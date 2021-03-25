@@ -3,20 +3,7 @@
 #include "My/Core/Define.h"
 
 #include "My/UI/UICanvas.h"
-#include "CameraLocator.h"
-#include "Character.h"
-
-std::shared_ptr<my::Character> g_pCharacter;
-
-
-void CGameApp::InitializeGame(void) {
-}
-
-void CGameApp::UpdateGame(float delta) {
-}
-
-void CGameApp::UpdateUI(float delta) {
-}
+#include "Camera/CameraLocator.h"
 
 
 void CGameApp::RenderScene(void) {
@@ -54,20 +41,24 @@ void CGameApp::Render3D(void) {
     translate.Translation(0.0f, 0.0f, 0.0f, translate);
     plane = scale * rotate * translate;
     ::CGraphicsUtilities::RenderPlane(plane);
+
+    _game_manager->Render();
 }
 
 void CGameApp::Render2D(void) {
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "test");
+    //_ui_canvas->Render();
 }
 
 MofBool CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("Resource");
 
+    _game_manager = std::make_shared<my::GameManager>();
     _camera_manager = std::make_shared<my::CameraManager>();
     my::CameraLocator::SetService(_camera_manager);
 
-    g_pCharacter = std::make_shared<my::Character>();
-    g_pCharacter->Initialize();
+    _game_manager->Initialize();
+
     return TRUE;
 }
 MofBool CGameApp::Input(void) {
@@ -83,8 +74,9 @@ MofBool CGameApp::Update(void) {
 
     float delta = def::kDeltaTime;
 
-    this->UpdateGame(delta);
-    this->UpdateUI(delta);
+
+    _game_manager->Update(delta);
+    //this->UpdateUI(delta);
     _camera_manager->Update();
     return TRUE;
 }
@@ -98,6 +90,6 @@ MofBool CGameApp::Render(void) {
     return TRUE;
 }
 MofBool CGameApp::Release(void) {
-    g_pCharacter->Release();
+    _game_manager->Release();
     return TRUE;
 }

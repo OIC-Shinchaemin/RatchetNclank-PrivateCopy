@@ -147,12 +147,15 @@
     <ClCompile Include="..\include\My\UI\UICanvas.cpp" />
     <ClCompile Include="..\include\My\UI\UIItem.cpp" />
     <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="CameraLocator.cpp" />
-    <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="Camera\CameraController.cpp" />
+    <ClCompile Include="Camera\CameraLocator.cpp" />
+    <ClCompile Include="Camera\CameraManager.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="Game\GameManager.cpp" />
+    <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,13 +172,16 @@
     <ClInclude Include="..\include\My\UI\UICanvas.h" />
     <ClInclude Include="..\include\My\UI\UIItem.h" />
     <ClInclude Include="..\include\My\UI\UIPanel.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraController.h" />
-    <ClInclude Include="CameraLocator.h" />
-    <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="Camera\CameraController.h" />
+    <ClInclude Include="Camera\CameraLocator.h" />
+    <ClInclude Include="Camera\CameraManager.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="GameApp.h" />
+    <ClInclude Include="Game\GameManager.h" />
+    <ClInclude Include="Game\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

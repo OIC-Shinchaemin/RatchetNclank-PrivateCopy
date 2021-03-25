@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include "Define.h"
+#include "../Define.h"
 
 #include "My/Core/Observer.h"
 #include "My/Core/Utility.h"

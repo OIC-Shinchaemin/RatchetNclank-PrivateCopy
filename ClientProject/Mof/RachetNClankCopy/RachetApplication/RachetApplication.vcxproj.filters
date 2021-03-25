@@ -38,10 +38,16 @@
       <UniqueIdentifier>{7e25563b-f84d-47fd-b72e-7bccf029481c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Source\Camera">
-      <UniqueIdentifier>{c6bb43d0-68f4-463c-8891-6bd93d7af20c}</UniqueIdentifier>
+      <UniqueIdentifier>{495f56d1-f6dc-42a4-8088-b13d3c2a6641}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Header\Camera">
-      <UniqueIdentifier>{181898a7-c80c-4e89-8557-010e66d76657}</UniqueIdentifier>
+      <UniqueIdentifier>{27b42ee6-6a36-45aa-bfcd-ed554edeb5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Game">
+      <UniqueIdentifier>{9f8b624c-8281-4519-883c-3ff8a2e8a69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Game">
+      <UniqueIdentifier>{2496ac41-fe9a-4995-b36c-2cb20993aa75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,17 +75,26 @@
     <ClCompile Include="Character.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="Actor.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\CameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
+    <ClCompile Include="Camera\CameraLocator.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="CameraLocator.cpp">
+    <ClCompile Include="Camera\CameraManager.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
+    <ClCompile Include="Camera\Camera.cpp">
       <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameManager.cpp">
+      <Filter>Rachet\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Renderer.cpp">
+      <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,18 +137,6 @@
     <ClInclude Include="..\include\My\UI\UIItem.h">
       <Filter>Rachet\NewFilter1\UI\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Rachet\Header\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>Rachet\Header\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraLocator.h">
-      <Filter>Rachet\Header\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Rachet\Header\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="GameApp.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -142,6 +145,27 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraLocator.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraManager.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Camera.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameManager.h">
+      <Filter>Rachet\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Renderer.h">
+      <Filter>Rachet\Header\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

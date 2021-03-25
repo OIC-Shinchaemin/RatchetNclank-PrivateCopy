@@ -2,7 +2,7 @@
 
 #include "My/Core/Define.h"
 #include "Camera.h"
-#include "Character.h"
+#include "../Character.h"
 
 
 void my::CameraController::UpdateCameraPosition(const std::shared_ptr<my::Camera>& camera) {
