@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Rachet">
+      <UniqueIdentifier>{ee6ebebb-e1b2-41b5-8a2e-5cbe8cd42389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\NewFilter1">
+      <UniqueIdentifier>{e90bc59d-2869-42a3-b9b4-eeaab95aefe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\NewFilter1\Core">
+      <UniqueIdentifier>{3e39f7d1-16ce-4f33-988b-1281ed8a9b3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\NewFilter1\UI">
+      <UniqueIdentifier>{e94b31d8-b9c0-47a1-9ee7-a0039b177dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Rachet\NewFilter1\UI\Header">
+      <UniqueIdentifier>{42590ba1-ab9f-4376-927a-d3b233943d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Rachet\NewFilter1\UI\Source">
+      <UniqueIdentifier>{2a9fe089-d3cc-4c0a-8410-eb242e21963d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\NewFilter1\Core\Source">
+      <UniqueIdentifier>{b97fd4ae-f345-4301-af9e-62f0f5c29f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\NewFilter1\Core\Header">
+      <UniqueIdentifier>{7e25563b-f84d-47fd-b72e-7bccf029481c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Camera">
+      <UniqueIdentifier>{c6bb43d0-68f4-463c-8891-6bd93d7af20c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Camera">
+      <UniqueIdentifier>{181898a7-c80c-4e89-8557-010e66d76657}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Rachet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\State.cpp">
+      <Filter>Rachet\NewFilter1\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\StateMachine.cpp">
+      <Filter>Rachet\NewFilter1\Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\UI\UICanvas.cpp">
+      <Filter>Rachet\NewFilter1\UI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\UI\UIItem.cpp">
+      <Filter>Rachet\NewFilter1\UI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\UI\UIPanel.cpp">
+      <Filter>Rachet\NewFilter1\UI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraLocator.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\My\Core\Define.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Header.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Math.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Observable.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Observer.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\ServiceLocator.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\State.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\StateMachine.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Trait.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Utility.h">
+      <Filter>Rachet\NewFilter1\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\UI\UICanvas.h">
+      <Filter>Rachet\NewFilter1\UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\UI\UIPanel.h">
+      <Filter>Rachet\NewFilter1\UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\UI\UIItem.h">
+      <Filter>Rachet\NewFilter1\UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraLocator.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameApp.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
