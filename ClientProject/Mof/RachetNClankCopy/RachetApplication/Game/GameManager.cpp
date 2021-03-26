@@ -17,7 +17,9 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Character>& ptr) {
 }
 
 my::GameManager::GameManager() :
-    _character(){
+    _character() {
+
+
 }
 
 my::GameManager::~GameManager() {
@@ -27,10 +29,16 @@ bool my::GameManager::Initialize(void) {
     _character = std::make_shared<my::Character>();
     _character->Initialize();
 
+    _quick_change = std::make_unique<my::QuickChangeSystem>();
+    _game_money = std::make_unique<my::GameMoney>();
+
+    _game_money->Initialize(0);
     return true;
 }
 
 bool my::GameManager::Input(void) {
+    _quick_change->Input();
+    _game_money->Input();
     return true;
 }
 
@@ -39,6 +47,9 @@ bool my::GameManager::Update(float delta_time) {
 }
 
 bool my::GameManager::Render(void) {
+    _quick_change->Render();
+    _game_money->Render();
+
     return true;
 }
 

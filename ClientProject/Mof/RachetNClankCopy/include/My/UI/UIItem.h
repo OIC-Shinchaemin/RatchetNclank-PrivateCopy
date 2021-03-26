@@ -110,23 +110,6 @@ public:
 };
 class UIItem : public my::UIEvent, public std::enable_shared_from_this<my::UIItem>, public my::Observable<UIItem> {
     using Event = my::UIEvent;
-    /*
-    enum class State {
-        Default,
-        CursorIn,
-        Select,
-        Enter,
-        Active,
-        CursorOut,
-        Cancel,
-        Exit,
-        End
-    };
-    //! イベント
-    std::unordered_map<State, std::function<bool(void)>> _event_func;
-    //! 状態
-    my::UIItem::State _state;
-    */
 protected:
     //! 名前
     std::string _name;

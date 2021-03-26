@@ -6,6 +6,12 @@
 
 
 namespace ut {
+static std::uint32_t GetDigit(std::uint32_t num) {
+    if (num == 0) {
+        return 1;
+    } // if
+    return static_cast<std::uint32_t> (std::log10(num) + 1);
+}
 template <class T>
 void SafeDelete(T*& ptr) {
     if (ptr != nullptr) {
@@ -108,7 +114,7 @@ static float GenerateRandomF(const float min, const float max) {
     std::uniform_real_distribution<> random(min, max);
     return static_cast<float>(random(engine));
 }
-/*
+
 static bool ParseJsonDocument(const char* path, rapidjson::Document& document) {
     std::ifstream file(path);
     // ファイルを開けないならfalseを返す
@@ -123,6 +129,5 @@ static bool ParseJsonDocument(const char* path, rapidjson::Document& document) {
     document.ParseStream(str);
     return true;
 }
-*/
 }
 #endif // !MY_UTILITY_H

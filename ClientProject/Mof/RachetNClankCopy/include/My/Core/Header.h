@@ -32,7 +32,7 @@
 #include <mutex>
 
 
-//#include "rapidjson/document.h"
+#include "rapidjson/document.h"
 
 #include <Mof.h>
 

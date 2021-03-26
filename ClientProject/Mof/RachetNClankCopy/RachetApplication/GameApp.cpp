@@ -1,9 +1,8 @@
 #include "GameApp.h"
 
 #include "My/Core/Define.h"
-
-#include "My/UI/UICanvas.h"
 #include "Camera/CameraLocator.h"
+#include "ResourceLocator.h"
 
 
 void CGameApp::RenderScene(void) {
@@ -47,18 +46,22 @@ void CGameApp::Render3D(void) {
 
 void CGameApp::Render2D(void) {
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "test");
-    //_ui_canvas->Render();
+    _ui_canvas->Render();
 }
 
 MofBool CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("Resource");
 
-    _game_manager = std::make_shared<my::GameManager>();
+    _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
+    _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
     _camera_manager = std::make_shared<my::CameraManager>();
+    _ui_canvas = std::make_shared<my::UICanvas>();
+    
     my::CameraLocator::SetService(_camera_manager);
-
+    my::ResourceLocator::SetService(_resource_manager);
+    
+    _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->Initialize();
-
     return TRUE;
 }
 MofBool CGameApp::Input(void) {
@@ -67,6 +70,8 @@ MofBool CGameApp::Input(void) {
         ::PostQuitMessage(0);
         return false;
     } // if
+
+    _game_manager->Input();
     return TRUE;
 }
 MofBool CGameApp::Update(void) {
@@ -76,7 +81,7 @@ MofBool CGameApp::Update(void) {
 
 
     _game_manager->Update(delta);
-    //this->UpdateUI(delta);
+    _ui_canvas->Update(delta);
     _camera_manager->Update();
     return TRUE;
 }
@@ -90,6 +95,7 @@ MofBool CGameApp::Render(void) {
     return TRUE;
 }
 MofBool CGameApp::Release(void) {
-    _game_manager->Release();
+    _resource_manager.reset();
+    _game_manager.reset();
     return TRUE;
 }
