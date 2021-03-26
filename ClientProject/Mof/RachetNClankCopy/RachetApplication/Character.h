@@ -16,6 +16,7 @@
 
 namespace my {
 class Character : public my::Actor, public my::CameraLocator {
+    using super = my::Actor;
     using Observable = my::Observable<my::Character>;
 private:
 	//! カメラ
@@ -29,9 +30,22 @@ public:
     /// コンストラクタ
     /// </summary>
     Character();
-    ~Character();
-    bool Initialize(void);
-    bool Release(void);
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    virtual ~Character();
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name="transform"></param>
+    /// <returns></returns>
+    virtual bool Initialize(const def::Transform& transform) override;
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Release(void) override;
 };
 }
 #endif // !MY_CHARACTER_H
