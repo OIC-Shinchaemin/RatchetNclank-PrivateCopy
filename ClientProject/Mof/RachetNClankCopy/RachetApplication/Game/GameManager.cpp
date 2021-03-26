@@ -2,6 +2,8 @@
 
 #include "My/Core/Trait.h"
 #include "My/Core/Utility.h"
+#include "../Save/SaveData.h"
+#include "../Save/SaveSystem.h"
 
 
 void my::GameManager::AddElement(const std::shared_ptr<my::Character>& ptr) {
@@ -18,8 +20,6 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Character>& ptr) {
 
 my::GameManager::GameManager() :
     _character() {
-
-
 }
 
 my::GameManager::~GameManager() {
@@ -32,7 +32,11 @@ bool my::GameManager::Initialize(void) {
     _quick_change = std::make_unique<my::QuickChangeSystem>();
     _game_money = std::make_unique<my::GameMoney>();
 
-    _game_money->Initialize(0);
+
+    auto save_data = my::SaveData();
+    my::SaveSystem().Fetch(save_data);
+
+    _game_money->Initialize(save_data.GetMoney());
     return true;
 }
 
@@ -55,5 +59,9 @@ bool my::GameManager::Render(void) {
 
 bool my::GameManager::Release(void) {
     _character->Release();
+
+    
+    auto save_param = my::SaveDataParam(_game_money->GetValue());
+    my::SaveSystem().Save(save_param);
     return true;
 }

@@ -41,6 +41,12 @@ public:
     /// </summary>
     ~GameMoney();
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::uint32_t GetValue(void) const;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name="value"></param>

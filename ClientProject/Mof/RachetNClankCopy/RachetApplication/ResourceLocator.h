@@ -14,6 +14,20 @@ namespace my {
 class ResourceLocator: public ServiceLocator<my::ResourceMgr> {
 public:
     using super = my::ServiceLocator<my::ResourceMgr>;
+protected:
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    template<class T>
+    std::shared_ptr<T> GetResource(const char* key) {
+        if (auto ptr = super::GetService(); ptr) {
+            return ptr->Get<std::shared_ptr<T>>(key);
+        } // if
+        return nullptr;
+    }
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,19 +43,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<ResourceMgr> GetService(void) const = delete;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    template<class T>
-    std::shared_ptr<T> GetResource(const char* key) {
-        if (auto ptr = super::GetService(); ptr) {
-            return ptr->Get<std::shared_ptr<T>>(key);
-        } // if
-        return nullptr;
-    }
 };
 }
 #endif // !MY_RESOURCE_LOCATOR_H
