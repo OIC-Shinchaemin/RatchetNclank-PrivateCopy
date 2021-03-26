@@ -96,6 +96,21 @@
     <ClCompile Include="Game\Renderer.cpp">
       <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
+    <ClCompile Include="QuickChangeSystem.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CanvasLocator.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLocator.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMoney.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveData.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -140,9 +155,6 @@
     <ClInclude Include="GameApp.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -167,5 +179,34 @@
     <ClInclude Include="Game\Renderer.h">
       <Filter>Rachet\Header\Game</Filter>
     </ClInclude>
+    <ClInclude Include="QuickChangeSystem.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasLocator.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLocator.h">
+      <Filter>Rachet\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstructContainer.h">
+      <Filter>Rachet\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Rachet\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefine.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMoney.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveData.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resource\resource_path.txt">
+      <Filter>リソース ファイル</Filter>
+    </Text>
   </ItemGroup>
 </Project>

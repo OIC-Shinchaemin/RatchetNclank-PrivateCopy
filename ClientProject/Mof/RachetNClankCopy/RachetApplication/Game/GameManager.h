@@ -4,6 +4,8 @@
 
 #include "Renderer.h"
 #include "../Character.h"
+#include "../QuickChangeSystem.h"
+#include "../GameMoney.h"
 
 
 namespace my {
@@ -13,6 +15,10 @@ private:
 	my::Renderer _renderer;
 	//! キャラクタ
 	std::shared_ptr<my::Character> _character;
+	//! クイックチェンジ
+	std::unique_ptr<my::QuickChangeSystem>  _quick_change;
+	//! クイックチェンジ
+	std::unique_ptr<my::GameMoney>  _game_money;
 private:
 	/// <summary>
 	/// 追加

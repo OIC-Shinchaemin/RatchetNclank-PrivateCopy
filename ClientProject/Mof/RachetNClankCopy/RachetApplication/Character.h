@@ -9,7 +9,7 @@
 #include "Camera/CameraLocator.h"
 
 #include "My/Core/Observable.h"
-#include "Define.h"
+#include "GameDefine.h"
 #include "Camera/Camera.h"
 #include "Camera/CameraController.h"
 
