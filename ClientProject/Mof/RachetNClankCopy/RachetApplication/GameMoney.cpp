@@ -14,6 +14,10 @@ my::GameMoney::~GameMoney() {
     _font.Release();
 }
 
+std::uint32_t my::GameMoney::GetValue(void) const {
+    return this->_value;
+}
+
 bool my::GameMoney::Initialize(uint32_t value) {
     _font.Create(_font_size, "");
     _value = value;
@@ -21,7 +25,14 @@ bool my::GameMoney::Initialize(uint32_t value) {
 }
 
 bool my::GameMoney::Input(void) {
-    _value += 10;
+    if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+        _value++;
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+        _value--;
+    } // else if
+
+
     return true;
 }
 

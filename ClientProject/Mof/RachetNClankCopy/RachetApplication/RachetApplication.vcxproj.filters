@@ -49,6 +49,15 @@
     <Filter Include="Rachet\Source\Game">
       <UniqueIdentifier>{2496ac41-fe9a-4995-b36c-2cb20993aa75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\save">
+      <UniqueIdentifier>{df540a94-66f5-4b59-a889-76236bcb6e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Save">
+      <UniqueIdentifier>{56956ab5-ebe0-47b0-aa9a-d0024cd0dafc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Save">
+      <UniqueIdentifier>{dfdafe75-011d-4685-a73f-4d70c3298e98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -108,8 +117,11 @@
     <ClCompile Include="GameMoney.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="SaveData.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Save\SaveData.cpp">
+      <Filter>Rachet\Source\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="Save\SaveSystem.cpp">
+      <Filter>Rachet\Source\Save</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,13 +212,21 @@
     <ClInclude Include="GameMoney.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="SaveData.h">
-      <Filter>Rachet\Header</Filter>
+    <ClInclude Include="Save\SaveSystem.h">
+      <Filter>Rachet\Header\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="Save\SaveData.h">
+      <Filter>Rachet\Header\Save</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
       <Filter>リソース ファイル</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\save\savedata.json">
+      <Filter>リソース ファイル\save</Filter>
+    </None>
   </ItemGroup>
 </Project>

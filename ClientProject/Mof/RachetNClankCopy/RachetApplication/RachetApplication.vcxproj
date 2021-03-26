@@ -160,7 +160,8 @@
     <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="QuickChangeSystem.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
-    <ClCompile Include="SaveData.cpp" />
+    <ClCompile Include="Save\SaveData.cpp" />
+    <ClCompile Include="Save\SaveSystem.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -193,10 +194,14 @@
     <ClInclude Include="QuickChangeSystem.h" />
     <ClInclude Include="ResourceLocator.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="SaveData.h" />
+    <ClInclude Include="Save\SaveData.h" />
+    <ClInclude Include="Save\SaveSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\save\savedata.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
