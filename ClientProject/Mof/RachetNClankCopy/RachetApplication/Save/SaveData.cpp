@@ -17,3 +17,7 @@ void my::SaveData::MoveParam(SaveDataParam& param) {
 uint32_t my::SaveData::GetMoney(void) const {
     return this->_param.money;
 }
+
+const std::vector<std::string>& my::SaveData::GetAvailableWeaponsAddress(void) {
+    return this->_param.available_weapons;
+}

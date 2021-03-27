@@ -5,6 +5,13 @@
 #include "ssarchiver.h"
 #include "ssattribute.h"
 
+#define SPRITESTUDIO6_SSAEVERSION "2.00.01"
+
+class SsAnimation;
+
+
+
+
 
 /// アニメーション再生設定情報です。
 class SsAnimationSettings
@@ -13,8 +20,10 @@ public:
 	int						fps;			//!< 再生FPS
 	int						frameCount;		//!< フレーム数
 	SsPartsSortMode::_enum	sortMode;		//!< パーツのソートモード
-	SsPoint2		canvasSize;				//!< キャンバスサイズ(元基準枠)。ビューポートのサイズとイコールではない。
-	SsVector2		pivot;					//!< キャンバスの原点。0,0 が中央。-0.5, +0.5 が左上
+	SsPoint2				canvasSize;		//!< キャンバスサイズ(元基準枠)。ビューポートのサイズとイコールではない。
+	SsVector2				pivot;			//!< キャンバスの原点。0,0 が中央。-0.5, +0.5 が左上
+	int						startFrame;		//!< アニメーションの開始フレーム
+	int						endFrame;		//!< アニメーションの終了フレーム
 
 	SsAnimationSettings(){}
 	virtual ~SsAnimationSettings(){}
@@ -28,6 +37,15 @@ public:
 		SSAR_DECLARE( canvasSize );
 		SSAR_DECLARE( pivot );
 		SSAR_DECLARE_ENUM(sortMode);
+		//タグが存在しない（Ver5.8以前のデータ）場合は初期値を入れる
+		if (SSAR_DECLARE(startFrame) == false)
+		{
+			startFrame = 0;
+		}
+		if (SSAR_DECLARE(endFrame) == false)
+		{
+			endFrame = frameCount - 1;
+		}
 	}
 };
 
@@ -46,22 +64,62 @@ public:
 	SsBlendType::_enum		alphaBlendType;	//!< αブレンドの演算式
 	int						show;			//!< [編集用データ] パーツの表示・非常時
 	int						locked;			//!< [編集用データ] パーツのロック状態
+	SsString				colorLabel;		//!< カラーラベル
+	bool					maskInfluence;	//!< マスクの影響を受けるかどうか
 
 	float					inheritRates[(int)SsAttributeKind::num];	///< 親の値の継承率。SS4との互換性のため残されているが0 or 1
 
 	//参照アニメーション名
 	//ツールはともかくランタイムでは勿体ない使い方なので何らか考えること
-	SsString        refAnimePack;   ///< 参照アニメ名
-	SsString        refAnime;       ///< 参照アニメ名			
+	//--------------------------------------------------------------------------------------
+	//インスタンスパーツパラメータ
+	//--------------------------------------------------------------------------------------
+	SsString				refAnimePack;	//!< 参照アニメ名
+	SsString				refAnime;		//!< 参照アニメ名			
 
-	SsString        refEffectName;	///< 割り当てたパーティクル名
+	//--------------------------------------------------------------------------------------
+	//エフェクトパーツパラメータ
+	//--------------------------------------------------------------------------------------
+	SsString				refEffectName;	//!< 割り当てたパーティクル名
 
-	SsString        colorLabel;		///< カラーラベル
+	//--------------------------------------------------------------------------------------
+	//ボーンパーツパラメータ
+	//--------------------------------------------------------------------------------------
+	int						boneLength;		//!< ボーンの長さ
+	SsVector2				bonePosition;	//!< ボーンの座標
+	float					boneRotation;	//!< ボーンの角度
+
+	SsVector2				weightPosition;	//!< ウェイトの位置
+	float					weightImpact;	//!< ウェイトの強さ
+
+	//--------------------------------------------------------------------------------------
+	//メッシュパーツパラメータ
+	//--------------------------------------------------------------------------------------
+	int						meshWeightType;	//!< ウェイトの種類[エディタ用]
+	int						meshWeightStrong;//!< ウェイトの強さ[エディタ用]
+
+	//--------------------------------------------------------------------------------------
+	//コンストレイントパーツパラメータ
+	//--------------------------------------------------------------------------------------
+	int							IKDepth;		//!< IK深度
+	SsIkRotationArrow::_enum	IKRotationArrow;//!< 回転方向
 
 public:
 	SsPart() : 
-	  name("") , arrayIndex(0), parentIndex(0) , show(0) , locked(0)
+	  name("") , arrayIndex(0), parentIndex(0) , show(0) , locked(0) , maskInfluence(true)
 	  {
+			refEffectName = "";
+			boneLength = 0;
+			bonePosition = SsVector2(0,0);
+			boneRotation = 0;
+			weightPosition = SsVector2(0, 0);
+			weightImpact = 0;
+			meshWeightType = 0;
+			meshWeightStrong = 0;
+			IKDepth = 0;
+			IKRotationArrow = SsIkRotationArrow::arrowfree;
+
+		
 			//memset( inheritRates , 0 , sizeof( float) * SsAttributeKind::num );
 			for (int i = 0; i < (int)SsAttributeKind::num ; ++i)
 				inheritRates[i] = 1.f;
@@ -95,14 +153,23 @@ public:
 		SSAR_DECLARE_ENUM( alphaBlendType );
 		SSAR_DECLARE( show );
 		SSAR_DECLARE( locked );
+		SSAR_DECLARE( colorLabel );
+		SSAR_DECLARE( maskInfluence );
+
 		SSAR_DECLARE( refAnimePack );
 		SSAR_DECLARE( refAnime );
-		SSAR_DECLARE( colorLabel );
 
-		if ( type == SsPartType::effect )
-		{
-			SSAR_DECLARE( refEffectName ); 	
-		}
+		SSAR_DECLARE( refEffectName );
+
+		SSAR_DECLARE( boneLength );
+		SSAR_DECLARE( bonePosition );
+		SSAR_DECLARE( boneRotation );
+		SSAR_DECLARE( weightPosition );
+		SSAR_DECLARE( weightImpact );
+		SSAR_DECLARE( meshWeightType );
+		SSAR_DECLARE( meshWeightStrong );
+		SSAR_DECLARE( IKDepth );
+		SSAR_DECLARE_ENUM( IKRotationArrow );
 
 		//継承率後に改良を実施
 		if ( ar->getType() == EnumSsArchiver::in )
@@ -123,8 +190,60 @@ public:
 				}
 			}
 		}
+	}
+};
+
+#define SSMESHPART_BONEMAX	(128)
+
+class SsMeshBindInfo
+{
+public:
+	int			weight[SSMESHPART_BONEMAX];
+	SsString	boneName[SSMESHPART_BONEMAX];
+	int			boneIndex[SSMESHPART_BONEMAX];
+	SsVector3   offset[SSMESHPART_BONEMAX];
+	int			bindBoneNum;
+
+	SsMeshBindInfo()
+	{
+		for (int i = 0; i < SSMESHPART_BONEMAX; i++)
+		{
+			weight[i] = 0;
+			boneName[i] = "";
+			boneIndex[i] = 0;
+			offset[i] = SsVector3(0, 0, 0);
+		}
+		bindBoneNum = 0;
 
 	}
+	virtual ~SsMeshBindInfo() {}
+
+	void	fromString(SsString str);
+
+};
+
+
+
+//メッシュ1枚毎の情報
+class  SsMeshBind 
+{
+public:
+	SsString     meshName;
+
+	std::vector<SsMeshBindInfo>   meshVerticesBindArray;
+
+public:
+	SsMeshBind() {}
+	virtual ~SsMeshBind() {}
+
+	void	loader(ISsXmlArchiver* ar);
+
+	SSSERIALIZE_BLOCK
+	{
+		loader(ar);
+	}
+
+
 };
 
 
@@ -133,6 +252,11 @@ class SsModel
 {
 public:
 	std::vector<SsPart*>	partList;	//!<格納されているパーツのリスト
+	SsAnimation*			setupAnimation;	///< 参照するセットアップアニメ
+
+	std::vector<SsMeshBind*> 		meshList;
+	std::map<SsString,int>			boneList;		///<何に使っているか調査　要らなければ削除
+
 
 public:
 	SsModel(){}
@@ -145,9 +269,13 @@ public:
 	///シリアライズのための宣言です。
 	SSSERIALIZE_BLOCK
 	{
-		SSAR_DECLARE_LIST( partList );
-	}
+		std::vector<SsString> tempMeshList;
 
+		SSAR_DECLARE_LIST( partList );
+		SSAR_DECLARE( boneList );
+		SSAR_DECLARE_LIST( meshList );
+		setupAnimation = NULL;
+	}
 };
 
 
@@ -200,8 +328,9 @@ public:
 	bool		overrideSettings;				/// このインスタンスが持つ設定を使いanimePack の設定を参照しない。FPS, frameCount は常に自身の設定を使う。
 	SsAnimationSettings			settings;		/// 設定情報 
 	std::vector<SsPartAnime*>	partAnimes;		///	パーツ毎のアニメーションキーフレームが格納されるリスト
+	std::vector<SsLabel*>		labels;			/// アニメーションが持つラベルのリストです。
+	bool						isSetup;		///< セットアップアニメか？
 
-	std::vector<SsLabel*>	labels;				/// アニメーションが持つラベルのリストです。
 public:
 	SsAnimation(){}
 	virtual ~SsAnimation()
@@ -219,6 +348,7 @@ public:
 		SSAR_STRUCT_DECLARE( settings );
 		SSAR_DECLARE_LISTEX( labels , "value" );
 		SSAR_DECLARE_LISTEX( partAnimes , "partAnime" );
+		SSAR_DECLARE(isSetup);
 	}
 };
 
@@ -253,6 +383,21 @@ public:
 		SSAR_STRUCT_DECLARE( Model );
 		SSAR_DECLARE( cellmapNames );
 		SSAR_DECLARE_LISTEX( animeList , "anime" );
+
+		//モデルにセットアップアニメーションを設定する
+		int i;
+		int size = (int)animeList.size();
+		for (i = 0; i < size; i++)
+		{
+			SsAnimation* anime = animeList[i];
+			if (anime->isSetup != 0)
+			{
+				Model.setupAnimation = anime;
+				break;
+			}
+		}
+
+
 	}
 
 	//アニメーション名からアニメーションを取得する

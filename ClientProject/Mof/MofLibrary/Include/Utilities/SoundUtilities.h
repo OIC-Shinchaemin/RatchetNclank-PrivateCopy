@@ -64,6 +64,17 @@ namespace Mof {
 								それ以外		解放エラー、エラーコードを返す。
 		*//**************************************************************************/
 		static MofBool ResetWavePosition(HMMIO hmmio,MMCKINFO* mmdata,MMCKINFO* mmriff);
+		/*************************************************************************//*!
+				@brief			WAVEファイルの読み込み位置を初期化する
+				@param[in]		hmmio			ファイルハンドル
+				@param[in]		mmdata			MMINFO
+				@param[in]		mmriff			MMINFO
+				@param[in]		off				オフセット位置
+
+				@return			TRUE			正常終了<br>
+								それ以外		解放エラー、エラーコードを返す。
+		*//**************************************************************************/
+		static MofBool SetWavePosition(HMMIO hmmio, MMCKINFO* mmdata, MMCKINFO* mmriff, MofU32 off);
 #endif
 
 #ifdef		MOFLIB_WINDOWS

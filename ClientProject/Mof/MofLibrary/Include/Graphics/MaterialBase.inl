@@ -163,6 +163,15 @@ FORCE_INLINE CVector4& CMaterialBase::GetDiffuse(void){
 
 		@return			ディフューズ色
 *//**************************************************************************/
+FORCE_INLINE const CVector4& CMaterialBase::GetDiffuse(void) const {
+	return Diffuse;
+}
+/*************************************************************************//*!
+		@brief			ディフューズ色取得
+		@param			None
+
+		@return			ディフューズ色
+*//**************************************************************************/
 FORCE_INLINE MofU32 CMaterialBase::GetDiffuseU32(void) const{
 	return Diffuse.ToU32Color();
 }
@@ -173,6 +182,15 @@ FORCE_INLINE MofU32 CMaterialBase::GetDiffuseU32(void) const{
 		@return			アンビエント色
 *//**************************************************************************/
 FORCE_INLINE CVector4& CMaterialBase::GetAmbient(void){
+	return Ambient;
+}
+/*************************************************************************//*!
+		@brief			アンビエント色取得
+		@param			None
+
+		@return			アンビエント色
+*//**************************************************************************/
+FORCE_INLINE const CVector4& CMaterialBase::GetAmbient(void) const {
 	return Ambient;
 }
 /*************************************************************************//*!
@@ -199,6 +217,15 @@ FORCE_INLINE CVector4& CMaterialBase::GetSpeculer(void){
 
 		@return			スペキュラ色
 *//**************************************************************************/
+FORCE_INLINE const CVector4& CMaterialBase::GetSpeculer(void) const {
+	return Speculer;
+}
+/*************************************************************************//*!
+		@brief			スペキュラ色取得
+		@param			None
+
+		@return			スペキュラ色
+*//**************************************************************************/
 FORCE_INLINE MofU32 CMaterialBase::GetSpeculerU32(void) const{
 	return Speculer.ToU32Color();
 }
@@ -209,6 +236,15 @@ FORCE_INLINE MofU32 CMaterialBase::GetSpeculerU32(void) const{
 		@return			エミッシブ色
 *//**************************************************************************/
 FORCE_INLINE CVector4& CMaterialBase::GetEmissive(void){
+	return Emissive;
+}
+/*************************************************************************//*!
+		@brief			エミッシブ色取得
+		@param			None
+
+		@return			エミッシブ色
+*//**************************************************************************/
+FORCE_INLINE const CVector4& CMaterialBase::GetEmissive(void) const {
 	return Emissive;
 }
 /*************************************************************************//*!
@@ -255,6 +291,20 @@ FORCE_INLINE LPTextureArray CMaterialBase::GetTextureArray(void){
 						それ以外	失敗、エラーコードが戻り値となる
 *//**************************************************************************/
 FORCE_INLINE LPTexture CMaterialBase::GetTexture(MofU32 n) {
+	if (n >= pTextureArray->GetArrayCount())
+	{
+		return NULL;
+	}
+	return pTextureArray->GetData(n);
+}
+/*************************************************************************//*!
+		@brief			テクスチャ取得
+		@param			n			番号
+
+		@return			TRUE		成功<br>
+						それ以外	失敗、エラーコードが戻り値となる
+*//**************************************************************************/
+FORCE_INLINE const LPTexture CMaterialBase::GetTexture(MofU32 n) const {
 	if (n >= pTextureArray->GetArrayCount())
 	{
 		return NULL;

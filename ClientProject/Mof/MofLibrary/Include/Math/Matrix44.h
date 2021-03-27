@@ -1064,7 +1064,7 @@ namespace Mof {
 
 				@return			s—ñ®
 		*//**************************************************************************/
-		MofFloat Determinant(void);
+		MofFloat Determinant(void) const;
 		/*************************************************************************//*!
 				@brief			‹ts—ñŒvZ
 				@param			None
@@ -1078,7 +1078,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void Inverse(Matrix44& OutMat);
+		void Inverse(Matrix44& OutMat) const;
 		
 		/*************************************************************************//*!
 				@brief			•âŠÔŒvZ

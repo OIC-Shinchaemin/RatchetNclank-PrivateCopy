@@ -670,21 +670,21 @@ namespace Mof {
 
 				@return			現在のモーション時間
 		*//**************************************************************************/
-		virtual MofFloat GetTime(void);
+		virtual MofFloat GetTime(void) const;
 		/*************************************************************************//*!
 				@brief			現在のモーション番号取得
 				@param			None
 
 				@return			現在のモーション番号
 		*//**************************************************************************/
-		virtual MofS32 GetMotionNo(void);
+		virtual MofS32 GetMotionNo(void) const;
 		/*************************************************************************//*!
 				@brief			登録されているモーション数取得
 				@param			None
 
 				@return			登録されているモーション数
 		*//**************************************************************************/
-		virtual MofS32 GetMotionCount(void);
+		virtual MofS32 GetMotionCount(void) const;
 		/*************************************************************************//*!
 				@brief			登録されているボーン数取得
 				@param			None
@@ -713,7 +713,7 @@ namespace Mof {
 				@return			登録されているモーションの番号
 								MOF_U32_MAX			指定名のモーションが登録されていない
 		*//**************************************************************************/
-		virtual MofU32 GetMotionNoByName(LPCMofChar pName);
+		virtual MofU32 GetMotionNoByName(LPCMofChar pName) const;
 		/*************************************************************************//*!
 				@brief			ボーン状態取得
 				@param[in]		n				ボーン番号

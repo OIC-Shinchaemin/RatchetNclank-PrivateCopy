@@ -3,14 +3,22 @@
 
 
 #include <cstdint>
+#include <string>
+#include <vector>
 
 
 namespace my {
 struct SaveDataParam {
+    //! Š
     int money;
-    SaveDataParam() : money(0) {
+    //! Š
+    std::vector<std::string> available_weapons;
+
+    SaveDataParam() : money(0), available_weapons() {
     }
-    SaveDataParam(int m) :money(m) {
+    SaveDataParam(int m, std::vector<std::string>& move) :
+        money(m),
+        available_weapons(std::move(move)) {
     }
 };
 class SaveData {
@@ -36,6 +44,10 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     uint32_t GetMoney(void) const;
+    /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    const std::vector<std::string>& GetAvailableWeaponsAddress(void);
 };
 }
 #endif // !MY_SAVE_DATA_H

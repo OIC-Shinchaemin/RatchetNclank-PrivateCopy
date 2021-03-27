@@ -203,21 +203,21 @@ namespace Mof {
 
 				@return			現在のモーション時間
 		*//**************************************************************************/
-		virtual MofFloat GetTime(void);
+		virtual MofFloat GetTime(void) const;
 		/*************************************************************************//*!
 				@brief			現在のモーション番号取得
 				@param			None
 
 				@return			現在のモーション番号
 		*//**************************************************************************/
-		virtual MofS32 GetMotionNo(void);
+		virtual MofS32 GetMotionNo(void) const;
 		/*************************************************************************//*!
 				@brief			登録されているモーション数取得
 				@param			None
 
 				@return			登録されているモーション数
 		*//**************************************************************************/
-		virtual MofS32 GetMotionCount(void);
+		virtual MofS32 GetMotionCount(void) const;
 		/*************************************************************************//*!
 				@brief			現在のフレーム番号取得
 				@param			None
@@ -232,6 +232,13 @@ namespace Mof {
 				@return			現在のアニメーション矩形
 		*//**************************************************************************/
 		virtual CRectangle& GetSrcRect(void);
+		/*************************************************************************//*!
+				@brief			現在のアニメーション矩形取得
+				@param			None
+
+				@return			現在のアニメーション矩形
+		*//**************************************************************************/
+		virtual const CRectangle& GetSrcRect(void) const;
 		
 		//クラス基本定義
 		MOF_LIBRARYCLASS(CSpriteMotionController,MOF_SPRITEMOTIONCONTROLLERCLASS_ID);

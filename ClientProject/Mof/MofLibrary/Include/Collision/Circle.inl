@@ -400,7 +400,7 @@ FORCE_INLINE void CCircle::SetPosition(const Vector2& pos){
 		@return			TRUE		‰~‚Ì’†‚É“_‚ª‚ ‚é
 						FALSE		‰~‚Ì”ÍˆÍŠO
 *//**************************************************************************/
-FORCE_INLINE MofBool CCircle::CollisionPoint(const MofFloat px,const MofFloat py){
+FORCE_INLINE MofBool CCircle::CollisionPoint(const MofFloat px,const MofFloat py) const {
 	MofFloat d = (MOF_SQUARE(x - px)) + (MOF_SQUARE(y - py));
 	if(d <= MOF_SQUARE(r))
 	{
@@ -416,7 +416,7 @@ FORCE_INLINE MofBool CCircle::CollisionPoint(const MofFloat px,const MofFloat py
 		@return			TRUE		‰~‚Ì’†‚É“_‚ª‚ ‚é
 						FALSE		‰~‚Ì”ÍˆÍŠO
 *//**************************************************************************/
-FORCE_INLINE MofBool CCircle::CollisionPoint(const Vector2& p){
+FORCE_INLINE MofBool CCircle::CollisionPoint(const Vector2& p) const {
 	MofFloat d = (MOF_SQUARE(x - p.x)) + (MOF_SQUARE(y - p.y));
 	if(d <= MOF_SQUARE(r))
 	{
@@ -434,7 +434,7 @@ FORCE_INLINE MofBool CCircle::CollisionPoint(const Vector2& p){
 		@return			TRUE		‰~‚Ì’†‚É“_‚ª‚ ‚é
 						FALSE		‰~‚Ì”ÍˆÍŠO
 *//**************************************************************************/
-FORCE_INLINE MofBool CCircle::CollisionCircle(const MofFloat cx,const MofFloat cy,const MofFloat cr){
+FORCE_INLINE MofBool CCircle::CollisionCircle(const MofFloat cx,const MofFloat cy,const MofFloat cr) const {
 	MofFloat d = (MOF_SQUARE(x - cx)) + (MOF_SQUARE(y - cy));
 	if(d <= MOF_SQUARE(r + cr))
 	{
@@ -450,7 +450,7 @@ FORCE_INLINE MofBool CCircle::CollisionCircle(const MofFloat cx,const MofFloat c
 		@return			TRUE		‰~‚Ì’†‚É“_‚ª‚ ‚é
 						FALSE		‰~‚Ì”ÍˆÍŠO
 *//**************************************************************************/
-FORCE_INLINE MofBool CCircle::CollisionCircle(const Circle& c){
+FORCE_INLINE MofBool CCircle::CollisionCircle(const Circle& c) const {
 	MofFloat d = (MOF_SQUARE(x - c.x)) + (MOF_SQUARE(y - c.y));
 	if(d <= MOF_SQUARE(r + c.r))
 	{

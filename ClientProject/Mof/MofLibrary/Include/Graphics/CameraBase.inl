@@ -173,12 +173,30 @@ FORCE_INLINE CVector3& CCamera::GetViewPosition(void){
 	return m_Position;
 }
 /*************************************************************************//*!
+		@brief			カメラ位置取得
+		@param			None
+
+		@return			カメラ位置
+*//**************************************************************************/
+FORCE_INLINE const CVector3& CCamera::GetViewPosition(void) const {
+	return m_Position;
+}
+/*************************************************************************//*!
 		@brief			注視点取得
 		@param			None
 
 		@return			注視点
 *//**************************************************************************/
 FORCE_INLINE CVector3& CCamera::GetTargetPosition(void){
+	return m_Target;
+}
+/*************************************************************************//*!
+		@brief			注視点取得
+		@param			None
+
+		@return			注視点
+*//**************************************************************************/
+FORCE_INLINE const CVector3& CCamera::GetTargetPosition(void) const {
 	return m_Target;
 }
 /*************************************************************************//*!
@@ -191,12 +209,30 @@ FORCE_INLINE CVector3& CCamera::GetViewFront(void){
 	return m_ViewFront;
 }
 /*************************************************************************//*!
+		@brief			視線ベクトル取得
+		@param			None
+
+		@return			視線ベクトル
+*//**************************************************************************/
+FORCE_INLINE const CVector3& CCamera::GetViewFront(void) const {
+	return m_ViewFront;
+}
+/*************************************************************************//*!
 		@brief			上方ベクトル取得
 		@param			None
 
 		@return			上方ベクトル
 *//**************************************************************************/
 FORCE_INLINE CVector3& CCamera::GetViewUp(void){
+	return m_ViewUp;
+}
+/*************************************************************************//*!
+		@brief			上方ベクトル取得
+		@param			None
+
+		@return			上方ベクトル
+*//**************************************************************************/
+FORCE_INLINE const CVector3& CCamera::GetViewUp(void) const {
 	return m_ViewUp;
 }
 /*************************************************************************//*!
@@ -218,12 +254,30 @@ FORCE_INLINE CMatrix44& CCamera::GetViewMatrix(void){
 	return m_ViewMatrix;
 }
 /*************************************************************************//*!
+		@brief			ビュー行列取得
+		@param			None
+
+		@return			ビュー行列
+*//**************************************************************************/
+FORCE_INLINE const CMatrix44& CCamera::GetViewMatrix(void) const {
+	return m_ViewMatrix;
+}
+/*************************************************************************//*!
 		@brief			ビルボード行列取得
 		@param			None
 
 		@return			ビルボード行列
 *//**************************************************************************/
 FORCE_INLINE CMatrix33& CCamera::GetBillBoardMatrix(void){
+	return m_BillBoardMatrix;
+}
+/*************************************************************************//*!
+		@brief			ビルボード行列取得
+		@param			None
+
+		@return			ビルボード行列
+*//**************************************************************************/
+FORCE_INLINE const CMatrix33& CCamera::GetBillBoardMatrix(void) const {
 	return m_BillBoardMatrix;
 }
 /*************************************************************************//*!
@@ -236,12 +290,30 @@ FORCE_INLINE CMatrix44& CCamera::GetProjectionMatrix(void){
 	return m_ProjectionMatrix;
 }
 /*************************************************************************//*!
+		@brief			プロジェクション行列取得
+		@param			None
+
+		@return			プロジェクション行列
+*//**************************************************************************/
+FORCE_INLINE const CMatrix44& CCamera::GetProjectionMatrix(void) const {
+	return m_ProjectionMatrix;
+}
+/*************************************************************************//*!
 		@brief			ビュープロジェクション行列取得
 		@param			None
 
 		@return			ビュープロジェクション行列
 *//**************************************************************************/
 FORCE_INLINE CMatrix44& CCamera::GetViewProjectionMatrix(void){
+	return m_ViewProjectionMatrix;
+}
+/*************************************************************************//*!
+		@brief			ビュープロジェクション行列取得
+		@param			None
+
+		@return			ビュープロジェクション行列
+*//**************************************************************************/
+FORCE_INLINE const CMatrix44& CCamera::GetViewProjectionMatrix(void) const {
 	return m_ViewProjectionMatrix;
 }
 /*************************************************************************//*!

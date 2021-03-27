@@ -13,6 +13,7 @@ typedef	wchar_t		SsChar;
 typedef std::vector<SsValue>		SsArray;
 typedef std::map<SsString,SsValue>	SsHash;
 
+//SsValue用のシリアライザ
 void	SsValueSeriarizer( ISsXmlArchiver* ar , SsValue& v , const std::string key = "value" );
 
 
@@ -206,7 +207,7 @@ template <> inline SsString& SsValue::get<SsString>() {
 		}else if ( this->type == int_type )
 		{
 #ifdef _WIN32
-            ret = std::to_string( (__int64)_int);
+            ret = std::to_string( (int)_int);
 #else
             ret = std::to_string( (int)(_int) );
 #endif
@@ -310,7 +311,7 @@ template <> inline bool SsValue::is<SsHash>() const {
 
 
 
-static  SsValue	SsValueSeriarizer__MakeValue( const char* v )
+inline static  SsValue	SsValueSeriarizer__MakeValue( const char* v )
 {
     std::string temp = v;
 	bool is_priod;

@@ -13,7 +13,7 @@
 namespace my {
 class Weapon : public my::Actor , public my::ResourceLocator{
     using super = my::Actor;
-private:
+protected:
     //! ƒƒbƒVƒ…
     std::weak_ptr<Mof::CMeshContainer> _mesh;
 public:

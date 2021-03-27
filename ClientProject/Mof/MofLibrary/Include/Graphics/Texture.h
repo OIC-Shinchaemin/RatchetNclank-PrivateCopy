@@ -993,14 +993,14 @@ namespace Mof {
 
 				@return			画像の幅
 		*//**************************************************************************/
-		virtual MofU32 GetWidth(void) = 0;
+		virtual MofU32 GetWidth(void) const = 0;
 		/*************************************************************************//*!
 				@brief			高さ取得
 				@param			None
 
 				@return			画像の高さ
 		*//**************************************************************************/
-		virtual MofU32 GetHeight(void) = 0;
+		virtual MofU32 GetHeight(void) const = 0;
 	};
 
 	//ポインタ置き換え

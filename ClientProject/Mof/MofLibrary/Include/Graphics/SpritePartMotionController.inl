@@ -53,7 +53,7 @@ FORCE_INLINE MofBool CSpritePartMotionController::SetTime(MofFloat t){
 
 		@return			現在のモーション時間
 *//**************************************************************************/
-FORCE_INLINE MofFloat CSpritePartMotionController::GetTime(void){
+FORCE_INLINE MofFloat CSpritePartMotionController::GetTime(void) const{
 	return m_MotionTime;
 }
 /*************************************************************************//*!
@@ -62,7 +62,7 @@ FORCE_INLINE MofFloat CSpritePartMotionController::GetTime(void){
 
 		@return			現在のモーション番号
 *//**************************************************************************/
-FORCE_INLINE MofS32 CSpritePartMotionController::GetMotionNo(void){
+FORCE_INLINE MofS32 CSpritePartMotionController::GetMotionNo(void) const {
 	return m_MotionNo;
 }
 /*************************************************************************//*!
@@ -71,7 +71,7 @@ FORCE_INLINE MofS32 CSpritePartMotionController::GetMotionNo(void){
 
 		@return			登録されているモーション数
 *//**************************************************************************/
-FORCE_INLINE MofS32 CSpritePartMotionController::GetMotionCount(void){
+FORCE_INLINE MofS32 CSpritePartMotionController::GetMotionCount(void) const {
 	return m_pAnimation->GetArrayCount();
 }
 

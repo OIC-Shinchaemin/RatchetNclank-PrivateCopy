@@ -131,21 +131,21 @@ namespace Mof {
 
 				@return			現在のモーション時間
 		*//**************************************************************************/
-		virtual MofFloat GetTime(void) = 0;
+		virtual MofFloat GetTime(void) const = 0;
 		/*************************************************************************//*!
 				@brief			現在のモーション番号取得
 				@param			None
 
 				@return			現在のモーション番号
 		*//**************************************************************************/
-		virtual MofS32 GetMotionNo(void) = 0;
+		virtual MofS32 GetMotionNo(void) const = 0;
 		/*************************************************************************//*!
 				@brief			登録されているモーション数取得
 				@param			None
 
 				@return			登録されているモーション数
 		*//**************************************************************************/
-		virtual MofS32 GetMotionCount(void) = 0;
+		virtual MofS32 GetMotionCount(void) const = 0;
 	};
 }
 

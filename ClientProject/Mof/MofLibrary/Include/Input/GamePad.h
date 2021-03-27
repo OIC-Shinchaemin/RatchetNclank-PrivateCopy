@@ -76,7 +76,7 @@ namespace Mof {
 				@return			TRUE			入力あり<br>
 								FALSE			入力なし
 		*//**************************************************************************/
-		virtual MofBool IsKeyPush(const MofU8 n) = 0;
+		virtual MofBool IsKeyPush(const MofU8 n) const = 0;
 		/*************************************************************************//*!
 				@brief			ゲームパッドキー入力状態判定<br>
 								キー番号のキーのHold(このフレームで入力されている)判定を行う
@@ -85,7 +85,7 @@ namespace Mof {
 				@return			TRUE			入力あり<br>
 								FALSE			入力なし
 		*//**************************************************************************/
-		virtual MofBool IsKeyHold(const MofU8 n) = 0;
+		virtual MofBool IsKeyHold(const MofU8 n) const = 0;
 		/*************************************************************************//*!
 				@brief			ゲームパッドキー入力状態判定<br>
 								キー番号のキーのPull(このフレームで放された)判定を行う
@@ -94,7 +94,7 @@ namespace Mof {
 				@return			TRUE			入力あり<br>
 								FALSE			入力なし
 		*//**************************************************************************/
-		virtual MofBool IsKeyPull(const MofU8 n) = 0;
+		virtual MofBool IsKeyPull(const MofU8 n) const = 0;
 
 		//----------------------------------------------------------------------------
 		////Get
@@ -122,7 +122,7 @@ namespace Mof {
 
 				@return			スティック横入力量(-1.0～1.0)
 		*//**************************************************************************/
-		virtual MofFloat GetStickHorizontal(void) = 0;
+		virtual MofFloat GetStickHorizontal(void) const = 0;
 		/*************************************************************************//*!
 				@brief			パッド状態取得<br>
 								スティックの縦への傾きを取得する。
@@ -130,7 +130,7 @@ namespace Mof {
 
 				@return			スティック縦入力量(-1.0～1.0)
 		*//**************************************************************************/
-		virtual MofFloat GetStickVertical(void) = 0;
+		virtual MofFloat GetStickVertical(void) const = 0;
 	};
 
 	//ポインタ置き換え

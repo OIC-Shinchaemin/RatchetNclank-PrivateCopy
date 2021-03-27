@@ -7,6 +7,7 @@
 #include "../QuickChangeSystem.h"
 #include "../GameMoney.h"
 #include "../Weapon.h"
+#include "../WeaponSystem.h"
 
 
 namespace my {
@@ -20,8 +21,10 @@ private:
 	std::unique_ptr<my::QuickChangeSystem>  _quick_change;
 	//! クイックチェンジ
 	std::unique_ptr<my::GameMoney>  _game_money;
-	//! クイックチェンジ
-	std::unique_ptr<my::Weapon>  _weapon;
+	//! 武器
+	std::shared_ptr<my::Weapon> _current_weapon;
+	//! 武器
+	std::unique_ptr<my::WeaponSystem>  _weapon_system;
 private:
 	/// <summary>
 	/// 追加

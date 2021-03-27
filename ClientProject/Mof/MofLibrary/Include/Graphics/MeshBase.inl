@@ -54,7 +54,7 @@ FORCE_INLINE LPBlockContainer CMeshBase::GetBlockContainer(void){
 
 		@return			ƒWƒIƒƒgƒŠ“o˜^”
 *//**************************************************************************/
-FORCE_INLINE MofU32 CMeshBase::GetGeometryCount(void){
+FORCE_INLINE MofU32 CMeshBase::GetGeometryCount(void) const {
 	return m_pGeometry->GetArrayCount();
 }
 /*************************************************************************//*!
