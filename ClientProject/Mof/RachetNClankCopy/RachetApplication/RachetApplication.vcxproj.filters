@@ -58,6 +58,12 @@
     <Filter Include="Rachet\Header\Save">
       <UniqueIdentifier>{dfdafe75-011d-4685-a73f-4d70c3298e98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Weapon">
+      <UniqueIdentifier>{400de8d5-d072-4d5b-b217-b55056d6a978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Weapon">
+      <UniqueIdentifier>{d8b7b08c-6590-4f09-8ddf-6429c717e012}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -122,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="Save\SaveSystem.cpp">
       <Filter>Rachet\Source\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Rachet\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Save\SaveData.h">
       <Filter>Rachet\Header\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,11 @@ bool my::GameMoney::Render(void) {
         tex->Render(_position.x, _position.y);
         auto pos = _position;
         pos.x -= _font_size * 0.5f * ut::GetDigit(_value) + ut::GetDigit(_value);
-        _font.RenderString(pos.x, pos.y, std::to_string(_value).c_str());
+        const char* text = "ddd";
+
+//        _font.RenderString(pos.x, pos.y, std::to_string(_value).c_str());
+//        _font.RenderString(pos.x, pos.y, text);
+        ::CGraphicsUtilities::RenderString(pos.x, pos.y, std::to_string(_value).c_str());
     } // if
     return true;
 }

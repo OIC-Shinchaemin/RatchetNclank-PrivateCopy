@@ -27,11 +27,11 @@ my::GameManager::~GameManager() {
 
 bool my::GameManager::Initialize(void) {
     _character = std::make_shared<my::Character>();
-    _character->Initialize();
+    _character->Initialize({});
 
     _quick_change = std::make_unique<my::QuickChangeSystem>();
     _game_money = std::make_unique<my::GameMoney>();
-
+    _weapon = std::make_unique<my::Weapon>();
 
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
@@ -51,9 +51,10 @@ bool my::GameManager::Update(float delta_time) {
 }
 
 bool my::GameManager::Render(void) {
+    _weapon->Render();
+
     _quick_change->Render();
     _game_money->Render();
-
     return true;
 }
 

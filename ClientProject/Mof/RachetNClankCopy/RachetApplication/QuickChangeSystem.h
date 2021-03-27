@@ -2,9 +2,10 @@
 #define MY_QUICK_CHANGE_SYSTEM_H
 
 
+#include "ResourceLocator.h"
+
 #include <Mof.h>
 
-#include "ResourceLocator.h"
 
 
 namespace my {
