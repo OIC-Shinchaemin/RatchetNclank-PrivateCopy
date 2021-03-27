@@ -1,8 +1,8 @@
 #include "WeaponSystem.h"
 
-#include "OmniWrench.h"
-#include "BombGlove.h"
-#include "Pyrocitor.h"
+#include "Weapon/OmniWrench.h"
+#include "Weapon/BombGlove.h"
+#include "Weapon/Pyrocitor.h"
 
 
 my::WeaponSystem::WeaponSystem() :

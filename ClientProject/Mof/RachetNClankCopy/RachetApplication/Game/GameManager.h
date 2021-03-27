@@ -6,7 +6,7 @@
 #include "../Character.h"
 #include "../QuickChangeSystem.h"
 #include "../GameMoney.h"
-#include "../Weapon.h"
+#include "../Weapon/Weapon.h"
 #include "../WeaponSystem.h"
 
 

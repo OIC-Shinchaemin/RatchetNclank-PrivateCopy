@@ -58,14 +58,14 @@
     <Filter Include="Rachet\Header\Save">
       <UniqueIdentifier>{dfdafe75-011d-4685-a73f-4d70c3298e98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Weapon">
-      <UniqueIdentifier>{400de8d5-d072-4d5b-b217-b55056d6a978}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Weapon">
-      <UniqueIdentifier>{d8b7b08c-6590-4f09-8ddf-6429c717e012}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Factory">
       <UniqueIdentifier>{b96171b7-57c7-4532-aba0-a5aeb2ee59f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Weapon">
+      <UniqueIdentifier>{afd19543-1ace-4d8d-b8ba-b79ef6b2e90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Weapon">
+      <UniqueIdentifier>{3c9a9cde-1a27-4fd2-8a7d-1a44475340cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,29 +132,23 @@
     <ClCompile Include="Save\SaveSystem.cpp">
       <Filter>Rachet\Source\Save</Filter>
     </ClCompile>
-    <ClCompile Include="Mechanical.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="BombGlove.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="OmniWrench.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Pyrocitor.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
     <ClCompile Include="WeaponSystem.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Creator.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Weapon\BombGlove.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Factory.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Weapon\Mechanical.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon\OmniWrench.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon\Pyrocitor.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon\Weapon.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,15 +224,6 @@
     <ClInclude Include="CanvasLocator.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceLocator.h">
-      <Filter>Rachet\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstructContainer.h">
-      <Filter>Rachet\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Rachet\Source</Filter>
-    </ClInclude>
     <ClInclude Include="GameDefine.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -251,28 +236,37 @@
     <ClInclude Include="Save\SaveData.h">
       <Filter>Rachet\Header\Save</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Mechanical.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="BombGlove.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="OmniWrench.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Pyrocitor.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
     <ClInclude Include="WeaponSystem.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Creator.h">
+    <ClInclude Include="Weapon\Mechanical.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon\OmniWrench.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon\Pyrocitor.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon\Weapon.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon\BombGlove.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Factory.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Creator.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLocator.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Factory.h">
+    <ClInclude Include="AbstructContainer.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
