@@ -193,6 +193,31 @@ void Player::UpdateJump(void)
 	}
 }
 
+void Player::UpdateAttack(void)
+{
+	if (m_State != Attack1 && m_State != Attack2 && m_State != Attack3)
+	{
+		return;
+	}
+	if (m_State == Attack1 && m_pMotion->IsEndMotion() && m_bNextAtc)
+	{
+		m_State = Attack2;
+		m_bNextAtc = false;
+		m_bAttackMove = false;
+	}
+	else if (m_State == Attack2 && m_pMotion->IsEndMotion() && m_bNextAtc)
+	{
+		m_State = Attack3;
+		m_bNextAtc = false;
+		m_bAttackMove = false;
+	}
+	else if (m_pMotion->IsEndMotion() && !m_bNextAtc)
+	{
+		m_State = None;
+		m_bAttackMove = false;
+	}
+}
+
 void Player::ChangeAnimation(void)
 {
 	if (m_State != None)
