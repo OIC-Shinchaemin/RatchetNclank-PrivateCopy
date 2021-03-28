@@ -2,8 +2,8 @@
 #define MY_WEAPON_H
 
 
-#include "Actor.h"
-#include "ResourceLocator.h"
+#include "../Actor.h"
+#include "../ResourceLocator.h"
 
 #include <memory>
 

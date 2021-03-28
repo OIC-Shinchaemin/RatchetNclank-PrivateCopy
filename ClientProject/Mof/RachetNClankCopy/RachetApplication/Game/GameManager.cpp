@@ -4,9 +4,6 @@
 #include "My/Core/Utility.h"
 #include "../Save/SaveData.h"
 #include "../Save/SaveSystem.h"
-#include "../OmniWrench.h"
-#include "../BombGlove.h"
-#include "../Pyrocitor.h"
 
 
 void my::GameManager::AddElement(const std::shared_ptr<my::Character>& ptr) {

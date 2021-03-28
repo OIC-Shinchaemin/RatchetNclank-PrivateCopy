@@ -7,9 +7,9 @@
 #include <vector>
 #include <unordered_map>
 
-#include "Weapon.h"
+#include "Weapon/Weapon.h"
 #include "Save/SaveData.h"
-#include "Factory.h"
+#include "Factory/Factory.h"
 
 
 namespace my {
