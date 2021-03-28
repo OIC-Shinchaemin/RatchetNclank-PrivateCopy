@@ -162,6 +162,7 @@
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="Save\SaveData.cpp" />
     <ClCompile Include="Save\SaveSystem.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -197,6 +198,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Save\SaveData.h" />
     <ClInclude Include="Save\SaveSystem.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>

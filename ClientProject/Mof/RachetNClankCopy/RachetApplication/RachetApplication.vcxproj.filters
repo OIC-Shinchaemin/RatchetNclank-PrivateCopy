@@ -132,6 +132,9 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Rachet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Rachet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
