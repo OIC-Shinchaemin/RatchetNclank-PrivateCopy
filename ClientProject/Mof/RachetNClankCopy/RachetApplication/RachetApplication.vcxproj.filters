@@ -150,6 +150,9 @@
     <ClCompile Include="Weapon\Weapon.cpp">
       <Filter>Rachet\Source\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Gamepad.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -267,6 +270,9 @@
       <Filter>Rachet\Header</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Gamepad.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
