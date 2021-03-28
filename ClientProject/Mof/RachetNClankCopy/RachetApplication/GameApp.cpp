@@ -1,5 +1,6 @@
 #include "GameApp.h"
 
+#include "Gamepad.h"
 #include "My/Core/Define.h"
 #include "Camera/CameraLocator.h"
 #include "ResourceLocator.h"
@@ -50,6 +51,7 @@ void CGameApp::Render2D(void) {
 }
 
 MofBool CGameApp::Initialize(void) {
+    my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
 
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
@@ -66,7 +68,8 @@ MofBool CGameApp::Initialize(void) {
 }
 MofBool CGameApp::Input(void) {
     ::g_pInput->RefreshKey();
-    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
+    ::g_pGamepad->RefreshKey();
+    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
         ::PostQuitMessage(0);
         return false;
     } // if
@@ -97,5 +100,7 @@ MofBool CGameApp::Render(void) {
 MofBool CGameApp::Release(void) {
     _resource_manager.reset();
     _game_manager.reset();
+
+    my::Gamepad::GetInstance().Release();
     return TRUE;
 }

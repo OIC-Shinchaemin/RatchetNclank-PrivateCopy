@@ -17,14 +17,14 @@ private:
 	my::Renderer _renderer;
 	//! キャラクタ
 	std::shared_ptr<my::Character> _character;
-	//! クイックチェンジ
-	std::unique_ptr<my::QuickChangeSystem>  _quick_change;
-	//! クイックチェンジ
+	//! 金
 	std::unique_ptr<my::GameMoney>  _game_money;
 	//! 武器
 	std::shared_ptr<my::Weapon> _current_weapon;
 	//! 武器
-	std::unique_ptr<my::WeaponSystem>  _weapon_system;
+	std::shared_ptr<my::WeaponSystem>  _weapon_system;
+	//! クイックチェンジ
+	std::unique_ptr<my::QuickChangeSystem>  _quick_change;
 private:
 	/// <summary>
 	/// 追加

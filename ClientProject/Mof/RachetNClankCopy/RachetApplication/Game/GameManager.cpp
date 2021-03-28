@@ -29,15 +29,16 @@ bool my::GameManager::Initialize(void) {
     _character = std::make_shared<my::Character>();
     _character->Initialize({});
 
-    _quick_change = std::make_unique<my::QuickChangeSystem>();
     _game_money = std::make_unique<my::GameMoney>();
-    _weapon_system = std::make_unique<my::WeaponSystem>();
+    _weapon_system = std::make_shared<my::WeaponSystem>();
+    _quick_change = std::make_unique<my::QuickChangeSystem>();
 
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
 
     _game_money->Initialize(save_data.GetMoney());
     _weapon_system->Initialize(save_data);
+    _quick_change->Initialize({}, _weapon_system);
 
     _current_weapon = _weapon_system->GetWeapon("OmniWrench");
     return true;
@@ -62,6 +63,8 @@ bool my::GameManager::Input(void) {
 }
 
 bool my::GameManager::Update(float delta_time) {
+    _quick_change->Update();
+
     return true;
 }
 
