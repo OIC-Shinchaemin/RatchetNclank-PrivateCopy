@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\CameraController">
+      <UniqueIdentifier>{458022cd-f3f2-4434-b67e-a3b7fad33396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\CameraController">
+      <UniqueIdentifier>{4cd1d320-74a0-46bb-95ba-534dae8bfc67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Window">
+      <UniqueIdentifier>{c2208c5e-ceed-4173-9d6c-8b830d3d4ab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Window">
+      <UniqueIdentifier>{ea30710c-8bfa-48e4-9d64-c8e6434c0797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Action">
+      <UniqueIdentifier>{318eeed3-9266-4a13-b037-cbac86c922f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Action">
+      <UniqueIdentifier>{dbdb42cc-1dd5-4345-8f0d-5502cbbe7e57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Menu">
+      <UniqueIdentifier>{e0702efc-0f19-4796-be5e-8e424349f622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Menu">
+      <UniqueIdentifier>{09b0f04d-93a0-4526-bbe8-9788795b0015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Parameter">
+      <UniqueIdentifier>{e1bcee80-e111-4625-8cfb-ee80d81cac7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Parameter">
+      <UniqueIdentifier>{a912b764-e96c-4d5e-84a9-ce4bc355fc5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Common">
+      <UniqueIdentifier>{a39dbe59-c075-4072-8aa4-939e38ca0c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Common">
+      <UniqueIdentifier>{f076ae58-fd0d-496a-a70c-d659616bfe6d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>ソース ファイル\CameraController</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseMoveCameraController.cpp">
+      <Filter>ソース ファイル\CameraController</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshWindow.cpp">
+      <Filter>ソース ファイル\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectWindow.cpp">
+      <Filter>ソース ファイル\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugGui.cpp">
+      <Filter>ソース ファイル\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>ソース ファイル\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorParameter.cpp">
+      <Filter>ソース ファイル\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionManager.cpp">
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiWindowRect.cpp">
+      <Filter>ソース ファイル\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="FileDialog.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoad.cpp">
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoadDialog.cpp">
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshViewCameraController.cpp">
+      <Filter>ソース ファイル\CameraController</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolMenu.cpp">
+      <Filter>ソース ファイル\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseUtilities.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveProject.cpp">
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadProject.cpp">
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectDataPurse.cpp">
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="AddObject.cpp">
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>ヘッダー ファイル\CameraController</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugGui.h">
+      <Filter>ヘッダー ファイル\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshWindow.h">
+      <Filter>ヘッダー ファイル\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectWindow.h">
+      <Filter>ヘッダー ファイル\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorParameter.h">
+      <Filter>ヘッダー ファイル\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="ParameterMap.h">
+      <Filter>ヘッダー ファイル\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseMoveCameraController.h">
+      <Filter>ヘッダー ファイル\CameraController</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>ヘッダー ファイル\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionBase.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionManager.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiWindowRect.h">
+      <Filter>ヘッダー ファイル\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetBase.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="FileDialog.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoad.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowKeyName.h">
+      <Filter>ヘッダー ファイル\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionKeyName.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoadDialog.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshViewCameraController.h">
+      <Filter>ヘッダー ファイル\CameraController</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolMenu.h">
+      <Filter>ヘッダー ファイル\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseUtilities.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveProject.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadProject.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDataPurse.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="AddObject.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
