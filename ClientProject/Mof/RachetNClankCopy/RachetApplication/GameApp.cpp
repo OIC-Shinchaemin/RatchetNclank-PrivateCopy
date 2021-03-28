@@ -4,13 +4,21 @@
 #include "Camera/CameraLocator.h"
 #include "ResourceLocator.h"
 
+//! DEBUG : テストコード
+#include "Stage.h"
+
+Stage stage;
+
 
 void CGameApp::RenderScene(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
     ::CGraphicsUtilities::RenderGrid(2, 20, MOF_COLOR_WHITE, PLANEAXIS_ALL);
 
-    this->Render3D();
+    //! DEBUG : テストコード
+    stage.Render();
+
+    //this->Render3D();
 
     ::g_pGraphics->SetDepthEnable(false);
 
@@ -62,6 +70,10 @@ MofBool CGameApp::Initialize(void) {
     
     _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->Initialize();
+
+    //! DEBUG : テストコード
+    stage.Initialize();
+
     return TRUE;
 }
 MofBool CGameApp::Input(void) {
@@ -83,6 +95,10 @@ MofBool CGameApp::Update(void) {
     _game_manager->Update(delta);
     _ui_canvas->Update(delta);
     _camera_manager->Update();
+
+    //! DEBUG : テストコード
+    stage.Update();
+
     return TRUE;
 }
 
@@ -97,5 +113,9 @@ MofBool CGameApp::Render(void) {
 MofBool CGameApp::Release(void) {
     _resource_manager.reset();
     _game_manager.reset();
+
+    //! DEBUG : テストコード
+    stage.Release();
+
     return TRUE;
 }
