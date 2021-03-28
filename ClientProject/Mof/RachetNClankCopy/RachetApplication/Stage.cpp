@@ -57,10 +57,6 @@ bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* ob
         if (!LoadMesh(filename + ext, ChangeFullPath(mesh_path))) {
             return false;
         }
-        MeshData mesh_data;
-        mesh_data.first  = filename;
-        mesh_data.second = GetMeshPtr(filename + ext);
-        (*mesh_list).push_back(mesh_data);
     }
 
     int object_count = purse_s32(buff_index);
