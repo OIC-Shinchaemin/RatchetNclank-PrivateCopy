@@ -18,7 +18,7 @@ void CGameApp::RenderScene(void) {
     //! DEBUG : テストコード
     stage.Render();
 
-    //this->Render3D();
+    this->Render3D();
 
     ::g_pGraphics->SetDepthEnable(false);
 
