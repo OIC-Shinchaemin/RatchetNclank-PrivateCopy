@@ -118,6 +118,7 @@
     <ClCompile Include="ObjectWindow.cpp" />
     <ClCompile Include="ProjectDataPurse.cpp" />
     <ClCompile Include="SaveProject.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="ToolMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="ProjectDataPurse.h" />
     <ClInclude Include="SaveProject.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="ToolMenu.h" />
     <ClInclude Include="WindowKeyName.h" />
   </ItemGroup>
