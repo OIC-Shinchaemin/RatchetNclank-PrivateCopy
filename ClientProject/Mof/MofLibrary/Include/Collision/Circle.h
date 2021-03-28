@@ -312,7 +312,7 @@ namespace Mof {
 				@return			TRUE		円の中に点がある
 								FALSE		円の範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const MofFloat px,const MofFloat py);
+		MofBool CollisionPoint(const MofFloat px,const MofFloat py) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したVector2（ポイント）が円の中に入っているかを判定する
@@ -321,7 +321,7 @@ namespace Mof {
 				@return			TRUE		円の中に点がある
 								FALSE		円の範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const Vector2& p);
+		MofBool CollisionPoint(const Vector2& p) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したCircle（円）が接触しているかを判定する
@@ -332,7 +332,7 @@ namespace Mof {
 				@return			TRUE		円の中に点がある
 								FALSE		円の範囲外
 		*//**************************************************************************/
-		MofBool CollisionCircle(const MofFloat cx,const MofFloat cy,const MofFloat cr);
+		MofBool CollisionCircle(const MofFloat cx,const MofFloat cy,const MofFloat cr) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したCircle（円）が接触しているかを判定する
@@ -341,7 +341,7 @@ namespace Mof {
 				@return			TRUE		円の中に点がある
 								FALSE		円の範囲外
 		*//**************************************************************************/
-		MofBool CollisionCircle(const Circle& c);
+		MofBool CollisionCircle(const Circle& c) const;
 		
 		/*************************************************************************//*!
 				@brief			数値の設定

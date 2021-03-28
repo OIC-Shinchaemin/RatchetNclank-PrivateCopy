@@ -15,7 +15,7 @@
 		@return			TRUE			入力あり<br>
 						FALSE			入力なし
 *//**************************************************************************/
-FORCE_INLINE MofBool CXGamePad::IsKeyPush(const MofU8 n){
+FORCE_INLINE MofBool CXGamePad::IsKeyPush(const MofU8 n) const {
 	if(n >= XINPUT_MAX)
 	{
 		return FALSE;
@@ -30,7 +30,7 @@ FORCE_INLINE MofBool CXGamePad::IsKeyPush(const MofU8 n){
 		@return			TRUE			入力あり<br>
 						FALSE			入力なし
 *//**************************************************************************/
-FORCE_INLINE MofBool CXGamePad::IsKeyHold(const MofU8 n){
+FORCE_INLINE MofBool CXGamePad::IsKeyHold(const MofU8 n) const {
 	if(n >= XINPUT_MAX)
 	{
 		return FALSE;
@@ -45,7 +45,7 @@ FORCE_INLINE MofBool CXGamePad::IsKeyHold(const MofU8 n){
 		@return			TRUE			入力あり<br>
 						FALSE			入力なし
 *//**************************************************************************/
-FORCE_INLINE MofBool CXGamePad::IsKeyPull(const MofU8 n){
+FORCE_INLINE MofBool CXGamePad::IsKeyPull(const MofU8 n) const {
 	if(n >= XINPUT_MAX)
 	{
 		return FALSE;
@@ -79,7 +79,7 @@ FORCE_INLINE MofGamePadState* CXGamePad::GetPadState(void){
 
 		@return			スティック横入力量(-1.0～1.0)
 *//**************************************************************************/
-FORCE_INLINE MofFloat CXGamePad::GetStickHorizontal(void){
+FORCE_INLINE MofFloat CXGamePad::GetStickHorizontal(void) const {
 	return (MofFloat)m_PadState.Gamepad.sThumbLX / (MofFloat)MOFXINPUT_STICKMAX;
 }
 /*************************************************************************//*!
@@ -89,7 +89,7 @@ FORCE_INLINE MofFloat CXGamePad::GetStickHorizontal(void){
 
 		@return			スティック縦入力量(-1.0～1.0)
 *//**************************************************************************/
-FORCE_INLINE MofFloat CXGamePad::GetStickVertical(void){
+FORCE_INLINE MofFloat CXGamePad::GetStickVertical(void) const {
 	return (MofFloat)m_PadState.Gamepad.sThumbLY / (MofFloat)MOFXINPUT_STICKMAX;
 }
 /*************************************************************************//*!
@@ -99,7 +99,7 @@ FORCE_INLINE MofFloat CXGamePad::GetStickVertical(void){
 
 		@return			スティック横入力量(-1.0～1.0)
 *//**************************************************************************/
-FORCE_INLINE MofFloat CXGamePad::GetRightStickHorizontal(void){
+FORCE_INLINE MofFloat CXGamePad::GetRightStickHorizontal(void) const {
 	return (MofFloat)m_PadState.Gamepad.sThumbRX / (MofFloat)MOFXINPUT_STICKMAX;
 }
 /*************************************************************************//*!
@@ -109,7 +109,7 @@ FORCE_INLINE MofFloat CXGamePad::GetRightStickHorizontal(void){
 
 		@return			スティック縦入力量(-1.0～1.0)
 *//**************************************************************************/
-FORCE_INLINE MofFloat CXGamePad::GetRightStickVertical(void){
+FORCE_INLINE MofFloat CXGamePad::GetRightStickVertical(void) const {
 	return (MofFloat)m_PadState.Gamepad.sThumbRY / (MofFloat)MOFXINPUT_STICKMAX;
 }
 

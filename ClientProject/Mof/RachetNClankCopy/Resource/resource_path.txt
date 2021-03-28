@@ -1,3 +1,6 @@
-../Resource/mesh/wrench/scene.mom
+../Resource/mesh/omni_wrench/scene.mom
+../Resource/mesh/bomb_glove/scene.mom
+../Resource/mesh/pyrocitor/scene.mom
+
 ../Resource/texture/quick_change/background.png
 ../Resource/texture/money/money.png

@@ -64,6 +64,9 @@
     <Filter Include="Rachet\Source\Weapon">
       <UniqueIdentifier>{d8b7b08c-6590-4f09-8ddf-6429c717e012}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Factory">
+      <UniqueIdentifier>{b96171b7-57c7-4532-aba0-a5aeb2ee59f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -129,7 +132,28 @@
     <ClCompile Include="Save\SaveSystem.cpp">
       <Filter>Rachet\Source\Save</Filter>
     </ClCompile>
+    <ClCompile Include="Mechanical.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
     <ClCompile Include="Weapon.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="BombGlove.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="OmniWrench.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyrocitor.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponSystem.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Creator.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -228,6 +252,27 @@
       <Filter>Rachet\Header\Save</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Mechanical.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="BombGlove.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="OmniWrench.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyrocitor.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponSystem.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Creator.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>

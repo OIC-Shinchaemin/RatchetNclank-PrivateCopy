@@ -367,7 +367,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const Vector3& pt);
+		MofBool CollisionPoint(const Vector3& pt) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定した二つのAABBが接触しているかを判定する
@@ -376,7 +376,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionAABB(const BoxAABB& b);
+		MofBool CollisionAABB(const BoxAABB& b) const;
 
 		//----------------------------------------------------------------------------
 		////Get
@@ -451,7 +451,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void CalculateAABB(BoxAABB& ob);
+		void CalculateAABB(BoxAABB& ob) const;
 		
 		/*************************************************************************//*!
 				@brief			指定座標との最近点の算出
@@ -460,7 +460,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void ClosestPtPoint(const Vector3& pt,Vector3& op);
+		void ClosestPtPoint(const Vector3& pt,Vector3& op) const;
 		
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
@@ -470,7 +470,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const Vector3& pt);
+		MofBool CollisionPoint(const Vector3& pt) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定した二つのOBBが接触しているかを判定する
@@ -479,7 +479,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionOBB(const BoxOBB& b);
+		MofBool CollisionOBB(const BoxOBB& b) const;
 
 		//----------------------------------------------------------------------------
 		////Get

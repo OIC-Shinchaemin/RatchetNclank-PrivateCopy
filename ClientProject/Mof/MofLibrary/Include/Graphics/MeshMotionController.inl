@@ -43,7 +43,7 @@ FORCE_INLINE MofBool CMeshMotionController::SetTime(MofFloat t){
 
 		@return			現在のモーション時間
 *//**************************************************************************/
-FORCE_INLINE MofFloat CMeshMotionController::GetTime(void){
+FORCE_INLINE MofFloat CMeshMotionController::GetTime(void) const{
 	return m_MotionTime;
 }
 /*************************************************************************//*!
@@ -52,7 +52,7 @@ FORCE_INLINE MofFloat CMeshMotionController::GetTime(void){
 
 		@return			現在のモーション番号
 *//**************************************************************************/
-FORCE_INLINE MofS32 CMeshMotionController::GetMotionNo(void){
+FORCE_INLINE MofS32 CMeshMotionController::GetMotionNo(void) const {
 	return m_MotionNo;
 }
 /*************************************************************************//*!
@@ -61,7 +61,7 @@ FORCE_INLINE MofS32 CMeshMotionController::GetMotionNo(void){
 
 		@return			登録されているモーション数
 *//**************************************************************************/
-FORCE_INLINE MofS32 CMeshMotionController::GetMotionCount(void){
+FORCE_INLINE MofS32 CMeshMotionController::GetMotionCount(void) const {
 	return m_pAnimation->GetArrayCount();
 }
 /*************************************************************************//*!
@@ -108,7 +108,7 @@ FORCE_INLINE LPMeshAnimation CMeshMotionController::GetMotionByName(LPCMofChar p
 		@return			登録されているモーションの番号
 						MOF_U32_MAX		指定名のモーションが登録されていない
 *//**************************************************************************/
-FORCE_INLINE MofU32 CMeshMotionController::GetMotionNoByName(LPCMofChar pName){
+FORCE_INLINE MofU32 CMeshMotionController::GetMotionNoByName(LPCMofChar pName) const {
 	if (!pName)
 	{
 		return MOF_U32_MAX;

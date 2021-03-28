@@ -860,14 +860,14 @@ namespace Mof {
 
 				@return			‰æ‘œ‚Ì•
 		*//**************************************************************************/
-		virtual MofU32 GetWidth(void);
+		virtual MofU32 GetWidth(void) const;
 		/*************************************************************************//*!
 				@brief			‚‚³æ“¾
 				@param			None
 
 				@return			‰æ‘œ‚Ì‚‚³
 		*//**************************************************************************/
-		virtual MofU32 GetHeight(void);
+		virtual MofU32 GetHeight(void) const;
 	};
 
 	#include	"TextureBase.inl"

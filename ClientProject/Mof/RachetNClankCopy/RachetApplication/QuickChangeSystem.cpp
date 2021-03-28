@@ -5,15 +5,16 @@ my::QuickChangeSystem::QuickChangeSystem() :
     _position(50.0f, 200.0f),
     _color(1.0f, 1.0f, 1.0f, 0.0f),
     _state(State::Exit),
-    _alpha(0.05f) {
+    _alpha(0.05f) ,
+    _weapons(){
     _texture = my::ResourceLocator::GetResource<Mof::CTexture>("../Resource/texture/quick_change/background.png");
 }
 
 my::QuickChangeSystem::~QuickChangeSystem() {
 }
 
-bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos) {
-    return false;
+bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
+    return true;
 }
 
 bool my::QuickChangeSystem::Input(void) {

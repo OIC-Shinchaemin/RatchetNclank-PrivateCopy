@@ -4,6 +4,9 @@
 #include "My/Core/Utility.h"
 #include "../Save/SaveData.h"
 #include "../Save/SaveSystem.h"
+#include "../OmniWrench.h"
+#include "../BombGlove.h"
+#include "../Pyrocitor.h"
 
 
 void my::GameManager::AddElement(const std::shared_ptr<my::Character>& ptr) {
@@ -31,18 +34,33 @@ bool my::GameManager::Initialize(void) {
 
     _quick_change = std::make_unique<my::QuickChangeSystem>();
     _game_money = std::make_unique<my::GameMoney>();
-    _weapon = std::make_unique<my::Weapon>();
+    _weapon_system = std::make_unique<my::WeaponSystem>();
 
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
 
     _game_money->Initialize(save_data.GetMoney());
+    _weapon_system->Initialize(save_data);
+
+    _current_weapon = _weapon_system->GetWeapon("OmniWrench");
     return true;
 }
 
 bool my::GameManager::Input(void) {
     _quick_change->Input();
     _game_money->Input();
+
+
+    if (::g_pInput->IsKeyPush(MOFKEY_1)) {
+        _current_weapon = _weapon_system->GetWeapon("BombGlove");
+    } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_2)) {
+        _current_weapon = _weapon_system->GetWeapon("Pyrocitor");
+    } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_3)) {
+        _current_weapon = _weapon_system->GetWeapon("OmniWrench");
+    } // if
+
     return true;
 }
 
@@ -51,7 +69,7 @@ bool my::GameManager::Update(float delta_time) {
 }
 
 bool my::GameManager::Render(void) {
-    _weapon->Render();
+    _current_weapon->Render();
 
     _quick_change->Render();
     _game_money->Render();
@@ -61,8 +79,9 @@ bool my::GameManager::Render(void) {
 bool my::GameManager::Release(void) {
     _character->Release();
 
-    
-    auto save_param = my::SaveDataParam(_game_money->GetValue());
+    std::vector<std::string> weapon;
+    _weapon_system->CreateAvailableWeaponNames(weapon);
+    auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
     my::SaveSystem().Save(save_param);
     return true;
 }

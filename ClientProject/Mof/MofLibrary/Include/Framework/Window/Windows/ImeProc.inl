@@ -82,3 +82,12 @@ FORCE_INLINE MofBool CImeProc::GetInputImeString(CString& os){
 FORCE_INLINE LPString CImeProc::GetEnterString(void){
 	return &m_EnterString;
 }
+/*************************************************************************//*!
+		@brief			‘}“üˆÊ’u‚ÌŽæ“¾
+		@param			None
+
+		@return			‘}“üˆÊ’u
+*//**************************************************************************/
+FORCE_INLINE MofS32 CImeProc::GetInsertPoint(void) {
+	return m_InsertPoint;
+}

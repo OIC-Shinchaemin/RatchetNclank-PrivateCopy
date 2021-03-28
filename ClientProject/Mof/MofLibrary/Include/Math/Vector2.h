@@ -242,7 +242,7 @@ namespace Mof {
 
 				@return			補間ベクトル
 		*//**************************************************************************/
-		static Vector2 Lerp(Vector2& v1, Vector2& v2, MofFloat t);
+		static Vector2 Lerp(const Vector2& v1, const Vector2& v2, MofFloat t);
 		/*************************************************************************//*!
 				@brief			ベクトル１からベクトル２へとstepで移動をおこなう<br>
 								stepの値がベクトル間の距離より大きい場合、v2の位置で停止する
@@ -252,7 +252,7 @@ namespace Mof {
 
 				@return			補間ベクトル
 		*//**************************************************************************/
-		static Vector2 Move(Vector2& v1, Vector2& v2, MofFloat step);
+		static Vector2 Move(const Vector2& v1, const Vector2& v2, MofFloat step);
 
 	private:
 		//作成を禁止する
@@ -374,28 +374,28 @@ namespace Mof {
 
 				@return			X,Yの最大値
 		*//**************************************************************************/
-		MofFloat GetMaxValue(void);
+		MofFloat GetMaxValue(void) const;
 		/*************************************************************************//*!
 				@brief			絶対値の最大の数値の取得
 				@param			None
 
 				@return			X,Yの絶対値の最大値
 		*//**************************************************************************/
-		MofFloat GetMaxAbsValue(void);
+		MofFloat GetMaxAbsValue(void) const;
 		/*************************************************************************//*!
 				@brief			最低の数値の取得
 				@param			None
 
 				@return			X,Yの最小値
 		*//**************************************************************************/
-		MofFloat GetMinValue(void);
+		MofFloat GetMinValue(void) const;
 		/*************************************************************************//*!
 				@brief			絶対値の最低の数値の取得
 				@param			None
 
 				@return			X,Yの絶対値の最小値
 		*//**************************************************************************/
-		MofFloat GetMinAbsValue(void);
+		MofFloat GetMinAbsValue(void) const;
 
 		//----------------------------------------------------------------------------
 		////Operator

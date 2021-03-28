@@ -79,11 +79,11 @@
 #endif
 
 #ifdef		MOFLIB_WINDOWS_DESKTOP
-//#pragma comment(lib,"XAudio2.lib")
+#pragma comment(lib,"XAudio2.lib")
 #pragma comment(lib,"msacm32.lib")
 #include	<mmreg.h>
 #include	<msacm.h>
-#include	"XAudio/XAudio2.h"
+#include	<xaudio2.h>
 #else
 #pragma comment(lib,"XAudio2.lib")
 #pragma comment(lib,"windowscodecs.lib")

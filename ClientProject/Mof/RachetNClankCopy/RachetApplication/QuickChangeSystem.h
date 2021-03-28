@@ -4,8 +4,13 @@
 
 #include "ResourceLocator.h"
 
+#include <memory>
+#include <array>
+#include <string>
+
 #include <Mof.h>
 
+#include "WeaponSystem.h"
 
 
 namespace my {
@@ -29,6 +34,8 @@ private:
     State _state;
     //! アルファ
     float _alpha;
+    //! 武器
+    std::array<std::string,8> _weapons;
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,7 +50,7 @@ public:
     /// </summary>
     /// <param name="pos"></param>
     /// <returns></returns>
-    bool Initialize(Mof::CVector2 pos);
+    bool Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system);
     /// <summary>
     /// 入力
     /// </summary>

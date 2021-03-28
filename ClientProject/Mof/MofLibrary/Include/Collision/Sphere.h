@@ -325,7 +325,7 @@ namespace Mof {
 				@return			TRUE		球の中に点がある
 								FALSE		球の範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const MofFloat px,const MofFloat py,const MofFloat pz);
+		MofBool CollisionPoint(const MofFloat px,const MofFloat py,const MofFloat pz) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したVector3（ポイント）が球の中に入っているかを判定する
@@ -334,7 +334,7 @@ namespace Mof {
 				@return			TRUE		球の中に点がある
 								FALSE		球の範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const Vector3& p);
+		MofBool CollisionPoint(const Vector3& p) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したSphere（球）が接触しているかを判定する
@@ -346,7 +346,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionSphere(const MofFloat cx,const MofFloat cy,const MofFloat cz,const MofFloat cr);
+		MofBool CollisionSphere(const MofFloat cx,const MofFloat cy,const MofFloat cz,const MofFloat cr) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したSphere（球）が接触しているかを判定する
@@ -355,7 +355,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionSphere(const Sphere& c);
+		MofBool CollisionSphere(const Sphere& c) const;
 		
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
@@ -365,7 +365,7 @@ namespace Mof {
 				@return			TRUE		接触あり
 								FALSE		接触なし
 		*//**************************************************************************/
-		MofBool CollisionGeometry(LPGeometry pGeom);
+		MofBool CollisionGeometry(LPGeometry pGeom) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したジオメトリと交差するかを判定する。<br>
@@ -376,7 +376,7 @@ namespace Mof {
 				@return			TRUE		接触あり
 								FALSE		接触なし
 		*//**************************************************************************/
-		MofBool CollisionGeometry(LPGeometry pGeom, COLLISIONOUTGEOMETRY& out);
+		MofBool CollisionGeometry(LPGeometry pGeom, COLLISIONOUTGEOMETRY& out) const;
 
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
@@ -386,7 +386,7 @@ namespace Mof {
 				@return			TRUE		接触あり
 								FALSE		接触なし
 		*//**************************************************************************/
-		MofBool CollisionMesh(LPMesh pMesh);
+		MofBool CollisionMesh(LPMesh pMesh) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したメッシュと交差するかを判定する。<br>
@@ -397,7 +397,7 @@ namespace Mof {
 				@return			TRUE		接触あり
 								FALSE		接触なし
 		*//**************************************************************************/
-		MofBool CollisionMesh(LPMesh pMesh, COLLISIONOUTMESH& out);
+		MofBool CollisionMesh(LPMesh pMesh, COLLISIONOUTMESH& out) const;
 
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
@@ -407,7 +407,7 @@ namespace Mof {
 				@return			TRUE		接触あり
 								FALSE		接触なし
 		*//**************************************************************************/
-		MofBool CollisionMesh(LPMeshContainer pMesh);
+		MofBool CollisionMesh(LPMeshContainer pMesh) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したメッシュと交差するかを判定する。<br>
@@ -418,7 +418,7 @@ namespace Mof {
 				@return			TRUE		接触あり
 								FALSE		接触なし
 		*//**************************************************************************/
-		MofBool CollisionMesh(LPMeshContainer pMesh, COLLISIONOUTGEOMETRY& out);
+		MofBool CollisionMesh(LPMeshContainer pMesh, COLLISIONOUTGEOMETRY& out) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したメッシュと交差するかを判定する。<br>
@@ -429,7 +429,7 @@ namespace Mof {
 				@return			TRUE		接触あり
 								FALSE		接触なし
 		*//**************************************************************************/
-		MofBool CollisionMesh(LPMeshContainer pMesh, COLLISIONOUTMESHCONTAINER& out);
+		MofBool CollisionMesh(LPMeshContainer pMesh, COLLISIONOUTMESHCONTAINER& out) const;
 
 		/*************************************************************************//*!
 				@brief			数値の設定
