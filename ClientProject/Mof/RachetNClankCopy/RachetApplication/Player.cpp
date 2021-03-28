@@ -152,6 +152,47 @@ void Player::UpdateMove(void)
 	}
 }
 
+void Player::UpdateJump(void)
+{
+	if (JumpStart == m_State && m_pMotion->IsEndMotion())
+	{
+		m_Gravity = 0.2f;
+		m_State = JumpUp;
+	}
+	else if (JumpUp == m_State)
+	{
+		if (m_Time < 0)
+		{
+			m_Gravity = 0.0f;
+			m_State = JumpDown;
+		}
+		if (m_Gravity < 0)
+		{
+			if (m_bJump2)
+			{
+				m_State = Jump2;
+			}
+			else
+			{
+				m_State = JumpDown;
+			}
+		}
+	}
+	else if (Jump2 == m_State && m_pMotion->IsEndMotion())
+	{
+		m_State = JumpDown;
+	}
+	else if (JumpDown == m_State && m_pMotion->IsEndMotion())
+	{
+		//m_State = None;
+	}
+	else if (m_State == JumpEnd)
+	{
+		m_State = None;
+		m_bJump = false;
+	}
+}
+
 void Player::ChangeAnimation(void)
 {
 	if (m_State != None)

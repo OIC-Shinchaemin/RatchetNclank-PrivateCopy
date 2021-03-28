@@ -58,6 +58,7 @@ private:
 
 	virtual bool Input(void);
 	void UpdateMove(void);
+	void UpdateJump(void);
 	void ChangeAnimation(void);
 	void CollisionStage(LPMeshContainer pMesh);
 public:
