@@ -36,5 +36,14 @@ FORCE_INLINE LightType CDirectionalLight::GetType(void) const{
 FORCE_INLINE CVector3& CDirectionalLight::GetDirection(void){
 	return m_Direction;
 }
+/*************************************************************************//*!
+		@brief			ライト方向取得
+		@param			None
+
+		@return			ライト方向
+*//**************************************************************************/
+FORCE_INLINE const CVector3& CDirectionalLight::GetDirection(void) const {
+	return m_Direction;
+}
 
 //[EOF]

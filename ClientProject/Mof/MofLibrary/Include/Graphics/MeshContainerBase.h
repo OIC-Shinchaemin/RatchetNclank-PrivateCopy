@@ -329,7 +329,7 @@ namespace Mof {
 
 				@return			メッシュ登録数
 		*//**************************************************************************/
-		virtual MofU32 GetMeshCount(void);
+		virtual MofU32 GetMeshCount(void) const;
 		/*************************************************************************//*!
 				@brief			メッシュ取得
 				@param[in]		pName			メッシュ番号
@@ -352,7 +352,7 @@ namespace Mof {
 
 				@return			ジオメトリ登録数
 		*//**************************************************************************/
-		virtual MofU32 GetGeometryCount(void);
+		virtual MofU32 GetGeometryCount(void) const;
 		/*************************************************************************//*!
 				@brief			ジオメトリ取得
 				@param[in]		No				ジオメトリ番号

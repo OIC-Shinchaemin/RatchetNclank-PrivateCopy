@@ -32,7 +32,7 @@ FORCE_INLINE LPString CTextureBase::GetName(void){
 
 		@return			âÊëúÇÃïù
 *//**************************************************************************/
-FORCE_INLINE MofU32 CTextureBase::GetWidth(void){
+FORCE_INLINE MofU32 CTextureBase::GetWidth(void) const {
 	return m_Width;
 }
 /*************************************************************************//*!
@@ -41,7 +41,7 @@ FORCE_INLINE MofU32 CTextureBase::GetWidth(void){
 
 		@return			âÊëúÇÃçÇÇ≥
 *//**************************************************************************/
-FORCE_INLINE MofU32 CTextureBase::GetHeight(void){
+FORCE_INLINE MofU32 CTextureBase::GetHeight(void) const {
 	return m_Height;
 }
 

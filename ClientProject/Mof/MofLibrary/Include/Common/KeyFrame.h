@@ -190,7 +190,7 @@ namespace Mof {
 
 				@return			データ
 		*//**************************************************************************/
-		T GetValue(void) const;
+		const T& GetValue(void) const;
 
 		//クラス基本定義
 		MOF_LIBRARYCLASS(CKeyFrame,MOF_KEYFRAMECLASS_ID);

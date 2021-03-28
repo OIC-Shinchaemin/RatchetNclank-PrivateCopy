@@ -37,7 +37,7 @@ FORCE_INLINE MofBool CSpriteMotionController::SetTime(MofFloat t){
 
 		@return			現在のモーション時間
 *//**************************************************************************/
-FORCE_INLINE MofFloat CSpriteMotionController::GetTime(void){
+FORCE_INLINE MofFloat CSpriteMotionController::GetTime(void) const {
 	return m_MotionTime;
 }
 /*************************************************************************//*!
@@ -46,7 +46,7 @@ FORCE_INLINE MofFloat CSpriteMotionController::GetTime(void){
 
 		@return			現在のモーション番号
 *//**************************************************************************/
-FORCE_INLINE MofS32 CSpriteMotionController::GetMotionNo(void){
+FORCE_INLINE MofS32 CSpriteMotionController::GetMotionNo(void) const {
 	return m_MotionNo;
 }
 /*************************************************************************//*!
@@ -55,7 +55,7 @@ FORCE_INLINE MofS32 CSpriteMotionController::GetMotionNo(void){
 
 		@return			登録されているモーション数
 *//**************************************************************************/
-FORCE_INLINE MofS32 CSpriteMotionController::GetMotionCount(void){
+FORCE_INLINE MofS32 CSpriteMotionController::GetMotionCount(void) const {
 	return m_pAnimation->GetArrayCount();
 }
 /*************************************************************************//*!
@@ -75,6 +75,15 @@ FORCE_INLINE MofS32 CSpriteMotionController::GetFrameNo(void) {
 		@return			現在のアニメーション矩形
 *//**************************************************************************/
 FORCE_INLINE CRectangle& CSpriteMotionController::GetSrcRect(void){
+	return m_SrcRect;
+}
+/*************************************************************************//*!
+		@brief			現在のアニメーション矩形取得
+		@param			None
+
+		@return			現在のアニメーション矩形
+*//**************************************************************************/
+FORCE_INLINE const CRectangle& CSpriteMotionController::GetSrcRect(void) const {
 	return m_SrcRect;
 }
 

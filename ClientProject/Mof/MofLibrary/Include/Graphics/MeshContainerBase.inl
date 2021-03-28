@@ -57,7 +57,7 @@ FORCE_INLINE LPMeshArray CMeshContainerBase::GetMesh(void){
 
 		@return			ÉÅÉbÉVÉÖìoò^êî
 *//**************************************************************************/
-FORCE_INLINE MofU32 CMeshContainerBase::GetMeshCount(void){
+FORCE_INLINE MofU32 CMeshContainerBase::GetMeshCount(void) const {
 	return m_pMesh->GetArrayCount();
 }
 /*************************************************************************//*!
@@ -95,7 +95,7 @@ FORCE_INLINE LPMesh CMeshContainerBase::GetMesh(LPCMofChar pName){
 
 		@return			ÉWÉIÉÅÉgÉäìoò^êî
 *//**************************************************************************/
-FORCE_INLINE MofU32 CMeshContainerBase::GetGeometryCount(void){
+FORCE_INLINE MofU32 CMeshContainerBase::GetGeometryCount(void) const {
 	MofU32 re = 0;
 	for (MofU32 i = 0; i < m_pMesh->GetArrayCount(); i++)
 	{

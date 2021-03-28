@@ -1,4 +1,4 @@
-#ifndef __SSEFFECTELEMENT__
+﻿#ifndef __SSEFFECTELEMENT__
 #define __SSEFFECTELEMENT__
 
 
@@ -13,6 +13,7 @@ enum EffectPartType
 };
 
 
+//命令種別
 namespace SsEffectFunctionType
 {
 	enum enum_
@@ -44,6 +45,9 @@ class SsCell;
 
 
 
+
+
+//範囲値クラス
 template<class mytype>
 class VarianceValue : public SsXmlRangeValueConverter
 {
@@ -153,17 +157,18 @@ public:
 	void	setType(SsEffectFunctionType::enum_ type){ myType = type; } 
 
 #if 0
+	//各部で実装する
 	virtual void InitializeEmmiter( SsEffectRenderEmitter* emmiter ) {}
 	virtual void UpdateEmmiter( SsEffectRenderEmitter* emmiter ){}
 	virtual void UpdateEndEmmiter( SsEffectRenderEmitter* emmiter ){}
 	virtual void InitializeParticle( SsEffectRenderEmitter* e , SsEffectRenderParticle* particle ){}
 	virtual void UpdateParticle( SsEffectRenderParticle* particle ){}
 #endif
-
+	//シリアライザ
 
 	virtual SSSERIALIZE_BLOCK
 	{
-
+		ar = ar;
 	}
 
 };
@@ -171,6 +176,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//パーティクルを構成する基本の値
 class  ParticleElementBasic  : public SsEffectElementBase
 {
 public:
@@ -222,6 +228,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//遅れ
 class  ParticleElementRndSeedChange : public SsEffectElementBase
 {
 public:
@@ -235,9 +242,11 @@ public:
 	}
 	virtual ~ParticleElementRndSeedChange(){}
 /*
+	//各部で実装する
 	virtual void InitializeEmmiter( SsEffectRenderEmitter* emmiter );
 */
 
+	//シリアライザ
 	SSSERIALIZE_BLOCK
 	{
 		SSAR_DECLARE( Seed );
@@ -246,6 +255,7 @@ public:
 };
 
 //--------------------------------------------------------------------------------------
+//遅れ
 class  ParticleElementDelay : public SsEffectElementBase
 {
 public:
@@ -258,6 +268,7 @@ public:
 	}
 	virtual ~ParticleElementDelay(){}
 /*
+	//各部で実装する
 	virtual void InitializeEmmiter( SsEffectRenderEmitter* emmiter );
 	virtual void UpdateEmmiter( SsEffectRenderEmitter* emmiter );
 
@@ -276,6 +287,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//重力への影響
 class  ParticleElementGravity : public SsEffectElementBase
 {
 public:
@@ -302,6 +314,7 @@ public:
 };
 
 //--------------------------------------------------------------------------------------
+//発生位置への影響
 class  ParticleElementPosition : public SsEffectElementBase
 {
 public:
@@ -328,8 +341,9 @@ public:
 
 };
 
-#if 0
+#if 0	//オミット
 //--------------------------------------------------------------------------------------
+//発生位置への影響
 class  ParticleElementTransPosition : public SsEffectElementBase
 {
 public:
@@ -359,6 +373,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//角度変化
 class  ParticleElementRotation : public SsEffectElementBase
 {
 public:
@@ -378,7 +393,7 @@ public:
 	virtual void InitializeParticle( SsEffectRenderEmitter* e , SsEffectRenderParticle* particle );
 	virtual void UpdateParticle( SsEffectRenderParticle* particle );
 */
-
+	//シリアライザ
 	SSSERIALIZE_BLOCK
 	{
 		SSAR_DECLARE( Rotation );
@@ -389,6 +404,7 @@ public:
 };
 
 //--------------------------------------------------------------------------------------
+//角度変化
 class  ParticleElementRotationTrans : public SsEffectElementBase
 {
 public:
@@ -443,6 +459,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//接戦加速度を与える
 class  ParticleElementTangentialAcceleration : public SsEffectElementBase
 {
 public:
@@ -469,6 +486,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//頂点カラーを制御する
 class  ParticleElementInitColor : public SsEffectElementBase
 {
 public:
@@ -492,6 +510,7 @@ public:
 };
 
 //--------------------------------------------------------------------------------------
+//頂点カラーを制御する
 class  ParticleElementTransColor : public SsEffectElementBase
 {
 public:
@@ -517,6 +536,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//著点カラーを制御する
 class  ParticleElementAlphaFade : public SsEffectElementBase
 {
 public:
@@ -543,6 +563,7 @@ public:
 };
 
 //--------------------------------------------------------------------------------------
+//サイズ初期
 class  ParticleElementSize : public SsEffectElementBase
 {
 public:
@@ -575,6 +596,7 @@ public:
 
 
 //--------------------------------------------------------------------------------------
+//サイズ変更
 class  ParticleElementTransSize : public SsEffectElementBase
 {
 public:
@@ -606,6 +628,7 @@ public:
 };
 
 //--------------------------------------------------------------------------------------
+//重力点
 class  ParticlePointGravity : public SsEffectElementBase
 {
 public:
@@ -624,6 +647,7 @@ public:
 
 	/*
 	virtual SsEffectElementBase*  new_(){ return new ParticlePointGravity(); }
+	//各部で実装する
 	virtual void InitializeEmmiter( SsEffectRenderEmitter* emmiter ){}
 	virtual void UpdateEmmiter( SsEffectRenderEmitter* emmiter ){}
 
@@ -658,6 +682,7 @@ public:
 /*
 	virtual SsEffectElementBase*  new_(){ return new ParticleTurnToDirectionEnabled(); }
 
+	//各部で実装する
 	virtual void InitializeEmmiter( SsEffectRenderEmitter* emmiter ){}
 	virtual void UpdateEmmiter( SsEffectRenderEmitter* emmiter ){}
 

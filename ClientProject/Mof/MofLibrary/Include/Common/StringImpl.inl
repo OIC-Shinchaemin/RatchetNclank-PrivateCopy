@@ -28,7 +28,7 @@ FORCE_INLINE MofBool MOF_STRINGIMPL_NAME::Delete(const MofU32 s){
 						> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 						< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 *//**************************************************************************/
-FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::Compare(const MOF_STRINGIMPL_TYPE* s){
+FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::Compare(const MOF_STRINGIMPL_TYPE* s) const {
 	return Compare(m_pStr,s);
 }
 /*************************************************************************//*!
@@ -42,7 +42,7 @@ FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::Compare(const MOF_STRINGIMPL_TYPE* s){
 						> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 						< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 *//**************************************************************************/
-FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::Compare(const MOF_STRINGIMPL_TYPE* s,MofU32 l){
+FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::Compare(const MOF_STRINGIMPL_TYPE* s,MofU32 l) const {
 	return Compare(m_pStr,s,l);
 }
 /*************************************************************************//*!
@@ -55,7 +55,7 @@ FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::Compare(const MOF_STRINGIMPL_TYPE* s,Mo
 						> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 						< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 *//**************************************************************************/
-FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::CompareCase(const MOF_STRINGIMPL_TYPE* s){
+FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::CompareCase(const MOF_STRINGIMPL_TYPE* s) const {
 	return CompareCase(m_pStr,s);
 }
 /*************************************************************************//*!
@@ -69,7 +69,7 @@ FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::CompareCase(const MOF_STRINGIMPL_TYPE* 
 						> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 						< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 *//**************************************************************************/
-FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::CompareCase(const MOF_STRINGIMPL_TYPE* s,MofU32 l){
+FORCE_INLINE MofS32 MOF_STRINGIMPL_NAME::CompareCase(const MOF_STRINGIMPL_TYPE* s,MofU32 l) const {
 	return CompareCase(m_pStr,s,l);
 }
 /*************************************************************************//*!

@@ -491,7 +491,7 @@ FORCE_INLINE void CRectangle::SetHeight(const MofFloat h) {
 		@return			TRUE		矩形の中に点がある
 						FALSE		矩形の範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CRectangle::CollisionPoint(const MofFloat px,const MofFloat py){
+FORCE_INLINE MofBool CRectangle::CollisionPoint(const MofFloat px,const MofFloat py) const {
 	if(px >= Left && px <= Right && py >= Top && py <= Bottom)
 	{
 		return TRUE;
@@ -506,7 +506,7 @@ FORCE_INLINE MofBool CRectangle::CollisionPoint(const MofFloat px,const MofFloat
 		@return			TRUE		矩形の中に点がある
 						FALSE		矩形の範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CRectangle::CollisionPoint(const Vector2& p){
+FORCE_INLINE MofBool CRectangle::CollisionPoint(const Vector2& p) const {
 	if(p.x >= Left && p.x <= Right && p.y >= Top && p.y <= Bottom)
 	{
 		return TRUE;
@@ -524,7 +524,7 @@ FORCE_INLINE MofBool CRectangle::CollisionPoint(const Vector2& p){
 		@return			TRUE		矩形の中に点がある
 						FALSE		矩形の範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CRectangle::CollisionRect(const MofFloat l,const MofFloat t,const MofFloat r,const MofFloat b){
+FORCE_INLINE MofBool CRectangle::CollisionRect(const MofFloat l,const MofFloat t,const MofFloat r,const MofFloat b) const {
 	if(r >= Left && l <= Right && b >= Top && t <= Bottom)
 	{
 		return TRUE;
@@ -539,7 +539,7 @@ FORCE_INLINE MofBool CRectangle::CollisionRect(const MofFloat l,const MofFloat t
 		@return			TRUE		矩形の中に点がある
 						FALSE		矩形の範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CRectangle::CollisionRect(const Rectangle& r){
+FORCE_INLINE MofBool CRectangle::CollisionRect(const Rectangle& r) const {
 	if(r.Right >= Left && r.Left <= Right && r.Bottom >= Top && r.Top <= Bottom)
 	{
 		return TRUE;
