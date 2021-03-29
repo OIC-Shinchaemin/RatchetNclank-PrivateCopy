@@ -29,29 +29,47 @@ bool my::GameManager::Initialize(void) {
     _character = std::make_shared<my::Character>();
     _character->Initialize({});
 
-    _quick_change = std::make_unique<my::QuickChangeSystem>();
     _game_money = std::make_unique<my::GameMoney>();
-    _weapon = std::make_unique<my::Weapon>();
+    _weapon_system = std::make_shared<my::WeaponSystem>();
+    _quick_change = std::make_unique<my::QuickChangeSystem>();
 
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
 
     _game_money->Initialize(save_data.GetMoney());
+    _weapon_system->Initialize(save_data);
+    _quick_change->Initialize({}, _weapon_system);
+
+    _current_weapon = _weapon_system->GetWeapon("OmniWrench");
     return true;
 }
 
 bool my::GameManager::Input(void) {
     _quick_change->Input();
     _game_money->Input();
+
+
+    if (::g_pInput->IsKeyPush(MOFKEY_1)) {
+        _current_weapon = _weapon_system->GetWeapon("BombGlove");
+    } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_2)) {
+        _current_weapon = _weapon_system->GetWeapon("Pyrocitor");
+    } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_3)) {
+        _current_weapon = _weapon_system->GetWeapon("OmniWrench");
+    } // if
+
     return true;
 }
 
 bool my::GameManager::Update(float delta_time) {
+    _quick_change->Update();
+
     return true;
 }
 
 bool my::GameManager::Render(void) {
-    _weapon->Render();
+    _current_weapon->Render();
 
     _quick_change->Render();
     _game_money->Render();
@@ -61,8 +79,9 @@ bool my::GameManager::Render(void) {
 bool my::GameManager::Release(void) {
     _character->Release();
 
-    
-    auto save_param = my::SaveDataParam(_game_money->GetValue());
+    std::vector<std::string> weapon;
+    _weapon_system->CreateAvailableWeaponNames(weapon);
+    auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
     my::SaveSystem().Save(save_param);
     return true;
 }

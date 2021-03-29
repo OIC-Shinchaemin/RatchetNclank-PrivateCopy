@@ -197,7 +197,7 @@ template < typename T > FORCE_INLINE T& CKeyFrame< T >::GetValue(void){
 
 		@return			ÉfÅ[É^
 *//**************************************************************************/
-template < typename T > FORCE_INLINE T CKeyFrame< T >::GetValue(void) const{
+template < typename T > FORCE_INLINE const T& CKeyFrame< T >::GetValue(void) const{
 	return m_Value;
 }
 

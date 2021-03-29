@@ -1,14 +1,23 @@
 #include "GameApp.h"
 
+#include "Gamepad.h"
 #include "My/Core/Define.h"
 #include "Camera/CameraLocator.h"
 #include "ResourceLocator.h"
+
+//! DEBUG : �e�X�g�R�[�h
+#include "Stage.h"
+
+Stage stage;
 
 
 void CGameApp::RenderScene(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
     ::CGraphicsUtilities::RenderGrid(2, 20, MOF_COLOR_WHITE, PLANEAXIS_ALL);
+
+    //! DEBUG : �e�X�g�R�[�h
+    stage.Render();
 
     this->Render3D();
 
@@ -50,6 +59,7 @@ void CGameApp::Render2D(void) {
 }
 
 MofBool CGameApp::Initialize(void) {
+    my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
 
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
@@ -62,11 +72,16 @@ MofBool CGameApp::Initialize(void) {
     
     _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->Initialize();
+
+    //! DEBUG : �e�X�g�R�[�h
+    stage.Initialize();
+
     return TRUE;
 }
 MofBool CGameApp::Input(void) {
     ::g_pInput->RefreshKey();
-    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
+    ::g_pGamepad->RefreshKey();
+    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
         ::PostQuitMessage(0);
         return false;
     } // if
@@ -83,6 +98,10 @@ MofBool CGameApp::Update(void) {
     _game_manager->Update(delta);
     _ui_canvas->Update(delta);
     _camera_manager->Update();
+
+    //! DEBUG : �e�X�g�R�[�h
+    stage.Update();
+
     return TRUE;
 }
 
@@ -97,5 +116,11 @@ MofBool CGameApp::Render(void) {
 MofBool CGameApp::Release(void) {
     _resource_manager.reset();
     _game_manager.reset();
+
+    //! DEBUG : �e�X�g�R�[�h
+    stage.Release();
+
+    my::Gamepad::GetInstance().Release();
+  
     return TRUE;
 }

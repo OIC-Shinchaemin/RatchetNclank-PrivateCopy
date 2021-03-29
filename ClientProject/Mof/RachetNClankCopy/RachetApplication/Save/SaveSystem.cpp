@@ -25,22 +25,38 @@ bool my::SaveSystem::Fetch(my::SaveData& out) {
             savedata_param.money = param["money"].GetInt();
         } // if
     } // if
+
+    if (document.HasMember("weapons")) {
+        const auto& weapons = document["weapons"];
+        for (int i = 0, n = weapons.Size(); i < n; i++) {
+            savedata_param.available_weapons.push_back(weapons[i].GetString());
+        } // for
+    } // if
+
+
     out.MoveParam(savedata_param);
     return true;
 }
 
 bool my::SaveSystem::Save(const my::SaveDataParam& param) {
     rapidjson::Document document(rapidjson::Type::kObjectType);
+    
     rapidjson::Value work(rapidjson::Type::kObjectType);
     work.AddMember("money", param.money, document.GetAllocator());
-
     document.AddMember("param", work, document.GetAllocator());
 
+    rapidjson::Value weapons(rapidjson::Type::kArrayType);   
+    for (auto& name : param.available_weapons) {
+        auto temp = rapidjson::StringRef(name.c_str(), name.size());
+        weapons.PushBack(rapidjson::Value(temp), document.GetAllocator());
+    } // for
+    document.AddMember("weapons", weapons, document.GetAllocator());
+
+    
+    
     std::ofstream temp(_path.c_str());
     rapidjson::OStreamWrapper stream(temp);
-
     rapidjson::Writer<rapidjson::OStreamWrapper> writer(stream);
     document.Accept(writer);
-
     return true;
 }

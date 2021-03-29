@@ -149,7 +149,7 @@ public:
 							> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 							< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 	*//**************************************************************************/
-	MofS32 Compare(const MOF_STRINGIMPL_TYPE* s);
+	MofS32 Compare(const MOF_STRINGIMPL_TYPE* s) const;
 	/*************************************************************************//*!
 			@brief			•¶Žš—ñ‚Ì”äŠr<br>
 							Žw’è‚³‚ê‚½•¶Žš—ñ‚ª”äŠr‘ÎÛ‚Ì•¶Žš—ñ‚Ì‚Æˆê’v‚·‚é‚©‚ð”»’è‚·‚éB<br>
@@ -161,7 +161,7 @@ public:
 							> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 							< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 	*//**************************************************************************/
-	MofS32 Compare(const MOF_STRINGIMPL_TYPE* s,MofU32 l);
+	MofS32 Compare(const MOF_STRINGIMPL_TYPE* s,MofU32 l) const;
 	/*************************************************************************//*!
 			@brief			•¶Žš—ñ‚Ì”äŠr<br>
 							Žw’è‚³‚ê‚½•¶Žš—ñ‚ª”äŠr‘ÎÛ‚Ì•¶Žš—ñ‚Ì‚Æˆê’v‚·‚é‚©‚ð”»’è‚·‚éB<br>
@@ -197,7 +197,7 @@ public:
 							> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 							< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 	*//**************************************************************************/
-	MofS32 CompareCase(const MOF_STRINGIMPL_TYPE* s);
+	MofS32 CompareCase(const MOF_STRINGIMPL_TYPE* s) const;
 	/*************************************************************************//*!
 			@brief			•¶Žš—ñ‚Ì”äŠr<br>
 							Žw’è‚³‚ê‚½•¶Žš—ñ‚ª”äŠr‘ÎÛ‚Ì•¶Žš—ñ‚Ì‚Æˆê’v‚·‚é‚©‚ð”»’è‚·‚éB<br>
@@ -209,7 +209,7 @@ public:
 							> 0			æ“ª•¶Žš‚ªŽ©•ª‚ª‘å‚«‚¢
 							< 0			æ“ª•¶Žš‚ª”äŠr•¶Žš—ñ‚ª‘å‚«‚¢
 	*//**************************************************************************/
-	MofS32 CompareCase(const MOF_STRINGIMPL_TYPE* s,MofU32 l);
+	MofS32 CompareCase(const MOF_STRINGIMPL_TYPE* s,MofU32 l) const;
 	/*************************************************************************//*!
 			@brief			•¶Žš—ñ‚Ì”äŠr<br>
 							Žw’è‚³‚ê‚½•¶Žš—ñ‚ª”äŠr‘ÎÛ‚Ì•¶Žš—ñ‚Ì‚Æˆê’v‚·‚é‚©‚ð”»’è‚·‚éB<br>

@@ -72,9 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -105,6 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,6 +159,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameMoney.cpp" />
+    <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -163,7 +167,14 @@
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="Save\SaveData.cpp" />
     <ClCompile Include="Save\SaveSystem.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponSystem.cpp" />
+    <ClCompile Include="Weapon\BombGlove.cpp" />
+    <ClCompile Include="Weapon\Mechanical.cpp" />
+    <ClCompile Include="Weapon\OmniWrench.cpp" />
+    <ClCompile Include="Weapon\Pyrocitor.cpp" />
+    <ClCompile Include="Weapon\Weapon.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +199,12 @@
     <ClInclude Include="Camera\CameraManager.h" />
     <ClInclude Include="CanvasLocator.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Factory\Creator.h" />
+    <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameMoney.h" />
+    <ClInclude Include="Gamepad.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\Renderer.h" />
     <ClInclude Include="Player.h" />
@@ -200,7 +214,14 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Save\SaveData.h" />
     <ClInclude Include="Save\SaveSystem.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponSystem.h" />
+    <ClInclude Include="Weapon\BombGlove.h" />
+    <ClInclude Include="Weapon\Mechanical.h" />
+    <ClInclude Include="Weapon\OmniWrench.h" />
+    <ClInclude Include="Weapon\Pyrocitor.h" />
+    <ClInclude Include="Weapon\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt" />

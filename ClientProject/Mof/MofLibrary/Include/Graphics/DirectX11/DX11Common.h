@@ -86,6 +86,7 @@ typedef		ID3D11Buffer*						MofVertexBuffer;
 typedef		ID3D11InputLayout*					MofVertexLayout;
 typedef		ID3D11Buffer*						MofIndexBuffer;
 typedef		ID3D11SamplerState*					MofSamplerState;
+typedef		HFONT								MofFont;
 
 //DEFINE
 #define		SHADERPARAM_ALIGNMENT				__declspec(align(16))

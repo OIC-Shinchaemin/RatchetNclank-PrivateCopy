@@ -89,12 +89,12 @@ namespace Mof {
 		/*******************//*!
 		再生用ストリーム
 		*//********************/
-		LPMp3File					m_pMp3Steram;
+		LPMp3File					m_pMp3Stream;
 #else
 		/*******************//*!
 		再生用ストリーム
 		*//********************/
-		LPUWPStream					m_pSteram;
+		LPUWPStream					m_pStream;
 #endif
 		/*******************//*!
 		再生用ストリーム

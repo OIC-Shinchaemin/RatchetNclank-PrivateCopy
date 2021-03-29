@@ -353,7 +353,7 @@ namespace Mof {
 				@return			TRUE		矩形の中に点がある
 								FALSE		矩形の範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const MofFloat px,const MofFloat py);
+		MofBool CollisionPoint(const MofFloat px,const MofFloat py) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したVector2（ポイント）が矩形の中に入っているかを判定する
@@ -362,7 +362,7 @@ namespace Mof {
 				@return			TRUE		矩形の中に点がある
 								FALSE		矩形の範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const Vector2& p);
+		MofBool CollisionPoint(const Vector2& p) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したRectangle（矩形）が接触しているかを判定する
@@ -374,7 +374,7 @@ namespace Mof {
 				@return			TRUE		矩形の中に点がある
 								FALSE		矩形の範囲外
 		*//**************************************************************************/
-		MofBool CollisionRect(const MofFloat l,const MofFloat t,const MofFloat r,const MofFloat b);
+		MofBool CollisionRect(const MofFloat l,const MofFloat t,const MofFloat r,const MofFloat b) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したRectangle（矩形）が接触しているかを判定する
@@ -383,7 +383,7 @@ namespace Mof {
 				@return			TRUE		矩形の中に点がある
 								FALSE		矩形の範囲外
 		*//**************************************************************************/
-		MofBool CollisionRect(const Rectangle& r);
+		MofBool CollisionRect(const Rectangle& r) const;
 		
 		/*************************************************************************//*!
 				@brief			数値の設定

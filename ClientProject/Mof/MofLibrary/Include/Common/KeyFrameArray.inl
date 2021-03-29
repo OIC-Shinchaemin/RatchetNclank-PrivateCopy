@@ -348,7 +348,7 @@ template < typename T > FORCE_INLINE MofBool CKeyFrameArray< T >::SetLoop(MofU32
 
 		@return			最初のキーフレームの時間
 *//**************************************************************************/
-template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetStartKeyTime(void){
+template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetStartKeyTime(void) const {
 	if(this->m_Count <= 0)
 	{
 		return 0.0f;
@@ -361,7 +361,7 @@ template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetStartKeyTi
 
 		@return			最終のキーフレームの時間
 *//**************************************************************************/
-template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetLastKeyTime(void){
+template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetLastKeyTime(void) const {
 	if(this->m_Count <= 0)
 	{
 		return 0.0f;
@@ -374,7 +374,7 @@ template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetLastKeyTim
 
 		@return			今の時間のループの終了時間
 *//**************************************************************************/
-template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetLoopLastTime(MofFloat t){
+template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetLoopLastTime(MofFloat t) const {
 	//キーフレームが0なら基礎データを返す
 	if(this->m_Count <= 0)
 	{
@@ -403,7 +403,7 @@ template < typename T > FORCE_INLINE MofFloat CKeyFrameArray< T >::GetLoopLastTi
 		@return			NULL		キーが見つからない<br>
 						それ以外	見つけたキーフレーム
 *//**************************************************************************/
-template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetKeyFrame(MofFloat t){
+template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetKeyFrame(MofFloat t) const {
 	//全部フレームから指定時間のものを探す
 	for(MofU32 i = 0;i < this->m_Count;i++)
 	{
@@ -421,7 +421,7 @@ template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetKey
 
 		@return			配列要素番号
 *//**************************************************************************/
-template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetKeyFrameNo(MofFloat t) {
+template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetKeyFrameNo(MofFloat t) const {
 	//全部フレームから指定時間のものを探す
 	for (MofU32 i = 0; i < this->m_Count; i++)
 	{
@@ -440,7 +440,7 @@ template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetKeyFrameNo(M
 		@return			NULL		キーが見つからない<br>
 						それ以外	見つけたキーフレーム
 *//**************************************************************************/
-template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetNowKeyFrame(MofFloat t){
+template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetNowKeyFrame(MofFloat t) const {
 	//キーがない
 	if(this->m_Count <= 0)
 	{
@@ -493,7 +493,7 @@ template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetNow
 
 		@return			配列要素番号
 *//**************************************************************************/
-template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetNowKeyFrameNo(MofFloat t) {
+template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetNowKeyFrameNo(MofFloat t) const {
 	//キーがない
 	if (this->m_Count <= 0)
 	{
@@ -547,7 +547,7 @@ template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetNowKeyFrameN
 		@return			NULL		キーが見つからない<br>
 						それ以外	見つけたキーフレーム
 *//**************************************************************************/
-template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetNextKeyFrame(MofFloat t){
+template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetNextKeyFrame(MofFloat t) const {
 	//キーがない
 	if(this->m_Count <= 0)
 	{
@@ -600,7 +600,7 @@ template < typename T > FORCE_INLINE CKeyFrame< T >* CKeyFrameArray< T >::GetNex
 
 		@return			配列要素番号
 *//**************************************************************************/
-template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetNextKeyFrameNo(MofFloat t) {
+template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetNextKeyFrameNo(MofFloat t) const {
 	//キーがない
 	if (this->m_Count <= 0)
 	{
@@ -655,7 +655,7 @@ template < typename T > FORCE_INLINE MofU32 CKeyFrameArray< T >::GetNextKeyFrame
 		@return			TRUE		成功<br>
 						それ以外	失敗、エラーコードが戻り値となる
 *//**************************************************************************/
-template < typename T > FORCE_INLINE MofBool CKeyFrameArray< T >::GetTimeState(MofFloat Time,T& Out){
+template < typename T > FORCE_INLINE MofBool CKeyFrameArray< T >::GetTimeState(MofFloat Time,T& Out) const {
 	//キーがない
 	if(this->m_Count <= 0)
 	{
@@ -726,7 +726,8 @@ template < typename T > FORCE_INLINE MofBool CKeyFrameArray< T >::GetTimeState(M
 					return InterpolationImpl< T >::GetInterpolationValue(prev->m_Value, next->m_Value, t, Out);
 
 				case KEYINTERPOLATION_BEZIER1:
-					return InterpolationImpl< T >::GetInterpolateBezierValue(prev->m_Value, next->m_Value, prev->m_InterpolationValue[0], prev->m_InterpolationValue[1], prev->m_InterpolationValue[2], prev->m_InterpolationValue[3], prev->m_Time, next->m_Time, t, Out);
+					return InterpolationImpl< T >::GetInterpolationValue(prev->m_Value, next->m_Value, t, Out);
+					//return InterpolationImpl< T >::GetInterpolateBezierValue(prev->m_Value, next->m_Value, prev->m_InterpolationValue[0], prev->m_InterpolationValue[1], prev->m_InterpolationValue[2], prev->m_InterpolationValue[3], prev->m_Time, next->m_Time, t, Out);
 
 				case KEYINTERPOLATION_BEZIER2:
 					t = GetInterpolateBezierTime(prev->m_InterpolationValue[0],prev->m_InterpolationValue[1],prev->m_InterpolationValue[2],prev->m_InterpolationValue[3],t);

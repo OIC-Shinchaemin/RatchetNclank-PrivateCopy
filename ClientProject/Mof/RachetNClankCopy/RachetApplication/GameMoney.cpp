@@ -32,7 +32,6 @@ bool my::GameMoney::Input(void) {
         _value--;
     } // else if
 
-
     return true;
 }
 

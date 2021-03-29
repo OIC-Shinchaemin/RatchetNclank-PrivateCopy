@@ -82,6 +82,13 @@ namespace Mof {
 				@return			ライト方向
 		*//**************************************************************************/
 		virtual CVector3& GetDirection(void);
+		/*************************************************************************//*!
+				@brief			ライト方向取得
+				@param			None
+
+				@return			ライト方向
+		*//**************************************************************************/
+		virtual const CVector3& GetDirection(void) const;
 
 		//クラス基本定義
 		MOF_LIBRARYCLASS(CDirectionalLight,MOF_DIRECTIONALLIGHTCLASS_ID);

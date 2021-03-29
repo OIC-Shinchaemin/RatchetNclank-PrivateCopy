@@ -209,7 +209,7 @@ namespace Mof {
 
 				@return			ジオメトリ登録数
 		*//**************************************************************************/
-		virtual MofU32 GetGeometryCount(void) = 0;
+		virtual MofU32 GetGeometryCount(void) const = 0;
 		/*************************************************************************//*!
 				@brief			ジオメトリ取得
 				@param[in]		pName			探すジオメトリ名

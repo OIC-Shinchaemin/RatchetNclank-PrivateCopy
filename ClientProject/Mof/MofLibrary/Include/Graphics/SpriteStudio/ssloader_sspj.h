@@ -1,10 +1,13 @@
 ﻿#ifndef __SSLOADER_SSPJ__
 #define __SSLOADER_SSPJ__
 
+#pragma warning(disable : 4819) //
 
 #include "sstypes.h"
 #include "ssarchiver.h"
 #include "ssstring_uty.h"
+
+#define SPRITESTUDIO6_SSPJVERSION "2.00.00"
 
 /// プロジェクトファイルの設定が記載されているデータです。
 /// 以下のタグはエディタ編集用のデータなので読み飛ばします。
@@ -37,11 +40,12 @@ public:
 	SsTexWrapMode::_enum		wrapMode;					//!< テクスチャのラップモード
 	SsTexFilterMode::_enum		filterMode;					//!< テクスチャのフィルタモード
 
-	int						dontUseMatrixForTransform;
-	int						rootPartFunctionAsVer4;
+	int							vertexAnimeFloat;			//!< 頂点変形アトリビュートの少数対応
 
-
-	SsProjectSetting() : dontUseMatrixForTransform(0) , rootPartFunctionAsVer4(0) {}
+	SsProjectSetting() 
+	{
+		vertexAnimeFloat = false;							//!< SpriteStudio6.1以前のデータの場合は存在しないのでOFFを初期値とする
+	}
 	
 	///シリアライズのための宣言です。
 	SSSERIALIZE_BLOCK
@@ -55,9 +59,7 @@ public:
 		SSAR_DECLARE(queryExportBaseDirectory);
 		SSAR_DECLARE_ENUM( wrapMode );
 		SSAR_DECLARE_ENUM( filterMode );
-		
-		SSAR_DECLARE(dontUseMatrixForTransform);
-		SSAR_DECLARE(rootPartFunctionAsVer4);
+		SSAR_DECLARE_ENUM(vertexAnimeFloat);
 
 	}
 };
@@ -92,6 +94,7 @@ public:
 	std::vector<SsString>	cellmapNames;		//!< セルマップファイルのリスト
 	std::vector<SsString>	animepackNames;		//!< アニメファイルのリスト
 	std::vector<SsString>	effectFileNames;	//!< エフェクトファイルのリスト
+	std::vector<SsString>	textureList;		//!< セルマップから取得したテクスチャのリスト
 
 
 	SsAnimePackList		animeList;		//!< アニメーションのリスト	

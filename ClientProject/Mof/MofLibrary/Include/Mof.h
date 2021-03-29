@@ -71,8 +71,15 @@
 //		・2019/03/11	VS2017対応追加
 //						細かなバグ修正
 //						0x00000008
+//		・2019/12/11	_ITERATOR_DEBUG_LEVEL=0の指定の追加
+//						細かなバグ修正
+//						0x00000009
+//		・2020/09/30	_ITERATOR_DEBUG_LEVEL=0の指定の取りやめ
+//						いくつかのメソッドにconst指定を追加
+//						細かなバグ修正
+//						0x00000010
 //------------------------------------------------------------
-#define		MOFLIB_VERSION					0x00000008
+#define		MOFLIB_VERSION					0x00000010
 #define		MOFLIB_MAJORVERSION				((MOFLIB_VERSION & 0xFFFF0000) >> 16)
 #define		MOFLIB_MINORVERSION				((MOFLIB_VERSION & 0xFFFF))
 
@@ -152,10 +159,10 @@
 #ifdef		MOFLIB_CONVERTSS
 
 #include	"Graphics/SpriteStudio/ssloader.h"
+#include	"Graphics/SpriteStudio/ConvertSpriteStudio.h"
 
 #endif		// MOFLIB_CONVERTSS
 
-#include	"Graphics/SpriteStudio/ConvertSpriteStudio.h"
 #include	"Graphics/MQO/ConvertMQO.h"
 #include	"Graphics/PMD/ConvertPMD.h"
 #include	"Graphics/PMD/ConvertPMX.h"

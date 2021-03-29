@@ -55,6 +55,7 @@ namespace Mof {
 	typedef struct MOFLIBRARY_API tag_DIRECTX11GRAPHICSSTATUS : public tag_GRAPHICSSTATUS {
 		LPWindow				pWindow;												//!<対象ウインドウ
 		MofBool					bWindowed;												//!<ウインドウモードフラグ
+		MofU32					RefreshRate;											//!<リフレッシュレート
 		D3D_FEATURE_LEVEL		ValidFeatureLevel;										//!<有効デバイスレベル
 		MofU32					DisplayModeCount;										//!<ディスプレイモード数
 		DXGI_MODE_DESC*			pDisplayMode;											//!<ディスプレイモード配列
@@ -69,6 +70,7 @@ namespace Mof {
 		tag_GRAPHICSSTATUS() ,
 		pWindow(NULL) ,
 		bWindowed(FALSE) ,
+		RefreshRate(60) ,
 		ValidFeatureLevel(D3D_FEATURE_LEVEL_11_0) ,
 		DisplayModeCount(0) ,
 		pDisplayMode(NULL) {
@@ -286,6 +288,14 @@ namespace Mof {
 								それ以外	失敗、エラーコードが戻り値となる
 		*//**************************************************************************/
 		virtual MofBool SetBackBufferSize(MofS32 sw, MofS32 sh);
+		/*************************************************************************//*!
+				@brief			スクリーンモードを設定する
+				@param[in]		m			TRUE:ウインドウモード、:FALSE:フルスクリーンモード
+
+				@return			TRUE		成功<br>
+								それ以外	失敗、エラーコードが戻り値となる
+		*//**************************************************************************/
+		virtual MofBool SetScreenMode(MofBool m);
 		/*************************************************************************//*!
 				@brief			描画用画面サイズを設定する
 				@param[in]		sw				幅
