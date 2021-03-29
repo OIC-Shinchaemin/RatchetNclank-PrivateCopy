@@ -441,7 +441,7 @@ FORCE_INLINE void CSphere::SetPosition(const Vector3& pos){
 		@return			TRUE		球の中に点がある
 						FALSE		球の範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CSphere::CollisionPoint(const MofFloat px,const MofFloat py,const MofFloat pz){
+FORCE_INLINE MofBool CSphere::CollisionPoint(const MofFloat px,const MofFloat py,const MofFloat pz) const {
 	MofFloat d = (MOF_SQUARE(x - px)) + (MOF_SQUARE(y - py)) + (MOF_SQUARE(z - pz));
 	if(d <= MOF_SQUARE(r))
 	{
@@ -457,7 +457,7 @@ FORCE_INLINE MofBool CSphere::CollisionPoint(const MofFloat px,const MofFloat py
 		@return			TRUE		球の中に点がある
 						FALSE		球の範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CSphere::CollisionPoint(const Vector3& p){
+FORCE_INLINE MofBool CSphere::CollisionPoint(const Vector3& p) const {
 	MofFloat d = (MOF_SQUARE(x - p.x)) + (MOF_SQUARE(y - p.y)) + (MOF_SQUARE(z - p.z));
 	if(d <= MOF_SQUARE(r))
 	{
@@ -476,7 +476,7 @@ FORCE_INLINE MofBool CSphere::CollisionPoint(const Vector3& p){
 		@return			TRUE		接触
 						FALSE		範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CSphere::CollisionSphere(const MofFloat cx,const MofFloat cy,const MofFloat cz,const MofFloat cr){
+FORCE_INLINE MofBool CSphere::CollisionSphere(const MofFloat cx,const MofFloat cy,const MofFloat cz,const MofFloat cr) const {
 	MofFloat d = (MOF_SQUARE(x - cx)) + (MOF_SQUARE(y - cy)) + (MOF_SQUARE(y - cz));
 	if(d <= MOF_SQUARE(r + cr))
 	{
@@ -492,7 +492,7 @@ FORCE_INLINE MofBool CSphere::CollisionSphere(const MofFloat cx,const MofFloat c
 		@return			TRUE		接触
 						FALSE		範囲外
 *//**************************************************************************/
-FORCE_INLINE MofBool CSphere::CollisionSphere(const Sphere& c){
+FORCE_INLINE MofBool CSphere::CollisionSphere(const Sphere& c) const {
 	MofFloat d = (MOF_SQUARE(x - c.x)) + (MOF_SQUARE(y - c.y)) + (MOF_SQUARE(z - c.z));
 	if(d <= MOF_SQUARE(r + c.r))
 	{

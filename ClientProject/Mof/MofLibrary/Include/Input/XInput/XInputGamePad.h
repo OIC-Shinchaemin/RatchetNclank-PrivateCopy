@@ -194,7 +194,7 @@ namespace Mof {
 				@return			TRUE			入力あり<br>
 								FALSE			入力なし
 		*//**************************************************************************/
-		virtual MofBool IsKeyPush(const MofU8 n);
+		virtual MofBool IsKeyPush(const MofU8 n) const;
 		/*************************************************************************//*!
 				@brief			ゲームパッドキー入力状態判定<br>
 								キー番号のキーのHold(このフレームで入力されている)判定を行う
@@ -203,7 +203,7 @@ namespace Mof {
 				@return			TRUE			入力あり<br>
 								FALSE			入力なし
 		*//**************************************************************************/
-		virtual MofBool IsKeyHold(const MofU8 n);
+		virtual MofBool IsKeyHold(const MofU8 n) const;
 		/*************************************************************************//*!
 				@brief			ゲームパッドキー入力状態判定<br>
 								キー番号のキーのPull(このフレームで放された)判定を行う
@@ -212,7 +212,7 @@ namespace Mof {
 				@return			TRUE			入力あり<br>
 								FALSE			入力なし
 		*//**************************************************************************/
-		virtual MofBool IsKeyPull(const MofU8 n);
+		virtual MofBool IsKeyPull(const MofU8 n) const;
 
 		//----------------------------------------------------------------------------
 		////Get
@@ -240,7 +240,7 @@ namespace Mof {
 
 				@return			スティック横入力量(-1.0～1.0)
 		*//**************************************************************************/
-		virtual MofFloat GetStickHorizontal(void);
+		virtual MofFloat GetStickHorizontal(void) const;
 		/*************************************************************************//*!
 				@brief			パッド状態取得<br>
 								スティックの縦への傾きを取得する。
@@ -248,7 +248,7 @@ namespace Mof {
 
 				@return			スティック縦入力量(-1.0～1.0)
 		*//**************************************************************************/
-		virtual MofFloat GetStickVertical(void);
+		virtual MofFloat GetStickVertical(void) const;
 		/*************************************************************************//*!
 				@brief			パッド状態取得<br>
 								右スティックの横への傾きを取得する。
@@ -256,7 +256,7 @@ namespace Mof {
 
 				@return			スティック横入力量(-1.0～1.0)
 		*//**************************************************************************/
-		virtual MofFloat GetRightStickHorizontal(void);
+		virtual MofFloat GetRightStickHorizontal(void) const;
 		/*************************************************************************//*!
 				@brief			パッド状態取得<br>
 								右スティックの縦への傾きを取得する。
@@ -264,7 +264,7 @@ namespace Mof {
 
 				@return			スティック縦入力量(-1.0～1.0)
 		*//**************************************************************************/
-		virtual MofFloat GetRightStickVertical(void);
+		virtual MofFloat GetRightStickVertical(void) const;
 		
 
 		//クラス基本定義

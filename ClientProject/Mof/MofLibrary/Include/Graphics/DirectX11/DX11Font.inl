@@ -43,3 +43,12 @@ FORCE_INLINE MofBool CDX11Font::RenderString(Rectangle& drec,LPCMofChar pText){
 FORCE_INLINE MofBool CDX11Font::RenderStringScale(MofFloat px, MofFloat py, MofFloat scl, LPCMofChar pText) {
 	return RenderStringScale(px, py, m_DefaultColor, pText);
 }
+/*************************************************************************//*!
+		@brief			登録テクスチャを取得
+		@param			None
+
+		@return			登録テクスチャ
+*//**************************************************************************/
+FORCE_INLINE LPTexture CDX11Font::GetTexture(void) {
+	return m_pTexture;
+}

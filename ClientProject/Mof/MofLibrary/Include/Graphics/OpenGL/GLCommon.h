@@ -54,6 +54,7 @@ typedef		GLuint								MofVertexBuffer;
 typedef		Mof::LPGLLayoutArray	MofVertexLayout;
 typedef		GLuint								MofIndexBuffer;
 typedef		LPMofVoid							MofSamplerState;
+typedef		GLuint								MofFont;
 
 //DEFINE
 #define		SHADERPARAM_ALIGNMENT		

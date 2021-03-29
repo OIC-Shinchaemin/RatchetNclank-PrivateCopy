@@ -148,6 +148,10 @@
 #endif		//#ifndef	__MOFTYPEWARNINGOUTPUT__
 #endif
 
+#if defined(DEBUG) || defined(_DEBUG)
+//#define		_ITERATOR_DEBUG_LEVEL					0
+#endif
+
 #endif
 
 //[EOF]

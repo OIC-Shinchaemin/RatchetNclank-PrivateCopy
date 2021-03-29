@@ -326,7 +326,7 @@ namespace Mof {
 				@return			TRUE		カプセルの中に点がある
 								FALSE		カプセルの範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const MofFloat px,const MofFloat py,const MofFloat pz);
+		MofBool CollisionPoint(const MofFloat px,const MofFloat py,const MofFloat pz) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したVector3（ポイント）がカプセルの中に入っているかを判定する
@@ -335,7 +335,7 @@ namespace Mof {
 				@return			TRUE		カプセルの中に点がある
 								FALSE		カプセルの範囲外
 		*//**************************************************************************/
-		MofBool CollisionPoint(const Vector3& p);
+		MofBool CollisionPoint(const Vector3& p) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したSphere（球）が接触しているかを判定する
@@ -344,7 +344,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionSphere(const Sphere& c);
+		MofBool CollisionSphere(const Sphere& c) const;
 		/*************************************************************************//*!
 				@brief			あたり判定<br>
 								指定したCapsule（カプセル）が接触しているかを判定する
@@ -353,7 +353,7 @@ namespace Mof {
 				@return			TRUE		接触
 								FALSE		範囲外
 		*//**************************************************************************/
-		MofBool CollisionCapsule(const Capsule& c);
+		MofBool CollisionCapsule(const Capsule& c) const;
 		
 		/*************************************************************************//*!
 				@brief			数値の設定

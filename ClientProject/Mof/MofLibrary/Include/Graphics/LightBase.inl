@@ -107,6 +107,15 @@ FORCE_INLINE CVector4& CLightBase::GetDiffuse(void){
 
 		@return			ディフューズ色
 *//**************************************************************************/
+FORCE_INLINE const CVector4& CLightBase::GetDiffuse(void) const {
+	return m_Diffuse;
+}
+/*************************************************************************//*!
+		@brief			ディフューズ色取得
+		@param			None
+
+		@return			ディフューズ色
+*//**************************************************************************/
 FORCE_INLINE MofU32 CLightBase::GetDiffuseU32(void) const{
 	return m_Diffuse.ToU32Color();
 }
@@ -125,6 +134,15 @@ FORCE_INLINE CVector4& CLightBase::GetAmbient(void){
 
 		@return			アンビエント色
 *//**************************************************************************/
+FORCE_INLINE const CVector4& CLightBase::GetAmbient(void) const {
+	return m_Ambient;
+}
+/*************************************************************************//*!
+		@brief			アンビエント色取得
+		@param			None
+
+		@return			アンビエント色
+*//**************************************************************************/
 FORCE_INLINE MofU32 CLightBase::GetAmbientU32(void) const{
 	return m_Ambient.ToU32Color();
 }
@@ -135,6 +153,15 @@ FORCE_INLINE MofU32 CLightBase::GetAmbientU32(void) const{
 		@return			スペキュラ色
 *//**************************************************************************/
 FORCE_INLINE CVector4& CLightBase::GetSpeculer(void){
+	return m_Speculer;
+}
+/*************************************************************************//*!
+		@brief			スペキュラ色取得
+		@param			None
+
+		@return			スペキュラ色
+*//**************************************************************************/
+FORCE_INLINE const CVector4& CLightBase::GetSpeculer(void) const {
 	return m_Speculer;
 }
 /*************************************************************************//*!

@@ -6,7 +6,8 @@
 #include "../Character.h"
 #include "../QuickChangeSystem.h"
 #include "../GameMoney.h"
-#include "../Weapon.h"
+#include "../Weapon/Weapon.h"
+#include "../WeaponSystem.h"
 
 
 namespace my {
@@ -16,12 +17,14 @@ private:
 	my::Renderer _renderer;
 	//! キャラクタ
 	std::shared_ptr<my::Character> _character;
+	//! 金
+	std::unique_ptr<my::GameMoney>  _game_money;
+	//! 武器
+	std::shared_ptr<my::Weapon> _current_weapon;
+	//! 武器
+	std::shared_ptr<my::WeaponSystem>  _weapon_system;
 	//! クイックチェンジ
 	std::unique_ptr<my::QuickChangeSystem>  _quick_change;
-	//! クイックチェンジ
-	std::unique_ptr<my::GameMoney>  _game_money;
-	//! クイックチェンジ
-	std::unique_ptr<my::Weapon>  _weapon;
 private:
 	/// <summary>
 	/// 追加

@@ -530,7 +530,7 @@ FORCE_INLINE void CVector4::SetValue(MofFloat vx,MofFloat vy,MofFloat vz,MofFloa
 
 		@return			X,Y,Z,Wの最大値
 *//**************************************************************************/
-FORCE_INLINE MofFloat CVector4::GetMaxValue(void){
+FORCE_INLINE MofFloat CVector4::GetMaxValue(void) const {
 	MofFloat m = MOF_MAX(x,y);
 	m = MOF_MAX(z,m);
 	return MOF_MAX(w,m);
@@ -541,7 +541,7 @@ FORCE_INLINE MofFloat CVector4::GetMaxValue(void){
 
 		@return			X,Y,Z,Wの絶対値の最大値
 *//**************************************************************************/
-FORCE_INLINE MofFloat CVector4::GetMaxAbsValue(void){
+FORCE_INLINE MofFloat CVector4::GetMaxAbsValue(void) const {
 	MofFloat m = MOF_MAX(MOF_ABS(x),MOF_ABS(y));
 	m = MOF_MAX(MOF_ABS(z),m);
 	return MOF_MAX(MOF_ABS(w),m);
@@ -552,7 +552,7 @@ FORCE_INLINE MofFloat CVector4::GetMaxAbsValue(void){
 
 		@return			X,Y,Z,Wの最小値
 *//**************************************************************************/
-FORCE_INLINE MofFloat CVector4::GetMinValue(void){
+FORCE_INLINE MofFloat CVector4::GetMinValue(void) const {
 	MofFloat m = MOF_MIN(x,y);
 	m = MOF_MIN(z,m);
 	return MOF_MIN(w,m);
@@ -563,7 +563,7 @@ FORCE_INLINE MofFloat CVector4::GetMinValue(void){
 
 		@return			X,Y,Z,Wの絶対値の最小値
 *//**************************************************************************/
-FORCE_INLINE MofFloat CVector4::GetMinAbsValue(void){
+FORCE_INLINE MofFloat CVector4::GetMinAbsValue(void) const {
 	MofFloat m = MOF_MIN(MOF_ABS(x),MOF_ABS(y));
 	m = MOF_MIN(MOF_ABS(z),m);
 	return MOF_MIN(MOF_ABS(w),m);

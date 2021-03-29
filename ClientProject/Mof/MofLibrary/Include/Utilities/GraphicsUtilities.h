@@ -213,7 +213,7 @@ namespace Mof {
 								失敗した場合NULL
 		*//**************************************************************************/
 		//static LPGeometry CGraphicsUtilities::CreateTriangleGeometry(BufferAccess VUsage, BufferAccess IUsage);
-	    static LPGeometry CreateTriangleGeometry(BufferAccess VUsage, BufferAccess IUsage);
+		static LPGeometry CreateTriangleGeometry(BufferAccess VUsage, BufferAccess IUsage);
 		/*************************************************************************//*!
 				@brief			平面プリミティブを作成する
 				@param[in]		w			幅

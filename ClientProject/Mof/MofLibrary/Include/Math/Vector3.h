@@ -337,7 +337,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		static void RotateAround(Vector3& src, Vector3& pivot, Vector3& Angle, Vector3& out);
+		static void RotateAround(const Vector3& src, const Vector3& pivot, const Vector3& Angle, Vector3& out);
 		/*************************************************************************//*!
 				@brief			指定した点を中心とした回転をした位置を求める
 				@param[in]		src			元ベクトル
@@ -348,7 +348,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		static void RotateAround(Vector3& src, Vector3& pivot, Vector3& Axis, MofFloat Angle, Vector3& out);
+		static void RotateAround(const Vector3& src, const Vector3& pivot, const Vector3& Axis, MofFloat Angle, Vector3& out);
 
 		/*************************************************************************//*!
 				@brief			ベクトル１からベクトル２へとt(０～１)の値で線形補間をおこなう
@@ -358,7 +358,7 @@ namespace Mof {
 
 				@return			補間ベクトル
 		*//**************************************************************************/
-		static Vector3 Lerp(Vector3& v1, Vector3& v2, MofFloat t);
+		static Vector3 Lerp(const Vector3& v1, const Vector3& v2, MofFloat t);
 		/*************************************************************************//*!
 				@brief			ベクトル１からベクトル２へとstepで移動をおこなう<br>
 								stepの値がベクトル間の距離より大きい場合、v2の位置で停止する
@@ -368,7 +368,7 @@ namespace Mof {
 
 				@return			補間ベクトル
 		*//**************************************************************************/
-		static Vector3 Move(Vector3& v1, Vector3& v2, MofFloat step);
+		static Vector3 Move(const Vector3& v1, const Vector3& v2, MofFloat step);
 
 		/*************************************************************************//*!
 				@brief			ベクトルの大きさを拡張
@@ -386,7 +386,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		static void Extension(Vector3& src, MofFloat l, Vector3& out);
+		static void Extension(const Vector3& src, MofFloat l, Vector3& out);
 	private:
 		//作成を禁止する
 		CVector3Utilities(){};
@@ -519,7 +519,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void PlaneSpace(Vector3& p);
+		void PlaneSpace(Vector3& p) const;
 		/*************************************************************************//*!
 				@brief			計算ベクトルの平面投影ベクトルを求める
 				@param[out]		p			出力ベクトル
@@ -527,7 +527,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void PlaneSpace(Vector3& p,Vector3& q);
+		void PlaneSpace(Vector3& p,Vector3& q) const;
 		
 		/*************************************************************************//*!
 				@brief			指定行列で変換をする
@@ -582,7 +582,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void RotateAround(Vector3& pivot, Vector3& Angle);
+		void RotateAround(const Vector3& pivot, const Vector3& Angle);
 		/*************************************************************************//*!
 				@brief			指定した点を中心とした回転をした位置を求める
 				@param[in]		pivot		中心
@@ -591,7 +591,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void RotateAround(Vector3& pivot, Vector3& Angle, Vector3& out);
+		void RotateAround(const Vector3& pivot, const Vector3& Angle, Vector3& out) const;
 		/*************************************************************************//*!
 				@brief			指定した点を中心とした回転をした位置を求める
 				@param[in]		pivot		中心
@@ -600,7 +600,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void RotateAround(Vector3& pivot, Vector3& Axis, MofFloat Angle);
+		void RotateAround(const Vector3& pivot, const Vector3& Axis, MofFloat Angle);
 		/*************************************************************************//*!
 				@brief			指定した点を中心とした回転をした位置を求める
 				@param[in]		pivot		中心
@@ -610,7 +610,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void RotateAround(Vector3& pivot, Vector3& Axis, MofFloat Angle, Vector3& out);
+		void RotateAround(const Vector3& pivot, const Vector3& Axis, MofFloat Angle, Vector3& out) const;
 		
 		/*************************************************************************//*!
 				@brief			値を絶対値にする
@@ -650,7 +650,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void Extension(MofFloat l, Vector3& out);
+		void Extension(MofFloat l, Vector3& out) const;
 
 		/*************************************************************************//*!
 				@brief			数値の設定
@@ -675,28 +675,28 @@ namespace Mof {
 
 				@return			X,Y,Zの最大値
 		*//**************************************************************************/
-		MofFloat GetMaxValue(void);
+		MofFloat GetMaxValue(void) const;
 		/*************************************************************************//*!
 				@brief			絶対値の最大の数値の取得
 				@param			None
 
 				@return			X,Y,Zの絶対値の最大値
 		*//**************************************************************************/
-		MofFloat GetMaxAbsValue(void);
+		MofFloat GetMaxAbsValue(void) const;
 		/*************************************************************************//*!
 				@brief			最低の数値の取得
 				@param			None
 
 				@return			X,Y,Zの最小値
 		*//**************************************************************************/
-		MofFloat GetMinValue(void);
+		MofFloat GetMinValue(void) const;
 		/*************************************************************************//*!
 				@brief			絶対値の最低の数値の取得
 				@param			None
 
 				@return			X,Y,Zの絶対値の最小値
 		*//**************************************************************************/
-		MofFloat GetMinAbsValue(void);
+		MofFloat GetMinAbsValue(void) const;
 
 		//----------------------------------------------------------------------------
 		////Operator

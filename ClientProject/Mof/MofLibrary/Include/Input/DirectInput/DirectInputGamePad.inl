@@ -15,7 +15,7 @@
 		@return			TRUE			入力あり<br>
 						FALSE			入力なし
 *//**************************************************************************/
-FORCE_INLINE MofBool CDXGamePad::IsKeyPush(const MofU8 n){
+FORCE_INLINE MofBool CDXGamePad::IsKeyPush(const MofU8 n) const {
 	if(n >= MOFINPUT_GAMEPADBUTTONMAX)
 	{
 		return FALSE;
@@ -30,7 +30,7 @@ FORCE_INLINE MofBool CDXGamePad::IsKeyPush(const MofU8 n){
 		@return			TRUE			入力あり<br>
 						FALSE			入力なし
 *//**************************************************************************/
-FORCE_INLINE MofBool CDXGamePad::IsKeyHold(const MofU8 n){
+FORCE_INLINE MofBool CDXGamePad::IsKeyHold(const MofU8 n) const {
 	if(n >= MOFINPUT_GAMEPADBUTTONMAX)
 	{
 		return FALSE;
@@ -45,7 +45,7 @@ FORCE_INLINE MofBool CDXGamePad::IsKeyHold(const MofU8 n){
 		@return			TRUE			入力あり<br>
 						FALSE			入力なし
 *//**************************************************************************/
-FORCE_INLINE MofBool CDXGamePad::IsKeyPull(const MofU8 n){
+FORCE_INLINE MofBool CDXGamePad::IsKeyPull(const MofU8 n) const {
 	if(n >= MOFINPUT_GAMEPADBUTTONMAX)
 	{
 		return FALSE;
@@ -79,7 +79,7 @@ FORCE_INLINE MofGamePadState* CDXGamePad::GetPadState(void){
 
 		@return			スティック横入力量(-1.0～1.0)
 *//**************************************************************************/
-FORCE_INLINE MofFloat CDXGamePad::GetStickHorizontal(void){
+FORCE_INLINE MofFloat CDXGamePad::GetStickHorizontal(void) const {
 	return m_PadState.lX * 0.001f;
 }
 /*************************************************************************//*!
@@ -89,7 +89,7 @@ FORCE_INLINE MofFloat CDXGamePad::GetStickHorizontal(void){
 
 		@return			スティック縦入力量(-1.0～1.0)
 *//**************************************************************************/
-FORCE_INLINE MofFloat CDXGamePad::GetStickVertical(void){
+FORCE_INLINE MofFloat CDXGamePad::GetStickVertical(void) const {
 	return m_PadState.lY * 0.001f;
 }
 

@@ -1,4 +1,4 @@
-#ifndef __SSLOADER_SSEE__
+﻿#ifndef __SSLOADER_SSEE__
 #define __SSLOADER_SSEE__
 
 #include "sstypes.h"
@@ -6,6 +6,7 @@
 
 #include "SsEffectBehavior.h"
 
+#define SPRITESTUDIO6_SSEEVERSION "2.00.00"
 
 
 class SimpleTree
@@ -116,8 +117,8 @@ private:
 
 public:
 	std::vector<SsEffectNode*> nodeList;
-	int			lockRandSeed; 	 //
-	bool    	isLockRandSeed;  //
+	int			lockRandSeed; 	 // ランダムシード固定値
+	bool    	isLockRandSeed;  // ランダムシードを固定するか否か
 	int			fps;             //
 	SsString	bgcolor;
 	SsString	effectName;
@@ -137,11 +138,11 @@ public:
 		root = 0;
 	}
 
-
+    //アクセス
 	SsEffectNode* GetRoot(){ return root;}
 
 
-
+	//シリアライザ
 	SSSERIALIZE_BLOCK
 	{
 		SSAR_DECLARE(lockRandSeed);
@@ -156,7 +157,7 @@ public:
 
 		SSAR_DECLARE_LISTEX(nodeList,"node");
 
-
+		//ツリーの構築
 		if ( nodeList.size() > 0 )
 		{
 			root = nodeList[0];
@@ -186,14 +187,16 @@ public:
 class SsEffectFile
 {
 public:
-	SsEffectModel	   effectData;
-	SsString		   name;
+	SsString			version;
+	SsEffectModel		effectData;  //親子構造＋各アトリビュート
+	SsString			name;
 
 	SsEffectFile(){}
 	virtual ~SsEffectFile(){}
 
 	SSSERIALIZE_BLOCK
 	{
+		SSAR_DECLARE_ATTRIBUTE(version);
 		SSAR_DECLARE(name);
 		SSAR_STRUCT_DECLARE( effectData );
 		effectData.effectName = name;
@@ -203,7 +206,7 @@ public:
 
 
 class SsProject;
-
+//!sspjのローダークラスです。
 class ssloader_ssee
 {
 public:

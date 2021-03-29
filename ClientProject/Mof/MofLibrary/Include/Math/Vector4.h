@@ -259,7 +259,7 @@ namespace Mof {
 
 				@return			補間ベクトル
 		*//**************************************************************************/
-		static Vector4 Lerp(Vector4& v1, Vector4& v2, MofFloat t);
+		static Vector4 Lerp(const Vector4& v1, const Vector4& v2, MofFloat t);
 		/*************************************************************************//*!
 				@brief			ベクトル１からベクトル２へとstepで移動をおこなう<br>
 								stepの値がベクトル間の距離より大きい場合、v2の位置で停止する
@@ -269,7 +269,7 @@ namespace Mof {
 
 				@return			補間ベクトル
 		*//**************************************************************************/
-		static Vector4 Move(Vector4& v1, Vector4& v2, MofFloat step);
+		static Vector4 Move(const Vector4& v1, const Vector4& v2, MofFloat step);
 
 		/*************************************************************************//*!
 				@brief			U32カラーから変換
@@ -384,7 +384,7 @@ namespace Mof {
 
 				@return			None
 		*//**************************************************************************/
-		void Cross(const Vector4& v1,const Vector4& v2,Vector4& OutVec);
+		void Cross(const Vector4& v1,const Vector4& v2,Vector4& OutVec) const;
 		
 		/*************************************************************************//*!
 				@brief			U32カラーから変換
@@ -442,28 +442,28 @@ namespace Mof {
 
 				@return			X,Y,Z,Wの最大値
 		*//**************************************************************************/
-		MofFloat GetMaxValue(void);
+		MofFloat GetMaxValue(void) const;
 		/*************************************************************************//*!
 				@brief			絶対値の最大の数値の取得
 				@param			None
 
 				@return			X,Y,Z,Wの絶対値の最大値
 		*//**************************************************************************/
-		MofFloat GetMaxAbsValue(void);
+		MofFloat GetMaxAbsValue(void) const;
 		/*************************************************************************//*!
 				@brief			最低の数値の取得
 				@param			None
 
 				@return			X,Y,Z,Wの最小値
 		*//**************************************************************************/
-		MofFloat GetMinValue(void);
+		MofFloat GetMinValue(void) const;
 		/*************************************************************************//*!
 				@brief			絶対値の最低の数値の取得
 				@param			None
 
 				@return			X,Y,Z,Wの絶対値の最小値
 		*//**************************************************************************/
-		MofFloat GetMinAbsValue(void);
+		MofFloat GetMinAbsValue(void) const;
 
 		//----------------------------------------------------------------------------
 		////Operator

@@ -228,21 +228,21 @@ namespace Mof {
 
 				@return			最初のキーフレームの時間
 		*//**************************************************************************/
-		MofFloat GetStartKeyTime(void);
+		MofFloat GetStartKeyTime(void) const;
 		/*************************************************************************//*!
 				@brief			最終のキーフレームの時間取得
 				@param			None
 
 				@return			最終のキーフレームの時間
 		*//**************************************************************************/
-		MofFloat GetLastKeyTime(void);
+		MofFloat GetLastKeyTime(void) const;
 		/*************************************************************************//*!
 				@brief			今の時間のループの終了時間取得
 				@param[in]		t			時間
 
 				@return			今の時間のループの終了時間
 		*//**************************************************************************/
-		MofFloat GetLoopLastTime(MofFloat t);
+		MofFloat GetLoopLastTime(MofFloat t) const;
 		/*************************************************************************//*!
 				@brief			指定時間のキーを取得
 				@param[in]		t			時間
@@ -250,14 +250,14 @@ namespace Mof {
 				@return			NULL		キーが見つからない<br>
 								それ以外	見つけたキーフレーム
 		*//**************************************************************************/
-		CKeyFrame< T >* GetKeyFrame(MofFloat t);
+		CKeyFrame< T >* GetKeyFrame(MofFloat t) const;
 		/*************************************************************************//*!
 				@brief			指定時間のキー番号を取得
 				@param[in]		t			時間
 
 				@return			配列要素番号
 		*//**************************************************************************/
-		MofU32 GetKeyFrameNo(MofFloat t);
+		MofU32 GetKeyFrameNo(MofFloat t) const;
 		/*************************************************************************//*!
 				@brief			指定時間のキーを取得
 				@param[in]		t			時間
@@ -265,14 +265,14 @@ namespace Mof {
 				@return			NULL		キーが見つからない<br>
 								それ以外	見つけたキーフレーム
 		*//**************************************************************************/
-		CKeyFrame< T >* GetNowKeyFrame(MofFloat t);
+		CKeyFrame< T >* GetNowKeyFrame(MofFloat t) const;
 		/*************************************************************************//*!
 				@brief			指定時間のキー番号を取得
 				@param[in]		t			時間
 
 				@return			配列要素番号
 		*//**************************************************************************/
-		MofU32 GetNowKeyFrameNo(MofFloat t);
+		MofU32 GetNowKeyFrameNo(MofFloat t) const;
 		/*************************************************************************//*!
 				@brief			指定時間のキーを取得
 				@param[in]		t			時間
@@ -280,14 +280,14 @@ namespace Mof {
 				@return			NULL		キーが見つからない<br>
 								それ以外	見つけたキーフレーム
 		*//**************************************************************************/
-		CKeyFrame< T >* GetNextKeyFrame(MofFloat t);
+		CKeyFrame< T >* GetNextKeyFrame(MofFloat t) const;
 		/*************************************************************************//*!
 				@brief			指定時間のキー番号を取得
 				@param[in]		t			時間
 
 				@return			配列要素番号
 		*//**************************************************************************/
-		MofU32 GetNextKeyFrameNo(MofFloat t);
+		MofU32 GetNextKeyFrameNo(MofFloat t) const;
 		/*************************************************************************//*!
 				@brief			指定時間のキー状態を取得
 				@param[in]		Time		時間
@@ -296,7 +296,7 @@ namespace Mof {
 				@return			TRUE		成功<br>
 								それ以外	失敗、エラーコードが戻り値となる
 		*//**************************************************************************/
-		MofBool GetTimeState(MofFloat Time,T& Out);
+		MofBool GetTimeState(MofFloat Time,T& Out) const;
 
 		//クラス基本定義
 		MOF_LIBRARYCLASS(CKeyFrameArray,MOF_KEYFRAMEARRAYCLASS_ID);
