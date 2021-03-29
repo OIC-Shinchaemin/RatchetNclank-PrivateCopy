@@ -24,7 +24,7 @@ private:
 	//! 武器
 	std::shared_ptr<my::WeaponSystem>  _weapon_system;
 	//! クイックチェンジ
-	std::unique_ptr<my::QuickChangeSystem>  _quick_change;
+	std::shared_ptr<my::QuickChangeSystem>  _quick_change;
 private:
 	/// <summary>
 	/// 追加

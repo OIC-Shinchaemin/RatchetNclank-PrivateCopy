@@ -1,19 +1,33 @@
 #include "UIPanel.h"
 
 
-my::UIPanel::UIPanel() :
-    _background(),
+my::UIPanel::UIPanel(const char* name) :
+    _name(name),
+    _position(),
     _items(),
-    _position() {
+    _texture(),
+    _color(){
 }
 
 my::UIPanel::~UIPanel() {
-    _background.reset();
+    _texture.reset();
     _items.clear();
 }
 
 void my::UIPanel::OnNotify(const std::shared_ptr<my::UIItem>& observable, const char* event) {
     my::Observable<my::UIPanel>::Notify(shared_from_this(), event);
+}
+
+void my::UIPanel::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
+    this->_texture = ptr;
+}
+
+void my::UIPanel::SetPosition(Mof::CVector2 pos) {
+    this->_position = pos;
+}
+
+void my::UIPanel::SetColor(Mof::CVector4 color) {
+    this->_color= color;
 }
 
 Mof::CVector2 my::UIPanel::GetPosition(void) const {
@@ -30,15 +44,7 @@ void my::UIPanel::RemoveElement(const ElemPtr& elem) {
     ut::SwapPopback(_items, elem);
 }
 
-bool my::UIPanel::Initialize(Mof::CVector2 pos) {
-    this->_position = pos;
-    return true;
-}
-
-bool my::UIPanel::Input(void) {
-    for (auto& item : _items) {
-        item->Input();
-    } // for
+bool my::UIPanel::Initialize(void) {
     return true;
 }
 
@@ -50,8 +56,8 @@ bool my::UIPanel::Update(float delta_time) {
 }
 
 bool my::UIPanel::Render(void) {
-    if (auto tex = _background.lock()) {
-        tex->Render(_position.x, _position.y);
+    if (auto tex = _texture.lock()) {
+        tex->Render(_position.x, _position.y, _color.ToU32Color());
     } // if
 
     for (auto& item : _items) {

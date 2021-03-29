@@ -19,7 +19,8 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Character>& ptr) {
 }
 
 my::GameManager::GameManager() :
-    _character() {
+    _character(),
+    _quick_change() {
 }
 
 my::GameManager::~GameManager() {
@@ -31,7 +32,7 @@ bool my::GameManager::Initialize(void) {
 
     _game_money = std::make_unique<my::GameMoney>();
     _weapon_system = std::make_shared<my::WeaponSystem>();
-    _quick_change = std::make_unique<my::QuickChangeSystem>();
+    _quick_change = std::make_shared<my::QuickChangeSystem>();
 
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);

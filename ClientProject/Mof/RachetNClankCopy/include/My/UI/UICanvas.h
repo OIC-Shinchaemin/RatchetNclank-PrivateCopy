@@ -46,7 +46,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Input(void);
+    //bool Input(void);
     /// <summary>
     /// XV
     /// </summary>

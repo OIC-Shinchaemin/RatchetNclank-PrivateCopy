@@ -14,6 +14,7 @@
 #include "My/Core/Define.h"
 
 namespace my {
+/*
 class UIEvent {
     using EventOwner = std::shared_ptr<class UIItem>;
     using OnEventFunc = std::function<bool(const EventOwner&)>;
@@ -108,29 +109,25 @@ public:
         return true;
     }
 };
-class UIItem : public my::UIEvent, public std::enable_shared_from_this<my::UIItem>, public my::Observable<UIItem> {
-    using Event = my::UIEvent;
+*/
+class UIItem : public std::enable_shared_from_this<my::UIItem>, public my::Observable<UIItem> {
 protected:
     //! 名前
     std::string _name;
-    //! 背景
-    std::weak_ptr<Mof::CTexture> _texture;
     //! 位置
     Mof::CVector2 _position;
-    //! 衝突
-    Mof::CRectangle _rectangle;
+    //! テクスチャ
+    std::weak_ptr<Mof::CTexture> _texture;
     //! 色
     Mof::CVector4 _color;
+    //! 衝突
+    Mof::CRectangle _rectangle;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    UIItem();
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
     /// <param name="name"></param>
-    UIItem(const std::string& name);
+    UIItem(const char* name);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -151,7 +148,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetBlendColor(const Mof::CVector4 color);
+    void SetColor(const Mof::CVector4 color);
     /// <summary>
     /// ゲッター
     /// </summary>

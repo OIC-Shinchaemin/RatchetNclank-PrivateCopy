@@ -3,35 +3,21 @@
 
 
 #include "ResourceLocator.h"
+#include "CanvasLocator.h"
+#include "My/Core/Observable.h"
 
 #include <optional>
 #include <memory>
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <algorithm>
 
 #include <Mof.h>
 
 #include "WeaponSystem.h"
 
-#ifdef max
-#undef max
-#endif // max
-#ifdef min
-#undef min
-#endif // min
-
 
 namespace my {
-static int Approximate(const std::vector<int>& vec, int value) {
-    return *std::min_element(vec.begin(), vec.end(), [&value](int a, int b) {
-        return
-            std::abs(std::max(value, a) - std::min(value, a)) <
-            std::abs(std::max(value, b) - std::min(value, b));
-    });
-}
-
 class QuickChangeItem {
 private:
     //! 位置
@@ -76,7 +62,8 @@ public:
     /// <returns></returns>
     bool Render(Mof::CVector4 color);
 };
-class QuickChangeSystem : public my::ResourceLocator {
+class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem>, public my::ResourceLocator, public my::CanvasLocator, public Observable<my::QuickChangeSystem> {
+    using Observable = my::Observable<my::QuickChangeSystem>;
     enum class State {
         Enter,
         Exit
@@ -121,6 +108,12 @@ public:
     /// </summary>
     ~QuickChangeSystem();
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector4 GetColor(void) const;
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="pos"></param>
@@ -144,6 +137,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Render(void);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Release(void);
 };
 }
 #endif // !MY_QUICK_CHANGE_SYSTEM_H

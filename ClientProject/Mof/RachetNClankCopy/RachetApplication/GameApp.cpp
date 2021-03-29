@@ -4,8 +4,7 @@
 #include "My/Core/Define.h"
 #include "Camera/CameraLocator.h"
 #include "ResourceLocator.h"
-
-//! DEBUG : �e�X�g�R�[�h
+#include "CanvasLocator.h"
 #include "Stage.h"
 
 Stage stage;
@@ -16,7 +15,6 @@ void CGameApp::RenderScene(void) {
     ::g_pGraphics->SetDepthEnable(true);
     ::CGraphicsUtilities::RenderGrid(2, 20, MOF_COLOR_WHITE, PLANEAXIS_ALL);
 
-    //! DEBUG : �e�X�g�R�[�h
     stage.Render();
 
     this->Render3D();
@@ -67,15 +65,20 @@ MofBool CGameApp::Initialize(void) {
     _camera_manager = std::make_shared<my::CameraManager>();
     _ui_canvas = std::make_shared<my::UICanvas>();
     
-    my::CameraLocator::SetService(_camera_manager);
     my::ResourceLocator::SetService(_resource_manager);
-    
+    my::CameraLocator::SetService(_camera_manager);
+    my::CanvasLocator::SetService(_ui_canvas);
+
     _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->Initialize();
+<<<<<<< HEAD
 
     //! DEBUG : �e�X�g�R�[�h
     stage.Initialize();
 
+=======
+    
+>>>>>>> UIItem修正
     return TRUE;
 }
 MofBool CGameApp::Input(void) {
@@ -91,16 +94,15 @@ MofBool CGameApp::Input(void) {
 }
 MofBool CGameApp::Update(void) {
     this->Input();
-
     float delta = def::kDeltaTime;
 
-
     _game_manager->Update(delta);
-    _ui_canvas->Update(delta);
     _camera_manager->Update();
 
-    //! DEBUG : �e�X�g�R�[�h
+    // こちら修正しました。　→　インスタンス名合わせましょうか？
     stage.Update();
+
+    _ui_canvas->Update(delta);
 
     return TRUE;
 }
@@ -114,11 +116,14 @@ MofBool CGameApp::Render(void) {
     return TRUE;
 }
 MofBool CGameApp::Release(void) {
-    _resource_manager.reset();
+    _ui_canvas.reset();
+    _camera_manager.reset();
     _game_manager.reset();
 
-    //! DEBUG : �e�X�g�R�[�h
+    // こちらも修正しました。
     stage.Release();
+
+    _resource_manager.reset();
 
     my::Gamepad::GetInstance().Release();
   

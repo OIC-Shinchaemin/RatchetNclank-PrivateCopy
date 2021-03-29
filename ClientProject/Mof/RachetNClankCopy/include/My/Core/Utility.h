@@ -5,12 +5,27 @@
 #include "My/Core/Trait.h"
 
 
+#ifdef max
+#undef max
+#endif // max
+#ifdef min
+#undef min
+#endif // min
+
+
 namespace ut {
 static std::uint32_t GetDigit(std::uint32_t num) {
     if (num == 0) {
         return 1;
     } // if
     return static_cast<std::uint32_t> (std::log10(num) + 1);
+}
+static int Approximate(const std::vector<int>& vec, int value) {
+    return *std::min_element(vec.begin(), vec.end(), [&value](int a, int b) {
+        return
+            std::abs(std::max(value, a) - std::min(value, a)) <
+            std::abs(std::max(value, b) - std::min(value, b));
+    });
 }
 template <class T>
 void SafeDelete(T*& ptr) {
