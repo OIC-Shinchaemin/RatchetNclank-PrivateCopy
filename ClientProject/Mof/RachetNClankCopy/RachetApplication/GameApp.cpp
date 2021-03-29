@@ -2,12 +2,9 @@
 
 #include "Gamepad.h"
 #include "My/Core/Define.h"
+#include "My/UI/CanvasLocator.h"
 #include "Camera/CameraLocator.h"
 #include "ResourceLocator.h"
-#include "CanvasLocator.h"
-#include "Stage.h"
-
-Stage stage;
 
 
 void CGameApp::RenderScene(void) {
@@ -15,7 +12,6 @@ void CGameApp::RenderScene(void) {
     ::g_pGraphics->SetDepthEnable(true);
     ::CGraphicsUtilities::RenderGrid(2, 20, MOF_COLOR_WHITE, PLANEAXIS_ALL);
 
-    stage.Render();
 
     this->Render3D();
 
@@ -71,10 +67,9 @@ MofBool CGameApp::Initialize(void) {
 
     _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->Initialize();
-    stage.Initialize();
-    
     return TRUE;
 }
+
 MofBool CGameApp::Input(void) {
     ::g_pInput->RefreshKey();
     ::g_pGamepad->RefreshKey();
@@ -86,18 +81,14 @@ MofBool CGameApp::Input(void) {
     _game_manager->Input();
     return TRUE;
 }
+
 MofBool CGameApp::Update(void) {
     this->Input();
     float delta = def::kDeltaTime;
 
     _game_manager->Update(delta);
     _camera_manager->Update();
-
-    // こちら修正しました。　→　インスタンス名合わせましょうか？
-    stage.Update();
-
     _ui_canvas->Update(delta);
-
     return TRUE;
 }
 
@@ -109,17 +100,13 @@ MofBool CGameApp::Render(void) {
     ::g_pGraphics->RenderEnd();
     return TRUE;
 }
+
 MofBool CGameApp::Release(void) {
     _ui_canvas.reset();
     _camera_manager.reset();
     _game_manager.reset();
-
-    // こちらも修正しました。
-    stage.Release();
-
     _resource_manager.reset();
 
     my::Gamepad::GetInstance().Release();
-  
     return TRUE;
 }

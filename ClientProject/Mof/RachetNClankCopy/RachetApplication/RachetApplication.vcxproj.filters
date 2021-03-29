@@ -31,12 +31,6 @@
     <Filter Include="リソース ファイル\save">
       <UniqueIdentifier>{df540a94-66f5-4b59-a889-76236bcb6e05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Source\Save">
-      <UniqueIdentifier>{56956ab5-ebe0-47b0-aa9a-d0024cd0dafc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Save">
-      <UniqueIdentifier>{dfdafe75-011d-4685-a73f-4d70c3298e98}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Factory">
       <UniqueIdentifier>{b96171b7-57c7-4532-aba0-a5aeb2ee59f8}</UniqueIdentifier>
     </Filter>
@@ -67,8 +61,35 @@
     <Filter Include="Rachet\Base\UI\Source">
       <UniqueIdentifier>{2a9fe089-d3cc-4c0a-8410-eb242e21963d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\NewFilter2">
-      <UniqueIdentifier>{0e0ff91a-9042-4c49-888d-82c27b103861}</UniqueIdentifier>
+    <Filter Include="Rachet\Source\Stage">
+      <UniqueIdentifier>{70c1c10e-2efe-456e-9716-08f7f34c7d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Stage">
+      <UniqueIdentifier>{8e63c488-eb09-44ad-886f-0fa333e29194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Character">
+      <UniqueIdentifier>{a342c8dc-3904-4dac-93bf-0039bf0fa15f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Character">
+      <UniqueIdentifier>{14dd5eb3-eca1-4e3e-9ed0-5bfbe23882aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\GameSystem">
+      <UniqueIdentifier>{86d89cd3-d5cf-4956-9342-e24ea9a9c09a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\GameSystem">
+      <UniqueIdentifier>{2369b452-7079-464c-9c15-f8e8fa725391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\GameSystem\Save">
+      <UniqueIdentifier>{f003a0ab-3dfb-4c88-a0d0-374ea0594296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\GameSystem\Save">
+      <UniqueIdentifier>{aeae01bb-2344-4ed7-aca5-8557089776ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\UI">
+      <UniqueIdentifier>{c13108cd-858b-4ced-aa58-12a69c04f9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\UI">
+      <UniqueIdentifier>{1b271a1a-f8dd-44bd-b429-aeb12db7154e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +114,6 @@
     <ClCompile Include="..\include\My\UI\UIPanel.cpp">
       <Filter>Rachet\Base\UI\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
@@ -117,25 +135,7 @@
     <ClCompile Include="Game\Renderer.cpp">
       <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="QuickChangeSystem.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CanvasLocator.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceLocator.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMoney.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Save\SaveData.cpp">
-      <Filter>Rachet\Source\Save</Filter>
-    </ClCompile>
-    <ClCompile Include="Save\SaveSystem.cpp">
-      <Filter>Rachet\Source\Save</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponSystem.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
     <ClCompile Include="Weapon\BombGlove.cpp">
@@ -156,14 +156,38 @@
     <ClCompile Include="Gamepad.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Rachet\Header\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Character\Player.cpp">
+      <Filter>Rachet\Source\Character</Filter>
     </ClCompile>
-    <ClCompile Include="QuickChangeMenu.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Character\Character.cpp">
+      <Filter>Rachet\Source\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\QuickChangeSystem.cpp">
+      <Filter>Rachet\Source\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\WeaponSystem.cpp">
+      <Filter>Rachet\Source\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\GameMoney.cpp">
+      <Filter>Rachet\Source\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\Save\SaveSystem.cpp">
+      <Filter>Rachet\Source\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\Save\SaveData.cpp">
+      <Filter>Rachet\Source\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\UI\CanvasLocator.cpp">
+      <Filter>Rachet\Base\UI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\QuickChangeMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Character\Enemy.cpp">
+      <Filter>Rachet\Source\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +233,6 @@
     <ClInclude Include="GameApp.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -233,25 +254,7 @@
     <ClInclude Include="Game\Renderer.h">
       <Filter>Rachet\Header\Game</Filter>
     </ClInclude>
-    <ClInclude Include="QuickChangeSystem.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="CanvasLocator.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="GameDefine.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMoney.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Save\SaveSystem.h">
-      <Filter>Rachet\Header\Save</Filter>
-    </ClInclude>
-    <ClInclude Include="Save\SaveData.h">
-      <Filter>Rachet\Header\Save</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponSystem.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
     <ClInclude Include="Weapon\Mechanical.h">
@@ -278,9 +281,6 @@
     <ClInclude Include="ResourceLocator.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="AbstructContainer.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -290,14 +290,41 @@
     <ClInclude Include="resource.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Rachet\Header</Filter>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Rachet\Source\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Rachet\Header</Filter>
+    <ClInclude Include="Character\Character.h">
+      <Filter>Rachet\Header\Character</Filter>
     </ClInclude>
-    <ClInclude Include="QuickChangeMenu.h">
-      <Filter>Rachet\Source</Filter>
+    <ClInclude Include="Character\Player.h">
+      <Filter>Rachet\Header\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\GameMoney.h">
+      <Filter>Rachet\Header\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\QuickChangeSystem.h">
+      <Filter>Rachet\Header\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\WeaponSystem.h">
+      <Filter>Rachet\Header\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\Save\SaveData.h">
+      <Filter>Rachet\Header\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\Save\SaveSystem.h">
+      <Filter>Rachet\Header\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\UI\CanvasLocator.h">
+      <Filter>Rachet\Base\UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\QuickChangeMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Character\Enemy.h">
+      <Filter>Rachet\Header\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\AbstructContainer.h">
+      <Filter>Rachet\Base\Core\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
