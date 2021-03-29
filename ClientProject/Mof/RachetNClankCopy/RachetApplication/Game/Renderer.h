@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "../Actor.h"
-#include "../Character.h"
+#include "../Character/Character.h"
 
 
 namespace my {

@@ -3,11 +3,12 @@
 
 
 #include "Renderer.h"
-#include "../Character.h"
-#include "../QuickChangeSystem.h"
-#include "../GameMoney.h"
+#include "../GameSystem/GameMoney.h"
+#include "../GameSystem/WeaponSystem.h"
+#include "../GameSystem/QuickChangeSystem.h"
+#include "../Stage/Stage.h"
+#include "../Character/Character.h"
 #include "../Weapon/Weapon.h"
-#include "../WeaponSystem.h"
 
 
 namespace my {
@@ -15,16 +16,18 @@ class GameManager {
 private:
 	//! レンダラー
 	my::Renderer _renderer;
-	//! キャラクタ
-	std::shared_ptr<my::Character> _character;
 	//! 金
 	std::unique_ptr<my::GameMoney>  _game_money;
-	//! 武器
-	std::shared_ptr<my::Weapon> _current_weapon;
 	//! 武器
 	std::shared_ptr<my::WeaponSystem>  _weapon_system;
 	//! クイックチェンジ
 	std::shared_ptr<my::QuickChangeSystem>  _quick_change;
+	//! ステージ
+	Stage _stage;
+	//! キャラクタ
+	std::shared_ptr<my::Character> _character;
+	//! 武器
+	std::shared_ptr<my::Weapon> _current_weapon;
 private:
 	/// <summary>
 	/// 追加
