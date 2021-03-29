@@ -23,12 +23,14 @@ void my::UICanvas::RemoveElement(const ElemPtr& elem) {
     ut::EraseRemove(_panels, elem);
 }
 
+/*
 bool my::UICanvas::Input(void) {
     if (!_panels.empty()) {
         _panels.back()->Input();
     } // if
     return true;
 }
+*/
 
 bool my::UICanvas::Update(float delta_time) {
     for (auto& panel : _panels) {
@@ -41,9 +43,5 @@ bool my::UICanvas::Render(void) {
     for (auto& panel : _panels) {
         panel->Render();
     } // for
-
-//    Mof::CVector2 pos;
-//    ::g_pInput->GetMousePos(pos);
-//    ::CGraphicsUtilities::RenderFillCircle(Mof::CCircle(pos, 10.0f), MOF_COLOR_CWHITE);
     return true;
 }

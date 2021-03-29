@@ -6,6 +6,7 @@
 #include "My/Core/Observable.h"
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include <Mof.h>
@@ -18,17 +19,22 @@ class UIPanel : public std::enable_shared_from_this<my::UIPanel> , public my::Ob
 public:
     using ElemPtr = std::shared_ptr<my::UIItem>;
 protected:
-    //! 背景
-    std::weak_ptr<Mof::CTexture>_background;
-    //! 要素
-    std::vector<ElemPtr> _items;
+    //! 名前
+    std::string _name;
     //! 位置
     Mof::CVector2 _position;
+    //! 要素
+    std::vector<ElemPtr> _items;
+    //! 背景
+    std::weak_ptr<Mof::CTexture>_texture;
+    //! 色
+    Mof::CVector4 _color;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    UIPanel();
+    /// <param name="name"></param>
+    UIPanel(const char* name);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -39,6 +45,21 @@ public:
     /// <param name="observable"></param>
     /// <param name="event"></param>
     virtual void OnNotify(const std::shared_ptr<my::UIItem>& observable, const char* event) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetTexture(const std::shared_ptr<Mof::CTexture>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="pos"></param>
+    void SetPosition(Mof::CVector2 pos);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="color"></param>
+    void SetColor(Mof::CVector4 color);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -58,15 +79,9 @@ public:
     /// <summary>
     /// 初期化
     /// </summary>
-    /// <param name="pos"></param>
-    /// <returns></returns>
-    virtual bool Initialize(Mof::CVector2 pos);
-    /// <summary>
-    /// 入力
-    /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Input(void);
+    virtual bool Initialize(void);
     /// <summary>
     /// 更新
     /// </summary>

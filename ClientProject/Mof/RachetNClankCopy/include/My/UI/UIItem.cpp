@@ -1,16 +1,12 @@
 #include "UIItem.h"
 
 
-my::UIItem::UIItem() :
-    Event(),
-    _name(),
-    _texture(),
+my::UIItem::UIItem(const char* name) :
+    _name(name),
     _position(),
-    _rectangle(),
-    _color(1.0f, 1.0f, 1.0f, 1.0f) {
-}
-
-my::UIItem::UIItem(const std::string& name) {
+    _texture(),
+    _color(),
+    _rectangle() {
 }
 
 my::UIItem::~UIItem() {
@@ -25,7 +21,7 @@ void my::UIItem::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }
 
-void my::UIItem::SetBlendColor(const Mof::CVector4 color) {
+void my::UIItem::SetColor(const Mof::CVector4 color) {
     this->_color = color;
 }
 
@@ -38,7 +34,7 @@ Mof::CRectangle my::UIItem::GetRectangle(void) const {
 bool my::UIItem::Initialize(Mof::CVector2 pos, const std::shared_ptr<Mof::CTexture>& tex, const Mof::CVector4& color) {
     this->_position = pos;
     this->SetTexture(tex);
-    this->SetBlendColor(color);
+    this->SetColor(color);
     _rectangle = Mof::CRectangle(0.0f, 0.0f, tex->GetWidth(), tex->GetHeight());
     return true;
 }

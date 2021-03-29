@@ -1,6 +1,8 @@
 #include "QuickChangeSystem.h"
 
+#include "My/Core/Utility.h"
 #include "Gamepad.h"
+#include "QuickChangeMenu.h"
 
 
 void my::QuickChangeSystem::Open(void) {
@@ -50,6 +52,10 @@ my::QuickChangeSystem::QuickChangeSystem() :
 my::QuickChangeSystem::~QuickChangeSystem() {
 }
 
+Mof::CVector4 my::QuickChangeSystem::GetColor(void) const {
+    return this->_color;
+}
+
 bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
     std::vector<std::string> work;
     weapon_system->CreateAvailableWeaponNames(work);
@@ -66,6 +72,13 @@ bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<
         temp.SetTexture(tex);
         i++;
     } // for
+
+
+    auto menu = std::make_shared< my::QuickChangeMenu>("QuickChangeMenu");
+    Observable::AddObserver(menu);
+    menu->SetColor(def::color_rgba::kCyan);
+    menu->SetPosition(_position);
+    my::CanvasLocator::AddElement(menu);
     return true;
 }
 
@@ -85,7 +98,7 @@ bool my::QuickChangeSystem::Input(void) {
         if (degree < 0) {
             degree += math::ToDegree(math::kTwoPi);
         } /// if
-        _current_angle = my::Approximate(_angles, degree);
+        _current_angle = ut::Approximate(_angles, degree);
     } // if
     return true;
 }
@@ -96,34 +109,38 @@ bool my::QuickChangeSystem::Update(void) {
         if (_color.a > 1.0f) {
             _color.a = 1.0f;
         } // if
+        Observable::Notify(shared_from_this(), "UpdateColor");
     } // if
     else if (_state == State::Exit) {
         _color.a -= _alpha;
+        Observable::Notify(shared_from_this(), "UpdateColor");
     } // else if
 
     return true;
 }
 
 bool my::QuickChangeSystem::Render(void) {
-    auto circle = Mof::CCircle(_position, _distance);
-    ::CGraphicsUtilities::RenderCircle(circle, _color.ToU32Color());
-
-
+    //auto circle = Mof::CCircle(_position, _distance);
+    //::CGraphicsUtilities::RenderCircle(circle, _color.ToU32Color());
+   
     for (auto& item : _items) {
         item.second.Render(_color);
     } // for
 
-    if ( _current_angle.has_value()) {
+    if (_current_angle.has_value()) {
         float current_angle = _current_angle.value();
-        
-
         auto rect = Mof::CRectangle(0.0f, 0.0f, 64.0f, 64.0f);
         auto radian = math::Radian(current_angle);
         rect.Translation(-rect.GetBottomRight() * 0.5f);
         rect.Translation(_position + Mof::CVector2(std::cos(radian()) * _distance, -std::sin(radian()) * _distance));
         ::CGraphicsUtilities::RenderFillRect(rect, Mof::CVector4(1.0f, 1.0f, 0.0f, _color.a).ToU32Color());
     } // if
+    
+    return true;
+}
 
+bool my::QuickChangeSystem::Release(void) {
+    my::CanvasLocator::RemoveElement(menu);
     return true;
 }
 
