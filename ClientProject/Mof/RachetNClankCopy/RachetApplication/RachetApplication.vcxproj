@@ -162,6 +162,7 @@
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuickChangeSystem.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="Save\SaveData.cpp" />
@@ -206,7 +207,9 @@
     <ClInclude Include="Gamepad.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\Renderer.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="QuickChangeSystem.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Save\SaveData.h" />
@@ -225,6 +228,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RachetApplication.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

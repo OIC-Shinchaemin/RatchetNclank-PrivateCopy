@@ -67,6 +67,9 @@
     <Filter Include="Rachet\Base\UI\Source">
       <UniqueIdentifier>{2a9fe089-d3cc-4c0a-8410-eb242e21963d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\NewFilter2">
+      <UniqueIdentifier>{0e0ff91a-9042-4c49-888d-82c27b103861}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -154,6 +157,9 @@
       <Filter>Rachet\Source</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
@@ -284,6 +290,12 @@
     <ClInclude Include="Weapon.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -297,5 +309,10 @@
     <None Include="..\Resource\save\savedata.json">
       <Filter>リソース ファイル\save</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RachetApplication.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
