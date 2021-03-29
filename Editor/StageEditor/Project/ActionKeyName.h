@@ -12,7 +12,7 @@ public:
     static constexpr char* MeshLoadDialog   = "MeshLoadDialog";
     static constexpr char* SaveProject      = "SaveProject";
     static constexpr char* LoadProject      = "LoadProject";
-    static constexpr char* ProjectDataPurse = "ProjectDataPurse";
+    static constexpr char* ProjectDataParse = "ProjectDataParse";
     static constexpr char* AddObject        = "AddObject";
 };
 

@@ -108,7 +108,7 @@
     <ClCompile Include="LoadProject.cpp">
       <Filter>ソース ファイル\Action</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectDataPurse.cpp">
+    <ClCompile Include="ProjectDataParse.cpp">
       <Filter>ソース ファイル\Action</Filter>
     </ClCompile>
     <ClCompile Include="AddObject.cpp">
@@ -194,7 +194,7 @@
     <ClInclude Include="LoadProject.h">
       <Filter>ヘッダー ファイル\Action</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectDataPurse.h">
+    <ClInclude Include="ProjectDataParse.h">
       <Filter>ヘッダー ファイル\Action</Filter>
     </ClInclude>
     <ClInclude Include="AddObject.h">

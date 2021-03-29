@@ -1,7 +1,7 @@
 #include "Stage.h"
 #include <filesystem>
 
-bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list) {
+bool Stage::Parse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list) {
     // ファイル詳細
     // メッシュ数                       ( 4 byte )
     // LOOP
@@ -26,7 +26,7 @@ bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* ob
     // LOOP END
     // EOF
 
-    std::function<MofS32(int)> purse_s32 = [&](int n) {
+    std::function<MofS32(int)> Parse_s32 = [&](int n) {
         const unsigned char buff[4] = {
             static_cast<MofU8>(buffer->c_str()[n + 0]),
             static_cast<MofU8>(buffer->c_str()[n + 1]),
@@ -37,20 +37,20 @@ bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* ob
         return s32;
     };
     
-    std::function<std::string(int, int)> purse_string = [&](int n, int count) {
+    std::function<std::string(int, int)> Parse_string = [&](int n, int count) {
         std::string buff = buffer->substr(n, count);
         return buff;
     };
     
     int buff_index = 0;
     
-    int mesh_count = purse_s32(buff_index);
+    int mesh_count = Parse_s32(buff_index);
     buff_index    += sizeof(MofS32);
     
     for (int i = 0; i < mesh_count; i++) {
-        int mesh_path_length  = purse_s32(buff_index);
+        int mesh_path_length  = Parse_s32(buff_index);
         buff_index           += sizeof(MofS32);
-        std::string mesh_path = purse_string(buff_index, mesh_path_length);
+        std::string mesh_path = Parse_string(buff_index, mesh_path_length);
         buff_index           += mesh_path_length;
         std::string filename  = Stage::GetFileName(mesh_path);
         std::string ext       = Stage::GetExt(mesh_path);
@@ -59,43 +59,43 @@ bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* ob
         }
     }
 
-    int object_count = purse_s32(buff_index);
+    int object_count = Parse_s32(buff_index);
     buff_index      += sizeof(MofS32);
 
     for (int i = 0; i < object_count; i++) {
         
-        int object_name_length  = purse_s32(buff_index);
+        int object_name_length  = Parse_s32(buff_index);
         buff_index             += sizeof(MofS32);
         
-        std::string object_name = purse_string(buff_index, object_name_length);
+        std::string object_name = Parse_string(buff_index, object_name_length);
         buff_index             += object_name_length;
         
-        int mesh_name_length    = purse_s32(buff_index);
+        int mesh_name_length    = Parse_s32(buff_index);
         buff_index             += sizeof(MofS32);
 
-        std::string mesh_name   = purse_string(buff_index, mesh_name_length);
+        std::string mesh_name   = Parse_string(buff_index, mesh_name_length);
         buff_index             += mesh_name_length;
 
         Vector3 position, rotation, scale;
-        position.x  = purse_s32(buff_index) * 0.001f;
+        position.x  = Parse_s32(buff_index) * 0.001f;
         buff_index += sizeof(MofS32);               
-        position.y  = purse_s32(buff_index) * 0.001f;
+        position.y  = Parse_s32(buff_index) * 0.001f;
         buff_index += sizeof(MofS32);               
-        position.z  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-                                                    
-        scale.x     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        scale.y     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        scale.z     = purse_s32(buff_index) * 0.001f;
+        position.z  = Parse_s32(buff_index) * 0.001f;
         buff_index += sizeof(MofS32);               
                                                     
-        rotation.x  = purse_s32(buff_index) * 0.001f;
+        scale.x     = Parse_s32(buff_index) * 0.001f;
         buff_index += sizeof(MofS32);               
-        rotation.y  = purse_s32(buff_index) * 0.001f;
+        scale.y     = Parse_s32(buff_index) * 0.001f;
         buff_index += sizeof(MofS32);               
-        rotation.z  = purse_s32(buff_index) * 0.001f;
+        scale.z     = Parse_s32(buff_index) * 0.001f;
+        buff_index += sizeof(MofS32);               
+                                                    
+        rotation.x  = Parse_s32(buff_index) * 0.001f;
+        buff_index += sizeof(MofS32);               
+        rotation.y  = Parse_s32(buff_index) * 0.001f;
+        buff_index += sizeof(MofS32);               
+        rotation.z  = Parse_s32(buff_index) * 0.001f;
         buff_index += sizeof(MofS32);
 
         ObjectData object_data;
@@ -205,7 +205,7 @@ void Stage::Initialize(void) {
     std::string current_path = std::filesystem::current_path().string();
     std::string last_path    = Stage::GetFileName(current_path);
     bool load_map_flag       = LoadMap(&buffer, file);
-    bool purse_flag          = Purse(&buffer, &_mesh_array, &_object_array);
+    bool Parse_flag          = Parse(&buffer, &_mesh_array, &_object_array);
 }
 
 void Stage::Update(void) {

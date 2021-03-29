@@ -1,5 +1,6 @@
 #pragma once
 #include "AssetBase.h"
+#include "rapidjson/document.h"
 
 // É}ÉEÉX
 #define MOFMOUSE_CENTERBUTTON 2
@@ -54,4 +55,5 @@ using MeshList      = std::vector<MeshData>;
 using ObjectList    = std::vector<ObjectData>;
 using AddObjectData = std::pair<ObjectData*, ObjectList*>;
 using SaveData      = std::tuple<std::string, MeshList*, ObjectList*>;
-using LoadData      = std::pair<std::string, std::string*>;
+using ParseData     = std::tuple<rapidjson::Document*, MeshList*, ObjectList*>;
+using LoadData      = std::pair<std::string, rapidjson::Document*>;

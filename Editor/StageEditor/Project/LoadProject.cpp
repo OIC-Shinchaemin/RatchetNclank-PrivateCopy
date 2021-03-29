@@ -1,5 +1,6 @@
 #include "LoadProject.h"
 #include "Define.h"
+#include "My/Core/Utility.h"
 
 // ********************************************************************************
 /// <summary>
@@ -17,21 +18,12 @@ bool LoadProject::Action(std::any any) {
         return false;
     }
 
-    const std::string& file_name = std::get<0>(*save_data);
-    std::string*       buffer    = std::get<1>(*save_data);
+    const std::string&   file_name = std::get<0>(*save_data);
+    rapidjson::Document* buffer    = std::get<1>(*save_data);
 
-    std::ifstream input_stream;
-    input_stream.open(file_name, std::ios::binary);
-
-    if (!input_stream.is_open()) {
+    if (!ut::ParseJsonDocument(file_name.c_str(), *buffer)) {
         return false;
     }
 
-    std::stringstream bufferstream;
-    
-    bufferstream << input_stream.rdbuf();
-    *buffer = bufferstream.str();
-    
-    input_stream.close();
     return true;
 }
