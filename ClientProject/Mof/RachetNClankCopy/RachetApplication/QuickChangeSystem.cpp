@@ -140,7 +140,6 @@ bool my::QuickChangeSystem::Render(void) {
 }
 
 bool my::QuickChangeSystem::Release(void) {
-    my::CanvasLocator::RemoveElement(menu);
     return true;
 }
 
