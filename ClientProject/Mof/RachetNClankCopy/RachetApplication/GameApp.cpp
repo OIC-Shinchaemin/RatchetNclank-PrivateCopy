@@ -71,14 +71,8 @@ MofBool CGameApp::Initialize(void) {
 
     _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->Initialize();
-<<<<<<< HEAD
-
-    //! DEBUG : �e�X�g�R�[�h
     stage.Initialize();
-
-=======
     
->>>>>>> UIItem修正
     return TRUE;
 }
 MofBool CGameApp::Input(void) {

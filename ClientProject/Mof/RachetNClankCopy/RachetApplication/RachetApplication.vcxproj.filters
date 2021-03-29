@@ -156,13 +156,13 @@
     <ClCompile Include="Gamepad.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="QuickChangeMenu.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -287,9 +287,6 @@
     <ClInclude Include="Gamepad.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -298,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickChangeMenu.h">
+      <Filter>Rachet\Source</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
