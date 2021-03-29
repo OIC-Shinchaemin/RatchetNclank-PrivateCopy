@@ -36,6 +36,7 @@ private:
 		MoveFast,
 	};
 	using super = my::Character;
+	CCamera					m_Camera;
 	CXGamePad				m_GamePad;
 	CMeshContainer			m_Mesh;
 	CMeshContainer			m_WeaponMesh;
@@ -57,6 +58,7 @@ private:
 	bool					m_bStage;
 
 	virtual bool Input(void);
+	void UpdateCamera(void);
 	void UpdateMove(void);
 	void UpdateJump(void);
 	void UpdateAttack(void);

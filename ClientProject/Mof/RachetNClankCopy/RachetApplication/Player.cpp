@@ -89,6 +89,27 @@ bool Player::Input(void)
 	return true;
 }
 
+void Player::UpdateCamera(void)
+{
+	CVector3 cpos = m_Pos;
+	CVector3 tpos = m_Pos;
+	CVector3 fvec(0, 0, -1);
+	fvec.RotationY(m_CameraAngle.x);
+	fvec.RotationX(m_CameraAngle.y);
+	cpos.y += 2.0f;
+	tpos.y += 1.5f;
+	cpos -= fvec * 4.2f;
+	tpos += fvec * 0.5f;
+
+	if (m_State == JumpUp || m_State == JumpDown || m_State == Jump2)
+	{
+		cpos.y = m_Camera.GetViewPosition().y;
+		tpos.y = m_Camera.GetTargetPosition().y;
+	}
+	m_Camera.LookAt(cpos, tpos, CVector3(0, 1, 0));
+	m_Camera.Update();
+}
+
 void Player::UpdateMove(void)
 {
 	if (m_State == Attack1 && !m_bAttackMove ||
@@ -116,7 +137,7 @@ void Player::UpdateMove(void)
 		return;
 	}
 	//カメラの前方向のベクトル
-	CVector3 cfvec /*= m_Camera.GetViewFront()*/;
+	CVector3 cfvec = m_Camera.GetViewFront();
 	//カメラのY軸の回転角度を求める
 	float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
 	//移動角度を求める
@@ -306,6 +327,11 @@ bool Player::Initialize(const def::Transform& transform)
 	m_State = None;
 	m_bJump2 = false;
 	m_Time = 0.0f;
+	m_Camera.SetViewPort();
+	m_Camera.LookAt(CVector3(-2, 2, -2), CVector3(0, 0, 0), CVector3(0.0f, 1.0f, 0.0f));
+	m_Camera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 1000.0f);
+	UpdateCamera();
+	CGraphicsUtilities::SetCamera(&m_Camera);
 
 	return true;
 }
