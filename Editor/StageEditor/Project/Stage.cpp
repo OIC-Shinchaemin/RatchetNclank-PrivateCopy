@@ -54,13 +54,9 @@ bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* ob
         buff_index           += mesh_path_length;
         std::string filename  = Stage::GetFileName(mesh_path);
         std::string ext       = Stage::GetExt(mesh_path);
-        if (!LoadMesh(filename, ChangeFullPath(mesh_path))) {
+        if (!LoadMesh(filename + ext, ChangeFullPath(mesh_path))) {
             return false;
         }
-        MeshData mesh_data;
-        mesh_data.first  = filename;
-        mesh_data.second = GetMeshPtr(filename + ext);
-        (*mesh_list).push_back(mesh_data);
     }
 
     int object_count = purse_s32(buff_index);
@@ -205,9 +201,11 @@ void Stage::AddObject(AddObjectData* data) {
 
 void Stage::Initialize(void) {
     std::string buffer;
-    std::string file   = "test.map";
-    bool load_map_flag = LoadMap(&buffer, file);
-    bool purse_flag    = Purse(&buffer, &_mesh_array, &_object_array);
+    std::string file         = "test.map";
+    std::string current_path = std::filesystem::current_path().string();
+    std::string last_path    = Stage::GetFileName(current_path);
+    bool load_map_flag       = LoadMap(&buffer, file);
+    bool purse_flag          = Purse(&buffer, &_mesh_array, &_object_array);
 }
 
 void Stage::Update(void) {
