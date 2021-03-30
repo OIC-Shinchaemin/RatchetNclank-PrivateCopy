@@ -53,6 +53,7 @@ void CGameApp::Render2D(void) {
 }
 
 MofBool CGameApp::Initialize(void) {
+    ::CMofImGui::Setup();
     my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
 
@@ -71,6 +72,7 @@ MofBool CGameApp::Initialize(void) {
 }
 
 MofBool CGameApp::Input(void) {
+    ::CMofImGui::Refresh();
     ::g_pInput->RefreshKey();
     ::g_pGamepad->RefreshKey();
     if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
@@ -94,10 +96,12 @@ MofBool CGameApp::Update(void) {
 }
 
 MofBool CGameApp::Render(void) {
+    ::CMofImGui::RenderSetup();
     ::g_pGraphics->RenderStart();
 
     this->RenderScene();
 
+    ::CMofImGui::RenderGui();
     ::g_pGraphics->RenderEnd();
     return TRUE;
 }
@@ -109,5 +113,6 @@ MofBool CGameApp::Release(void) {
     _resource_manager.reset();
 
     my::Gamepad::GetInstance().Release();
+    ::CMofImGui::Cleanup();
     return TRUE;
 }

@@ -109,25 +109,27 @@ void Player::UpdateMove(void) {
         m_State == Attack3 && !m_bAttackMove) {
 
         CVector3 fvec(0, 0, -1);
-        //fvec.RotationY(m_Angle.y);
         fvec.RotationY(angle_y);
-        m_Move += fvec * 0.2f;
+        //m_Move += fvec * 0.2f;
+        super::_velocity.AddVelocityForce(fvec * 0.2f);
         m_bAttackMove = true;
     }
 
     if (m_MoveState == Wait || m_State != None && !m_bJump) {
-        float ml = m_Move.Length();
+        auto move = super::_velocity.GetVelocity();
+        float ml = move.Length();
         if (ml > CHARACTER_MOVESPEED) {
-            m_Move.Normal(m_Move);
-            m_Move *= (ml - CHARACTER_MOVESPEED);
+            move.Normal(move);
+            move *= (ml - CHARACTER_MOVESPEED);
+            super::_velocity.SetVelocity(move);
         }
         else {
-            m_Move.SetValue(0.0f, 0.0f, 0.0f);
+            move.SetValue(0.0f, 0.0f, 0.0f);
+            super::_velocity.SetVelocity(move);
         }
         return;
     }
     //カメラの前方向のベクトル
-    //CVector3 cfvec = m_Camera.GetViewFront();
     CVector3 cfvec = _camera_controller->GetViewFront();
     //カメラのY軸の回転角度を求める
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
@@ -144,9 +146,12 @@ void Player::UpdateMove(void) {
     //移動方向のベクトル
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
-    m_Move += fvec * CHARACTER_MOVESPEED;
+    //m_Move += fvec * CHARACTER_MOVESPEED;
+    super::_velocity.AddVelocityForce(fvec * CHARACTER_MOVESPEED);
+
     //移動を最高速度でクリップする
-    float ml = m_Move.Length();
+    auto move = super::_velocity.GetVelocity();
+    float ml = move.Length();
     float ms = 0.0f;
     if (m_MoveState == MoveSlow) {
         ms = CHARACTER_SLOWMOVESPEEDMAX;
@@ -156,8 +161,9 @@ void Player::UpdateMove(void) {
     }
 
     if (ml >= ms) {
-        m_Move.Normal(m_Move);
-        m_Move *= ms;
+        move.Normal(move);
+        move *= ms;
+        super::_velocity.SetVelocity(move);
     }
 
     auto rotate = super::GetRotate();
@@ -216,6 +222,20 @@ void Player::UpdateAttack(void) {
     }
 }
 
+void Player::UpdateTransform(float delta_time) {
+    auto owner = this;
+    // rotate
+    auto rotate = this->UpdateRotate(delta_time, owner->GetRotate(), _velocity.GetAngularVelocity());
+    owner->SetRotate(rotate);
+    // position
+    auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), _velocity.GetVelocity());
+    if (pos.y < 0.0f) {
+        pos.y = 0.0f;
+        m_MoveState = Wait;
+    } // if
+    owner->SetPosition(pos);
+}
+
 void Player::ChangeAnimation(void) {
     if (m_State != None) {
         switch (m_State) {
@@ -267,7 +287,6 @@ void Player::ChangeAnimation(void) {
 }
 
 Player::Player() :
-    m_WeaponMesh(),
     m_CameraAngle(),
     m_State(),
     m_MoveState(),
@@ -278,31 +297,14 @@ Player::Player() :
     m_bJump2(),
     m_bAttackMove(),
     m_bNextAtc(),
-    //m_Pos(),
-    m_Move(),
-    //m_Angle(),
     m_Gravity(),
-    m_bStage(),
     _player_view_camera(),
     _top_view_camera(),
-    _camera_controller(std::make_shared<my::CameraController>()){
+    _camera_controller(std::make_shared<my::CameraController>()) {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
 }
 
 Player::~Player() {
-}
-
-bool Player::Load(void) {
-    /*
-    if (!m_Mesh.Load("Character/Chr_01_ion_mdl_01.mom")) {
-        return false;
-    }
-    _motion = m_Mesh.CreateMotionController();
-    if (!m_WeaponMesh.Load("Character/Wep_01_ion_mdl_01.mom")) {
-        return false;
-    }
-    */
-    return true;
 }
 
 bool Player::Initialize(const def::Transform& transform) {
@@ -315,10 +317,10 @@ bool Player::Initialize(const def::Transform& transform) {
 
         _player_view_camera = (std::make_shared<my::Camera>());
         auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
-       _player_view_camera->SetPosition(pos);
-       _player_view_camera->SetTarget(math::vec3::kZero);
-       _player_view_camera->Initialize();
-       _camera_controller->SetCamera(_player_view_camera);
+        _player_view_camera->SetPosition(pos);
+        _player_view_camera->SetTarget(math::vec3::kZero);
+        _player_view_camera->Initialize();
+        _camera_controller->SetCamera(_player_view_camera);
 
         my::CameraLocator::RegisterGlobalCamera(_player_view_camera);
     }
@@ -328,24 +330,11 @@ bool Player::Initialize(const def::Transform& transform) {
         _motion = mesh->CreateMotionController();
         _motion->ChangeMotion(0);
     } // if
-    
-    if (!m_WeaponMesh.Load("../Resource/mesh/Character/Wep_01_ion_mdl_01.mom")) {
-        return false;
-    }
 
-
-    //m_Pos = Vector3(0, 0, 0);
     m_State = None;
     m_MoveState = Wait;
     m_bJump2 = false;
     m_Time = 0.0f;
-    /*
-    m_Camera.SetViewPort();
-    m_Camera.LookAt(CVector3(-2, 2, -2), CVector3(0, 0, 0), CVector3(0.0f, 1.0f, 0.0f));
-    m_Camera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 1000.0f);
-    UpdateCamera();
-    CGraphicsUtilities::SetCamera(&m_Camera);
-    */
     return true;
 }
 
@@ -353,34 +342,16 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
     super::Update(delta_time);
 
     m_Time -= CUtilities::GetFrameSecond();
-    //Input();
     UpdateMove();
     //UpdateJump();
     //UpdateAttack();
+    
 
-    auto pos = super::GetPosition();
-    pos += m_Move;
-    //m_Pos += m_Move;
-
-
-
-    /*if (m_State != Jump2)
-    {
-        m_Gravity -= GRAVITY;
-    }*/
-    if (pos.y < 0) {
-        m_MoveState = Wait;
-        pos.y = 0;
-    }
-    pos.y += m_Gravity;
-
-    super::SetPosition(pos);
-
-    //CollisionStage(stageMesh);
-
+    this->UpdateTransform(delta_time);
     ChangeAnimation();
 
 //    UpdateCamera();
+    auto pos = super::GetPosition();
     float height = 2.0f;
     _camera_controller->SetCameraTarget(Mof::CVector3(pos.x, pos.y + height, pos.z));
     _camera_controller->Update();
@@ -398,7 +369,7 @@ bool Player::Render(void) {
     //武器メッシュを描画する行列をボーン情報から計算する
     CMatrix44 matWeapon = pBoneState->pBone->GetRotationOffsetMatrix() * pBoneState->BoneMatrix;
     //武器メッシュの描画
-    m_WeaponMesh.Render(matWeapon);
+    //m_WeaponMesh.Render(matWeapon);
     return true;
 }
 
@@ -408,51 +379,5 @@ bool Player::Release(void) {
     _camera_controller.reset();
 
     MOF_SAFE_DELETE(_motion);
-
-    m_WeaponMesh.Release();
     return true;
 }
-/*
-void Player::CollisionStage(LPMeshContainer pMesh)
-{
-    //判定初期化
-    m_bStage = false;
-    //接触情報
-    COLLISIONOUTGEOMETRY gout;
-    //進行方向へのレイ
-    CRay3D mray(m_Pos, m_Move);
-    mray.Position.y += 0.5f;
-    if (mray.CollisionMesh(pMesh, gout))
-    {
-        if (gout.d <= m_Move.Length() + 1.0f)
-        {
-            float nd = CVector3Utilities::Dot(m_Move, gout.Normal);
-            nd = MOF_ABS(nd);
-            m_Pos += mray.Direction * (gout.d - (1.0f - nd));
-            m_Pos += gout.Normal * nd;
-            m_bStage = true;
-        }
-    }
-    //下方向へのレイ
-    CRay3D dray(m_Pos, CVector3(0, -1, 0));
-    dray.Position.y += 2.0f;
-    if (dray.CollisionMesh(pMesh, gout))
-    {
-        if (gout.d <= 2.1f)
-        {
-            m_Pos.y += 2.1f - gout.d;
-
-            if (m_State == JumpDown && m_Gravity < 0)
-            {
-                m_State = JumpEnd;
-            }
-
-            //通常状態での地面への接触処理
-            if (m_Gravity < 0)
-            {
-                m_Gravity = 0.0f;
-            }
-        }
-    }
-}
-*/

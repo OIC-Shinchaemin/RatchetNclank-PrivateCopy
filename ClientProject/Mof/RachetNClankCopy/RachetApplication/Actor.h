@@ -22,7 +22,24 @@ private:
     my::ActorState _state;
     //! トランスフォーム
     def::Transform _transform;
-public:    
+protected:
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="rotate"></param>
+    /// <param name="velocity"></param>
+    /// <returns></returns>
+    Mof::CVector3 UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="position"></param>
+    /// <param name="velocity"></param>
+    /// <returns></returns>
+    Mof::CVector3 UpdatePosition(float delta_time, Mof::CVector3 position, Mof::CVector3 velocity);
+public:
     /// <summary>
     /// コンストラクタ
     /// </summary>

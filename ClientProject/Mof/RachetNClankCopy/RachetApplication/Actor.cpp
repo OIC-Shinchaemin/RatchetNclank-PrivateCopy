@@ -1,5 +1,32 @@
 #include "Actor.h"
 
+#include "My/Core/Math.h"
+
+
+Mof::CVector3 my::Actor::UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity) {
+    float sleep_threshold = 0.01f;
+    if (sleep_threshold < velocity.Length()) {
+        rotate += velocity * delta_time;
+    } // if
+
+    if (math::kTwoPi <= rotate.y) {
+        rotate.y -= math::kTwoPi;
+    } // if
+    else if (rotate.y <= 0.0f) {
+        rotate.y += math::kTwoPi;
+    } // else if
+    return rotate;
+}
+
+Mof::CVector3 my::Actor::UpdatePosition(float delta_time, Mof::CVector3 position, Mof::CVector3 velocity) {
+    float sleep_threshold = 0.001f;
+
+    if (sleep_threshold < velocity.Length()) {
+        position += velocity * delta_time;
+    } // if
+    return position;
+}
+
 my::Actor::Actor() :
     _state(my::ActorState::Active),
     _transform() {
