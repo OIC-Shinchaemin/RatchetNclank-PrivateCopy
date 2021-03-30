@@ -108,6 +108,7 @@
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GuiWindowRect.cpp" />
     <ClCompile Include="LoadProject.cpp" />
+    <ClCompile Include="LoadProjectDialog.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
     <ClCompile Include="MeshLoadDialog.cpp" />
@@ -118,6 +119,7 @@
     <ClCompile Include="ObjectWindow.cpp" />
     <ClCompile Include="ProjectDataParse.cpp" />
     <ClCompile Include="SaveProject.cpp" />
+    <ClCompile Include="SaveProjectDialog.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="ToolMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -136,6 +138,7 @@
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GuiWindowRect.h" />
     <ClInclude Include="LoadProject.h" />
+    <ClInclude Include="LoadProjectDialog.h" />
     <ClInclude Include="MeshLoad.h" />
     <ClInclude Include="MeshLoadDialog.h" />
     <ClInclude Include="MeshViewCameraController.h" />
@@ -147,6 +150,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="ProjectDataParse.h" />
     <ClInclude Include="SaveProject.h" />
+    <ClInclude Include="SaveProjectDialog.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="ToolMenu.h" />

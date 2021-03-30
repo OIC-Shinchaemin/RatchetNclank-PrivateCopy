@@ -21,6 +21,7 @@ public:
         Vector3                         scale        { 1.0f, 1.0f, 1.0f };
         Vector3                         rotation     { 0.0f, 0.0f, 0.0f };
         std::shared_ptr<CMeshContainer> mesh_pointer { nullptr };
+        std::string                     mesh_path    { "" };
         std::string                     name         { "" };
 
         // ********************************************************************************
@@ -38,8 +39,9 @@ public:
             bool scale_flag  = (v1.scale        == v2.scale       );
             bool rotate_flag = (v1.rotation     == v2.rotation    );
             bool mesh_flag   = (v1.mesh_pointer == v2.mesh_pointer);
+            bool path_flag   = (v1.mesh_path    == v2.mesh_path   );
             bool name_flag   = (v1.name         == v2.name        );
-            return (pos_flag && scale_flag && rotate_flag && mesh_flag && name_flag);
+            return (pos_flag && scale_flag && rotate_flag && mesh_flag && path_flag && name_flag);
         }
     };
 

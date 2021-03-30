@@ -101,6 +101,23 @@ public:
 
     // ********************************************************************************
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="std::shared_ptr<T>"></param>
+    /// <returns></returns>
+    /// <created>いのうえ,2021/03/30</created>
+    /// <changed>いのうえ,2021/03/30</changed>
+    // ********************************************************************************
+    static Key GetKey(std::shared_ptr<T> ptr) {
+        auto data = std::find_if(
+            GetAssetMap()._asset_map.begin(), GetAssetMap()._asset_map.end(),
+            [&](const std::pair<Key, std::shared_ptr<T>>& obj) { return obj.second == ptr; }
+        );
+        return data->first;
+    }
+
+    // ********************************************************************************
+    /// <summary>
     /// マップからキーのデータを削除する。
     /// </summary>
     /// <param name="key">検索用キー</param>

@@ -142,6 +142,7 @@ MofBool CGameApp::Update(void) {
     if (mesh_pointer && !isUseGui && g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
         ObjectData data;
         data.position     = MouseUtilities::GetWorldPos();
+        data.mesh_path    = MeshAsset::GetKey(mesh_pointer->second);
         data.name         = mesh_pointer->first;
         data.mesh_pointer = mesh_pointer->second;
         object_window.Add(data);

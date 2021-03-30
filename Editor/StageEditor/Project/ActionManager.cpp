@@ -4,7 +4,9 @@
 #include "MeshLoad.h"
 #include "MeshLoadDialog.h"
 #include "SaveProject.h"
+#include "SaveProjectDialog.h"
 #include "LoadProject.h"
+#include "LoadProjectDialog.h"
 #include "ProjectDataParse.h"
 #include "AddObject.h"
 
@@ -16,12 +18,14 @@
 /// <changed>‚¢‚Ì‚¤‚¦,2021/03/18</changed>
 // ********************************************************************************
 ActionManager::ActionManager(void) {
-    _action_map[ActionKeyName::MeshLoad]         = std::make_shared<MeshLoad>();
-    _action_map[ActionKeyName::MeshLoadDialog]   = std::make_shared<MeshLoadDialog>();
-    _action_map[ActionKeyName::SaveProject]      = std::make_shared<SaveProject>();
-    _action_map[ActionKeyName::LoadProject]      = std::make_shared<LoadProject>();
-    _action_map[ActionKeyName::ProjectDataParse] = std::make_shared<ProjectDataParse>();
-    _action_map[ActionKeyName::AddObject]        = std::make_shared<AddObject>();
+    _action_map[ActionKeyName::MeshLoad]          = std::make_shared<MeshLoad>();
+    _action_map[ActionKeyName::MeshLoadDialog]    = std::make_shared<MeshLoadDialog>();
+    _action_map[ActionKeyName::SaveProject]       = std::make_shared<SaveProject>();
+    _action_map[ActionKeyName::SaveProjectDialog] = std::make_shared<SaveProjectDialog>();
+    _action_map[ActionKeyName::LoadProject]       = std::make_shared<LoadProject>();
+    _action_map[ActionKeyName::LoadProjectDialog] = std::make_shared<LoadProjectDialog>();
+    _action_map[ActionKeyName::ProjectDataParse]  = std::make_shared<ProjectDataParse>();
+    _action_map[ActionKeyName::AddObject]         = std::make_shared<AddObject>();
 }
 
 // ********************************************************************************

@@ -81,7 +81,7 @@ void MeshWindow::MeshLoad(void) {
 	if (ActionManager::GetInstance().Action(ActionKeyName::MeshLoadDialog, &filename)) {
 		std::shared_ptr<CMeshContainer> mesh = MeshAsset::GetAsset(filename);
         _mesh_list_current = _mesh_list.size();
-		_mesh_list.push_back(MeshData(filename, mesh));
+		_mesh_list.push_back(MeshData(FileDialog::GetFileName(filename.c_str()), mesh));
         _mesh_select_item  = &(_mesh_list[_mesh_list_current]);
 	}
 }

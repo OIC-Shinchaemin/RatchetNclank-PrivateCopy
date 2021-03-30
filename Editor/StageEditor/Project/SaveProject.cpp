@@ -51,7 +51,7 @@ bool SaveProject::Action(std::any any) {
     for (const auto & it : *mesh_list) {
         // 書き出しデータ
         std::string      resource_path    = *ParameterMap<std::string>::GetInstance().Get("resource_path");
-        std::string      full_path        = FileDialog::ChangeFullPath(it.second->GetName()->GetString());
+        std::string      full_path        = resource_path + "\\" + MeshAsset::GetKey(it.second);
         CString          relative_path    = FileDialog::ChangeRelativePath(full_path.c_str(), resource_path.c_str()).c_str();
         // 各書き出し
         mesh_array.PushBack(
@@ -68,8 +68,8 @@ bool SaveProject::Action(std::any any) {
         // 書き出しデータ
         MofU32     object_name_length = it.name.length();
         LPCMofChar object_name        = it.name.c_str();
-        MofU32     name_length        = it.mesh_pointer->GetName()->GetLength();
-        LPCMofChar name               = it.mesh_pointer->GetName()->GetString();
+        MofU32     name_length        = it.mesh_path.length();
+        LPCMofChar name               = it.mesh_path.c_str();
         MofS32     position_x         = static_cast<MofS32>(it.position.x * 1000.0f);
         MofS32     position_y         = static_cast<MofS32>(it.position.y * 1000.0f);
         MofS32     position_z         = static_cast<MofS32>(it.position.z * 1000.0f);

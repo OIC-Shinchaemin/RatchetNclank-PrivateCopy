@@ -4,6 +4,7 @@
 #include "FileDialog.h"
 #include "ActionKeyName.h"
 #include "My/Core/Header.h"
+#include "ParameterMap.h"
 
 // ********************************************************************************
 /// <summary>
@@ -45,19 +46,20 @@ bool ProjectDataParse::Action(std::any any) {
     if (!(*project_data).HasMember("mesh_list")) {
         return false;
     };
-    const auto& json_mesh_list = (*project_data)["mesh_list"];
-    int mesh_count = json_mesh_list.Size();
+    const std::string* resource_path  = ParameterMap<std::string>::GetInstance().Get("resource_path");
+    const auto&        json_mesh_list = (*project_data)["mesh_list"];
+    const int          mesh_count     = json_mesh_list.Size();
     mesh_list->reserve(mesh_count);
     for (int i = 0; i < mesh_count; i++) {
         _ASSERT_EXPR(json_mesh_list[i].IsString(), L"NO STR");
         std::string mesh_path = json_mesh_list[i].GetString();
+        std::string full_path = *resource_path + "\\" + json_mesh_list[i].GetString();
         std::string filename  = FileDialog::GetFileName(mesh_path.c_str());
-        std::string ext       = FileDialog::GetExt(mesh_path.c_str());
-        std::pair<std::string, std::string> load_data(filename + ext, mesh_path);
+        std::pair<std::string, std::string> load_data(mesh_path, full_path);
         ActionManager::GetInstance().Action(ActionKeyName::MeshLoad, load_data);
         MeshData mesh_data;
         mesh_data.first  = filename;
-        mesh_data.second = MeshAsset::GetAsset(filename + ext);
+        mesh_data.second = MeshAsset::GetAsset(mesh_path);
         (*mesh_list).push_back(std::move(mesh_data));
     }
 
@@ -65,7 +67,7 @@ bool ProjectDataParse::Action(std::any any) {
         return false;
     };
     const auto& json_object_list = (*project_data)["object_list"];
-    int object_count = json_object_list.Size();
+    const int   object_count     = json_object_list.Size();
     object_list->reserve(object_count);
     for (int i = 0; i < object_count; i++) {
         const auto& json_object_data = json_object_list[i];
@@ -87,6 +89,7 @@ bool ProjectDataParse::Action(std::any any) {
 
         ObjectData object_data;
         object_data.name         = object_name;
+        object_data.mesh_path    = mesh_name;
         object_data.mesh_pointer = MeshAsset::GetAsset(mesh_name);
         object_data.position     = position;
         object_data.rotation     = rotation;

@@ -1,0 +1,33 @@
+{
+    "mesh_list": [
+        "mesh\\sample_mom\\sample_box.mom"
+    ],
+    "object_list": [
+        {
+            "object_name": "sample_box",
+            "mesh_name": "mesh\\sample_mom\\sample_box.mom",
+            "pos_x": -581,
+            "pos_y": 0,
+            "pos_z": -474,
+            "scale_x": 1000,
+            "scale_y": 1000,
+            "scale_z": 1000,
+            "rotation_x": 0,
+            "rotation_y": 0,
+            "rotation_z": 0
+        },
+        {
+            "object_name": "sample_box1",
+            "mesh_name": "mesh\\sample_mom\\sample_box.mom",
+            "pos_x": 854,
+            "pos_y": 0,
+            "pos_z": -528,
+            "scale_x": 1000,
+            "scale_y": 1000,
+            "scale_z": 1000,
+            "rotation_x": 0,
+            "rotation_y": 0,
+            "rotation_z": 0
+        }
+    ]
+}

@@ -9,17 +9,19 @@ bool Stage::Parse(const rapidjson::Document* buffer, MeshList* mesh_list, Object
     //     メッシュファイル相対パス
     // ],
     // "object_list": [
-    //     "object_name": オブジェクト名,
-    //     "mesh_name": メッシュ名,
-    //     "pos_x": 座標位置X  * 1000,
-    //     "pos_y": 座標位置Y  * 1000,
-    //     "pos_z": 座標位置Z  * 1000,
-    //     "scale_x": 拡大率X  * 1000,
-    //     "scale_y": 拡大率Y  * 1000,
-    //     "scale_z": 拡大率Z  * 1000,
-    //     "rotation_x": 回転X * 1000,
-    //     "rotation_y": 回転Y * 1000,
-    //     "rotation_z": 回転Z * 1000
+    //     {
+    //         "object_name": オブジェクト名,
+    //         "mesh_name": メッシュ名,
+    //         "pos_x": 座標位置X  * 1000,
+    //         "pos_y": 座標位置Y  * 1000,
+    //         "pos_z": 座標位置Z  * 1000,
+    //         "scale_x": 拡大率X  * 1000,
+    //         "scale_y": 拡大率Y  * 1000,
+    //         "scale_z": 拡大率Z  * 1000,
+    //         "rotation_x": 回転X * 1000,
+    //         "rotation_y": 回転Y * 1000,
+    //         "rotation_z": 回転Z * 1000
+    //     }
     // ]
     // EOF
 
@@ -155,9 +157,7 @@ void Stage::AddObject(AddObjectData* data) {
 
 void Stage::Initialize(void) {
     rapidjson::Document buffer;
-    std::string file         = "test.map";
-    std::string current_path = std::filesystem::current_path().string();
-    std::string last_path    = Stage::GetFileName(current_path);
+    std::string file         = "stage/test.json";
     bool load_map_flag       = LoadMap(&buffer, file);
     bool Parse_flag          = Parse(&buffer, &_mesh_array, &_object_array);
 }

@@ -121,7 +121,10 @@ std::string FileDialog::ChangeRelativePath(LPCMofChar path, LPCMofChar base) {
 /// <changed>‚¢‚Ì‚¤‚¦,2020/11/11</changed>
 // ********************************************************************************
 std::string FileDialog::ChangeFullPath(LPCMofChar path) {
+    /**
+    /*/
     return std::filesystem::absolute(path).string();
+    /**/
 }
 
 #endif

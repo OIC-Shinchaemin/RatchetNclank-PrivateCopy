@@ -2,6 +2,7 @@
 #include "FileDialog.h"
 #include "ActionManager.h"
 #include "Define.h"
+#include "ParameterMap.h"
 
 // ********************************************************************************
 /// <summary>
@@ -28,9 +29,11 @@ bool MeshLoadDialog::Action(std::any any) {
 
     // オープンに成功していればメッシュの登録を行う
     if (open) {
+        std::string* resource_path = ParameterMap<std::string>::GetInstance().Get("resource_path");
         // ファイル名
-        std::string* out = std::any_cast<std::string*>(any);
-        *out = FileDialog::GetFileName(path);
+        std::string* out       = std::any_cast<std::string*>(any);
+        std::string  file_name = FileDialog::GetFileName(path) + FileDialog::GetExt(path);
+        *out = FileDialog::ChangeRelativePath(path, resource_path->c_str());
         // 登録データの作成
         std::pair<std::string, std::string> data(*out, path);
         // メッシュの読み込み、登録をする
