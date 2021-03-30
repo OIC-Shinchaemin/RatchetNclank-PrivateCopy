@@ -8,31 +8,37 @@
 #include "../Character/Player.h"
 
 
-void my::GameManager::AddElement(const std::shared_ptr<my::Character>& ptr) {
-    if (ty::has_func_render<std::shared_ptr<my::Character>>()) {
-        _renderer.AddElement(ptr);
-    } // if
+void my::GameManager::AddElement(const std::shared_ptr<my::Actor>& ptr) {
+    _game_world.AddActor(ptr);
+    _renderer.AddElement(ptr);
 }
 
-void my::GameManager::RemoveElement(const std::shared_ptr<my::Character>& ptr) {
-    if (ty::has_func_render<std::shared_ptr<my::Character>>()) {
-        _renderer.RemoveElement(ptr);
-    } // if
+void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
+    _game_world.RemoveActor(ptr);
+    _renderer.RemoveElement(ptr);
 }
 
 void my::GameManager::Collision(void) {
     auto player = _character->GetPosition();
-    for (auto& enemy: _enemies) {
+
+    auto player_sphere = _character->GetSphere();
+
+    for (auto& enemy : _enemies) {
         if (enemy->ContainInRecognitionRange(player)) {
             enemy->SetTarget(_character);
         } // if
         else {
             enemy->SetTarget(nullptr);
         } // else
+
+        if (enemy->GetSphere().CollisionSphere(player_sphere)) {
+            enemy->End();
+        } // if
     } // for
 }
 
 my::GameManager::GameManager() :
+    _game_world(),
     _renderer(),
     _game_money(),
     _weapon_system(),
@@ -45,13 +51,18 @@ my::GameManager::GameManager() :
 my::GameManager::~GameManager() {
 }
 
+void my::GameManager::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
+    if (type == "DeleteRequest") {
+        _delete_actors.push_back(ptr);
+    } // if
+}
+
 bool my::GameManager::Initialize(void) {
     _stage.Initialize();
 
     _game_money = std::make_unique<my::GameMoney>();
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-//    _character = std::make_shared<my::Character>();
     _character = std::make_shared<Player>();
 
     auto save_data = my::SaveData();
@@ -65,13 +76,15 @@ bool my::GameManager::Initialize(void) {
     _current_weapon = _weapon_system->GetWeapon("OmniWrench");
 
     auto transform = def::Transform();
-    transform.position = Mof::CVector3(1.0f, 0.0f, 0.0f);
-    auto temp = std::make_shared<my::Enemy>();
+    transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
+    // Enemy‚ğ‰Šú‰»‚·‚é‚½‚ß‚ÉƒLƒƒƒbƒVƒ…
+    auto temp = ut::MakeSharedWithRelease<my::Enemy>();
+    temp->AddObserver(shared_from_this());
     temp->Initialize(transform);
     _enemies.push_back(temp);
 
-    _renderer.AddElement(_character);
-    _renderer.AddElement(temp);
+    this->AddElement(_character);
+    this->AddElement(temp);
     return true;
 }
 
@@ -89,25 +102,22 @@ bool my::GameManager::Input(void) {
         _current_weapon = _weapon_system->GetWeapon("OmniWrench");
     } // if
 
-    _character->Input();
-    for (auto& ptr : _enemies) {
-        ptr->Input();
-    } // for
-
+    _game_world.Input();
     return true;
 }
 
 bool my::GameManager::Update(float delta_time) {
+    for (auto& ptr : _delete_actors) {
+        this->RemoveElement(ptr);
+    } // for
+    _delete_actors.clear();
+    
+
     _quick_change->Update();
     _stage.Update();
-    _character->Update(delta_time);
-    for (auto& ptr : _enemies) {
-        ptr->Update(delta_time);
-    } // for
+
+    _game_world.Update(delta_time);
     _current_weapon->Update(delta_time);
-
-
-
     this->Collision();
     return true;
 }

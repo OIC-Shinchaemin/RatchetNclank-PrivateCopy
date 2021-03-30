@@ -11,7 +11,7 @@
 
 
 namespace my {
-class UICanvas : public std::enable_shared_from_this<my::UICanvas>, public my::Observer<my::UIPanel>, public my::Observable<my::UICanvas> {
+class UICanvas : public std::enable_shared_from_this<my::UICanvas>, public my::Observer<const std::shared_ptr<my::UIPanel>&, const char* > {
     using ElemPtr = std::shared_ptr<my::UIPanel>;
 private:
     //! UIƒpƒlƒ‹

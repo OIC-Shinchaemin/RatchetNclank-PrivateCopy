@@ -4,24 +4,24 @@
 
 
 my::Renderer::Renderer() :
-    _characters(){
+    _actors(){
 }
 
 my::Renderer::~Renderer() {
 }
 
-void my::Renderer::AddElement(const std::shared_ptr<my::Character>& ptr) {
-    _characters.push_back(ptr);
+void my::Renderer::AddElement(const std::shared_ptr<my::Actor>& ptr) {
+    _actors.push_back(ptr);
 }
 
-void my::Renderer::RemoveElement(const std::shared_ptr<my::Character>& ptr) {
-    ut::EraseRemove(_characters, ptr);
+void my::Renderer::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
+    ut::SwapPopback(_actors, ptr);
 }
 
 bool my::Renderer::Render(void) {
-    for (auto ptr : _characters) {
+    for (auto ptr : _actors) {
         ptr->Render();
-        ptr->DebugRender();
+        ptr->RenderDebug();
     } // for
     return true;
 }

@@ -30,7 +30,7 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class QuickChangeMenu : public my::UIPanel , public my::Observer<my::QuickChangeSystem> {
+class QuickChangeMenu : public my::UIPanel, public my::Observer<Mof::CVector4> {
     using super = my::UIPanel;
 public:
     /// <summary>
@@ -41,9 +41,8 @@ public:
     /// <summary>
     /// 通知イベント
     /// </summary>
-    /// <param name="observable"></param>
-    /// <param name="event"></param>
-    virtual void OnNotify(const std::shared_ptr<my::QuickChangeSystem>& observable, const char* event) override;
+    /// <param name="color"></param>
+    virtual void OnNotify(Mof::CVector4 color) override;
     /// <summary>
     /// 描画
     /// </summary>

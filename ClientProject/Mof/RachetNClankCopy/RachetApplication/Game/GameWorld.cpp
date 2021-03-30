@@ -1,0 +1,47 @@
+#include "GameWorld.h"
+
+
+my::GameWorld::GameWorld() :
+    _actors() {
+}
+
+my::GameWorld::~GameWorld() {
+}
+
+my::GameWorld::ActorPtr my::GameWorld::GetActor(uint32_t index) const {
+    if (_actors.size() <= index) {
+        return nullptr;
+    } // if
+    return _actors.at(index);
+}
+
+void my::GameWorld::AddActor(const ActorPtr& actor) {
+    _actors.emplace_back(actor);
+}
+
+void my::GameWorld::RemoveActor(const ActorPtr& actor) {
+    ut::SwapPopback(_actors, actor);
+}
+
+bool my::GameWorld::Input(void) {
+    // update
+    for (auto& actor : _actors) {
+        actor->Input();
+    } // for
+    return true;
+}
+
+bool my::GameWorld::Update(float delta_time) {
+    // delete
+//    ut::EraseRemove(_actors, [](const ActorPtr& actor) {
+//        return actor->GetState() == my::ActorState::End;
+//    });    
+    // update
+    for (auto& actor : _actors) {
+        actor->Update(delta_time);
+    } // for
+    return true;
+}
+
+void my::GameWorld::UpdateDebug(void) {
+}

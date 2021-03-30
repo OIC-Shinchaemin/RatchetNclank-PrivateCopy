@@ -62,8 +62,8 @@ public:
     /// <returns></returns>
     bool Render(Mof::CVector4 color);
 };
-class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem>, public my::ResourceLocator, public my::CanvasLocator, public Observable<my::QuickChangeSystem> {
-    using Observable = my::Observable<my::QuickChangeSystem>;
+class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem>, public my::ResourceLocator, public my::CanvasLocator, public Observable<Mof::CVector4> {
+    using Observable = my::Observable<Mof::CVector4>;
     enum class State {
         Enter,
         Exit

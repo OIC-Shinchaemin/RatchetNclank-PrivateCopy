@@ -192,6 +192,9 @@
     <ClCompile Include="SightRecognition.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameWorld.cpp">
+      <Filter>Rachet\Source\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -331,6 +334,9 @@
     </ClInclude>
     <ClInclude Include="SightRecognition.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameWorld.h">
+      <Filter>Rachet\Header\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

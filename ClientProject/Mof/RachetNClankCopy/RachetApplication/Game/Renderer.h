@@ -6,13 +6,11 @@
 #include <vector>
 
 #include "../Actor.h"
-#include "../Character/Character.h"
-
 
 namespace my {
 class Renderer {
     //! キャラクタ
-    std::vector<std::shared_ptr<my::Character>> _characters;
+    std::vector<std::shared_ptr<my::Actor>> _actors;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,12 +24,12 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddElement(const std::shared_ptr<my::Character>& ptr);
+    void AddElement(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void RemoveElement(const std::shared_ptr<my::Character>& ptr);
+    void RemoveElement(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// 描画
     /// </summary>

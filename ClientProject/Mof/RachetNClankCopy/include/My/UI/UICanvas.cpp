@@ -10,7 +10,7 @@ my::UICanvas::~UICanvas() {
 }
 
 void my::UICanvas::OnNotify(const std::shared_ptr<my::UIPanel>& observable, const char* event) {
-    my::Observable<my::UICanvas>::Notify(shared_from_this(), event);
+//    my::Observable<my::UICanvas>::Notify(shared_from_this(), event);
 }
 
 void my::UICanvas::AddElement(const ElemPtr& elem) {
