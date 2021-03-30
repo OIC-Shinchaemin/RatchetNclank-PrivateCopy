@@ -43,7 +43,7 @@ private:
     //CCamera					m_Camera;
     //CMeshContainer			m_Mesh;
     CMeshContainer			m_WeaponMesh;
-    LPMeshMotionController	m_pMotion;
+    //LPMeshMotionController	m_pMotion;
     CVector2				m_CameraAngle;
     ActionState				m_State;
     MoveState				m_MoveState;
@@ -60,8 +60,9 @@ private:
     float					m_Gravity;
     bool					m_bStage;
     ///////////
+    
     //! カメラ
-    std::shared_ptr<my::Camera> _camera;
+    std::shared_ptr<my::Camera> _player_view_camera;
     //! カメラ
     std::shared_ptr<my::Camera> _top_view_camera;
     //! カメラコントローラ

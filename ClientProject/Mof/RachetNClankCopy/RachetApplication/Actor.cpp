@@ -1,12 +1,12 @@
 #include "Actor.h"
 
 my::Actor::Actor() :
+    _state(my::ActorState::Active),
     _transform() {
 }
 
 my::Actor::~Actor() {
 }
-
 
 void my::Actor::SetPosition(Mof::CVector3 position) {
     this->_transform.position = position;
@@ -36,7 +36,18 @@ Mof::CVector3 my::Actor::GetScale(void) const {
     return this->_transform.scale;
 }
 
+my::ActorState my::Actor::GetState(void) const {
+    return this->_state;
+}
+
+void my::Actor::End(void) {
+    this->_state = my::ActorState::End;
+    Observable::Notify("DeleteRequest",shared_from_this());
+}
+
 bool my::Actor::Initialize(const def::Transform& transform) {
+    _state = my::ActorState::Active;
+    _transform = transform;
     return true;
 }
 
@@ -54,4 +65,7 @@ bool my::Actor::Render(void) {
 
 bool my::Actor::Release(void) {
     return true;
+}
+
+void my::Actor::RenderDebug(void) {
 }

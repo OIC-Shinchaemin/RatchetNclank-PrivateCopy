@@ -84,8 +84,9 @@ MofBool CGameApp::Input(void) {
 
 MofBool CGameApp::Update(void) {
     this->Input();
-    float delta = def::kDeltaTime;
+    float delta = Mof::CUtilities::GetFrameSecond();
 
+    
     _game_manager->Update(delta);
     _camera_manager->Update();
     _ui_canvas->Update(delta);

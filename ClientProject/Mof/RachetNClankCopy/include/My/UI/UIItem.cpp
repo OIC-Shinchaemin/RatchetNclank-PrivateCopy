@@ -13,10 +13,6 @@ my::UIItem::~UIItem() {
     _texture.reset();
 }
 
-void my::UIItem::Notify(const std::shared_ptr<my::UIItem>& shared_this, const char* event) {
-    my::Observable<my::UIItem>::Notify(shared_this, event);
-}
-
 void my::UIItem::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }

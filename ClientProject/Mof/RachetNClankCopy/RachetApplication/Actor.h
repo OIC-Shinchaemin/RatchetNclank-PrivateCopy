@@ -8,11 +8,18 @@
 #include <Mof.h>
 
 #include "My/Core/Define.h"
-
+#include "My/Core/Observable.h"
 
 namespace my {
-class Actor : public std::enable_shared_from_this<my::Actor> {
+enum class ActorState {
+    Active,
+    End
+};
+class Actor : public std::enable_shared_from_this<my::Actor>, public my::Observable<const char*, const std::shared_ptr<my::Actor>&> {
+    using Observable = my::Observable<const char*, const std::shared_ptr<my::Actor>&>;
 private:
+    //! 状態
+    my::ActorState _state;
     //! トランスフォーム
     def::Transform _transform;
 public:    
@@ -23,7 +30,7 @@ public:
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~Actor();
+    virtual ~Actor();    
     /// <summary>
     /// セッター
     /// </summary>
@@ -64,6 +71,17 @@ public:
     /// <returns></returns>
     Mof::CVector3 GetScale(void) const;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::ActorState GetState(void) const;
+    /// <summary>
+    /// デリート
+    /// </summary>
+    /// <param name=""></param>
+    void End(void);
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="transform"></param>
@@ -93,6 +111,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Release(void);
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    virtual void RenderDebug(void);
 };
 }
 #endif // !MY_ACTOR_H

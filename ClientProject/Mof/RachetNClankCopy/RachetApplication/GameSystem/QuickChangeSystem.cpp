@@ -109,11 +109,11 @@ bool my::QuickChangeSystem::Update(void) {
         if (_color.a > 1.0f) {
             _color.a = 1.0f;
         } // if
-        Observable::Notify(shared_from_this(), "UpdateColor");
+        Observable::Notify(_color);
     } // if
     else if (_state == State::Exit) {
         _color.a -= _alpha;
-        Observable::Notify(shared_from_this(), "UpdateColor");
+        Observable::Notify(_color);
     } // else if
 
     return true;
@@ -171,6 +171,6 @@ bool my::QuickChangeItem::Render(Mof::CVector4 color) {
         tex->Render(pos.x, pos.y, color.ToU32Color());
     } // if
     rect.Translation(pos);
-    ::CGraphicsUtilities::RenderRect(rect, Mof::CVector4(0.0f, 0.0f, 1.0f, color.a).ToU32Color());
+    ::CGraphicsUtilities::RenderRect(rect, Mof::CVector4(0.0f, 1.0f, 1.0f, color.a).ToU32Color());
     return true;
 }

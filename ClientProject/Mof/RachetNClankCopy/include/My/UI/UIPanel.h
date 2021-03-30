@@ -15,7 +15,7 @@
 
 
 namespace my {
-class UIPanel : public std::enable_shared_from_this<my::UIPanel> , public my::Observer<my::UIItem>, public my::Observable<my::UIPanel> {
+class UIPanel : public std::enable_shared_from_this<my::UIPanel>, public my::Observer<const std::shared_ptr<my::UIItem>&, const char* >, public my::Observable<const std::shared_ptr<my::UIPanel>&, const char* > {
 public:
     using ElemPtr = std::shared_ptr<my::UIItem>;
 protected:

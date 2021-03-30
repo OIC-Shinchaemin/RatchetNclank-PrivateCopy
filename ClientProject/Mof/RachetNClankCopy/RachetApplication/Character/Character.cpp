@@ -4,8 +4,9 @@
 my::Character::Character() :
     super(),
     _mesh(),
+    _motion(),
     _volume(1.0f),
-    _height(1.0f){
+    _height(1.0f) {
 }
 
 my::Character::~Character() {
@@ -20,12 +21,30 @@ bool my::Character::Initialize(const def::Transform& transform) {
     return true;
 }
 
-
-bool my::Character::Release(void) {
-    super::Release();
+bool my::Character::Update(float delta_time) {
+    _motion->AddTimer(delta_time);
     return true;
 }
 
-void my::Character::DebugRender(void) {
+bool my::Character::Render(void) {
+    if (auto mesh = _mesh.lock()) {
+        CMatrix44 matWorld;
+        matWorld.RotationZXY(super::GetRotate());
+        matWorld.SetTranslation(super::GetPosition());
+        _motion->RefreshBoneMatrix(matWorld);
+        mesh->Render(_motion);
+    } // if
+    return true;
+}
+
+bool my::Character::Release(void) {
+    super::Release();
+
+    _mesh.reset();
+    ut::SafeDelete(_motion);
+    return true;
+}
+
+void my::Character::RenderDebug(void) {
     ::CGraphicsUtilities::RenderLineSphere(this->GetSphere(), def::color_rgba::kRed);
 }

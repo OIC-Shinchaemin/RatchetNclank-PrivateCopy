@@ -37,6 +37,6 @@
 #include "rapidjson/ostreamwrapper.h"
 
 #include <Mof.h>
-
+#include <imgui/MofImGui.h>
 
 #endif // !MY_HEADER_H

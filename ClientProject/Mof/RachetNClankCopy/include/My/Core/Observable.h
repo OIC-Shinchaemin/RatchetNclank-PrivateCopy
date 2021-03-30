@@ -2,7 +2,6 @@
 #define MY_OBSERVABLE_H
 
 
-#include <any>
 #include <memory>
 #include <vector>
 
@@ -11,9 +10,9 @@
 
 
 namespace my {
-template<class Derived>
+template<class...NotifyArgs>
 class Observable {
-    using Observer = my::Observer<Derived>;
+    using Observer = my::Observer<NotifyArgs...>;
 private:
     //! オブザーバ
     std::vector<std::weak_ptr<Observer>> _observers;
@@ -21,10 +20,8 @@ protected:
     /// <summary>
     /// 通知
     /// </summary>
-    /// <param name="data"></param>
-    /// <param name="event"></param>
-    void Notify(const std::shared_ptr<Derived>& shared_this, const char* event);
-//    void Notify(const std::shared_ptr<Derived>& shared_this, const char* event, std::any);
+    /// <param name="...args"></param>
+    void Notify(NotifyArgs... args);
 public:
     /// <summary>
     /// コンストラクタ
@@ -45,27 +42,32 @@ public:
     /// <param name="observer"></param>
     void RemoveObserver(const std::shared_ptr<Observer>& observer);
 };
-template<class Derived>
-inline void Observable<Derived>::Notify(const std::shared_ptr<Derived>& shared_this, const char* event) {
+
+template<class ...NotifyArgs>
+inline void Observable<NotifyArgs...>::Notify(NotifyArgs ...args) {
     auto& o = _observers;
     std::for_each(o.begin(), o.end(), [&](std::weak_ptr<Observer> weak) {
         if (auto ptr = weak.lock()) {
-            ptr->OnNotify(shared_this, event);
+            ptr->OnNotify(args...);
         } // if
     });
 }
-template<class Derived>
-inline Observable<Derived>::Observable() {
+
+template<class ...NotifyArgs>
+inline Observable<NotifyArgs...>::Observable() {
 }
-template<class Derived>
-inline Observable<Derived>::~Observable() {
+
+template<class ...NotifyArgs>
+inline Observable<NotifyArgs...>::~Observable() {
 }
-template<class Derived>
-inline void Observable<Derived>::AddObserver(const std::shared_ptr<Observer>& observer) {
+
+template<class ...NotifyArgs>
+inline void Observable<NotifyArgs...>::AddObserver(const std::shared_ptr<Observer>& observer) {
     _observers.push_back(observer);
 }
-template<class Derived>
-inline void Observable<Derived>::RemoveObserver(const std::shared_ptr<Observer>& observer) {
+
+template<class ...NotifyArgs>
+inline void Observable<NotifyArgs...>::RemoveObserver(const std::shared_ptr<Observer>& observer) {
     ut::EraseRemove(_observers, [observer](const std::weak_ptr<Observer>& weak) {
         if (auto ptr = weak.lock()) {
             return ptr == observer;
