@@ -1,5 +1,6 @@
 #pragma once
 #include "Mof.h"
+#include "rapidjson/document.h"
 #include <unordered_map>
 
 // ********************************************************************************
@@ -61,7 +62,10 @@ public:
     using SaveData      = std::tuple<std::string, MeshList*, ObjectList*>;
 
     //! pair<file_name, file_buffer>
-    using LoadData      = std::pair<std::string, std::string*>;
+    using LoadData      = std::pair<std::string, rapidjson::Document*>;
+
+    //! pair<file_buffer, MeshList*, ObjectList*>
+    using ParseData     = std::tuple<rapidjson::Document*, MeshList*, ObjectList*>;
 
 private:
 
@@ -71,9 +75,9 @@ private:
     //! オブジェクトデータ配列
     ObjectList _object_array;
 
-    bool Parse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list);
+    bool Parse(const rapidjson::Document* buffer, MeshList* mesh_list, ObjectList* object_list);
 
-    bool LoadMap(std::string* buffer_pointer, const std::string& map_file);
+    bool LoadMap(rapidjson::Document* buffer_pointer, const std::string& map_file);
 
     bool LoadMesh(const std::string& key, const std::string& mesh_file);
 
