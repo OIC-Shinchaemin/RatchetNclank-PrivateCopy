@@ -1,102 +1,66 @@
 #include "Stage.h"
+#include "My/Core/Utility.h"
 #include <filesystem>
 
-bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list) {
+bool Stage::Parse(const rapidjson::Document* buffer, MeshList* mesh_list, ObjectList* object_list) {
+
     // ファイル詳細
-    // メッシュ数                       ( 4 byte )
-    // LOOP
-    // メッシュファイル相対パスの長さ   ( 4 byte )
-    // メッシュファイル相対パス         ( メッシュファイル相対パスの長さ byte )
-    // LOOP END
-    // オブジェクト数                   ( 4 byte )
-    // LOOP
-    // オブジェクト名の長さ             ( 4 byte )
-    // オブジェクト名                   ( オブジェクト名の長さ byte )
-    // メッシュ名の長さ                 ( 4 byte )
-    // メッシュ名                       ( メッシュ名の長さ byte )
-    // 座標位置X * 1000                 ( 4 byte )
-    // 座標位置Y * 1000                 ( 4 byte )
-    // 座標位置Z * 1000                 ( 4 byte )
-    // 拡大率X   * 1000                 ( 4 byte )
-    // 拡大率Y   * 1000                 ( 4 byte )
-    // 拡大率Z   * 1000                 ( 4 byte )
-    // 回転X     * 1000                 ( 4 byte )
-    // 回転Y     * 1000                 ( 4 byte )
-    // 回転Z     * 1000                 ( 4 byte )
-    // LOOP END
+    // "mesh_list": [
+    //     メッシュファイル相対パス
+    // ],
+    // "object_list": [
+    //     {
+    //         "object_name": オブジェクト名,
+    //         "mesh_name": メッシュ名,
+    //         "pos_x": 座標位置X  * 1000,
+    //         "pos_y": 座標位置Y  * 1000,
+    //         "pos_z": 座標位置Z  * 1000,
+    //         "scale_x": 拡大率X  * 1000,
+    //         "scale_y": 拡大率Y  * 1000,
+    //         "scale_z": 拡大率Z  * 1000,
+    //         "rotation_x": 回転X * 1000,
+    //         "rotation_y": 回転Y * 1000,
+    //         "rotation_z": 回転Z * 1000
+    //     }
+    // ]
     // EOF
 
-    std::function<MofS32(int)> purse_s32 = [&](int n) {
-        const unsigned char buff[4] = {
-            static_cast<MofU8>(buffer->c_str()[n + 0]),
-            static_cast<MofU8>(buffer->c_str()[n + 1]),
-            static_cast<MofU8>(buffer->c_str()[n + 2]),
-            static_cast<MofU8>(buffer->c_str()[n + 3]),
-        };
-        MofS32 s32 = (buff[3] << 24) | (buff[2] << 16) | (buff[1] << 8) | (buff[0]);
-        return s32;
+    if (!(*buffer).HasMember("mesh_list")) {
+        return false;
     };
-    
-    std::function<std::string(int, int)> purse_string = [&](int n, int count) {
-        std::string buff = buffer->substr(n, count);
-        return buff;
-    };
-    
-    int buff_index = 0;
-    
-    int mesh_count = purse_s32(buff_index);
-    buff_index    += sizeof(MofS32);
-    
+    const auto& json_mesh_list = (*buffer)["mesh_list"];
+    int         mesh_count     = json_mesh_list.Size();
+    mesh_list->reserve(mesh_count);
     for (int i = 0; i < mesh_count; i++) {
-        int mesh_path_length  = purse_s32(buff_index);
-        buff_index           += sizeof(MofS32);
-        std::string mesh_path = purse_string(buff_index, mesh_path_length);
-        buff_index           += mesh_path_length;
+        _ASSERT_EXPR(json_mesh_list[i].IsString(), L"NO STR");
+        std::string mesh_path = json_mesh_list[i].GetString();
         std::string filename  = Stage::GetFileName(mesh_path);
-        std::string ext       = Stage::GetExt(mesh_path);
-        if (!LoadMesh(filename + ext, ChangeFullPath(mesh_path))) {
-            return false;
-        }
+        LoadMesh(mesh_path, mesh_path);
     }
 
-    int object_count = purse_s32(buff_index);
-    buff_index      += sizeof(MofS32);
-
+    if (!(*buffer).HasMember("object_list")) {
+        return false;
+    };
+    const auto& json_object_list = (*buffer)["object_list"];
+    int         object_count     = json_object_list.Size();
+    object_list->reserve(object_count);
     for (int i = 0; i < object_count; i++) {
-        
-        int object_name_length  = purse_s32(buff_index);
-        buff_index             += sizeof(MofS32);
-        
-        std::string object_name = purse_string(buff_index, object_name_length);
-        buff_index             += object_name_length;
-        
-        int mesh_name_length    = purse_s32(buff_index);
-        buff_index             += sizeof(MofS32);
-
-        std::string mesh_name   = purse_string(buff_index, mesh_name_length);
-        buff_index             += mesh_name_length;
+        const auto& json_object_data = json_object_list[i];
+        std::string object_name      = json_object_data["object_name"].GetString();
+        std::string mesh_name        = json_object_data["mesh_name"].GetString();
 
         Vector3 position, rotation, scale;
-        position.x  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        position.y  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        position.z  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
+        position.x  = json_object_data["pos_x"].GetInt() * 0.001f;
+        position.y  = json_object_data["pos_y"].GetInt() * 0.001f;
+        position.z  = json_object_data["pos_z"].GetInt() * 0.001f;
                                                     
-        scale.x     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        scale.y     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        scale.z     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
+        scale.x     = json_object_data["scale_x"].GetInt() * 0.001f;
+        scale.y     = json_object_data["scale_y"].GetInt() * 0.001f;
+        scale.z     = json_object_data["scale_z"].GetInt() * 0.001f;
                                                     
-        rotation.x  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        rotation.y  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        rotation.z  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);
+        rotation.x  = json_object_data["rotation_x"].GetInt() * 0.001f;
+        rotation.y  = json_object_data["rotation_y"].GetInt() * 0.001f;
+        rotation.z  = json_object_data["rotation_z"].GetInt() * 0.001f;
 
         ObjectData object_data;
         object_data.name         = object_name;
@@ -108,28 +72,15 @@ bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* ob
         AddObjectData add_object_data;
         add_object_data.first  = &object_data;
         add_object_data.second = object_list;
-        Stage::AddObject(&add_object_data);
+        Stage::AddObject(std::move(&add_object_data));
     }
     return true;
 }
 
-bool Stage::LoadMap(std::string* buffer_pointer, const std::string& map_file) {
-    const std::string& file_name = map_file;
-    std::string*       buffer    = buffer_pointer;
-
-    std::ifstream input_stream;
-    input_stream.open(file_name, std::ios::binary);
-
-    if (!input_stream.is_open()) {
+bool Stage::LoadMap(rapidjson::Document* buffer_pointer, const std::string& map_file) {
+    if (!ut::ParseJsonDocument(map_file.c_str(), *buffer_pointer)) {
         return false;
     }
-
-    std::stringstream bufferstream;
-
-    bufferstream << input_stream.rdbuf();
-    *buffer = bufferstream.str();
-
-    input_stream.close();
     return true;
 }
 
@@ -200,12 +151,10 @@ void Stage::AddObject(AddObjectData* data) {
 }
 
 void Stage::Initialize(void) {
-    std::string buffer;
-    std::string file         = "stage/test.map";
-    std::string current_path = std::filesystem::current_path().string();
-    std::string last_path    = Stage::GetFileName(current_path);
-    bool load_map_flag       = LoadMap(&buffer, file);
-    bool purse_flag          = Purse(&buffer, &_mesh_array, &_object_array);
+    rapidjson::Document buffer;
+    std::string file   = "stage/test.json";
+    bool load_map_flag = LoadMap(&buffer, file);
+    bool Parse_flag    = Parse(&buffer, &_mesh_array, &_object_array);
 }
 
 void Stage::Update(void) {
@@ -214,6 +163,9 @@ void Stage::Update(void) {
 void Stage::Render(void) {
 
     for (const auto& it : _object_array) {
+        if (it.mesh_pointer == nullptr) {
+            continue;
+        }
         CMatrix44 matrix_world;
         CMatrix44 position, scale, rotation;
         position.Translation(it.position);
