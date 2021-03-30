@@ -1,10 +1,24 @@
 #include "Character.h"
 
 
+void my::Character::UpdateTransform(float delta_time) {
+    auto owner = this;
+    // rotate
+    auto rotate = this->UpdateRotate(delta_time, owner->GetRotate(), _velocity.GetAngularVelocity());
+    owner->SetRotate(rotate);
+    // position
+    auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), _velocity.GetVelocity());
+    if (pos.y < 0.0f) {
+        pos.y = 0.0f;
+    } // if
+    owner->SetPosition(pos);
+}
+
 my::Character::Character() :
     super(),
     _mesh(),
     _motion(),
+    _velocity(),
     _volume(1.0f),
     _height(1.0f) {
 }
@@ -23,6 +37,7 @@ bool my::Character::Initialize(const def::Transform& transform) {
 
 bool my::Character::Update(float delta_time) {
     _motion->AddTimer(delta_time);
+    _velocity.Update(delta_time);
     return true;
 }
 

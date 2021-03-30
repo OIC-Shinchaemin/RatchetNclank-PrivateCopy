@@ -9,10 +9,10 @@
 
 
 // à⁄ìÆë¨ìx
-#define		CHARACTER_MOVESPEED			(0.015f)
-#define		CHARACTER_SLOWMOVESPEEDMAX		(0.03f)
+#define		CHARACTER_MOVESPEED			(0.015f* 60) 
+#define		CHARACTER_SLOWMOVESPEEDMAX		(0.03f* 60)
 //#define		CHARACTER_FASTMOVESPEEDMAX		(0.25f)
-#define		CHARACTER_FASTMOVESPEEDMAX		(0.1f)
+#define		CHARACTER_FASTMOVESPEEDMAX		(0.1f* 60)
 // âÒì]ë¨ìx
 #define		CHARACTER_ROTATIONSPEED		(0.2f)
 //çUåÇâÒêî
@@ -40,10 +40,6 @@ private:
         MoveFast,
     };
     using super = my::Character;
-    //CCamera					m_Camera;
-    //CMeshContainer			m_Mesh;
-    CMeshContainer			m_WeaponMesh;
-    //LPMeshMotionController	m_pMotion;
     CVector2				m_CameraAngle;
     ActionState				m_State;
     MoveState				m_MoveState;
@@ -54,12 +50,7 @@ private:
     bool					m_bJump2;
     bool					m_bAttackMove;
     bool					m_bNextAtc;
-    //CVector3				m_Pos;
-    CVector3				m_Move;
-    //CVector3				m_Angle;
     float					m_Gravity;
-    bool					m_bStage;
-    ///////////
     
     //! ÉJÉÅÉâ
     std::shared_ptr<my::Camera> _player_view_camera;
@@ -73,13 +64,12 @@ private:
     void UpdateMove(void);
     void UpdateJump(void);
     void UpdateAttack(void);
+    virtual void UpdateTransform(float delta_time) override;
     void ChangeAnimation(void);
-    void CollisionStage(LPMeshContainer pMesh);
 public:
     Player();
     ~Player();
 
-    bool Load(void);
     virtual bool Initialize(const def::Transform& transform) override;
     virtual bool Input(void) override;
     virtual bool Update(float delta_time) override;
@@ -87,4 +77,3 @@ public:
     virtual bool Render(void) override;
     virtual bool Release(void) override;
 };
-

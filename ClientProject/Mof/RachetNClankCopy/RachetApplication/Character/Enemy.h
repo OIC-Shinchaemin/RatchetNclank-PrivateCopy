@@ -8,65 +8,6 @@
 
 
 namespace my {
-class Velocity {
-private:
-    //! 速度
-    Mof::CVector3 _velocity;
-    //! 角速度
-    Mof::CVector3 _angular_velocity;
-    //! 付与測度
-    Mof::CVector3 _velocity_force;
-    //! 付与測度
-    Mof::CVector3 _angular_velocity_force;
-    //! 減速Y
-    float _gravity;
-    //! 減速係数XZ
-    float _drag;
-    //! 減速係数
-    float _angular_drag;
-public:
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    Velocity();
-    /// <summary>
-    /// デストラクタ
-    /// </summary>
-    ~Velocity();
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    Mof::CVector3 GetVelocity(void) const;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    Mof::CVector3 GetAngularVelocity(void) const;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    Mof::CVector3 GetVelocityForce(void) const;
-    /// <summary>
-    /// 追加
-    /// </summary>
-    void AddVelocityForce(Mof::CVector3 accele);
-    /// <summary>
-    /// 追加
-    /// </summary>
-    /// <param name="accele"></param>
-    void AddAngularVelocityForce(Mof::CVector3 accele);
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time">時間</param>
-    /// <returns></returns>
-    bool Update(float delta_time);
-};
 enum class AIState {
     Patrol,
     Combat
@@ -81,24 +22,9 @@ private:
     my::SightRecognition _sight;
     //! 状態
     my::AIState _state;
-    //! 速度
-    my::Velocity _velocity;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time"></param>
-    /// <param name="rotate"></param>
-    /// <param name="velocity"></param>
-    /// <returns></returns>
-    Mof::CVector3 UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity);
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time"></param>
-    /// <param name="position"></param>
-    /// <param name="velocity"></param>
-    /// <returns></returns>
-    Mof::CVector3 UpdatePosition(float delta_time, Mof::CVector3 position, Mof::CVector3 velocity);
+
+    void InputMoveVelocity(Mof::CVector2 stick, float speed);
+    void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
     /// <summary>
     /// 描画
     /// </summary>

@@ -10,6 +10,7 @@
 #include <Mof.h>
 
 #include "../GameDefine.h"
+#include "../Velocity.h"
 
 
 namespace my {
@@ -20,10 +21,18 @@ protected:
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! モーション
     Mof::LPMeshMotionController	_motion;
+    //! 速度
+    my::Velocity _velocity;
     //! 大きさ
     float _volume;
     //! 高さ
     float _height;
+protected:
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    virtual void UpdateTransform(float delta_time);
 public:
     /// <summary>
     /// コンストラクタ

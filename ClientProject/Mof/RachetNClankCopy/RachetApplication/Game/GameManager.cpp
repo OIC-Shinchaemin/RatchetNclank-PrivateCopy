@@ -116,9 +116,15 @@ bool my::GameManager::Update(float delta_time) {
     _quick_change->Update();
     _stage.Update();
 
+
     _game_world.Update(delta_time);
     _current_weapon->Update(delta_time);
     this->Collision();
+    
+    
+    ::ImGui::Begin("GameManager");
+    ::ImGui::Text(" ");
+    ::ImGui::End();
     return true;
 }
 

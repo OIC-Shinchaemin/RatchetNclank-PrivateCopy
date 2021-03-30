@@ -195,6 +195,9 @@
     <ClCompile Include="Game\GameWorld.cpp">
       <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Velocity.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -337,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="Game\GameWorld.h">
       <Filter>Rachet\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Velocity.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

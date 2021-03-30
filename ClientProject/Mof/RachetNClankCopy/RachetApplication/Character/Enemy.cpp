@@ -1,28 +1,40 @@
 #include "Enemy.h"
 
 
-Mof::CVector3 my::Enemy::UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity) {
-    float sleep_threshold = 0.01f;
-    if (sleep_threshold < velocity.Length()) {
-        rotate += velocity * delta_time;
-    } // if
+void my::Enemy::InputMoveVelocity(Mof::CVector2 stick, float speed) {
+    // “ü—Í‘¬“x
+    auto accele = Mof::CVector3(0.0f, 0.0f, -speed * stick.Length());
+    auto rotate = super::GetRotate();
+    accele.RotateAround(Mof::CVector3(), rotate);
 
-    if (math::kTwoPi <= rotate.y) {
-        rotate.y -= math::kTwoPi;
-    } // if
-    else if (rotate.y <= 0.0f) {
-        rotate.y += math::kTwoPi;
-    } // else if
-    return rotate;
+    // ‘¬“x’Ç‰Á
+    super::_velocity.AddVelocityForce(accele);
 }
 
-Mof::CVector3 my::Enemy::UpdatePosition(float delta_time, Mof::CVector3 position, Mof::CVector3 velocity) {
-    float sleep_threshold = 0.001f;
+void my::Enemy::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
+    // “ü—ÍŠp“x
+    auto rotate = super::GetRotate();
+    
+    float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi;
 
-    if (sleep_threshold < velocity.Length()) {
-        position += velocity * delta_time;
+    if (math::kTwoPi <= angle_y) {
+        angle_y -= math::kTwoPi;
     } // if
-    return position;
+    else if (angle_y <= 0.0f) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    // ·•ªŠp“x
+    angle_y -= rotate.y;
+    if (math::kPi < angle_y) {
+        angle_y -= math::kTwoPi;
+    } // if
+    else if (angle_y < -math::kPi) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
+    super::_velocity.AddAngularVelocityForce(accele);
 }
 
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
@@ -45,7 +57,7 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 
 my::Enemy::Enemy() :
     super(),
-    _state(my::AIState::Patrol){
+    _state(my::AIState::Patrol) {
     //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/enemy/catcatup.mom");
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     float scale = 0.2f;
@@ -77,28 +89,17 @@ bool my::Enemy::Input(void) {
         auto dir = target->GetPosition() - super::GetPosition();
         float speed = 0.3f;
         auto accele = dir * speed;
-        _velocity.AddVelocityForce(accele);
+    
+        Mof::CVector2 in = Mof::CVector2(0.5f, 0.0f);
+        this->InputMoveAngularVelocity(in, 1.0f);
+        this->InputMoveVelocity(in, 1.4f);
     } // if
     return true;
 }
 
 bool my::Enemy::Update(float delta_time) {
     super::Update(delta_time);
-    _velocity.Update(delta_time);
-
-    auto owner = this;
-    // rotate
-    auto rotate = this->UpdateRotate(delta_time, owner->GetRotate(), _velocity.GetAngularVelocity());
-    owner->SetRotate(rotate);
-    // position
-    auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), _velocity.GetVelocity());
-    //owner->SetPosition(pos);
-
-    if (pos.y < 0.0f) {
-        pos.y = 0.0f;
-    } // if
-    owner->SetPosition(pos);
-
+    super::UpdateTransform(delta_time);
     return true;
 }
 
@@ -132,51 +133,4 @@ void my::Enemy::RenderDebug(void) {
         auto ray = Mof::CRay3D(start, diff);
         this->RenderRay(ray, Mof::CVector3Utilities::Length(diff), def::color_rgba_u32::kYellow);
     } // if
-}
-
-my::Velocity::Velocity() :
-    _velocity(),
-    _angular_velocity(),
-    _velocity_force(),
-    _angular_velocity_force(),
-    _gravity(0.25f),
-    _drag(0.8f),
-    _angular_drag(0.8f) {
-}
-
-my::Velocity::~Velocity() {
-}
-
-Mof::CVector3 my::Velocity::GetVelocity(void) const {
-    return this->_velocity;
-}
-
-Mof::CVector3 my::Velocity::GetAngularVelocity(void) const {
-    return this->_angular_velocity;
-}
-
-Mof::CVector3 my::Velocity::GetVelocityForce(void) const {
-    return this->_velocity_force;
-}
-
-void my::Velocity::AddVelocityForce(Mof::CVector3 accele) {
-    this->_velocity_force += accele;
-}
-
-void my::Velocity::AddAngularVelocityForce(Mof::CVector3 accele) {
-    this->_angular_velocity_force += accele;
-}
-
-bool my::Velocity::Update(float delta_time) {
-    _angular_velocity += _angular_velocity_force;
-    _velocity += _velocity_force;
-
-    _velocity.y -= _gravity;
-    _velocity *= _drag;
-    _angular_velocity *= _angular_drag;
-
-    //_prev_velocity_force = _velocity_force;
-    _velocity_force = Mof::CVector3();
-    _angular_velocity_force = Mof::CVector3();
-    return true;
 }

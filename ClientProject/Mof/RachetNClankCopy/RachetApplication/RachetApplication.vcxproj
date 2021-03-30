@@ -173,6 +173,7 @@
     <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
+    <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="Weapon\BombGlove.cpp" />
     <ClCompile Include="Weapon\Mechanical.cpp" />
     <ClCompile Include="Weapon\OmniWrench.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="SightRecognition.h" />
     <ClInclude Include="Stage\Stage.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
+    <ClInclude Include="Velocity.h" />
     <ClInclude Include="Weapon\BombGlove.h" />
     <ClInclude Include="Weapon\Mechanical.h" />
     <ClInclude Include="Weapon\OmniWrench.h" />
