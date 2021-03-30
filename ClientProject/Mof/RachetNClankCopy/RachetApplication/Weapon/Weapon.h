@@ -30,7 +30,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Render(void);
+    virtual bool Render(void);    
+    virtual bool Render(Mof::LPBONEMOTIONSTATE bone_state);
 };
 }
 #endif // !MY_WEAPON_H
