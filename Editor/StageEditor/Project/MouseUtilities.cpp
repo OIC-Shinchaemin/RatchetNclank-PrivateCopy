@@ -2,8 +2,7 @@
 
 Vector3 MouseUtilities::GetWorldPos(void) {
 
-    Vector2 mouse_pos;
-    g_pInput->GetMousePos(mouse_pos);
+    Vector2 mouse_pos = MouseUtilities::GetPos();
 
     LPCamera camera = CGraphicsUtilities::GetCamera();
     Vector3 cv;
@@ -17,7 +16,9 @@ Vector3 MouseUtilities::GetWorldPos(void) {
 }
 
 Vector2 MouseUtilities::GetPos(void) {
-    return Vector2();
+    Vector2 mouse_pos;
+    g_pInput->GetMousePos(mouse_pos);
+    return mouse_pos;
 }
 
 Vector3 MouseUtilities::GetMove(void) {

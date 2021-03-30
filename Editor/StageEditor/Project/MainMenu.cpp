@@ -11,16 +11,16 @@ void MainMenu::File(void) {
     if (ImGui::MenuItem("open", "Ctrl + O")) {
         LoadData data;
         std::string* file_name = ParameterMap<std::string>::GetInstance().Get("open_file_name");
-        std::string  project_data;
-        *file_name = "test.map";
+        rapidjson::Document project_data;
+        *file_name = "test.json";
         data.first  = *file_name;
         data.second = &project_data;
         if (ActionManager::GetInstance().Action(ActionKeyName::LoadProject, &data)) {
-            SaveData save_data;
-            std::get<0>(save_data) = project_data;
+            ParseData save_data;
+            std::get<0>(save_data) = &project_data;
             std::get<1>(save_data) = ParameterMap<MeshList>::GetInstance().Get("mesh_list");
             std::get<2>(save_data) = ParameterMap<ObjectList>::GetInstance().Get("object_list");
-            if (ActionManager::GetInstance().Action(ActionKeyName::ProjectDataPurse, &save_data)) {
+            if (ActionManager::GetInstance().Action(ActionKeyName::ProjectDataParse, &save_data)) {
                 
             }
         }
@@ -30,7 +30,7 @@ void MainMenu::File(void) {
     if (ImGui::MenuItem("save", "Ctrl + S")) {
         SaveData data;
         std::string* file_name = ParameterMap<std::string>::GetInstance().Get("open_file_name");
-        *file_name = "test.map";
+        *file_name = "test.json";
         std::get<0>(data) = *file_name;
         std::get<1>(data) = ParameterMap<MeshList>::GetInstance().Get("mesh_list");
         std::get<2>(data) = ParameterMap<ObjectList>::GetInstance().Get("object_list");

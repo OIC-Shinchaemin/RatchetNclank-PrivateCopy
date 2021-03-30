@@ -71,7 +71,7 @@ private:
     //! オブジェクトデータ配列
     ObjectList _object_array;
 
-    bool Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list);
+    bool Parse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list);
 
     bool LoadMap(std::string* buffer_pointer, const std::string& map_file);
 

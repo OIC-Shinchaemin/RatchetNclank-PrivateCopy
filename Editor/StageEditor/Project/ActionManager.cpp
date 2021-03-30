@@ -5,7 +5,7 @@
 #include "MeshLoadDialog.h"
 #include "SaveProject.h"
 #include "LoadProject.h"
-#include "ProjectDataPurse.h"
+#include "ProjectDataParse.h"
 #include "AddObject.h"
 
 // ********************************************************************************
@@ -20,7 +20,7 @@ ActionManager::ActionManager(void) {
     _action_map[ActionKeyName::MeshLoadDialog]   = std::make_shared<MeshLoadDialog>();
     _action_map[ActionKeyName::SaveProject]      = std::make_shared<SaveProject>();
     _action_map[ActionKeyName::LoadProject]      = std::make_shared<LoadProject>();
-    _action_map[ActionKeyName::ProjectDataPurse] = std::make_shared<ProjectDataPurse>();
+    _action_map[ActionKeyName::ProjectDataParse] = std::make_shared<ProjectDataParse>();
     _action_map[ActionKeyName::AddObject]        = std::make_shared<AddObject>();
 }
 
