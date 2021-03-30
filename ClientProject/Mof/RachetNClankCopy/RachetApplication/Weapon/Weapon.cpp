@@ -19,3 +19,15 @@ bool my::Weapon::Render(void) {
     } // if
     return false;
 }
+
+bool my::Weapon::Render(Mof::LPBONEMOTIONSTATE bone_state) {
+    if (!bone_state) {
+        return false;
+    } // if 
+
+    auto mat = bone_state->pBone->GetRotationOffsetMatrix() * bone_state->BoneMatrix;
+    if (auto r = _mesh.lock()) {
+        r->Render(mat);
+    } // if
+    return true;
+}

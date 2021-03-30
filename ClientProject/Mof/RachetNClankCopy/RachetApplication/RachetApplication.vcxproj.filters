@@ -189,6 +189,9 @@
     <ClCompile Include="Character\Enemy.cpp">
       <Filter>Rachet\Source\Character</Filter>
     </ClCompile>
+    <ClCompile Include="SightRecognition.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -325,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="..\include\My\Core\AbstructContainer.h">
       <Filter>Rachet\Base\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SightRecognition.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

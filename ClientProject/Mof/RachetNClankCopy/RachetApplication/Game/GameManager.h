@@ -1,6 +1,8 @@
 #ifndef MY_GAME_MANAGER_H
 #define MY_GAME_MANAGER_H
 
+#include <memory>
+#include <vector>
 
 #include "Renderer.h"
 #include "../GameSystem/GameMoney.h"
@@ -8,6 +10,7 @@
 #include "../GameSystem/QuickChangeSystem.h"
 #include "../Stage/Stage.h"
 #include "../Character/Character.h"
+#include "../Character/Enemy.h"
 #include "../Weapon/Weapon.h"
 
 
@@ -26,6 +29,8 @@ private:
 	Stage _stage;
 	//! キャラクタ
 	std::shared_ptr<my::Character> _character;
+	//! キャラクタ
+	std::vector<std::shared_ptr<my::Enemy>> _enemies;
 	//! 武器
 	std::shared_ptr<my::Weapon> _current_weapon;
 private:
@@ -39,6 +44,11 @@ private:
 	/// </summary>
 	/// <param name="ptr"></param>
 	void RemoveElement(const std::shared_ptr<my::Character>& ptr);
+	/// <summary>
+	/// collision
+	/// </summary>
+	/// <param name=""></param>
+	void Collision(void);
 public:
 	/// <summary>
 	/// コンストラクタ
