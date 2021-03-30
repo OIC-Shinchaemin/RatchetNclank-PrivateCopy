@@ -156,9 +156,6 @@
     <ClCompile Include="Gamepad.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Stage\Stage.cpp">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="Character\Player.cpp">
       <Filter>Rachet\Source\Character</Filter>
     </ClCompile>
@@ -191,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="SightRecognition.cpp">
       <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +293,6 @@
     <ClInclude Include="resource.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Character\Character.h">
       <Filter>Rachet\Header\Character</Filter>
     </ClInclude>
@@ -331,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="SightRecognition.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Rachet\Header\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
