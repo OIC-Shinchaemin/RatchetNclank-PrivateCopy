@@ -167,6 +167,7 @@
     <ClCompile Include="GameSystem\Save\SaveSystem.cpp" />
     <ClCompile Include="GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
+    <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="GameSystem\Save\SaveSystem.h" />
     <ClInclude Include="GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameManager.h" />
+    <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />

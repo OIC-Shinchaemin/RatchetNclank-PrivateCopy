@@ -15,7 +15,7 @@ my::UIPanel::~UIPanel() {
 }
 
 void my::UIPanel::OnNotify(const std::shared_ptr<my::UIItem>& observable, const char* event) {
-    my::Observable<my::UIPanel>::Notify(shared_from_this(), event);
+    my::Observable<const std::shared_ptr<my::UIPanel>&, const char* >::Notify(shared_from_this(), event);
 }
 
 void my::UIPanel::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {

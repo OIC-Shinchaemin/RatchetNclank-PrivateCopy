@@ -2,11 +2,8 @@
 #define MY_OBSERVER_H
 
 
-#include <memory>
-
-
 namespace my {
-template<class Observable>
+template<class...NotifyArgs>
 class Observer {
 public:
     /// <summary>
@@ -20,15 +17,14 @@ public:
     /// <summary>
     /// 通知イベント
     /// </summary>
-    /// <param name="observable"></param>
-    /// <param name="event"></param>
-    virtual void OnNotify(const std::shared_ptr<Observable>& observable, const char* event) = 0;
+    /// <param name="..."></param>
+    virtual void OnNotify(NotifyArgs...) = 0;
 };
-template<class Observable>
-inline Observer<Observable>::Observer() {
+template<class ...NotifyArgs>
+inline Observer<NotifyArgs...>::Observer() {
 }
-template<class Observable>
-inline Observer<Observable>::~Observer() {
+template<class ...NotifyArgs>
+inline Observer<NotifyArgs...>::~Observer() {
 }
 }
 #endif // !MY_OBSERVER_H
