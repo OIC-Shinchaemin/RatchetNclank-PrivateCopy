@@ -1,42 +1,6 @@
 #include "Enemy.h"
 
 
-void my::Enemy::InputMoveVelocity(Mof::CVector2 stick, float speed) {
-    // “ü—Í‘¬“x
-    auto accele = Mof::CVector3(0.0f, 0.0f, -speed * stick.Length());
-    auto rotate = super::GetRotate();
-    accele.RotateAround(Mof::CVector3(), rotate);
-
-    // ‘¬“x’Ç‰Á
-    super::_velocity.AddVelocityForce(accele);
-}
-
-void my::Enemy::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
-    // “ü—ÍŠp“x
-    auto rotate = super::GetRotate();
-
-    float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi;
-
-    if (math::kTwoPi <= angle_y) {
-        angle_y -= math::kTwoPi;
-    } // if
-    else if (angle_y <= 0.0f) {
-        angle_y += math::kTwoPi;
-    } // else if
-
-    // ·•ªŠp“x
-    angle_y -= rotate.y;
-    if (math::kPi < angle_y) {
-        angle_y -= math::kTwoPi;
-    } // if
-    else if (angle_y < -math::kPi) {
-        angle_y += math::kTwoPi;
-    } // else if
-
-    auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
-    super::_velocity.AddAngularVelocityForce(accele);
-}
-
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
                                      ray.Position + ray.Direction * length,
@@ -58,7 +22,6 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 my::Enemy::Enemy() :
     super(),
     _state(my::AIState::Patrol) {
-    //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/enemy/catcatup.mom");
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     float scale = 0.2f;
     super::SetScale(Mof::CVector3(scale, scale, scale));
@@ -80,14 +43,18 @@ bool my::Enemy::Initialize(const def::Transform& transform) {
         _motion = mesh->CreateMotionController();
         _motion->ChangeMotion(0);
     } // if
-
+    /*
+    auto ntnode = std::make_shared<my::NearTargetNode>();
+    _rootnode->AddChild(ntnode);
+    _behaviour_executor = _rootnode->CreateExecutor();
+    */
     return true;
 }
 
 bool my::Enemy::Input(void) {
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
-
+    /*
     if (_state == my::AIState::Patrol) {
         in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, 3.14f * 2.0f));
 
@@ -96,7 +63,8 @@ bool my::Enemy::Input(void) {
         this->InputMoveAngularVelocity(in, angular_speed);
         this->InputMoveVelocity(in, speed);
     } // if
-    else if (_state == my::AIState::Combat) {
+    */
+    if (_state != my::AIState::Combat) {
 
         if (auto target = _target.lock()) {
             auto dir = target->GetPosition() - super::GetPosition();
@@ -108,10 +76,7 @@ bool my::Enemy::Input(void) {
             this->InputMoveAngularVelocity(in, angular_speed);
             this->InputMoveVelocity(in, speed);
         } // if
-
     } // else if
-
-
     return true;
 }
 
