@@ -28,6 +28,8 @@ protected:
     //! çÇÇ≥
     float _height;
 protected:
+    void InputMoveVelocity(Mof::CVector2 stick, float speed);
+    void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
     /// <summary>
     /// çXêV
     /// </summary>

@@ -5,6 +5,7 @@
 #include "Character.h"
 
 #include "../SightRecognition.h"
+#include "../Behaviour/Executor/INodeExecutor.h"
 
 
 namespace my {
@@ -23,8 +24,8 @@ private:
     //! èÛë‘
     my::AIState _state;
 
-    void InputMoveVelocity(Mof::CVector2 stick, float speed);
-    void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
+    Behaviour::NodeExecutorPtr< std::shared_ptr< my::Enemy >> _behaviour_executor;
+
     /// <summary>
     /// ï`âÊ
     /// </summary>

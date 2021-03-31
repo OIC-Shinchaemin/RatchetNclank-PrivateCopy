@@ -198,6 +198,15 @@
     <ClInclude Include="..\include\My\UI\UIItem.h" />
     <ClInclude Include="..\include\My\UI\UIPanel.h" />
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\NodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\SelectorNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Node\ActionNode.h" />
+    <ClInclude Include="Behaviour\Node\CompositeNode.h" />
+    <ClInclude Include="Behaviour\Node\Node.h" />
+    <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraLocator.h" />

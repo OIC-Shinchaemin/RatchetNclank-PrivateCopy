@@ -34,6 +34,12 @@ constexpr float ToRadian(float degree) {
 constexpr float ToDegree(float radian) {
     return radian * (180.0f / math::kPi);
 }
+static Mof::CVector2 Rotate(float x, float y, float theta) {
+    float temp_x = (x)*std::cosf(theta) - (y)*std::sinf(theta);
+    float temp_y = (x)*std::sinf(theta) + (y)*std::cosf(theta);
+
+    return Mof::CVector2(temp_x, temp_y);
+};
 
 class Radian {
     float _degree;

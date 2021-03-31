@@ -6,6 +6,61 @@
 bool Player::Input(void) {
     super::Input();
 
+    float angular_speed = 1.0f;
+    float speed = 1.0f;
+    bool action = false; bool left = false; bool right = false;
+    auto in = Mof::CVector2(1.0f, 0.0f);
+    float move_angle = 0.0f;
+
+    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+        action = true;
+        left = true;
+        move_angle = 180.0f;
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+        action = true;
+        right = true;
+        move_angle = 0.0f;
+    } // else if
+    if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+        action = true;
+        move_angle = 90.0f;
+        if (right) {
+            move_angle -= 45.0f;
+        } // if
+        else if (left) {
+            move_angle += 45.0f;
+        } // else if
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+        action = true;
+        move_angle = 270.0f;
+        if (right) {
+            move_angle += 45.0f;
+        } // if
+        else if (left) {
+            move_angle -= 45.0f;
+        } // else if
+    } // else if
+
+    if (action) {
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        this->InputMoveAngularVelocity(in, angular_speed);
+        this->InputMoveVelocity(in, speed);
+    } // if
+
+
+
+    float h = ::g_pGamepad->GetStickHorizontal();
+    float v = ::g_pGamepad->GetStickVertical();
+    if (auto in = Mof::CVector2(h, v); in.Length() > 0.5f) {
+        this->InputMoveAngularVelocity(in, angular_speed);
+        this->InputMoveVelocity(in, speed);
+    } // if
+
+
+
+    /*
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
     if (MOF_ABS(h) < MOF_ABS(v)) {
@@ -71,11 +126,7 @@ bool Player::Input(void) {
             m_bNextAtc = true;
         }
     }
-    return true;
-}
-
-bool Player::Update(float delta_time) {
-    this->Update(delta_time, NULL);
+    */
     return true;
 }
 
@@ -90,15 +141,6 @@ void Player::UpdateCamera(void) {
     tpos.y += 1.5f;
     cpos -= fvec * 4.2f;
     tpos += fvec * 0.5f;
-
-    /*
-    if (m_State == JumpUp || m_State == JumpDown || m_State == Jump2) {
-        cpos.y = m_Camera.GetViewPosition().y;
-        tpos.y = m_Camera.GetTargetPosition().y;
-    }
-    m_Camera.LookAt(cpos, tpos, CVector3(0, 1, 0));
-    m_Camera.Update();
-    */
 }
 
 void Player::UpdateMove(void) {
@@ -309,22 +351,19 @@ Player::~Player() {
 
 bool Player::Initialize(const def::Transform& transform) {
     super::Initialize(transform);
-    {
-        _top_view_camera = (std::make_shared<my::Camera>());
-        _top_view_camera->SetPosition(Mof::CVector3(0.0f, 1.5f, 5.0f));
-        _top_view_camera->SetTarget(math::vec3::kUnitY * 2.0f);
-        _top_view_camera->Initialize();
+    _top_view_camera = (std::make_shared<my::Camera>());
+    _top_view_camera->SetPosition(Mof::CVector3(0.0f, 1.5f, 5.0f));
+    _top_view_camera->SetTarget(math::vec3::kUnitY * 2.0f);
+    _top_view_camera->Initialize();
 
-        _player_view_camera = (std::make_shared<my::Camera>());
-        auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
-        _player_view_camera->SetPosition(pos);
-        _player_view_camera->SetTarget(math::vec3::kZero);
-        _player_view_camera->Initialize();
-        _camera_controller->SetCamera(_player_view_camera);
+    _player_view_camera = (std::make_shared<my::Camera>());
+    auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
+    _player_view_camera->SetPosition(pos);
+    _player_view_camera->SetTarget(math::vec3::kZero);
+    _player_view_camera->Initialize();
+    _camera_controller->SetCamera(_player_view_camera);
 
-        my::CameraLocator::RegisterGlobalCamera(_player_view_camera);
-    }
-
+    my::CameraLocator::RegisterGlobalCamera(_player_view_camera);
 
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
@@ -338,6 +377,20 @@ bool Player::Initialize(const def::Transform& transform) {
     return true;
 }
 
+bool Player::Update(float delta_time) {
+    super::Update(delta_time);
+
+    this->UpdateTransform(delta_time);
+    ChangeAnimation();
+
+    // update camera;
+    auto pos = super::GetPosition();
+    float height = 2.0f;
+    _camera_controller->SetCameraTarget(Mof::CVector3(pos.x, pos.y + height, pos.z));
+    _camera_controller->Update();
+    return true;
+}
+
 bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
     super::Update(delta_time);
 
@@ -345,7 +398,7 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
     UpdateMove();
     //UpdateJump();
     //UpdateAttack();
-    
+
 
     this->UpdateTransform(delta_time);
     ChangeAnimation();

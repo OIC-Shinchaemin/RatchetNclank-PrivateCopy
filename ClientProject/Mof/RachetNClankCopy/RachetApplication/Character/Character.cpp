@@ -1,6 +1,43 @@
 #include "Character.h"
 
 
+
+void my::Character::InputMoveVelocity(Mof::CVector2 stick, float speed) {
+    // “ü—Í‘¬“x
+    auto accele = Mof::CVector3(0.0f, 0.0f, -speed * stick.Length());
+    auto rotate = super::GetRotate();
+    accele.RotateAround(Mof::CVector3(), rotate);
+
+    // ‘¬“x’Ç‰Á
+    _velocity.AddVelocityForce(accele);
+}
+
+void my::Character::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
+    // “ü—ÍŠp“x
+    auto rotate = super::GetRotate();
+
+    float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi;
+
+    if (math::kTwoPi <= angle_y) {
+        angle_y -= math::kTwoPi;
+    } // if
+    else if (angle_y <= 0.0f) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    // ·•ªŠp“x
+    angle_y -= rotate.y;
+    if (math::kPi < angle_y) {
+        angle_y -= math::kTwoPi;
+    } // if
+    else if (angle_y < -math::kPi) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
+    _velocity.AddAngularVelocityForce(accele);
+}
+
 void my::Character::UpdateTransform(float delta_time) {
     auto owner = this;
     // rotate
