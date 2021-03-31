@@ -91,6 +91,15 @@
     <Filter Include="Rachet\Source\UI">
       <UniqueIdentifier>{1b271a1a-f8dd-44bd-b429-aeb12db7154e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Behaviour">
+      <UniqueIdentifier>{4a4faf05-3de1-453e-b178-5e002fbd50b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Executor">
+      <UniqueIdentifier>{9b9a0cb9-7ce1-4835-a648-dac4259153c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Node">
+      <UniqueIdentifier>{c5513471-6a03-479d-b8c3-ba7d84591e9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -343,6 +352,60 @@
     </ClInclude>
     <ClInclude Include="Velocity.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Node.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ActionNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\INodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\NodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SelectorNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\CompositeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SelectorNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SequencerNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SequencerNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ParameterNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ConditionalNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\DecoratorNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SimplexNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SimplexNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
