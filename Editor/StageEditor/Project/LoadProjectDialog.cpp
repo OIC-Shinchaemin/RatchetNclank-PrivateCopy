@@ -30,6 +30,7 @@ bool LoadProjectDialog::Action(std::any any) {
     );
 
     if (open) {
+        ActionManager::GetInstance().Action(ActionKeyName::FileClose, nullptr);
         std::string* resource_path = ParameterMap<std::string>::GetInstance().Get("resource_path");
         std::string* open_file     = ParameterMap<std::string>::GetInstance().Get("open_file_name");
         *open_file = path;

@@ -52,7 +52,7 @@ struct ObjectData {
     }
 };
 
-using MeshData      = std::pair<std::string, std::shared_ptr<CMeshContainer>>;
+using MeshData      = std::pair<std::string, std::weak_ptr<CMeshContainer>>;
 using MeshList      = std::vector<MeshData>;
 using ObjectList    = std::vector<ObjectData>;
 using AddObjectData = std::pair<ObjectData*, ObjectList*>;

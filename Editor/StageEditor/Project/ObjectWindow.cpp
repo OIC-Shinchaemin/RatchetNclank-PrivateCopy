@@ -62,7 +62,10 @@ void ObjectWindow::ShowObjectInfo(void) {
                 ImGui::InputFloat3("rotation", _object_select_item->rotation);
             }
             // ファイル名の表示
-            ImGui::Text("file : %s", _object_select_item->mesh_pointer->GetName()->GetString());
+            _object_select_item = GetSelectObjectData();
+            if (_object_select_item) {
+                ImGui::Text("file : %s", _object_select_item->mesh_pointer->GetName()->GetString());
+            }
             // データの破棄
             if (ImGui::Button("remove")) {
                 Remove();
@@ -90,11 +93,13 @@ void ObjectWindow::Remove(void) {
         )
     );
     // 選択中のデータを差し替えておく
-    if (_object_list_current >= 0) {
-        _object_select_item = &_object_list[_object_list_current];
+    if (_object_list.size() > 0 && _object_list_current >= 0) {
+        _object_list_current = max(0, _object_list_current - 1);
+        _object_select_item  = &_object_list[_object_list_current];
     }
     else {
-        _object_select_item = nullptr;
+        _object_list_current = 0;
+        _object_select_item  = nullptr;
     }
 }
 
@@ -167,6 +172,9 @@ void ObjectWindow::Add(ObjectData& data) {
 ObjectData* ObjectWindow::GetSelectObjectData(void) {
     if (_object_select_item == nullptr && _object_list.size() > 0) {
         _object_select_item = &(_object_list[0]);
+    }
+    else if (_object_list.size() <= 0) {
+        _object_select_item = nullptr;
     }
     return _object_select_item;
 }

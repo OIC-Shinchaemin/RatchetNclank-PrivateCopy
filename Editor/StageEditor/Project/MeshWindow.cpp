@@ -55,8 +55,9 @@ void MeshWindow::ShowMeshInfo(void) {
         int text_length =  0;
         _mesh_select_item = GetSelectMeshData();
         if (_mesh_select_item) {
-            text        = _mesh_select_item->second->GetName()->GetString();
-            text_length = _mesh_select_item->second->GetName()->GetLength();
+            std::shared_ptr<CMeshContainer> mesh = _mesh_select_item->second.lock();
+            text        = mesh->GetName()->GetString();
+            text_length = mesh->GetName()->GetLength();
         }
         ImGui::InputTextWithHint("file", "select mesh...", text, text_length, ImGuiInputTextFlags_ReadOnly);
         ImGui::Text(std::filesystem::current_path().string().c_str());
@@ -79,7 +80,7 @@ void MeshWindow::MeshLoad(void) {
     std::string filename;
 	// データの参照、登録
 	if (ActionManager::GetInstance().Action(ActionKeyName::MeshLoadDialog, &filename)) {
-		std::shared_ptr<CMeshContainer> mesh = MeshAsset::GetAsset(filename);
+		std::weak_ptr<CMeshContainer> mesh = MeshAsset::GetAsset(filename);
         _mesh_list_current = _mesh_list.size();
 		_mesh_list.push_back(MeshData(FileDialog::GetFileName(filename.c_str()), mesh));
         _mesh_select_item  = &(_mesh_list[_mesh_list_current]);
@@ -94,7 +95,40 @@ void MeshWindow::MeshLoad(void) {
 /// <changed>いのうえ,2021/03/18</changed>
 // ********************************************************************************
 void MeshWindow::MeshRelease(void) {
+    
+    const std::string key       = MeshAsset::GetKey(_mesh_select_item->second.lock());
+    const int         use_count = MeshAsset::GetUseCount(key);
 
+    // 自分以外にも参照がある場合は消さない
+    if (use_count > 1) {
+        MessageBox(
+            NULL,
+            "使用しているオブジェクトをすべて削除してからもう一度お試しください",
+            "このメッシュは使用されています",
+            MB_OK
+        );
+        return;
+    }
+    MeshAsset::Erase(key);
+    auto& it = std::find_if(
+        _mesh_list.begin(), _mesh_list.end(),
+        [=](const MeshData& obj) { return obj.first == _mesh_select_item->first; }
+    );
+
+    auto& next = _mesh_list.erase(it);
+    if (next == _mesh_list.end()) {
+        if (_mesh_list.size() <= 0) {
+            _mesh_select_item  = nullptr;
+            _mesh_list_current = 0;
+        }
+        else {
+            _mesh_list_current = max(0, _mesh_list_current - 1);
+            _mesh_select_item  = &_mesh_list[_mesh_list_current];
+        }
+    }
+    else {
+        _mesh_select_item = &_mesh_list[_mesh_list_current];
+    }
 }
 
 // ********************************************************************************
@@ -166,5 +200,9 @@ MeshData* MeshWindow::GetSelectMeshData(void) {
     if (_mesh_select_item == nullptr && _mesh_list.size() > 0) {
         _mesh_select_item = &(_mesh_list[0]);
     }
+    else if (_mesh_list.size() <= 0) {
+        _mesh_select_item = nullptr;
+    }
+
     return _mesh_select_item;
 }

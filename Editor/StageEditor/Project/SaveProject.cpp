@@ -51,7 +51,7 @@ bool SaveProject::Action(std::any any) {
     for (const auto & it : *mesh_list) {
         // 書き出しデータ
         std::string      resource_path    = *ParameterMap<std::string>::GetInstance().Get("resource_path");
-        std::string      full_path        = resource_path + "\\" + MeshAsset::GetKey(it.second);
+        std::string      full_path        = resource_path + "\\" + MeshAsset::GetKey(it.second.lock());
         CString          relative_path    = FileDialog::ChangeRelativePath(full_path.c_str(), resource_path.c_str()).c_str();
         // 各書き出し
         mesh_array.PushBack(

@@ -16,5 +16,6 @@ public:
     static constexpr char* LoadProjectDialog = "LoadProjectDialog";
     static constexpr char* ProjectDataParse  = "ProjectDataParse";
     static constexpr char* AddObject         = "AddObject";
+    static constexpr char* FileClose         = "FileClose";
 };
 

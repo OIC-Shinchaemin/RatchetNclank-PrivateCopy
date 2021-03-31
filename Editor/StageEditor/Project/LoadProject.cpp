@@ -21,8 +21,8 @@ bool LoadProject::Action(std::any any) {
 
     const std::string&   file_name = std::get<0>(*save_data);
     rapidjson::Document* buffer    = std::get<1>(*save_data);
-    std::string* resource_path = ParameterMap<std::string>::GetInstance().Get("resource_path");
-    std::string full_path = *resource_path + "\\" + file_name;
+    std::string* resource_path     = ParameterMap<std::string>::GetInstance().Get("resource_path");
+    std::string  full_path         = *resource_path + "\\" + file_name;
     if (!ut::ParseJsonDocument(full_path.c_str(), *buffer)) {
         return false;
     }
