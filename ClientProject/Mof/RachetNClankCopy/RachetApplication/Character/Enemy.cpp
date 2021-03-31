@@ -14,7 +14,7 @@ void my::Enemy::InputMoveVelocity(Mof::CVector2 stick, float speed) {
 void my::Enemy::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
     // “ü—ÍŠp“x
     auto rotate = super::GetRotate();
-    
+
     float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi;
 
     if (math::kTwoPi <= angle_y) {
@@ -85,15 +85,33 @@ bool my::Enemy::Initialize(const def::Transform& transform) {
 }
 
 bool my::Enemy::Input(void) {
-    if (auto target = _target.lock()) {
-        auto dir = target->GetPosition() - super::GetPosition();
-        float speed = 0.3f;
-        auto accele = dir * speed;
-    
-        Mof::CVector2 in = Mof::CVector2(0.5f, 0.0f);
-        this->InputMoveAngularVelocity(in, 1.0f);
-        this->InputMoveVelocity(in, 1.4f);
+    float tilt = 1.0f;
+    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
+
+    if (_state == my::AIState::Patrol) {
+        in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, 3.14f * 2.0f));
+
+        float angular_speed = 5.0f;
+        float speed = 0.1f;
+        this->InputMoveAngularVelocity(in, angular_speed);
+        this->InputMoveVelocity(in, speed);
     } // if
+    else if (_state == my::AIState::Combat) {
+
+        if (auto target = _target.lock()) {
+            auto dir = target->GetPosition() - super::GetPosition();
+            float angle = std::atan2(dir.z, dir.x);
+            in = math::Rotate(in.x, in.y, angle);
+
+            float angular_speed = 1.0f;
+            float speed = 0.1f;
+            this->InputMoveAngularVelocity(in, angular_speed);
+            this->InputMoveVelocity(in, speed);
+        } // if
+
+    } // else if
+
+
     return true;
 }
 
