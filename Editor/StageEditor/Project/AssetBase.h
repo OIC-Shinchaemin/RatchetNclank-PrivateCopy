@@ -103,6 +103,18 @@ public:
     /// <summary>
     /// 
     /// </summary>
+    /// <returns></returns>
+    /// <created>‚¢‚Ì‚¤‚¦,2021/03/31</created>
+    /// <changed>‚¢‚Ì‚¤‚¦,2021/03/31</changed>
+    // ********************************************************************************
+    static int GetUseCount(const Key& key) {
+        return GetAssetMap()._asset_map[key].use_count();
+    }
+
+    // ********************************************************************************
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="std::shared_ptr<T>"></param>
     /// <returns></returns>
     /// <created>‚¢‚Ì‚¤‚¦,2021/03/30</created>

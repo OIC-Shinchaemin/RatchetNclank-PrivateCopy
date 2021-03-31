@@ -12,7 +12,9 @@ void MainMenu::File(void) {
         std::string file;
         ActionManager::GetInstance().Action(ActionKeyName::LoadProjectDialog, &file);
     };
-    if (ImGui::MenuItem("close", "Ctrl + Alt + C")) {};
+    if (ImGui::MenuItem("close", "Ctrl + Alt + C")) {
+        ActionManager::GetInstance().Action(ActionKeyName::FileClose, nullptr);
+    };
     ImGui::Separator();
     if (ImGui::MenuItem("save", "Ctrl + S")) {
         SaveData data;

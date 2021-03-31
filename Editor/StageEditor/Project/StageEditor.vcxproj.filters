@@ -121,7 +121,10 @@
       <Filter>ソース ファイル\Action</Filter>
     </ClCompile>
     <ClCompile Include="LoadProjectDialog.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="FileClose.cpp">
+      <Filter>ソース ファイル\Action</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,7 +216,10 @@
       <Filter>ヘッダー ファイル\Action</Filter>
     </ClInclude>
     <ClInclude Include="LoadProjectDialog.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="FileClose.h">
+      <Filter>ヘッダー ファイル\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

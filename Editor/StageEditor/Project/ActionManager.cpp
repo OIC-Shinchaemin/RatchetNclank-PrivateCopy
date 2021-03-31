@@ -9,6 +9,7 @@
 #include "LoadProjectDialog.h"
 #include "ProjectDataParse.h"
 #include "AddObject.h"
+#include "FileClose.h"
 
 // ********************************************************************************
 /// <summary>
@@ -26,6 +27,7 @@ ActionManager::ActionManager(void) {
     _action_map[ActionKeyName::LoadProjectDialog] = std::make_shared<LoadProjectDialog>();
     _action_map[ActionKeyName::ProjectDataParse]  = std::make_shared<ProjectDataParse>();
     _action_map[ActionKeyName::AddObject]         = std::make_shared<AddObject>();
+    _action_map[ActionKeyName::FileClose]         = std::make_shared<FileClose>();
 }
 
 // ********************************************************************************

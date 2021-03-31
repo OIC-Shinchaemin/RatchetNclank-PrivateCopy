@@ -142,9 +142,9 @@ MofBool CGameApp::Update(void) {
     if (mesh_pointer && !isUseGui && g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
         ObjectData data;
         data.position     = MouseUtilities::GetWorldPos();
-        data.mesh_path    = MeshAsset::GetKey(mesh_pointer->second);
+        data.mesh_path    = MeshAsset::GetKey(mesh_pointer->second.lock());
         data.name         = mesh_pointer->first;
-        data.mesh_pointer = mesh_pointer->second;
+        data.mesh_pointer = mesh_pointer->second.lock();
         object_window.Add(data);
     }
 
@@ -229,8 +229,8 @@ MofBool CGameApp::Render(void) {
     mouse_pos.y = 0.0f;
     matrix_world_object.SetTranslation(mouse_pos);
     MeshData* meshdata_pointer = mesh_window.GetSelectMeshData();
-    if (meshdata_pointer && meshdata_pointer->second) {
-        meshdata_pointer->second->Render(matrix_world_object, Vector4(1, 1, 1, 0.5f));
+    if (meshdata_pointer && meshdata_pointer->second.lock()) {
+        meshdata_pointer->second.lock()->Render(matrix_world_object, Vector4(1, 1, 1, 0.5f));
     }
 
     g_pGraphics->SetDepthEnable(FALSE);
