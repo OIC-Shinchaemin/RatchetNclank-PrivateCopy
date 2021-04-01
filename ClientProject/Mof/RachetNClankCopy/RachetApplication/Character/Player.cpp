@@ -6,59 +6,14 @@
 bool Player::Input(void) {
     super::Input();
 
-    // keyboard
     float angular_speed = 1.0f;
     float speed = 1.0f;
-    bool action = false; bool left = false; bool right = false;
-    auto in = Mof::CVector2(1.0f, 0.0f);
-    float move_angle = 0.0f;
 
-    if (::g_pInput->IsKeyHold(MOFKEY_A)) {
-        action = true;
-        left = true;
-        move_angle = 180.0f;
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
-        action = true;
-        right = true;
-        move_angle = 0.0f;
-    } // else if
-    if (::g_pInput->IsKeyHold(MOFKEY_W)) {
-        action = true;
-        move_angle = 90.0f;
-        if (right) {
-            move_angle -= 45.0f;
-        } // if
-        else if (left) {
-            move_angle += 45.0f;
-        } // else if
-    } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
-        action = true;
-        move_angle = 270.0f;
-        if (right) {
-            move_angle += 45.0f;
-        } // if
-        else if (left) {
-            move_angle -= 45.0f;
-        } // else if
-    } // else if
-
-    if (action) {
-        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
     // contaroller
-    float h = ::g_pGamepad->GetStickHorizontal();
-    float v = ::g_pGamepad->GetStickVertical();
-    if (auto in = Mof::CVector2(h, v); in.Length() > 0.5f) {
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
-
-
-
+    this->InputCameraForGamepad(angular_speed, speed);
+    // keyboard
+    this->InputCameraForKeyboard(angular_speed, speed);
+    
     /*
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
@@ -127,6 +82,130 @@ bool Player::Input(void) {
     }
     */
     return true;
+}
+
+void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
+    // “ü—ÍŠp“x
+    auto rotate = super::GetRotate();
+
+    float camera_angle_y = std::atan2(- _camera_controller->GetViewFront().z, _camera_controller->GetViewFront().x) + math::kHalfPi;
+    float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi + camera_angle_y;
+
+    if (math::kTwoPi <= angle_y) {
+        angle_y -= math::kTwoPi;
+    } // if
+    else if (angle_y <= 0.0f) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    // ·•ªŠp“x
+    angle_y -= rotate.y;
+    if (math::kPi < angle_y) {
+        angle_y -= math::kTwoPi;
+    } // if
+    else if (angle_y < -math::kPi) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
+    _velocity.AddAngularVelocityForce(accele);
+}
+
+void Player::InputCameraForKeyboard(float angular_speed, float speed) {
+    // keyboard
+    bool action = false; bool left = false; bool right = false;
+    auto in = Mof::CVector2(1.0f, 0.0f);
+    float move_angle = 0.0f;
+
+    if (::g_pInput->IsKeyHold(MOFKEY_A)) {
+        action = true;
+        left = true;
+        move_angle = 180.0f;
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
+        action = true;
+        right = true;
+        move_angle = 0.0f;
+    } // else if
+    if (::g_pInput->IsKeyHold(MOFKEY_W)) {
+        action = true;
+        move_angle = 90.0f;
+        if (right) {
+            move_angle -= 45.0f;
+        } // if
+        else if (left) {
+            move_angle += 45.0f;
+        } // else if
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
+        action = true;
+        move_angle = 270.0f;
+        if (right) {
+            move_angle += 45.0f;
+        } // if
+        else if (left) {
+            move_angle -= 45.0f;
+        } // else if
+    } // else if
+
+    if (action) {
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        this->InputMoveAngularVelocity(in, angular_speed);
+        this->InputMoveVelocity(in, speed);
+    } // if
+
+
+    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+        _camera_controller->AddAzimuth(1.0f);
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+        _camera_controller->AddAzimuth(-1.0f);
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+        _camera_controller->AddAltitude(1.0f);
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+        _camera_controller->AddAltitude(-1.0f);
+    } // else if
+
+}
+
+void Player::InputCameraForGamepad(float angular_speed, float speed) {
+    float h = 0.0f;
+    float v = 0.0f;
+    float threshold = 0.5f;
+
+    h = ::g_pGamepad->GetStickHorizontal();
+    v = ::g_pGamepad->GetStickVertical();
+    if (auto in = Mof::CVector2(h, v); in.Length() > threshold) {
+        this->InputMoveAngularVelocity(in, angular_speed);
+        this->InputMoveVelocity(in, speed);
+    } // if
+
+
+    h = ::g_pGamepad->GetRightStickHorizontal();
+    v = ::g_pGamepad->GetRightStickVertical();
+    if (auto in = Mof::CVector2(h, v); in.Length() > threshold) {
+        // x
+        if (threshold <= std::abs(in.x)) {
+            if (0.0f < in.x) {
+                _camera_controller->AddAzimuth(1.0f);
+            } // if
+            else {
+                _camera_controller->AddAzimuth(-1.0f);
+            } // else
+        } // if
+        // y
+        if (threshold <= std::abs(in.y)) {
+            if (0.0f < in.y) {
+                _camera_controller->AddAltitude(1.0f);
+            } // if
+            else {
+                _camera_controller->AddAltitude(-1.0f);
+            } // else 
+        } // if
+    } // if
+
 }
 
 void Player::UpdateCamera(void) {

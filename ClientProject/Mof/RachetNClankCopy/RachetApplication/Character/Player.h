@@ -59,7 +59,9 @@ private:
     //! カメラコントローラ
     std::shared_ptr<my::CameraController>_camera_controller;
 
-
+    virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed) override;
+    void InputCameraForKeyboard(float angular_speed, float speed);
+    void InputCameraForGamepad(float angular_speed, float speed);
     void UpdateCamera(void);
     void UpdateMove(void);
     void UpdateJump(void);
