@@ -31,10 +31,10 @@ public:
         //実行済み
         if (super::_state == super::State::Completed) {
             return super::Result::Sucess;
-        }
+        } // if
         else if (super::_state == super::State::Incompleted) {
             return super::Result::Failure;
-        }
+        } // else uif
         //実行開始
         super::_state = super::State::Running;
         if (super::_node->Execute(actor)) {

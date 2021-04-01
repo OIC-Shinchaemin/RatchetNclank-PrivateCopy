@@ -16,9 +16,9 @@ protected:
     super::State _state;
     //! 対応ノード
     NodePtr<Actor> _node;
-    //! 親ノード
+    //! 親
     NodeExecutorWeakPtr<Actor> _parent;
-    //! 子ノード
+    //! 子供
     NodeExecutorList<Actor> _children;
 public:
     /// <summary>

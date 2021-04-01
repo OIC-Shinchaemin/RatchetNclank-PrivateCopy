@@ -6,6 +6,7 @@
 #include "../Behaviour/Node/ActionNode.h"
 #include "../Behaviour/Node/ConditionalNode.h"
 #include "../Behaviour/Node/DecoratorNode.h"
+#include "../Behaviour/Node/ParameterNode.h"
 
 
 //using BehaviourActor = my::Actor;
@@ -24,6 +25,7 @@ behaviour::NodeExecutorPtr<my::Enemy::EnemyPtr> my::Enemy::CreatePatrolBehaviour
 
     auto action_0 = std::make_shared<behaviour::FunctionNode<EnemyPtr>>(&my::Enemy::GoHome);
     decorator_0->SetChild(action_0);
+    
 
     auto action_1 = std::make_shared<behaviour::FunctionNode<EnemyPtr>>(&my::Enemy::OverLooking);
     _patrol_rootnode->AddChild(decorator_0);

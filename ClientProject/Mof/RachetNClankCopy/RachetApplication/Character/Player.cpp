@@ -6,23 +6,24 @@
 bool Player::Input(void) {
     super::Input();
 
+    // keyboard
     float angular_speed = 1.0f;
     float speed = 1.0f;
     bool action = false; bool left = false; bool right = false;
     auto in = Mof::CVector2(1.0f, 0.0f);
     float move_angle = 0.0f;
 
-    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+    if (::g_pInput->IsKeyHold(MOFKEY_A)) {
         action = true;
         left = true;
         move_angle = 180.0f;
     } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+    else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
         action = true;
         right = true;
         move_angle = 0.0f;
     } // else if
-    if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+    if (::g_pInput->IsKeyHold(MOFKEY_W)) {
         action = true;
         move_angle = 90.0f;
         if (right) {
@@ -32,7 +33,7 @@ bool Player::Input(void) {
             move_angle += 45.0f;
         } // else if
     } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+    else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
         action = true;
         move_angle = 270.0f;
         if (right) {
@@ -48,9 +49,7 @@ bool Player::Input(void) {
         this->InputMoveAngularVelocity(in, angular_speed);
         this->InputMoveVelocity(in, speed);
     } // if
-
-
-
+    // contaroller
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
     if (auto in = Mof::CVector2(h, v); in.Length() > 0.5f) {
