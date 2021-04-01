@@ -13,7 +13,7 @@ class CompositeNodeExecutor : public NodeExecutor<Actor> {
     using super = NodeExecutor<Actor>;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="node"></param>
     CompositeNodeExecutor(const CompositeNodePtr<Actor>& node) :
@@ -25,12 +25,12 @@ public:
         }
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~CompositeNodeExecutor() = default;
     /// <summary>
-    /// Àsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg
-    /// ó‘Ô‚ğInactive‚Éİ’è
+    /// å®Ÿè¡ŒçŠ¶æ…‹ã‚’å…¨ã¦ãƒªã‚»ãƒƒãƒˆ
+    /// çŠ¶æ…‹ã‚’Inactiveã«è¨­å®š
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) override{

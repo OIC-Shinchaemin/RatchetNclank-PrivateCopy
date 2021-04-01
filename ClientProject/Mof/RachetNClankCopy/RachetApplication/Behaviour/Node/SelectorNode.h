@@ -13,17 +13,17 @@ class SelectorNode : public behaviour::CompositeNode<Actor> {
 	using super = behaviour::CompositeNode<Actor>;
 public:
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	SelectorNode() : 
 		super("Selector") {
 	}
 	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^
+	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	virtual ~SelectorNode() = default;
 	/// <summary>
-	/// ì¬
+	/// ä½œæˆ
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>

@@ -13,17 +13,17 @@ class ActionNodeBase : public behaviour::Node<Actor> {
     using super = behaviour::Node<Actor>;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     ActionNodeBase() :
         super("Action") {
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~ActionNodeBase() = default;
     /// <summary>
-    /// ì¬
+    /// ä½œæˆ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -36,13 +36,13 @@ template<typename Actor>
 class FunctionNode : public behaviour::ActionNodeBase<Actor> {
     using super = behaviour::ActionNodeBase<Actor>;
 protected:
-    //! Àsˆ—
+    //! å®Ÿè¡Œå‡¦ç†
     using OnExecFunction = std::function< bool(Actor&) >;
-    //! Àsˆ—
+    //! å®Ÿè¡Œå‡¦ç†
     OnExecFunction OnExec;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="exec"></param>
     FunctionNode(OnExecFunction exec) :
@@ -50,15 +50,15 @@ public:
         OnExec(exec) {
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~FunctionNode() = default;
     /// <summary>
-    /// ƒm[ƒh‚ÌÀs
+    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œ
     /// </summary>
-    /// <param name="actor">ÀsƒAƒNƒ^[</param>
-    /// <returns>true:Às‚Ì¬Œ÷</returns>
-    /// <returns>false:Às‚Ì¸”s</returns>
+    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
+    /// <returns>true:å®Ÿè¡Œã®æˆåŠŸ</returns>
+    /// <returns>false:å®Ÿè¡Œã®å¤±æ•—</returns>
     virtual bool Execute(Actor& actor) override{
         return OnExec(actor);
     }

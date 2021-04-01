@@ -10,7 +10,7 @@
 
 
 //using BehaviourActor = my::Actor;
-// 外部から受け取る
+// 螟夜Κ縺九ｉ蜿励￠蜿悶ｋ
 behaviour::CompositeNodePtr< std::shared_ptr<my::Enemy> > _patrol_rootnode;
 behaviour::CompositeNodePtr< std::shared_ptr<my::Enemy> > _combat_rootnode;
 
@@ -155,7 +155,7 @@ bool my::Enemy::Initialize(const def::Transform& transform) {
 }
 
 bool my::Enemy::Input(void) {
-    // 後ににEnemyStateのメンバに持たせる
+    // 蠕後↓縺ｫEnemyState縺ｮ繝｡繝ｳ繝舌↓謖√◆縺帙ｋ
     auto temp = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
 
     if (_state == my::AIState::Patrol) {
@@ -185,17 +185,17 @@ bool my::Enemy::ContainInRecognitionRange(Mof::CVector3 pos) {
 void my::Enemy::RenderDebug(void) {
     super::RenderDebug();
 
-    // 視線描画
+    // 隕也ｷ壽緒逕ｻ
     Mof::Vector3 start = super::GetPosition();
     float h = super::_height;
     start.y += h;
 
-    // 視界境界表示
+    // 隕也阜蠅�逡瑚｡ｨ遉ｺ
     this->RenderRay(start, 0.0f);
     this->RenderRay(start, 90.0f);
     this->RenderRay(start, -90.0f);
 
-    // 対象への視線を表示
+    // 蟇ｾ雎｡縺ｸ縺ｮ隕也ｷ壹ｒ陦ｨ遉ｺ
     if (auto target = _target.lock()) {
         auto pos = target->GetPosition();
         pos.y += super::_height;

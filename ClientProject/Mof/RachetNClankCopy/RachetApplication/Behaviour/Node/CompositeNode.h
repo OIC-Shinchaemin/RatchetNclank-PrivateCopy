@@ -10,11 +10,11 @@ template<typename Actor>
 class CompositeNode : public behaviour::Node<Actor> {
     using super = behaviour::Node<Actor>;
 protected:
-    //! qƒm[ƒh
+    //! å­ãƒãƒ¼ãƒ‰
     NodeList<Actor> _children;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="name"></param>
     CompositeNode(const std::string& name) :
@@ -22,23 +22,23 @@ public:
         _children() {
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~CompositeNode() = default;
     /// <summary>
-    /// ƒQƒbƒ^[
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     const NodeList<Actor>& GetChildren(void) const { return _children; }
     /// <summary>
-    /// ƒQƒbƒ^[
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     NodeList<Actor>& GetChildren(void) { return _children; }
     /// <summary>
-    /// ’Ç‰Á
+    /// è¿½åŠ 
     /// </summary>
     /// <param name="node"></param>
     void AddChild(const NodePtr<Actor>& node) { _children.push_back(node); }

@@ -6,42 +6,42 @@
 
 
 namespace behaviour {
-// ‘O•ûéŒ¾
+// å‰æ–¹å®£è¨€
 template<typename Actor> class Node;
 template<typename Actor> using NodePtr = std::shared_ptr<Node<Actor>>;
 template<typename Actor> using NodeList = std::list<NodePtr<Actor>>;
 template<typename Actor>
 class Node : public std::enable_shared_from_this<Node<Actor>> {
 protected:
-    //! –¼‘O
+    //! åå‰
     std::string _name;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="name"></param>
     Node(const std::string& name)
         : _name(name) {
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~Node() = default;
     /// <summary>
-    /// ƒQƒbƒ^[
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     const std::string& GetName(void)const noexcept { return _name; }
     /// <summary>
-    /// ƒm[ƒh‚ÌÀs
+    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œ
     /// </summary>
-    /// <param name="actor">ÀsƒAƒNƒ^[</param>
-    /// <returns>true:Às‚Ì¬Œ÷</returns>
-    /// <returns>false:Às‚Ì¸”s</returns>
+    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
+    /// <returns>true:å®Ÿè¡Œã®æˆåŠŸ</returns>
+    /// <returns>false:å®Ÿè¡Œã®å¤±æ•—</returns>
     virtual bool Execute(Actor& actor) { return false; }
     /// <summary>
-    /// ì¬
+    /// ä½œæˆ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>

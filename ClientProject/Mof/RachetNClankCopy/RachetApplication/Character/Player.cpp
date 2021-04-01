@@ -13,7 +13,7 @@ bool Player::Input(void) {
     this->InputCameraForGamepad(angular_speed, speed);
     // keyboard
     this->InputCameraForKeyboard(angular_speed, speed);
-    
+  
     /*
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
@@ -85,7 +85,7 @@ bool Player::Input(void) {
 }
 
 void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
-    // “ü—ÍŠp“x
+    // å…¥åŠ›è§’åº¦
     auto rotate = super::GetRotate();
 
     float camera_angle_y = std::atan2(- _camera_controller->GetViewFront().z, _camera_controller->GetViewFront().x) + math::kHalfPi;
@@ -98,7 +98,7 @@ void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
         angle_y += math::kTwoPi;
     } // else if
 
-    // ·•ªŠp“x
+    // å·®åˆ†è§’åº¦
     angle_y -= rotate.y;
     if (math::kPi < angle_y) {
         angle_y -= math::kTwoPi;
@@ -249,27 +249,27 @@ void Player::UpdateMove(void) {
         }
         return;
     }
-    //ƒJƒƒ‰‚Ì‘O•ûŒü‚ÌƒxƒNƒgƒ‹
+    //ã‚«ãƒ¡ãƒ©ã®å‰æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«
     CVector3 cfvec = _camera_controller->GetViewFront();
-    //ƒJƒƒ‰‚ÌY²‚Ì‰ñ“]Šp“x‚ğ‹‚ß‚é
+    //ã‚«ãƒ¡ãƒ©ã®Yè»¸ã®å›è»¢è§’åº¦ã‚’æ±‚ã‚ã‚‹
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
-    //ˆÚ“®Šp“x‚ğ‹‚ß‚é
+    //ç§»å‹•è§’åº¦ã‚’æ±‚ã‚ã‚‹
     float my = m_MoveAngle + cy;
     MOF_NORMALIZE_RADIANANGLE(my);
-    //·•ªŠp“x
+    //å·®åˆ†è§’åº¦
     float sa = my - angle_y;
     MOF_ROTDIRECTION_RADIANANGLE(sa);
-    //‰ñ“]
+    //å›è»¢
     angle_y += MOF_CLIPING(sa, -CHARACTER_ROTATIONSPEED * m_StickTilt, CHARACTER_ROTATIONSPEED * m_StickTilt);
     MOF_NORMALIZE_RADIANANGLE(angle_y);
 
-    //ˆÚ“®•ûŒü‚ÌƒxƒNƒgƒ‹
+    //ç§»å‹•æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
     //m_Move += fvec * CHARACTER_MOVESPEED;
     super::_velocity.AddVelocityForce(fvec * CHARACTER_MOVESPEED);
 
-    //ˆÚ“®‚ğÅ‚‘¬“x‚ÅƒNƒŠƒbƒv‚·‚é
+    //ç§»å‹•ã‚’æœ€é«˜é€Ÿåº¦ã§ã‚¯ãƒªãƒƒãƒ—ã™ã‚‹
     auto move = super::_velocity.GetVelocity();
     float ml = move.Length();
     float ms = 0.0f;
@@ -492,14 +492,14 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
 bool Player::Render(void) {
     super::Render();
 
-    //•Ší‚ğİ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ğæ“¾‚·‚é
+    //æ­¦å™¨ã‚’è¨­å®šã™ã‚‹ãƒœãƒ¼ãƒ³ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
     LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
     if (!pBoneState) {
         return false;
     }
-    //•ŠíƒƒbƒVƒ…‚ğ•`‰æ‚·‚és—ñ‚ğƒ{[ƒ“î•ñ‚©‚çŒvZ‚·‚é
+    //æ­¦å™¨ãƒ¡ãƒƒã‚·ãƒ¥ã‚’æç”»ã™ã‚‹è¡Œåˆ—ã‚’ãƒœãƒ¼ãƒ³æƒ…å ±ã‹ã‚‰è¨ˆç®—ã™ã‚‹
     CMatrix44 matWeapon = pBoneState->pBone->GetRotationOffsetMatrix() * pBoneState->BoneMatrix;
-    //•ŠíƒƒbƒVƒ…‚Ì•`‰æ
+    //æ­¦å™¨ãƒ¡ãƒƒã‚·ãƒ¥ã®æç”»
     //m_WeaponMesh.Render(matWeapon);
     return true;
 }

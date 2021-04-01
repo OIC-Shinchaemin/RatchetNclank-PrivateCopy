@@ -11,31 +11,31 @@ class ActionNodeExecutor : public behaviour::NodeExecutor<Actor> {
     using super = behaviour::NodeExecutor<Actor>;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="node"></param>
     ActionNodeExecutor(const NodePtr<Actor>& node) :
         super(node) {
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~ActionNodeExecutor() = default;
     /// <summary>
-    /// ƒm[ƒh‚ÌÀs
+    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œ
     /// </summary>
-    /// <param name="actor">ÀsƒAƒNƒ^[</param>
-    /// <returns>true:Às‚Ì¬Œ÷</returns>
-    /// <returns>false:Às‚Ì¸”s</returns>
+    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
+    /// <returns>true:å®Ÿè¡Œã®æˆåŠŸ</returns>
+    /// <returns>false:å®Ÿè¡Œã®å¤±æ•—</returns>
     virtual INodeExecutor<Actor>::Result Execute(Actor& actor) override {
-        //ÀsÏ‚İ
+        //å®Ÿè¡Œæ¸ˆã¿
         if (super::_state == super::State::Completed) {
             return super::Result::Sucess;
         } // if
         else if (super::_state == super::State::Incompleted) {
             return super::Result::Failure;
         } // else uif
-        //ÀsŠJn
+        //å®Ÿè¡Œé–‹å§‹
         super::_state = super::State::Running;
         if (super::_node->Execute(actor)) {
             super::_state = super::State::Completed;
