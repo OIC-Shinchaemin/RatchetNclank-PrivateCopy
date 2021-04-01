@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
-#define BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
+#ifndef BEHAVIOUR_SEQUENCER_NODE_EXECUTOR_H
+#define BEHAVIOUR_SEQUENCER_NODE_EXECUTOR_H
 
 
 #include "CompositeNodeExecutor.h"
@@ -7,49 +7,49 @@
 
 namespace behaviour {
 template <typename Actor>
-class SelectorNodeExecutor : public behaviour::CompositeNodeExecutor<Actor> {
+class SequencerNodeExecutor : public behaviour::CompositeNodeExecutor<Actor> {
     using super = behaviour::CompositeNodeExecutor<Actor>;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="node"></param>
-    SelectorNodeExecutor(const CompositeNodePtr<Actor>& node) :
+    SequencerNodeExecutor(const CompositeNodePtr<Actor>& node) :
         super(node) {
     }
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
-    virtual ~SelectorNodeExecutor() = default;
+    virtual ~SequencerNodeExecutor() = default;
     /// <summary>
-    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œå‡¦ç†
+    /// ƒm[ƒh‚ÌÀsˆ—
     /// </summary>
-    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
-    /// <returns>Succeeded:å®Ÿè¡Œã®æˆåŠŸ</returns>
-    /// <returns>Failed:å®Ÿè¡Œã®å¤±æ•—</returns>
+    /// <param name="actor">ÀsƒAƒNƒ^[</param>
+    /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
+    /// <returns>Failed:Às‚Ì¸”s</returns>
     virtual INodeExecutor<Actor>::Result Execute(Actor& actor) override {
-        // å®Ÿè¡Œæ¸ˆã¿
+        // ÀsÏ‚İ
         if (super::_state == super::State::Completed) {
             return super::Result::Sucess;
         } // if
         else if (super::_state == super::State::Incompleted) {
             return super::Result::Failure;
         } // else if
-        // å®Ÿè¡Œé–‹å§‹
+        // ÀsŠJn
         super::_state = super::State::Running;
         for (auto& ptr : super::_children) {
             auto re = ptr->Execute(actor);
-            if (re == super::Result::Sucess) {
-                super::_state = super::State::Completed;
-                return super::Result::Sucess;
+            if (re == super::Result::Failure) {
+                super::_state = super::State::Incompleted;
+                return super::Result::Failure;
             } // if
             else if (re == super::Result::None) {
                 return super::Result::None;
             } // else if
         } // for
-        super::_state = super::State::Incompleted;
-        return super::Result::Failure;
+        super::_state = super::State::Completed;
+        return super::Result::Sucess;
     }
 };
 }
-#endif // !BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
+#endif // !BEHAVIOUR_SEQUENCER_NODE_EXECUTOR_H

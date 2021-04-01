@@ -8,58 +8,12 @@ bool Player::Input(void) {
 
     float angular_speed = 1.0f;
     float speed = 1.0f;
-    bool action = false; bool left = false; bool right = false;
-    auto in = Mof::CVector2(1.0f, 0.0f);
-    float move_angle = 0.0f;
 
-    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
-        action = true;
-        left = true;
-        move_angle = 180.0f;
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
-        action = true;
-        right = true;
-        move_angle = 0.0f;
-    } // else if
-    if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-        action = true;
-        move_angle = 90.0f;
-        if (right) {
-            move_angle -= 45.0f;
-        } // if
-        else if (left) {
-            move_angle += 45.0f;
-        } // else if
-    } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-        action = true;
-        move_angle = 270.0f;
-        if (right) {
-            move_angle += 45.0f;
-        } // if
-        else if (left) {
-            move_angle -= 45.0f;
-        } // else if
-    } // else if
-
-    if (action) {
-        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
-
-
-
-    float h = ::g_pGamepad->GetStickHorizontal();
-    float v = ::g_pGamepad->GetStickVertical();
-    if (auto in = Mof::CVector2(h, v); in.Length() > 0.5f) {
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
-
-
-
+    // contaroller
+    this->InputCameraForGamepad(angular_speed, speed);
+    // keyboard
+    this->InputCameraForKeyboard(angular_speed, speed);
+  
     /*
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
@@ -130,6 +84,130 @@ bool Player::Input(void) {
     return true;
 }
 
+void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
+    // å…¥åŠ›è§’åº¦
+    auto rotate = super::GetRotate();
+
+    float camera_angle_y = std::atan2(- _camera_controller->GetViewFront().z, _camera_controller->GetViewFront().x) + math::kHalfPi;
+    float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi + camera_angle_y;
+
+    if (math::kTwoPi <= angle_y) {
+        angle_y -= math::kTwoPi;
+    } // if
+    else if (angle_y <= 0.0f) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    // å·®åˆ†è§’åº¦
+    angle_y -= rotate.y;
+    if (math::kPi < angle_y) {
+        angle_y -= math::kTwoPi;
+    } // if
+    else if (angle_y < -math::kPi) {
+        angle_y += math::kTwoPi;
+    } // else if
+
+    auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
+    _velocity.AddAngularVelocityForce(accele);
+}
+
+void Player::InputCameraForKeyboard(float angular_speed, float speed) {
+    // keyboard
+    bool action = false; bool left = false; bool right = false;
+    auto in = Mof::CVector2(1.0f, 0.0f);
+    float move_angle = 0.0f;
+
+    if (::g_pInput->IsKeyHold(MOFKEY_A)) {
+        action = true;
+        left = true;
+        move_angle = 180.0f;
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
+        action = true;
+        right = true;
+        move_angle = 0.0f;
+    } // else if
+    if (::g_pInput->IsKeyHold(MOFKEY_W)) {
+        action = true;
+        move_angle = 90.0f;
+        if (right) {
+            move_angle -= 45.0f;
+        } // if
+        else if (left) {
+            move_angle += 45.0f;
+        } // else if
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
+        action = true;
+        move_angle = 270.0f;
+        if (right) {
+            move_angle += 45.0f;
+        } // if
+        else if (left) {
+            move_angle -= 45.0f;
+        } // else if
+    } // else if
+
+    if (action) {
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        this->InputMoveAngularVelocity(in, angular_speed);
+        this->InputMoveVelocity(in, speed);
+    } // if
+
+
+    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+        _camera_controller->AddAzimuth(1.0f);
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+        _camera_controller->AddAzimuth(-1.0f);
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+        _camera_controller->AddAltitude(1.0f);
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+        _camera_controller->AddAltitude(-1.0f);
+    } // else if
+
+}
+
+void Player::InputCameraForGamepad(float angular_speed, float speed) {
+    float h = 0.0f;
+    float v = 0.0f;
+    float threshold = 0.5f;
+
+    h = ::g_pGamepad->GetStickHorizontal();
+    v = ::g_pGamepad->GetStickVertical();
+    if (auto in = Mof::CVector2(h, v); in.Length() > threshold) {
+        this->InputMoveAngularVelocity(in, angular_speed);
+        this->InputMoveVelocity(in, speed);
+    } // if
+
+
+    h = ::g_pGamepad->GetRightStickHorizontal();
+    v = ::g_pGamepad->GetRightStickVertical();
+    if (auto in = Mof::CVector2(h, v); in.Length() > threshold) {
+        // x
+        if (threshold <= std::abs(in.x)) {
+            if (0.0f < in.x) {
+                _camera_controller->AddAzimuth(1.0f);
+            } // if
+            else {
+                _camera_controller->AddAzimuth(-1.0f);
+            } // else
+        } // if
+        // y
+        if (threshold <= std::abs(in.y)) {
+            if (0.0f < in.y) {
+                _camera_controller->AddAltitude(1.0f);
+            } // if
+            else {
+                _camera_controller->AddAltitude(-1.0f);
+            } // else 
+        } // if
+    } // if
+
+}
+
 void Player::UpdateCamera(void) {
     auto pos = super::GetPosition();
     CVector3 cpos = pos;
@@ -171,27 +249,27 @@ void Player::UpdateMove(void) {
         }
         return;
     }
-    //ƒJƒƒ‰‚Ì‘O•ûŒü‚ÌƒxƒNƒgƒ‹
+    //ã‚«ãƒ¡ãƒ©ã®å‰æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«
     CVector3 cfvec = _camera_controller->GetViewFront();
-    //ƒJƒƒ‰‚ÌY²‚Ì‰ñ“]Šp“x‚ğ‹‚ß‚é
+    //ã‚«ãƒ¡ãƒ©ã®Yè»¸ã®å›è»¢è§’åº¦ã‚’æ±‚ã‚ã‚‹
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
-    //ˆÚ“®Šp“x‚ğ‹‚ß‚é
+    //ç§»å‹•è§’åº¦ã‚’æ±‚ã‚ã‚‹
     float my = m_MoveAngle + cy;
     MOF_NORMALIZE_RADIANANGLE(my);
-    //·•ªŠp“x
+    //å·®åˆ†è§’åº¦
     float sa = my - angle_y;
     MOF_ROTDIRECTION_RADIANANGLE(sa);
-    //‰ñ“]
+    //å›è»¢
     angle_y += MOF_CLIPING(sa, -CHARACTER_ROTATIONSPEED * m_StickTilt, CHARACTER_ROTATIONSPEED * m_StickTilt);
     MOF_NORMALIZE_RADIANANGLE(angle_y);
 
-    //ˆÚ“®•ûŒü‚ÌƒxƒNƒgƒ‹
+    //ç§»å‹•æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
     //m_Move += fvec * CHARACTER_MOVESPEED;
     super::_velocity.AddVelocityForce(fvec * CHARACTER_MOVESPEED);
 
-    //ˆÚ“®‚ğÅ‚‘¬“x‚ÅƒNƒŠƒbƒv‚·‚é
+    //ç§»å‹•ã‚’æœ€é«˜é€Ÿåº¦ã§ã‚¯ãƒªãƒƒãƒ—ã™ã‚‹
     auto move = super::_velocity.GetVelocity();
     float ml = move.Length();
     float ms = 0.0f;
@@ -414,14 +492,14 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
 bool Player::Render(void) {
     super::Render();
 
-    //•Ší‚ğİ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ğæ“¾‚·‚é
+    //æ­¦å™¨ã‚’è¨­å®šã™ã‚‹ãƒœãƒ¼ãƒ³ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
     LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
     if (!pBoneState) {
         return false;
     }
-    //•ŠíƒƒbƒVƒ…‚ğ•`‰æ‚·‚és—ñ‚ğƒ{[ƒ“î•ñ‚©‚çŒvZ‚·‚é
+    //æ­¦å™¨ãƒ¡ãƒƒã‚·ãƒ¥ã‚’æç”»ã™ã‚‹è¡Œåˆ—ã‚’ãƒœãƒ¼ãƒ³æƒ…å ±ã‹ã‚‰è¨ˆç®—ã™ã‚‹
     CMatrix44 matWeapon = pBoneState->pBone->GetRotationOffsetMatrix() * pBoneState->BoneMatrix;
-    //•ŠíƒƒbƒVƒ…‚Ì•`‰æ
+    //æ­¦å™¨ãƒ¡ãƒƒã‚·ãƒ¥ã®æç”»
     //m_WeaponMesh.Render(matWeapon);
     return true;
 }

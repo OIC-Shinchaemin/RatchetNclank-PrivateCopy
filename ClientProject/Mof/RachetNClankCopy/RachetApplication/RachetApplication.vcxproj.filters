@@ -380,6 +380,33 @@
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SequencerNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SequencerNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ParameterNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ConditionalNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\DecoratorNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SimplexNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SimplexNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">

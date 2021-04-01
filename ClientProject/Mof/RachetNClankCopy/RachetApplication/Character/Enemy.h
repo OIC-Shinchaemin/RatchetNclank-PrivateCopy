@@ -1,6 +1,6 @@
 #ifndef MY_ENEMY_H
 #define MY_ENEMY_H
-
+ 
 
 #include "Character.h"
 
@@ -15,19 +15,65 @@ enum class AIState {
 };
 class Enemy : public my::Character {
     using super = my::Character;
+    using EnemyPtr = std::shared_ptr<my::Enemy>;
 private:
-    //! •W“I
+    //! åˆæœŸä½ç½®
+    Mof::CVector3 _init_position;
+    //! æ¨™çš„
     std::weak_ptr<my::Character>_target;
-    //std::vector< std::weak_ptr<my::Character>>_recognized;
-    //! ‹Šo
+    //! è¦–è¦š
     my::SightRecognition _sight;
-    //! ó‘Ô
+    //! çŠ¶æ…‹
     my::AIState _state;
-
-    Behaviour::NodeExecutorPtr< std::shared_ptr< my::Enemy >> _behaviour_executor;
-
+    //! ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢å®Ÿè¡Œ
+    behaviour::NodeExecutorPtr< EnemyPtr > _patrol_behaviour_executor;
+    //! ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢å®Ÿè¡Œ
+    behaviour::NodeExecutorPtr< EnemyPtr > _combat_behaviour_executor;
+    
     /// <summary>
-    /// •`‰æ
+    /// ä½œæˆ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    behaviour::NodeExecutorPtr< EnemyPtr >  CreatePatrolBehaviour(void);
+    /// <summary>
+    /// ä½œæˆ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    behaviour::NodeExecutorPtr< EnemyPtr >  CreateCombatBehaviour(void);
+    /// <summary>
+    /// ã‚²ãƒƒã‚¿ãƒ¼
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetDistanceFromInitPosition(void) const;
+    /// <summary>
+    /// åˆ¤å®š
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool HasTarget(void) const;
+    /// <summary>
+    /// è¦‹æ¸¡ã™
+    /// </summary>
+    /// <param name=""></param>
+    bool OverLooking(void);
+    /// <summary>
+    /// è¿½ã„ã‹ã‘ã‚‹
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Chase(void);
+    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
+    /// <summary>
+    /// åˆæœŸä½ç½®ã«æˆ»ã‚‹
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool GoHome(void);
+    /// <summary>
+    /// æç”»
     /// </summary>
     /// <param name="ray"></param>
     /// <param name="length"></param>
@@ -36,50 +82,50 @@ private:
     void RenderRay(Mof::Vector3 start, float degree_y);
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     Enemy();
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~Enemy();
     /// <summary>
-    /// ƒZƒbƒ^[
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="ptr"></param>
     void SetTarget(const std::shared_ptr<my::Character>& ptr);
     /// <summary>
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     /// </summary>
     /// <param name="transform"></param>
     /// <returns></returns>
     virtual bool Initialize(const def::Transform& transform) override;
     /// <summary>
-    /// “ü—Í
+    /// å…¥åŠ›
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Input(void) override;
     /// <summary>
-    /// XV
+    /// æ›´æ–°
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time);
     /// <summary>
-    /// •`‰æ
+    /// æç”»
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
-    /// ‹”F‰Â”\”»’è
+    /// è¦–èªå¯èƒ½åˆ¤å®š
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool ContainInRecognitionRange(Mof::CVector3 pos);
     /// <summary>
-    /// ƒfƒoƒbƒO
+    /// ãƒ‡ãƒãƒƒã‚°
     /// </summary>
     /// <param name=""></param>
     virtual void RenderDebug(void) override;

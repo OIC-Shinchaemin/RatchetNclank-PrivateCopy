@@ -56,7 +56,7 @@ my::Character::Character() :
     _mesh(),
     _motion(),
     _velocity(),
-    _volume(1.0f),
+    _volume(0.5f),
     _height(1.0f) {
 }
 

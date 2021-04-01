@@ -1,36 +1,44 @@
-#pragma once
+#ifndef BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
+#define BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
 
-#include		"NodeExecutor.h"
-#include		"../Node/CompositeNode.h"
 
-namespace Behaviour {
+#include "NodeExecutor.h"
 
-	/**
-	 * @brief		•¡”‚Ìq‹Ÿ‚ğ‚Âƒm[ƒh‚ÌÀs—pƒNƒ‰ƒX
-	 */
-template < typename T >
-class CompositeNodeExecutor : public NodeExecutor< T > {
+#include "../Node/CompositeNode.h"
+
+
+namespace behaviour {
+template<typename Actor>
+class CompositeNodeExecutor : public NodeExecutor<Actor> {
+    using super = NodeExecutor<Actor>;
 public:
-	CompositeNodeExecutor(const CompositeNodePtr< T >& node)
-		: NodeExecutor< T >(node) {
-		for (auto& ptr : node->GetChildren()) {
-			auto add = ptr->CreateExecutor();
-			add->SetParent(weak_from_this());
-			_children.push_back(add);
-		}
-	}
-	virtual ~CompositeNodeExecutor() = default;
-
-	/**
-	 * @brief		ƒm[ƒh‚ÌÀsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg‚µ‚Ä
-	 *				ó‘Ô‚ğInactive‚Éİ’è‚·‚é
-	 */
-	virtual void Reset() {
-		NodeExecutor::Reset();
-		for (auto& ptr : _children) {
-			ptr->Reset();
-		}
-	}
+    /// <summary>
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// </summary>
+    /// <param name="node"></param>
+    CompositeNodeExecutor(const CompositeNodePtr<Actor>& node) :
+        super(node) {
+        for (auto& ptr : node->GetChildren()) {
+            auto add = ptr->CreateExecutor();
+            add->SetParent(super::weak_from_this());
+            super::_children.push_back(add);
+        }
+    }
+    /// <summary>
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// </summary>
+    virtual ~CompositeNodeExecutor() = default;
+    /// <summary>
+    /// å®Ÿè¡ŒçŠ¶æ…‹ã‚’å…¨ã¦ãƒªã‚»ãƒƒãƒˆ
+    /// çŠ¶æ…‹ã‚’Inactiveã«è¨­å®š
+    /// </summary>
+    /// <param name=""></param>
+    virtual void Reset(void) override{
+        super::Reset();
+        for (auto& ptr : super::_children) {
+            ptr->Reset();
+        }
+    }
 };
-
 }
+#endif // !BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
