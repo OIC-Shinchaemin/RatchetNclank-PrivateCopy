@@ -16,7 +16,8 @@ static float camera_move_zoom_hold_ratio = 0.01f;
 static float camera_move_track_ratio     = 0.01f;
 
 // アセット関係
-using MeshAsset = AssetBase<std::string, CMeshContainer>;
+using MeshAsset    = AssetBase<std::string, CMeshContainer>;
+using TextureAsset = AssetBase<std::string, CTexture>;
 
 // ********************************************************************************
 /// <summary>

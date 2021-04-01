@@ -122,6 +122,7 @@
     <ClCompile Include="SaveProject.cpp" />
     <ClCompile Include="SaveProjectDialog.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="ToolIcon.cpp" />
     <ClCompile Include="ToolMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="SaveProjectDialog.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="ToolIcon.h" />
     <ClInclude Include="ToolMenu.h" />
     <ClInclude Include="WindowKeyName.h" />
   </ItemGroup>

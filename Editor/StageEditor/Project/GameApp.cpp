@@ -32,6 +32,7 @@
 #include    "WindowKeyName.h"
 #include    "MouseUtilities.h"
 #include    "FileDialog.h"
+#include    "ToolIcon.h"
 
 //Singleton
 GuiWindowRect             gui_window_rect;
@@ -43,6 +44,7 @@ ParameterMap<Vector4>     parameter_map_vec4;
 ParameterMap<std::string> parameter_map_string;
 ParameterMap<ObjectList>  parameter_map_objectlist;
 ParameterMap<MeshList>    parameter_map_meshlist;
+ToolIcon                  tool_icon;
 
 EditorParameter           editor_parameter;
 
@@ -72,6 +74,8 @@ MofBool CGameApp::Initialize(void) {
     CUtilities::SetCurrentDirectory("Resource");
     std::string resource_dir = std::filesystem::current_path().string();
     editor_parameter.SetResourcePath(resource_dir);
+
+    tool_icon.Load();
 
     float scene_w = window_width;
     float scene_h = window_height;
@@ -288,6 +292,7 @@ MofBool CGameApp::Release(void) {
 	mesh_view_target.Release();
     
 	MeshAsset::Release();
+	TextureAsset::Release();
 
     return TRUE;
 }
