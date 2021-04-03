@@ -171,6 +171,7 @@
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
+    <ClInclude Include="PhysicWorld.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />
     <ClInclude Include="ResourceManager.h" />

@@ -219,6 +219,9 @@
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicWorld.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -427,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="Factory\BehaviourExecutorFactory.h">
       <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicWorld.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

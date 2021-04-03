@@ -4,12 +4,12 @@
 
 #include "My/UI/UIPanel.h"
 
-#include "My/Core/Observer.h"
+#include "My/Core/Observable.h"
 #include "../GameSystem/QuickChangeSystem.h"
 
 
 namespace my {
-class QuickChangeMenuItem : public my::UIItem /*, public my::Observer<my::QuickChangeSystemItem> */{
+class QuickChangeMenuItem : public my::UIItem {
     using super = my::UIItem;
 public:
     /// <summary>
@@ -32,6 +32,9 @@ public:
 };
 class QuickChangeMenu : public my::UIPanel, public my::Observer<Mof::CVector4> {
     using super = my::UIPanel;
+private:
+    //! 通知用
+    my::Observable<std::string> _weapon;
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,6 +46,11 @@ public:
     /// </summary>
     /// <param name="color"></param>
     virtual void OnNotify(Mof::CVector4 color) override;
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddWeaponObserver(const std::shared_ptr<my::Observer<std::string>>& ptr);
     /// <summary>
     /// 描画
     /// </summary>

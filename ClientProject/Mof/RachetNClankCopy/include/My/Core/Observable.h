@@ -16,12 +16,6 @@ class Observable {
 private:
     //! オブザーバ
     std::vector<std::weak_ptr<Observer>> _observers;
-protected:
-    /// <summary>
-    /// 通知
-    /// </summary>
-    /// <param name="...args"></param>
-    void Notify(NotifyArgs... args);
 public:
     /// <summary>
     /// コンストラクタ
@@ -41,18 +35,12 @@ public:
     /// </summary>
     /// <param name="observer"></param>
     void RemoveObserver(const std::shared_ptr<Observer>& observer);
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="...args"></param>
+    void Notify(NotifyArgs... args);
 };
-
-template<class ...NotifyArgs>
-inline void Observable<NotifyArgs...>::Notify(NotifyArgs ...args) {
-    auto& o = _observers;
-    std::for_each(o.begin(), o.end(), [&](std::weak_ptr<Observer> weak) {
-        if (auto ptr = weak.lock()) {
-            ptr->OnNotify(args...);
-        } // if
-    });
-}
-
 template<class ...NotifyArgs>
 inline Observable<NotifyArgs...>::Observable() {
 }
@@ -75,5 +63,15 @@ inline void Observable<NotifyArgs...>::RemoveObserver(const std::shared_ptr<Obse
         return false;
     });
 }
+template<class ...NotifyArgs>
+inline void Observable<NotifyArgs...>::Notify(NotifyArgs ...args) {
+    auto& o = _observers;
+    std::for_each(o.begin(), o.end(), [&](std::weak_ptr<Observer> weak) {
+        if (auto ptr = weak.lock()) {
+            ptr->OnNotify(args...);
+        } // if
+    });
+}
+
 }
 #endif // !MY_OBSERVABLE_H

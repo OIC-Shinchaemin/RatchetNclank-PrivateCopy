@@ -7,7 +7,7 @@
 
 my::WeaponSystem::WeaponSystem() :
     _weapons(),
-    _factory(){
+    _factory() {
 
     _factory.Register<my::OmniWrench>("OmniWrench");
     _factory.Register<my::BombGlove>("BombGlove");
@@ -15,6 +15,14 @@ my::WeaponSystem::WeaponSystem() :
 }
 
 my::WeaponSystem::~WeaponSystem() {
+}
+
+void my::WeaponSystem::OnNotify(const std::string& change) {
+    _current.Notify(this->GetWeapon(change));
+}
+
+void my::WeaponSystem::AddWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Weapon>>>& ptr) {
+    _current.AddObserver(ptr);
 }
 
 void my::WeaponSystem::CreateAvailableWeaponNames(std::vector<std::string>& out) {

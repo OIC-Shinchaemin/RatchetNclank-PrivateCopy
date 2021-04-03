@@ -7,13 +7,13 @@
 #include "My/Core/Observer.h"
 #include "GameWorld.h"
 #include "Renderer.h"
+
 #include "../GameSystem/GameMoney.h"
 #include "../GameSystem/WeaponSystem.h"
 #include "../GameSystem/QuickChangeSystem.h"
 #include "../Stage/Stage.h"
 #include "../Character/Character.h"
 #include "../Character/Enemy.h"
-#include "../Weapon/Weapon.h"
 
 
 namespace my {
@@ -37,8 +37,6 @@ private:
     std::shared_ptr<my::Character> _character;
     //! ƒLƒƒƒ‰ƒNƒ^
     std::vector<std::shared_ptr<my::Enemy>> _enemies;
-    //! •Ší
-    std::shared_ptr<my::Weapon> _current_weapon;
 private:
     /// <summary>
     /// ’Ç‰Á

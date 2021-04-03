@@ -44,8 +44,7 @@ my::GameManager::GameManager() :
     _weapon_system(),
     _quick_change(),
     _stage(),
-    _character(),
-    _current_weapon() {
+    _character() {
 }
 
 my::GameManager::~GameManager() {
@@ -63,7 +62,10 @@ bool my::GameManager::Initialize(void) {
     _game_money = std::make_unique<my::GameMoney>();
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-    _character = std::make_shared<Player>();
+    auto player = std::make_shared<Player>();
+    _character = player;
+    _weapon_system->AddWeaponObserver(player);
+    _quick_change->AddWeaponObserver(_weapon_system);
 
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
@@ -72,8 +74,6 @@ bool my::GameManager::Initialize(void) {
     _weapon_system->Initialize(save_data);
     _quick_change->Initialize({}, _weapon_system);
     _character->Initialize({});
-
-    _current_weapon = _weapon_system->GetWeapon("OmniWrench");
 
     auto transform = def::Transform();
     transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
@@ -92,16 +92,6 @@ bool my::GameManager::Input(void) {
     _game_money->Input();
     _quick_change->Input();
 
-    if (::g_pInput->IsKeyPush(MOFKEY_1)) {
-        _current_weapon = _weapon_system->GetWeapon("BombGlove");
-    } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_2)) {
-        _current_weapon = _weapon_system->GetWeapon("Pyrocitor");
-    } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_3)) {
-        _current_weapon = _weapon_system->GetWeapon("OmniWrench");
-    } // if
-
     _game_world.Input();
     return true;
 }
@@ -111,17 +101,16 @@ bool my::GameManager::Update(float delta_time) {
         this->RemoveElement(ptr);
     } // for
     _delete_actors.clear();
-    
+
 
     _quick_change->Update();
     _stage.Update();
 
 
     _game_world.Update(delta_time);
-    _current_weapon->Update(delta_time);
     this->Collision();
-    
-    
+
+
     ::ImGui::Begin("GameManager");
     ::ImGui::Text(" ");
     ::ImGui::End();
@@ -130,8 +119,6 @@ bool my::GameManager::Update(float delta_time) {
 
 bool my::GameManager::Render(void) {
     _renderer.Render();
-
-    _current_weapon->Render();
 
     _stage.Render();
     _quick_change->Render();

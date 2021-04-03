@@ -11,10 +11,14 @@ void my::QuickChangeSystem::Open(void) {
 }
 
 void my::QuickChangeSystem::Close(void) {
-    _state = State::Exit;
-    _current_angle.reset();
-
     // notify target weapon name
+    if (_current_angle.has_value()) {
+        auto& item = _items.at(_current_angle.value());
+        auto weapon_name = item.GetWeapon();
+        _current.Notify(weapon_name);
+    } // if
+    _current_angle.reset();
+    _state = State::Exit;
 }
 
 my::QuickChangeSystem::QuickChangeSystem() :
@@ -54,6 +58,10 @@ my::QuickChangeSystem::~QuickChangeSystem() {
 
 Mof::CVector4 my::QuickChangeSystem::GetColor(void) const {
     return this->_color;
+}
+
+void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<my::Observer<const std::string&>>& ptr) {
+    _current.AddObserver(ptr);
 }
 
 bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
