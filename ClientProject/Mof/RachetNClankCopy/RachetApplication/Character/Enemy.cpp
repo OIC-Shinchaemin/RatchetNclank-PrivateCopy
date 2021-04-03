@@ -1,53 +1,51 @@
 #include "Enemy.h"
 
-#include "../Behaviour/Node/Node.h"
-#include "../Behaviour/Node/SequencerNode.h"
-#include "../Behaviour/Node/SelectorNode.h"
-#include "../Behaviour/Node/ActionNode.h"
-#include "../Behaviour/Node/ConditionalNode.h"
-#include "../Behaviour/Node/DecoratorNode.h"
-#include "../Behaviour/Node/ParameterNode.h"
 
-
-//using BehaviourActor = my::Actor;
-// ŠO•”‚©‚çŽó‚¯Žæ‚é
-behaviour::CompositeNodePtr< std::shared_ptr<my::Enemy> > _patrol_rootnode;
-behaviour::CompositeNodePtr< std::shared_ptr<my::Enemy> > _combat_rootnode;
-
-behaviour::NodeExecutorPtr<my::Enemy::EnemyPtr> my::Enemy::CreatePatrolBehaviour(void) {
-    using namespace behaviour;
-    _patrol_rootnode = std::make_shared<SelectorNode<EnemyPtr>>();
-    
-    auto decorator_0 = std::make_shared < DecoratorNode<EnemyPtr, float>>(
-        ConditionalNodeBase< EnemyPtr>::Operator::GreaterEqual,
-        std::make_shared<GetNode<EnemyPtr, float>>(&Enemy::GetDistanceFromInitPosition),
-        std::make_shared<ValueNode<EnemyPtr, float>>(2.0f));
-
-    auto action_0 = std::make_shared<behaviour::FunctionNode<EnemyPtr>>(&my::Enemy::GoHome);
-    decorator_0->SetChild(action_0);
-    
-
-    auto action_1 = std::make_shared<behaviour::FunctionNode<EnemyPtr>>(&my::Enemy::OverLooking);
-    _patrol_rootnode->AddChild(decorator_0);
-    _patrol_rootnode->AddChild(action_1);
-    return _patrol_rootnode->CreateExecutor();
-}
-behaviour::NodeExecutorPtr<my::Enemy::EnemyPtr> my::Enemy::CreateCombatBehaviour(void) {
-    _combat_rootnode = std::make_shared< behaviour::SelectorNode< my::Enemy::EnemyPtr>>();
-    auto action_0 = std::make_shared<behaviour::FunctionNode<my::Enemy::EnemyPtr>>(&my::Enemy::Chase);
-    _combat_rootnode->AddChild(action_0);
-    return _combat_rootnode->CreateExecutor();
+bool my::Enemy::ChangeToMoveState(void) {
+    _enemy_state = my::EnemyState::Move;
+    return true;
 }
 
-float my::Enemy::GetDistanceFromInitPosition(void) const {
+bool my::Enemy::ChangeToAttackState(void) {
+    _enemy_state = my::EnemyState::Attack;
+    return true;
+}
+
+bool my::Enemy::ChangeToPatrolState(void) {
+    _state = my::AIState::Patrol;
+    _patrol_behaviour_executor->Reset();
+    return true;
+}
+
+bool my::Enemy::ChangeToCombatState(void) {
+    _state = my::AIState::Combat;
+    _combat_behaviour_executor->Reset();
+    return true;
+}
+
+float my::Enemy::GetDistanceFromInitPosition(void) {
     return Mof::CVector3Utilities::Distance(_init_position, super::GetPosition());
 }
 
-bool my::Enemy::HasTarget(void) const {
+bool my::Enemy::HasTarget(void) {
     return !_target.expired();
 }
 
+bool my::Enemy::TargetInAttackRange(void) {
+    if (auto target = _target.lock()) {
+        if (_attack.GetRangeSphere().CollisionPoint(target->GetPosition())) {
+            return true;
+        } // if
+    } // if
+    return false;
+}
+
 bool my::Enemy::OverLooking(void) {
+    if (this->HasTarget()) {
+        this->ChangeToCombatState();
+        return true;
+    } // if
+
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -56,15 +54,27 @@ bool my::Enemy::OverLooking(void) {
     in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
     float angular_speed = 4.0f;
     this->InputMoveAngularVelocity(in, angular_speed);
-    if (auto target = _target.lock()) {
-        _state = my::AIState::Combat;
-        _combat_behaviour_executor->Reset();
-        return true;
+    return false;
+}
+
+bool my::Enemy::GoHome(void) {
+    this->ChaseTo(_init_position, 0.3f, 1.0f);
+    if (this->GetDistanceFromInitPosition() > 2.0f) {
+        return false;
     } // if
+    return true;
+}
+
+bool my::Enemy::Attack(void) {
+    _attack.Start();
+    _combat_behaviour_executor->Reset();
     return false;
 }
 
 void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
+    _enemy_state = my::EnemyState::Move;
+
+
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -76,28 +86,15 @@ void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) 
     this->InputMoveVelocity(in, speed);
 }
 
-bool my::Enemy::Chase(void) {
-    if (_target.expired()) {
-        _state = my::AIState::Patrol;
-        _patrol_behaviour_executor->Reset();
-    } // if
-
+bool my::Enemy::ChaseTarget(void) {
     if (auto target = _target.lock()) {
-        if (!Mof::CSphere(super::GetPosition(), _sight.GetRange()).CollisionPoint(target->GetPosition())) {
-            _target.reset();
+        if (this->TargetInAttackRange()) {
             return true;
         } // if
-        this->ChaseTo(target->GetPosition(), 0.1f, 1.0f);
+        this->ChaseTo(target->GetPosition(), 0.2f, 1.0f);
+        return false;
     } // if
-    return false;
-}
-
-bool my::Enemy::GoHome(void) {
-    this->ChaseTo(_init_position, 0.1f, 1.0f);
-    if (this->GetDistanceFromInitPosition() < 2.0f) {
-        return true;
-    } // if
-    return false;
+    return true;
 }
 
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
@@ -123,7 +120,9 @@ my::Enemy::Enemy() :
     _init_position(),
     _target(),
     _sight(),
+    _attack(),
     _state(my::AIState::Patrol),
+    _enemy_state(my::EnemyState::Move),
     _patrol_behaviour_executor(),
     _combat_behaviour_executor() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
@@ -138,14 +137,19 @@ void my::Enemy::SetTarget(const std::shared_ptr<my::Character>& ptr) {
     this->_target = ptr;
 }
 
+Mof::CSphere my::Enemy::GetAttackSphere(void) const {
+    return  this->_attack.GetSphere();
+}
+
 bool my::Enemy::Initialize(const def::Transform& transform) {
     super::Initialize(transform);
-//    _init_position = super::GetPosition();
-    _init_position = Mof::CVector3(6.0f, 0.0f, 6.0f);
+    //_init_position = super::GetPosition();
+    _init_position = Mof::CVector3(5.0f, 0.0f, 5.0f);
     _sight.SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _attack.SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
 
-    _patrol_behaviour_executor = this->CreatePatrolBehaviour();
-    _combat_behaviour_executor = this->CreateCombatBehaviour();
+    _combat_behaviour_executor =  _behaviour_executor_factory.Create("../Resource/behaviour/combat.json");
+    _patrol_behaviour_executor = _behaviour_executor_factory.Create("../Resource/behaviour/patrol.json");
 
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
@@ -203,4 +207,22 @@ void my::Enemy::RenderDebug(void) {
         auto ray = Mof::CRay3D(start, diff);
         this->RenderRay(ray, Mof::CVector3Utilities::Length(diff), def::color_rgba_u32::kYellow);
     } // if
+
+
+    if (_state == my::AIState::Patrol) {
+        ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = Patrol");
+        _patrol_behaviour_executor->DebugRender();
+    } // if
+    else if (_state == my::AIState::Combat) {
+        ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = Combat");
+        _combat_behaviour_executor->DebugRender();
+    } // else if
+
+    if (_enemy_state == my::EnemyState::Move) {
+        ::CGraphicsUtilities::RenderString(0.0f, 20.0f, "state = Move");
+    } // if
+    else if (_enemy_state == my::EnemyState::Attack) {
+        ::CGraphicsUtilities::RenderString(0.0f, 20.0f, "state = Attack");
+    } // else if
+    _attack.RenderDebug();
 }

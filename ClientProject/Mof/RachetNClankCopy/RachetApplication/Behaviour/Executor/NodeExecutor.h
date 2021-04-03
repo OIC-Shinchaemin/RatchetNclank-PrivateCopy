@@ -6,6 +6,8 @@
 
 #include "../Node/Node.h"
 
+#include <Mof.h>
+
 
 namespace behaviour {
 template<typename Actor>
@@ -57,6 +59,37 @@ public:
     /// <param name=""></param>
     virtual void Reset(void) override {
         _state = super::State::Inactive;
+    }
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <typeparam name="Actor"></typeparam>
+    virtual void DebugRender(Mof::CVector2 position) override {
+        MofU32 color;
+        if (_state == super::State::Inactive) {
+            color = MOF_COLOR_WHITE;
+        } // else if
+        if (_state == super::State::Running) {
+            color = MOF_COLOR_RED;
+        } // if
+        if (_state == super::State::Completed) {
+            color = MOF_COLOR_GREEN;
+        } // else if
+        if (_state == super::State::Incompleted) {
+            color = MOF_COLOR_BLUE;
+        } // else if
+
+
+        ::CGraphicsUtilities::RenderString(position.x, position.y, color, _node->GetName().c_str());
+        auto pos = position;
+        pos.x += 100.0f;
+        for (auto ptr : _children) {
+            ptr->DebugRender(pos);
+            pos.y += 20.0f;
+        } // for
+    }
+    virtual void DebugRender(void) override {
+        this->DebugRender(Mof::CVector2(100.0f, 100.0f));
     }
 };
 }

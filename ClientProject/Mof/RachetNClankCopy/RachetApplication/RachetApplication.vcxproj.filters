@@ -100,6 +100,12 @@
     <Filter Include="Rachet\Header\Behaviour\Node">
       <UniqueIdentifier>{c5513471-6a03-479d-b8c3-ba7d84591e9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\behaviour">
+      <UniqueIdentifier>{3be1d213-4b2d-4d51-a4aa-2ec5d4dc7c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Factory">
+      <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -206,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="Velocity.cpp">
       <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BehaviourExecutorFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +419,15 @@
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionPointerContainer.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BehaviourExecutorFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -416,6 +437,12 @@
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json">
       <Filter>リソース ファイル\save</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\patrol.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -34,13 +34,13 @@ public:
         } // if
         else if (super::_state == super::State::Incompleted) {
             return super::Result::Failure;
-        } // else uif
+        } // else if
         //ÀsŠJn
         super::_state = super::State::Running;
         if (super::_node->Execute(actor)) {
             super::_state = super::State::Completed;
             return super::Result::Sucess;
-        }
+        } // if
         return super::Result::None;
     }
 };

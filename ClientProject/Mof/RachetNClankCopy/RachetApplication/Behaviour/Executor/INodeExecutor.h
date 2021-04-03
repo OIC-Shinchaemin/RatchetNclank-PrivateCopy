@@ -5,6 +5,8 @@
 #include <memory>
 #include <list>
 
+#include <Mof.h>
+
 
 namespace behaviour {
 // 前方宣言
@@ -44,6 +46,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) = 0;
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <typeparam name="Actor"></typeparam>
+    virtual void DebugRender(Mof::CVector2 position) = 0;
+    virtual void DebugRender(void) = 0;
 };
 }
 #endif // !BEHAVIOUR_INODE_EXECUTOR_H

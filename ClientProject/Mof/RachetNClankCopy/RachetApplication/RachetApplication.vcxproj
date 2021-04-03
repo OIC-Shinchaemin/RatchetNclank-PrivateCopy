@@ -152,6 +152,7 @@
     <ClCompile Include="..\include\My\UI\UIItem.cpp" />
     <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraLocator.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Character\Character.cpp" />
     <ClCompile Include="Character\Enemy.cpp" />
     <ClCompile Include="Character\Player.cpp" />
+    <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="GameSystem\GameMoney.cpp" />
@@ -198,6 +200,7 @@
     <ClInclude Include="..\include\My\UI\UIItem.h" />
     <ClInclude Include="..\include\My\UI\UIPanel.h" />
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Attack.h" />
     <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h" />
@@ -223,8 +226,10 @@
     <ClInclude Include="Character\Character.h" />
     <ClInclude Include="Character\Enemy.h" />
     <ClInclude Include="Character\Player.h" />
+    <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
+    <ClInclude Include="FunctionPointerContainer.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Gamepad.h" />
@@ -253,6 +258,8 @@
     <Text Include="..\Resource\resource_path.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Resource\behaviour\combat.json" />
+    <None Include="..\Resource\behaviour\patrol.json" />
     <None Include="..\Resource\save\savedata.json" />
   </ItemGroup>
   <ItemGroup>

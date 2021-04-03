@@ -64,7 +64,9 @@ my::Character::~Character() {
 }
 
 Mof::CSphere my::Character::GetSphere(void) const {
-    return Mof::CSphere(super::GetPosition(), _volume);
+    auto pos = super::GetPosition();
+    pos.y += _height;
+    return Mof::CSphere(pos, _volume);
 }
 
 bool my::Character::Initialize(const def::Transform& transform) {

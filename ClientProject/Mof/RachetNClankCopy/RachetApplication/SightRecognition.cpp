@@ -5,7 +5,7 @@
 
 my::SightRecognition::SightRecognition() :
     _owner(),
-    _range(2.5f) {
+    _range(5.0f) {
 }
 
 my::SightRecognition::~SightRecognition() {

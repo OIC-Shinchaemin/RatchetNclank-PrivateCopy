@@ -6,8 +6,8 @@
 bool Player::Input(void) {
     super::Input();
 
-    float angular_speed = 1.0f;
-    float speed = 1.0f;
+    float angular_speed = 3.5f;
+    float speed = 0.6f;
 
     // contaroller
     this->InputCameraForGamepad(angular_speed, speed);
