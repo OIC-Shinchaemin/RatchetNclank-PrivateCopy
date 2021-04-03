@@ -160,6 +160,12 @@
     <ClCompile Include="Character\Character.cpp" />
     <ClCompile Include="Character\Enemy.cpp" />
     <ClCompile Include="Character\Player.cpp" />
+    <ClCompile Include="Collision\CollisionAlgolithm.cpp" />
+    <ClCompile Include="Collision\CollisionObject.cpp" />
+    <ClCompile Include="Collision\EnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Collision\EnemyCollisionObject.cpp" />
+    <ClCompile Include="Collision\PlayerCollisionAlgolithm.cpp" />
+    <ClCompile Include="Collision\PlayerCollisionObject.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
@@ -170,8 +176,8 @@
     <ClCompile Include="GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
+    <ClCompile Include="Game\PhysicWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
-    <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
@@ -227,6 +233,12 @@
     <ClInclude Include="Character\Character.h" />
     <ClInclude Include="Character\Enemy.h" />
     <ClInclude Include="Character\Player.h" />
+    <ClInclude Include="Collision\CollisionAlgolithm.h" />
+    <ClInclude Include="Collision\CollisionObject.h" />
+    <ClInclude Include="Collision\EnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Collision\EnemyCollisionObject.h" />
+    <ClInclude Include="Collision\PlayerCollisionAlgolithm.h" />
+    <ClInclude Include="Collision\PlayerCollisionObject.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
@@ -241,8 +253,8 @@
     <ClInclude Include="GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameWorld.h" />
+    <ClInclude Include="Game\PhysicWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
-    <ClInclude Include="PhysicWorld.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />
     <ClInclude Include="ResourceManager.h" />

@@ -63,6 +63,14 @@ my::Character::Character() :
 my::Character::~Character() {
 }
 
+float my::Character::GetVolume(void) const {
+    return this->_volume;
+}
+
+float my::Character::GetHeight(void) const {
+    return this->_height;
+}
+
 Mof::CSphere my::Character::GetSphere(void) const {
     auto pos = super::GetPosition();
     pos.y += _height;

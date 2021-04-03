@@ -9,6 +9,8 @@
 
 #include "My/Core/Define.h"
 #include "My/Core/Observable.h"
+#include "Collision/CollisionObject.h"
+
 
 namespace my {
 enum class ActorState {
@@ -22,7 +24,19 @@ private:
     my::ActorState _state;
     //! トランスフォーム
     def::Transform _transform;
+    //! 衝突用
+    std::shared_ptr<my::CollisionObject> _collision_object;
 protected:
+    /// <summary>
+    /// 生成
+    /// </summary>
+    /// <typeparam name="Type"></typeparam>
+    /// <param name=""></param>
+    template<typename Type, typename Owner>
+    void GenerateCollisionObject(std::shared_ptr<Owner> ptr) {
+        _collision_object = std::make_shared<Type>();
+        _collision_object->SetOwner(ptr);
+    }
     /// <summary>
     /// 更新
     /// </summary>
@@ -93,6 +107,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     my::ActorState GetState(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::CollisionObject> GetCollisionObject(void) const;
     /// <summary>
     /// デリート
     /// </summary>

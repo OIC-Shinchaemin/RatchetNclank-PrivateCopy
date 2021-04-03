@@ -1,5 +1,7 @@
 #include "Enemy.h"
 
+#include "../Collision/EnemyCollisionObject.h"
+
 
 bool my::Enemy::ChangeToMoveState(void) {
     _enemy_state = my::EnemyState::Move;
@@ -143,6 +145,7 @@ Mof::CSphere my::Enemy::GetAttackSphere(void) const {
 
 bool my::Enemy::Initialize(const def::Transform& transform) {
     super::Initialize(transform);
+    super::GenerateCollisionObject<my::EnemyCollisionObject>(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
     //_init_position = super::GetPosition();
     _init_position = Mof::CVector3(5.0f, 0.0f, 5.0f);
     _sight.SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));

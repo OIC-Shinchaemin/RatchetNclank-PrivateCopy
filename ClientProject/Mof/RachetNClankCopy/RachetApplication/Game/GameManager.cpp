@@ -11,14 +11,17 @@
 void my::GameManager::AddElement(const std::shared_ptr<my::Actor>& ptr) {
     _game_world.AddActor(ptr);
     _renderer.AddElement(ptr);
+    _physic_world.AddActor(ptr);
 }
 
 void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
+    _physic_world.RemoveActor(ptr);
 }
 
 void my::GameManager::Collision(void) {
+    _physic_world.Update();
     auto player = _character->GetPosition();
 
     auto player_sphere = _character->GetSphere();

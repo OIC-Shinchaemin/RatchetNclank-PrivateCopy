@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include "../Gamepad.h"
+#include "../Collision/PlayerCollisionObject.h"
 
 
 bool Player::Input(void) {
@@ -443,6 +444,8 @@ void Player::OnNotify(std::shared_ptr<my::Weapon> change) {
 
 bool Player::Initialize(const def::Transform& transform) {
     super::Initialize(transform);
+    super::GenerateCollisionObject<my::PlayerCollisionObject>(std::dynamic_pointer_cast<Player>(shared_from_this()));
+
     _player_view_camera = (std::make_shared<my::Camera>());
     auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
     _player_view_camera->SetPosition(pos);

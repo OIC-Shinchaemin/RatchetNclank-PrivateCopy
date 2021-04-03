@@ -49,6 +49,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    float GetVolume(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetHeight(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual Mof::CSphere GetSphere(void) const;
     /// <summary>
     /// 初期化

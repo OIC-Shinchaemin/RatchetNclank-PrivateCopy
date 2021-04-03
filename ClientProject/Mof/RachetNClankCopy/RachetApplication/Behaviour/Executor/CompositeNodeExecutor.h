@@ -11,6 +11,9 @@ namespace behaviour {
 template<typename Actor>
 class CompositeNodeExecutor : public NodeExecutor<Actor> {
     using super = NodeExecutor<Actor>;
+protected:
+    //! 実行中
+    NodeExecutorPtr<Actor> _current;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,6 +38,7 @@ public:
     /// <param name=""></param>
     virtual void Reset(void) override{
         super::Reset();
+        _current.reset();
         for (auto& ptr : super::_children) {
             ptr->Reset();
         }

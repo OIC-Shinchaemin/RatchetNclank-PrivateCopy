@@ -28,6 +28,14 @@ public:
     /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
     /// <returns>Failed:Às‚Ì¸”s</returns>
     virtual INodeExecutor<Actor>::Result Execute(Actor& actor) override {
+        if (super::_current) {
+            auto re = super::_current->Execute(actor);
+            if (re != super::Result::None) {
+                super::_current = nullptr;
+            } // if
+            return super::Result::None;
+        } // if
+
         // ÀsÏ‚İ
         if (super::_state == super::State::Completed) {
             return super::Result::Sucess;

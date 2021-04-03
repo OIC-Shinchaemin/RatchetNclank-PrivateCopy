@@ -29,7 +29,8 @@ Mof::CVector3 my::Actor::UpdatePosition(float delta_time, Mof::CVector3 position
 
 my::Actor::Actor() :
     _state(my::ActorState::Active),
-    _transform() {
+    _transform(),
+    _collision_object() {
 }
 
 my::Actor::~Actor() {
@@ -67,9 +68,13 @@ my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
 
+std::shared_ptr<my::CollisionObject> my::Actor::GetCollisionObject(void) const {
+    return this->_collision_object;
+}
+
 void my::Actor::End(void) {
     this->_state = my::ActorState::End;
-    Observable::Notify("DeleteRequest",shared_from_this());
+    Observable::Notify("DeleteRequest", shared_from_this());
 }
 
 bool my::Actor::Initialize(const def::Transform& transform) {
@@ -91,6 +96,7 @@ bool my::Actor::Render(void) {
 }
 
 bool my::Actor::Release(void) {
+    _collision_object.reset();
     return true;
 }
 
