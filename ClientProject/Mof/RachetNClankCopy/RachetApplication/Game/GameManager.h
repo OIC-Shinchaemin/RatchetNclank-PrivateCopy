@@ -36,9 +36,9 @@ private:
     //! ステージ
     Stage _stage;
     //! キャラクタ
-    std::shared_ptr<my::Character> _character;
+    //std::shared_ptr<my::Character> _character;
     //! キャラクタ
-    std::vector<std::shared_ptr<my::Enemy>> _enemies;
+    //std::vector<std::shared_ptr<my::Enemy>> _enemies;
 private:
     /// <summary>
     /// 追加

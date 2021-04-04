@@ -76,7 +76,7 @@ public:
     ~Player();
     virtual void OnNotify(std::shared_ptr<my::Weapon> change) override;
 
-    virtual bool Initialize(const def::Transform& transform) override;
+    virtual bool Initialize(my::Actor::Param* param) override;
     virtual bool Input(void) override;
     virtual bool Update(float delta_time) override;
     virtual bool Update(float delta_time, LPMeshContainer stageMesh);

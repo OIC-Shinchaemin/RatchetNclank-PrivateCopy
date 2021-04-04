@@ -29,7 +29,7 @@ Mof::CVector3 my::Actor::UpdatePosition(float delta_time, Mof::CVector3 position
 
 my::Actor::Actor() :
     _state(my::ActorState::Active),
-    _transform(),
+    _param(),
     _collision_objects() {
 }
 
@@ -37,15 +37,15 @@ my::Actor::~Actor() {
 }
 
 void my::Actor::SetPosition(Mof::CVector3 position) {
-    this->_transform.position = position;
+    this->_param.transform.position = position;
 }
 
 void my::Actor::SetRotate(Mof::CVector3 rotate) {
-    this->_transform.rotate = rotate;
+    this->_param.transform.rotate = rotate;
 }
 
 void my::Actor::SetScale(Mof::CVector3 scale) {
-    this->_transform.scale = scale;
+    this->_param.transform.scale = scale;
 }
 
 std::string my::Actor::GetName(void) const {
@@ -53,15 +53,15 @@ std::string my::Actor::GetName(void) const {
 }
 
 Mof::CVector3 my::Actor::GetPosition(void) const {
-    return this->_transform.position;
+    return this->_param.transform.position;
 }
 
 Mof::CVector3 my::Actor::GetRotate(void) const {
-    return this->_transform.rotate;
+    return this->_param.transform.rotate;
 }
 
 Mof::CVector3 my::Actor::GetScale(void) const {
-    return this->_transform.scale;
+    return this->_param.transform.scale;
 }
 
 my::ActorState my::Actor::GetState(void) const {
@@ -77,9 +77,10 @@ void my::Actor::End(void) {
     Observable::Notify("DeleteRequest", shared_from_this());
 }
 
-bool my::Actor::Initialize(const def::Transform& transform) {
+bool my::Actor::Initialize(my::Actor::Param* param) {
     _state = my::ActorState::Active;
-    _transform = transform;
+    _param.transform = param->transform;
+    _param.init_transform = _param.transform;
     return true;
 }
 

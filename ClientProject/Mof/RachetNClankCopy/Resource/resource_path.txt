@@ -3,6 +3,7 @@
 ../Resource/mesh/omni_wrench/scene.mom
 ../Resource/mesh/bomb_glove/scene.mom
 ../Resource/mesh/pyrocitor/scene.mom
+../Resource/mesh/blaster_bullet/scene.mom
 
 ../Resource/texture/icon/bomb_glove.png
 ../Resource/texture/icon/pyrocitor.png

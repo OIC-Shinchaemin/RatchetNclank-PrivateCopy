@@ -6,6 +6,7 @@
 #include "../GameSystem/Save/SaveSystem.h"
 #include "../Character/Enemy.h"
 #include "../Character/Player.h"
+#include "../Bullet/Bullet.h"
 
 
 void my::GameManager::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -30,8 +31,7 @@ my::GameManager::GameManager() :
     _game_money(),
     _weapon_system(),
     _quick_change(),
-    _stage(),
-    _character() {
+    _stage() {
 
 }
 
@@ -50,8 +50,8 @@ bool my::GameManager::Initialize(void) {
     _game_money = std::make_unique<my::GameMoney>();
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-    auto player = std::make_shared<Player>();
-    _character = player;
+    auto player = ut::MakeSharedWithRelease<Player>();
+    //_character = player;
     _weapon_system->AddWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 
@@ -61,17 +61,19 @@ bool my::GameManager::Initialize(void) {
     _game_money->Initialize(save_data.GetMoney());
     _weapon_system->Initialize(save_data);
     _quick_change->Initialize({}, _weapon_system);
-    _character->Initialize({});
 
-    auto transform = def::Transform();
-    transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
+    auto param = new my::Actor::Param();
+    player->Initialize(param);
+    param->transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
     // Enemy‚ğ‰Šú‰»‚·‚é‚½‚ß‚ÉƒLƒƒƒbƒVƒ…
     auto temp = ut::MakeSharedWithRelease<my::Enemy>();
     temp->AddObserver(shared_from_this());
-    temp->Initialize(transform);
-    _enemies.push_back(temp);
+    temp->Initialize(param);
+    //_enemies.push_back(temp);
 
-    this->AddElement(_character);
+    ut::SafeDelete(param);
+
+    this->AddElement(player);
     this->AddElement(temp);
     return true;
 }
@@ -79,8 +81,18 @@ bool my::GameManager::Initialize(void) {
 bool my::GameManager::Input(void) {
     _game_money->Input();
     _quick_change->Input();
-
     _game_world.Input();
+
+    if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+        auto temp = ut::MakeSharedWithRelease<my::Bullet>();
+        temp->AddObserver(shared_from_this());
+        auto param = my::Bullet::Param();
+        param.transform.position = Mof::CVector3(0.0f, 2.0f, 0.0f);
+        param.transform.scale = Mof::CVector3(0.1f, 0.1f, 0.1f);
+        param.speed = Mof::CVector3(4.0f, 0.0f, 0.0f);
+        temp->Start(param);
+        this->AddElement(temp);
+    } // if
     return true;
 }
 
@@ -116,7 +128,7 @@ bool my::GameManager::Render(void) {
 }
 
 bool my::GameManager::Release(void) {
-    _character->Release();
+    //_character->Release();
     _stage.Release();
 
     //! save

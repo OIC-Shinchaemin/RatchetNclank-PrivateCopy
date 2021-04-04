@@ -77,8 +77,8 @@ Mof::CSphere my::Character::GetSphere(void) const {
     return Mof::CSphere(pos, _volume);
 }
 
-bool my::Character::Initialize(const def::Transform& transform) {
-    super::Initialize(transform);
+bool my::Character::Initialize(my::Actor::Param* param) {
+    super::Initialize(param);
     return true;
 }
 

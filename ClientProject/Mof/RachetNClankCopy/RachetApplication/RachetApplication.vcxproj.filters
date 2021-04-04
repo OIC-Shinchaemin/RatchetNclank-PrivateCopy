@@ -124,6 +124,12 @@
     <Filter Include="Rachet\Header\Collision\Object">
       <UniqueIdentifier>{a5955b7b-d4b5-443a-96a7-62cb96e79bf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Bullet">
+      <UniqueIdentifier>{1ddb5bbd-12f9-4b21-8af1-6c188ec99cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Bullet">
+      <UniqueIdentifier>{e685aca4-fa9b-4e9c-bbb6-a286ac3820c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -263,6 +269,9 @@
     </ClCompile>
     <ClCompile Include="Collision\Object\CollisionObject.cpp">
       <Filter>Rachet\Source\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\Bullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="Collision\Algolithm\CollisionAlgolithm.h">
       <Filter>Rachet\Header\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\Bullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

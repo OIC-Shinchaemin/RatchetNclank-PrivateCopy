@@ -442,8 +442,8 @@ void Player::OnNotify(std::shared_ptr<my::Weapon> change) {
     _current_weapon = change;
 }
 
-bool Player::Initialize(const def::Transform& transform) {
-    super::Initialize(transform);
+bool Player::Initialize(my::Actor::Param* param) {
+    super::Initialize(param);
     auto coll = std::make_shared<my::PlayerCollisionObject>();
     coll->SetOwner(std::dynamic_pointer_cast<Player>(shared_from_this()));
     super::AddCollisionObject(coll);

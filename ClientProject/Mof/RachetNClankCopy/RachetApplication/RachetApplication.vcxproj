@@ -153,6 +153,7 @@
     <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="Bullet\Bullet.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraLocator.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
     <ClInclude Include="Behaviour\Node\SimplexNode.h" />
+    <ClInclude Include="Bullet\Bullet.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraLocator.h" />

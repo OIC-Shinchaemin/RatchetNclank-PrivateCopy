@@ -124,9 +124,9 @@ public:
     /// <summary>
     /// ‰Šú‰»
     /// </summary>
-    /// <param name="transform"></param>
+    /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(const def::Transform& transform) override;
+    virtual bool Initialize(my::Actor::Param* param) override;
     /// <summary>
     /// “ü—Í
     /// </summary>

@@ -178,13 +178,12 @@ void my::Enemy::GenerateCollisionObject(void) {
 
 }
 
-bool my::Enemy::Initialize(const def::Transform& transform) {
-    super::Initialize(transform);
+bool my::Enemy::Initialize(my::Actor::Param* param) {
+    super::Initialize(param);
     _sight = std::make_shared<my::SightRecognition>();
     _attack = std::make_shared<my::Attack>();    
     this->GenerateCollisionObject();
    
-
     //_init_position = super::GetPosition();
     _init_position = Mof::CVector3(5.0f, 0.0f, 5.0f);
     _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));

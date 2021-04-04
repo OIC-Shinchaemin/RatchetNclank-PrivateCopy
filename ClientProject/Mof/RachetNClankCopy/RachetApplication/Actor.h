@@ -20,11 +20,23 @@ enum class ActorState {
 };
 class Actor : public std::enable_shared_from_this<my::Actor>, public my::Observable<const char*, const std::shared_ptr<my::Actor>&> {
     using Observable = my::Observable<const char*, const std::shared_ptr<my::Actor>&>;
+public:
+    struct Param {
+        //! トランスフォーム
+        def::Transform transform;
+        //! 初期位置
+        def::Transform init_transform;
+        Param() :
+            transform(), init_transform() {
+        }
+        virtual ~Param() {
+        }
+    };
 private:
     //! 状態
     my::ActorState _state;
-    //! トランスフォーム
-    def::Transform _transform;
+    //! パラメータ
+    my::Actor::Param _param;
     //! 衝突用
     std::vector<std::shared_ptr<my::CollisionObject>> _collision_objects;
 protected:
@@ -61,7 +73,7 @@ public:
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~Actor();    
+    virtual ~Actor();
     /// <summary>
     /// セッター
     /// </summary>
@@ -121,9 +133,9 @@ public:
     /// <summary>
     /// 初期化
     /// </summary>
-    /// <param name="transform"></param>
+    /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(const def::Transform& transform);
+    virtual bool Initialize(my::Actor::Param* param);
     /// <summary>
     /// 入力
     /// </summary>
