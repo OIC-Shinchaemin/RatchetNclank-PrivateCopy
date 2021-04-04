@@ -4,12 +4,13 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <Mof.h>
 
 #include "My/Core/Define.h"
 #include "My/Core/Observable.h"
-#include "Collision/CollisionObject.h"
+#include "Collision/Object/CollisionObject.h"
 
 
 namespace my {
@@ -25,17 +26,16 @@ private:
     //! トランスフォーム
     def::Transform _transform;
     //! 衝突用
-    std::shared_ptr<my::CollisionObject> _collision_object;
+    std::vector<std::shared_ptr<my::CollisionObject>> _collision_objects;
 protected:
     /// <summary>
     /// 生成
     /// </summary>
     /// <typeparam name="Type"></typeparam>
     /// <param name=""></param>
-    template<typename Type, typename Owner>
-    void GenerateCollisionObject(std::shared_ptr<Owner> ptr) {
-        _collision_object = std::make_shared<Type>();
-        _collision_object->SetOwner(ptr);
+    template<typename Type>
+    void AddCollisionObject(std::shared_ptr<Type> ptr) {
+        _collision_objects.push_back(ptr);
     }
     /// <summary>
     /// 更新
@@ -112,7 +112,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::CollisionObject> GetCollisionObject(void) const;
+    const std::vector<std::shared_ptr<my::CollisionObject>>& GetCollisionObjects(void) const;
     /// <summary>
     /// デリート
     /// </summary>

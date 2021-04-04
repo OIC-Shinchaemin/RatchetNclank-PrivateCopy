@@ -30,7 +30,7 @@ Mof::CVector3 my::Actor::UpdatePosition(float delta_time, Mof::CVector3 position
 my::Actor::Actor() :
     _state(my::ActorState::Active),
     _transform(),
-    _collision_object() {
+    _collision_objects() {
 }
 
 my::Actor::~Actor() {
@@ -68,8 +68,8 @@ my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
 
-std::shared_ptr<my::CollisionObject> my::Actor::GetCollisionObject(void) const {
-    return this->_collision_object;
+const std::vector<std::shared_ptr<my::CollisionObject>>& my::Actor::GetCollisionObjects(void) const {
+    return this->_collision_objects;
 }
 
 void my::Actor::End(void) {
@@ -96,7 +96,7 @@ bool my::Actor::Render(void) {
 }
 
 bool my::Actor::Release(void) {
-    _collision_object.reset();
+    _collision_objects.clear();
     return true;
 }
 

@@ -7,7 +7,7 @@
 #include "My/Core/Observer.h"
 #include "GameWorld.h"
 #include "Renderer.h"
-#include "PhysicWorld.h"
+#include "PhysicsWorld.h"
 #include "../GameSystem/GameMoney.h"
 #include "../GameSystem/WeaponSystem.h"
 #include "../GameSystem/QuickChangeSystem.h"
@@ -26,7 +26,7 @@ private:
     //! レンダラー
     my::Renderer _renderer;
     //! コリジョン
-    my::PhysicWorld _physic_world;
+    my::PhysicsWorld _physic_world;
     //! 金
     std::unique_ptr<my::GameMoney>  _game_money;
     //! 武器

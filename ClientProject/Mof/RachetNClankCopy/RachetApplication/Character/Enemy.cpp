@@ -1,6 +1,8 @@
 #include "Enemy.h"
 
-#include "../Collision/EnemyCollisionObject.h"
+#include "Player.h"
+#include "../Collision/Object/EnemyCollisionObject.h"
+#include "../Collision/Object/EnemySightCollisionObject.h"
 
 
 bool my::Enemy::ChangeToMoveState(void) {
@@ -35,7 +37,7 @@ bool my::Enemy::HasTarget(void) {
 
 bool my::Enemy::TargetInAttackRange(void) {
     if (auto target = _target.lock()) {
-        if (_attack.GetRangeSphere().CollisionPoint(target->GetPosition())) {
+        if (_attack->GetRangeSphere().CollisionPoint(target->GetPosition())) {
             return true;
         } // if
     } // if
@@ -68,7 +70,7 @@ bool my::Enemy::GoHome(void) {
 }
 
 bool my::Enemy::Attack(void) {
-    _attack.Start();
+    _attack->Start();
     _combat_behaviour_executor->Reset();
     return false;
 }
@@ -114,7 +116,7 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
     mat.RotationZXY(rotate);
     ray.Direction = -math::vec3::kUnitZ * mat;
 
-    this->RenderRay(ray, _sight.GetRange(), def::color_rgba_u32::kGreen);
+    this->RenderRay(ray, _sight->GetRange(), def::color_rgba_u32::kGreen);
 }
 
 my::Enemy::Enemy() :
@@ -140,16 +142,53 @@ void my::Enemy::SetTarget(const std::shared_ptr<my::Character>& ptr) {
 }
 
 Mof::CSphere my::Enemy::GetAttackSphere(void) const {
-    return  this->_attack.GetSphere();
+    return  this->_attack->GetSphere();
+}
+
+void my::Enemy::GenerateCollisionObject(void) {
+    auto coll = std::make_shared<my::EnemyCollisionObject>();
+    coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    super::AddCollisionObject(coll);
+    coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
+                           "PlayerCollisionObject",
+                           my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
+        this->End(); return true;
+    }));
+
+    auto sight_coll = std::make_shared<my::EnemySightCollisionObject>();
+    sight_coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    sight_coll->SetSight(_sight);
+    super::AddCollisionObject(sight_coll);
+    sight_coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
+                                 "PlayerCollisionObject",
+                                 my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
+        auto target = std::any_cast<std::weak_ptr<Player>>(in.target);
+        if (auto ptr = target.lock()) {
+            this->SetTarget(ptr);
+        } // if
+        return true;
+    }));
+    sight_coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Exit,
+                                 "PlayerCollisionObject",
+                                 my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
+        this->SetTarget(nullptr); 
+        return true;
+    }));
+
+
 }
 
 bool my::Enemy::Initialize(const def::Transform& transform) {
     super::Initialize(transform);
-    super::GenerateCollisionObject<my::EnemyCollisionObject>(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _sight = std::make_shared<my::SightRecognition>();
+    _attack = std::make_shared<my::Attack>();    
+    this->GenerateCollisionObject();
+   
+
     //_init_position = super::GetPosition();
     _init_position = Mof::CVector3(5.0f, 0.0f, 5.0f);
-    _sight.SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    _attack.SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _attack->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
 
     _combat_behaviour_executor =  _behaviour_executor_factory.Create("../Resource/behaviour/combat.json");
     _patrol_behaviour_executor = _behaviour_executor_factory.Create("../Resource/behaviour/patrol.json");
@@ -186,7 +225,7 @@ bool my::Enemy::Render(void) {
 }
 
 bool my::Enemy::ContainInRecognitionRange(Mof::CVector3 pos) {
-    return _sight.ContainInRecognitionRange(pos);
+    return _sight->ContainInRecognitionRange(pos);
 }
 
 void my::Enemy::RenderDebug(void) {
@@ -227,5 +266,5 @@ void my::Enemy::RenderDebug(void) {
     else if (_enemy_state == my::EnemyState::Attack) {
         ::CGraphicsUtilities::RenderString(0.0f, 20.0f, "state = Attack");
     } // else if
-    _attack.RenderDebug();
+    _attack->RenderDebug();
 }

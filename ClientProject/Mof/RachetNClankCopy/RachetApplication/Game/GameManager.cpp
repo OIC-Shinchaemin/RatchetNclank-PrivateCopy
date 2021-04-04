@@ -22,22 +22,6 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
 
 void my::GameManager::Collision(void) {
     _physic_world.Update();
-    auto player = _character->GetPosition();
-
-    auto player_sphere = _character->GetSphere();
-
-    for (auto& enemy : _enemies) {
-        if (enemy->ContainInRecognitionRange(player)) {
-            enemy->SetTarget(_character);
-        } // if
-        else {
-            enemy->SetTarget(nullptr);
-        } // else
-
-        if (enemy->GetSphere().CollisionSphere(player_sphere)) {
-            enemy->End();
-        } // if
-    } // for
 }
 
 my::GameManager::GameManager() :
@@ -48,6 +32,7 @@ my::GameManager::GameManager() :
     _quick_change(),
     _stage(),
     _character() {
+
 }
 
 my::GameManager::~GameManager() {

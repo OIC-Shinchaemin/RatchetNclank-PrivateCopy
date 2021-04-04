@@ -107,10 +107,22 @@
       <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Source\Collision">
-      <UniqueIdentifier>{25ce492b-f1f5-4d53-a156-351f745521d5}</UniqueIdentifier>
+      <UniqueIdentifier>{29a654a9-e09d-4726-abd9-041fde828b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Collision\Algolithm">
+      <UniqueIdentifier>{d785346f-be4b-4702-a8be-a8e095e82c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Collision\Object">
+      <UniqueIdentifier>{f28df811-fe21-41c3-8e7e-7f1cc398ed54}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Header\Collision">
-      <UniqueIdentifier>{1ba79d52-05f8-4cf4-9456-2e219f4e88b8}</UniqueIdentifier>
+      <UniqueIdentifier>{cc546e59-d244-464a-99a6-4f19ffb19a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Collision\Algolithm">
+      <UniqueIdentifier>{76168668-72c3-4dc2-95e7-defccea9601c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Collision\Object">
+      <UniqueIdentifier>{a5955b7b-d4b5-443a-96a7-62cb96e79bf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -225,26 +237,32 @@
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="Game\PhysicWorld.cpp">
+    <ClCompile Include="Game\PhysicsWorld.cpp">
       <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\CollisionObject.cpp">
-      <Filter>Rachet\Source\Collision</Filter>
+    <ClCompile Include="Collision\Algolithm\EnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\EnemyCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Collision</Filter>
+    <ClCompile Include="Collision\Algolithm\EnemySightCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\EnemyCollisionObject.cpp">
-      <Filter>Rachet\Source\Collision</Filter>
+    <ClCompile Include="Collision\Algolithm\PlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\PlayerCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Collision</Filter>
+    <ClCompile Include="Collision\Algolithm\CollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\PlayerCollisionObject.cpp">
-      <Filter>Rachet\Source\Collision</Filter>
+    <ClCompile Include="Collision\Object\EnemyCollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\CollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Collision</Filter>
+    <ClCompile Include="Collision\Object\EnemySightCollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Object\PlayerCollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Object\CollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -455,26 +473,32 @@
     <ClInclude Include="Factory\BehaviourExecutorFactory.h">
       <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="Game\PhysicWorld.h">
+    <ClInclude Include="Game\PhysicsWorld.h">
       <Filter>Rachet\Header\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\CollisionObject.h">
-      <Filter>Rachet\Header\Collision</Filter>
+    <ClInclude Include="Collision\Object\EnemyCollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\EnemyCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Collision</Filter>
+    <ClInclude Include="Collision\Object\EnemySightCollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\EnemyCollisionObject.h">
-      <Filter>Rachet\Header\Collision</Filter>
+    <ClInclude Include="Collision\Object\PlayerCollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\PlayerCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Collision</Filter>
+    <ClInclude Include="Collision\Object\CollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\PlayerCollisionObject.h">
-      <Filter>Rachet\Header\Collision</Filter>
+    <ClInclude Include="Collision\Algolithm\EnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\CollisionAlgolithm.h">
-      <Filter>Rachet\Header\Collision</Filter>
+    <ClInclude Include="Collision\Algolithm\EnemySightCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Algolithm\PlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Algolithm\CollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

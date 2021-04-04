@@ -28,11 +28,11 @@ private:
     //! 初期位置
     Mof::CVector3 _init_position;
     //! 標的
-    std::weak_ptr<my::Character>_target;
+    std::weak_ptr<my::Actor>_target;
     //! 視覚
-    my::SightRecognition _sight;
+    std::shared_ptr<my::SightRecognition>  _sight;
     //! 視覚
-    my::Attack _attack;
+    std::shared_ptr<my::Attack>_attack;
     //! 状態
     my::AIState _state;
     //! 状態
@@ -116,6 +116,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CSphere GetAttackSphere(void) const;
+    /// <summary>
+    /// 生成
+    /// </summary>
+    /// <param name=""></param>
+    void GenerateCollisionObject(void);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -32,7 +32,6 @@ bool my::SightRecognition::ContainInRecognitionRange(Mof::CVector3 target) {
     } // if
 
 
-
     Mof::CVector3 dir = target - pos;
     Mof::CVector3 front(-math::vec3::kUnitZ);
     Mof::CMatrix33 mat;
