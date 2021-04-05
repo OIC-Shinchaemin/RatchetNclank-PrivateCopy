@@ -86,8 +86,8 @@ MofBool CGameApp::Input(void) {
 
 MofBool CGameApp::Update(void) {
     this->Input();
-    float delta = Mof::CUtilities::GetFrameSecond();
-
+    //float delta = Mof::CUtilities::GetFrameSecond();
+    float delta = 0.01667f;
     
     _game_manager->Update(delta);
     _camera_manager->Update();

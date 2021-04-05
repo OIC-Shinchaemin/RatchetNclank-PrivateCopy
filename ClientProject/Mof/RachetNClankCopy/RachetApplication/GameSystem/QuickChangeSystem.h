@@ -87,6 +87,8 @@ private:
     std::unordered_map<int, my::QuickChangeItem> _items;
     //! パス
     std::unordered_map<std::string, std::string> _tex_names;
+    //! 通知用
+    my::Observable<const std::string&> _current;
 
     /// <summary>
     /// 開く
@@ -113,6 +115,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector4 GetColor(void) const;
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddWeaponObserver(const std::shared_ptr<my::Observer<const std::string&>>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

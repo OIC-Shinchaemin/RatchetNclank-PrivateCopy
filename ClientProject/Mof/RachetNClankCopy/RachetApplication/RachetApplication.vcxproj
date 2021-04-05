@@ -152,6 +152,11 @@
     <ClCompile Include="..\include\My\UI\UIItem.cpp" />
     <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="Bullet\BlasterBullet.cpp" />
+    <ClCompile Include="Bullet\BombGloveBullet.cpp" />
+    <ClCompile Include="Bullet\Bullet.cpp" />
+    <ClCompile Include="Bullet\PyrocitorBullet.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraLocator.cpp" />
@@ -159,6 +164,15 @@
     <ClCompile Include="Character\Character.cpp" />
     <ClCompile Include="Character\Enemy.cpp" />
     <ClCompile Include="Character\Player.cpp" />
+    <ClCompile Include="Collision\Algolithm\CollisionAlgolithm.cpp" />
+    <ClCompile Include="Collision\Algolithm\EnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Collision\Algolithm\EnemySightCollisionAlgolithm.cpp" />
+    <ClCompile Include="Collision\Algolithm\PlayerCollisionAlgolithm.cpp" />
+    <ClCompile Include="Collision\Object\CollisionObject.cpp" />
+    <ClCompile Include="Collision\Object\EnemyCollisionObject.cpp" />
+    <ClCompile Include="Collision\Object\EnemySightCollisionObject.cpp" />
+    <ClCompile Include="Collision\Object\PlayerCollisionObject.cpp" />
+    <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="GameSystem\GameMoney.cpp" />
@@ -168,12 +182,15 @@
     <ClCompile Include="GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
+    <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="Velocity.cpp" />
+    <ClCompile Include="Weapon\Blaster.cpp" />
     <ClCompile Include="Weapon\BombGlove.cpp" />
     <ClCompile Include="Weapon\Mechanical.cpp" />
     <ClCompile Include="Weapon\OmniWrench.cpp" />
@@ -198,6 +215,7 @@
     <ClInclude Include="..\include\My\UI\UIItem.h" />
     <ClInclude Include="..\include\My\UI\UIPanel.h" />
     <ClInclude Include="Actor.h" />
+<<<<<<< HEAD
     <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
@@ -207,6 +225,31 @@
     <ClInclude Include="Behaviour\Node\CompositeNode.h" />
     <ClInclude Include="Behaviour\Node\Node.h" />
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
+=======
+    <ClInclude Include="Attack.h" />
+    <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\NodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\SelectorNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\SequencerNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\SimplexNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Node\ActionNode.h" />
+    <ClInclude Include="Behaviour\Node\CompositeNode.h" />
+    <ClInclude Include="Behaviour\Node\ConditionalNode.h" />
+    <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
+    <ClInclude Include="Behaviour\Node\Node.h" />
+    <ClInclude Include="Behaviour\Node\ParameterNode.h" />
+    <ClInclude Include="Behaviour\Node\SelectorNode.h" />
+    <ClInclude Include="Behaviour\Node\SequencerNode.h" />
+    <ClInclude Include="Behaviour\Node\SimplexNode.h" />
+    <ClInclude Include="Bullet\BlasterBullet.h" />
+    <ClInclude Include="Bullet\BombGloveBullet.h" />
+    <ClInclude Include="Bullet\Bullet.h" />
+    <ClInclude Include="Bullet\PyrocitorBullet.h" />
+>>>>>>> origin/Ex55_WeaponAction
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraLocator.h" />
@@ -214,8 +257,18 @@
     <ClInclude Include="Character\Character.h" />
     <ClInclude Include="Character\Enemy.h" />
     <ClInclude Include="Character\Player.h" />
+    <ClInclude Include="Collision\Algolithm\CollisionAlgolithm.h" />
+    <ClInclude Include="Collision\Algolithm\EnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Collision\Algolithm\EnemySightCollisionAlgolithm.h" />
+    <ClInclude Include="Collision\Algolithm\PlayerCollisionAlgolithm.h" />
+    <ClInclude Include="Collision\Object\CollisionObject.h" />
+    <ClInclude Include="Collision\Object\EnemyCollisionObject.h" />
+    <ClInclude Include="Collision\Object\EnemySightCollisionObject.h" />
+    <ClInclude Include="Collision\Object\PlayerCollisionObject.h" />
+    <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
+    <ClInclude Include="FunctionPointerContainer.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Gamepad.h" />
@@ -226,7 +279,9 @@
     <ClInclude Include="GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameWorld.h" />
+    <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
+    <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -234,6 +289,7 @@
     <ClInclude Include="Stage\Stage.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="Velocity.h" />
+    <ClInclude Include="Weapon\Blaster.h" />
     <ClInclude Include="Weapon\BombGlove.h" />
     <ClInclude Include="Weapon\Mechanical.h" />
     <ClInclude Include="Weapon\OmniWrench.h" />
@@ -244,6 +300,8 @@
     <Text Include="..\Resource\resource_path.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Resource\behaviour\combat.json" />
+    <None Include="..\Resource\behaviour\patrol.json" />
     <None Include="..\Resource\save\savedata.json" />
   </ItemGroup>
   <ItemGroup>

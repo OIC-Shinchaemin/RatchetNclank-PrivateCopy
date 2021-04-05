@@ -22,9 +22,15 @@ float my::SightRecognition::GetRange(void) const {
 bool my::SightRecognition::ContainInRecognitionRange(Mof::CVector3 target) {
     _ASSERT_EXPR(!_owner.expired(),L"無効なポインタを参照しています");
 
+    
     // 相手へのベクトルと自分の前方ベクトルの内積が正（>０）の場合は鋭角であり前方９０°以内と判断できる
     auto pos = _owner.lock()->GetPosition();
     auto rotate = _owner.lock()->GetRotate();
+
+    if (!Mof::CSphere(pos, _range).CollisionPoint(target)) {
+        return false;
+    } // if
+
 
     Mof::CVector3 dir = target - pos;
     Mof::CVector3 front(-math::vec3::kUnitZ);

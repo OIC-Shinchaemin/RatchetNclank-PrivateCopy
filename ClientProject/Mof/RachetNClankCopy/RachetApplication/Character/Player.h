@@ -2,10 +2,13 @@
 
 
 #include "Character.h"
+#include "My/Core/Observer.h"
 #include "../Camera/CameraLocator.h"
 
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
+#include "../Weapon/Mechanical.h"
+#include "../GameSystem/WeaponSystem.h"
 
 
 // 移動速度
@@ -21,7 +24,7 @@
 
 #define		GRAVITY					(0.01f)
 
-class Player : public my::Character, private my::CameraLocator {
+class Player : public my::Character, private my::CameraLocator, public my::Observer<std::shared_ptr<my::Mechanical>> {
 private:
     enum ActionState {
         None,
@@ -51,15 +54,17 @@ private:
     bool					m_bAttackMove;
     bool					m_bNextAtc;
     float					m_Gravity;
-    
+
     //! カメラ
     std::shared_ptr<my::Camera> _player_view_camera;
-    //! カメラ
-    std::shared_ptr<my::Camera> _top_view_camera;
     //! カメラコントローラ
-    std::shared_ptr<my::CameraController>_camera_controller;
+    my::CameraController _camera_controller;
+    //! 武器
+    std::weak_ptr<my::Mechanical>_current_mechanical;
 
-
+    virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed) override;
+    void InputCameraForKeyboard(float angular_speed, float speed);
+    void InputCameraForGamepad(float angular_speed, float speed);
     void UpdateCamera(void);
     void UpdateMove(void);
     void UpdateJump(void);
@@ -69,8 +74,9 @@ private:
 public:
     Player();
     ~Player();
+    virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
 
-    virtual bool Initialize(const def::Transform& transform) override;
+    virtual bool Initialize(my::Actor::Param* param) override;
     virtual bool Input(void) override;
     virtual bool Update(float delta_time) override;
     virtual bool Update(float delta_time, LPMeshContainer stageMesh);

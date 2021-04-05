@@ -100,6 +100,39 @@
     <Filter Include="Rachet\Header\Behaviour\Node">
       <UniqueIdentifier>{c5513471-6a03-479d-b8c3-ba7d84591e9b}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
+=======
+    <Filter Include="リソース ファイル\behaviour">
+      <UniqueIdentifier>{3be1d213-4b2d-4d51-a4aa-2ec5d4dc7c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Factory">
+      <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Collision">
+      <UniqueIdentifier>{29a654a9-e09d-4726-abd9-041fde828b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Collision\Algolithm">
+      <UniqueIdentifier>{d785346f-be4b-4702-a8be-a8e095e82c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Collision\Object">
+      <UniqueIdentifier>{f28df811-fe21-41c3-8e7e-7f1cc398ed54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Collision">
+      <UniqueIdentifier>{cc546e59-d244-464a-99a6-4f19ffb19a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Collision\Algolithm">
+      <UniqueIdentifier>{76168668-72c3-4dc2-95e7-defccea9601c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Collision\Object">
+      <UniqueIdentifier>{a5955b7b-d4b5-443a-96a7-62cb96e79bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Bullet">
+      <UniqueIdentifier>{1ddb5bbd-12f9-4b21-8af1-6c188ec99cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Bullet">
+      <UniqueIdentifier>{e685aca4-fa9b-4e9c-bbb6-a286ac3820c0}</UniqueIdentifier>
+    </Filter>
+>>>>>>> origin/Ex55_WeaponAction
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -206,6 +239,57 @@
     </ClCompile>
     <ClCompile Include="Velocity.cpp">
       <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BehaviourExecutorFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PhysicsWorld.cpp">
+      <Filter>Rachet\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Algolithm\EnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Algolithm\EnemySightCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Algolithm\PlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Algolithm\CollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Object\EnemyCollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Object\EnemySightCollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Object\PlayerCollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Object\CollisionObject.cpp">
+      <Filter>Rachet\Source\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\Bullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffect.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\BombGloveBullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\BlasterBullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\PyrocitorBullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon\Blaster.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,6 +464,90 @@
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Behaviour\Executor\SequencerNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SequencerNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ParameterNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ConditionalNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\DecoratorNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SimplexNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SimplexNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionPointerContainer.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BehaviourExecutorFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PhysicsWorld.h">
+      <Filter>Rachet\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Object\EnemyCollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Object\EnemySightCollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Object\PlayerCollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Object\CollisionObject.h">
+      <Filter>Rachet\Header\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Algolithm\EnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Algolithm\EnemySightCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Algolithm\PlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Algolithm\CollisionAlgolithm.h">
+      <Filter>Rachet\Header\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\Bullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffect.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\BombGloveBullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\PyrocitorBullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\BlasterBullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon\Blaster.h">
+      <Filter>Rachet\Header\Weapon</Filter>
+    </ClInclude>
+>>>>>>> origin/Ex55_WeaponAction
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -389,6 +557,12 @@
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json">
       <Filter>リソース ファイル\save</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\patrol.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

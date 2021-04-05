@@ -18,6 +18,14 @@ void my::Velocity::SetVelocity(Mof::CVector3 value) {
     this->_velocity = value;
 }
 
+void my::Velocity::SetGravity(float value) {
+    this->_gravity = value;
+}
+
+void my::Velocity::SetDrag(float value) {
+    this->_drag = value;
+}
+
 Mof::CVector3 my::Velocity::GetVelocity(void) const {
     return this->_velocity;
 }

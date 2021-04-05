@@ -8,6 +8,10 @@ my::QuickChangeMenu::QuickChangeMenu(const char* name) :
 void my::QuickChangeMenu::OnNotify(Mof::CVector4 color) {
     this->SetColor(color);
 }
+void my::QuickChangeMenu::AddWeaponObserver(const std::shared_ptr<my::Observer<std::string>>& ptr) {
+    _weapon.AddObserver(ptr);
+}
+
 /*
 void my::QuickChangeMenu::OnNotify(const std::shared_ptr<my::QuickChangeSystem>& observable, const char* event) {
     if (event == "UpdateColor") {

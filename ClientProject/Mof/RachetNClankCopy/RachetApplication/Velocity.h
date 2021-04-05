@@ -37,6 +37,16 @@ public:
     /// <param name="value"></param>
     void SetVelocity(Mof::CVector3 value);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetGravity(float value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetDrag(float value);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>

@@ -10,7 +10,6 @@
 #include <Mof.h>
 
 #include "../GameDefine.h"
-#include "../Velocity.h"
 
 
 namespace my {
@@ -21,15 +20,18 @@ protected:
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! モーション
     Mof::LPMeshMotionController	_motion;
-    //! 速度
-    my::Velocity _velocity;
     //! 大きさ
     float _volume;
     //! 高さ
     float _height;
 protected:
+<<<<<<< HEAD
     void InputMoveVelocity(Mof::CVector2 stick, float speed);
     void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
+=======
+    virtual void InputMoveVelocity(Mof::CVector2 stick, float speed);
+    virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
+>>>>>>> origin/Ex55_WeaponAction
     /// <summary>
     /// 更新
     /// </summary>
@@ -49,13 +51,25 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    float GetVolume(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetHeight(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual Mof::CSphere GetSphere(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
-    /// <param name="transform"></param>
+    /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(const def::Transform& transform) override;
+    virtual bool Initialize(my::Actor::Param* param) override;
     /// <summary>
     /// 更新
     /// </summary>
