@@ -100,8 +100,6 @@
     <Filter Include="Rachet\Header\Behaviour\Node">
       <UniqueIdentifier>{c5513471-6a03-479d-b8c3-ba7d84591e9b}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
-=======
     <Filter Include="リソース ファイル\behaviour">
       <UniqueIdentifier>{3be1d213-4b2d-4d51-a4aa-2ec5d4dc7c2e}</UniqueIdentifier>
     </Filter>
@@ -132,7 +130,6 @@
     <Filter Include="Rachet\Header\Bullet">
       <UniqueIdentifier>{e685aca4-fa9b-4e9c-bbb6-a286ac3820c0}</UniqueIdentifier>
     </Filter>
->>>>>>> origin/Ex55_WeaponAction
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -198,6 +195,9 @@
     <ClCompile Include="Gamepad.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClCompile>
     <ClCompile Include="Character\Player.cpp">
       <Filter>Rachet\Source\Character</Filter>
     </ClCompile>
@@ -230,9 +230,6 @@
     </ClCompile>
     <ClCompile Include="SightRecognition.cpp">
       <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Stage.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameWorld.cpp">
       <Filter>Rachet\Source\Game</Filter>
@@ -392,6 +389,9 @@
     <ClInclude Include="resource.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
     <ClInclude Include="Character\Character.h">
       <Filter>Rachet\Header\Character</Filter>
     </ClInclude>
@@ -428,9 +428,6 @@
     <ClInclude Include="SightRecognition.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClCompile>
     <ClInclude Include="Game\GameWorld.h">
       <Filter>Rachet\Header\Game</Filter>
     </ClInclude>
@@ -464,11 +461,6 @@
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     <ClInclude Include="Behaviour\Executor\SequencerNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
@@ -496,7 +488,6 @@
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Attack.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -551,9 +542,6 @@
     <ClInclude Include="Weapon\Blaster.h">
       <Filter>Rachet\Header\Weapon</Filter>
     </ClInclude>
->>>>>>> origin/Ex55_WeaponAction
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">

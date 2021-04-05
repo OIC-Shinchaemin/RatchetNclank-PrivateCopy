@@ -16,49 +16,33 @@ namespace my {
 class Character : public my::Actor, public my::ResourceLocator {
     using super = my::Actor;
 protected:
-    //! ãƒ¡ãƒƒã‚·ãƒ¥
+    //! ƒƒbƒVƒ…
     std::weak_ptr<Mof::CMeshContainer> _mesh;
-    //! ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³
+    //! ƒ‚[ƒVƒ‡ƒ“
     Mof::LPMeshMotionController	_motion;
-<<<<<<< HEAD
     //! ‘å‚«‚³
-=======
-    //! é€Ÿåº¦
-    my::Velocity _velocity;
-    //! å¤§ãã•
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     float _volume;
-    //! é«˜ã•
+    //! ‚‚³
     float _height;
 protected:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    void InputMoveVelocity(Mof::CVector2 stick, float speed);
-    void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
-=======
     virtual void InputMoveVelocity(Mof::CVector2 stick, float speed);
     virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
->>>>>>> origin/Ex55_WeaponAction
-=======
-    virtual void InputMoveVelocity(Mof::CVector2 stick, float speed);
-    virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name="delta_time"></param>
     virtual void UpdateTransform(float delta_time);
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     Character();
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~Character();
     /// <summary>
-    /// ã‚²ãƒƒã‚¿ãƒ¼
+    /// ƒQƒbƒ^[
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -76,31 +60,31 @@ public:
     /// <returns></returns>
     virtual Mof::CSphere GetSphere(void) const;
     /// <summary>
-    /// åˆæœŸåŒ–
+    /// ‰Šú‰»
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
     virtual bool Initialize(my::Actor::Param* param) override;
     /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
-    /// è§£æ”¾
+    /// ‰ğ•ú
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Release(void) override;
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     virtual void RenderDebug(void) override;

@@ -215,23 +215,9 @@
     <ClInclude Include="..\include\My\UI\UIItem.h" />
     <ClInclude Include="..\include\My\UI\UIPanel.h" />
     <ClInclude Include="Actor.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
-    <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
-    <ClInclude Include="Behaviour\Executor\NodeExecutor.h" />
-    <ClInclude Include="Behaviour\Executor\SelectorNodeExecutor.h" />
-    <ClInclude Include="Behaviour\Node\ActionNode.h" />
-    <ClInclude Include="Behaviour\Node\CompositeNode.h" />
-    <ClInclude Include="Behaviour\Node\Node.h" />
-    <ClInclude Include="Behaviour\Node\SelectorNode.h" />
-=======
     <ClInclude Include="Attack.h" />
     <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
@@ -248,14 +234,10 @@
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
     <ClInclude Include="Behaviour\Node\SimplexNode.h" />
-<<<<<<< HEAD
     <ClInclude Include="Bullet\BlasterBullet.h" />
     <ClInclude Include="Bullet\BombGloveBullet.h" />
     <ClInclude Include="Bullet\Bullet.h" />
     <ClInclude Include="Bullet\PyrocitorBullet.h" />
->>>>>>> origin/Ex55_WeaponAction
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraLocator.h" />

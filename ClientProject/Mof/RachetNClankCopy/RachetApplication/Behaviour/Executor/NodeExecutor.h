@@ -1,60 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#pragma once
-
-#include		"INodeExecutor.h"
-#include		"../Node/Node.h"
-
-namespace Behaviour {
-	/** ƒm[ƒhÀs—pƒNƒ‰ƒX */
-template < typename T >
-class NodeExecutor : public INodeExecutor< T > {
-protected:
-	/** ó‘Ô */
-	State						_state;
-	/** ‘Î‰ƒm[ƒh */
-	NodePtr< T >				_node;
-	/** eƒm[ƒh */
-	NodeExecutorWeakPtr< T >	_parent;
-	/** qƒm[ƒh */
-	NodeExecutorList< T >		_children;
-public:
-	NodeExecutor(const NodePtr< T >& node)
-		: _state(State::Inactive)
-		, _node(node)
-		, _parent()
-		, _children() {
-	}
-	virtual ~NodeExecutor() = default;
-
-	/**
-	 * @brief		ƒm[ƒh‚ÌÀsˆ—
-	 * @param[in]	actor		ÀsƒAƒNƒ^[
-	 * @return		Succeeded	Às‚Ì¬Œ÷
-	 *				Failed		Às‚Ì¸”s
-	 */
-	virtual Result Exec(T& actor) { return Result::Failure; }
-
-	/**
-	 * @brief		ƒm[ƒh‚ÌÀsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg‚µ‚Ä
-	 *				ó‘Ô‚ğInactive‚Éİ’è‚·‚é
-	 */
-	virtual void Reset() {
-		_state = State::Inactive;
-	}
-
-	/**
-	 * @brief		e‚Ìİ’è
-	 * @param[in]	ptr			eƒAƒNƒ^[
-	 */
-	void SetParent(NodeExecutorWeakPtr< T >& ptr) override {
-		_parent = ptr;
-	}
-};
-}
-=======
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 #ifndef BEHAVIOUR_NODE_EXECUTOR_H
 #define BEHAVIOUR_NODE_EXECUTOR_H
 
@@ -71,17 +14,17 @@ template<typename Actor>
 class NodeExecutor : public INodeExecutor<Actor> {
     using super = INodeExecutor<Actor>;
 protected:
-    //! çŠ¶æ…‹
+    //! ó‘Ô
     super::State _state;
-    //! å¯¾å¿œãƒãƒ¼ãƒ‰
+    //! ‘Î‰ƒm[ƒh
     NodePtr<Actor> _node;
-    //! è¦ª
+    //! e
     NodeExecutorWeakPtr<Actor> _parent;
-    //! å­ä¾›
+    //! q‹Ÿ
     NodeExecutorList<Actor> _children;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="node"></param>
     NodeExecutor(const NodePtr<Actor>& node) :
@@ -92,26 +35,26 @@ public:
         _children() {
     }
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~NodeExecutor() = default;
     /// <summary>
-    /// ã‚»ãƒƒã‚¿ãƒ¼
+    /// ƒZƒbƒ^[
     /// </summary>
     /// <param name="ptr"></param>
     void SetParent(NodeExecutorWeakPtr<Actor> ptr) override {
         _parent = ptr;
     }
     /// <summary>
-    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œå‡¦ç†
+    /// ƒm[ƒh‚ÌÀsˆ—
     /// </summary>
-    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
-    /// <returns>Succeeded:å®Ÿè¡Œã®æˆåŠŸ</returns>
-    /// <returns>Failed:å®Ÿè¡Œã®å¤±æ•—</returns>
+    /// <param name="actor">ÀsƒAƒNƒ^[</param>
+    /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
+    /// <returns>Failed:Às‚Ì¸”s</returns>
     virtual behaviour::INodeExecutor<Actor>::Result Execute(Actor& actor) override { return behaviour::INodeExecutor<Actor>::Result::Failure; }
     /// <summary>
-    /// å®Ÿè¡ŒçŠ¶æ…‹ã‚’å…¨ã¦ãƒªã‚»ãƒƒãƒˆ
-    /// çŠ¶æ…‹ã‚’Inactiveã«è¨­å®š
+    /// Àsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg
+    /// ó‘Ô‚ğInactive‚Éİ’è
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) override {
@@ -151,7 +94,3 @@ public:
 };
 }
 #endif // !BEHAVIOUR_NODE_EXECUTOR_H
-<<<<<<< HEAD
->>>>>>> origin/Ex55_WeaponAction
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485

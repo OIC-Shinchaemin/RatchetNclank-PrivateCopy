@@ -1,61 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#pragma once
-
-#include		"../Executor/ActionNodeExecutor.h"
-
-namespace Behaviour {
-
-	/**
-	 * @brief		ˆ—Àsƒm[ƒh
-	 *				Œp³‚µ‚Äˆ—‚ğì¬‚·‚é
-	 */
-template < typename T >
-class ActionNodeBase : public Node< T > {
-protected:
-public:
-	ActionNodeBase()
-		: Node< T >("Action") {
-	}
-	virtual ~ActionNodeBase() = default;
-
-	virtual NodeExecutorPtr< T > CreateExecutor() const {
-		NodePtr< T > ptr = std::const_pointer_cast<Node< T >>(shared_from_this());
-		return std::make_shared<ActionNodeExecutor< T >>(ptr);
-	}
-};
-
-/**
- * @brief		ƒAƒNƒ^[‚ÌŠÖ”Às—pƒm[ƒh
- */
-template < typename T >
-class FunctionNode : public ActionNodeBase< T > {
-protected:
-	/** Àsˆ— */
-	using OnExecFunction = std::function< bool(T&) >;
-	/** Àsˆ— */
-	OnExecFunction			OnExec;
-public:
-	FunctionNode(OnExecFunction exec)
-		: ActionNodeBase< T >()
-		, OnExec(exec) {
-	}
-	virtual ~FunctionNode() = default;
-
-	/**
-	 * @brief		ƒm[ƒh‚ÌÀsˆ—
-	 * @param[in]	actor		ÀsƒAƒNƒ^[
-	 * @return		true		Às‚Ì¬Œ÷
-	 *				false		Às‚Ì¸”s
-	 */
-	virtual bool Exec(T& actor) {
-		return OnExec(actor);
-	}
-};
-}
-=======
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 #ifndef BEHAVIOUR_ACTION_NODE_H
 #define BEHAVIOUR_ACTION_NODE_H
 
@@ -71,17 +13,17 @@ class ActionNodeBase : public behaviour::Node<Actor> {
     using super = behaviour::Node<Actor>;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     ActionNodeBase() :
         super("Action") {
     }
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~ActionNodeBase() = default;
     /// <summary>
-    /// ä½œæˆ
+    /// ì¬
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -94,13 +36,13 @@ template<typename Actor>
 class FunctionNode : public behaviour::ActionNodeBase<Actor> {
     using super = behaviour::ActionNodeBase<Actor>;
 protected:
-    //! å®Ÿè¡Œå‡¦ç†
+    //! Àsˆ—
     using OnExecFunction = std::function< bool(Actor&) >;
-    //! å®Ÿè¡Œå‡¦ç†
+    //! Àsˆ—
     OnExecFunction OnExec;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="exec"></param>
     FunctionNode(OnExecFunction exec) :
@@ -108,22 +50,18 @@ public:
         OnExec(exec) {
     }
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~FunctionNode() = default;
     /// <summary>
-    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œ
+    /// ƒm[ƒh‚ÌÀs
     /// </summary>
-    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
-    /// <returns>true:å®Ÿè¡Œã®æˆåŠŸ</returns>
-    /// <returns>false:å®Ÿè¡Œã®å¤±æ•—</returns>
+    /// <param name="actor">ÀsƒAƒNƒ^[</param>
+    /// <returns>true:Às‚Ì¬Œ÷</returns>
+    /// <returns>false:Às‚Ì¸”s</returns>
     virtual bool Execute(Actor& actor) override{
         return OnExec(actor);
     }
 };
 }
 #endif // !BEHAVIOUR_ACTION_NODE_BASE_H
-<<<<<<< HEAD
->>>>>>> origin/Ex55_WeaponAction
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485

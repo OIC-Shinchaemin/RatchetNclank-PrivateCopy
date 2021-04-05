@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#pragma once
-
-#include		"CompositeNode.h"
-#include		"../Executor/SelectorNodeExecutor.h"
-
-namespace Behaviour {
-
-	/**
-	 * @brief		ƒZƒŒƒNƒ^[ŽÀs—pƒm[ƒh
-	 *				‡”Ô‚Éƒm[ƒh‚ðŽÀs‚µ‚Ç‚ê‚©ˆê‚Â‚Å‚àSucess‚ª•Ô‚Á‚Ä‚«‚½Žž“_‚ÅI—¹‚·‚é
-	 */
-template < typename T >
-class SelectorNode : public CompositeNode< T > {
-protected:
-public:
-	SelectorNode()
-		: CompositeNode< T >("Selector") {
-	}
-	virtual ~SelectorNode() = default;
-
-	virtual NodeExecutorPtr<T> CreateExecutor() const {
-		NodePtr< T > ptr = std::const_pointer_cast<Node< T >>(shared_from_this());
-		auto temp = std::dynamic_pointer_cast<CompositeNode< T >>(ptr);
-		return std::make_shared<SelectorNodeExecutor< T >>(temp);
-	}
-};
-}
-=======
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 #ifndef BEHAVIOUR_SELECTOR_NODE_H
 #define BEHAVIOUR_SELECTOR_NODE_H
 
@@ -45,17 +13,17 @@ class SelectorNode : public behaviour::CompositeNode<Actor> {
 	using super = behaviour::CompositeNode<Actor>;
 public:
 	/// <summary>
-	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 	/// </summary>
 	SelectorNode() : 
 		super("Selector") {
 	}
 	/// <summary>
-	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// ƒfƒXƒgƒ‰ƒNƒ^
 	/// </summary>
 	virtual ~SelectorNode() = default;
 	/// <summary>
-	/// ä½œæˆ
+	/// ì¬
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
@@ -67,7 +35,3 @@ public:
 };
 }
 #endif // !BEHAVIOUR_SELECTOR_NODE_H
-<<<<<<< HEAD
->>>>>>> origin/Ex55_WeaponAction
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485

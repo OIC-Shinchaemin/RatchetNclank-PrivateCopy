@@ -1,44 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#pragma once
-
-#include		"NodeExecutor.h"
-#include		"../Node/CompositeNode.h"
-
-namespace Behaviour {
-
-	/**
-	 * @brief		•¡”‚Ìq‹Ÿ‚ğ‚Âƒm[ƒh‚ÌÀs—pƒNƒ‰ƒX
-	 */
-template < typename T >
-class CompositeNodeExecutor : public NodeExecutor< T > {
-public:
-	CompositeNodeExecutor(const CompositeNodePtr< T >& node)
-		: NodeExecutor< T >(node) {
-		for (auto& ptr : node->GetChildren()) {
-			auto add = ptr->CreateExecutor();
-			add->SetParent(weak_from_this());
-			_children.push_back(add);
-		}
-	}
-	virtual ~CompositeNodeExecutor() = default;
-
-	/**
-	 * @brief		ƒm[ƒh‚ÌÀsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg‚µ‚Ä
-	 *				ó‘Ô‚ğInactive‚Éİ’è‚·‚é
-	 */
-	virtual void Reset() {
-		NodeExecutor::Reset();
-		for (auto& ptr : _children) {
-			ptr->Reset();
-		}
-	}
-};
-
-}
-=======
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 #ifndef BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
 #define BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
 
@@ -57,7 +16,7 @@ protected:
     NodeExecutorPtr<Actor> _current;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="node"></param>
     CompositeNodeExecutor(const CompositeNodePtr<Actor>& node) :
@@ -69,12 +28,12 @@ public:
         }
     }
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~CompositeNodeExecutor() = default;
     /// <summary>
-    /// å®Ÿè¡ŒçŠ¶æ…‹ã‚’å…¨ã¦ãƒªã‚»ãƒƒãƒˆ
-    /// çŠ¶æ…‹ã‚’Inactiveã«è¨­å®š
+    /// Àsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg
+    /// ó‘Ô‚ğInactive‚Éİ’è
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) override{
@@ -87,7 +46,3 @@ public:
 };
 }
 #endif // !BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
-<<<<<<< HEAD
->>>>>>> origin/Ex55_WeaponAction
-=======
->>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
