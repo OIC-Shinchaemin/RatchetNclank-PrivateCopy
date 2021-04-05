@@ -508,14 +508,14 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
 
     m_Time -= CUtilities::GetFrameSecond();
     UpdateMove();
-    //UpdateJump();
-    //UpdateAttack();
+    UpdateJump();
+    UpdateAttack();
 
 
     this->UpdateTransform(delta_time);
     ChangeAnimation();
 
-//    UpdateCamera();    
+    UpdateCamera();    
     return true;
 }
 

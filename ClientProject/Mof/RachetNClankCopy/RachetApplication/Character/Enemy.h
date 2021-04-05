@@ -18,12 +18,18 @@ enum class AIState {
     Combat
 };
 enum class EnemyState {
+    Idle,
     Move,
     Attack,
 };
 class Enemy : public my::Character {
     using super = my::Character;
     using EnemyPtr = std::shared_ptr<my::Enemy>;
+    enum class MotionType {
+        IdleWait,
+        MoveRun,
+        AttackOne,
+    };
 private:
     //! ‰ŠúˆÊ’u
     Mof::CVector3 _init_position;

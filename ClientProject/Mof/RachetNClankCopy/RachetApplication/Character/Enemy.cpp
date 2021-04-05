@@ -193,9 +193,14 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     _combat_behaviour_executor =  _behaviour_executor_factory.Create("../Resource/behaviour/combat.json");
     _patrol_behaviour_executor = _behaviour_executor_factory.Create("../Resource/behaviour/patrol.json");
 
+    // mesh motion
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
-        _motion->ChangeMotion(0);
+    } // if
+    if (_motion) {
+        if (auto motion_names = super::_motion_names.lock()) {
+            _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
+        } // if
     } // if
     return true;
 }
@@ -215,6 +220,20 @@ bool my::Enemy::Input(void) {
 
 bool my::Enemy::Update(float delta_time) {
     super::Update(delta_time);
+
+    auto v = super::_velocity.GetVelocity();
+    if (0.01f < Mof::CVector2(v.x, v.z).Length()) {
+        _enemy_state = my::EnemyState::Move;
+    } // if
+    else {
+        _enemy_state = my::EnemyState::Idle;
+    } // else
+
+    if (auto motion_names = _motion_names.lock(); !_motion_names.expired() && _motion) {
+        // ó‘ÔƒNƒ‰ƒX‚ÖˆÚ“®‚³‚¹‚é
+        _motion->ChangeMotionByName(motion_names->GetName(_enemy_state), 1.0f, true, false);
+    } // if
+
     super::UpdateTransform(delta_time);
     return true;
 }
