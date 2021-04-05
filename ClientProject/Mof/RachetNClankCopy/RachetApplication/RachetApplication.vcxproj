@@ -153,7 +153,10 @@
     <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="Bullet\BlasterBullet.cpp" />
+    <ClCompile Include="Bullet\BombGloveBullet.cpp" />
     <ClCompile Include="Bullet\Bullet.cpp" />
+    <ClCompile Include="Bullet\PyrocitorBullet.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraLocator.cpp" />
@@ -181,11 +184,13 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="Velocity.cpp" />
+    <ClCompile Include="Weapon\Blaster.cpp" />
     <ClCompile Include="Weapon\BombGlove.cpp" />
     <ClCompile Include="Weapon\Mechanical.cpp" />
     <ClCompile Include="Weapon\OmniWrench.cpp" />
@@ -229,7 +234,10 @@
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
     <ClInclude Include="Behaviour\Node\SimplexNode.h" />
+    <ClInclude Include="Bullet\BlasterBullet.h" />
+    <ClInclude Include="Bullet\BombGloveBullet.h" />
     <ClInclude Include="Bullet\Bullet.h" />
+    <ClInclude Include="Bullet\PyrocitorBullet.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraLocator.h" />
@@ -261,6 +269,7 @@
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
+    <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -268,6 +277,7 @@
     <ClInclude Include="Stage\Stage.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="Velocity.h" />
+    <ClInclude Include="Weapon\Blaster.h" />
     <ClInclude Include="Weapon\BombGlove.h" />
     <ClInclude Include="Weapon\Mechanical.h" />
     <ClInclude Include="Weapon\OmniWrench.h" />

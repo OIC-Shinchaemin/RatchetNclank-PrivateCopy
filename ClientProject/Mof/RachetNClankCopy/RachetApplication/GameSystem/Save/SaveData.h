@@ -47,7 +47,7 @@ public:
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>
-    const std::vector<std::string>& GetAvailableWeaponsAddress(void);
+    const std::vector<std::string>& GetAvailableMechanicalWeaponsAddress(void);
 };
 }
 #endif // !MY_SAVE_DATA_H

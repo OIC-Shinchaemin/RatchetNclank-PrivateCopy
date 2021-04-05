@@ -27,25 +27,35 @@ Mof::CVector3 my::Actor::UpdatePosition(float delta_time, Mof::CVector3 position
     return position;
 }
 
+void my::Actor::UpdateTransform(float delta_time) {
+    // rotate
+    auto rotate = this->UpdateRotate(delta_time, this->GetRotate(), _velocity.GetAngularVelocity());
+    this->SetRotate(rotate);
+    // position
+    auto pos = this->UpdatePosition(delta_time, this->GetPosition(), _velocity.GetVelocity());
+    this->SetPosition(pos);
+}
+
 my::Actor::Actor() :
     _state(my::ActorState::Active),
-    _param(),
-    _collision_objects() {
+    _transform(),
+    _collision_objects(),
+    _velocity() {
 }
 
 my::Actor::~Actor() {
 }
 
 void my::Actor::SetPosition(Mof::CVector3 position) {
-    this->_param.transform.position = position;
+    this->_transform.position = position;
 }
 
 void my::Actor::SetRotate(Mof::CVector3 rotate) {
-    this->_param.transform.rotate = rotate;
+    this->_transform.rotate = rotate;
 }
 
 void my::Actor::SetScale(Mof::CVector3 scale) {
-    this->_param.transform.scale = scale;
+    this->_transform.scale = scale;
 }
 
 std::string my::Actor::GetName(void) const {
@@ -53,15 +63,15 @@ std::string my::Actor::GetName(void) const {
 }
 
 Mof::CVector3 my::Actor::GetPosition(void) const {
-    return this->_param.transform.position;
+    return this->_transform.position;
 }
 
 Mof::CVector3 my::Actor::GetRotate(void) const {
-    return this->_param.transform.rotate;
+    return this->_transform.rotate;
 }
 
 Mof::CVector3 my::Actor::GetScale(void) const {
-    return this->_param.transform.scale;
+    return this->_transform.scale;
 }
 
 my::ActorState my::Actor::GetState(void) const {
@@ -79,8 +89,7 @@ void my::Actor::End(void) {
 
 bool my::Actor::Initialize(my::Actor::Param* param) {
     _state = my::ActorState::Active;
-    _param.transform = param->transform;
-    _param.init_transform = _param.transform;
+    _transform = param->transform;
     return true;
 }
 

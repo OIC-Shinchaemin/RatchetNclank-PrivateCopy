@@ -39,23 +39,21 @@ void my::Character::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
 }
 
 void my::Character::UpdateTransform(float delta_time) {
-    auto owner = this;
     // rotate
-    auto rotate = this->UpdateRotate(delta_time, owner->GetRotate(), _velocity.GetAngularVelocity());
-    owner->SetRotate(rotate);
+    auto rotate = super::UpdateRotate(delta_time, super::GetRotate(), _velocity.GetAngularVelocity());
+    super::SetRotate(rotate);
     // position
-    auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), _velocity.GetVelocity());
+    auto pos = super::UpdatePosition(delta_time, super::GetPosition(), _velocity.GetVelocity());
     if (pos.y < 0.0f) {
         pos.y = 0.0f;
     } // if
-    owner->SetPosition(pos);
+    super::SetPosition(pos);
 }
 
 my::Character::Character() :
     super(),
     _mesh(),
     _motion(),
-    _velocity(),
     _volume(0.5f),
     _height(1.0f) {
 }

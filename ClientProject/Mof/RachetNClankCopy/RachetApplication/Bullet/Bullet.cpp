@@ -1,21 +1,12 @@
 #include "Bullet.h"
 
-void my::Bullet::UpdateTransform(float delta_time) {
-    auto owner = this;
-    // rotate
-    auto rotate = this->UpdateRotate(delta_time, owner->GetRotate(), _velocity.GetAngularVelocity());
-    owner->SetRotate(rotate);
-    // position
-    auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), _velocity.GetVelocity());
-    owner->SetPosition(pos);
-}
 
 my::Bullet::Bullet() :
     super(),
+    _speed(),
     _mesh(),
     _exist_time(0.0f),
-    _speed(){
-    _mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/blaster_bullet/scene.mom");
+    _exist_time_max(0.0f) {
 }
 
 my::Bullet::~Bullet() {
@@ -23,13 +14,9 @@ my::Bullet::~Bullet() {
 
 bool my::Bullet::Update(float delta_time) {
     _exist_time += delta_time;
-    if (5.0f <= _exist_time) {
+    if (_exist_time_max <= _exist_time) {
         super::End();
     } // if
-
-    _velocity.AddVelocityForce(_speed);
-    _velocity.Update(delta_time);
-    this->UpdateTransform(delta_time);
     return true;
 }
 
@@ -41,9 +28,6 @@ bool my::Bullet::Render(void) {
         translate.Translation(super::GetPosition(), translate);
         auto world = scale * rotate * translate;
         r->Render(world);
-
-
-        ::CGraphicsUtilities::RenderSphere(Mof::CSphere(super::GetPosition(), 0.2f), def::color_rgba::kBlack);
     } // if
     return false;
 }

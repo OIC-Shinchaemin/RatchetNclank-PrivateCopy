@@ -19,6 +19,8 @@
 namespace my {
 class GameManager : public std::enable_shared_from_this<my::GameManager>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
 private:
+    //! ’Ç‰Á
+    std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! íœ
     std::vector<std::shared_ptr<my::Actor>> _delete_actors;
     //! ƒQ[ƒ€
@@ -69,7 +71,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>&ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
     /// <summary>
     /// ‰Šú‰»
     /// </summary>

@@ -11,6 +11,7 @@
 #include "My/Core/Define.h"
 #include "My/Core/Observable.h"
 #include "Collision/Object/CollisionObject.h"
+#include "Velocity.h"
 
 
 namespace my {
@@ -19,15 +20,14 @@ enum class ActorState {
     End
 };
 class Actor : public std::enable_shared_from_this<my::Actor>, public my::Observable<const char*, const std::shared_ptr<my::Actor>&> {
+public:
     using Observable = my::Observable<const char*, const std::shared_ptr<my::Actor>&>;
 public:
     struct Param {
         //! トランスフォーム
         def::Transform transform;
-        //! 初期位置
-        def::Transform init_transform;
         Param() :
-            transform(), init_transform() {
+            transform(){
         }
         virtual ~Param() {
         }
@@ -35,11 +35,13 @@ public:
 private:
     //! 状態
     my::ActorState _state;
-    //! パラメータ
-    my::Actor::Param _param;
+    //! トランスフォーム
+    def::Transform _transform;
     //! 衝突用
     std::vector<std::shared_ptr<my::CollisionObject>> _collision_objects;
 protected:
+    //! 速度
+    my::Velocity _velocity;
     /// <summary>
     /// 生成
     /// </summary>
@@ -65,6 +67,11 @@ protected:
     /// <param name="velocity"></param>
     /// <returns></returns>
     Mof::CVector3 UpdatePosition(float delta_time, Mof::CVector3 position, Mof::CVector3 velocity);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    virtual void UpdateTransform(float delta_time);
 public:
     /// <summary>
     /// コンストラクタ

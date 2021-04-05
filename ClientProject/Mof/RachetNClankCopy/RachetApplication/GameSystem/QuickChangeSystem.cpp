@@ -48,9 +48,21 @@ my::QuickChangeSystem::QuickChangeSystem() :
         _items.emplace(degree, std::move(temp));
     } // for
 
-    _tex_names.emplace("OmniWrench", "../Resource/texture/money/money.png");
     _tex_names.emplace("BombGlove", "../Resource/texture/icon/bomb_glove.png");
     _tex_names.emplace("Pyrocitor", "../Resource/texture/icon/pyrocitor.png");
+    _tex_names.emplace("Blaster", "../Resource/texture/icon/blaster.png");
+    _tex_names.emplace("GloveOfDoom", "../Resource/texture/icon/glove_of_doom.png");
+    _tex_names.emplace("MineGlove", "../Resource/texture/icon/mine_glove.png");
+    _tex_names.emplace("Taunter", "../Resource/texture/icon/taunter.png");
+    _tex_names.emplace("SuckCannon", "../Resource/texture/icon/suck_cannon.png");
+    _tex_names.emplace("Devastator", "../Resource/texture/icon/devastator.png");
+    _tex_names.emplace("Walloper", "../Resource/texture/icon/walloper.png");
+    _tex_names.emplace("VisibombGun", "../Resource/texture/icon/visibomb_gun.png");
+    _tex_names.emplace("DecoyGlove", "../Resource/texture/icon/decoy_glove.png");
+    _tex_names.emplace("DroneDevice", "../Resource/texture/icon/drone_device.png");
+    _tex_names.emplace("TeslaClaw", "../Resource/texture/icon/tesla_claw.png");
+    _tex_names.emplace("MorphORay", "../Resource/texture/icon/morph_o_ray.png");
+    _tex_names.emplace("RYNO", "../Resource/texture/icon/ryno.png");
 }
 
 my::QuickChangeSystem::~QuickChangeSystem() {
@@ -66,15 +78,14 @@ void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<my::Observer
 
 bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
     std::vector<std::string> work;
-    weapon_system->CreateAvailableWeaponNames(work);
-    //work.erase(work.begin());
-    
+    weapon_system->CreateAvailableMechanicalWeaponNames(work);
+
     int i = 0;
     for (auto& name : work) {
         auto& path = _tex_names.at(name);
         auto tex = my::ResourceLocator::GetResource<Mof::CTexture>(path.c_str());
 
-        auto &temp = _items.at(i * 45);
+        auto& temp = _items.at(i * 45);
 
         temp.SetWeapon(name.c_str());
         temp.SetTexture(tex);
@@ -91,10 +102,10 @@ bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<
 }
 
 bool my::QuickChangeSystem::Input(void) {
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y)) {
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_RSHIFT)) {
         this->Open();
     } // if
-    else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_Y)) {
+    else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPull(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPull(MOFKEY_RSHIFT)) {
         this->Close();
     } // else if
 
@@ -108,6 +119,31 @@ bool my::QuickChangeSystem::Input(void) {
         } /// if
         _current_angle = ut::Approximate(_angles, degree);
     } // if
+
+    if (::g_pInput->IsKeyPush(MOFKEY_0)) {
+        _current_angle = 45.0f * 0;
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_1)) {
+        _current_angle = 45.0f * 1;
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_2)) {
+        _current_angle = 45.0f * 2;
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_3)) {
+        _current_angle = 45.0f * 3;
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_4)) {
+        _current_angle = 45.0f * 4;
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_5)) {
+        _current_angle = 45.0f * 5;
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_6)) {
+        _current_angle = 45.0f * 6;
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_7)) {
+        _current_angle = 45.0f * 7;
+    } // else if
     return true;
 }
 
@@ -128,13 +164,11 @@ bool my::QuickChangeSystem::Update(void) {
 }
 
 bool my::QuickChangeSystem::Render(void) {
-    //auto circle = Mof::CCircle(_position, _distance);
-    //::CGraphicsUtilities::RenderCircle(circle, _color.ToU32Color());
-   
     for (auto& item : _items) {
         item.second.Render(_color);
     } // for
 
+    // ‘I‘ð’†‚Ì‚à‚Ì‚ð‚í‚©‚è‚â‚·‚­‚µ‚½‚¢
     if (_current_angle.has_value()) {
         float current_angle = _current_angle.value();
         auto rect = Mof::CRectangle(0.0f, 0.0f, 64.0f, 64.0f);
@@ -143,11 +177,13 @@ bool my::QuickChangeSystem::Render(void) {
         rect.Translation(_position + Mof::CVector2(std::cos(radian()) * _distance, -std::sin(radian()) * _distance));
         ::CGraphicsUtilities::RenderFillRect(rect, Mof::CVector4(1.0f, 1.0f, 0.0f, _color.a).ToU32Color());
     } // if
-    
+
     return true;
 }
 
 bool my::QuickChangeSystem::Release(void) {
+    _items.clear();
+    _tex_names.clear();
     return true;
 }
 

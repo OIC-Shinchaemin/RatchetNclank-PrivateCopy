@@ -6,7 +6,6 @@
 #include "../GameSystem/Save/SaveSystem.h"
 #include "../Character/Enemy.h"
 #include "../Character/Player.h"
-#include "../Bullet/Bullet.h"
 
 
 void my::GameManager::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -19,10 +18,6 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
     _physic_world.RemoveActor(ptr);
-}
-
-void my::GameManager::Collision(void) {
-    _physic_world.Update();
 }
 
 my::GameManager::GameManager() :
@@ -39,6 +34,10 @@ my::GameManager::~GameManager() {
 }
 
 void my::GameManager::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
+    if (type == "AddRequest") {
+        ptr->AddObserver(shared_from_this());
+        _created_actors.push_back(ptr);
+    } // if
     if (type == "DeleteRequest") {
         _delete_actors.push_back(ptr);
     } // if
@@ -52,14 +51,14 @@ bool my::GameManager::Initialize(void) {
     _quick_change = std::make_shared<my::QuickChangeSystem>();
     auto player = ut::MakeSharedWithRelease<Player>();
     //_character = player;
-    _weapon_system->AddWeaponObserver(player);
+    _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
 
     _game_money->Initialize(save_data.GetMoney());
-    _weapon_system->Initialize(save_data);
+    _weapon_system->Initialize(save_data, shared_from_this());
     _quick_change->Initialize({}, _weapon_system);
 
     auto param = new my::Actor::Param();
@@ -69,7 +68,6 @@ bool my::GameManager::Initialize(void) {
     auto temp = ut::MakeSharedWithRelease<my::Enemy>();
     temp->AddObserver(shared_from_this());
     temp->Initialize(param);
-    //_enemies.push_back(temp);
 
     ut::SafeDelete(param);
 
@@ -83,33 +81,24 @@ bool my::GameManager::Input(void) {
     _quick_change->Input();
     _game_world.Input();
 
-    if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
-        auto temp = ut::MakeSharedWithRelease<my::Bullet>();
-        temp->AddObserver(shared_from_this());
-        auto param = my::Bullet::Param();
-        param.transform.position = Mof::CVector3(0.0f, 2.0f, 0.0f);
-        param.transform.scale = Mof::CVector3(0.1f, 0.1f, 0.1f);
-        param.speed = Mof::CVector3(4.0f, 0.0f, 0.0f);
-        temp->Start(param);
-        this->AddElement(temp);
-    } // if
     return true;
 }
 
 bool my::GameManager::Update(float delta_time) {
+    for (auto& ptr : _created_actors) {
+        this->AddElement(ptr);
+    } // for
+    _created_actors.clear();
     for (auto& ptr : _delete_actors) {
         this->RemoveElement(ptr);
     } // for
     _delete_actors.clear();
 
-
     _quick_change->Update();
     _stage.Update();
 
-
     _game_world.Update(delta_time);
-    this->Collision();
-
+    _physic_world.Update();
 
     ::ImGui::Begin("GameManager");
     ::ImGui::Text(" ");
@@ -133,7 +122,7 @@ bool my::GameManager::Release(void) {
 
     //! save
     std::vector<std::string> weapon;
-    _weapon_system->CreateAvailableWeaponNames(weapon);
+    _weapon_system->CreateAvailableMechanicalWeaponNames(weapon);
     auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
     my::SaveSystem().Save(save_param);
 

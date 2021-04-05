@@ -7,7 +7,7 @@
 
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
-#include "../Weapon/Weapon.h"
+#include "../Weapon/Mechanical.h"
 #include "../GameSystem/WeaponSystem.h"
 
 
@@ -24,7 +24,7 @@
 
 #define		GRAVITY					(0.01f)
 
-class Player : public my::Character, private my::CameraLocator, public my::Observer<std::shared_ptr<my::Weapon>> {
+class Player : public my::Character, private my::CameraLocator, public my::Observer<std::shared_ptr<my::Mechanical>> {
 private:
     enum ActionState {
         None,
@@ -60,7 +60,7 @@ private:
     //! カメラコントローラ
     my::CameraController _camera_controller;
     //! 武器
-    std::weak_ptr<my::Weapon>_current_weapon;
+    std::weak_ptr<my::Mechanical>_current_mechanical;
 
     virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed) override;
     void InputCameraForKeyboard(float angular_speed, float speed);
@@ -74,7 +74,7 @@ private:
 public:
     Player();
     ~Player();
-    virtual void OnNotify(std::shared_ptr<my::Weapon> change) override;
+    virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
 
     virtual bool Initialize(my::Actor::Param* param) override;
     virtual bool Input(void) override;

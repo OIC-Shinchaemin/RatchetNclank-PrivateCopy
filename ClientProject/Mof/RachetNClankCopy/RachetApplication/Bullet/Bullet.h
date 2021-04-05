@@ -26,20 +26,15 @@ public:
         virtual ~Param() {
         }
     };
-private:
-    //! メッシュ
-    std::weak_ptr<Mof::CMeshContainer> _mesh;
-    //! 速度
-    my::Velocity _velocity;
-    //! 時間
-    float _exist_time;
+protected:
     //! 速さ
     Mof::CVector3 _speed;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time"></param>
-    virtual void UpdateTransform(float delta_time);
+    //! メッシュ
+    std::weak_ptr<Mof::CMeshContainer> _mesh;
+    //! 時間
+    float _exist_time;
+    //! 時間
+    float _exist_time_max;
 public:
     /// <summary>
     /// コンストラクタ
@@ -79,4 +74,4 @@ public:
     virtual void RenderDebug(void) override;
 };
 }
-#endif // !MY_ACTOR_H
+#endif // !MY_BULLET_H

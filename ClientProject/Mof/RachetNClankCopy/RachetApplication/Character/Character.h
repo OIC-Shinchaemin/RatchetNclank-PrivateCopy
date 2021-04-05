@@ -10,7 +10,6 @@
 #include <Mof.h>
 
 #include "../GameDefine.h"
-#include "../Velocity.h"
 
 
 namespace my {
@@ -21,8 +20,6 @@ protected:
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! ƒ‚[ƒVƒ‡ƒ“
     Mof::LPMeshMotionController	_motion;
-    //! ‘¬“x
-    my::Velocity _velocity;
     //! ‘å‚«‚³
     float _volume;
     //! ‚‚³

@@ -18,6 +18,6 @@ uint32_t my::SaveData::GetMoney(void) const {
     return this->_param.money;
 }
 
-const std::vector<std::string>& my::SaveData::GetAvailableWeaponsAddress(void) {
+const std::vector<std::string>& my::SaveData::GetAvailableMechanicalWeaponsAddress(void) {
     return this->_param.available_weapons;
 }

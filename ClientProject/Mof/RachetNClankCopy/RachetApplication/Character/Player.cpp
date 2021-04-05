@@ -14,17 +14,14 @@ bool Player::Input(void) {
     this->InputCameraForGamepad(angular_speed, speed);
     // keyboard
     this->InputCameraForKeyboard(angular_speed, speed);
-    
-    if (::g_pInput->IsKeyPush(MOFKEY_1)) {
-//        _current_weapon = _weapon_system->GetWeapon("BombGlove");
-    } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_2)) {
-//        _current_weapon = _weapon_system->GetWeapon("Pyrocitor");
-    } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_3)) {
-//        _current_weapon = _weapon_system->GetWeapon("OmniWrench");
-    } // if
 
+    if (auto weapon = _current_mechanical.lock()) {
+        if (weapon->IsAction() && weapon->CanFire()) {
+            auto pos = super::GetPosition();
+            pos.y += super::GetHeight();
+            weapon->Fire(def::Transform(pos, super::GetRotate()));
+        } // if
+    } // if
     /*
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
@@ -99,7 +96,7 @@ void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
     // “ü—ÍŠp“x
     auto rotate = super::GetRotate();
 
-    float camera_angle_y = std::atan2(- _camera_controller.GetViewFront().z, _camera_controller.GetViewFront().x) + math::kHalfPi;
+    float camera_angle_y = std::atan2(-_camera_controller.GetViewFront().z, _camera_controller.GetViewFront().x) + math::kHalfPi;
     float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi + camera_angle_y;
 
     if (math::kTwoPi <= angle_y) {
@@ -431,15 +428,15 @@ Player::Player() :
     m_Gravity(),
     _player_view_camera(),
     _camera_controller(),
-    _current_weapon()  {
+    _current_mechanical() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
 }
 
 Player::~Player() {
 }
 
-void Player::OnNotify(std::shared_ptr<my::Weapon> change) {
-    _current_weapon = change;
+void Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
+    _current_mechanical = change;
 }
 
 bool Player::Initialize(my::Actor::Param* param) {
@@ -481,6 +478,10 @@ bool Player::Update(float delta_time) {
     auto pos = super::GetPosition();
     _camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + super::_height, pos.z));
     _camera_controller.Update();
+
+    if (auto weapon = _current_mechanical.lock()) {
+        weapon->Update(delta_time);
+    } // if
     return true;
 }
 
@@ -496,15 +497,7 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
     this->UpdateTransform(delta_time);
     ChangeAnimation();
 
-//    UpdateCamera();
-    auto pos = super::GetPosition();
-    float height = 2.0f;
-
-    if (auto weapon = _current_weapon.lock()) {
-        weapon->Update(delta_time);
-    } // if
-    _camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + height, pos.z));
-    _camera_controller.Update();
+//    UpdateCamera();    
     return true;
 }
 
@@ -513,7 +506,7 @@ bool Player::Render(void) {
 
     // •Ší‚ðÝ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ðŽæ“¾‚·‚é
     LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
-    if (auto weapon = _current_weapon.lock()) {
+    if (auto weapon = _current_mechanical.lock()) {
         // weapon ->Render(pBoneState);
         weapon->Render();
     } // if
@@ -523,7 +516,7 @@ bool Player::Render(void) {
 bool Player::Release(void) {
     super::Release();
     _player_view_camera.reset();
-    _current_weapon.reset();
+    _current_mechanical.reset();
     MOF_SAFE_DELETE(_motion);
     return true;
 }

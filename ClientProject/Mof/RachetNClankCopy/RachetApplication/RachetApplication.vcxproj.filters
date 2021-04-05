@@ -273,6 +273,21 @@
     <ClCompile Include="Bullet\Bullet.cpp">
       <Filter>Rachet\Source\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleEffect.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\BombGloveBullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\BlasterBullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet\PyrocitorBullet.cpp">
+      <Filter>Rachet\Source\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon\Blaster.cpp">
+      <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -511,6 +526,21 @@
     </ClInclude>
     <ClInclude Include="Bullet\Bullet.h">
       <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffect.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\BombGloveBullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\PyrocitorBullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet\BlasterBullet.h">
+      <Filter>Rachet\Header\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon\Blaster.h">
+      <Filter>Rachet\Header\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -26,11 +26,17 @@ public:
     /// </summary>
     virtual ~Weapon();
     /// <summary>
+    /// çXêV
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <returns></returns>
+    virtual bool Update(float delta_time);
+    /// <summary>
     /// ï`âÊ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Render(void);    
+    virtual bool Render(void);
     virtual bool Render(Mof::LPBONEMOTIONSTATE bone_state);
 };
 }
