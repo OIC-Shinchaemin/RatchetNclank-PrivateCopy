@@ -184,12 +184,13 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
-    <ClCompile Include="Motion.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
-    <ClCompile Include="State\EnemyState.cpp" />
+    <ClCompile Include="State\EnemyMotionIdleState.cpp" />
+    <ClCompile Include="State\EnemyMotionMoveState.cpp" />
+    <ClCompile Include="State\EnemyMotionState.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="Weapon\Blaster.cpp" />
@@ -271,7 +272,6 @@
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
-    <ClInclude Include="Motion.h" />
     <ClInclude Include="MotionNames.h" />
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="resource.h" />
@@ -279,7 +279,9 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SightRecognition.h" />
     <ClInclude Include="Stage\Stage.h" />
-    <ClInclude Include="State\EnemyState.h" />
+    <ClInclude Include="State\EnemyMotionIdleState.h" />
+    <ClInclude Include="State\EnemyMotionMoveState.h" />
+    <ClInclude Include="State\EnemyMotionState.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="Velocity.h" />
     <ClInclude Include="Weapon\Blaster.h" />

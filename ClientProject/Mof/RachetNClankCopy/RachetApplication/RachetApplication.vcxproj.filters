@@ -297,10 +297,13 @@
     <ClCompile Include="Weapon\Blaster.cpp">
       <Filter>Rachet\Source\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Motion.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="State\EnemyMotionState.cpp">
+      <Filter>Rachet\Source\State</Filter>
     </ClCompile>
-    <ClCompile Include="State\EnemyState.cpp">
+    <ClCompile Include="State\EnemyMotionMoveState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotionIdleState.cpp">
       <Filter>Rachet\Source\State</Filter>
     </ClCompile>
   </ItemGroup>
@@ -557,13 +560,16 @@
     <ClInclude Include="Weapon\Blaster.h">
       <Filter>Rachet\Header\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Motion.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="MotionNames.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="State\EnemyState.h">
+    <ClInclude Include="State\EnemyMotionState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotionMoveState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotionIdleState.h">
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
   </ItemGroup>

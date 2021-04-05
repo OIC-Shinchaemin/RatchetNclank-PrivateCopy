@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "../Collision/Object/EnemyCollisionObject.h"
 #include "../Collision/Object/EnemySightCollisionObject.h"
+#include "../State/EnemyMotionIdleState.h"
+#include "../State/EnemyMotionMoveState.h"
 
 
 bool my::Enemy::ChangeToMoveState(void) {
@@ -12,6 +14,11 @@ bool my::Enemy::ChangeToMoveState(void) {
 
 bool my::Enemy::ChangeToAttackState(void) {
     _enemy_state = my::EnemyState::Attack;
+    return true;
+}
+
+bool my::Enemy::ChangeMotionState(const char* next) {
+    _motion_state_machine.ChangeState(next);
     return true;
 }
 
@@ -175,8 +182,6 @@ void my::Enemy::GenerateCollisionObject(void) {
         this->SetTarget(nullptr); 
         return true;
     }));
-
-
 }
 
 bool my::Enemy::Initialize(my::Actor::Param* param) {
@@ -202,6 +207,11 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
             _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
         } // if
     } // if
+
+    // state
+    this->RegisterState<state::EnemyMotionIdleState>(_motion_state_machine);
+    this->RegisterState<state::EnemyMotionMoveState>(_motion_state_machine);
+    _motion_state_machine.ChangeState("EnemyMotionIdleState");
     return true;
 }
 
@@ -220,31 +230,9 @@ bool my::Enemy::Input(void) {
 
 bool my::Enemy::Update(float delta_time) {
     super::Update(delta_time);
-
-    auto v = super::_velocity.GetVelocity();
-    if (0.01f < Mof::CVector2(v.x, v.z).Length()) {
-        _enemy_state = my::EnemyState::Move;
-    } // if
-    else {
-        _enemy_state = my::EnemyState::Idle;
-    } // else
-
-    if (auto motion_names = _motion_names.lock(); !_motion_names.expired() && _motion) {
-        // ó‘ÔƒNƒ‰ƒX‚ÖˆÚ“®‚³‚¹‚é
-        _motion->ChangeMotionByName(motion_names->GetName(_enemy_state), 1.0f, true, false);
-    } // if
-
+    _motion_state_machine.Update(delta_time);
     super::UpdateTransform(delta_time);
     return true;
-}
-
-bool my::Enemy::Render(void) {
-    super::Render();
-    return true;
-}
-
-bool my::Enemy::ContainInRecognitionRange(Mof::CVector3 pos) {
-    return _sight->ContainInRecognitionRange(pos);
 }
 
 void my::Enemy::RenderDebug(void) {
