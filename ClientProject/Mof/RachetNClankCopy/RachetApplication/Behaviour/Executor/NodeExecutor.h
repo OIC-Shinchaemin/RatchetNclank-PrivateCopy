@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma once
 
 #include		"INodeExecutor.h"
@@ -52,6 +53,8 @@ public:
 };
 }
 =======
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 #ifndef BEHAVIOUR_NODE_EXECUTOR_H
 #define BEHAVIOUR_NODE_EXECUTOR_H
 
@@ -68,17 +71,17 @@ template<typename Actor>
 class NodeExecutor : public INodeExecutor<Actor> {
     using super = INodeExecutor<Actor>;
 protected:
-    //! ó‘Ô
+    //! çŠ¶æ…‹
     super::State _state;
-    //! ‘Î‰ƒm[ƒh
+    //! å¯¾å¿œãƒãƒ¼ãƒ‰
     NodePtr<Actor> _node;
-    //! e
+    //! è¦ª
     NodeExecutorWeakPtr<Actor> _parent;
-    //! q‹Ÿ
+    //! å­ä¾›
     NodeExecutorList<Actor> _children;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="node"></param>
     NodeExecutor(const NodePtr<Actor>& node) :
@@ -89,26 +92,26 @@ public:
         _children() {
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~NodeExecutor() = default;
     /// <summary>
-    /// ƒZƒbƒ^[
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="ptr"></param>
     void SetParent(NodeExecutorWeakPtr<Actor> ptr) override {
         _parent = ptr;
     }
     /// <summary>
-    /// ƒm[ƒh‚ÌÀsˆ—
+    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œå‡¦ç†
     /// </summary>
-    /// <param name="actor">ÀsƒAƒNƒ^[</param>
-    /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
-    /// <returns>Failed:Às‚Ì¸”s</returns>
+    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
+    /// <returns>Succeeded:å®Ÿè¡Œã®æˆåŠŸ</returns>
+    /// <returns>Failed:å®Ÿè¡Œã®å¤±æ•—</returns>
     virtual behaviour::INodeExecutor<Actor>::Result Execute(Actor& actor) override { return behaviour::INodeExecutor<Actor>::Result::Failure; }
     /// <summary>
-    /// Àsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg
-    /// ó‘Ô‚ğInactive‚Éİ’è
+    /// å®Ÿè¡ŒçŠ¶æ…‹ã‚’å…¨ã¦ãƒªã‚»ãƒƒãƒˆ
+    /// çŠ¶æ…‹ã‚’Inactiveã«è¨­å®š
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) override {
@@ -148,4 +151,7 @@ public:
 };
 }
 #endif // !BEHAVIOUR_NODE_EXECUTOR_H
+<<<<<<< HEAD
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485

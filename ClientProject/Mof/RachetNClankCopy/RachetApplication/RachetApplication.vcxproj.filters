@@ -465,7 +465,10 @@
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     <ClInclude Include="Behaviour\Executor\SequencerNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
@@ -493,6 +496,7 @@
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Attack.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -548,6 +552,8 @@
       <Filter>Rachet\Header\Weapon</Filter>
     </ClInclude>
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">

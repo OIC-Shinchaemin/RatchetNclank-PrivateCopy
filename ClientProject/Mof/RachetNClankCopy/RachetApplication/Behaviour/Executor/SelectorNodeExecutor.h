@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma once
 
 #include "CompositeNodeExecutor.h"
@@ -45,6 +46,8 @@ public:
 };
 }
 =======
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 #ifndef BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
 #define BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
 
@@ -58,23 +61,24 @@ class SelectorNodeExecutor : public behaviour::CompositeNodeExecutor<Actor> {
     using super = behaviour::CompositeNodeExecutor<Actor>;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="node"></param>
     SelectorNodeExecutor(const CompositeNodePtr<Actor>& node) :
         super(node) {
     }
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     virtual ~SelectorNodeExecutor() = default;
     /// <summary>
-    /// ƒm[ƒh‚ÌÀsˆ—
+    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œå‡¦ç†
     /// </summary>
-    /// <param name="actor">ÀsƒAƒNƒ^[</param>
-    /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
-    /// <returns>Failed:Às‚Ì¸”s</returns>
+    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
+    /// <returns>Succeeded:å®Ÿè¡Œã®æˆåŠŸ</returns>
+    /// <returns>Failed:å®Ÿè¡Œã®å¤±æ•—</returns>
     virtual INodeExecutor<Actor>::Result Execute(Actor& actor) override {
+<<<<<<< HEAD
         if (super::_current) {
             auto re = super::_current->Execute(actor);
             if (re != super::Result::None) {
@@ -84,13 +88,16 @@ public:
         } // if
 
         // ÀsÏ‚İ
+=======
+        // å®Ÿè¡Œæ¸ˆã¿
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
         if (super::_state == super::State::Completed) {
             return super::Result::Sucess;
         } // if
         else if (super::_state == super::State::Incompleted) {
             return super::Result::Failure;
         } // else if
-        // ÀsŠJn
+        // å®Ÿè¡Œé–‹å§‹
         super::_state = super::State::Running;
         for (auto& ptr : super::_children) {
             auto re = ptr->Execute(actor);
@@ -108,4 +115,7 @@ public:
 };
 }
 #endif // !BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
+<<<<<<< HEAD
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485

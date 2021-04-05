@@ -10,6 +10,7 @@ bool Player::Input(void) {
 <<<<<<< HEAD
     float angular_speed = 1.0f;
     float speed = 1.0f;
+<<<<<<< HEAD
     bool action = false; bool left = false; bool right = false;
     auto in = Mof::CVector2(1.0f, 0.0f);
     float move_angle = 0.0f;
@@ -65,11 +66,14 @@ bool Player::Input(void) {
 =======
     float angular_speed = 3.5f;
     float speed = 0.6f;
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 
     // contaroller
     this->InputCameraForGamepad(angular_speed, speed);
     // keyboard
     this->InputCameraForKeyboard(angular_speed, speed);
+<<<<<<< HEAD
 
     if (auto weapon = _current_mechanical.lock()) {
         if (weapon->IsAction() && weapon->CanFire()) {
@@ -79,6 +83,9 @@ bool Player::Input(void) {
         } // if
     } // if
 >>>>>>> origin/Ex55_WeaponAction
+=======
+  
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     /*
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
@@ -148,11 +155,14 @@ bool Player::Input(void) {
     */
     return true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 }
 
 void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
-    // “ü—ÍŠp“x
+    // å…¥åŠ›è§’åº¦
     auto rotate = super::GetRotate();
 
     float camera_angle_y = std::atan2(-_camera_controller.GetViewFront().z, _camera_controller.GetViewFront().x) + math::kHalfPi;
@@ -165,7 +175,7 @@ void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
         angle_y += math::kTwoPi;
     } // else if
 
-    // ·•ªŠp“x
+    // å·®åˆ†è§’åº¦
     angle_y -= rotate.y;
     if (math::kPi < angle_y) {
         angle_y -= math::kTwoPi;
@@ -273,7 +283,10 @@ void Player::InputCameraForGamepad(float angular_speed, float speed) {
         } // if
     } // if
 
+<<<<<<< HEAD
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 }
 
 void Player::UpdateCamera(void) {
@@ -317,27 +330,33 @@ void Player::UpdateMove(void) {
         }
         return;
     }
+<<<<<<< HEAD
     //ƒJƒƒ‰‚Ì‘O•ûŒü‚ÌƒxƒNƒgƒ‹
     CVector3 cfvec = _camera_controller.GetViewFront();
     //ƒJƒƒ‰‚ÌY²‚Ì‰ñ“]Šp“x‚ğ‹‚ß‚é
+=======
+    //ã‚«ãƒ¡ãƒ©ã®å‰æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«
+    CVector3 cfvec = _camera_controller->GetViewFront();
+    //ã‚«ãƒ¡ãƒ©ã®Yè»¸ã®å›è»¢è§’åº¦ã‚’æ±‚ã‚ã‚‹
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
-    //ˆÚ“®Šp“x‚ğ‹‚ß‚é
+    //ç§»å‹•è§’åº¦ã‚’æ±‚ã‚ã‚‹
     float my = m_MoveAngle + cy;
     MOF_NORMALIZE_RADIANANGLE(my);
-    //·•ªŠp“x
+    //å·®åˆ†è§’åº¦
     float sa = my - angle_y;
     MOF_ROTDIRECTION_RADIANANGLE(sa);
-    //‰ñ“]
+    //å›è»¢
     angle_y += MOF_CLIPING(sa, -CHARACTER_ROTATIONSPEED * m_StickTilt, CHARACTER_ROTATIONSPEED * m_StickTilt);
     MOF_NORMALIZE_RADIANANGLE(angle_y);
 
-    //ˆÚ“®•ûŒü‚ÌƒxƒNƒgƒ‹
+    //ç§»å‹•æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
     //m_Move += fvec * CHARACTER_MOVESPEED;
     super::_velocity.AddVelocityForce(fvec * CHARACTER_MOVESPEED);
 
-    //ˆÚ“®‚ğÅ‚‘¬“x‚ÅƒNƒŠƒbƒv‚·‚é
+    //ç§»å‹•ã‚’æœ€é«˜é€Ÿåº¦ã§ã‚¯ãƒªãƒƒãƒ—ã™ã‚‹
     auto move = super::_velocity.GetVelocity();
     float ml = move.Length();
     float ms = 0.0f;
@@ -584,12 +603,24 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
 bool Player::Render(void) {
     super::Render();
 
+<<<<<<< HEAD
     // •Ší‚ğİ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ğæ“¾‚·‚é
     LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
     if (auto weapon = _current_mechanical.lock()) {
         // weapon ->Render(pBoneState);
         weapon->Render();
     } // if
+=======
+    //æ­¦å™¨ã‚’è¨­å®šã™ã‚‹ãƒœãƒ¼ãƒ³ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
+    LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
+    if (!pBoneState) {
+        return false;
+    }
+    //æ­¦å™¨ãƒ¡ãƒƒã‚·ãƒ¥ã‚’æç”»ã™ã‚‹è¡Œåˆ—ã‚’ãƒœãƒ¼ãƒ³æƒ…å ±ã‹ã‚‰è¨ˆç®—ã™ã‚‹
+    CMatrix44 matWeapon = pBoneState->pBone->GetRotationOffsetMatrix() * pBoneState->BoneMatrix;
+    //æ­¦å™¨ãƒ¡ãƒƒã‚·ãƒ¥ã®æç”»
+    //m_WeaponMesh.Render(matWeapon);
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     return true;
 }
 

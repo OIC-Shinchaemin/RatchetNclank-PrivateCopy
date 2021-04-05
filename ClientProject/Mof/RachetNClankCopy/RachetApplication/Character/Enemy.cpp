@@ -1,5 +1,6 @@
 #include "Enemy.h"
 
+<<<<<<< HEAD
 #include "Player.h"
 #include "../Collision/Object/EnemyCollisionObject.h"
 #include "../Collision/Object/EnemySightCollisionObject.h"
@@ -30,6 +31,48 @@ bool my::Enemy::ChangeToCombatState(void) {
 }
 
 float my::Enemy::GetDistanceFromInitPosition(void) {
+=======
+#include "../Behaviour/Node/Node.h"
+#include "../Behaviour/Node/SequencerNode.h"
+#include "../Behaviour/Node/SelectorNode.h"
+#include "../Behaviour/Node/ActionNode.h"
+#include "../Behaviour/Node/ConditionalNode.h"
+#include "../Behaviour/Node/DecoratorNode.h"
+#include "../Behaviour/Node/ParameterNode.h"
+
+
+//using BehaviourActor = my::Actor;
+// Â§ñÈÉ®„Åã„ÇâÂèó„ÅëÂèñ„Çã
+behaviour::CompositeNodePtr< std::shared_ptr<my::Enemy> > _patrol_rootnode;
+behaviour::CompositeNodePtr< std::shared_ptr<my::Enemy> > _combat_rootnode;
+
+behaviour::NodeExecutorPtr<my::Enemy::EnemyPtr> my::Enemy::CreatePatrolBehaviour(void) {
+    using namespace behaviour;
+    _patrol_rootnode = std::make_shared<SelectorNode<EnemyPtr>>();
+    
+    auto decorator_0 = std::make_shared < DecoratorNode<EnemyPtr, float>>(
+        ConditionalNodeBase< EnemyPtr>::Operator::GreaterEqual,
+        std::make_shared<GetNode<EnemyPtr, float>>(&Enemy::GetDistanceFromInitPosition),
+        std::make_shared<ValueNode<EnemyPtr, float>>(2.0f));
+
+    auto action_0 = std::make_shared<behaviour::FunctionNode<EnemyPtr>>(&my::Enemy::GoHome);
+    decorator_0->SetChild(action_0);
+    
+
+    auto action_1 = std::make_shared<behaviour::FunctionNode<EnemyPtr>>(&my::Enemy::OverLooking);
+    _patrol_rootnode->AddChild(decorator_0);
+    _patrol_rootnode->AddChild(action_1);
+    return _patrol_rootnode->CreateExecutor();
+}
+behaviour::NodeExecutorPtr<my::Enemy::EnemyPtr> my::Enemy::CreateCombatBehaviour(void) {
+    _combat_rootnode = std::make_shared< behaviour::SelectorNode< my::Enemy::EnemyPtr>>();
+    auto action_0 = std::make_shared<behaviour::FunctionNode<my::Enemy::EnemyPtr>>(&my::Enemy::Chase);
+    _combat_rootnode->AddChild(action_0);
+    return _combat_rootnode->CreateExecutor();
+}
+
+float my::Enemy::GetDistanceFromInitPosition(void) const {
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     return Mof::CVector3Utilities::Distance(_init_position, super::GetPosition());
 }
 
@@ -103,7 +146,10 @@ bool my::Enemy::ChaseTarget(void) {
     return true;
 }
 
+<<<<<<< HEAD
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
                                      ray.Position + ray.Direction * length,
@@ -125,8 +171,11 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 my::Enemy::Enemy() :
     super(),
 <<<<<<< HEAD
+<<<<<<< HEAD
     _state(my::AIState::Patrol) {
 =======
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     _init_position(),
     _target(),
     _sight(),
@@ -135,7 +184,10 @@ my::Enemy::Enemy() :
     _enemy_state(my::EnemyState::Move),
     _patrol_behaviour_executor(),
     _combat_behaviour_executor() {
+<<<<<<< HEAD
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     float scale = 0.2f;
     super::SetScale(Mof::CVector3(scale, scale, scale));
@@ -204,6 +256,7 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
         _motion->ChangeMotion(0);
     } // if
 <<<<<<< HEAD
+<<<<<<< HEAD
     /*
     auto ntnode = std::make_shared<my::NearTargetNode>();
     _rootnode->AddChild(ntnode);
@@ -211,10 +264,13 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     */
 =======
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     return true;
 }
 
 bool my::Enemy::Input(void) {
+<<<<<<< HEAD
 <<<<<<< HEAD
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
@@ -245,6 +301,16 @@ bool my::Enemy::Input(void) {
     else if (_state == my::AIState::Combat) {
         _combat_behaviour_executor->Execute((temp));
 >>>>>>> origin/Ex55_WeaponAction
+=======
+    // Âæå„Å´„Å´EnemyState„ÅÆ„É°„É≥„Éê„Å´ÊåÅ„Åü„Åõ„Çã
+    auto temp = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
+
+    if (_state == my::AIState::Patrol) {
+        _patrol_behaviour_executor->Execute(temp);
+    } // if
+    else if (_state == my::AIState::Combat) {
+        _combat_behaviour_executor->Execute((temp));
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
     } // else if
     return true;
 }
@@ -267,17 +333,17 @@ bool my::Enemy::ContainInRecognitionRange(Mof::CVector3 pos) {
 void my::Enemy::RenderDebug(void) {
     super::RenderDebug();
 
-    // éãê¸ï`âÊ
+    // Ë¶ñÁ∑öÊèèÁîª
     Mof::Vector3 start = super::GetPosition();
     float h = super::_height;
     start.y += h;
 
-    // éãäEã´äEï\é¶
+    // Ë¶ñÁïåÂ¢ÉÁïåË°®Á§∫
     this->RenderRay(start, 0.0f);
     this->RenderRay(start, 90.0f);
     this->RenderRay(start, -90.0f);
 
-    // ëŒè€Ç÷ÇÃéãê¸Çï\é¶
+    // ÂØæË±°„Å∏„ÅÆË¶ñÁ∑ö„ÇíË°®Á§∫
     if (auto target = _target.lock()) {
         auto pos = target->GetPosition();
         pos.y += super::_height;

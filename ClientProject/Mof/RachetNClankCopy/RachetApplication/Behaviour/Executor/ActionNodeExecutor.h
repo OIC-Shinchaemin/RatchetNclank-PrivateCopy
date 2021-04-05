@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma once
 
 #include "NodeExecutor.h"
@@ -39,6 +40,8 @@ public:
 };
 }
 =======
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
 #ifndef BEHAVIOUR_ACTION_NODE_EXECUTOR_H
 #define BEHAVIOUR_ACTION_NODE_EXECUTOR_H
 
@@ -75,7 +78,11 @@ public:
         } // if
         else if (super::_state == super::State::Incompleted) {
             return super::Result::Failure;
+<<<<<<< HEAD
         } // else if
+=======
+        } // else uif
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
         //実行開始
         super::_state = super::State::Running;
         if (super::_node->Execute(actor)) {
@@ -87,4 +94,7 @@ public:
 };
 }
 #endif // !BEHAVIOUR_ACTION_NODE_EXECUTOR_H
+<<<<<<< HEAD
 >>>>>>> origin/Ex55_WeaponAction
+=======
+>>>>>>> 0872728f9b1d5b6a69437db90362aaa9c002b485
