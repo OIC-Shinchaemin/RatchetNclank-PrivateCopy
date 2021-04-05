@@ -7,62 +7,6 @@
 bool Player::Input(void) {
     super::Input();
 
-<<<<<<< HEAD
-    float angular_speed = 1.0f;
-    float speed = 1.0f;
-    bool action = false; bool left = false; bool right = false;
-    auto in = Mof::CVector2(1.0f, 0.0f);
-    float move_angle = 0.0f;
-
-    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
-        action = true;
-        left = true;
-        move_angle = 180.0f;
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
-        action = true;
-        right = true;
-        move_angle = 0.0f;
-    } // else if
-    if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-        action = true;
-        move_angle = 90.0f;
-        if (right) {
-            move_angle -= 45.0f;
-        } // if
-        else if (left) {
-            move_angle += 45.0f;
-        } // else if
-    } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-        action = true;
-        move_angle = 270.0f;
-        if (right) {
-            move_angle += 45.0f;
-        } // if
-        else if (left) {
-            move_angle -= 45.0f;
-        } // else if
-    } // else if
-
-    if (action) {
-        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
-
-
-
-    float h = ::g_pGamepad->GetStickHorizontal();
-    float v = ::g_pGamepad->GetStickVertical();
-    if (auto in = Mof::CVector2(h, v); in.Length() > 0.5f) {
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
-
-
-
-=======
     float angular_speed = 3.5f;
     float speed = 0.6f;
 
@@ -78,7 +22,6 @@ bool Player::Input(void) {
             weapon->Fire(def::Transform(pos, super::GetRotate()));
         } // if
     } // if
->>>>>>> origin/Ex55_WeaponAction
     /*
     float h = ::g_pGamepad->GetStickHorizontal();
     float v = ::g_pGamepad->GetStickVertical();
@@ -147,8 +90,6 @@ bool Player::Input(void) {
     }
     */
     return true;
-<<<<<<< HEAD
-=======
 }
 
 void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
@@ -273,7 +214,6 @@ void Player::InputCameraForGamepad(float angular_speed, float speed) {
         } // if
     } // if
 
->>>>>>> origin/Ex55_WeaponAction
 }
 
 void Player::UpdateCamera(void) {
@@ -495,14 +435,6 @@ Player::Player() :
 Player::~Player() {
 }
 
-<<<<<<< HEAD
-bool Player::Initialize(const def::Transform& transform) {
-    super::Initialize(transform);
-    _top_view_camera = (std::make_shared<my::Camera>());
-    _top_view_camera->SetPosition(Mof::CVector3(0.0f, 1.5f, 5.0f));
-    _top_view_camera->SetTarget(math::vec3::kUnitY * 2.0f);
-    _top_view_camera->Initialize();
-=======
 void Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
     _current_mechanical = change;
 }
@@ -512,19 +444,13 @@ bool Player::Initialize(my::Actor::Param* param) {
     auto coll = std::make_shared<my::PlayerCollisionObject>();
     coll->SetOwner(std::dynamic_pointer_cast<Player>(shared_from_this()));
     super::AddCollisionObject(coll);
->>>>>>> origin/Ex55_WeaponAction
 
     _player_view_camera = (std::make_shared<my::Camera>());
     auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
     _player_view_camera->SetPosition(pos);
     _player_view_camera->SetTarget(math::vec3::kZero);
     _player_view_camera->Initialize();
-<<<<<<< HEAD
-    _camera_controller->SetCamera(_player_view_camera);
-
-=======
     _camera_controller.SetCamera(_player_view_camera);
->>>>>>> origin/Ex55_WeaponAction
     my::CameraLocator::RegisterGlobalCamera(_player_view_camera);
 
     if (auto mesh = _mesh.lock()) {
@@ -550,18 +476,12 @@ bool Player::Update(float delta_time) {
 
     // update camera;
     auto pos = super::GetPosition();
-<<<<<<< HEAD
-    float height = 2.0f;
-    _camera_controller->SetCameraTarget(Mof::CVector3(pos.x, pos.y + height, pos.z));
-    _camera_controller->Update();
-=======
     _camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + super::_height, pos.z));
     _camera_controller.Update();
 
     if (auto weapon = _current_mechanical.lock()) {
         weapon->Update(delta_time);
     } // if
->>>>>>> origin/Ex55_WeaponAction
     return true;
 }
 

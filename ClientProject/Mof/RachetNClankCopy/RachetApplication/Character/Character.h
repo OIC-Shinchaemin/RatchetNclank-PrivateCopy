@@ -25,13 +25,8 @@ protected:
     //! ‚‚³
     float _height;
 protected:
-<<<<<<< HEAD
-    void InputMoveVelocity(Mof::CVector2 stick, float speed);
-    void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
-=======
     virtual void InputMoveVelocity(Mof::CVector2 stick, float speed);
     virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
->>>>>>> origin/Ex55_WeaponAction
     /// <summary>
     /// XV
     /// </summary>

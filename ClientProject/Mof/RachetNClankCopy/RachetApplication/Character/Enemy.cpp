@@ -4,8 +4,6 @@
 #include "../Collision/Object/EnemyCollisionObject.h"
 #include "../Collision/Object/EnemySightCollisionObject.h"
 
-<<<<<<< HEAD
-=======
 
 bool my::Enemy::ChangeToMoveState(void) {
     _enemy_state = my::EnemyState::Move;
@@ -103,7 +101,6 @@ bool my::Enemy::ChaseTarget(void) {
     return true;
 }
 
->>>>>>> origin/Ex55_WeaponAction
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
                                      ray.Position + ray.Direction * length,
@@ -124,9 +121,6 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 
 my::Enemy::Enemy() :
     super(),
-<<<<<<< HEAD
-    _state(my::AIState::Patrol) {
-=======
     _init_position(),
     _target(),
     _sight(),
@@ -135,7 +129,6 @@ my::Enemy::Enemy() :
     _enemy_state(my::EnemyState::Move),
     _patrol_behaviour_executor(),
     _combat_behaviour_executor() {
->>>>>>> origin/Ex55_WeaponAction
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     float scale = 0.2f;
     super::SetScale(Mof::CVector3(scale, scale, scale));
@@ -203,48 +196,18 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
         _motion = mesh->CreateMotionController();
         _motion->ChangeMotion(0);
     } // if
-<<<<<<< HEAD
-    /*
-    auto ntnode = std::make_shared<my::NearTargetNode>();
-    _rootnode->AddChild(ntnode);
-    _behaviour_executor = _rootnode->CreateExecutor();
-    */
-=======
->>>>>>> origin/Ex55_WeaponAction
     return true;
 }
 
 bool my::Enemy::Input(void) {
-<<<<<<< HEAD
-    float tilt = 1.0f;
-    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
-    /*
-=======
     // Œã‚É‚ÉEnemyState‚Ìƒƒ“ƒo‚ÉŽ‚½‚¹‚é
     auto temp = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
 
->>>>>>> origin/Ex55_WeaponAction
     if (_state == my::AIState::Patrol) {
         _patrol_behaviour_executor->Execute(temp);
     } // if
-<<<<<<< HEAD
-    */
-    if (_state != my::AIState::Combat) {
-
-        if (auto target = _target.lock()) {
-            auto dir = target->GetPosition() - super::GetPosition();
-            float angle = std::atan2(dir.z, dir.x);
-            in = math::Rotate(in.x, in.y, angle);
-
-            float angular_speed = 1.0f;
-            float speed = 0.1f;
-            this->InputMoveAngularVelocity(in, angular_speed);
-            this->InputMoveVelocity(in, speed);
-        } // if
-=======
     else if (_state == my::AIState::Combat) {
         _combat_behaviour_executor->Execute((temp));
->>>>>>> origin/Ex55_WeaponAction
     } // else if
     return true;
 }

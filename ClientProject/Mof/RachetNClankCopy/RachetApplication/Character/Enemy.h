@@ -8,12 +8,8 @@
 #include <string>
 
 #include "../SightRecognition.h"
-<<<<<<< HEAD
-#include "../Behaviour/Executor/INodeExecutor.h"
-=======
 #include "../Attack.h"
 #include "../Factory/BehaviourExecutorFactory.h"
->>>>>>> origin/Ex55_WeaponAction
 
 
 namespace my {
@@ -39,11 +35,6 @@ private:
     std::shared_ptr<my::Attack>_attack;
     //! 状態
     my::AIState _state;
-<<<<<<< HEAD
-
-    Behaviour::NodeExecutorPtr< std::shared_ptr< my::Enemy >> _behaviour_executor;
-
-=======
     //! 状態
     my::EnemyState _enemy_state;
     //! ビヘイビア実行
@@ -97,7 +88,6 @@ public:
     /// <returns></returns>
     bool Attack(void);
     void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
->>>>>>> origin/Ex55_WeaponAction
     /// <summary>
     /// 描画
     /// </summary>
