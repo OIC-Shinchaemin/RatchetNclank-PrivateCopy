@@ -130,6 +130,9 @@
     <Filter Include="Rachet\Header\Bullet">
       <UniqueIdentifier>{e685aca4-fa9b-4e9c-bbb6-a286ac3820c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\motion_type">
+      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -287,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="Weapon\Blaster.cpp">
       <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Motion.cpp">
+      <Filter>Rachet\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -542,6 +548,12 @@
     <ClInclude Include="Weapon\Blaster.h">
       <Filter>Rachet\Header\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Motion.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionNames.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -557,6 +569,12 @@
     </None>
     <None Include="..\Resource\behaviour\combat.json">
       <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\enemy.motion_names">
+      <Filter>リソース ファイル\motion_type</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\player.motion_names">
+      <Filter>リソース ファイル\motion_type</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

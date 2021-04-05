@@ -130,6 +130,7 @@ my::Enemy::Enemy() :
     _patrol_behaviour_executor(),
     _combat_behaviour_executor() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
+    super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
     float scale = 0.2f;
     super::SetScale(Mof::CVector3(scale, scale, scale));
 }

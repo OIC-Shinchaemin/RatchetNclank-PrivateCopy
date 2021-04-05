@@ -184,6 +184,7 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="Motion.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
@@ -269,6 +270,8 @@
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
+    <ClInclude Include="Motion.h" />
+    <ClInclude Include="MotionNames.h" />
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />
@@ -290,6 +293,8 @@
   <ItemGroup>
     <None Include="..\Resource\behaviour\combat.json" />
     <None Include="..\Resource\behaviour\patrol.json" />
+    <None Include="..\Resource\motion_names\enemy.motion_names" />
+    <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
   </ItemGroup>
   <ItemGroup>

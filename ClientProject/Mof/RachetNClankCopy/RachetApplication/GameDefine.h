@@ -6,6 +6,7 @@
 #include <Mof.h>
 
 #include "My/Core/Math.h"
+#include "MotionNames.h"
 #include "ResourceManager.h"
 #include "FunctionPointerContainer.h"
 
@@ -18,7 +19,8 @@ struct Transform {
 };
 using ResourceMgr = my::ResourceManager<
     std::shared_ptr<Mof::CTexture>,
-    std::shared_ptr<Mof::CMeshContainer>
+    std::shared_ptr<Mof::CMeshContainer>,
+    std::shared_ptr<my::MotionNames>
 >;
 
 class Enemy;
