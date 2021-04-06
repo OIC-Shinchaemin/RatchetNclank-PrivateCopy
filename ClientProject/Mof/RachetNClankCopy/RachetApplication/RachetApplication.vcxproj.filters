@@ -318,6 +318,15 @@
     <ClCompile Include="State\EnemyMotionAttackState.cpp">
       <Filter>Rachet\Source\State</Filter>
     </ClCompile>
+    <ClCompile Include="Move.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -595,6 +604,15 @@
     </ClInclude>
     <ClInclude Include="State\EnemyMotionAttackState.h">
       <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Move.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

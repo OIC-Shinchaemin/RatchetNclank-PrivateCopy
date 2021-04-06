@@ -11,6 +11,8 @@
 #include "My/Core/StateMachine.h"
 #include "../Factory/BehaviourExecutorFactory.h"
 #include "../SightRecognition.h"
+#include "../Idle.h"
+#include "../Move.h"
 #include "../Attack.h"
 
 
@@ -35,10 +37,16 @@ private:
     //! 標的
     std::weak_ptr<my::Actor>_target;
 
+    //! 待機
+    std::shared_ptr<my::Idle> _idle;
+    //! 移動
+    std::shared_ptr<my::Move> _move;
     //! 視覚
     std::shared_ptr<my::SightRecognition>  _sight;
     //! 攻撃
     std::shared_ptr<my::Attack>_attack;
+
+
 
     //! 状態
     my::StateMachine _motion_state_machine;

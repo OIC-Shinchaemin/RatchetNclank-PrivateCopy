@@ -11,7 +11,6 @@
 
 
 void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
-//    _enemy_state = my::EnemyState::Move;
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -19,8 +18,10 @@ void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) 
     float angle = std::atan2(dir.z, dir.x);
     in = math::Rotate(in.x, in.y, angle);
 
-    this->InputMoveAngularVelocity(in, angular_speed);
-    this->InputMoveVelocity(in, speed);
+    _move->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
+    _move->SetAngularSpeed(angular_speed);
+    _move->SetMoveSpeed(speed);
+    _move->Start();
 }
 
 float my::Enemy::GetDistanceFromInitPosition(void) {
@@ -64,7 +65,10 @@ bool my::Enemy::OverLooking(void) {
 
     in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
     float angular_speed = 4.0f;
-    this->InputMoveAngularVelocity(in, angular_speed);
+
+    _idle->SetIdealAngle(ut::GenerateRandomF(0.0f, math::kTwoPi));
+    _idle->SetAngularSpeed(angular_speed);
+    _idle->Start();
     return false;
 }
 
@@ -110,8 +114,10 @@ my::Enemy::Enemy() :
     _thinking_time_max(0.0f),
     _init_position(),
     _target(),
-    _sight(),
-    _attack() {
+    _idle(),
+    _move(),
+    _attack(),
+    _sight() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
 }
@@ -156,14 +162,22 @@ void my::Enemy::GenerateCollisionObject(void) {
 
 bool my::Enemy::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
-    _sight = std::make_shared<my::SightRecognition>();
+    _idle = std::make_shared<my::Idle>();
+    _move = std::make_shared<my::Move>();
     _attack = std::make_shared<my::Attack>();
+    _sight = std::make_shared<my::SightRecognition>();
     this->GenerateCollisionObject();
 
     // components initialize
     _init_position = super::GetPosition();
-    _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _idle->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _move->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
     _attack->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+
+    _idle->SetVelocity(&_velocity);
+    _move->SetVelocity(&_velocity);
+
 
     // mesh motion
     if (auto mesh = _mesh.lock()) {
@@ -197,6 +211,18 @@ bool my::Enemy::Input(void) {
 bool my::Enemy::Update(float delta_time) {
     super::Update(delta_time);
     _motion_state_machine.Update(delta_time);
+
+    if (_idle->IsActive()) {
+        _idle->Update(delta_time);
+    } // if
+    if (_move->IsActive()) {
+        _move->Update(delta_time);
+    } // if
+    if (_attack->IsActive()) {
+//        _attack->Update(delta_time);
+    } // if
+
+
     super::UpdateTransform(delta_time);
     return true;
 }
