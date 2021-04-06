@@ -35,25 +35,29 @@ void ToolMenu::Show(void) {
         ImGui::Text(""); ImGui::SameLine();
         int* edit_mode = ParameterMap<int>::GetInstance().Get("edit_mode");
         
-        if (!ImGui::ImageButton(
+        if (ImGui::ImageButton(
             ToolIcon::GetInstance().GetTexture(ToolIcon::Hand),
             size, uv1, uv2, frame_padding,
             (((*edit_mode) == 0) ? bg_select_col : bg_col))) {
             *edit_mode = 0;
         } ImGui::SameLine();
         
-        if (!ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::ArrowMove),
+        if (ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::ArrowMove),
             size, uv1, uv2, frame_padding,
             (((*edit_mode) == 1) ? bg_select_col : bg_col))) {
             *edit_mode = 1;
         } ImGui::SameLine();
 
-        if (!ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::ArrowRotate),
+        if (ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::ArrowRotate),
             size, uv1, uv2, frame_padding,
             (((*edit_mode) == 2) ? bg_select_col : bg_col))) {
             *edit_mode = 2;
         } ImGui::SameLine();
-        ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::ArrowScale) , size, uv1, uv2, frame_padding); ImGui::SameLine();
+        if (ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::ArrowScale),
+            size, uv1, uv2, frame_padding,
+            (((*edit_mode) == 3) ? bg_select_col : bg_col))) {
+            *edit_mode = 3;
+        } ImGui::SameLine();
     }
     ImGui::GetStyle().WindowPadding = def_window_padding;
     ImGui::GetStyle().ItemSpacing   = def_item_spacing;
