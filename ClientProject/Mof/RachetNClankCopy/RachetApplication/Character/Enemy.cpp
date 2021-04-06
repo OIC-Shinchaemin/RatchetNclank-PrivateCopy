@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "../Collision/Object/EnemyCollisionObject.h"
 #include "../Collision/Object/EnemySightCollisionObject.h"
+#include "../State/EnemyMotionIdleState.h"
+#include "../State/EnemyMotionMoveState.h"
 
 
 bool my::Enemy::ChangeToMoveState(void) {
@@ -12,6 +14,11 @@ bool my::Enemy::ChangeToMoveState(void) {
 
 bool my::Enemy::ChangeToAttackState(void) {
     _enemy_state = my::EnemyState::Attack;
+    return true;
+}
+
+bool my::Enemy::ChangeMotionState(const char* next) {
+    _motion_state_machine.ChangeState(next);
     return true;
 }
 
@@ -130,6 +137,7 @@ my::Enemy::Enemy() :
     _patrol_behaviour_executor(),
     _combat_behaviour_executor() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
+    super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
     float scale = 0.2f;
     super::SetScale(Mof::CVector3(scale, scale, scale));
 }
@@ -174,8 +182,6 @@ void my::Enemy::GenerateCollisionObject(void) {
         this->SetTarget(nullptr); 
         return true;
     }));
-
-
 }
 
 bool my::Enemy::Initialize(my::Actor::Param* param) {
@@ -192,10 +198,20 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     _combat_behaviour_executor =  _behaviour_executor_factory.Create("../Resource/behaviour/combat.json");
     _patrol_behaviour_executor = _behaviour_executor_factory.Create("../Resource/behaviour/patrol.json");
 
+    // mesh motion
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
-        _motion->ChangeMotion(0);
     } // if
+    if (_motion) {
+        if (auto motion_names = super::_motion_names.lock()) {
+            _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
+        } // if
+    } // if
+
+    // state
+    this->RegisterState<state::EnemyMotionIdleState>(_motion_state_machine);
+    this->RegisterState<state::EnemyMotionMoveState>(_motion_state_machine);
+    _motion_state_machine.ChangeState("EnemyMotionIdleState");
     return true;
 }
 
@@ -214,17 +230,9 @@ bool my::Enemy::Input(void) {
 
 bool my::Enemy::Update(float delta_time) {
     super::Update(delta_time);
+    _motion_state_machine.Update(delta_time);
     super::UpdateTransform(delta_time);
     return true;
-}
-
-bool my::Enemy::Render(void) {
-    super::Render();
-    return true;
-}
-
-bool my::Enemy::ContainInRecognitionRange(Mof::CVector3 pos) {
-    return _sight->ContainInRecognitionRange(pos);
 }
 
 void my::Enemy::RenderDebug(void) {

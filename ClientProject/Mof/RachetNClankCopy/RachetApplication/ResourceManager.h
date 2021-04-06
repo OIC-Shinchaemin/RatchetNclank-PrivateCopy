@@ -10,6 +10,7 @@
 #include <Mof.h>
 
 #include "my/Core/AbstructContainer.h"
+#include "MotionNames.h"
 
 
 namespace my {
@@ -120,6 +121,9 @@ public:
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".mom"); format) {
                 bool success = this->AddSharedElement<Mof::CMeshContainer>(data_path.c_str());
+            } // else if
+            else if (auto format = std::strstr(data_path.c_str(), ".motion_names"); format) {
+                bool success = this->AddSharedElement<my::MotionNames>(data_path.c_str());
             } // else if
         } // for
         _is_loaded = true;

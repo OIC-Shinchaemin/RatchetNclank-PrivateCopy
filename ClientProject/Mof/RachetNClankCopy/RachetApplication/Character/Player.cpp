@@ -359,7 +359,6 @@ void Player::UpdateTransform(float delta_time) {
     auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), _velocity.GetVelocity());
     if (pos.y < 0.0f) {
         pos.y = 0.0f;
-        m_MoveState = Wait;
     } // if
     owner->SetPosition(pos);
 }
@@ -430,6 +429,7 @@ Player::Player() :
     _camera_controller(),
     _current_mechanical() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
+    super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/player.motion_names");
 }
 
 Player::~Player() {
@@ -441,10 +441,13 @@ void Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
 
 bool Player::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
+
+    // collision
     auto coll = std::make_shared<my::PlayerCollisionObject>();
     coll->SetOwner(std::dynamic_pointer_cast<Player>(shared_from_this()));
     super::AddCollisionObject(coll);
 
+    // camera
     _player_view_camera = (std::make_shared<my::Camera>());
     auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
     _player_view_camera->SetPosition(pos);
@@ -453,12 +456,15 @@ bool Player::Initialize(my::Actor::Param* param) {
     _camera_controller.SetCamera(_player_view_camera);
     my::CameraLocator::RegisterGlobalCamera(_player_view_camera);
 
+    // mesh motion
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
-        _motion->ChangeMotion(0);
     } // if
-
-    //_current_weapon = _weapon_system->GetWeapon("OmniWrench");
+    if (_motion) {
+        if (auto motion_names = super::_motion_names.lock()) {
+            _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true);
+        } // if
+    } // if
 
 
     m_State = None;
@@ -471,9 +477,21 @@ bool Player::Initialize(my::Actor::Param* param) {
 bool Player::Update(float delta_time) {
     super::Update(delta_time);
 
-    this->UpdateTransform(delta_time);
-    ChangeAnimation();
+    auto v = super::_velocity.GetVelocity();
+    if (0.01f < Mof::CVector2(v.x, v.z).Length()) {
+        m_MoveState = MoveState::MoveFast;
+    } // if
+    else {
+        m_MoveState = MoveState::Wait;
+    } // else
 
+    if (auto motion_names = _motion_names.lock(); !_motion_names.expired() && _motion) {
+        // ó‘ÔƒNƒ‰ƒX‚ÖˆÚ“®‚³‚¹‚é
+        _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true, false);
+    } // if
+
+
+    this->UpdateTransform(delta_time);
     // update camera;
     auto pos = super::GetPosition();
     _camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + super::_height, pos.z));
@@ -490,14 +508,14 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
 
     m_Time -= CUtilities::GetFrameSecond();
     UpdateMove();
-    //UpdateJump();
-    //UpdateAttack();
+    UpdateJump();
+    UpdateAttack();
 
 
     this->UpdateTransform(delta_time);
     ChangeAnimation();
 
-//    UpdateCamera();    
+    UpdateCamera();    
     return true;
 }
 

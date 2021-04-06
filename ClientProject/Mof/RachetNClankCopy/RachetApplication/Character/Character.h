@@ -10,6 +10,7 @@
 #include <Mof.h>
 
 #include "../GameDefine.h"
+#include "../MotionNames.h"
 
 
 namespace my {
@@ -20,6 +21,8 @@ protected:
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! モーション
     Mof::LPMeshMotionController	_motion;
+    //! モーション名
+    std::weak_ptr<my::MotionNames> _motion_names;
     //! 大きさ
     float _volume;
     //! 高さ
