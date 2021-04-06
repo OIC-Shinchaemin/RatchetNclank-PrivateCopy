@@ -22,8 +22,9 @@ CameraController::Controller MouseMoveCameraController::MouseMoveController(void
     Vector3 mouse_move = MouseUtilities::GetMove();
 
     // 回転
-    bool eye = (*edit_mode == 1);
-    controller.rotation.trigger_flag = MouseUtilities::IsKeyHold(eye ? MOFMOUSE_LBUTTON : MOFMOUSE_RBUTTON);
+    bool eye = (*edit_mode & EditMode::EditEye);
+    MofU32 key = (eye ? MOFMOUSE_LBUTTON : MOFMOUSE_RBUTTON);
+    controller.rotation.trigger_flag = MouseUtilities::IsKeyHold(key);
     controller.rotation.move         = mouse_move * camera_move_rotation_ratio;
 
     // ズーム
@@ -37,7 +38,9 @@ CameraController::Controller MouseMoveCameraController::MouseMoveController(void
     controller.zoom.move         = zoom_move;
 
     // トラック
-    controller.track.trigger_flag = MouseUtilities::IsKeyHold(MOFMOUSE_LBUTTON);
+    bool track = (*edit_mode & EditMode::EditHand);
+    bool track_trigger = (track ? MouseUtilities::IsKeyHold(MOFMOUSE_LBUTTON) : false);
+    controller.track.trigger_flag = track_trigger;
     controller.track.move         = mouse_move * camera_move_track_ratio;
 
     return controller;
