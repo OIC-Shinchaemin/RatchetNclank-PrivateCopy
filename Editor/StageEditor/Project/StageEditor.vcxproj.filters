@@ -127,7 +127,7 @@
       <Filter>ソース ファイル\Action</Filter>
     </ClCompile>
     <ClCompile Include="ToolIcon.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +225,7 @@
       <Filter>ヘッダー ファイル\Action</Filter>
     </ClInclude>
     <ClInclude Include="ToolIcon.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
