@@ -48,6 +48,10 @@ private:
     my::EnemyState _enemy_state;
     //! 状態
     my::StateMachine _motion_state_machine;
+    //! 状態
+    my::StateMachine _ai_state_machine;
+
+
 
     //! ビヘイビア実行
     behaviour::NodeExecutorPtr< EnemyPtr > _patrol_behaviour_executor;
@@ -57,7 +61,7 @@ private:
     my::BehaviourExecutorFactory _behaviour_executor_factory;
 
     template<class State>
-    void RegisterState(my::StateMachine& out) {
+    void RegisterMotionState(my::StateMachine& out) {
         auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
 
         auto ptr = std::make_shared<State>();
@@ -65,6 +69,14 @@ private:
         ptr->SetMotionNames(_motion_names);
         ptr->SetEnemy(shared_this);
         ptr->SetVelocity(&_velocity);
+        out.RegisterState(ptr);
+    }
+    template<class State>
+    void RegisterAIState(my::StateMachine& out) {
+        auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
+        auto ptr = std::make_shared<State>();
+        ptr->SetEnemy(shared_this);
+        ptr->GenerateBehaviourExecutor(_behaviour_executor_factory);
         out.RegisterState(ptr);
     }
 public:

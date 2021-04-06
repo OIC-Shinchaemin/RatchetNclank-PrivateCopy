@@ -5,6 +5,8 @@
 #include "../Collision/Object/EnemySightCollisionObject.h"
 #include "../State/EnemyMotionIdleState.h"
 #include "../State/EnemyMotionMoveState.h"
+#include "../State/AIPatrolState.h"
+#include "../State/AICombatState.h"
 
 
 bool my::Enemy::ChangeToMoveState(void) {
@@ -209,9 +211,12 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     } // if
 
     // state
-    this->RegisterState<state::EnemyMotionIdleState>(_motion_state_machine);
-    this->RegisterState<state::EnemyMotionMoveState>(_motion_state_machine);
+    this->RegisterMotionState<state::EnemyMotionIdleState>(_motion_state_machine);
+    this->RegisterMotionState<state::EnemyMotionMoveState>(_motion_state_machine);
     _motion_state_machine.ChangeState("EnemyMotionIdleState");
+    this->RegisterAIState<state::AIPatrolState>(_ai_state_machine);
+    this->RegisterAIState<state::AICombatState>(_ai_state_machine);
+    _ai_state_machine.ChangeState("AIPatrolState");
     return true;
 }
 
@@ -225,6 +230,8 @@ bool my::Enemy::Input(void) {
     else if (_state == my::AIState::Combat) {
         _combat_behaviour_executor->Execute((temp));
     } // else if
+
+    _ai_state_machine.Update(1.0f / 60.0f);
     return true;
 }
 
@@ -266,6 +273,8 @@ void my::Enemy::RenderDebug(void) {
         ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = Combat");
         _combat_behaviour_executor->DebugRender();
     } // else if
+
+    
 
     if (_enemy_state == my::EnemyState::Move) {
         ::CGraphicsUtilities::RenderString(0.0f, 20.0f, "state = Move");
