@@ -515,7 +515,7 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
     this->UpdateTransform(delta_time);
     ChangeAnimation();
 
-    UpdateCamera();    
+    UpdateCamera();
     return true;
 }
 
@@ -527,6 +527,9 @@ bool Player::Render(void) {
     if (auto weapon = _current_mechanical.lock()) {
         // weapon ->Render(pBoneState);
         weapon->Render();
+
+        auto name = weapon->GetName();
+        ::CGraphicsUtilities::RenderString(600.0f, 300.0f, name.c_str());
     } // if
     return true;
 }

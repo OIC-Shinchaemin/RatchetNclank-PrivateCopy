@@ -15,15 +15,6 @@
 
 
 namespace my {
-enum class AIState {
-    Patrol,
-    Combat
-};
-enum class EnemyState {
-    Idle,
-    Move,
-    Attack,
-};
 class Enemy : public my::Character {
     using super = my::Character;
     using EnemyPtr = std::shared_ptr<my::Enemy>;
@@ -32,31 +23,27 @@ public:
         IdleWait,
         MoveRun,
         AttackOne,
+        CountMax,
     };
 private:
+    //! 時間
+    float _thinking_time;
+    //! 時間
+    float _thinking_time_max;
     //! 初期位置
     Mof::CVector3 _init_position;
     //! 標的
     std::weak_ptr<my::Actor>_target;
+
     //! 視覚
     std::shared_ptr<my::SightRecognition>  _sight;
-    //! 視覚
+    //! 攻撃
     std::shared_ptr<my::Attack>_attack;
-    //! 状態
-    my::AIState _state;
-    //! 状態
-    my::EnemyState _enemy_state;
+
     //! 状態
     my::StateMachine _motion_state_machine;
     //! 状態
     my::StateMachine _ai_state_machine;
-
-
-
-    //! ビヘイビア実行
-    behaviour::NodeExecutorPtr< EnemyPtr > _patrol_behaviour_executor;
-    //! ビヘイビア実行
-    behaviour::NodeExecutorPtr< EnemyPtr > _combat_behaviour_executor;
     //! ファクトリー
     my::BehaviourExecutorFactory _behaviour_executor_factory;
 
@@ -69,6 +56,7 @@ private:
         ptr->SetMotionNames(_motion_names);
         ptr->SetEnemy(shared_this);
         ptr->SetVelocity(&_velocity);
+        ptr->SetAttack(_attack);
         out.RegisterState(ptr);
     }
     template<class State>
@@ -80,8 +68,6 @@ private:
         out.RegisterState(ptr);
     }
 public:
-    bool ChangeToPatrolState(void);
-    bool ChangeToCombatState(void);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -147,12 +133,6 @@ public:
     /// <param name="ptr"></param>
     void SetTarget(const std::shared_ptr<my::Character>& ptr);
     /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    Mof::CSphere GetAttackSphere(void) const;
-    /// <summary>
     /// 生成
     /// </summary>
     /// <param name=""></param>
@@ -175,21 +155,28 @@ public:
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time);
-    /// <summary>
-    /// デバッグ
-    /// </summary>
-    /// <param name=""></param>
-    virtual void RenderDebug(void) override;
-
-    bool ChangeToMoveState(void);
-    bool ChangeToAttackState(void);
-
+    bool ChangeToPatrolState(void);
+    bool ChangeToCombatState(void);
     /// <summary>
     /// 変更
     /// </summary>
     /// <param name="next"></param>
     /// <returns></returns>
-    bool ChangeMotionState(const char* next);
+    bool ChangeMotionState(const char* next_state);
+    /*
+    template <typename Enum>
+    bool ChangeMotionState(Enum type) {
+        if (auto motion_names = _motion_names.lock()) {
+            return ChangeMotionState(motion_names->At(type));
+        } // if
+        return false;
+    }
+    */
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    virtual void RenderDebug(void) override;
 };
 }
 #endif // !MY_ENEMY_H

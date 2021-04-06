@@ -19,6 +19,10 @@ void state::EnemyMotionMoveState::Update(float delta_time) {
     if (0.0001f >= length) { // move component is inactive
         super::ChangeState("EnemyMotionIdleState");
     } // if
+
+    if (auto attack = super::_attack.lock(); !super::_attack.expired() && attack->IsActive()) {
+        super::ChangeState("EnemyMotionAttackState");
+    } // if
 }
 
 void state::EnemyMotionMoveState::Enter(void) {

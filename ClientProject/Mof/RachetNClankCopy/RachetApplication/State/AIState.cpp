@@ -32,8 +32,13 @@ void state::AIState::Update(float delta_time) {
 }
 
 void state::AIState::Enter(void) {
+    _behaviour_executor->Reset();
 }
 
 void state::AIState::Exit(void) {
-    _behaviour_executor->Reset();
+    //_behaviour_executor->Reset();
+}
+
+void state::AIState::DebugRender(void) {
+    _behaviour_executor->DebugRender();
 }

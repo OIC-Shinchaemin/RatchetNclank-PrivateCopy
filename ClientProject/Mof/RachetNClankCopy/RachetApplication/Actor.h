@@ -33,6 +33,8 @@ public:
         }
     };
 private:
+    //! 名前
+    std::string _name;
     //! 状態
     my::ActorState _state;
     //! トランスフォーム
@@ -81,6 +83,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Actor();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="name"></param>
+    void SetName(const char* name);
     /// <summary>
     /// セッター
     /// </summary>

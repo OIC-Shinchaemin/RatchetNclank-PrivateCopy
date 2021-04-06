@@ -62,6 +62,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void Exit(void) override;
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    virtual void DebugRender(void) override;
 };
 }
 #endif // !STATE_AI_STATE_H

@@ -8,6 +8,8 @@
 namespace my {
 class Attack {
 private:
+    //! 実行中
+    bool _active;
     //! 所有者
     std::weak_ptr<class Enemy> _owner;
     //! 攻撃範囲
@@ -51,7 +53,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    Mof::CSphere GetRangeSphere(void) const;
+    Mof::CSphere GetCanAttackRangeSphere(void) const;
+    /// <summary>
+    /// 有効判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsActive(void) const;
+    /// <summary>
+    /// 無効化
+    /// </summary>
+    /// <param name=""></param>
+    void Inactive(void);
     /// <summary>
     /// アクション
     /// </summary>
