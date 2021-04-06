@@ -504,7 +504,7 @@ bool Player::Update(float delta_time) {
     return true;
 }
 
-bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
+bool Player::Update(float delta_time, LPMeshContainer stage_mesh) {
     super::Update(delta_time);
 
     _time -= CUtilities::GetFrameSecond();
