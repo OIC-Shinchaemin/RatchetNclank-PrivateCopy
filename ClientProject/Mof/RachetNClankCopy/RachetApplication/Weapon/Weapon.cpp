@@ -1,14 +1,23 @@
 #include "Weapon.h"
 
+#include "../Bullet/Bullet.h"
+#include "../ParticleEffect.h"
+
+
 my::Weapon::Weapon() :
     super(),
-    _mesh() {
+    _mesh(){
 }
 
 my::Weapon::~Weapon() {
 }
 
-bool my::Weapon::Render(void) {    
+bool my::Weapon::Update(float delta_time) {
+    super::Update(delta_time);
+    return true;
+}
+
+bool my::Weapon::Render(void) {
     if (auto r = _mesh.lock()) {
         Mof::CMatrix44 scale, rotate, translate;
         scale.Scaling(super::GetScale(), scale);

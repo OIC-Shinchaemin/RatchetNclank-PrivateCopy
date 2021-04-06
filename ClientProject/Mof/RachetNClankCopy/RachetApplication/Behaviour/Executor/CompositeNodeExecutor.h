@@ -11,9 +11,12 @@ namespace behaviour {
 template<typename Actor>
 class CompositeNodeExecutor : public NodeExecutor<Actor> {
     using super = NodeExecutor<Actor>;
+protected:
+    //! Às’†
+    NodeExecutorPtr<Actor> _current;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="node"></param>
     CompositeNodeExecutor(const CompositeNodePtr<Actor>& node) :
@@ -25,16 +28,17 @@ public:
         }
     }
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~CompositeNodeExecutor() = default;
     /// <summary>
-    /// å®Ÿè¡ŒçŠ¶æ…‹ã‚’å…¨ã¦ãƒªã‚»ãƒƒãƒˆ
-    /// çŠ¶æ…‹ã‚’Inactiveã«è¨­å®š
+    /// Àsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg
+    /// ó‘Ô‚ğInactive‚Éİ’è
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) override{
         super::Reset();
+        _current.reset();
         for (auto& ptr : super::_children) {
             ptr->Reset();
         }

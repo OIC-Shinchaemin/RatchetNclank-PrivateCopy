@@ -6,23 +6,25 @@
 
 #include "../Node/Node.h"
 
+#include <Mof.h>
+
 
 namespace behaviour {
 template<typename Actor>
 class NodeExecutor : public INodeExecutor<Actor> {
     using super = INodeExecutor<Actor>;
 protected:
-    //! çŠ¶æ…‹
+    //! ó‘Ô
     super::State _state;
-    //! å¯¾å¿œãƒãƒ¼ãƒ‰
+    //! ‘Î‰ƒm[ƒh
     NodePtr<Actor> _node;
-    //! è¦ª
+    //! e
     NodeExecutorWeakPtr<Actor> _parent;
-    //! å­ä¾›
+    //! q‹Ÿ
     NodeExecutorList<Actor> _children;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="node"></param>
     NodeExecutor(const NodePtr<Actor>& node) :
@@ -33,30 +35,61 @@ public:
         _children() {
     }
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~NodeExecutor() = default;
     /// <summary>
-    /// ã‚»ãƒƒã‚¿ãƒ¼
+    /// ƒZƒbƒ^[
     /// </summary>
     /// <param name="ptr"></param>
     void SetParent(NodeExecutorWeakPtr<Actor> ptr) override {
         _parent = ptr;
     }
     /// <summary>
-    /// ãƒãƒ¼ãƒ‰ã®å®Ÿè¡Œå‡¦ç†
+    /// ƒm[ƒh‚ÌÀsˆ—
     /// </summary>
-    /// <param name="actor">å®Ÿè¡Œã‚¢ã‚¯ã‚¿ãƒ¼</param>
-    /// <returns>Succeeded:å®Ÿè¡Œã®æˆåŠŸ</returns>
-    /// <returns>Failed:å®Ÿè¡Œã®å¤±æ•—</returns>
+    /// <param name="actor">ÀsƒAƒNƒ^[</param>
+    /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
+    /// <returns>Failed:Às‚Ì¸”s</returns>
     virtual behaviour::INodeExecutor<Actor>::Result Execute(Actor& actor) override { return behaviour::INodeExecutor<Actor>::Result::Failure; }
     /// <summary>
-    /// å®Ÿè¡ŒçŠ¶æ…‹ã‚’å…¨ã¦ãƒªã‚»ãƒƒãƒˆ
-    /// çŠ¶æ…‹ã‚’Inactiveã«è¨­å®š
+    /// Àsó‘Ô‚ğ‘S‚ÄƒŠƒZƒbƒg
+    /// ó‘Ô‚ğInactive‚Éİ’è
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) override {
         _state = super::State::Inactive;
+    }
+    /// <summary>
+    /// ƒfƒoƒbƒO
+    /// </summary>
+    /// <typeparam name="Actor"></typeparam>
+    virtual void DebugRender(Mof::CVector2 position) override {
+        MofU32 color;
+        if (_state == super::State::Inactive) {
+            color = MOF_COLOR_WHITE;
+        } // else if
+        if (_state == super::State::Running) {
+            color = MOF_COLOR_RED;
+        } // if
+        if (_state == super::State::Completed) {
+            color = MOF_COLOR_GREEN;
+        } // else if
+        if (_state == super::State::Incompleted) {
+            color = MOF_COLOR_BLUE;
+        } // else if
+
+
+        ::CGraphicsUtilities::RenderString(position.x, position.y, color, _node->GetName().c_str());
+        auto pos = position;
+        pos.x += 100.0f;
+        for (auto ptr : _children) {
+            ptr->DebugRender(pos);
+            pos.y += 20.0f;
+        } // for
+    }
+    virtual void DebugRender(void) override {
+        this->DebugRender(Mof::CVector2(100.0f, 100.0f));
     }
 };
 }

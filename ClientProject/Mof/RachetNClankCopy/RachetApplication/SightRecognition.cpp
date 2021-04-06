@@ -5,7 +5,7 @@
 
 my::SightRecognition::SightRecognition() :
     _owner(),
-    _range(2.5f) {
+    _range(5.0f) {
 }
 
 my::SightRecognition::~SightRecognition() {
@@ -30,7 +30,6 @@ bool my::SightRecognition::ContainInRecognitionRange(Mof::CVector3 target) {
     if (!Mof::CSphere(pos, _range).CollisionPoint(target)) {
         return false;
     } // if
-
 
 
     Mof::CVector3 dir = target - pos;

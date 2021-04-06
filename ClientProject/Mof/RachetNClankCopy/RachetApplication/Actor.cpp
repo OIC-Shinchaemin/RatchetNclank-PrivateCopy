@@ -27,9 +27,20 @@ Mof::CVector3 my::Actor::UpdatePosition(float delta_time, Mof::CVector3 position
     return position;
 }
 
+void my::Actor::UpdateTransform(float delta_time) {
+    // rotate
+    auto rotate = this->UpdateRotate(delta_time, this->GetRotate(), _velocity.GetAngularVelocity());
+    this->SetRotate(rotate);
+    // position
+    auto pos = this->UpdatePosition(delta_time, this->GetPosition(), _velocity.GetVelocity());
+    this->SetPosition(pos);
+}
+
 my::Actor::Actor() :
     _state(my::ActorState::Active),
-    _transform() {
+    _transform(),
+    _collision_objects(),
+    _velocity() {
 }
 
 my::Actor::~Actor() {
@@ -67,14 +78,18 @@ my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
 
-void my::Actor::End(void) {
-    this->_state = my::ActorState::End;
-    Observable::Notify("DeleteRequest",shared_from_this());
+const std::vector<std::shared_ptr<my::CollisionObject>>& my::Actor::GetCollisionObjects(void) const {
+    return this->_collision_objects;
 }
 
-bool my::Actor::Initialize(const def::Transform& transform) {
+void my::Actor::End(void) {
+    this->_state = my::ActorState::End;
+    Observable::Notify("DeleteRequest", shared_from_this());
+}
+
+bool my::Actor::Initialize(my::Actor::Param* param) {
     _state = my::ActorState::Active;
-    _transform = transform;
+    _transform = param->transform;
     return true;
 }
 
@@ -91,6 +106,7 @@ bool my::Actor::Render(void) {
 }
 
 bool my::Actor::Release(void) {
+    _collision_objects.clear();
     return true;
 }
 

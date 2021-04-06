@@ -1,11 +1,15 @@
 #ifndef MY_ENEMY_H
 #define MY_ENEMY_H
- 
+
 
 #include "Character.h"
 
+#include <unordered_map>
+#include <string>
+
 #include "../SightRecognition.h"
-#include "../Behaviour/Executor/INodeExecutor.h"
+#include "../Attack.h"
+#include "../Factory/BehaviourExecutorFactory.h"
 
 
 namespace my {
@@ -13,67 +17,79 @@ enum class AIState {
     Patrol,
     Combat
 };
+enum class EnemyState {
+    Move,
+    Attack,
+};
 class Enemy : public my::Character {
     using super = my::Character;
     using EnemyPtr = std::shared_ptr<my::Enemy>;
 private:
-    //! åˆæœŸä½ç½®
+    //! ‰ŠúˆÊ’u
     Mof::CVector3 _init_position;
-    //! æ¨™çš„
-    std::weak_ptr<my::Character>_target;
-    //! è¦–è¦š
-    my::SightRecognition _sight;
-    //! çŠ¶æ…‹
+    //! •W“I
+    std::weak_ptr<my::Actor>_target;
+    //! ‹Šo
+    std::shared_ptr<my::SightRecognition>  _sight;
+    //! ‹Šo
+    std::shared_ptr<my::Attack>_attack;
+    //! ó‘Ô
     my::AIState _state;
-    //! ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢å®Ÿè¡Œ
+    //! ó‘Ô
+    my::EnemyState _enemy_state;
+    //! ƒrƒwƒCƒrƒAÀs
     behaviour::NodeExecutorPtr< EnemyPtr > _patrol_behaviour_executor;
-    //! ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢å®Ÿè¡Œ
+    //! ƒrƒwƒCƒrƒAÀs
     behaviour::NodeExecutorPtr< EnemyPtr > _combat_behaviour_executor;
-    
+    //! ƒtƒ@ƒNƒgƒŠ[
+    my::BehaviourExecutorFactory _behaviour_executor_factory;
+public:
+    bool ChangeToPatrolState(void);
+    bool ChangeToCombatState(void);
     /// <summary>
-    /// ä½œæˆ
+    /// ƒQƒbƒ^[
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    behaviour::NodeExecutorPtr< EnemyPtr >  CreatePatrolBehaviour(void);
+    float GetDistanceFromInitPosition(void);
     /// <summary>
-    /// ä½œæˆ
+    /// ”»’è
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    behaviour::NodeExecutorPtr< EnemyPtr >  CreateCombatBehaviour(void);
+    bool HasTarget(void);
     /// <summary>
-    /// ã‚²ãƒƒã‚¿ãƒ¼
+    /// ”»’è
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    float GetDistanceFromInitPosition(void) const;
+    bool TargetInAttackRange(void);
     /// <summary>
-    /// åˆ¤å®š
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    bool HasTarget(void) const;
-    /// <summary>
-    /// è¦‹æ¸¡ã™
+    /// Œ©“n‚·
     /// </summary>
     /// <param name=""></param>
     bool OverLooking(void);
     /// <summary>
-    /// è¿½ã„ã‹ã‘ã‚‹
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    bool Chase(void);
-    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
-    /// <summary>
-    /// åˆæœŸä½ç½®ã«æˆ»ã‚‹
+    /// ‰ŠúˆÊ’u‚É–ß‚é
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool GoHome(void);
     /// <summary>
-    /// æç”»
+    /// ’Ç‚¢‚©‚¯‚é
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool ChaseTarget(void);
+    /// <summary>
+    /// UŒ‚
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Attack(void);
+    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
+    /// <summary>
+    /// •`‰æ
     /// </summary>
     /// <param name="ray"></param>
     /// <param name="length"></param>
@@ -82,53 +98,67 @@ private:
     void RenderRay(Mof::Vector3 start, float degree_y);
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     Enemy();
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~Enemy();
     /// <summary>
-    /// ã‚»ãƒƒã‚¿ãƒ¼
+    /// ƒZƒbƒ^[
     /// </summary>
     /// <param name="ptr"></param>
     void SetTarget(const std::shared_ptr<my::Character>& ptr);
     /// <summary>
-    /// åˆæœŸåŒ–
+    /// ƒQƒbƒ^[
     /// </summary>
-    /// <param name="transform"></param>
+    /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Initialize(const def::Transform& transform) override;
+    Mof::CSphere GetAttackSphere(void) const;
     /// <summary>
-    /// å…¥åŠ›
+    /// ¶¬
+    /// </summary>
+    /// <param name=""></param>
+    void GenerateCollisionObject(void);
+    /// <summary>
+    /// ‰Šú‰»
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    virtual bool Initialize(my::Actor::Param* param) override;
+    /// <summary>
+    /// “ü—Í
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Input(void) override;
     /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time);
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
-    /// è¦–èªå¯èƒ½åˆ¤å®š
+    /// ‹”F‰Â”\”»’è
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool ContainInRecognitionRange(Mof::CVector3 pos);
     /// <summary>
-    /// ãƒ‡ãƒãƒƒã‚°
+    /// ƒfƒoƒbƒO
     /// </summary>
     /// <param name=""></param>
     virtual void RenderDebug(void) override;
+
+    bool ChangeToMoveState(void);
+    bool ChangeToAttackState(void);
 };
 }
 #endif // !MY_ENEMY_H

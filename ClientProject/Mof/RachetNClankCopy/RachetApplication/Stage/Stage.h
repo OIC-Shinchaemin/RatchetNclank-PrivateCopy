@@ -1,6 +1,5 @@
 #pragma once
 #include "Mof.h"
-#include "rapidjson/document.h"
 #include <unordered_map>
 
 // ********************************************************************************
@@ -21,7 +20,6 @@ public:
         Vector3                         scale        { 1.0f, 1.0f, 1.0f };
         Vector3                         rotation     { 0.0f, 0.0f, 0.0f };
         std::shared_ptr<CMeshContainer> mesh_pointer { nullptr };
-        std::string                     mesh_path    { "" };
         std::string                     name         { "" };
 
         // ********************************************************************************
@@ -39,9 +37,8 @@ public:
             bool scale_flag  = (v1.scale        == v2.scale       );
             bool rotate_flag = (v1.rotation     == v2.rotation    );
             bool mesh_flag   = (v1.mesh_pointer == v2.mesh_pointer);
-            bool path_flag   = (v1.mesh_path    == v2.mesh_path   );
             bool name_flag   = (v1.name         == v2.name        );
-            return (pos_flag && scale_flag && rotate_flag && mesh_flag && path_flag && name_flag);
+            return (pos_flag && scale_flag && rotate_flag && mesh_flag && name_flag);
         }
     };
 
@@ -64,10 +61,7 @@ public:
     using SaveData      = std::tuple<std::string, MeshList*, ObjectList*>;
 
     //! pair<file_name, file_buffer>
-    using LoadData      = std::pair<std::string, rapidjson::Document*>;
-
-    //! pair<file_buffer, MeshList*, ObjectList*>
-    using ParseData     = std::tuple<rapidjson::Document*, MeshList*, ObjectList*>;
+    using LoadData      = std::pair<std::string, std::string*>;
 
 private:
 
@@ -77,9 +71,9 @@ private:
     //! オブジェクトデータ配列
     ObjectList _object_array;
 
-    bool Parse(const rapidjson::Document* buffer, MeshList* mesh_list, ObjectList* object_list);
+    bool Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list);
 
-    bool LoadMap(rapidjson::Document* buffer_pointer, const std::string& map_file);
+    bool LoadMap(std::string* buffer_pointer, const std::string& map_file);
 
     bool LoadMesh(const std::string& key, const std::string& mesh_file);
 

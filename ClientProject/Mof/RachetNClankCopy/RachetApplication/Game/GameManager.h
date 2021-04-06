@@ -7,24 +7,28 @@
 #include "My/Core/Observer.h"
 #include "GameWorld.h"
 #include "Renderer.h"
+#include "PhysicsWorld.h"
 #include "../GameSystem/GameMoney.h"
 #include "../GameSystem/WeaponSystem.h"
 #include "../GameSystem/QuickChangeSystem.h"
 #include "../Stage/Stage.h"
 #include "../Character/Character.h"
 #include "../Character/Enemy.h"
-#include "../Weapon/Weapon.h"
 
 
 namespace my {
 class GameManager : public std::enable_shared_from_this<my::GameManager>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
 private:
+    //! 追加
+    std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! 削除
     std::vector<std::shared_ptr<my::Actor>> _delete_actors;
     //! ゲーム
     my::GameWorld _game_world;
     //! レンダラー
     my::Renderer _renderer;
+    //! コリジョン
+    my::PhysicsWorld _physic_world;
     //! 金
     std::unique_ptr<my::GameMoney>  _game_money;
     //! 武器
@@ -34,11 +38,9 @@ private:
     //! ステージ
     Stage _stage;
     //! キャラクタ
-    std::shared_ptr<my::Character> _character;
+    //std::shared_ptr<my::Character> _character;
     //! キャラクタ
-    std::vector<std::shared_ptr<my::Enemy>> _enemies;
-    //! 武器
-    std::shared_ptr<my::Weapon> _current_weapon;
+    //std::vector<std::shared_ptr<my::Enemy>> _enemies;
 private:
     /// <summary>
     /// 追加
@@ -69,7 +71,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>&ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
     /// <summary>
     /// 初期化
     /// </summary>

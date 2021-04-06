@@ -2,26 +2,29 @@
 
 
 #include "Character.h"
+#include "My/Core/Observer.h"
 #include "../Camera/CameraLocator.h"
 
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
+#include "../Weapon/Mechanical.h"
+#include "../GameSystem/WeaponSystem.h"
 
 
-// 移動速度
+// 遘ｻ蜍暮溷ｺｦ
 #define		CHARACTER_MOVESPEED			(0.015f* 60) 
 #define		CHARACTER_SLOWMOVESPEEDMAX		(0.03f* 60)
 //#define		CHARACTER_FASTMOVESPEEDMAX		(0.25f)
 #define		CHARACTER_FASTMOVESPEEDMAX		(0.1f* 60)
-// 回転速度
+// 蝗櫁ｻ｢騾溷ｺｦ
 #define		CHARACTER_ROTATIONSPEED		(0.2f)
-//攻撃回数
+//謾ｻ謦�蝗樊焚
 #define		CHARACTER_ATTACKCOUNT		(3)
 #define		CHARACTER_ATTACKMOVETIME	(0.1f)
 
 #define		GRAVITY					(0.01f)
 
-class Player : public my::Character, private my::CameraLocator {
+class Player : public my::Character, private my::CameraLocator, public my::Observer<std::shared_ptr<my::Mechanical>> {
 private:
     enum ActionState {
         None,
@@ -52,12 +55,12 @@ private:
     bool					_next_atc;
     float					_gravity;
     
-    //! カメラ
+    //! 繧ｫ繝｡繝ｩ
     std::shared_ptr<my::Camera> _player_view_camera;
-    //! カメラ
-    std::shared_ptr<my::Camera> _top_view_camera;
-    //! カメラコントローラ
-    std::shared_ptr<my::CameraController>_camera_controller;
+    //! 繧ｫ繝｡繝ｩ繧ｳ繝ｳ繝医Ο繝ｼ繝ｩ
+    my::CameraController _camera_controller;
+    //! 豁ｦ蝎ｨ
+    std::weak_ptr<my::Mechanical>_current_mechanical;
 
     virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed) override;
     void InputCameraForKeyboard(float angular_speed, float speed);
@@ -71,8 +74,9 @@ private:
 public:
     Player();
     ~Player();
+    virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
 
-    virtual bool Initialize(const def::Transform& transform) override;
+    virtual bool Initialize(my::Actor::Param* param) override;
     virtual bool Input(void) override;
     virtual bool Update(float delta_time) override;
     virtual bool Update(float delta_time, LPMeshContainer stage_mesh);
