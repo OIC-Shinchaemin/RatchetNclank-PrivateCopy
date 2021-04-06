@@ -93,7 +93,7 @@ bool Player::Input(void) {
 }
 
 void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
-    // 入力角度
+    // 蜈･蜉幄ｧ貞ｺｦ
     auto rotate = super::GetRotate();
 
     float camera_angle_y = std::atan2(-_camera_controller.GetViewFront().z, _camera_controller.GetViewFront().x) + math::kHalfPi;
@@ -106,7 +106,7 @@ void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
         angle_y += math::kTwoPi;
     } // else if
 
-    // 差分角度
+    // 蟾ｮ蛻�ｧ貞ｺｦ
     angle_y -= rotate.y;
     if (math::kPi < angle_y) {
         angle_y -= math::kTwoPi;
@@ -257,27 +257,27 @@ void Player::UpdateMove(void) {
         }
         return;
     }
-    //カメラの前方向のベクトル
+    //繧ｫ繝｡繝ｩ縺ｮ蜑肴婿蜷代�繝吶け繝医Ν
     CVector3 cfvec = _camera_controller.GetViewFront();
-    //カメラのY軸の回転角度を求める
+    //繧ｫ繝｡繝ｩ縺ｮY霆ｸ縺ｮ蝗櫁ｻ｢隗貞ｺｦ繧呈ｱゅａ繧
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
-    //移動角度を求める
+    //遘ｻ蜍戊ｧ貞ｺｦ繧呈ｱゅａ繧
     float my = _move_angle + cy;
     MOF_NORMALIZE_RADIANANGLE(my);
-    //差分角度
+    //蟾ｮ蛻�ｧ貞ｺｦ
     float sa = my - angle_y;
     MOF_ROTDIRECTION_RADIANANGLE(sa);
-    //回転
+    //蝗櫁ｻ｢
     angle_y += MOF_CLIPING(sa, -CHARACTER_ROTATIONSPEED * _stick_tilt, CHARACTER_ROTATIONSPEED * _stick_tilt);
     MOF_NORMALIZE_RADIANANGLE(angle_y);
 
-    //移動方向のベクトル
+    //遘ｻ蜍墓婿蜷代�繝吶け繝医Ν
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
     //m_Move += fvec * CHARACTER_MOVESPEED;
     super::_velocity.AddVelocityForce(fvec * CHARACTER_MOVESPEED);
 
-    //移動を最高速度でクリップする
+    //遘ｻ蜍輔ｒ譛鬮倬溷ｺｦ縺ｧ繧ｯ繝ｪ繝��縺吶ｋ
     auto move = super::_velocity.GetVelocity();
     float ml = move.Length();
     float ms = 0.0f;
@@ -430,6 +430,7 @@ Player::Player() :
     _camera_controller(),
     _current_mechanical() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
+    super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/player.motion_names");
 }
 
 Player::~Player() {
@@ -441,10 +442,13 @@ void Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
 
 bool Player::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
+
+    // collision
     auto coll = std::make_shared<my::PlayerCollisionObject>();
     coll->SetOwner(std::dynamic_pointer_cast<Player>(shared_from_this()));
     super::AddCollisionObject(coll);
 
+    // camera
     _player_view_camera = (std::make_shared<my::Camera>());
     auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
     _player_view_camera->SetPosition(pos);
@@ -453,12 +457,15 @@ bool Player::Initialize(my::Actor::Param* param) {
     _camera_controller.SetCamera(_player_view_camera);
     my::CameraLocator::RegisterGlobalCamera(_player_view_camera);
 
+    // mesh motion
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
-        _motion->ChangeMotion(0);
     } // if
-
-    //_current_weapon = _weapon_system->GetWeapon("OmniWrench");
+    if (_motion) {
+        if (auto motion_names = super::_motion_names.lock()) {
+            _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true);
+        } // if
+    } // if
 
 
     _state = None;
@@ -471,9 +478,21 @@ bool Player::Initialize(my::Actor::Param* param) {
 bool Player::Update(float delta_time) {
     super::Update(delta_time);
 
-    this->UpdateTransform(delta_time);
-    ChangeAnimation();
+    auto v = super::_velocity.GetVelocity();
+    if (0.01f < Mof::CVector2(v.x, v.z).Length()) {
+        m_MoveState = MoveState::MoveFast;
+    } // if
+    else {
+        m_MoveState = MoveState::Wait;
+    } // else
 
+    if (auto motion_names = _motion_names.lock(); !_motion_names.expired() && _motion) {
+        // 状態クラスへ移動させる
+        _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true, false);
+    } // if
+
+
+    this->UpdateTransform(delta_time);
     // update camera;
     auto pos = super::GetPosition();
     _camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + super::_height, pos.z));
@@ -490,21 +509,21 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
 
     _time -= CUtilities::GetFrameSecond();
     UpdateMove();
-    //UpdateJump();
-    //UpdateAttack();
+    UpdateJump();
+    UpdateAttack();
 
 
     this->UpdateTransform(delta_time);
     ChangeAnimation();
 
-//    UpdateCamera();    
+    UpdateCamera();    
     return true;
 }
 
 bool Player::Render(void) {
     super::Render();
 
-    // 武器を設定するボーンの情報を取得する
+    // 豁ｦ蝎ｨ繧定ｨｭ螳壹☆繧九�繝ｼ繝ｳ縺ｮ諠�ｱ繧貞叙蠕励☆繧
     LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
     if (auto weapon = _current_mechanical.lock()) {
         // weapon ->Render(pBoneState);

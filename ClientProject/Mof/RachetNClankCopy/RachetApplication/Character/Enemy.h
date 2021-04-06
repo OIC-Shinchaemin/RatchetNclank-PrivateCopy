@@ -3,13 +3,15 @@
 
 
 #include "Character.h"
+#include "My/Core/Observer.h"
 
 #include <unordered_map>
 #include <string>
 
+#include "My/Core/StateMachine.h"
+#include "../Factory/BehaviourExecutorFactory.h"
 #include "../SightRecognition.h"
 #include "../Attack.h"
-#include "../Factory/BehaviourExecutorFactory.h"
 
 
 namespace my {
@@ -18,12 +20,19 @@ enum class AIState {
     Combat
 };
 enum class EnemyState {
+    Idle,
     Move,
     Attack,
 };
 class Enemy : public my::Character {
     using super = my::Character;
     using EnemyPtr = std::shared_ptr<my::Enemy>;
+public:
+    enum class MotionType {
+        IdleWait,
+        MoveRun,
+        AttackOne,
+    };
 private:
     //! 初期位置
     Mof::CVector3 _init_position;
@@ -37,12 +46,27 @@ private:
     my::AIState _state;
     //! 状態
     my::EnemyState _enemy_state;
+    //! 状態
+    my::StateMachine _motion_state_machine;
+
     //! ビヘイビア実行
     behaviour::NodeExecutorPtr< EnemyPtr > _patrol_behaviour_executor;
     //! ビヘイビア実行
     behaviour::NodeExecutorPtr< EnemyPtr > _combat_behaviour_executor;
     //! ファクトリー
     my::BehaviourExecutorFactory _behaviour_executor_factory;
+
+    template<class State>
+    void RegisterState(my::StateMachine& out) {
+        auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
+
+        auto ptr = std::make_shared<State>();
+        ptr->SetLPMeshMotionController(_motion);
+        ptr->SetMotionNames(_motion_names);
+        ptr->SetEnemy(shared_this);
+        ptr->SetVelocity(&_velocity);
+        out.RegisterState(ptr);
+    }
 public:
     bool ChangeToPatrolState(void);
     bool ChangeToCombatState(void);
@@ -140,18 +164,6 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time);
     /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Render(void) override;
-    /// <summary>
-    /// 視認可能判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    bool ContainInRecognitionRange(Mof::CVector3 pos);
-    /// <summary>
     /// デバッグ
     /// </summary>
     /// <param name=""></param>
@@ -159,6 +171,13 @@ public:
 
     bool ChangeToMoveState(void);
     bool ChangeToAttackState(void);
+
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name="next"></param>
+    /// <returns></returns>
+    bool ChangeMotionState(const char* next);
 };
 }
 #endif // !MY_ENEMY_H
