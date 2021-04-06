@@ -93,7 +93,7 @@ bool Player::Input(void) {
 }
 
 void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
-    // “ü—ÍŠp“x
+    // èœˆï½¥èœ‰å¹„ï½§è²ï½ºï½¦
     auto rotate = super::GetRotate();
 
     float camera_angle_y = std::atan2(-_camera_controller.GetViewFront().z, _camera_controller.GetViewFront().x) + math::kHalfPi;
@@ -106,7 +106,7 @@ void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
         angle_y += math::kTwoPi;
     } // else if
 
-    // ·•ªŠp“x
+    // èŸ¾ï½®è›»ï¿½ï½§è²ï½ºï½¦
     angle_y -= rotate.y;
     if (math::kPi < angle_y) {
         angle_y -= math::kTwoPi;
@@ -221,8 +221,8 @@ void Player::UpdateCamera(void) {
     CVector3 cpos = pos;
     CVector3 tpos = pos;
     CVector3 fvec(0, 0, -1);
-    fvec.RotationY(m_CameraAngle.x);
-    fvec.RotationX(m_CameraAngle.y);
+    fvec.RotationY(_camera_angle.x);
+    fvec.RotationX(_camera_angle.y);
     cpos.y += 2.0f;
     tpos.y += 1.5f;
     cpos -= fvec * 4.2f;
@@ -232,18 +232,18 @@ void Player::UpdateCamera(void) {
 void Player::UpdateMove(void) {
     auto angle_y = super::GetRotate().y;
 
-    if (m_State == Attack1 && !m_bAttackMove ||
-        m_State == Attack2 && !m_bAttackMove ||
-        m_State == Attack3 && !m_bAttackMove) {
+    if (_state == Attack1 && !_attack_move ||
+        _state == Attack2 && !_attack_move ||
+        _state == Attack3 && !_attack_move) {
 
         CVector3 fvec(0, 0, -1);
         fvec.RotationY(angle_y);
         //m_Move += fvec * 0.2f;
         super::_velocity.AddVelocityForce(fvec * 0.2f);
-        m_bAttackMove = true;
+        _attack_move = true;
     }
 
-    if (m_MoveState == Wait || m_State != None && !m_bJump) {
+    if (_move_state == Wait || _state != None && !_jump) {
         auto move = super::_velocity.GetVelocity();
         float ml = move.Length();
         if (ml > CHARACTER_MOVESPEED) {
@@ -257,34 +257,34 @@ void Player::UpdateMove(void) {
         }
         return;
     }
-    //ƒJƒƒ‰‚Ì‘O•ûŒü‚ÌƒxƒNƒgƒ‹
+    //ç¹§ï½«ç¹ï½¡ç¹ï½©ç¸ºï½®èœ‘è‚´å©¿èœ·ä»£ï¿½ç¹å¶ã‘ç¹åŒ»Î
     CVector3 cfvec = _camera_controller.GetViewFront();
-    //ƒJƒƒ‰‚ÌY²‚Ì‰ñ“]Šp“x‚ğ‹‚ß‚é
+    //ç¹§ï½«ç¹ï½¡ç¹ï½©ç¸ºï½®Yéœ†ï½¸ç¸ºï½®è—æ«ï½»ï½¢éš—è²ï½ºï½¦ç¹§å‘ˆï½±ã‚…ï½ç¹§
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
-    //ˆÚ“®Šp“x‚ğ‹‚ß‚é
-    float my = m_MoveAngle + cy;
+    //é˜ï½»èœæˆŠï½§è²ï½ºï½¦ç¹§å‘ˆï½±ã‚…ï½ç¹§
+    float my = _move_angle + cy;
     MOF_NORMALIZE_RADIANANGLE(my);
-    //·•ªŠp“x
+    //èŸ¾ï½®è›»ï¿½ï½§è²ï½ºï½¦
     float sa = my - angle_y;
     MOF_ROTDIRECTION_RADIANANGLE(sa);
-    //‰ñ“]
-    angle_y += MOF_CLIPING(sa, -CHARACTER_ROTATIONSPEED * m_StickTilt, CHARACTER_ROTATIONSPEED * m_StickTilt);
+    //è—æ«ï½»ï½¢
+    angle_y += MOF_CLIPING(sa, -CHARACTER_ROTATIONSPEED * _stick_tilt, CHARACTER_ROTATIONSPEED * _stick_tilt);
     MOF_NORMALIZE_RADIANANGLE(angle_y);
 
-    //ˆÚ“®•ûŒü‚ÌƒxƒNƒgƒ‹
+    //é˜ï½»èœå¢“å©¿èœ·ä»£ï¿½ç¹å¶ã‘ç¹åŒ»Î
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
     //m_Move += fvec * CHARACTER_MOVESPEED;
     super::_velocity.AddVelocityForce(fvec * CHARACTER_MOVESPEED);
 
-    //ˆÚ“®‚ğÅ‚‘¬“x‚ÅƒNƒŠƒbƒv‚·‚é
+    //é˜ï½»èœè¼”ï½’è­›é¬®å€¬æº·ï½ºï½¦ç¸ºï½§ç¹§ï½¯ç¹ï½ªç¹ï¿½ï¿½ç¸ºå¶ï½‹
     auto move = super::_velocity.GetVelocity();
     float ml = move.Length();
     float ms = 0.0f;
-    if (m_MoveState == MoveSlow) {
+    if (_move_state == MoveSlow) {
         ms = CHARACTER_SLOWMOVESPEEDMAX;
     }
-    else if (m_MoveState == MoveFast) {
+    else if (_move_state == MoveFast) {
         ms = CHARACTER_FASTMOVESPEEDMAX;
     }
 
@@ -300,53 +300,53 @@ void Player::UpdateMove(void) {
 }
 
 void Player::UpdateJump(void) {
-    if (JumpStart == m_State && _motion->IsEndMotion()) {
-        m_Gravity = 0.2f;
-        m_State = JumpUp;
+    if (JumpStart == _state && _motion->IsEndMotion()) {
+        _gravity = 0.2f;
+        _state = JumpUp;
     }
-    else if (JumpUp == m_State) {
-        if (m_Time < 0) {
-            m_Gravity = 0.0f;
-            m_State = JumpDown;
+    else if (JumpUp == _state) {
+        if (_time < 0) {
+            _gravity = 0.0f;
+            _state = JumpDown;
         }
-        if (m_Gravity < 0) {
-            if (m_bJump2) {
-                m_State = Jump2;
+        if (_gravity < 0) {
+            if (_jump2) {
+                _state = Jump2;
             }
             else {
-                m_State = JumpDown;
+                _state = JumpDown;
             }
         }
     }
-    else if (Jump2 == m_State && _motion->IsEndMotion()) {
-        m_State = JumpDown;
+    else if (Jump2 == _state && _motion->IsEndMotion()) {
+        _state = JumpDown;
     }
-    else if (JumpDown == m_State && _motion->IsEndMotion()) {
+    else if (JumpDown == _state && _motion->IsEndMotion()) {
         //m_State = None;
     }
-    else if (m_State == JumpEnd) {
-        m_State = None;
-        m_bJump = false;
+    else if (_state == JumpEnd) {
+        _state = None;
+        _jump = false;
     }
 }
 
 void Player::UpdateAttack(void) {
-    if (m_State != Attack1 && m_State != Attack2 && m_State != Attack3) {
+    if (_state != Attack1 && _state != Attack2 && _state != Attack3) {
         return;
     }
-    if (m_State == Attack1 && _motion->IsEndMotion() && m_bNextAtc) {
-        m_State = Attack2;
-        m_bNextAtc = false;
-        m_bAttackMove = false;
+    if (_state == Attack1 && _motion->IsEndMotion() && _next_atc) {
+        _state = Attack2;
+        _next_atc = false;
+        _attack_move = false;
     }
-    else if (m_State == Attack2 && _motion->IsEndMotion() && m_bNextAtc) {
-        m_State = Attack3;
-        m_bNextAtc = false;
-        m_bAttackMove = false;
+    else if (_state == Attack2 && _motion->IsEndMotion() && _next_atc) {
+        _state = Attack3;
+        _next_atc = false;
+        _attack_move = false;
     }
-    else if (_motion->IsEndMotion() && !m_bNextAtc) {
-        m_State = None;
-        m_bAttackMove = false;
+    else if (_motion->IsEndMotion() && !_next_atc) {
+        _state = None;
+        _attack_move = false;
     }
 }
 
@@ -359,13 +359,14 @@ void Player::UpdateTransform(float delta_time) {
     auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), _velocity.GetVelocity());
     if (pos.y < 0.0f) {
         pos.y = 0.0f;
+        _move_state = Wait;
     } // if
     owner->SetPosition(pos);
 }
 
 void Player::ChangeAnimation(void) {
-    if (m_State != None) {
-        switch (m_State) {
+    if (_state != None) {
+        switch (_state) {
             case Player::None:
                 break;
             case Player::Attack1:
@@ -397,7 +398,7 @@ void Player::ChangeAnimation(void) {
         }
     }
     else {
-        switch (m_MoveState) {
+        switch (_move_state) {
             case Player::Wait:
                 _motion->ChangeMotionByName("bse_wait_lp", 1.0f, TRUE, FALSE);
                 break;
@@ -414,17 +415,17 @@ void Player::ChangeAnimation(void) {
 }
 
 Player::Player() :
-    m_CameraAngle(),
-    m_State(),
-    m_MoveState(),
-    m_StickTilt(),
-    m_MoveAngle(),
-    m_Time(),
-    m_bJump(),
-    m_bJump2(),
-    m_bAttackMove(),
-    m_bNextAtc(),
-    m_Gravity(),
+    _camera_angle(),
+    _state(),
+    _move_state(),
+    _stick_tilt(),
+    _move_angle(),
+    _time(),
+    _jump(),
+    _jump2(),
+    _attack_move(),
+    _next_atc(),
+    _gravity(),
     _player_view_camera(),
     _camera_controller(),
     _current_mechanical() {
@@ -467,10 +468,10 @@ bool Player::Initialize(my::Actor::Param* param) {
     } // if
 
 
-    m_State = None;
-    m_MoveState = Wait;
-    m_bJump2 = false;
-    m_Time = 0.0f;
+    _state = None;
+    _move_state = Wait;
+    _jump2 = false;
+    _time = 0.0f;
     return true;
 }
 
@@ -486,7 +487,7 @@ bool Player::Update(float delta_time) {
     } // else
 
     if (auto motion_names = _motion_names.lock(); !_motion_names.expired() && _motion) {
-        // ó‘ÔƒNƒ‰ƒX‚ÖˆÚ“®‚³‚¹‚é
+        // çŠ¶æ…‹ã‚¯ãƒ©ã‚¹ã¸ç§»å‹•ã•ã›ã‚‹
         _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true, false);
     } // if
 
@@ -503,10 +504,10 @@ bool Player::Update(float delta_time) {
     return true;
 }
 
-bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
+bool Player::Update(float delta_time, LPMeshContainer stage_mesh) {
     super::Update(delta_time);
 
-    m_Time -= CUtilities::GetFrameSecond();
+    _time -= CUtilities::GetFrameSecond();
     UpdateMove();
     UpdateJump();
     UpdateAttack();
@@ -522,7 +523,7 @@ bool Player::Update(float delta_time, LPMeshContainer stageMesh) {
 bool Player::Render(void) {
     super::Render();
 
-    // •Ší‚ğİ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ğæ“¾‚·‚é
+    // è±ï½¦èï½¨ç¹§å®šï½¨ï½­è³å£¹â˜†ç¹§ä¹ï¿½ç¹ï½¼ç¹ï½³ç¸ºï½®è« ï¿½ï½±ç¹§è²å™è •åŠ±â˜†ç¹§
     LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
     if (auto weapon = _current_mechanical.lock()) {
         // weapon ->Render(pBoneState);

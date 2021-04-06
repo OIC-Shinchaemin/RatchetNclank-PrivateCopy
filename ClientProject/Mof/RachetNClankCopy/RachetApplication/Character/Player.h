@@ -11,14 +11,14 @@
 #include "../GameSystem/WeaponSystem.h"
 
 
-// 移動速度
+// 遘ｻ蜍暮溷ｺｦ
 #define		CHARACTER_MOVESPEED			(0.015f* 60) 
 #define		CHARACTER_SLOWMOVESPEEDMAX		(0.03f* 60)
 //#define		CHARACTER_FASTMOVESPEEDMAX		(0.25f)
 #define		CHARACTER_FASTMOVESPEEDMAX		(0.1f* 60)
-// 回転速度
+// 蝗櫁ｻ｢騾溷ｺｦ
 #define		CHARACTER_ROTATIONSPEED		(0.2f)
-//攻撃回数
+//謾ｻ謦�蝗樊焚
 #define		CHARACTER_ATTACKCOUNT		(3)
 #define		CHARACTER_ATTACKMOVETIME	(0.1f)
 
@@ -43,23 +43,23 @@ private:
         MoveFast,
     };
     using super = my::Character;
-    CVector2				m_CameraAngle;
-    ActionState				m_State;
-    MoveState				m_MoveState;
-    float					m_StickTilt;
-    float					m_MoveAngle;
-    float					m_Time;
-    bool					m_bJump;
-    bool					m_bJump2;
-    bool					m_bAttackMove;
-    bool					m_bNextAtc;
-    float					m_Gravity;
-
-    //! カメラ
+    CVector2				_camera_angle;
+    ActionState				_state;
+    MoveState				_move_state;
+    float					_stick_tilt;
+    float					_move_angle;
+    float					_time;
+    bool					_jump;
+    bool					_jump2;
+    bool					_attack_move;
+    bool					_next_atc;
+    float					_gravity;
+    
+    //! 繧ｫ繝｡繝ｩ
     std::shared_ptr<my::Camera> _player_view_camera;
-    //! カメラコントローラ
+    //! 繧ｫ繝｡繝ｩ繧ｳ繝ｳ繝医Ο繝ｼ繝ｩ
     my::CameraController _camera_controller;
-    //! 武器
+    //! 豁ｦ蝎ｨ
     std::weak_ptr<my::Mechanical>_current_mechanical;
 
     virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed) override;
@@ -79,7 +79,7 @@ public:
     virtual bool Initialize(my::Actor::Param* param) override;
     virtual bool Input(void) override;
     virtual bool Update(float delta_time) override;
-    virtual bool Update(float delta_time, LPMeshContainer stageMesh);
+    virtual bool Update(float delta_time, LPMeshContainer stage_mesh);
     virtual bool Render(void) override;
     virtual bool Release(void) override;
 };
