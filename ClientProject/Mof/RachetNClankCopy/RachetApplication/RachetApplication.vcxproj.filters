@@ -130,6 +130,15 @@
     <Filter Include="Rachet\Header\Bullet">
       <UniqueIdentifier>{e685aca4-fa9b-4e9c-bbb6-a286ac3820c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\motion_type">
+      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\State">
+      <UniqueIdentifier>{f9e74fe4-09ae-450a-9a9f-844c2fa66407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\State">
+      <UniqueIdentifier>{9f970ecc-a903-486b-bc92-5a85fbd4ea10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -287,6 +296,15 @@
     </ClCompile>
     <ClCompile Include="Weapon\Blaster.cpp">
       <Filter>Rachet\Source\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotionState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotionMoveState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotionIdleState.cpp">
+      <Filter>Rachet\Source\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -542,6 +560,18 @@
     <ClInclude Include="Weapon\Blaster.h">
       <Filter>Rachet\Header\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="MotionNames.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotionState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotionMoveState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotionIdleState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -557,6 +587,12 @@
     </None>
     <None Include="..\Resource\behaviour\combat.json">
       <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\enemy.motion_names">
+      <Filter>リソース ファイル\motion_type</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\player.motion_names">
+      <Filter>リソース ファイル\motion_type</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
