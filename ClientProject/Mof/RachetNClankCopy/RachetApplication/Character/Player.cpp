@@ -175,7 +175,6 @@ void Player::InputCameraForKeyboard(float angular_speed, float speed) {
     else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
         _camera_controller.AddAltitude(-1.0f);
     } // else if
-
 }
 
 void Player::InputCameraForGamepad(float angular_speed, float speed) {

@@ -21,7 +21,7 @@ void state::EnemyMotionMoveState::Update(float delta_time) {
     } // if
 
     if (auto attack = super::_attack.lock(); !super::_attack.expired() && attack->IsActive()) {
-        super::ChangeState("EnemyMotionAttackState");
+        //super::ChangeState("EnemyMotionAttackState");
     } // if
 }
 

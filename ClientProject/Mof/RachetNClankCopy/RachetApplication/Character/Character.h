@@ -28,8 +28,10 @@ protected:
     //! çÇÇ≥
     float _height;
 protected:
+    virtual void InputMoveVelocity(float speed);
     virtual void InputMoveVelocity(Mof::CVector2 stick, float speed);
     virtual void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
+    virtual void InputMoveAngularVelocity(float angle, float speed);
     /// <summary>
     /// çXêV
     /// </summary>

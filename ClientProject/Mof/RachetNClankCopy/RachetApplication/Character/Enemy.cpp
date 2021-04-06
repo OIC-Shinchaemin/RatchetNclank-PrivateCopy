@@ -10,6 +10,19 @@
 #include "../State/AICombatState.h"
 
 
+void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
+//    _enemy_state = my::EnemyState::Move;
+    float tilt = 1.0f;
+    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
+
+    auto dir = target - super::GetPosition();
+    float angle = std::atan2(dir.z, dir.x);
+    in = math::Rotate(in.x, in.y, angle);
+
+    this->InputMoveAngularVelocity(in, angular_speed);
+    this->InputMoveVelocity(in, speed);
+}
+
 float my::Enemy::GetDistanceFromInitPosition(void) {
     return Mof::CVector3Utilities::Distance(_init_position, super::GetPosition());
 }
@@ -25,6 +38,14 @@ bool my::Enemy::TargetInAttackRange(void) {
         } // if
     } // if
     return false;
+}
+
+bool my::Enemy::GoHome(void) {
+    this->ChaseTo(_init_position, 0.3f, 1.0f);
+    if (this->GetDistanceFromInitPosition() > 2.0f) {
+        return false;
+    } // if
+    return true;
 }
 
 bool my::Enemy::OverLooking(void) {
@@ -47,9 +68,12 @@ bool my::Enemy::OverLooking(void) {
     return false;
 }
 
-bool my::Enemy::GoHome(void) {
-    this->ChaseTo(_init_position, 0.3f, 1.0f);
-    if (this->GetDistanceFromInitPosition() > 2.0f) {
+bool my::Enemy::ChaseTarget(void) {
+    if (auto target = _target.lock()) {
+        if (this->TargetInAttackRange()) {
+            return true;
+        } // if
+        this->ChaseTo(target->GetPosition(), 0.2f, 1.0f);
         return false;
     } // if
     return true;
@@ -60,32 +84,6 @@ bool my::Enemy::Attack(void) {
     _ai_state_machine.ChangeState("AICombatState");
     return false;
 //    return _attack->IsActive();
-}
-
-void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
-//    _enemy_state = my::EnemyState::Move;
-
-
-    float tilt = 1.0f;
-    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
-
-    auto dir = target - super::GetPosition();
-    float angle = std::atan2(dir.z, dir.x);
-    in = math::Rotate(in.x, in.y, angle);
-
-    this->InputMoveAngularVelocity(in, angular_speed);
-    this->InputMoveVelocity(in, speed);
-}
-
-bool my::Enemy::ChaseTarget(void) {
-    if (auto target = _target.lock()) {
-        if (this->TargetInAttackRange()) {
-            return true;
-        } // if
-        this->ChaseTo(target->GetPosition(), 0.2f, 1.0f);
-        return false;
-    } // if
-    return true;
 }
 
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
@@ -108,18 +106,14 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 
 my::Enemy::Enemy() :
     super(),
+    _thinking_time(0.0f),
+    _thinking_time_max(0.0f),
     _init_position(),
     _target(),
     _sight(),
-    _attack()
- //   ,
- //  _enemy_state(my::EnemyState::Move) 
-
-{
+    _attack() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
-    float scale = 0.2f;
-    super::SetScale(Mof::CVector3(scale, scale, scale));
 }
 
 my::Enemy::~Enemy() {
@@ -175,10 +169,8 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
     } // if
-    if (_motion) {
-        if (auto motion_names = super::_motion_names.lock()) {
-            _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
-        } // if
+    if (auto motion_names = super::_motion_names.lock();  !super::_motion_names.expired() && _motion) {
+        _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
     } // if
 
     // state
@@ -193,7 +185,12 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
 }
 
 bool my::Enemy::Input(void) {
-    _ai_state_machine.Update(1.0f / 60.0f);
+    float delta_time = 1.0f / 60.0f;
+    _thinking_time -= delta_time;
+    if (_thinking_time < 0.0f) {
+        _ai_state_machine.Update(delta_time);
+        _thinking_time = _thinking_time_max;
+    } // if
     return true;
 }
 

@@ -1,10 +1,8 @@
 #include "Character.h"
 
 
-
-void my::Character::InputMoveVelocity(Mof::CVector2 stick, float speed) {
-    // “ü—Í‘¬“x
-    auto accele = Mof::CVector3(0.0f, 0.0f, -speed * stick.Length());
+void my::Character::InputMoveVelocity(float speed) {
+    auto accele = Mof::CVector3(0.0f, 0.0f, speed);
     auto rotate = super::GetRotate();
     accele.RotateAround(Mof::CVector3(), rotate);
 
@@ -12,12 +10,19 @@ void my::Character::InputMoveVelocity(Mof::CVector2 stick, float speed) {
     _velocity.AddVelocityForce(accele);
 }
 
+void my::Character::InputMoveVelocity(Mof::CVector2 stick, float speed) {
+    // “ü—Í‘¬“x
+    this->InputMoveVelocity(-speed * stick.Length());
+}
+
 void my::Character::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
     // “ü—ÍŠp“x
-    auto rotate = super::GetRotate();
-
     float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi;
+    this->InputMoveAngularVelocity(angle_y, speed);
+}
 
+void my::Character::InputMoveAngularVelocity(float angle, float speed) {
+    float angle_y = angle;
     if (math::kTwoPi <= angle_y) {
         angle_y -= math::kTwoPi;
     } // if
@@ -25,6 +30,7 @@ void my::Character::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
         angle_y += math::kTwoPi;
     } // else if
 
+    auto rotate = super::GetRotate();
     // ·•ªŠp“x
     angle_y -= rotate.y;
     if (math::kPi < angle_y) {

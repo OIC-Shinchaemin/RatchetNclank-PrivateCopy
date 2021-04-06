@@ -68,6 +68,7 @@ private:
         out.RegisterState(ptr);
     }
 public:
+    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -87,16 +88,16 @@ public:
     /// <returns></returns>
     bool TargetInAttackRange(void);
     /// <summary>
-    /// 見渡す
-    /// </summary>
-    /// <param name=""></param>
-    bool OverLooking(void);
-    /// <summary>
     /// 初期位置に戻る
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool GoHome(void);
+    /// <summary>
+    /// 見渡す
+    /// </summary>
+    /// <param name=""></param>
+    bool OverLooking(void);
     /// <summary>
     /// 追いかける
     /// </summary>
@@ -109,7 +110,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Attack(void);
-    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// 描画
     /// </summary>
@@ -163,15 +163,6 @@ public:
     /// <param name="next"></param>
     /// <returns></returns>
     bool ChangeMotionState(const char* next_state);
-    /*
-    template <typename Enum>
-    bool ChangeMotionState(Enum type) {
-        if (auto motion_names = _motion_names.lock()) {
-            return ChangeMotionState(motion_names->At(type));
-        } // if
-        return false;
-    }
-    */
     /// <summary>
     /// デバッグ
     /// </summary>
