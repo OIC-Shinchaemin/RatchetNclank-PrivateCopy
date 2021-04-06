@@ -1,6 +1,7 @@
 #include "MouseMoveCameraController.h"
 #include "Define.h"
 #include "MouseUtilities.h"
+#include "ParameterMap.h"
 
 // ********************************************************************************
 /// <summary>
@@ -14,11 +15,15 @@ CameraController::Controller MouseMoveCameraController::MouseMoveController(void
     // カメラ制御用
     CameraController::Controller controller;
 
+    // エディタのモード
+    int* edit_mode = ParameterMap<int>::GetInstance().Get("edit_mode");
+
     // マウス移動量
     Vector3 mouse_move = MouseUtilities::GetMove();
-    g_pInput->GetMouseMove(mouse_move);
+
     // 回転
-    controller.rotation.trigger_flag = MouseUtilities::IsKeyHold(MOFMOUSE_RBUTTON);
+    bool eye = (*edit_mode == 1);
+    controller.rotation.trigger_flag = MouseUtilities::IsKeyHold(eye ? MOFMOUSE_LBUTTON : MOFMOUSE_RBUTTON);
     controller.rotation.move         = mouse_move * camera_move_rotation_ratio;
 
     // ズーム

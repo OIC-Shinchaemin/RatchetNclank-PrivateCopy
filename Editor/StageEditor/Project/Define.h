@@ -15,6 +15,18 @@ static float camera_move_zoom_ratio      = 0.0001f;
 static float camera_move_zoom_hold_ratio = 0.01f;
 static float camera_move_track_ratio     = 0.01f;
 
+// EditorMode
+enum EditMode : MofU8 {
+    EditTrans  = 0x01, //! 0b 0000 0001
+    EditRotate = 0x02, //! 0b 0000 0010
+    EditScale  = 0x04, //! 0b 0000 0100
+    EditEye    = 0x08, //! 0b 0000 1000
+    EditHand   = 0x10, //! 0b 0001 0000
+
+    MoveCamera = 0x80, //! 0b 1000 0000
+    InstObject = 0x40, //! 0b 0100 0000
+};
+
 // アセット関係
 using MeshAsset    = AssetBase<std::string, CMeshContainer>;
 using TextureAsset = AssetBase<std::string, CTexture>;

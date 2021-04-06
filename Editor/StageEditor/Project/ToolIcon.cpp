@@ -7,12 +7,16 @@ bool ToolIcon::Load(void) {
         ArrowMove,
         ArrowRotate,
         ArrowScale,
+        Eye,
+        Installation,
     };
     LPCMofChar file[] = {
         "toolicon/hand.png",
         "toolicon/arrow_move.png",
         "toolicon/arrow_rotate.png",
         "toolicon/arrow_scale.png",
+        "toolicon/eye.png",
+        "toolicon/installation.png",
     };
     int i = 0;
     for (const auto& it : key) {

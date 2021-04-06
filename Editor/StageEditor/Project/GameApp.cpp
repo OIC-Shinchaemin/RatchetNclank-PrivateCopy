@@ -69,7 +69,7 @@ ObjectWindow              object_window;
 *//**************************************************************************/
 MofBool CGameApp::Initialize(void) {
 
-    CMofImGui::Setup();
+    CMofImGui::Setup(false, false);
 
     CUtilities::SetCurrentDirectory("Resource");
     std::string resource_dir = std::filesystem::current_path().string();
@@ -117,6 +117,29 @@ MofBool CGameApp::Update(void) {
     gamepad.RefreshKey();
 	//mesh_view_controller.Update();
 
+    // ToolMenu
+    {
+        int* edit_mode = ParameterMap<int>::GetInstance().Get("edit_mode");
+        if (g_pInput->IsKeyHold(MOFKEY_LALT) || g_pInput->IsKeyHold(MOFKEY_RALT)) {
+            *edit_mode = EditMode::EditEye | EditMode::MoveCamera;
+            if (g_pInput->IsKeyHold(MOFKEY_LCONTROL) || g_pInput->IsKeyHold(MOFKEY_RCONTROL) ||
+                MouseUtilities::IsKeyHold(MOFMOUSE_CENTERBUTTON)) {
+                *edit_mode = EditMode::EditHand | EditMode::MoveCamera;
+            }
+        }
+        else if (g_pInput->IsKeyPull(MOFKEY_LALT) || g_pInput->IsKeyPull(MOFKEY_RALT)) {
+            *edit_mode = EditMode::EditHand | EditMode::MoveCamera;
+        }
+        if (g_pInput->IsKeyPush(MOFKEY_W)) {
+            *edit_mode = EditMode::EditTrans | EditMode::MoveCamera;
+        }
+        if (g_pInput->IsKeyPush(MOFKEY_E)) {
+            *edit_mode = EditMode::EditRotate | EditMode::MoveCamera;
+        }
+        if (g_pInput->IsKeyPush(MOFKEY_R)) {
+            *edit_mode = EditMode::EditScale | EditMode::MoveCamera;
+        }
+    }
 
     bool isUseGui = GuiWindowRect::GetInstance().IsGuiItemUse();
     if(!isUseGui) {
