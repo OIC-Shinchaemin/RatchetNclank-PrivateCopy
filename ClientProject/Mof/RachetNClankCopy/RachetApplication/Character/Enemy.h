@@ -76,7 +76,7 @@ private:
         out.RegisterState(ptr);
     }
 public:
-    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
+    bool ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>

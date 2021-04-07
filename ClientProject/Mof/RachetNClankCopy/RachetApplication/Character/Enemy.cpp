@@ -10,7 +10,7 @@
 #include "../State/AICombatState.h"
 
 
-void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
+bool my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -21,7 +21,7 @@ void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) 
     _move->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
     _move->SetAngularSpeed(angular_speed);
     _move->SetMoveSpeed(speed);
-    _move->Start();
+    return _move->Start();
 }
 
 float my::Enemy::GetDistanceFromInitPosition(void) {
@@ -55,9 +55,7 @@ bool my::Enemy::OverLooking(void) {
         this->ChangeToCombatState();
         return true;
     } // if
-
-    // _overlooking.Action();
-
+    
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -65,7 +63,9 @@ bool my::Enemy::OverLooking(void) {
 
     in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
     float angular_speed = 4.0f;
+    puts("OverLooking");
 
+    // _overlooking.Action();
     _idle->SetIdealAngle(ut::GenerateRandomF(0.0f, math::kTwoPi));
     _idle->SetAngularSpeed(angular_speed);
     _idle->Start();
@@ -73,6 +73,7 @@ bool my::Enemy::OverLooking(void) {
 }
 
 bool my::Enemy::ChaseTarget(void) {
+    puts("ChaseTarget");
     if (auto target = _target.lock()) {
         if (this->TargetInAttackRange()) {
             return true;
