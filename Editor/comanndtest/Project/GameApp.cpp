@@ -15,7 +15,7 @@ CCamera main_camera;
 
 CSphere sphere(Vector3(), 1);
 CommandManager cmdManager;
-ICommand* nowCommand;
+ICommandPtr nowCommand;
 /*************************************************************************//*!
 		@brief			アプリケーションの初期化
 		@param			None
@@ -48,19 +48,19 @@ MofBool CGameApp::Update(void) {
 	g_pInput->RefreshKey();
 
 	if (g_pInput->IsKeyHold(MOFKEY_LEFT)) {
-		cmdManager.PushCommand(
-			new MoveCommand(Vector3(-0.01f, 0, 0), &sphere)
+		cmdManager.Register(
+			std::make_shared<MoveCommand>(Vector3(-0.01f, 0, 0), &sphere)
 		);
 	}
 	if (g_pInput->IsKeyPush(MOFKEY_RIGHT)) {
-		nowCommand = new PositionCommand(&sphere);
+		nowCommand = std::make_shared<PositionCommand>(&sphere);
 	}
 	if (g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
 		sphere.Translation(Vector3(0.01f, 0, 0));
 	}
 	if (g_pInput->IsKeyPull(MOFKEY_RIGHT)) {
-		nowCommand->Push();
-		cmdManager.PushCommand(nowCommand);
+		nowCommand->Register();
+		cmdManager.Register(nowCommand);
 		nowCommand = nullptr;
 	}
 	if (g_pInput->IsKeyHold(MOFKEY_LCONTROL) && g_pInput->IsKeyPush(MOFKEY_Z)) {

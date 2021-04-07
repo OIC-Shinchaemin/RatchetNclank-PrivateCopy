@@ -2,25 +2,51 @@
 #include "Command.h"
 #include <vector>
 
-constexpr unsigned int command_count = 16;
+constexpr unsigned int command_count = 50;
 
 /// <summary>
-/// 
+/// コマンド管理クラス
 /// </summary>
 class CommandManager {
 private:
 
-	std::vector<ICommand*> _execstack;
-	std::vector<ICommand*> _redostack;
+	//! 実行スタック
+	std::vector<ICommandPtr> _exec_stack;
+
+	//! やり直しスタック
+	std::vector<ICommandPtr> _redo_stack;
+
+	/// <summary>
+	/// コマンド配列のサイズ制御
+	/// </summary>
+	void SizeControll(void);
 
 public:
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	CommandManager(void);
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~CommandManager(void);
 
+	/// <summary>
+	/// やり直し
+	/// </summary>
 	void Redo(void);
+
+	/// <summary>
+	/// 元に戻す
+	/// </summary>
 	void Undo(void);
 
-	void PushCommand(ICommand* cmd);
+	/// <summary>
+	/// コマンドの登録
+	/// </summary>
+	/// <param name="cmd">登録するコマンド</param>
+	void Register(const ICommandPtr& cmd);
 };
 
