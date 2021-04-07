@@ -32,9 +32,6 @@ bool my::Idle::InactiveCondition(void) const {
 }
 
 void my::Idle::Execute(float delta_time) {
-    std::cout << "_ideal_angle = " << _ideal_angle << "\n";
-    std::cout << "_angular_speed = " << _angular_speed << "\n";
-
     this->InputMoveAngularVelocity(_ideal_angle, _angular_speed);
 }
 
@@ -65,7 +62,6 @@ bool my::Idle::Start(void) {
         return false;
     } // if
     _active = true;
-    puts("Start");
     super::GetOwner()->ChangeMotionState("EnemyMotionIdleState");
     return _active;
 }

@@ -85,7 +85,6 @@ void my::Move::SetIdealAngle(float radian) {
 bool my::Move::Start(void) {
     if (_active) {
         return false;
-        puts("sdg");
     } // if
     _active = true;
     super::GetOwner()->ChangeMotionState("EnemyMotionMoveState");

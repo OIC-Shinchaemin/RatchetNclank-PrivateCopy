@@ -10,7 +10,7 @@
 #include "../State/AICombatState.h"
 
 
-bool my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
+void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -18,10 +18,10 @@ bool my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) 
     float angle = std::atan2(dir.z, dir.x);
     in = math::Rotate(in.x, in.y, angle);
 
-    _move->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-    _move->SetAngularSpeed(angular_speed);
     _move->SetMoveSpeed(speed);
-    return _move->Start();
+    _move->SetAngularSpeed(angular_speed);
+    _move->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
+    _move->Start();
 }
 
 float my::Enemy::GetDistanceFromInitPosition(void) {
@@ -43,6 +43,7 @@ bool my::Enemy::TargetInAttackRange(void) {
 
 bool my::Enemy::GoHome(void) {
     this->ChaseTo(_init_position, 0.3f, 1.0f);
+
     if (this->GetDistanceFromInitPosition() > 2.0f) {
         return false;
     } // if
@@ -52,10 +53,8 @@ bool my::Enemy::GoHome(void) {
 bool my::Enemy::OverLooking(void) {
     if (this->HasTarget()) {
         _ai_state_machine.ChangeState("AICombatState");
-        this->ChangeToCombatState();
         return true;
     } // if
-    
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -63,17 +62,15 @@ bool my::Enemy::OverLooking(void) {
 
     in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
     float angular_speed = 4.0f;
-    puts("OverLooking");
-
+    
     // _overlooking.Action();
-    _idle->SetIdealAngle(ut::GenerateRandomF(0.0f, math::kTwoPi));
     _idle->SetAngularSpeed(angular_speed);
+    _idle->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
     _idle->Start();
     return false;
 }
 
 bool my::Enemy::ChaseTarget(void) {
-    puts("ChaseTarget");
     if (auto target = _target.lock()) {
         if (this->TargetInAttackRange()) {
             return true;
@@ -88,7 +85,6 @@ bool my::Enemy::Attack(void) {
     _attack->Start();
     _ai_state_machine.ChangeState("AICombatState");
     return false;
-//    return _attack->IsActive();
 }
 
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
@@ -117,8 +113,8 @@ my::Enemy::Enemy() :
     _target(),
     _idle(),
     _move(),
-    _attack(),
-    _sight() {
+    _sight(),
+    _attack() {
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
 }
@@ -163,23 +159,14 @@ void my::Enemy::GenerateCollisionObject(void) {
 
 bool my::Enemy::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
+    _init_position = super::GetPosition();
+    // generate
     _idle = std::make_shared<my::Idle>();
     _move = std::make_shared<my::Move>();
-    _attack = std::make_shared<my::Attack>();
     _sight = std::make_shared<my::SightRecognition>();
+    _attack = std::make_shared<my::Attack>();
     this->GenerateCollisionObject();
-
-    // components initialize
-    _init_position = super::GetPosition();
-    _idle->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    _move->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    _attack->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-
-    _idle->SetVelocity(&_velocity);
-    _move->SetVelocity(&_velocity);
-
-
+    
     // mesh motion
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
@@ -187,6 +174,20 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     if (auto motion_names = super::_motion_names.lock();  !super::_motion_names.expired() && _motion) {
         _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
     } // if
+
+
+    for (int i = 0; i < _motion->GetMotionCount(); i ++) {
+        std::cout <<  "_motion->GetMotion(i)->GetName()" << _motion->GetMotion(i)->GetName()->GetString() << "\n";
+    } // for
+    
+    // components initialize
+    _idle->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _move->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _attack->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    _idle->SetVelocity(&_velocity);
+    _move->SetVelocity(&_velocity);
+    _attack->SetMotion(_motion);
 
     // state
     this->RegisterMotionState<state::EnemyMotionIdleState>(_motion_state_machine);
@@ -210,8 +211,6 @@ bool my::Enemy::Input(void) {
 }
 
 bool my::Enemy::Update(float delta_time) {
-    super::Update(delta_time);
-    _motion_state_machine.Update(delta_time);
 
     if (_idle->IsActive()) {
         _idle->Update(delta_time);
@@ -220,9 +219,11 @@ bool my::Enemy::Update(float delta_time) {
         _move->Update(delta_time);
     } // if
     if (_attack->IsActive()) {
-//        _attack->Update(delta_time);
+        _attack->Update(delta_time);
     } // if
-
+    
+    super::Update(delta_time);
+    _motion_state_machine.Update(delta_time);
 
     super::UpdateTransform(delta_time);
     return true;

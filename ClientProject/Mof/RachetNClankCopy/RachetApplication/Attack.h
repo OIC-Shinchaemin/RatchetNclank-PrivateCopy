@@ -2,20 +2,32 @@
 #define MY_ATTACK_H
 
 
+#include "Action.h"
+
 #include <Mof.h>
 
 
 namespace my {
-class Attack {
+class Attack : public my::Action {
+    using super = my::Action;
 private:
-    //! 実行中
-    bool _active;
-    //! 所有者
-    std::weak_ptr<class Enemy> _owner;
     //! 攻撃範囲
     float _range;
     //! サイズ
     float _volume;
+    //! モーションポインタを参照する管理はしない
+    Mof::LPMeshMotionController _motion;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool InactiveCondition(void) const override;
+    /// <summary>
+    /// 実行
+    /// </summary>
+    /// <param name="delta_time"></param>
+    virtual void Execute(float delta_time) override;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,8 +40,8 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="owner"></param>
-    void SetOwner(const std::shared_ptr<class Enemy>& owner);
+    /// <param name="ptr"></param>
+    void SetMotion(Mof::LPMeshMotionController ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -55,21 +67,11 @@ public:
     /// <returns></returns>
     Mof::CSphere GetCanAttackRangeSphere(void) const;
     /// <summary>
-    /// 有効判定
+    /// 開始
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
-    bool IsActive(void) const;
-    /// <summary>
-    /// 無効化
-    /// </summary>
-    /// <param name=""></param>
-    void Inactive(void);
-    /// <summary>
-    /// アクション
-    /// </summary>
-    /// <param name=""></param>
-    void Start(void);
+    /// <returns>成功</returns>
+    virtual bool Start(void) override;
     /// <summary>
     /// デバッグ
     /// </summary>

@@ -3,6 +3,7 @@
 
 state::EnemyMotionAttackState::EnemyMotionAttackState() :
     super() {
+    super::_motion_speed = 0.5f;
     super::_motion_loop = false;
 }
 
@@ -17,7 +18,7 @@ void state::EnemyMotionAttackState::Update(float delta_time) {
     auto v = super::_velocity->GetVelocity();
     auto length = Mof::CVector2(v.x, v.z).Length();    
     if (0.0001f < length) { // move component is active
-        super::ChangeState("EnemyMotionMoveState");
+        //super::ChangeState("EnemyMotionMoveState");
     } // if
 }
 
