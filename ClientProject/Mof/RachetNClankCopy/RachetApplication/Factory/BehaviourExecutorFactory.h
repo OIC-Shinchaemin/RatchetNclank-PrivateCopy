@@ -168,7 +168,7 @@ public:
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    behaviour::NodeExecutorPtr<std::shared_ptr<class Enemy> > Create(const char* key);
+    behaviour::NodeExecutorPtr<std::shared_ptr<class Enemy> > Create(const char* key) const;
 };
 }
 #endif // !MY_BEHAVIOUR_EXECUTOR_FACTORY_H

@@ -12,7 +12,8 @@ state::EnemyMotionState::EnemyMotionState() :
     _motion(),
     _motion_names(),
     _enemy(),
-    _velocity() {
+    _velocity(),
+    _attack() {
 }
 
 state::EnemyMotionState::~EnemyMotionState() {
@@ -32,4 +33,8 @@ void state::EnemyMotionState::SetEnemy(const std::shared_ptr<my::Enemy>& ptr) {
 
 void state::EnemyMotionState::SetVelocity(my::Velocity* ptr) {
     this->_velocity = ptr;
+}
+
+void state::EnemyMotionState::SetAttack(const std::shared_ptr<my::Attack>& ptr) {
+    this->_attack = ptr;
 }

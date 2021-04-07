@@ -67,6 +67,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     void Release(void);
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    void DebugRender(void);
 };
 }
 #endif // !MY_STATE_MACHINE_H

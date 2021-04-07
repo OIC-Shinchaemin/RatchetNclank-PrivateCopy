@@ -13,6 +13,7 @@
 #include "../MotionNames.h"
 #include "../Character/Enemy.h"
 #include "../Velocity.h"
+#include "../Attack.h"
 
 
 namespace state {
@@ -47,6 +48,8 @@ protected:
     std::weak_ptr<my::Enemy> _enemy;
     //! 速度
     my::Velocity* _velocity;
+    //! 速度
+    std::weak_ptr<my::Attack> _attack;
     /// <summary>
     /// 判定
     /// </summary>
@@ -103,6 +106,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetVelocity(my::Velocity* ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetAttack(const std::shared_ptr<my::Attack>& ptr);
 };
 }
 #endif // !STATE_ENEMY_MOTION_STATE_H

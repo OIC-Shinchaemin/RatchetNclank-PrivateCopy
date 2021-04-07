@@ -93,7 +93,7 @@ bool Player::Input(void) {
 }
 
 void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
-    // 蜈･蜉幄ｧ貞ｺｦ
+    // 入力角度
     auto rotate = super::GetRotate();
 
     float camera_angle_y = std::atan2(-_camera_controller.GetViewFront().z, _camera_controller.GetViewFront().x) + math::kHalfPi;
@@ -106,7 +106,7 @@ void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
         angle_y += math::kTwoPi;
     } // else if
 
-    // 蟾ｮ蛻�ｧ貞ｺｦ
+    // 差分角度
     angle_y -= rotate.y;
     if (math::kPi < angle_y) {
         angle_y -= math::kTwoPi;
@@ -175,7 +175,6 @@ void Player::InputCameraForKeyboard(float angular_speed, float speed) {
     else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
         _camera_controller.AddAltitude(-1.0f);
     } // else if
-
 }
 
 void Player::InputCameraForGamepad(float angular_speed, float speed) {
@@ -257,27 +256,27 @@ void Player::UpdateMove(void) {
         }
         return;
     }
-    //繧ｫ繝｡繝ｩ縺ｮ蜑肴婿蜷代�繝吶け繝医Ν
+    //カメラの前方向のベクトル
     CVector3 cfvec = _camera_controller.GetViewFront();
-    //繧ｫ繝｡繝ｩ縺ｮY霆ｸ縺ｮ蝗櫁ｻ｢隗貞ｺｦ繧呈ｱゅａ繧
+    //カメラのY軸の回転角度を求める
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
-    //遘ｻ蜍戊ｧ貞ｺｦ繧呈ｱゅａ繧
+    //移動角度を求める
     float my = _move_angle + cy;
     MOF_NORMALIZE_RADIANANGLE(my);
-    //蟾ｮ蛻�ｧ貞ｺｦ
+    //差分角度
     float sa = my - angle_y;
     MOF_ROTDIRECTION_RADIANANGLE(sa);
-    //蝗櫁ｻ｢
+    //回転
     angle_y += MOF_CLIPING(sa, -CHARACTER_ROTATIONSPEED * _stick_tilt, CHARACTER_ROTATIONSPEED * _stick_tilt);
     MOF_NORMALIZE_RADIANANGLE(angle_y);
 
-    //遘ｻ蜍墓婿蜷代�繝吶け繝医Ν
+    //移動方向のベクトル
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
     //m_Move += fvec * CHARACTER_MOVESPEED;
     super::_velocity.AddVelocityForce(fvec * CHARACTER_MOVESPEED);
 
-    //遘ｻ蜍輔ｒ譛鬮倬溷ｺｦ縺ｧ繧ｯ繝ｪ繝��縺吶ｋ
+    //移動を最高速度でクリップする
     auto move = super::_velocity.GetVelocity();
     float ml = move.Length();
     float ms = 0.0f;
@@ -463,7 +462,7 @@ bool Player::Initialize(my::Actor::Param* param) {
     } // if
     if (_motion) {
         if (auto motion_names = super::_motion_names.lock()) {
-            _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true);
+            _motion->ChangeMotionByName(motion_names->GetName(_move_state), 1.0f, true);
         } // if
     } // if
 
@@ -480,15 +479,15 @@ bool Player::Update(float delta_time) {
 
     auto v = super::_velocity.GetVelocity();
     if (0.01f < Mof::CVector2(v.x, v.z).Length()) {
-        m_MoveState = MoveState::MoveFast;
+        _move_state = MoveState::MoveFast;
     } // if
     else {
-        m_MoveState = MoveState::Wait;
+        _move_state = MoveState::Wait;
     } // else
 
     if (auto motion_names = _motion_names.lock(); !_motion_names.expired() && _motion) {
         // 状態クラスへ移動させる
-        _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true, false);
+        _motion->ChangeMotionByName(motion_names->GetName(_move_state), 1.0f, true, false);
     } // if
 
 
@@ -516,18 +515,21 @@ bool Player::Update(float delta_time, LPMeshContainer stage_mesh) {
     this->UpdateTransform(delta_time);
     ChangeAnimation();
 
-    UpdateCamera();    
+    UpdateCamera();
     return true;
 }
 
 bool Player::Render(void) {
     super::Render();
 
-    // 豁ｦ蝎ｨ繧定ｨｭ螳壹☆繧九�繝ｼ繝ｳ縺ｮ諠�ｱ繧貞叙蠕励☆繧
+    // 武器を設定するボーンの情報を取得する
     LPBONEMOTIONSTATE pBoneState = _motion->GetBoneState("UPP_weapon");
     if (auto weapon = _current_mechanical.lock()) {
         // weapon ->Render(pBoneState);
         weapon->Render();
+
+        auto name = weapon->GetName();
+        ::CGraphicsUtilities::RenderString(600.0f, 300.0f, name.c_str());
     } // if
     return true;
 }

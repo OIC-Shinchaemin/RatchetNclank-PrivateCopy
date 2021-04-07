@@ -306,6 +306,18 @@
     <ClCompile Include="State\EnemyMotionIdleState.cpp">
       <Filter>Rachet\Source\State</Filter>
     </ClCompile>
+    <ClCompile Include="State\AIState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\AIPatrolState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\AICombatState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotionAttackState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -570,6 +582,18 @@
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
     <ClInclude Include="State\EnemyMotionIdleState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\AIState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\AIPatrolState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\AICombatState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotionAttackState.h">
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
   </ItemGroup>

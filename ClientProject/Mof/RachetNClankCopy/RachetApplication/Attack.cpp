@@ -5,9 +5,10 @@
 
 
 my::Attack::Attack() :
+    _active(false),
     _owner(),
     _range(2.0f),
-    _volume(0.5f){
+    _volume(0.5f) {
 }
 
 my::Attack::~Attack() {
@@ -42,7 +43,7 @@ Mof::CSphere my::Attack::GetSphere(void) const {
     return Mof::CSphere();
 }
 
-Mof::CSphere my::Attack::GetRangeSphere(void) const {
+Mof::CSphere my::Attack::GetCanAttackRangeSphere(void) const {
     if (auto owner = _owner.lock()) {
         auto pos = owner->GetPosition();
         return Mof::CSphere(pos, _range);
@@ -50,13 +51,22 @@ Mof::CSphere my::Attack::GetRangeSphere(void) const {
     return Mof::CSphere();
 }
 
+bool my::Attack::IsActive(void) const {
+    return this->_active;
+}
+
+void my::Attack::Inactive(void) {
+    _active = false;
+}
+
 void my::Attack::Start(void) {
     if (auto owner = _owner.lock()) {
-        owner->ChangeToAttackState();
+        _active = true;
+        owner->ChangeMotionState("EnemyMotionAttackState");
     } // if
 }
 
 void my::Attack::RenderDebug(void) {
     ::CGraphicsUtilities::RenderLineSphere(this->GetSphere(), def::color_rgba::kMagenta);
-    ::CGraphicsUtilities::RenderLineSphere(this->GetRangeSphere(), def::color_rgba::kYellow);
+    ::CGraphicsUtilities::RenderLineSphere(this->GetCanAttackRangeSphere(), def::color_rgba::kYellow);
 }

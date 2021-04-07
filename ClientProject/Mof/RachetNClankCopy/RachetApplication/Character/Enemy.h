@@ -15,15 +15,6 @@
 
 
 namespace my {
-enum class AIState {
-    Patrol,
-    Combat
-};
-enum class EnemyState {
-    Idle,
-    Move,
-    Attack,
-};
 class Enemy : public my::Character {
     using super = my::Character;
     using EnemyPtr = std::shared_ptr<my::Enemy>;
@@ -32,32 +23,32 @@ public:
         IdleWait,
         MoveRun,
         AttackOne,
+        CountMax,
     };
 private:
+    //! 時間
+    float _thinking_time;
+    //! 時間
+    float _thinking_time_max;
     //! 初期位置
     Mof::CVector3 _init_position;
     //! 標的
     std::weak_ptr<my::Actor>_target;
+
     //! 視覚
     std::shared_ptr<my::SightRecognition>  _sight;
-    //! 視覚
+    //! 攻撃
     std::shared_ptr<my::Attack>_attack;
-    //! 状態
-    my::AIState _state;
-    //! 状態
-    my::EnemyState _enemy_state;
+
     //! 状態
     my::StateMachine _motion_state_machine;
-
-    //! ビヘイビア実行
-    behaviour::NodeExecutorPtr< EnemyPtr > _patrol_behaviour_executor;
-    //! ビヘイビア実行
-    behaviour::NodeExecutorPtr< EnemyPtr > _combat_behaviour_executor;
+    //! 状態
+    my::StateMachine _ai_state_machine;
     //! ファクトリー
     my::BehaviourExecutorFactory _behaviour_executor_factory;
 
     template<class State>
-    void RegisterState(my::StateMachine& out) {
+    void RegisterMotionState(my::StateMachine& out) {
         auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
 
         auto ptr = std::make_shared<State>();
@@ -65,11 +56,19 @@ private:
         ptr->SetMotionNames(_motion_names);
         ptr->SetEnemy(shared_this);
         ptr->SetVelocity(&_velocity);
+        ptr->SetAttack(_attack);
+        out.RegisterState(ptr);
+    }
+    template<class State>
+    void RegisterAIState(my::StateMachine& out) {
+        auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
+        auto ptr = std::make_shared<State>();
+        ptr->SetEnemy(shared_this);
+        ptr->GenerateBehaviourExecutor(_behaviour_executor_factory);
         out.RegisterState(ptr);
     }
 public:
-    bool ChangeToPatrolState(void);
-    bool ChangeToCombatState(void);
+    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -89,16 +88,16 @@ public:
     /// <returns></returns>
     bool TargetInAttackRange(void);
     /// <summary>
-    /// 見渡す
-    /// </summary>
-    /// <param name=""></param>
-    bool OverLooking(void);
-    /// <summary>
     /// 初期位置に戻る
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool GoHome(void);
+    /// <summary>
+    /// 見渡す
+    /// </summary>
+    /// <param name=""></param>
+    bool OverLooking(void);
     /// <summary>
     /// 追いかける
     /// </summary>
@@ -111,7 +110,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Attack(void);
-    void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// 描画
     /// </summary>
@@ -135,12 +133,6 @@ public:
     /// <param name="ptr"></param>
     void SetTarget(const std::shared_ptr<my::Character>& ptr);
     /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    Mof::CSphere GetAttackSphere(void) const;
-    /// <summary>
     /// 生成
     /// </summary>
     /// <param name=""></param>
@@ -163,21 +155,19 @@ public:
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time);
-    /// <summary>
-    /// デバッグ
-    /// </summary>
-    /// <param name=""></param>
-    virtual void RenderDebug(void) override;
-
-    bool ChangeToMoveState(void);
-    bool ChangeToAttackState(void);
-
+    bool ChangeToPatrolState(void);
+    bool ChangeToCombatState(void);
     /// <summary>
     /// 変更
     /// </summary>
     /// <param name="next"></param>
     /// <returns></returns>
-    bool ChangeMotionState(const char* next);
+    bool ChangeMotionState(const char* next_state);
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    virtual void RenderDebug(void) override;
 };
 }
 #endif // !MY_ENEMY_H

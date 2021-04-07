@@ -51,3 +51,10 @@ void my::StateMachine::Release(void) {
     } // for
     _status.clear();
 }
+
+void my::StateMachine::DebugRender(void) {
+    if (!_current_state) {
+        return;
+    } // if
+    _current_state->DebugRender();
+}

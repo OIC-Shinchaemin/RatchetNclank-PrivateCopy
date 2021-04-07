@@ -129,7 +129,7 @@ my::BehaviourExecutorFactory::BehaviourExecutorFactory() :
     _behaviour_map.emplace("../Resource/behaviour/combat.json", this->CreateRootNode("../Resource/behaviour/combat.json"));
 }
 
-behaviour::NodeExecutorPtr<std::shared_ptr<my::Enemy> > my::BehaviourExecutorFactory::Create(const char* key) {
+behaviour::NodeExecutorPtr<std::shared_ptr<my::Enemy> > my::BehaviourExecutorFactory::Create(const char* key) const {
     auto it = _behaviour_map.find(key);
     if (it != _behaviour_map.end()) {
         return it->second->CreateExecutor();
