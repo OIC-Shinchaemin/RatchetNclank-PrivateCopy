@@ -37,6 +37,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void Exit(void) = 0;
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    virtual void DebugRender(void) {
+    }
 };
 }
 #endif // !MY_STATE_H

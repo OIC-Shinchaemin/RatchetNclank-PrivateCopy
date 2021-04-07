@@ -37,6 +37,7 @@ void my::Actor::UpdateTransform(float delta_time) {
 }
 
 my::Actor::Actor() :
+    _name("nameless"),
     _state(my::ActorState::Active),
     _transform(),
     _collision_objects(),
@@ -44,6 +45,10 @@ my::Actor::Actor() :
 }
 
 my::Actor::~Actor() {
+}
+
+void my::Actor::SetName(const char* name) {
+    this->_name = name;
 }
 
 void my::Actor::SetPosition(Mof::CVector3 position) {
@@ -59,7 +64,7 @@ void my::Actor::SetScale(Mof::CVector3 scale) {
 }
 
 std::string my::Actor::GetName(void) const {
-    return std::string();
+    return this->_name;
 }
 
 Mof::CVector3 my::Actor::GetPosition(void) const {

@@ -7,6 +7,7 @@
 
 my::BombGlove::BombGlove() :
     super() {
+    super::SetName("BombGlove");
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/bomb_glove/scene.mom");
     super::_shot_speed = 15.0f;
     super::_interval_max = 0.9f;
