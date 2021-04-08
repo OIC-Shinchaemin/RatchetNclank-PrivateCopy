@@ -15,7 +15,7 @@ class Factory {
 private:
     std::unordered_map<std::string, std::unique_ptr<my::ICreator<T>>> _products;
 public:
-    template< typename Derived>
+    template<typename Derived>
     void Register(const std::string& key) {
         _products[key] = std::make_unique<my::Creator<T, Derived>>();
     }

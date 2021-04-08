@@ -107,8 +107,6 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 
 my::Enemy::Enemy() :
     super(),
-    _thinking_time(0.0f),
-    _thinking_time_max(0.0f),
     _init_position(),
     _target(),
     _idle(),
@@ -202,11 +200,11 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
 
 bool my::Enemy::Input(void) {
     float delta_time = 1.0f / 60.0f;
-    _thinking_time -= delta_time;
-    if (_thinking_time < 0.0f) {
+    //_thinking_time -= delta_time;
+    //if (_thinking_time < 0.0f) {
         _ai_state_machine.Update(delta_time);
-        _thinking_time = _thinking_time_max;
-    } // if
+        //_thinking_time = _thinking_time_max;
+    //} // if
     return true;
 }
 
