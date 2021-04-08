@@ -9,7 +9,6 @@
 #include <string>
 
 #include "My/Core/StateMachine.h"
-#include "../Factory/BehaviourExecutorFactory.h"
 #include "../Idle.h"
 #include "../Move.h"
 #include "../SightRecognition.h"
@@ -28,15 +27,11 @@ public:
         CountMax,
     };
 private:
-    //! 時間
-    float _thinking_time;
-    //! 時間
-    float _thinking_time_max;
     //! 初期位置
     Mof::CVector3 _init_position;
     //! 標的
     std::weak_ptr<my::Actor>_target;
-
+    
     //! 待機
     std::shared_ptr<my::Idle> _idle;
     //! 攻撃
@@ -46,12 +41,12 @@ private:
     //! 攻撃
     std::shared_ptr<my::Attack>_attack;
 
+
+
     //! 状態
     my::StateMachine _motion_state_machine;
     //! 状態
     my::StateMachine _ai_state_machine;
-    //! ファクトリー
-    my::BehaviourExecutorFactory _behaviour_executor_factory;
 
     template<class State>
     void RegisterMotionState(my::StateMachine& out) {
@@ -70,7 +65,7 @@ private:
         auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
         auto ptr = std::make_shared<State>();
         ptr->SetEnemy(shared_this);
-        ptr->GenerateBehaviourExecutor(_behaviour_executor_factory);
+        ptr->GenerateBehaviourExecutor();
         out.RegisterState(ptr);
     }
 public:

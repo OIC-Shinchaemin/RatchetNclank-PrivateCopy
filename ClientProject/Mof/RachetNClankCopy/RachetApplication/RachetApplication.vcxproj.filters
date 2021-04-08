@@ -327,6 +327,12 @@
     <ClCompile Include="Idle.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Factory\FactoryManager.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BehaviourFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -613,6 +619,12 @@
     </ClInclude>
     <ClInclude Include="Idle.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\FactoryManager.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BehaviourFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
