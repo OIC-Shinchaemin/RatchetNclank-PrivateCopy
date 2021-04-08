@@ -211,6 +211,7 @@ bool my::Enemy::Input(void) {
 }
 
 bool my::Enemy::Update(float delta_time) {
+    _motion->AddTimer(delta_time);
 
     if (_idle->IsActive()) {
         _idle->Update(delta_time);
@@ -221,8 +222,10 @@ bool my::Enemy::Update(float delta_time) {
     if (_attack->IsActive()) {
         _attack->Update(delta_time);
     } // if
-    
-    super::Update(delta_time);
+  
+    _velocity.Update(delta_time);
+
+//    super::Update(delta_time);
     _motion_state_machine.Update(delta_time);
 
     super::UpdateTransform(delta_time);
