@@ -33,7 +33,10 @@ CommandManager::~CommandManager(void) {
 /// やり直し
 /// </summary>
 void CommandManager::Redo(void) {
-	ICommandPtr& cmd = _redo_stack.back();
+	if (_redo_stack.size() <= 0) {
+		return;
+	}
+	ICommandPtr cmd = _redo_stack.back();
 	cmd->Exec();
 	_redo_stack.pop_back();
 	_exec_stack.push_back(cmd);
@@ -44,7 +47,10 @@ void CommandManager::Redo(void) {
 /// 元に戻す
 /// </summary>
 void CommandManager::Undo(void) {
-	ICommandPtr& cmd = _exec_stack.back();
+	if (_exec_stack.size() <= 0) {
+		return;
+	}
+	ICommandPtr cmd = _exec_stack.back();
 	cmd->Undo();
 	_exec_stack.pop_back();
 	_redo_stack.push_back(cmd);
@@ -60,4 +66,15 @@ void CommandManager::Register(const ICommandPtr& cmd) {
 	_exec_stack.push_back(cmd);
 	_redo_stack.clear();
 	SizeControll();
+}
+
+/// <summary>
+/// コマンドの取得
+/// </summary>
+/// <returns>配列</returns>
+const std::vector<ICommandPtr>& CommandManager::GetExecArray(void) const {
+	return _exec_stack;
+}
+const std::vector<ICommandPtr>& CommandManager::GetRedoArray(void) const {
+	return _redo_stack;
 }

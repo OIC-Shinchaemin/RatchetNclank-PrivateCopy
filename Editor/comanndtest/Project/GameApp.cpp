@@ -11,11 +11,12 @@
 #include	"GameApp.h"
 #include	"CommandManager.h"
 
-CCamera main_camera;
+CCamera        main_camera;
 
-CSphere sphere(Vector3(), 1);
+CSphere        sphere(Vector3(), 1);
 CommandManager cmdManager;
-ICommandPtr nowCommand;
+ICommandPtr    nowCommand;
+
 /*************************************************************************//*!
 		@brief			アプリケーションの初期化
 		@param			None
@@ -90,6 +91,19 @@ MofBool CGameApp::Render(void) {
 	CGraphicsUtilities::RenderSphere(sphere, Vector4(0, 1, 0, 1));
 
 	g_pGraphics->SetDepthEnable(FALSE);
+
+	const std::vector<ICommandPtr>& execs = cmdManager.GetExecArray();
+	const std::vector<ICommandPtr>& redos = cmdManager.GetRedoArray();
+	int offset_y = 0;
+	for (const auto& it : execs) {
+		CGraphicsUtilities::RenderString(0, offset_y, it->GetName().c_str());
+		offset_y += 30;
+	}
+	offset_y = 0;
+	for (const auto& it : redos) {
+		CGraphicsUtilities::RenderString(300, offset_y, it->GetName().c_str());
+		offset_y += 30;
+	}
 
 	//描画の終了
 	g_pGraphics->RenderEnd();

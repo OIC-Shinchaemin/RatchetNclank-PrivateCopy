@@ -48,5 +48,12 @@ public:
 	/// </summary>
 	/// <param name="cmd">登録するコマンド</param>
 	void Register(const ICommandPtr& cmd);
+
+    /// <summary>
+    /// コマンドの取得
+    /// </summary>
+    /// <returns>配列</returns>
+    const std::vector<ICommandPtr>& GetExecArray(void) const;
+    const std::vector<ICommandPtr>& GetRedoArray(void) const;
 };
 

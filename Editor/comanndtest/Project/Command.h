@@ -26,7 +26,7 @@ public:
 	/// コマンド名の取得
 	/// </summary>
 	/// <returns>コマンド名</returns>
-	virtual const std::string& GetName(void) const = 0;
+	virtual const std::string GetName(void) const = 0;
 };
 
 //! コマンドポインタ
@@ -57,7 +57,7 @@ public:
 		pTarget->Translation(-move_);
 	}
 
-	const std::string& GetName(void) const override {
+	const std::string GetName(void) const override {
 		return "MoveCommand";
 	}
 };
@@ -87,7 +87,7 @@ public:
 		pTarget->Position = prev_;
 	}
 
-	const std::string& GetName(void) const override {
+	const std::string GetName(void) const override {
 		return "PositionCommand";
 	}
 };
