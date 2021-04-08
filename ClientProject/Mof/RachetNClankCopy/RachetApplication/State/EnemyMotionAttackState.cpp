@@ -15,11 +15,6 @@ const char* state::EnemyMotionAttackState::GetName(void) const {
 }
 
 void state::EnemyMotionAttackState::Update(float delta_time) {
-    auto v = super::_velocity->GetVelocity();
-    auto length = Mof::CVector2(v.x, v.z).Length();    
-    if (0.0001f < length) { // move component is active
-        //super::ChangeState("EnemyMotionMoveState");
-    } // if
 }
 
 void state::EnemyMotionAttackState::Enter(void) {
@@ -27,4 +22,7 @@ void state::EnemyMotionAttackState::Enter(void) {
 }
 
 void state::EnemyMotionAttackState::Exit(void) {
+    if (auto attack = _attack.lock()) {
+        attack->Inactive();
+    } // if
 }
