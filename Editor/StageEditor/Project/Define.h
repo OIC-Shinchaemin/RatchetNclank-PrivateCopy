@@ -46,6 +46,23 @@ struct ObjectData {
 
     // ********************************************************************************
     /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <created>いのうえ,2021/04/08</created>
+    /// <changed>いのうえ,2021/04/08</changed>
+    // ********************************************************************************
+    ObjectData(void) = default;
+    ObjectData(const ObjectData& obj) 
+    : position(obj.position)
+    , scale(obj.scale)
+    , rotation(obj.rotation)
+    , mesh_pointer(obj.mesh_pointer)
+    , mesh_path(obj.mesh_path)
+    , name(obj.name) {
+    }
+
+    // ********************************************************************************
+    /// <summary>
     /// 
     /// </summary>
     /// <param name="v1"></param>
