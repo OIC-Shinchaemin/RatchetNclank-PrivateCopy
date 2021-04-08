@@ -2,23 +2,30 @@
 #include "Mof.h"
 #include "MofImGui/MofImGui.h"
 #include "Define.h"
+#include "StageObjectCommandRegister.h"
+#include "Singleton.h"
 
 // ********************************************************************************
 /// <summary>
 /// オブジェクトを管理するウィンドウ
 /// </summary>
 // ********************************************************************************
-class ObjectWindow {
+class ObjectWindow : public Singleton<ObjectWindow> {
 private:
 
     //! オブジェクトリスト
-    std::vector<ObjectData> _object_list;
+    std::vector<ObjectData>    _object_list;
     //! 選択中の番号      
-    int                     _object_list_current   { 0 };
-    //! 選択中のアイテム      
-    ObjectData*             _object_select_item    { nullptr };
+    int                        _object_list_current    { 0 };
+    //! 選択中のアイテム       
+    ObjectData*                _object_select_item     { nullptr };
+    ObjectData                 _object_select_item_prev;
     //! オブジェクトのトランスフォーム情報入力方法
-    bool                    _object_data_input_mode{ true };
+    bool                       _object_data_input_mode { true };
+    //! オブジェクトの変更フラグ
+    bool                       _object_change_flag     { false };
+    //! コマンド
+    StageObjectCommandRegister _command_register       { &_object_change_flag, _object_select_item };
 
     // ********************************************************************************
     /// <summary>
@@ -37,15 +44,6 @@ private:
     /// <changed>いのうえ,2021/03/20</changed>
     // ********************************************************************************
     void ShowObjectInfo(void);
-
-    // ********************************************************************************
-    /// <summary>
-    /// データの破棄
-    /// </summary>
-    /// <created>いのうえ,2021/03/20</created>
-    /// <changed>いのうえ,2021/03/20</changed>
-    // ********************************************************************************
-    void Remove(void);
 
 public:
 
@@ -88,6 +86,16 @@ public:
 
     // ********************************************************************************
     /// <summary>
+    /// データの破棄
+    /// </summary>
+    /// <created>いのうえ,2021/03/20</created>
+    /// <changed>いのうえ,2021/03/20</changed>
+    // ********************************************************************************
+    void Remove(void);
+    void Remove(const ObjectData& data);
+
+    // ********************************************************************************
+    /// <summary>
     /// 現在選択中のデータを取得する
     /// </summary>
     /// <returns>現在選択中のデータポインタ</returns>
@@ -105,5 +113,16 @@ public:
     /// <changed>いのうえ,2021/03/20</changed>
     // ********************************************************************************
     const std::vector<ObjectData>& GetObjectList(void) const;
+    std::vector<ObjectData>& GetObjectList(void);
+
+    // ********************************************************************************
+    /// <summary>
+    /// 選択中のオブジェクト番号の取得
+    /// </summary>
+    /// <returns>選択中のオブジェクト番号</returns>
+    /// <created>いのうえ,2021/04/08</created>
+    /// <changed>いのうえ,2021/04/08</changed>
+    // ********************************************************************************
+    int GetSelectNo(void) const;
 };
 

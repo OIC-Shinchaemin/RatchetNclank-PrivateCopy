@@ -4,6 +4,8 @@
 #include "ParameterMap.h"
 #include "ActionManager.h"
 #include "ActionKeyName.h"
+#include "CommandManager.h"
+#include "ObjectRemoveCommand.h"
 
 // ********************************************************************************
 /// <summary>
@@ -39,27 +41,40 @@ void ObjectWindow::ShowObjectInfo(void) {
         ImGui::BeginChild("object info", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()), true);
         // 選択中アイテムがある場合のみ表示する
         if (_object_select_item) {
+            // 変更のチェック
+            bool change[4] = { false, false, false, false };
+            _object_select_item_prev = *_object_select_item;
             // ファイル名を表示する
             char object_name[128]    =  "";
             int  object_name_length  = 128;
             strcpy(object_name, _object_select_item->name.c_str());
             // 名前の表示と入力から変更できるようにする
-            if (ImGui::InputText("object name", object_name, object_name_length)) {
+            if (ImGui::InputText("object name", object_name, object_name_length, ImGuiInputTextFlags_EnterReturnsTrue)) {
                 _object_select_item->name = object_name;
+                change[3] = true;
             };
             // 各ステータスをドラッグか直接入力するかで編集できるようにする
             ImGui::Text("input mode : "); ImGui::SameLine();
             if (ImGui::RadioButton("drag" ,  _object_data_input_mode)) { _object_data_input_mode =  true; } ImGui::SameLine();
             if (ImGui::RadioButton("input", !_object_data_input_mode)) { _object_data_input_mode = false; }
             if (_object_data_input_mode) {
-                ImGui::DragFloat3("position", _object_select_item->position,           0.01f, MOF_FLOAT_MINF, MOF_FLOAT_INF);
-                ImGui::DragFloat3("scale"   , _object_select_item->scale   ,           0.01f, MOF_FLOAT_MINF, MOF_FLOAT_INF);
-                ImGui::DragFloat3("rotation", _object_select_item->rotation, MOF_ToRadian(1), MOF_FLOAT_MINF, MOF_FLOAT_INF);
+                change[0] = ImGui::DragFloat3("position", _object_select_item->position,           0.01f, MOF_FLOAT_MINF, MOF_FLOAT_INF);
+                change[1] = ImGui::DragFloat3("scale"   , _object_select_item->scale   ,           0.01f, MOF_FLOAT_MINF, MOF_FLOAT_INF);
+                change[2] = ImGui::DragFloat3("rotation", _object_select_item->rotation, MOF_ToRadian(1), MOF_FLOAT_MINF, MOF_FLOAT_INF);
             }
             else {
-                ImGui::InputFloat3("position", _object_select_item->position);
-                ImGui::InputFloat3("scale"   , _object_select_item->scale   );
-                ImGui::InputFloat3("rotation", _object_select_item->rotation);
+                change[0] = ImGui::InputFloat3("position", _object_select_item->position);
+                change[1] = ImGui::InputFloat3("scale"   , _object_select_item->scale);
+                change[2] = ImGui::InputFloat3("rotation", _object_select_item->rotation);
+            }
+            // 変更されたかの監視.されていればデータを登録する
+            for (auto& it : change) {
+                if (it) {
+                    _object_change_flag = true;
+                    _command_register.SetObjectData(_object_select_item);
+                    break;
+                }
+                _object_change_flag = false;
             }
             // ファイル名の表示
             _object_select_item = GetSelectObjectData();
@@ -68,39 +83,12 @@ void ObjectWindow::ShowObjectInfo(void) {
             }
             // データの破棄
             if (ImGui::Button("remove")) {
-                Remove();
+                CommandManager::GetInstance().Register(std::make_shared<ObjectRemoveCommand>());
             }
         }
         ImGui::EndChild();
     }
     ImGui::EndGroup();
-}
-
-// ********************************************************************************
-/// <summary>
-/// データの破棄
-/// </summary>
-/// <created>いのうえ,2021/03/20</created>
-/// <changed>いのうえ,2021/03/20</changed>
-// ********************************************************************************
-void ObjectWindow::Remove(void) {
-    // 選択中のデータを参照する
-    const ObjectData& delete_obj = *_object_select_item;
-    // リストから削除
-    _object_list.erase(
-        std::find_if(_object_list.begin(), _object_list.end(),
-            [&](const ObjectData& data) { return ObjectData::Compare(data, delete_obj); }
-        )
-    );
-    // 選択中のデータを差し替えておく
-    if (_object_list.size() > 0 && _object_list_current >= 0) {
-        _object_list_current = max(0, _object_list_current - 1);
-        _object_select_item  = &_object_list[_object_list_current];
-    }
-    else {
-        _object_list_current = 0;
-        _object_select_item  = nullptr;
-    }
 }
 
 // ********************************************************************************
@@ -140,6 +128,16 @@ void ObjectWindow::Show(void) {
         ShowObjectInfo();
     }
     ImGui::End();
+
+    if (_object_select_item) {
+        // コマンド用保持変数
+        ObjectData tmp       = *_object_select_item;
+        *_object_select_item = _object_select_item_prev;
+        // コマンドの更新
+        _command_register.Update();
+        *_object_select_item = tmp;
+    }
+
 }
 
 // ********************************************************************************
@@ -158,7 +156,43 @@ void ObjectWindow::Add(ObjectData& data) {
 
     _object_list_current = static_cast<int>(_object_list.size() - 1);
     _object_select_item  = &(_object_list[_object_list_current]);
+    data = *_object_select_item;
+}
 
+// ********************************************************************************
+/// <summary>
+/// データの破棄
+/// </summary>
+/// <created>いのうえ,2021/03/20</created>
+/// <changed>いのうえ,2021/03/20</changed>
+// ********************************************************************************
+void ObjectWindow::Remove(void) {
+    Remove(*_object_select_item);
+}
+
+// ********************************************************************************
+/// <summary>
+/// データの破棄
+/// </summary>
+/// <created>いのうえ,2021/03/20</created>
+/// <changed>いのうえ,2021/03/20</changed>
+// ********************************************************************************
+void ObjectWindow::Remove(const ObjectData& data) {
+    // リストから削除
+    _object_list.erase(
+        std::find_if(_object_list.begin(), _object_list.end(),
+            [&](const ObjectData& data_) { return ObjectData::Compare(data_, data); }
+        )
+    );
+    // 選択中のデータを差し替えておく
+    if (_object_list.size() > 0 && _object_list_current >= 0) {
+        _object_list_current = max(0, _object_list_current - 1);
+        _object_select_item  = &_object_list[_object_list_current];
+    }
+    else {
+        _object_list_current = 0;
+        _object_select_item  = nullptr;
+    }
 }
 
 // ********************************************************************************
@@ -189,4 +223,19 @@ ObjectData* ObjectWindow::GetSelectObjectData(void) {
 // ********************************************************************************
 const std::vector<ObjectData>& ObjectWindow::GetObjectList(void) const {
     return _object_list;
+}
+std::vector<ObjectData>& ObjectWindow::GetObjectList(void) {
+    return _object_list;
+}
+
+// ********************************************************************************
+/// <summary>
+/// 選択中のオブジェクト番号の取得
+/// </summary>
+/// <returns>選択中のオブジェクト番号</returns>
+/// <created>いのうえ,2021/04/08</created>
+/// <changed>いのうえ,2021/04/08</changed>
+// ********************************************************************************
+int ObjectWindow::GetSelectNo(void) const {
+    return _object_list_current;
 }
