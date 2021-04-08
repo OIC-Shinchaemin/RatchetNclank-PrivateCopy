@@ -4,18 +4,25 @@
 #include "Character/Enemy.h"
 
 
+bool my::Attack::InactiveCondition(void) const {
+    //std::cout << "_motion->IsEndMotion() = " << _motion->IsEndMotion() << "\n";
+    return _motion->IsEndMotion();
+}
+
+void my::Attack::Execute(float delta_time) {
+}
+
 my::Attack::Attack() :
-    _active(false),
-    _owner(),
     _range(2.0f),
-    _volume(0.5f) {
+    _volume(0.5f),
+    _motion() {
 }
 
 my::Attack::~Attack() {
 }
 
-void my::Attack::SetOwner(const std::shared_ptr<my::Enemy>& owner) {
-    this->_owner = owner;
+void my::Attack::SetMotion(Mof::LPMeshMotionController ptr) {
+    this->_motion = ptr;
 }
 
 float my::Attack::GetRange(void) const {
@@ -27,6 +34,9 @@ float my::Attack::GetVolume(void) const {
 }
 
 Mof::CSphere my::Attack::GetSphere(void) const {
+    if (!this->IsActive()) {
+        return Mof::CSphere();
+    } // if
     if (auto owner = _owner.lock()) {
         auto pos = owner->GetPosition();
         auto rotate = owner->GetRotate();
@@ -51,19 +61,13 @@ Mof::CSphere my::Attack::GetCanAttackRangeSphere(void) const {
     return Mof::CSphere();
 }
 
-bool my::Attack::IsActive(void) const {
-    return this->_active;
-}
-
-void my::Attack::Inactive(void) {
-    _active = false;
-}
-
-void my::Attack::Start(void) {
-    if (auto owner = _owner.lock()) {
-        _active = true;
-        owner->ChangeMotionState("EnemyMotionAttackState");
+bool my::Attack::Start(void) {
+    if (_active) {
+        return false;
     } // if
+    _active = true;
+    super::GetOwner()->ChangeMotionState("EnemyMotionAttackState");
+    return true;
 }
 
 void my::Attack::RenderDebug(void) {

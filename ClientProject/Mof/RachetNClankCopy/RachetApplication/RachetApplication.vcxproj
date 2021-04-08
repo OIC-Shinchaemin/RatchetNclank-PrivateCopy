@@ -151,6 +151,7 @@
     <ClCompile Include="..\include\My\UI\UICanvas.cpp" />
     <ClCompile Include="..\include\My\UI\UIItem.cpp" />
     <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Bullet\BlasterBullet.cpp" />
@@ -184,6 +185,8 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="Idle.cpp" />
+    <ClCompile Include="Move.cpp" />
     <ClCompile Include="ParticleEffect.cpp" />
     <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
@@ -221,6 +224,7 @@
     <ClInclude Include="..\include\My\UI\UICanvas.h" />
     <ClInclude Include="..\include\My\UI\UIItem.h" />
     <ClInclude Include="..\include\My\UI\UIPanel.h" />
+    <ClInclude Include="Action.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Attack.h" />
     <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
@@ -276,7 +280,9 @@
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
+    <ClInclude Include="Idle.h" />
     <ClInclude Include="MotionNames.h" />
+    <ClInclude Include="Move.h" />
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLocator.h" />
