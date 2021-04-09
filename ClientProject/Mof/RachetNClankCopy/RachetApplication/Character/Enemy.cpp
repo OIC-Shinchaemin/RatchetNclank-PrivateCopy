@@ -112,7 +112,8 @@ my::Enemy::Enemy() :
     _idle(),
     _move(),
     _sight(),
-    _attack() {
+    _attack(),
+    _thinking_time(){
     super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
     super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
 }
@@ -158,6 +159,7 @@ void my::Enemy::GenerateCollisionObject(void) {
 bool my::Enemy::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
     _init_position = super::GetPosition();
+    _thinking_time.Initialize(0.0f, true);
     // generate
     _idle = std::make_shared<my::Idle>();
     _move = std::make_shared<my::Move>();
@@ -200,11 +202,9 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
 
 bool my::Enemy::Input(void) {
     float delta_time = 1.0f / 60.0f;
-    //_thinking_time -= delta_time;
-    //if (_thinking_time < 0.0f) {
+    if (_thinking_time.Tick(delta_time)) {
         _ai_state_machine.Update(delta_time);
-        //_thinking_time = _thinking_time_max;
-    //} // if
+    } // if
     return true;
 }
 

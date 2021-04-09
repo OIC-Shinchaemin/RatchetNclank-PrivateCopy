@@ -333,6 +333,9 @@
     <ClCompile Include="Factory\BehaviourFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -625,6 +628,9 @@
     </ClInclude>
     <ClInclude Include="Factory\BehaviourFactory.h">
       <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
