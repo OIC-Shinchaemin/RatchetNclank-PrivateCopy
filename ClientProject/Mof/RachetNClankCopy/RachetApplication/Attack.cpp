@@ -5,7 +5,7 @@
 
 
 bool my::Attack::InactiveCondition(void) const {
-    //std::cout << "_motion->IsEndMotion() = " << _motion->IsEndMotion() << "\n";
+    std::cout << "_motion->IsEndMotion() = " << _motion->IsEndMotion() << "\n";
     return _motion->IsEndMotion();
 }
 
@@ -68,6 +68,10 @@ bool my::Attack::Start(void) {
     _active = true;
     super::GetOwner()->ChangeMotionState("EnemyMotionAttackState");
     return true;
+}
+
+void my::Attack::Inactive(void) {
+    this->_active = false;
 }
 
 void my::Attack::RenderDebug(void) {

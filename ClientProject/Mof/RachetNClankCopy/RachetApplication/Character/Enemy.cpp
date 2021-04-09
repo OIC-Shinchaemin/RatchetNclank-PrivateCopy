@@ -107,8 +107,6 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 
 my::Enemy::Enemy() :
     super(),
-    _thinking_time(0.0f),
-    _thinking_time_max(0.0f),
     _init_position(),
     _target(),
     _idle(),
@@ -202,15 +200,16 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
 
 bool my::Enemy::Input(void) {
     float delta_time = 1.0f / 60.0f;
-    _thinking_time -= delta_time;
-    if (_thinking_time < 0.0f) {
+    //_thinking_time -= delta_time;
+    //if (_thinking_time < 0.0f) {
         _ai_state_machine.Update(delta_time);
-        _thinking_time = _thinking_time_max;
-    } // if
+        //_thinking_time = _thinking_time_max;
+    //} // if
     return true;
 }
 
 bool my::Enemy::Update(float delta_time) {
+    _motion->AddTimer(delta_time);
 
     if (_idle->IsActive()) {
         _idle->Update(delta_time);
@@ -221,8 +220,10 @@ bool my::Enemy::Update(float delta_time) {
     if (_attack->IsActive()) {
         _attack->Update(delta_time);
     } // if
-    
-    super::Update(delta_time);
+  
+    _velocity.Update(delta_time);
+
+//    super::Update(delta_time);
     _motion_state_machine.Update(delta_time);
 
     super::UpdateTransform(delta_time);

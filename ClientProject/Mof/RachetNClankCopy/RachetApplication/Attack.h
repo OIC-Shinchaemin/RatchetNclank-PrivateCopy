@@ -73,6 +73,10 @@ public:
     /// <returns>成功</returns>
     virtual bool Start(void) override;
     /// <summary>
+    /// 無効化
+    /// </summary>
+    void Inactive(void);
+    /// <summary>
     /// デバッグ
     /// </summary>
     /// <param name=""></param>

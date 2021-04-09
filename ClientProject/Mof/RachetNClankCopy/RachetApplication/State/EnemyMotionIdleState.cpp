@@ -14,11 +14,6 @@ const char* state::EnemyMotionIdleState::GetName(void) const {
 }
 
 void state::EnemyMotionIdleState::Update(float delta_time) {
-    auto v = super::_velocity->GetVelocity();
-    auto length = Mof::CVector2(v.x, v.z).Length();    
-    if (0.0001f < length) { // move component is active
-        //super::ChangeState("EnemyMotionMoveState");
-    } // if
 }
 
 void state::EnemyMotionIdleState::Enter(void) {

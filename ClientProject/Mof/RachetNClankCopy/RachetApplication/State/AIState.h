@@ -46,7 +46,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void GenerateBehaviourExecutor(const my::BehaviourExecutorFactory& ptr);
+    void GenerateBehaviourExecutor(void);
     /// <summary>
     /// 更新
     /// </summary>

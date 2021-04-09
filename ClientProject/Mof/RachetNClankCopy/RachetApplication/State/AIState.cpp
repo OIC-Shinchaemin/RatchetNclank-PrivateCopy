@@ -1,5 +1,7 @@
 #include "AIState.h"
 
+#include "../Factory/FactoryManager.h"
+
 
 std::shared_ptr<my::Enemy> state::AIState::GetEnemy(void) const {
     if (auto enemy = _enemy.lock()) {
@@ -21,8 +23,8 @@ void state::AIState::SetEnemy(const std::shared_ptr<my::Enemy>& ptr) {
     this->_enemy = ptr;
 }
 
-void state::AIState::GenerateBehaviourExecutor(const my::BehaviourExecutorFactory& ptr) {
-    _behaviour_executor = ptr.Create(_behaviour_path.c_str());
+void state::AIState::GenerateBehaviourExecutor(void) {
+    _behaviour_executor = my::FactoryManager::Singleton().CreateBehaviourExecutor(_behaviour_path.c_str());
 }
 
 void state::AIState::Update(float delta_time) {
