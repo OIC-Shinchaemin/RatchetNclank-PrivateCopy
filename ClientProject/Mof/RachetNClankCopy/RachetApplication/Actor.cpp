@@ -188,7 +188,7 @@ void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
     ptr->Construct(shared_from_this());
 
     auto& coms = _components;
-    //コンポーネントを更新と描画に仕分け
+    // 仕分け
     std::copy_if(coms.begin(), coms.end(), std::back_inserter(_input_components), [](ComPtr com) {
         return com->IsInput();
     });
