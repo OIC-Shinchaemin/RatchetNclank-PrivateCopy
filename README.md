@@ -1,0 +1,2 @@
+# RatchetNclank-PrivateCopy
+ラチェクラをできるだけまねしてみる
