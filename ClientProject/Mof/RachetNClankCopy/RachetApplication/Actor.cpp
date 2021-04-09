@@ -1,6 +1,9 @@
 #include "Actor.h"
 
 #include "My/Core/Math.h"
+#include "My/Core/Utility.h"
+#include "Component/Component.h"
+#include "Factory/ActorBuilder.h"
 
 
 Mof::CVector3 my::Actor::UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity) {
@@ -37,9 +40,13 @@ void my::Actor::UpdateTransform(float delta_time) {
 }
 
 my::Actor::Actor() :
-    _name("nameless"),
     _state(my::ActorState::Active),
+    _name(),
     _transform(),
+    _components(),
+    _input_components(),
+    _update_components(),
+    _render_components(),
     _collision_objects(),
     _velocity() {
 }
@@ -87,6 +94,40 @@ const std::vector<std::shared_ptr<my::CollisionObject>>& my::Actor::GetCollision
     return this->_collision_objects;
 }
 
+void my::Actor::AddComponent(const ComPtr& component) {
+    if (component->IsInput()) {
+        ut::InsertAscend(_input_components, component);
+    } // if
+    if (component->IsUpdate()) {
+        ut::InsertAscend(_update_components, component);
+    } // if
+    if (component->IsRender()) {
+        ut::InsertAscend(_render_components, component);
+    } // if
+
+
+    // 追加されるComponentが指定の優先度で処理されるようにする
+    ut::InsertAscend(_components, component);
+    component->SetOwner(shared_from_this());
+    component->Initialize();
+}
+
+void my::Actor::RemoveComponent(const ComPtr& component) {
+    if (component->IsInput()) {
+        ut::EraseFind(_input_components, component);
+    } // if
+    if (component->IsUpdate()) {
+        ut::EraseFind(_update_components, component);
+    } // if
+    if (component->IsRender()) {
+        ut::EraseFind(_render_components, component);
+    } // if
+
+
+    component->Release();
+    ut::EraseFind(_components, component);
+}
+
 void my::Actor::End(void) {
     this->_state = my::ActorState::End;
     Observable::Notify("DeleteRequest", shared_from_this());
@@ -95,24 +136,72 @@ void my::Actor::End(void) {
 bool my::Actor::Initialize(my::Actor::Param* param) {
     _state = my::ActorState::Active;
     _transform = param->transform;
+    _name = param->name;
+
+        // コンポーネントの初期化
+    for (auto& com : _components) {
+        com->Initialize();
+    } // for
+    // 優先度順に整列
+    std::sort(_components.begin(), _components.end());
+    std::sort(_input_components.begin(), _input_components.end());
+    std::sort(_update_components.begin(), _update_components.end());
+    std::sort(_render_components.begin(), _render_components.end());
     return true;
 }
 
 bool my::Actor::Input(void) {
+    for (auto& com : _input_components) {
+        com->Input();
+    } // for
     return true;
 }
 
 bool my::Actor::Update(float delta_time) {
+    for (auto& com : _update_components) {
+        com->Update(delta_time);
+    } // for
     return true;
 }
 
 bool my::Actor::Render(void) {
+    for (auto& com : _render_components) {
+        com->Render();
+    } // for
     return true;
 }
 
 bool my::Actor::Release(void) {
     _collision_objects.clear();
+    _input_components.clear();
+    _update_components.clear();
+    _render_components.clear();
+    for (auto& com : _components) {
+        com->Release();
+    } // for
+    _components.clear();
     return true;
+}
+
+void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
+    auto ptr = std::dynamic_pointer_cast<my::ActorBuilder>(builder);
+    ptr->Construct(shared_from_this());
+
+    auto& coms = _components;
+    //コンポーネントを更新と描画に仕分け
+    std::copy_if(coms.begin(), coms.end(), std::back_inserter(_input_components), [](ComPtr com) {
+        return com->IsInput();
+    });
+    std::copy_if(coms.begin(), coms.end(), std::back_inserter(_update_components), [](ComPtr com) {
+        return com->IsUpdate();
+    });
+    std::copy_if(coms.begin(), coms.end(), std::back_inserter(_render_components), [](ComPtr com) {
+        return com->IsRender();
+    });
+
+    for (auto& c : _components) {
+        c->SetOwner(shared_from_this());
+    } // for
 }
 
 void my::Actor::RenderDebug(void) {

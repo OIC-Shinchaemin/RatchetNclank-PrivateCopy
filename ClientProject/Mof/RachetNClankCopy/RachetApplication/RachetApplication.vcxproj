@@ -173,6 +173,8 @@
     <ClCompile Include="Collision\Object\EnemyCollisionObject.cpp" />
     <ClCompile Include="Collision\Object\EnemySightCollisionObject.cpp" />
     <ClCompile Include="Collision\Object\PlayerCollisionObject.cpp" />
+    <ClCompile Include="Component\Component.cpp" />
+    <ClCompile Include="Factory\ActorBuilder.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
     <ClCompile Include="Factory\FactoryManager.cpp" />
@@ -267,11 +269,14 @@
     <ClInclude Include="Collision\Object\EnemyCollisionObject.h" />
     <ClInclude Include="Collision\Object\EnemySightCollisionObject.h" />
     <ClInclude Include="Collision\Object\PlayerCollisionObject.h" />
+    <ClInclude Include="Component\Component.h" />
+    <ClInclude Include="Factory\ActorBuilder.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />
+    <ClInclude Include="Factory\IBuilder.h" />
     <ClInclude Include="FunctionPointerContainer.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
