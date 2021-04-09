@@ -13,19 +13,17 @@ CommandLogWindow::~CommandLogWindow(void) {
 
 void CommandLogWindow::Show(void) {
 	ImGui::Begin("command log window", ParameterMap<bool>::GetInstance().Get(WindowKeyName::CommandLogWindow)); {
-	    GuiWindowRect::GetInstance().Add(WindowKeyName::MeshWindow);
-
-	    ImGui::BeginChild("command exec");
-		for (const auto& it : CommandManager::GetInstance().GetExecArray()) {
-			ImGui::Text(it->GetName().c_str());
+	    GuiWindowRect::GetInstance().Add(WindowKeyName::CommandLogWindow);
+	    for (const auto& it : _logs) {
+			ImGui::Text(it.c_str());
 		}
-	    ImGui::EndChild();
-		ImGui::SameLine();
-		ImGui::BeginChild("command redo");
-		for (const auto& it : CommandManager::GetInstance().GetRedoArray()) {
-			ImGui::Text(it->GetName().c_str());
-		}
-		ImGui::EndChild();
 	}
 	ImGui::End();
+}
+
+void CommandLogWindow::AddLog(const std::string& log) {
+	_logs.push_back(log);
+	if (_logs.size() >= 100) {
+		_logs.erase(_logs.begin());
+	}
 }

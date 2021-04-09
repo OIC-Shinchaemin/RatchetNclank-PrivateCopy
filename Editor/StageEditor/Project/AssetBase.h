@@ -120,7 +120,7 @@ public:
     /// <created>‚¢‚Ì‚¤‚¦,2021/03/30</created>
     /// <changed>‚¢‚Ì‚¤‚¦,2021/03/30</changed>
     // ********************************************************************************
-    static Key GetKey(std::shared_ptr<T> ptr) {
+    static Key GetKey(const std::shared_ptr<T>& ptr) {
         auto data = std::find_if(
             GetAssetMap()._asset_map.begin(), GetAssetMap()._asset_map.end(),
             [&](const std::pair<Key, std::shared_ptr<T>>& obj) { return obj.second == ptr; }

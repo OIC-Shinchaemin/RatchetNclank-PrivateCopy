@@ -5,6 +5,7 @@
 #include "ActionKeyName.h"
 #include "My/Core/Header.h"
 #include "ParameterMap.h"
+#include "CommandManager.h"
 
 // ********************************************************************************
 /// <summary>
@@ -20,6 +21,7 @@ bool ProjectDataParse::Action(std::any any) {
     if (save_data == nullptr) {
         return false;
     }
+    CommandManager::GetInstance().Reset();
     const rapidjson::Document* project_data = std::get<0>(*save_data);
     MeshList*                  mesh_list    = std::get<1>(*save_data);
     ObjectList*                object_list  = std::get<2>(*save_data);

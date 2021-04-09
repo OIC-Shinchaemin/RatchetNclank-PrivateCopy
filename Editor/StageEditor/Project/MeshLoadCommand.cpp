@@ -16,7 +16,7 @@ void MeshLoadCommand::Exec(void) {
         MeshAsset::Erase(_key_name);
     }
     std::string* resource_path = ParameterMap<std::string>::GetInstance().Get("resource_path");
-    std::string  path          = *resource_path + "/" + _file_name;
+    std::string  path          = *resource_path + "\\" + _file_name;
     MeshAsset::Load(_key_name, path.c_str());
     std::string                   key  = FileDialog::GetFileName(_file_name.c_str());
     std::weak_ptr<CMeshContainer> mesh = MeshAsset::GetAsset(_key_name);

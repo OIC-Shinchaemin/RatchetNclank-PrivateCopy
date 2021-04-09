@@ -1,4 +1,5 @@
 #include "CommandManager.h"
+#include "CommandLogWindow.h"
 
 /// <summary>
 /// コマンド配列のサイズ制御
@@ -41,6 +42,7 @@ void CommandManager::Redo(void) {
 	_redo_stack.pop_back();
 	_exec_stack.push_back(cmd);
 	SizeControll();
+	CommandLogWindow::GetInstance().AddLog("redo:" + cmd->GetName());
 }
 
 /// <summary>
@@ -55,6 +57,7 @@ void CommandManager::Undo(void) {
 	_exec_stack.pop_back();
 	_redo_stack.push_back(cmd);
 	SizeControll();
+	CommandLogWindow::GetInstance().AddLog("undo:" + cmd->GetName());
 }
 
 /// <summary>
@@ -66,6 +69,16 @@ void CommandManager::Register(const ICommandPtr& cmd) {
 	_exec_stack.push_back(cmd);
 	_redo_stack.clear();
 	SizeControll();
+	CommandLogWindow::GetInstance().AddLog("exec:" + cmd->GetName());
+}
+
+/// <summary>
+/// リセット
+/// </summary>
+void CommandManager::Reset(void) {
+	_exec_stack.clear();
+	_redo_stack.clear();
+	CommandLogWindow::GetInstance().AddLog("clear");
 }
 
 /// <summary>

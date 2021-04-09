@@ -50,6 +50,11 @@ public:
 	/// <param name="cmd">登録するコマンド</param>
 	void Register(const ICommandPtr& cmd);
 
+	/// <summary>
+	/// リセット
+	/// </summary>
+	void Reset(void);
+
     /// <summary>
     /// コマンドの取得
     /// </summary>

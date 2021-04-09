@@ -7,10 +7,10 @@ MeshRemoveCommand::MeshRemoveCommand(void)
     : _key("")
     , _file_name("") 
     , _insert_point(0) {
-    std::string*                    resource_path = ParameterMap<std::string>::GetInstance().Get("resource_path");
-    std::shared_ptr<CMeshContainer> mesh          = MeshWindow::GetInstance().GetSelectMeshData()->second.lock();
+    std::string*                     resource_path = ParameterMap<std::string>::GetInstance().Get("resource_path");
+    std::shared_ptr<CMeshContainer>& mesh          = MeshWindow::GetInstance().GetSelectMeshData()->second.lock();
     _key          = MeshAsset::GetKey(mesh);
-    _file_name    = (*resource_path) + "/" + _key;
+    _file_name    = (*resource_path) + "\\" + _key;
     _insert_point = MeshWindow::GetInstance().GetSelectNo();
 }
 
