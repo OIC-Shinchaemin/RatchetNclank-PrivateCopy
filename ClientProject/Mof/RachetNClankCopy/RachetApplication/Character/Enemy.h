@@ -9,6 +9,7 @@
 #include <string>
 
 #include "My/Core/StateMachine.h"
+#include "../Timer.h"
 #include "../Idle.h"
 #include "../Move.h"
 #include "../SightRecognition.h"
@@ -31,7 +32,10 @@ private:
     Mof::CVector3 _init_position;
     //! 標的
     std::weak_ptr<my::Actor>_target;
-    
+    //! タイマー
+    my::Timer _thinking_time;
+
+
     //! 待機
     std::shared_ptr<my::Idle> _idle;
     //! 攻撃

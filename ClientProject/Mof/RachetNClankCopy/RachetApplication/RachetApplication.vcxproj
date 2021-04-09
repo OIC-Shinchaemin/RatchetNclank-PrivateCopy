@@ -200,6 +200,7 @@
     <ClCompile Include="State\EnemyMotionIdleState.cpp" />
     <ClCompile Include="State\EnemyMotionMoveState.cpp" />
     <ClCompile Include="State\EnemyMotionState.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="Weapon\Blaster.cpp" />
@@ -300,6 +301,7 @@
     <ClInclude Include="State\EnemyMotionIdleState.h" />
     <ClInclude Include="State\EnemyMotionMoveState.h" />
     <ClInclude Include="State\EnemyMotionState.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="Velocity.h" />
     <ClInclude Include="Weapon\Blaster.h" />
