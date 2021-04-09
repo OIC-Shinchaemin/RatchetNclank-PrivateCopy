@@ -150,6 +150,12 @@
     <ClCompile Include="ObjectRemoveCommand.cpp">
       <Filter>ソース ファイル\Command</Filter>
     </ClCompile>
+    <ClCompile Include="MeshLoadCommand.cpp">
+      <Filter>ソース ファイル\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRemoveCommand.cpp">
+      <Filter>ソース ファイル\Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -264,6 +270,12 @@
       <Filter>ヘッダー ファイル\Command</Filter>
     </ClInclude>
     <ClInclude Include="ObjectRemoveCommand.h">
+      <Filter>ヘッダー ファイル\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoadCommand.h">
+      <Filter>ヘッダー ファイル\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRemoveCommand.h">
       <Filter>ヘッダー ファイル\Command</Filter>
     </ClInclude>
   </ItemGroup>

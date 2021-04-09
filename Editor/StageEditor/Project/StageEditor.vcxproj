@@ -113,7 +113,9 @@
     <ClCompile Include="LoadProjectDialog.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
+    <ClCompile Include="MeshLoadCommand.cpp" />
     <ClCompile Include="MeshLoadDialog.cpp" />
+    <ClCompile Include="MeshRemoveCommand.cpp" />
     <ClCompile Include="MeshViewCameraController.cpp" />
     <ClCompile Include="MeshWindow.cpp" />
     <ClCompile Include="MouseMoveCameraController.cpp" />
@@ -150,7 +152,9 @@
     <ClInclude Include="LoadProject.h" />
     <ClInclude Include="LoadProjectDialog.h" />
     <ClInclude Include="MeshLoad.h" />
+    <ClInclude Include="MeshLoadCommand.h" />
     <ClInclude Include="MeshLoadDialog.h" />
+    <ClInclude Include="MeshRemoveCommand.h" />
     <ClInclude Include="MeshViewCameraController.h" />
     <ClInclude Include="MeshWindow.h" />
     <ClInclude Include="MouseMoveCameraController.h" />

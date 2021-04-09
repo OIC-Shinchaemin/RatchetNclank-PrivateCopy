@@ -3,22 +3,23 @@
 #include "Define.h"
 
 /// <summary>
-/// 削除コマンド
+/// 
 /// </summary>
-class ObjectRemoveCommand : public ICommand {
+class MeshRemoveCommand : public ICommand {
 private:
 
 	//! 対象データ
-	ObjectData _data;
+	std::string _key;
+	std::string _file_name;
+	
 	//! 消すデータのUndo用挿入位置
-	int        _insert_point;
+	int         _insert_point;
 
 public:
-
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	ObjectRemoveCommand(void);
+	MeshRemoveCommand(void);
 
 	/// <summary>
 	/// 登録

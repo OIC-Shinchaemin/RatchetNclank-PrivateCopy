@@ -1,13 +1,14 @@
 #pragma once
 #include "MofImGui/MofImGui.h"
 #include "Define.h"
+#include "Singleton.h"
 
 // ********************************************************************************
 /// <summary>
 /// メッシュデータ保持ウィンドウクラス
 /// </summary>
 // ********************************************************************************
-class MeshWindow {
+class MeshWindow : public Singleton<MeshWindow> {
 private:
 
     //! メッシュリスト
@@ -34,24 +35,6 @@ private:
     /// <changed>いのうえ,2021/03/18</changed>
     // ********************************************************************************
     void ShowMeshInfo(void);
-
-    // ********************************************************************************
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <created>いのうえ,2021/03/18</created>
-    /// <changed>いのうえ,2021/03/18</changed>
-    // ********************************************************************************
-    void MeshLoad(void);
-
-    // ********************************************************************************
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <created>いのうえ,2021/03/18</created>
-    /// <changed>いのうえ,2021/03/18</changed>
-    // ********************************************************************************
-    void MeshRelease(void);
 
 public:
 
@@ -93,5 +76,40 @@ public:
     /// <changed>いのうえ,2021/03/19</changed>
     // ********************************************************************************
     MeshData* GetSelectMeshData(void);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetSelectNo(void) const;
+    void SetSelectNo(int no);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    const MeshList& GetMeshList(void) const;
+    MeshList& GetMeshList(void);
+
+    // ********************************************************************************
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <created>いのうえ,2021/03/18</created>
+    /// <changed>いのうえ,2021/03/18</changed>
+    // ********************************************************************************
+    void AddMeshList(const MeshData* data);
+    void MeshLoadDialog(void);
+
+    // ********************************************************************************
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <created>いのうえ,2021/03/18</created>
+    /// <changed>いのうえ,2021/03/18</changed>
+    // ********************************************************************************
+    void MeshRelease(void);
 };
 

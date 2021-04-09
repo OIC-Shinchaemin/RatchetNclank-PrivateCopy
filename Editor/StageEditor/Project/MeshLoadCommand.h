@@ -3,22 +3,23 @@
 #include "Define.h"
 
 /// <summary>
-/// 削除コマンド
+/// メッシュ読み込みコマンド
 /// </summary>
-class ObjectRemoveCommand : public ICommand {
+class MeshLoadCommand : public ICommand {
 private:
 
-	//! 対象データ
-	ObjectData _data;
-	//! 消すデータのUndo用挿入位置
-	int        _insert_point;
+	//! 管理対象
+	std::string _file_name;
+	std::string _key_name;
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	ObjectRemoveCommand(void);
+	/// <param name="key">キー名</param>
+	/// <param name="file">ファイルパス</param>
+	MeshLoadCommand(const std::string& key, const std::string& file);
 
 	/// <summary>
 	/// 登録
