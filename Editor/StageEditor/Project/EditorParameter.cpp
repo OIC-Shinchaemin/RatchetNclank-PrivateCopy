@@ -39,6 +39,10 @@ bool EditorParameter::IsShowGrid(void) const {
     return _show_grid;
 }
 
+bool EditorParameter::IsShowCommandLogWindow(void) const {
+    return _show_commandlog_window;
+}
+
 int EditorParameter::GetEditMode(void) const {
     return _edit_mode;
 }
@@ -69,6 +73,7 @@ EditorParameter::EditorParameter(void) {
     ParameterMap<bool>::GetInstance().Set(WindowKeyName::ObjectWindow       , &_show_mesh_window);
     ParameterMap<bool>::GetInstance().Set(WindowKeyName::ToolMenu           , &_show_tool_menu);
     ParameterMap<bool>::GetInstance().Set(WindowKeyName::MainMenu           , &_show_main_menu);
+    ParameterMap<bool>::GetInstance().Set(WindowKeyName::CommandLogWindow   , &_show_commandlog_window);
     ParameterMap<bool>::GetInstance().Set("show_grid"                       , &_show_grid);
 
 	ParameterMap<float>::GetInstance().Set("mesh_view_zoom", &_mesh_view_zoom);

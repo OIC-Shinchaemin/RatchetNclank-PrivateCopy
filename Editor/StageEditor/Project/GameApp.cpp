@@ -37,6 +37,7 @@
 //COMMAND
 #include    "CommandManager.h"
 #include    "ObjectPlantCommand.h"
+#include    "CommandLogWindow.h"
 
 //Singleton
 GuiWindowRect             gui_window_rect;
@@ -52,6 +53,7 @@ ToolIcon                  tool_icon;
 CommandManager            command_manager;
 MeshWindow                mesh_window;
 ObjectWindow              object_window;
+CommandLogWindow          command_log_window;
 
 EditorParameter           editor_parameter;
 
@@ -180,6 +182,10 @@ MofBool CGameApp::Update(void) {
         object_window.Show();
     }
 
+    if (editor_parameter.IsShowCommandLogWindow()) {
+        command_log_window.Show();
+    }
+
     MeshData* mesh_pointer = mesh_window.GetSelectMeshData();
     if (mesh_pointer && !isUseGui && g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
         ObjectData data;
@@ -195,7 +201,6 @@ MofBool CGameApp::Update(void) {
     if (editor_parameter.IsShowIsItemInfo()) { DebugGui::ShowIsItemInfoWindow(); }
     if (editor_parameter.IsShowRectInfo())   { DebugGui::ShowRectInfoWindow(); }
     if (editor_parameter.IsShowDemoWindow()) { ImGui::ShowDemoWindow(parameter_map_bool.Get(WindowKeyName::DebugDemoWindow)); }
-    
 
     return TRUE;
 }
