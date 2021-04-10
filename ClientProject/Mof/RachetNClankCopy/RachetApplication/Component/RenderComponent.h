@@ -4,10 +4,15 @@
 
 #include "Component.h"
 
+#include <string>
+
 
 namespace my {
 class RenderComponent : public my::Component {
     using super = my::Component;
+protected:
+    //! 描画リソース
+    std::string _path;
 public:
     /// <summary>
     /// コンストラクタ
@@ -23,6 +28,12 @@ public:
     /// </summary>
     /// <param name="param"></param>
     virtual void SetParam(const rapidjson::Value& param) override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::string GetPath(void) const;
     /// <summary>
     /// 描画判定
     /// </summary>

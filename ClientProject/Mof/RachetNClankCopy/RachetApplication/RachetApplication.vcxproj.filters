@@ -363,6 +363,15 @@
     <ClCompile Include="Component\UpdateComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Factory\ComponentCreator.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\ComponentFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BuilderFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -679,6 +688,15 @@
     </ClInclude>
     <ClInclude Include="Component\UpdateComponent.h">
       <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentCreator.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BuilderFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

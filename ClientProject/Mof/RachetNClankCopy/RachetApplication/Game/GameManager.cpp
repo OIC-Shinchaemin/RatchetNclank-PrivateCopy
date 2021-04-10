@@ -1,11 +1,13 @@
 #include "GameManager.h"
 
+#include "../Factory/FactoryManager.h"
 #include "My/Core/Trait.h"
 #include "My/Core/Utility.h"
 #include "../GameSystem/Save/SaveData.h"
 #include "../GameSystem/Save/SaveSystem.h"
 #include "../Character/Enemy.h"
 #include "../Character/Player.h"
+#include "../Factory/ActorBuilder.h"
 
 
 void my::GameManager::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -21,6 +23,7 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
 }
 
 my::GameManager::GameManager() :
+    //_factory(),
     _game_world(),
     _renderer(),
     _game_money(),
@@ -42,8 +45,15 @@ void my::GameManager::OnNotify(const char* type, const std::shared_ptr<my::Actor
         _delete_actors.push_back(ptr);
     } // if
 }
+/*
+void my::GameManager::SetFactoryManager(const std::shared_ptr<my::FactoryManager>& ptr) {
+    this->_factory = ptr;
+}
+*/
 
 bool my::GameManager::Initialize(void) {
+    //_ASSERT_EXPR(!_factory.expired(), L"保持しているポインタが無効です");
+
     _stage.Initialize();
 
     _game_money = std::make_unique<my::GameMoney>();
@@ -64,11 +74,11 @@ bool my::GameManager::Initialize(void) {
     auto param = new my::Actor::Param();
     player->Initialize(param);
     param->transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
-    // Enemyを初期化するためにキャッシュ
+    // Enemy
     auto temp = ut::MakeSharedWithRelease<my::Enemy>();
     temp->AddObserver(shared_from_this());
+    temp->Construct(my::FactoryManager::Singleton().CreateBuilder("../Resource/builder/enemy.json"));
     temp->Initialize(param);
-
     ut::SafeDelete(param);
 
     this->AddElement(player);

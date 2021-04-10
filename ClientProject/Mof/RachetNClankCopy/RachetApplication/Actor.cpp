@@ -3,7 +3,7 @@
 #include "My/Core/Math.h"
 #include "My/Core/Utility.h"
 #include "Component/Component.h"
-#include "Factory/ActorBuilder.h"
+#include "Factory/IBuilder.h"
 
 
 Mof::CVector3 my::Actor::UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity) {
@@ -112,6 +112,12 @@ void my::Actor::AddComponent(const ComPtr& component) {
     component->Initialize();
 }
 
+void my::Actor::CloneToComponents(const ComArray& com_array) {
+    std::transform(com_array.begin(), com_array.end(), std::back_inserter(_components), [](const std::shared_ptr<my::Component>& component) {
+        return component->Clone();
+    });
+}
+
 void my::Actor::RemoveComponent(const ComPtr& component) {
     if (component->IsInput()) {
         ut::EraseFind(_input_components, component);
@@ -184,8 +190,7 @@ bool my::Actor::Release(void) {
 }
 
 void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
-    auto ptr = std::dynamic_pointer_cast<my::ActorBuilder>(builder);
-    ptr->Construct(shared_from_this());
+    builder->Construct(shared_from_this());
 
     auto& coms = _components;
     // Žd•ª‚¯

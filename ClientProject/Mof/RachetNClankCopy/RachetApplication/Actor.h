@@ -26,12 +26,13 @@ public:
     using Observable = my::Observable<const char*, const std::shared_ptr<my::Actor>&>;
 public:
     struct Param {
-        //! トランスフォーム
-        def::Transform transform;
         //! 名前
         std::string name;
+        //! トランスフォーム
+        def::Transform transform;
 
         Param() :
+            name(),
             transform(){
         }
         virtual ~Param() {
@@ -184,6 +185,11 @@ public:
     /// </summary>
     /// <param name="component"></param>
     void AddComponent(const ComPtr& component);
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name=""></param>
+    void CloneToComponents(const ComArray& com_array);
     /// <summary>
     /// 削除
     /// </summary>

@@ -15,6 +15,7 @@ my::MeshComponent::MeshComponent(const my::MeshComponent& obj) :
     _mesh(obj._mesh),
     _motion_com(),
     _is_show(obj._is_show) {
+    super::_path = obj._path;
 }
 
 my::MeshComponent::~MeshComponent() {

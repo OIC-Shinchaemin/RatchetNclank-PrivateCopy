@@ -181,6 +181,9 @@
     <ClCompile Include="Factory\ActorBuilder.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
+    <ClCompile Include="Factory\BuilderFactory.cpp" />
+    <ClCompile Include="Factory\ComponentCreator.cpp" />
+    <ClCompile Include="Factory\ComponentFactory.cpp" />
     <ClCompile Include="Factory\FactoryManager.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
@@ -281,6 +284,9 @@
     <ClInclude Include="Factory\ActorBuilder.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
+    <ClInclude Include="Factory\BuilderFactory.h" />
+    <ClInclude Include="Factory\ComponentCreator.h" />
+    <ClInclude Include="Factory\ComponentFactory.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />

@@ -19,6 +19,8 @@
 namespace my {
 class GameManager : public std::enable_shared_from_this<my::GameManager>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
 private:
+    //! ファクトリー
+    //std::weak_ptr<class FactoryManager> _factory;
     //! 追加
     std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! 削除
@@ -37,10 +39,6 @@ private:
     std::shared_ptr<my::QuickChangeSystem>  _quick_change;
     //! ステージ
     Stage _stage;
-    //! キャラクタ
-    //std::shared_ptr<my::Character> _character;
-    //! キャラクタ
-    //std::vector<std::shared_ptr<my::Enemy>> _enemies;
 private:
     /// <summary>
     /// 追加
@@ -52,11 +50,6 @@ private:
     /// </summary>
     /// <param name="ptr"></param>
     void RemoveElement(const std::shared_ptr<my::Actor>& ptr);
-    /// <summary>
-    /// collision
-    /// </summary>
-    /// <param name=""></param>
-    void Collision(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -72,6 +65,11 @@ public:
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    //void SetFactoryManager(const std::shared_ptr<class FactoryManager>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>
