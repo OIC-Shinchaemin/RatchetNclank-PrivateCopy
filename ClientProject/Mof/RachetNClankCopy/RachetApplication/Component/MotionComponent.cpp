@@ -3,40 +3,36 @@
 #include "MeshComponent.h"
 
 
-void my::MotionComponent::GenerateMotionNames(void) {
-//    _motion_names.emplace(my::MotionType::kIdleWait, "bse_wait_lp");
-//    _motion_names.emplace(my::MotionType::kMoveRun, "mov_run_lp");
-//    _motion_names.emplace(my::MotionType::kMoveTurn, "mov_run_lp");
-}
-
 my::MotionComponent::MotionComponent(int priority) :
     super(priority),
     _motion(),
-    _motion_names() {
+    _motion_names() ,
+    _path(){
 }
 
 my::MotionComponent::MotionComponent(const MotionComponent& obj) :
     super(obj._priority),
     _motion(),
-    _motion_names(obj._motion_names) {
+    _motion_names(obj._motion_names) ,
+    _path(obj._path){
 }
 
 my::MotionComponent::~MotionComponent() {
 }
 
-std::string my::MotionComponent::GetType(void) const {
-    return "MotionComponent";
+void my::MotionComponent::SetParam(const rapidjson::Value& param) {
+    super::SetParam(param);
+    const char* path = "path";
+
+    _ASSERT_EXPR(param.HasMember(path), L"指定のパラメータがありません");
+    _ASSERT_EXPR(param[path].IsString(), L"パラメータの指定された型でありません");
+
+    auto temp = super::_resource_manager.lock()->Get<std::shared_ptr<my::MotionNames>>(param[path].GetString());
+    _motion_names = temp;
 }
 
-const char* my::MotionComponent::GetMotionName(const std::string& type) {
-    // check contains
-    /*
-    auto it = _motion_names.find(type);
-    if (it != _motion_names.end()) {
-        return it->second.c_str();
-    } // id
-    */
-    return nullptr;
+std::string my::MotionComponent::GetType(void) const {
+    return "MotionComponent";
 }
 
 Mof::LPMeshMotionController my::MotionComponent::GetMotionData(void) const {
@@ -56,10 +52,8 @@ bool my::MotionComponent::Initialize(void) {
 
     for (int i = 0; i < _motion->GetMotionCount(); i++) {
         auto name = *_motion->GetMotion(i)->GetName();
-        std::cout << "name  = " << name << "\n";
+        //std::cout << "name  = " << name << "\n";
     } // for
-
-    this->GenerateMotionNames();
     return true;
 }
 
@@ -78,7 +72,7 @@ std::shared_ptr<my::Component> my::MotionComponent::Clone(void) {
     return std::make_shared<my::MotionComponent>(*this);
 }
 
-bool my::MotionComponent::ChangeMotionByName(const char* name, bool loop, float speed, bool same) {
+bool my::MotionComponent::ChangeMotionByName(const char* name, float speed, bool loop, bool same) {
     if (_motion) {
         return _motion->ChangeMotionByName(name, speed, loop, same);
     } // if

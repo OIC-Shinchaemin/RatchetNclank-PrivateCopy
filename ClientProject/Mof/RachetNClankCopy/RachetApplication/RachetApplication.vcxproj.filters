@@ -372,6 +372,9 @@
     <ClCompile Include="Factory\BuilderFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Component\MotionStateComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -697,6 +700,9 @@
     </ClInclude>
     <ClInclude Include="Factory\BuilderFactory.h">
       <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MotionStateComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

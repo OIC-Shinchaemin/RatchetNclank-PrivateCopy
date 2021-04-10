@@ -8,6 +8,9 @@
 
 #include "../Actor.h"
 
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
+
 
 namespace my {
 class Component : public std::enable_shared_from_this<my::Component> {
@@ -17,7 +20,14 @@ private:
 protected:
     //! 小さいほど処理される順番が早い
     int _priority;
+    //! リソース
+    static std::weak_ptr<my::ResourceMgr> _resource_manager;
 public:
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    static void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
     /// <summary>
     /// コンストラクタ
     /// </summary>

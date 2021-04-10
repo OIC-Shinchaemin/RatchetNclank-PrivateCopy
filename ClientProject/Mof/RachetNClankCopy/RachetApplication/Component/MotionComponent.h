@@ -6,6 +6,8 @@
 
 #include <string>
 
+#include <Mof.h>
+
 #include "../MotionNames.h"
 
 
@@ -13,16 +15,21 @@ namespace my {
 class MotionComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! アニメーションデータ
-    Mof::LPMeshMotionController _motion;
     //! モーション
-    my::MotionNames _motion_names;
-    //std::unordered_map<std::string, std::string> _motion_names;
+    Mof::LPMeshMotionController	_motion;
+    //! モーション名
+    std::weak_ptr<my::MotionNames> _motion_names;
+    //! パス
+    std::string _path;
     /// <summary>
-    /// 作成
+    /// 変更
     /// </summary>
-    /// <param name=""></param>
-    void GenerateMotionNames(void);
+    /// <param name="name"></param>
+    /// <param name="speed"></param>
+    /// <param name="loop"></param>
+    /// <param name="same"></param>
+    /// <returns></returns>
+    bool ChangeMotionByName(const char* name, float speed = 1.0f, bool loop = true, bool same = true);
 public:
     /// <summary>
     /// コンストラクタ
@@ -39,17 +46,16 @@ public:
     /// </summary>
     virtual ~MotionComponent();
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    const char* GetMotionName(const std::string& type);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -89,12 +95,21 @@ public:
     /// <summary>
     /// 変更
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="loop"></param>
+    /// <typeparam name="Enum"></typeparam>
+    /// <param name="type"></param>
     /// <param name="speed"></param>
+    /// <param name="loop"></param>
     /// <param name="same"></param>
     /// <returns></returns>
-    bool ChangeMotionByName(const char* name, bool loop = true, float speed = 1.0f, bool same = true);
+    template<typename Enum>
+    bool ChangeMotion(Enum type, float speed = 1.0f, bool loop = true, bool same = true) {
+        if (auto motion_names = _motion_names.lock()) {
+            return this->ChangeMotionByName(
+                motion_names->At(type),
+                speed, loop, same);
+        } // if
+        return false;
+    }
 };
 }
 #endif // !MY_MOTION_COMPONENT_H

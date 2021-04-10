@@ -2,11 +2,15 @@
 
 #include "My/Core/Utility.h"
 
+#include "../Component/MotionComponent.h"
+#include "../Component/MotionStateComponent.h"
 #include "../Component/MeshComponent.h"
 
 
 my::ComponentFactory::ComponentFactory() :
     _component_creators() {
+    my::ComponentFactory::AddComponentCreator<my::MotionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::MotionStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
 }
 

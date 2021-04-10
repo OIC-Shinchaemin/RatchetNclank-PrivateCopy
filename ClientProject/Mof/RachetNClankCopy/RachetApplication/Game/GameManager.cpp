@@ -1,8 +1,9 @@
 #include "GameManager.h"
 
-#include "../Factory/FactoryManager.h"
 #include "My/Core/Trait.h"
 #include "My/Core/Utility.h"
+
+#include "../Factory/FactoryManager.h"
 #include "../GameSystem/Save/SaveData.h"
 #include "../GameSystem/Save/SaveSystem.h"
 #include "../Character/Enemy.h"
@@ -24,6 +25,7 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
 
 my::GameManager::GameManager() :
     //_factory(),
+    _resource(),
     _game_world(),
     _renderer(),
     _game_money(),
@@ -51,9 +53,11 @@ void my::GameManager::SetFactoryManager(const std::shared_ptr<my::FactoryManager
 }
 */
 
-bool my::GameManager::Initialize(void) {
-    //_ASSERT_EXPR(!_factory.expired(), L"•ÛŽ‚µ‚Ä‚¢‚éƒ|ƒCƒ“ƒ^‚ª–³Œø‚Å‚·");
+void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
+    this->_resource = ptr;
+}
 
+bool my::GameManager::Initialize(void) {
     _stage.Initialize();
 
     _game_money = std::make_unique<my::GameMoney>();

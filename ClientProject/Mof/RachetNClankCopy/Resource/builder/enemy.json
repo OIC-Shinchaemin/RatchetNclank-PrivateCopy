@@ -1,6 +1,19 @@
 {
   "components": [
     {
+      "type": "MotionComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/motion_names/enemy.motion_names"
+      }
+    },
+        {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,

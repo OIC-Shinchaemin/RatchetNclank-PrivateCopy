@@ -12,15 +12,13 @@
 #include "../GameSystem/WeaponSystem.h"
 #include "../GameSystem/QuickChangeSystem.h"
 #include "../Stage/Stage.h"
-#include "../Character/Character.h"
-#include "../Character/Enemy.h"
 
 
 namespace my {
 class GameManager : public std::enable_shared_from_this<my::GameManager>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
 private:
     //! ファクトリー
-    //std::weak_ptr<class FactoryManager> _factory;
+    std::weak_ptr<my::ResourceMgr> _resource;
     //! 追加
     std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! 削除
@@ -70,6 +68,7 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     //void SetFactoryManager(const std::shared_ptr<class FactoryManager>& ptr);
+    void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

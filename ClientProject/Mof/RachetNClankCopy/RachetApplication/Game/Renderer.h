@@ -5,7 +5,10 @@
 #include <memory>
 #include <vector>
 
+#include "../GameDefine.h"
 #include "../Actor.h"
+#include "../ResourceManager.h"
+
 
 namespace my {
 class Renderer {

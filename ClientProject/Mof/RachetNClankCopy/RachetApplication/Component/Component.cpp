@@ -1,6 +1,12 @@
 #include "Component.h"
 
 
+std::weak_ptr<my::ResourceMgr> my::Component::_resource_manager;
+
+void my::Component::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
+    _resource_manager = ptr;
+}
+
 my::Component::Component(int priority) :
     _owner(),
     _priority(priority) {

@@ -1,10 +1,11 @@
 #include "Renderer.h"
 
 #include "My/Core/Utility.h"
+#include "../Component/MeshComponent.h"
 
 
 my::Renderer::Renderer() :
-    _actors(){
+    _actors() {
 }
 
 my::Renderer::~Renderer() {

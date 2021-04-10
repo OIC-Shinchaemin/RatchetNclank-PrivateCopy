@@ -28,8 +28,8 @@ void my::MeshComponent::SetParam(const rapidjson::Value& param) {
     _ASSERT_EXPR(param.HasMember(path), L"指定のパラメータがありません");
     _ASSERT_EXPR(param[path].IsString(), L"パラメータの指定された型でありません");
 
-    //auto temp = super::GetResource<Mof::CMeshContainer>(param[path].GetString());
-    //this->SetMesh(temp);
+    auto temp = super::_resource_manager.lock()->Get<std::shared_ptr<Mof::CMeshContainer>>(param[path].GetString());
+    this->SetMesh(temp);
 }
 
 void my::MeshComponent::SetMesh(const std::shared_ptr<Mof::CMeshContainer>& ptr) {

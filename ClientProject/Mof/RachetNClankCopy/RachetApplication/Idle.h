@@ -18,6 +18,7 @@ private:
     //! ‘¬“x
     my::Velocity* _velocity;
 
+
     virtual void InputMoveAngularVelocity(float angle, float speed);
     /// <summary>
     /// ”»’è
