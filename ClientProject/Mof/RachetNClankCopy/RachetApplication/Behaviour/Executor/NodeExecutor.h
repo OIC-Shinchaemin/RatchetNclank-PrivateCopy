@@ -53,6 +53,12 @@ public:
     /// <returns>Failed:実行の失敗</returns>
     virtual behaviour::INodeExecutor<Actor>::Result Execute(Actor& actor) override { return behaviour::INodeExecutor<Actor>::Result::Failure; }
     /// <summary>
+    /// 実行時必要なポインタをキャッシュ
+    /// </summary>
+    /// <param actor=""></param>
+    virtual void Prepare(const Actor& actor) override {
+    }
+    /// <summary>
     /// 実行状態を全てリセット
     /// 状態をInactiveに設定
     /// </summary>
