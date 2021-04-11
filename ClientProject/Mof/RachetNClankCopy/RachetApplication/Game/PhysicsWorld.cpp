@@ -1,9 +1,9 @@
 #include "PhysicsWorld.h"
 
 #include "My/Core/Utility.h"
-#include "../Collision/Algolithm/PlayerCollisionAlgolithm.h"
-#include "../Collision/Algolithm/EnemyCollisionAlgolithm.h"
-#include "../Collision/Algolithm/EnemySightCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemySightCollisionAlgolithm.h"
 
 
 std::shared_ptr<my::CollisionAlgolithm> my::PhysicsWorld::CreateAlgolithm(const char* type) {

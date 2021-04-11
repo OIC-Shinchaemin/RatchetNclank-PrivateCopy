@@ -27,7 +27,7 @@ state::EnemyMotionState::EnemyMotionState() :
 state::EnemyMotionState::~EnemyMotionState() {
 }
 
-void state::EnemyMotionState::SetEnemy(const std::shared_ptr<my::Enemy>& ptr) {
+void state::EnemyMotionState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     _motion_com = ptr->GetComponent<my::MotionComponent>();
     _motion_state_com = ptr->GetComponent<my::MotionStateComponent>();
 }

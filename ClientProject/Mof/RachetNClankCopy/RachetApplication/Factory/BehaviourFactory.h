@@ -15,7 +15,7 @@
 #include "../Behaviour/Node/ActionNode.h"
 #include "../Behaviour/Node/SequencerNode.h"
 #include "../Behaviour/Node/SelectorNode.h"
-#include "../Character/Enemy.h"
+#include "../Actor/Character/Enemy.h"
 
 
 namespace my {

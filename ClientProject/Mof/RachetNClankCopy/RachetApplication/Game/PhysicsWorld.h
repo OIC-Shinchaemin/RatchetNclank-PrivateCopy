@@ -5,8 +5,8 @@
 #include <memory>
 
 #include "../Actor.h"
-#include "../Collision/Object/CollisionObject.h"
-#include "../Collision/Algolithm/CollisionAlgolithm.h"
+#include "../Component/Collision/Object/CollisionObject.h"
+#include "../Component/Collision/Algolithm/CollisionAlgolithm.h"
 
 
 namespace my {

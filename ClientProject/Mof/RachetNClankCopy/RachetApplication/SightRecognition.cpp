@@ -1,6 +1,7 @@
 #include "SightRecognition.h"
 
-#include "Character/Enemy.h"
+#include "Actor/Character/Enemy.h"
+#include "My/Core/Math.h"
 
 
 my::SightRecognition::SightRecognition() :

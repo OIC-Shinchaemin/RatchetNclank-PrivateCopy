@@ -6,7 +6,7 @@
 
 #include <memory>
 
-#include "../Component/AttackComponent.h"
+#include "../Component/EnemyAttackComponent.h"
 
 
 namespace state {
@@ -14,7 +14,7 @@ class EnemyMotionAttackState : public state::EnemyMotionState {
     using super = state::EnemyMotionState;
 private:
     //! 攻撃
-    std::weak_ptr<my::AttackComponent> _attack_com;
+    std::weak_ptr<my::EnemyAttackComponent> _attack_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,7 +28,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetEnemy(const std::shared_ptr<my::Enemy>& ptr) override;
+    virtual void SetActor(const std::shared_ptr<my::Actor>& ptr) override;
     /// <summary>
     /// ゲッター
     /// </summary>

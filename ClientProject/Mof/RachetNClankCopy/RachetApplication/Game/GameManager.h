@@ -11,7 +11,7 @@
 #include "../GameSystem/GameMoney.h"
 #include "../GameSystem/WeaponSystem.h"
 #include "../GameSystem/QuickChangeSystem.h"
-#include "../Stage/Stage.h"
+#include "../Actor/Stage/Stage.h"
 
 
 namespace my {

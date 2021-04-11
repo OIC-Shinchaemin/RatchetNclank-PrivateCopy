@@ -6,8 +6,8 @@
 #include "../Factory/FactoryManager.h"
 #include "../GameSystem/Save/SaveData.h"
 #include "../GameSystem/Save/SaveSystem.h"
-#include "../Character/Enemy.h"
-#include "../Character/Player.h"
+#include "../Actor/Character/Enemy.h"
+#include "../Actor/Character/Player.h"
 #include "../Factory/ActorBuilder.h"
 
 
@@ -64,22 +64,23 @@ bool my::GameManager::Initialize(void) {
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
     auto player = ut::MakeSharedWithRelease<Player>();
-    //_character = player;
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
-
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
 
     _game_money->Initialize(save_data.GetMoney());
     _weapon_system->Initialize(save_data, shared_from_this());
     _quick_change->Initialize({}, _weapon_system);
-
+    // actor
     auto param = new my::Actor::Param();
+    player->AddObserver(shared_from_this());
+    player->Construct(my::FactoryManager::Singleton().CreateBuilder("../Resource/builder/player.json"));
     player->Initialize(param);
     param->transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
-    // Enemy
+    
     auto temp = ut::MakeSharedWithRelease<my::Enemy>();
+    param->name = "enemy";
     temp->AddObserver(shared_from_this());
     temp->Construct(my::FactoryManager::Singleton().CreateBuilder("../Resource/builder/enemy.json"));
     temp->Initialize(param);
