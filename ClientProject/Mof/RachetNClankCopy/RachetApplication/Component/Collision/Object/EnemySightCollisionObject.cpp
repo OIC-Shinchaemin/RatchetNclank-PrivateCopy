@@ -1,43 +1,38 @@
 #include "EnemySightCollisionObject.h"
 
-#include "../../../Actor/Character/Enemy.h"
+#include "../../SightRecognitionComponent.h"
 
 
-my::EnemySightCollisionObject::EnemySightCollisionObject() :
-    super(),
-    _owner(),
+my::EnemySightCollisionObject::EnemySightCollisionObject(int priority) :
+    super(priority),
+    _sight_recognition() {
+}
+
+my::EnemySightCollisionObject::EnemySightCollisionObject(const EnemySightCollisionObject& obj) :
+    super(obj._priority),
     _sight_recognition() {
 }
 
 my::EnemySightCollisionObject::~EnemySightCollisionObject() {
 }
 
-void my::EnemySightCollisionObject::SetOwner(std::any owner) {
-    _owner = std::any_cast<std::shared_ptr<my::Enemy>>(owner);
-}
-
-std::any my::EnemySightCollisionObject::GetOwner(void) const {
-    return this->_owner;
-}
-
 void my::EnemySightCollisionObject::SetSight(const std::shared_ptr<my::SightRecognitionComponent>& ptr) {
     this->_sight_recognition = ptr;
 }
 
-const char* my::EnemySightCollisionObject::GetType(void) const {
+std::string my::EnemySightCollisionObject::GetType(void) const {
     return "EnemySightCollisionObject";
 }
 
 std::optional<Mof::CSphere> my::EnemySightCollisionObject::GetSphere(void) {    
-    if (_owner.expired() || _sight_recognition.expired()) {
+    if (_sight_recognition.expired()) {
         return std::optional<Mof::CSphere>();
     } // if
-    auto owner = _owner.lock();
-    if (owner->GetState() == my::ActorState::End) {
+    if (super::GetOwner() ->GetState() == my::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto sight = _sight_recognition.lock();
-    return Mof::CSphere(owner->GetPosition(), sight->GetRange());
+    return Mof::CSphere(super::GetOwner()->GetPosition(), sight->GetRange());
 }
 
 std::optional<Mof::CBoxAABB> my::EnemySightCollisionObject::GetBox(void) {
@@ -53,12 +48,15 @@ std::optional<Mof::LPMeshContainer> my::EnemySightCollisionObject::GetMesh(void)
 }
 
 std::optional<my::SightObject> my::EnemySightCollisionObject::GetSightObject(void) {
-    if (_owner.expired() || _sight_recognition.expired()) {
+    if (_sight_recognition.expired()) {
         return std::optional<my::SightObject>();
     } // if
-    auto owner = _owner.lock();
-    if (owner->GetState() == my::ActorState::End) {
+    if (super::GetOwner()->GetState() == my::ActorState::End) {
         return std::optional<my::SightObject>();
     } // if
-    return my::SightObject(owner->GetPosition(), owner->GetRotate());
+    return my::SightObject(super::GetOwner()->GetPosition(), super::GetOwner()->GetRotate());
+}
+
+std::shared_ptr<my::Component> my::EnemySightCollisionObject::Clone(void) {
+    return std::make_shared<my::EnemySightCollisionObject>(*this);
 }

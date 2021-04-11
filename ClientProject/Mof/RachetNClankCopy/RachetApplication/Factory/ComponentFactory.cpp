@@ -13,6 +13,9 @@
 #include "../Component/VelocityComponent.h"
 #include "../Component/TransformComponent.h"
 #include "../Component/MeshComponent.h"
+#include "../Component/Collision/Object/PlayerCollisionObject.h"
+#include "../Component/Collision/Object/EnemyCollisionObject.h"
+#include "../Component/Collision/Object/EnemySightCollisionObject.h"
 
 
 my::ComponentFactory::ComponentFactory() :
@@ -28,6 +31,10 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::VelocityComponent>();
     my::ComponentFactory::AddComponentCreator<my::TransformComponent>();
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerCollisionObject>();
+    my::ComponentFactory::AddComponentCreator<my::EnemyCollisionObject>();
+    my::ComponentFactory::AddComponentCreator<my::EnemySightCollisionObject>();
+
 }
 
 my::ComponentFactory::~ComponentFactory() {

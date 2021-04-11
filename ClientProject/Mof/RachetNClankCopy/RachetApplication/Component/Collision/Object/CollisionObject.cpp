@@ -3,7 +3,9 @@
 #include "My/Core/Utility.h"
 
 
-my::CollisionObject::CollisionObject() :
+my::CollisionObject::CollisionObject(int priority) :
+    super(priority),
+    _collisioned(),
     _on_enter(),
     _on_stay(),
     _on_exit() {

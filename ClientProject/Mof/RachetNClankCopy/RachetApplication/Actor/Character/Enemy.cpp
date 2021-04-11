@@ -137,9 +137,10 @@ void my::Enemy::SetTarget(const std::shared_ptr<my::Character>& ptr) {
 }
 
 void my::Enemy::GenerateCollisionObject(void) {
-    auto coll = std::make_shared<my::EnemyCollisionObject>();
-    coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    super::AddCollisionObject(coll);
+    //auto coll = std::make_shared<my::EnemyCollisionObject>();
+    auto coll = super::GetComponent<my::EnemyCollisionObject>();
+    //coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    //super::AddCollisionObject(coll);
     coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
                            "PlayerCollisionObject",
                            my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
@@ -147,17 +148,15 @@ void my::Enemy::GenerateCollisionObject(void) {
     }));
 
     auto sight = super::GetComponent<my::SightRecognitionComponent>();
-    auto sight_coll = std::make_shared<my::EnemySightCollisionObject>();
-    sight_coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    auto sight_coll = super::GetComponent<my::EnemySightCollisionObject>();
+    //sight_coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
     sight_coll->SetSight(sight);
-    super::AddCollisionObject(sight_coll);
+    //super::AddCollisionObject(sight_coll);
     sight_coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
                                  "PlayerCollisionObject",
                                  my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
-        auto target = std::any_cast<std::weak_ptr<Player>>(in.target);
-        if (auto ptr = target.lock()) {
-            this->SetTarget(ptr);
-        } // if
+        auto target = std::any_cast<std::shared_ptr<my::Actor>>(in.target);
+        this->SetTarget(std::dynamic_pointer_cast<Player> (target));
         return true;
     }));
     sight_coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Exit,

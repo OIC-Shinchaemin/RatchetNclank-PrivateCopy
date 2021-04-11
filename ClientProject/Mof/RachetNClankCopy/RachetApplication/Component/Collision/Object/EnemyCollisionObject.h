@@ -15,12 +15,18 @@ class EnemyCollisionObject : public my::CollisionObject {
     using super = my::CollisionObject;
 private:
     //! 所有者
-    std::weak_ptr<class Enemy> _owner;
+    //std::weak_ptr<class Enemy> _owner;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    EnemyCollisionObject();
+    /// <param name="priority"></param>
+    EnemyCollisionObject(int priority);
+    /// <summary>
+    /// コピーコンストラクタ
+    /// </summary>
+    /// <param name="obj"></param>
+    EnemyCollisionObject(const EnemyCollisionObject& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -29,19 +35,19 @@ public:
     /// セッター
     /// </summary>
     /// <param name="owner"></param>
-    virtual void SetOwner(std::any owner) override;
+    //virtual void SetOwner(std::any owner) override;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::any GetOwner(void) const override;
+    //virtual std::any GetOwner(void) const override;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual const char* GetType(void) const override;
+    virtual std::string GetType(void) const override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -72,6 +78,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::optional<my::SightObject> GetSightObject(void) override;
+    /// <summary>
+    /// 複製
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::shared_ptr<my::Component> Clone(void) override;
 };
 }
 #endif // !MY_ENEMY_COLLISION_OBJECT_H

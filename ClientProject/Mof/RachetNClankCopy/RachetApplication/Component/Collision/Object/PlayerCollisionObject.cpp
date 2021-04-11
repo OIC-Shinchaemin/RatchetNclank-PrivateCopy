@@ -3,35 +3,27 @@
 #include "../../../Actor/Character/Player.h"
 
 
-my::PlayerCollisionObject::PlayerCollisionObject() :
-    super(),
-    _owner(){
+my::PlayerCollisionObject::PlayerCollisionObject(int priority) :
+    super(priority) {
+}
+
+my::PlayerCollisionObject::PlayerCollisionObject(const PlayerCollisionObject& obj) :
+    super(obj._priority) {
 }
 
 my::PlayerCollisionObject::~PlayerCollisionObject() {
 }
 
-void my::PlayerCollisionObject::SetOwner(std::any owner) {
-    _owner = std::any_cast<std::shared_ptr<::Player>>(owner);
-}
-
-std::any my::PlayerCollisionObject::GetOwner(void) const {
-    return this->_owner;
-}
-
-const char* my::PlayerCollisionObject::GetType(void) const {
+std::string my::PlayerCollisionObject::GetType(void) const {
     return "PlayerCollisionObject";
 }
 
 std::optional<Mof::CSphere> my::PlayerCollisionObject::GetSphere(void) {
-    if (auto owner = _owner.lock()) {
-        if (owner->GetState() == my::ActorState::End) {
-            return std::optional<Mof::CSphere>();
-        } // if
-
-        return Mof::CSphere(owner->GetPosition(), owner->GetVolume());
+    if (super::GetOwner()->GetState() == my::ActorState::End) {
+        return std::optional<Mof::CSphere>();
     } // if
-    return std::optional<Mof::CSphere>();
+    auto owner = std::dynamic_pointer_cast<Player>(super::GetOwner());
+    return Mof::CSphere(super::GetOwner()->GetPosition(), owner->GetVolume());
 }
 
 std::optional<Mof::CBoxAABB> my::PlayerCollisionObject::GetBox(void) {
@@ -48,4 +40,8 @@ std::optional<Mof::LPMeshContainer> my::PlayerCollisionObject::GetMesh(void) {
 
 std::optional<my::SightObject> my::PlayerCollisionObject::GetSightObject(void) {
     return std::optional<my::SightObject>();
+}
+
+std::shared_ptr<my::Component> my::PlayerCollisionObject::Clone(void) {
+    return std::make_shared<my::PlayerCollisionObject>(*this);
 }
