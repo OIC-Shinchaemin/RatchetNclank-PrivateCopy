@@ -23,8 +23,8 @@ private:
     std::vector<Pair> _weapons;
     //! 通知用
     my::Observable<std::shared_ptr<my::Mechanical>> _subject;
-    //! ファクトリー
-    my::Factory<my::Mechanical> _factory;
+    //! マップ
+    std::unordered_map<std::string, std::string> _builder_name_map;
 public:
     /// <summary>
     /// コンストラクタ

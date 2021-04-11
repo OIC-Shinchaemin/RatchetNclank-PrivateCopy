@@ -190,6 +190,7 @@
     <ClCompile Include="Component\PlayerIdleComponent.cpp" />
     <ClCompile Include="Component\PlayerMoveComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
+    <ClCompile Include="Component\SightRecognitionComponent.cpp" />
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Component\UpdateComponent.cpp" />
     <ClCompile Include="Component\VelocityComponent.cpp" />
@@ -212,7 +213,6 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
-    <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="State\AICombatState.cpp" />
     <ClCompile Include="State\AIPatrolState.cpp" />
     <ClCompile Include="State\AIState.cpp" />
@@ -300,6 +300,7 @@
     <ClInclude Include="Component\PlayerIdleComponent.h" />
     <ClInclude Include="Component\PlayerMoveComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
+    <ClInclude Include="Component\SightRecognitionComponent.h" />
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Component\UpdateComponent.h" />
     <ClInclude Include="Component\VelocityComponent.h" />
@@ -329,7 +330,6 @@
     <ClInclude Include="MotionNames.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="SightRecognition.h" />
     <ClInclude Include="State\AICombatState.h" />
     <ClInclude Include="State\AIPatrolState.h" />
     <ClInclude Include="State\AIState.h" />

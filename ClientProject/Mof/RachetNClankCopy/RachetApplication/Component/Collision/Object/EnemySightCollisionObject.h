@@ -9,7 +9,7 @@
 
 #include <Mof.h>
 
-#include "../../../SightRecognition.h"
+#include "../../SightRecognitionComponent.h"
 
 
 namespace my {
@@ -19,7 +19,7 @@ private:
     //! 所有者
     std::weak_ptr<class Enemy> _owner;
     //! 所有者
-    std::weak_ptr<my::SightRecognition> _sight_recognition;
+    std::weak_ptr<my::SightRecognitionComponent> _sight_recognition;
 public:
     /// <summary>
     /// コンストラクタ
@@ -44,7 +44,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetSight(const std::shared_ptr<my::SightRecognition>& ptr);
+    void SetSight(const std::shared_ptr<my::SightRecognitionComponent>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
