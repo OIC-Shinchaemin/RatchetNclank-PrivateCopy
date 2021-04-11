@@ -39,26 +39,30 @@ my::PhysicsWorld::~PhysicsWorld() {
 }
 
 void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
-    auto& work = actor->GetCollisionObjects();
+    std::vector<std::weak_ptr<my::CollisionObject>> work;
+    actor->GetComponents<my::CollisionObject>(work);
+    
     for (auto& ptr : work) {
-        auto type = ptr->GetType();
+        auto type = ptr.lock()->GetType();
         for (auto& obj : _objects) {
             if (type == obj.algo->GetLayerType()) {
-                obj.layers.push_back(ptr);
+                obj.layers.push_back(ptr.lock());
             } // if
             if (type == obj.algo->GetTargetType()) {
-                obj.targets.push_back(ptr);
+                obj.targets.push_back(ptr.lock());
             } // if
         } // for
     } // for
 }
 
 void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
-    auto& work = actor->GetCollisionObjects();
+    std::vector<std::weak_ptr<my::CollisionObject>> work;
+    actor->GetComponents<my::CollisionObject>(work);
+
     for (auto& ptr : work) {
         for (auto& obj : _objects) {
-            ut::EraseRemove(obj.layers, ptr);
-            ut::EraseRemove(obj.targets, ptr);
+            ut::EraseRemove(obj.layers, ptr.lock());
+            ut::EraseRemove(obj.targets, ptr.lock());
         } // for
     } // for
 }

@@ -462,9 +462,9 @@ bool Player::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
 
     // collision
-    auto coll = std::make_shared<my::PlayerCollisionObject>();
-    coll->SetOwner(std::dynamic_pointer_cast<Player>(shared_from_this()));
-    super::AddCollisionObject(coll);
+    auto coll = super::GetComponent<my::PlayerCollisionObject>();
+//    coll->SetOwner(std::dynamic_pointer_cast<Player>(shared_from_this()));
+//    super::AddCollisionObject(coll);
 
     // camera
     _player_view_camera = (std::make_shared<my::Camera>());

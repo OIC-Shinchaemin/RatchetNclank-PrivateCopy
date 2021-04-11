@@ -56,6 +56,19 @@
         "priority": 0,
         "path": "../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom"
       }
+    },
+
+    {
+      "type": "EnemyCollisionObject",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "EnemySightCollisionObject",
+      "paramater": {
+        "priority": 0
+      }
     }
   ]
 }

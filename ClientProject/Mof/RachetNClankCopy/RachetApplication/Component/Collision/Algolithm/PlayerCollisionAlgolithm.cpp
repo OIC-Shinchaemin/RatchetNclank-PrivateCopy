@@ -1,6 +1,6 @@
 #include "PlayerCollisionAlgolithm.h"
 
-#include "../../Character/Enemy.h"
+#include "../../../Actor/Character/Enemy.h"
 
 
 my::PlayerEnemyCollisionAlgolithm::PlayerEnemyCollisionAlgolithm() :

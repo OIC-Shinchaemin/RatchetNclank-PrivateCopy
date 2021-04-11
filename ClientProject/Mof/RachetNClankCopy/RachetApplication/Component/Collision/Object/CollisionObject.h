@@ -5,8 +5,11 @@
 #include <optional>
 #include <any>
 #include <memory>
+#include <string>
 
 #include <Mof.h>
+
+#include "../../Component.h"
 
 
 namespace my {
@@ -32,7 +35,8 @@ struct CollisionInfo {
     CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : d(c.d) {}
     //virtual ~CollisionInfo() {}
 };
-class CollisionObject {
+class CollisionObject : public my::Component {
+    using super = my::Component;
 public:
     enum class CollisionFuncType {
         Enter,
@@ -69,7 +73,8 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    CollisionObject();
+    /// <param name="priority"></param>
+    CollisionObject(int priority);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -78,19 +83,13 @@ public:
     /// セッター
     /// </summary>
     /// <param name="owner"></param>
-    virtual void SetOwner(std::any owner) = 0;
+    //virtual void SetOwner(std::any owner) = 0;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::any GetOwner(void) const = 0;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual const char* GetType(void) const = 0;
+    //virtual std::any GetOwner(void) const = 0;
     /// <summary>
     /// ゲッター
     /// </summary>

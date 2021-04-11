@@ -10,7 +10,7 @@
 
 #include "My/Core/Define.h"
 #include "My/Core/Observable.h"
-#include "Component/Collision/Object/CollisionObject.h"
+//#include "Component/Collision/Object/CollisionObject.h"
 
 
 namespace my {
@@ -50,17 +50,17 @@ private:
     ComArray _update_components;
     ComArray _render_components;
     //! 衝突用
-    std::vector<std::shared_ptr<my::CollisionObject>> _collision_objects;
+    //std::vector<std::shared_ptr<my::CollisionObject>> _collision_objects;
 protected:
     /// <summary>
     /// 生成
     /// </summary>
     /// <typeparam name="Type"></typeparam>
     /// <param name=""></param>
-    template<typename Type>
-    void AddCollisionObject(std::shared_ptr<Type> ptr) {
-        _collision_objects.push_back(ptr);
-    }
+//    template<typename Type>
+//    void AddCollisionObject(std::shared_ptr<Type> ptr) {
+//        _collision_objects.push_back(ptr);
+//    }
 public:
     /// <summary>
     /// コンストラクタ
@@ -125,7 +125,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::vector<std::shared_ptr<my::CollisionObject>>& GetCollisionObjects(void) const;
+    //const std::vector<std::shared_ptr<my::CollisionObject>>& GetCollisionObjects(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
