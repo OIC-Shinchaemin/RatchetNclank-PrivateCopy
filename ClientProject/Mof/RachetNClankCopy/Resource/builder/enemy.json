@@ -7,10 +7,41 @@
         "path": "../Resource/motion_names/enemy.motion_names"
       }
     },
-        {
+
+    {
+      "type": "MoveComponent",
+      "paramater": {
+        "priority": 90
+      }
+    },
+    {
+      "type": "IdleComponent",
+      "paramater": {
+        "priority": 91
+      }
+    },
+    {
+      "type": "AttackComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
       "type": "MotionStateComponent",
       "paramater": {
-        "priority": 0
+        "priority": 98
+      }
+    },
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
       }
     },
     {

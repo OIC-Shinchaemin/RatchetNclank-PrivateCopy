@@ -3,14 +3,16 @@
 #include "Player.h"
 #include "../Collision/Object/EnemyCollisionObject.h"
 #include "../Collision/Object/EnemySightCollisionObject.h"
-#include "../State/EnemyMotionIdleState.h"
-#include "../State/EnemyMotionMoveState.h"
-#include "../State/EnemyMotionAttackState.h"
 #include "../State/AIPatrolState.h"
 #include "../State/AICombatState.h"
+#include "../Component/IdleComponent.h"
+#include "../Component/MoveComponent.h"
+#include "../Component/AttackComponent.h"
 
 
 void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
+    auto move_com = super::GetComponent<my::MoveComponent>();
+
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -18,10 +20,10 @@ void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) 
     float angle = std::atan2(dir.z, dir.x);
     in = math::Rotate(in.x, in.y, angle);
 
-    _move->SetMoveSpeed(speed);
-    _move->SetAngularSpeed(angular_speed);
-    _move->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-    _move->Start();
+    move_com->SetMoveSpeed(speed);
+    move_com->SetAngularSpeed(angular_speed);
+    move_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
+    move_com->Start();
 }
 
 float my::Enemy::GetDistanceFromInitPosition(void) {
@@ -34,7 +36,8 @@ bool my::Enemy::HasTarget(void) {
 
 bool my::Enemy::TargetInAttackRange(void) {
     if (auto target = _target.lock()) {
-        if (_attack->GetCanAttackRangeSphere().CollisionPoint(target->GetPosition())) {
+        auto attack_com = super::GetComponent<my::AttackComponent>();
+        if (attack_com->GetCanAttackRangeSphere().CollisionPoint(target->GetPosition())) {
             return true;
         } // if
     } // if
@@ -55,6 +58,9 @@ bool my::Enemy::OverLooking(void) {
         _ai_state_machine.ChangeState("AICombatState");
         return true;
     } // if
+
+    auto idle_com = super::GetComponent<my::IdleComponent>();
+
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
 
@@ -64,9 +70,9 @@ bool my::Enemy::OverLooking(void) {
     float angular_speed = 4.0f;
 
     // _overlooking.Action();
-    _idle->SetAngularSpeed(angular_speed);
-    _idle->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-    _idle->Start();
+    idle_com->SetAngularSpeed(angular_speed);
+    idle_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
+    idle_com->Start();
     return false;
 }
 
@@ -82,7 +88,14 @@ bool my::Enemy::ChaseTarget(void) {
 }
 
 bool my::Enemy::Attack(void) {
-    _attack->Start();
+    auto move_com = super::GetComponent<my::MoveComponent>();
+
+    move_com->SetMoveSpeed(0.0f);
+    move_com->SetAngularSpeed(0.0f);
+
+    auto attack_com = super::GetComponent<my::AttackComponent>();
+
+    attack_com->Start();
     _ai_state_machine.ChangeState("AICombatState");
     return false;
 }
@@ -109,10 +122,7 @@ my::Enemy::Enemy() :
     super(),
     _init_position(),
     _target(),
-    _idle(),
-    _move(),
     _sight(),
-    _attack(),
     _thinking_time() {
     super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
 }
@@ -160,41 +170,14 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     _init_position = super::GetPosition();
     _thinking_time.Initialize(0.0f, true);
     // generate
-    _idle = std::make_shared<my::Idle>();
-    _move = std::make_shared<my::Move>();
+    //_idle = std::make_shared<my::Idle>();
+    //_move = std::make_shared<my::Move>();
     _sight = std::make_shared<my::SightRecognition>();
-    _attack = std::make_shared<my::Attack>();
     this->GenerateCollisionObject();
 
-    /*
-    // mesh motion
-    if (auto mesh = _mesh.lock()) {
-        _motion = mesh->CreateMotionController();
-    } // if
-    if (auto motion_names = super::_motion_names.lock();  !super::_motion_names.expired() && _motion) {
-        _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
-    } // if
-    for (int i = 0; i < _motion->GetMotionCount(); i++) {
-        std::cout << "_motion->GetMotion(i)->GetName()" << _motion->GetMotion(i)->GetName()->GetString() << "\n";
-    } // for
-    */
-
-    // components initialize
-    _idle->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    _move->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
     _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    _attack->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    _idle->SetVelocity(&_velocity);
-    _move->SetVelocity(&_velocity);
-    _attack->SetMotion(_motion);
 
     // state
-    /*
-    this->RegisterMotionState<state::EnemyMotionIdleState>(_motion_state_machine);
-    this->RegisterMotionState<state::EnemyMotionMoveState>(_motion_state_machine);
-    this->RegisterMotionState<state::EnemyMotionAttackState>(_motion_state_machine);
-    _motion_state_machine.ChangeState("EnemyMotionIdleState");
-    */
     this->RegisterAIState<state::AIPatrolState>(_ai_state_machine);
     this->RegisterAIState<state::AICombatState>(_ai_state_machine);
     _ai_state_machine.ChangeState("AIPatrolState");
@@ -210,25 +193,6 @@ bool my::Enemy::Input(void) {
 }
 
 bool my::Enemy::Update(float delta_time) {
-    //_motion->AddTimer(delta_time);
-
-    if (_idle->IsActive()) {
-        _idle->Update(delta_time);
-    } // if
-    if (_move->IsActive()) {
-        _move->Update(delta_time);
-    } // if
-    if (_attack->IsActive()) {
-        _attack->Update(delta_time);
-    } // if
-
-    _velocity.Update(delta_time);
-
-//    super::Update(delta_time);
-    //_motion_state_machine.Update(delta_time);
-
-    super::UpdateTransform(delta_time);
-
     my::Actor::Update(delta_time);
     return true;
 }
@@ -245,10 +209,6 @@ bool my::Enemy::ChangeToPatrolState(void) {
 
 bool my::Enemy::ChangeToCombatState(void) {
     _ai_state_machine.ChangeState("AICombatState");
-    return true;
-}
-bool my::Enemy::ChangeMotionState(const char* next) {
-    //_motion_state_machine.ChangeState(next);
     return true;
 }
 
@@ -273,10 +233,7 @@ void my::Enemy::RenderDebug(void) {
         auto ray = Mof::CRay3D(start, diff);
         this->RenderRay(ray, Mof::CVector3Utilities::Length(diff), def::color_rgba_u32::kYellow);
     } // if    
-    _attack->RenderDebug();
 
     _ai_state_machine.DebugRender();
-    //_motion_state_machine.DebugRender();
     ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _ai_state_machine.GetCurrentStateName());
-    //::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _motion_state_machine.GetCurrentStateName());
 }

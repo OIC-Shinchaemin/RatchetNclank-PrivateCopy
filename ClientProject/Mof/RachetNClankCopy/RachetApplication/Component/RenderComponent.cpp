@@ -26,6 +26,7 @@ bool my::RenderComponent::IsRender(void) const {
 
 bool my::RenderComponent::Initialize(void) {
     super::Initialize();
+    super::_active = true;
     return true;
 }
 

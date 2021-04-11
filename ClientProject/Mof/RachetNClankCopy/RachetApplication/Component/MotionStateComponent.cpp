@@ -28,6 +28,7 @@ std::string my::MotionStateComponent::GetType(void) const {
 
 bool my::MotionStateComponent::Initialize(void) {
     super::Initialize();
+    super::Start();
     this->RegisterMotionState<state::EnemyMotionIdleState>(_state_machine);
     this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
     this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
@@ -39,6 +40,13 @@ bool my::MotionStateComponent::Update(float delta_time) {
     _state_machine.Update(delta_time);
     return false;
 }
+
+#ifdef _DEBUG
+bool my::MotionStateComponent::Render(void) {
+    ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _state_machine.GetCurrentStateName());
+    return false;
+}
+#endif // _DEBUG
 
 bool my::MotionStateComponent::Release(void) {
     super::Release();

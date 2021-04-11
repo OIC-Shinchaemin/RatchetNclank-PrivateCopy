@@ -2,12 +2,18 @@
 
 
 state::EnemyMotionAttackState::EnemyMotionAttackState() :
-    super() {
+    super(),
+    _attack_com() {
     super::_motion_speed = 0.5f;
     super::_motion_loop = false;
 }
 
 state::EnemyMotionAttackState::~EnemyMotionAttackState() {
+}
+
+void state::EnemyMotionAttackState::SetEnemy(const std::shared_ptr<my::Enemy>& ptr) {
+    super::SetEnemy(ptr);
+    _attack_com = ptr->GetComponent<my::AttackComponent>();
 }
 
 const char* state::EnemyMotionAttackState::GetName(void) const {
@@ -22,7 +28,6 @@ void state::EnemyMotionAttackState::Enter(void) {
 }
 
 void state::EnemyMotionAttackState::Exit(void) {
-    if (auto attack = _attack.lock()) {
-        attack->Inactive();
+    if (auto attack_com = _attack_com.lock()) {
     } // if
 }

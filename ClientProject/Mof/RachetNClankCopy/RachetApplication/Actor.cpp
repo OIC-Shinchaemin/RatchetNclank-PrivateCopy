@@ -165,14 +165,18 @@ bool my::Actor::Input(void) {
 
 bool my::Actor::Update(float delta_time) {
     for (auto& com : _update_components) {
-        com->Update(delta_time);
+        if (com->IsActive()) {
+            com->Update(delta_time);
+        } // if
     } // for
     return true;
 }
 
 bool my::Actor::Render(void) {
     for (auto& com : _render_components) {
-        com->Render();
+        if (com->IsActive()) {
+            com->Render();
+        } // if
     } // for
     return true;
 }

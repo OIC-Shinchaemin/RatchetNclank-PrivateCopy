@@ -255,9 +255,6 @@
     <ClCompile Include="Velocity.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Attack.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
@@ -327,15 +324,6 @@
     <ClCompile Include="State\EnemyMotionAttackState.cpp">
       <Filter>Rachet\Source\State</Filter>
     </ClCompile>
-    <ClCompile Include="Move.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Action.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Factory\FactoryManager.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
@@ -373,6 +361,21 @@
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Component\MotionStateComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MoveComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\VelocityComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\TransformComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\IdleComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\AttackComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
   </ItemGroup>
@@ -575,9 +578,6 @@
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
-    <ClInclude Include="Attack.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="FunctionPointerContainer.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -653,15 +653,6 @@
     <ClInclude Include="State\EnemyMotionAttackState.h">
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
-    <ClInclude Include="Move.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Action.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Idle.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Factory\FactoryManager.h">
       <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
@@ -702,6 +693,21 @@
       <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Component\MotionStateComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MoveComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\VelocityComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\TransformComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\IdleComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\AttackComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
