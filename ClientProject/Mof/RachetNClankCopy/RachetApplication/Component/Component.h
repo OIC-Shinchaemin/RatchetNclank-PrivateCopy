@@ -22,6 +22,8 @@ protected:
     int _priority;
     //! リソース
     static std::weak_ptr<my::ResourceMgr> _resource_manager;
+    //! 有効
+    bool _active;
 public:
     /// <summary>
     /// セッター
@@ -65,6 +67,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     int GetPriority(void) const;
+    /// <summary>
+    /// 有効判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsActive(void) const;
     /// <summary>
     /// 入力判定
     /// </summary>

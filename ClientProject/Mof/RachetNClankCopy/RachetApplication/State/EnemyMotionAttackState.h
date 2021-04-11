@@ -4,10 +4,17 @@
 
 #include "EnemyMotionState.h"
 
+#include <memory>
+
+#include "../Component/AttackComponent.h"
+
 
 namespace state {
 class EnemyMotionAttackState : public state::EnemyMotionState {
     using super = state::EnemyMotionState;
+private:
+    //! 攻撃
+    std::weak_ptr<my::AttackComponent> _attack_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -17,6 +24,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~EnemyMotionAttackState();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    virtual void SetEnemy(const std::shared_ptr<my::Enemy>& ptr) override;
     /// <summary>
     /// ゲッター
     /// </summary>

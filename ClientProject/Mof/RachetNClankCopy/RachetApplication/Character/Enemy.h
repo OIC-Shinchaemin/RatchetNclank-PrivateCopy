@@ -10,10 +10,7 @@
 
 #include "My/Core/StateMachine.h"
 #include "../Timer.h"
-#include "../Idle.h"
-#include "../Move.h"
 #include "../SightRecognition.h"
-#include "../Attack.h"
 
 
 namespace my {
@@ -35,19 +32,9 @@ private:
     //! タイマー
     my::Timer _thinking_time;
 
-    //! 待機
-    std::shared_ptr<my::Idle> _idle;
-    //! 攻撃
-    std::shared_ptr<my::Move> _move;
     //! 視覚
     std::shared_ptr<my::SightRecognition> _sight;
-    //! 攻撃
-    std::shared_ptr<my::Attack>_attack;
-
-
-
-    //! 状態
-    //my::StateMachine _motion_state_machine;
+    
     //! 状態
     my::StateMachine _ai_state_machine;
 
@@ -156,12 +143,6 @@ public:
     
     bool ChangeToPatrolState(void);
     bool ChangeToCombatState(void);
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="next"></param>
-    /// <returns></returns>
-    bool ChangeMotionState(const char* next_state);
     /// <summary>
     /// デバッグ
     /// </summary>

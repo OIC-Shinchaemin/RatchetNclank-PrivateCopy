@@ -8,14 +8,10 @@
 
 #include <Mof.h>
 
-#include "My/Core/Observable.h"
-#include "My/Core/Observer.h"
 #include "../MotionNames.h"
+#include "../Character/Enemy.h"
 #include "../Component/MotionComponent.h"
 #include "../Component/MotionStateComponent.h"
-#include "../Character/Enemy.h"
-#include "../Velocity.h"
-#include "../Attack.h"
 
 
 namespace state {
@@ -46,11 +42,6 @@ protected:
     std::weak_ptr<my::MotionComponent> _motion_com;
     //! 状態
     std::weak_ptr<my::MotionStateComponent> _motion_state_com;
-
-    //! 速度
-    my::Velocity* _velocity;
-    //! 速度
-    std::weak_ptr<my::Attack> _attack;
     /// <summary>
     /// 変更
     /// </summary>
@@ -76,7 +67,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetEnemy(const std::shared_ptr<my::Enemy>& ptr);
+    virtual void SetEnemy(const std::shared_ptr<my::Enemy>& ptr);
 };
 }
 #endif // !STATE_ENEMY_MOTION_STATE_H
