@@ -2,7 +2,6 @@
 #define MY_QUICK_CHANGE_SYSTEM_H
 
 
-#include "../ResourceLocator.h"
 #include "My/Core/Observable.h"
 #include "MY/UI/CanvasLocator.h"
 
@@ -15,6 +14,8 @@
 #include <Mof.h>
 
 #include "WeaponSystem.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 
 
 namespace my {
@@ -62,7 +63,7 @@ public:
     /// <returns></returns>
     bool Render(Mof::CVector4 color);
 };
-class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem>, public my::ResourceLocator, public my::CanvasLocator, public Observable<Mof::CVector4> {
+class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem>, public my::CanvasLocator, public Observable<Mof::CVector4> {
     using Observable = my::Observable<Mof::CVector4>;
     enum class State {
         Enter,
@@ -89,7 +90,8 @@ private:
     std::unordered_map<std::string, std::string> _tex_names;
     //! 通知用
     my::Observable<const std::string&> _current;
-
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource;
     /// <summary>
     /// 開く
     /// </summary>
@@ -109,6 +111,11 @@ public:
     /// デストラクタ
     /// </summary>
     ~QuickChangeSystem();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

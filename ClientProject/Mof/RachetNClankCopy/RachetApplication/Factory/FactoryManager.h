@@ -3,13 +3,14 @@
 
 
 #include "../GameDefine.h"
-#include "../FunctionPointerContainer.h"
+#include "My/Core/FunctionPointerContainer.h"
 #include "Factory.h"
 #include "My/Core/State.h"
 #include "../State/AIState.h"
 #include "../State/EnemyMotionState.h"
 #include "ComponentFactory.h"
 #include "BuilderFactory.h"
+#include "ActorFactory.h"
 #include "BehaviourFactory.h"
 #include "BehaviourExecutorFactory.h"
 
@@ -19,8 +20,10 @@ class FactoryManager {
 private:
     //! コンポーネント
     my::ComponentFactory _component;
-    //! コンポーネント
+    //! ビルダー
     my::BuilderFactory _builder;
+    //! アクター
+    my::ActorFactory _actor;
     //! ファクトリー
     my::BehaviourFactory _behaviour_node;
     //! ファクトリー
@@ -52,6 +55,17 @@ public:
     /// <param name="path"></param>
     /// <returns></returns>
     std::shared_ptr<my::IBuilder> CreateBuilder(const char* path) const;
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Actor> CreateActor(const char* path, my::Actor::Param* param);
+    template<typename Derived>
+    std::shared_ptr<Derived> CreateActor(const char* path, my::Actor::Param* param) {
+        return _actor.Create<Derived>(path, param);
+    }
     /// <summary>
     /// 作成
     /// </summary>

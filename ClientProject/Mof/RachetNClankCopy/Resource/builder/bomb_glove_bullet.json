@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/bomb_glove_bullet/scene.mom"
+      }
+    }
+  ]
+}

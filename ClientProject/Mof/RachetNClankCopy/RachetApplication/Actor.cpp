@@ -5,7 +5,7 @@
 #include "Component/Component.h"
 #include "Factory/IBuilder.h"
 
-
+/*
 Mof::CVector3 my::Actor::UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity) {
     float sleep_threshold = 0.01f;
     if (sleep_threshold < velocity.Length()) {
@@ -38,6 +38,7 @@ void my::Actor::UpdateTransform(float delta_time) {
     auto pos = this->UpdatePosition(delta_time, this->GetPosition(), _velocity.GetVelocity());
     this->SetPosition(pos);
 }
+*/
 
 my::Actor::Actor() :
     _state(my::ActorState::Active),
@@ -47,8 +48,7 @@ my::Actor::Actor() :
     _input_components(),
     _update_components(),
     _render_components(),
-    _collision_objects(),
-    _velocity() {
+    _collision_objects() {
 }
 
 my::Actor::~Actor() {

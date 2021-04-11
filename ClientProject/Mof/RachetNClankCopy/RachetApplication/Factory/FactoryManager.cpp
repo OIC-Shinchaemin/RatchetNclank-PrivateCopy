@@ -4,6 +4,7 @@
 my::FactoryManager::FactoryManager() :
     _component(),
     _builder(&_component),
+    _actor(&_builder),
     _behaviour_node(),
     _behaviour_executor(&_behaviour_node) {
 }
@@ -22,6 +23,10 @@ std::shared_ptr<my::Component> my::FactoryManager::CreateComponent(const char* n
 
 std::shared_ptr<my::IBuilder> my::FactoryManager::CreateBuilder(const char* path) const {
     return _builder.Create(path);
+}
+
+std::shared_ptr<my::Actor> my::FactoryManager::CreateActor(const char* path, my::Actor::Param* param) {
+    return _actor.Create<my::Actor>(path, param);
 }
 
 behaviour::NodeExecutorPtr<std::shared_ptr<my::Enemy>> my::FactoryManager::CreateBehaviourExecutor(const char* key) {

@@ -47,11 +47,6 @@ void my::GameManager::OnNotify(const char* type, const std::shared_ptr<my::Actor
         _delete_actors.push_back(ptr);
     } // if
 }
-/*
-void my::GameManager::SetFactoryManager(const std::shared_ptr<my::FactoryManager>& ptr) {
-    this->_factory = ptr;
-}
-*/
 
 void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
     this->_resource = ptr;
@@ -59,11 +54,15 @@ void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>&
 
 bool my::GameManager::Initialize(void) {
     _stage.Initialize();
-
-    _game_money = std::make_unique<my::GameMoney>();
     _weapon_system = std::make_shared<my::WeaponSystem>();
+    _game_money = std::make_unique<my::GameMoney>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-    auto player = ut::MakeSharedWithRelease<Player>();
+    _game_money->SetResourceManager(_resource);
+    _quick_change->SetResourceManager(_resource);
+    
+    auto param = new my::Actor::Param();
+    auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
+
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
     auto save_data = my::SaveData();
@@ -73,19 +72,15 @@ bool my::GameManager::Initialize(void) {
     _weapon_system->Initialize(save_data, shared_from_this());
     _quick_change->Initialize({}, _weapon_system);
     // actor
-    auto param = new my::Actor::Param();
-    player->AddObserver(shared_from_this());
-    player->Construct(my::FactoryManager::Singleton().CreateBuilder("../Resource/builder/player.json"));
-    player->Initialize(param);
     param->transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
-    
-    auto temp = ut::MakeSharedWithRelease<my::Enemy>();
     param->name = "enemy";
-    temp->AddObserver(shared_from_this());
-    temp->Construct(my::FactoryManager::Singleton().CreateBuilder("../Resource/builder/enemy.json"));
-    temp->Initialize(param);
-    ut::SafeDelete(param);
+    auto temp = my::FactoryManager::Singleton().CreateActor<my::Enemy>("../Resource/builder/enemy.json", param);
 
+    temp->AddObserver(shared_from_this());
+    player->AddObserver(shared_from_this());
+
+
+    ut::SafeDelete(param);
     this->AddElement(player);
     this->AddElement(temp);
     return true;
@@ -132,7 +127,6 @@ bool my::GameManager::Render(void) {
 }
 
 bool my::GameManager::Release(void) {
-    //_character->Release();
     _stage.Release();
 
     //! save

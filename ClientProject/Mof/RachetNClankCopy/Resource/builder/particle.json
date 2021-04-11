@@ -1,31 +1,6 @@
 {
   "components": [
     {
-      "type": "MotionComponent",
-      "paramater": {
-        "priority": 0,
-        "path": "../Resource/motion_names/player.motion_names"
-      }
-    },
-    {
-      "type": "PlayerMoveComponent",
-      "paramater": {
-        "priority": 90
-      }
-    },
-    {
-      "type": "PlayerIdleComponent",
-      "paramater": {
-        "priority": 91
-      }
-    },
-    {
-      "type": "MotionStateComponent",
-      "paramater": {
-        "priority": 98
-      }
-    },
-    {
       "type": "VelocityComponent",
       "paramater": {
         "priority": 99

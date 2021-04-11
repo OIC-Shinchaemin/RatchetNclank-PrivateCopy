@@ -2,14 +2,13 @@
 #define MY_BULLET_H
 
 
-#include "../../ResourceLocator.h"
-
 #include "../../Actor.h"
-#include "../../Velocity.h"
+
+#include "My/Core/Timer.h"
 
 
 namespace my {
-class Bullet : public my::Actor, public my::ResourceLocator {
+class Bullet : public my::Actor {
     using super = my::Actor;
 public:
     struct Param : public super::Param {
@@ -29,12 +28,14 @@ public:
 protected:
     //! 速さ
     Mof::CVector3 _speed;
-    //! メッシュ
-    std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! 時間
-    float _exist_time;
-    //! 時間
-    float _exist_time_max;
+    my::Timer _exist_time;
+
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    void BulletUpdate(float delta_time);
 public:
     /// <summary>
     /// コンストラクタ
@@ -55,13 +56,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Render(void) override;
+    //virtual bool Render(void) override;
     /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Release(void) override;
+    //virtual bool Release(void) override;
     /// <summary>
     /// 発射
     /// </summary>
@@ -71,7 +72,7 @@ public:
     /// 描画
     /// </summary>
     /// <param name=""></param>
-    virtual void RenderDebug(void) override;
+    //virtual void RenderDebug(void) override;
 };
 }
 #endif // !MY_BULLET_H

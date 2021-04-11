@@ -3,12 +3,13 @@
 #include "../../Gamepad.h"
 #include "../Bullet/PyrocitorBullet.h"
 #include "../ParticleEffect.h"
+#include "../../Factory/FactoryManager.h"
 
 
 my::Pyrocitor::Pyrocitor() :
     super() {
     super::SetName("Pyrocitor");
-    super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/pyrocitor/scene.mom");
+    //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/pyrocitor/scene.mom");
     super::_shot_speed = 2.0f;
     super::_interval_max = 0.06f;
     super::_bullet_count = 240;
@@ -23,7 +24,6 @@ bool my::Pyrocitor::IsAction(void) const {
 
 bool my::Pyrocitor::Fire(const def::Transform& transform) {
     super::Fire(transform);
-    auto add = ut::MakeSharedWithRelease<my::PyrocitorBullet>();
     auto param = my::Bullet::Param();
 
     param.transform = transform;
@@ -31,6 +31,9 @@ bool my::Pyrocitor::Fire(const def::Transform& transform) {
     speed.RotateAround(math::vec3::kZero, param.transform.rotate);
     param.speed = speed;
     param.speed.y = _shot_speed * 0.2f;
+
+    auto add = my::FactoryManager::Singleton().CreateActor<my::PyrocitorBullet>("../Resource/builder/pyrocitor_bullet.json", &param);
+    //auto add = ut::MakeSharedWithRelease<my::PyrocitorBullet>();
 
     add->Start(param);
     Observable::Notify("AddRequest", add);

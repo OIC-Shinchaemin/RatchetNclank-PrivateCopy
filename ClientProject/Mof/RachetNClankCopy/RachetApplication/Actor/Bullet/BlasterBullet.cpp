@@ -1,21 +1,23 @@
 #include "BlasterBullet.h"
 
+#include "../../Component/VelocityComponent.h"
+
 
 my::BlasterBullet::BlasterBullet() :
     super() {
-    super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/blaster_bullet/scene.mom");
-    super::_exist_time_max = 3.0f;
+    _exist_time.Initialize(3.0f,false);
 }
 
 my::BlasterBullet::~BlasterBullet() {
 }
 
 bool my::BlasterBullet::Update(float delta_time) {
-    super::Update(delta_time);
+    super::BulletUpdate(delta_time);
 
-    _velocity.AddVelocityForce(_speed);
-    _velocity.Update(delta_time);
-    super::UpdateTransform(delta_time);
+    auto v = super::GetComponent<my::VelocityComponent>();
+    v->AddVelocityForce(_speed);
+
+    super::Update(delta_time);
     return true;
 }
 
@@ -26,5 +28,6 @@ bool my::BlasterBullet::Render(void) {
 
 void my::BlasterBullet::Start(const my::BlasterBullet::Param& in) {
     super::Start(in);
-    super::_velocity.SetGravity(0.0f);
+    auto v = super::GetComponent<my::VelocityComponent>();
+    v ->SetGravity(0.0f);
 }

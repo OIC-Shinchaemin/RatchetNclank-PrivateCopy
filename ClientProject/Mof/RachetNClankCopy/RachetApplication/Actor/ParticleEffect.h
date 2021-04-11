@@ -6,6 +6,8 @@
 
 #include <Mof.h>
 
+#include "My/Core/Timer.h"
+
 
 namespace my {
 class ParticleEffect : public my::Actor {
@@ -39,7 +41,7 @@ private:
     //! 色
     Mof::CVector4 _color;
     //! 時間
-    float _life_time;
+    my::Timer _life_time;
     //! デフォルトサイズ
     float _size;
     //! 更新パラメータ
