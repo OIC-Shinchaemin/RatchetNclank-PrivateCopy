@@ -69,6 +69,14 @@ public:
     /// <summary>
     /// ì¬
     /// </summary>
+    /// <param name="type"></param>
+    /// <param name="builder_key"></param>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Mechanical> CreateMechanicalWeapon(const char* type, const std::string& builder_key, my::Actor::Param* param);
+    /// <summary>
+    /// ì¬
+    /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
     behaviour::NodeExecutorPtr<std::shared_ptr<class Enemy> > CreateBehaviourExecutor(const char* key);

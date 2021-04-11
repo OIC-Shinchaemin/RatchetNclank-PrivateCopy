@@ -1,21 +1,17 @@
 #include "WeaponSystem.h"
 
 #include "../Game/GameManager.h"
-#include "../Actor/Weapon/OmniWrench.h"
-#include "../Actor/Weapon/BombGlove.h"
-#include "../Actor/Weapon/Pyrocitor.h"
-#include "../Actor/Weapon/Blaster.h"
+#include "../Factory/FactoryManager.h"
 
 
 my::WeaponSystem::WeaponSystem() :
     _weapons(),
-    _factory() ,
-    _subject(){
+    _subject(),
+    _builder_name_map() {
 
-    //_factory.Register<my::OmniWrench>("OmniWrench");
-    _factory.Register<my::BombGlove>("BombGlove");
-    _factory.Register<my::Pyrocitor>("Pyrocitor");
-    _factory.Register<my::Blaster>("Blaster");
+    _builder_name_map.emplace("BombGlove", "../Resource/builder/bomb_glove.json");
+    _builder_name_map.emplace("Pyrocitor", "../Resource/builder/pyrocitor.json");
+    _builder_name_map.emplace("Blaster", "../Resource/builder/blaster.json");
 }
 
 my::WeaponSystem::~WeaponSystem() {
@@ -37,8 +33,14 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
 }
 
 bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::GameManager>& observer) {
+
+    auto param = my::Actor::Param();
     for (const auto& key : in.GetAvailableMechanicalWeaponsAddress()) {
-        auto add = _factory.Create(key);
+        param.name = key;
+
+        auto add = my::FactoryManager::Singleton().CreateMechanicalWeapon(
+            key.c_str(), _builder_name_map.at(key), &param
+        );
         add->AddObserver(observer);
         _weapons.push_back(std::make_pair(key, add));
     } // for
@@ -46,7 +48,7 @@ bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Ga
 }
 
 std::shared_ptr<my::Mechanical> my::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
-    auto it =  std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
+    auto it = std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
         return pair.first == name;
     });
     if (it != _weapons.end()) {

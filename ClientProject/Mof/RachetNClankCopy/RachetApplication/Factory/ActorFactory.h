@@ -10,14 +10,19 @@
 #include "../Actor.h"
 #include "IBuilder.h"
 #include "BuilderFactory.h"
+#include "Factory.h"
+#include "../Actor/Weapon/Mechanical.h"
 
 
 namespace my {
 class ActorFactory {
 private:
+    //! ファクトリー
     my::BuilderFactory* _builder_factory;
     //! 保持しているBulder
     std::map<std::string, std::shared_ptr<my::IBuilder>> _builders;
+    //! Mechanical
+    my::Factory<my::Mechanical> _mechanical_factory;
 public:
     /// <summary>
     /// コンストラクタ
@@ -65,6 +70,14 @@ public:
         ptr->Initialize(param);
         return ptr;
     }
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="builder_key"></param>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Mechanical> CreateMechanicalWeapon(const char* type,const std::string& builder_key, my::Actor::Param* param);
     /// <summary>
     /// 解放
     /// </summary>

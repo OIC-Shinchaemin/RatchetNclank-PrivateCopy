@@ -16,8 +16,8 @@ bool my::Mechanical::IsAction(void) const {
 }
 
 bool my::Mechanical::Update(float delta_time) {
-    super::Update(delta_time);
     _interval -= delta_time;
+    super::Update(delta_time);
     return true;
 }
 

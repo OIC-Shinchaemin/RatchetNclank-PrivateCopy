@@ -2,6 +2,7 @@
 
 #include "My/Core/Utility.h"
 
+#include "../Component/SightRecognitionComponent.h"
 #include "../Component/MotionComponent.h"
 #include "../Component/PlayerIdleComponent.h"
 #include "../Component/PlayerMoveComponent.h"
@@ -16,6 +17,7 @@
 
 my::ComponentFactory::ComponentFactory() :
     _component_creators() {
+    my::ComponentFactory::AddComponentCreator<my::SightRecognitionComponent>();
     my::ComponentFactory::AddComponentCreator<my::MotionComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerIdleComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMoveComponent>();

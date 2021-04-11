@@ -8,6 +8,7 @@
 #include "../../Component/EnemyIdleComponent.h"
 #include "../../Component/EnemyMoveComponent.h"
 #include "../../Component/EnemyAttackComponent.h"
+#include "../../Component/SightRecognitionComponent.h"
 
 
 void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
@@ -107,6 +108,8 @@ void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
 }
 
 void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
+    auto sight = super::GetComponent<my::SightRecognitionComponent>();
+
     auto ray = Mof::CRay3D(start);
     auto rotate = super::GetRotate();
     rotate.y += math::ToRadian(degree_y);
@@ -115,14 +118,13 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
     mat.RotationZXY(rotate);
     ray.Direction = -math::vec3::kUnitZ * mat;
 
-    this->RenderRay(ray, _sight->GetRange(), def::color_rgba_u32::kGreen);
+    this->RenderRay(ray, sight->GetRange(), def::color_rgba_u32::kGreen);
 }
 
 my::Enemy::Enemy() :
     super(),
     _init_position(),
     _target(),
-    _sight(),
     _thinking_time() {
     //super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
 }
@@ -144,9 +146,10 @@ void my::Enemy::GenerateCollisionObject(void) {
         this->End(); return true;
     }));
 
+    auto sight = super::GetComponent<my::SightRecognitionComponent>();
     auto sight_coll = std::make_shared<my::EnemySightCollisionObject>();
     sight_coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    sight_coll->SetSight(_sight);
+    sight_coll->SetSight(sight);
     super::AddCollisionObject(sight_coll);
     sight_coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
                                  "PlayerCollisionObject",
@@ -172,10 +175,10 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     // generate
     //_idle = std::make_shared<my::Idle>();
     //_move = std::make_shared<my::Move>();
-    _sight = std::make_shared<my::SightRecognition>();
+//    _sight = std::make_shared<my::SightRecognitionComponent>();
     this->GenerateCollisionObject();
 
-    _sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
+    //_sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
 
     // state
     this->RegisterAIState<state::AIPatrolState>(_ai_state_machine);

@@ -29,6 +29,10 @@ std::shared_ptr<my::Actor> my::FactoryManager::CreateActor(const char* path, my:
     return _actor.Create<my::Actor>(path, param);
 }
 
+std::shared_ptr<my::Mechanical> my::FactoryManager::CreateMechanicalWeapon(const char* type, const std::string& builder_key, my::Actor::Param* param) {
+    return _actor.CreateMechanicalWeapon(type, builder_key, param);
+}
+
 behaviour::NodeExecutorPtr<std::shared_ptr<my::Enemy>> my::FactoryManager::CreateBehaviourExecutor(const char* key) {
     return _behaviour_executor.Create(key);
 }

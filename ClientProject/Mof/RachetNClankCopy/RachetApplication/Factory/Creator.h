@@ -4,6 +4,8 @@
 
 #include <memory>
 
+#include "My/Core/Utility.h"
+
 
 namespace my {
 template <typename T>
@@ -14,9 +16,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual  std::shared_ptr<T> Create(void) const {
-        return std::make_shared<T>();
-    }
+    virtual std::shared_ptr<T> Create(void) const = 0;
 };
 template <typename Base, typename Derived>
 class Creator : public my::ICreator<Base> {
@@ -26,8 +26,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<Base> Create(void) const {
-        return std::make_shared<Derived>();
+    virtual std::shared_ptr<Base> Create(void) const override {
+        return ut::MakeSharedWithRelease<Derived>();
     }
 };
 }

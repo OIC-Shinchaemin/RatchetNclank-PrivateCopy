@@ -24,7 +24,7 @@ public:
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    std::shared_ptr<T> Create(const std::string& key) {
+    std::shared_ptr<T> Create(const std::string& key){
         return _products[key]->Create();
     }
 };

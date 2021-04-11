@@ -1,6 +1,12 @@
 {
   "components": [
     {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "MotionComponent",
       "paramater": {
         "priority": 0,

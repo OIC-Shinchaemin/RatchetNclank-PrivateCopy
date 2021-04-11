@@ -10,7 +10,6 @@
 
 #include "My/Core/StateMachine.h"
 #include "My/Core/Timer.h"
-#include "../../SightRecognition.h"
 
 
 namespace my {
@@ -33,7 +32,7 @@ private:
     my::Timer _thinking_time;
 
     //! ‹Šo
-    std::shared_ptr<my::SightRecognition> _sight;
+    //std::shared_ptr<my::SightRecognitionComponent> _sight;
     
     //! ó‘Ô
     my::StateMachine _ai_state_machine;

@@ -222,9 +222,6 @@
     <ClCompile Include="UI\QuickChangeMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SightRecognition.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Game\GameWorld.cpp">
       <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
@@ -396,6 +393,9 @@
     <ClCompile Include="..\include\My\Core\Timer.cpp">
       <Filter>Rachet\Base\Core\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Component\SightRecognitionComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -502,9 +502,6 @@
     </ClInclude>
     <ClInclude Include="..\include\My\Core\AbstructContainer.h">
       <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="SightRecognition.h">
-      <Filter>Rachet\Header</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameWorld.h">
       <Filter>Rachet\Header\Game</Filter>
@@ -739,6 +736,9 @@
     </ClInclude>
     <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h">
       <Filter>Rachet\Base\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SightRecognitionComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

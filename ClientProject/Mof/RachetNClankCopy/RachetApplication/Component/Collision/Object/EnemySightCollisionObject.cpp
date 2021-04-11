@@ -20,7 +20,7 @@ std::any my::EnemySightCollisionObject::GetOwner(void) const {
     return this->_owner;
 }
 
-void my::EnemySightCollisionObject::SetSight(const std::shared_ptr<my::SightRecognition>& ptr) {
+void my::EnemySightCollisionObject::SetSight(const std::shared_ptr<my::SightRecognitionComponent>& ptr) {
     this->_sight_recognition = ptr;
 }
 
