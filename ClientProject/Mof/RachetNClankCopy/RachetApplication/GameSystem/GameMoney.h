@@ -7,11 +7,12 @@
 
 #include <Mof.h>
 
-#include "../ResourceLocator.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 
 
 namespace my {
-class GameMoney : public my::ResourceLocator {
+class GameMoney {
 private:
 //! 名前
     std::string _name;
@@ -31,6 +32,8 @@ private:
     Mof::CFont _font;
     //! フォント
     std::size_t _font_size;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -40,6 +43,11 @@ public:
     /// デストラクタ
     /// </summary>
     ~GameMoney();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

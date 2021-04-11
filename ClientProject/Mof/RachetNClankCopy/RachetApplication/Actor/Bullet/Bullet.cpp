@@ -1,25 +1,26 @@
 #include "Bullet.h"
 
 
+void my::Bullet::BulletUpdate(float delta_time) {
+    if (_exist_time.Tick(delta_time)) {
+        super::End();
+    } // if
+}
+
 my::Bullet::Bullet() :
     super(),
     _speed(),
-    _mesh(),
-    _exist_time(0.0f),
-    _exist_time_max(0.0f) {
+    _exist_time() {
 }
 
 my::Bullet::~Bullet() {
 }
 
 bool my::Bullet::Update(float delta_time) {
-    _exist_time += delta_time;
-    if (_exist_time_max <= _exist_time) {
-        super::End();
-    } // if
+    super::Update(delta_time);
     return true;
 }
-
+/*
 bool my::Bullet::Render(void) {
     if (auto r = _mesh.lock()) {
         Mof::CMatrix44 scale, rotate, translate;
@@ -36,11 +37,9 @@ bool my::Bullet::Release(void) {
     super::Release();
     return true;
 }
+*/
 
 void my::Bullet::Start(const my::Bullet::Param& in) {
     super::Initialize((super::Param*)(&in));
     _speed = in.speed;
-}
-
-void my::Bullet::RenderDebug(void) {
 }

@@ -9,7 +9,8 @@ my::VelocityComponent::VelocityComponent(int priority) :
     _angular_velocity_force(),
     _gravity(0.25f),
     _drag(0.8f),
-    _angular_drag(0.8f) {
+    _angular_drag(0.8f),
+    _use_gravity(false) {
 }
 
 my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
@@ -20,7 +21,8 @@ my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
     _angular_velocity_force(obj._angular_velocity_force),
     _gravity(obj._gravity),
     _drag(obj._drag),
-    _angular_drag(obj._angular_drag) {
+    _angular_drag(obj._angular_drag),
+    _use_gravity(obj._use_gravity) {
 }
 
 my::VelocityComponent::~VelocityComponent() {
@@ -36,6 +38,10 @@ void my::VelocityComponent::SetGravity(float value) {
 
 void my::VelocityComponent::SetDrag(float value) {
     this->_drag = value;
+}
+
+void my::VelocityComponent::SetUseGravity(bool use) {
+    this->_use_gravity = use;
 }
 
 std::string my::VelocityComponent::GetType(void) const {
@@ -72,7 +78,9 @@ bool my::VelocityComponent::Update(float delta_time) {
     _angular_velocity += _angular_velocity_force;
     _velocity += _velocity_force;
 
-    //_velocity.y -= _gravity;
+    if (_use_gravity) {
+        _velocity.y -= _gravity;
+    } // if
     _velocity *= _drag;
     _angular_velocity *= _angular_drag;
 

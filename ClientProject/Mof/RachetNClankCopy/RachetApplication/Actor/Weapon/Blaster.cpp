@@ -3,12 +3,13 @@
 #include "../../Gamepad.h"
 #include "../../Actor/Bullet/BlasterBullet.h"
 #include "../ParticleEffect.h"
+#include "../../Factory/FactoryManager.h"
 
 
 my::Blaster::Blaster() :
     super() {
     super::SetName("Blaster");
-    super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/blaster/scene.mom");
+    //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/blaster/scene.mom");
     super::_shot_speed = 5.0f;
     super::_interval_max = 0.06f;
     super::_bullet_count = 200;
@@ -23,7 +24,6 @@ bool my::Blaster::IsAction(void) const {
 
 bool my::Blaster::Fire(const def::Transform& transform) {
     super::Fire(transform);
-    auto add = ut::MakeSharedWithRelease<my::BlasterBullet>();
     auto param = my::Bullet::Param();
     
     param.transform = transform;
@@ -31,6 +31,8 @@ bool my::Blaster::Fire(const def::Transform& transform) {
     speed.RotateAround(math::vec3::kZero, param.transform.rotate);
     param.speed = speed;
     
+    auto add = my::FactoryManager::Singleton().CreateActor<my::BlasterBullet>("../Resource/builder/blaster_bullet.json", &param);
+
     add->Start(param);
     Observable::Notify("AddRequest", add);
 

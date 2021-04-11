@@ -1,5 +1,6 @@
 #include "QuickChangeSystem.h"
 
+#include "My/Core/Math.h"
 #include "My/Core/Utility.h"
 #include "../Gamepad.h"
 #include "../UI/QuickChangeMenu.h"
@@ -28,7 +29,8 @@ my::QuickChangeSystem::QuickChangeSystem() :
     _alpha(0.08f),
     _distance(128.0f),
     _angles(8),
-    _current_angle() {
+    _current_angle(),
+_resource(){
 
     int n = 0;
     std::generate(_angles.begin(), _angles.end(), [&n]() {
@@ -68,6 +70,10 @@ my::QuickChangeSystem::QuickChangeSystem() :
 my::QuickChangeSystem::~QuickChangeSystem() {
 }
 
+void my::QuickChangeSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+    this->_resource = ptr;
+}
+
 Mof::CVector4 my::QuickChangeSystem::GetColor(void) const {
     return this->_color;
 }
@@ -77,13 +83,16 @@ void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<my::Observer
 }
 
 bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
+    _ASSERT_EXPR(!_resource.expired(), L"ñ≥å¯Ç»É|ÉCÉìÉ^Çï€éùÇµÇƒÇ¢Ç‹Ç∑");
+
     std::vector<std::string> work;
     weapon_system->CreateAvailableMechanicalWeaponNames(work);
 
     int i = 0;
     for (auto& name : work) {
         auto& path = _tex_names.at(name);
-        auto tex = my::ResourceLocator::GetResource<Mof::CTexture>(path.c_str());
+        
+        auto tex = _resource.lock()->Get<std::shared_ptr<Mof::CTexture> >(path.c_str());
 
         auto& temp = _items.at(i * 45);
 

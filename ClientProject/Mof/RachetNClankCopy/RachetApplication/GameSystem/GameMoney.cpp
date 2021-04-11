@@ -6,12 +6,16 @@
 my::GameMoney::GameMoney() :
     _position(950.0f, 20.0f),
     _color(1.0f, 1.0f, 1.0f, 1.0f),
-    _font_size(24.0f) {
-    _texture = my::ResourceLocator::GetResource<Mof::CTexture>("../Resource/texture/money/money.png");
+    _font_size(24.0f),
+    _resource(){
 }
 
 my::GameMoney::~GameMoney() {
     _font.Release();
+}
+
+void my::GameMoney::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+    this->_resource = ptr;
 }
 
 std::uint32_t my::GameMoney::GetValue(void) const {
@@ -19,8 +23,11 @@ std::uint32_t my::GameMoney::GetValue(void) const {
 }
 
 bool my::GameMoney::Initialize(uint32_t value) {
+    _ASSERT_EXPR(!_resource.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     _font.Create(_font_size, "");
     _value = value;
+    _texture = _resource.lock()->Get<std::shared_ptr<Mof::CTexture> >("../Resource/texture/money/money.png");
+
     return true;
 }
 

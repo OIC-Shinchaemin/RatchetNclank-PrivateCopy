@@ -25,9 +25,8 @@ private:
     float _drag;
     //! 減速係数
     float _angular_drag;
-
-    //virtual void InputMoveVelocity(float speed);
-    //virtual void InputMoveAngularVelocity(float angle, float speed);
+    //! 影響判定
+    bool _use_gravity;
 public:
     /// <summary>
     /// コンストラクタ
@@ -58,6 +57,11 @@ public:
     /// </summary>
     /// <param name="value"></param>
     void SetDrag(float value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="use"></param>
+    void SetUseGravity(bool use);
     /// <summary>
     /// ゲッター
     /// </summary>

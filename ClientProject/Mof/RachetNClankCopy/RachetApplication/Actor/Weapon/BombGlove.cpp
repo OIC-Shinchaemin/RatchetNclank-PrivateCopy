@@ -3,12 +3,13 @@
 #include "../../Gamepad.h"
 #include "../../Actor/Bullet/BombGloveBullet.h"
 #include "../../Actor/ParticleEffect.h"
+#include "../../Factory/FactoryManager.h"
 
 
 my::BombGlove::BombGlove() :
     super() {
     super::SetName("BombGlove");
-    super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/bomb_glove/scene.mom");
+    //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/bomb_glove/scene.mom");
     super::_shot_speed = 15.0f;
     super::_interval_max = 0.9f;
     super::_bullet_count = 40;
@@ -23,7 +24,6 @@ bool my::BombGlove::IsAction(void) const {
 
 bool my::BombGlove::Fire(const def::Transform& transform) {
     super::Fire(transform);
-    auto add = ut::MakeSharedWithRelease<my::BombGloveBullet>();
     auto param = my::Bullet::Param();
 
     param.transform = transform;
@@ -31,6 +31,8 @@ bool my::BombGlove::Fire(const def::Transform& transform) {
     speed.RotateAround(math::vec3::kZero, param.transform.rotate);
     param.speed = speed;
     param.speed.y = super::_shot_speed * 0.4f;
+
+    auto add = my::FactoryManager::Singleton().CreateActor<my::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);
 
     add->Start(param);
     Observable::Notify("AddRequest", add);

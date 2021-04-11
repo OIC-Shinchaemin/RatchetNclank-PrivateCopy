@@ -3,7 +3,6 @@
 
 
 #include "../../Actor.h"
-#include "../../ResourceLocator.h"
 
 #include <memory>
 
@@ -11,10 +10,9 @@
 
 
 namespace my {
-class Weapon : public my::Actor , public my::ResourceLocator{
+class Weapon : public my::Actor {
     using super = my::Actor;
 protected:
-    //! ÉÅÉbÉVÉÖ
     std::weak_ptr<Mof::CMeshContainer> _mesh;
 public:
     /// <summary>

@@ -198,9 +198,6 @@
     <ClCompile Include="Game\Renderer.cpp">
       <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceLocator.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Gamepad.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
@@ -230,9 +227,6 @@
     </ClCompile>
     <ClCompile Include="Game\GameWorld.cpp">
       <Filter>Rachet\Source\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Velocity.cpp">
-      <Filter>Rachet\Source</Filter>
     </ClCompile>
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
@@ -266,9 +260,6 @@
     </ClCompile>
     <ClCompile Include="Factory\BehaviourFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Rachet\Source</Filter>
     </ClCompile>
     <ClCompile Include="Component\Component.cpp">
       <Filter>Rachet\Source\Component</Filter>
@@ -399,6 +390,12 @@
     <ClCompile Include="Component\Collision\Object\PlayerCollisionObject.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Factory\ActorFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\Timer.cpp">
+      <Filter>Rachet\Base\Core\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -473,9 +470,6 @@
     <ClInclude Include="Factory\Creator.h">
       <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceLocator.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -514,9 +508,6 @@
     </ClInclude>
     <ClInclude Include="Game\GameWorld.h">
       <Filter>Rachet\Header\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Velocity.h">
-      <Filter>Rachet\Header</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Node\Node.h">
       <Filter>Rachet\Header\Behaviour\Node</Filter>
@@ -572,9 +563,6 @@
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
-    <ClInclude Include="FunctionPointerContainer.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Factory\BehaviourExecutorFactory.h">
       <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
@@ -610,9 +598,6 @@
     </ClInclude>
     <ClInclude Include="Factory\BehaviourFactory.h">
       <Filter>Rachet\Header\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Rachet\Header</Filter>
     </ClInclude>
     <ClInclude Include="Component\Component.h">
       <Filter>Rachet\Header\Component</Filter>
@@ -746,6 +731,15 @@
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
+    <ClInclude Include="Factory\ActorFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Timer.h">
+      <Filter>Rachet\Base\Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h">
+      <Filter>Rachet\Base\Core\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -774,10 +768,25 @@
     <None Include="..\Resource\builder\player.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
-    <None Include="..\Resource\builder\bullet.json">
+    <None Include="..\Resource\builder\particle.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
-    <None Include="..\Resource\builder\particle.json">
+    <None Include="..\Resource\builder\pyrocitor_bullet.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bomb_glove_bullet.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\blaster_bullet.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\pyrocitor.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\blaster.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bomb_glove.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
   </ItemGroup>

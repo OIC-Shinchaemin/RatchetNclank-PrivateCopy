@@ -17,7 +17,7 @@
 namespace my {
 class GameManager : public std::enable_shared_from_this<my::GameManager>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
 private:
-    //! ファクトリー
+    //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! 追加
     std::vector<std::shared_ptr<my::Actor>> _created_actors;

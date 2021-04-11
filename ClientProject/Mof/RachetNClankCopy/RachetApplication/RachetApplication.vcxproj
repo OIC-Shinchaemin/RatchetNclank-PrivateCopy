@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="..\include\My\Core\State.cpp" />
     <ClCompile Include="..\include\My\Core\StateMachine.cpp" />
+    <ClCompile Include="..\include\My\Core\Timer.cpp" />
     <ClCompile Include="..\include\My\UI\CanvasLocator.cpp" />
     <ClCompile Include="..\include\My\UI\UICanvas.cpp" />
     <ClCompile Include="..\include\My\UI\UIItem.cpp" />
@@ -193,6 +194,7 @@
     <ClCompile Include="Component\UpdateComponent.cpp" />
     <ClCompile Include="Component\VelocityComponent.cpp" />
     <ClCompile Include="Factory\ActorBuilder.cpp" />
+    <ClCompile Include="Factory\ActorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
     <ClCompile Include="Factory\BuilderFactory.cpp" />
@@ -210,7 +212,6 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
-    <ClCompile Include="ResourceLocator.cpp" />
     <ClCompile Include="SightRecognition.cpp" />
     <ClCompile Include="State\AICombatState.cpp" />
     <ClCompile Include="State\AIPatrolState.cpp" />
@@ -222,14 +223,13 @@
     <ClCompile Include="State\PlayerMotionIdleState.cpp" />
     <ClCompile Include="State\PlayerMotionMoveState.cpp" />
     <ClCompile Include="State\PlayerMotionState.cpp" />
-    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
-    <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\AbstructContainer.h" />
     <ClInclude Include="..\include\My\Core\Define.h" />
+    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h" />
     <ClInclude Include="..\include\My\Core\Header.h" />
     <ClInclude Include="..\include\My\Core\Math.h" />
     <ClInclude Include="..\include\My\Core\Observable.h" />
@@ -237,6 +237,7 @@
     <ClInclude Include="..\include\My\Core\ServiceLocator.h" />
     <ClInclude Include="..\include\My\Core\State.h" />
     <ClInclude Include="..\include\My\Core\StateMachine.h" />
+    <ClInclude Include="..\include\My\Core\Timer.h" />
     <ClInclude Include="..\include\My\Core\Trait.h" />
     <ClInclude Include="..\include\My\Core\Utility.h" />
     <ClInclude Include="..\include\My\UI\CanvasLocator.h" />
@@ -303,6 +304,7 @@
     <ClInclude Include="Component\UpdateComponent.h" />
     <ClInclude Include="Component\VelocityComponent.h" />
     <ClInclude Include="Factory\ActorBuilder.h" />
+    <ClInclude Include="Factory\ActorFactory.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
     <ClInclude Include="Factory\BuilderFactory.h" />
@@ -312,7 +314,6 @@
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />
     <ClInclude Include="Factory\IBuilder.h" />
-    <ClInclude Include="FunctionPointerContainer.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Gamepad.h" />
@@ -327,7 +328,6 @@
     <ClInclude Include="Game\Renderer.h" />
     <ClInclude Include="MotionNames.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ResourceLocator.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SightRecognition.h" />
     <ClInclude Include="State\AICombatState.h" />
@@ -340,9 +340,7 @@
     <ClInclude Include="State\PlayerMotionIdleState.h" />
     <ClInclude Include="State\PlayerMotionMoveState.h" />
     <ClInclude Include="State\PlayerMotionState.h" />
-    <ClInclude Include="Timer.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
-    <ClInclude Include="Velocity.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt" />
@@ -350,10 +348,15 @@
   <ItemGroup>
     <None Include="..\Resource\behaviour\combat.json" />
     <None Include="..\Resource\behaviour\patrol.json" />
-    <None Include="..\Resource\builder\bullet.json" />
+    <None Include="..\Resource\builder\blaster.json" />
+    <None Include="..\Resource\builder\blaster_bullet.json" />
+    <None Include="..\Resource\builder\bomb_glove.json" />
+    <None Include="..\Resource\builder\bomb_glove_bullet.json" />
     <None Include="..\Resource\builder\enemy.json" />
     <None Include="..\Resource\builder\particle.json" />
     <None Include="..\Resource\builder\player.json" />
+    <None Include="..\Resource\builder\pyrocitor.json" />
+    <None Include="..\Resource\builder\pyrocitor_bullet.json" />
     <None Include="..\Resource\motion_names\enemy.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
