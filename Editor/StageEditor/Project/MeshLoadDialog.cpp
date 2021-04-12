@@ -35,9 +35,9 @@ bool MeshLoadDialog::Action(std::any any) {
         std::string  file_name = FileDialog::GetFileName(path) + FileDialog::GetExt(path);
         *out = FileDialog::ChangeRelativePath(path, resource_path->c_str());
         // “o˜^ƒf[ƒ^‚Ìì¬
-        std::pair<std::string, std::string> data(*out, path);
+        //std::pair<std::string, std::string> data(*out, path);
         // ƒƒbƒVƒ…‚Ì“Ç‚İ‚İA“o˜^‚ğ‚·‚é
-        ActionManager::GetInstance().Action("MeshLoad", data);
+        //ActionManager::GetInstance().Action("MeshLoad", data);
         return true;
     }
     return false;

@@ -34,6 +34,11 @@
 #include    "FileDialog.h"
 #include    "ToolIcon.h"
 
+//COMMAND
+#include    "CommandManager.h"
+#include    "ObjectPlantCommand.h"
+#include    "CommandLogWindow.h"
+
 //Singleton
 GuiWindowRect             gui_window_rect;
 ActionManager             action_manager;
@@ -45,6 +50,10 @@ ParameterMap<std::string> parameter_map_string;
 ParameterMap<ObjectList>  parameter_map_objectlist;
 ParameterMap<MeshList>    parameter_map_meshlist;
 ToolIcon                  tool_icon;
+CommandManager            command_manager;
+MeshWindow                mesh_window;
+ObjectWindow              object_window;
+CommandLogWindow          command_log_window;
 
 EditorParameter           editor_parameter;
 
@@ -56,8 +65,6 @@ MouseMoveCameraController camera_controller;
 CCamera                   mesh_view_camera;
 CTexture                  mesh_view_target;
 MeshViewCameraController  mesh_view_controller;
-MeshWindow                mesh_window;
-ObjectWindow              object_window;
 
 
 /*************************************************************************//*!
@@ -141,6 +148,16 @@ MofBool CGameApp::Update(void) {
         }
     }
 
+    // コマンドマネージャー
+    {
+        if (g_pInput->IsKeyHold(MOFKEY_LCONTROL) && g_pInput->IsKeyPush(MOFKEY_Z)) {
+            command_manager.Undo();
+        }
+        if (g_pInput->IsKeyHold(MOFKEY_LCONTROL) && g_pInput->IsKeyPush(MOFKEY_Y)) {
+            command_manager.Redo();
+        }
+    }
+
     bool isUseGui = GuiWindowRect::GetInstance().IsGuiItemUse();
     if(!isUseGui) {
         // カメラ制御
@@ -165,21 +182,25 @@ MofBool CGameApp::Update(void) {
         object_window.Show();
     }
 
+    if (editor_parameter.IsShowCommandLogWindow()) {
+        command_log_window.Show();
+    }
+
     MeshData* mesh_pointer = mesh_window.GetSelectMeshData();
     if (mesh_pointer && !isUseGui && g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
         ObjectData data;
-        data.position     = MouseUtilities::GetWorldPos();
-        data.mesh_path    = MeshAsset::GetKey(mesh_pointer->second.lock());
-        data.name         = mesh_pointer->first;
-        data.mesh_pointer = mesh_pointer->second.lock();
-        object_window.Add(data);
+        data.position       = MouseUtilities::GetWorldPos();
+        data.mesh_path      = MeshAsset::GetKey(mesh_pointer->second.lock());
+        data.name           = mesh_pointer->first;
+        data.mesh_pointer   = mesh_pointer->second.lock();
+        ICommandPtr command = std::make_shared<ObjectPlantCommand>(&data);
+        command_manager.Register(command);
     }
 
     if (editor_parameter.IsShowMouseInfo())  { DebugGui::ShowMouseInfoWindow(); }
     if (editor_parameter.IsShowIsItemInfo()) { DebugGui::ShowIsItemInfoWindow(); }
     if (editor_parameter.IsShowRectInfo())   { DebugGui::ShowRectInfoWindow(); }
     if (editor_parameter.IsShowDemoWindow()) { ImGui::ShowDemoWindow(parameter_map_bool.Get(WindowKeyName::DebugDemoWindow)); }
-    
 
     return TRUE;
 }
@@ -284,11 +305,9 @@ MofBool CGameApp::Render(void) {
 		mesh_window.Show();
 	}
 
-    ImGui::Begin("camera"); {
-        ImGui::Text("camera : ");
-        ImGui::Text("pos : %f, %f, %f,", main_camera.GetViewPosition().x, main_camera.GetViewPosition().y, main_camera.GetViewPosition().z);
-        ImGui::Text("tar : %f, %f, %f,", main_camera.GetTargetPosition().x, main_camera.GetTargetPosition().y, main_camera.GetTargetPosition().z);
-        ImGui::Text("vec : %f, %f, %f,", main_camera.GetViewUp().x, main_camera.GetViewUp().y, main_camera.GetViewUp().z);
+    ImGui::Begin("mouse"); {
+        Vector3 pos = MouseUtilities::GetWorldPos();
+        ImGui::Text("vec : %f, %f, %f,", pos.x, pos.y, pos.z);
     }
     ImGui::End();
 

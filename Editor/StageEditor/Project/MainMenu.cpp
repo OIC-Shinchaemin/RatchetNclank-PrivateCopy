@@ -57,28 +57,30 @@ void MainMenu::Edit(void) {
 }
 
 void MainMenu::View(void) {
-    bool* show_mouseinfo_pointer    = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugMouseInfo);
-    bool* show_isiteminfo_pointer   = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugIsItemInfo);
-    bool* show_rectinfo_pointer     = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugWindowRectInfo);
-    bool* show_demowindow_pointer   = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugDemoWindow);
-    bool* show_meshwindow_pointer   = ParameterMap<bool>::GetInstance().Get(WindowKeyName::MeshWindow);
-    bool* show_objectwindow_pointer = ParameterMap<bool>::GetInstance().Get(WindowKeyName::ObjectWindow);
-    bool* show_toolmenu_pointer     = ParameterMap<bool>::GetInstance().Get(WindowKeyName::ToolMenu);
-    bool* show_grid_pointer         = ParameterMap<bool>::GetInstance().Get("show_grid");
+    bool* show_mouseinfo_pointer        = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugMouseInfo);
+    bool* show_isiteminfo_pointer       = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugIsItemInfo);
+    bool* show_rectinfo_pointer         = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugWindowRectInfo);
+    bool* show_demowindow_pointer       = ParameterMap<bool>::GetInstance().Get(WindowKeyName::DebugDemoWindow);
+    bool* show_meshwindow_pointer       = ParameterMap<bool>::GetInstance().Get(WindowKeyName::MeshWindow);
+    bool* show_objectwindow_pointer     = ParameterMap<bool>::GetInstance().Get(WindowKeyName::ObjectWindow);
+    bool* show_commandlogwindow_pointer = ParameterMap<bool>::GetInstance().Get(WindowKeyName::CommandLogWindow);
+    bool* show_toolmenu_pointer         = ParameterMap<bool>::GetInstance().Get(WindowKeyName::ToolMenu);
+    bool* show_grid_pointer             = ParameterMap<bool>::GetInstance().Get("show_grid");
     std::function<void(std::string, bool*)> toggle_bool_item = [](std::string str, bool* flag) {
         if (ImGui::MenuItem(str.c_str(), NULL, *flag)) {
             *flag = !(*flag);
         }
     };
-    toggle_bool_item("mouse info"   , show_mouseinfo_pointer   );
-    toggle_bool_item("isitem info"  , show_isiteminfo_pointer  );
-    toggle_bool_item("rect info"    , show_rectinfo_pointer    );
-    toggle_bool_item("demo window"  , show_demowindow_pointer  );
-    toggle_bool_item("mesh window"  , show_meshwindow_pointer  );
-    toggle_bool_item("object window", show_objectwindow_pointer);
+    toggle_bool_item("mouse info"        , show_mouseinfo_pointer       );
+    toggle_bool_item("isitem info"       , show_isiteminfo_pointer      );
+    toggle_bool_item("rect info"         , show_rectinfo_pointer        );
+    toggle_bool_item("demo window"       , show_demowindow_pointer      );
+    toggle_bool_item("mesh window"       , show_meshwindow_pointer      );
+    toggle_bool_item("object window"     , show_objectwindow_pointer    );
+    toggle_bool_item("command log window", show_commandlogwindow_pointer);
     ImGui::Separator();
-    toggle_bool_item("tool menu"    , show_toolmenu_pointer    );
-    toggle_bool_item("show grid"    , show_grid_pointer        );
+    toggle_bool_item("tool menu"         , show_toolmenu_pointer        );
+    toggle_bool_item("show grid"         , show_grid_pointer            );
 }
 
 // ********************************************************************************

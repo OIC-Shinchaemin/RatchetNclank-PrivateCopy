@@ -6,6 +6,9 @@
 #include "ActionKeyName.h"
 #include "WindowKeyName.h"
 #include <filesystem>
+#include "CommandManager.h"
+#include "MeshLoadCommand.h"
+#include "MeshRemoveCommand.h"
 
 //! ToDo
 //extern CTexture                  mesh_view_target;
@@ -42,18 +45,18 @@ void MeshWindow::ShowMeshInfo(void) {
     ImGui::BeginGroup(); {
         // メッシュ情報関連の表示
         ImGui::BeginChild("mesh info", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()), true);
+        _mesh_select_item = GetSelectMeshData();
         // 読み込みボタン
         if (ImGui::Button("load")) {
-            MeshLoad();
+            MeshLoadDialog();
         } ImGui::SameLine();
         // 削除ボタン
-        if (ImGui::Button("delete")) {
-            MeshRelease();
+        if (ImGui::Button("delete") && _mesh_select_item) {
+            CommandManager::GetInstance().Register(std::make_shared<MeshRemoveCommand>());
         }
         // ファイル名を表示する
         char* text      = "";
         int text_length =  0;
-        _mesh_select_item = GetSelectMeshData();
         if (_mesh_select_item) {
             std::shared_ptr<CMeshContainer> mesh = _mesh_select_item->second.lock();
             text        = mesh->GetName()->GetString();
@@ -66,69 +69,6 @@ void MeshWindow::ShowMeshInfo(void) {
         ImGui::EndChild();
     }
     ImGui::EndGroup();
-}
-
-// ********************************************************************************
-/// <summary>
-/// 
-/// </summary>
-/// <created>いのうえ,2021/03/18</created>
-/// <changed>いのうえ,2021/03/18</changed>
-// ********************************************************************************
-void MeshWindow::MeshLoad(void) {
-    // ダイアログでファイルを読み込み
-    std::string filename;
-	// データの参照、登録
-	if (ActionManager::GetInstance().Action(ActionKeyName::MeshLoadDialog, &filename)) {
-		std::weak_ptr<CMeshContainer> mesh = MeshAsset::GetAsset(filename);
-        _mesh_list_current = _mesh_list.size();
-		_mesh_list.push_back(MeshData(FileDialog::GetFileName(filename.c_str()), mesh));
-        _mesh_select_item  = &(_mesh_list[_mesh_list_current]);
-	}
-}
-
-// ********************************************************************************
-/// <summary>
-/// 
-/// </summary>
-/// <created>いのうえ,2021/03/18</created>
-/// <changed>いのうえ,2021/03/18</changed>
-// ********************************************************************************
-void MeshWindow::MeshRelease(void) {
-    
-    const std::string key       = MeshAsset::GetKey(_mesh_select_item->second.lock());
-    const int         use_count = MeshAsset::GetUseCount(key);
-
-    // 自分以外にも参照がある場合は消さない
-    if (use_count > 1) {
-        MessageBox(
-            NULL,
-            "使用しているオブジェクトをすべて削除してからもう一度お試しください",
-            "このメッシュは使用されています",
-            MB_OK
-        );
-        return;
-    }
-    MeshAsset::Erase(key);
-    auto& it = std::find_if(
-        _mesh_list.begin(), _mesh_list.end(),
-        [=](const MeshData& obj) { return obj.first == _mesh_select_item->first; }
-    );
-
-    auto& next = _mesh_list.erase(it);
-    if (next == _mesh_list.end()) {
-        if (_mesh_list.size() <= 0) {
-            _mesh_select_item  = nullptr;
-            _mesh_list_current = 0;
-        }
-        else {
-            _mesh_list_current = max(0, _mesh_list_current - 1);
-            _mesh_select_item  = &_mesh_list[_mesh_list_current];
-        }
-    }
-    else {
-        _mesh_select_item = &_mesh_list[_mesh_list_current];
-    }
 }
 
 // ********************************************************************************
@@ -205,4 +145,87 @@ MeshData* MeshWindow::GetSelectMeshData(void) {
     }
 
     return _mesh_select_item;
+}
+
+int MeshWindow::GetSelectNo(void) const {
+    return _mesh_list_current;
+}
+
+void MeshWindow::SetSelectNo(int no) {
+    _mesh_list_current = no;
+}
+
+const MeshList& MeshWindow::GetMeshList(void) const {
+    return _mesh_list;
+}
+
+MeshList& MeshWindow::GetMeshList(void) {
+    return _mesh_list;
+}
+
+// ********************************************************************************
+/// <summary>
+/// 
+/// </summary>
+/// <created>いのうえ,2021/03/18</created>
+/// <changed>いのうえ,2021/03/18</changed>
+// ********************************************************************************
+void MeshWindow::AddMeshList(const MeshData* data) {
+    _mesh_list_current = _mesh_list.size();
+    _mesh_list.push_back(*data);
+    _mesh_select_item  = &(_mesh_list[_mesh_list_current]);
+}
+
+void MeshWindow::MeshLoadDialog(void) {
+    // ダイアログでファイルを読み込み
+    std::string filename;
+    // データの参照、登録
+    if (ActionManager::GetInstance().Action(ActionKeyName::MeshLoadDialog, &filename)) {
+        CommandManager::GetInstance().Register(std::make_shared<MeshLoadCommand>(filename, filename));
+        //std::weak_ptr<CMeshContainer> mesh = MeshAsset::GetAsset(filename);
+        //MeshLoad(&MeshData(FileDialog::GetFileName(filename.c_str()), mesh));
+    }
+}
+
+// ********************************************************************************
+/// <summary>
+/// 
+/// </summary>
+/// <created>いのうえ,2021/03/18</created>
+/// <changed>いのうえ,2021/03/18</changed>
+// ********************************************************************************
+void MeshWindow::MeshRelease(void) {
+    const std::string key       = MeshAsset::GetKey(_mesh_select_item->second.lock());
+    const int         use_count = MeshAsset::GetUseCount(key);
+
+    // 自分以外にも参照がある場合は消さない
+    if (use_count > 1) {
+        MessageBox(
+            NULL,
+            "使用しているオブジェクトをすべて削除してからもう一度お試しください",
+            "このメッシュは使用されています",
+            MB_OK
+        );
+        return;
+    }
+    MeshAsset::Erase(key);
+    auto& it = std::find_if(
+        _mesh_list.begin(), _mesh_list.end(),
+        [=](const MeshData& obj) { return obj.first == _mesh_select_item->first; }
+    );
+
+    auto& next = _mesh_list.erase(it);
+    if (next == _mesh_list.end()) {
+        if (_mesh_list.size() <= 0) {
+            _mesh_select_item  = nullptr;
+            _mesh_list_current = 0;
+        }
+        else {
+            _mesh_list_current = max(0, _mesh_list_current - 1);
+            _mesh_select_item  = &_mesh_list[_mesh_list_current];
+        }
+    }
+    else {
+        _mesh_select_item = &_mesh_list[_mesh_list_current];
+    }
 }
