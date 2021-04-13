@@ -396,6 +396,9 @@
     <ClCompile Include="Component\SightRecognitionComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Component\AIStateComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -740,6 +743,18 @@
     <ClInclude Include="Component\SightRecognitionComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Behaviour\Node\MoveActionNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\AIStateComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\LookAroundNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\GoHomeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -788,6 +803,9 @@
     </None>
     <None Include="..\Resource\builder\bomb_glove.json">
       <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\test.json">
+      <Filter>リソース ファイル\behaviour</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

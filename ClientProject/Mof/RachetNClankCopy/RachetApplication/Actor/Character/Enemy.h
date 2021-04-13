@@ -9,7 +9,6 @@
 #include <string>
 
 #include "My/Core/StateMachine.h"
-#include "My/Core/Timer.h"
 
 
 namespace my {
@@ -28,15 +27,9 @@ private:
     Mof::CVector3 _init_position;
     //! 標的
     std::weak_ptr<my::Actor>_target;
-    //! タイマー
-    my::Timer _thinking_time;
-
-    //! 視覚
-    //std::shared_ptr<my::SightRecognitionComponent> _sight;
-    
     //! 状態
-    my::StateMachine _ai_state_machine;
-
+    //my::StateMachine _ai_state_machine;
+    /*
     template<class State>
     void RegisterAIState(my::StateMachine& out) {
         auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
@@ -45,7 +38,14 @@ private:
         ptr->GenerateBehaviourExecutor();
         out.RegisterState(ptr);
     }
+    */
 public:
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetInitPosition(void) const;
     void ChaseTo(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// ゲッター
@@ -75,7 +75,7 @@ public:
     /// 見渡す
     /// </summary>
     /// <param name=""></param>
-    bool OverLooking(void);
+    bool LookAround(void);
     /// <summary>
     /// 追いかける
     /// </summary>
@@ -126,7 +126,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Input(void) override;
+    //virtual bool Input(void) override;
     /// <summary>
     /// 更新
     /// </summary>

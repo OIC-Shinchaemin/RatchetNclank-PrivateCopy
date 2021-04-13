@@ -3,13 +3,16 @@
 #include "Player.h"
 #include "../../Component/Collision/Object/EnemyCollisionObject.h"
 #include "../../Component/Collision/Object/EnemySightCollisionObject.h"
-#include "../../State/AIPatrolState.h"
-#include "../../State/AICombatState.h"
 #include "../../Component/EnemyIdleComponent.h"
 #include "../../Component/EnemyMoveComponent.h"
 #include "../../Component/EnemyAttackComponent.h"
 #include "../../Component/SightRecognitionComponent.h"
+#include "../../Component/AIStateComponent.h"
 
+
+Mof::CVector3 my::Enemy::GetInitPosition(void) const {
+    return this->_init_position;
+}
 
 void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
     auto move_com = super::GetComponent<my::EnemyMoveComponent>();
@@ -25,6 +28,9 @@ void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) 
     move_com->SetAngularSpeed(angular_speed);
     move_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
     move_com->Start();
+
+    auto attack_com = super::GetComponent<my::EnemyAttackComponent>();
+    attack_com->End();
 }
 
 float my::Enemy::GetDistanceFromInitPosition(void) {
@@ -54,9 +60,10 @@ bool my::Enemy::GoHome(void) {
     return true;
 }
 
-bool my::Enemy::OverLooking(void) {
+bool my::Enemy::LookAround(void) {
     if (this->HasTarget()) {
-        _ai_state_machine.ChangeState("AICombatState");
+        auto ai_state_com = super::GetComponent<my::AIStateComponent>();
+        ai_state_com->ChangeState("AICombatState");
         return true;
     } // if
 
@@ -70,7 +77,6 @@ bool my::Enemy::OverLooking(void) {
     in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
     float angular_speed = 4.0f;
 
-    // _overlooking.Action();
     idle_com->SetAngularSpeed(angular_speed);
     idle_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
     idle_com->Start();
@@ -95,9 +101,10 @@ bool my::Enemy::Attack(void) {
     move_com->SetAngularSpeed(0.0f);
 
     auto attack_com = super::GetComponent<my::EnemyAttackComponent>();
-
     attack_com->Start();
-    _ai_state_machine.ChangeState("AICombatState");
+
+    auto ai_state_com = super::GetComponent<my::AIStateComponent>();
+    ai_state_com ->ChangeState("AICombatState");
     return false;
 }
 
@@ -124,8 +131,7 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 my::Enemy::Enemy() :
     super(),
     _init_position(),
-    _target(),
-    _thinking_time() {
+    _target(){
     //super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
 }
 
@@ -170,27 +176,9 @@ void my::Enemy::GenerateCollisionObject(void) {
 bool my::Enemy::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
     _init_position = super::GetPosition();
-    _thinking_time.Initialize(0.0f, true);
     // generate
-    //_idle = std::make_shared<my::Idle>();
-    //_move = std::make_shared<my::Move>();
-//    _sight = std::make_shared<my::SightRecognitionComponent>();
     this->GenerateCollisionObject();
 
-    //_sight->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-
-    // state
-    this->RegisterAIState<state::AIPatrolState>(_ai_state_machine);
-    this->RegisterAIState<state::AICombatState>(_ai_state_machine);
-    _ai_state_machine.ChangeState("AIPatrolState");
-    return true;
-}
-
-bool my::Enemy::Input(void) {
-    float delta_time = 1.0f / 60.0f;
-    if (_thinking_time.Tick(delta_time)) {
-        _ai_state_machine.Update(delta_time);
-    } // if
     return true;
 }
 
@@ -205,12 +193,14 @@ bool my::Enemy::Render(void) {
 }
 
 bool my::Enemy::ChangeToPatrolState(void) {
-    _ai_state_machine.ChangeState("AIPatrolState");
+    auto ai_state_com = super::GetComponent<my::AIStateComponent>();
+    ai_state_com->ChangeState("AIPatrolState");
     return true;
 }
 
 bool my::Enemy::ChangeToCombatState(void) {
-    _ai_state_machine.ChangeState("AICombatState");
+    auto ai_state_com = super::GetComponent<my::AIStateComponent>();
+    ai_state_com ->ChangeState("AICombatState");
     return true;
 }
 
@@ -235,7 +225,4 @@ void my::Enemy::RenderDebug(void) {
         auto ray = Mof::CRay3D(start, diff);
         this->RenderRay(ray, Mof::CVector3Utilities::Length(diff), def::color_rgba_u32::kYellow);
     } // if    
-
-    _ai_state_machine.DebugRender();
-    ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _ai_state_machine.GetCurrentStateName());
 }

@@ -19,8 +19,8 @@ state::AIState::AIState() :
 state::AIState::~AIState() {
 }
 
-void state::AIState::SetEnemy(const std::shared_ptr<my::Enemy>& ptr) {
-    this->_enemy = ptr;
+void state::AIState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
+    this->_enemy = std::dynamic_pointer_cast<my::Enemy>(ptr);
 }
 
 void state::AIState::GenerateBehaviourExecutor(void) {

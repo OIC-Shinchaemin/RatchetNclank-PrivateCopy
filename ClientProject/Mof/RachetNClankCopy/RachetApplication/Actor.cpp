@@ -54,11 +54,6 @@ Mof::CVector3 my::Actor::GetScale(void) const {
 my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
-/*
-const std::vector<std::shared_ptr<my::CollisionObject>>& my::Actor::GetCollisionObjects(void) const {
-    return this->_collision_objects;
-}
-*/
 
 void my::Actor::AddComponent(const ComPtr& component) {
     if (component->IsInput()) {

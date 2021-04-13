@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 
+#include "../Actor.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Behaviour/Executor/INodeExecutor.h"
 #include "../Factory/BehaviourExecutorFactory.h"
@@ -41,7 +42,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetEnemy(const std::shared_ptr<my::Enemy>& ptr);
+    virtual void SetActor(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

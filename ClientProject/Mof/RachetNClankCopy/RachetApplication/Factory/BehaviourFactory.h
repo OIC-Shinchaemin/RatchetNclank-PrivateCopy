@@ -15,7 +15,10 @@
 #include "../Behaviour/Node/ActionNode.h"
 #include "../Behaviour/Node/SequencerNode.h"
 #include "../Behaviour/Node/SelectorNode.h"
+#include "../Behaviour/Node/GoHomeNode.h"
+#include "../Behaviour/Node/LookAroundNode.h"
 #include "../Actor/Character/Enemy.h"
+#include "Factory.h"
 
 
 namespace my {
@@ -23,6 +26,8 @@ class BehaviourFactory {
 private:
     //! コンテナ
     my::FuncPtrContainer _function_pointer_container;
+    //! アクション
+    my::Factory<behaviour::ActionNodeBase<std::shared_ptr<my::Enemy> >> _action_factory;
 public:
     /// <summary>
     /// コンストラクタ
@@ -30,12 +35,15 @@ public:
     BehaviourFactory() :
         _function_pointer_container() {
         _function_pointer_container.Register("Enemy::GoHome", &my::Enemy::GoHome);
-        _function_pointer_container.Register("Enemy::OverLooking", &my::Enemy::OverLooking);
+        _function_pointer_container.Register("Enemy::LookAround", &my::Enemy::LookAround);
         _function_pointer_container.Register("Enemy::ChaseTarget", &my::Enemy::ChaseTarget);
         _function_pointer_container.Register("Enemy::Attack", &my::Enemy::Attack);
         _function_pointer_container.Register("Enemy::ChangeToPatrolState", &my::Enemy::ChangeToPatrolState);
         _function_pointer_container.Register("Enemy::HasTarget", &my::Enemy::HasTarget);
         _function_pointer_container.Register("Enemy::GetDistanceFromInitPosition", &my::Enemy::GetDistanceFromInitPosition);
+
+        _action_factory.Register<behaviour::GoHomeNode<std::shared_ptr<my::Enemy>>>("GoHome");
+        _action_factory.Register<behaviour::LookAroundNode<std::shared_ptr<my::Enemy>>>("LookAround");
     }
     /// <summary>
     /// 作成
@@ -107,6 +115,21 @@ public:
             _function_pointer_container.Get<my::FuncPtrEnemyBool>(function_key));
         return function_node;
     }
+
+
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="behaviours"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    std::shared_ptr<behaviour::ActionNodeBase<std::shared_ptr<class Enemy> > > CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
+        using namespace behaviour;
+
+        auto derived = behaviours[index]["derived"].GetString();
+        return _action_factory.Create(derived);
+    }
+
     /// <summary>
     /// 作成
     /// </summary>
@@ -120,10 +143,14 @@ public:
         auto& children = behaviours[index]["children"];
         for (size_t i = 0, n = children.Size(); i < n; i++) {
             auto children_index = children[i].GetInt();
-            if (behaviours[children_index]["type"] == "FunctionNode") {
-                auto node = this->CreateFunctionNode(behaviours, children_index);
+            if (behaviours[children_index]["type"] == "ActionNode") {
+                auto node = this->CreateActionNode(behaviours, children_index);
                 sequencer_node->AddChild(node);
             } // if
+            else if (behaviours[children_index]["type"] == "FunctionNode") {
+                auto node = this->CreateFunctionNode(behaviours, children_index);
+                sequencer_node->AddChild(node);
+            } // else if
             else if (behaviours[children_index]["type"] == "DecoratorNode") {
                 auto return_type = std::string(behaviours[children_index]["return"].GetString());
                 if (return_type == "bool") {
@@ -153,10 +180,14 @@ public:
         auto& children = behaviours[index]["children"];
         for (size_t i = 0, n = children.Size(); i < n; i++) {
             auto children_index = children[i].GetInt();
-            if (behaviours[children_index]["type"] == "FunctionNode") {
-                auto node = this->CreateFunctionNode(behaviours, children_index);
+            if (behaviours[children_index]["type"] == "ActionNode") {
+                auto node = this->CreateActionNode(behaviours, children_index);
                 selector_node->AddChild(node);
             } // if
+            else if (behaviours[children_index]["type"] == "FunctionNode") {
+                auto node = this->CreateFunctionNode(behaviours, children_index);
+                selector_node->AddChild(node);
+            } // else if
             else if (behaviours[children_index]["type"] == "DecoratorNode") {
                 auto return_type = std::string(behaviours[children_index]["return"].GetString());
                 if (return_type == "bool") {
