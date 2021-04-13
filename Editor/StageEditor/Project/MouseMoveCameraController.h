@@ -19,6 +19,11 @@ private:
     // ********************************************************************************
     Controller MouseMoveController(void);
 
+    Controller ModeHand(void);
+    Controller ModeEye(void);
+    Controller ModeInstObject(void);
+
+
 public:
     // ********************************************************************************
     /// <summary>

@@ -39,7 +39,7 @@ private:
 	Vector4     _background_color       { Vector4(0,0,1,0) };
                                         
     //! エディタのモード                
-    int         _edit_mode              { 0 };
+    int         _edit_mode              { 0x10 };
     //! グリッドの間隔                  
     int         _grid_between           { 4 };
     //! グリッドのサイズ                

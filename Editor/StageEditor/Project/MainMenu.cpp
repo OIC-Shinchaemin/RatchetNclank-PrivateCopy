@@ -7,40 +7,14 @@
 #include "ActionKeyName.h"
 
 void MainMenu::File(void) {
-    if (ImGui::MenuItem("new", "Ctrl + N")) {};
-    if (ImGui::MenuItem("open", "Ctrl + O")) {
-        std::string file;
-        ActionManager::GetInstance().Action(ActionKeyName::LoadProjectDialog, &file);
-    };
-    if (ImGui::MenuItem("close", "Ctrl + Alt + C")) {
-        ActionManager::GetInstance().Action(ActionKeyName::FileClose, nullptr);
-    };
+    if (ImGui::MenuItem("new", "Ctrl + N")) { New(); };
+    if (ImGui::MenuItem("open", "Ctrl + O")) { Open(); };
+    if (ImGui::MenuItem("close", "Ctrl + Alt + C")) { Close(); };
     ImGui::Separator();
-    if (ImGui::MenuItem("save", "Ctrl + S")) {
-        SaveData data;
-        std::string* file_name = ParameterMap<std::string>::GetInstance().Get("open_file_name");
-        if (file_name->length() <= 0) {
-            if (ActionManager::GetInstance().Action(ActionKeyName::SaveProjectDialog, file_name)) {
-
-            }
-        }
-        else {
-            std::get<0>(data) = *file_name;
-            std::get<1>(data) = ParameterMap<MeshList>::GetInstance().Get("mesh_list");
-            std::get<2>(data) = ParameterMap<ObjectList>::GetInstance().Get("object_list");
-            if (ActionManager::GetInstance().Action(ActionKeyName::SaveProject, &data)) {
-
-            }
-        }
-    };
-    if (ImGui::MenuItem("save as...", "Ctrl + Shift + S")) {
-        std::string* file_name = ParameterMap<std::string>::GetInstance().Get("open_file_name");
-        if (ActionManager::GetInstance().Action(ActionKeyName::SaveProjectDialog, file_name)) {
-
-        }
-    };
+    if (ImGui::MenuItem("save", "Ctrl + S")) { Save(); };
+    if (ImGui::MenuItem("save as...", "Ctrl + Shift + S")) { SaveAs(); };
     ImGui::Separator();
-    if (ImGui::MenuItem("quit", "Alt + F4")) { PostQuitMessage(0); };
+    if (ImGui::MenuItem("quit", "Alt + F4")) { Quit(); };
 }
 
 void MainMenu::Edit(void) {
@@ -81,6 +55,45 @@ void MainMenu::View(void) {
     ImGui::Separator();
     toggle_bool_item("tool menu"         , show_toolmenu_pointer        );
     toggle_bool_item("show grid"         , show_grid_pointer            );
+}
+
+void MainMenu::New(void) {
+    Close();
+    SaveAs();
+}
+
+void MainMenu::Open(void) {
+    std::string file;
+    ActionManager::GetInstance().Action(ActionKeyName::LoadProjectDialog, &file);
+}
+
+void MainMenu::Close(void) {
+    ActionManager::GetInstance().Action(ActionKeyName::FileClose, nullptr);
+}
+
+void MainMenu::Save(void) {
+    std::string* file_name = ParameterMap<std::string>::GetInstance().Get("open_file_name");
+    if (file_name->length() <= 0) {
+        SaveAs();
+    }
+    else {
+        SaveData data;
+        std::get<0>(data) = *file_name;
+        std::get<1>(data) = ParameterMap<MeshList>::GetInstance().Get("mesh_list");
+        std::get<2>(data) = ParameterMap<ObjectList>::GetInstance().Get("object_list");
+        if (ActionManager::GetInstance().Action(ActionKeyName::SaveProject, &data)) {
+        }
+    }
+}
+
+void MainMenu::SaveAs(void) {
+    std::string* file_name = ParameterMap<std::string>::GetInstance().Get("open_file_name");
+    if (ActionManager::GetInstance().Action(ActionKeyName::SaveProjectDialog, file_name)) {
+    }
+}
+
+void MainMenu::Quit(void) {
+    PostQuitMessage(0);
 }
 
 // ********************************************************************************

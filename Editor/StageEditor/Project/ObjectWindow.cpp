@@ -22,6 +22,9 @@ void ObjectWindow::ShowObjectList(void) {
         if (ImGui::Selectable(it.name.c_str(), _object_list_current == i)) {
             _object_list_current = i;
             _object_select_item  = &it;
+            LPCamera main_camera = CGraphicsUtilities::GetCamera();
+            main_camera->SetTargetPosition(_object_select_item->position);
+            main_camera->Update();
         }
         i++;
     }
@@ -42,7 +45,7 @@ void ObjectWindow::ShowObjectInfo(void) {
         // 選択中アイテムがある場合のみ表示する
         if (_object_select_item) {
             // 変更のチェック
-            bool change[4] = { false, false, false, false };
+            bool change[5] = { false, false, false, false, false };
             _object_select_item_prev = *_object_select_item;
             // ファイル名を表示する
             char object_name[128]    =  "";
@@ -67,6 +70,26 @@ void ObjectWindow::ShowObjectInfo(void) {
                 change[1] = ImGui::InputFloat3("scale"   , _object_select_item->scale);
                 change[2] = ImGui::InputFloat3("rotation", _object_select_item->rotation);
             }
+            // ファイル名の表示
+            _object_select_item = GetSelectObjectData();
+            if (_object_select_item) {
+                if (_object_select_item->mesh_index >= 0) {
+                    const int       mesh_no   = _object_select_item->mesh_index;
+                    const MeshList* mesh_list = ParameterMap<MeshList>::GetInstance().Get("mesh_list");
+                    const int mesh_size = mesh_list->size();
+                    std::string combo_list;
+                    for (const auto& it : *mesh_list) {
+                        combo_list += (it.first) + '\0';
+                    }
+                    combo_list += '\0';
+                    int prev = _object_select_item->mesh_index;
+                    ImGui::Combo("mesh", &_object_select_item->mesh_index, combo_list.c_str());
+                    change[4] = (prev != _object_select_item->mesh_index);
+                }
+                else {
+                    ImGui::Text("file : no mesh");
+                }
+            }
             // 変更されたかの監視.されていればデータを登録する
             for (auto& it : change) {
                 if (it) {
@@ -75,11 +98,6 @@ void ObjectWindow::ShowObjectInfo(void) {
                     break;
                 }
                 _object_change_flag = false;
-            }
-            // ファイル名の表示
-            _object_select_item = GetSelectObjectData();
-            if (_object_select_item) {
-                ImGui::Text("file : %s", _object_select_item->mesh_pointer->GetName()->GetString());
             }
             // データの破棄
             if (ImGui::Button("remove")) {

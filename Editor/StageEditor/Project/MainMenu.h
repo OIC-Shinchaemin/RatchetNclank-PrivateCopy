@@ -40,6 +40,13 @@ private:
 
 public:
 
+    static void New(void);
+    static void Open(void);
+    static void Close(void);
+    static void Save(void);
+    static void SaveAs(void);
+    static void Quit(void);
+
     // ********************************************************************************
     /// <summary>
     /// メインメニューの表示

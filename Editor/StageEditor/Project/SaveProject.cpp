@@ -35,6 +35,7 @@ bool SaveProject::Action(std::any any) {
     // "object_list": [
     //     "object_name": オブジェクト名,
     //     "mesh_name": メッシュ名,
+    //     "mesh_index": メッシュ番号,
     //     "pos_x": 座標位置X  * 1000,
     //     "pos_y": 座標位置Y  * 1000,
     //     "pos_z": 座標位置Z  * 1000,
@@ -70,6 +71,7 @@ bool SaveProject::Action(std::any any) {
         LPCMofChar object_name        = it.name.c_str();
         MofU32     name_length        = it.mesh_path.length();
         LPCMofChar name               = it.mesh_path.c_str();
+        MofS32     mesh_index         = it.mesh_index;
         MofS32     position_x         = static_cast<MofS32>(it.position.x * 1000.0f);
         MofS32     position_y         = static_cast<MofS32>(it.position.y * 1000.0f);
         MofS32     position_z         = static_cast<MofS32>(it.position.z * 1000.0f);
@@ -84,6 +86,7 @@ bool SaveProject::Action(std::any any) {
         rapidjson::Value write_object(rapidjson::Type::kObjectType);
         auto write_object_name = rapidjson::StringRef(object_name, object_name_length);
         auto write_mesh_name   = rapidjson::StringRef(name       , name_length       );
+        rapidjson::Value write_mesh_index(mesh_index);
         rapidjson::Value write_position_x(position_x);
         rapidjson::Value write_position_y(position_y);
         rapidjson::Value write_position_z(position_z);
@@ -95,6 +98,7 @@ bool SaveProject::Action(std::any any) {
         rapidjson::Value write_rotation_z(rotation_z);
         write_object.AddMember("object_name", write_object_name, document.GetAllocator());
         write_object.AddMember("mesh_name"  , write_mesh_name  , document.GetAllocator());
+        write_object.AddMember("mesh_index" , write_mesh_index , document.GetAllocator());
         write_object.AddMember("pos_x"      , write_position_x , document.GetAllocator());
         write_object.AddMember("pos_y"      , write_position_y , document.GetAllocator());
         write_object.AddMember("pos_z"      , write_position_z , document.GetAllocator());

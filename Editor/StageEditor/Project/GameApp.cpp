@@ -33,6 +33,7 @@
 #include    "MouseUtilities.h"
 #include    "FileDialog.h"
 #include    "ToolIcon.h"
+#include    "Cursor.h"
 
 //COMMAND
 #include    "CommandManager.h"
@@ -125,26 +126,18 @@ MofBool CGameApp::Update(void) {
 	//mesh_view_controller.Update();
 
     // ToolMenu
+    int* edit_mode = ParameterMap<int>::GetInstance().Get("edit_mode");
     {
-        int* edit_mode = ParameterMap<int>::GetInstance().Get("edit_mode");
-        if (g_pInput->IsKeyHold(MOFKEY_LALT) || g_pInput->IsKeyHold(MOFKEY_RALT)) {
+        *edit_mode = EditMode::InstObject;
+        bool is_alt = (g_pInput->IsKeyHold(MOFKEY_LALT) || g_pInput->IsKeyHold(MOFKEY_RALT));
+        bool is_ctrl = (g_pInput->IsKeyHold(MOFKEY_LCONTROL) || g_pInput->IsKeyHold(MOFKEY_RCONTROL));
+        if (is_alt) {
             *edit_mode = EditMode::EditEye | EditMode::MoveCamera;
-            if (g_pInput->IsKeyHold(MOFKEY_LCONTROL) || g_pInput->IsKeyHold(MOFKEY_RCONTROL) ||
-                MouseUtilities::IsKeyHold(MOFMOUSE_CENTERBUTTON)) {
-                *edit_mode = EditMode::EditHand | EditMode::MoveCamera;
-            }
+            Cursor::ChangeCursor(CursorType::PIN);
         }
-        else if (g_pInput->IsKeyPull(MOFKEY_LALT) || g_pInput->IsKeyPull(MOFKEY_RALT)) {
+        else if (is_ctrl) {
             *edit_mode = EditMode::EditHand | EditMode::MoveCamera;
-        }
-        if (g_pInput->IsKeyPush(MOFKEY_W)) {
-            *edit_mode = EditMode::EditTrans | EditMode::MoveCamera;
-        }
-        if (g_pInput->IsKeyPush(MOFKEY_E)) {
-            *edit_mode = EditMode::EditRotate | EditMode::MoveCamera;
-        }
-        if (g_pInput->IsKeyPush(MOFKEY_R)) {
-            *edit_mode = EditMode::EditScale | EditMode::MoveCamera;
+            Cursor::ChangeCursor(CursorType::HAND);
         }
     }
 
@@ -155,6 +148,35 @@ MofBool CGameApp::Update(void) {
         }
         if (g_pInput->IsKeyHold(MOFKEY_LCONTROL) && g_pInput->IsKeyPush(MOFKEY_Y)) {
             command_manager.Redo();
+        }
+    }
+    // Short cut
+    {
+        bool is_ctrl  = (g_pInput->IsKeyHold(MOFKEY_LCONTROL) || g_pInput->IsKeyHold(MOFKEY_RCONTROL));
+        bool is_shift = (g_pInput->IsKeyHold(MOFKEY_LSHIFT)   || g_pInput->IsKeyHold(MOFKEY_RSHIFT));
+        bool is_alt   = (g_pInput->IsKeyHold(MOFKEY_LALT)     || g_pInput->IsKeyHold(MOFKEY_RALT));
+        if (is_ctrl && g_pInput->IsKeyPush(MOFKEY_N)) {
+            MainMenu::New();
+            Cursor::ChangeCursor(CursorType::WAIT);
+        }
+        if (is_ctrl && g_pInput->IsKeyPush(MOFKEY_O)) {
+            MainMenu::Open();
+            Cursor::ChangeCursor(CursorType::WAIT);
+        }
+        if (is_ctrl && is_alt && g_pInput->IsKeyPush(MOFKEY_C)) {
+            MainMenu::Close();
+            Cursor::ChangeCursor(CursorType::WAIT);
+        }
+        if (is_ctrl && g_pInput->IsKeyPush(MOFKEY_S)) {
+            MainMenu::Save();
+            Cursor::ChangeCursor(CursorType::WAIT);
+        }
+        if (is_ctrl && is_shift && g_pInput->IsKeyPush(MOFKEY_S)) {
+            MainMenu::SaveAs();
+            Cursor::ChangeCursor(CursorType::WAIT);
+        }
+        if ((is_shift && g_pInput->IsKeyPush(MOFKEY_F4)) || g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
+            MainMenu::Quit();
         }
     }
 
@@ -186,15 +208,17 @@ MofBool CGameApp::Update(void) {
         command_log_window.Show();
     }
 
-    MeshData* mesh_pointer = mesh_window.GetSelectMeshData();
-    if (mesh_pointer && !isUseGui && g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
-        ObjectData data;
-        data.position       = MouseUtilities::GetWorldPos();
-        data.mesh_path      = MeshAsset::GetKey(mesh_pointer->second.lock());
-        data.name           = mesh_pointer->first;
-        data.mesh_pointer   = mesh_pointer->second.lock();
-        ICommandPtr command = std::make_shared<ObjectPlantCommand>(&data);
-        command_manager.Register(command);
+    if ((*edit_mode) & InstObject) {
+        MeshData* mesh_pointer = mesh_window.GetSelectMeshData();
+        if (mesh_pointer && !isUseGui && g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
+            ObjectData data;
+            data.position       = MouseUtilities::GetWorldPos();
+            data.mesh_path      = MeshAsset::GetKey(mesh_pointer->second.lock());
+            data.name           = mesh_pointer->first;
+            data.mesh_index     = mesh_window.GetSelectNo();
+            ICommandPtr command = std::make_shared<ObjectPlantCommand>(&data);
+            command_manager.Register(command);
+        }
     }
 
     if (editor_parameter.IsShowMouseInfo())  { DebugGui::ShowMouseInfoWindow(); }
@@ -229,11 +253,15 @@ MofBool CGameApp::Render(void) {
         CGraphicsUtilities::RenderGrid(grid_between, grid_size, MOF_COLOR_WHITE, PLANEAXIS_ALL);
     }
 
-    //CMatrix44 matWorld;
-    //matWorld.Scaling(30, 1, 30);
-    //CGraphicsUtilities::RenderPlane(matWorld);
-
     for (const auto& it : object_window.GetObjectList()) {
+        std::shared_ptr<CMeshContainer> mesh_pointer = nullptr;
+        const int                       mesh_no      = it.mesh_index;
+        if (mesh_no >= 0) {
+            mesh_pointer = mesh_window.GetMeshList()[mesh_no].second.lock();
+        }
+        else {
+            continue;
+        }
         CMatrix44 object_rotation, object_scale;
         CMatrix44 object_matrix;
         object_rotation.RotationZXY(it.rotation);
@@ -252,33 +280,36 @@ MofBool CGameApp::Render(void) {
             edge_material.SetDiffuse (Vector4(1, 1, 1, 1));
             edge_material.SetEmissive(Vector4(1, 1, 1, 1));
             edge_material.SetSpeculer(Vector4(1, 1, 1, 1));
-            const int geo_size = it.mesh_pointer->GetGeometryCount();
+            const int geo_size = mesh_pointer->GetGeometryCount();
             std::vector<LPMaterial> def_material(geo_size);
             for (int i = 0; i < geo_size; i++) {
-                def_material[i] = it.mesh_pointer->GetGeometry(i)->GetMaterial();
+                def_material[i] = mesh_pointer->GetGeometry(i)->GetMaterial();
             }
             for (int i = 0; i < geo_size; i++) {
-                it.mesh_pointer->GetGeometry(i)->SetMaterial(&edge_material);
+                mesh_pointer->GetGeometry(i)->SetMaterial(&edge_material);
             }
             // 強調表示
             g_pGraphics->SetDepthEnable(FALSE);
-            it.mesh_pointer->Render(object_matrix_edge, Vector4(0, 1, 0, 1));
+            mesh_pointer->Render(object_matrix_edge, Vector4(0, 1, 0, 1));
             g_pGraphics->SetDepthEnable(TRUE);
             // マテリアルの設定を戻す
             for (int i = 0; i < geo_size; i++) {
-                it.mesh_pointer->GetGeometry(i)->SetMaterial(def_material[i]);
+                mesh_pointer->GetGeometry(i)->SetMaterial(def_material[i]);
             }
         }
-        it.mesh_pointer->Render(object_matrix);
+        mesh_pointer->Render(object_matrix);
     }
 
-    CMatrix44 matrix_world_object;
-    Vector3 mouse_pos = MouseUtilities::GetWorldPos();
-    mouse_pos.y = 0.0f;
-    matrix_world_object.SetTranslation(mouse_pos);
-    MeshData* meshdata_pointer = mesh_window.GetSelectMeshData();
-    if (meshdata_pointer && meshdata_pointer->second.lock()) {
-        meshdata_pointer->second.lock()->Render(matrix_world_object, Vector4(1, 1, 1, 0.5f));
+    int* edit_mode = ParameterMap<int>::GetInstance().Get("edit_mode");
+    if ((*edit_mode) & EditMode::InstObject) {
+        CMatrix44 matrix_world_object;
+        Vector3 mouse_pos = MouseUtilities::GetWorldPos();
+        mouse_pos.y = 0.0f;
+        matrix_world_object.SetTranslation(mouse_pos);
+        MeshData* meshdata_pointer = mesh_window.GetSelectMeshData();
+        if (meshdata_pointer && meshdata_pointer->second.lock()) {
+            meshdata_pointer->second.lock()->Render(matrix_world_object, Vector4(1, 1, 1, 0.5f));
+        }
     }
 
     g_pGraphics->SetDepthEnable(FALSE);
@@ -305,12 +336,6 @@ MofBool CGameApp::Render(void) {
 		mesh_window.Show();
 	}
 
-    ImGui::Begin("mouse"); {
-        Vector3 pos = MouseUtilities::GetWorldPos();
-        ImGui::Text("vec : %f, %f, %f,", pos.x, pos.y, pos.z);
-    }
-    ImGui::End();
-
     CMofImGui::RenderSetup();
     CMofImGui::RenderGui();
 
@@ -326,7 +351,8 @@ MofBool CGameApp::Render(void) {
                         それ以外    失敗、エラーコードが戻り値となる
 *//**************************************************************************/
 MofBool CGameApp::Release(void) {
-
+    std::string* resource_path = parameter_map_string.Get("resource_path");
+    CUtilities::SetCurrentDirectory(resource_path->c_str());
     CMofImGui::Cleanup();
 
     gamepad.Release();
