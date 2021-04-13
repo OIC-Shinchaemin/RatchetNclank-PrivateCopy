@@ -35,7 +35,6 @@ private:
     //! タイマー
     my::Timer _thinking_time;
 
-
     //! 待機
     std::shared_ptr<my::Idle> _idle;
     //! 攻撃
@@ -48,22 +47,10 @@ private:
 
 
     //! 状態
-    my::StateMachine _motion_state_machine;
+    //my::StateMachine _motion_state_machine;
     //! 状態
     my::StateMachine _ai_state_machine;
 
-    template<class State>
-    void RegisterMotionState(my::StateMachine& out) {
-        auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
-
-        auto ptr = std::make_shared<State>();
-        ptr->SetLPMeshMotionController(_motion);
-        ptr->SetMotionNames(_motion_names);
-        ptr->SetEnemy(shared_this);
-        ptr->SetVelocity(&_velocity);
-        ptr->SetAttack(_attack);
-        out.RegisterState(ptr);
-    }
     template<class State>
     void RegisterAIState(my::StateMachine& out) {
         auto shared_this = std::dynamic_pointer_cast<my::Enemy>(shared_from_this());
@@ -160,6 +147,13 @@ public:
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time);
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(void) override;
+    
     bool ChangeToPatrolState(void);
     bool ChangeToCombatState(void);
     /// <summary>

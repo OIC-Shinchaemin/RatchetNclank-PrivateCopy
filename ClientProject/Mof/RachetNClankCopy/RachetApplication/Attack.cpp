@@ -5,8 +5,9 @@
 
 
 bool my::Attack::InactiveCondition(void) const {
-    std::cout << "_motion->IsEndMotion() = " << _motion->IsEndMotion() << "\n";
-    return _motion->IsEndMotion();
+    //std::cout << "_motion->IsEndMotion() = " << _motion->IsEndMotion() << "\n";
+    //return _motion->IsEndMotion();
+    return false;
 }
 
 void my::Attack::Execute(float delta_time) {

@@ -139,6 +139,15 @@
     <Filter Include="Rachet\Source\State">
       <UniqueIdentifier>{9f970ecc-a903-486b-bc92-5a85fbd4ea10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Component">
+      <UniqueIdentifier>{5882736c-82d9-4cb1-82a6-2d33f365ecc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component">
+      <UniqueIdentifier>{4f7a0cc8-eb0a-483a-a36c-2d03f2b326b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\builder">
+      <UniqueIdentifier>{38822f9b-b1ef-4bf7-8b94-f3483a8de732}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -335,6 +344,36 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Component.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\ActorBuilder.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MeshComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MotionComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\RenderComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\UpdateComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\ComponentCreator.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\ComponentFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BuilderFactory.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MotionStateComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -632,6 +671,39 @@
     <ClInclude Include="Timer.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Component.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\IBuilder.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ActorBuilder.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MeshComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MotionComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\RenderComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\UpdateComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentCreator.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BuilderFactory.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MotionStateComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -653,6 +725,9 @@
     </None>
     <None Include="..\Resource\motion_names\player.motion_names">
       <Filter>リソース ファイル\motion_type</Filter>
+    </None>
+    <None Include="..\Resource\builder\enemy.json">
+      <Filter>リソース ファイル\builder</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

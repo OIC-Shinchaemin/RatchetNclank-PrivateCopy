@@ -62,7 +62,7 @@ bool my::Enemy::OverLooking(void) {
 
     in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
     float angular_speed = 4.0f;
-    
+
     // _overlooking.Action();
     _idle->SetAngularSpeed(angular_speed);
     _idle->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
@@ -113,8 +113,7 @@ my::Enemy::Enemy() :
     _move(),
     _sight(),
     _attack(),
-    _thinking_time(){
-    super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
+    _thinking_time() {
     super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
 }
 
@@ -166,7 +165,8 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     _sight = std::make_shared<my::SightRecognition>();
     _attack = std::make_shared<my::Attack>();
     this->GenerateCollisionObject();
-    
+
+    /*
     // mesh motion
     if (auto mesh = _mesh.lock()) {
         _motion = mesh->CreateMotionController();
@@ -174,12 +174,11 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     if (auto motion_names = super::_motion_names.lock();  !super::_motion_names.expired() && _motion) {
         _motion->ChangeMotionByName(motion_names->GetName(MotionType::IdleWait), 1.0f, true);
     } // if
-
-
-    for (int i = 0; i < _motion->GetMotionCount(); i ++) {
-        std::cout <<  "_motion->GetMotion(i)->GetName()" << _motion->GetMotion(i)->GetName()->GetString() << "\n";
+    for (int i = 0; i < _motion->GetMotionCount(); i++) {
+        std::cout << "_motion->GetMotion(i)->GetName()" << _motion->GetMotion(i)->GetName()->GetString() << "\n";
     } // for
-    
+    */
+
     // components initialize
     _idle->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
     _move->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
@@ -190,10 +189,12 @@ bool my::Enemy::Initialize(my::Actor::Param* param) {
     _attack->SetMotion(_motion);
 
     // state
+    /*
     this->RegisterMotionState<state::EnemyMotionIdleState>(_motion_state_machine);
     this->RegisterMotionState<state::EnemyMotionMoveState>(_motion_state_machine);
     this->RegisterMotionState<state::EnemyMotionAttackState>(_motion_state_machine);
     _motion_state_machine.ChangeState("EnemyMotionIdleState");
+    */
     this->RegisterAIState<state::AIPatrolState>(_ai_state_machine);
     this->RegisterAIState<state::AICombatState>(_ai_state_machine);
     _ai_state_machine.ChangeState("AIPatrolState");
@@ -209,7 +210,7 @@ bool my::Enemy::Input(void) {
 }
 
 bool my::Enemy::Update(float delta_time) {
-    _motion->AddTimer(delta_time);
+    //_motion->AddTimer(delta_time);
 
     if (_idle->IsActive()) {
         _idle->Update(delta_time);
@@ -220,13 +221,20 @@ bool my::Enemy::Update(float delta_time) {
     if (_attack->IsActive()) {
         _attack->Update(delta_time);
     } // if
-  
+
     _velocity.Update(delta_time);
 
 //    super::Update(delta_time);
-    _motion_state_machine.Update(delta_time);
+    //_motion_state_machine.Update(delta_time);
 
     super::UpdateTransform(delta_time);
+
+    my::Actor::Update(delta_time);
+    return true;
+}
+
+bool my::Enemy::Render(void) {
+    my::Actor::Render();
     return true;
 }
 
@@ -240,7 +248,7 @@ bool my::Enemy::ChangeToCombatState(void) {
     return true;
 }
 bool my::Enemy::ChangeMotionState(const char* next) {
-    _motion_state_machine.ChangeState(next);
+    //_motion_state_machine.ChangeState(next);
     return true;
 }
 
@@ -268,7 +276,7 @@ void my::Enemy::RenderDebug(void) {
     _attack->RenderDebug();
 
     _ai_state_machine.DebugRender();
-    _motion_state_machine.DebugRender();
+    //_motion_state_machine.DebugRender();
     ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _ai_state_machine.GetCurrentStateName());
-    ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _motion_state_machine.GetCurrentStateName());
+    //::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _motion_state_machine.GetCurrentStateName());
 }

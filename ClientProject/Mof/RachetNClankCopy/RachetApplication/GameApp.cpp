@@ -6,6 +6,8 @@
 #include "Camera/CameraLocator.h"
 #include "ResourceLocator.h"
 
+#include "Component/Component.h"
+
 
 void CGameApp::RenderScene(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0);
@@ -58,15 +60,21 @@ MofBool CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("Resource");
 
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
+    //_factory_manager = ut::MakeSharedWithRelease<my::FactoryManager>();
     _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
     _camera_manager = std::make_shared<my::CameraManager>();
     _ui_canvas = std::make_shared<my::UICanvas>();
     
+
+    my::Component::SetResourceManager(_resource_manager);
+
     my::ResourceLocator::SetService(_resource_manager);
     my::CameraLocator::SetService(_camera_manager);
     my::CanvasLocator::SetService(_ui_canvas);
 
     _resource_manager->Load("../Resource/resource_path.txt");
+    //_game_manager->SetFactoryManager(_factory_manager);
+    _game_manager->SetResourceManager(_resource_manager);
     _game_manager->Initialize();
     return TRUE;
 }

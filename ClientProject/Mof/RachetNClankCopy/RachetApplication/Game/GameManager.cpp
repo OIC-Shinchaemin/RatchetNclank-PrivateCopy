@@ -2,10 +2,13 @@
 
 #include "My/Core/Trait.h"
 #include "My/Core/Utility.h"
+
+#include "../Factory/FactoryManager.h"
 #include "../GameSystem/Save/SaveData.h"
 #include "../GameSystem/Save/SaveSystem.h"
 #include "../Character/Enemy.h"
 #include "../Character/Player.h"
+#include "../Factory/ActorBuilder.h"
 
 
 void my::GameManager::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -21,6 +24,8 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
 }
 
 my::GameManager::GameManager() :
+    //_factory(),
+    _resource(),
     _game_world(),
     _renderer(),
     _game_money(),
@@ -41,6 +46,15 @@ void my::GameManager::OnNotify(const char* type, const std::shared_ptr<my::Actor
     if (type == "DeleteRequest") {
         _delete_actors.push_back(ptr);
     } // if
+}
+/*
+void my::GameManager::SetFactoryManager(const std::shared_ptr<my::FactoryManager>& ptr) {
+    this->_factory = ptr;
+}
+*/
+
+void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
+    this->_resource = ptr;
 }
 
 bool my::GameManager::Initialize(void) {
@@ -64,11 +78,11 @@ bool my::GameManager::Initialize(void) {
     auto param = new my::Actor::Param();
     player->Initialize(param);
     param->transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
-    // Enemy‚ğ‰Šú‰»‚·‚é‚½‚ß‚ÉƒLƒƒƒbƒVƒ…
+    // Enemy
     auto temp = ut::MakeSharedWithRelease<my::Enemy>();
     temp->AddObserver(shared_from_this());
+    temp->Construct(my::FactoryManager::Singleton().CreateBuilder("../Resource/builder/enemy.json"));
     temp->Initialize(param);
-
     ut::SafeDelete(param);
 
     this->AddElement(player);

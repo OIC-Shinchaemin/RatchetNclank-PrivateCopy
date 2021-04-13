@@ -2,6 +2,8 @@
 
 
 my::FactoryManager::FactoryManager() :
+    _component(),
+    _builder(&_component),
     _behaviour_node(),
     _behaviour_executor(&_behaviour_node) {
 }
@@ -12,6 +14,14 @@ my::FactoryManager::~FactoryManager() {
 my::FactoryManager& my::FactoryManager::Singleton(void) {
     static my::FactoryManager object;
     return object;
+}
+
+std::shared_ptr<my::Component> my::FactoryManager::CreateComponent(const char* name, const rapidjson::Value& param) const{
+    return _component.Create(name, param);
+}
+
+std::shared_ptr<my::IBuilder> my::FactoryManager::CreateBuilder(const char* path) const {
+    return _builder.Create(path);
 }
 
 behaviour::NodeExecutorPtr<std::shared_ptr<my::Enemy>> my::FactoryManager::CreateBehaviourExecutor(const char* key) {
