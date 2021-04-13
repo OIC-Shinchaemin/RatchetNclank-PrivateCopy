@@ -212,7 +212,8 @@ namespace Mof {
 				@return			生成したジオメトリ<br>
 								失敗した場合NULL
 		*//**************************************************************************/
-		static LPGeometry CGraphicsUtilities::CreateTriangleGeometry(BufferAccess VUsage, BufferAccess IUsage);
+		//static LPGeometry CGraphicsUtilities::CreateTriangleGeometry(BufferAccess VUsage, BufferAccess IUsage);
+		static LPGeometry CreateTriangleGeometry(BufferAccess VUsage, BufferAccess IUsage);
 		/*************************************************************************//*!
 				@brief			平面プリミティブを作成する
 				@param[in]		w			幅
@@ -653,7 +654,8 @@ namespace Mof {
 				@return			TRUE		成功<br>
 								それ以外	失敗、エラーコードが戻り値となる
 		*//**************************************************************************/
-		static MofBool CGraphicsUtilities::RenderFillTriangle(Vector2& t, Vector2& rb, Vector2& lb, MofU32 tc, MofU32 rbc, MofU32 lbc);
+		//static MofBool CGraphicsUtilities::RenderFillTriangle(Vector2& t, Vector2& rb, Vector2& lb, MofU32 tc, MofU32 rbc, MofU32 lbc);
+		static MofBool RenderFillTriangle(Vector2& t, Vector2& rb, Vector2& lb, MofU32 tc, MofU32 rbc, MofU32 lbc);
 
 		//----------------------------------------------------------------------------
 		////四角形の描画
@@ -672,7 +674,8 @@ namespace Mof {
 				@return			TRUE		成功<br>
 								それ以外	失敗、エラーコードが戻り値となる
 		*//**************************************************************************/
-		static MofBool CGraphicsUtilities::RenderFillQuad(Vector2& lt, Vector2& lb, Vector2& rt, Vector2& rb, MofU32 ltc, MofU32 lbc, MofU32 rtc, MofU32 rbc);
+		//static MofBool CGraphicsUtilities::RenderFillQuad(Vector2& lt, Vector2& lb, Vector2& rt, Vector2& rb, MofU32 ltc, MofU32 lbc, MofU32 rtc, MofU32 rbc);
+		static MofBool RenderFillQuad(Vector2& lt, Vector2& lb, Vector2& rt, Vector2& rb, MofU32 ltc, MofU32 lbc, MofU32 rtc, MofU32 rbc);
 
 		//----------------------------------------------------------------------------
 		////平面の描画
