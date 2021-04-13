@@ -53,6 +53,7 @@ bool Stage::Parse(const rapidjson::Document* buffer, MeshList* mesh_list, Object
         const auto& json_object_data = json_object_list[i];
         std::string object_name      = json_object_data["object_name"].GetString();
         std::string mesh_name        = json_object_data["mesh_name"].GetString();
+        int         mesh_index       = json_object_data["mesh_index"].GetInt();
 
         Vector3 position, rotation, scale;
         position.x  = json_object_data["pos_x"].GetInt() * 0.001f;

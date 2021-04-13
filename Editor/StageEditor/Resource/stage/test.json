@@ -6,6 +6,7 @@
         {
             "object_name": "sample_box",
             "mesh_name": "mesh\\sample_mom\\sample_box.mom",
+            "mesh_index": 0,
             "pos_x": -581,
             "pos_y": 0,
             "pos_z": -474,
@@ -19,6 +20,7 @@
         {
             "object_name": "sample_box1",
             "mesh_name": "mesh\\sample_mom\\sample_box.mom",
+            "mesh_index": 0,
             "pos_x": 854,
             "pos_y": 0,
             "pos_z": -528,
