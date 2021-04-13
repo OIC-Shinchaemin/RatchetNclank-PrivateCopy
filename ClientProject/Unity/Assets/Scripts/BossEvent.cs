@@ -7,7 +7,7 @@ public class BossEvent : MonoBehaviour
     public GameObject player;
     public bool bBoss = false;
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == player)
         {
