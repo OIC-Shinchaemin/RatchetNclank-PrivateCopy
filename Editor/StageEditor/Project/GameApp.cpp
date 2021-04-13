@@ -63,10 +63,6 @@ CXGamePad                 gamepad;
 CCamera                   main_camera;
 MouseMoveCameraController camera_controller;
 
-CCamera                   mesh_view_camera;
-CTexture                  mesh_view_target;
-MeshViewCameraController  mesh_view_controller;
-
 
 /*************************************************************************//*!
         @brief            アプリケーションの初期化
@@ -93,17 +89,9 @@ MofBool CGameApp::Initialize(void) {
     main_camera.LookAt(Vector3(0.0f, 2.0f, -6.0f), Vector3(0, 0.5f, 0), Vector3(0, 1, 0));
     main_camera.Update();
 
-	mesh_view_camera.SetViewPort();
-	mesh_view_camera.PerspectiveFov(MOF_ToRadian(60), scene_w / scene_h, 0.1f, 500.0f);
-	mesh_view_camera.LookAt(Vector3(0.0f, 2.0f, -6.0f), Vector3(0, 0, 0), Vector3(0, 1, 0));
-	mesh_view_camera.Update();
-	mesh_view_target.Create(scene_w, scene_h, PIXELFORMAT_R8G8B8A8_UNORM, BUFFERACCESS_GPUREADWRITE);
-
     camera_controller.Initialize(&main_camera);
-    mesh_view_controller.Initialize(&mesh_view_camera);
 
     CGraphicsUtilities::SetCamera(&main_camera);
-    //CGraphicsUtilities::SetCamera(&mesh_view_camera);
 
     XGAMEPADCREATEINFO pad_info;
     pad_info.No = 0;
@@ -314,24 +302,6 @@ MofBool CGameApp::Render(void) {
 
     g_pGraphics->SetDepthEnable(FALSE);
 
-	//ToDo : MeshView
-	/*{
-		LPDepthTarget  depth_target = g_pGraphics->GetDepthTarget();
-		LPRenderTarget target_old   = g_pGraphics->GetRenderTarget();
-		g_pGraphics->SetRenderTarget(mesh_view_target.GetRenderTarget(), depth_target);
-        g_pGraphics->ClearTarget(back_color->r, back_color->g, back_color->b, back_color->a, 1.0f, 0);
-        CGraphicsUtilities::RenderFillRect(0, 0, 1024, 768, MOF_COLOR_GREEN);
-        g_pGraphics->SetDepthEnable(TRUE);
-		CGraphicsUtilities::SetCamera(&mesh_view_camera);
-		CMatrix44 mesh_view_matrix;
-		if (meshdata_pointer && meshdata_pointer->second) {
-			meshdata_pointer->second->Render(mesh_view_matrix, Vector4(1, 1, 1, 1));
-		}
-        g_pGraphics->SetDepthEnable(FALSE);
-		g_pGraphics->SetRenderTarget(target_old, depth_target);
-        mesh_view_target.Render(0, 0);
-	}*/
-
 	if (editor_parameter.IsShowMeshWindow()) {
 		mesh_window.Show();
 	}
@@ -356,8 +326,6 @@ MofBool CGameApp::Release(void) {
     CMofImGui::Cleanup();
 
     gamepad.Release();
-    
-	mesh_view_target.Release();
     
 	MeshAsset::Release();
 	TextureAsset::Release();

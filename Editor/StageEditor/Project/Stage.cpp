@@ -69,11 +69,11 @@ bool Stage::Parse(const rapidjson::Document* buffer, MeshList* mesh_list, Object
         rotation.z  = json_object_data["rotation_z"].GetInt() * 0.001f;
 
         ObjectData object_data;
-        object_data.name         = object_name;
-        object_data.mesh_pointer = Stage::GetMeshPtr(mesh_name);
-        object_data.position     = position;
-        object_data.rotation     = rotation;
-        object_data.scale        = scale;
+        object_data.name       = object_name;
+        object_data.mesh_index = mesh_index;
+        object_data.position   = position;
+        object_data.rotation   = rotation;
+        object_data.scale      = scale;
 
         AddObjectData add_object_data;
         add_object_data.first  = &object_data;
@@ -169,7 +169,7 @@ void Stage::Update(void) {
 void Stage::Render(void) {
 
     for (const auto& it : _object_array) {
-        if (it.mesh_pointer == nullptr) {
+        if (it.mesh_index < 0) {
             continue;
         }
         CMatrix44 matrix_world;
@@ -178,14 +178,13 @@ void Stage::Render(void) {
         scale.Scaling(it.scale);
         rotation.RotationZXY(it.rotation);
         matrix_world = scale * rotation * position;
-        it.mesh_pointer->Render(matrix_world);
+        int mesh_no = it.mesh_index;
+        MeshPtr mesh_pointer = _mesh_array[mesh_no].second;
+        mesh_pointer->Render(matrix_world);
     }
 }
 
 void Stage::Release(void) {
-    for (auto& it : _object_array) {
-        it.mesh_pointer = nullptr;
-    }
     _object_array.clear();
     for (auto& it : _mesh_array) {
         it.second->Release();

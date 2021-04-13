@@ -55,6 +55,12 @@
     <Filter Include="ヘッダー ファイル\Command">
       <UniqueIdentifier>{7cb63f4d-9785-434b-9bc4-c0b77918fba3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Stage">
+      <UniqueIdentifier>{9a393e76-4baf-4df8-8d22-9bf980fabec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage">
+      <UniqueIdentifier>{64c58e12-be8c-4f14-b866-3cc35bb18f05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -120,9 +126,6 @@
     <ClCompile Include="AddObject.cpp">
       <Filter>ソース ファイル\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SaveProjectDialog.cpp">
       <Filter>ソース ファイル\Action</Filter>
     </ClCompile>
@@ -157,7 +160,10 @@
       <Filter>ソース ファイル\Command</Filter>
     </ClCompile>
     <ClCompile Include="CommandLogWindow.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>ソース ファイル\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +248,6 @@
     <ClInclude Include="AddObject.h">
       <Filter>ヘッダー ファイル\Action</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SaveProjectDialog.h">
       <Filter>ヘッダー ファイル\Action</Filter>
     </ClInclude>
@@ -281,11 +284,14 @@
     <ClInclude Include="MeshRemoveCommand.h">
       <Filter>ヘッダー ファイル\Command</Filter>
     </ClInclude>
-    <ClInclude Include="CommandLogWindow.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandLogWindow.h">
+      <Filter>ヘッダー ファイル\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

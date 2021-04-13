@@ -69,22 +69,17 @@ CameraController::Controller MouseMoveCameraController::ModeEye(void) {
 
     // 回転
     controller.rotation.trigger_flag = MouseUtilities::IsKeyHold(MOFMOUSE_LBUTTON);
-    controller.rotation.move = mouse_move * camera_move_rotation_ratio;
+    controller.rotation.move         = mouse_move * camera_move_rotation_ratio;
 
     // ズーム
     bool zoom_trigger = (mouse_move.z != 0.0f);
-    float zoom_move = mouse_move.z * camera_move_zoom_ratio;
+    float zoom_move   = mouse_move.z * camera_move_zoom_ratio;
     if (MouseUtilities::IsKeyHold(MOFMOUSE_CENTERBUTTON)) {
         zoom_trigger = (mouse_move.y != 0.0f);
-        zoom_move = -mouse_move.y * camera_move_zoom_hold_ratio;
+        zoom_move    = -mouse_move.y * camera_move_zoom_hold_ratio;
     }
     controller.zoom.trigger_flag = zoom_trigger;
-    controller.zoom.move = zoom_move;
-
-    // トラック
-    bool track_trigger = false;
-    controller.track.trigger_flag = track_trigger;
-    controller.track.move = mouse_move * camera_move_track_ratio;
+    controller.zoom.move         = zoom_move;
 
     return controller;
 }
@@ -102,18 +97,13 @@ CameraController::Controller MouseMoveCameraController::ModeInstObject(void) {
 
     // ズーム
     bool zoom_trigger = (mouse_move.z != 0.0f);
-    float zoom_move = mouse_move.z * camera_move_zoom_ratio;
+    float zoom_move   = mouse_move.z * camera_move_zoom_ratio;
     if (MouseUtilities::IsKeyHold(MOFMOUSE_CENTERBUTTON)) {
         zoom_trigger = (mouse_move.y != 0.0f);
-        zoom_move = -mouse_move.y * camera_move_zoom_hold_ratio;
+        zoom_move    = -mouse_move.y * camera_move_zoom_hold_ratio;
     }
     controller.zoom.trigger_flag = zoom_trigger;
-    controller.zoom.move = zoom_move;
-
-    // トラック
-    bool track_trigger = false;
-    controller.track.trigger_flag = track_trigger;
-    controller.track.move = mouse_move * camera_move_track_ratio;
+    controller.zoom.move         = zoom_move;
 
     return controller;
 }

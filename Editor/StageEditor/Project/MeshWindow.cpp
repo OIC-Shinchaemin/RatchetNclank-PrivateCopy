@@ -10,9 +10,6 @@
 #include "MeshLoadCommand.h"
 #include "MeshRemoveCommand.h"
 
-//! ToDo
-//extern CTexture                  mesh_view_target;
-
 // ********************************************************************************
 /// <summary>
 /// 
@@ -64,8 +61,6 @@ void MeshWindow::ShowMeshInfo(void) {
         }
         ImGui::InputTextWithHint("file", "select mesh...", text, text_length, ImGuiInputTextFlags_ReadOnly);
         ImGui::Text(std::filesystem::current_path().string().c_str());
-		//! ToDo
-        //ImGui::Image((void*)mesh_view_target.GetTexture(), ImVec2(200, 200));
         ImGui::EndChild();
     }
     ImGui::EndGroup();
@@ -182,8 +177,6 @@ void MeshWindow::MeshLoadDialog(void) {
     // データの参照、登録
     if (ActionManager::GetInstance().Action(ActionKeyName::MeshLoadDialog, &filename)) {
         CommandManager::GetInstance().Register(std::make_shared<MeshLoadCommand>(filename, filename));
-        //std::weak_ptr<CMeshContainer> mesh = MeshAsset::GetAsset(filename);
-        //MeshLoad(&MeshData(FileDialog::GetFileName(filename.c_str()), mesh));
     }
 }
 
