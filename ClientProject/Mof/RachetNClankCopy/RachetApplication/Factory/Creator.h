@@ -27,7 +27,10 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<Base> Create(void) const override {
-        return ut::MakeSharedWithRelease<Derived>();
+        if constexpr (ty::has_func_release<Base>::value) {
+            return ut::MakeSharedWithRelease<Derived>();
+        } // if
+        return std::make_shared<Derived>();
     }
 };
 }

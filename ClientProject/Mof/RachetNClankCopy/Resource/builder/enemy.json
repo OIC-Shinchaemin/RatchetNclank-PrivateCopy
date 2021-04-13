@@ -1,6 +1,12 @@
 {
   "components": [
     {
+      "type": "AIStateComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "SightRecognitionComponent",
       "paramater": {
         "priority": 0

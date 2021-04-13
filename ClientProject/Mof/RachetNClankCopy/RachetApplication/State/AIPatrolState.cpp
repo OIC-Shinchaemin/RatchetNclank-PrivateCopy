@@ -3,7 +3,9 @@
 
 state::AIPatrolState::AIPatrolState() :
     super() {
-    super::_behaviour_path = "../Resource/behaviour/patrol.json";
+    //super::_behaviour_path = "../Resource/behaviour/patrol.json";
+    super::_behaviour_path = "../Resource/behaviour/test.json";
+    this->GenerateBehaviourExecutor();
 }
 
 state::AIPatrolState::~AIPatrolState() {

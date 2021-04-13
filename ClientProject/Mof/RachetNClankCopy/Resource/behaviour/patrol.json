@@ -16,7 +16,7 @@
     },
     {
       "type": "FunctionNode",
-      "function": "Enemy::OverLooking"
+      "function": "Enemy::LookAround"
     }
   ]
 }

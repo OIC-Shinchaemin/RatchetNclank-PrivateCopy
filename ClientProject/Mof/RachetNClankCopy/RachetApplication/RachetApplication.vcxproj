@@ -172,6 +172,7 @@
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraLocator.cpp" />
     <ClCompile Include="Camera\CameraManager.cpp" />
+    <ClCompile Include="Component\AIStateComponent.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemySightCollisionAlgolithm.cpp" />
@@ -273,6 +274,9 @@
     <ClInclude Include="Behaviour\Node\CompositeNode.h" />
     <ClInclude Include="Behaviour\Node\ConditionalNode.h" />
     <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
+    <ClInclude Include="Behaviour\Node\GoHomeNode.h" />
+    <ClInclude Include="Behaviour\Node\LookAroundNode.h" />
+    <ClInclude Include="Behaviour\Node\MoveActionNode.h" />
     <ClInclude Include="Behaviour\Node\Node.h" />
     <ClInclude Include="Behaviour\Node\ParameterNode.h" />
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
@@ -282,6 +286,7 @@
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraLocator.h" />
     <ClInclude Include="Camera\CameraManager.h" />
+    <ClInclude Include="Component\AIStateComponent.h" />
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemySightCollisionAlgolithm.h" />
@@ -348,6 +353,7 @@
   <ItemGroup>
     <None Include="..\Resource\behaviour\combat.json" />
     <None Include="..\Resource\behaviour\patrol.json" />
+    <None Include="..\Resource\behaviour\test.json" />
     <None Include="..\Resource\builder\blaster.json" />
     <None Include="..\Resource\builder\blaster_bullet.json" />
     <None Include="..\Resource\builder\bomb_glove.json" />
