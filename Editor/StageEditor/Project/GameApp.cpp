@@ -192,7 +192,7 @@ MofBool CGameApp::Update(void) {
         data.position       = MouseUtilities::GetWorldPos();
         data.mesh_path      = MeshAsset::GetKey(mesh_pointer->second.lock());
         data.name           = mesh_pointer->first;
-        data.mesh_pointer   = mesh_pointer->second.lock();
+        data.mesh_index     = mesh_window.GetSelectNo();
         ICommandPtr command = std::make_shared<ObjectPlantCommand>(&data);
         command_manager.Register(command);
     }
@@ -234,6 +234,14 @@ MofBool CGameApp::Render(void) {
     //CGraphicsUtilities::RenderPlane(matWorld);
 
     for (const auto& it : object_window.GetObjectList()) {
+        std::shared_ptr<CMeshContainer> mesh_pointer = nullptr;
+        const int                       mesh_no      = it.mesh_index;
+        if (mesh_no >= 0) {
+            mesh_pointer = mesh_window.GetMeshList()[mesh_no].second.lock();
+        }
+        else {
+            continue;
+        }
         CMatrix44 object_rotation, object_scale;
         CMatrix44 object_matrix;
         object_rotation.RotationZXY(it.rotation);
@@ -252,24 +260,24 @@ MofBool CGameApp::Render(void) {
             edge_material.SetDiffuse (Vector4(1, 1, 1, 1));
             edge_material.SetEmissive(Vector4(1, 1, 1, 1));
             edge_material.SetSpeculer(Vector4(1, 1, 1, 1));
-            const int geo_size = it.mesh_pointer->GetGeometryCount();
+            const int geo_size = mesh_pointer->GetGeometryCount();
             std::vector<LPMaterial> def_material(geo_size);
             for (int i = 0; i < geo_size; i++) {
-                def_material[i] = it.mesh_pointer->GetGeometry(i)->GetMaterial();
+                def_material[i] = mesh_pointer->GetGeometry(i)->GetMaterial();
             }
             for (int i = 0; i < geo_size; i++) {
-                it.mesh_pointer->GetGeometry(i)->SetMaterial(&edge_material);
+                mesh_pointer->GetGeometry(i)->SetMaterial(&edge_material);
             }
             // 強調表示
             g_pGraphics->SetDepthEnable(FALSE);
-            it.mesh_pointer->Render(object_matrix_edge, Vector4(0, 1, 0, 1));
+            mesh_pointer->Render(object_matrix_edge, Vector4(0, 1, 0, 1));
             g_pGraphics->SetDepthEnable(TRUE);
             // マテリアルの設定を戻す
             for (int i = 0; i < geo_size; i++) {
-                it.mesh_pointer->GetGeometry(i)->SetMaterial(def_material[i]);
+                mesh_pointer->GetGeometry(i)->SetMaterial(def_material[i]);
             }
         }
-        it.mesh_pointer->Render(object_matrix);
+        mesh_pointer->Render(object_matrix);
     }
 
     CMatrix44 matrix_world_object;

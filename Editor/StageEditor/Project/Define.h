@@ -37,12 +37,12 @@ using TextureAsset = AssetBase<std::string, CTexture>;
 /// </summary>
 // ********************************************************************************
 struct ObjectData {
-    Vector3                         position     { 0.0f, 0.0f, 0.0f };
-    Vector3                         scale        { 1.0f, 1.0f, 1.0f };
-    Vector3                         rotation     { 0.0f, 0.0f, 0.0f };
-    std::shared_ptr<CMeshContainer> mesh_pointer { nullptr };
-    std::string                     mesh_path    { "" };
-    std::string                     name         { "" };
+    Vector3     position   { 0.0f, 0.0f, 0.0f };
+    Vector3     scale      { 1.0f, 1.0f, 1.0f };
+    Vector3     rotation   { 0.0f, 0.0f, 0.0f };
+    int         mesh_index { -1 };
+    std::string mesh_path  { "" };
+    std::string name       { "" };
 
     // ********************************************************************************
     /// <summary>
@@ -56,7 +56,7 @@ struct ObjectData {
     : position(obj.position)
     , scale(obj.scale)
     , rotation(obj.rotation)
-    , mesh_pointer(obj.mesh_pointer)
+    , mesh_index(obj.mesh_index)
     , mesh_path(obj.mesh_path)
     , name(obj.name) {
     }
@@ -72,12 +72,12 @@ struct ObjectData {
     /// <changed>‚¢‚Ì‚¤‚¦,2021/03/20</changed>
     // ********************************************************************************
     static bool Compare(const ObjectData& v1, const ObjectData& v2) {
-        bool pos_flag    = (v1.position     == v2.position    );
-        bool scale_flag  = (v1.scale        == v2.scale       );
-        bool rotate_flag = (v1.rotation     == v2.rotation    );
-        bool mesh_flag   = (v1.mesh_pointer == v2.mesh_pointer);
-        bool path_flag   = (v1.mesh_path    == v2.mesh_path   );
-        bool name_flag   = (v1.name         == v2.name        );
+        bool pos_flag    = (v1.position   == v2.position  );
+        bool scale_flag  = (v1.scale      == v2.scale     );
+        bool rotate_flag = (v1.rotation   == v2.rotation  );
+        bool mesh_flag   = (v1.mesh_index == v2.mesh_index);
+        bool path_flag   = (v1.mesh_path  == v2.mesh_path );
+        bool name_flag   = (v1.name       == v2.name      );
         return (pos_flag && scale_flag && rotate_flag && mesh_flag && path_flag && name_flag);
     }
 };

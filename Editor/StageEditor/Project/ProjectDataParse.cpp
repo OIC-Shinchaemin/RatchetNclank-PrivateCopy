@@ -64,6 +64,7 @@ bool ProjectDataParse::Action(std::any any) {
         mesh_data.second = MeshAsset::GetAsset(mesh_path);
         (*mesh_list).push_back(std::move(mesh_data));
     }
+    std::function<int(std::string)> GetMeshIndex = [](const std::string& str) { return 0; };
 
     if (!(*project_data).HasMember("object_list")) {
         return false;
@@ -75,6 +76,7 @@ bool ProjectDataParse::Action(std::any any) {
         const auto& json_object_data = json_object_list[i];
         std::string object_name = json_object_data["object_name"].GetString();
         std::string mesh_name   = json_object_data["mesh_name"].GetString();
+        int         mesh_index  = json_object_data["mesh_index"].GetInt();
 
         Vector3 position, rotation, scale;
         position.x  = json_object_data["pos_x"].GetInt() * 0.001f;
@@ -92,7 +94,7 @@ bool ProjectDataParse::Action(std::any any) {
         ObjectData object_data;
         object_data.name         = object_name;
         object_data.mesh_path    = mesh_name;
-        object_data.mesh_pointer = MeshAsset::GetAsset(mesh_name);
+        object_data.mesh_index   = mesh_index;
         object_data.position     = position;
         object_data.rotation     = rotation;
         object_data.scale        = scale;
