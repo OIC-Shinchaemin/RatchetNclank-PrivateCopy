@@ -22,6 +22,9 @@ void ObjectWindow::ShowObjectList(void) {
         if (ImGui::Selectable(it.name.c_str(), _object_list_current == i)) {
             _object_list_current = i;
             _object_select_item  = &it;
+            LPCamera main_camera = CGraphicsUtilities::GetCamera();
+            main_camera->SetTargetPosition(_object_select_item->position);
+            main_camera->Update();
         }
         i++;
     }

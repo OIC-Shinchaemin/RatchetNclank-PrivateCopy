@@ -49,7 +49,9 @@ void ToolMenu::Show(void) {
                 *edit_mode = EditMode::EditEye | EditMode::MoveCamera;
             }
         } ImGui::SameLine();
-        
+
+        //! ToDo : ƒMƒYƒ‚ŽÀ‘•Œã
+        /*
         if (ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::ArrowMove),
             size, uv1, uv2, frame_padding,
             (((*edit_mode) & EditMode::EditTrans) ? bg_select_col : bg_col))) {
@@ -66,6 +68,7 @@ void ToolMenu::Show(void) {
             (((*edit_mode) & EditMode::EditScale) ? bg_select_col : bg_col))) {
             *edit_mode = EditMode::EditScale | EditMode::MoveCamera;
         } ImGui::SameLine();
+        */
 
         ImGui::Text("    "); ImGui::SameLine();
         if (ImGui::ImageButton(ToolIcon::GetInstance().GetTexture(ToolIcon::Installation),
