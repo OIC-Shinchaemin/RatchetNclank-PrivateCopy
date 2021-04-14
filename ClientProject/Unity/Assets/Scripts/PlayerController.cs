@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         //UnityEngine.Debug.Log("Now scene is <color=red>" + SceneManager.GetActiveScene().name + "</color>");
         //UnityEngine.Debug.Log(rb.velocity.y);
         //UnityEngine.Debug.Log(coll.IsTouchingLayers(ground));
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -103,6 +104,36 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            CollisionEnemy(enemy);
+        }
+    }
+
+    void CollisionEnemy(Enemy enemy)
+    {
+
+        if (state == State.falling)
+        {
+            enemy.JumpedOn();
+            Jump();
+        }
+        else
+        {
+            state = State.hurt;
+
+            HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
+
+            if (enemy.gameObject.transform.position.x > transform.position.x)
+            {
+                rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -110,26 +141,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (state == State.falling)
-            {
-                enemy.JumpedOn();
-                Jump();
-            }
-            else
-            {
-                state = State.hurt;
-
-                HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
-
-                if (other.gameObject.transform.position.x > transform.position.x)
-                {
-                    rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
-                }
-                else
-                {
-                    rb.velocity = new Vector2(hurtForce, rb.velocity.y);
-                }
-            }
+            CollisionEnemy(enemy);
         }
 
         if (other.gameObject.tag == "Destroy")
@@ -161,7 +173,9 @@ public class PlayerController : MonoBehaviour
         if (state != State.atack && state != State.Die)
         {
             float hDirection = Input.GetAxis("Horizontal");
+            float moveSpeed = 0.0f;
 
+            //climb start
             if (canClimb && Mathf.Abs(Input.GetAxis("Vertical")) > .1f)
             {
                 state = State.climb;
@@ -173,17 +187,26 @@ public class PlayerController : MonoBehaviour
             //Moving Left
             if (hDirection < 0)
             {
-                rb.velocity = new Vector2(-speed, rb.velocity.y);
+                moveSpeed = -speed;
                 transform.localScale = new Vector2(-1, 1);
                 Left = true;
             }
             //Moving Right
             else if (hDirection > 0)
             {
-                rb.velocity = new Vector2(speed, rb.velocity.y);
+                moveSpeed = speed;
                 transform.localScale = new Vector2(1, 1);
                 Left = false;
             }
+
+            else
+            {
+                moveSpeed = 0;
+            }
+
+            UnityEngine.Debug.Log(moveSpeed);
+
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
 
             //Jumping
             if (Input.GetButtonDown("Jump"))
