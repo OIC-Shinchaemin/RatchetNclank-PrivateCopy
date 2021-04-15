@@ -22,7 +22,7 @@ public:
     /// <param name="behaviour_factory"></param>
     BehaviourExecutorFactory(my::BehaviourFactory* behaviour_factory) :
         _behaviour_map() {
-        _behaviour_map.emplace("../Resource/behaviour/patrol.json", behaviour_factory->CreateRootNode("../Resource/behaviour/patrol.json"));
+        //_behaviour_map.emplace("../Resource/behaviour/patrol.json", behaviour_factory->CreateRootNode("../Resource/behaviour/patrol.json"));
         _behaviour_map.emplace("../Resource/behaviour/combat.json", behaviour_factory->CreateRootNode("../Resource/behaviour/combat.json"));
         _behaviour_map.emplace("../Resource/behaviour/test.json", behaviour_factory->CreateRootNode("../Resource/behaviour/test.json"));
     }

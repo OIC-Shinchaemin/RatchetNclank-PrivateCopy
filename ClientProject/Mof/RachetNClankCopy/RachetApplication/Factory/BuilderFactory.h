@@ -39,12 +39,6 @@ public:
     /// <param name="path"></param>
     /// <returns></returns>
     std::shared_ptr<my::IBuilder> Create(const char* path) const;
-    /// <summary>
-    /// ”»’è
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    //bool Exist(const std::string& type);
 };
 }
 #endif // !MY_ACTOR_FACTORY_H

@@ -4,11 +4,16 @@
 
 #include "NodeExecutor.h"
 
+#include "My/Core/Trait.h"
+
 
 namespace behaviour {
 template<typename Actor>
 class ActionNodeExecutor : public behaviour::NodeExecutor<Actor> {
     using super = behaviour::NodeExecutor<Actor>;
+private:
+    //! アクター
+    std::weak_ptr<typename ty::remove_shared<Actor>::type> _actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -21,6 +26,13 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~ActionNodeExecutor() = default;
+    /// <summary>
+    /// 実行時必要なポインタをキャッシュ
+    /// </summary>
+    /// <param actor=""></param>
+    virtual void Prepare(Actor actor) override {
+        _actor = actor;
+    }
     /// <summary>
     /// ノードの実行
     /// </summary>

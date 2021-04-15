@@ -12,11 +12,11 @@
     },
     {
       "type": "ActionNode",
-      "derived": "GoHome"
+      "derived": "GoHomeNode"
     },
     {
       "type": "ActionNode",
-      "derived": "LookAround"
+      "derived": "LookAroundNode"
     }
   ]
 }

@@ -8,28 +8,13 @@
 
 #include <Mof.h>
 
-#include "../MotionNames.h"
+#include "../Actor.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Component/MotionComponent.h"
 #include "../Component/MotionStateComponent.h"
 
 
 namespace state {
-/*
-template <typename Type>
-class TransitionRules {
-    using Condition = std::function<bool(Type&)>;
-private:
-    Condition _condition;
-public:
-    TransitionRules(Condition) :
-        _condition() {
-    }
-    bool operator()(Type& instance) const {
-        return _condition(instance);
-    }
-};
-*/
 class EnemyMotionState : public my::State {
 protected:
     //! アニメーション速度

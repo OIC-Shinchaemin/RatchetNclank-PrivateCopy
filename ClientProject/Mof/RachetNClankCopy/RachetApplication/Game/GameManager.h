@@ -67,7 +67,6 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetFactoryManager(const std::shared_ptr<class FactoryManager>& ptr);
     void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
     /// <summary>
     /// 初期化

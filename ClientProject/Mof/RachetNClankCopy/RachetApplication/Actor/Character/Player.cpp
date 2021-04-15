@@ -3,8 +3,8 @@
 #include "../../Gamepad.h"
 #include "../../Component/Collision/Object/PlayerCollisionObject.h"
 #include "../../Component/MotionComponent.h"
-#include "../../Component/PlayerIdleComponent.h"
-#include "../../Component/PlayerMoveComponent.h"
+#include "../../Component/Player/PlayerIdleComponent.h"
+#include "../../Component/Player/PlayerMoveComponent.h"
 #include "../../Component/VelocityComponent.h"
 
 

@@ -9,7 +9,9 @@
 my::Actor::Actor() :
     _state(my::ActorState::Active),
     _name(),
+    _tag(),
     _transform(),
+    _initial_transform(),
     _components(),
     _input_components(),
     _update_components(),
@@ -21,6 +23,10 @@ my::Actor::~Actor() {
 
 void my::Actor::SetName(const char* name) {
     this->_name = name;
+}
+
+void my::Actor::SetTag(const char* tag) {
+    this->_tag = tag;
 }
 
 void my::Actor::SetPosition(Mof::CVector3 position) {
@@ -39,6 +45,10 @@ std::string my::Actor::GetName(void) const {
     return this->_name;
 }
 
+std::string my::Actor::GetTag(void) const {
+    return this->_tag;
+}
+
 Mof::CVector3 my::Actor::GetPosition(void) const {
     return this->_transform.position;
 }
@@ -49,6 +59,10 @@ Mof::CVector3 my::Actor::GetRotate(void) const {
 
 Mof::CVector3 my::Actor::GetScale(void) const {
     return this->_transform.scale;
+}
+
+Mof::CVector3 my::Actor::GetInitialPosition(void) const {
+    return this->_initial_transform.position;
 }
 
 my::ActorState my::Actor::GetState(void) const {
@@ -100,12 +114,24 @@ void my::Actor::End(void) {
     Observable::Notify("DeleteRequest", shared_from_this());
 }
 
+bool my::Actor::Initialize(void) {
+    _state = my::ActorState::Active;
+    _transform = _initial_transform;
+    
+    // コンポーネントの初期化
+    for (auto& com : _components) {
+        com->Initialize();
+    } // for
+    return true;
+}
+
 bool my::Actor::Initialize(my::Actor::Param* param) {
     _state = my::ActorState::Active;
-    _transform = param->transform;
     _name = param->name;
+    _transform = param->transform;
+    _initial_transform = _transform;
 
-        // コンポーネントの初期化
+    // コンポーネントの初期化
     for (auto& com : _components) {
         com->Initialize();
     } // for

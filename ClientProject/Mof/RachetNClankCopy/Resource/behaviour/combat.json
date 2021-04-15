@@ -6,64 +6,38 @@
     {
       "type": "SelectorNode",
       "children": [
-        1,
-        10
+        1,6
       ]
-    },
-    {
-      "type": "DecoratorNode",
-      "return": "float",
-      "operator": "Less",
-      "left": 2,
-      "right": 3,
-      "child" : 4 
-    },
-    {
-      "type": "GetNode",
-      "function": "Enemy::GetDistanceFromInitPosition"
-    },
-    {
-      "type": "ValueNode",
-      "return": "float",
-      "value": 5.0
-    },
-
-
-    {
-      "type": "DecoratorNode",
-      "return": "bool",
-      "operator": "Equal",
-      "left": 5,
-      "right": 6,
-      "child": 7
-    },
-    {
-      "type": "GetNode",
-      "function": "Enemy::HasTarget"
-    },
-    {
-      "type": "ValueNode",
-      "return": "bool",
-      "value": true
     },
     {
       "type": "SequencerNode",
       "children": [
-        8,
-        9
+        2,
+        3,
+        4,
+        5
+
       ]
     },
     {
-      "type": "FunctionNode",
-      "function": "Enemy::ChaseTarget"
+      "type": "ConditionalNode",
+      "derived": "NotAwayFromHomeNode"
     },
     {
-      "type": "FunctionNode",
-      "function": "Enemy::Attack"
+      "type": "ConditionalNode",
+      "derived": "TargetRecognitionNode"
     },
     {
-      "type": "FunctionNode",
-      "function": "Enemy::ChangeToPatrolState"
+      "type": "ConditionalNode",
+      "derived": "TargetOutOfMeleeAttackRangeNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "MoveToEnemyNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "ChangePatrolNode"
     }
   ]
 }

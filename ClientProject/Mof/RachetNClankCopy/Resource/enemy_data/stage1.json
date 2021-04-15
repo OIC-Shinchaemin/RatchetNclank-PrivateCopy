@@ -1,0 +1,12 @@
+{
+  "enemy_datas": [
+    {
+      "builder": "../Resource/builder/enemy.json",
+      "name": "enemy3",
+      "position_x": 5.0,
+      "position_y": 0.0,
+      "position_z": 0.0
+    }
+
+  ]
+}
