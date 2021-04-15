@@ -7,8 +7,10 @@ public class HpEnemy : MonoBehaviour
     protected Animator anim;
     protected AudioSource death;
     protected Rigidbody2D rb;
-    
-    [SerializeField] private float health = 1;
+
+
+    [SerializeField, Range(1, 50)] private int health = 1;
+    [SerializeField, Range(1, 50)] private int getscore = 100;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,6 +21,7 @@ public class HpEnemy : MonoBehaviour
 
         if (health == 0)
         {
+            EbiScore();
             anim.SetTrigger("Death");
             death.Play();
             rb.velocity = Vector2.zero;
@@ -43,11 +46,20 @@ public class HpEnemy : MonoBehaviour
 
     private void Debug()
     {
-        UnityEngine.Debug.Log(health);
+        
     }
 
     public void Death()
     {
         Destroy(this.gameObject);
+    }
+    private void EbiScore()
+    {
+        PermanentUI.perm.scoreValue += getscore;
+        ScoreUpdate();
+    }
+    private void ScoreUpdate()
+    {
+        PermanentUI.perm.ScoreText.text = PermanentUI.perm.scoreValue.ToString("D7");
     }
 }
