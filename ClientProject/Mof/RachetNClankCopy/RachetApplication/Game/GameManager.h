@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "My/Core/Observer.h"
+#include "My/UI/UICanvas.h"
 #include "GameWorld.h"
 #include "Renderer.h"
 #include "PhysicsWorld.h"
@@ -19,6 +20,8 @@ class GameManager : public std::enable_shared_from_this<my::GameManager>, public
 private:
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! リソース
+    std::weak_ptr<my::UICanvas> _ui_canvas;
     //! 追加
     std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! 削除
@@ -68,6 +71,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

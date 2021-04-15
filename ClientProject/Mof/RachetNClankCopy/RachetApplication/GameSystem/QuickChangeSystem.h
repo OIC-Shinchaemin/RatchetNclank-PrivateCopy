@@ -3,7 +3,6 @@
 
 
 #include "My/Core/Observable.h"
-#include "MY/UI/CanvasLocator.h"
 
 #include <optional>
 #include <memory>
@@ -15,6 +14,8 @@
 
 #include "WeaponSystem.h"
 #include "../ResourceManager.h"
+#include "MY/UI/UICanvas.h"
+
 #include "../GameDefine.h"
 
 
@@ -29,6 +30,8 @@ private:
     std::weak_ptr<Mof::CTexture> _texture;
     //! 所有
     std::string _weapon;
+    //! リソース
+    std::weak_ptr<my::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// セッター
@@ -63,7 +66,7 @@ public:
     /// <returns></returns>
     bool Render(Mof::CVector4 color);
 };
-class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem>, public my::CanvasLocator, public Observable<Mof::CVector4> {
+class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem>, public Observable<Mof::CVector4> {
     using Observable = my::Observable<Mof::CVector4>;
     enum class State {
         Enter,
@@ -92,6 +95,8 @@ private:
     my::Observable<const std::string&> _current;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! リソース
+    std::weak_ptr<my::UICanvas> _ui_canvas;
     /// <summary>
     /// 開く
     /// </summary>
@@ -116,6 +121,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

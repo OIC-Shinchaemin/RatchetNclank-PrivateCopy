@@ -8,6 +8,12 @@
       }
     },
     {
+      "type": "HpComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "PlayerMoveComponent",
       "paramater": {
         "priority": 90

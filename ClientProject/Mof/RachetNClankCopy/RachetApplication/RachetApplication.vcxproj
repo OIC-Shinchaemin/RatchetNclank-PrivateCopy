@@ -148,7 +148,6 @@
     <ClCompile Include="..\include\My\Core\State.cpp" />
     <ClCompile Include="..\include\My\Core\StateMachine.cpp" />
     <ClCompile Include="..\include\My\Core\Timer.cpp" />
-    <ClCompile Include="..\include\My\UI\CanvasLocator.cpp" />
     <ClCompile Include="..\include\My\UI\UICanvas.cpp" />
     <ClCompile Include="..\include\My\UI\UIItem.cpp" />
     <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
@@ -186,6 +185,7 @@
     <ClCompile Include="Component\Enemy\EnemyIdleComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyMoveComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyStateComponent.cpp" />
+    <ClCompile Include="Component\HpComponent.cpp" />
     <ClCompile Include="Component\MeshComponent.cpp" />
     <ClCompile Include="Component\MotionComponent.cpp" />
     <ClCompile Include="Component\MotionStateComponent.cpp" />
@@ -229,6 +229,7 @@
     <ClCompile Include="State\PlayerMotionIdleState.cpp" />
     <ClCompile Include="State\PlayerMotionMoveState.cpp" />
     <ClCompile Include="State\PlayerMotionState.cpp" />
+    <ClCompile Include="UI\NanotechMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -246,7 +247,6 @@
     <ClInclude Include="..\include\My\Core\Timer.h" />
     <ClInclude Include="..\include\My\Core\Trait.h" />
     <ClInclude Include="..\include\My\Core\Utility.h" />
-    <ClInclude Include="..\include\My\UI\CanvasLocator.h" />
     <ClInclude Include="..\include\My\UI\UICanvas.h" />
     <ClInclude Include="..\include\My\UI\UIItem.h" />
     <ClInclude Include="..\include\My\UI\UIPanel.h" />
@@ -313,6 +313,7 @@
     <ClInclude Include="Component\Enemy\EnemyIdleComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyMoveComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyStateComponent.h" />
+    <ClInclude Include="Component\HpComponent.h" />
     <ClInclude Include="Component\MeshComponent.h" />
     <ClInclude Include="Component\MotionComponent.h" />
     <ClInclude Include="Component\MotionStateComponent.h" />
@@ -363,6 +364,7 @@
     <ClInclude Include="State\PlayerMotionIdleState.h" />
     <ClInclude Include="State\PlayerMotionMoveState.h" />
     <ClInclude Include="State\PlayerMotionState.h" />
+    <ClInclude Include="UI\NanotechMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
   </ItemGroup>
   <ItemGroup>

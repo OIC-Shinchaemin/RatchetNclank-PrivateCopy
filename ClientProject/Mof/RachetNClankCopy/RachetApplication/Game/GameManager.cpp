@@ -25,6 +25,7 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
 
 my::GameManager::GameManager() :
     _resource(),
+    _ui_canvas(),
     _game_world(),
     _renderer(),
     _game_money(),
@@ -51,6 +52,10 @@ void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>&
     this->_resource = ptr;
 }
 
+void my::GameManager::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
+    this->_ui_canvas = ptr;
+}
+
 bool my::GameManager::Initialize(void) {
     _stage.Initialize();
     _weapon_system = std::make_shared<my::WeaponSystem>();
@@ -58,6 +63,7 @@ bool my::GameManager::Initialize(void) {
     _quick_change = std::make_shared<my::QuickChangeSystem>();
     _game_money->SetResourceManager(_resource);
     _quick_change->SetResourceManager(_resource);
+    _quick_change->SetUICanvas(_ui_canvas);
 
     auto param = new my::Actor::Param();
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);

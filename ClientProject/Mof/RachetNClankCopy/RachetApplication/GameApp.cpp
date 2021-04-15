@@ -2,7 +2,6 @@
 
 #include "Gamepad.h"
 #include "My/Core/Define.h"
-#include "My/UI/CanvasLocator.h"
 #include "Camera/CameraLocator.h"
 
 #include "Component/Component.h"
@@ -65,12 +64,13 @@ MofBool CGameApp::Initialize(void) {
     
 
     my::Component::SetResourceManager(_resource_manager);
+    my::Component::SetUICanvas(_ui_canvas);
 
     my::CameraLocator::SetService(_camera_manager);
-    my::CanvasLocator::SetService(_ui_canvas);
 
     _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->SetResourceManager(_resource_manager);
+    _game_manager->SetUICanvas(_ui_canvas);
     _game_manager->Initialize();
     return TRUE;
 }
