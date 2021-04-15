@@ -3,18 +3,19 @@
 #include "Player.h"
 #include "../../Component/Collision/Object/EnemyCollisionObject.h"
 #include "../../Component/Collision/Object/EnemySightCollisionObject.h"
-#include "../../Component/EnemyIdleComponent.h"
-#include "../../Component/EnemyMoveComponent.h"
-#include "../../Component/EnemyAttackComponent.h"
+#include "../../Component/Enemy/EnemyIdleComponent.h"
+#include "../../Component/Enemy/EnemyMoveComponent.h"
+#include "../../Component/Enemy/EnemyAttackComponent.h"
 #include "../../Component/SightRecognitionComponent.h"
 #include "../../Component/AIStateComponent.h"
+#include "../../Component/Enemy/EnemyStateComponent.h"
 
 
-Mof::CVector3 my::Enemy::GetInitPosition(void) const {
-    return this->_init_position;
-}
+void my::Enemy::Chase(Mof::CVector3 target, float speed, float angular_speed) {
+    // ビヘイビアの実行関数内でEnemyStateComponentを介してActionStateを変更する
+    // 状態が変更されたら状態に対応するComponentをActiveにする　ActiveになっているComponentは自身の更新関数の中で条件を満たせばInactiveになる
+    // Activeにするタイミングで必要なパラメータをセットする
 
-void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) {
     auto move_com = super::GetComponent<my::EnemyMoveComponent>();
 
     float tilt = 1.0f;
@@ -31,83 +32,19 @@ void my::Enemy::ChaseTo(Mof::CVector3 target, float speed, float angular_speed) 
 
     auto attack_com = super::GetComponent<my::EnemyAttackComponent>();
     attack_com->End();
-}
 
+    auto state_com = super::GetComponent<my::EnemyStateComponent>();
+    //state_com->ChangeState("EnemyActionMoveState");
+}
+/*
 float my::Enemy::GetDistanceFromInitPosition(void) {
-    return Mof::CVector3Utilities::Distance(_init_position, super::GetPosition());
+    return Mof::CVector3Utilities::Distance(super::GetInitialPosition(), super::GetPosition());
 }
 
 bool my::Enemy::HasTarget(void) {
     return !_target.expired();
 }
-
-bool my::Enemy::TargetInAttackRange(void) {
-    if (auto target = _target.lock()) {
-        auto attack_com = super::GetComponent<my::EnemyAttackComponent>();
-        if (attack_com->GetCanAttackRangeSphere().CollisionPoint(target->GetPosition())) {
-            return true;
-        } // if
-    } // if
-    return false;
-}
-
-bool my::Enemy::GoHome(void) {
-    this->ChaseTo(_init_position, 0.3f, 1.0f);
-
-    if (this->GetDistanceFromInitPosition() > 2.0f) {
-        return false;
-    } // if
-    return true;
-}
-
-bool my::Enemy::LookAround(void) {
-    if (this->HasTarget()) {
-        auto ai_state_com = super::GetComponent<my::AIStateComponent>();
-        ai_state_com->ChangeState("AICombatState");
-        return true;
-    } // if
-
-    auto idle_com = super::GetComponent<my::EnemyIdleComponent>();
-
-    float tilt = 1.0f;
-    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
-
-    auto angle_y = math::ToDegree(super::GetRotate().y);
-
-    in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
-    float angular_speed = 4.0f;
-
-    idle_com->SetAngularSpeed(angular_speed);
-    idle_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-    idle_com->Start();
-    return false;
-}
-
-bool my::Enemy::ChaseTarget(void) {
-    if (auto target = _target.lock()) {
-        if (this->TargetInAttackRange()) {
-            return true;
-        } // if
-        this->ChaseTo(target->GetPosition(), 0.2f, 1.0f);
-        return false;
-    } // if
-    return true;
-}
-
-bool my::Enemy::Attack(void) {
-    auto move_com = super::GetComponent<my::EnemyMoveComponent>();
-
-    move_com->SetMoveSpeed(0.0f);
-    move_com->SetAngularSpeed(0.0f);
-
-    auto attack_com = super::GetComponent<my::EnemyAttackComponent>();
-    attack_com->Start();
-
-    auto ai_state_com = super::GetComponent<my::AIStateComponent>();
-    ai_state_com ->ChangeState("AICombatState");
-    return false;
-}
-
+*/
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
                                      ray.Position + ray.Direction * length,
@@ -130,9 +67,8 @@ void my::Enemy::RenderRay(Mof::Vector3 start, float degree_y) {
 
 my::Enemy::Enemy() :
     super(),
-    _init_position(),
     _target(){
-    //super::_motion_names = my::ResourceLocator::GetResource<my::MotionNames>("../Resource/motion_names/enemy.motion_names");
+    super::SetTag("Enemy");
 }
 
 my::Enemy::~Enemy() {
@@ -142,11 +78,12 @@ void my::Enemy::SetTarget(const std::shared_ptr<my::Character>& ptr) {
     this->_target = ptr;
 }
 
+std::weak_ptr<my::Actor> my::Enemy::GetTarget(void) const {
+    return this->_target;
+}
+
 void my::Enemy::GenerateCollisionObject(void) {
-    //auto coll = std::make_shared<my::EnemyCollisionObject>();
     auto coll = super::GetComponent<my::EnemyCollisionObject>();
-    //coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
-    //super::AddCollisionObject(coll);
     coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
                            "PlayerCollisionObject",
                            my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
@@ -155,9 +92,7 @@ void my::Enemy::GenerateCollisionObject(void) {
 
     auto sight = super::GetComponent<my::SightRecognitionComponent>();
     auto sight_coll = super::GetComponent<my::EnemySightCollisionObject>();
-    //sight_coll->SetOwner(std::dynamic_pointer_cast<my::Enemy>(shared_from_this()));
     sight_coll->SetSight(sight);
-    //super::AddCollisionObject(sight_coll);
     sight_coll->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
                                  "PlayerCollisionObject",
                                  my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
@@ -175,7 +110,7 @@ void my::Enemy::GenerateCollisionObject(void) {
 
 bool my::Enemy::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
-    _init_position = super::GetPosition();
+    //_init_position = super::GetPosition();
     // generate
     this->GenerateCollisionObject();
 
@@ -189,18 +124,6 @@ bool my::Enemy::Update(float delta_time) {
 
 bool my::Enemy::Render(void) {
     my::Actor::Render();
-    return true;
-}
-
-bool my::Enemy::ChangeToPatrolState(void) {
-    auto ai_state_com = super::GetComponent<my::AIStateComponent>();
-    ai_state_com->ChangeState("AIPatrolState");
-    return true;
-}
-
-bool my::Enemy::ChangeToCombatState(void) {
-    auto ai_state_com = super::GetComponent<my::AIStateComponent>();
-    ai_state_com ->ChangeState("AICombatState");
     return true;
 }
 

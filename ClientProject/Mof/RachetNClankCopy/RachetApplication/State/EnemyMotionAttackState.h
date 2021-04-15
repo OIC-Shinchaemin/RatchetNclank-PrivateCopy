@@ -6,7 +6,7 @@
 
 #include <memory>
 
-#include "../Component/EnemyAttackComponent.h"
+#include "../Component/Enemy/EnemyAttackComponent.h"
 
 
 namespace state {

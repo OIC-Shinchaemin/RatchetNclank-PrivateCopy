@@ -27,9 +27,10 @@ public:
     struct Param {
         //! 名前
         std::string name;
+        //! タグ
+        std::string tag;
         //! トランスフォーム
         def::Transform transform;
-
         Param() :
             name(),
             transform(){
@@ -42,25 +43,17 @@ private:
     my::ActorState _state;
     //! 名前
     std::string _name;
+    //! タグ
+    std::string _tag;
     //! トランスフォーム
     def::Transform _transform;
+    //! トランスフォーム
+    def::Transform _initial_transform;
     //! 機能
     ComArray _components;
     ComArray _input_components;
     ComArray _update_components;
     ComArray _render_components;
-    //! 衝突用
-    //std::vector<std::shared_ptr<my::CollisionObject>> _collision_objects;
-protected:
-    /// <summary>
-    /// 生成
-    /// </summary>
-    /// <typeparam name="Type"></typeparam>
-    /// <param name=""></param>
-//    template<typename Type>
-//    void AddCollisionObject(std::shared_ptr<Type> ptr) {
-//        _collision_objects.push_back(ptr);
-//    }
 public:
     /// <summary>
     /// コンストラクタ
@@ -74,7 +67,12 @@ public:
     /// セッター
     /// </summary>
     /// <param name="name"></param>
-    void SetName(const char* name);
+    void SetName(const char* name);    
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="tag"></param>
+    void SetTag(const char* tag);
     /// <summary>
     /// セッター
     /// </summary>
@@ -106,6 +104,12 @@ public:
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
+    /// <returns>タグ</returns>
+    std::string GetTag(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector3 GetPosition(void) const;
     /// <summary>
@@ -125,7 +129,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    //const std::vector<std::shared_ptr<my::CollisionObject>>& GetCollisionObjects(void) const;
+    Mof::CVector3 GetInitialPosition(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -176,6 +180,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     void End(void);
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Initialize(void);
     /// <summary>
     /// 初期化
     /// </summary>

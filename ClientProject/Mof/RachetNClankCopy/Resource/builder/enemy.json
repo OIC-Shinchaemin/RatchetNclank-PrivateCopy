@@ -19,6 +19,12 @@
         "path": "../Resource/motion_names/enemy.motion_names"
       }
     },
+    {
+      "type": "EnemyStateComponent",
+      "paramater": {
+        "priority": 80
+      }
+    },
 
     {
       "type": "EnemyMoveComponent",
@@ -26,6 +32,7 @@
         "priority": 90
       }
     },
+
     {
       "type": "EnemyIdleComponent",
       "paramater": {

@@ -2,7 +2,6 @@
 
 #include "Mof.h"
 #include "ResourceManager.h"
-//#include "Factory/FactoryManager.h"
 #include "Game/GameManager.h"
 #include "Camera/CameraManager.h"
 #include "My/UI/UICanvas.h"
@@ -12,8 +11,6 @@ class CGameApp : public CSingleGameApplication {
 private:
 	//! リソース
 	std::shared_ptr<my::ResourceMgr> _resource_manager;
-	//! ファクトリー
-	//std::shared_ptr<my::FactoryManager> _factory_manager;
 	//! ゲーム
 	std::shared_ptr<my::GameManager> _game_manager;
 	//! カメラ

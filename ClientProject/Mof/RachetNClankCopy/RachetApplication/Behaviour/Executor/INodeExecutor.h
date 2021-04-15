@@ -34,17 +34,17 @@ public:
     /// <param name="ptr"></param>
     virtual void SetParent(NodeExecutorWeakPtr<Actor> ptr) = 0;
     /// <summary>
+    /// 実行時必要なポインタをキャッシュ
+    /// </summary>
+    /// <param actor=""></param>
+    virtual void Prepare(Actor actor) = 0;
+    /// <summary>
     /// ノードの実行処理
     /// </summary>
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
     virtual INodeExecutor<Actor>::Result Execute(Actor& actor) = 0;
-    /// <summary>
-    /// 実行時必要なポインタをキャッシュ
-    /// </summary>
-    /// <param actor=""></param>
-    virtual void Prepare(const Actor& actor) = 0;
     /// <summary>
     /// 実行状態を全てリセット
     /// 状態をInactiveに設定

@@ -24,7 +24,6 @@ void my::GameManager::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
 }
 
 my::GameManager::GameManager() :
-    //_factory(),
     _resource(),
     _game_world(),
     _renderer(),
@@ -59,7 +58,7 @@ bool my::GameManager::Initialize(void) {
     _quick_change = std::make_shared<my::QuickChangeSystem>();
     _game_money->SetResourceManager(_resource);
     _quick_change->SetResourceManager(_resource);
-    
+
     auto param = new my::Actor::Param();
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
 
@@ -74,15 +73,37 @@ bool my::GameManager::Initialize(void) {
     // actor
     param->transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
     param->name = "enemy";
-    auto temp = my::FactoryManager::Singleton().CreateActor<my::Enemy>("../Resource/builder/enemy.json", param);
 
-    temp->AddObserver(shared_from_this());
+    // enemies 
+    rapidjson::Document document;
+    if (!ut::ParseJsonDocument("../Resource/enemy_data/stage1.json", document)) {
+        return false;
+    } // for
+
+    for (int i = 0, n = document["enemy_datas"].Size(); i < n; i++) {
+        auto& enemy_data = document["enemy_datas"][i];
+
+        _ASSERT_EXPR(enemy_data["builder"].IsString(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
+        _ASSERT_EXPR(enemy_data["name"].IsString(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
+        _ASSERT_EXPR(enemy_data["position_x"].IsFloat(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
+        _ASSERT_EXPR(enemy_data["position_y"].IsFloat(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
+        _ASSERT_EXPR(enemy_data["position_z"].IsFloat(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
+
+        auto path = std::string(enemy_data["builder"].GetString());
+        param->name = enemy_data["name"].GetString();
+        param->transform.position.x = enemy_data["position_x"].GetFloat();
+        param->transform.position.y = enemy_data["position_y"].GetFloat();
+        param->transform.position.z = enemy_data["position_z"].GetFloat();
+        auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(path.c_str(), param);
+        enemy->AddObserver(shared_from_this());
+        this->AddElement(enemy);
+    } // for
+
     player->AddObserver(shared_from_this());
-
-
-    ut::SafeDelete(param);
+    
     this->AddElement(player);
-    this->AddElement(temp);
+    
+    ut::SafeDelete(param);
     return true;
 }
 

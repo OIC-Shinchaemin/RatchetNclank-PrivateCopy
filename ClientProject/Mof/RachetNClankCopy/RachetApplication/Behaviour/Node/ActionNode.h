@@ -15,8 +15,8 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    ActionNodeBase() :
-        super("Action") {
+    ActionNodeBase(const std::string& name) :
+        super(name) {
     }
     /// <summary>
     /// デストラクタ
@@ -46,7 +46,7 @@ public:
     /// </summary>
     /// <param name="exec"></param>
     FunctionNode(OnExecFunction exec) :
-        super(), 
+        super("FunctionNode"), 
         OnExec(exec) {
     }
     /// <summary>

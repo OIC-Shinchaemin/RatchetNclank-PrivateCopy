@@ -15,8 +15,17 @@
 #include "../Behaviour/Node/ActionNode.h"
 #include "../Behaviour/Node/SequencerNode.h"
 #include "../Behaviour/Node/SelectorNode.h"
-#include "../Behaviour/Node/GoHomeNode.h"
-#include "../Behaviour/Node/LookAroundNode.h"
+#include "../Behaviour/Node/Action/AlwaysTrueNode.h"
+#include "../Behaviour/Node/Action/AlwaysFalseNode.h"
+#include "../Behaviour/Node/Action/GoHomeNode.h"
+#include "../Behaviour/Node/Action/LookAroundNode.h"
+#include "../Behaviour/Node/Action/MoveToEnemyNode.h"
+#include "../Behaviour/Node/Action/MeleeAttackNode.h"
+#include "../Behaviour/Node/Action/ChangePatrolNode.h"
+#include "../Behaviour/Node/Condition/NotAwayFromHomeNode.h"
+#include "../Behaviour/Node/Condition/TargetRecognitionNode.h"
+#include "../Behaviour/Node/Condition/TargetInMeleeAttackRangeNode.h"
+#include "../Behaviour/Node/Condition/TargetOutOfMeleeAttackRangeNode.h"
 #include "../Actor/Character/Enemy.h"
 #include "Factory.h"
 
@@ -28,22 +37,25 @@ private:
     my::FuncPtrContainer _function_pointer_container;
     //! アクション
     my::Factory<behaviour::ActionNodeBase<std::shared_ptr<my::Enemy> >> _action_factory;
+    //! アクション
+    my::Factory<behaviour::ConditionalNodeBase<std::shared_ptr<my::Enemy> >> _condition_factory;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     BehaviourFactory() :
         _function_pointer_container() {
-        _function_pointer_container.Register("Enemy::GoHome", &my::Enemy::GoHome);
-        _function_pointer_container.Register("Enemy::LookAround", &my::Enemy::LookAround);
-        _function_pointer_container.Register("Enemy::ChaseTarget", &my::Enemy::ChaseTarget);
-        _function_pointer_container.Register("Enemy::Attack", &my::Enemy::Attack);
-        _function_pointer_container.Register("Enemy::ChangeToPatrolState", &my::Enemy::ChangeToPatrolState);
-        _function_pointer_container.Register("Enemy::HasTarget", &my::Enemy::HasTarget);
-        _function_pointer_container.Register("Enemy::GetDistanceFromInitPosition", &my::Enemy::GetDistanceFromInitPosition);
-
-        _action_factory.Register<behaviour::GoHomeNode<std::shared_ptr<my::Enemy>>>("GoHome");
-        _action_factory.Register<behaviour::LookAroundNode<std::shared_ptr<my::Enemy>>>("LookAround");
+        _action_factory.Register<behaviour::AlwaysTrueNode<std::shared_ptr<my::Enemy>>>("AlwaysTrueNode");
+        _action_factory.Register<behaviour::AlwaysFalseNode<std::shared_ptr<my::Enemy>>>("AlwaysFalseNode");
+        _action_factory.Register<behaviour::GoHomeNode<std::shared_ptr<my::Enemy>>>("GoHomeNode");
+        _action_factory.Register<behaviour::LookAroundNode<std::shared_ptr<my::Enemy>>>("LookAroundNode");
+        _action_factory.Register<behaviour::MoveToEnemyNode<std::shared_ptr<my::Enemy>>>("MoveToEnemyNode");
+        _action_factory.Register<behaviour::MeleeAttackNode<std::shared_ptr<my::Enemy>>>("MeleeAttackNode");
+        _action_factory.Register<behaviour::ChangePatrolNode<std::shared_ptr<my::Enemy>>>("ChangePatrolNode");
+        _condition_factory.Register<behaviour::NotAwayFromHomeNode<std::shared_ptr<my::Enemy>>>("NotAwayFromHomeNode");
+        _condition_factory.Register<behaviour::TargetRecognitionNode<std::shared_ptr<my::Enemy>>>("TargetRecognitionNode");
+        _condition_factory.Register<behaviour::TargetInMeleeAttackRangeNode<std::shared_ptr<my::Enemy>>>("TargetInMeleeAttackRangeNode");
+        _condition_factory.Register<behaviour::TargetOutOfMeleeAttackRangeNode<std::shared_ptr<my::Enemy>>>("TargetOutOfMeleeAttackRangeNode");
     }
     /// <summary>
     /// 作成
@@ -115,8 +127,6 @@ public:
             _function_pointer_container.Get<my::FuncPtrEnemyBool>(function_key));
         return function_node;
     }
-
-
     /// <summary>
     /// 作成
     /// </summary>
@@ -125,11 +135,56 @@ public:
     /// <returns></returns>
     std::shared_ptr<behaviour::ActionNodeBase<std::shared_ptr<class Enemy> > > CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
         using namespace behaviour;
-
         auto derived = behaviours[index]["derived"].GetString();
         return _action_factory.Create(derived);
     }
-
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="behaviours"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    std::shared_ptr<behaviour::ConditionalNodeBase<std::shared_ptr<class Enemy> > > CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
+        using namespace behaviour;
+        auto derived = behaviours[index]["derived"].GetString();
+        return _condition_factory.Create(derived);
+        //auto& child = behaviours[index]["child"];
+        //auto child_index = child.GetInt();
+        /*
+        if (behaviours[child_index]["type"] == "ActionNode") {
+            auto node = this->CreateActionNode(behaviours, child_index);
+            simplex_node->SetChild(node);
+        } // if
+        else if (behaviours[child_index]["type"] == "ConditionalNode") {
+            auto node = this->CreateConditionalNode(behaviours, child_index);
+            simplex_node->SetChild(node);
+        } // if
+        else if (behaviours[child_index]["type"] == "FunctionNode") {
+            auto node = this->CreateFunctionNode(behaviours, child_index);
+            simplex_node->SetChild(node);
+        } // else if
+        else if (behaviours[child_index]["type"] == "DecoratorNode") {
+            auto return_type = std::string(behaviours[child_index]["return"].GetString());
+            if (return_type == "bool") {
+                auto node = this->CreateDecoratorNode<bool>(behaviours, child_index);
+                simplex_node->SetChild(node);
+            } // if
+            else if (return_type == "float") {
+                auto node = this->CreateDecoratorNode<float>(behaviours, child_index);
+                simplex_node->SetChild(node);
+            } // if
+        } // else if
+        else if (behaviours[child_index]["type"] == "SequencerNode") {
+            auto node = this->CreateSequencerNode(behaviours, child_index);
+            simplex_node->SetChild(node);
+        } // if
+        else if (behaviours[child_index]["type"] == "SelectorNode") {
+            auto node = this->CreateSelectorNode(behaviours, child_index);
+            simplex_node->SetChild(node);
+        } // else if
+        return conditional_node;
+        */
+    }
     /// <summary>
     /// 作成
     /// </summary>
@@ -147,6 +202,10 @@ public:
                 auto node = this->CreateActionNode(behaviours, children_index);
                 sequencer_node->AddChild(node);
             } // if
+            else if (behaviours[children_index]["type"] == "ConditionalNode") {
+                auto node = this->CreateConditionalNode(behaviours, children_index);
+                sequencer_node->AddChild(node);
+            } // if
             else if (behaviours[children_index]["type"] == "FunctionNode") {
                 auto node = this->CreateFunctionNode(behaviours, children_index);
                 sequencer_node->AddChild(node);
@@ -162,6 +221,15 @@ public:
                     sequencer_node->AddChild(node);
                 } // if
 
+            } // else if
+
+            else if (behaviours[children_index]["type"] == "SequencerNode") {
+                auto node = this->CreateSequencerNode(behaviours, children_index);
+                sequencer_node->AddChild(node);
+            } // if
+            else if (behaviours[children_index]["type"] == "SelectorNode") {
+                auto node = this->CreateSelectorNode(behaviours, children_index);
+                sequencer_node->AddChild(node);
             } // else if
 
         } // for
@@ -184,6 +252,10 @@ public:
                 auto node = this->CreateActionNode(behaviours, children_index);
                 selector_node->AddChild(node);
             } // if
+            else if (behaviours[children_index]["type"] == "ConditionalNode") {
+                auto node = this->CreateConditionalNode(behaviours, children_index);
+                selector_node->AddChild(node);
+            } // if
             else if (behaviours[children_index]["type"] == "FunctionNode") {
                 auto node = this->CreateFunctionNode(behaviours, children_index);
                 selector_node->AddChild(node);
@@ -200,6 +272,16 @@ public:
                 } // if
 
             } // else if
+
+            else if (behaviours[children_index]["type"] == "SequencerNode") {
+                auto node = this->CreateSequencerNode(behaviours, children_index);
+                selector_node->AddChild(node);
+            } // if
+            else if (behaviours[children_index]["type"] == "SelectorNode") {
+                auto node = this->CreateSelectorNode(behaviours, children_index);
+                selector_node->AddChild(node);
+            } // else if
+
         } // for
         return selector_node;
     }

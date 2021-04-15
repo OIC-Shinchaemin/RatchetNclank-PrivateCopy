@@ -33,7 +33,7 @@ bool my::MotionStateComponent::Initialize(void) {
     super::Start();
 
     // ŠO•”‚æ‚èì¬‚³‚ê‚½‚à‚Ì‚ðŽæ“¾
-    if (super::GetOwner()->GetName() == "enemy") {
+    if (super::GetOwner()->GetTag() == "Enemy") {
         this->RegisterMotionState<state::EnemyMotionIdleState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
@@ -54,7 +54,13 @@ bool my::MotionStateComponent::Update(float delta_time) {
 
 #ifdef _DEBUG
 bool my::MotionStateComponent::Render(void) {
-    ::CGraphicsUtilities::RenderString(0.0f, 0.0f, "state = %s", _state_machine.GetCurrentStateName());
+    if (super::GetOwner()->GetTag() == "Enemy") {
+        ::CGraphicsUtilities::RenderString(0.0f, 300.0f, "state = %s", _state_machine.GetCurrentStateName());
+    } // if
+
+    else {
+        ::CGraphicsUtilities::RenderString(0.0f, 350.0f, " player state = %s", _state_machine.GetCurrentStateName());
+    } // else
     return false;
 }
 #endif // _DEBUG

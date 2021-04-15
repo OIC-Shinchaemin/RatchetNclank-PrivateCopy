@@ -32,6 +32,15 @@ public:
     /// </summary>
     virtual ~CompositeNodeExecutor() = default;
     /// <summary>
+    /// 実行時必要なポインタをキャッシュ
+    /// </summary>
+    /// <param actor=""></param>
+    virtual void Prepare(Actor actor) override {
+        for (auto& ptr : super::_children) {
+            ptr->Prepare(actor);
+        } // for
+    }
+    /// <summary>
     /// 実行状態を全てリセット
     /// 状態をInactiveに設定
     /// </summary>
@@ -41,7 +50,7 @@ public:
         _current.reset();
         for (auto& ptr : super::_children) {
             ptr->Reset();
-        }
+        } // for
     }
 };
 }

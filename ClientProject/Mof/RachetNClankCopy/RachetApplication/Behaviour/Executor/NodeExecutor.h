@@ -46,18 +46,18 @@ public:
         _parent = ptr;
     }
     /// <summary>
+    /// 実行時必要なポインタをキャッシュ
+    /// </summary>
+    /// <param actor=""></param>
+    virtual void Prepare(Actor actor) override {
+    }
+    /// <summary>
     /// ノードの実行処理
     /// </summary>
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
     virtual behaviour::INodeExecutor<Actor>::Result Execute(Actor& actor) override { return behaviour::INodeExecutor<Actor>::Result::Failure; }
-    /// <summary>
-    /// 実行時必要なポインタをキャッシュ
-    /// </summary>
-    /// <param actor=""></param>
-    virtual void Prepare(const Actor& actor) override {
-    }
     /// <summary>
     /// 実行状態を全てリセット
     /// 状態をInactiveに設定
@@ -71,7 +71,7 @@ public:
     /// </summary>
     /// <typeparam name="Actor"></typeparam>
     virtual void DebugRender(Mof::CVector2 position) override {
-        MofU32 color;
+        MofU32 color = MOF_COLOR_WHITE;
         if (_state == super::State::Inactive) {
             color = MOF_COLOR_WHITE;
         } // else if
@@ -85,17 +85,19 @@ public:
             color = MOF_COLOR_BLUE;
         } // else if
 
-
+        Mof::CFont font;
+        font.Create(8, "");
         ::CGraphicsUtilities::RenderString(position.x, position.y, color, _node->GetName().c_str());
+        font.Release();
         auto pos = position;
-        pos.x += 100.0f;
+        pos.x += 200.0f;
         for (auto ptr : _children) {
             ptr->DebugRender(pos);
             pos.y += 20.0f;
         } // for
     }
     virtual void DebugRender(void) override {
-        this->DebugRender(Mof::CVector2(100.0f, 100.0f));
+        this->DebugRender(Mof::CVector2(10.0f, 10.0f));
     }
 };
 }
