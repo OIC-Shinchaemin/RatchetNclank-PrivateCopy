@@ -2,15 +2,20 @@
 
 
 std::weak_ptr<my::ResourceMgr> my::Component::_resource_manager;
+std::weak_ptr<my::UICanvas> my::Component::_ui_canvas;
 
 void my::Component::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
     _resource_manager = ptr;
 }
 
+void my::Component::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
+    _ui_canvas = ptr;
+}
+
 my::Component::Component(int priority) :
     _owner(),
-    _priority(priority) ,
-_active(false){
+    _priority(priority),
+    _active(false) {
 }
 
 my::Component::~Component() {

@@ -449,6 +449,7 @@ Player::Player() :
     _player_view_camera(),
     _camera_controller(),
     _current_mechanical() {
+    super::SetTag("Player");
 }
 
 Player::~Player() {

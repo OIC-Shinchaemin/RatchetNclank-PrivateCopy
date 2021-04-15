@@ -30,7 +30,8 @@ my::QuickChangeSystem::QuickChangeSystem() :
     _distance(128.0f),
     _angles(8),
     _current_angle(),
-_resource(){
+    _resource(),
+    _ui_canvas() {
 
     int n = 0;
     std::generate(_angles.begin(), _angles.end(), [&n]() {
@@ -74,6 +75,10 @@ void my::QuickChangeSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> pt
     this->_resource = ptr;
 }
 
+void my::QuickChangeSystem::SetUICanvas(const std::weak_ptr<my::UICanvas> ptr) {
+    this->_ui_canvas = ptr;
+}
+
 Mof::CVector4 my::QuickChangeSystem::GetColor(void) const {
     return this->_color;
 }
@@ -91,7 +96,7 @@ bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<
     int i = 0;
     for (auto& name : work) {
         auto& path = _tex_names.at(name);
-        
+
         auto tex = _resource.lock()->Get<std::shared_ptr<Mof::CTexture> >(path.c_str());
 
         auto& temp = _items.at(i * 45);
@@ -106,7 +111,10 @@ bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<
     Observable::AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetPosition(_position);
-    my::CanvasLocator::AddElement(menu);
+
+    if (auto canvas = _ui_canvas.lock()) {
+        canvas->AddElement(menu);
+    } // if
     return true;
 }
 

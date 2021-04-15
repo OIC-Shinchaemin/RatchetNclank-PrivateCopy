@@ -12,13 +12,6 @@ void my::QuickChangeMenu::AddWeaponObserver(const std::shared_ptr<my::Observer<s
     _weapon.AddObserver(ptr);
 }
 
-/*
-void my::QuickChangeMenu::OnNotify(const std::shared_ptr<my::QuickChangeSystem>& observable, const char* event) {
-    if (event == "UpdateColor") {
-        this->SetColor(observable->GetColor());
-    } // if
-}
-*/
 bool my::QuickChangeMenu::Render(void) {
     auto circle = Mof::CCircle(_position, 128.0f);
     ::CGraphicsUtilities::RenderCircle(circle, _color.ToU32Color());

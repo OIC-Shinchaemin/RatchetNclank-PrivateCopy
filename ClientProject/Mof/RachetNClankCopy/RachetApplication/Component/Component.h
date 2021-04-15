@@ -10,6 +10,7 @@
 
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "MY/UI/UICanvas.h"
 
 
 namespace my {
@@ -22,6 +23,8 @@ protected:
     int _priority;
     //! リソース
     static std::weak_ptr<my::ResourceMgr> _resource_manager;
+    //! リソース
+    static std::weak_ptr<my::UICanvas> _ui_canvas;
     //! 有効
     bool _active;
 public:
@@ -30,6 +33,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     static void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    static void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
     /// <summary>
     /// コンストラクタ
     /// </summary>

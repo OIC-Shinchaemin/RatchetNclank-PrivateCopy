@@ -237,9 +237,6 @@
     <ClCompile Include="GameSystem\Save\SaveData.cpp">
       <Filter>Rachet\Source\GameSystem\Save</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\My\UI\CanvasLocator.cpp">
-      <Filter>Rachet\Base\UI\Source</Filter>
-    </ClCompile>
     <ClCompile Include="UI\QuickChangeMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
@@ -435,6 +432,12 @@
     <ClCompile Include="Component\UpdateComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="UI\NanotechMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\HpComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -532,9 +535,6 @@
     </ClInclude>
     <ClInclude Include="GameSystem\Save\SaveSystem.h">
       <Filter>Rachet\Header\GameSystem\Save</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\UI\CanvasLocator.h">
-      <Filter>Rachet\Base\UI\Header</Filter>
     </ClInclude>
     <ClInclude Include="UI\QuickChangeMenu.h">
       <Filter>Rachet\Header\UI</Filter>
@@ -829,6 +829,12 @@
     </ClInclude>
     <ClInclude Include="Behaviour\Node\Action\AlwaysFalseNode.h">
       <Filter>Rachet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NanotechMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\HpComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
