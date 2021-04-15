@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
         }
+        //攻撃   by ぇぬ
+        if (CanAtack)
+        {
+            Atack();
+        }
+
         AnimationState();
         anim.SetInteger("state", (int)state); //アニメーションステータスをセットするとこ
 
@@ -81,13 +87,13 @@ public class PlayerController : MonoBehaviour
             PermanentUI.perm.cherries += 1;
             PermanentUI.perm.cherryTaxt.text = PermanentUI.perm.cherries.ToString();
         }
-        if(collision.tag=="Powerup")        //チュートリアルで使用したパワーアップコード。現在使用してません。
-        {
-            Destroy(collision.gameObject);
-            JumpForce = 25;
-            GetComponent<SpriteRenderer>().color = Color.yellow;
-            StartCoroutine(ResetPower());
-        }
+        //if(collision.tag=="Powerup")        //チュートリアルで使用したパワーアップコード。現在使用してません。
+        //{
+        //    Destroy(collision.gameObject);
+        //    JumpForce = 25;
+        //    GetComponent<SpriteRenderer>().color = Color.yellow;
+        //    StartCoroutine(ResetPower());
+        //}
         if (collision.tag == "AtackMode")
         {
             Destroy(collision.gameObject);
@@ -216,12 +222,6 @@ public class PlayerController : MonoBehaviour
                     Jump();
                 }
             }
-
-            //攻撃   by ぇぬ
-            if (CanAtack)
-            {
-                Atack();
-            }
         }
     }
 
@@ -236,16 +236,19 @@ public class PlayerController : MonoBehaviour
 
     private void Atack()
     {
-        if (Input.GetButtonDown("Attack"))
+        if (state != State.atack && state != State.Die)
         {
-            Throwse.Play();
-            state = State.atack;
-            GameObject g = Instantiate(atackball);
-            g.transform.position = atackball.transform.position;
-            g.transform.rotation = atackball.transform.rotation;
+            if (Input.GetButtonDown("Attack"))
+            {
+                Throwse.Play();
+                state = State.atack;
+                GameObject g = Instantiate(atackball);
+                g.transform.position = atackball.transform.position;
+                g.transform.rotation = atackball.transform.rotation;
 
-            g.SetActive(true);
+                g.SetActive(true);
 
+            }
         }
     }
 
