@@ -1,7 +1,7 @@
 #include "AIStateComponent.h"
 
-#include "../State/AIPatrolState.h"
-#include "../State/AICombatState.h"
+#include "../State/AI/AIPatrolState.h"
+#include "../State/AI/AICombatState.h"
 
 
 my::AIStateComponent::AIStateComponent(int priority) :

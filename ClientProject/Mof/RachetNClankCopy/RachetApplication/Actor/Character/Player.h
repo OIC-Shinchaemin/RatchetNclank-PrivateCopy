@@ -3,7 +3,6 @@
 
 #include "Character.h"
 #include "My/Core/Observer.h"
-#include "../../Camera/CameraLocator.h"
 
 #include "../../Camera/Camera.h"
 #include "../../Camera/CameraController.h"
@@ -24,7 +23,7 @@
 
 #define		GRAVITY					(0.01f)
 
-class Player : public my::Character, private my::CameraLocator, public my::Observer<std::shared_ptr<my::Mechanical>> {
+class Player : public my::Character, public my::Observer<std::shared_ptr<my::Mechanical>> {
 public:
     enum class MotionType {
         IdleWait,

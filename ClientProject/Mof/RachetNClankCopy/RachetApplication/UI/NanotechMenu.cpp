@@ -8,7 +8,7 @@ my::NanotechMenu::NanotechMenu(const char* name) :
 }
 
 void my::NanotechMenu::OnNotify(int hp) {
-    _hp = hp;
+    this->_hp = hp;
 }
 
 void my::NanotechMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {

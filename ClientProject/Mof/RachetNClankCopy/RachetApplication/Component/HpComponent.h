@@ -4,6 +4,7 @@
 
 #include "UpdateComponent.h"
 
+#include "My/Core/Observable.h"
 #include "My/Core/StateMachine.h"
 #include "My/Core/Timer.h"
 
@@ -12,7 +13,12 @@ namespace my {
 class HpComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! 最大値
+    int _hp_max;
+    //! Hp
     int _hp;
+    //! Hp
+    my::Observable<int> _observable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -66,6 +72,16 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
+    /// <summary>
+    /// 回復
+    /// </summary>
+    /// <param name="value"></param>
+    void Heal(int value);
+    /// <summary>
+    /// ダメージ
+    /// </summary>
+    /// <param name="value"></param>
+    void Damage(int value);
 };
 }
 #endif // !MY_HP_COMPONENT_H
