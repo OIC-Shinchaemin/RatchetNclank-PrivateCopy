@@ -33,7 +33,6 @@ private:
     //! •W“I
     std::weak_ptr<my::Actor>_target;
 public:
-    //void Chase(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// •`‰æ
     /// </summary>

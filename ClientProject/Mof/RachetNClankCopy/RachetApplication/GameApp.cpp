@@ -2,9 +2,9 @@
 
 #include "Gamepad.h"
 #include "My/Core/Define.h"
-#include "Camera/CameraLocator.h"
 
 #include "Component/Component.h"
+#include "Camera/CameraController.h"
 
 
 void CGameApp::RenderScene(void) {
@@ -65,8 +65,7 @@ MofBool CGameApp::Initialize(void) {
 
     my::Component::SetResourceManager(_resource_manager);
     my::Component::SetUICanvas(_ui_canvas);
-
-    my::CameraLocator::SetService(_camera_manager);
+    my::CameraController::SetCameraManager(_camera_manager);
 
     _resource_manager->Load("../Resource/resource_path.txt");
     _game_manager->SetResourceManager(_resource_manager);

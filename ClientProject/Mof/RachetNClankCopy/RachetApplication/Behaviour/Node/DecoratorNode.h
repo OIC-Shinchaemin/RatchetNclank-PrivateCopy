@@ -3,8 +3,8 @@
 
 
 #include "SimplexNode.h"
-#include "ParameterNode.h"
 
+#include "ParameterNode.h"
 #include "../Executor/DecoratorNodeExecutor.h"
 
 
@@ -50,7 +50,9 @@ public:
     /// <param name="op"></param>
     /// <param name="p1"></param>
     /// <param name="p2"></param>
-    DecoratorNode(behaviour::ConditionalNodeBase::Operator op, ParameterNodePtr<Actor, Value> p1, ParameterNodePtr<Actor, Value> p2) :
+    DecoratorNode(behaviour::ConditionalNodeBase::Operator op, 
+                  behaviour::ParameterNodePtr<Actor, Value> p1,
+                  behaviour::ParameterNodePtr<Actor, Value> p2) :
         super(),
         _operator(op),
         _param1(p1),

@@ -1,10 +1,10 @@
 #include "MotionStateComponent.h"
 
-#include "../State/PlayerMotionIdleState.h"
-#include "../State/PlayerMotionMoveState.h"
-#include "../State/EnemyMotionIdleState.h"
-#include "../State/EnemyMotionMoveState.h"
-#include "../State/EnemyMotionAttackState.h"
+#include "../State/PlayerMotion/PlayerMotionIdleState.h"
+#include "../State/PlayerMotion/PlayerMotionMoveState.h"
+#include "../State/EnemyMotion/EnemyMotionIdleState.h"
+#include "../State/EnemyMotion/EnemyMotionMoveState.h"
+#include "../State/EnemyMotion/EnemyMotionAttackState.h"
 
 
 my::MotionStateComponent::MotionStateComponent(int priority) :

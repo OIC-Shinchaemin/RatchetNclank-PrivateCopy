@@ -4,22 +4,22 @@
 
 #include <memory>
 
-#include "../GameDefine.h"
-
-#include "My/Core/Observer.h"
-#include "My/Core/Utility.h"
 #include "My/Core/Math.h"
+#include "Camera.h"
+#include "CameraManager.h"
 
 
 namespace my {
 class CameraController {
 private:
+    //! マネージャ
+    static std::weak_ptr<my::CameraManager> _manager;
     //! ばね定数
-    const float kSpring; 
+    const float _spring; 
     //! 減衰定数
-    const float kDumping; 
+    const float _dumping; 
     //! カメラ
-    std::weak_ptr<class Camera>_camera;
+    std::shared_ptr<my::Camera>_camera;
     //! 対象
     Mof::CVector3 _position;
     //! 対象
@@ -45,6 +45,11 @@ private:
     Mof::CVector3 SphericalToCartesian(Mof::CVector3 spherical) const;
     Mof::CVector3 SphericalToCartesian(float x, float y, float z) const;
 public:
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    static void SetCameraManager(const std::shared_ptr<my::CameraManager>& ptr);
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -147,6 +152,18 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Update(void);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Release(void);
+    /// <summary>
+    /// 登録
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool RegisterGlobalCamera(void);
 };
 }
 #endif // !MY_CAMERA_CONTROLLER_H

@@ -10,33 +10,7 @@
 #include "../../Component/AIStateComponent.h"
 #include "../../Component/Enemy/EnemyStateComponent.h"
 
-/*
-void my::Enemy::Chase(Mof::CVector3 target, float speed, float angular_speed) {
-    // ビヘイビアの実行関数内でEnemyStateComponentを介してActionStateを変更する
-    // 状態が変更されたら状態に対応するComponentをActiveにする　ActiveになっているComponentは自身の更新関数の中で条件を満たせばInactiveになる
-    // Activeにするタイミングで必要なパラメータをセットする
 
-    auto move_com = super::GetComponent<my::EnemyMoveComponent>();
-
-    float tilt = 1.0f;
-    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
-
-    auto dir = target - super::GetPosition();
-    float angle = std::atan2(dir.z, dir.x);
-    in = math::Rotate(in.x, in.y, angle);
-
-    move_com->SetMoveSpeed(speed);
-    move_com->SetAngularSpeed(angular_speed);
-    move_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-    move_com->Start();
-
-    auto attack_com = super::GetComponent<my::EnemyAttackComponent>();
-    attack_com->End();
-
-    auto state_com = super::GetComponent<my::EnemyStateComponent>();
-    //state_com->ChangeState("EnemyActionMoveState");
-}
-*/
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
                                      ray.Position + ray.Direction * length,

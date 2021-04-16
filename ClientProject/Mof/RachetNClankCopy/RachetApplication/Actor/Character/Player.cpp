@@ -474,20 +474,7 @@ bool Player::Initialize(my::Actor::Param* param) {
     _player_view_camera->SetTarget(math::vec3::kZero);
     _player_view_camera->Initialize();
     _camera_controller.SetCamera(_player_view_camera);
-    my::CameraLocator::RegisterGlobalCamera(_player_view_camera);
-
-    /*
-    // mesh motion
-    if (auto mesh = _mesh.lock()) {
-        _motion = mesh->CreateMotionController();
-    } // if
-    if (_motion) {
-        if (auto motion_names = super::_motion_names.lock()) {
-            _motion->ChangeMotionByName(motion_names->GetName(m_MoveState), 1.0f, true);
-        } // if
-    } // if
-    */
-
+    _camera_controller.RegisterGlobalCamera();
 
     m_State = None;
     m_MoveState = Wait;
@@ -545,6 +532,7 @@ bool Player::Render(void) {
 
 bool Player::Release(void) {
     super::Release();
+    _camera_controller.Release();
     _player_view_camera.reset();
     _current_mechanical.reset();
     return true;

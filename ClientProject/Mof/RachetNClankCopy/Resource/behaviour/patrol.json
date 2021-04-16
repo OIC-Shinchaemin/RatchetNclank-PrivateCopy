@@ -11,12 +11,12 @@
       ]
     },
     {
-      "type": "FunctionNode",
-      "function": "Enemy::GoHome"
+      "type": "ActionNode",
+      "derived": "GoHomeNode"
     },
     {
-      "type": "FunctionNode",
-      "function": "Enemy::LookAround"
+      "type": "ActionNode",
+      "derived": "LookAroundNode"
     }
   ]
 }

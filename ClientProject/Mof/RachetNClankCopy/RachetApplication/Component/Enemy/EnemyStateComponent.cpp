@@ -1,9 +1,9 @@
 #include "EnemyStateComponent.h"
 
-#include "../../State/EnemyActionIdleState.h"
-#include "../../State/EnemyActionMoveState.h"
-#include "../../State/EnemyActionGoHomeState.h"
-#include "../../State/EnemyActionAttackState.h"
+#include "../../State/EnemyAction/EnemyActionIdleState.h"
+#include "../../State/EnemyAction/EnemyActionMoveState.h"
+#include "../../State/EnemyAction/EnemyActionGoHomeState.h"
+#include "../../State/EnemyAction/EnemyActionAttackState.h"
 
 
 my::EnemyStateComponent::EnemyStateComponent(int priority) :
