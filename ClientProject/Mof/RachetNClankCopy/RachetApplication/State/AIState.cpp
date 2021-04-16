@@ -32,7 +32,7 @@ void state::AIState::GenerateBehaviourExecutor(void) {
 
 void state::AIState::Update(float delta_time) {
     if (auto enemy = this->GetEnemy(); enemy) {
-        _behaviour_executor->Execute(enemy);
+        _behaviour_executor->Execute();
     } // if
 }
 

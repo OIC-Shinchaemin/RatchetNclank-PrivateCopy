@@ -24,7 +24,23 @@ void state::EnemyActionMoveState::Update(float delta_time) {
 
 void state::EnemyActionMoveState::Enter(void) {
     if (auto move_com = _move_com.lock()) {
+        auto target = std::dynamic_pointer_cast<my::Enemy>( super::GetActor())->GetTarget().lock()->GetPosition();
+        float speed = 0.2f;
+        float angular_speed = 1.0f;
+
+        float tilt = 1.0f;
+        Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
+        auto dir = target - super::GetActor()->GetPosition();
+        float angle = std::atan2(dir.z, dir.x);
+        in = math::Rotate(in.x, in.y, angle);
+
+        move_com->SetMoveSpeed(speed);
+        move_com->SetAngularSpeed(angular_speed);
+        move_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
         move_com->Start();
+    } // if
+    if (auto attack_com = _attack_com.lock()) {
+        attack_com->End();
     } // if
 }
 

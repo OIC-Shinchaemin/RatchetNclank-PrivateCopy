@@ -15,9 +15,17 @@
 namespace state {
 class EnemyActionState : public my::State {
 private:
+    //! アクター
+    std::weak_ptr<my::Actor> _actor;
     //! 状態
     std::weak_ptr<my::EnemyStateComponent> _state_com;
 protected:
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Actor>GetActor(void) const;
     /// <summary>
     /// 変更
     /// </summary>

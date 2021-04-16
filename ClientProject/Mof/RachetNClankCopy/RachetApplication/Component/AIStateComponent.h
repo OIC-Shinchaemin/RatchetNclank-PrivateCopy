@@ -21,6 +21,7 @@ private:
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<State>();
         ptr->SetActor(shared_this);
+        ptr->GenerateBehaviourExecutor();
         out.RegisterState(ptr);
     }
 public:

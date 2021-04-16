@@ -4,7 +4,9 @@
 
 #include "../ActionNode.h"
 
-#include "../../../Component/Enemy/EnemyAttackComponent.h"
+#include "../Component/Enemy/EnemyStateComponent.h"
+#include "../Component/Enemy/EnemyMoveComponent.h"
+#include "../Component/Enemy/EnemyAttackComponent.h"
 
 
 namespace behaviour {
@@ -28,18 +30,18 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(Actor& actor) override {
+    virtual bool Execute(std::any ptr) override {
+        auto actor = std::any_cast<Actor>(ptr);
+
         _ASSERT_EXPR(!actor->GetTarget().expired(), L"保持しているポインタが無効です");
-        /*
         auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
         auto pos = actor->GetTarget().lock()->GetPosition();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
             return true;
         } // if
-        */
 
-        auto target = actor->GetTarget().lock();
-        actor->Chase(target->GetPosition(), 0.2f, 1.0f);
+        auto state_com = actor->GetComponent<my::EnemyStateComponent>();
+        state_com->ChangeState("EnemyActionMoveState");
         return false;
     };
 };

@@ -27,9 +27,9 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual INodeExecutor<Actor>::Result Execute(Actor& actor) override {
+    virtual INodeExecutor<Actor>::Result Execute(void) override {
         if (super::_current) {
-            auto re = super::_current->Execute(actor);
+            auto re = super::_current->Execute();
             if (re != super::Result::None) {
                 super::_current = nullptr;
             } // if
@@ -47,7 +47,7 @@ public:
         // 実行開始
         super::_state = super::State::Running;
         for (auto& ptr : super::_children) {
-            auto re = ptr->Execute(actor);
+            auto re = ptr->Execute();
             if (re == super::Result::Failure) {
                 super::_state = super::State::Incompleted;
                 return super::Result::Failure;

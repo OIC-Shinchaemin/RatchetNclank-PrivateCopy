@@ -2,6 +2,7 @@
 
 #include "../../State/EnemyActionIdleState.h"
 #include "../../State/EnemyActionMoveState.h"
+#include "../../State/EnemyActionGoHomeState.h"
 #include "../../State/EnemyActionAttackState.h"
 
 
@@ -34,6 +35,7 @@ bool my::EnemyStateComponent::Initialize(void) {
     this->RegisterState<state::EnemyActionIdleState>(_state_machine);
     this->RegisterState<state::EnemyActionMoveState>(_state_machine);
     this->RegisterState<state::EnemyActionAttackState>(_state_machine);
+    this->RegisterState<state::EnemyActionGoHomeState>(_state_machine);
     _state_machine.ChangeState("EnemyActionIdleState");
     return true;
 }

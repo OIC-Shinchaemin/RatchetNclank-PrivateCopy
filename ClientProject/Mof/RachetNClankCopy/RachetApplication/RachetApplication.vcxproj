@@ -219,6 +219,7 @@
     <ClCompile Include="State\AIPatrolState.cpp" />
     <ClCompile Include="State\AIState.cpp" />
     <ClCompile Include="State\EnemyActionAttackState.cpp" />
+    <ClCompile Include="State\EnemyActionGoHomeState.cpp" />
     <ClCompile Include="State\EnemyActionIdleState.cpp" />
     <ClCompile Include="State\EnemyActionMoveState.cpp" />
     <ClCompile Include="State\EnemyActionState.cpp" />
@@ -354,6 +355,7 @@
     <ClInclude Include="State\AIPatrolState.h" />
     <ClInclude Include="State\AIState.h" />
     <ClInclude Include="State\EnemyActionAttackState.h" />
+    <ClInclude Include="State\EnemyActionGoHomeState.h" />
     <ClInclude Include="State\EnemyActionIdleState.h" />
     <ClInclude Include="State\EnemyActionMoveState.h" />
     <ClInclude Include="State\EnemyActionState.h" />

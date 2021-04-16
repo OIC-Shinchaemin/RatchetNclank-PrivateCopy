@@ -438,6 +438,9 @@
     <ClCompile Include="Component\HpComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="State\EnemyActionGoHomeState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -835,6 +838,9 @@
     </ClInclude>
     <ClInclude Include="Component\HpComponent.h">
       <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyActionGoHomeState.h">
+      <Filter>Rachet\Header\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

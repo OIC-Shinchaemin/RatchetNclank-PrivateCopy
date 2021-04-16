@@ -10,7 +10,7 @@
 #include "../../Component/AIStateComponent.h"
 #include "../../Component/Enemy/EnemyStateComponent.h"
 
-
+/*
 void my::Enemy::Chase(Mof::CVector3 target, float speed, float angular_speed) {
     // ビヘイビアの実行関数内でEnemyStateComponentを介してActionStateを変更する
     // 状態が変更されたら状態に対応するComponentをActiveにする　ActiveになっているComponentは自身の更新関数の中で条件を満たせばInactiveになる
@@ -35,14 +35,6 @@ void my::Enemy::Chase(Mof::CVector3 target, float speed, float angular_speed) {
 
     auto state_com = super::GetComponent<my::EnemyStateComponent>();
     //state_com->ChangeState("EnemyActionMoveState");
-}
-/*
-float my::Enemy::GetDistanceFromInitPosition(void) {
-    return Mof::CVector3Utilities::Distance(super::GetInitialPosition(), super::GetPosition());
-}
-
-bool my::Enemy::HasTarget(void) {
-    return !_target.expired();
 }
 */
 void my::Enemy::RenderRay(const Mof::CRay3D& ray, float length, int color) {
@@ -110,7 +102,6 @@ void my::Enemy::GenerateCollisionObject(void) {
 
 bool my::Enemy::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
-    //_init_position = super::GetPosition();
     // generate
     this->GenerateCollisionObject();
 

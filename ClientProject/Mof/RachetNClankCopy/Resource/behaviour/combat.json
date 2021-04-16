@@ -6,7 +6,8 @@
     {
       "type": "SelectorNode",
       "children": [
-        1,6
+        1,
+        6
       ]
     },
     {
@@ -14,9 +15,7 @@
       "children": [
         2,
         3,
-        4,
-        5
-
+        4,5
       ]
     },
     {
@@ -28,12 +27,12 @@
       "derived": "TargetRecognitionNode"
     },
     {
-      "type": "ConditionalNode",
-      "derived": "TargetOutOfMeleeAttackRangeNode"
+      "type": "ActionNode",
+      "derived": "MoveToEnemyNode"
     },
     {
       "type": "ActionNode",
-      "derived": "MoveToEnemyNode"
+      "derived": "MeleeAttackNode"
     },
     {
       "type": "ActionNode",
