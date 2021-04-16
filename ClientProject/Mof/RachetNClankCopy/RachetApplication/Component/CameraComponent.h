@@ -22,12 +22,12 @@ private:
     /// 操作
     /// </summary>
     /// <param name=""></param>
-    void ControllByKeyboard(void);
+    void ControlByKeyboard(void);
     /// <summary>
     /// 操作
     /// </summary>
     /// <param name=""></param>
-    void ControllByGamepad(void);
+    void ControlByGamepad(void);
 public:
     /// <summary>
     /// コンストラクタ
