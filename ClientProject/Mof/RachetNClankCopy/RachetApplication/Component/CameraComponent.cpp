@@ -3,7 +3,7 @@
 #include "../Gamepad.h"
 
 
-void my::CameraComponent::ControllByKeyboard(void) {
+void my::CameraComponent::ControlByKeyboard(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         _camera_controller.AddAzimuth(1.0f);
     } // if
@@ -18,7 +18,7 @@ void my::CameraComponent::ControllByKeyboard(void) {
     } // else if
 }
 
-void my::CameraComponent::ControllByGamepad(void) {
+void my::CameraComponent::ControlByGamepad(void) {
     float horizontal = ::g_pGamepad->GetRightStickHorizontal();
     float vertical = ::g_pGamepad->GetRightStickVertical();
     float threshold = 0.5f;
@@ -80,11 +80,14 @@ bool my::CameraComponent::Initialize(void) {
     _player_view_camera->SetTarget(math::vec3::kZero);
     _player_view_camera->Initialize();
     _camera_controller.SetCamera(_player_view_camera);
-    _camera_controller.RegisterGlobalCamera();
+    //_camera_controller.RegisterGlobalCamera();
     return true;
 }
 
 bool my::CameraComponent::Update(float delta_time) {
+    this->ControlByGamepad();
+    this->ControlByKeyboard();
+
     auto pos = super::GetOwner()->GetPosition();
     pos.y += 1.0f;
     //_camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + super::_height, pos.z));
