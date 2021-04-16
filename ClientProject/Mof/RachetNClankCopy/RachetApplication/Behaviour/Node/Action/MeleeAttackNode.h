@@ -4,14 +4,15 @@
 
 #include "../ActionNode.h"
 
+#include "../../../Actor.h"
+#include "../../../Actor/Character/Enemy.h"
 #include "../../../Component/AIStateComponent.h"
 #include "../../../Component/Enemy/EnemyStateComponent.h"
 
 
 namespace behaviour {
-template<typename Actor>
-class MeleeAttackNode : public behaviour::ActionNodeBase<Actor> {
-    using super = behaviour::ActionNodeBase<Actor>;
+class MeleeAttackNode : public behaviour::ActionNodeBase {
+    using super = behaviour::ActionNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
@@ -30,14 +31,14 @@ public:
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<Actor>(ptr);
-
-        if (actor->GetTarget().expired()) {
+        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
+        
+        if (std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().expired()) {
             return false;
         } // if
 
         auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
-        auto pos = actor->GetTarget().lock()->GetPosition();
+        auto pos = std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().lock()->GetPosition();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
             auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
             ai_state_com->ChangeState("AICombatState");

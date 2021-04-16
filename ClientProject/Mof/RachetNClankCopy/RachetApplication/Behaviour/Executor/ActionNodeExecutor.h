@@ -5,21 +5,21 @@
 #include "NodeExecutor.h"
 
 #include "My/Core/Trait.h"
+#include "../../Actor.h"
 
 
 namespace behaviour {
-template<typename Actor>
-class ActionNodeExecutor : public behaviour::NodeExecutor<Actor> {
-    using super = behaviour::NodeExecutor<Actor>;
+class ActionNodeExecutor : public behaviour::NodeExecutor {
+    using super = behaviour::NodeExecutor;
 private:
     //! アクター
-    std::weak_ptr<typename ty::remove_shared<Actor>::type> _actor;
+    std::weak_ptr<my::Actor> _actor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    ActionNodeExecutor(const NodePtr<Actor>& node) :
+    ActionNodeExecutor(const behaviour::NodePtr& node) :
         super(node) {
     }
     /// <summary>
@@ -31,7 +31,7 @@ public:
     /// </summary>
     /// <param actor=""></param>
     virtual void Prepare(std::any actor) override {
-        _actor = std::any_cast<Actor>(actor);
+        _actor = std::any_cast<std::shared_ptr<my::Actor>>(actor);
     }
     /// <summary>
     /// ノードの実行
@@ -39,7 +39,7 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual INodeExecutor<Actor>::Result Execute(void) override {
+    virtual behaviour::INodeExecutor::Result Execute(void) override {
         //実行済み
         if (super::_state == super::State::Completed) {
             return super::Result::Sucess;
@@ -50,7 +50,6 @@ public:
         //実行開始
         super::_state = super::State::Running;
         auto temp = _actor.lock();
-        //if (std::dynamic_pointer_cast<behaviour::ActionNodeBase>(super::_node)->Execute(temp)) {
         if (super::_node->Execute(temp)) {
             super::_state = super::State::Completed;
             return super::Result::Sucess;

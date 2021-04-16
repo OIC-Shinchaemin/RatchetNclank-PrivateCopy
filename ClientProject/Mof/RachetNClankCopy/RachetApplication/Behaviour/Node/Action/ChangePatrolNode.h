@@ -8,9 +8,8 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class ChangePatrolNode : public behaviour::ActionNodeBase<Actor> {
-    using super = behaviour::ActionNodeBase<Actor>;
+class ChangePatrolNode : public behaviour::ActionNodeBase {
+    using super = behaviour::ActionNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,7 +28,7 @@ public:
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<Actor>(ptr);
+        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
 
         // can transition state
         if (1) {

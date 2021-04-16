@@ -11,10 +11,9 @@
 
 
 namespace my {
-template<typename Actor>
 class BehaviourExecutorFactory {
     //! マップ
-    std::unordered_map<std::string, behaviour::CompositeNodePtr<std::shared_ptr<Actor> > > _behaviour_map;
+    std::unordered_map<std::string, behaviour::CompositeNodePtr > _behaviour_map;
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,7 +30,7 @@ public:
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    behaviour::NodeExecutorPtr<std::shared_ptr<Actor> > Create(const char* key) const {
+    behaviour::NodeExecutorPtr Create(const char* key) const {
         auto it = _behaviour_map.find(key);
         if (it != _behaviour_map.end()) {
             return it->second->CreateExecutor();

@@ -4,11 +4,13 @@
 
 #include "../ConditionalNode.h"
 
+#include "../../../Actor.h"
+#include "../../../Actor/Character/Enemy.h"
+
 
 namespace behaviour {
-template<typename Actor>
-class TargetRecognitionNode : public behaviour::ConditionalNodeBase<Actor> {
-    using super = behaviour::ConditionalNodeBase<Actor>;
+class TargetRecognitionNode : public behaviour::ConditionalNodeBase {
+    using super = behaviour::ConditionalNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,7 +29,7 @@ public:
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
     virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<Actor>(ptr);
+        auto actor =  std::dynamic_pointer_cast<my::Enemy>(std::any_cast<std::shared_ptr<my::Actor>>(ptr));
         return !actor->GetTarget().expired();
     }
 };

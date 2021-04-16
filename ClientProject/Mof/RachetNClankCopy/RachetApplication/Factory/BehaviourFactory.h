@@ -36,39 +36,39 @@ private:
     //! コンテナ
     my::FuncPtrContainer _function_pointer_container;
     //! アクション
-    my::Factory<behaviour::ActionNodeBase<std::shared_ptr<my::Enemy> >> _action_factory;
+    my::Factory<behaviour::ActionNodeBase> _action_factory;
     //! アクション
-    my::Factory<behaviour::ConditionalNodeBase<std::shared_ptr<my::Enemy> >> _condition_factory;
+    my::Factory<behaviour::ConditionalNodeBase> _condition_factory;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     BehaviourFactory() :
         _function_pointer_container() {
-        _action_factory.Register<behaviour::AlwaysTrueNode<std::shared_ptr<my::Enemy>>>("AlwaysTrueNode");
-        _action_factory.Register<behaviour::AlwaysFalseNode<std::shared_ptr<my::Enemy>>>("AlwaysFalseNode");
-        _action_factory.Register<behaviour::GoHomeNode<std::shared_ptr<my::Enemy>>>("GoHomeNode");
-        _action_factory.Register<behaviour::LookAroundNode<std::shared_ptr<my::Enemy>>>("LookAroundNode");
-        _action_factory.Register<behaviour::MoveToEnemyNode<std::shared_ptr<my::Enemy>>>("MoveToEnemyNode");
-        _action_factory.Register<behaviour::MeleeAttackNode<std::shared_ptr<my::Enemy>>>("MeleeAttackNode");
-        _action_factory.Register<behaviour::ChangePatrolNode<std::shared_ptr<my::Enemy>>>("ChangePatrolNode");
-        _condition_factory.Register<behaviour::NotAwayFromHomeNode<std::shared_ptr<my::Enemy>>>("NotAwayFromHomeNode");
-        _condition_factory.Register<behaviour::TargetRecognitionNode<std::shared_ptr<my::Enemy>>>("TargetRecognitionNode");
-        _condition_factory.Register<behaviour::TargetInMeleeAttackRangeNode<std::shared_ptr<my::Enemy>>>("TargetInMeleeAttackRangeNode");
-        _condition_factory.Register<behaviour::TargetOutOfMeleeAttackRangeNode<std::shared_ptr<my::Enemy>>>("TargetOutOfMeleeAttackRangeNode");
+        _action_factory.Register<behaviour::AlwaysTrueNode >("AlwaysTrueNode");
+        _action_factory.Register<behaviour::AlwaysFalseNode >("AlwaysFalseNode");
+        _action_factory.Register<behaviour::GoHomeNode >("GoHomeNode");
+        _action_factory.Register<behaviour::LookAroundNode >("LookAroundNode");
+        _action_factory.Register<behaviour::MoveToEnemyNode >("MoveToEnemyNode");
+        _action_factory.Register<behaviour::MeleeAttackNode >("MeleeAttackNode");
+        _action_factory.Register<behaviour::ChangePatrolNode >("ChangePatrolNode");
+        _condition_factory.Register<behaviour::NotAwayFromHomeNode >("NotAwayFromHomeNode");
+        _condition_factory.Register<behaviour::TargetRecognitionNode >("TargetRecognitionNode");
+        _condition_factory.Register<behaviour::TargetInMeleeAttackRangeNode >("TargetInMeleeAttackRangeNode");
+        _condition_factory.Register<behaviour::TargetOutOfMeleeAttackRangeNode >("TargetOutOfMeleeAttackRangeNode");
     }
     /// <summary>
     /// 作成
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    behaviour::CompositeNodePtr<std::shared_ptr<class Enemy> > CreateRootNode(const char* path) {
+    behaviour::CompositeNodePtr CreateRootNode(const char* path) {
         rapidjson::Document document;
         if (!ut::ParseJsonDocument(path, document)) {
             return nullptr;
         } // if
         using namespace behaviour;
-        behaviour::CompositeNodePtr<std::shared_ptr<my::Enemy> > rootnode;
+        behaviour::CompositeNodePtr rootnode;
         _ASSERT_EXPR(document.HasMember("root"), L"メンバを保持していません");
         _ASSERT_EXPR(document.HasMember("behaviours"), L"メンバを保持していません");
 
@@ -90,8 +90,8 @@ public:
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    behaviour::ConditionalNodeBase< std::shared_ptr<class Enemy> > ::Operator GetConditionalOperator(std::string type) {
-        using Operator = behaviour::ConditionalNodeBase<std::shared_ptr<my::Enemy>>::Operator;
+    behaviour::ConditionalNodeBase::Operator GetConditionalOperator(std::string type) {
+        using Operator = behaviour::ConditionalNodeBase ::Operator;
         if (type == "Equal") {
             return Operator::Equal;
         } // if
@@ -133,7 +133,7 @@ public:
     /// <param name="behaviours"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    std::shared_ptr<behaviour::ActionNodeBase<std::shared_ptr<class Enemy> > > CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
+    std::shared_ptr<behaviour::ActionNodeBase> CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
         using namespace behaviour;
         auto derived = behaviours[index]["derived"].GetString();
         return _action_factory.Create(derived);
@@ -144,7 +144,7 @@ public:
     /// <param name="behaviours"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    std::shared_ptr<behaviour::ConditionalNodeBase<std::shared_ptr<class Enemy> > > CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
+    std::shared_ptr<behaviour::ConditionalNodeBase > CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
         using namespace behaviour;
         auto derived = behaviours[index]["derived"].GetString();
         return _condition_factory.Create(derived);
@@ -191,10 +191,10 @@ public:
     /// <param name="behaviours"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    std::shared_ptr<behaviour::SequencerNode<std::shared_ptr<class Enemy> > > CreateSequencerNode(rapidjson::Value& behaviours, uint32_t index) {
+    std::shared_ptr<behaviour::SequencerNode> CreateSequencerNode(rapidjson::Value& behaviours, uint32_t index) {
         using namespace behaviour;
 
-        auto sequencer_node = std::make_shared<SequencerNode<std::shared_ptr<my::Enemy> >>();
+        auto sequencer_node = std::make_shared<SequencerNode>();
         auto& children = behaviours[index]["children"];
         for (size_t i = 0, n = children.Size(); i < n; i++) {
             auto children_index = children[i].GetInt();
@@ -241,10 +241,10 @@ public:
     /// <param name="behaviours"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    std::shared_ptr<behaviour::SelectorNode<std::shared_ptr<class Enemy> > > CreateSelectorNode(rapidjson::Value& behaviours, uint32_t index) {
+    std::shared_ptr<behaviour::SelectorNode> CreateSelectorNode(rapidjson::Value& behaviours, uint32_t index) {
         using namespace behaviour;
 
-        auto selector_node = std::make_shared<SelectorNode<std::shared_ptr<my::Enemy> >>();
+        auto selector_node = std::make_shared<SelectorNode>();
         auto& children = behaviours[index]["children"];
         for (size_t i = 0, n = children.Size(); i < n; i++) {
             auto children_index = children[i].GetInt();

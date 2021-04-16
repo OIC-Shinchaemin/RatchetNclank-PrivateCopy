@@ -6,12 +6,11 @@
 
 
 namespace behaviour {
-template < typename Actor>
-class SimplexNode : public behaviour::ConditionalNodeBase<Actor> {
-    using super = behaviour::ConditionalNodeBase<Actor>;
+class SimplexNode : public behaviour::ConditionalNodeBase {
+    using super = behaviour::ConditionalNodeBase;
 protected:
     //! 子ノード
-    NodePtr<Actor> _child;
+    behaviour::NodePtr _child;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,20 +27,20 @@ public:
     /// セッター
     /// </summary>
     /// <param name="node"></param>
-    void SetChild(const NodePtr<Actor>& action) { _child = action; }
+    void SetChild(const behaviour::NodePtr& action) { _child = action; }
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    NodePtr<Actor>& GetChild(void) { return _child; }
+    behaviour::NodePtr& GetChild(void) { return _child; }
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const NodePtr<Actor>& GetChild(void) const { return _child; }
+    const behaviour::NodePtr& GetChild(void) const { return _child; }
 };
-template<typename Actor> using SimplexNodePtr = std::shared_ptr<SimplexNode<Actor>>;
+using SimplexNodePtr = std::shared_ptr<SimplexNode>;
 }
 #endif // !BEHAVIOUR_SIMPLEX_NODE_H

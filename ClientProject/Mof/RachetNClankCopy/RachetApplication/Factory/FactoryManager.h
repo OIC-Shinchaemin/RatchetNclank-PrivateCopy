@@ -27,7 +27,7 @@ private:
     //! ファクトリー
     my::BehaviourFactory _behaviour_node;
     //! ファクトリー
-    my::BehaviourExecutorFactory<class Enemy> _behaviour_executor;
+    my::BehaviourExecutorFactory _behaviour_executor;
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -79,7 +79,7 @@ public:
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    behaviour::NodeExecutorPtr<std::shared_ptr<class Enemy> > CreateBehaviourExecutor(const char* key);
+    behaviour::NodeExecutorPtr CreateBehaviourExecutor(const char* key);
 };
 }
 #endif // !MY_FACTORY_MANAGER_H

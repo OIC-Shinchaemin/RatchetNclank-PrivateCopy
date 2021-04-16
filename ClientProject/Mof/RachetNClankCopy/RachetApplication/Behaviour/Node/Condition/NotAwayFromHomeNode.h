@@ -3,12 +3,12 @@
 
 
 #include "../ConditionalNode.h"
+#include "../../../Actor.h"
 
 
 namespace behaviour {
-template<typename Actor>
-class NotAwayFromHomeNode: public behaviour::ConditionalNodeBase<Actor> {
-    using super = behaviour::ConditionalNodeBase<Actor>;
+class NotAwayFromHomeNode: public behaviour::ConditionalNodeBase {
+    using super = behaviour::ConditionalNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,7 +27,7 @@ public:
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
     virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<Actor>(ptr);
+        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
 
         return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) < 5.0f;
     }
