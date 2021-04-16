@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     //本当は使いたくなかった変数たち
     int JumpCount;
-    
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             PermanentUI.perm.cherries += 1;
             PermanentUI.perm.cherryTaxt.text = PermanentUI.perm.cherries.ToString();
+            CherryScore();
+            
         }
         //if(collision.tag=="Powerup")        //チュートリアルで使用したパワーアップコード。現在使用してません。
         //{
@@ -136,7 +138,12 @@ public class PlayerController : MonoBehaviour
 
             if (enemy.gameObject.transform.position.x > transform.position.x)
             {
+
                 rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+                EnemyScore();
+                enemy.JumpedOn();
+                Jump();
+
             }
             else
             {
