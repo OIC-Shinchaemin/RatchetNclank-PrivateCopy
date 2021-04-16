@@ -8,9 +8,8 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class TargetOutOfMeleeAttackRangeNode : public behaviour::ConditionalNodeBase<Actor> {
-    using super = behaviour::ConditionalNodeBase<Actor>;
+class TargetOutOfMeleeAttackRangeNode : public behaviour::ConditionalNodeBase {
+    using super = behaviour::ConditionalNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,12 +28,12 @@ public:
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
     virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<Actor>(ptr);
+        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
         
-        _ASSERT_EXPR(!actor->GetTarget().expired(), L"保持しているポインタが無効です");
+        _ASSERT_EXPR(!std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().expired(), L"保持しているポインタが無効です");
 
         auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
-        auto pos = actor->GetTarget().lock()->GetPosition();
+        auto pos = std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().lock()->GetPosition();
         return !attack_com->GetCanAttackRangeSphere().CollisionPoint(pos);
     }
 };

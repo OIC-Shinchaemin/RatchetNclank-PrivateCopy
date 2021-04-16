@@ -8,9 +8,8 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class ConditionalNodeBase : public behaviour::Node<Actor> {
-    using super = behaviour::Node<Actor>;
+class ConditionalNodeBase : public behaviour::Node {
+    using super = behaviour::Node;
 public:
     enum class Operator {
         Equal, // ==
@@ -42,9 +41,9 @@ public:
     /// çÏê¨
     /// </summary>
     /// <returns></returns>
-    virtual NodeExecutorPtr<Actor> CreateExecutor(void) const override {
+    virtual behaviour ::NodeExecutorPtr CreateExecutor(void) const override {
         auto ptr = std::const_pointer_cast<super>(super::shared_from_this());
-        return std::make_shared<ConditionalNodeExecutor<Actor>>(ptr);
+        return std::make_shared<behaviour::ConditionalNodeExecutor>(ptr);
     }
 };
 //template < typename T, typename V >

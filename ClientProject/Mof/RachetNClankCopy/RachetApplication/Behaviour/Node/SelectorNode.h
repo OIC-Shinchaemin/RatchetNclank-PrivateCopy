@@ -8,9 +8,8 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class SelectorNode : public behaviour::CompositeNode<Actor> {
-	using super = behaviour::CompositeNode<Actor>;
+class SelectorNode : public behaviour::CompositeNode {
+	using super = behaviour::CompositeNode;
 public:
 	/// <summary>
 	/// コンストラクタ
@@ -27,10 +26,10 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	virtual NodeExecutorPtr<Actor> CreateExecutor(void) const {
-		auto ptr = std::const_pointer_cast<behaviour::Node<Actor>>(super::shared_from_this());
+	virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+		auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
 		auto temp = std::dynamic_pointer_cast<super>(ptr);
-		return std::make_shared<behaviour::SelectorNodeExecutor<Actor>>(temp);
+		return std::make_shared<behaviour::SelectorNodeExecutor>(temp);
 	}
 };
 }

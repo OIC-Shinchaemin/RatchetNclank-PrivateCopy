@@ -2,9 +2,6 @@
 #define BEHAVIOUR_PARAMETER_NODE_H
 
 
-#include "Node.h"
-
-
 namespace behaviour {
 template<typename Actor, typename Value>
 class IParameterNode {

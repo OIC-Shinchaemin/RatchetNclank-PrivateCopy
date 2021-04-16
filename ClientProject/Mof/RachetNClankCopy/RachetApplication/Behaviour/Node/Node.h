@@ -2,18 +2,13 @@
 #define BEHAVIOUR_NODE_H
 
 
-#include "../Executor/INodeExecutor.h"
-
 #include <any>
+
+#include "../Executor/INodeExecutor.h"
 
 
 namespace behaviour {
-// 前方宣言
-template<typename Actor> class Node;
-template<typename Actor> using NodePtr = std::shared_ptr<Node<Actor>>;
-template<typename Actor> using NodeList = std::list<NodePtr<Actor>>;
-template<typename Actor>
-class Node : public std::enable_shared_from_this<Node<Actor>> {
+class Node : public std::enable_shared_from_this<behaviour::Node> {
 protected:
     //! 名前
     std::string _name;
@@ -34,22 +29,26 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::string& GetName(void)const noexcept { return _name; }
+    const std::string& GetName(void)const noexcept {
+        return _name;
+    }
     /// <summary>
     /// ノードの実行
     /// </summary>
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) { 
-        return false; 
+    virtual bool Execute(std::any ptr) {
+        return false;
     }
     /// <summary>
     /// 作成
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr<Actor> CreateExecutor(void) const = 0;
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const = 0;
 };
+using NodePtr = std::shared_ptr<Node>;
+using NodeList = std::list<NodePtr>;
 }
 #endif // !BEHAVIOUR_NODE_H

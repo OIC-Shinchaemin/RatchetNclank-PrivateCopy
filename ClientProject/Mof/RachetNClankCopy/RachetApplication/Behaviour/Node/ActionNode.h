@@ -8,9 +8,8 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class ActionNodeBase : public behaviour::Node<Actor> {
-    using super = behaviour::Node<Actor>;
+class ActionNodeBase : public behaviour::Node {
+    using super = behaviour::Node;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,17 +26,17 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr<Actor> CreateExecutor(void) const {
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
         auto ptr = std::const_pointer_cast<super>(super::shared_from_this());
-        return std::make_shared<ActionNodeExecutor<Actor>>(ptr);
+        return std::make_shared<ActionNodeExecutor>(ptr);
     }
 };
 template<typename Actor>
-class FunctionNode : public behaviour::ActionNodeBase<Actor> {
-    using super = behaviour::ActionNodeBase<Actor>;
+class FunctionNode : public behaviour::ActionNodeBase {
+    using super = behaviour::ActionNodeBase;
 protected:
     //! 実行処理
-    using OnExecFunction = std::function< bool(Actor&) >;
+    using OnExecFunction = std::function<bool(Actor&)>;
     //! 実行処理
     OnExecFunction OnExec;
 public:
@@ -46,7 +45,7 @@ public:
     /// </summary>
     /// <param name="exec"></param>
     FunctionNode(OnExecFunction exec) :
-        super("FunctionNode"), 
+        super("FunctionNode"),
         OnExec(exec) {
     }
     /// <summary>
@@ -59,7 +58,7 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override{
+    virtual bool Execute(std::any ptr) override {
         auto actor = std::any_cast<Actor>(ptr);
         return OnExec(actor);
     }

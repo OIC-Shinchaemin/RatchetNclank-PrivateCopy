@@ -6,20 +6,21 @@
 
 #include "My/Core/Trait.h"
 
+#include "../../Actor.h"
+
 
 namespace behaviour {
-template<typename Actor>
-class ConditionalNodeExecutor : public behaviour::NodeExecutor<Actor> {
-    using super = behaviour::NodeExecutor<Actor>;
+class ConditionalNodeExecutor : public behaviour::NodeExecutor {
+    using super = behaviour::NodeExecutor;
 private:
     //! アクター
-    std::weak_ptr<typename ty::remove_shared<Actor>::type> _actor;
+    std::weak_ptr<my::Actor> _actor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    ConditionalNodeExecutor(const NodePtr<Actor>& node) : 
+    ConditionalNodeExecutor(const behaviour::NodePtr& node) :
         super(node) {
     }
     /// <summary>
@@ -31,7 +32,7 @@ public:
     /// </summary>
     /// <param actor=""></param>
     virtual void Prepare(std::any actor) override {
-        _actor = std::any_cast<Actor>(actor);
+        _actor = std::any_cast<std::shared_ptr<my::Actor>>(actor);
     }
     /// <summary>
     /// ノードの実行処理
@@ -39,7 +40,7 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual INodeExecutor<Actor>::Result Execute(void) override {
+    virtual behaviour::INodeExecutor::Result Execute(void) override {
         // 実行開始
         super::_state = super::State::Running;
         auto temp = _actor.lock();

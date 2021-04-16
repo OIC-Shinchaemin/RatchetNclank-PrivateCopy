@@ -6,15 +6,14 @@
 
 
 namespace behaviour {
-template <typename Actor>
-class SequencerNodeExecutor : public behaviour::CompositeNodeExecutor<Actor> {
-    using super = behaviour::CompositeNodeExecutor<Actor>;
+class SequencerNodeExecutor : public behaviour::CompositeNodeExecutor {
+    using super = behaviour::CompositeNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    SequencerNodeExecutor(const CompositeNodePtr<Actor>& node) :
+    SequencerNodeExecutor(const behaviour::CompositeNodePtr& node) :
         super(node) {
     }
     /// <summary>
@@ -27,7 +26,7 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual INodeExecutor<Actor>::Result Execute(void) override {
+    virtual behaviour::INodeExecutor::Result Execute(void) override {
         if (super::_current) {
             auto re = super::_current->Execute();
             if (re != super::Result::None) {

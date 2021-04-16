@@ -26,7 +26,7 @@ void state::AIState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
 void state::AIState::GenerateBehaviourExecutor(void) {
     _behaviour_executor = my::FactoryManager::Singleton().CreateBehaviourExecutor(_behaviour_path.c_str());
     
-    std::shared_ptr<my::Enemy> temp = _enemy.lock();
+    std::shared_ptr<my::Actor> temp = _enemy.lock();
     _behaviour_executor->Prepare(temp);
 }
 

@@ -20,7 +20,7 @@ protected:
     //! 通知
     std::weak_ptr<my::Enemy> _enemy;
     //! ビヘイビア実行
-    behaviour::NodeExecutorPtr<std::shared_ptr<my::Enemy>> _behaviour_executor;
+    behaviour::NodeExecutorPtr _behaviour_executor;
     //! パス
     std::string _behaviour_path;
     /// <summary>

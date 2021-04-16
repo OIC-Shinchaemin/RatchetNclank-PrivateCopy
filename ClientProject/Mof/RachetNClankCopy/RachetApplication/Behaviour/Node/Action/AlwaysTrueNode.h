@@ -6,9 +6,8 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class AlwaysTrueNode : public behaviour::ActionNodeBase<Actor> {
-    using super = behaviour::ActionNodeBase<Actor>;
+class AlwaysTrueNode : public behaviour::ActionNodeBase {
+    using super = behaviour::ActionNodeBase;
 public:
     /// <summary>
     /// コンストラクタ

@@ -6,12 +6,11 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class CompositeNode : public behaviour::Node<Actor> {
-    using super = behaviour::Node<Actor>;
+class CompositeNode : public behaviour::Node {
+    using super = behaviour::Node;
 protected:
     //! 子ノード
-    NodeList<Actor> _children;
+    behaviour::NodeList _children;
 public:
     /// <summary>
     /// コンストラクタ
@@ -30,19 +29,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const NodeList<Actor>& GetChildren(void) const { return _children; }
+    const behaviour::NodeList& GetChildren(void) const { return _children; }
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    NodeList<Actor>& GetChildren(void) { return _children; }
+    behaviour::NodeList& GetChildren(void) { return _children; }
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="node"></param>
-    void AddChild(const NodePtr<Actor>& node) { _children.push_back(node); }
+    void AddChild(const behaviour::NodePtr& node) { _children.push_back(node); }
 };
-template<typename Actor> using CompositeNodePtr = std::shared_ptr<CompositeNode<Actor>>;
+using CompositeNodePtr = std::shared_ptr<behaviour::CompositeNode>;
 }
 #endif // !BEHAVIOUR_COMPOSITENODE_H

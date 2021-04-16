@@ -4,30 +4,29 @@
 
 #include "INodeExecutor.h"
 
-#include "../Node/Node.h"
-
 #include <Mof.h>
+
+#include "../Node/Node.h"
 
 
 namespace behaviour {
-template<typename Actor>
-class NodeExecutor : public INodeExecutor<Actor> {
-    using super = INodeExecutor<Actor>;
+class NodeExecutor : public behaviour::INodeExecutor {
+    using super = behaviour::INodeExecutor;
 protected:
     //! 状態
     super::State _state;
     //! 対応ノード
-    NodePtr<Actor> _node;
+    behaviour::NodePtr _node;
     //! 親
-    NodeExecutorWeakPtr<Actor> _parent;
+    behaviour::NodeExecutorWeakPtr _parent;
     //! 子供
-    NodeExecutorList<Actor> _children;
+    behaviour::NodeExecutorList _children;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    NodeExecutor(const NodePtr<Actor>& node) :
+    NodeExecutor(const behaviour::NodePtr& node) :
         super(),
         _state(super::State::Inactive),
         _node(node),
@@ -42,7 +41,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetParent(NodeExecutorWeakPtr<Actor> ptr) override {
+    void SetParent(behaviour::NodeExecutorWeakPtr ptr) override {
         _parent = ptr;
     }
     /// <summary>
@@ -57,8 +56,8 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual behaviour::INodeExecutor<Actor>::Result Execute(void) override { 
-        return behaviour::INodeExecutor<Actor>::Result::Failure; 
+    virtual behaviour::INodeExecutor::Result Execute(void) override {
+        return behaviour::INodeExecutor::Result::Failure;
     }
     /// <summary>
     /// 実行状態を全てリセット
