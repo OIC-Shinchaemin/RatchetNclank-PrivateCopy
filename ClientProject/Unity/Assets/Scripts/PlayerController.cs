@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     public bool Left = false;
     private int DCount;
 
+    //本当は使いたくなかった変数たち
+    int JumpCount;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -277,6 +280,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(rb.velocity.x) < .1f && state != State.Die)
             {
+                CountReset();
                 state = State.idle;
             }
         }
@@ -381,4 +385,31 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+    public void ScoreUpdate()               //ややこしいバグを後回しにするための奴
+    {
+        PermanentUI.perm.ScoreText.text = PermanentUI.perm.scoreValue.ToString("D7");
+    }
+
+
+
+    private void CherryScore()               //以下同文
+    {
+        PermanentUI.perm.scoreValue += PermanentUI.perm.cherries * 100;
+        ScoreUpdate();
+    }
+    private void EnemyScore()
+    {
+        JumpCount++;
+        if (JumpCount > 8)
+        {
+            JumpCount = 8;
+        }
+        PermanentUI.perm.scoreValue += JumpCount * 100;
+        ScoreUpdate();
+    }
+    private void CountReset()
+    {
+        JumpCount = 0;
+    }
+
 }
