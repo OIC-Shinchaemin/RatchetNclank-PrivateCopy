@@ -49,7 +49,7 @@ public:
     /// 実行時必要なポインタをキャッシュ
     /// </summary>
     /// <param actor=""></param>
-    virtual void Prepare(Actor actor) override {
+    virtual void Prepare(std::any actor) override {
     }
     /// <summary>
     /// ノードの実行処理
@@ -57,7 +57,9 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual behaviour::INodeExecutor<Actor>::Result Execute(Actor& actor) override { return behaviour::INodeExecutor<Actor>::Result::Failure; }
+    virtual behaviour::INodeExecutor<Actor>::Result Execute(void) override { 
+        return behaviour::INodeExecutor<Actor>::Result::Failure; 
+    }
     /// <summary>
     /// 実行状態を全てリセット
     /// 状態をInactiveに設定

@@ -35,7 +35,7 @@ public:
     /// 実行時必要なポインタをキャッシュ
     /// </summary>
     /// <param actor=""></param>
-    virtual void Prepare(Actor actor) override {
+    virtual void Prepare(std::any actor) override {
         for (auto& ptr : super::_children) {
             ptr->Prepare(actor);
         } // for

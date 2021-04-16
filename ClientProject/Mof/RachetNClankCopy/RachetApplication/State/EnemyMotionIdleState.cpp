@@ -1,5 +1,6 @@
 #include "EnemyMotionIdleState.h"
 
+
 state::EnemyMotionIdleState::EnemyMotionIdleState() :
     super() {
     super::_motion_loop = true;

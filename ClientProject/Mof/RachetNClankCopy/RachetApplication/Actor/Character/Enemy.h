@@ -25,6 +25,7 @@ public:
     enum class ActionType {
         IdleWait,
         MoveRun,
+        MoveGoHome,
         AttackOne,
         CountMax,
     };
@@ -32,19 +33,7 @@ private:
     //! 標的
     std::weak_ptr<my::Actor>_target;
 public:
-    void Chase(Mof::CVector3 target, float speed, float angular_speed);
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //float GetDistanceFromInitPosition(void);
-    /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //bool HasTarget(void);
+    //void Chase(Mof::CVector3 target, float speed, float angular_speed);
     /// <summary>
     /// 描画
     /// </summary>

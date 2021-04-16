@@ -59,7 +59,8 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(Actor& actor) override{
+    virtual bool Execute(std::any ptr) override{
+        auto actor = std::any_cast<Actor>(ptr);
         return OnExec(actor);
     }
 };
