@@ -1,14 +1,16 @@
 #include "PlayerCollisionObject.h"
 
-#include "../../../Actor/Character/Player.h"
+#include "../../Player/PlayerComponent.h"
 
 
 my::PlayerCollisionObject::PlayerCollisionObject(int priority) :
-    super(priority) {
+    super(priority),
+    _player_com(){
 }
 
 my::PlayerCollisionObject::PlayerCollisionObject(const PlayerCollisionObject& obj) :
-    super(obj._priority) {
+    super(obj._priority) ,
+    _player_com(){
 }
 
 my::PlayerCollisionObject::~PlayerCollisionObject() {
@@ -19,11 +21,13 @@ std::string my::PlayerCollisionObject::GetType(void) const {
 }
 
 std::optional<Mof::CSphere> my::PlayerCollisionObject::GetSphere(void) {
+    _ASSERT_EXPR(!_player_com.expired(),L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     if (super::GetOwner()->GetState() == my::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
-    auto owner = std::dynamic_pointer_cast<Player>(super::GetOwner());
-    return Mof::CSphere(super::GetOwner()->GetPosition(), owner->GetVolume());
+    auto pos = super::GetOwner()->GetPosition();
+    pos.y += _player_com.lock()->GetHeight();
+    return Mof::CSphere(pos, _player_com.lock()->GetVolume());
 }
 
 std::optional<Mof::CBoxAABB> my::PlayerCollisionObject::GetBox(void) {
@@ -40,6 +44,12 @@ std::optional<Mof::LPMeshContainer> my::PlayerCollisionObject::GetMesh(void) {
 
 std::optional<my::SightObject> my::PlayerCollisionObject::GetSightObject(void) {
     return std::optional<my::SightObject>();
+}
+
+bool my::PlayerCollisionObject::Initialize(void) {
+    super::Initialize();
+    _player_com = super::GetOwner()->GetComponent<my::PlayerComponent>();
+    return true;
 }
 
 std::shared_ptr<my::Component> my::PlayerCollisionObject::Clone(void) {

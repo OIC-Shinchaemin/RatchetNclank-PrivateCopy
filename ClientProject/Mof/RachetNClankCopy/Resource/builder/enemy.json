@@ -20,6 +20,12 @@
       }
     },
     {
+      "type": "EnemyComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "EnemyStateComponent",
       "paramater": {
         "priority": 80
@@ -79,6 +85,12 @@
     },
     {
       "type": "EnemySightCollisionObject",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "EnemyAttackCollisionObject",
       "paramater": {
         "priority": 0
       }

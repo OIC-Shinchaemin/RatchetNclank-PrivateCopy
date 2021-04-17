@@ -348,15 +348,6 @@
     <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp">
       <Filter>Rachet\Source\Actor\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\EnemyCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\EnemySightCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\PlayerCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
@@ -473,6 +464,27 @@
     </ClCompile>
     <ClCompile Include="Camera\DebugCameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionObject.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -734,15 +746,6 @@
     <ClInclude Include="Component\Collision\Object\EnemySightCollisionObject.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\EnemyCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\EnemySightCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\PlayerCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
@@ -883,6 +886,27 @@
     </ClInclude>
     <ClInclude Include="Camera\DebugCameraController.h">
       <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionObject.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

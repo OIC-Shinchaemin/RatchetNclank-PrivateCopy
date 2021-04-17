@@ -80,17 +80,6 @@ public:
     /// </summary>
     virtual ~CollisionObject();
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="owner"></param>
-    //virtual void SetOwner(std::any owner) = 0;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual std::any GetOwner(void) const = 0;
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>

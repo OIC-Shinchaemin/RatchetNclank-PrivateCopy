@@ -7,6 +7,7 @@
 #include "../Actor.h"
 #include "../Component/Collision/Object/CollisionObject.h"
 #include "../Component/Collision/Algolithm/CollisionAlgolithm.h"
+#include "../Factory/Factory.h"
 
 
 namespace my {
@@ -25,6 +26,8 @@ private:
     };
     //! 衝突処理対象
     std::vector<CollisionPair> _objects;
+    //! ファクトリー
+    my::Factory<my::CollisionAlgolithm> collision_algolithm_factory;
 private:
     /// <summary>
     /// 作成

@@ -1,9 +1,11 @@
 #include "PhysicsWorld.h"
 
 #include "My/Core/Utility.h"
-#include "../Component/Collision/Algolithm/PlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemySightCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerEnemyCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerEnemyAttackCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemySightPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
 
 
 std::shared_ptr<my::CollisionAlgolithm> my::PhysicsWorld::CreateAlgolithm(const char* type) {
@@ -17,19 +19,30 @@ std::shared_ptr<my::CollisionAlgolithm> my::PhysicsWorld::CreateAlgolithm(const 
     if (type == "EnemySightPlayerCollisionAlgolithm") {
         ptr = std::make_shared<my::EnemySightPlayerCollisionAlgolithm>();
     } // if
+    if (type == "EnemyAttackPlayerCollisionAlgolithm") {
+        ptr = std::make_shared<my::EnemyAttackPlayerCollisionAlgolithm>();
+    } // if
     return ptr;
 }
 
 my::PhysicsWorld::PhysicsWorld() :
     _objects() {
+    collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>("PlayerEnemyCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>("PlayerEnemyAttackCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>("EnemyPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemySightPlayerCollisionAlgolithm>("EnemySightPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>("EnemyAttackPlayerCollisionAlgolithm");
+
     const char* types[] = {
         "PlayerEnemyCollisionAlgolithm",
+        "PlayerEnemyAttackCollisionAlgolithm",
         "EnemyPlayerCollisionAlgolithm",
         "EnemySightPlayerCollisionAlgolithm",
+        "EnemyAttackPlayerCollisionAlgolithm",
     };
     for (auto type : types) {
         auto temp = CollisionPair();
-        temp.algo = this->CreateAlgolithm(type);
+        temp.algo = collision_algolithm_factory.Create(type);
         _objects.push_back(temp);
     } // for
 }

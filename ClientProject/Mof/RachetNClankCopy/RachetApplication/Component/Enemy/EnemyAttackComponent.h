@@ -58,12 +58,6 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    Mof::CSphere GetSphere(void) const;
-    /// <summary>
-    /// ƒQƒbƒ^[
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
     Mof::CSphere GetCanAttackRangeSphere(void) const;
     /// <summary>
     /// ‰Šú‰»
@@ -77,6 +71,9 @@ public:
     /// <param name="delta_time">ŠÔ</param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
+#ifdef _DEBUG
+    virtual bool Render(void) override;
+#endif // _DEBUG
     /// <summary>
     /// ‰ğ•ú
     /// </summary>

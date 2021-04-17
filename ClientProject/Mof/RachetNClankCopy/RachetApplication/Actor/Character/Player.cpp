@@ -239,7 +239,7 @@ bool Player::Update(float delta_time) {
     if (auto weapon = _current_mechanical.lock()) {
         if (weapon->IsAction() && weapon->CanFire()) {
             auto pos = super::GetPosition();
-            pos.y += super::GetHeight();
+            //pos.y += super::GetHeight();
             weapon->Fire(def::Transform(pos, super::GetRotate()));
         } // if
     } // if

@@ -2,7 +2,9 @@
 
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
-
+#ifdef _DEBUG
+#include "../Collision/Object/EnemyAttackCollisionObject.h"
+#endif // _DEBUG
 
 my::EnemyAttackComponent::EnemyAttackComponent(int priority) :
     super(priority),
@@ -13,7 +15,7 @@ my::EnemyAttackComponent::EnemyAttackComponent(int priority) :
 }
 
 my::EnemyAttackComponent::EnemyAttackComponent(const EnemyAttackComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _range(obj._range),
     _volume(obj._volume),
     _motion_com(),
@@ -34,7 +36,7 @@ float my::EnemyAttackComponent::GetRange(void) const {
 float my::EnemyAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
-
+/*
 Mof::CSphere my::EnemyAttackComponent::GetSphere(void) const {
     if (!this->IsActive()) {
         return Mof::CSphere();
@@ -51,6 +53,7 @@ Mof::CSphere my::EnemyAttackComponent::GetSphere(void) const {
 
     return Mof::CSphere(pos, _volume);
 }
+*/
 
 Mof::CSphere my::EnemyAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
@@ -71,6 +74,15 @@ bool my::EnemyAttackComponent::Update(float delta_time) {
         if (motion_com->IsEndMotion()) {
             super::End();
         } // if
+    } // if
+    return true;
+}
+
+bool my::EnemyAttackComponent::Render(void) {
+    auto coll_com = super::GetOwner()->GetComponent<my::EnemyAttackCollisionObject>();
+    if (coll_com && coll_com->GetSphere().has_value()) {
+        auto sphere = coll_com->GetSphere().value();
+        ::CGraphicsUtilities::RenderLineSphere(sphere, def::color_rgba::kRed);
     } // if
     return true;
 }

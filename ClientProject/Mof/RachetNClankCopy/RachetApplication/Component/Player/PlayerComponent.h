@@ -15,6 +15,10 @@ private:
     std::weak_ptr<class PlayerIdleComponent> _idle_com;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
+    //! 大きさ
+    float _volume;
+    //! 高さ
+    float _height;
 
     bool MoveByKeyboard(float angular_speed, float speed);
     void MoveByGamepad(float angular_speed, float speed);
@@ -40,6 +44,18 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetVolume(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetHeight(void) const;
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
@@ -51,6 +67,9 @@ public:
     /// <param name="delta_time">時間</param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
+#ifdef _DEBUG
+    virtual bool Render(void) override;
+#endif // _DEBUG
     /// <summary>
     /// 解放
     /// </summary>

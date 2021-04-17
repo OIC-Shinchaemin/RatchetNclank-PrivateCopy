@@ -14,8 +14,7 @@ namespace my {
 class EnemyCollisionObject : public my::CollisionObject {
     using super = my::CollisionObject;
 private:
-    //! 所有者
-    //std::weak_ptr<class Enemy> _owner;
+    std::weak_ptr<class EnemyComponent> _enemy_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,17 +30,6 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~EnemyCollisionObject();
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="owner"></param>
-    //virtual void SetOwner(std::any owner) override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual std::any GetOwner(void) const override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -78,6 +66,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::optional<my::SightObject> GetSightObject(void) override;
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Initialize(void) override;
     /// <summary>
     /// 複製
     /// </summary>

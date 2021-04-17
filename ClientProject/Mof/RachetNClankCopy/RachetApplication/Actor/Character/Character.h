@@ -9,10 +9,6 @@ namespace my {
 class Character : public my::Actor {
     using super = my::Actor;
 protected:
-    //! 大きさ
-    float _volume;
-    //! 高さ
-    float _height;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,19 +23,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    float GetVolume(void) const;
+    //float GetVolume(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    float GetHeight(void) const;
+    //float GetHeight(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual Mof::CSphere GetSphere(void) const;
+    //virtual Mof::CSphere GetSphere(void) const;
     /// <summary>
     /// 描画
     /// </summary>

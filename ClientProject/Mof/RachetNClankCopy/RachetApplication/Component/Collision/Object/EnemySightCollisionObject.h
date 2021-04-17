@@ -15,8 +15,6 @@ class EnemySightCollisionObject : public my::CollisionObject {
     using super = my::CollisionObject;
 private:
     //! 所有者
-    //std::weak_ptr<class Enemy> _owner;
-    //! 所有者
     std::weak_ptr<class SightRecognitionComponent> _sight_recognition;
 public:
     /// <summary>
@@ -33,17 +31,6 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~EnemySightCollisionObject();
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="owner"></param>
-    //virtual void SetOwner(std::any owner) override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual std::any GetOwner(void) const override;
     /// <summary>
     /// セッター
     /// </summary>

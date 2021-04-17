@@ -34,15 +34,6 @@ private:
     std::weak_ptr<my::Actor>_target;
 public:
     /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name="ray"></param>
-    /// <param name="length"></param>
-    /// <param name="color"></param>
-    void RenderRay(const Mof::CRay3D& ray, float length, int color);
-    void RenderRay(Mof::Vector3 start, float degree_y);
-public:
-    /// <summary>
     /// コンストラクタ
     /// </summary>
     Enemy();
