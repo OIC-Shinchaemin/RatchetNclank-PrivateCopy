@@ -21,24 +21,35 @@ enum class ActorState {
 };
 class Actor : public std::enable_shared_from_this<my::Actor>, public my::Observable<const char*, const std::shared_ptr<my::Actor>&> {
 public:
+    using ComPtr = std::shared_ptr<class Component>;
+    using ComArray = std::vector<ComPtr>;
     using Observable = my::Observable<const char*, const std::shared_ptr<my::Actor>&>;
 public:
     struct Param {
+        //! 名前
+        std::string name;
         //! トランスフォーム
         def::Transform transform;
+
         Param() :
+            name(),
             transform(){
         }
         virtual ~Param() {
         }
     };
 private:
-    //! 名前
-    std::string _name;
     //! 状態
     my::ActorState _state;
+    //! 名前
+    std::string _name;
     //! トランスフォーム
     def::Transform _transform;
+    //! 機能
+    ComArray _components;
+    ComArray _input_components;
+    ComArray _update_components;
+    ComArray _render_components;
     //! 衝突用
     std::vector<std::shared_ptr<my::CollisionObject>> _collision_objects;
 protected:
@@ -107,6 +118,12 @@ public:
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
+    /// <returns></returns>
+    my::ActorState GetState(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
     /// <returns>名前</returns>
     std::string GetName(void) const;
     /// <summary>
@@ -132,13 +149,52 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::ActorState GetState(void) const;
+    const std::vector<std::shared_ptr<my::CollisionObject>>& GetCollisionObjects(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
+    /// <typeparam name="T"></typeparam>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::vector<std::shared_ptr<my::CollisionObject>>& GetCollisionObjects(void) const;
+    template<typename T>
+    std::shared_ptr<T>GetComponent(void) const {
+        for (auto& com : _components) {
+            auto ret = std::dynamic_pointer_cast<T>(com);
+            if (ret) {
+                return ret;
+            } // if
+        } // for
+        return nullptr;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="out"></param>
+    template <typename T>
+    void GetComponents(std::vector<std::weak_ptr<T>>& out) const {
+        for (auto& com : _components) {
+            auto ptr = std::dynamic_pointer_cast<T>(com);
+            if (ptr) {
+                out.push_back(ptr);
+            } // if
+        } // for
+    }
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="component"></param>
+    void AddComponent(const ComPtr& component);
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name=""></param>
+    void CloneToComponents(const ComArray& com_array);
+    /// <summary>
+    /// 削除
+    /// </summary>
+    /// <param name="component"></param>
+    void RemoveComponent(const ComPtr& component);
     /// <summary>
     /// デリート
     /// </summary>
@@ -174,6 +230,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Release(void);
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="builder"></param>
+    void Construct(const std::shared_ptr<class IBuilder>& builder);
     /// <summary>
     /// デバッグ
     /// </summary>

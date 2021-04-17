@@ -173,8 +173,18 @@
     <ClCompile Include="Collision\Object\EnemyCollisionObject.cpp" />
     <ClCompile Include="Collision\Object\EnemySightCollisionObject.cpp" />
     <ClCompile Include="Collision\Object\PlayerCollisionObject.cpp" />
+    <ClCompile Include="Component\Component.cpp" />
+    <ClCompile Include="Component\MeshComponent.cpp" />
+    <ClCompile Include="Component\MotionComponent.cpp" />
+    <ClCompile Include="Component\MotionStateComponent.cpp" />
+    <ClCompile Include="Component\RenderComponent.cpp" />
+    <ClCompile Include="Component\UpdateComponent.cpp" />
+    <ClCompile Include="Factory\ActorBuilder.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
+    <ClCompile Include="Factory\BuilderFactory.cpp" />
+    <ClCompile Include="Factory\ComponentCreator.cpp" />
+    <ClCompile Include="Factory\ComponentFactory.cpp" />
     <ClCompile Include="Factory\FactoryManager.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
@@ -200,6 +210,7 @@
     <ClCompile Include="State\EnemyMotionIdleState.cpp" />
     <ClCompile Include="State\EnemyMotionMoveState.cpp" />
     <ClCompile Include="State\EnemyMotionState.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="Weapon\Blaster.cpp" />
@@ -266,11 +277,22 @@
     <ClInclude Include="Collision\Object\EnemyCollisionObject.h" />
     <ClInclude Include="Collision\Object\EnemySightCollisionObject.h" />
     <ClInclude Include="Collision\Object\PlayerCollisionObject.h" />
+    <ClInclude Include="Component\Component.h" />
+    <ClInclude Include="Component\MeshComponent.h" />
+    <ClInclude Include="Component\MotionComponent.h" />
+    <ClInclude Include="Component\MotionStateComponent.h" />
+    <ClInclude Include="Component\RenderComponent.h" />
+    <ClInclude Include="Component\UpdateComponent.h" />
+    <ClInclude Include="Factory\ActorBuilder.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
+    <ClInclude Include="Factory\BuilderFactory.h" />
+    <ClInclude Include="Factory\ComponentCreator.h" />
+    <ClInclude Include="Factory\ComponentFactory.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />
+    <ClInclude Include="Factory\IBuilder.h" />
     <ClInclude Include="FunctionPointerContainer.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
@@ -300,6 +322,7 @@
     <ClInclude Include="State\EnemyMotionIdleState.h" />
     <ClInclude Include="State\EnemyMotionMoveState.h" />
     <ClInclude Include="State\EnemyMotionState.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="Velocity.h" />
     <ClInclude Include="Weapon\Blaster.h" />
@@ -315,6 +338,7 @@
   <ItemGroup>
     <None Include="..\Resource\behaviour\combat.json" />
     <None Include="..\Resource\behaviour\patrol.json" />
+    <None Include="..\Resource\builder\enemy.json" />
     <None Include="..\Resource\motion_names\enemy.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\save\savedata.json" />

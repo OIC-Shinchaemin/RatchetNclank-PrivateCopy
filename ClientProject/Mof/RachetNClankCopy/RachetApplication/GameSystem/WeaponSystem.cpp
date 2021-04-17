@@ -40,13 +40,15 @@ bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Ga
     for (const auto& key : in.GetAvailableMechanicalWeaponsAddress()) {
         auto add = _factory.Create(key);
         add->AddObserver(observer);
-        _weapons.emplace(key, add);
+        _weapons.push_back(std::make_pair(key, add));
     } // for
     return true;
 }
 
 std::shared_ptr<my::Mechanical> my::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
-    auto it = _weapons.find(name);
+    auto it =  std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
+        return pair.first == name;
+    });
     if (it != _weapons.end()) {
         return it->second;
     } // if

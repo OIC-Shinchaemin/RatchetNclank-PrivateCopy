@@ -17,9 +17,10 @@
 
 namespace my {
 class WeaponSystem : public my::Observer<const std::string&> {
+    using Pair = std::pair<std::string, std::shared_ptr<my::Mechanical>>;
 private:
     //! 武器
-    std::unordered_map<std::string, std::shared_ptr<my::Mechanical>> _weapons;
+    std::vector<Pair> _weapons;
     //! 通知用
     my::Observable<std::shared_ptr<my::Mechanical>> _subject;
     //! ファクトリー

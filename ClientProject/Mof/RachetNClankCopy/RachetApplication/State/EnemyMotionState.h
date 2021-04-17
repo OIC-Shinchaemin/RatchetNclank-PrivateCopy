@@ -11,6 +11,8 @@
 #include "My/Core/Observable.h"
 #include "My/Core/Observer.h"
 #include "../MotionNames.h"
+#include "../Component/MotionComponent.h"
+#include "../Component/MotionStateComponent.h"
 #include "../Character/Enemy.h"
 #include "../Velocity.h"
 #include "../Attack.h"
@@ -40,43 +42,27 @@ protected:
     bool _motion_loop;
     //! アニメーションフラグ
     bool _motion_same;
-    //! アニメーションデータ
-    Mof::LPMeshMotionController _motion;
-    //! 名前
-    std::weak_ptr<my::MotionNames> _motion_names;
-    //! 通知
-    std::weak_ptr<my::Enemy> _enemy;
+    //! モーション
+    std::weak_ptr<my::MotionComponent> _motion_com;
+    //! 状態
+    std::weak_ptr<my::MotionStateComponent> _motion_state_com;
+
     //! 速度
     my::Velocity* _velocity;
     //! 速度
     std::weak_ptr<my::Attack> _attack;
     /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    bool IsEndMotion(void) const;
-    /// <summary>
     /// 変更
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    template<typename Enum>
-    bool ChangeMotion(Enum type) {
-        if (auto motion_names = _motion_names.lock(); motion_names && _motion) {
-            return _motion->ChangeMotionByName(
-                motion_names->At(type),
-                _motion_speed, _motion_loop, _motion_same);
-        } // if
-        return false;
-    }
-    bool ChangeState(const char* next) {
-        if (auto ptr = _enemy.lock()) {
-            ptr->ChangeMotionState(next);
-            return true;
-        } // if
-        return false;
-    }
+    bool ChangeMotion(my::Enemy::MotionType type);
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name="next"></param>
+    /// <returns></returns>
+    bool ChangeState(const char* next) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -90,27 +76,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetLPMeshMotionController(Mof::LPMeshMotionController ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetMotionNames(const std::weak_ptr<my::MotionNames>& ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
     void SetEnemy(const std::shared_ptr<my::Enemy>& ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetVelocity(my::Velocity* ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetAttack(const std::shared_ptr<my::Attack>& ptr);
 };
 }
 #endif // !STATE_ENEMY_MOTION_STATE_H
