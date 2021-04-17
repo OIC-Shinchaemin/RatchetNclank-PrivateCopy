@@ -60,34 +60,15 @@ private:
     bool					m_bNextAtc;
     float					m_Gravity;
 
-    //! カメラ
-    std::shared_ptr<my::Camera> _player_view_camera;
-    //! カメラコントローラ
-    my::CameraController _camera_controller;
     //! 武器
     std::weak_ptr<my::Mechanical>_current_mechanical;
-
-    void InputMoveVelocity(Mof::CVector2 stick, float speed);
-    void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
-
-
-    void InputCameraForKeyboard(float angular_speed, float speed);
-    void InputCameraForGamepad(float angular_speed, float speed);
-    //void UpdateCamera(void);
-    //void UpdateMove(void);
-    //void UpdateJump(void);
-    //void UpdateAttack(void);
-    //virtual void UpdateTransform(float delta_time) override;
-    //void ChangeAnimation(void);
 public:
     Player();
     ~Player();
     virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
 
     virtual bool Initialize(my::Actor::Param* param) override;
-    virtual bool Input(void) override;
     virtual bool Update(float delta_time) override;
-    //virtual bool Update(float delta_time, LPMeshContainer stageMesh);
     virtual bool Render(void) override;
     virtual bool Release(void) override;
 };

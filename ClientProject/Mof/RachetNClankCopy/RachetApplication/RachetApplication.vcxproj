@@ -170,6 +170,8 @@
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraManager.cpp" />
+    <ClCompile Include="Camera\DebugCameraController.cpp" />
+    <ClCompile Include="Camera\FollowCameraController.cpp" />
     <ClCompile Include="Component\AIStateComponent.cpp" />
     <ClCompile Include="Component\CameraComponent.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp" />
@@ -300,6 +302,8 @@
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraManager.h" />
+    <ClInclude Include="Camera\DebugCameraController.h" />
+    <ClInclude Include="Camera\FollowCameraController.h" />
     <ClInclude Include="Component\AIStateComponent.h" />
     <ClInclude Include="Component\CameraComponent.h" />
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h" />

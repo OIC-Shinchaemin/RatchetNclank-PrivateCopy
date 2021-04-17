@@ -1,242 +1,9 @@
 #include "Player.h"
 
 #include "../../Gamepad.h"
-#include "../../Component/Collision/Object/PlayerCollisionObject.h"
 #include "../../Component/MotionComponent.h"
-#include "../../Component/Player/PlayerIdleComponent.h"
-#include "../../Component/Player/PlayerMoveComponent.h"
-#include "../../Component/VelocityComponent.h"
 
 
-bool Player::Input(void) {
-    super::Input();
-
-    float angular_speed = 3.5f;
-    float speed = 0.6f;
-
-    // contaroller
-    this->InputCameraForGamepad(angular_speed, speed);
-    // keyboard
-    this->InputCameraForKeyboard(angular_speed, speed);
-
-    if (auto weapon = _current_mechanical.lock()) {
-        if (weapon->IsAction() && weapon->CanFire()) {
-            auto pos = super::GetPosition();
-            pos.y += super::GetHeight();
-            weapon->Fire(def::Transform(pos, super::GetRotate()));
-        } // if
-    } // if
-    /*
-    float h = ::g_pGamepad->GetStickHorizontal();
-    float v = ::g_pGamepad->GetStickVertical();
-    if (MOF_ABS(h) < MOF_ABS(v)) {
-        m_StickTilt = MOF_ABS(v) * 0.5f;
-    }
-    else {
-        m_StickTilt = MOF_ABS(h) * 0.5f;
-    }
-    if (MOF_ABS(h) > 0.4f && MOF_ABS(h) <= 0.7f && MOF_ABS(v) <= 0.7f
-        || MOF_ABS(v) > 0.4f && MOF_ABS(h) <= 0.7f && MOF_ABS(v) <= 0.7f) {
-        m_MoveState = MoveSlow;
-        m_MoveAngle = atan2f(-v, h) + MOF_MATH_HALFPI;
-    }
-    else if (MOF_ABS(h) > 0.5f || MOF_ABS(v) > 0.5f) {
-        m_MoveState = MoveFast;
-        m_MoveAngle = atan2f(-v, h) + MOF_MATH_HALFPI;
-    }
-    else {
-        m_MoveState = Wait;
-    }
-
-    float rh = ::g_pGamepad->GetRightStickHorizontal();
-    float rv = ::g_pGamepad->GetRightStickVertical();
-    if (MOF_ABS(rh) > 0.2f) {
-        m_CameraAngle.x += rh * 0.024f;
-    }
-    if (MOF_ABS(rv) > 0.2f) {
-        m_CameraAngle.y += rv * 0.01f;
-    }
-    else {
-        if (m_CameraAngle.y > 0.01f) {
-            m_CameraAngle.y -= 0.01f;
-        }
-        else if (m_CameraAngle.y < -0.01f) {
-            m_CameraAngle.y += 0.01f;
-        }
-        else {
-            m_CameraAngle.y = 0.0f;
-        }
-    }
-
-    if (::g_pGamepad->IsKeyPull(XINPUT_A)) {
-        m_Time = 0.22f;
-    }
-    else if (::g_pGamepad->IsKeyPush(XINPUT_A)) {
-        if (m_State == JumpUp && !m_bJump2 && m_Time >= 0) {
-            m_bJump2 = true;
-            m_Time = 10.0f;
-        }
-        else if (m_State == None) {
-            m_bJump = true;
-            m_State = JumpStart;
-            m_bJump2 = false;
-            m_Time = 10.0f;
-        }
-    }
-    else if (::g_pGamepad->IsKeyPush(XINPUT_X)) {
-        if (m_State == None) {
-            m_State = Attack1;
-            m_bAttackMove = false;
-        }
-        else if (m_State == Attack1 || m_State == Attack2) {
-            m_bNextAtc = true;
-        }
-    }
-    */
-    return true;
-}
-
-void Player::InputMoveVelocity(Mof::CVector2 stick, float speed) {
-    if (auto velocity_com = super::GetComponent<my::VelocityComponent>()) {
-        auto accele = Mof::CVector3(0.0f, 0.0f, -speed);
-        auto rotate = super::GetRotate();
-        accele.RotateAround(Mof::CVector3(), rotate);
-
-        velocity_com->AddVelocityForce(accele);
-    } // if
-}
-
-void Player::InputMoveAngularVelocity(Mof::CVector2 stick, float speed) {
-    if (auto velocity_com = super::GetComponent<my::VelocityComponent>()) {
-
-        // “ü—ÍŠp“x
-        auto rotate = super::GetRotate();
-
-        float camera_angle_y = std::atan2(-_camera_controller.GetViewFront().z, _camera_controller.GetViewFront().x) + math::kHalfPi;
-        float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi + camera_angle_y;
-
-        if (math::kTwoPi <= angle_y) {
-            angle_y -= math::kTwoPi;
-        } // if
-        else if (angle_y <= 0.0f) {
-            angle_y += math::kTwoPi;
-        } // else if
-
-        // ·•ªŠp“x
-        angle_y -= rotate.y;
-        if (math::kPi < angle_y) {
-            angle_y -= math::kTwoPi;
-        } // if
-        else if (angle_y < -math::kPi) {
-            angle_y += math::kTwoPi;
-        } // else if
-
-        auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
-        velocity_com->AddAngularVelocityForce(accele);
-    } // if
-}
-
-void Player::InputCameraForKeyboard(float angular_speed, float speed) {
-    // keyboard
-    bool action = false; bool left = false; bool right = false;
-    auto in = Mof::CVector2(1.0f, 0.0f);
-    float move_angle = 0.0f;
-
-    if (::g_pInput->IsKeyHold(MOFKEY_A)) {
-        action = true;
-        left = true;
-        move_angle = 180.0f;
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
-        action = true;
-        right = true;
-        move_angle = 0.0f;
-    } // else if
-    if (::g_pInput->IsKeyHold(MOFKEY_W)) {
-        action = true;
-        move_angle = 90.0f;
-        if (right) {
-            move_angle -= 45.0f;
-        } // if
-        else if (left) {
-            move_angle += 45.0f;
-        } // else if
-    } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
-        action = true;
-        move_angle = 270.0f;
-        if (right) {
-            move_angle += 45.0f;
-        } // if
-        else if (left) {
-            move_angle -= 45.0f;
-        } // else if
-    } // else if
-
-    if (action) {
-        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
-
-    if (action) {
-        super::GetComponent<my::PlayerMoveComponent>()->Start();
-    } // if
-    else {
-        super::GetComponent<my::PlayerIdleComponent>()->Start();
-    } // else 
-
-    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
-        _camera_controller.AddAzimuth(1.0f);
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
-        _camera_controller.AddAzimuth(-1.0f);
-    } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-        _camera_controller.AddAltitude(1.0f);
-    } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-        _camera_controller.AddAltitude(-1.0f);
-    } // else if
-}
-
-void Player::InputCameraForGamepad(float angular_speed, float speed) {
-    float h = 0.0f;
-    float v = 0.0f;
-    float threshold = 0.5f;
-
-    h = ::g_pGamepad->GetStickHorizontal();
-    v = ::g_pGamepad->GetStickVertical();
-    if (auto in = Mof::CVector2(h, v); in.Length() > threshold) {
-        this->InputMoveAngularVelocity(in, angular_speed);
-        this->InputMoveVelocity(in, speed);
-    } // if
-
-    h = ::g_pGamepad->GetRightStickHorizontal();
-    v = ::g_pGamepad->GetRightStickVertical();
-    if (auto in = Mof::CVector2(h, v); in.Length() > threshold) {
-        // x
-        if (threshold <= std::abs(in.x)) {
-            if (0.0f < in.x) {
-                _camera_controller.AddAzimuth(1.0f);
-            } // if
-            else {
-                _camera_controller.AddAzimuth(-1.0f);
-            } // else
-        } // if
-        // y
-        if (threshold <= std::abs(in.y)) {
-            if (0.0f < in.y) {
-                _camera_controller.AddAltitude(1.0f);
-            } // if
-            else {
-                _camera_controller.AddAltitude(-1.0f);
-            } // else 
-        } // if
-    } // if
-
-}
-//
 //void Player::UpdateCamera(void) {
 //    auto pos = super::GetPosition();
 //    CVector3 cpos = pos;
@@ -251,7 +18,6 @@ void Player::InputCameraForGamepad(float angular_speed, float speed) {
 //}
 //
 //void Player::UpdateMove(void) {
-//    auto angle_y = super::GetRotate().y;
 //
 //    if (m_State == Attack1 && !m_bAttackMove ||
 //        m_State == Attack2 && !m_bAttackMove ||
@@ -446,8 +212,6 @@ Player::Player() :
     m_bAttackMove(),
     m_bNextAtc(),
     m_Gravity(),
-    _player_view_camera(),
-    _camera_controller(),
     _current_mechanical() {
     super::SetTag("Player");
 }
@@ -462,20 +226,6 @@ void Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
 bool Player::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
 
-    // collision
-    auto coll = super::GetComponent<my::PlayerCollisionObject>();
-//    coll->SetOwner(std::dynamic_pointer_cast<Player>(shared_from_this()));
-//    super::AddCollisionObject(coll);
-
-    // camera
-    _player_view_camera = (std::make_shared<my::Camera>());
-    auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
-    _player_view_camera->SetPosition(pos);
-    _player_view_camera->SetTarget(math::vec3::kZero);
-    _player_view_camera->Initialize();
-    _camera_controller.SetCamera(_player_view_camera);
-    _camera_controller.RegisterGlobalCamera();
-
     m_State = None;
     m_MoveState = Wait;
     m_bJump2 = false;
@@ -486,10 +236,13 @@ bool Player::Initialize(my::Actor::Param* param) {
 bool Player::Update(float delta_time) {
     super::Update(delta_time);
 
-    // update camera;
-    auto pos = super::GetPosition();
-    _camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + super::_height, pos.z));
-    _camera_controller.Update();
+    if (auto weapon = _current_mechanical.lock()) {
+        if (weapon->IsAction() && weapon->CanFire()) {
+            auto pos = super::GetPosition();
+            pos.y += super::GetHeight();
+            weapon->Fire(def::Transform(pos, super::GetRotate()));
+        } // if
+    } // if
 
     // update child
     if (auto weapon = _current_mechanical.lock()) {
@@ -532,8 +285,6 @@ bool Player::Render(void) {
 
 bool Player::Release(void) {
     super::Release();
-    _camera_controller.Release();
-    _player_view_camera.reset();
     _current_mechanical.reset();
     return true;
 }
