@@ -36,24 +36,6 @@ float my::EnemyAttackComponent::GetRange(void) const {
 float my::EnemyAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
-/*
-Mof::CSphere my::EnemyAttackComponent::GetSphere(void) const {
-    if (!this->IsActive()) {
-        return Mof::CSphere();
-    } // if
-    auto pos = super::GetOwner()->GetPosition();
-    auto rotate = super::GetOwner()->GetRotate();
-
-    float offset = 1.0f;
-    auto front = Mof::CVector3(-math::vec3::kUnitZ * offset);
-    front.RotationY(rotate.y);
-
-    pos += front;
-    pos.y += 1.0f;
-
-    return Mof::CSphere(pos, _volume);
-}
-*/
 
 Mof::CSphere my::EnemyAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();

@@ -31,6 +31,7 @@ public:
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
+    /// <returns>指定値に到達</returns>
     bool Tick(float delta_time);
 };
 }

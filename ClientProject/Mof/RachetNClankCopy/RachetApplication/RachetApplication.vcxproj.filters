@@ -486,6 +486,15 @@
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDamageComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotion\PlayerMotionDamageState.cpp">
+      <Filter>Rachet\Source\State\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerInvincibleComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -907,6 +916,15 @@
     </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDamageComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotion\PlayerMotionDamageState.h">
+      <Filter>Rachet\Header\State\PlayerMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerInvincibleComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

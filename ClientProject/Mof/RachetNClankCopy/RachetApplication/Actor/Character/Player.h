@@ -28,6 +28,7 @@ public:
     enum class MotionType {
         IdleWait,
         MoveRun,
+        DamageDown,
         CountMax,
     };
 private:

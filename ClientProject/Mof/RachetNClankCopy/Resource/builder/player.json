@@ -32,6 +32,18 @@
       }
     },
     {
+      "type": "PlayerDamageComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
+      "type": "PlayerInvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+    {
       "type": "MotionStateComponent",
       "paramater": {
         "priority": 98

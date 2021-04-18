@@ -27,6 +27,9 @@ public:
 class NanotechMenu : public my::UIPanel, public my::Observer<int> {
     using super = my::UIPanel;
 private:
+    //! 最大値
+    int _hp_max;
+    //! Hp
     int _hp;
     //! リソース
     std::weak_ptr<my::UICanvas> _ui_canvas;

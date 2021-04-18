@@ -18,10 +18,8 @@ void my::PlayerMoveComponent::InputMoveVelocity(float speed) {
 void my::PlayerMoveComponent::InputMoveAngularVelocity(float angle, float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
         
-        //auto rotate = super::GetRotate();
         auto view_front = _camera_com.lock()->GetViewFront();
         float camera_angle_y = std::atan2(-view_front.z, view_front.x) + math::kHalfPi;
-        //float angle_y = std::atan2(-stick.y, stick.x) - math::kHalfPi + camera_angle_y;
         float angle_y = angle + camera_angle_y;
         if (math::kTwoPi <= angle_y) {
             angle_y -= math::kTwoPi;

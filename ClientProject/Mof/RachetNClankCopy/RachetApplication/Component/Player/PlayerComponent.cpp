@@ -1,8 +1,10 @@
 #include "PlayerComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../Component/HpComponent.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
+#include "../Player/PlayerDamageComponent.h"
 #include "../Collision/Object/PlayerCollisionObject.h"
 
 
@@ -87,6 +89,7 @@ my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
     _idle_com(),
     _move_com(),
+    _damage_com(),
     _volume(0.5f),
     _height(1.0f) {
 }
@@ -95,6 +98,7 @@ my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
     _idle_com(),
     _move_com(),
+    _damage_com(),
     _volume(0.5f),
     _height(1.0f) {
 }
@@ -120,15 +124,7 @@ bool my::PlayerComponent::Initialize(void) {
     super::Start();
     _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-
-
-    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionObject>();
-    coll_com->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
-                                 "EnemyAttackCollisionObject",
-                                 my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
-        puts("Hited");
-        return true;
-    }));
+    _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
     return true;
 }
 
@@ -136,15 +132,23 @@ bool my::PlayerComponent::Update(float delta_time) {
     float angular_speed = 3.5f;
     float speed = 0.6f;
 
-    if (!this->MoveByKeyboard(angular_speed, speed)) {
-        this->MoveByGamepad(angular_speed, speed);
+    if (auto damage_com = _damage_com.lock()) {
+        if (!damage_com->IsActive()) {
+
+            if (!this->MoveByKeyboard(angular_speed, speed)) {
+                this->MoveByGamepad(angular_speed, speed);
+            } // if
+        } // if
     } // if
+
     return true;
 }
 
 bool my::PlayerComponent::Render(void) {
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionObject>();
-    ::CGraphicsUtilities::RenderLineSphere(coll_com->GetSphere().value(), def::color_rgba::kCyan);
+    if (coll_com->GetSphere().has_value()) {
+        ::CGraphicsUtilities::RenderLineSphere(coll_com->GetSphere().value(), def::color_rgba::kCyan);
+    } // if
     return true;
 }
 

@@ -9,6 +9,8 @@
 #include "../Component/Player/PlayerComponent.h"
 #include "../Component/Player/PlayerIdleComponent.h"
 #include "../Component/Player/PlayerMoveComponent.h"
+#include "../Component/Player/PlayerDamageComponent.h"
+#include "../Component/Player/PlayerInvincibleComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyIdleComponent.h"
@@ -34,6 +36,8 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerIdleComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMoveComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerInvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyIdleComponent>();

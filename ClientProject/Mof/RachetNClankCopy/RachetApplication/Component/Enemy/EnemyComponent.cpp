@@ -44,7 +44,9 @@ bool my::EnemyComponent::Update(float delta_time) {
 
 bool my::EnemyComponent::Render(void) {
     auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionObject>();
-    ::CGraphicsUtilities::RenderLineSphere(coll_com->GetSphere().value(), def::color_rgba::kCyan);
+    if (coll_com->GetSphere().has_value()) {
+        ::CGraphicsUtilities::RenderLineSphere(coll_com->GetSphere().value(), def::color_rgba::kCyan);
+    } // if
     return true;
 }
 

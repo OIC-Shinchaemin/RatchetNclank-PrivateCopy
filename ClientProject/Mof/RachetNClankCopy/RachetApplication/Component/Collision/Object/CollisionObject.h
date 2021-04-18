@@ -6,6 +6,8 @@
 #include <any>
 #include <memory>
 #include <string>
+#include <vector>
+#include <unordered_map>
 
 #include <Mof.h>
 
@@ -29,14 +31,16 @@ struct SightObject {
 struct CollisionInfo {
     //! 埋まり値
     float d = 0.0f;
+    //! 埋まり値
+    Mof::CVector3 angle;
+
     //! 衝突対象
     std::any target;
-    CollisionInfo() : d(0.0f) {}
-    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : d(c.d) {}
+    CollisionInfo() : d(0.0f), angle() {}
+    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : d(c.d), angle() {}
     //virtual ~CollisionInfo() {}
 };
 class CollisionObject : public my::Component {
-    using super = my::Component;
 public:
     enum class CollisionFuncType {
         Enter,
@@ -44,7 +48,6 @@ public:
         Exit,
     };
     class CollisionFunc {
-        //using Func = std::function<bool(std::shared_ptr<my::CollisionInfo>)>;
         using Func = std::function<bool(const my::CollisionInfo&)>;
     private:
         //! 実行関数
@@ -55,20 +58,37 @@ public:
         void AddFunction(Func lambda) {
             this->_func = lambda;
         }
-        //bool Execute(std::shared_ptr<my::CollisionInfo> info) {
-        bool Execute(const my::CollisionInfo& info) {
+        bool Execute(const my::CollisionInfo& info) const {
             return _func(info);
         }
     };
+
+    using super = my::Component;
+    using FuncArray = std::vector<CollisionFunc>;
 private:
     //! 衝突したオブジェクト
     std::vector<std::weak_ptr<my::CollisionObject>> _collisioned;
     //! 実行関数
-    std::unordered_map<std::string, CollisionFunc> _on_enter;
+    std::unordered_map<std::string, FuncArray> _on_enter;
     //! 実行関数
-    std::unordered_map<std::string, CollisionFunc> _on_stay;
+    std::unordered_map<std::string, FuncArray> _on_stay;
     //! 実行関数
-    std::unordered_map<std::string, CollisionFunc> _on_exit;
+    std::unordered_map<std::string, FuncArray> _on_exit;
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="obj"></param>
+    /// <param name="out"></param>
+    void AddCollisionFunc(const std::string& target, const CollisionFunc& obj, std::unordered_map<std::string, FuncArray>& out);
+    /// <summary>
+    /// 実行
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="info"></param>
+    /// <param name="in"></param>
+    /// <returns></returns>
+    bool ExecuteFunction(const std::string& key, const my::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in);
 public:
     /// <summary>
     /// コンストラクタ
@@ -129,8 +149,9 @@ public:
     /// 追加
     /// </summary>
     /// <param name="type"></param>
-    /// <param name="lambda"></param>
-    void AddCollisionFunc(CollisionFuncType type, const std::string& key, CollisionFunc lambda);
+    /// <param name="target"></param>
+    /// <param name="obj"></param>
+    void AddCollisionFunc(CollisionFuncType type, const std::string& target, const CollisionFunc& obj);
     /// <summary>
     /// 実行
     /// </summary>

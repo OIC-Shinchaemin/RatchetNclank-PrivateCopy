@@ -137,6 +137,8 @@ bool my::GameManager::Update(float delta_time) {
     _game_world.Update(delta_time);
     _physic_world.Update();
 
+
+
     ::ImGui::Begin("GameManager");
     ::ImGui::Text(" ");
     ::ImGui::End();

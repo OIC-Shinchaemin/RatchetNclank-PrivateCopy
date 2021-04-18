@@ -15,11 +15,14 @@ private:
     std::weak_ptr<class PlayerIdleComponent> _idle_com;
     //! ˆÚ“®
     std::weak_ptr<class PlayerMoveComponent> _move_com;
+    //! ˆÚ“®
+    std::weak_ptr<class PlayerDamageComponent> _damage_com;
+
     //! ‘å‚«‚³
     float _volume;
     //! ‚‚³
     float _height;
-
+    
     bool MoveByKeyboard(float angular_speed, float speed);
     void MoveByGamepad(float angular_speed, float speed);
 public:

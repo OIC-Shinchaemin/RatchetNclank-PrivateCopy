@@ -38,23 +38,17 @@ bool my::HpComponent::Initialize(void) {
         if (auto canvas = super::_ui_canvas.lock()) {
             auto menu = std::make_shared<my::NanotechMenu>("NanotechMenu");
             _observable.AddObserver(menu);
-            menu->SetPosition(Mof::CVector2());
+            menu->SetPosition(Mof::CVector2(512.0f - 32.0f * 2.0f - 16.0f, 50.0f));
+            menu->SetColor(Mof::CVector4(0.1f, 0.3f, 0.5f, 0.5f));
             canvas->AddElement(menu);
         } // if
     } // if
-    
-    
+
+
     return true;
 }
 
 bool my::HpComponent::Update(float delta_time) {
-    if (::g_pInput->IsKeyHold(MOFKEY_SPACE)) {
-        this->Damage(1);
-    } // if
-    if (::g_pInput->IsKeyHold(MOFKEY_BACK)) {
-        this->Heal(1);
-    } // if
-
     return false;
 }
 
@@ -83,8 +77,9 @@ void my::HpComponent::Heal(int value) {
 
 void my::HpComponent::Damage(int value) {
     _hp -= value;
-    if (_hp < 0) {
+    if (_hp <= 0) {
         _hp = 0;
+        super::GetOwner()->End();
     } // if
     _observable.Notify(_hp);
 }

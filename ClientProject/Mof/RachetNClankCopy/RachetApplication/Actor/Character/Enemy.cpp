@@ -60,7 +60,6 @@ void my::Enemy::GenerateCollisionObject(void) {
                                  "PlayerCollisionObject",
                                  my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
         auto target = std::any_cast<std::shared_ptr<my::Actor>>(in.target);
-        puts("Hit");
         return true;
     }));
 

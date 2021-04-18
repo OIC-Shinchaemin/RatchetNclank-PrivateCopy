@@ -3,7 +3,8 @@
 
 my::NanotechMenu::NanotechMenu(const char* name) :
     super(name),
-    _hp(4),
+    _hp_max(4),
+    _hp(_hp_max),
     _ui_canvas() {
 }
 
@@ -17,6 +18,19 @@ void my::NanotechMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
 
 bool my::NanotechMenu::Render(void) {
     ::CGraphicsUtilities::RenderString(200.0f, 600.0f, "player  hp = %d", this->_hp);
+    auto pos = super::_position;
+
+    float radius = 32.0f;
+    for (int i = 0; i < _hp_max; i++) {
+        if (i < _hp) {
+            auto circle = Mof::CCircle(pos, radius);
+            ::CGraphicsUtilities::RenderFillCircle(circle, def::color_rgba_u32::kBlack);
+        } // if
+        auto circle = Mof::CCircle(pos, radius);
+        ::CGraphicsUtilities::RenderFillCircle(circle, super::_color.ToU32Color());
+        pos.x += radius * 2.0f;
+    } // for
+    super::Render();
     return true;
 }
 

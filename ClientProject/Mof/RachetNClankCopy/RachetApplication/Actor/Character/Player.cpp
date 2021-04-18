@@ -2,6 +2,7 @@
 
 #include "../../Gamepad.h"
 #include "../../Component/MotionComponent.h"
+#include "../../Component/Player/PlayerComponent.h"
 
 
 //void Player::UpdateCamera(void) {
@@ -239,7 +240,8 @@ bool Player::Update(float delta_time) {
     if (auto weapon = _current_mechanical.lock()) {
         if (weapon->IsAction() && weapon->CanFire()) {
             auto pos = super::GetPosition();
-            //pos.y += super::GetHeight();
+            auto height = super::GetComponent<my::PlayerComponent>()->GetHeight();
+            pos.y += height;
             weapon->Fire(def::Transform(pos, super::GetRotate()));
         } // if
     } // if

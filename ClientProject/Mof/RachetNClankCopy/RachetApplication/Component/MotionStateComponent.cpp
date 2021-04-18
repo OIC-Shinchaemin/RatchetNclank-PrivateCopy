@@ -2,6 +2,7 @@
 
 #include "../State/PlayerMotion/PlayerMotionIdleState.h"
 #include "../State/PlayerMotion/PlayerMotionMoveState.h"
+#include "../State/PlayerMotion/PlayerMotionDamageState.h"
 #include "../State/EnemyMotion/EnemyMotionIdleState.h"
 #include "../State/EnemyMotion/EnemyMotionMoveState.h"
 #include "../State/EnemyMotion/EnemyMotionAttackState.h"
@@ -42,6 +43,7 @@ bool my::MotionStateComponent::Initialize(void) {
     else {
         this->RegisterMotionState<state::PlayerMotionIdleState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionMoveState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionDamageState>(_state_machine);
         _state_machine.ChangeState("PlayerMotionIdleState");
     } // else 
     return true;

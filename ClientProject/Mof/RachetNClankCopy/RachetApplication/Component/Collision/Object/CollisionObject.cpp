@@ -3,6 +3,24 @@
 #include "My/Core/Utility.h"
 
 
+void my::CollisionObject::AddCollisionFunc(const std::string& target, const CollisionFunc& obj, std::unordered_map<std::string, FuncArray>& out) {
+    if (auto it = out.find(target); it == out.end()) {
+        out.emplace(target, FuncArray());
+    } // if
+    out.at(target).push_back(obj);
+}
+
+bool my::CollisionObject::ExecuteFunction(const std::string& key, const my::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in) {
+    auto it = in.find(key);
+    if (it != in.end()) {
+        for (const auto& func : it->second) {
+            func.Execute(info);
+        } // for
+        return true;
+    } // if
+    return false;
+}
+
 my::CollisionObject::CollisionObject(int priority) :
     super(priority),
     _collisioned(),
@@ -34,16 +52,16 @@ bool my::CollisionObject::ExistCollisionedObject(const std::shared_ptr<my::Colli
     return false;
 }
 
-void my::CollisionObject::AddCollisionFunc(CollisionFuncType type, const std::string& key, CollisionFunc lambda) {
+void my::CollisionObject::AddCollisionFunc(CollisionFuncType type, const std::string& target, const CollisionFunc& obj) {
     switch (type) {
         case my::CollisionObject::CollisionFuncType::Enter:
-            _on_enter.emplace(key, lambda);
+            this->AddCollisionFunc(target, obj, _on_enter);
             break;
         case my::CollisionObject::CollisionFuncType::Stay:
-            _on_stay.emplace(key, lambda);
+            this->AddCollisionFunc(target, obj, _on_stay);
             break;
         case my::CollisionObject::CollisionFuncType::Exit:
-            _on_exit.emplace(key, lambda);
+            this->AddCollisionFunc(target, obj, _on_exit);
             break;
         default:
             break;
@@ -51,28 +69,13 @@ void my::CollisionObject::AddCollisionFunc(CollisionFuncType type, const std::st
 }
 
 bool my::CollisionObject::ExecuteEnterFunction(const std::string& key, const my::CollisionInfo& info) {
-    auto it = _on_enter.find(key);
-    if (it != _on_enter.end()) {
-        it->second.Execute(info);
-        return true;
-    } // if
-    return false;
+    return this->ExecuteFunction(key, info, _on_enter);
 }
 
 bool my::CollisionObject::ExecuteStayFunction(const std::string& key, const my::CollisionInfo& info) {
-    auto it = _on_stay.find(key);
-    if (it != _on_stay.end()) {
-        it->second.Execute(info);
-        return true;
-    } // if
-    return false;
+    return this->ExecuteFunction(key, info, _on_stay);
 }
 
 bool my::CollisionObject::ExecuteExitFunction(const std::string& key, const my::CollisionInfo& info) {
-    auto it = _on_exit.find(key);
-    if (it != _on_exit.end()) {
-        it->second.Execute(info);
-        return true;
-    } // if
-    return false;
+    return this->ExecuteFunction(key, info, _on_exit);
 }

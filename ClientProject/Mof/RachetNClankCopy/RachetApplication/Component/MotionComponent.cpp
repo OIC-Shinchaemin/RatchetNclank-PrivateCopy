@@ -53,7 +53,7 @@ bool my::MotionComponent::Initialize(void) {
 
     for (int i = 0; i < _motion->GetMotionCount(); i++) {
         auto name = *_motion->GetMotion(i)->GetName();
-        //std::cout << "name  = " << name << "\n";
+        std::cout << "name  = " << name << "\n";
     } // for
     return true;
 }

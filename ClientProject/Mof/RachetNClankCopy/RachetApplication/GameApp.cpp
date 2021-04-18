@@ -48,7 +48,7 @@ void CGameApp::Render3D(void) {
 }
 
 void CGameApp::Render2D(void) {
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "test");
+    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", ::CUtilities::GetFPS());
     _ui_canvas->Render();
 }
 
