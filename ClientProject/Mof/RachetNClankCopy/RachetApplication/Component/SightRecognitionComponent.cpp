@@ -92,7 +92,7 @@ bool my::SightRecognitionComponent::Render(void) {
     this->RenderRay(start, -90.0f);
 
     // ‘ÎÛ‚Ö‚ÌŽ‹ü‚ð•\Ž¦
-    if (auto target = enemy->GetTarget().lock()) {
+    if (auto target = _enemy_com.lock()->GetTarget().lock()) {
         auto pos = target->GetPosition();
         pos.y += height;
         auto diff = pos - start;

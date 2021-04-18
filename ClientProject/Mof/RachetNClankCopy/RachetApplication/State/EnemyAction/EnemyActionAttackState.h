@@ -4,6 +4,7 @@
 
 #include "EnemyActionState.h"
 
+#include "../../Component/Enemy/EnemyComponent.h"
 #include "../../Component/Enemy/EnemyIdleComponent.h"
 #include "../../Component/Enemy/EnemyMoveComponent.h"
 #include "../../Component/Enemy/EnemyAttackComponent.h"
@@ -13,6 +14,8 @@ namespace state {
 class EnemyActionAttackState : public state::EnemyActionState {
     using super = state::EnemyActionState;
 private:
+    //! Œ^
+    std::weak_ptr<my::EnemyComponent> _enemy_com;
     //! ‘Ò‹@
     std::weak_ptr<my::EnemyIdleComponent> _idle_com;
     //! ˆÚ“®

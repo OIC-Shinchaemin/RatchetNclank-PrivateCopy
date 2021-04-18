@@ -10,6 +10,7 @@ state::EnemyActionGoHomeState::~EnemyActionGoHomeState() {
 
 void state::EnemyActionGoHomeState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     super::SetActor(ptr);
+    this->_enemy_com = ptr->GetComponent<my::EnemyComponent>();
     this->_idle_com = ptr->GetComponent<my::EnemyIdleComponent>();
     this->_move_com = ptr->GetComponent<my::EnemyMoveComponent>();
     this->_attack_com = ptr->GetComponent<my::EnemyAttackComponent>();

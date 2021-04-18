@@ -7,6 +7,7 @@
 #include "../../../Actor.h"
 #include "../../../Actor/Character/Enemy.h"
 #include "../../../Component/AIStateComponent.h"
+#include "../Component/Enemy/EnemyComponent.h"
 #include "../../../Component/Enemy/EnemyStateComponent.h"
 
 
@@ -32,13 +33,14 @@ public:
     /// <returns>false:é¿çsÇÃé∏îs</returns>
     virtual bool Execute(std::any ptr) override {
         auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
-        
-        if (std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().expired()) {
+        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
+
+        if (target.expired()) {
             return false;
         } // if
 
         auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
-        auto pos = std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().lock()->GetPosition();
+        auto pos = target.lock()->GetPosition();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
             auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
             ai_state_com->ChangeState("AICombatState");

@@ -11,14 +11,14 @@ my::EnemySightPlayerCollisionAlgolithm::~EnemySightPlayerCollisionAlgolithm() {
 }
 
 const char* my::EnemySightPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return "EnemySightCollisionObject";
+    return "EnemySightCollisionComponent";
 }
 
 const char* my::EnemySightPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return "PlayerCollisionObject";
+    return "PlayerCollisionComponent";
 }
 
-bool my::EnemySightPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionObject> object, std::shared_ptr<my::CollisionObject> target, my::CollisionInfo& out) {
+bool my::EnemySightPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

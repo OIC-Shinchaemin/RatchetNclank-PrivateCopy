@@ -10,6 +10,7 @@ state::EnemyActionMoveState::~EnemyActionMoveState() {
 
 void state::EnemyActionMoveState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     super::SetActor(ptr);
+    this->_enemy_com = ptr->GetComponent<my::EnemyComponent>();
     this->_idle_com = ptr->GetComponent<my::EnemyIdleComponent>();
     this->_move_com = ptr->GetComponent<my::EnemyMoveComponent>();
     this->_attack_com = ptr->GetComponent<my::EnemyAttackComponent>();
@@ -24,7 +25,7 @@ void state::EnemyActionMoveState::Update(float delta_time) {
 
 void state::EnemyActionMoveState::Enter(void) {
     if (auto move_com = _move_com.lock()) {
-        auto target = std::dynamic_pointer_cast<my::Enemy>( super::GetActor())->GetTarget().lock()->GetPosition();
+        auto target = _enemy_com.lock()->GetTarget().lock()->GetPosition();
         float speed = 0.2f;
         float angular_speed = 1.0f;
 

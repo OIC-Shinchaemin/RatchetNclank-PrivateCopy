@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include "../Object/CollisionObject.h"
+#include "../Object/CollisionComponent.h"
 
 
 namespace my {
@@ -31,19 +31,12 @@ public:
     /// <returns></returns>
     virtual const char* GetTargetType(void) const = 0;
     /// <summary>
-    /// è’ìÀ
-    /// </summary>
-    /// <param name="object"></param>
-    /// <param name="target"></param>
-    /// <param name="info"></param>
-    //virtual void Collision(std::shared_ptr<my::CollisionObject >object, std::shared_ptr<my::CollisionObject >target, const my::CollisionInfo& info) = 0;
-    /// <summary>
     /// îªíË
     /// </summary>
     /// <param name="object"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    virtual bool IsCollision(std::shared_ptr<my::CollisionObject >object, std::shared_ptr<my::CollisionObject >target, my::CollisionInfo& out) = 0;
+    virtual bool IsCollision(std::shared_ptr<my::CollisionComponent >object, std::shared_ptr<my::CollisionComponent >target, my::CollisionInfo& out) = 0;
 };
 }
 #endif // !MY_COLLISION_ALGOLITHM_H

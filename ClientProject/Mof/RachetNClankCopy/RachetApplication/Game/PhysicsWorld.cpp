@@ -38,8 +38,8 @@ my::PhysicsWorld::~PhysicsWorld() {
 }
 
 void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
-    std::vector<std::weak_ptr<my::CollisionObject>> work;
-    actor->GetComponents<my::CollisionObject>(work);
+    std::vector<std::weak_ptr<my::CollisionComponent>> work;
+    actor->GetComponents<my::CollisionComponent>(work);
     
     for (auto& ptr : work) {
         auto type = ptr.lock()->GetType();
@@ -55,8 +55,8 @@ void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
 }
 
 void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
-    std::vector<std::weak_ptr<my::CollisionObject>> work;
-    actor->GetComponents<my::CollisionObject>(work);
+    std::vector<std::weak_ptr<my::CollisionComponent>> work;
+    actor->GetComponents<my::CollisionComponent>(work);
 
     for (auto& ptr : work) {
         for (auto& layer : _layers) {

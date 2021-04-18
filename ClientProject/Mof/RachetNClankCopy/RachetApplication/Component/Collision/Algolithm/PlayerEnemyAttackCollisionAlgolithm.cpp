@@ -11,14 +11,14 @@ my::PlayerEnemyAttackCollisionAlgolithm::~PlayerEnemyAttackCollisionAlgolithm() 
 }
 
 const char* my::PlayerEnemyAttackCollisionAlgolithm::GetLayerType(void) const {
-    return "PlayerCollisionObject";
+    return "PlayerCollisionComponent";
 }
 
 const char* my::PlayerEnemyAttackCollisionAlgolithm::GetTargetType(void) const {
-    return "EnemyAttackCollisionObject";
+    return "EnemyAttackCollisionComponent";
 }
 
-bool my::PlayerEnemyAttackCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionObject> object, std::shared_ptr<my::CollisionObject> target, my::CollisionInfo& out) {
+bool my::PlayerEnemyAttackCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;
     } // if

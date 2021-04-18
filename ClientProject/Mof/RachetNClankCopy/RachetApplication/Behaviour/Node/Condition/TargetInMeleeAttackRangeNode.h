@@ -4,6 +4,7 @@
 
 #include "../ConditionalNode.h"
 
+#include "../../../Component/Enemy/EnemyComponent.h"
 #include "../../../Component/Enemy/EnemyAttackComponent.h"
 
 
@@ -30,12 +31,13 @@ public:
     virtual bool Execute(std::any ptr) override {        
         auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
 
+        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
 
 
-        _ASSERT_EXPR(!std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().expired(), L"保持しているポインタが無効です");
+        _ASSERT_EXPR(!target.expired(), L"保持しているポインタが無効です");
 
         auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
-        auto pos = std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().lock()->GetPosition();
+        auto pos = target.lock()->GetPosition();
         return attack_com->GetCanAttackRangeSphere().CollisionPoint(pos);
     }
 };

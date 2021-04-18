@@ -9,14 +9,14 @@ my::EnemyBlasterBulletCollisionAlgolithm::~EnemyBlasterBulletCollisionAlgolithm(
 }
 
 const char* my::EnemyBlasterBulletCollisionAlgolithm::GetLayerType(void) const {
-    return "EnemyCollisionObject";
+    return "EnemyCollisionComponent";
 }
 
 const char* my::EnemyBlasterBulletCollisionAlgolithm::GetTargetType(void) const {
-    return "BlasterBulletCollisionObject";
+    return "BlasterBulletCollisionComponent";
 }
 
-bool my::EnemyBlasterBulletCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionObject> object, std::shared_ptr<my::CollisionObject> target, my::CollisionInfo& out) {
+bool my::EnemyBlasterBulletCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

@@ -6,7 +6,7 @@
 #include "../HpComponent.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerInvincibleComponent.h"
-#include "../Collision/Object/PlayerCollisionObject.h"
+#include "../Collision/Object/PlayerCollisionComponent.h"
 
 
 my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
@@ -48,10 +48,10 @@ bool my::PlayerDamageComponent::Initialize(void) {
     _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
     _invincible_com = super::GetOwner()->GetComponent<my::PlayerInvincibleComponent>();
 
-    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionObject>();
-    coll_com->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Stay,
-                               "EnemyAttackCollisionObject",
-                               my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
+                               "EnemyAttackCollisionComponent",
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
 
         this->Start();
         _damage_angle = in.angle;

@@ -15,6 +15,8 @@ private:
     float _volume;
     //! 高さ
     float _height;
+    //! 標的
+    std::weak_ptr<my::Actor> _target;
 public:
     /// <summary>
     /// コンストラクタ
@@ -30,6 +32,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~EnemyComponent();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetTarget(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -48,6 +55,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     float GetHeight(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::weak_ptr<my::Actor> GetTarget(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

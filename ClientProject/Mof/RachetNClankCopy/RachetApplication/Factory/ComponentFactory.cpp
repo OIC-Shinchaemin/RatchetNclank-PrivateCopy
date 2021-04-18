@@ -22,11 +22,11 @@
 #include "../Component/TransformComponent.h"
 #include "../Component/MeshComponent.h"
 #include "../Component/CameraComponent.h"
-#include "../Component/Collision/Object/PlayerCollisionObject.h"
-#include "../Component/Collision/Object/EnemyCollisionObject.h"
-#include "../Component/Collision/Object/EnemySightCollisionObject.h"
-#include "../Component/Collision/Object/EnemyAttackCollisionObject.h"
-#include "../Component/Collision/Object/BlasterBulletCollisionObject.h"
+#include "../Component/Collision/Object/PlayerCollisionComponent.h"
+#include "../Component/Collision/Object/EnemyCollisionComponent.h"
+#include "../Component/Collision/Object/EnemySightCollisionComponent.h"
+#include "../Component/Collision/Object/EnemyAttackCollisionComponent.h"
+#include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
 
 
 my::ComponentFactory::ComponentFactory() :
@@ -51,11 +51,11 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::TransformComponent>();
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
-    my::ComponentFactory::AddComponentCreator<my::PlayerCollisionObject>();
-    my::ComponentFactory::AddComponentCreator<my::EnemyCollisionObject>();
-    my::ComponentFactory::AddComponentCreator<my::EnemySightCollisionObject>();
-    my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionObject>();
-    my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionObject>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::EnemyCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::EnemySightCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();
 
 }
 

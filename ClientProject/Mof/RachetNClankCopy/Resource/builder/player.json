@@ -75,7 +75,7 @@
       }
     },
     {
-      "type": "PlayerCollisionObject",
+      "type": "PlayerCollisionComponent",
       "paramater": {
         "priority": 0
       }

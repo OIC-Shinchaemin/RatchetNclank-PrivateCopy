@@ -1,0 +1,184 @@
+#ifndef MY_COLLISION_COMPONENT_H
+#define MY_COLLISION_COMPONENT_H
+
+
+#include <optional>
+#include <any>
+#include <memory>
+#include <string>
+#include <vector>
+#include <unordered_map>
+
+#include <Mof.h>
+
+#include "../../Component.h"
+#include "../../../Stage/Stage.h"
+
+
+namespace my {
+struct SightObject {
+    //! 視点
+    Mof::CVector3 position;
+    //! 向き
+    Mof::CVector3 rotate;
+    SightObject() :
+        position(), rotate() {
+    }
+    SightObject(Mof::CVector3 pos, Mof::CVector3 rot) :
+        position(pos), rotate(rot) {
+    }
+};
+
+struct CollisionInfo {
+    //! 埋まり値
+    float distance = 0.0f;
+    //! 埋まり値
+    Mof::CVector3 angle;
+
+    //! 衝突対象
+    std::any target;
+    CollisionInfo() : distance(0.0f), angle() {}
+    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle() {}
+    //virtual ~CollisionInfo() {}
+};
+class CollisionComponent : public my::Component {
+public:
+    enum class CollisionFuncType {
+        Enter,
+        Stay,
+        Exit,
+    };
+    class CollisionFunc {
+        using Func = std::function<bool(const my::CollisionInfo&)>;
+    private:
+        //! 実行関数
+        Func _func;
+    public:
+        CollisionFunc() :_func() {}
+        CollisionFunc(Func func) :_func(func) {}
+        void AddFunction(Func lambda) {
+            this->_func = lambda;
+        }
+        bool Execute(const my::CollisionInfo& info) const {
+            return _func(info);
+        }
+    };
+
+    using super = my::Component;
+    using FuncArray = std::vector<CollisionFunc>;
+private:
+    //! 衝突したオブジェクト
+    std::vector<std::weak_ptr<my::CollisionComponent>> _collisioned;
+    //! 実行関数
+    std::unordered_map<std::string, FuncArray> _on_enter;
+    //! 実行関数
+    std::unordered_map<std::string, FuncArray> _on_stay;
+    //! 実行関数
+    std::unordered_map<std::string, FuncArray> _on_exit;
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="obj"></param>
+    /// <param name="out"></param>
+    void AddCollisionFunc(const std::string& target, const CollisionFunc& obj, std::unordered_map<std::string, FuncArray>& out);
+    /// <summary>
+    /// 実行
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="info"></param>
+    /// <param name="in"></param>
+    /// <returns></returns>
+    bool ExecuteFunction(const std::string& key, const my::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in);
+public:
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="priority"></param>
+    CollisionComponent(int priority);
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    virtual ~CollisionComponent();
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::CSphere> GetSphere(void) = 0;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::CBoxAABB> GetBox(void) = 0;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetRay(void) = 0;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::LPMeshContainer> GetMesh(void) = 0;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<my::SightObject> GetSightObject(void) = 0;
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr);
+    /// <summary>
+    /// 削除
+    /// </summary>
+    /// <param name="ptr"></param>
+    void RemoveCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr);
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name="ptr"></param>
+    /// <returns></returns>
+    bool ExistCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr);
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="target"></param>
+    /// <param name="obj"></param>
+    void AddCollisionFunc(CollisionFuncType type, const std::string& target, const CollisionFunc& obj);
+    /// <summary>
+    /// 実行
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="info"></param>
+    /// <returns></returns>
+    bool ExecuteEnterFunction(const std::string& key, const my::CollisionInfo& info);
+    /// <summary>
+    /// 実行
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="info"></param>
+    /// <returns></returns>
+    bool ExecuteStayFunction(const std::string& key, const my::CollisionInfo& info);
+    /// <summary>
+    /// 実行
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="info"></param>
+    /// <returns></returns>
+    bool ExecuteExitFunction(const std::string& key, const my::CollisionInfo& info);
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="mesh"></param>
+    virtual void CollisionStage(Mof::LPMeshContainer mesh);
+};
+}
+#endif // !MY_COLLISION_COMPONENT_H

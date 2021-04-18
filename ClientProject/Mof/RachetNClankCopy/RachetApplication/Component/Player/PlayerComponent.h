@@ -22,7 +22,9 @@ private:
     float _volume;
     //! ‚‚³
     float _height;
-    
+    //! •W“I
+    //std::weak_ptr<my::Actor> _target;
+
     bool MoveByKeyboard(float angular_speed, float speed);
     void MoveByGamepad(float angular_speed, float speed);
 public:

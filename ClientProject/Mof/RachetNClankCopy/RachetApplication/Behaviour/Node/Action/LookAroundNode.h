@@ -5,8 +5,8 @@
 #include "../ActionNode.h"
 
 #include "../../../Component/AIStateComponent.h"
+#include "../../../Component/Enemy/EnemyComponent.h"
 #include "../../../Component/Enemy/EnemyStateComponent.h"
-#include "../../../Actor/Character/Enemy.h"
 
 
 namespace behaviour {
@@ -31,8 +31,9 @@ public:
     /// <returns>false:é¿çsÇÃé∏îs</returns>
     virtual bool Execute(std::any ptr) override {
         auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
+        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
 
-        if (!std::dynamic_pointer_cast<my::Enemy>(actor)->GetTarget().expired()) {
+        if (!target.expired()) {
             auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
             ai_state_com->ChangeState("AICombatState");
             return true;

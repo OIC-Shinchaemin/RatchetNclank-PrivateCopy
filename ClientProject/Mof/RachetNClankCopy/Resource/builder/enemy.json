@@ -90,19 +90,19 @@
     },
 
     {
-      "type": "EnemyCollisionObject",
+      "type": "EnemyCollisionComponent",
       "paramater": {
         "priority": 0
       }
     },
     {
-      "type": "EnemySightCollisionObject",
+      "type": "EnemySightCollisionComponent",
       "paramater": {
         "priority": 0
       }
     },
     {
-      "type": "EnemyAttackCollisionObject",
+      "type": "EnemyAttackCollisionComponent",
       "paramater": {
         "priority": 0
       }

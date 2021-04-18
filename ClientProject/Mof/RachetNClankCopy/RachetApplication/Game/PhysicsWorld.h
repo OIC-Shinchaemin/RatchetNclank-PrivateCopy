@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "../Actor.h"
-#include "../Component/Collision/Object/CollisionObject.h"
+#include "../Component/Collision/Object/CollisionComponent.h"
 #include "../Component/Collision/Algolithm/CollisionAlgolithm.h"
 #include "../Factory/Factory.h"
 #include "../Stage/Stage.h"
@@ -14,7 +14,7 @@
 namespace my {
 class PhysicsWorld {
     using ActorPtr = std::shared_ptr<my::Actor>;
-    using ObjectPtr = std::shared_ptr<my::CollisionObject>;
+    using ObjectPtr = std::shared_ptr<my::CollisionComponent>;
     using ObjectArray = std::vector<ObjectPtr>;
 private:
     struct CollisionLayer {

@@ -20,7 +20,7 @@
       }
     },
     {
-      "type": "BlasterBulletCollisionObject",
+      "type": "BlasterBulletCollisionComponent",
       "paramater": {
         "priority": 0
       }

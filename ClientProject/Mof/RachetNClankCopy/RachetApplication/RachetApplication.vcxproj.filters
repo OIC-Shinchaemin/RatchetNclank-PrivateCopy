@@ -330,18 +330,6 @@
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\CollisionObject.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Object\EnemyCollisionObject.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Object\EnemySightCollisionObject.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Object\PlayerCollisionObject.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Factory\ActorFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
@@ -444,9 +432,6 @@
     <ClCompile Include="Camera\DebugCameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionObject.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
@@ -498,14 +483,29 @@
     <ClCompile Include="Game\GameSystem\WeaponSystem.cpp">
       <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionObject.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemySightCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -737,18 +737,6 @@
     <ClInclude Include="Actor\ParticleEffect.h">
       <Filter>Rachet\Header\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\CollisionObject.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\PlayerCollisionObject.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\EnemyCollisionObject.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\EnemySightCollisionObject.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
@@ -890,9 +878,6 @@
     <ClInclude Include="Camera\DebugCameraController.h">
       <Filter>Rachet\Header\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionObject.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
@@ -950,14 +935,29 @@
     <ClInclude Include="Game\GameSystem\Save\SaveSystem.h">
       <Filter>Rachet\Header\Game\GameSystem\Save</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionObject.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyDamageComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemySightCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

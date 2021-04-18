@@ -9,18 +9,18 @@ my::EnemyPlayerCollisionAlgolithm::~EnemyPlayerCollisionAlgolithm() {
 }
 
 const char* my::EnemyPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return "EnemyCollisionObject";
+    return "EnemyCollisionComponent";
 }
 
 const char* my::EnemyPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return "PlayerCollisionObject";
+    return "PlayerCollisionComponent";
 }
 /*
-void my::EnemyPlayerCollisionAlgolithm::Collision(std::shared_ptr<my::CollisionObject> object, std::shared_ptr<my::CollisionObject> target, const my::CollisionInfo& info) {
-    object->ExcuteFunction("PlayerCollisionObject", info);
+void my::EnemyPlayerCollisionAlgolithm::Collision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, const my::CollisionInfo& info) {
+    object->ExcuteFunction("PlayerCollisionComponent", info);
 }
 */
-bool my::EnemyPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionObject> object, std::shared_ptr<my::CollisionObject> target, my::CollisionInfo& out) {
+bool my::EnemyPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

@@ -3,7 +3,7 @@
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
 #ifdef _DEBUG
-#include "../Collision/Object/EnemyAttackCollisionObject.h"
+#include "../Collision/Object/EnemyAttackCollisionComponent.h"
 #endif // _DEBUG
 
 my::EnemyAttackComponent::EnemyAttackComponent(int priority) :
@@ -61,7 +61,7 @@ bool my::EnemyAttackComponent::Update(float delta_time) {
 }
 
 bool my::EnemyAttackComponent::Render(void) {
-    auto coll_com = super::GetOwner()->GetComponent<my::EnemyAttackCollisionObject>();
+    auto coll_com = super::GetOwner()->GetComponent<my::EnemyAttackCollisionComponent>();
     if (coll_com && coll_com->GetSphere().has_value()) {
         auto sphere = coll_com->GetSphere().value();
         ::CGraphicsUtilities::RenderLineSphere(sphere, def::color_rgba::kRed);

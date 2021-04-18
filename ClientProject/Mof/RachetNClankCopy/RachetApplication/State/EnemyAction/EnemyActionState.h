@@ -9,7 +9,6 @@
 #include <Mof.h>
 
 #include "../../Actor.h"
-#include "../../Actor/Character/Enemy.h"
 #include "../../Component/Enemy/EnemyStateComponent.h"
 
 

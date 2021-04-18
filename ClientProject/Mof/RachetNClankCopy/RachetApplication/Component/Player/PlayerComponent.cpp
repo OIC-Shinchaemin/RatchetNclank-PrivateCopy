@@ -5,7 +5,7 @@
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
 #include "../Player/PlayerDamageComponent.h"
-#include "../Collision/Object/PlayerCollisionObject.h"
+#include "../Collision/Object/PlayerCollisionComponent.h"
 
 
 bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
@@ -122,6 +122,7 @@ float my::PlayerComponent::GetHeight(void) const {
 bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Start();
+
     _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
@@ -145,7 +146,7 @@ bool my::PlayerComponent::Update(float delta_time) {
 }
 
 bool my::PlayerComponent::Render(void) {
-    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionObject>();
+    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     if (coll_com->GetSphere().has_value()) {
         ::CGraphicsUtilities::RenderLineSphere(coll_com->GetSphere().value(), def::color_rgba::kCyan);
     } // if

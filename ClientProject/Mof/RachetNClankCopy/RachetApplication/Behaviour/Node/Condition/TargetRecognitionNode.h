@@ -5,7 +5,7 @@
 #include "../ConditionalNode.h"
 
 #include "../../../Actor.h"
-#include "../../../Actor/Character/Enemy.h"
+#include "../../../Component/Enemy/EnemyComponent.h"
 
 
 namespace behaviour {
@@ -30,7 +30,8 @@ public:
     /// <returns>Failed:é¿çsÇÃé∏îs</returns>
     virtual bool Execute(std::any ptr) override {
         auto actor =  std::dynamic_pointer_cast<my::Enemy>(std::any_cast<std::shared_ptr<my::Actor>>(ptr));
-        return !actor->GetTarget().expired();
+        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
+        return !target.expired();
     }
 };
 }

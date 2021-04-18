@@ -30,18 +30,12 @@ public:
     /// <returns></returns>
     virtual const char* GetTargetType(void) const override;
     /// <summary>
-    /// è’ìÀ
-    /// </summary>
-    /// <param name="object"></param>
-    /// <param name="target"></param>
-    //virtual void Collision(std::shared_ptr<my::CollisionObject >object, std::shared_ptr<my::CollisionObject >target, const my::CollisionInfo& info) override;
-    /// <summary>
     /// îªíË
     /// </summary>
     /// <param name="object"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    virtual bool IsCollision(std::shared_ptr<my::CollisionObject >object, std::shared_ptr<my::CollisionObject >target, my::CollisionInfo& out) override;
+    virtual bool IsCollision(std::shared_ptr<my::CollisionComponent >object, std::shared_ptr<my::CollisionComponent >target, my::CollisionInfo& out) override;
 };
 }
 #endif // !MY_ENEMY_PLAYER_COLLISION_ALGOLITHM_H

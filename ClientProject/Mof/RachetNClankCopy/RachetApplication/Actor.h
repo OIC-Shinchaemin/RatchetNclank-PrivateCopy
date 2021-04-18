@@ -10,7 +10,6 @@
 
 #include "My/Core/Define.h"
 #include "My/Core/Observable.h"
-//#include "Component/Collision/Object/CollisionObject.h"
 
 
 namespace my {
