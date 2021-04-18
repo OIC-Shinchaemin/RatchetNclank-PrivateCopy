@@ -26,7 +26,7 @@ std::shared_ptr<my::CollisionAlgolithm> my::PhysicsWorld::CreateAlgolithm(const 
 }
 
 my::PhysicsWorld::PhysicsWorld() :
-    _objects() {
+    _layers() {
     collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>("PlayerEnemyCollisionAlgolithm");
     collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>("PlayerEnemyAttackCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>("EnemyPlayerCollisionAlgolithm");
@@ -41,14 +41,14 @@ my::PhysicsWorld::PhysicsWorld() :
         "EnemyAttackPlayerCollisionAlgolithm",
     };
     for (auto type : types) {
-        auto temp = CollisionPair();
+        auto temp = CollisionLayer();
         temp.algo = collision_algolithm_factory.Create(type);
-        _objects.push_back(temp);
+        _layers.push_back(temp);
     } // for
 }
 
 my::PhysicsWorld::~PhysicsWorld() {
-    _objects.clear();
+    _layers.clear();
 }
 
 void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
@@ -57,12 +57,12 @@ void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
     
     for (auto& ptr : work) {
         auto type = ptr.lock()->GetType();
-        for (auto& obj : _objects) {
-            if (type == obj.algo->GetLayerType()) {
-                obj.layers.push_back(ptr.lock());
+        for (auto& layer: _layers) {
+            if (type == layer.algo->GetLayerType()) {
+                layer.objects.push_back(ptr.lock());
             } // if
-            if (type == obj.algo->GetTargetType()) {
-                obj.targets.push_back(ptr.lock());
+            if (type == layer.algo->GetTargetType()) {
+                layer.targets.push_back(ptr.lock());
             } // if
         } // for
     } // for
@@ -73,40 +73,49 @@ void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
     actor->GetComponents<my::CollisionObject>(work);
 
     for (auto& ptr : work) {
-        for (auto& obj : _objects) {
-            ut::EraseRemove(obj.layers, ptr.lock());
-            ut::EraseRemove(obj.targets, ptr.lock());
+        for (auto& layer : _layers) {
+            ut::EraseRemove(layer.objects, ptr.lock());
+            ut::EraseRemove(layer.targets, ptr.lock());
         } // for
     } // for
 }
 
 bool my::PhysicsWorld::Update(void) {
-    for (auto& obj : _objects) {
-        for (auto& layer : obj.layers) {
-            for (auto& target : obj.targets) {
-                if (layer == target) {
+    for (auto& layer : _layers) {
+        for (auto& object : layer.objects) {
+            for (auto& target : layer.targets) {
+                if (object == target) {
                     continue;
                 } // if
                 auto info = my::CollisionInfo();
-                if (!obj.algo->IsCollision(layer, target, info)) {
+                if (!layer.algo->IsCollision(object, target, info)) {
                     // Õ“ËI—¹
-                    if (layer->ExistCollisionedObject(target)) {
-                        layer->ExecuteExitFunction(target->GetType(), info);
-                        layer->RemoveCollisionedObject(target);
+                    if (object->ExistCollisionedObject(target)) {
+                        object->ExecuteExitFunction(target->GetType(), info);
+                        object->RemoveCollisionedObject(target);
                     } // if
                     continue;
                 } // if
                 // Õ“ËŠJŽn
-                if (!layer->ExistCollisionedObject(target)) {
-                    layer->ExecuteEnterFunction(target->GetType(), info);
-                    layer->AddCollisionedObject(target);
+                if (!object->ExistCollisionedObject(target)) {
+                    object->ExecuteEnterFunction(target->GetType(), info);
+                    object->AddCollisionedObject(target);
                 } // if
                 // Õ“Ë’†
                 else {
-                    layer->ExecuteStayFunction(target->GetType(), info);
+                    object->ExecuteStayFunction(target->GetType(), info);
                 } // else
             } // for
         } // for
     } // for
     return true;
+}
+
+void my::PhysicsWorld::CollisionStage(Stage* stage) {
+    Mof::LPMeshContainer mesh = &*stage->GetStaticStageMesh();
+    for (auto& layer : _layers) {
+        for (auto& object : layer.objects) {
+            object->CollisionStage(mesh);
+        } // for
+    } // for
 }

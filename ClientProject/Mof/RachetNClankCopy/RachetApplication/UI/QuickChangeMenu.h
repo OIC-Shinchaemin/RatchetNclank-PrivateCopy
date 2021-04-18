@@ -5,7 +5,7 @@
 #include "My/UI/UIPanel.h"
 
 #include "My/Core/Observable.h"
-#include "../GameSystem/QuickChangeSystem.h"
+#include "../Game/GameSystem/QuickChangeSystem.h"
 
 
 namespace my {

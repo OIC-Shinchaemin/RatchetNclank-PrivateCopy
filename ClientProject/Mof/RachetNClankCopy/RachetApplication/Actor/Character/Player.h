@@ -7,7 +7,7 @@
 #include "../../Camera/Camera.h"
 #include "../../Camera/CameraController.h"
 #include "../Weapon/Mechanical.h"
-#include "../../GameSystem/WeaponSystem.h"
+#include "../../Game/GameSystem/WeaponSystem.h"
 
 
 // 移動速度

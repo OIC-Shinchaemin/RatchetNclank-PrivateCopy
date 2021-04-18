@@ -79,6 +79,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
+    /// <summary>
+    /// è’ìÀ
+    /// </summary>
+    /// <param name="ptr"></param>
+//    virtual void CollisionStage(Stage* ptr) override;
+    virtual void CollisionStage(Mof::LPMeshContainer mesh) override;
 };
 }
 #endif // !MY_PLAYER_COLLISION_OBJECT_H

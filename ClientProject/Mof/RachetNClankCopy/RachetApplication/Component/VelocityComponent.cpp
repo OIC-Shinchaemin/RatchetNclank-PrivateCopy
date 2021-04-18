@@ -10,7 +10,7 @@ my::VelocityComponent::VelocityComponent(int priority) :
     _gravity(0.25f),
     _drag(0.8f),
     _angular_drag(0.8f),
-    _use_gravity(false) {
+    _use_gravity(true) {
 }
 
 my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :

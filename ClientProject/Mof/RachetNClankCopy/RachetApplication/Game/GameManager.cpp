@@ -3,9 +3,10 @@
 #include "My/Core/Trait.h"
 #include "My/Core/Utility.h"
 
+#include "../Stage/StageDefine.h"
 #include "../Factory/FactoryManager.h"
-#include "../GameSystem/Save/SaveData.h"
-#include "../GameSystem/Save/SaveSystem.h"
+#include "GameSystem/Save/SaveData.h"
+#include "GameSystem/Save/SaveSystem.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
 #include "../Factory/ActorBuilder.h"
@@ -57,58 +58,44 @@ void my::GameManager::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
 }
 
 bool my::GameManager::Initialize(void) {
-    _stage.Initialize();
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _game_money = std::make_unique<my::GameMoney>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
     _game_money->SetResourceManager(_resource);
     _quick_change->SetResourceManager(_resource);
     _quick_change->SetUICanvas(_ui_canvas);
-
-    auto param = new my::Actor::Param();
-    auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
-
-    _weapon_system->AddMechanicalWeaponObserver(player);
-    _quick_change->AddWeaponObserver(_weapon_system);
+    // game system
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
-
     _game_money->Initialize(save_data.GetMoney());
     _weapon_system->Initialize(save_data, shared_from_this());
     _quick_change->Initialize({}, _weapon_system);
-    // actor
-    param->transform.position = Mof::CVector3(4.0f, 0.0f, 0.0f);
-    param->name = "enemy";
 
-    // enemies 
-    rapidjson::Document document;
-    if (!ut::ParseJsonDocument("../Resource/enemy_data/stage1.json", document)) {
+
+    // stage
+    if (!_stage.Load("../Resource/test.json")) {
         return false;
-    } // for
+    } // if
+    _stage.Initialize();
 
-    for (int i = 0, n = document["enemy_datas"].Size(); i < n; i++) {
-        auto& enemy_data = document["enemy_datas"][i];
-
-        _ASSERT_EXPR(enemy_data["builder"].IsString(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
-        _ASSERT_EXPR(enemy_data["name"].IsString(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
-        _ASSERT_EXPR(enemy_data["position_x"].IsFloat(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
-        _ASSERT_EXPR(enemy_data["position_y"].IsFloat(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
-        _ASSERT_EXPR(enemy_data["position_z"].IsFloat(),L"Žw’è‚³‚ê‚½Œ^‚Å‚ ‚è‚Ü‚¹‚ñ");
-
-        auto path = std::string(enemy_data["builder"].GetString());
-        param->name = enemy_data["name"].GetString();
-        param->transform.position.x = enemy_data["position_x"].GetFloat();
-        param->transform.position.y = enemy_data["position_y"].GetFloat();
-        param->transform.position.z = enemy_data["position_z"].GetFloat();
-        auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(path.c_str(), param);
+    auto param = new my::Actor::Param();
+    // chara
+    for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
+        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::StageObjectType_EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+        auto builder = enemy_spawn.first.c_str();
+        param->name = enemy_spawn.second->GetName();
+        param->transform.position = enemy_spawn.second->GetPosition();
+        auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
         enemy->AddObserver(shared_from_this());
         this->AddElement(enemy);
     } // for
-
+    param->transform.position = Mof::CVector3(0.0f, 3.0f, 0.0f);
+    auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
     player->AddObserver(shared_from_this());
-    
     this->AddElement(player);
-    
+    _weapon_system->AddMechanicalWeaponObserver(player);
+    _quick_change->AddWeaponObserver(_weapon_system);
+
     ut::SafeDelete(param);
     return true;
 }
@@ -131,12 +118,15 @@ bool my::GameManager::Update(float delta_time) {
     } // for
     _delete_actors.clear();
 
+    // update
     _quick_change->Update();
     _stage.Update();
 
-    _game_world.Update(delta_time);
-    _physic_world.Update();
 
+    _game_world.Update(delta_time);
+
+    _physic_world.Update();
+    _physic_world.CollisionStage(&_stage);
 
 
     ::ImGui::Begin("GameManager");
@@ -147,10 +137,8 @@ bool my::GameManager::Update(float delta_time) {
 
 bool my::GameManager::Render(void) {
     _renderer.Render();
-
     _stage.Render();
     _quick_change->Render();
-
     _game_money->Render();
     return true;
 }

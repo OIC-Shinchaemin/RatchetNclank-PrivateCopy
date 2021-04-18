@@ -17,7 +17,6 @@ void my::NanotechMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
 }
 
 bool my::NanotechMenu::Render(void) {
-    ::CGraphicsUtilities::RenderString(200.0f, 600.0f, "player  hp = %d", this->_hp);
     auto pos = super::_position;
 
     float radius = 32.0f;

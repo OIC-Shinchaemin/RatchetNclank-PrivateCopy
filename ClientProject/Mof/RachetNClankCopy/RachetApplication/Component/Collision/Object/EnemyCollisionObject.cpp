@@ -35,7 +35,13 @@ std::optional<Mof::CBoxAABB> my::EnemyCollisionObject::GetBox(void) {
 }
 
 std::optional<Mof::CRay3D> my::EnemyCollisionObject::GetRay(void) {
-    return std::optional<Mof::CRay3D>();
+    _ASSERT_EXPR(!_enemy_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    if (super::GetOwner()->GetState() == my::ActorState::End) {
+        return std::optional<Mof::CRay3D>();
+    } // if
+    auto pos = super::GetOwner()->GetPosition();
+    pos.y += _enemy_com.lock()->GetHeight();
+    return Mof::CRay3D(pos, math::vec3::kNegUnitY);
 }
 
 std::optional<Mof::LPMeshContainer> my::EnemyCollisionObject::GetMesh(void) {
@@ -55,4 +61,20 @@ bool my::EnemyCollisionObject::Initialize(void) {
 
 std::shared_ptr<my::Component> my::EnemyCollisionObject::Clone(void) {
     return std::make_shared<my::EnemyCollisionObject>(*this);
+}
+
+void my::EnemyCollisionObject::CollisionStage(Mof::LPMeshContainer mesh) {
+    if (!this->GetRay().has_value()) {
+        return;
+    } // if
+
+    Mof::COLLISIONOUTGEOMETRY info;
+    if (this->GetRay().value().CollisionMesh(mesh, info)) {
+        float height = _enemy_com.lock()->GetHeight();
+        if (info.d <= height) {
+            auto pos = super::GetOwner()->GetPosition();
+            pos.y += height - info.d;
+            super::GetOwner()->SetPosition(pos);
+        } // if
+    } // if
 }

@@ -21,28 +21,28 @@ void CGameApp::RenderScene(void) {
 }
 
 void CGameApp::Render3D(void) {
-    auto render_plane = [](Mof::CVector3 pos, Mof::CVector4 color) {
-        Mof::CMatrix44 scale, rotate, translate;
-        auto plane = Mof::CMatrix44();
-        scale.Scaling(10.0f, 10.0f, 10.0f, scale);
-        rotate.RotationY(MOF_ToRadian(0.0f), rotate);
-        translate.Translation(pos, translate);
-        plane = scale * rotate * translate;
-        ::CGraphicsUtilities::RenderPlane(plane, color);
-    };
-    render_plane(Mof::CVector3(0.0f, 0.0f, -10.0f), def::color_rgba::kRed);
-    render_plane(Mof::CVector3(10.0f, 0.0f, 0.0f), def::color_rgba::kGreen);
-    render_plane(Mof::CVector3(0.0f, 0.0f, 10.0f), def::color_rgba::kBlue);
-    render_plane(Mof::CVector3(-10.0f, 0.0f, 0.0f), def::color_rgba::kYellow);
-
-
-    Mof::CMatrix44 scale, rotate, translate;
-    auto plane = Mof::CMatrix44();
-    scale.Scaling(10.0f, 10.0f, 10.0f, scale);
-    rotate.RotationY(MOF_ToRadian(0.0f), rotate);
-    translate.Translation(0.0f, 0.0f, 0.0f, translate);
-    plane = scale * rotate * translate;
-    ::CGraphicsUtilities::RenderPlane(plane);
+    //auto render_plane = [](Mof::CVector3 pos, Mof::CVector4 color) {
+    //    Mof::CMatrix44 scale, rotate, translate;
+    //    auto plane = Mof::CMatrix44();
+    //    scale.Scaling(10.0f, 10.0f, 10.0f, scale);
+    //    rotate.RotationY(MOF_ToRadian(0.0f), rotate);
+    //    translate.Translation(pos, translate);
+    //    plane = scale * rotate * translate;
+    //    ::CGraphicsUtilities::RenderPlane(plane, color);
+    //};
+    //render_plane(Mof::CVector3(0.0f, 0.0f, -10.0f), def::color_rgba::kRed);
+    //render_plane(Mof::CVector3(10.0f, 0.0f, 0.0f), def::color_rgba::kGreen);
+    //render_plane(Mof::CVector3(0.0f, 0.0f, 10.0f), def::color_rgba::kBlue);
+    //render_plane(Mof::CVector3(-10.0f, 0.0f, 0.0f), def::color_rgba::kYellow);
+    //
+    //
+    //Mof::CMatrix44 scale, rotate, translate;
+    //auto plane = Mof::CMatrix44();
+    //scale.Scaling(10.0f, 10.0f, 10.0f, scale);
+    //rotate.RotationY(MOF_ToRadian(0.0f), rotate);
+    //translate.Translation(0.0f, 0.0f, 0.0f, translate);
+    //plane = scale * rotate * translate;
+    //::CGraphicsUtilities::RenderPlane(plane);
 
     _game_manager->Render();
 }

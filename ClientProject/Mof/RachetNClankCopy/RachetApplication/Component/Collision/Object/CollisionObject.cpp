@@ -79,3 +79,6 @@ bool my::CollisionObject::ExecuteStayFunction(const std::string& key, const my::
 bool my::CollisionObject::ExecuteExitFunction(const std::string& key, const my::CollisionInfo& info) {
     return this->ExecuteFunction(key, info, _on_exit);
 }
+
+void my::CollisionObject::CollisionStage(Mof::LPMeshContainer mesh) {
+}

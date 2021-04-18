@@ -9,10 +9,10 @@
 #include "GameWorld.h"
 #include "Renderer.h"
 #include "PhysicsWorld.h"
-#include "../GameSystem/GameMoney.h"
-#include "../GameSystem/WeaponSystem.h"
-#include "../GameSystem/QuickChangeSystem.h"
-#include "../Actor/Stage/Stage.h"
+#include "GameSystem/GameMoney.h"
+#include "GameSystem/WeaponSystem.h"
+#include "GameSystem/QuickChangeSystem.h"
+#include "../Stage/Stage.h"
 
 
 namespace my {

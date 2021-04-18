@@ -55,18 +55,6 @@
     <Filter Include="Rachet\Base\UI\Source">
       <UniqueIdentifier>{2a9fe089-d3cc-4c0a-8410-eb242e21963d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Source\GameSystem">
-      <UniqueIdentifier>{86d89cd3-d5cf-4956-9342-e24ea9a9c09a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\GameSystem">
-      <UniqueIdentifier>{2369b452-7079-464c-9c15-f8e8fa725391}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\GameSystem\Save">
-      <UniqueIdentifier>{f003a0ab-3dfb-4c88-a0d0-374ea0594296}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\GameSystem\Save">
-      <UniqueIdentifier>{aeae01bb-2344-4ed7-aca5-8557089776ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\UI">
       <UniqueIdentifier>{c13108cd-858b-4ced-aa58-12a69c04f9c2}</UniqueIdentifier>
     </Filter>
@@ -109,9 +97,6 @@
     <Filter Include="Rachet\Header\Actor\Character">
       <UniqueIdentifier>{aa754e65-ad9b-4130-88c4-32258af789c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Actor\Stage">
-      <UniqueIdentifier>{ceb6691c-b0a6-4b46-8f48-ee637fb9f8a2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Actor\Weapon">
       <UniqueIdentifier>{f262ee4d-4be1-4682-a1db-b5d58c348024}</UniqueIdentifier>
     </Filter>
@@ -126,9 +111,6 @@
     </Filter>
     <Filter Include="Rachet\Source\Actor\Weapon">
       <UniqueIdentifier>{1eeb2b3e-5be9-4091-9d4c-e56cd2ed839e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Actor\Stage">
-      <UniqueIdentifier>{6c57efcb-4e30-4c4b-8293-38ec911dc9bc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Header\Component\Collision">
       <UniqueIdentifier>{e3c0bba5-0f41-479c-9221-e416c195215d}</UniqueIdentifier>
@@ -147,9 +129,6 @@
     </Filter>
     <Filter Include="Rachet\Source\Component\Collision\Object">
       <UniqueIdentifier>{798d80d2-d41c-4177-85a5-fc209edd4182}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\enemy_data">
-      <UniqueIdentifier>{a8a8cf3b-ae75-41da-9499-4a62279cc9f7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Source\Component\Player">
       <UniqueIdentifier>{25d03a4d-f13e-4b4a-94fb-0f1eca9a274b}</UniqueIdentifier>
@@ -199,6 +178,24 @@
     <Filter Include="Rachet\Source\State\AI">
       <UniqueIdentifier>{fac0ece7-4437-4700-916b-5c842b8d6b06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Stage">
+      <UniqueIdentifier>{8eda0607-7e3c-4307-b439-cd2639e92fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage">
+      <UniqueIdentifier>{7956d0d2-11d8-418b-87ba-fe5cfe593950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Game\GameSystem">
+      <UniqueIdentifier>{0517efc8-f9e0-4670-ba41-b85b09bc98e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Game\GameSystem">
+      <UniqueIdentifier>{d9f7a254-cd71-491d-bdb1-38ea6006de52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Game\GameSystem\Save">
+      <UniqueIdentifier>{5ca69d88-a075-4c2a-9f7e-3e195ef6a814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Game\GameSystem\Save">
+      <UniqueIdentifier>{ca3b5e09-611f-4b5c-8559-bbf2ec3831b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -242,21 +239,6 @@
     </ClCompile>
     <ClCompile Include="Gamepad.cpp">
       <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem\QuickChangeSystem.cpp">
-      <Filter>Rachet\Source\GameSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem\WeaponSystem.cpp">
-      <Filter>Rachet\Source\GameSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem\GameMoney.cpp">
-      <Filter>Rachet\Source\GameSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem\Save\SaveSystem.cpp">
-      <Filter>Rachet\Source\GameSystem\Save</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem\Save\SaveData.cpp">
-      <Filter>Rachet\Source\GameSystem\Save</Filter>
     </ClCompile>
     <ClCompile Include="UI\QuickChangeMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
@@ -323,9 +305,6 @@
     </ClCompile>
     <ClCompile Include="Actor\Weapon\Weapon.cpp">
       <Filter>Rachet\Source\Actor\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor\Stage\Stage.cpp">
-      <Filter>Rachet\Source\Actor\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Actor\Character\Enemy.cpp">
       <Filter>Rachet\Source\Actor\Character</Filter>
@@ -495,6 +474,30 @@
     <ClCompile Include="Component\Player\PlayerInvincibleComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Stage\JsonStageParser.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\StageObject.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Save\SaveData.cpp">
+      <Filter>Rachet\Source\Game\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Save\SaveSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GameMoney.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\WeaponSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -574,21 +577,6 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem\GameMoney.h">
-      <Filter>Rachet\Header\GameSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem\QuickChangeSystem.h">
-      <Filter>Rachet\Header\GameSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem\WeaponSystem.h">
-      <Filter>Rachet\Header\GameSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem\Save\SaveData.h">
-      <Filter>Rachet\Header\GameSystem\Save</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem\Save\SaveSystem.h">
-      <Filter>Rachet\Header\GameSystem\Save</Filter>
     </ClInclude>
     <ClInclude Include="UI\QuickChangeMenu.h">
       <Filter>Rachet\Header\UI</Filter>
@@ -736,9 +724,6 @@
     </ClInclude>
     <ClInclude Include="Actor\Weapon\Blaster.h">
       <Filter>Rachet\Header\Actor\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor\Stage\Stage.h">
-      <Filter>Rachet\Header\Actor\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Actor\ParticleEffect.h">
       <Filter>Rachet\Header\Actor</Filter>
@@ -926,6 +911,36 @@
     <ClInclude Include="Component\Player\PlayerInvincibleComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Stage\JsonStageParser.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageParser.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GameMoney.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\QuickChangeSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\WeaponSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Save\SaveData.h">
+      <Filter>Rachet\Header\Game\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Save\SaveSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem\Save</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -972,11 +987,11 @@
     <None Include="..\Resource\builder\bomb_glove.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
-    <None Include="..\Resource\enemy_data\stage1.json">
-      <Filter>リソース ファイル\enemy_data</Filter>
-    </None>
     <None Include="..\Resource\behaviour\patrol.json">
       <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\test.json">
+      <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@
 #include <Mof.h>
 
 #include "../../Component.h"
+#include "../../../Stage/Stage.h"
 
 
 namespace my {
@@ -30,14 +31,14 @@ struct SightObject {
 
 struct CollisionInfo {
     //! ñÑÇ‹ÇËíl
-    float d = 0.0f;
+    float distance = 0.0f;
     //! ñÑÇ‹ÇËíl
     Mof::CVector3 angle;
 
     //! è’ìÀëŒè€
     std::any target;
-    CollisionInfo() : d(0.0f), angle() {}
-    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : d(c.d), angle() {}
+    CollisionInfo() : distance(0.0f), angle() {}
+    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle() {}
     //virtual ~CollisionInfo() {}
 };
 class CollisionObject : public my::Component {
@@ -173,6 +174,11 @@ public:
     /// <param name="info"></param>
     /// <returns></returns>
     bool ExecuteExitFunction(const std::string& key, const my::CollisionInfo& info);
+    /// <summary>
+    /// è’ìÀ
+    /// </summary>
+    /// <param name="mesh"></param>
+    virtual void CollisionStage(Mof::LPMeshContainer mesh);
 };
 }
 #endif // !MY_COLLISION_OBJECT_H

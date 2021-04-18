@@ -98,7 +98,7 @@ public:
         } // for
     }
     virtual void DebugRender(void) override {
-        this->DebugRender(Mof::CVector2(10.0f, 10.0f));
+        //this->DebugRender(Mof::CVector2(10.0f, 10.0f));
     }
 };
 }
