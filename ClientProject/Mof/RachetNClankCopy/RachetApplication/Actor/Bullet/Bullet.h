@@ -52,12 +52,6 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
-    /// •`‰æ
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual bool Render(void) override;
-    /// <summary>
     /// ‰ð•ú
     /// </summary>
     /// <param name=""></param>
@@ -68,11 +62,6 @@ public:
     /// </summary>
     /// <param name="in"></param>
     void Start(const my::Bullet::Param& in);
-    /// <summary>
-    /// •`‰æ
-    /// </summary>
-    /// <param name=""></param>
-    //virtual void RenderDebug(void) override;
 };
 }
 #endif // !MY_BULLET_H

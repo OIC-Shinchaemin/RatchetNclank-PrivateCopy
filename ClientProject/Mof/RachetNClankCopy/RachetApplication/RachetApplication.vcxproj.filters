@@ -498,6 +498,15 @@
     <ClCompile Include="Game\GameSystem\WeaponSystem.cpp">
       <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionObject.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -940,6 +949,15 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\Save\SaveSystem.h">
       <Filter>Rachet\Header\Game\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionObject.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyDamageComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

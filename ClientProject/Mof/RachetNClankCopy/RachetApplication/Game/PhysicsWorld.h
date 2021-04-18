@@ -29,13 +29,6 @@ private:
     std::vector<CollisionLayer> _layers;
     //! ファクトリー
     my::Factory<my::CollisionAlgolithm> collision_algolithm_factory;
-private:
-    /// <summary>
-    /// 作成
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    std::shared_ptr<my::CollisionAlgolithm> CreateAlgolithm(const char* type);
 public:
     /// <summary>
     /// コンストラクタ

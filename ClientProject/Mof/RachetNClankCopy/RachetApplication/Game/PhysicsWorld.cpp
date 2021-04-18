@@ -6,24 +6,8 @@
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemySightPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyBlasterBulletCollisionAlgolithm.h"
 
-
-std::shared_ptr<my::CollisionAlgolithm> my::PhysicsWorld::CreateAlgolithm(const char* type) {
-    std::shared_ptr<my::CollisionAlgolithm> ptr = nullptr;
-    if (type == "PlayerEnemyCollisionAlgolithm") {
-        ptr = std::make_shared<my::PlayerEnemyCollisionAlgolithm>();
-    } // if
-    if (type == "EnemyPlayerCollisionAlgolithm") {
-        ptr = std::make_shared<my::EnemyPlayerCollisionAlgolithm>();
-    } // if
-    if (type == "EnemySightPlayerCollisionAlgolithm") {
-        ptr = std::make_shared<my::EnemySightPlayerCollisionAlgolithm>();
-    } // if
-    if (type == "EnemyAttackPlayerCollisionAlgolithm") {
-        ptr = std::make_shared<my::EnemyAttackPlayerCollisionAlgolithm>();
-    } // if
-    return ptr;
-}
 
 my::PhysicsWorld::PhysicsWorld() :
     _layers() {
@@ -32,6 +16,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>("EnemyPlayerCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemySightPlayerCollisionAlgolithm>("EnemySightPlayerCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>("EnemyAttackPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>("EnemyBlasterBulletCollisionAlgolithm");
 
     const char* types[] = {
         "PlayerEnemyCollisionAlgolithm",
@@ -39,6 +24,7 @@ my::PhysicsWorld::PhysicsWorld() :
         "EnemyPlayerCollisionAlgolithm",
         "EnemySightPlayerCollisionAlgolithm",
         "EnemyAttackPlayerCollisionAlgolithm",
+        "EnemyBlasterBulletCollisionAlgolithm",
     };
     for (auto type : types) {
         auto temp = CollisionLayer();

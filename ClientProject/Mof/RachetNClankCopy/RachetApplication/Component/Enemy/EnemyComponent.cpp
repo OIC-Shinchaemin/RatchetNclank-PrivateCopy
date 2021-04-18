@@ -1,6 +1,7 @@
 #include "EnemyComponent.h"
 
 #include "../../Gamepad.h"
+#include "../Enemy/EnemyDamageComponent.h"
 #include "../Collision/Object/EnemyCollisionObject.h"
 
 
@@ -35,6 +36,14 @@ float my::EnemyComponent::GetHeight(void) const {
 bool my::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Start();
+
+    auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionObject>();
+    coll_com->AddCollisionFunc(my::CollisionObject::CollisionFuncType::Enter,
+                               "BlasterBulletCollisionObject",
+                               my::CollisionObject::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
+        return true;
+    }));
     return true;
 }
 

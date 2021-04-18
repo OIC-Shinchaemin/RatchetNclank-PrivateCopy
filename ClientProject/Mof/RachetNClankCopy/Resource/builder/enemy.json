@@ -20,6 +20,12 @@
       }
     },
     {
+      "type": "HpComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "EnemyComponent",
       "paramater": {
         "priority": 0
@@ -47,6 +53,12 @@
     },
     {
       "type": "EnemyAttackComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
+      "type": "EnemyDamageComponent",
       "paramater": {
         "priority": 92
       }

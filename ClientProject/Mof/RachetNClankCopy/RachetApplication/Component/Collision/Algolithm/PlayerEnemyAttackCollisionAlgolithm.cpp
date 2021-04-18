@@ -19,7 +19,6 @@ const char* my::PlayerEnemyAttackCollisionAlgolithm::GetTargetType(void) const {
 }
 
 bool my::PlayerEnemyAttackCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionObject> object, std::shared_ptr<my::CollisionObject> target, my::CollisionInfo& out) {
-    // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;
     } // if
@@ -27,7 +26,6 @@ bool my::PlayerEnemyAttackCollisionAlgolithm::IsCollision(std::shared_ptr<my::Co
         out.target = target->GetOwner();
         auto pos = object->GetOwner()->GetPosition();
         auto target_pos = target->GetOwner()->GetPosition();
-        //out.angle.y = std::atan2(pos.z - target_pos.z, pos.x - target_pos.x);
         out.angle.y = target->GetOwner()->GetRotate().y;
         return true;
     } // if

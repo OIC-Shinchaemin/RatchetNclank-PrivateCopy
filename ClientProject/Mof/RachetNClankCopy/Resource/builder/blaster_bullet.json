@@ -18,6 +18,12 @@
         "priority": 0,
         "path": "../Resource/mesh/blaster_bullet/scene.mom"
       }
+    },
+    {
+      "type": "BlasterBulletCollisionObject",
+      "paramater": {
+        "priority": 0
+      }
     }
   ]
 }

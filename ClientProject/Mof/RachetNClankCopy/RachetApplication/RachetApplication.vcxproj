@@ -175,10 +175,12 @@
     <ClCompile Include="Component\CameraComponent.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionObject.cpp" />
     <ClCompile Include="Component\Collision\Object\CollisionObject.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionObject.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionObject.cpp" />
@@ -187,6 +189,7 @@
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Enemy\EnemyAttackComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp" />
+    <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyIdleComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyMoveComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyStateComponent.cpp" />
@@ -316,10 +319,12 @@
     <ClInclude Include="Component\CameraComponent.h" />
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionObject.h" />
     <ClInclude Include="Component\Collision\Object\CollisionObject.h" />
     <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionObject.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionObject.h" />
@@ -328,6 +333,7 @@
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\Enemy\EnemyAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyComponent.h" />
+    <ClInclude Include="Component\Enemy\EnemyDamageComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyIdleComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyMoveComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyStateComponent.h" />
