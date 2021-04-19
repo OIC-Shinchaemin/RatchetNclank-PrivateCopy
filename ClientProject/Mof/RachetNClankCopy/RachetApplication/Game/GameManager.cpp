@@ -101,10 +101,8 @@ bool my::GameManager::Initialize(void) {
 }
 
 bool my::GameManager::Input(void) {
-    _game_money->Input();
     _quick_change->Input();
     _game_world.Input();
-
     return true;
 }
 

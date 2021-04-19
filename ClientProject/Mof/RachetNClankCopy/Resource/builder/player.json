@@ -3,7 +3,8 @@
     {
       "type": "SightRecognitionComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "range" :  10.0
       }
     },
     {

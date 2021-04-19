@@ -29,6 +29,11 @@ bool my::Player::Update(float delta_time) {
             auto pos = super::GetPosition();
             auto height = super::GetComponent<my::PlayerComponent>()->GetHeight();
             pos.y += height;
+            if (auto target = super::GetComponent<my::PlayerComponent>()->GetTarget().lock()) {
+                auto target_pos = target->GetPosition();
+                target_pos.y += height;
+                weapon->SetLockOnPosition(target_pos);
+            } // if
             weapon->Fire(def::Transform(pos, super::GetRotate()));
         } // if
     } // if

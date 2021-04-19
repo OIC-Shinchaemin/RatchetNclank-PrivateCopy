@@ -65,7 +65,6 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Input(void);
     bool Render(void);
 };
 }

@@ -56,6 +56,6 @@ void my::BlasterBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer me
 
     Mof::COLLISIONOUTGEOMETRY info;
     if (this->GetSphere().value().CollisionMesh(mesh, info)) {
-        //Start();
+        super::GetOwner()->End();
     } // if
 }

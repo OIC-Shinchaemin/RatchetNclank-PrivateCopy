@@ -28,7 +28,7 @@ void my::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float degree_y
 
 my::SightRecognitionComponent::SightRecognitionComponent(int priority) :
     super(priority),
-    _range(5.0f),
+    _range(0.0f),
     _player_com(),
     _enemy_com() {
     super::_active = true;
@@ -43,6 +43,16 @@ my::SightRecognitionComponent::SightRecognitionComponent(const SightRecognitionC
 }
 
 my::SightRecognitionComponent::~SightRecognitionComponent() {
+}
+
+void my::SightRecognitionComponent::SetParam(const rapidjson::Value& param) {
+    super::SetParam(param);
+    const char* range = "range";
+
+    _ASSERT_EXPR(param.HasMember(range), L"指定のパラメータがありません");
+    _ASSERT_EXPR(param[range].IsFloat(), L"パラメータの指定された型でありません");
+
+    _range = param[range].GetFloat();
 }
 
 std::string my::SightRecognitionComponent::GetType(void) const {

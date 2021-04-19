@@ -17,6 +17,8 @@ protected:
     float _interval_max;
     //! サイズ
     int _bullet_count;
+    //! 位置
+    std::optional<Mof::CVector3> _lock_on_position;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,6 +28,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Mechanical();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="position"></param>
+    void SetLockOnPosition(Mof::CVector3 position);
     /// <summary>
     /// 入力判定
     /// </summary>

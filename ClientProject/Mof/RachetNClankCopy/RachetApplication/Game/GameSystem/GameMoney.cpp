@@ -31,17 +31,6 @@ bool my::GameMoney::Initialize(uint32_t value) {
     return true;
 }
 
-bool my::GameMoney::Input(void) {
-    if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-        _value++;
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-        _value--;
-    } // else if
-
-    return true;
-}
-
 bool my::GameMoney::Render(void) {
     if (auto tex = _texture.lock()) {
         tex->Render(_position.x, _position.y);

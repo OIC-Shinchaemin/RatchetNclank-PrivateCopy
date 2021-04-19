@@ -22,53 +22,25 @@ bool my::Blaster::IsAction(void) const {
     return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_SPACE);
 }
 
-bool my::Blaster::Fire(const def::Transform& transform) {
+bool my::Blaster::Fire(const def::Transform& transform) {    
     super::Fire(transform);
     auto param = my::Bullet::Param();
-    
     param.transform = transform;
-    auto speed = Mof::CVector3(0.0f, 0.0f, -_shot_speed);
-    speed.RotateAround(math::vec3::kZero, param.transform.rotate);
-    param.speed = speed;
-    
-    auto add = my::FactoryManager::Singleton().CreateActor<my::BlasterBullet>("../Resource/builder/blaster_bullet.json", &param);
 
-    add->Start(param);
-    Observable::Notify("AddRequest", add);
-
-    /*
-    {
-        auto add = ut::MakeSharedWithRelease<my::BlasterBullet>();
-        auto param = my::Bullet::Param();
-        param.transform = transform;
+    if (super::_lock_on_position.has_value()) {
+        Mof::CVector3 direction =  super::_lock_on_position.value() - param.transform.position;
+        direction.Normal(direction);
+        param.speed = direction * _shot_speed;
+        super::_lock_on_position.reset();
+    } // if
+    else {
         auto speed = Mof::CVector3(0.0f, 0.0f, -_shot_speed);
         speed.RotateAround(math::vec3::kZero, param.transform.rotate);
         param.speed = speed;
+    } // else
 
-        add->Start(param);
-        Observable::Notify("AddRequest", add);
-    }
-    {
-        auto add = ut::MakeSharedWithRelease<my::ParticleEffect>();
-        Observable::Notify("AddRequest", add);
-        auto param = my::ParticleEffect::Param();
-        auto update_param = my::ParticleEffect::UpdateParam();
-        param.transform.position = transform.position;
-        param.transform.scale = Mof::CVector3(0.1f, 0.1f, 0.1f);
-        param.color = def::color_rgba::kRed;
-        param.life_time = 0.8f;
-
-        auto speed = Mof::CVector3(0.0f, 0.0f, -_shot_speed * 0.25f);
-        speed.RotateAround(math::vec3::kZero, transform.rotate);
-        speed.y = 0.02f;
-        update_param.velocity = speed;
-        update_param.scale = Mof::CVector3(0.001f, 0.001f, 0.001f);
-
-        auto info = my::ParticleEffect::Info();
-        info.init_param = std::move(param);
-        info.update_param = std::move(update_param);
-        add->Start(info);
-    }
-    */
+    auto add = my::FactoryManager::Singleton().CreateActor<my::BlasterBullet>("../Resource/builder/blaster_bullet.json", &param);
+    add->Start(param);
+    Observable::Notify("AddRequest", add);
     return true;
 }

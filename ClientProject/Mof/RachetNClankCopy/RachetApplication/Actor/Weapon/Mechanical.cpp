@@ -5,10 +5,15 @@ my::Mechanical::Mechanical() :
     _shot_speed(0.0f),
     _interval(0.0f),
     _interval_max(0.0f),
-    _bullet_count(0) {
+    _bullet_count(0),
+    _lock_on_position() {
 }
 
 my::Mechanical::~Mechanical() {
+}
+
+void my::Mechanical::SetLockOnPosition(Mof::CVector3 position) {
+    this->_lock_on_position = position;
 }
 
 bool my::Mechanical::IsAction(void) const {

@@ -88,18 +88,16 @@ void my::PlayerComponent::MoveByGamepad(float angular_speed, float speed) {
 
 my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
-    _volume(0.5f),
-    _height(1.0f),
     _target(),
     _idle_com(),
     _move_com(),
     _damage_com() {
+    super::_volume = 0.5f;
+    super::_height = 1.0f;
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
-    _volume(0.5f),
-    _height(1.0f),
     _target(),
     _idle_com(),
     _move_com(),
@@ -117,14 +115,6 @@ std::string my::PlayerComponent::GetType(void) const {
     return "PlayerComponent";
 }
 
-float my::PlayerComponent::GetVolume(void) const {
-    return this->_volume;
-}
-
-float my::PlayerComponent::GetHeight(void) const {
-    return this->_height;
-}
-
 std::weak_ptr<my::Actor> my::PlayerComponent::GetTarget(void) const {
     return this->_target;
 }
@@ -139,6 +129,7 @@ bool my::PlayerComponent::Initialize(void) {
 
     if (auto canvas = super::_ui_canvas.lock()) {
         auto menu = std::make_shared<my::LockOnCursorMenu>("LockOnCursorMenu");
+        menu->SetResourceManager(_resource_manager);
         _observable.AddObserver(menu);
         canvas->AddElement(menu);
     } // if
@@ -159,7 +150,10 @@ bool my::PlayerComponent::Update(float delta_time) {
     } // if
 
     if (auto target = _target.lock()) {
-        _observable.Notify(target->GetPosition());
+        auto enemy_com = target->GetComponent<super>();
+        auto pos = target->GetPosition();
+        pos.y += enemy_com->GetHeight();
+        _observable.Notify(pos);
     } // if
     else {
         _observable.Notify(std::optional<Mof::CVector3>());

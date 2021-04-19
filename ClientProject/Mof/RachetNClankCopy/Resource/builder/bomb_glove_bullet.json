@@ -1,6 +1,13 @@
 {
   "components": [
     {
+      "type": "BombGloveBulletComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+
+    {
       "type": "VelocityComponent",
       "paramater": {
         "priority": 99
@@ -17,6 +24,12 @@
       "paramater": {
         "priority": 0,
         "path": "../Resource/mesh/bomb_glove_bullet/scene.mom"
+      }
+    },
+    {
+      "type": "BombGloveBulletCollisionComponent",
+      "paramater": {
+        "priority": 0
       }
     }
   ]

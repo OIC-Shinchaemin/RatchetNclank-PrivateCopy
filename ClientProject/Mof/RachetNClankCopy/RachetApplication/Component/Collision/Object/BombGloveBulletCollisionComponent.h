@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_COLLISION_COMPONENT_H
-#define MY_PLAYER_COLLISION_COMPONENT_H
+#ifndef MY_BOMB_GLOVE_BULLET_COLLISION_COMPONENT_H
+#define MY_BOMB_GLOVE_BULLET_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -11,26 +11,24 @@
 
 
 namespace my {
-class PlayerCollisionComponent : public my::CollisionComponent {
+class BombGloveBulletCollisionComponent: public my::CollisionComponent {
     using super = my::CollisionComponent;
 private:
-    //! プレイヤー
-    std::weak_ptr<class PlayerComponent> _player_com;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerCollisionComponent(int priority);
+    BombGloveBulletCollisionComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerCollisionComponent(const PlayerCollisionComponent& obj);
+    BombGloveBulletCollisionComponent(const BombGloveBulletCollisionComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerCollisionComponent();
+    virtual ~BombGloveBulletCollisionComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -86,4 +84,4 @@ public:
     virtual void CollisionStage(Mof::LPMeshContainer mesh) override;
 };
 }
-#endif // !MY_PLAYER_COLLISION_COMPONENT_H
+#endif // !MY_BOMB_GLOVE_BULLET_COLLISION_COMPONENT_H

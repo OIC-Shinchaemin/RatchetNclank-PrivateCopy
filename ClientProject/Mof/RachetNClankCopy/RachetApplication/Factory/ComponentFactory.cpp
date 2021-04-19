@@ -17,6 +17,8 @@
 #include "../Component/Enemy/EnemyMoveComponent.h"
 #include "../Component/Enemy/EnemyAttackComponent.h"
 #include "../Component/Enemy/EnemyDamageComponent.h"
+#include "../Component/Bullet/BlasterBulletComponent.h"
+#include "../Component/Bullet/BombGloveBulletComponent.h"
 #include "../Component/MotionStateComponent.h"
 #include "../Component/VelocityComponent.h"
 #include "../Component/TransformComponent.h"
@@ -27,6 +29,7 @@
 #include "../Component/Collision/Object/SightCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyAttackCollisionComponent.h"
 #include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
+#include "../Component/Collision/Object/BombGloveBulletCollisionComponent.h"
 
 
 my::ComponentFactory::ComponentFactory() :
@@ -46,6 +49,8 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::EnemyMoveComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyDamageComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::MotionStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::VelocityComponent>();
     my::ComponentFactory::AddComponentCreator<my::TransformComponent>();
@@ -56,7 +61,8 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::SightCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();
-
+    my::ComponentFactory::AddComponentCreator<my::BombGloveBulletCollisionComponent>();
+    
 }
 
 my::ComponentFactory::~ComponentFactory() {

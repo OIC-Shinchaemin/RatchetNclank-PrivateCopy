@@ -5,6 +5,7 @@
 
 my::BlasterBullet::BlasterBullet() :
     super() {
+    super::SetTag("BlasterBullet");
     _exist_time.Initialize(3.0f,false);
 }
 

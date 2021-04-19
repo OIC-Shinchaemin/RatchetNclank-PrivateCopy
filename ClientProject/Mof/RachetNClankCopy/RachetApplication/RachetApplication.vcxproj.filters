@@ -196,6 +196,12 @@
     <Filter Include="Rachet\Source\Game\GameSystem\Save">
       <UniqueIdentifier>{ca3b5e09-611f-4b5c-8559-bbf2ec3831b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Component\Bullet">
+      <UniqueIdentifier>{c93197d2-7fd8-45f9-8dc3-5d7fc1caa273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Bullet">
+      <UniqueIdentifier>{b67d75ff-a189-48ce-9f34-f1732e17ad60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -512,6 +518,27 @@
     </ClCompile>
     <ClCompile Include="UI\LockOnCursorMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\CharacterComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Bullet\BlasterBulletComponent.cpp">
+      <Filter>Rachet\Source\Component\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BombGloveBulletCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Bullet\BombGloveBulletComponent.cpp">
+      <Filter>Rachet\Source\Component\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -970,6 +997,27 @@
     </ClInclude>
     <ClInclude Include="UI\LockOnCursorMenu.h">
       <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CharacterComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Bullet\BlasterBulletComponent.h">
+      <Filter>Rachet\Header\Component\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BombGloveBulletCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Bullet\BombGloveBulletComponent.h">
+      <Filter>Rachet\Header\Component\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

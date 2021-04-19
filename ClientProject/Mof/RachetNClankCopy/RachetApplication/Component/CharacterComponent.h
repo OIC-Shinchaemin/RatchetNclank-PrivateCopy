@@ -1,38 +1,42 @@
-#ifndef MY_ENEMY_COMPONENT_H
-#define MY_ENEMY_COMPONENT_H
+#ifndef MY_CHARACTER_COMPONENT_H
+#define MY_CHARACTER_COMPONENT_H
 
 
-#include "../CharacterComponent.h"
+#include "UpdateComponent.h"
 
 #include <memory>
 
+#include "My/Core/Observable.h"
+
 
 namespace my {
-class EnemyComponent : public my::CharacterComponent {
-    using super = my::CharacterComponent;
-private:
-    //! 標的
-    std::weak_ptr<my::Actor> _target;
+class CharacterComponent : public my::UpdateComponent {
+    using super = my::UpdateComponent;
+protected:
+    //! 大きさ
+    float _volume;
+    //! 高さ
+    float _height;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    EnemyComponent(int priority);
+    CharacterComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    EnemyComponent(const EnemyComponent& obj);
+    CharacterComponent(const CharacterComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~EnemyComponent();
+    virtual ~CharacterComponent();
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<my::Actor>& ptr);
+    //void SetTarget(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -44,28 +48,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<my::Actor> GetTarget(void) const;
+    float GetVolume(void) const;
     /// <summary>
-    /// 初期化
+    /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Initialize(void) override;
+    float GetHeight(void) const;
     /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time">時間</param>
-    /// <returns></returns>
-    virtual bool Update(float delta_time) override;
-#ifdef _DEBUG
-    virtual bool Render(void) override;
-#endif // _DEBUG
-    /// <summary>
-    /// 解放
+    /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Release(void) override;
+    //std::weak_ptr<my::Actor> GetTarget(void) const;
     /// <summary>
     /// 複製
     /// </summary>
@@ -74,4 +69,4 @@ public:
     virtual std::shared_ptr<my::Component> Clone(void) override;
 };
 }
-#endif // !MY_ENEMY_COMPONENT_H
+#endif // !MY_CHARACTER_COMPONENT_H
