@@ -15,6 +15,9 @@ private:
     std::weak_ptr<class PlayerIdleComponent> _idle_com;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
+
+    bool MoveByKeyboard(float angular_speed, float speed);
+    void MoveByGamepad(float angular_speed, float speed);
 public:
     /// <summary>
     /// コンストラクタ

@@ -21,6 +21,8 @@ private:
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! ƒ‚[ƒVƒ‡ƒ“
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
+    //! ƒJƒƒ‰
+    std::weak_ptr<class CameraComponent> _camera_com;
 
     virtual void InputMoveVelocity(float speed);
     virtual void InputMoveAngularVelocity(float angle, float speed);

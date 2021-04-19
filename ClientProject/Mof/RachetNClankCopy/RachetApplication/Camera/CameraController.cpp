@@ -76,6 +76,10 @@ void my::CameraController::SetAltitude(float degree) {
     this->_altitude = degree;
 }
 
+std::shared_ptr<my::Camera> my::CameraController::GetCamera(void) const {
+    return this->_camera;
+}
+
 Mof::CVector3 my::CameraController::GetCameraPosition(void) const {
     if (_camera) {
         return _camera->GetPosition();

@@ -4,6 +4,7 @@
 
 #include "UpdateComponent.h"
 
+#include "My/Core/ServiceLocator.h"
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
 
@@ -17,7 +18,7 @@ private:
     //! カメラ
     std::shared_ptr<my::Camera> _player_view_camera;
     //! カメラコントローラ
-    my::CameraController _camera_controller;
+    my::ServiceLocator<my::CameraController> _camera_controller;
     /// <summary>
     /// 操作
     /// </summary>
@@ -54,6 +55,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetViewFront(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

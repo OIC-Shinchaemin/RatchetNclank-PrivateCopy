@@ -468,6 +468,12 @@
     <ClCompile Include="Component\CameraComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Camera\FollowCameraController.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\DebugCameraController.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -871,6 +877,12 @@
     </ClInclude>
     <ClInclude Include="Component\CameraComponent.h">
       <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\FollowCameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\DebugCameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

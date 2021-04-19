@@ -17,7 +17,7 @@
 #define		CHARACTER_FASTMOVESPEEDMAX		(0.1f* 60)
 // 回転速度
 #define		CHARACTER_ROTATIONSPEED		(0.2f)
-//攻撃回数
+//攻撁E��数
 #define		CHARACTER_ATTACKCOUNT		(3)
 #define		CHARACTER_ATTACKMOVETIME	(0.1f)
 
@@ -48,44 +48,26 @@ private:
         MoveFast,
     };
     using super = my::Character;
-    CVector2				_camera_angle;
-    ActionState				_state;
-    MoveState				_move_state;
-    float					_stick_tilt;
-    float					_move_angle;
-    float					_time;
-    bool					_jump;
-    bool					_jump2;
-    bool					_attack_move;
-    bool					_next_atc;
-    float					_gravity;
-    
-    //! カメラ
-    std::shared_ptr<my::Camera> _player_view_camera;
-    //! カメラコントローラ
-    my::CameraController _camera_controller;
-    //! 武器
+    CVector2				m_CameraAngle;
+    ActionState				m_State;
+    MoveState				m_MoveState;
+    float					m_StickTilt;
+    float					m_MoveAngle;
+    float					m_Time;
+    bool					m_bJump;
+    bool					m_bJump2;
+    bool					m_bAttackMove;
+    bool					m_bNextAtc;
+    float					m_Gravity;
+
+    //! ����
     std::weak_ptr<my::Mechanical>_current_mechanical;
-
-    void InputMoveVelocity(Mof::CVector2 stick, float speed);
-    void InputMoveAngularVelocity(Mof::CVector2 stick, float speed);
-
-
-    void InputCameraForKeyboard(float angular_speed, float speed);
-    void InputCameraForGamepad(float angular_speed, float speed);
-    //void UpdateCamera(void);
-    //void UpdateMove(void);
-    //void UpdateJump(void);
-    //void UpdateAttack(void);
-    //virtual void UpdateTransform(float delta_time) override;
-    //void ChangeAnimation(void);
 public:
     Player();
     ~Player();
     virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
 
     virtual bool Initialize(my::Actor::Param* param) override;
-    virtual bool Input(void) override;
     virtual bool Update(float delta_time) override;
     virtual bool Render(void) override;
     virtual bool Release(void) override;

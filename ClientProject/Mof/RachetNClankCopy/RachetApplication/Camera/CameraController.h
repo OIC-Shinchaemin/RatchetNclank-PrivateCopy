@@ -11,15 +11,15 @@
 
 namespace my {
 class CameraController {
-private:
+protected:
     //! マネージャ
     static std::weak_ptr<my::CameraManager> _manager;
-    //! ばね定数
-    const float _spring; 
-    //! 減衰定数
-    const float _dumping; 
     //! カメラ
     std::shared_ptr<my::Camera>_camera;
+    //! ばね定数
+    const float _spring;
+    //! 減衰定数
+    const float _dumping;
     //! 対象
     Mof::CVector3 _position;
     //! 対象
@@ -32,7 +32,6 @@ private:
     math::Radian _altitude;
     //! 速度
     Mof::CVector3 _velocity;
-    
     /// <summary>
     /// 更新
     /// </summary>
@@ -62,7 +61,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetCamera(const std::shared_ptr<class Camera>& ptr);
+    void SetCamera(const std::shared_ptr<my::Camera>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -88,6 +87,12 @@ public:
     /// </summary>
     /// <param name="degree"></param>
     void SetAltitude(float degree);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Camera> GetCamera(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -151,7 +156,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Update(void);
+    virtual bool Update(void);
     /// <summary>
     /// 解放
     /// </summary>
