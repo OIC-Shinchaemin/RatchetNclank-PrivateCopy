@@ -11,7 +11,10 @@ public class SceneChange : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(sceneName);
+            //SceneManager.LoadScene("sceneName");
+            PermanentUI.perm.nowScene = sceneName;
+            SceneManager.LoadScene("HalfScene");
+
         }
     }
 }
