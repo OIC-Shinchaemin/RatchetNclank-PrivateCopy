@@ -4,22 +4,22 @@
 
 #include <memory>
 
-#include "../GameDefine.h"
-
-#include "My/Core/Observer.h"
-#include "My/Core/Utility.h"
 #include "My/Core/Math.h"
+#include "Camera.h"
+#include "CameraManager.h"
 
 
 namespace my {
 class CameraController {
-private:
-    //! ばね定数
-    const float kSpring; 
-    //! 減衰定数
-    const float kDumping; 
+protected:
+    //! マネージャ
+    static std::weak_ptr<my::CameraManager> _manager;
     //! カメラ
-    std::weak_ptr<class Camera>_camera;
+    std::shared_ptr<my::Camera>_camera;
+    //! ばね定数
+    const float _spring;
+    //! 減衰定数
+    const float _dumping;
     //! 対象
     Mof::CVector3 _position;
     //! 対象
@@ -32,7 +32,6 @@ private:
     math::Radian _altitude;
     //! 速度
     Mof::CVector3 _velocity;
-    
     /// <summary>
     /// 更新
     /// </summary>
@@ -46,6 +45,11 @@ private:
     Mof::CVector3 SphericalToCartesian(float x, float y, float z) const;
 public:
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    static void SetCameraManager(const std::shared_ptr<my::CameraManager>& ptr);
+    /// <summary>
     /// コンストラクタ
     /// </summary>
     CameraController();
@@ -57,7 +61,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetCamera(const std::shared_ptr<class Camera>& ptr);
+    void SetCamera(const std::shared_ptr<my::Camera>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -83,6 +87,12 @@ public:
     /// </summary>
     /// <param name="degree"></param>
     void SetAltitude(float degree);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Camera> GetCamera(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -146,7 +156,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Update(void);
+    virtual bool Update(void);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Release(void);
+    /// <summary>
+    /// 登録
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool RegisterGlobalCamera(void);
 };
 }
 #endif // !MY_CAMERA_CONTROLLER_H

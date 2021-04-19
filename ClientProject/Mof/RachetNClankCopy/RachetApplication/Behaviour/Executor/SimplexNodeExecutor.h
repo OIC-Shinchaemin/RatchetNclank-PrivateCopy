@@ -8,15 +8,14 @@
 
 
 namespace behaviour {
-template<typename Actor>
-class SimplexNodeExecutor : public behaviour::NodeExecutor<Actor> {
-    using super = behaviour::NodeExecutor<Actor>;
+class SimplexNodeExecutor : public behaviour::NodeExecutor {
+    using super = behaviour::NodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    SimplexNodeExecutor(const SimplexNodePtr<Actor>& node) :
+    SimplexNodeExecutor(const behaviour::SimplexNodePtr& node) :
         super(node) {
         auto& ptr = node->GetChild();
         auto add = ptr->CreateExecutor();

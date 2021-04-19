@@ -15,9 +15,9 @@ private:
     my::StateMachine _state_machine;
     template<class State>
     void RegisterMotionState(my::StateMachine& out) {
-        auto shared_this = std::dynamic_pointer_cast<my::Enemy>(super::GetOwner());
+        auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<State>();
-        ptr->SetEnemy(shared_this);
+        ptr->SetActor(shared_this);
         out.RegisterState(ptr);
     }
 public:
@@ -58,6 +58,9 @@ public:
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
+#ifdef _DEBUG
+    virtual bool Render(void) override;
+#endif // _DEBUG
     /// <summary>
     /// ‰ð•ú
     /// </summary>

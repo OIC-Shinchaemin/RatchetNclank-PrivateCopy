@@ -10,6 +10,7 @@
 
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "MY/UI/UICanvas.h"
 
 
 namespace my {
@@ -22,12 +23,21 @@ protected:
     int _priority;
     //! リソース
     static std::weak_ptr<my::ResourceMgr> _resource_manager;
+    //! リソース
+    static std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! 有効
+    bool _active;
 public:
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
     static void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    static void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -65,6 +75,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     int GetPriority(void) const;
+    /// <summary>
+    /// 有効判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsActive(void) const;
     /// <summary>
     /// 入力判定
     /// </summary>

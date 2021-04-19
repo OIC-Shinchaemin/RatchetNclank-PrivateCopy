@@ -5,33 +5,30 @@
 #include <memory>
 
 #include "../Actor.h"
-#include "../Collision/Object/CollisionObject.h"
-#include "../Collision/Algolithm/CollisionAlgolithm.h"
+#include "../Component/Collision/Object/CollisionComponent.h"
+#include "../Component/Collision/Algolithm/CollisionAlgolithm.h"
+#include "../Factory/Factory.h"
+#include "../Stage/Stage.h"
 
 
 namespace my {
 class PhysicsWorld {
     using ActorPtr = std::shared_ptr<my::Actor>;
-    using ObjectPtr = std::shared_ptr<my::CollisionObject>;
+    using ObjectPtr = std::shared_ptr<my::CollisionComponent>;
     using ObjectArray = std::vector<ObjectPtr>;
 private:
-    struct CollisionPair {
+    struct CollisionLayer {
         //! 衝突する側
-        ObjectArray layers;
+        ObjectArray objects;
         //! 衝突される側
         ObjectArray targets;
         //! どんな風に衝突するか
         std::shared_ptr<my::CollisionAlgolithm> algo;
     };
     //! 衝突処理対象
-    std::vector<CollisionPair> _objects;
-private:
-    /// <summary>
-    /// 作成
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    std::shared_ptr<my::CollisionAlgolithm> CreateAlgolithm(const char* type);
+    std::vector<CollisionLayer> _layers;
+    //! ファクトリー
+    my::Factory<my::CollisionAlgolithm> collision_algolithm_factory;
 public:
     /// <summary>
     /// コンストラクタ
@@ -57,6 +54,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Update(void);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="stage"></param>
+    void CollisionStage(Stage* stage);
 };
 }
 #endif // !MY_PHYSIC_WORLD_H

@@ -4,17 +4,20 @@
 
 #include "SimplexNodeExecutor.h"
 
+#include "../../Actor.h"
+
 
 namespace behaviour {
-template<typename Actor>
-class DecoratorNodeExecutor : public behaviour::SimplexNodeExecutor<Actor> {
-    using super = behaviour::SimplexNodeExecutor<Actor>;
+class DecoratorNodeExecutor : public behaviour::SimplexNodeExecutor {
+    using super = behaviour::SimplexNodeExecutor;
+    //! アクター
+    std::weak_ptr<my::Actor> _actor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    DecoratorNodeExecutor(const SimplexNodePtr<Actor>& node) :
+    DecoratorNodeExecutor(const behaviour::SimplexNodePtr& node) :
         super(node) {
     }
     /// <summary>
@@ -22,17 +25,28 @@ public:
     /// </summary>
     virtual ~DecoratorNodeExecutor() = default;
     /// <summary>
+    /// 実行時必要なポインタをキャッシュ
+    /// </summary>
+    /// <param actor=""></param>
+    virtual void Prepare(std::any actor) override {
+        _actor = std::any_cast<std::shared_ptr<my::Actor>>(actor);
+        for (auto& ptr : super::_children) {
+            ptr->Prepare(actor);
+        } // for
+    }
+    /// <summary>
     /// ノードの実行処理
     /// </summary>
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual INodeExecutor<Actor>::Result Execute(Actor& actor) override {
+    virtual behaviour::INodeExecutor::Result Execute(void) override {
         // 実行開始
         super::_state = super::State::Running;
-        if (super::_node->Execute(actor)) {
+        auto temp = _actor.lock();
+        if (super::_node->Execute(temp)) {
             for (auto& ptr : super::_children) {
-                auto re = ptr->Execute(actor);
+                auto re = ptr->Execute();
                 if (re == super::Result::Sucess) {
                     super::_state = super::State::Completed;
                     return super::Result::Sucess;

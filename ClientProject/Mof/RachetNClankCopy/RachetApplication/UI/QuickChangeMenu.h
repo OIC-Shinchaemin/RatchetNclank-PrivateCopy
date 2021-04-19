@@ -5,7 +5,7 @@
 #include "My/UI/UIPanel.h"
 
 #include "My/Core/Observable.h"
-#include "../GameSystem/QuickChangeSystem.h"
+#include "../Game/GameSystem/QuickChangeSystem.h"
 
 
 namespace my {
@@ -17,12 +17,6 @@ public:
     /// </summary>
     /// <param name="name"></param>
     QuickChangeMenuItem(const char* name);
-    /// <summary>
-    /// 通知イベント
-    /// </summary>
-    /// <param name="observable"></param>
-    /// <param name="event"></param>
-    //virtual void OnNotify(const std::shared_ptr<my::QuickChangeSystem>& observable, const char* event) override;
     /// <summary>
     /// 描画
     /// </summary>

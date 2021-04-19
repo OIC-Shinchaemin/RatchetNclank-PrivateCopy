@@ -1,0 +1,96 @@
+{
+  "components": [
+    {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "MotionComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/motion_names/player.motion_names"
+      }
+    },
+    {
+      "type": "HpComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "PlayerComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "PlayerMoveComponent",
+      "paramater": {
+        "priority": 90
+      }
+    },
+    {
+      "type": "PlayerIdleComponent",
+      "paramater": {
+        "priority": 91
+      }
+    },
+    {
+      "type": "PlayerDamageComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
+      "type": "PlayerInvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+    {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 98
+      }
+    },
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom"
+      }
+    },
+    {
+      "type": "CameraComponent",
+      "paramater": {
+        "priority": 200
+      }
+    },
+    {
+      "type": "PlayerCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

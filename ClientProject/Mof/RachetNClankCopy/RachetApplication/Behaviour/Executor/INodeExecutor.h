@@ -2,6 +2,7 @@
 #define BEHAVIOUR_INODE_EXECUTOR_H
 
 
+#include <any>
 #include <memory>
 #include <list>
 
@@ -10,12 +11,11 @@
 
 namespace behaviour {
 // 前方宣言
-template<typename Actor> class INodeExecutor;
-template<typename Actor> using NodeExecutorPtr = std::shared_ptr<INodeExecutor<Actor>>;
-template<typename Actor> using NodeExecutorWeakPtr = std::weak_ptr<INodeExecutor<Actor>>;
-template<typename Actor> using NodeExecutorList = std::list<NodeExecutorPtr<Actor>>;
-template<typename Actor>
-class INodeExecutor : public std::enable_shared_from_this<INodeExecutor<Actor>> {
+class INodeExecutor;
+using NodeExecutorPtr = std::shared_ptr<INodeExecutor>;
+using NodeExecutorWeakPtr = std::weak_ptr<INodeExecutor>;
+using NodeExecutorList = std::list<NodeExecutorPtr>;
+class INodeExecutor : public std::enable_shared_from_this<behaviour::INodeExecutor> {
 public:
     enum class State {
         Inactive, //未実行
@@ -32,14 +32,19 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetParent(NodeExecutorWeakPtr<Actor> ptr) = 0;
+    virtual void SetParent(behaviour::NodeExecutorWeakPtr ptr) = 0;
+    /// <summary>
+    /// 実行時必要なポインタをキャッシュ
+    /// </summary>
+    /// <param actor=""></param>
+    virtual void Prepare(std::any actor) = 0;
     /// <summary>
     /// ノードの実行処理
     /// </summary>
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual INodeExecutor<Actor>::Result Execute(Actor& actor) = 0;
+    virtual INodeExecutor::Result Execute(void) = 0;
     /// <summary>
     /// 実行状態を全てリセット
     /// 状態をInactiveに設定

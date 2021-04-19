@@ -1,100 +1,85 @@
 #pragma once
-#include "Mof.h"
-#include <unordered_map>
+#include "StageObject.h"
 
-// ********************************************************************************
+// 名前の置き換え
+using MeshPtr         = std::shared_ptr<CMeshContainer>;
+using MeshArray       = std::vector<MeshPtr>;
+// pair<builder_path, pos_data>
+using EnemySpawnData  = std::pair<std::string, StageObjectPtr>;
+using EnemySpawnArray = std::vector<EnemySpawnData>;
+
 /// <summary>
-/// 
+/// ステージクラス
 /// </summary>
-// ********************************************************************************
 class Stage {
-public:
-    
-    // ********************************************************************************
-    /// <summary>
-    /// オブジェクトデータ
-    /// </summary>
-    // ********************************************************************************
-    struct ObjectData {
-        Vector3                         position     { 0.0f, 0.0f, 0.0f };
-        Vector3                         scale        { 1.0f, 1.0f, 1.0f };
-        Vector3                         rotation     { 0.0f, 0.0f, 0.0f };
-        std::shared_ptr<CMeshContainer> mesh_pointer { nullptr };
-        std::string                     name         { "" };
-
-        // ********************************************************************************
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-        /// <created>いのうえ,2021/03/20</created>
-        /// <changed>いのうえ,2021/03/20</changed>
-        // ********************************************************************************
-        static bool Compare(const ObjectData& v1, const ObjectData& v2) {
-            bool pos_flag    = (v1.position     == v2.position    );
-            bool scale_flag  = (v1.scale        == v2.scale       );
-            bool rotate_flag = (v1.rotation     == v2.rotation    );
-            bool mesh_flag   = (v1.mesh_pointer == v2.mesh_pointer);
-            bool name_flag   = (v1.name         == v2.name        );
-            return (pos_flag && scale_flag && rotate_flag && mesh_flag && name_flag);
-        }
-    };
-
-    //! 名前の置き換え
-    using MeshPtr       = std::shared_ptr<CMeshContainer>;
-
-    //! vector<ObjectData>
-    using ObjectList    = std::vector<ObjectData>;
-
-    //! pair<file_name, mesh_pointer>
-    using MeshData      = std::pair<std::string, MeshPtr>;
-
-    //! vector<MeshData>
-    using MeshList      = std::vector<MeshData>;
-
-    //! pair<ObjectData*, ObjectList*>
-    using AddObjectData = std::pair<ObjectData*, ObjectList*>;
-
-    //! tuple<file_name, MeshList*, ObjectList*>
-    using SaveData      = std::tuple<std::string, MeshList*, ObjectList*>;
-
-    //! pair<file_name, file_buffer>
-    using LoadData      = std::pair<std::string, std::string*>;
-
 private:
 
-    //! メッシュポインタ配列
-    MeshList   _mesh_array;
+    //! 静的なステージメッシュの生成フラグ
+    bool                _create_static_stage_mesh;
 
-    //! オブジェクトデータ配列
-    ObjectList _object_array;
+    //! 生成時の一時メッシュ置き場(解放処理のため保存)
+    CMeshContainerArray _copy_tmp_array;
 
-    bool Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list);
+    //! ステージで使用するメッシュの配列
+    MeshArray           _mesh_array;
 
-    bool LoadMap(std::string* buffer_pointer, const std::string& map_file);
+    //! 静的なオブジェクトの配列
+    StageObjectArray    _static_object_array;
 
-    bool LoadMesh(const std::string& key, const std::string& mesh_file);
+    //! 敵の出現位置配列
+    EnemySpawnArray     _enemy_spawn_array;
 
-    Stage::MeshPtr GetMeshPtr(const std::string& key);
-
-    std::string GetFileName(const std::string& file);
-
-    std::string GetExt(const std::string& file);
-
-    std::string ChangeFullPath(const std::string& file);
-
-    void AddObject(AddObjectData* data);
+    /// <summary>
+    /// 静的なステージメッシュの生成
+    /// </summary>
+    /// <returns>true : 生成, false : 未生成</returns>
+    bool CreateStaticStageMesh(void);
 
 public:
 
+    /// <summary>
+    /// ステージの読み込み
+    /// </summary>
+    /// <param name="path">ステージデータファイルパス</param>
+    /// <returns>true : 成功, false : エラー</returns>
+    bool Load(const std::string& path);
+
+    /// <summary>
+    /// 初期化
+    /// </summary>
     void Initialize(void);
 
+    /// <summary>
+    /// 更新
+    /// </summary>
     void Update(void);
 
+    /// <summary>
+    /// 描画
+    /// </summary>
     void Render(void);
 
+    /// <summary>
+    /// 解放
+    /// </summary>
     void Release(void);
+
+    /// <summary>
+    /// 静的なステージメッシュを生成したかのフラグ取得
+    /// </summary>
+    /// <returns>静的なステージメッシュを生成したかのフラグ</returns>
+    bool IsCreateStaticStageMesh(void) const;
+
+    /// <summary>
+    /// 静的なステージメッシュの取得
+    /// </summary>
+    /// <returns>生成していない場合 nullptr が返る</returns>
+    MeshPtr GetStaticStageMesh(void);
+
+    /// <summary>
+    /// 敵の出現位置配列の取得
+    /// </summary>
+    /// <returns>敵の出現位置配列</returns>
+    EnemySpawnArray& GetEnemySpawnArray(void);
 };
 

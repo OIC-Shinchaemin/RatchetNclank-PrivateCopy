@@ -7,7 +7,8 @@
 #include <unordered_map>
 
 #include "../GameDefine.h"
-#include "../FunctionPointerContainer.h"
+#include "Factory.h"
+#include "My/Core/FunctionPointerContainer.h"
 #include "../Behaviour/Node/ParameterNode.h"
 #include "../Behaviour/Node/CompositeNode.h"
 #include "../Behaviour/Node/ConditionalNode.h"
@@ -15,7 +16,7 @@
 #include "../Behaviour/Node/ActionNode.h"
 #include "../Behaviour/Node/SequencerNode.h"
 #include "../Behaviour/Node/SelectorNode.h"
-#include "../Character/Enemy.h"
+#include "../Actor/Character/Enemy.h"
 
 
 namespace my {
@@ -23,156 +24,65 @@ class BehaviourFactory {
 private:
     //! コンテナ
     my::FuncPtrContainer _function_pointer_container;
+    //! アクション
+    my::Factory<behaviour::ActionNodeBase> _action_factory;
+    //! アクション
+    my::Factory<behaviour::ConditionalNodeBase> _condition_factory;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    BehaviourFactory() :
-        _function_pointer_container() {
-        _function_pointer_container.Register("Enemy::GoHome", &my::Enemy::GoHome);
-        _function_pointer_container.Register("Enemy::OverLooking", &my::Enemy::OverLooking);
-        _function_pointer_container.Register("Enemy::ChaseTarget", &my::Enemy::ChaseTarget);
-        _function_pointer_container.Register("Enemy::Attack", &my::Enemy::Attack);
-        _function_pointer_container.Register("Enemy::ChangeToPatrolState", &my::Enemy::ChangeToPatrolState);
-        _function_pointer_container.Register("Enemy::HasTarget", &my::Enemy::HasTarget);
-        _function_pointer_container.Register("Enemy::GetDistanceFromInitPosition", &my::Enemy::GetDistanceFromInitPosition);
-    }
+    BehaviourFactory();
     /// <summary>
     /// 作成
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    behaviour::CompositeNodePtr<std::shared_ptr<class Enemy> > CreateRootNode(const char* path) {
-        rapidjson::Document document;
-        if (!ut::ParseJsonDocument(path, document)) {
-            return nullptr;
-        } // if
-        using namespace behaviour;
-        behaviour::CompositeNodePtr<std::shared_ptr<my::Enemy> > rootnode;
-        _ASSERT_EXPR(document.HasMember("root"), L"メンバを保持していません");
-        _ASSERT_EXPR(document.HasMember("behaviours"), L"メンバを保持していません");
+    behaviour::CompositeNodePtr CreateRootNode(const char* path);
 
-        auto root_index = document["root"]["index"].GetInt();
-        auto& behaviours = document["behaviours"];
-
-        auto type = std::string(behaviours[root_index]["type"].GetString());
-        if (type == "SequencerNode") {
-            rootnode = this->CreateSequencerNode(behaviours, root_index);
-        } // if
-        else if (type == "SelectorNode") {
-            rootnode = this->CreateSelectorNode(behaviours, root_index);
-        } // else if
-
-        return rootnode;
-    }
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    behaviour::ConditionalNodeBase< std::shared_ptr<class Enemy> > ::Operator GetConditionalOperator(std::string type) {
-        using Operator = behaviour::ConditionalNodeBase<std::shared_ptr<my::Enemy>>::Operator;
-        if (type == "Equal") {
-            return Operator::Equal;
-        } // if
-        else if (type == "NotEqual") {
-            return Operator::NotEqual;
-        } // else if
-        else if (type == "Less") {
-            return Operator::Less;
-        } // else if
-        else if (type == "LessEqual") {
-            return Operator::LessEqual;
-        } // else if
-        else if (type == "Greater") {
-            return Operator::Greater;
-        } // else if
-        else if (type == "GreaterEqual") {
-            return Operator::GreaterEqual;
-        } // else if
-        // default 
-        return Operator::Equal;
-    }
+    behaviour::ConditionalNodeBase::Operator GetConditionalOperator(std::string type);
     /// <summary>
     /// 作成
     /// </summary>
     /// <param name="behaviours"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    std::shared_ptr<behaviour::FunctionNode<std::shared_ptr<class Enemy> > > CreateFunctionNode(rapidjson::Value& behaviours, uint32_t index) {
-        using namespace behaviour;
-
-        auto function_key = behaviours[index]["function"].GetString();
-        auto function_node = std::make_shared<FunctionNode<std::shared_ptr<my::Enemy> >>(
-            _function_pointer_container.Get<my::FuncPtrEnemyBool>(function_key));
-        return function_node;
-    }
+    std::shared_ptr<behaviour::FunctionNode<std::shared_ptr<class Enemy> > > CreateFunctionNode(rapidjson::Value& behaviours, uint32_t index);
     /// <summary>
     /// 作成
     /// </summary>
     /// <param name="behaviours"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    std::shared_ptr<behaviour::SequencerNode<std::shared_ptr<class Enemy> > > CreateSequencerNode(rapidjson::Value& behaviours, uint32_t index) {
-        using namespace behaviour;
+    std::shared_ptr<behaviour::ActionNodeBase> CreateActionNode(rapidjson::Value& behaviours, uint32_t index);
 
-        auto sequencer_node = std::make_shared<SequencerNode<std::shared_ptr<my::Enemy> >>();
-        auto& children = behaviours[index]["children"];
-        for (size_t i = 0, n = children.Size(); i < n; i++) {
-            auto children_index = children[i].GetInt();
-            if (behaviours[children_index]["type"] == "FunctionNode") {
-                auto node = this->CreateFunctionNode(behaviours, children_index);
-                sequencer_node->AddChild(node);
-            } // if
-            else if (behaviours[children_index]["type"] == "DecoratorNode") {
-                auto return_type = std::string(behaviours[children_index]["return"].GetString());
-                if (return_type == "bool") {
-                    auto node = this->CreateDecoratorNode<bool>(behaviours, children_index);
-                    sequencer_node->AddChild(node);
-                } // if
-                else if (return_type == "float") {
-                    auto node = this->CreateDecoratorNode<float>(behaviours, children_index);
-                    sequencer_node->AddChild(node);
-                } // if
-
-            } // else if
-
-        } // for
-        return sequencer_node;
-    }
     /// <summary>
     /// 作成
     /// </summary>
     /// <param name="behaviours"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    std::shared_ptr<behaviour::SelectorNode<std::shared_ptr<class Enemy> > > CreateSelectorNode(rapidjson::Value& behaviours, uint32_t index) {
-        using namespace behaviour;
+    std::shared_ptr<behaviour::ConditionalNodeBase > CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index);
 
-        auto selector_node = std::make_shared<SelectorNode<std::shared_ptr<my::Enemy> >>();
-        auto& children = behaviours[index]["children"];
-        for (size_t i = 0, n = children.Size(); i < n; i++) {
-            auto children_index = children[i].GetInt();
-            if (behaviours[children_index]["type"] == "FunctionNode") {
-                auto node = this->CreateFunctionNode(behaviours, children_index);
-                selector_node->AddChild(node);
-            } // if
-            else if (behaviours[children_index]["type"] == "DecoratorNode") {
-                auto return_type = std::string(behaviours[children_index]["return"].GetString());
-                if (return_type == "bool") {
-                    auto node = this->CreateDecoratorNode<bool>(behaviours, children_index);
-                    selector_node->AddChild(node);
-                } // if
-                else if (return_type == "float") {
-                    auto node = this->CreateDecoratorNode<float>(behaviours, children_index);
-                    selector_node->AddChild(node);
-                } // if
-
-            } // else if
-        } // for
-        return selector_node;
-    }
-
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="behaviours"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    std::shared_ptr<behaviour::SequencerNode> CreateSequencerNode(rapidjson::Value& behaviours, uint32_t index);
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="behaviours"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    std::shared_ptr<behaviour::SelectorNode> CreateSelectorNode(rapidjson::Value& behaviours, uint32_t index);
     /// <summary>
     /// 作成
     /// </summary>

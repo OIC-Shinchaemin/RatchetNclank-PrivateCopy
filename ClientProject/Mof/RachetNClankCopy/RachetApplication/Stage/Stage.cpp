@@ -1,236 +1,178 @@
 #include "Stage.h"
-#include <filesystem>
+#include "JsonStageParser.h"
 
-bool Stage::Purse(const std::string* buffer, MeshList* mesh_list, ObjectList* object_list) {
-    // ファイル詳細
-    // メッシュ数                       ( 4 byte )
-    // LOOP
-    // メッシュファイル相対パスの長さ   ( 4 byte )
-    // メッシュファイル相対パス         ( メッシュファイル相対パスの長さ byte )
-    // LOOP END
-    // オブジェクト数                   ( 4 byte )
-    // LOOP
-    // オブジェクト名の長さ             ( 4 byte )
-    // オブジェクト名                   ( オブジェクト名の長さ byte )
-    // メッシュ名の長さ                 ( 4 byte )
-    // メッシュ名                       ( メッシュ名の長さ byte )
-    // 座標位置X * 1000                 ( 4 byte )
-    // 座標位置Y * 1000                 ( 4 byte )
-    // 座標位置Z * 1000                 ( 4 byte )
-    // 拡大率X   * 1000                 ( 4 byte )
-    // 拡大率Y   * 1000                 ( 4 byte )
-    // 拡大率Z   * 1000                 ( 4 byte )
-    // 回転X     * 1000                 ( 4 byte )
-    // 回転Y     * 1000                 ( 4 byte )
-    // 回転Z     * 1000                 ( 4 byte )
-    // LOOP END
-    // EOF
+/// <summary>
+/// 静的なステージメッシュの生成
+/// </summary>
+/// <returns>true : 生成, false : 未生成</returns>
+bool Stage::CreateStaticStageMesh(void) {
+    // 静的オブジェクトがなければ当たり判定用のメッシュは生成しない
+    if (_static_object_array.size() <= 0) {
+        return false;
+    }
+    // メッシュの生成
+    MeshPtr stage_mesh = std::make_shared<CMeshContainer>();
+    for (auto& object : _static_object_array) {
+        // 万が一メッシュ登録していないオブジェクトがいれば弾く
+        // 当たり判定の設定をしていないオブジェクトも弾く
+        if (object->GetMeshNo() < 0 || !object->IsCollisionEnable()) {
+            continue;
+        }
+        const int index = _copy_tmp_array.GetArrayCount();
+        _copy_tmp_array.Add(_mesh_array[object->GetMeshNo()]->CreateCopyObject());
+        LPMeshContainer mesh_tmp   = _copy_tmp_array[index];
+        const int       mesh_count = mesh_tmp->GetMeshCount();
+        for (int i = 0; i < mesh_count; i++) {
+            // オブジェクトの拡大、回転に合わせてジオメトリの再計算
+            const int geo_count = mesh_tmp->GetGeometryCount();
+            for (int j = 0; j < geo_count; j++) {
+                CMatrix44& matrix = mesh_tmp->GetMesh(i)->GetGeometry(j)->GetMatrix();
+            
+                // 現在のデータを取得
+                CVector3 scale, rotate, trans;
+                matrix.GetScaling(scale);
+                matrix.GetRotation(rotate);
+                matrix.GetTranslation(trans);
 
-    std::function<MofS32(int)> purse_s32 = [&](int n) {
-        const unsigned char buff[4] = {
-            static_cast<MofU8>(buffer->c_str()[n + 0]),
-            static_cast<MofU8>(buffer->c_str()[n + 1]),
-            static_cast<MofU8>(buffer->c_str()[n + 2]),
-            static_cast<MofU8>(buffer->c_str()[n + 3]),
-        };
-        MofS32 s32 = (buff[3] << 24) | (buff[2] << 16) | (buff[1] << 8) | (buff[0]);
-        return s32;
-    };
-    
-    std::function<std::string(int, int)> purse_string = [&](int n, int count) {
-        std::string buff = buffer->substr(n, count);
-        return buff;
-    };
-    
-    int buff_index = 0;
-    
-    int mesh_count = purse_s32(buff_index);
-    buff_index    += sizeof(MofS32);
-    
-    for (int i = 0; i < mesh_count; i++) {
-        int mesh_path_length  = purse_s32(buff_index);
-        buff_index           += sizeof(MofS32);
-        std::string mesh_path = purse_string(buff_index, mesh_path_length);
-        buff_index           += mesh_path_length;
-        std::string filename  = Stage::GetFileName(mesh_path);
-        std::string ext       = Stage::GetExt(mesh_path);
-        if (!LoadMesh(filename + ext, ChangeFullPath(mesh_path))) {
-            return false;
+                // 再計算
+                CMatrix44 scale_, rotate_, trans_;
+                scale_.Scaling(scale * object->GetScale());
+                trans_.Translation(trans * object->GetScale());
+                rotate_.RotationZXY(object->GetRotate());
+                trans_ *= rotate_;
+                matrix  = scale_ * trans_;
+            }
+            // 再計算後のメッシュを登録
+            stage_mesh->GetMesh()->Add(std::move(mesh_tmp->GetMesh(i)));
         }
     }
-
-    int object_count = purse_s32(buff_index);
-    buff_index      += sizeof(MofS32);
-
-    for (int i = 0; i < object_count; i++) {
-        
-        int object_name_length  = purse_s32(buff_index);
-        buff_index             += sizeof(MofS32);
-        
-        std::string object_name = purse_string(buff_index, object_name_length);
-        buff_index             += object_name_length;
-        
-        int mesh_name_length    = purse_s32(buff_index);
-        buff_index             += sizeof(MofS32);
-
-        std::string mesh_name   = purse_string(buff_index, mesh_name_length);
-        buff_index             += mesh_name_length;
-
-        Vector3 position, rotation, scale;
-        position.x  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        position.y  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        position.z  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-                                                    
-        scale.x     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        scale.y     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        scale.z     = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-                                                    
-        rotation.x  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        rotation.y  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);               
-        rotation.z  = purse_s32(buff_index) * 0.001f;
-        buff_index += sizeof(MofS32);
-
-        ObjectData object_data;
-        object_data.name         = object_name;
-        object_data.mesh_pointer = Stage::GetMeshPtr(mesh_name);
-        object_data.position     = position;
-        object_data.rotation     = rotation;
-        object_data.scale        = scale;
-
-        AddObjectData add_object_data;
-        add_object_data.first  = &object_data;
-        add_object_data.second = object_list;
-        Stage::AddObject(&add_object_data);
+    // 静的オブジェクトがあっても一つも当たり判定を取らない場合メッシュの追加はしない
+    if (stage_mesh->GetMesh()->GetArrayCount() <= 0) {
+        return false;
     }
+    // メッシュ配列の最後に追加する
+    stage_mesh->SetName("static_stage_mesh");
+    //stage_mesh->Save("static_stage_mesh.mom");
+    _mesh_array.push_back(std::move(stage_mesh));
     return true;
 }
 
-bool Stage::LoadMap(std::string* buffer_pointer, const std::string& map_file) {
-    const std::string& file_name = map_file;
-    std::string*       buffer    = buffer_pointer;
+/// <summary>
+/// ステージの読み込み
+/// </summary>
+/// <param name="path">ステージデータファイルパス</param>
+/// <returns>true : 成功, false : エラー</returns>
+bool Stage::Load(const std::string& path) {
+    // パーサーの準備
+    ParseData parse_data;
+    parse_data.mesh_array_pointer          = &_mesh_array;
+    parse_data.static_object_array_pointer = &_static_object_array;
+    parse_data.enemy_spawn_array_pointer   = &_enemy_spawn_array;
+    StageParserPtr parser = nullptr;
 
-    std::ifstream input_stream;
-    input_stream.open(file_name, std::ios::binary);
+    // 拡張子の取得
+    int length      = path.find_last_of('.');
+    std::string ext = path.substr(length);
 
-    if (!input_stream.is_open()) {
+    // パーサーの選択
+    if (ext == ".json") {
+        parser = std::make_shared<JsonStageParser>();
+    }
+    // パースできない拡張子
+    else {
         return false;
     }
 
-    std::stringstream bufferstream;
-
-    bufferstream << input_stream.rdbuf();
-    *buffer = bufferstream.str();
-
-    input_stream.close();
-    return true;
-}
-
-bool Stage::LoadMesh(const std::string& key, const std::string& mesh_file) {
-    Stage::MeshPtr mesh_pointer = GetMeshPtr(key);
-    if (mesh_pointer == nullptr) {
-        Stage::MeshPtr mesh = std::make_shared<CMeshContainer>();
-        if (!mesh->Load(mesh_file.c_str())) {
-            return false;
-        }
-        _mesh_array.push_back(Stage::MeshData(key, mesh));
+    // 読み込み
+    if (parser->Load(path, parse_data) != TRUE) {
+        return false;
     }
+
+    // 静的オブジェクトの判定用メッシュ生成
+    _create_static_stage_mesh = CreateStaticStageMesh();
+
     return true;
 }
 
-Stage::MeshPtr Stage::GetMeshPtr(const std::string& key) {
-    Stage::MeshPtr mesh_pointer = nullptr;
-    for (const auto& it : _mesh_array) {
-        if (it.first != key) {
+/// <summary>
+/// 初期化
+/// </summary>
+void Stage::Initialize(void) {
+
+}
+
+/// <summary>
+/// 更新
+/// </summary>
+void Stage::Update(void) {
+
+}
+
+/// <summary>
+/// 描画
+/// </summary>
+void Stage::Render(void) {
+    for (const auto& it : _static_object_array) {
+        const int mesh_no = it->GetMeshNo();
+        if (mesh_no < 0) {
             continue;
         }
-        mesh_pointer = it.second;
-        break;
-    }
-    return mesh_pointer;
-}
-
-std::string Stage::GetFileName(const std::string& file) {
-    std::string fullpath = ChangeFullPath(file);
-    int         path_i   = fullpath.find_last_of("\\") + 1;
-    int         ext_i    = fullpath.find_last_of(".");
-    std::string filename = fullpath.substr(path_i, ext_i - path_i);
-    return filename;
-}
-
-std::string Stage::GetExt(const std::string& file) {
-    std::string ext    = file;
-    int         length = ext.find_last_of('.');
-    ext                = ext.substr(length);
-    return ext;
-}
-
-std::string Stage::ChangeFullPath(const std::string& file) {
-    return std::filesystem::absolute(file).string();
-}
-
-void Stage::AddObject(AddObjectData* data) {
-    ObjectData* object_data = (*data).first;
-    ObjectList* object_list = (*data).second;
-    using list_iterator = ObjectList::iterator;
-    // 登録する名前
-    std::string name = object_data->name;
-    // すでに名前があるかの検索関数
-    std::function<list_iterator(std::string)> name_find =
-        [&](std::string n) {
-        return std::find_if(object_list->begin(), object_list->end(), [&](const ObjectData& v) { return v.name == n; });
-    };
-    // 名前がかぶった場合の番号
-    int count = 1;
-    for (list_iterator it = name_find(name); it != object_list->end(); count++) {
-        name = object_data->name + std::to_string(count);
-        it = name_find(name);
-    }
-    // データの登録
-    ObjectData push_data = *object_data;
-    push_data.name       = name;
-    object_list->push_back(push_data);
-}
-
-void Stage::Initialize(void) {
-    std::string buffer;
-    std::string file         = "stage/test.map";
-    std::string current_path = std::filesystem::current_path().string();
-    std::string last_path    = Stage::GetFileName(current_path);
-    bool load_map_flag       = LoadMap(&buffer, file);
-    bool purse_flag          = Purse(&buffer, &_mesh_array, &_object_array);
-}
-
-void Stage::Update(void) {
-}
-
-void Stage::Render(void) {
-
-    for (const auto& it : _object_array) {
-        CMatrix44 matrix_world;
-        CMatrix44 position, scale, rotation;
-        position.Translation(it.position);
-        scale.Scaling(it.scale);
-        rotation.RotationZXY(it.rotation);
-        matrix_world = scale * rotation * position;
-        it.mesh_pointer->Render(matrix_world);
+        _mesh_array[mesh_no]->Render(it->GetWorldMatrix());
     }
 }
 
+/// <summary>
+/// 解放
+/// </summary>
 void Stage::Release(void) {
-    for (auto& it : _object_array) {
-        it.mesh_pointer = nullptr;
+
+    // 判定用メッシュの手動解放
+    if (_create_static_stage_mesh) {
+        for (int i = 0; i < _copy_tmp_array.GetArrayCount(); i++) {
+            MOF_SAFE_DELETE(_copy_tmp_array[i]);
+        }
+        const int tail = (_mesh_array.size() - 1);
+        for (int i = 0; i < _mesh_array[tail]->GetMeshCount(); i++) {
+            _mesh_array[tail]->GetMesh()->SetData(nullptr, i);
+        }
+        _mesh_array[tail]->GetMesh()->ReSize(0);
+        _mesh_array[tail] = nullptr;
     }
-    _object_array.clear();
+
     for (auto& it : _mesh_array) {
-        it.second->Release();
+        if (it) {
+            it->Release();
+            it = nullptr;
+        }
     }
     _mesh_array.clear();
+    _static_object_array.clear();
+    _static_object_array.clear();
+}
+
+/// <summary>
+/// 静的なステージメッシュを生成したかのフラグ取得
+/// </summary>
+/// <returns>静的なステージメッシュを生成したかのフラグ</returns>
+bool Stage::IsCreateStaticStageMesh(void) const {
+    return _create_static_stage_mesh;
+}
+
+/// <summary>
+/// 静的なステージメッシュの取得
+/// </summary>
+/// <returns>生成していない場合 nullptr が返る</returns>
+MeshPtr Stage::GetStaticStageMesh(void) {
+    if (_create_static_stage_mesh) {
+        return _mesh_array.back();
+    }
+    return nullptr;
+}
+
+/// <summary>
+/// 敵の出現位置配列の取得
+/// </summary>
+/// <returns>敵の出現位置配列</returns>
+EnemySpawnArray& Stage::GetEnemySpawnArray(void) {
+    return _enemy_spawn_array;
 }

@@ -2,14 +2,20 @@
 
 
 std::weak_ptr<my::ResourceMgr> my::Component::_resource_manager;
+std::weak_ptr<my::UICanvas> my::Component::_ui_canvas;
 
 void my::Component::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
     _resource_manager = ptr;
 }
 
+void my::Component::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
+    _ui_canvas = ptr;
+}
+
 my::Component::Component(int priority) :
     _owner(),
-    _priority(priority) {
+    _priority(priority),
+    _active(false) {
 }
 
 my::Component::~Component() {
@@ -35,6 +41,10 @@ std::shared_ptr<my::Actor> my::Component::GetOwner(void) const {
 
 int my::Component::GetPriority(void) const {
     return this->_priority;
+}
+
+bool my::Component::IsActive(void) const {
+    return this->_active;
 }
 
 bool my::Component::IsInput(void) const {

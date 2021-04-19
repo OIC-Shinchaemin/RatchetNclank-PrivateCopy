@@ -5,20 +5,23 @@
 #include <vector>
 
 #include "My/Core/Observer.h"
+#include "My/UI/UICanvas.h"
 #include "GameWorld.h"
 #include "Renderer.h"
 #include "PhysicsWorld.h"
-#include "../GameSystem/GameMoney.h"
-#include "../GameSystem/WeaponSystem.h"
-#include "../GameSystem/QuickChangeSystem.h"
+#include "GameSystem/GameMoney.h"
+#include "GameSystem/WeaponSystem.h"
+#include "GameSystem/QuickChangeSystem.h"
 #include "../Stage/Stage.h"
 
 
 namespace my {
 class GameManager : public std::enable_shared_from_this<my::GameManager>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
 private:
-    //! ファクトリー
+    //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! リソース
+    std::weak_ptr<my::UICanvas> _ui_canvas;
     //! 追加
     std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! 削除
@@ -67,8 +70,12 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetFactoryManager(const std::shared_ptr<class FactoryManager>& ptr);
     void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -1,7 +1,10 @@
 #include "CameraController.h"
 
 #include "My/Core/Define.h"
-#include "Camera.h"
+#include "My/Core/Utility.h"
+
+
+std::weak_ptr<my::CameraManager> my::CameraController::_manager;
 
 
 void my::CameraController::UpdateCameraPosition(const std::shared_ptr<my::Camera>& camera) {
@@ -11,7 +14,7 @@ void my::CameraController::UpdateCameraPosition(const std::shared_ptr<my::Camera
     auto ideal_pos = _target + offset;
 
     auto displace = _position - ideal_pos;
-    auto accel = (displace * (-kSpring)) - (_velocity * kDumping);
+    auto accel = (displace * (-_spring)) - (_velocity * _dumping);
 
     _velocity += accel * def::kDeltaTime;
     _position += _velocity * def::kDeltaTime;
@@ -30,9 +33,13 @@ Mof::CVector3 my::CameraController::SphericalToCartesian(float distance, float a
     return Mof::CVector3(x, z, -y);
 }
 
+void my::CameraController::SetCameraManager(const std::shared_ptr<my::CameraManager>& ptr) {
+    _manager = ptr;
+}
+
 my::CameraController::CameraController() :
-    kSpring (50.0f),
-    kDumping(std::sqrt(kSpring) * 2.0f),
+    _spring(50.0f),
+    _dumping(std::sqrt(_spring) * 2.0f),
     _camera(),
     _position(),
     _target(),
@@ -69,18 +76,22 @@ void my::CameraController::SetAltitude(float degree) {
     this->_altitude = degree;
 }
 
+std::shared_ptr<my::Camera> my::CameraController::GetCamera(void) const {
+    return this->_camera;
+}
+
 Mof::CVector3 my::CameraController::GetCameraPosition(void) const {
-    if (auto camera = _camera.lock()) {
-        return camera->GetPosition();
+    if (_camera) {
+        return _camera->GetPosition();
     } // if
     return Mof::CVector3();
 }
 
 Mof::CVector3 my::CameraController::GetViewFront(void) const {
-    if (_camera.expired()) {
-        return Mof::CVector3();
+    if (_camera) {
+        return _camera->GetViewFront();
     } // if
-    return _camera.lock()->GetViewFront();
+    return Mof::CVector3();
 }
 
 float my::CameraController::GetAzimuth(void) const {
@@ -121,14 +132,21 @@ void my::CameraController::AddAltitude(float degree) {
 }
 
 bool my::CameraController::HasValidCamara(void) const {
-    return !_camera.expired();
+    return _camera.get();
 }
 
 bool my::CameraController::Update(void) {
-    if (_camera.expired()) {
-        return false;
-    } // if
-    auto camera = _camera.lock();
-    this->UpdateCameraPosition(camera);
+    this->UpdateCameraPosition(_camera);
+    return true;
+}
+
+bool my::CameraController::Release(void) {
+    _camera.reset();
+    return true;
+}
+
+bool my::CameraController::RegisterGlobalCamera(void) {
+    _ASSERT_EXPR(!_manager.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    _manager.lock()->RegisterGlobalCamera(_camera);
     return true;
 }

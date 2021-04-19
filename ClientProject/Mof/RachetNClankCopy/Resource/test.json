@@ -1,0 +1,89 @@
+{
+  "mesh_list": [
+    "aaa.mom",
+    "test.mom"
+  ],
+  "static_object_list": [
+    {
+      "enable": true,
+      "collision": true,
+      "object_name": "terrain",
+      "mesh_no": 0,
+      "pos_x": 0.0,
+      "pos_y": 0.0,
+      "pos_z": 0.0,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0,
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rotation_z": 0.0
+    },
+    {
+      "enable": true,
+      "collision": true,
+      "object_name": "player",
+      "mesh_no": 1,
+      "pos_x": 0.0,
+      "pos_y": 0.0,
+      "pos_z": 0.0,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0,
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rotation_z": 0.0
+    }
+  ],
+  "enemy_spawn_list": [
+    {
+      "builder": "builder/enemy.json",
+      "name": "enemy",
+      "pos_x": 1.0,
+      "pos_y": 1.0,
+      "pos_z": 1.0
+    },
+    {
+      "builder": "builder/enemy.json",
+      "name": "enemy1",
+      "pos_x": 2.0,
+      "pos_y": 1.0,
+      "pos_z": 2.0
+    },
+    {
+      "builder": "builder/enemy.json",
+      "name": "enemy2",
+      "pos_x": 2.0,
+      "pos_y": 1.0,
+      "pos_z": 2.0
+    },
+    {
+      "builder": "builder/enemy.json",
+      "name": "enemy3",
+      "pos_x": 2.0,
+      "pos_y": 1.0,
+      "pos_z": 3.0
+    },
+    {
+      "builder": "builder/enemy.json",
+      "name": "enemy4",
+      "pos_x": 2.0,
+      "pos_y": 1.0,
+      "pos_z": 4.0
+    },
+    {
+      "builder": "builder/enemy.json",
+      "name": "enemy5",
+      "pos_x": 2.0,
+      "pos_y": 1.0,
+      "pos_z": 5.0
+    },
+    {
+      "builder": "builder/enemy.json",
+      "name": "enemy6",
+      "pos_x": 2.0,
+      "pos_y": 1.0,
+      "pos_z": 6.0
+    }
+  ]
+}
