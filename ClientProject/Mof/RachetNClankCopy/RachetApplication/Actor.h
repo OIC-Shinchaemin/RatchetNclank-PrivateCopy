@@ -10,7 +10,8 @@
 
 #include "My/Core/Define.h"
 #include "My/Core/Observable.h"
-#include "Collision/Object/CollisionObject.h"
+#include "Component/Collision/Object/CollisionObject.h"
+
 #include "Velocity.h"
 
 

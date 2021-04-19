@@ -11,7 +11,7 @@
 
 #include "My/Core/Observable.h"
 #include "Save/SaveData.h"
-#include "../Weapon/Mechanical.h"
+#include "../Actor/Weapon/Mechanical.h"
 #include "../Factory/Factory.h"
 
 

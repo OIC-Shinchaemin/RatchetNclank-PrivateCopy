@@ -9,19 +9,19 @@
     },
 
     {
-      "type": "MoveComponent",
+      "type": "EnemyMoveComponent",
       "paramater": {
         "priority": 90
       }
     },
     {
-      "type": "IdleComponent",
+      "type": "EnemyIdleComponent",
       "paramater": {
         "priority": 91
       }
     },
     {
-      "type": "AttackComponent",
+      "type": "EnemyAttackComponent",
       "paramater": {
         "priority": 92
       }

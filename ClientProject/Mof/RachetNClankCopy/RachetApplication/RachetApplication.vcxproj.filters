@@ -34,12 +34,6 @@
     <Filter Include="Rachet\Header\Factory">
       <UniqueIdentifier>{b96171b7-57c7-4532-aba0-a5aeb2ee59f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Weapon">
-      <UniqueIdentifier>{afd19543-1ace-4d8d-b8ba-b79ef6b2e90e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Weapon">
-      <UniqueIdentifier>{3c9a9cde-1a27-4fd2-8a7d-1a44475340cb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Base">
       <UniqueIdentifier>{e90bc59d-2869-42a3-b9b4-eeaab95aefe5}</UniqueIdentifier>
     </Filter>
@@ -60,18 +54,6 @@
     </Filter>
     <Filter Include="Rachet\Base\UI\Source">
       <UniqueIdentifier>{2a9fe089-d3cc-4c0a-8410-eb242e21963d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Stage">
-      <UniqueIdentifier>{70c1c10e-2efe-456e-9716-08f7f34c7d09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Stage">
-      <UniqueIdentifier>{8e63c488-eb09-44ad-886f-0fa333e29194}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Character">
-      <UniqueIdentifier>{a342c8dc-3904-4dac-93bf-0039bf0fa15f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Character">
-      <UniqueIdentifier>{14dd5eb3-eca1-4e3e-9ed0-5bfbe23882aa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Source\GameSystem">
       <UniqueIdentifier>{86d89cd3-d5cf-4956-9342-e24ea9a9c09a}</UniqueIdentifier>
@@ -106,30 +88,6 @@
     <Filter Include="Rachet\Source\Factory">
       <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Source\Collision">
-      <UniqueIdentifier>{29a654a9-e09d-4726-abd9-041fde828b5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Collision\Algolithm">
-      <UniqueIdentifier>{d785346f-be4b-4702-a8be-a8e095e82c4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Collision\Object">
-      <UniqueIdentifier>{f28df811-fe21-41c3-8e7e-7f1cc398ed54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Collision">
-      <UniqueIdentifier>{cc546e59-d244-464a-99a6-4f19ffb19a47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Collision\Algolithm">
-      <UniqueIdentifier>{76168668-72c3-4dc2-95e7-defccea9601c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Collision\Object">
-      <UniqueIdentifier>{a5955b7b-d4b5-443a-96a7-62cb96e79bf5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Bullet">
-      <UniqueIdentifier>{1ddb5bbd-12f9-4b21-8af1-6c188ec99cf8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Bullet">
-      <UniqueIdentifier>{e685aca4-fa9b-4e9c-bbb6-a286ac3820c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="リソース ファイル\motion_type">
       <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
     </Filter>
@@ -147,6 +105,54 @@
     </Filter>
     <Filter Include="リソース ファイル\builder">
       <UniqueIdentifier>{38822f9b-b1ef-4bf7-8b94-f3483a8de732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor">
+      <UniqueIdentifier>{06c272ec-f183-4117-aed0-17d30ef8bd5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Bullet">
+      <UniqueIdentifier>{5e4f620d-85fe-44a3-9445-3f4bd2a7c1de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Character">
+      <UniqueIdentifier>{aa754e65-ad9b-4130-88c4-32258af789c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Stage">
+      <UniqueIdentifier>{ceb6691c-b0a6-4b46-8f48-ee637fb9f8a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Weapon">
+      <UniqueIdentifier>{f262ee4d-4be1-4682-a1db-b5d58c348024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor">
+      <UniqueIdentifier>{567c9894-7e27-4f46-a5f6-5e87db7ee5db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Bullet">
+      <UniqueIdentifier>{d606399a-7af4-4a1d-a333-692611185579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Character">
+      <UniqueIdentifier>{ca6bdf29-a178-4b7a-b1ba-64c54b3fb7a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Weapon">
+      <UniqueIdentifier>{1eeb2b3e-5be9-4091-9d4c-e56cd2ed839e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Stage">
+      <UniqueIdentifier>{6c57efcb-4e30-4c4b-8293-38ec911dc9bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Collision">
+      <UniqueIdentifier>{e3c0bba5-0f41-479c-9221-e416c195215d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Collision">
+      <UniqueIdentifier>{372ebe60-f1d8-4de0-9f1b-d6a5173bcc9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Collision\Object">
+      <UniqueIdentifier>{2a0e99e8-b4ca-451a-baa6-8a83c816dbd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Collision\Algolithm">
+      <UniqueIdentifier>{c57a99ab-0e7e-400c-b3af-7cc3faeb0b42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Collision\Algolithm">
+      <UniqueIdentifier>{e0b68d24-3adc-431b-ae40-789de98b60f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Collision\Object">
+      <UniqueIdentifier>{798d80d2-d41c-4177-85a5-fc209edd4182}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,32 +201,8 @@
     <ClCompile Include="ResourceLocator.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon\BombGlove.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon\Mechanical.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon\OmniWrench.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon\Pyrocitor.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon\Weapon.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
-    </ClCompile>
     <ClCompile Include="Gamepad.cpp">
       <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Stage.cpp">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Player.cpp">
-      <Filter>Rachet\Source\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Character.cpp">
-      <Filter>Rachet\Source\Character</Filter>
     </ClCompile>
     <ClCompile Include="GameSystem\QuickChangeSystem.cpp">
       <Filter>Rachet\Source\GameSystem</Filter>
@@ -243,9 +225,6 @@
     <ClCompile Include="UI\QuickChangeMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Character\Enemy.cpp">
-      <Filter>Rachet\Source\Character</Filter>
-    </ClCompile>
     <ClCompile Include="SightRecognition.cpp">
       <Filter>Rachet\Source</Filter>
     </ClCompile>
@@ -260,48 +239,6 @@
     </ClCompile>
     <ClCompile Include="Game\PhysicsWorld.cpp">
       <Filter>Rachet\Source\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Algolithm\EnemyCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Algolithm\EnemySightCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Algolithm\PlayerCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Algolithm\CollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Object\EnemyCollisionObject.cpp">
-      <Filter>Rachet\Source\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Object\EnemySightCollisionObject.cpp">
-      <Filter>Rachet\Source\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Object\PlayerCollisionObject.cpp">
-      <Filter>Rachet\Source\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision\Object\CollisionObject.cpp">
-      <Filter>Rachet\Source\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet\Bullet.cpp">
-      <Filter>Rachet\Source\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleEffect.cpp">
-      <Filter>Rachet\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet\BombGloveBullet.cpp">
-      <Filter>Rachet\Source\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet\BlasterBullet.cpp">
-      <Filter>Rachet\Source\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet\PyrocitorBullet.cpp">
-      <Filter>Rachet\Source\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon\Blaster.cpp">
-      <Filter>Rachet\Source\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="State\EnemyMotionState.cpp">
       <Filter>Rachet\Source\State</Filter>
@@ -363,20 +300,104 @@
     <ClCompile Include="Component\MotionStateComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Component\MoveComponent.cpp">
-      <Filter>Rachet\Source\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Component\VelocityComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
     <ClCompile Include="Component\TransformComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Component\IdleComponent.cpp">
+    <ClCompile Include="State\PlayerMotionState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotionIdleState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotionMoveState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\EnemyAttackComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Component\AttackComponent.cpp">
+    <ClCompile Include="Component\EnemyIdleComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\EnemyMoveComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\PlayerIdleComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\PlayerMoveComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\ParticleEffect.cpp">
+      <Filter>Rachet\Source\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Blaster.cpp">
+      <Filter>Rachet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\BombGlove.cpp">
+      <Filter>Rachet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Mechanical.cpp">
+      <Filter>Rachet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\OmniWrench.cpp">
+      <Filter>Rachet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Pyrocitor.cpp">
+      <Filter>Rachet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Weapon.cpp">
+      <Filter>Rachet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Stage\Stage.cpp">
+      <Filter>Rachet\Source\Actor\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Enemy.cpp">
+      <Filter>Rachet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Player.cpp">
+      <Filter>Rachet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Character.cpp">
+      <Filter>Rachet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\BlasterBullet.cpp">
+      <Filter>Rachet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\BombGloveBullet.cpp">
+      <Filter>Rachet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\Bullet.cpp">
+      <Filter>Rachet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp">
+      <Filter>Rachet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemySightCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\CollisionObject.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyCollisionObject.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemySightCollisionObject.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\PlayerCollisionObject.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -446,21 +467,6 @@
     <ClInclude Include="GameDefine.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon\Mechanical.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon\OmniWrench.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon\Pyrocitor.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon\Weapon.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon\BombGlove.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
     <ClInclude Include="Factory\Factory.h">
       <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
@@ -478,15 +484,6 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Character\Character.h">
-      <Filter>Rachet\Header\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Character\Player.h">
-      <Filter>Rachet\Header\Character</Filter>
     </ClInclude>
     <ClInclude Include="GameSystem\GameMoney.h">
       <Filter>Rachet\Header\GameSystem</Filter>
@@ -508,9 +505,6 @@
     </ClInclude>
     <ClInclude Include="UI\QuickChangeMenu.h">
       <Filter>Rachet\Header\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Character\Enemy.h">
-      <Filter>Rachet\Header\Character</Filter>
     </ClInclude>
     <ClInclude Include="..\include\My\Core\AbstructContainer.h">
       <Filter>Rachet\Base\Core\Header</Filter>
@@ -587,48 +581,6 @@
     <ClInclude Include="Game\PhysicsWorld.h">
       <Filter>Rachet\Header\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\Object\EnemyCollisionObject.h">
-      <Filter>Rachet\Header\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision\Object\EnemySightCollisionObject.h">
-      <Filter>Rachet\Header\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision\Object\PlayerCollisionObject.h">
-      <Filter>Rachet\Header\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision\Object\CollisionObject.h">
-      <Filter>Rachet\Header\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision\Algolithm\EnemyCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision\Algolithm\EnemySightCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision\Algolithm\PlayerCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision\Algolithm\CollisionAlgolithm.h">
-      <Filter>Rachet\Header\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet\Bullet.h">
-      <Filter>Rachet\Header\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleEffect.h">
-      <Filter>Rachet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet\BombGloveBullet.h">
-      <Filter>Rachet\Header\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet\PyrocitorBullet.h">
-      <Filter>Rachet\Header\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet\BlasterBullet.h">
-      <Filter>Rachet\Header\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon\Blaster.h">
-      <Filter>Rachet\Header\Weapon</Filter>
-    </ClInclude>
     <ClInclude Include="MotionNames.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -695,20 +647,104 @@
     <ClInclude Include="Component\MotionStateComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Component\MoveComponent.h">
-      <Filter>Rachet\Header\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Component\VelocityComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
     <ClInclude Include="Component\TransformComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Component\IdleComponent.h">
+    <ClInclude Include="State\PlayerMotionState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotionIdleState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotionMoveState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\EnemyIdleComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Component\AttackComponent.h">
+    <ClInclude Include="Component\EnemyMoveComponent.h">
       <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\EnemyAttackComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\PlayerIdleComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\PlayerMoveComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\BombGloveBullet.h">
+      <Filter>Rachet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\Bullet.h">
+      <Filter>Rachet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\PyrocitorBullet.h">
+      <Filter>Rachet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\BlasterBullet.h">
+      <Filter>Rachet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Character.h">
+      <Filter>Rachet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Enemy.h">
+      <Filter>Rachet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Player.h">
+      <Filter>Rachet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\BombGlove.h">
+      <Filter>Rachet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Mechanical.h">
+      <Filter>Rachet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\OmniWrench.h">
+      <Filter>Rachet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Pyrocitor.h">
+      <Filter>Rachet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Weapon.h">
+      <Filter>Rachet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Blaster.h">
+      <Filter>Rachet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Stage\Stage.h">
+      <Filter>Rachet\Header\Actor\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\ParticleEffect.h">
+      <Filter>Rachet\Header\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionObject.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\PlayerCollisionObject.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyCollisionObject.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemySightCollisionObject.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemySightCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -733,6 +769,15 @@
       <Filter>リソース ファイル\motion_type</Filter>
     </None>
     <None Include="..\Resource\builder\enemy.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\player.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bullet.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\particle.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
   </ItemGroup>

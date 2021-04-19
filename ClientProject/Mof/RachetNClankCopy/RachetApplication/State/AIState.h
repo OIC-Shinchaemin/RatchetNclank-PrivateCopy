@@ -7,7 +7,7 @@
 #include <memory>
 #include <string>
 
-#include "../Character/Enemy.h"
+#include "../Actor/Character/Enemy.h"
 #include "../Behaviour/Executor/INodeExecutor.h"
 #include "../Factory/BehaviourExecutorFactory.h"
 

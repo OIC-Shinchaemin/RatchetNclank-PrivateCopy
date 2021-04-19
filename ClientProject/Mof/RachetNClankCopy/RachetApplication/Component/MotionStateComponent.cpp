@@ -1,5 +1,7 @@
 #include "MotionStateComponent.h"
 
+#include "../State/PlayerMotionIdleState.h"
+#include "../State/PlayerMotionMoveState.h"
 #include "../State/EnemyMotionIdleState.h"
 #include "../State/EnemyMotionMoveState.h"
 #include "../State/EnemyMotionAttackState.h"
@@ -29,10 +31,19 @@ std::string my::MotionStateComponent::GetType(void) const {
 bool my::MotionStateComponent::Initialize(void) {
     super::Initialize();
     super::Start();
-    this->RegisterMotionState<state::EnemyMotionIdleState>(_state_machine);
-    this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
-    this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
-    _state_machine.ChangeState("EnemyMotionIdleState");
+
+    // ŠO•”‚æ‚èì¬‚³‚ê‚½‚à‚Ì‚ðŽæ“¾
+    if (super::GetOwner()->GetName() == "enemy") {
+        this->RegisterMotionState<state::EnemyMotionIdleState>(_state_machine);
+        this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
+        this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
+        _state_machine.ChangeState("EnemyMotionIdleState");
+    } // if
+    else {
+        this->RegisterMotionState<state::PlayerMotionIdleState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMoveState>(_state_machine);
+        _state_machine.ChangeState("PlayerMotionIdleState");
+    } // else 
     return true;
 }
 

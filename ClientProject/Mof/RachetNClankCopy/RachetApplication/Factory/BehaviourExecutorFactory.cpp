@@ -1,3 +1,3 @@
 #include "BehaviourExecutorFactory.h"
 
-#include "../Character/Enemy.h"
+#include "../Actor/Character/Enemy.h"

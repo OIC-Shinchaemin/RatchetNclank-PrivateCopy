@@ -1,10 +1,10 @@
 #include "WeaponSystem.h"
 
 #include "../Game/GameManager.h"
-#include "../Weapon/OmniWrench.h"
-#include "../Weapon/BombGlove.h"
-#include "../Weapon/Pyrocitor.h"
-#include "../Weapon/Blaster.h"
+#include "../Actor/Weapon/OmniWrench.h"
+#include "../Actor/Weapon/BombGlove.h"
+#include "../Actor/Weapon/Pyrocitor.h"
+#include "../Actor/Weapon/Blaster.h"
 
 
 my::WeaponSystem::WeaponSystem() :

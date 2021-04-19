@@ -9,7 +9,7 @@
 #include <Mof.h>
 
 #include "../MotionNames.h"
-#include "../Character/Enemy.h"
+#include "../Actor/Character/Enemy.h"
 #include "../Component/MotionComponent.h"
 #include "../Component/MotionStateComponent.h"
 
@@ -67,7 +67,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetEnemy(const std::shared_ptr<my::Enemy>& ptr);
+    virtual void SetActor(const std::shared_ptr<my::Actor>& ptr);
 };
 }
 #endif // !STATE_ENEMY_MOTION_STATE_H
