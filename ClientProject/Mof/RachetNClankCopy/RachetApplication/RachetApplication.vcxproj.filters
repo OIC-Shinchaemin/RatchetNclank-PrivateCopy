@@ -435,9 +435,6 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.cpp">
-      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
@@ -501,11 +498,20 @@
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\EnemySightCollisionComponent.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\LockOnCursorMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -881,9 +887,6 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.h">
-      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
@@ -944,9 +947,6 @@
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\EnemySightCollisionComponent.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
@@ -958,6 +958,18 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\LockOnCursorMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,7 +32,7 @@ protected:
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    bool ChangeMotion(Player::MotionType type);
+    bool ChangeMotion(my::Player::MotionType type);
     /// <summary>
     /// ïœçX
     /// </summary>

@@ -4,7 +4,8 @@
 #include "../Component/Collision/Algolithm/PlayerEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemySightPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyBlasterBulletCollisionAlgolithm.h"
 
@@ -14,7 +15,8 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>("PlayerEnemyCollisionAlgolithm");
     collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>("PlayerEnemyAttackCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>("EnemyPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemySightPlayerCollisionAlgolithm>("EnemySightPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>("SightPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>("SightEnemyCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>("EnemyAttackPlayerCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>("EnemyBlasterBulletCollisionAlgolithm");
 
@@ -22,7 +24,8 @@ my::PhysicsWorld::PhysicsWorld() :
         "PlayerEnemyCollisionAlgolithm",
         "PlayerEnemyAttackCollisionAlgolithm",
         "EnemyPlayerCollisionAlgolithm",
-        "EnemySightPlayerCollisionAlgolithm",
+        "SightPlayerCollisionAlgolithm",
+        "SightEnemyCollisionAlgolithm",
         "EnemyAttackPlayerCollisionAlgolithm",
         "EnemyBlasterBulletCollisionAlgolithm",
     };

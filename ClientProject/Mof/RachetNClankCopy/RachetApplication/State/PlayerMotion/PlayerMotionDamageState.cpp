@@ -18,7 +18,7 @@ void state::PlayerMotionDamageState::Update(float delta_time) {
 }
 
 void state::PlayerMotionDamageState::Enter(void) {
-    super::ChangeMotion(Player::MotionType::DamageDown);
+    super::ChangeMotion(my::Player::MotionType::DamageDown);
 }
 
 void state::PlayerMotionDamageState::Exit(void) {

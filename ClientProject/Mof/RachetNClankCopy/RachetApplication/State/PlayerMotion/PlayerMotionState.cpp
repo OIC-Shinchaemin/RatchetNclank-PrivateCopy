@@ -1,7 +1,7 @@
 #include "PlayerMotionState.h"
 
 
-bool state::PlayerMotionState::ChangeMotion(Player::MotionType type) {
+bool state::PlayerMotionState::ChangeMotion(my::Player::MotionType type) {
     if (auto motion_com = _motion_com.lock()) {
         return motion_com->ChangeMotion(type, _motion_speed, _motion_loop, _motion_same);
     } // if

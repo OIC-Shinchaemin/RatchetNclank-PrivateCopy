@@ -17,7 +17,7 @@ void state::PlayerMotionMoveState::Update(float delta_time) {
 }
 
 void state::PlayerMotionMoveState::Enter(void) {
-    super::ChangeMotion(Player::MotionType::MoveRun);
+    super::ChangeMotion(my::Player::MotionType::MoveRun);
 }
 
 void state::PlayerMotionMoveState::Exit(void) {

@@ -177,14 +177,15 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp" />
-    <ClCompile Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
-    <ClCompile Include="Component\Collision\Object\EnemySightCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Enemy\EnemyAttackComponent.cpp" />
@@ -245,6 +246,7 @@
     <ClCompile Include="State\PlayerMotion\PlayerMotionIdleState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionMoveState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionState.cpp" />
+    <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -321,14 +323,15 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
-    <ClInclude Include="Component\Collision\Algolithm\EnemySightPlayerCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\CollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
-    <ClInclude Include="Component\Collision\Object\EnemySightCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\Enemy\EnemyAttackComponent.h" />
@@ -398,6 +401,7 @@
     <ClInclude Include="State\PlayerMotion\PlayerMotionIdleState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionMoveState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionState.h" />
+    <ClInclude Include="UI\LockOnCursorMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
   </ItemGroup>

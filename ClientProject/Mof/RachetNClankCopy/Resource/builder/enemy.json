@@ -96,7 +96,7 @@
       }
     },
     {
-      "type": "EnemySightCollisionComponent",
+      "type": "SightCollisionComponent",
       "paramater": {
         "priority": 0
       }

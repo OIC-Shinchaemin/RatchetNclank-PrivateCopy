@@ -4,7 +4,7 @@
 #include "../Enemy/EnemyDamageComponent.h"
 #include "../SightRecognitionComponent.h"
 #include "../Collision/Object/EnemyCollisionComponent.h"
-#include "../Collision/Object/EnemySightCollisionComponent.h"
+#include "../Collision/Object/SightCollisionComponent.h"
 #include "../Collision/Object/EnemyAttackCollisionComponent.h"
 
 
@@ -28,7 +28,6 @@ my::EnemyComponent::~EnemyComponent() {
 void my::EnemyComponent::SetTarget(const std::shared_ptr<my::Actor>& ptr) {
     this->_target = ptr;
 }
-
 
 std::string my::EnemyComponent::GetType(void) const {
     return "EnemyComponent";
@@ -63,7 +62,7 @@ bool my::EnemyComponent::Initialize(void) {
         super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
         return true;
     }));
-    auto sight_coll = super::GetOwner()->GetComponent<my::EnemySightCollisionComponent>();
+    auto sight_coll = super::GetOwner()->GetComponent<my::SightCollisionComponent>();
     sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                  "PlayerCollisionComponent",
                                  my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {

@@ -24,7 +24,7 @@
 #include "../Component/CameraComponent.h"
 #include "../Component/Collision/Object/PlayerCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyCollisionComponent.h"
-#include "../Component/Collision/Object/EnemySightCollisionComponent.h"
+#include "../Component/Collision/Object/SightCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyAttackCollisionComponent.h"
 #include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
 
@@ -53,7 +53,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyCollisionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::EnemySightCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::SightCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();
 

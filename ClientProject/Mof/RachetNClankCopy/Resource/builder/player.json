@@ -1,6 +1,12 @@
 {
   "components": [
     {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "MotionComponent",
       "paramater": {
         "priority": 0,
@@ -76,6 +82,12 @@
     },
     {
       "type": "PlayerCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
       "paramater": {
         "priority": 0
       }

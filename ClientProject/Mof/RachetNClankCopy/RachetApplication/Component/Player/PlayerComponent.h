@@ -6,25 +6,27 @@
 
 #include <memory>
 
+#include "My/Core/Observable.h"
+
 
 namespace my {
 class PlayerComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! 大きさ
+    float _volume;
+    //! 高さ
+    float _height;
+    //! 標的
+    std::weak_ptr<my::Actor> _target;
+    //! カーソル位置
+    my::Observable<std::optional<Mof::CVector3>> _observable;
     //! 待機
     std::weak_ptr<class PlayerIdleComponent> _idle_com;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
     //! 移動
     std::weak_ptr<class PlayerDamageComponent> _damage_com;
-
-    //! 大きさ
-    float _volume;
-    //! 高さ
-    float _height;
-    //! 標的
-    //std::weak_ptr<my::Actor> _target;
-
     bool MoveByKeyboard(float angular_speed, float speed);
     void MoveByGamepad(float angular_speed, float speed);
 public:
@@ -43,6 +45,11 @@ public:
     /// </summary>
     virtual ~PlayerComponent();
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetTarget(const std::shared_ptr<my::Actor>& ptr);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -60,6 +67,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     float GetHeight(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::weak_ptr<my::Actor> GetTarget(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

@@ -2,18 +2,23 @@
 #define MY_SIGHT_RECOGNITION_COMPONENT_H
 
 
-#include "Component.h"
+#include "UpdateComponent.h"
 
+#include <memory>
+#include <vector>
 
 namespace my {
-class SightRecognitionComponent : public my::Component {
-    using super = my::Component;
+class SightRecognitionComponent : public my::UpdateComponent {
+    using super = my::UpdateComponent;
 private:
     //! 視野
     float _range;
+    //! 認識
+    std::vector<std::weak_ptr<my::Actor>> _recognized;
+    //! キャラ
+    std::weak_ptr<class PlayerComponent> _player_com;
     //! キャラ
     std::weak_ptr<class EnemyComponent> _enemy_com;
-
     /// <summary>
     /// 描画
     /// </summary>
@@ -50,21 +55,24 @@ public:
     /// <returns></returns>
     float GetRange(void) const;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    const std::vector<std::weak_ptr<my::Actor>>& GetRecognized(void) const;
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
     /// <summary>
-    /// 視認可能判定
+    /// 更新
     /// </summary>
-    /// <param name=""></param>
+    /// <param name="delta_time">時間</param>
     /// <returns></returns>
-    bool ContainInRecognitionRange(Mof::CVector3 target);
+    virtual bool Update(float delta_time) override;
 #ifdef _DEBUG
-    virtual bool IsRender(void) const override {
-        return true;
-    }
     virtual bool Render(void) override;
 #endif // _DEBUG
     /// <summary>

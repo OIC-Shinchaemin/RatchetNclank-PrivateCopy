@@ -31,7 +31,7 @@ private:
     int _hp_max;
     //! Hp
     int _hp;
-    //! ƒŠƒ\[ƒX
+    //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
 public:
     /// <summary>

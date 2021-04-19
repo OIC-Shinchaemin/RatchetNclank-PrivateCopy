@@ -18,7 +18,7 @@ void state::PlayerMotionIdleState::Update(float delta_time) {
 }
 
 void state::PlayerMotionIdleState::Enter(void) {
-    super::ChangeMotion(Player::MotionType::IdleWait);
+    super::ChangeMotion(my::Player::MotionType::IdleWait);
 }
 
 void state::PlayerMotionIdleState::Exit(void) {
