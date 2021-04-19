@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     //Inspector variables
     [SerializeField] private LayerMask ground;
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 10f;
     [SerializeField] private float JumpForce = 10f;
     [SerializeField] private float hurtForce = 10f;
     [SerializeField] private AudioSource cherry;
@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     //本当は使いたくなかった変数たち
     int JumpCount;
 
+    float hDirection = 0;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,6 +55,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+
         if (state == State.climb)
         {
             Climb();
@@ -61,6 +65,15 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
         }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (coll.IsTouchingLayers(ground) && state != State.hurt)
+            {
+                Jump();
+            }
+        }
+
         //攻撃   by ぇぬ
         if (CanAtack)
         {
@@ -78,6 +91,7 @@ public class PlayerController : MonoBehaviour
         //UnityEngine.Debug.Log("Now scene is <color=red>" + SceneManager.GetActiveScene().name + "</color>");
         //UnityEngine.Debug.Log(rb.velocity.y);
         //UnityEngine.Debug.Log(coll.IsTouchingLayers(ground));
+        UnityEngine.Debug.Log(hDirection);
 
     }
 
@@ -140,9 +154,6 @@ public class PlayerController : MonoBehaviour
             {
 
                 rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
-                EnemyScore();
-                enemy.JumpedOn();
-                Jump();
 
             }
             else
@@ -188,7 +199,8 @@ public class PlayerController : MonoBehaviour
     {
         if (state != State.atack && state != State.Die)
         {
-            float hDirection = Input.GetAxis("Horizontal");
+            hDirection = Input.GetAxis("Horizontal");
+
             float moveSpeed = 0.0f;
 
             //climb start
@@ -220,18 +232,10 @@ public class PlayerController : MonoBehaviour
                 moveSpeed = 0;
             }
 
-            UnityEngine.Debug.Log(moveSpeed);
-
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
 
             //Jumping
-            if (Input.GetButtonDown("Jump"))
-            {
-                if (coll.IsTouchingLayers(ground))
-                {
-                    Jump();
-                }
-            }
+            
         }
     }
 
@@ -246,18 +250,21 @@ public class PlayerController : MonoBehaviour
 
     private void Atack()
     {
-        if (state != State.atack && state != State.Die)
+        if (state != State.hurt)
         {
-            if (Input.GetButtonDown("Attack"))
+            if (state != State.atack && state != State.Die)
             {
-                Throwse.Play();
-                state = State.atack;
-                GameObject g = Instantiate(atackball);
-                g.transform.position = atackball.transform.position;
-                g.transform.rotation = atackball.transform.rotation;
+                if (Input.GetButtonDown("Attack"))
+                {
+                    Throwse.Play();
+                    state = State.atack;
+                    GameObject g = Instantiate(atackball);
+                    g.transform.position = atackball.transform.position;
+                    g.transform.rotation = atackball.transform.rotation;
 
-                g.SetActive(true);
+                    g.SetActive(true);
 
+                }
             }
         }
     }
@@ -295,7 +302,7 @@ public class PlayerController : MonoBehaviour
         {
             state = State.falling;
         }
-        else if (Mathf.Abs(rb.velocity.x) > 2f)
+        else if (Mathf.Abs(rb.velocity.x) > 1f)
         {
             //moving
             if (state != State.atack && state != State.Die)
