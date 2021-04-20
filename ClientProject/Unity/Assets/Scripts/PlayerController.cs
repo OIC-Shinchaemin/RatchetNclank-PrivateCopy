@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             PermanentUI.perm.cherries += 1;
             PermanentUI.perm.cherryTaxt.text = PermanentUI.perm.cherries.ToString();
-            CherryScore();
+            PermanentUI.perm.CherryScore();
             
         }
         //if(collision.tag=="Powerup")        //チュートリアルで使用したパワーアップコード。現在使用してません。
@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
             PermanentUI.perm.healthAmount.text = PermanentUI.perm.health.ToString();
             if (PermanentUI.perm.health <= 0)
             {
+                PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
 
             }
@@ -142,6 +143,7 @@ public class PlayerController : MonoBehaviour
         if (state == State.falling)
         {
             enemy.JumpedOn();
+            PermanentUI.perm.EnemyScore();
             Jump();
         }
         else
@@ -177,6 +179,7 @@ public class PlayerController : MonoBehaviour
             PermanentUI.perm.healthAmount.text = PermanentUI.perm.health.ToString();
             if (PermanentUI.perm.health <= 0)
             {
+                PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
 
             }
@@ -189,7 +192,9 @@ public class PlayerController : MonoBehaviour
         PermanentUI.perm.healthAmount.text = PermanentUI.perm.health.ToString();
         if (PermanentUI.perm.health <= 0)
         {
+            PermanentUI.perm.PlayerCount -= 1;
             state = State.Die;
+
             //PermanentUI.perm.Reset();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -287,6 +292,7 @@ public class PlayerController : MonoBehaviour
         {
             if (coll.IsTouchingLayers(ground))
             {
+                PermanentUI.perm.CountReset();
                 state = State.idle;
             }
         }
@@ -294,7 +300,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(rb.velocity.x) < .1f && state != State.Die)
             {
-                CountReset();
+               PermanentUI.perm.CountReset();
                 state = State.idle;
             }
         }
@@ -396,34 +402,15 @@ public class PlayerController : MonoBehaviour
         if (DCount >= 10)
         {
             PermanentUI.perm.Reset();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("HalfScene");
         }
     }
-    public void ScoreUpdate()               //ややこしいバグを後回しにするための奴
-    {
-        PermanentUI.perm.ScoreText.text = PermanentUI.perm.scoreValue.ToString("D7");
-    }
 
 
 
-    private void CherryScore()               //以下同文
-    {
-        PermanentUI.perm.scoreValue += PermanentUI.perm.cherries * 100;
-        ScoreUpdate();
-    }
-    private void EnemyScore()
-    {
-        JumpCount++;
-        if (JumpCount > 8)
-        {
-            JumpCount = 8;
-        }
-        PermanentUI.perm.scoreValue += JumpCount * 100;
-        ScoreUpdate();
-    }
-    private void CountReset()
-    {
-        JumpCount = 0;
-    }
+
+   
+
+
 
 }
