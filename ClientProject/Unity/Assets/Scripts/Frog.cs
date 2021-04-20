@@ -79,6 +79,18 @@ public class Frog : Enemy
             }
         }
     }
-
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (facingLeft)
+            {
+                facingLeft = false;
+            }
+            else
+            {
+                facingLeft = true;
+            }
+        }
+    }
 }

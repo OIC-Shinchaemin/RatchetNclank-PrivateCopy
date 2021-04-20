@@ -10,7 +10,6 @@ TagManager:
   - Destroy
   - AttackMode
   - AtackMode
-  - Powerup
   - HpEnemy
   layers:
   - Default
@@ -28,9 +27,6 @@ TagManager:
   - Enemy
   - Bullet
   - BackGround
-  - 
-  - 
-  - 
   - 
   - 
   - 

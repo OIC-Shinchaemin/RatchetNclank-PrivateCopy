@@ -15,7 +15,7 @@ public class PermanentUI : MonoBehaviour
     private int defaultHealth;
     public int scoreValue = 0;
 
-    public string nowScene = "SampleScene";
+    public string nowScene = "1-1";
 
     public static PermanentUI perm;
 
