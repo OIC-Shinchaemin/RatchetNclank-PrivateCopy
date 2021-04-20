@@ -7,8 +7,10 @@
 #include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyBlasterBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyBombGloveBulletCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyPyrocitorBulletCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyBlasterBulletCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyBombGloveEffectCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BlasterBulletEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BombGloveBulletEnemyCollisionAlgolithm.h"
 
@@ -21,8 +23,10 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>("SightPlayerCollisionAlgolithm");
     collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>("SightEnemyCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>("EnemyAttackPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>("EnemyBlasterBulletCollisionAlgolithm");
     collision_algolithm_factory.Register<my::EnemyBombGloveBulletCollisionAlgolithm>("EnemyBombGloveBulletCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyPyrocitorBulletCollisionAlgolithm>("EnemyPyrocitorBulletCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>("EnemyBlasterBulletCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyBombGloveEffectCollisionAlgolithm>("EnemyBombGloveEffectCollisionAlgolithm");
     collision_algolithm_factory.Register<my::BlasterBulletEnemyCollisionAlgolithm>("BlasterBulletEnemyCollisionAlgolithm");
     collision_algolithm_factory.Register<my::BombGloveBulletEnemyCollisionAlgolithm>("BombGloveBulletEnemyCollisionAlgolithm");
 
@@ -33,8 +37,10 @@ my::PhysicsWorld::PhysicsWorld() :
         "SightPlayerCollisionAlgolithm",
         "SightEnemyCollisionAlgolithm",
         "EnemyAttackPlayerCollisionAlgolithm",
-        "EnemyBlasterBulletCollisionAlgolithm",
         "EnemyBombGloveBulletCollisionAlgolithm",
+        "EnemyPyrocitorBulletCollisionAlgolithm",
+        "EnemyBlasterBulletCollisionAlgolithm",
+        "EnemyBombGloveEffectCollisionAlgolithm",
         "BlasterBulletEnemyCollisionAlgolithm",
         "BombGloveBulletEnemyCollisionAlgolithm",
     };

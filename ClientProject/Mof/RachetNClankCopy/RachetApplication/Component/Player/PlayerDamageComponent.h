@@ -23,10 +23,10 @@ private:
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! Hp
     std::weak_ptr<class HpComponent> _hp_com;
+    //! 無敵
+    std::weak_ptr<class InvincibleComponent> _invincible_com;
     //! 待機
     std::weak_ptr<class PlayerIdleComponent> _idle_com;
-    //! 待機
-    std::weak_ptr<class PlayerInvincibleComponent> _invincible_com;
 public:
     /// <summary>
     /// コンストラクタ

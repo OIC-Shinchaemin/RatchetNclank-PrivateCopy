@@ -10,6 +10,9 @@
 #include <unordered_map>
 
 #include "My/Core/Observable.h"
+#include "../../ResourceManager.h"
+#include "../../GameDefine.h"
+#include "MY/UI/UICanvas.h"
 #include "Save/SaveData.h"
 #include "../../Actor/Weapon/Mechanical.h"
 #include "../../Factory/Factory.h"
@@ -23,8 +26,14 @@ private:
     std::vector<Pair> _weapons;
     //! 通知用
     my::Observable<std::shared_ptr<my::Mechanical>> _subject;
+    //! 通知用
+    my::Observable<const my::Mechanical::Info&> _equipment_subject;
     //! マップ
     std::unordered_map<std::string, std::string> _builder_name_map;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource;
+    //! UI
+    std::weak_ptr<my::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -40,10 +49,20 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(const std::string& change) override;
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Mechanical>>> &ptr);
+    void AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Mechanical>>>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

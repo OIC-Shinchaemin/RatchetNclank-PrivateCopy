@@ -71,7 +71,7 @@ public:
     /// ŠJŽn
     /// </summary>
     /// <param name="info"></param>
-    void Start(const my::ParticleEffect::Info& info);
+    virtual void Start(const my::ParticleEffect::Info& info);
 };
 }
 #endif // !MY_PARTICLE_EFFECT_H

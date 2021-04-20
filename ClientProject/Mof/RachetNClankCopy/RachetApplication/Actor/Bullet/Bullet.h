@@ -52,12 +52,6 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
-    /// ‰ð•ú
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual bool Release(void) override;
-    /// <summary>
     /// ”­ŽË
     /// </summary>
     /// <param name="in"></param>

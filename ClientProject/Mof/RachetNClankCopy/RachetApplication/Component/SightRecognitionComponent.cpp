@@ -113,7 +113,7 @@ bool my::SightRecognitionComponent::Update(float delta_time) {
                     auto a_pos = a.expired() ? far_pos : a.lock()->GetPosition();
                     auto b_pos = b.expired() ? far_pos : b.lock()->GetPosition();
                     return
-                        Mof::CVector3Utilities::Distance(pos, a_pos) >
+                        Mof::CVector3Utilities::Distance(pos, a_pos) <
                         Mof::CVector3Utilities::Distance(pos, b_pos);
                 });
                 player_com->SetTarget(it->lock());
@@ -124,6 +124,7 @@ bool my::SightRecognitionComponent::Update(float delta_time) {
     return true;
 }
 
+#ifdef _DEBUG
 bool my::SightRecognitionComponent::Render(void) {
     // éãê¸ï`âÊ
 
@@ -159,6 +160,7 @@ bool my::SightRecognitionComponent::Render(void) {
     } // if
     return true;
 }
+#endif // _DEBUG
 
 std::shared_ptr<my::Component> my::SightRecognitionComponent::Clone(void) {
     return std::make_shared<my::SightRecognitionComponent>(*this);

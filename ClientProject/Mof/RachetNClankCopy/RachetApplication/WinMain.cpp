@@ -1,4 +1,9 @@
+#ifdef _DEBUG
 #pragma comment(lib, "MofImGui_d.lib")
+#elif NDEBUG
+#pragma comment(lib, "MofImGui.lib")
+#endif // !_DEBUG
+
 
 #include "GameApp.h"
 #include "imgui/MofImGui.h"

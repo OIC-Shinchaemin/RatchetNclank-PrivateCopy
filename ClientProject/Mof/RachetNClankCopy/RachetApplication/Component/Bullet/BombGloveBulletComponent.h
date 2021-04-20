@@ -6,11 +6,19 @@
 
 #include <memory>
 
+#include "../Collision/Object/CollisionComponent.h"
+
 
 namespace my {
 class BombGloveBulletComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    /// <summary>
+    /// 衝突処理
+    /// </summary>
+    /// <param name="in"></param>
+    /// <returns></returns>
+    bool CollisionEnemy(const my::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ
@@ -44,9 +52,6 @@ public:
     /// <param name="delta_time">時間</param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
-#ifdef _DEBUG
-    virtual bool Render(void) override;
-#endif // _DEBUG
     /// <summary>
     /// 解放
     /// </summary>

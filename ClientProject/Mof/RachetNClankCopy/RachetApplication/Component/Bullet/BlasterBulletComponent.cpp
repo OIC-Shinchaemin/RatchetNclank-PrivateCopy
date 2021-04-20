@@ -26,7 +26,6 @@ bool my::BlasterBulletComponent::Initialize(void) {
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "EnemyCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        puts("sdg");
         super::GetOwner()->End();
         return true;
     }));
@@ -34,10 +33,6 @@ bool my::BlasterBulletComponent::Initialize(void) {
 }
 
 bool my::BlasterBulletComponent::Update(float delta_time) {
-    return true;
-}
-
-bool my::BlasterBulletComponent::Render(void) {
     return true;
 }
 

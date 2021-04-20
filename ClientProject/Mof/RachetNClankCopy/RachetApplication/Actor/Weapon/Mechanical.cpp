@@ -6,7 +6,8 @@ my::Mechanical::Mechanical() :
     _interval(0.0f),
     _interval_max(0.0f),
     _bullet_count(0),
-    _lock_on_position() {
+    _lock_on_position(),
+    _subject(){
 }
 
 my::Mechanical::~Mechanical() {
@@ -14,6 +15,10 @@ my::Mechanical::~Mechanical() {
 
 void my::Mechanical::SetLockOnPosition(Mof::CVector3 position) {
     this->_lock_on_position = position;
+}
+
+int my::Mechanical::GetBulletCount(void) const {
+    return this->_bullet_count;
 }
 
 bool my::Mechanical::IsAction(void) const {
@@ -32,9 +37,15 @@ bool my::Mechanical::Fire(const def::Transform& transform) {
         _bullet_count = 0;
     } // if
     _interval = _interval_max;
+    
+    _subject.Notify(my::Mechanical::Info(this->_bullet_count, this->GetName().c_str()));
     return true;
 }
 
 bool my::Mechanical::CanFire(void) const {
     return _bullet_count > 0 && _interval < 0.0f;
+}
+
+void my::Mechanical::AddMechanicalInfoObserver(const std::shared_ptr<my::Observer<const my::Mechanical::Info&>>& ptr) {
+    _subject.AddObserver(ptr);
 }

@@ -46,14 +46,24 @@ bool my::EnemyComponent::Initialize(void) {
         super::GetOwner()->End(); 
         return true;
     }));
+    
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+                               "PyrocitorBulletCollisionComponent",
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
+        return true;
+    }));
+
+    
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "BlasterBulletCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
         return true;
     }));
+
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "BombGloveBulletCollisionComponent",
+                               "BombGloveEffectCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
         return true;
@@ -80,7 +90,7 @@ bool my::EnemyComponent::Initialize(void) {
 bool my::EnemyComponent::Update(float delta_time) {
     return true;
 }
-
+#ifdef _DEBUG
 bool my::EnemyComponent::Render(void) {
     auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
     if (coll_com->GetSphere().has_value()) {
@@ -88,6 +98,7 @@ bool my::EnemyComponent::Render(void) {
     } // if
     return true;
 }
+#endif // _DEBUG
 
 bool my::EnemyComponent::Release(void) {
     super::Release();

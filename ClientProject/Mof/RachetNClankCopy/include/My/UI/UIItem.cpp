@@ -13,6 +13,10 @@ my::UIItem::~UIItem() {
     _texture.reset();
 }
 
+void my::UIItem::SetPosition(Mof::CVector2 position) {
+    this->_position = position;
+}
+
 void my::UIItem::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }

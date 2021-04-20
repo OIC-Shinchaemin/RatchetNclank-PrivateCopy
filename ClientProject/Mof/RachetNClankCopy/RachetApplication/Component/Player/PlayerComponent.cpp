@@ -2,6 +2,7 @@
 
 #include "../../Gamepad.h"
 #include "../../Component/HpComponent.h"
+#include "../../Component/VelocityComponent.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
 #include "../Player/PlayerDamageComponent.h"
@@ -15,6 +16,7 @@ bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
     auto in = Mof::CVector2(1.0f, 0.0f);
     float move_angle = 0.0f;
 
+    
     if (::g_pInput->IsKeyHold(MOFKEY_A)) {
         action = true;
         left = true;
@@ -45,6 +47,12 @@ bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
             move_angle -= 45.0f;
         } // else if
     } // else if
+
+    if (::g_pInput->IsKeyHold(MOFKEY_J)) {
+        auto v = super::GetOwner()->GetComponent<my::VelocityComponent>();
+        v->AddVelocityForce(Mof::CVector3(0.0f, 10.0f, 0.0f));
+    } // if
+
 
     if (action) {
         if (auto move_com = _move_com.lock()) {
@@ -123,9 +131,12 @@ bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Start();
 
+    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
+
+    velocity_com->SetGravity(0.98f);
 
     if (auto canvas = super::_ui_canvas.lock()) {
         auto menu = std::make_shared<my::LockOnCursorMenu>("LockOnCursorMenu");
@@ -160,7 +171,7 @@ bool my::PlayerComponent::Update(float delta_time) {
     } // else 
     return true;
 }
-
+#ifdef _DEBUG
 bool my::PlayerComponent::Render(void) {
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     if (coll_com->GetSphere().has_value()) {
@@ -173,6 +184,7 @@ bool my::PlayerComponent::Render(void) {
     } // if
     return true;
 }
+#endif // _DEBUG
 
 bool my::PlayerComponent::Release(void) {
     super::Release();

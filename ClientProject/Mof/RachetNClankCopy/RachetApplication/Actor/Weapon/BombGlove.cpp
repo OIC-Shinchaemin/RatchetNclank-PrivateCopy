@@ -2,14 +2,12 @@
 
 #include "../../Gamepad.h"
 #include "../../Actor/Bullet/BombGloveBullet.h"
-#include "../../Actor/ParticleEffect.h"
 #include "../../Factory/FactoryManager.h"
 
 
 my::BombGlove::BombGlove() :
     super() {
     super::SetName("BombGlove");
-    //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/bomb_glove/scene.mom");
     super::_shot_speed = 15.0f;
     super::_interval_max = 0.9f;
     super::_bullet_count = 40;
@@ -25,16 +23,29 @@ bool my::BombGlove::IsAction(void) const {
 bool my::BombGlove::Fire(const def::Transform& transform) {
     super::Fire(transform);
     auto param = my::Bullet::Param();
-
     param.transform = transform;
-    auto speed = Mof::CVector3(0.0f, 0.0f, -super::_shot_speed);
-    speed.RotateAround(math::vec3::kZero, param.transform.rotate);
-    param.speed = speed;
-    param.speed.y = super::_shot_speed * 0.4f;
 
-    auto add = my::FactoryManager::Singleton().CreateActor<my::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);
+    if (super::_lock_on_position.has_value()) {
+        Mof::CVector3 direction = super::_lock_on_position.value() - param.transform.position;
+        auto v = Mof::CVector3(direction.x, 0.0f, direction.z);
+        float time = v.Length() / super::_shot_speed;
 
+        float g = 0.25f * 60.0f;
+        float v0 = 0.5f * g * time - direction.y;
+
+        v.Normal(v);
+        param.speed = v * super::_shot_speed;
+        param.speed.y = v0;
+    } // if
+    else {
+        auto speed = Mof::CVector3(0.0f, 0.0f, -super::_shot_speed);
+        speed.RotateAround(math::vec3::kZero, param.transform.rotate);
+        param.speed = speed;
+        param.speed.y = super::_shot_speed * 0.4f;
+    } // else
+
+    auto add = my::FactoryManager::Singleton().CreateActor<my::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);;
     add->Start(param);
-    Observable::Notify("AddRequest", add);
+    super::Observable::Notify("AddRequest", add);
     return true;
 }

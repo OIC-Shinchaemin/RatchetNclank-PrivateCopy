@@ -28,6 +28,10 @@ std::optional<Mof::CSphere> my::EnemyAttackCollisionComponent::GetSphere(void) {
         return std::optional<Mof::CSphere>();
     } // if
     auto attack_com = _attack_com.lock();
+    if (!attack_com->IsActive()) {
+        return std::optional<Mof::CSphere>();
+    } // if
+    
     auto pos = super::GetOwner()->GetPosition();
     auto rotate = super::GetOwner()->GetRotate();
 

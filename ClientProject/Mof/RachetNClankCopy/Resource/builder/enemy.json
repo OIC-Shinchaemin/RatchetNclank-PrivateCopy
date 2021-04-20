@@ -27,6 +27,13 @@
       }
     },
     {
+      "type": "InvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+
+    {
       "type": "EnemyComponent",
       "paramater": {
         "priority": 0

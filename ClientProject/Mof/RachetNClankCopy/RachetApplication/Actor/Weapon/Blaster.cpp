@@ -9,7 +9,6 @@
 my::Blaster::Blaster() :
     super() {
     super::SetName("Blaster");
-    //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/blaster/scene.mom");
     super::_shot_speed = 5.0f;
     super::_interval_max = 0.06f;
     super::_bullet_count = 200;

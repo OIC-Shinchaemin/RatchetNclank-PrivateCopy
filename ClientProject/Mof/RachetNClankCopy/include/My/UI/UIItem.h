@@ -39,6 +39,11 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
+    /// <param name="position"></param>
+    void SetPosition(Mof::CVector2 position);
+    /// <summary>
+    /// セッター
+    /// </summary>
     /// <param name="ptr"></param>
     void SetTexture(const std::shared_ptr<Mof::CTexture>& ptr);
     /// <summary>

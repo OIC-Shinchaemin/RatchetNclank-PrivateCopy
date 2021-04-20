@@ -5,7 +5,7 @@
 #include "../MotionStateComponent.h"
 #include "../HpComponent.h"
 #include "../Player/PlayerIdleComponent.h"
-#include "../Player/PlayerInvincibleComponent.h"
+#include "../InvincibleComponent.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
 
 
@@ -16,8 +16,8 @@ my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
     _motion_com(),
     _motion_state_com(),
     _hp_com(),
-    _idle_com(),
-    _invincible_com() {
+    _invincible_com(),
+    _idle_com() {
 }
 
 my::PlayerDamageComponent::PlayerDamageComponent(const PlayerDamageComponent& obj) :
@@ -46,7 +46,7 @@ bool my::PlayerDamageComponent::Initialize(void) {
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _hp_com = super::GetOwner()->GetComponent<my::HpComponent>();
     _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
-    _invincible_com = super::GetOwner()->GetComponent<my::PlayerInvincibleComponent>();
+    _invincible_com = super::GetOwner()->GetComponent<my::InvincibleComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,

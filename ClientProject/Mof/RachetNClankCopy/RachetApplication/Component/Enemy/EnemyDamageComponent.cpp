@@ -1,22 +1,19 @@
 #include "EnemyDamageComponent.h"
 
-#include "../VelocityComponent.h"
-#include "../MotionComponent.h"
-#include "../MotionStateComponent.h"
 #include "../HpComponent.h"
-#include "../Player/PlayerIdleComponent.h"
-#include "../Player/PlayerInvincibleComponent.h"
-#include "../Collision/Object/PlayerCollisionComponent.h"
+#include "../InvincibleComponent.h"
 
 
 my::EnemyDamageComponent::EnemyDamageComponent(int priority) :
     super(priority),
-    _hp_com() {
+    _hp_com(),
+    _invincible_com() {
 }
 
 my::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) :
     super(obj._priority),
-    _hp_com() {
+    _hp_com(),
+    _invincible_com() {
 }
 
 my::EnemyDamageComponent::~EnemyDamageComponent() {
@@ -29,6 +26,7 @@ std::string my::EnemyDamageComponent::GetType(void) const {
 bool my::EnemyDamageComponent::Initialize(void) {
     super::Initialize();
     _hp_com = super::GetOwner()->GetComponent<my::HpComponent>();
+    _invincible_com = super::GetOwner()->GetComponent<my::InvincibleComponent>();
     return true;
 }
 
@@ -50,9 +48,22 @@ bool my::EnemyDamageComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
-    super::Start();
+    if (auto invincible_com = _invincible_com.lock()) {
+        if (invincible_com->IsActive()) {
+            return false;
+        } // if
+    } // if
+
+
+    super::Start();       
     if (auto hp_com = _hp_com.lock()) {
         hp_com->Damage(1);
     } // if
+    if (auto invincible_com = _invincible_com.lock()) {
+        invincible_com->Start();
+    } // if
+
+
+
     return true;
 }

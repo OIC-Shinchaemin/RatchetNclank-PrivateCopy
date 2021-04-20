@@ -6,11 +6,11 @@
 #include "../Component/SightRecognitionComponent.h"
 #include "../Component/MotionComponent.h"
 #include "../Component/HpComponent.h"
+#include "../Component/InvincibleComponent.h"
 #include "../Component/Player/PlayerComponent.h"
 #include "../Component/Player/PlayerIdleComponent.h"
 #include "../Component/Player/PlayerMoveComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
-#include "../Component/Player/PlayerInvincibleComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyIdleComponent.h"
@@ -28,8 +28,10 @@
 #include "../Component/Collision/Object/EnemyCollisionComponent.h"
 #include "../Component/Collision/Object/SightCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyAttackCollisionComponent.h"
-#include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
 #include "../Component/Collision/Object/BombGloveBulletCollisionComponent.h"
+#include "../Component/Collision/Object/PyrocitorBulletCollisionComponent.h"
+#include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
+#include "../Component/Collision/Object/BombGloveEffectCollisionComponent.h"
 
 
 my::ComponentFactory::ComponentFactory() :
@@ -42,15 +44,15 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerIdleComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMoveComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
-    my::ComponentFactory::AddComponentCreator<my::PlayerInvincibleComponent>();
+    my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyIdleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyMoveComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyDamageComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::MotionStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::VelocityComponent>();
     my::ComponentFactory::AddComponentCreator<my::TransformComponent>();
@@ -60,8 +62,10 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::EnemyCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::SightCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PyrocitorBulletCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BombGloveEffectCollisionComponent>();
     
 }
 

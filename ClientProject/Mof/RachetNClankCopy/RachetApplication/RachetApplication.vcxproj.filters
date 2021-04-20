@@ -202,6 +202,12 @@
     <Filter Include="Rachet\Source\Component\Bullet">
       <UniqueIdentifier>{b67d75ff-a189-48ce-9f34-f1732e17ad60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Actor\Effect">
+      <UniqueIdentifier>{774f9e04-bb18-41a1-b3f3-aa53d75d3389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Effect">
+      <UniqueIdentifier>{21ca3901-c96c-413a-898a-dd5fda3e2dcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -290,9 +296,6 @@
     </ClCompile>
     <ClCompile Include="Component\TransformComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor\ParticleEffect.cpp">
-      <Filter>Rachet\Source\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Actor\Weapon\Blaster.cpp">
       <Filter>Rachet\Source\Actor\Weapon</Filter>
@@ -459,9 +462,6 @@
     <ClCompile Include="State\PlayerMotion\PlayerMotionDamageState.cpp">
       <Filter>Rachet\Source\State\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Player\PlayerInvincibleComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Stage\JsonStageParser.cpp">
       <Filter>Rachet\Source\Stage</Filter>
     </ClCompile>
@@ -539,6 +539,30 @@
     </ClCompile>
     <ClCompile Include="Component\Bullet\BombGloveBulletComponent.cpp">
       <Filter>Rachet\Source\Component\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Effect\BombGloveEffect.cpp">
+      <Filter>Rachet\Source\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Effect\ParticleEffect.cpp">
+      <Filter>Rachet\Source\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BombGloveEffectCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\InvincibleComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\EquipmentWeaponMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -767,9 +791,6 @@
     <ClInclude Include="Actor\Weapon\Blaster.h">
       <Filter>Rachet\Header\Actor\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\ParticleEffect.h">
-      <Filter>Rachet\Header\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
@@ -932,9 +953,6 @@
     <ClInclude Include="State\PlayerMotion\PlayerMotionDamageState.h">
       <Filter>Rachet\Header\State\PlayerMotion</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Player\PlayerInvincibleComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Stage\JsonStageParser.h">
       <Filter>Rachet\Header\Stage</Filter>
     </ClInclude>
@@ -1019,6 +1037,30 @@
     <ClInclude Include="Component\Bullet\BombGloveBulletComponent.h">
       <Filter>Rachet\Header\Component\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Effect\ParticleEffect.h">
+      <Filter>Rachet\Header\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Effect\BombGloveEffect.h">
+      <Filter>Rachet\Header\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BombGloveEffectCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InvincibleComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\EquipmentWeaponMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\resource_path.txt">
@@ -1070,6 +1112,9 @@
     </None>
     <None Include="..\Resource\test.json">
       <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="..\Resource\builder\bomb_glove_effect.json">
+      <Filter>リソース ファイル\builder</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
