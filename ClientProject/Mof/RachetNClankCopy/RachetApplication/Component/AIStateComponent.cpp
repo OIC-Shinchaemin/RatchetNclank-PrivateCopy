@@ -40,7 +40,7 @@ bool my::AIStateComponent::Initialize(void) {
 
 bool my::AIStateComponent::Update(float delta_time) {
     if (_thinking_time.Tick(delta_time)) {
-        _state_machine.Update(delta_time);
+       // _state_machine.Update(delta_time);
     } // if
     return false;
 }
