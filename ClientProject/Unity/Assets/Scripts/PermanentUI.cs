@@ -15,8 +15,11 @@ public class PermanentUI : MonoBehaviour
     private int defaultHealth;
     public int scoreValue = 0;
 
+    public string nowScene = "SampleScene";
+
     public static PermanentUI perm;
 
+   
     private void Start()
     {
         DontDestroyOnLoad(gameObject);

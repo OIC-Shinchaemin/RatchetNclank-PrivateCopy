@@ -15,7 +15,7 @@ public class Title : MonoBehaviour
     {
         if (Input.GetButtonUp("Attack"))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("HalfScene");
         }
     }
 }

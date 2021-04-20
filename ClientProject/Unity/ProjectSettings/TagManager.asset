@@ -11,6 +11,7 @@ TagManager:
   - AttackMode
   - AtackMode
   - Powerup
+  - HpEnemy
   layers:
   - Default
   - TransparentFX
@@ -21,6 +22,9 @@ TagManager:
   - 
   - 
   - Ground
+  - HalfUI
+  - 
+  - 
   - Enemy
   - Bullet
   - BackGround
