@@ -7,23 +7,26 @@ using TMPro;
 public class PermanentUI : MonoBehaviour
 {
     //Player State
+    private int JumpCount;
     public int cherries = 0;
     public int health;
+    public int PlayerCount = 3;
     public TextMeshProUGUI cherryTaxt;
     public TextMeshProUGUI healthAmount;
     public TextMeshProUGUI ScoreText;
+    
     private int defaultHealth;
     public int scoreValue = 0;
 
     public string nowScene = "1-1";
-
+    public TextMeshProUGUI SceneName;
     public static PermanentUI perm;
 
    
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
 
+        DontDestroyOnLoad(gameObject);
         //前のシーンにpermUIがなければ
         if (!perm)
         {
@@ -44,8 +47,6 @@ public class PermanentUI : MonoBehaviour
         cherries = 0;
         health = defaultHealth;
         cherryTaxt.text = cherries.ToString();
-        scoreValue = 0;
-        ScoreText.text = scoreValue.ToString("D7");
     }
 
     public void GameEnd()
@@ -56,5 +57,28 @@ public class PermanentUI : MonoBehaviour
         ScoreText.text = scoreValue.ToString("D7");
 
         Destroy(gameObject);
+    }
+    public void CherryScore()       
+    {
+        scoreValue += 100+(cherries / 5) * 100;
+        ScoreUpdate();
+    }
+    public void ScoreUpdate()
+    {
+        PermanentUI.perm.ScoreText.text = PermanentUI.perm.scoreValue.ToString("D7");
+    }
+    public void EnemyScore()
+    {
+        JumpCount++;
+        if (JumpCount > 8)
+        {
+            JumpCount = 8;
+        }
+        PermanentUI.perm.scoreValue += JumpCount * 100;
+        ScoreUpdate();
+    }
+    public void CountReset()
+    {
+        JumpCount = 0;
     }
 }

@@ -13,6 +13,7 @@ public class SceneChange : MonoBehaviour
         {
             //SceneManager.LoadScene("sceneName");
             PermanentUI.perm.nowScene = sceneName;
+            PermanentUI.perm.SceneName.text = sceneName; 
             SceneManager.LoadScene("HalfScene");
 
         }

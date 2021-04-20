@@ -485,6 +485,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eagle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2543876206459825738, guid: 1dd3ee025322c674d87daa8b57bf3afc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 2543876206459825742, guid: 1dd3ee025322c674d87daa8b57bf3afc,
         type: 3}
       propertyPath: m_RootOrder
