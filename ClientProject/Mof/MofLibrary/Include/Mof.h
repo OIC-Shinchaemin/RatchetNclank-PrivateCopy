@@ -94,7 +94,7 @@
 
 //外部ライブラリが必須のコンバーター
 //#define		MOFLIB_CONVERTFBX				//FBX(プロジェクトにFBXのインクルードパス追加が必要)
-#define		MOFLIB_CONVERTSS				//SpriteStudio
+//#define		MOFLIB_CONVERTSS				//SpriteStudio
 
 //基礎フレームワークのインクルード
 #ifdef		MOFLIB_WINDOWS

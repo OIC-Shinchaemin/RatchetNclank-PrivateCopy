@@ -28,7 +28,7 @@ void my::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float degree_y
 
 my::SightRecognitionComponent::SightRecognitionComponent(int priority) :
     super(priority),
-    _range(5.0f),
+    _range(0.0f),
     _player_com(),
     _enemy_com() {
     super::_active = true;
@@ -43,6 +43,16 @@ my::SightRecognitionComponent::SightRecognitionComponent(const SightRecognitionC
 }
 
 my::SightRecognitionComponent::~SightRecognitionComponent() {
+}
+
+void my::SightRecognitionComponent::SetParam(const rapidjson::Value& param) {
+    super::SetParam(param);
+    const char* range = "range";
+
+    _ASSERT_EXPR(param.HasMember(range), L"指定のパラメータがありません");
+    _ASSERT_EXPR(param[range].IsFloat(), L"パラメータの指定された型でありません");
+
+    _range = param[range].GetFloat();
 }
 
 std::string my::SightRecognitionComponent::GetType(void) const {
@@ -103,7 +113,7 @@ bool my::SightRecognitionComponent::Update(float delta_time) {
                     auto a_pos = a.expired() ? far_pos : a.lock()->GetPosition();
                     auto b_pos = b.expired() ? far_pos : b.lock()->GetPosition();
                     return
-                        Mof::CVector3Utilities::Distance(pos, a_pos) >
+                        Mof::CVector3Utilities::Distance(pos, a_pos) <
                         Mof::CVector3Utilities::Distance(pos, b_pos);
                 });
                 player_com->SetTarget(it->lock());
@@ -114,6 +124,7 @@ bool my::SightRecognitionComponent::Update(float delta_time) {
     return true;
 }
 
+#ifdef _DEBUG
 bool my::SightRecognitionComponent::Render(void) {
     // 視線描画
 
@@ -149,6 +160,7 @@ bool my::SightRecognitionComponent::Render(void) {
     } // if
     return true;
 }
+#endif // _DEBUG
 
 std::shared_ptr<my::Component> my::SightRecognitionComponent::Clone(void) {
     return std::make_shared<my::SightRecognitionComponent>(*this);

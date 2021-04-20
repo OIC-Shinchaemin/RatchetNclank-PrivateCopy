@@ -3,7 +3,8 @@
     {
       "type": "SightRecognitionComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "range": 10.0
       }
     },
     {
@@ -19,6 +20,13 @@
         "priority": 0
       }
     },
+    {
+      "type": "InvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+
     {
       "type": "PlayerComponent",
       "paramater": {
@@ -44,7 +52,7 @@
       }
     },
     {
-      "type": "PlayerInvincibleComponent",
+      "type": "InvincibleComponent",
       "paramater": {
         "priority": 93
       }

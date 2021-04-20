@@ -2,7 +2,7 @@
 #define MY_PLAYER_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../CharacterComponent.h"
 
 #include <memory>
 
@@ -10,13 +10,9 @@
 
 
 namespace my {
-class PlayerComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerComponent : public my::CharacterComponent {
+    using super = my::CharacterComponent;
 private:
-    //! 大きさ
-    float _volume;
-    //! 高さ
-    float _height;
     //! 標的
     std::weak_ptr<my::Actor> _target;
     //! カーソル位置
@@ -55,18 +51,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    float GetVolume(void) const;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    float GetHeight(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

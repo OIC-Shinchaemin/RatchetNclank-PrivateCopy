@@ -18,6 +18,12 @@
         "priority": 0,
         "path": "../Resource/mesh/pyrocitor_bullet/scene.mom"
       }
+    },
+    {
+      "type": "PyrocitorBulletCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
     }
   ]
 }

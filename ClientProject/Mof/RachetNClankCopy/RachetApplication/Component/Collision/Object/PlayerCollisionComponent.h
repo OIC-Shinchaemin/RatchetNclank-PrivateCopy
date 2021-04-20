@@ -83,7 +83,6 @@ public:
     /// è’ìÀ
     /// </summary>
     /// <param name="ptr"></param>
-//    virtual void CollisionStage(Stage* ptr) override;
     virtual void CollisionStage(Mof::LPMeshContainer mesh) override;
 };
 }

@@ -1,6 +1,6 @@
 #include "ParticleEffect.h"
 
-#include "../Component/VelocityComponent.h"
+#include "../../Component/VelocityComponent.h"
 
 
 my::ParticleEffect::ParticleEffect() :

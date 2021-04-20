@@ -61,16 +61,19 @@ bool my::GameManager::Initialize(void) {
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _game_money = std::make_unique<my::GameMoney>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
+    
     _game_money->SetResourceManager(_resource);
+    _weapon_system->SetResourceManager(_resource);
+    _weapon_system->SetUICanvas(_ui_canvas);
     _quick_change->SetResourceManager(_resource);
     _quick_change->SetUICanvas(_ui_canvas);
+
     // game system
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
     _game_money->Initialize(save_data.GetMoney());
     _weapon_system->Initialize(save_data, shared_from_this());
     _quick_change->Initialize({}, _weapon_system);
-
 
     // stage
     if (!_stage.Load("../Resource/test.json")) {
@@ -101,10 +104,7 @@ bool my::GameManager::Initialize(void) {
 }
 
 bool my::GameManager::Input(void) {
-    _game_money->Input();
-    _quick_change->Input();
     _game_world.Input();
-
     return true;
 }
 
@@ -138,7 +138,6 @@ bool my::GameManager::Update(float delta_time) {
 bool my::GameManager::Render(void) {
     _renderer.Render();
     _stage.Render();
-    _quick_change->Render();
     _game_money->Render();
     return true;
 }

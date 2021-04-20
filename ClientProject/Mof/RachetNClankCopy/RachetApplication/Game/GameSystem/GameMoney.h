@@ -22,11 +22,7 @@ private:
     Mof::CVector2 _position;
     //! 色
     Mof::CVector4 _color;
-    //! 状態
-    //State _state;
-    //! アルファ
-    //float _alpha;
-    
+    //! お金
     uint32_t _value;
     //! フォント
     Mof::CFont _font;
@@ -65,7 +61,6 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Input(void);
     bool Render(void);
 };
 }

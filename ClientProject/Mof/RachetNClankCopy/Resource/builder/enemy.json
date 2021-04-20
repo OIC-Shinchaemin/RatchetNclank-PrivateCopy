@@ -9,7 +9,8 @@
     {
       "type": "SightRecognitionComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "range": 8.0
       }
     },
     {
@@ -25,6 +26,13 @@
         "priority": 0
       }
     },
+    {
+      "type": "InvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+
     {
       "type": "EnemyComponent",
       "paramater": {

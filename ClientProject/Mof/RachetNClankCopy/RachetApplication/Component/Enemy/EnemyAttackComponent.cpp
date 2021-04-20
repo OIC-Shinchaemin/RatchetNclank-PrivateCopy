@@ -60,6 +60,7 @@ bool my::EnemyAttackComponent::Update(float delta_time) {
     return true;
 }
 
+#ifdef _DEBUG
 bool my::EnemyAttackComponent::Render(void) {
     auto coll_com = super::GetOwner()->GetComponent<my::EnemyAttackCollisionComponent>();
     if (coll_com && coll_com->GetSphere().has_value()) {
@@ -68,6 +69,7 @@ bool my::EnemyAttackComponent::Render(void) {
     } // if
     return true;
 }
+#endif // _DEBUG
 
 bool my::EnemyAttackComponent::Release(void) {
     super::Release();

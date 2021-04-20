@@ -31,26 +31,12 @@ bool my::GameMoney::Initialize(uint32_t value) {
     return true;
 }
 
-bool my::GameMoney::Input(void) {
-    if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-        _value++;
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-        _value--;
-    } // else if
-
-    return true;
-}
-
 bool my::GameMoney::Render(void) {
     if (auto tex = _texture.lock()) {
         tex->Render(_position.x, _position.y);
         auto pos = _position;
         pos.x -= _font_size * 0.5f * ut::GetDigit(_value) + ut::GetDigit(_value);
         const char* text = "ddd";
-
-//        _font.RenderString(pos.x, pos.y, std::to_string(_value).c_str());
-//        _font.RenderString(pos.x, pos.y, text);
         ::CGraphicsUtilities::RenderString(pos.x, pos.y, std::to_string(_value).c_str());
     } // if
     return true;

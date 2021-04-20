@@ -2,19 +2,15 @@
 #define MY_ENEMY_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../CharacterComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class EnemyComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class EnemyComponent : public my::CharacterComponent {
+    using super = my::CharacterComponent;
 private:
-    //! 大きさ
-    float _volume;
-    //! 高さ
-    float _height;
     //! 標的
     std::weak_ptr<my::Actor> _target;
 public:
@@ -43,18 +39,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    float GetVolume(void) const;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    float GetHeight(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

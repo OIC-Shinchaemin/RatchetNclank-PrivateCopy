@@ -10,15 +10,13 @@
 
 my::EnemyComponent::EnemyComponent(int priority) :
     super(priority),
-    _volume(0.5f),
-    _height(1.0f),
     _target() {
+    super::_volume = 0.5f;
+    super::_height = 1.0f;
 }
 
 my::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
     super(obj),
-    _volume(obj._volume),
-    _height(obj._height),
     _target() {
 }
 
@@ -31,14 +29,6 @@ void my::EnemyComponent::SetTarget(const std::shared_ptr<my::Actor>& ptr) {
 
 std::string my::EnemyComponent::GetType(void) const {
     return "EnemyComponent";
-}
-
-float my::EnemyComponent::GetVolume(void) const {
-    return this->_volume;
-}
-
-float my::EnemyComponent::GetHeight(void) const {
-    return this->_height;
 }
 
 std::weak_ptr<my::Actor> my::EnemyComponent::GetTarget(void) const {
@@ -56,12 +46,30 @@ bool my::EnemyComponent::Initialize(void) {
         super::GetOwner()->End(); 
         return true;
     }));
+    
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+                               "PyrocitorBulletCollisionComponent",
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
+        return true;
+    }));
+
+    
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "BlasterBulletCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
         return true;
     }));
+
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+                               "BombGloveEffectCollisionComponent",
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
+        return true;
+    }));
+
+
     auto sight_coll = super::GetOwner()->GetComponent<my::SightCollisionComponent>();
     sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                  "PlayerCollisionComponent",
@@ -82,7 +90,7 @@ bool my::EnemyComponent::Initialize(void) {
 bool my::EnemyComponent::Update(float delta_time) {
     return true;
 }
-
+#ifdef _DEBUG
 bool my::EnemyComponent::Render(void) {
     auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
     if (coll_com->GetSphere().has_value()) {
@@ -90,6 +98,7 @@ bool my::EnemyComponent::Render(void) {
     } // if
     return true;
 }
+#endif // _DEBUG
 
 bool my::EnemyComponent::Release(void) {
     super::Release();

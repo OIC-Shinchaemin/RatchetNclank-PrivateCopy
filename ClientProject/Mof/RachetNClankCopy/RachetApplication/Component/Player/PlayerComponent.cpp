@@ -2,6 +2,7 @@
 
 #include "../../Gamepad.h"
 #include "../../Component/HpComponent.h"
+#include "../../Component/VelocityComponent.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
 #include "../Player/PlayerDamageComponent.h"
@@ -15,6 +16,7 @@ bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
     auto in = Mof::CVector2(1.0f, 0.0f);
     float move_angle = 0.0f;
 
+    
     if (::g_pInput->IsKeyHold(MOFKEY_A)) {
         action = true;
         left = true;
@@ -45,6 +47,12 @@ bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
             move_angle -= 45.0f;
         } // else if
     } // else if
+
+    if (::g_pInput->IsKeyHold(MOFKEY_J)) {
+        auto v = super::GetOwner()->GetComponent<my::VelocityComponent>();
+        v->AddVelocityForce(Mof::CVector3(0.0f, 10.0f, 0.0f));
+    } // if
+
 
     if (action) {
         if (auto move_com = _move_com.lock()) {
@@ -88,18 +96,16 @@ void my::PlayerComponent::MoveByGamepad(float angular_speed, float speed) {
 
 my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
-    _volume(0.5f),
-    _height(1.0f),
     _target(),
     _idle_com(),
     _move_com(),
     _damage_com() {
+    super::_volume = 0.5f;
+    super::_height = 1.0f;
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
-    _volume(0.5f),
-    _height(1.0f),
     _target(),
     _idle_com(),
     _move_com(),
@@ -117,14 +123,6 @@ std::string my::PlayerComponent::GetType(void) const {
     return "PlayerComponent";
 }
 
-float my::PlayerComponent::GetVolume(void) const {
-    return this->_volume;
-}
-
-float my::PlayerComponent::GetHeight(void) const {
-    return this->_height;
-}
-
 std::weak_ptr<my::Actor> my::PlayerComponent::GetTarget(void) const {
     return this->_target;
 }
@@ -133,12 +131,16 @@ bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Start();
 
+    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
 
+    velocity_com->SetGravity(0.98f);
+
     if (auto canvas = super::_ui_canvas.lock()) {
         auto menu = std::make_shared<my::LockOnCursorMenu>("LockOnCursorMenu");
+        menu->SetResourceManager(_resource_manager);
         _observable.AddObserver(menu);
         canvas->AddElement(menu);
     } // if
@@ -159,14 +161,17 @@ bool my::PlayerComponent::Update(float delta_time) {
     } // if
 
     if (auto target = _target.lock()) {
-        _observable.Notify(target->GetPosition());
+        auto enemy_com = target->GetComponent<super>();
+        auto pos = target->GetPosition();
+        pos.y += enemy_com->GetHeight();
+        _observable.Notify(pos);
     } // if
     else {
         _observable.Notify(std::optional<Mof::CVector3>());
     } // else 
     return true;
 }
-
+#ifdef _DEBUG
 bool my::PlayerComponent::Render(void) {
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     if (coll_com->GetSphere().has_value()) {
@@ -179,6 +184,7 @@ bool my::PlayerComponent::Render(void) {
     } // if
     return true;
 }
+#endif // _DEBUG
 
 bool my::PlayerComponent::Release(void) {
     super::Release();

@@ -5,6 +5,8 @@
 #include "My/UI/UIPanel.h"
 
 #include "My/Core/Observable.h"
+#include "../GameDefine.h"
+#include "../ResourceManager.h"
 #include "MY/UI/UICanvas.h"
 
 
@@ -14,8 +16,8 @@ class LockOnCursorMenu : public my::UIPanel, public my::Observer<std::optional<M
 private:
     //! 位置
     std::optional<Mof::CVector3> _position;
-    //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource_manager;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,6 +29,11 @@ public:
     /// </summary>
     /// <param name="position"></param>
     virtual void OnNotify(std::optional<Mof::CVector3> position) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>

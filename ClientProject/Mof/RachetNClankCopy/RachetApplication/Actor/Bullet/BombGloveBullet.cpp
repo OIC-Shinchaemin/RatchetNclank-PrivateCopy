@@ -33,6 +33,7 @@ void my::BombGloveBullet::Start(const my::BombGloveBullet::Param& in) {
     super::Start(in);
     auto v = super::GetComponent<my::VelocityComponent>();
     v->SetDrag(0.98f);
+    //v->SetDrag(1.0f);
     v->SetGravity(0.25f);
     v->SetUseGravity(true);
 }

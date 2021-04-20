@@ -1,35 +1,39 @@
-#ifndef MY_PLAYER_INVINCIBLE_COMPONENT_H
-#define MY_PLAYER_INVINCIBLE_COMPONENT_H
+#ifndef MY_BOMB_GLOVE_BULLET_COMPONENT_H
+#define MY_BOMB_GLOVE_BULLET_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 #include <memory>
 
-#include "My/Core/Timer.h"
+#include "../Collision/Object/CollisionComponent.h"
 
 
 namespace my {
-class PlayerInvincibleComponent : public my::UpdateComponent {
+class BombGloveBulletComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! 時間
-    my::Timer _invincible;
+    /// <summary>
+    /// 衝突処理
+    /// </summary>
+    /// <param name="in"></param>
+    /// <returns></returns>
+    bool CollisionEnemy(const my::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerInvincibleComponent(int priority);
+    BombGloveBulletComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerInvincibleComponent(const PlayerInvincibleComponent& obj);
+    BombGloveBulletComponent(const BombGloveBulletComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerInvincibleComponent();
+    virtual ~BombGloveBulletComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -60,12 +64,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
-    /// <summary>
-    /// 開始
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns>成功</returns>
-    virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_INVINCIBLE_COMPONENT_H
+#endif // !MY_BOMB_GLOVE_BULLET_COMPONENT_H

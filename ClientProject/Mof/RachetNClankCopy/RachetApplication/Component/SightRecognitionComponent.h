@@ -43,6 +43,11 @@ public:
     /// </summary>
     virtual ~SightRecognitionComponent();
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
