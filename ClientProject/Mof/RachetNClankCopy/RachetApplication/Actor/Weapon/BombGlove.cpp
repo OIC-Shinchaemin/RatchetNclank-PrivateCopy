@@ -8,7 +8,7 @@
 my::BombGlove::BombGlove() :
     super() {
     super::SetName("BombGlove");
-    super::_shot_speed = 15.0f;
+    super::_shot_speed = 10.0f;
     super::_interval_max = 0.9f;
     super::_bullet_count = 40;
 }
@@ -32,9 +32,10 @@ bool my::BombGlove::Fire(const def::Transform& transform) {
 
         float g = 0.25f * 60.0f;
         float v0 = 0.5f * g * time - direction.y;
-
+        float v_t  = std::log10(0.98f * 60.0f * time) * super::_shot_speed;
+        
         v.Normal(v);
-        param.speed = v * super::_shot_speed;
+        param.speed = v * v_t;
         param.speed.y = v0;
     } // if
     else {
