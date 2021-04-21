@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
-        PermanentUI.perm.healthAmount.text = PermanentUI.perm.health.ToString();
+        PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
         naturalGravity = rb.gravityScale;
     }
 
@@ -122,9 +122,9 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Destroy")
         {
-            PermanentUI.perm.health = 0;
-            PermanentUI.perm.healthAmount.text = PermanentUI.perm.health.ToString();
-            if (PermanentUI.perm.health <= 0)
+            PermanentUI.perm.currentHP = 0;
+            PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
+            if (PermanentUI.perm.currentHP <= 0)
             {
                 PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
@@ -182,9 +182,9 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "Destroy")
         {
-            PermanentUI.perm.health = 0;
-            PermanentUI.perm.healthAmount.text = PermanentUI.perm.health.ToString();
-            if (PermanentUI.perm.health <= 0)
+            PermanentUI.perm.currentHP = 0;
+            PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
+            if (PermanentUI.perm.currentHP <= 0)
             {
                 PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
@@ -213,9 +213,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHealth()
     {
-        PermanentUI.perm.health -= 1;
-        PermanentUI.perm.healthAmount.text = PermanentUI.perm.health.ToString();
-        if (PermanentUI.perm.health <= 0)
+        PermanentUI.perm.currentHP -= 1;
+        PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
+        if (PermanentUI.perm.currentHP <= 0)
         {
             PermanentUI.perm.PlayerCount -= 1;
             state = State.Die;

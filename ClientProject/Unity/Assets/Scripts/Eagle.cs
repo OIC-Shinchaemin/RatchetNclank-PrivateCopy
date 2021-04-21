@@ -9,12 +9,8 @@ public class Eagle : Enemy
     private float second;
     [SerializeField] private GameObject EagleBullet;
     private float shotspeed = 10f;
-    public GameObject player;
 
-    private void Start()
-    {
-        player = GameObject.Find("Player");
-    }
+
 
     private void Update()
     {

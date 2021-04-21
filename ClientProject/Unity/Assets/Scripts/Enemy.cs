@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         death = GetComponent<AudioSource>();
-        player = GameObject.Find("Player");
     }
 
     public void JumpedOn()

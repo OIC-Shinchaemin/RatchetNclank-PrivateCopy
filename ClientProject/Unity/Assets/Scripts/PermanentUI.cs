@@ -6,16 +6,17 @@ using TMPro;
 
 public class PermanentUI : MonoBehaviour
 {
+    private const int MaxHP = 3;
+
     //Player State
     private int JumpCount;
     public int cherries = 0;
-    public int health;
+    public int currentHP = 0;
     public int PlayerCount = 3;
     public TextMeshProUGUI cherryTaxt;
     public TextMeshProUGUI healthAmount;
-    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI ScoreText;    
     
-    private int defaultHealth;
     public int scoreValue = 0;
 
     public string nowScene = "1-1";
@@ -24,7 +25,7 @@ public class PermanentUI : MonoBehaviour
 
    
     private void Start()
-    {
+    {                
 
         DontDestroyOnLoad(gameObject);
         //前のシーンにpermUIがなければ
@@ -39,20 +40,24 @@ public class PermanentUI : MonoBehaviour
             Destroy(gameObject);
         }
 
-        defaultHealth = health;
+
+        currentHP = MaxHP;
+        healthAmount.text = currentHP.ToString();
     }
 
     public void Reset()
     {
         cherries = 0;
-        health = defaultHealth;
+        currentHP = MaxHP;
+
         cherryTaxt.text = cherries.ToString();
+        healthAmount.text = currentHP.ToString();
     }
 
+
     public void GameEnd()
-    {
-        cherries = 0;
-        health = defaultHealth;
+    {                
+        cherries = 0;        
         cherryTaxt.text = cherries.ToString();
         ScoreText.text = scoreValue.ToString("D7");
 

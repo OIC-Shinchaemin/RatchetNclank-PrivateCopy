@@ -60,6 +60,9 @@ TagManager:
   - name: Fore
     uniqueID: 561156017
     locked: 0
+  - name: Player
+    uniqueID: 3750284855
+    locked: 0
   - name: Camera
     uniqueID: 302211467
     locked: 0
