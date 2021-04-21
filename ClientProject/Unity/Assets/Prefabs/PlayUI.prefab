@@ -821,13 +821,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cherries: 0
-  health: 3
+  currentHP: 0
   PlayerCount: 3
   cherryTaxt: {fileID: 8166933320973538568}
   healthAmount: {fileID: 8166933320510089270}
   ScoreText: {fileID: 2230704725062595106}
   scoreValue: 0
-  nowScene: SampleScene
+  nowScene: 1-1
   SceneName: {fileID: 4190555559628173153}
 --- !u!1 &8166933320510089268
 GameObject:
