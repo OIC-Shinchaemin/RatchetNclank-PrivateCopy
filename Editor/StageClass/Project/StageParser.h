@@ -1,6 +1,6 @@
 #pragma once
 #include "Stage.h"
-#include "StageDefine.h"
+#include "StageFileFormat.h"
 
 #include <memory>
 #include <string>
@@ -12,6 +12,7 @@ struct ParseData {
     MeshArray*        mesh_array_pointer;
     StageObjectArray* static_object_array_pointer;
     EnemySpawnArray*  enemy_spawn_array_pointer;
+    GimmickArray*     gimmick_array_pointer;
 };
 
 /// <summary>

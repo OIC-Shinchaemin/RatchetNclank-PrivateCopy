@@ -25,6 +25,12 @@
     <Filter Include="ヘッダー ファイル\Stage\Parser">
       <UniqueIdentifier>{369ac1ff-78c6-484a-8881-d9ed3b90c2b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Stage\Gimmick">
+      <UniqueIdentifier>{251d8856-927a-4b44-9615-5c2386d15842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage\Gimmick">
+      <UniqueIdentifier>{eb1d009f-81a7-48cf-98cf-41eda1f6da4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -41,6 +47,15 @@
     </ClCompile>
     <ClCompile Include="JsonStageParser.cpp">
       <Filter>ソース ファイル\Stage\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="GimmickBase.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Elevator.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Bridge.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +75,18 @@
       <Filter>ヘッダー ファイル\Stage\Parser</Filter>
     </ClInclude>
     <ClInclude Include="JsonStageParser.h">
+      <Filter>ヘッダー ファイル\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="GimmickBase.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Elevator.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="StageFileFormat.h">
       <Filter>ヘッダー ファイル\Stage\Parser</Filter>
     </ClInclude>
   </ItemGroup>
