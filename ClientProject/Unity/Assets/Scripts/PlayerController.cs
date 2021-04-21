@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private int DCount;
 
     //本当は使いたくなかった変数たち
-    int JumpCount;
+    //int JumpCount;
 
     float hDirection = 0;
 

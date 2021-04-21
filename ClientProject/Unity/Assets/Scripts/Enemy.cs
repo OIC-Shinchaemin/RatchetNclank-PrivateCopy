@@ -8,11 +8,14 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected AudioSource death;
 
+    public GameObject player;
+
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         death = GetComponent<AudioSource>();
+        player = GameObject.Find("Player");
     }
 
     public void JumpedOn()
