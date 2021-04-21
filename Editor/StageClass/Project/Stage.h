@@ -1,5 +1,6 @@
 #pragma once
 #include "StageObject.h"
+#include "GimmickBase.h"
 
 // 名前の置き換え
 using MeshPtr         = std::shared_ptr<CMeshContainer>;
@@ -29,6 +30,9 @@ private:
     //! 敵の出現位置配列
     EnemySpawnArray     _enemy_spawn_array;
 
+    //! ギミックの配列
+    GimmickArray        _gimmick_array;
+
     /// <summary>
     /// 静的なステージメッシュの生成
     /// </summary>
@@ -52,7 +56,7 @@ public:
     /// <summary>
     /// 更新
     /// </summary>
-    void Update(void);
+    void Update(float delta);
 
     /// <summary>
     /// 描画
@@ -81,5 +85,11 @@ public:
     /// </summary>
     /// <returns>敵の出現位置配列</returns>
     EnemySpawnArray& GetEnemySpawnArray(void);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    GimmickArray& GetGimmickArray(void);
 };
 

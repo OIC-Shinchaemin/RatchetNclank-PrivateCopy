@@ -49,7 +49,17 @@ MofBool CGameApp::Update(void) {
 	//キーの更新
 	g_pInput->RefreshKey();
 
-	stage.Update();
+	stage.Update(CUtilities::GetFrameSecond());
+
+	if (g_pInput->IsKeyPush(MOFKEY_1)) {
+		stage.Initialize();
+	}
+	if (g_pInput->IsKeyPush(MOFKEY_2)) {
+		stage.GetGimmickArray()[0]->ActionStart();
+	}
+	if (g_pInput->IsKeyPush(MOFKEY_3)) {
+		stage.GetGimmickArray()[1]->ActionStart();
+	}
 
 	return TRUE;
 }

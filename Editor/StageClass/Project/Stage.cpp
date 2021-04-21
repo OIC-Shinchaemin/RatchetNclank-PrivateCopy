@@ -68,6 +68,7 @@ bool Stage::Load(const std::string& path) {
     parse_data.mesh_array_pointer          = &_mesh_array;
     parse_data.static_object_array_pointer = &_static_object_array;
     parse_data.enemy_spawn_array_pointer   = &_enemy_spawn_array;
+    parse_data.gimmick_array_pointer       = &_gimmick_array;
     StageParserPtr parser = nullptr;
 
     // 拡張子の取得
@@ -84,7 +85,7 @@ bool Stage::Load(const std::string& path) {
     }
 
     // 読み込み
-    if (parser->Load(path, parse_data) != TRUE) {
+    if (parser->Load(path, parse_data) != StageFileResult::Success) {
         return false;
     }
 
@@ -98,14 +99,18 @@ bool Stage::Load(const std::string& path) {
 /// 初期化
 /// </summary>
 void Stage::Initialize(void) {
-
+    for (const auto& gimmick : _gimmick_array) {
+        gimmick->Initialize();
+    }
 }
 
 /// <summary>
 /// 更新
 /// </summary>
-void Stage::Update(void) {
-
+void Stage::Update(float delta) {
+    for (const auto& gimmick : _gimmick_array) {
+        gimmick->Update(delta);
+    }
 }
 
 /// <summary>
@@ -114,10 +119,17 @@ void Stage::Update(void) {
 void Stage::Render(void) {
     for (const auto& it : _static_object_array) {
         const int mesh_no = it->GetMeshNo();
-        if (mesh_no < 0) {
+        if (mesh_no < 0 || _mesh_array.size() <= mesh_no) {
             continue;
         }
         _mesh_array[mesh_no]->Render(it->GetWorldMatrix());
+    }
+    for (const auto& gimmick : _gimmick_array) {
+        const int mesh_no = gimmick->GetMeshNo();
+        if (mesh_no < 0 || _mesh_array.size() <= mesh_no) {
+            continue;
+        }
+        _mesh_array[mesh_no]->Render(gimmick->GetWorldMatrix());
     }
 }
 
@@ -175,4 +187,8 @@ MeshPtr Stage::GetStaticStageMesh(void) {
 /// <returns>敵の出現位置配列</returns>
 EnemySpawnArray& Stage::GetEnemySpawnArray(void) {
     return _enemy_spawn_array;
+}
+
+GimmickArray& Stage::GetGimmickArray(void) {
+    return _gimmick_array;
 }

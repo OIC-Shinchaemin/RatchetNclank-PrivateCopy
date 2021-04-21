@@ -54,6 +54,9 @@
     <ClCompile Include="Elevator.cpp">
       <Filter>ソース ファイル\Stage\Gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="Bridge.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -79,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="Elevator.h">
       <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="StageFileFormat.h">
+      <Filter>ヘッダー ファイル\Stage\Parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
