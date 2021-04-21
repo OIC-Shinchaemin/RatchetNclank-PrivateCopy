@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 58038351157783349}
   - component: {fileID: 1355911455731950278}
   - component: {fileID: 1546777603778168944}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Ghetsis-Child
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  getscore: 100
 --- !u!114 &-1254174899688602814
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class Ghetsis : MonoBehaviour
 
     public GameObject bossChild;
 
-    public GameObject bossEvent;
+    public BossEvent bossEvent;
 
     float second;
 
@@ -126,9 +126,9 @@ public class Ghetsis : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    public void OnDeathEvent()
     {
-        //bossEvent.GetComponent<BossEvent>().bBoss = false;
-        UnityEngine.Debug.Log("えへへ");
+        bossEvent.bBoss = false;
+        bossEvent.TriggerON();
     }
 }

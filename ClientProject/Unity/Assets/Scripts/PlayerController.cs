@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         //UnityEngine.Debug.Log("Now scene is <color=red>" + SceneManager.GetActiveScene().name + "</color>");
         //UnityEngine.Debug.Log(rb.velocity.y);
         //UnityEngine.Debug.Log(coll.IsTouchingLayers(ground));
-        UnityEngine.Debug.Log(hDirection);
+        //UnityEngine.Debug.Log(hDirection);
 
     }
 

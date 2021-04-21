@@ -43080,7 +43080,7 @@ GameObject:
   - component: {fileID: 1589024603}
   - component: {fileID: 1589024604}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SceneChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43124,7 +43124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f771ef6c46e9a43bfbac6d1c624d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: EndScene
+  sceneName: 2-2
 --- !u!4 &1589024605
 Transform:
   m_ObjectHideFlags: 0
