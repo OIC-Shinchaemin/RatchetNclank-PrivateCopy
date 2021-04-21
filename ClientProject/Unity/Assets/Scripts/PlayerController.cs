@@ -136,8 +136,26 @@ public class PlayerController : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             CollisionEnemy(enemy);
         }
+
     }
 
+    void CollisionBullet(Bullet bullet)
+    {
+        state = State.hurt;
+
+        HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
+
+        if (bullet.gameObject.transform.position.x > transform.position.x)
+        {
+
+            rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+
+        }
+        else
+        {
+            rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+        }
+    }
     void CollisionEnemy(Enemy enemy)
     {
 
@@ -190,6 +208,11 @@ public class PlayerController : MonoBehaviour
                 state = State.Die;
 
             }
+        }
+        if (other.gameObject.tag == "Bullet")
+        {
+            Bullet bullet = other.gameObject.GetComponent<Bullet>();
+            CollisionBullet(bullet);
         }
     }
 
@@ -410,7 +433,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
-        coll.isTrigger = true;
+        //coll.isTrigger = true;
         GetComponent<Collider2D>().enabled = false;
     }
 

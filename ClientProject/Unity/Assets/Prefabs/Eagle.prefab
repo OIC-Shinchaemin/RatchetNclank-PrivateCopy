@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3829785928246528373}
   - component: {fileID: 224505430489690023}
+  - component: {fileID: 488977854125237256}
   - component: {fileID: 6889854679212959206}
   - component: {fileID: 3809983492761950961}
   - component: {fileID: 4630851834804198917}
   m_Layer: 13
   m_Name: EagleBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &488977854125237256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678798834621495514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9284442d0ceb37f4f8b2458474107adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &6889854679212959206
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -200,10 +213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076f5c6b6ceee8c4aa9fcb965becaf7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  canAtack: 0
+  canAttack: 0
   EagleBullet: {fileID: 678798834621495514}
   player: {fileID: 0}
+  PlayerPos: {x: 0, y: 0}
+  EaglePos: {x: 0, y: 0}
 --- !u!212 &2543876206459825737
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -294,6 +308,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   getscore: 100
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &2543876206459825743
 Animator:
   serializedVersion: 3

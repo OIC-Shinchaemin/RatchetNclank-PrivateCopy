@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected AudioSource death;
 
-    public GameObject player;
+    
 
     protected virtual void Start()
     {
