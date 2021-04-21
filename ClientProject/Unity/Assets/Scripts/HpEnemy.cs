@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HpEnemy : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class HpEnemy : MonoBehaviour
 
 
     [SerializeField, Range(1, 50)] private int health = 1;
-    [SerializeField, Range(1, 50)] private int getscore = 100;
+    [SerializeField] private int getscore = 100;
+    [SerializeField] UnityEvent deathEvent;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -52,6 +54,7 @@ public class HpEnemy : MonoBehaviour
     public void Death()
     {
         Destroy(this.gameObject);
+        deathEvent.Invoke();
     }
     private void EbiScore()
     {

@@ -13,7 +13,7 @@ public class Ghetsis : MonoBehaviour
 
     public GameObject bossChild;
 
-    public GameObject bossEvent;
+    public BossEvent bossEvent;
 
     float second;
 
@@ -29,7 +29,7 @@ public class Ghetsis : MonoBehaviour
 
     void Update()
     {
-        if (bossEvent.GetComponent<BossEvent>().bBoss==true) //ボス戦フラグがたったら
+        if (bossEvent.GetComponent<BossEvent>().bBoss == true) //ボス戦フラグがたったら
         {
             BossMove();
 
@@ -117,11 +117,18 @@ public class Ghetsis : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Throw")
         {
             rotatespeed += 2;
         }
+    }
+
+    public void OnDeathEvent()
+    {
+        bossEvent.bBoss = false;
+        bossEvent.TriggerON();
     }
 }

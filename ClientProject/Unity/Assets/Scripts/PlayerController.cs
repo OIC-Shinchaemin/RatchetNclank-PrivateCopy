@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
         //UnityEngine.Debug.Log("Now scene is <color=red>" + SceneManager.GetActiveScene().name + "</color>");
         //UnityEngine.Debug.Log(rb.velocity.y);
         //UnityEngine.Debug.Log(coll.IsTouchingLayers(ground));
-        UnityEngine.Debug.Log(hDirection);
+        //UnityEngine.Debug.Log(hDirection);
 
     }
 
@@ -173,6 +174,12 @@ public class PlayerController : MonoBehaviour
             CollisionEnemy(enemy);
         }
 
+        if (other.gameObject.tag == "HpEnemy")
+        {
+            HpEnemy HpEnemy = other.gameObject.GetComponent<HpEnemy>();
+            CollisionHpEnemy(HpEnemy);
+        }
+
         if (other.gameObject.tag == "Destroy")
         {
             PermanentUI.perm.health = 0;
@@ -183,6 +190,24 @@ public class PlayerController : MonoBehaviour
                 state = State.Die;
 
             }
+        }
+    }
+
+    private void CollisionHpEnemy(HpEnemy HpEnemy)
+    {
+        state = State.hurt;
+
+        HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
+
+        if (HpEnemy.gameObject.transform.position.x > transform.position.x)
+        {
+
+            rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+
+        }
+        else
+        {
+            rb.velocity = new Vector2(hurtForce, rb.velocity.y);
         }
     }
 

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3691608555301254547}
   m_Layer: 0
   m_Name: Ghetsis
-  m_TagString: Enemy
+  m_TagString: HpEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +227,8 @@ MonoBehaviour:
   wayPoint1: {fileID: 0}
   wayPoint2: {fileID: 0}
   wayPoint3: {fileID: 0}
+  bossChild: {fileID: 0}
+  bossEvent: {fileID: 0}
   movespeed: {x: 0.05, y: 0.05}
 --- !u!114 &3691608555301254545
 MonoBehaviour:
@@ -241,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  getscore: 100
 --- !u!95 &3691608555301254546
 Animator:
   serializedVersion: 3
