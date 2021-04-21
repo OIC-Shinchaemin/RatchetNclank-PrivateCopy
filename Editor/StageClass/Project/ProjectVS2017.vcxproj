@@ -97,14 +97,18 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Elevator.cpp" />
     <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="GimmickBase.cpp" />
     <ClCompile Include="JsonStageParser.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageObject.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Elevator.h" />
     <ClInclude Include="GameApp.h" />
+    <ClInclude Include="GimmickBase.h" />
     <ClInclude Include="JsonStageParser.h" />
     <ClInclude Include="StageParser.h" />
     <ClInclude Include="Stage.h" />
