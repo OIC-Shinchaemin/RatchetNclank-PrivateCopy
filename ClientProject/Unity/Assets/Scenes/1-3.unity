@@ -2306,7 +2306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599533155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.199772, y: 0.9742055, z: -10}
+  m_LocalPosition: {x: -31.199778, y: 0.9736166, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3386,7 +3386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928055591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.8, y: -16.3, z: 0}
+  m_LocalPosition: {x: 60.8, y: -8.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39748,3 +39748,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   getscore: 100
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
