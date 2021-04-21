@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class Eagle : Enemy
 {
+    
     [SerializeField] private bool canAtack = false;
     private float second;
     [SerializeField] private GameObject EagleBullet;
+    private float shotspeed = 10f;
+    public GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+    }
+
     private void Update()
     {
         if(canAtack)
@@ -17,10 +26,17 @@ public class Eagle : Enemy
 
             if (second >= 1.0)    //1秒おきに攻撃
             {
-                //memo:x=-2.55y=-3.5
-                GameObject g = Instantiate(EagleBullet);
-                g.transform.position = EagleBullet.transform.position;
-                g.transform.rotation = EagleBullet.transform.rotation;
+                //プレイヤーの座標 - 自分の座標でベクトルを求めるわよん。
+                Vector2 vec = player.transform.position - transform.position;
+                //求めたベクトルを正規化するのです。
+                vec.Normalize();
+                //弾速を掛けることとする!!
+                vec *= shotspeed;
+                GameObject g = Instantiate(EagleBullet,transform.position,EagleBullet.transform.rotation);
+
+                g.GetComponent<Rigidbody2D>().velocity = vec;
+
+
                 g.SetActive(true);
 
                 second = 0;

@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 224505430489690023}
   - component: {fileID: 6889854679212959206}
   - component: {fileID: 3809983492761950961}
+  - component: {fileID: 4630851834804198917}
   m_Layer: 13
   m_Name: EagleBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3829785928246528373
 Transform:
   m_ObjectHideFlags: 0
@@ -130,6 +131,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &4630851834804198917
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678798834621495514}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 75d4732f25679d04d865c5d96cc70e5f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2543876206459825738
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,8 +200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076f5c6b6ceee8c4aa9fcb965becaf7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   canAtack: 0
   EagleBullet: {fileID: 678798834621495514}
+  player: {fileID: 0}
 --- !u!212 &2543876206459825737
 SpriteRenderer:
   m_ObjectHideFlags: 0
