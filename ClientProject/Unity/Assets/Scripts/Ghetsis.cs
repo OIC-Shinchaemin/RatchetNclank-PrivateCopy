@@ -29,7 +29,7 @@ public class Ghetsis : MonoBehaviour
 
     void Update()
     {
-        if (bossEvent.GetComponent<BossEvent>().bBoss==true) //ボス戦フラグがたったら
+        if (bossEvent.GetComponent<BossEvent>().bBoss == true) //ボス戦フラグがたったら
         {
             BossMove();
 
@@ -117,11 +117,18 @@ public class Ghetsis : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Throw")
         {
             rotatespeed += 2;
         }
+    }
+
+    private void OnDisable()
+    {
+        //bossEvent.GetComponent<BossEvent>().bBoss = false;
+        UnityEngine.Debug.Log("えへへ");
     }
 }

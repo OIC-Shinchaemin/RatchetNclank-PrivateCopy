@@ -46,7 +46,7 @@ public class AtackBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy"&&!IsBreaking)               
+        if (collision.tag == "Enemy" || collision.tag == "HpEnemy" && !IsBreaking)               
         {
             sound.Play();
             anim.SetTrigger("Lost");
