@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource footstep;
 
     //ぇぬのコード用
-    [SerializeField] private bool CanAtack = false;
+    public bool CanAtack = false;
     [SerializeField] private GameObject atackball;
     [SerializeField] private AudioSource Throwse;
     public bool Left = false;
