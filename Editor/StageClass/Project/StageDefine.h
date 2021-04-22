@@ -9,4 +9,7 @@ enum class StageObjectType {
     EnemySpawnPoint,   //! 敵出現位置
     Elevator,          //! エレベーター
     Bridge,            //! 橋
+    BoxBullet,
+    BoxBolt,
+    BoxNanotech,
 };

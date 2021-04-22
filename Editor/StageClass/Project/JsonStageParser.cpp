@@ -151,6 +151,12 @@ GimmickPtr JsonStageParser::CreateGimmick(StageObjectType type, const rapidjson:
         start.z = data["start_pos_z"].GetDouble();
         ptr     = std::make_shared<Bridge>(start);
     } break;
+    case StageObjectType::BoxBullet:
+    case StageObjectType::BoxBolt:
+    case StageObjectType::BoxNanotech:
+    {
+        ptr = std::make_shared<WoodBox>();
+    }break;
     }
     return ptr;
 }
@@ -176,6 +182,7 @@ StageFileResult JsonStageParser::Load(const std::string& path, ParseData& out) {
     StageObjectArray* static_object_array = out.static_object_array_pointer;
     EnemySpawnArray*  enemy_spawn_array   = out.enemy_spawn_array_pointer;
     GimmickArray*     gimmick_array       = out.gimmick_array_pointer;
+    WoodBoxArray*     box_array           = out.box_array_pointer;
     
     // メッシュリストの分解
     if (json_document.HasMember("mesh_list")) {
@@ -198,6 +205,19 @@ StageFileResult JsonStageParser::Load(const std::string& path, ParseData& out) {
         GimmickObjectListParse(json_document, gimmick_array);
     }
 
+    for (GimmickArray::iterator it = gimmick_array->begin(); it != gimmick_array->end();) {
+        StageObjectType type = (*it)->GetType();
+        if (type == StageObjectType::BoxBullet ||
+            type == StageObjectType::BoxBolt ||
+            type == StageObjectType::BoxNanotech) {
+            box_array->push_back(std::dynamic_pointer_cast<WoodBox>(*it));
+            it = gimmick_array->erase(it);
+            continue;
+        }
+        else {
+            ++it;
+        }
+    }
 
     return StageFileResult::Success;
 }

@@ -6,6 +6,10 @@
 
 #include "StageDefine.h"
 
+// 名前の置き換え
+using MeshPtr   = std::shared_ptr<CMeshContainer>;
+using MeshArray = std::vector<MeshPtr>;
+
 /// <summary>
 /// ステージオブジェクトクラス
 /// </summary>
@@ -113,6 +117,8 @@ public:
     /// 描画用マトリクスの再計算
     /// </summary>
     void RefreshWorldMatrix(void);
+
+    void SetEnable(bool b);
 };
 
 // 置き換え

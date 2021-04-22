@@ -1,10 +1,8 @@
 #pragma once
 #include "StageObject.h"
 #include "GimmickBase.h"
+#include "WoodBox.h"
 
-// 名前の置き換え
-using MeshPtr         = std::shared_ptr<CMeshContainer>;
-using MeshArray       = std::vector<MeshPtr>;
 // pair<builder_path, pos_data>
 using EnemySpawnData  = std::pair<std::string, StageObjectPtr>;
 using EnemySpawnArray = std::vector<EnemySpawnData>;
@@ -33,11 +31,20 @@ private:
     //! ギミックの配列
     GimmickArray        _gimmick_array;
 
+    //! 箱系オブジェクトの配列
+    WoodBoxArray        _woodbox_array;
+
+    std::vector<bool>   _box_enable_array_prev;
+
+    bool                _init_flag;
+
     /// <summary>
     /// 静的なステージメッシュの生成
     /// </summary>
     /// <returns>true : 生成, false : 未生成</returns>
     bool CreateStaticStageMesh(void);
+
+    void RenderObject(const StageObjectPtr& obj);
 
 public:
 
@@ -91,5 +98,7 @@ public:
     /// </summary>
     /// <returns></returns>
     GimmickArray& GetGimmickArray(void);
+
+    WoodBoxArray& GetWoodBoxArray(void);
 };
 

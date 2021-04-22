@@ -57,6 +57,9 @@
     <ClCompile Include="Bridge.cpp">
       <Filter>ソース ファイル\Stage\Gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="WoodBox.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="StageFileFormat.h">
       <Filter>ヘッダー ファイル\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="WoodBox.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
