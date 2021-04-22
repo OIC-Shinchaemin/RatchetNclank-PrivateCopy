@@ -34,7 +34,9 @@ void state::EnemyActionIdleState::Enter(void) {
     
     if (auto idle_com = _idle_com.lock()) {
         idle_com->SetAngularSpeed(angular_speed);
-        idle_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
+        float angle = idle_com->GetIdealAngle();
+        angle += math::ToRadian(1.0f);
+        idle_com->SetIdealAngle(angle);
         idle_com->Start();
     } // if
     if (auto move_com = _move_com.lock()) {

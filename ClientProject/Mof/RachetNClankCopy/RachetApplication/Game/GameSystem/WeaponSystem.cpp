@@ -50,6 +50,9 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
 }
 
 bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::GameManager>& observer) {
+    if (auto canvas = _ui_canvas.lock()) {
+        canvas->RemoveElement("EquipmentWeaponMenu");
+    } // if
     auto menu = std::make_shared< my::EquipmentWeaponMenu>("EquipmentWeaponMenu");
     _equipment_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
@@ -66,7 +69,12 @@ bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Ga
             key.c_str(), _builder_name_map.at(key), &param);
         weapon->AddObserver(observer);
         weapon->AddMechanicalInfoObserver(menu);
-        _weapons.push_back(std::make_pair(key, weapon));
+        auto it = std::find_if(_weapons.begin(), _weapons.end(), [key](const my::WeaponSystem::Pair& pair) {
+            return pair.first == key;
+        });
+        if (it == _weapons.end()) {
+            _weapons.push_back(std::make_pair(key, weapon));
+        } // if
     } // for
 
     return true;
@@ -75,7 +83,7 @@ bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Ga
 std::shared_ptr<my::Mechanical> my::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
     auto it = std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
         return pair.first == name;
-    });
+                           });
     if (it != _weapons.end()) {
         return it->second;
     } // if

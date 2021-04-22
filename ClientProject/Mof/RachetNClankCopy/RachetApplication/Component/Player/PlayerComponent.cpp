@@ -139,6 +139,7 @@ bool my::PlayerComponent::Initialize(void) {
     velocity_com->SetGravity(0.98f);
 
     if (auto canvas = super::_ui_canvas.lock()) {
+        canvas->RemoveElement("LockOnCursorMenu");
         auto menu = std::make_shared<my::LockOnCursorMenu>("LockOnCursorMenu");
         menu->SetResourceManager(_resource_manager);
         _observable.AddObserver(menu);

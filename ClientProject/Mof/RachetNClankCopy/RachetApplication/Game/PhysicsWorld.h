@@ -29,6 +29,11 @@ private:
     std::vector<CollisionLayer> _layers;
     //! ファクトリー
     my::Factory<my::CollisionAlgolithm> collision_algolithm_factory;
+    /// <summary>
+    /// 生成
+    /// </summary>
+    /// <param name=""></param>
+    void GenerateLayer(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -59,6 +64,11 @@ public:
     /// </summary>
     /// <param name="stage"></param>
     void CollisionStage(Stage* stage);
+    /// <summary>
+    /// リセット
+    /// </summary>
+    /// <param name=""></param>
+    void Reset(void);
 };
 }
 #endif // !MY_PHYSIC_WORLD_H

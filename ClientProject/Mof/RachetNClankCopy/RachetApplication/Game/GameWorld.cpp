@@ -45,3 +45,7 @@ bool my::GameWorld::Update(float delta_time) {
 
 void my::GameWorld::UpdateDebug(void) {
 }
+
+void my::GameWorld::Reset(void) {
+    _actors.clear();
+}
