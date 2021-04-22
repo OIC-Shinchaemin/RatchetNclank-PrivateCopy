@@ -13,6 +13,7 @@ struct ParseData {
     StageObjectArray* static_object_array_pointer;
     EnemySpawnArray*  enemy_spawn_array_pointer;
     GimmickArray*     gimmick_array_pointer;
+    WoodBoxArray*     box_array_pointer;
 };
 
 /// <summary>

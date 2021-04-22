@@ -104,3 +104,7 @@ void StageObject::RefreshWorldMatrix(void) {
     trans.Translation(_position);
     _world_matrix = scale * rotate * trans;
 }
+
+void StageObject::SetEnable(bool b) {
+    _enable = b;
+}
