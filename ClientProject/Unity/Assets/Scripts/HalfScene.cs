@@ -24,7 +24,7 @@ public class HalfScene : MonoBehaviour
     void Update()
     {
         delaytime++;
-        if (delaytime > 600)
+        if (delaytime > 300)
         {
 
 

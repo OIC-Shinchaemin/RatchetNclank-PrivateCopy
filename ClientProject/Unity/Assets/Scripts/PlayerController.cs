@@ -71,9 +71,12 @@ public class PlayerController : MonoBehaviour
         {
             if (state != State.hurt && state != State.Die)
             {
-                RaycastHit2D hit = Physics2D.Raycast(rb.position, Vector2.down, 1.3f, ground);
-                if (hit.collider != null)
+                RaycastHit2D lhit = Physics2D.Raycast(rb.position+new Vector2(0.4f,0), Vector2.down, 1.3f, ground);
+                RaycastHit2D rhit = Physics2D.Raycast(rb.position + new Vector2(-0.4f, 0), Vector2.down, 1.3f, ground);
+                if (lhit.collider != null || rhit.collider != null)
+                {
                     Jump();
+                }
             }
         }
 
