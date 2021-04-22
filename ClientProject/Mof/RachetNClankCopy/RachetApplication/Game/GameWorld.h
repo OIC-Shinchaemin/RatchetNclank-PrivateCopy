@@ -56,6 +56,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     void UpdateDebug(void);
+    /// <summary>
+    /// ƒŠƒZƒbƒg
+    /// </summary>
+    /// <param name=""></param>
+    void Reset(void);
 };
 }
 #endif // !MY_GAME_WORLD_H

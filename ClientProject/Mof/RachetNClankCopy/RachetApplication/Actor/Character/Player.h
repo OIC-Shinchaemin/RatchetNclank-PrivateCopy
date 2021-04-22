@@ -37,6 +37,11 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
     /// <summary>
+    /// ƒfƒŠ[ƒg
+    /// </summary>
+    /// <param name=""></param>
+    virtual void End(void) override;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name="param"></param>

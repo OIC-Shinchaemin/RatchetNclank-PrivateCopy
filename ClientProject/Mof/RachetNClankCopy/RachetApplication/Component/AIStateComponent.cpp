@@ -6,7 +6,7 @@
 
 my::AIStateComponent::AIStateComponent(int priority) :
     super(priority),
-    _state_machine() ,
+    _state_machine(),
     _thinking_time() {
 }
 
@@ -40,7 +40,7 @@ bool my::AIStateComponent::Initialize(void) {
 
 bool my::AIStateComponent::Update(float delta_time) {
     if (_thinking_time.Tick(delta_time)) {
-       // _state_machine.Update(delta_time);
+        _state_machine.Update(delta_time);
     } // if
     return false;
 }

@@ -39,6 +39,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Render(void);
+    /// <summary>
+    /// ƒŠƒZƒbƒg
+    /// </summary>
+    /// <param name=""></param>
+    void Reset(void);
 };
 }
 #endif // !MY_RENDERER_H

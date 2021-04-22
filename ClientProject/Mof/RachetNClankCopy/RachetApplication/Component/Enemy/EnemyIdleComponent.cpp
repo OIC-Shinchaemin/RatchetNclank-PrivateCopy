@@ -58,6 +58,10 @@ void my::EnemyIdleComponent ::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
+float my::EnemyIdleComponent::GetIdealAngle(void) const {
+    return this->_ideal_angle;
+}
+
 std::string my::EnemyIdleComponent ::GetType(void) const {
     return "EnemyIdleComponent";
 }

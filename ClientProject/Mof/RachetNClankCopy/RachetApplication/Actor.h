@@ -178,7 +178,7 @@ public:
     /// ƒfƒŠ[ƒg
     /// </summary>
     /// <param name=""></param>
-    void End(void);
+    virtual void End(void);
     /// <summary>
     /// ‰Šú‰»
     /// </summary>

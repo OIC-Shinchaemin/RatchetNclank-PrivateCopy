@@ -4,6 +4,11 @@
 #include "../../Component/Player/PlayerComponent.h"
 
 
+void my::Player::End(void) {
+    Observable::Notify("PlayerDead", shared_from_this());
+    //super::End();
+}
+
 my::Player::Player() :
     _current_mechanical() {
     super::SetTag("Player");

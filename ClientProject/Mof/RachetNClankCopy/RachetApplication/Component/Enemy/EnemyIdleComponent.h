@@ -51,6 +51,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    float GetIdealAngle(void) const;
+    /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
     /// ‰Šú‰»
