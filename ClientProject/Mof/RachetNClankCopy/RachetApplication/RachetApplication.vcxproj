@@ -241,6 +241,9 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="Stage\Bridge.cpp" />
+    <ClCompile Include="Stage\Elevator.cpp" />
+    <ClCompile Include="Stage\GimmickBase.cpp" />
     <ClCompile Include="Stage\JsonStageParser.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="Stage\StageObject.cpp" />
@@ -407,9 +410,13 @@
     <ClInclude Include="MotionNames.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Stage\Bridge.h" />
+    <ClInclude Include="Stage\Elevator.h" />
+    <ClInclude Include="Stage\GimmickBase.h" />
     <ClInclude Include="Stage\JsonStageParser.h" />
     <ClInclude Include="Stage\Stage.h" />
     <ClInclude Include="Stage\StageDefine.h" />
+    <ClInclude Include="Stage\StageFileFormat.h" />
     <ClInclude Include="Stage\StageObject.h" />
     <ClInclude Include="Stage\StageParser.h" />
     <ClInclude Include="State\AI\AICombatState.h" />

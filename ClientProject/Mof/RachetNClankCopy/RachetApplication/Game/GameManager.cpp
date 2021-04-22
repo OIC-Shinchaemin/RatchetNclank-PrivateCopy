@@ -61,7 +61,7 @@ bool my::GameManager::Initialize(void) {
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _game_money = std::make_unique<my::GameMoney>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-    
+
     _game_money->SetResourceManager(_resource);
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
@@ -84,7 +84,7 @@ bool my::GameManager::Initialize(void) {
     auto param = new my::Actor::Param();
     // chara
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::StageObjectType_EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+        // _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::StageObjectType_EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
         param->transform.position = enemy_spawn.second->GetPosition();
@@ -118,10 +118,18 @@ bool my::GameManager::Update(float delta_time) {
     } // for
     _delete_actors.clear();
 
+
+    if (::g_pInput->IsKeyPush(MOFKEY_G)) {
+        _stage.GetGimmickArray().at(0)->ActionStart();
+    } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_H)) {
+        _stage.GetGimmickArray().at(1)->ActionStart();
+    } // if
+
+
     // update
     _quick_change->Update();
-    _stage.Update();
-
+    _stage.Update(delta_time);
 
     _game_world.Update(delta_time);
 

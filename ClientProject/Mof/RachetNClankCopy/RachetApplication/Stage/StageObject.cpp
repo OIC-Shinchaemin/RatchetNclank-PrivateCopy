@@ -3,23 +3,7 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-StageObject::StageObject(void) 
-    : _enable(true)
-    , _collision_enable(true)
-    , _type(0) 
-    , _name("")
-    , _mesh_no(-1)
-    , _position(Vector3(0, 0, 0))
-    , _scale(Vector3(1, 1, 1))
-    , _rotate(Vector3(0, 0, 0))
-    , _world_matrix() {
-    RefreshWorldMatrix();
-}
-
-/// <summary>
-/// コンストラクタ
-/// </summary>
-StageObject::StageObject(bool enable, bool collision, StageObjectType_ type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate)
+StageObject::StageObject(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate)
     : _enable(enable)
     , _collision_enable(collision)
     , _type(type)
@@ -58,7 +42,7 @@ bool StageObject::IsCollisionEnable(void) const {
 /// 種類の取得
 /// </summary>
 /// <returns>種類</returns>
-StageObjectType_ StageObject::GetType(void) const {
+StageObjectType StageObject::GetType(void) const {
     return _type;
 }
 

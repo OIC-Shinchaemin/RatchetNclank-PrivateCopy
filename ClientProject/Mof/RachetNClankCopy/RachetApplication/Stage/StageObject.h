@@ -4,8 +4,7 @@
 #include <string>
 #include <memory>
 
-// enum置き換え(実装は StageDefine.h )
-using StageObjectType_ = int;
+#include "StageDefine.h"
 
 /// <summary>
 /// ステージオブジェクトクラス
@@ -20,7 +19,7 @@ protected:
     bool             _collision_enable;
 
     //! オブジェクトの種類
-    StageObjectType_ _type;
+    StageObjectType  _type;
 
     //! オブジェクトの名前
     std::string      _name;
@@ -41,17 +40,11 @@ protected:
     CMatrix44        _world_matrix;
 
 public:
-
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    StageObject(void);
-
     /// <summary>
     /// コンストラクタ
     /// </summary>
     StageObject(bool enable = true, bool collision = true,
-        StageObjectType_ type = 0, std::string name = "",
+        StageObjectType type = StageObjectType::None, std::string name = "",
         int mesh_no = -1,
         Vector3 pos = Vector3(),
         Vector3 scale = Vector3(1, 1, 1),
@@ -60,7 +53,7 @@ public:
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~StageObject(void);
+    virtual ~StageObject(void);
 
     /// <summary>
     /// 有効フラグの取得
@@ -78,7 +71,7 @@ public:
     /// 種類の取得
     /// </summary>
     /// <returns>種類</returns>
-    StageObjectType_ GetType(void) const;
+    StageObjectType GetType(void) const;
 
     /// <summary>
     /// 名前の取得

@@ -1,7 +1,9 @@
 {
   "mesh_list": [
     "aaa.mom",
-    "test.mom"
+    "test.mom",
+    "sample_cylinder.mom",
+    "sample_box.mom"
   ],
   "static_object_list": [
     {
@@ -84,6 +86,47 @@
       "pos_x": 2.0,
       "pos_y": 1.0,
       "pos_z": 6.0
+    }
+  ],
+  "gimmick_list": [
+    {
+      "enable": true,
+      "collision": true,
+      "object_name": "elevator",
+      "mesh_no": 2,
+      "pos_x": 0.0,
+      "pos_y": 0.0,
+      "pos_z": 0.0,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0,
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rotation_z": 0.0,
+      "type": 3,
+      "end_pos_x": 1.0,
+      "end_pos_y": 1.0,
+      "end_pos_z": 1.0,
+      "request": 2.0
+    },
+    {
+      "enable": true,
+      "collision": true,
+      "object_name": "bridge",
+      "mesh_no": 3,
+      "pos_x": 0.0,
+      "pos_y": 0.0,
+      "pos_z": 0.0,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0,
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rotation_z": 0.0,
+      "type": 4,
+      "start_pos_x": 1.0,
+      "start_pos_y": 1.0,
+      "start_pos_z": 1.0
     }
   ]
 }
