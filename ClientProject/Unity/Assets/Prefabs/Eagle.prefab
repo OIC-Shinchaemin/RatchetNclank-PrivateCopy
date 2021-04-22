@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6889854679212959206}
   - component: {fileID: 3809983492761950961}
   - component: {fileID: 4630851834804198917}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: EagleBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 2543876206459825743}
   - component: {fileID: 8812764936142120203}
   - component: {fileID: 808329640914316982}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Eagle
   m_TagString: Enemy
   m_Icon: {fileID: 0}

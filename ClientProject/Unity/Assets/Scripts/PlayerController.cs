@@ -69,9 +69,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (coll.IsTouchingLayers(ground) && state != State.hurt)
+            if (state != State.hurt && state != State.Die)
             {
-                Jump();
+                RaycastHit2D lhit = Physics2D.Raycast(rb.position+new Vector2(0.4f,0), Vector2.down, 1.3f, ground);
+                RaycastHit2D rhit = Physics2D.Raycast(rb.position + new Vector2(-0.4f, 0), Vector2.down, 1.3f, ground);
+                if (lhit.collider != null || rhit.collider != null)
+                {
+                    Jump();
+                }
             }
         }
 
@@ -128,7 +133,6 @@ public class PlayerController : MonoBehaviour
             {
                 PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
-
             }
         }
         if (collision.gameObject.tag == "Enemy")
@@ -136,7 +140,6 @@ public class PlayerController : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             CollisionEnemy(enemy);
         }
-
     }
 
     void CollisionBullet(Bullet bullet)
@@ -453,12 +456,4 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("HalfScene");
         }
     }
-
-
-
-
-   
-
-
-
 }

@@ -13,7 +13,7 @@ public class HalfScene : MonoBehaviour
     private void Start()
     {
         playerCount.text = PermanentUI.perm.PlayerCount.ToString();
-        if(PermanentUI.perm.PlayerCount<0)
+        if(PermanentUI.perm.PlayerCount<=0)
         {
             GameOver.SetActive(true);
         }
@@ -24,11 +24,11 @@ public class HalfScene : MonoBehaviour
     void Update()
     {
         delaytime++;
-        if (delaytime > 600)
+        if (delaytime > 300)
         {
 
 
-            if (PermanentUI.perm.PlayerCount < 0)
+            if (PermanentUI.perm.PlayerCount <= 0)
             {
                 PermanentUI.perm.GameEnd();
                 SceneManager.LoadScene("TitleScene");

@@ -24,12 +24,15 @@ EditorBuildSettings:
     path: Assets/Scenes/1-Boss.unity
     guid: d163e8f69579b2f48a7ff263d2b39545
   - enabled: 1
-    path: Assets/Scenes/2-1.unity
-    guid: 3704e061dc8765b45a098b341286d5ff
-  - enabled: 1
     path: Assets/Scenes/HalfScene.unity
     guid: 7b92d9c32c1661848a2622ee3ab6e1e7
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: e9c703b5c2d383d4ba04b3c35f2298cd
+  - enabled: 0
+    path: Assets/Scenes/2-1.unity
+    guid: 3704e061dc8765b45a098b341286d5ff
+  - enabled: 0
+    path: Assets/Scenes/2-2.unity
+    guid: bafbcfad79f8f004497fca888b374b31
   m_configObjects: {}

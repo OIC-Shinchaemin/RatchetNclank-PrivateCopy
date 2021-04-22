@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4277260719534825921}
   - component: {fileID: 4277260719534825920}
   - component: {fileID: -573368389584074974}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Frog
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -282,3 +282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   getscore: 100
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
