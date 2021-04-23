@@ -34,12 +34,12 @@ public class Eagle : Enemy
             {
                 Attack();
             }
-            if(canMove)
-            {
-                Move();
-            }
-        }
 
+        }
+        if (canMove)
+        {
+            Move();
+        }
     }
 
     private void Attack()
