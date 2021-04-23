@@ -24,7 +24,7 @@ TagManager:
   - Ground
   - HalfUI
   - 
-  - 
+  - Player
   - Enemy
   - Bullet
   - BackGround

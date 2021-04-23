@@ -6,7 +6,8 @@ public class Opossum : Enemy
 {
     [SerializeField] private float leftCap;
     [SerializeField] private float rightCap;
-
+    [SerializeField] private LayerMask Player;
+    [SerializeField] private LayerMask Ground;
     [SerializeField] private int moveSpeed = 5;
     private bool facingLeft = true;
     // Start is called before the first frame update
@@ -18,6 +19,10 @@ public class Opossum : Enemy
 
     void Update()
     {
+
+
+
+
 
         if (facingLeft)
         {
