@@ -57,7 +57,7 @@ void my::Player::UpdateInput(void)
             _double_jump = true;
             _time = 10.0f;
         }
-        else //if (m_State == None)
+        else if (_player_state == PlayerState::Wait)
         {
             this->JumpStart();
         }
@@ -96,7 +96,7 @@ void my::Player::UpdateInput(void)
     }
     else
     {
-        _player_state = PlayerState::Wait;
+        //_player_state = PlayerState::Wait;
     }
 
     if (g_pGamepad->IsKeyPull(XINPUT_A))
@@ -110,7 +110,7 @@ void my::Player::UpdateInput(void)
             _double_jump = true;
             _time = 10.0f;
         }
-        else //if (m_State == None)
+        else if (_player_state == PlayerState::Wait)
         {
             this->JumpStart();
         }
@@ -183,14 +183,14 @@ void my::Player::UpdateJump(void)
 {
     if (_player_state == PlayerState::JumpStart && _motion->IsEndMotion())
     {
-        _gravity = 0.2f;
+        //_gravity = 0.2f;
         _player_state = PlayerState::JumpUp;
     }
     else if (_player_state == PlayerState::JumpUp)
     {
         if (_time < 0)
         {
-            _gravity = 0.0f;
+            //_gravity = 0.0f;
             _player_state = PlayerState::JumpDown;
         }
         if (_gravity < 0)
@@ -211,12 +211,37 @@ void my::Player::UpdateJump(void)
     }
     else if (PlayerState::JumpDown == _player_state && _motion->IsEndMotion())
     {
-        //m_State = None;
+        _player_state = PlayerState::Wait;
     }
     else if (_player_state == PlayerState::JumpEnd)
     {
         _player_state = PlayerState::Wait;
         _jump = false;
+    }
+}
+
+void my::Player::UpdateAttack(void)
+{
+    if (_player_state != PlayerState::Attack1 && _player_state != PlayerState::Attack2 && _player_state != PlayerState::Attack3)
+    {
+        return;
+    }
+    if (_player_state == PlayerState::Attack1 && _motion->IsEndMotion() && _Next_attack)
+    {
+        _player_state = PlayerState::Attack2;
+        _Next_attack = false;
+        _attack_move = false;
+    }
+    else if (_player_state == PlayerState::Attack2 && _motion->IsEndMotion() && _Next_attack)
+    {
+        _player_state = PlayerState::Attack3;
+        _Next_attack = false;
+        _attack_move = false;
+    }
+    else if (_motion->IsEndMotion() && !_Next_attack)
+    {
+        _player_state = PlayerState::Wait;
+        _attack_move = false;
     }
 }
 
@@ -336,6 +361,7 @@ bool my::Player::Update(float delta_time) {
     }
     //UpdateMove();
     UpdateJump();
+    UpdateAttack();
 
     CVector3 pos = GetPosition();
     pos += _move;
