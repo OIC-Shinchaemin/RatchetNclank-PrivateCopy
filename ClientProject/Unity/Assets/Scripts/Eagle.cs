@@ -6,24 +6,40 @@ public class Eagle : Enemy
 {
     
     [SerializeField] private bool canAttack = false;
+    [SerializeField] private bool canMove = false;
+
     private float second;
     [SerializeField] private GameObject EagleBullet;
     [SerializeField] private GameObject player;
 
-    public Vector2 PlayerPos;
-    public Vector2 EaglePos;
+    private Vector2 PlayerPos;
+    private Vector2 EaglePos;
 
+
+    [SerializeField] private float moveSpeed = 5;
+    [SerializeField] private float topCap;
+    [SerializeField] private float underCap;
+
+    [SerializeField] bool Upmode = false;
 
     private float shotspeed = 10f;
 
     
     private void Update()
     {
-        if(canAttack)
+        if(GetComponent<SpriteRenderer>().isVisible)
         {
-            Attack();
-        }
 
+            if (canAttack)
+            {
+                Attack();
+            }
+
+        }
+        if (canMove)
+        {
+            Move();
+        }
     }
 
     private void Attack()
@@ -56,5 +72,28 @@ public class Eagle : Enemy
 
             second = 0;
         }
+    }
+
+    private void Move()
+    {
+        if (Upmode)
+        {
+            rb.velocity = new Vector2(0, moveSpeed);
+        }
+        else
+        {
+
+            rb.velocity = new Vector2(0, -moveSpeed);
+
+        }
+        if (transform.position.y > topCap)
+        {
+            Upmode = false;
+        }
+        else if(transform.position.y < underCap)
+        {
+            Upmode = true;
+        }
+
     }
 }
