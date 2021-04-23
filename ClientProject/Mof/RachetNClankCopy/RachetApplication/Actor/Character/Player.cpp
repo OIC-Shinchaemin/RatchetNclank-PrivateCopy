@@ -7,63 +7,73 @@
 
 void my::Player::UpdateInput(void)
 {
-    bool key_input = false;
-    if (g_pInput->IsKeyHold(MOFKEY_W) && g_pInput->IsKeyHold(MOFKEY_A))
-    {
-        _player_state = PlayerState::MoveFast;
+    bool key_input = false; bool left = false; bool right = false;
+    if (::g_pInput->IsKeyHold(MOFKEY_A)) {
         key_input = true;
-        _move_angle = 315.0f;
-    }
-    else if (g_pInput->IsKeyHold(MOFKEY_S) && g_pInput->IsKeyHold(MOFKEY_A))
-    {
-        _player_state = PlayerState::MoveFast;
+        left = true;
+        _move_angle = 270.0f;
+    } 
+    else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
         key_input = true;
-        _move_angle = 225.0f;
-    }
-    else if (g_pInput->IsKeyHold(MOFKEY_W) && g_pInput->IsKeyHold(MOFKEY_D))
-    {
-        _player_state = PlayerState::MoveFast;
-        key_input = true;
-        _move_angle = 45.0f;
-    }
-    else if (g_pInput->IsKeyHold(MOFKEY_S) && g_pInput->IsKeyHold(MOFKEY_D))
-    {
-        _player_state = PlayerState::MoveFast;
-        key_input = true;
-        _move_angle = 135.0f;
-    }
-    else if (g_pInput->IsKeyHold(MOFKEY_W))
-    {
-        _player_state = PlayerState::MoveFast;
+        right = true;
+        _move_angle = 90.0f;
+    } 
+    if (::g_pInput->IsKeyHold(MOFKEY_W)) {
         key_input = true;
         _move_angle = 0.0f;
-    }
-    else if (g_pInput->IsKeyHold(MOFKEY_S))
-    {
-        _player_state = PlayerState::MoveFast;
+        if (right) {
+            _move_angle += 45.0f;
+        } 
+        else if (left) {
+            _move_angle -= 45.0f;
+        } 
+    } 
+    else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
         key_input = true;
         _move_angle = 180.0f;
-    }
-    else if (g_pInput->IsKeyHold(MOFKEY_A))
+        if (right) {
+           _move_angle -= 45.0f;
+        } 
+        else if (left) {
+            _move_angle += 45.0f;
+        } 
+    } 
+    if (key_input)
     {
+        _move_angle   = math::ToRadian(_move_angle) ;
         _player_state = PlayerState::MoveFast;
-        key_input = true;
-        _move_angle = 270.0f;
-    }
-    else if (g_pInput->IsKeyHold(MOFKEY_D))
-    {
-        _player_state = PlayerState::MoveFast;
-        key_input = true;
-        _move_angle = 90.0f;
     }
 
-    if (g_pInput->IsKeyHold(MOFKEY_SPACE))
+    if (g_pInput->IsKeyPull(MOFKEY_SPACE))
     {
         key_input = true;
+        _time = 0.22f;
     }
-    if (g_pInput->IsKeyHold(MOFKEY_V))
+    else if (g_pInput->IsKeyPush(MOFKEY_SPACE))
     {
         key_input = true;
+        if (_player_state == PlayerState::JumpUp && !_double_jump && _time >= 0)
+        {
+            _double_jump = true;
+            _time = 10.0f;
+        }
+        else //if (m_State == None)
+        {
+            this->JumpStart();
+        }
+    }
+    else if (g_pInput->IsKeyPush(MOFKEY_V))
+    {
+        key_input = true;
+        if (_player_state == PlayerState::Wait)
+        {
+            _player_state = PlayerState::Attack1;
+            _attack_move = false;
+        }
+        else if (_player_state == PlayerState::Attack1 || _player_state == PlayerState::Attack2)
+        {
+            _Next_attack = true;
+        }
     }
 
 
@@ -102,10 +112,7 @@ void my::Player::UpdateInput(void)
         }
         else //if (m_State == None)
         {
-            _jump = true;
-            _player_state = PlayerState::JumpStart;
-            _double_jump = false;
-            _time = 10.0f;
+            this->JumpStart();
         }
     }
     else if (g_pGamepad->IsKeyPush(XINPUT_X))
@@ -124,20 +131,7 @@ void my::Player::UpdateInput(void)
 
 void my::Player::UpdateMove(void)
 {
-    if (_player_state == PlayerState::Wait /*|| !_jump*/)
-    {
-        float ml = _move.Length();
-        if (ml > character_move_speed)
-        {
-            _move.Normal(_move);
-            _move *= (ml - character_move_speed);
-        }
-        else
-        {
-            _move.SetValue(0.0f, 0.0f, 0.0f);
-        }
-        return;
-    }
+    
 
     CVector3 cfvec = _camera_controller.GetService()->GetViewFront();
     float cy = atan2(cfvec.z, -cfvec.x) + MOF_MATH_HALFPI;
@@ -146,28 +140,42 @@ void my::Player::UpdateMove(void)
     float sa = my - GetRotate().y;
     MOF_ROTDIRECTION_RADIANANGLE(sa);
     CVector3 angle = GetRotate();
-    angle.y += MOF_CLIPING(sa, -character_rotation_speed, character_rotation_speed);
+    angle.y += MOF_CLIPING(sa, -_character_rotation_speed, _character_rotation_speed);
     SetRotate(angle);
     MOF_NORMALIZE_RADIANANGLE(angle.y);
 
     CVector3 fvec(0, 0, -1);
     fvec.RotationY(my);
-    _move += fvec * character_move_speed;
+    _move += fvec * _character_move_speed;
     float ml = _move.Length();
     float ms = 0.0f;
     if (_player_state == PlayerState::MoveSlow)
     {
-        ms = character_slow_move_speed_max;
+        ms = _character_slow_move_speed_max;
     }
     else if (_player_state == PlayerState::MoveFast)
     {
-        ms = character_fast_move_speed_max;
+        ms = _character_fast_move_speed_max;
     }
 
     if (ml >= ms)
     {
         _move.Normal(_move);
         _move *= ms;
+    }
+}
+
+void my::Player::UpdateWait(void)
+{
+    float ml = _move.Length();
+    if (ml > _character_move_speed)
+    {
+        _move.Normal(_move);
+        _move *= (ml - _character_move_speed);
+    }
+    else
+    {
+        _move.SetValue(0.0f, 0.0f, 0.0f);
     }
 }
 
@@ -210,6 +218,15 @@ void my::Player::UpdateJump(void)
         _player_state = PlayerState::Wait;
         _jump = false;
     }
+}
+
+void my::Player::JumpStart(void)
+{
+    _jump = true;
+    _player_state = PlayerState::JumpStart;
+    _double_jump = false;
+    _time = 10.0f;
+    _move.y = _jump_power;
 }
 
 void my::Player::ChangeAnimation(void)
@@ -255,7 +272,21 @@ void my::Player::ChangeAnimation(void)
 }
 
 my::Player::Player() :
-    _current_mechanical() {
+    _current_mechanical(),
+    _mesh(),
+    _motion(),
+    _player_view_camera(),
+    _camera_controller(),
+    _move_angle(0.0f),
+    _player_state(),
+    _move(),
+    _gravity(0.0f),
+    _time(0.0f),
+    _jump(false),
+    _double_jump(false),
+    _attack_move(false),
+    _Next_attack(false)
+{
     super::SetTag("Player");
 }
 
@@ -295,7 +326,15 @@ bool my::Player::Update(float delta_time) {
     _motion->AddTimer(CUtilities::GetFrameSecond());
 
     UpdateInput();
-    UpdateMove();
+    if (_player_state == PlayerState::MoveFast || _player_state == PlayerState::MoveSlow)
+    {
+        UpdateMove();
+    }
+    else if (_player_state == PlayerState::Wait)
+    {
+        UpdateWait();
+    }
+    //UpdateMove();
     UpdateJump();
 
     CVector3 pos = GetPosition();
@@ -304,7 +343,7 @@ bool my::Player::Update(float delta_time) {
     {
         //_gravity -= gravity;
     }
-    _gravity = gravity;
+    _gravity = _gravity_increment;
     pos.y -= _gravity;
     SetPosition(pos);
 
@@ -327,6 +366,10 @@ bool my::Player::Update(float delta_time) {
     if (auto weapon = _current_mechanical.lock()) {
         weapon->Update(delta_time);
     } // if
+
+    float height = 1.0f;
+    pos.y += height;
+    _camera_controller.GetService()->SetCameraTarget(pos);
     _camera_controller.GetService()->Update();
     return true;
 }
@@ -361,5 +404,6 @@ bool my::Player::Render(void) {
 bool my::Player::Release(void) {
     super::Release();
     _current_mechanical.reset();
+    MOF_SAFE_DELETE(_motion);
     return true;
 }
