@@ -19,6 +19,12 @@
     <Filter Include="ソース ファイル\Utilities">
       <UniqueIdentifier>{1836db43-dfb8-4c87-9e2f-fe7edf6b5655}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\stage">
+      <UniqueIdentifier>{c385b833-a9da-4357-bb6e-d5d98de8608b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\stage">
+      <UniqueIdentifier>{7750e2a9-bbc5-4841-b37d-c7e8df1fbd37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -33,6 +39,27 @@
     <ClCompile Include="EditorParameter.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="stage\Bridge.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\Elevator.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\GimmickBase.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\JsonStageParser.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\Stage.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\StageObject.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\WoodBox.cpp">
+      <Filter>ソース ファイル\stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -46,6 +73,36 @@
     </ClInclude>
     <ClInclude Include="ParameterKey.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\Bridge.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\Elevator.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\GimmickBase.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\JsonStageParser.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\Stage.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\StageDefine.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\StageFileFormat.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\StageObject.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\StageParser.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\WoodBox.h">
+      <Filter>ヘッダー ファイル\stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,12 +13,15 @@
 #include    "GameApp.h"
 #include    "utilities/EditorUtilities.h"
 #include    "EditorParameter.h"
+#include    "stage/Stage.h"
 
-CXGamePad gamepad;
+CXGamePad   gamepad;
 
-CCamera   main_camera;
+CCamera     main_camera;
 
 std::string resource_dir = "";
+
+Stage       stage;
 
 /*************************************************************************//*!
         @brief            アプリケーションの初期化
@@ -51,6 +54,9 @@ MofBool CGameApp::Initialize(void) {
     pad_info.No = 0;
     gamepad.Create(&pad_info);
 
+    stage.Load("stage/test.json");
+    stage.Initialize();
+
     return TRUE;
 }
 /*************************************************************************//*!
@@ -74,6 +80,19 @@ MofBool CGameApp::Update(void) {
         main_camera.SetViewPort();
         main_camera.Update();
     }
+
+    stage.Update(0.01667f);
+
+
+    if (g_pInput->IsKeyPush(MOFKEY_4)) {
+        stage.GetWoodBoxArray()[1]->SetEnable(false);
+    }
+    if (g_pInput->IsKeyPush(MOFKEY_5)) {
+        stage.GetWoodBoxArray()[3]->SetEnable(false);
+    }
+    if (g_pInput->IsKeyPush(MOFKEY_6)) {
+        stage.GetWoodBoxArray()[7]->SetEnable(false);
+    }
     
     return TRUE;
 }
@@ -93,6 +112,8 @@ MofBool CGameApp::Render(void) {
     
 	CGraphicsUtilities::SetCamera(&main_camera);
     g_pGraphics->SetDepthEnable(TRUE);
+    
+    stage.Render();
 
     g_pGraphics->SetDepthEnable(FALSE);
 
@@ -121,6 +142,8 @@ MofBool CGameApp::Release(void) {
     gamepad.Release();
 
     editor::EditorUtilities::SaveWindowParam();
+
+    stage.Release();
 
     return TRUE;
 }
