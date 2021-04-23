@@ -172,20 +172,6 @@ bool my::PlayerComponent::Update(float delta_time) {
     } // else 
     return true;
 }
-#ifdef _DEBUG
-bool my::PlayerComponent::Render(void) {
-    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
-    if (coll_com->GetSphere().has_value()) {
-        ::CGraphicsUtilities::RenderLineSphere(coll_com->GetSphere().value(), def::color_rgba::kCyan);
-    } // if
-
-    if (auto target = _target.lock()) {
-        auto sphere = Mof::CSphere(target->GetPosition(), 1.0f);
-        ::CGraphicsUtilities::RenderLineSphere(sphere, def::color_rgba::kYellow);
-    } // if
-    return true;
-}
-#endif // _DEBUG
 
 bool my::PlayerComponent::Release(void) {
     super::Release();

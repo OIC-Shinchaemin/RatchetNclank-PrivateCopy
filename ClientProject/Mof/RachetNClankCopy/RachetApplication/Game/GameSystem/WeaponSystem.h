@@ -74,7 +74,7 @@ public:
     /// <param name="in"></param>
     /// <param name="observer"></param>
     /// <returns></returns>
-    bool Initialize(my::SaveData& in, const std::shared_ptr<class GameManager>& observer);
+    bool Initialize(my::SaveData& in, const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);
     /// <summary>
     /// ƒQƒbƒ^[
     /// </summary>

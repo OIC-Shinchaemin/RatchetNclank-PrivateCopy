@@ -45,14 +45,6 @@ bool my::AIStateComponent::Update(float delta_time) {
     return false;
 }
 
-#ifdef _DEBUG
-bool my::AIStateComponent::Render(void) {
-    ::CGraphicsUtilities::RenderString(0.0f, 100.0f, "state = %s", _state_machine.GetCurrentStateName());
-    _state_machine.DebugRender();
-    return false;
-}
-#endif // _DEBUG
-
 bool my::AIStateComponent::Release(void) {
     super::Release();
     return true;

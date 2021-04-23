@@ -208,6 +208,12 @@
     <Filter Include="Rachet\Header\Actor\Effect">
       <UniqueIdentifier>{21ca3901-c96c-413a-898a-dd5fda3e2dcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Scene">
+      <UniqueIdentifier>{e8c366f6-97a1-4312-969f-42a1d7699999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Scene">
+      <UniqueIdentifier>{e10fb131-c044-4268-ab70-1d544e5d595e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -572,6 +578,24 @@
     </ClCompile>
     <ClCompile Include="Stage\GimmickBase.cpp">
       <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneImplementation.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TitleScene.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameScene.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ClearScene.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1081,6 +1105,27 @@
     </ClInclude>
     <ClInclude Include="Stage\Bridge.h">
       <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ComponentDefine.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneDefine.h">
+      <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TitleScene.h">
+      <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameScene.h">
+      <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ClearScene.h">
+      <Filter>Rachet\Header\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

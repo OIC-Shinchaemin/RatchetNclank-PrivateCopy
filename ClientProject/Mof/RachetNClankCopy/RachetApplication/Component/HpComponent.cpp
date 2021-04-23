@@ -5,6 +5,12 @@
 #include "../UI/NanotechMenu.h"
 
 
+void my::HpComponent::TryRemoveUI(void) {
+    if (auto canvas = super::_ui_canvas.lock()) {
+        canvas->RemoveElement("NanotechMenu");
+    } // if
+}
+
 my::HpComponent::HpComponent(int priority) :
     super(priority),
     _hp_max(4),
@@ -36,7 +42,7 @@ bool my::HpComponent::Initialize(void) {
     auto tag = super::GetOwner()->GetTag();
     if (tag == "Player") {
         if (auto canvas = super::_ui_canvas.lock()) {
-            canvas->RemoveElement("NanotechMenu");
+            this->TryRemoveUI();
             
             auto menu = std::make_shared<my::NanotechMenu>("NanotechMenu");
             _observable.AddObserver(menu);
@@ -54,14 +60,9 @@ bool my::HpComponent::Update(float delta_time) {
     return false;
 }
 
-#ifdef _DEBUG
-bool my::HpComponent::Render(void) {
-    return false;
-}
-#endif // _DEBUG
-
 bool my::HpComponent::Release(void) {
     super::Release();
+    this->TryRemoveUI();
     return true;
 }
 

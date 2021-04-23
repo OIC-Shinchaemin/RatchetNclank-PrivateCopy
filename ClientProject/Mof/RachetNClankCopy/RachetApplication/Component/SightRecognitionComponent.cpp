@@ -94,11 +94,7 @@ bool my::SightRecognitionComponent::Initialize(void) {
             _recognized.push_back(target);
             return true;
         }));
-
-
     } // else if
-
-
     return true;
 }
 
@@ -123,44 +119,6 @@ bool my::SightRecognitionComponent::Update(float delta_time) {
     _recognized.clear();
     return true;
 }
-
-#ifdef _DEBUG
-bool my::SightRecognitionComponent::Render(void) {
-    // Ž‹ü•`‰æ
-
-    Mof::Vector3 start = super::GetOwner()->GetPosition();
-    std::weak_ptr<my::Actor> target_weak;
-    float height = 0.0f;
-
-    if (auto tag = super::GetOwner()->GetTag(); tag == "Player") {
-        height = _player_com.lock()->GetHeight();
-        target_weak = _player_com.lock()->GetTarget();
-    } // if
-    else if (tag == "Enemy") {
-        height = _enemy_com.lock()->GetHeight();
-        target_weak = _enemy_com.lock()->GetTarget();
-
-
-    } // else if
-
-
-    start.y += height;
-    // Ž‹ŠE‹«ŠE•\Ž¦
-    this->RenderRay(start, 0.0f);
-    this->RenderRay(start, 90.0f);
-    this->RenderRay(start, -90.0f);
-
-    // ‘ÎÛ‚Ö‚ÌŽ‹ü‚ð•\Ž¦
-    if (auto target = target_weak.lock()) {
-        auto pos = target->GetPosition();
-        pos.y += height;
-        auto diff = pos - start;
-        auto ray = Mof::CRay3D(start, diff);
-        this->RenderRay(ray, Mof::CVector3Utilities::Length(diff), def::color_rgba_u32::kYellow);
-    } // if
-    return true;
-}
-#endif // _DEBUG
 
 std::shared_ptr<my::Component> my::SightRecognitionComponent::Clone(void) {
     return std::make_shared<my::SightRecognitionComponent>(*this);

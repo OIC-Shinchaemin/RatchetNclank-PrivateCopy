@@ -54,19 +54,6 @@ bool my::MotionStateComponent::Update(float delta_time) {
     return false;
 }
 
-#ifdef _DEBUG
-bool my::MotionStateComponent::Render(void) {
-    if (super::GetOwner()->GetTag() == "Enemy") {
-        ::CGraphicsUtilities::RenderString(0.0f, 300.0f, "state = %s", _state_machine.GetCurrentStateName());
-    } // if
-
-    else {
-        ::CGraphicsUtilities::RenderString(0.0f, 350.0f, " player state = %s", _state_machine.GetCurrentStateName());
-    } // else
-    return false;
-}
-#endif // _DEBUG
-
 bool my::MotionStateComponent::Release(void) {
     super::Release();
     return true;

@@ -50,12 +50,6 @@ bool my::MotionComponent::Initialize(void) {
     if (auto mesh = mesh_com->GetMesh().lock()) {
         _motion = mesh->CreateMotionController();
     } // if
-#ifdef _DEBUG
-    for (int i = 0; i < _motion->GetMotionCount(); i++) {
-//        auto name = *_motion->GetMotion(i)->GetName();
-//        std::cout << "name  = " << name << "\n";
-    } // for
-#endif // _DEBUG
     return true;
 }
 

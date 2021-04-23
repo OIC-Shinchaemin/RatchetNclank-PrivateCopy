@@ -45,13 +45,6 @@ bool my::EnemyStateComponent::Update(float delta_time) {
     return false;
 }
 
-#ifdef _DEBUG
-bool my::EnemyStateComponent::Render(void) {
-    ::CGraphicsUtilities::RenderString(0.0f, 200.0f, "state = %s", _state_machine.GetCurrentStateName());
-    return false;
-}
-#endif // _DEBUG
-
 bool my::EnemyStateComponent::Release(void) {
     super::Release();
     _state_machine.Release();
