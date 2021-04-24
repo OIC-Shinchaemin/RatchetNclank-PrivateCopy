@@ -99,7 +99,7 @@ bool my::GameManager::Initialize(void) {
     auto param = new my::Actor::Param();
     // chara
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Å’^â€šÂªË†Ãªâ€™vâ€šÂµâ€šÃœâ€šÂ¹â€šÃ±");
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
         param->transform.position = enemy_spawn.second->GetPosition();
@@ -108,6 +108,11 @@ bool my::GameManager::Initialize(void) {
     } // for
     param->transform.position = Mof::CVector3(0.0f, 3.0f, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
+    player->AddObserver(shared_from_this());
+    if (auto resource = _resource.lock())
+    {
+        player->Generate(resource->Get<std::shared_ptr<Mof::CMeshContainer>>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom"));
+    }
     this->AddElement(player);
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
@@ -144,9 +149,6 @@ bool my::GameManager::Update(float delta_time) {
     // collision
     _physic_world.Update();
     _physic_world.CollisionStage(&_stage);
-    ::ImGui::Begin("GameManager");
-    ::ImGui::Text(" ");
-    ::ImGui::End();
     return true;
 }
 
