@@ -32,7 +32,7 @@
     },
     {
       "type": "ActionNode",
-      "derived": "RangedAttackNode"
+      "derived": "MeleeAttackNode"
     },
     {
       "type": "ActionNode",

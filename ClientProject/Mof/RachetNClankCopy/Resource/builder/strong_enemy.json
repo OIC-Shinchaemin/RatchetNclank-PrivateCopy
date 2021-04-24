@@ -3,7 +3,11 @@
     {
       "type": "AIStateComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "behaviour": [
+          "../Resource/behaviour/strong_enemy_patrol.json",
+          "../Resource/behaviour/strong_enemy_combat.json"
+        ]
       }
     },
     {
@@ -60,7 +64,7 @@
       }
     },
     {
-      "type": "EnemyMeleeAttackComponent",
+      "type": "EnemyRangedAttackComponent",
       "paramater": {
         "priority": 92
       }

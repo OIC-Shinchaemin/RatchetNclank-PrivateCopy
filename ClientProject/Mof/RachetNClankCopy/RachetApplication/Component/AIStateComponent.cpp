@@ -7,12 +7,14 @@
 my::AIStateComponent::AIStateComponent(int priority) :
     super(priority),
     _state_machine(),
-    _thinking_time() {
+    _thinking_time(),
+    _behaviour_path(){
 }
 
 my::AIStateComponent::AIStateComponent(const AIStateComponent& obj) :
     super(obj._priority),
-    _state_machine(obj._state_machine) {
+    _state_machine(obj._state_machine),
+    _behaviour_path(obj._behaviour_path){
 }
 
 my::AIStateComponent::~AIStateComponent() {
@@ -20,6 +22,17 @@ my::AIStateComponent::~AIStateComponent() {
 
 void my::AIStateComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
+    
+    const char* behaviour = "behaviour";
+    if (param.HasMember(behaviour)) {
+        _ASSERT_EXPR(param[behaviour].IsArray(), L"パラメータの指定された型でありません");
+
+        _behaviour_path.reserve(param[behaviour].GetArray().Size());
+
+        for (int i = 0, n = param[behaviour].GetArray().Size(); i < n; i++) {
+            _behaviour_path.push_back(param[behaviour].GetArray()[i].GetString());
+        } // for
+    } // if
 }
 
 std::string my::AIStateComponent::GetType(void) const {
@@ -32,8 +45,8 @@ bool my::AIStateComponent::Initialize(void) {
     _thinking_time.Initialize(0.0f, true);
 
     // state
-    this->RegisterState<state::AIPatrolState>(_state_machine);
-    this->RegisterState<state::AICombatState>(_state_machine);
+    this->RegisterState<state::AIPatrolState>(_state_machine, _behaviour_path.at(0));
+    this->RegisterState<state::AICombatState>(_state_machine, _behaviour_path.at(1));
     _state_machine.ChangeState("AIPatrolState");
     return true;
 }

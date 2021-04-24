@@ -44,8 +44,8 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="ptr"></param>
-    void GenerateBehaviourExecutor(void);
+    /// <param name="path"></param>
+    void GenerateBehaviourExecutor(const std::string& path);
     /// <summary>
     /// 更新
     /// </summary>

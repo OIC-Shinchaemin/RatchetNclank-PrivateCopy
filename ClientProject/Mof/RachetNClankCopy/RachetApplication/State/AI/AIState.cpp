@@ -23,8 +23,8 @@ void state::AIState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     this->_actor = ptr;
 }
 
-void state::AIState::GenerateBehaviourExecutor(void) {
-    _behaviour_executor = my::FactoryManager::Singleton().CreateBehaviourExecutor(_behaviour_path.c_str());
+void state::AIState::GenerateBehaviourExecutor(const std::string& path) {
+    _behaviour_executor = my::FactoryManager::Singleton().CreateBehaviourExecutor(path.c_str());
     _behaviour_executor->Prepare(_actor.lock());
 }
 

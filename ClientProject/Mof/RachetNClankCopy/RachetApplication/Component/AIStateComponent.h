@@ -16,12 +16,15 @@ private:
     my::StateMachine _state_machine;
     //! タイマー
     my::Timer _thinking_time;
+    //! 作成パス
+    std::vector<std::string> _behaviour_path;
+
     template<class State>
-    void RegisterState(my::StateMachine& out) {
+    void RegisterState(my::StateMachine& out, const std::string& behaviour) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<State>();
         ptr->SetActor(shared_this);
-        ptr->GenerateBehaviourExecutor();
+        ptr->GenerateBehaviourExecutor(behaviour);
         out.RegisterState(ptr);
     }
 public:

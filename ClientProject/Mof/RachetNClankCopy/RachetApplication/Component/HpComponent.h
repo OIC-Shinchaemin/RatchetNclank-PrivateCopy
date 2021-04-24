@@ -19,11 +19,8 @@ private:
     int _hp;
     //! Hp
     my::Observable<int> _observable;
-    /// <summary>
-    /// 削除
-    /// </summary>
-    /// <param name=""></param>
-    void TryRemoveUI(void);
+    //! UI表示
+    bool _ui_remove;
 public:
     /// <summary>
     /// コンストラクタ

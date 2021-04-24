@@ -3,7 +3,8 @@
 #include "../../State/EnemyAction/EnemyActionIdleState.h"
 #include "../../State/EnemyAction/EnemyActionMoveState.h"
 #include "../../State/EnemyAction/EnemyActionGoHomeState.h"
-#include "../../State/EnemyAction/EnemyActionAttackState.h"
+#include "../../State/EnemyAction/EnemyActionMeleeAttackState.h"
+#include "../../State/EnemyAction/EnemyActionRangedAttackState.h"
 
 
 my::EnemyStateComponent::EnemyStateComponent(int priority) :
@@ -34,7 +35,8 @@ bool my::EnemyStateComponent::Initialize(void) {
     // state
     this->RegisterState<state::EnemyActionIdleState>(_state_machine);
     this->RegisterState<state::EnemyActionMoveState>(_state_machine);
-    this->RegisterState<state::EnemyActionAttackState>(_state_machine);
+    this->RegisterState<state::EnemyActionMeleeAttackState>(_state_machine);
+    this->RegisterState<state::EnemyActionRangedAttackState>(_state_machine);
     this->RegisterState<state::EnemyActionGoHomeState>(_state_machine);
     _state_machine.ChangeState("EnemyActionIdleState");
     return true;

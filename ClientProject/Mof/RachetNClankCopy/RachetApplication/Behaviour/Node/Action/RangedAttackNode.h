@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_MELLE_ATTACK_NODE_H
-#define BEHAVIOUR_MELLE_ATTACK_NODE_H
+#ifndef BEHAVIOUR_RANGED_ATTACK_NODE_H
+#define BEHAVIOUR_RANGED_ATTACK_NODE_H
 
 
 #include "../ActionNode.h"
@@ -7,24 +7,25 @@
 #include "../../../Actor.h"
 #include "../../../Actor/Character/Enemy.h"
 #include "../../../Component/AIStateComponent.h"
-#include "../Component/Enemy/EnemyComponent.h"
+#include "../../../Component/Enemy/EnemyComponent.h"
 #include "../../../Component/Enemy/EnemyStateComponent.h"
+#include "../../../Component/Enemy/EnemyRangedAttackComponent.h"
 
 
 namespace behaviour {
-class MeleeAttackNode : public behaviour::ActionNodeBase {
+class RangedAttackNode : public behaviour::ActionNodeBase {
     using super = behaviour::ActionNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    MeleeAttackNode() :
-        super("MeleeAttackNode") {
+    RangedAttackNode() :
+        super("RangedAttackNode") {
     }
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~MeleeAttackNode() = default;
+    virtual ~RangedAttackNode() = default;
     /// <summary>
     /// ノードの実行
     /// </summary>
@@ -39,14 +40,14 @@ public:
             return false;
         } // if
 
-        auto attack_com = actor->GetComponent<my::EnemyMeleeAttackComponent>();
+        auto attack_com = actor->GetComponent<my::EnemyRangedAttackComponent>();
         auto pos = target.lock()->GetPosition();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
             auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
             ai_state_com->ChangeState("AICombatState");
 
             auto state_com = actor->GetComponent<my::EnemyStateComponent>();
-            state_com->ChangeState("EnemyActionMeleeAttackState");
+            state_com->ChangeState("EnemyActionRangedAttackState");
             return false;
         } // if
 
@@ -55,4 +56,4 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_MELLE_ATTACK_NODE_H
+#endif // !BEHAVIOUR_RANGED_ATTACK_NODE_H

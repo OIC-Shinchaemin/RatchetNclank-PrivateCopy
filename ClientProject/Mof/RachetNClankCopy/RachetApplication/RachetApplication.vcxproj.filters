@@ -429,9 +429,6 @@
     <ClCompile Include="State\EnemyAction\EnemyActionState.cpp">
       <Filter>Rachet\Source\State\EnemyAction</Filter>
     </ClCompile>
-    <ClCompile Include="State\EnemyAction\EnemyActionAttackState.cpp">
-      <Filter>Rachet\Source\State\EnemyAction</Filter>
-    </ClCompile>
     <ClCompile Include="State\AI\AICombatState.cpp">
       <Filter>Rachet\Source\State\AI</Filter>
     </ClCompile>
@@ -626,6 +623,15 @@
     </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyRangedAttackComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyAction\EnemyActionMeleeAttackState.cpp">
+      <Filter>Rachet\Source\State\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyAction\EnemyActionRangedAttackState.cpp">
+      <Filter>Rachet\Source\State\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\EnemyBullet.cpp">
+      <Filter>Rachet\Source\Actor\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -911,9 +917,6 @@
     <ClInclude Include="Behaviour\Node\Condition\NotAwayFromHomeNode.h">
       <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
     </ClInclude>
-    <ClInclude Include="Behaviour\Node\Condition\TargetInMeleeAttackRangeNode.h">
-      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
-    </ClInclude>
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h">
       <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
     </ClInclude>
@@ -948,9 +951,6 @@
       <Filter>Rachet\Header\State\EnemyAction</Filter>
     </ClInclude>
     <ClInclude Include="State\EnemyAction\EnemyActionState.h">
-      <Filter>Rachet\Header\State\EnemyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="State\EnemyAction\EnemyActionAttackState.h">
       <Filter>Rachet\Header\State\EnemyAction</Filter>
     </ClInclude>
     <ClInclude Include="State\EnemyAction\EnemyActionGoHomeState.h">
@@ -1175,6 +1175,18 @@
     <ClInclude Include="Component\Enemy\EnemyRangedAttackComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="State\EnemyAction\EnemyActionMeleeAttackState.h">
+      <Filter>Rachet\Header\State\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyAction\EnemyActionRangedAttackState.h">
+      <Filter>Rachet\Header\State\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\RangedAttackNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\EnemyBullet.h">
+      <Filter>Rachet\Header\Actor\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1247,6 +1259,9 @@
     </None>
     <None Include="..\Resource\behaviour\combat.json">
       <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\builder\enemy_bullet.json">
+      <Filter>リソース ファイル\builder</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

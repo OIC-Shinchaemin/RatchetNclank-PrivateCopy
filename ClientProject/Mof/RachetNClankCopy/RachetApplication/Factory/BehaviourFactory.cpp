@@ -6,26 +6,26 @@
 #include "../Behaviour/Node/Action/LookAroundNode.h"
 #include "../Behaviour/Node/Action/MoveToEnemyNode.h"
 #include "../Behaviour/Node/Action/MeleeAttackNode.h"
+#include "../Behaviour/Node/Action/RangedAttackNode.h"
 #include "../Behaviour/Node/Action/ChangePatrolNode.h"
 #include "../Behaviour/Node/Condition/NotAwayFromHomeNode.h"
 #include "../Behaviour/Node/Condition/TargetRecognitionNode.h"
-#include "../Behaviour/Node/Condition/TargetInMeleeAttackRangeNode.h"
 
 
 my::BehaviourFactory::BehaviourFactory() :
     _function_pointer_container(),
     _action_factory(),
     _condition_factory() {
-    _action_factory.Register<behaviour::AlwaysTrueNode >("AlwaysTrueNode");
-    _action_factory.Register<behaviour::AlwaysFalseNode >("AlwaysFalseNode");
-    _action_factory.Register<behaviour::GoHomeNode >("GoHomeNode");
-    _action_factory.Register<behaviour::LookAroundNode >("LookAroundNode");
-    _action_factory.Register<behaviour::MoveToEnemyNode >("MoveToEnemyNode");
-    _action_factory.Register<behaviour::MeleeAttackNode >("MeleeAttackNode");
-    _action_factory.Register<behaviour::ChangePatrolNode >("ChangePatrolNode");
-    _condition_factory.Register<behaviour::NotAwayFromHomeNode >("NotAwayFromHomeNode");
-    _condition_factory.Register<behaviour::TargetRecognitionNode >("TargetRecognitionNode");
-    _condition_factory.Register<behaviour::TargetInMeleeAttackRangeNode >("TargetInMeleeAttackRangeNode");
+    _action_factory.Register<behaviour::AlwaysTrueNode>("AlwaysTrueNode");
+    _action_factory.Register<behaviour::AlwaysFalseNode>("AlwaysFalseNode");
+    _action_factory.Register<behaviour::GoHomeNode>("GoHomeNode");
+    _action_factory.Register<behaviour::LookAroundNode>("LookAroundNode");
+    _action_factory.Register<behaviour::MoveToEnemyNode>("MoveToEnemyNode");
+    _action_factory.Register<behaviour::MeleeAttackNode>("MeleeAttackNode");
+    _action_factory.Register<behaviour::RangedAttackNode>("RangedAttackNode");
+    _action_factory.Register<behaviour::ChangePatrolNode>("ChangePatrolNode");
+    _condition_factory.Register<behaviour::NotAwayFromHomeNode>("NotAwayFromHomeNode");
+    _condition_factory.Register<behaviour::TargetRecognitionNode>("TargetRecognitionNode");
 }
 
 behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* path) {

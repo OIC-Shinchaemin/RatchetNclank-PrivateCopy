@@ -157,6 +157,7 @@
     <ClCompile Include="Actor\Bullet\BlasterBullet.cpp" />
     <ClCompile Include="Actor\Bullet\BombGloveBullet.cpp" />
     <ClCompile Include="Actor\Bullet\Bullet.cpp" />
+    <ClCompile Include="Actor\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp" />
     <ClCompile Include="Actor\Character\Character.cpp" />
     <ClCompile Include="Actor\Character\Enemy.cpp" />
@@ -263,10 +264,11 @@
     <ClCompile Include="State\AI\AICombatState.cpp" />
     <ClCompile Include="State\AI\AIPatrolState.cpp" />
     <ClCompile Include="State\AI\AIState.cpp" />
-    <ClCompile Include="State\EnemyAction\EnemyActionAttackState.cpp" />
+    <ClCompile Include="State\EnemyAction\EnemyActionMeleeAttackState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionGoHomeState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionIdleState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionMoveState.cpp" />
+    <ClCompile Include="State\EnemyAction\EnemyActionRangedAttackState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionAttackState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionIdleState.cpp" />
@@ -303,6 +305,7 @@
     <ClInclude Include="Actor\Bullet\BlasterBullet.h" />
     <ClInclude Include="Actor\Bullet\BombGloveBullet.h" />
     <ClInclude Include="Actor\Bullet\Bullet.h" />
+    <ClInclude Include="Actor\Bullet\EnemyBullet.h" />
     <ClInclude Include="Actor\Bullet\PyrocitorBullet.h" />
     <ClInclude Include="Actor\Character\Character.h" />
     <ClInclude Include="Actor\Character\Enemy.h" />
@@ -333,10 +336,10 @@
     <ClInclude Include="Behaviour\Node\Action\GoHomeNode.h" />
     <ClInclude Include="Behaviour\Node\Action\LookAroundNode.h" />
     <ClInclude Include="Behaviour\Node\Action\MeleeAttackNode.h" />
+    <ClInclude Include="Behaviour\Node\Action\RangedAttackNode.h" />
     <ClInclude Include="Behaviour\Node\CompositeNode.h" />
     <ClInclude Include="Behaviour\Node\ConditionalNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\NotAwayFromHomeNode.h" />
-    <ClInclude Include="Behaviour\Node\Condition\TargetInMeleeAttackRangeNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
     <ClInclude Include="Behaviour\Node\Node.h" />
@@ -448,10 +451,11 @@
     <ClInclude Include="State\AI\AICombatState.h" />
     <ClInclude Include="State\AI\AIPatrolState.h" />
     <ClInclude Include="State\AI\AIState.h" />
-    <ClInclude Include="State\EnemyAction\EnemyActionAttackState.h" />
+    <ClInclude Include="State\EnemyAction\EnemyActionMeleeAttackState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionGoHomeState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionIdleState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionMoveState.h" />
+    <ClInclude Include="State\EnemyAction\EnemyActionRangedAttackState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionAttackState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionIdleState.h" />
@@ -481,6 +485,7 @@
     <None Include="..\Resource\builder\bomb_glove.json" />
     <None Include="..\Resource\builder\bomb_glove_bullet.json" />
     <None Include="..\Resource\builder\bomb_glove_effect.json" />
+    <None Include="..\Resource\builder\enemy_bullet.json" />
     <None Include="..\Resource\builder\particle.json" />
     <None Include="..\Resource\builder\player.json" />
     <None Include="..\Resource\builder\pyrocitor.json" />

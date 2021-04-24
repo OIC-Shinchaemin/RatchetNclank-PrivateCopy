@@ -1,5 +1,5 @@
-#ifndef STATE_ENEMY_ACTION_ATTACK_STATE_H
-#define STATE_ENEMY_ACTION_ATTACK_STATE_H
+#ifndef STATE_ENEMY_ACTION_MELEE_ATTACK_STATE_H
+#define STATE_ENEMY_ACTION_MELEE_ATTACK_STATE_H
 
 
 #include "EnemyActionState.h"
@@ -11,7 +11,7 @@
 
 
 namespace state {
-class EnemyActionAttackState : public state::EnemyActionState {
+class EnemyActionMeleeAttackState : public state::EnemyActionState {
     using super = state::EnemyActionState;
 private:
     //! 型
@@ -26,11 +26,11 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    EnemyActionAttackState();
+    EnemyActionMeleeAttackState();
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~EnemyActionAttackState();
+    virtual ~EnemyActionMeleeAttackState();
     /// <summary>
     /// セッター
     /// </summary>
@@ -59,4 +59,4 @@ public:
     virtual void Exit(void) override;
 };
 }
-#endif // !STATE_ENEMY_ACTION_ATTACK_STATE_H
+#endif // !STATE_ENEMY_ACTION_MELEE_ATTACK_STATE_H

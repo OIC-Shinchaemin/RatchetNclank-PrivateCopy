@@ -1,19 +1,19 @@
-#include "EnemyActionAttackState.h"
+#include "EnemyActionMeleeAttackState.h"
 
 
-state::EnemyActionAttackState::EnemyActionAttackState() :
+state::EnemyActionMeleeAttackState::EnemyActionMeleeAttackState() :
     super(),
     _attack_com() {
 }
 
-state::EnemyActionAttackState::~EnemyActionAttackState() {
+state::EnemyActionMeleeAttackState::~EnemyActionMeleeAttackState() {
 }
 
-const char* state::EnemyActionAttackState::GetName(void) const {
-    return "EnemyActionAttackState";
+const char* state::EnemyActionMeleeAttackState::GetName(void) const {
+    return "EnemyActionMeleeAttackState";
 }
 
-void state::EnemyActionAttackState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
+void state::EnemyActionMeleeAttackState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     super::SetActor(ptr);
     this->_enemy_com = ptr->GetComponent<my::EnemyComponent>();
     this->_idle_com = ptr->GetComponent<my::EnemyIdleComponent>();
@@ -21,10 +21,10 @@ void state::EnemyActionAttackState::SetActor(const std::shared_ptr<my::Actor>& p
     this->_attack_com = ptr->GetComponent<my::EnemyMeleeAttackComponent>();
 }
 
-void state::EnemyActionAttackState::Update(float delta_time) {
+void state::EnemyActionMeleeAttackState::Update(float delta_time) {
 }
 
-void state::EnemyActionAttackState::Enter(void) {
+void state::EnemyActionMeleeAttackState::Enter(void) {
     if (auto attack_com = _attack_com.lock()) {
         attack_com->Start();
     } // if
@@ -34,5 +34,5 @@ void state::EnemyActionAttackState::Enter(void) {
     } // if
 }
 
-void state::EnemyActionAttackState::Exit(void) {
+void state::EnemyActionMeleeAttackState::Exit(void) {
 }

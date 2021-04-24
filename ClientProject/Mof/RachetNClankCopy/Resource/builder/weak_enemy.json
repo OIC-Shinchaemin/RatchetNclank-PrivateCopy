@@ -3,7 +3,11 @@
     {
       "type": "AIStateComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "behaviour": [
+          "../Resource/behaviour/weak_enemy_patrol.json",
+          "../Resource/behaviour/weak_enemy_combat.json"
+        ]
       }
     },
     {
