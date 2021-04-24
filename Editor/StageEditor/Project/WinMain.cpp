@@ -1,6 +1,5 @@
 #include    "GameApp.h"
-#include    "MofImGui/MofImGui.h"
-#include    "Define.h"
+#include    <imgui/MofImGui.h>
 
 #ifdef _DEBUG
 //int main(int argc, char* argv[])
@@ -15,8 +14,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
     Mof::WINDOWSGAMEFRAMEWORKINITIALIZEINFO Info;
     Info.pApplication            = new CGameApp();
     Info.WindowCreateInfo.pProc  = new CMofImGuiProc();
-    Info.WindowCreateInfo.Width  = window_width;
-    Info.WindowCreateInfo.Height = window_height;
+    Info.WindowCreateInfo.Style  = WS_OVERLAPPEDWINDOW;
+    Info.WindowCreateInfo.Width  = 1280;
+    Info.WindowCreateInfo.Height =  720;
 
     if (pFrame->Initialize(&Info))
     {

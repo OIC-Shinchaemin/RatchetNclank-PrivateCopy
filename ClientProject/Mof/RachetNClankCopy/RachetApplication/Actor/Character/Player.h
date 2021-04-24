@@ -7,64 +7,116 @@
 #include "My/Core/Observer.h"
 
 #include "../Weapon/Mechanical.h"
+#include "My/Core/ServiceLocator.h"
+#include "../../Camera/Camera.h"
+#include "../../Camera/CameraController.h"
+
+
 
 
 namespace my {
-class Player : public my::Character, public my::Observer<std::shared_ptr<my::Mechanical>> {
-    using super = my::Character;
-public:
-    enum class MotionType {
-        IdleWait,
-        MoveRun,
-        DamageDown,
-        CountMax,
-    };
-private:
-    //! •Ší
-    std::weak_ptr<my::Mechanical>_current_mechanical;
-public:
+	class Player : public my::Character, public my::Observer<std::shared_ptr<my::Mechanical>> {
+		using super = my::Character;
+	public:
+		enum class MotionType {
+			IdleWait,
+			MoveRun,
+			DamageDown,
+			CountMax,
+		};
+	private:
+
+		enum class PlayerState {
+			Wait,
+			Attack1,
+			Attack2,
+			Attack3,
+			MoveSlow,
+			MoveFast,
+			JumpStart,
+			JumpUp,
+			JumpDown,
+			JumpEnd,
+			DoubleJump,
+		};
+		//! æ­¦å™¨
+		std::weak_ptr<my::Mechanical>_current_mechanical;
+
+		//! ãƒ¡ãƒƒã‚·ãƒ¥
+		std::weak_ptr<Mof::CMeshContainer> _mesh;
+		Mof::LPMeshMotionController	_motion;
+		//! ã‚«ãƒ¡ãƒ©
+		std::shared_ptr<my::Camera> _player_view_camera;
+		//! ã‚«ãƒ¡ãƒ©ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©
+		my::ServiceLocator<my::CameraController> _camera_controller;
+
+		float _character_slow_move_speed_max = 0.03f;
+		float _character_move_speed = 0.015f;
+		float _character_fast_move_speed_max = 0.25f;
+		float _character_rotation_speed = 0.2f;
+		float _gravity_increment = 0.1f;
+		float _jump_power = 0.13f;
+		float _move_angle;
+		PlayerState _player_state;
+		CVector3 _move;
+		float _gravity;
+		float _time;
+		bool _jump;
+		bool _double_jump;
+		bool _attack_move;
+		bool _Next_attack;
+
+		void UpdateInput(void);
+		void UpdateMove(void);
+		void UpdateWait(void);
+		void UpdateJump(void);
+		void UpdateAttack(void);
+		void JumpStart(void);
+		void ChangeAnimation(void);
+	public:
+		/// <summary>
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		/// </summary>
+		Player();
+		/// <summary>
+		/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		/// </summary>
+		~Player();
+		/// <summary>
+		/// é€šçŸ¥
+		/// </summary>
+		/// <param name="change"></param>
+		virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-    /// </summary>
-    Player();
-    /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
-    /// </summary>
-    ~Player();
-    /// <summary>
-    /// ’Ê’m
-    /// </summary>
-    /// <param name="change"></param>
-    virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
-    /// <summary>
-    /// ƒfƒŠ[ƒg
+    /// ãƒ‡ãƒªãƒ¼ãƒˆ
     /// </summary>
     /// <param name=""></param>
     virtual void End(void) override;
-    /// <summary>
-    /// ‰Šú‰»
-    /// </summary>
-    /// <param name="param"></param>
-    /// <returns></returns>
-    virtual bool Initialize(my::Actor::Param* param) override;
-    /// <summary>
-    /// XV
-    /// </summary>
-    /// <param name="delta_time"></param>
-    /// <returns></returns>
-    virtual bool Update(float delta_time) override;
-    /// <summary>
-    /// •`‰æ
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Render(void) override;
-    /// <summary>
-    /// ‰ğ•ú
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Release(void) override;
-};
+		bool Generate(const std::shared_ptr<Mof::CMeshContainer>& mesh);
+		/// <summary>
+		/// åˆæœŸåŒ–
+		/// </summary>
+		/// <param name="param"></param>
+		/// <returns></returns>
+		virtual bool Initialize(my::Actor::Param* param) override;
+		/// <summary>
+		/// æ›´æ–°
+		/// </summary>
+		/// <param name="delta_time"></param>
+		/// <returns></returns>
+		virtual bool Update(float delta_time) override;
+		/// <summary>
+		/// æç”»
+		/// </summary>
+		/// <param name=""></param>
+		/// <returns></returns>
+		virtual bool Render(void) override;
+		/// <summary>
+		/// è§£æ”¾
+		/// </summary>
+		/// <param name=""></param>
+		/// <returns></returns>
+		virtual bool Release(void) override;
+	};
 }
 #endif // !MY_PLAYER_H

@@ -43,7 +43,7 @@ my::CameraController::CameraController() :
     _camera(),
     _position(),
     _target(),
-    _distance(5.0f),
+    _distance(8.0f),
     _azimuth(270.0f),
     _altitude(this->GetDefaultAltitude()),
     _velocity() {
