@@ -178,12 +178,6 @@
     <Filter Include="Rachet\Source\State\AI">
       <UniqueIdentifier>{fac0ece7-4437-4700-916b-5c842b8d6b06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Stage">
-      <UniqueIdentifier>{8eda0607-7e3c-4307-b439-cd2639e92fa1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Stage">
-      <UniqueIdentifier>{7956d0d2-11d8-418b-87ba-fe5cfe593950}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Source\Game\GameSystem">
       <UniqueIdentifier>{0517efc8-f9e0-4670-ba41-b85b09bc98e8}</UniqueIdentifier>
     </Filter>
@@ -213,6 +207,12 @@
     </Filter>
     <Filter Include="Rachet\Source\Scene">
       <UniqueIdentifier>{e10fb131-c044-4268-ab70-1d544e5d595e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Stage">
+      <UniqueIdentifier>{64aec432-eb48-41fc-b6db-c6d95598a53b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage">
+      <UniqueIdentifier>{cc87694c-5234-4efc-9b0f-178ef3bca202}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -468,15 +468,6 @@
     <ClCompile Include="State\PlayerMotion\PlayerMotionDamageState.cpp">
       <Filter>Rachet\Source\State\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Stage\JsonStageParser.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Stage.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\StageObject.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp">
       <Filter>Rachet\Source\Game\GameSystem\Save</Filter>
     </ClCompile>
@@ -570,15 +561,6 @@
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Stage\Bridge.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Elevator.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\GimmickBase.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>Rachet\Source\Scene</Filter>
     </ClCompile>
@@ -596,6 +578,27 @@
     </ClCompile>
     <ClCompile Include="Scene\ClearScene.cpp">
       <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\WoodBox.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\StageObject.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\JsonStageParser.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\GimmickBase.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Elevator.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Bridge.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -986,21 +989,6 @@
     <ClInclude Include="State\PlayerMotion\PlayerMotionDamageState.h">
       <Filter>Rachet\Header\State\PlayerMotion</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\JsonStageParser.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageDefine.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageObject.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageParser.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Game\GameSystem\GameMoney.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
     </ClInclude>
@@ -1094,18 +1082,6 @@
     <ClInclude Include="UI\EquipmentWeaponMenu.h">
       <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\StageFileFormat.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\GimmickBase.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Elevator.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Bridge.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\Scene.h">
       <Filter>Rachet\Header\Scene</Filter>
     </ClInclude>
@@ -1126,6 +1102,36 @@
     </ClInclude>
     <ClInclude Include="Scene\ClearScene.h">
       <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Bridge.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Elevator.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\GimmickBase.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\JsonStageParser.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageParser.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\WoodBox.h">
+      <Filter>Rachet\Header\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
