@@ -12,6 +12,7 @@ TagManager:
   - AtackMode
   - HpEnemy
   - Bullet
+  - Lift
   layers:
   - Default
   - TransparentFX

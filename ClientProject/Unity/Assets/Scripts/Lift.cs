@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lift : MonoBehaviour
 {
     //速度
-    [SerializeField] private float moveSpeed = 5;
+    [SerializeField, Range(0.01f,0.1f)] private float moveSpeed = 0.5f;
     //上限
     [SerializeField] private float topCap;
     //下限
@@ -49,12 +49,12 @@ public class Lift : MonoBehaviour
     {
         if (Upmode)
         {
-            rb.velocity = new Vector2(0, moveSpeed);
+            transform.Translate(0f, moveSpeed,0f);
         }
         else
         {
 
-            rb.velocity = new Vector2(0, -moveSpeed);
+            transform.Translate(0f, -moveSpeed, 0f);
 
         }
         if (transform.position.y > topCap)
@@ -71,22 +71,30 @@ public class Lift : MonoBehaviour
     {
         if (Leftmode)
         {
-            rb.velocity = new Vector2(-moveSpeed,0);
+            if(transform.position.x >leftCap)
+            {
+
+                transform.Translate(-moveSpeed, 0f, 0f);
+            }
+            else
+            {
+                Leftmode = false;
+            }
         }
         else
         {
+            if(transform.position.x<rightCap)
+            {
+                transform.Translate(moveSpeed, 0f, 0f);
 
-            rb.velocity = new Vector2( moveSpeed,0);
+            }
+            else
+            {
+                Leftmode = true;
+            }
 
         }
-        if (transform.position.x < rightCap)
-        {
-            Leftmode = false;
-        }
-        else if (transform.position.x > leftCap)
-        {
-            Leftmode = true;
-        }
+
     }
 
 
