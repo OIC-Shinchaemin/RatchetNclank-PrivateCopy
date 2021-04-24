@@ -36,6 +36,8 @@ bool my::HpComponent::Initialize(void) {
     auto tag = super::GetOwner()->GetTag();
     if (tag == "Player") {
         if (auto canvas = super::_ui_canvas.lock()) {
+            canvas->RemoveElement("NanotechMenu");
+            
             auto menu = std::make_shared<my::NanotechMenu>("NanotechMenu");
             _observable.AddObserver(menu);
             menu->SetPosition(Mof::CVector2(512.0f - 32.0f * 2.0f - 16.0f, 50.0f));

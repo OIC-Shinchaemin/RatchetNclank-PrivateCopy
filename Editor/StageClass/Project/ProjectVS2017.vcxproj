@@ -97,6 +97,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="WoodBox.cpp" />
     <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Elevator.cpp" />
     <ClCompile Include="GameApp.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WoodBox.h" />
     <ClInclude Include="Bridge.h" />
     <ClInclude Include="Elevator.h" />
     <ClInclude Include="GameApp.h" />

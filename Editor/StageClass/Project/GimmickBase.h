@@ -20,7 +20,7 @@ public:
     virtual void ActionStart(void);
     virtual bool IsStart(void) const;
 
-    void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
+    virtual void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
         Vector3 pos, Vector3 scale, Vector3 rotate);
 };
 

@@ -40,6 +40,8 @@ private:
     std::shared_ptr<my::QuickChangeSystem>  _quick_change;
     //! ステージ
     Stage _stage;
+    //! 再初期化
+    bool _re_initialize;
 private:
     /// <summary>
     /// 追加
@@ -51,6 +53,10 @@ private:
     /// </summary>
     /// <param name="ptr"></param>
     void RemoveElement(const std::shared_ptr<my::Actor>& ptr);
+    /// <summary>
+    /// 再初期化
+    /// </summary>
+    void ReInitialize(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -76,6 +82,12 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
+    /// <summary>
+    /// 読み込み
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Load(void);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -271,6 +271,11 @@ void my::Player::ChangeAnimation(void)
     }
 }
 
+void my::Player::End(void) {
+    Observable::Notify("PlayerDead", shared_from_this());
+    //super::End();
+}
+
 my::Player::Player() :
     _current_mechanical(),
     _mesh(),
@@ -389,7 +394,7 @@ bool my::Player::Render(void) {
         } // if
     } // if
 
-    // •Ší‚ğİ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ğæ“¾‚·‚é
+    // æ­¦å™¨ã‚’è¨­å®šã™ã‚‹ãƒœãƒ¼ãƒ³ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
     auto motion = super::GetComponent<my::MotionComponent>()->GetMotionData();
     LPBONEMOTIONSTATE pBoneState = motion->GetBoneState("UPP_weapon");
     if (auto weapon = _current_mechanical.lock()) {

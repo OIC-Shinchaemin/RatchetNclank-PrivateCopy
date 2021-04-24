@@ -41,7 +41,6 @@ void state::AIState::Enter(void) {
 }
 
 void state::AIState::Exit(void) {
-    //_behaviour_executor->Reset();
 }
 
 void state::AIState::DebugRender(void) {

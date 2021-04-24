@@ -7,7 +7,7 @@
 
 
 void my::QuickChangeSystem::Open(void) {
-    _info.color= Mof::CVector4(1.0f, 1.0f, 1.0f, 0.0f);
+    _info.color = Mof::CVector4(1.0f, 1.0f, 1.0f, 0.0f);
     _state = State::Enter;
 }
 
@@ -36,7 +36,7 @@ my::QuickChangeSystem::QuickChangeSystem() :
         int angle = n;
         n += 45;
         return angle;
-    });
+                  });
 
     for (auto& degree : _angles) {
         _items.emplace(degree, std::move(my::QuickChangeItem()));
@@ -65,8 +65,10 @@ void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<my::Observer
 bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
     _ASSERT_EXPR(!_resource.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     // ui
+    if (auto canvas = _ui_canvas.lock()) {
+        canvas->RemoveElement("QuickChangeMenu");
+    } // if
     auto menu = std::make_shared< my::QuickChangeMenu>("QuickChangeMenu");
-    //Observable::AddObserver(menu);
     _subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(_resource);

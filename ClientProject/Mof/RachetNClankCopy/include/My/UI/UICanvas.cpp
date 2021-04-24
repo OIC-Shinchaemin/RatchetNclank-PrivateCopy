@@ -2,7 +2,7 @@
 
 
 my::UICanvas::UICanvas() :
-    _panels(){
+    _panels() {
 }
 
 my::UICanvas::~UICanvas() {
@@ -10,7 +10,17 @@ my::UICanvas::~UICanvas() {
 }
 
 void my::UICanvas::OnNotify(const std::shared_ptr<my::UIPanel>& observable, const char* event) {
-//    my::Observable<my::UICanvas>::Notify(shared_from_this(), event);
+    //    my::Observable<my::UICanvas>::Notify(shared_from_this(), event);
+}
+
+my::UICanvas::ElemPtr my::UICanvas::GetElement(const std::string& name) const {
+    auto it = std::find_if(_panels.begin(), _panels.end(), [name](const ElemPtr& ptr) {
+        return ptr->GetName() == name;
+                           });
+    if (it != _panels.end()) {
+        return *it;
+    } // if
+    return nullptr;
 }
 
 void my::UICanvas::AddElement(const ElemPtr& elem) {
@@ -21,6 +31,14 @@ void my::UICanvas::AddElement(const ElemPtr& elem) {
 void my::UICanvas::RemoveElement(const ElemPtr& elem) {
     elem->RemoveObserver(shared_from_this());
     ut::EraseRemove(_panels, elem);
+}
+
+bool my::UICanvas::RemoveElement(const std::string& name) {
+    if (auto exist = this->GetElement(name); exist) {
+        this->RemoveElement(exist);
+        return true;
+    } // if
+    return false;
 }
 
 /*

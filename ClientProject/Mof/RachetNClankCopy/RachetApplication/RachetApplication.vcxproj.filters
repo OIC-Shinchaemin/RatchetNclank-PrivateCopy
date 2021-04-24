@@ -564,6 +564,15 @@
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Stage\Bridge.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Elevator.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\GimmickBase.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1060,6 +1069,18 @@
     </ClInclude>
     <ClInclude Include="UI\EquipmentWeaponMenu.h">
       <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\GimmickBase.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Elevator.h">
+      <Filter>Rachet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Bridge.h">
+      <Filter>Rachet\Header\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

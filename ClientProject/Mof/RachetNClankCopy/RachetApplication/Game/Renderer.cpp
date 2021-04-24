@@ -26,3 +26,7 @@ bool my::Renderer::Render(void) {
     } // for
     return true;
 }
+
+void my::Renderer::Reset(void) {
+    _actors.clear();
+}

@@ -15,21 +15,7 @@
 #include "../Component/Collision/Algolithm/BombGloveBulletEnemyCollisionAlgolithm.h"
 
 
-my::PhysicsWorld::PhysicsWorld() :
-    _layers() {
-    collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>("PlayerEnemyCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>("PlayerEnemyAttackCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>("EnemyPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>("SightPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>("SightEnemyCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>("EnemyAttackPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyBombGloveBulletCollisionAlgolithm>("EnemyBombGloveBulletCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyPyrocitorBulletCollisionAlgolithm>("EnemyPyrocitorBulletCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>("EnemyBlasterBulletCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyBombGloveEffectCollisionAlgolithm>("EnemyBombGloveEffectCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::BlasterBulletEnemyCollisionAlgolithm>("BlasterBulletEnemyCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::BombGloveBulletEnemyCollisionAlgolithm>("BombGloveBulletEnemyCollisionAlgolithm");
-
+void my::PhysicsWorld::GenerateLayer(void) {
     const char* types[] = {
         "PlayerEnemyCollisionAlgolithm",
         "PlayerEnemyAttackCollisionAlgolithm",
@@ -51,6 +37,24 @@ my::PhysicsWorld::PhysicsWorld() :
     } // for
 }
 
+my::PhysicsWorld::PhysicsWorld() :
+    _layers() {
+    collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>("PlayerEnemyCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>("PlayerEnemyAttackCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>("EnemyPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>("SightPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>("SightEnemyCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>("EnemyAttackPlayerCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyBombGloveBulletCollisionAlgolithm>("EnemyBombGloveBulletCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyPyrocitorBulletCollisionAlgolithm>("EnemyPyrocitorBulletCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>("EnemyBlasterBulletCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::EnemyBombGloveEffectCollisionAlgolithm>("EnemyBombGloveEffectCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::BlasterBulletEnemyCollisionAlgolithm>("BlasterBulletEnemyCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::BombGloveBulletEnemyCollisionAlgolithm>("BombGloveBulletEnemyCollisionAlgolithm");
+
+    this->GenerateLayer();
+}
+
 my::PhysicsWorld::~PhysicsWorld() {
     _layers.clear();
 }
@@ -58,10 +62,10 @@ my::PhysicsWorld::~PhysicsWorld() {
 void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
     std::vector<std::weak_ptr<my::CollisionComponent>> work;
     actor->GetComponents<my::CollisionComponent>(work);
-    
+
     for (auto& ptr : work) {
         auto type = ptr.lock()->GetType();
-        for (auto& layer: _layers) {
+        for (auto& layer : _layers) {
             if (type == layer.algo->GetLayerType()) {
                 layer.objects.push_back(ptr.lock());
             } // if
@@ -87,7 +91,16 @@ void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
 bool my::PhysicsWorld::Update(void) {
     for (auto& layer : _layers) {
         for (auto& object : layer.objects) {
+            if (layer.objects.empty()) {
+                continue;
+            } // if
+
             for (auto& target : layer.targets) {
+                if (layer.targets.empty()) {
+                    continue;
+                } // if
+
+                
                 if (object == target) {
                     continue;
                 } // if
@@ -122,4 +135,9 @@ void my::PhysicsWorld::CollisionStage(Stage* stage) {
             object->CollisionStage(mesh);
         } // for
     } // for
+}
+
+void my::PhysicsWorld::Reset(void) {
+    _layers.clear();
+    this->GenerateLayer();
 }

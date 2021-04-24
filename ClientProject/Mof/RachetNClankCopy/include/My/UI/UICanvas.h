@@ -32,6 +32,12 @@ public:
     /// <param name="event"></param>
     virtual void OnNotify(const std::shared_ptr<my::UIPanel>& observable, const char* event) override;
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    ElemPtr GetElement(const std::string& name) const;
+    /// <summary>
     /// ’Ç‰Á
     /// </summary>
     /// <param name="elem"></param>
@@ -41,6 +47,11 @@ public:
     /// </summary>
     /// <param name="elem"></param>
     void RemoveElement(const ElemPtr& elem);
+    /// <summary>
+    /// íœ
+    /// </summary>
+    /// <param name="name"></param>
+    bool RemoveElement(const std::string& name);
     /// <summary>
     /// “ü—Í
     /// </summary>

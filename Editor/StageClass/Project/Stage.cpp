@@ -33,6 +33,9 @@ bool Stage::CreateStaticStageMesh(void) {
                 matrix.GetScaling(scale);
                 matrix.GetRotation(rotate);
                 matrix.GetTranslation(trans);
+                scale  *= object->GetScale();
+                rotate += object->GetRotate();
+                trans  += object->GetPosition();
 
                 // 再計算
                 CMatrix44 scale_, rotate_, trans_;
@@ -52,9 +55,20 @@ bool Stage::CreateStaticStageMesh(void) {
     }
     // メッシュ配列の最後に追加する
     stage_mesh->SetName("static_stage_mesh");
-    //stage_mesh->Save("static_stage_mesh.mom");
+    stage_mesh->Save("static_stage_mesh.mom");
     _mesh_array.push_back(std::move(stage_mesh));
     return true;
+}
+
+void Stage::RenderObject(const StageObjectPtr& obj) {
+    if (!obj->IsEnable()) {
+        return;
+    }
+    const int mesh_no = obj->GetMeshNo();
+    if (mesh_no < 0 || _mesh_array.size() <= mesh_no) {
+        return;
+    }
+    _mesh_array[mesh_no]->Render(obj->GetWorldMatrix());
 }
 
 /// <summary>
@@ -69,6 +83,7 @@ bool Stage::Load(const std::string& path) {
     parse_data.static_object_array_pointer = &_static_object_array;
     parse_data.enemy_spawn_array_pointer   = &_enemy_spawn_array;
     parse_data.gimmick_array_pointer       = &_gimmick_array;
+    parse_data.box_array_pointer           = &_woodbox_array;
     StageParserPtr parser = nullptr;
 
     // 拡張子の取得
@@ -102,14 +117,48 @@ void Stage::Initialize(void) {
     for (const auto& gimmick : _gimmick_array) {
         gimmick->Initialize();
     }
+    for (const auto& box : _woodbox_array) {
+        box->Initialize();
+        box->SetStageMesh(GetStaticStageMesh());
+        box->SetBoxArray(&_woodbox_array);
+        box->SetMeshArray(&_mesh_array);
+        if (box->GetType() == StageObjectType::BoxNanotech) {
+            box->SetEnable(true);
+        }
+        _box_enable_array_prev.push_back(box->IsEnable());
+    }
+    _init_flag = true;
 }
 
 /// <summary>
 /// 更新
 /// </summary>
 void Stage::Update(float delta) {
+    const int box_enable_size = _woodbox_array.size();
+    bool      box_break_flag  = false;
+    for (int i = 0; i < box_enable_size; i++) {
+        if (_box_enable_array_prev[i] != _woodbox_array[i]->IsEnable()) {
+            box_break_flag = true;
+            break;
+        }
+    }
+    if (box_break_flag || _init_flag) {
+        for (auto& it : _woodbox_array) {
+            it->ActionStart();
+        }
+    }
     for (const auto& gimmick : _gimmick_array) {
         gimmick->Update(delta);
+    }
+    for (const auto& box : _woodbox_array) {
+        box->Update(delta);
+    }
+    for (int i = 0; i < box_enable_size; i++) {
+        _box_enable_array_prev[i] = _woodbox_array[i]->IsEnable();
+    }
+
+    if (_init_flag) {
+        _init_flag = false;
     }
 }
 
@@ -117,19 +166,14 @@ void Stage::Update(float delta) {
 /// 描画
 /// </summary>
 void Stage::Render(void) {
-    for (const auto& it : _static_object_array) {
-        const int mesh_no = it->GetMeshNo();
-        if (mesh_no < 0 || _mesh_array.size() <= mesh_no) {
-            continue;
-        }
-        _mesh_array[mesh_no]->Render(it->GetWorldMatrix());
+    for (const auto& obj : _static_object_array) {
+        RenderObject(obj);
     }
     for (const auto& gimmick : _gimmick_array) {
-        const int mesh_no = gimmick->GetMeshNo();
-        if (mesh_no < 0 || _mesh_array.size() <= mesh_no) {
-            continue;
-        }
-        _mesh_array[mesh_no]->Render(gimmick->GetWorldMatrix());
+        RenderObject(gimmick);
+    }
+    for (const auto& box : _woodbox_array) {
+        RenderObject(box);
     }
 }
 
@@ -137,6 +181,12 @@ void Stage::Render(void) {
 /// 解放
 /// </summary>
 void Stage::Release(void) {
+
+    _woodbox_array.clear();
+    _gimmick_array.clear();
+    _enemy_spawn_array.clear();
+    _static_object_array.clear();
+    _box_enable_array_prev.clear();
 
     // 判定用メッシュの手動解放
     if (_create_static_stage_mesh) {
@@ -158,8 +208,6 @@ void Stage::Release(void) {
         }
     }
     _mesh_array.clear();
-    _static_object_array.clear();
-    _static_object_array.clear();
 }
 
 /// <summary>
@@ -191,4 +239,8 @@ EnemySpawnArray& Stage::GetEnemySpawnArray(void) {
 
 GimmickArray& Stage::GetGimmickArray(void) {
     return _gimmick_array;
+}
+
+WoodBoxArray& Stage::GetWoodBoxArray(void) {
+    return _woodbox_array;
 }

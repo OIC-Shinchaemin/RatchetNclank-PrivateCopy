@@ -39,15 +39,15 @@ namespace my {
 			JumpEnd,
 			DoubleJump,
 		};
-		//! •Ší
+		//! æ­¦å™¨
 		std::weak_ptr<my::Mechanical>_current_mechanical;
 
-		//! ƒƒbƒVƒ…
+		//! ãƒ¡ãƒƒã‚·ãƒ¥
 		std::weak_ptr<Mof::CMeshContainer> _mesh;
 		Mof::LPMeshMotionController	_motion;
-		//! ƒJƒƒ‰
+		//! ã‚«ãƒ¡ãƒ©
 		std::shared_ptr<my::Camera> _player_view_camera;
-		//! ƒJƒƒ‰ƒRƒ“ƒgƒ[ƒ‰
+		//! ã‚«ãƒ¡ãƒ©ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©
 		my::ServiceLocator<my::CameraController> _camera_controller;
 
 		float _character_slow_move_speed_max = 0.03f;
@@ -74,39 +74,44 @@ namespace my {
 		void ChangeAnimation(void);
 	public:
 		/// <summary>
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
 		Player();
 		/// <summary>
-		/// ƒfƒXƒgƒ‰ƒNƒ^
+		/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		/// </summary>
 		~Player();
 		/// <summary>
-		/// ’Ê’m
+		/// é€šçŸ¥
 		/// </summary>
 		/// <param name="change"></param>
 		virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
+    /// <summary>
+    /// ãƒ‡ãƒªãƒ¼ãƒˆ
+    /// </summary>
+    /// <param name=""></param>
+    virtual void End(void) override;
 		bool Generate(const std::shared_ptr<Mof::CMeshContainer>& mesh);
 		/// <summary>
-		/// ‰Šú‰»
+		/// åˆæœŸåŒ–
 		/// </summary>
 		/// <param name="param"></param>
 		/// <returns></returns>
 		virtual bool Initialize(my::Actor::Param* param) override;
 		/// <summary>
-		/// XV
+		/// æ›´æ–°
 		/// </summary>
 		/// <param name="delta_time"></param>
 		/// <returns></returns>
 		virtual bool Update(float delta_time) override;
 		/// <summary>
-		/// •`‰æ
+		/// æç”»
 		/// </summary>
 		/// <param name=""></param>
 		/// <returns></returns>
 		virtual bool Render(void) override;
 		/// <summary>
-		/// ‰ğ•ú
+		/// è§£æ”¾
 		/// </summary>
 		/// <param name=""></param>
 		/// <returns></returns>

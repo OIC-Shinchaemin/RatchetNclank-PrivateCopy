@@ -30,6 +30,10 @@ void my::UIPanel::SetColor(Mof::CVector4 color) {
     this->_color= color;
 }
 
+std::string my::UIPanel::GetName(void) const {
+    return this->_name;
+}
+
 Mof::CVector2 my::UIPanel::GetPosition(void) const {
     return this->_position;
 }

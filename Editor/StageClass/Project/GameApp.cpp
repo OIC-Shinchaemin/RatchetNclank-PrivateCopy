@@ -29,6 +29,7 @@ MofBool CGameApp::Initialize(void) {
 	
 	main_camera.SetViewPort();
 	main_camera.PerspectiveFov(MOF_ToRadian(60.0f), width / height, 0.01f, 1000.0f);
+	//main_camera.LookAt(Vector3(50, 30, -50), Vector3(), Vector3(0, 1, 0));
 	main_camera.LookAt(Vector3(0, 10, -30), Vector3(), Vector3(0, 1, 0));
 	main_camera.Update();
 	CGraphicsUtilities::SetCamera(&main_camera);
@@ -49,7 +50,7 @@ MofBool CGameApp::Update(void) {
 	//キーの更新
 	g_pInput->RefreshKey();
 
-	stage.Update(CUtilities::GetFrameSecond());
+	stage.Update(0.016667f);
 
 	if (g_pInput->IsKeyPush(MOFKEY_1)) {
 		stage.Initialize();
@@ -59,6 +60,15 @@ MofBool CGameApp::Update(void) {
 	}
 	if (g_pInput->IsKeyPush(MOFKEY_3)) {
 		stage.GetGimmickArray()[1]->ActionStart();
+	}
+	if (g_pInput->IsKeyPush(MOFKEY_4)) {
+		stage.GetWoodBoxArray()[1]->SetEnable(false);
+	}
+	if (g_pInput->IsKeyPush(MOFKEY_5)) {
+		stage.GetWoodBoxArray()[3]->SetEnable(false);
+	}
+	if (g_pInput->IsKeyPush(MOFKEY_6)) {
+		stage.GetWoodBoxArray()[7]->SetEnable(false);
 	}
 
 	return TRUE;
@@ -79,11 +89,7 @@ MofBool CGameApp::Render(void) {
 	g_pGraphics->SetDepthEnable(TRUE);
 
 	stage.Render();
-	/*MeshPtr mesh = stage.GetStaticStageMesh();
-	if (mesh) {
-		CMatrix44 mat;
-		mesh->Render(mat);
-	}*/
+
 	g_pGraphics->SetDepthEnable(FALSE);
 
 	//描画の終了

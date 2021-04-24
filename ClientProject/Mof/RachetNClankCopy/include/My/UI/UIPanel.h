@@ -65,6 +65,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    std::string GetName(void) const;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     Mof::CVector2 GetPosition(void) const;
     /// <summary>
     /// í«â¡
