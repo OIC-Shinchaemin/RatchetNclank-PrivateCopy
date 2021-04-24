@@ -32,6 +32,7 @@
 #include "../Component/Collision/Object/PyrocitorBulletCollisionComponent.h"
 #include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
 #include "../Component/Collision/Object/BombGloveEffectCollisionComponent.h"
+#include "../Component/Collision/Object/ShipCollisionComponent.h"
 
 
 my::ComponentFactory::ComponentFactory() :
@@ -66,6 +67,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PyrocitorBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveEffectCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::ShipCollisionComponent>();
     
 }
 

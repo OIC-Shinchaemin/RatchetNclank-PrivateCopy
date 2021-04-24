@@ -1,5 +1,7 @@
 #include "EnemyBlasterBulletCollisionAlgolithm.h"
 
+#include "../Object/CollisionComponentDefine.h"
+
 
 my::EnemyBlasterBulletCollisionAlgolithm::EnemyBlasterBulletCollisionAlgolithm() :
     super() {
@@ -9,11 +11,13 @@ my::EnemyBlasterBulletCollisionAlgolithm::~EnemyBlasterBulletCollisionAlgolithm(
 }
 
 const char* my::EnemyBlasterBulletCollisionAlgolithm::GetLayerType(void) const {
-    return "EnemyCollisionComponent";
+    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
+    //return "EnemyCollisionComponent";
 }
 
 const char* my::EnemyBlasterBulletCollisionAlgolithm::GetTargetType(void) const {
-    return "BlasterBulletCollisionComponent";
+    return my::CollisionComponentType::kBlasterBulletCollisionComponent.c_str();
+    //return "BlasterBulletCollisionComponent";
 }
 
 bool my::EnemyBlasterBulletCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {

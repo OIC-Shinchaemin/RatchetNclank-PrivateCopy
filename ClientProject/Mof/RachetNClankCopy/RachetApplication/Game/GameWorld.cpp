@@ -3,6 +3,7 @@
 
 my::GameWorld::GameWorld() :
     _actors() {
+    _actors.reserve(256);
 }
 
 my::GameWorld::~GameWorld() {

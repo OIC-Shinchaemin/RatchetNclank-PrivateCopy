@@ -341,6 +341,7 @@ bool my::Player::Generate(const std::shared_ptr<ResourceMgr>& ptr)
 
 bool my::Player::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
+    return true;
     _player_view_camera = (std::make_shared<my::Camera>());
     auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
     _player_view_camera->SetPosition(pos);
@@ -353,7 +354,23 @@ bool my::Player::Initialize(my::Actor::Param* param) {
 }
 
 bool my::Player::Update(float delta_time) {
-   // super::Updqate(delta_time);
+    super::Update(delta_time);
+    if (auto weapon = _current_mechanical.lock()) {
+        weapon->Update(delta_time);
+        if (weapon->IsAction() && weapon->CanFire()) {
+            auto pos = super::GetPosition();
+            auto height = super::GetComponent<my::PlayerComponent>()->GetHeight();
+            pos.y += height;
+            if (auto target = super::GetComponent<my::PlayerComponent>()->GetTarget().lock()) {
+                auto target_pos = target->GetPosition();
+                target_pos.y += height;
+                weapon->SetLockOnPosition(target_pos);
+            } // if
+            weapon->Fire(def::Transform(pos, super::GetRotate()));
+        } // if
+    } // if
+    return true;
+
     _time -= CUtilities::GetFrameSecond();
     _motion->AddTimer(CUtilities::GetFrameSecond());
 
@@ -408,7 +425,9 @@ bool my::Player::Update(float delta_time) {
 }
 
 bool my::Player::Render(void) {
-    //super::Render();
+    super::Render();
+    return true;
+
     if (auto r = _mesh.lock()) {
         Mof::CMatrix44 scale, rotate, translate;
         scale.Scaling(super::GetScale(), scale);

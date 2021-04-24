@@ -1,5 +1,7 @@
 #include "BombGloveEffectCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
+
 
 my::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(int priority) :
     super(priority) {
@@ -13,7 +15,8 @@ my::BombGloveEffectCollisionComponent::~BombGloveEffectCollisionComponent() {
 }
 
 std::string my::BombGloveEffectCollisionComponent::GetType(void) const {
-    return "BombGloveEffectCollisionComponent";
+    return my::CollisionComponentType::kBombGloveEffectCollisionComponent;
+    //return "BombGloveEffectCollisionComponent";
 }
 
 std::optional<Mof::CSphere> my::BombGloveEffectCollisionComponent::GetSphere(void) {

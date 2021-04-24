@@ -2,7 +2,6 @@
 
 #include "../../Gamepad.h"
 #include "../../Actor/Bullet/BlasterBullet.h"
-#include "../ParticleEffect.h"
 #include "../../Factory/FactoryManager.h"
 
 

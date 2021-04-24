@@ -1,7 +1,6 @@
 #include "Weapon.h"
 
 #include "../Bullet/Bullet.h"
-#include "../ParticleEffect.h"
 
 
 my::Weapon::Weapon() :

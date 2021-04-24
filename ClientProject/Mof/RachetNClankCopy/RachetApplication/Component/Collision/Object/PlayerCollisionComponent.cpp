@@ -1,5 +1,6 @@
 #include "PlayerCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
 #include "../../Player/PlayerComponent.h"
 
 
@@ -17,7 +18,8 @@ my::PlayerCollisionComponent::~PlayerCollisionComponent() {
 }
 
 std::string my::PlayerCollisionComponent::GetType(void) const {
-    return "PlayerCollisionComponent";
+    return my::CollisionComponentType::kPlayerCollisionComponent;
+    //return "PlayerCollisionComponent";
 }
 
 std::optional<Mof::CSphere> my::PlayerCollisionComponent::GetSphere(void) {

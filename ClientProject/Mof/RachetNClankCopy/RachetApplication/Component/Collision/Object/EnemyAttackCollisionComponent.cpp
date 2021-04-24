@@ -1,5 +1,6 @@
 #include "EnemyAttackCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
 #include "../../Enemy/EnemyAttackComponent.h"
 
 
@@ -17,7 +18,8 @@ my::EnemyAttackCollisionComponent::~EnemyAttackCollisionComponent() {
 }
 
 std::string my::EnemyAttackCollisionComponent::GetType(void) const {
-    return "EnemyAttackCollisionComponent";
+    return my::CollisionComponentType::kEnemyAttackCollisionComponent;
+    //return "EnemyAttackCollisionComponent";
 }
 
 std::optional<Mof::CSphere> my::EnemyAttackCollisionComponent::GetSphere(void) {

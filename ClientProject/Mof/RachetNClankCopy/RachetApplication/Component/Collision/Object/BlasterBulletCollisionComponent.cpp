@@ -1,5 +1,7 @@
 #include "BlasterBulletCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
+
 
 my::BlasterBulletCollisionComponent::BlasterBulletCollisionComponent(int priority) :
     super(priority) {
@@ -13,7 +15,7 @@ my::BlasterBulletCollisionComponent::~BlasterBulletCollisionComponent() {
 }
 
 std::string my::BlasterBulletCollisionComponent::GetType(void) const {
-    return "BlasterBulletCollisionComponent";
+    return my::CollisionComponentType::kBlasterBulletCollisionComponent;
 }
 
 std::optional<Mof::CSphere> my::BlasterBulletCollisionComponent::GetSphere(void) {

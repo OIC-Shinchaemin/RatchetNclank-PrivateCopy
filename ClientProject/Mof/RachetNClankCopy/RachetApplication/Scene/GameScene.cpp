@@ -10,6 +10,7 @@
 #include "../Game/GameSystem/Save/SaveSystem.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
+#include "../Actor//Ship/Ship.h"
 #include "../Factory/ActorBuilder.h"
 
 
@@ -36,6 +37,12 @@ void my::GameScene::ReInitialize(void) {
 bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
+
+    if (auto r= _resource.lock()) {
+        if (auto mesh = r->Get<std::shared_ptr<Mof::CMeshContainer>>("../Resource/mesh/stage/skybox.mom")) {
+            //mesh->Render(Mof::CMatrix44());
+        } // if
+    } // if
 
     _renderer.Render();
     _stage.Render();
@@ -68,6 +75,10 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
     } // if
     if (type == "PlayerDead") {
         _re_initialize = true;
+    } // if
+
+    if (type == "ShipCollision") {
+        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 }
 
@@ -103,6 +114,12 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
 }
 
 bool my::GameScene::Initialize(void) {
+    // light
+    _light.SetDirection(-math::vec3::kOne);
+    _light.SetDiffuse(def::color_rgba::kWhite);
+    _light.SetAmbient(def::color_rgba::kWhite * 0.8f);
+    ::CGraphicsUtilities::SetDirectionalLight(&_light);
+
     // game system
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
@@ -114,20 +131,28 @@ bool my::GameScene::Initialize(void) {
 
     auto param = new my::Actor::Param();
     // chara
-    //for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-    //    _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
-    //    auto builder = enemy_spawn.first.c_str();
-    //    param->name = enemy_spawn.second->GetName();
-    //    param->transform.position = enemy_spawn.second->GetPosition();
-    //    auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
-    //    this->AddElement(enemy);
-    //} // for
+    for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
+        
+        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+        auto builder = enemy_spawn.first.c_str();
+        param->name = enemy_spawn.second->GetName();
+        param->transform.position = enemy_spawn.second->GetPosition();
+        auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
+        this->AddElement(enemy);
+    } // for
 
     param->transform.position = Mof::CVector3(5.0f, 0.0f, 0.0f);
     param->transform.rotate = Mof::CVector3(0.0f, math::kPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
     player->Generate(_resource.lock());
     this->AddElement(player);
+
+    param->transform.position = Mof::CVector3(2.0f, 1.0f, 5.0f);
+    auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", param);
+    this->AddElement(ship);
+
+    
+    
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 
@@ -170,9 +195,6 @@ bool my::GameScene::Update(float delta_time) {
     // collision
     _physic_world.Update();
     _physic_world.CollisionStage(&_stage);
-    ::ImGui::Begin("GameScene");
-    ::ImGui::Text(" ");
-    ::ImGui::End();
     return true;
 }
 

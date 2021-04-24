@@ -19,6 +19,9 @@ my::WeaponSystem::WeaponSystem() :
 }
 
 my::WeaponSystem::~WeaponSystem() {
+    if (auto canvas = _ui_canvas.lock()) {
+        canvas->RemoveElement("EquipmentWeaponMenu");
+    } // if
 }
 
 void my::WeaponSystem::OnNotify(const std::string& change) {

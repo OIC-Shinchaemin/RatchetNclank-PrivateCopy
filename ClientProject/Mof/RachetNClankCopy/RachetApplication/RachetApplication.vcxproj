@@ -163,6 +163,7 @@
     <ClCompile Include="Actor\Character\Player.cpp" />
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
+    <ClCompile Include="Actor\Ship\Ship.cpp" />
     <ClCompile Include="Actor\Weapon\Blaster.cpp" />
     <ClCompile Include="Actor\Weapon\BombGlove.cpp" />
     <ClCompile Include="Actor\Weapon\Mechanical.cpp" />
@@ -182,12 +183,14 @@
     <ClCompile Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp" />
@@ -196,9 +199,11 @@
     <ClCompile Include="Component\Collision\Object\BombGloveBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\BombGloveEffectCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
@@ -303,6 +308,7 @@
     <ClInclude Include="Actor\Character\Player.h" />
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
+    <ClInclude Include="Actor\Ship\Ship.h" />
     <ClInclude Include="Actor\Weapon\Blaster.h" />
     <ClInclude Include="Actor\Weapon\BombGlove.h" />
     <ClInclude Include="Actor\Weapon\Mechanical.h" />
@@ -351,12 +357,14 @@
     <ClInclude Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h" />
@@ -365,9 +373,11 @@
     <ClInclude Include="Component\Collision\Object\BombGloveBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\BombGloveEffectCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\CollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h" />
     <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
@@ -456,7 +466,7 @@
     <ClInclude Include="UI\QuickChangeMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resource\resource_path.txt" />
+    <Text Include="..\Resource\scene_resource\general.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\behaviour\combat.json" />
@@ -466,15 +476,17 @@
     <None Include="..\Resource\builder\bomb_glove.json" />
     <None Include="..\Resource\builder\bomb_glove_bullet.json" />
     <None Include="..\Resource\builder\bomb_glove_effect.json" />
-    <None Include="..\Resource\builder\enemy.json" />
     <None Include="..\Resource\builder\particle.json" />
     <None Include="..\Resource\builder\player.json" />
     <None Include="..\Resource\builder\pyrocitor.json" />
     <None Include="..\Resource\builder\pyrocitor_bullet.json" />
+    <None Include="..\Resource\builder\ship.json" />
+    <None Include="..\Resource\builder\strong_enemy.json" />
+    <None Include="..\Resource\builder\weak_enemy.json" />
     <None Include="..\Resource\motion_names\enemy.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
-    <None Include="..\Resource\test.json" />
+    <None Include="..\Resource\stage\test.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RachetApplication.rc" />

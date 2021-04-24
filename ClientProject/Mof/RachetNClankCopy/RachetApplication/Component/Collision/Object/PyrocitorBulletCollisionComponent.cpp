@@ -1,5 +1,7 @@
 #include "PyrocitorBulletCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
+
 
 my::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(int priority) :
     super(priority) {
@@ -13,7 +15,8 @@ my::PyrocitorBulletCollisionComponent::~PyrocitorBulletCollisionComponent() {
 }
 
 std::string my::PyrocitorBulletCollisionComponent::GetType(void) const {
-    return "PyrocitorBulletCollisionComponent";
+    return my::CollisionComponentType::kPyrocitorBulletCollisionComponent;
+ //   return "PyrocitorBulletCollisionComponent";
 }
 
 std::optional<Mof::CSphere> my::PyrocitorBulletCollisionComponent::GetSphere(void) {

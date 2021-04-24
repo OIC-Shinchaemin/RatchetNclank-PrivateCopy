@@ -76,9 +76,6 @@
     <Filter Include="Rachet\Source\Factory">
       <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\motion_type">
-      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Component">
       <UniqueIdentifier>{5882736c-82d9-4cb1-82a6-2d33f365ecc8}</UniqueIdentifier>
     </Filter>
@@ -213,6 +210,18 @@
     </Filter>
     <Filter Include="Rachet\Source\Stage">
       <UniqueIdentifier>{cc87694c-5234-4efc-9b0f-178ef3bca202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Ship">
+      <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\scene_resource">
+      <UniqueIdentifier>{e7b0a52a-a213-4e12-a354-b6e5957328f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\motion_names">
+      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\stage">
+      <UniqueIdentifier>{492cf9dc-39e2-4b04-9c3a-8bc9da18b19f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -599,6 +608,21 @@
     </ClCompile>
     <ClCompile Include="Stage\Bridge.cpp">
       <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Ship\Ship.cpp">
+      <Filter>Rachet\Header\Actor\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1133,10 +1157,25 @@
     <ClInclude Include="Stage\WoodBox.h">
       <Filter>Rachet\Header\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Ship\Ship.h">
+      <Filter>Rachet\Header\Actor\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resource\resource_path.txt">
-      <Filter>リソース ファイル</Filter>
+    <Text Include="..\Resource\scene_resource\general.txt">
+      <Filter>リソース ファイル\scene_resource</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -1147,13 +1186,10 @@
       <Filter>リソース ファイル\behaviour</Filter>
     </None>
     <None Include="..\Resource\motion_names\enemy.motion_names">
-      <Filter>リソース ファイル\motion_type</Filter>
+      <Filter>リソース ファイル\motion_names</Filter>
     </None>
     <None Include="..\Resource\motion_names\player.motion_names">
-      <Filter>リソース ファイル\motion_type</Filter>
-    </None>
-    <None Include="..\Resource\builder\enemy.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>リソース ファイル\motion_names</Filter>
     </None>
     <None Include="..\Resource\builder\player.json">
       <Filter>リソース ファイル\builder</Filter>
@@ -1182,10 +1218,19 @@
     <None Include="..\Resource\behaviour\patrol.json">
       <Filter>リソース ファイル\behaviour</Filter>
     </None>
-    <None Include="..\Resource\test.json">
-      <Filter>リソース ファイル</Filter>
-    </None>
     <None Include="..\Resource\builder\bomb_glove_effect.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\ship.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\test.json">
+      <Filter>リソース ファイル\stage</Filter>
+    </None>
+    <None Include="..\Resource\builder\strong_enemy.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\weak_enemy.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
   </ItemGroup>

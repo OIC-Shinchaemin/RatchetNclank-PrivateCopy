@@ -1,6 +1,7 @@
 #include "EnemyAttackPlayerCollisionAlgolithm.h"
 
 #include "My/Core/Math.h"
+#include "../Object/CollisionComponentDefine.h"
 
 
 my::EnemyAttackPlayerCollisionAlgolithm::EnemyAttackPlayerCollisionAlgolithm() :
@@ -11,11 +12,13 @@ my::EnemyAttackPlayerCollisionAlgolithm::~EnemyAttackPlayerCollisionAlgolithm() 
 }
 
 const char* my::EnemyAttackPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return "EnemyAttackCollisionComponent";
+    return my::CollisionComponentType::kEnemyAttackCollisionComponent.c_str();
+    //return "EnemyAttackCollisionComponent";
 }
 
 const char* my::EnemyAttackPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return "PlayerCollisionComponent";
+    return my::CollisionComponentType::kPlayerCollisionComponent.c_str();
+    //return "PlayerCollisionComponent";
 }
 
 bool my::EnemyAttackPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {

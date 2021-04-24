@@ -18,6 +18,8 @@ private:
     std::weak_ptr<class MotionComponent> _motion_com;
     //! 非表示フラグ
     bool _is_show;
+    //! 表示色
+    Mof::CVector4 _color;
 public:
     /// <summary>
     /// コンストラクタ

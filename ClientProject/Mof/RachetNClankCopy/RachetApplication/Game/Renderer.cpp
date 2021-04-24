@@ -6,6 +6,7 @@
 
 my::Renderer::Renderer() :
     _actors() {
+    _actors.reserve(256);
 }
 
 my::Renderer::~Renderer() {

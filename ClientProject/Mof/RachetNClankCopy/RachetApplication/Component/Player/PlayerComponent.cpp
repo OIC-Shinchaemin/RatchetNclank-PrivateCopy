@@ -16,7 +16,7 @@ bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
     auto in = Mof::CVector2(1.0f, 0.0f);
     float move_angle = 0.0f;
 
-    
+
     if (::g_pInput->IsKeyHold(MOFKEY_A)) {
         action = true;
         left = true;
@@ -138,6 +138,16 @@ bool my::PlayerComponent::Initialize(void) {
 
     velocity_com->SetGravity(0.98f);
 
+    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
+                               "ShipCollisionComponent",
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->Notify("ShipCollision", super::GetOwner());
+        return true;
+    }));
+
+
+
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
         auto menu = std::make_shared<my::LockOnCursorMenu>("LockOnCursorMenu");
@@ -175,6 +185,9 @@ bool my::PlayerComponent::Update(float delta_time) {
 
 bool my::PlayerComponent::Release(void) {
     super::Release();
+    if (auto canvas = super::_ui_canvas.lock()) {
+        canvas->RemoveElement("LockOnCursorMenu");
+    } // if
     return true;
 }
 
