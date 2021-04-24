@@ -327,14 +327,16 @@ void my::Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
     _current_mechanical = change;
 }
 
-bool my::Player::Generate(const std::shared_ptr<Mof::CMeshContainer>& mesh)
+bool my::Player::Generate(const std::shared_ptr<ResourceMgr>& ptr)
 {
-    _mesh = mesh;
-    if (auto m = _mesh.lock())
-    {
-        _motion = m->CreateMotionController();
-    }
-    return false;
+    if (!ptr) {
+        return false;
+    } // if
+    _mesh = ptr->Get<std::shared_ptr<Mof::CMeshContainer>>("../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom");
+    if (auto mesh = _mesh.lock()) {
+        _motion = mesh->CreateMotionController();
+    } // if
+    return true;
 }
 
 bool my::Player::Initialize(my::Actor::Param* param) {
