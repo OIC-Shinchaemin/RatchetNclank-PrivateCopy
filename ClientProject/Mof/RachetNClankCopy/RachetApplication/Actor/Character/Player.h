@@ -55,7 +55,7 @@ namespace my {
 		float _character_fast_move_speed_max = 0.25f;
 		float _character_rotation_speed = 0.2f;
 		float _gravity_increment = 0.1f;
-		float _jump_power = 0.5f;
+		float _jump_power = 0.13f;
 		float _move_angle;
 		PlayerState _player_state;
 		CVector3 _move;
@@ -70,6 +70,7 @@ namespace my {
 		void UpdateMove(void);
 		void UpdateWait(void);
 		void UpdateJump(void);
+		void UpdateAttack(void);
 		void JumpStart(void);
 		void ChangeAnimation(void);
 	public:
