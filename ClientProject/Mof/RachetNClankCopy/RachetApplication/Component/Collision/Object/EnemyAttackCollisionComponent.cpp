@@ -1,7 +1,7 @@
 #include "EnemyAttackCollisionComponent.h"
 
 #include "CollisionComponentDefine.h"
-#include "../../Enemy/EnemyAttackComponent.h"
+#include "../../Enemy/EnemyMeleeAttackComponent.h"
 
 
 my::EnemyAttackCollisionComponent::EnemyAttackCollisionComponent(int priority) :
@@ -65,7 +65,7 @@ std::optional<my::SightObject> my::EnemyAttackCollisionComponent::GetSightObject
 
 bool my::EnemyAttackCollisionComponent::Initialize(void) {
     super::Initialize();
-    _attack_com = super::GetOwner()->GetComponent<my::EnemyAttackComponent>();
+    _attack_com = super::GetOwner()->GetComponent<my::EnemyMeleeAttackComponent>();
     return true;
 }
 

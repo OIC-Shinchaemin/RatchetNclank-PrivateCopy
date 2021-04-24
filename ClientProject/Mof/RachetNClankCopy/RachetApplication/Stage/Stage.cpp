@@ -55,8 +55,8 @@ bool Stage::CreateStaticStageMesh(void) {
     }
     // ƒƒbƒVƒ…”z—ñ‚ÌÅŒã‚É’Ç‰Á‚·‚é
     stage_mesh->SetName("static_stage_mesh");
-    auto name = "static_stage_mesh.mom";
-    stage_mesh->Save(reinterpret_cast<LPMofChar>(&name));
+    //auto name = "static_stage_mesh.mom";
+    //stage_mesh->Save(reinterpret_cast<LPMofChar>(&name));
     _mesh_array.push_back(std::move(stage_mesh));
     return true;
 }

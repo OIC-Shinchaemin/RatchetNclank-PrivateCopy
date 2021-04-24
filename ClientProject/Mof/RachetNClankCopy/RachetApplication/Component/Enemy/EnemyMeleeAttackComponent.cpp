@@ -1,10 +1,10 @@
-#include "EnemyAttackComponent.h"
+#include "EnemyMeleeAttackComponent.h"
 
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
 
 
-my::EnemyAttackComponent::EnemyAttackComponent(int priority) :
+my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     super(priority),
     _range(2.0f),
     _volume(0.5f),
@@ -12,7 +12,7 @@ my::EnemyAttackComponent::EnemyAttackComponent(int priority) :
     _motion_state_com() {
 }
 
-my::EnemyAttackComponent::EnemyAttackComponent(const EnemyAttackComponent& obj) :
+my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
@@ -20,27 +20,27 @@ my::EnemyAttackComponent::EnemyAttackComponent(const EnemyAttackComponent& obj) 
     _motion_state_com() {
 }
 
-my::EnemyAttackComponent ::~EnemyAttackComponent() {
+my::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
 }
 
-std::string my::EnemyAttackComponent::GetType(void) const {
-    return "EnemyAttackComponent";
+std::string my::EnemyMeleeAttackComponent::GetType(void) const {
+    return "EnemyMeleeAttackComponent";
 }
 
-float my::EnemyAttackComponent::GetRange(void) const {
+float my::EnemyMeleeAttackComponent::GetRange(void) const {
     return this->_range;
 }
 
-float my::EnemyAttackComponent::GetVolume(void) const {
+float my::EnemyMeleeAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-Mof::CSphere my::EnemyAttackComponent::GetCanAttackRangeSphere(void) const {
+Mof::CSphere my::EnemyMeleeAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _range);
 }
 
-bool my::EnemyAttackComponent::Initialize(void) {
+bool my::EnemyMeleeAttackComponent::Initialize(void) {
     super::Initialize();
 
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
@@ -49,7 +49,7 @@ bool my::EnemyAttackComponent::Initialize(void) {
     return true;
 }
 
-bool my::EnemyAttackComponent::Update(float delta_time) {
+bool my::EnemyMeleeAttackComponent::Update(float delta_time) {
     if (auto motion_com = _motion_com.lock()) {
         if (motion_com->IsEndMotion()) {
             super::End();
@@ -58,16 +58,16 @@ bool my::EnemyAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::EnemyAttackComponent::Release(void) {
+bool my::EnemyMeleeAttackComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyAttackComponent::Clone(void) {
-    return std::make_shared<my::EnemyAttackComponent >(*this);
+std::shared_ptr<my::Component> my::EnemyMeleeAttackComponent::Clone(void) {
+    return std::make_shared<my::EnemyMeleeAttackComponent >(*this);
 }
 
-bool my::EnemyAttackComponent::Start(void) {
+bool my::EnemyMeleeAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

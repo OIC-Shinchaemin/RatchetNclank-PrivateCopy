@@ -29,7 +29,7 @@ public:
     /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
     /// <returns>Failed:Às‚Ì¸”s</returns>
     virtual bool Execute(std::any ptr) override {
-        auto actor =  std::dynamic_pointer_cast<my::Enemy>(std::any_cast<std::shared_ptr<my::Actor>>(ptr));
+        auto actor =  std::any_cast<std::shared_ptr<my::Actor>>(ptr);
         auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
         return !target.expired();
     }

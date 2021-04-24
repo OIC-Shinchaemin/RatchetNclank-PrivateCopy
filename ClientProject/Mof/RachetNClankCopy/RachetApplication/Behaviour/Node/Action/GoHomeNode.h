@@ -6,7 +6,6 @@
 
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyMoveComponent.h"
-#include "../Component/Enemy/EnemyAttackComponent.h"
 
 
 namespace behaviour {

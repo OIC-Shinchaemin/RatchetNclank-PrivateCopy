@@ -10,7 +10,6 @@
 #include "../Behaviour/Node/Condition/NotAwayFromHomeNode.h"
 #include "../Behaviour/Node/Condition/TargetRecognitionNode.h"
 #include "../Behaviour/Node/Condition/TargetInMeleeAttackRangeNode.h"
-#include "../Behaviour/Node/Condition/TargetOutOfMeleeAttackRangeNode.h"
 
 
 my::BehaviourFactory::BehaviourFactory() :
@@ -27,7 +26,6 @@ my::BehaviourFactory::BehaviourFactory() :
     _condition_factory.Register<behaviour::NotAwayFromHomeNode >("NotAwayFromHomeNode");
     _condition_factory.Register<behaviour::TargetRecognitionNode >("TargetRecognitionNode");
     _condition_factory.Register<behaviour::TargetInMeleeAttackRangeNode >("TargetInMeleeAttackRangeNode");
-    _condition_factory.Register<behaviour::TargetOutOfMeleeAttackRangeNode >("TargetOutOfMeleeAttackRangeNode");
 }
 
 behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* path) {

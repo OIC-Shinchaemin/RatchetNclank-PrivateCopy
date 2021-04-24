@@ -7,7 +7,7 @@
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyMoveComponent.h"
-#include "../Component/Enemy/EnemyAttackComponent.h"
+#include "../Component/Enemy/EnemyMeleeAttackComponent.h"
 #include "../../../Actor/Character/Enemy.h"
 
 
@@ -38,7 +38,7 @@ public:
         auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
 
         _ASSERT_EXPR(!target.expired(), L"•ÛŽ‚µ‚Ä‚¢‚éƒ|ƒCƒ“ƒ^‚ª–³Œø‚Å‚·");
-        auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
+        auto attack_com = actor->GetComponent<my::EnemyMeleeAttackComponent>();
         auto pos = target.lock()->GetPosition();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
             return true;

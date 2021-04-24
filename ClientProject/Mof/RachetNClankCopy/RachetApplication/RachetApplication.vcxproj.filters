@@ -366,9 +366,6 @@
     <ClCompile Include="Component\AIStateComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Enemy\EnemyAttackComponent.cpp">
-      <Filter>Rachet\Source\Component\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyIdleComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
     </ClCompile>
@@ -623,6 +620,12 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyRangedAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -884,9 +887,6 @@
     <ClInclude Include="Component\Enemy\EnemyStateComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Enemy\EnemyAttackComponent.h">
-      <Filter>Rachet\Header\Component\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Component.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
@@ -912,9 +912,6 @@
       <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Node\Condition\TargetInMeleeAttackRangeNode.h">
-      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
-    </ClInclude>
-    <ClInclude Include="Behaviour\Node\Condition\TargetOutOfMeleeAttackRangeNode.h">
       <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h">
@@ -1172,6 +1169,12 @@
     <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyRangedAttackComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1181,9 +1184,6 @@
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json">
       <Filter>リソース ファイル\save</Filter>
-    </None>
-    <None Include="..\Resource\behaviour\combat.json">
-      <Filter>リソース ファイル\behaviour</Filter>
     </None>
     <None Include="..\Resource\motion_names\enemy.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
@@ -1215,9 +1215,6 @@
     <None Include="..\Resource\builder\bomb_glove.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
-    <None Include="..\Resource\behaviour\patrol.json">
-      <Filter>リソース ファイル\behaviour</Filter>
-    </None>
     <None Include="..\Resource\builder\bomb_glove_effect.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
@@ -1232,6 +1229,24 @@
     </None>
     <None Include="..\Resource\builder\weak_enemy.json">
       <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\strong_enemy_patrol.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\weak_enemy_combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\weak_enemy_patrol.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\strong_enemy_combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\patrol.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

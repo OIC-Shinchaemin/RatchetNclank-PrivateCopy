@@ -38,7 +38,6 @@ std::weak_ptr<my::Actor> my::EnemyComponent::GetTarget(void) const {
 bool my::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Start();
-
     auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                            "PlayerCollisionComponent",
@@ -46,7 +45,6 @@ bool my::EnemyComponent::Initialize(void) {
         super::GetOwner()->End(); 
         return true;
     }));
-    
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "PyrocitorBulletCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {

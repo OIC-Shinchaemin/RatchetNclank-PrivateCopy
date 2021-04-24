@@ -60,7 +60,7 @@
       }
     },
     {
-      "type": "EnemyAttackComponent",
+      "type": "EnemyMeleeAttackComponent",
       "paramater": {
         "priority": 92
       }

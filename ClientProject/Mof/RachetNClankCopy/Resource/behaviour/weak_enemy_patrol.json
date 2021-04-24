@@ -1,0 +1,22 @@
+{
+  "root": {
+    "index" : 0
+  },
+  "behaviours": [
+    {
+      "type": "SequencerNode",
+      "children": [
+        1,
+        2
+      ]
+    },
+    {
+      "type": "ActionNode",
+      "derived": "GoHomeNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "LookAroundNode"
+    }
+  ]
+}

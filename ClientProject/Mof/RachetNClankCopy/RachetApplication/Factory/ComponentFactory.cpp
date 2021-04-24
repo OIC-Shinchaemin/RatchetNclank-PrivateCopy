@@ -15,7 +15,7 @@
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyIdleComponent.h"
 #include "../Component/Enemy/EnemyMoveComponent.h"
-#include "../Component/Enemy/EnemyAttackComponent.h"
+#include "../Component/Enemy/EnemyMeleeAttackComponent.h"
 #include "../Component/Enemy/EnemyDamageComponent.h"
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
@@ -50,7 +50,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::EnemyStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyIdleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyMoveComponent>();
-    my::ComponentFactory::AddComponentCreator<my::EnemyAttackComponent>();
+    my::ComponentFactory::AddComponentCreator<my::EnemyMeleeAttackComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();

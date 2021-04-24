@@ -1,0 +1,42 @@
+{
+  "root": {
+    "index": 0
+  },
+  "behaviours": [
+    {
+      "type": "SelectorNode",
+      "children": [
+        1,
+        6
+      ]
+    },
+    {
+      "type": "SequencerNode",
+      "children": [
+        2,
+        3,
+        4,5
+      ]
+    },
+    {
+      "type": "ConditionalNode",
+      "derived": "NotAwayFromHomeNode"
+    },
+    {
+      "type": "ConditionalNode",
+      "derived": "TargetRecognitionNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "MoveToEnemyNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "MeleeAttackNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "ChangePatrolNode"
+    }
+  ]
+}

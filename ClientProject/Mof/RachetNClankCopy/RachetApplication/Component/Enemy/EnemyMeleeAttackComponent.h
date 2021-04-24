@@ -1,36 +1,40 @@
-#ifndef MY_ENEMY_ATTACK_COLLISION_COMPONENT_H
-#define MY_ENEMY_ATTACK_COLLISION_COMPONENT_H
+#ifndef MY_ENEMY_MELEE_ATTACK_COMPONENT_H
+#define MY_ENEMY_MELEE_ATTACK_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../UpdateComponent.h"
 
-#include <optional>
 #include <memory>
-
-#include <Mof.h>
 
 
 namespace my {
-class EnemyAttackCollisionComponent : public my::CollisionComponent {
-    using super = my::CollisionComponent;
+class EnemyMeleeAttackComponent : public my::UpdateComponent {
+    using super = my::UpdateComponent;
 private:
-    //! 攻撃
-    std::weak_ptr<class EnemyMeleeAttackComponent> _attack_com;
+private:
+    //! 攻撃範囲
+    float _range;
+    //! サイズ
+    float _volume;
+    //! モーション
+    std::weak_ptr<class MotionComponent> _motion_com;
+    //! モーション
+    std::weak_ptr<class MotionStateComponent> _motion_state_com;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    EnemyAttackCollisionComponent(int priority);
+    EnemyMeleeAttackComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    EnemyAttackCollisionComponent(const EnemyAttackCollisionComponent& obj);
+    EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~EnemyAttackCollisionComponent();
+    virtual ~EnemyMeleeAttackComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -42,31 +46,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<Mof::CSphere> GetSphere(void) override;
+    float GetRange(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<Mof::CBoxAABB> GetBox(void) override;
+    float GetVolume(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<Mof::CRay3D> GetRay(void) override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual std::optional<Mof::LPMeshContainer> GetMesh(void) override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual std::optional<my::SightObject> GetSightObject(void) override;
+    Mof::CSphere GetCanAttackRangeSphere(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -74,11 +66,29 @@ public:
     /// <returns></returns>
     virtual bool Initialize(void) override;
     /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time">時間</param>
+    /// <returns></returns>
+    virtual bool Update(float delta_time) override;
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Release(void) override;
+    /// <summary>
     /// 複製
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
+    /// <summary>
+    /// 開始
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>成功</returns>
+    virtual bool Start(void) override;
 };
 }
-#endif // !MY_ENEMY_ATTACK_COLLISION_COMPONENT_H
+#endif // !MY_ENEMY_ATTACK_COMPONENT_H

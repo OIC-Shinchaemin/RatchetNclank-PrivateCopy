@@ -5,7 +5,7 @@
 #include "../ConditionalNode.h"
 
 #include "../../../Component/Enemy/EnemyComponent.h"
-#include "../../../Component/Enemy/EnemyAttackComponent.h"
+#include "../../../Component/Enemy/EnemyMeleeAttackComponent.h"
 
 
 namespace behaviour {
@@ -36,7 +36,7 @@ public:
 
         _ASSERT_EXPR(!target.expired(), L"•ÛŽ‚µ‚Ä‚¢‚éƒ|ƒCƒ“ƒ^‚ª–³Œø‚Å‚·");
 
-        auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
+        auto attack_com = actor->GetComponent<my::EnemyMeleeAttackComponent>();
         auto pos = target.lock()->GetPosition();
         return attack_com->GetCanAttackRangeSphere().CollisionPoint(pos);
     }

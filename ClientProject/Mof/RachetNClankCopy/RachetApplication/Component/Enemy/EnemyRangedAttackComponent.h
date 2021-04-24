@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_ATTACK_COMPONENT_H
-#define MY_ENEMY_ATTACK_COMPONENT_H
+#ifndef MY_ENEMY_RANGED_ATTACK_COMPONENT_H
+#define MY_ENEMY_RANGED_ATTACK_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -8,7 +8,7 @@
 
 
 namespace my {
-class EnemyAttackComponent : public my::UpdateComponent {
+class EnemyRangedAttackComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
 private:
@@ -25,16 +25,16 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    EnemyAttackComponent(int priority);
+    EnemyRangedAttackComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    EnemyAttackComponent(const EnemyAttackComponent& obj);
+    EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~EnemyAttackComponent();
+    virtual ~EnemyRangedAttackComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -91,4 +91,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_ENEMY_ATTACK_COMPONENT_H
+#endif // !MY_ENEMY_RANGED_ATTACK_COMPONENT_H

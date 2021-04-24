@@ -13,7 +13,7 @@ state::EnemyMotionAttackState::~EnemyMotionAttackState() {
 
 void state::EnemyMotionAttackState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     super::SetActor(ptr);
-    _attack_com = ptr->GetComponent<my::EnemyAttackComponent>();
+    _attack_com = ptr->GetComponent<my::EnemyMeleeAttackComponent>();
 }
 
 const char* state::EnemyMotionAttackState::GetName(void) const {
