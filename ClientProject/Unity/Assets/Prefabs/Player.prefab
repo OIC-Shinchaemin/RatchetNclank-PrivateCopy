@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8388371521092655992}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -489,6 +489,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 3002367426876369064, guid: 585dc6db24311b3408636b0e8f57418f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3002367426876369069, guid: 585dc6db24311b3408636b0e8f57418f,
         type: 3}
       propertyPath: m_RootOrder
@@ -553,6 +558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ground.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781307983132931831, guid: 585dc6db24311b3408636b0e8f57418f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 585dc6db24311b3408636b0e8f57418f, type: 3}

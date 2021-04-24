@@ -189,6 +189,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+
+        if(other.gameObject.tag=="Lift")
+        {
+            transform.SetParent(other.transform);
+        }
+
+
         if (other.gameObject.tag == "Enemy")
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
@@ -216,6 +223,14 @@ public class PlayerController : MonoBehaviour
         {
             Bullet bullet = other.gameObject.GetComponent<Bullet>();
             CollisionBullet(bullet);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Lift")
+        {
+            transform.SetParent(null);
         }
     }
 
