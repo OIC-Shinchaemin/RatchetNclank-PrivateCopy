@@ -10,6 +10,7 @@ struct CollisionComponentType {
     static std::string kPlayerCollisionComponent;
     static std::string kEnemyCollisionComponent;
     static std::string kEnemyAttackCollisionComponent;
+    static std::string kEnemyBulletCollisionComponent;
     static std::string kSightCollisionComponent;
     static std::string kShipCollisionComponent;
     static std::string kBombGloveBulletCollisionComponent;

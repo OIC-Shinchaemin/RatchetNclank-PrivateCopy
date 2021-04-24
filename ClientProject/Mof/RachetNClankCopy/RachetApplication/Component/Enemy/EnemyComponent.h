@@ -4,6 +4,7 @@
 
 #include "../CharacterComponent.h"
 
+#include <optional>
 #include <memory>
 
 
@@ -45,6 +46,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::weak_ptr<my::Actor> GetTarget(void) const;
+    /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::optional<Mof::CVector3> GetTargetPosition(void) const;
     /// <summary>
     /// ‰Šú‰»
     /// </summary>

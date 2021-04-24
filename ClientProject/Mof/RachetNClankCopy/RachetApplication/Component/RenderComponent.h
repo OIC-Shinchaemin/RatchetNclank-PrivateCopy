@@ -59,11 +59,11 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
     /// <summary>
-    /// 描画
+    /// デバッグ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool DebugRender(void);
+    virtual bool DebugRender(void) override;
 };
 }
 #endif // !MY_RENDER_COMPONENT_H

@@ -7,28 +7,19 @@
       "type": "SelectorNode",
       "children": [
         1,
-        6
+        4
       ]
     },
     {
       "type": "SequencerNode",
       "children": [
         2,
-        3,
-        4,5
+        3
       ]
     },
     {
       "type": "ConditionalNode",
-      "derived": "NotAwayFromHomeNode"
-    },
-    {
-      "type": "ConditionalNode",
       "derived": "TargetRecognitionNode"
-    },
-    {
-      "type": "ActionNode",
-      "derived": "MoveToEnemyNode"
     },
     {
       "type": "ActionNode",

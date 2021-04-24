@@ -117,7 +117,7 @@ void my::Actor::End(void) {
 bool my::Actor::Initialize(void) {
     _state = my::ActorState::Active;
     _transform = _initial_transform;
-    
+
     // コンポーネントの初期化
     for (auto& com : _components) {
         com->Initialize();
@@ -163,6 +163,7 @@ bool my::Actor::Render(void) {
     for (auto& com : _render_components) {
         if (com->IsActive()) {
             com->Render();
+            com->DebugRender();
         } // if
     } // for
     return true;
@@ -199,5 +200,5 @@ void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
     } // for
 }
 
-void my::Actor::RenderDebug(void) {
+void my::Actor::DebugRender(void) {
 }

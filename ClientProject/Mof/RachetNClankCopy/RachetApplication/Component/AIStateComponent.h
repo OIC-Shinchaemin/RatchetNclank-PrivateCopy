@@ -82,6 +82,12 @@ public:
     /// </summary>
     /// <param name="name"></param>
     void ChangeState(const std::string& name);
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool DebugRender(void) override;
 };
 }
 #endif // !MY_AI_STATE_COMPONENT_H

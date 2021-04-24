@@ -23,7 +23,7 @@ void my::Renderer::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
 bool my::Renderer::Render(void) {
     for (auto ptr : _actors) {
         ptr->Render();
-        ptr->RenderDebug();
+        ptr->DebugRender();
     } // for
     return true;
 }

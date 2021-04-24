@@ -70,3 +70,8 @@ std::shared_ptr<my::Component> my::AIStateComponent::Clone(void) {
 void my::AIStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
+
+bool my::AIStateComponent::DebugRender(void) {
+    _state_machine.DebugRender();
+    return false;
+}

@@ -6,13 +6,9 @@
     {
       "type": "SequencerNode",
       "children": [
-        1,
-        2
+        1
+        
       ]
-    },
-    {
-      "type": "ActionNode",
-      "derived": "GoHomeNode"
     },
     {
       "type": "ActionNode",

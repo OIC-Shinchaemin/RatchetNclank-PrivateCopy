@@ -2,6 +2,7 @@
 
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
+#include "EnemyComponent.h"
 #include "../../Actor/Bullet/EnemyBullet.h"
 #include "../../Factory/FactoryManager.h"
 
@@ -9,17 +10,21 @@
 my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     super(priority),
     _range(3.0f),
-    _volume(0.5f),
+    _volume(0.2f),
+    _shot_speed(3.0f),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _enemy_com() {
 }
 
 my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
+    _shot_speed(obj._shot_speed),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _enemy_com() {
 }
 
 my::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
@@ -47,11 +52,12 @@ bool my::EnemyRangedAttackComponent::Initialize(void) {
 
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
-
+    _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();
     return true;
 }
 
 bool my::EnemyRangedAttackComponent::Update(float delta_time) {
+    super::End();
     if (auto motion_com = _motion_com.lock()) {
         if (motion_com->IsEndMotion()) {
             super::End();
@@ -77,18 +83,19 @@ bool my::EnemyRangedAttackComponent::Start(void) {
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState("EnemyMotionAttackState");
     } // if
+    _ASSERT_EXPR(_enemy_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
+    auto enemy_com = _enemy_com.lock();
 
     auto param = my::Bullet::Param();
     auto owner = super::GetOwner();
     auto transform = my::Transform();
     param.transform.position = owner->GetPosition();
+    param.transform.position.y += enemy_com->GetHeight();
     param.transform.rotate = owner->GetRotate();
-    
-    float shot_speed = 6.0f;
-    auto speed = Mof::CVector3(0.0f, 0.0f, -shot_speed);
-    speed.RotateAround(math::vec3::kZero, param.transform.rotate);
-    param.speed = speed;
-    param.speed.y = shot_speed * 0.2f;
+
+    Mof::CVector3 direction = enemy_com->GetTargetPosition().value() - param.transform.position;
+    direction.Normal(direction);
+    param.speed = direction * _shot_speed;
 
     auto add = my::FactoryManager::Singleton().CreateActor<my::EnemyBullet>("../Resource/builder/enemy_bullet.json", &param);
     add->Start(param);

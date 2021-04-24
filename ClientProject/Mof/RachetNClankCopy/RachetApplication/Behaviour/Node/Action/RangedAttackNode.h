@@ -35,24 +35,16 @@ public:
     virtual bool Execute(std::any ptr) override {
         auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
         auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
-
         if (target.expired()) {
             return false;
         } // if
+        
+        auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
+        ai_state_com->ChangeState("AICombatState");
 
-        auto attack_com = actor->GetComponent<my::EnemyRangedAttackComponent>();
-        auto pos = target.lock()->GetPosition();
-        if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
-            auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
-            ai_state_com->ChangeState("AICombatState");
-
-            auto state_com = actor->GetComponent<my::EnemyStateComponent>();
-            state_com->ChangeState("EnemyActionRangedAttackState");
-            return false;
-        } // if
-
-        return true;
-
+        auto state_com = actor->GetComponent<my::EnemyStateComponent>();
+        state_com->ChangeState("EnemyActionRangedAttackState");
+        return false;
     }
 };
 }

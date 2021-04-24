@@ -56,6 +56,9 @@ bool my::Component::IsUpdate(void) const {
 }
 
 bool my::Component::IsRender(void) const {
+#ifdef _DEBUG
+    return true;
+#endif // _DEBUG
     return false;
 }
 
@@ -79,4 +82,8 @@ bool my::Component::Render(void) {
 bool my::Component::Release(void) {
     _owner.reset();
     return true;
+}
+
+bool my::Component::DebugRender(void) {
+    return false;
 }

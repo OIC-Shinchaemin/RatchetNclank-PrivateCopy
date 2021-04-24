@@ -9,6 +9,7 @@ namespace my {
 struct CollisionAlgolithmType {
     static std::string kPlayerEnemyCollisionAlgolithm;
     static std::string kPlayerEnemyAttackCollisionAlgolithm;
+    static std::string kPlayerEnemyBulletCollisionAlgolithm;
     static std::string kPlayerShipCollisionAlgolithm;
     static std::string kEnemyPlayerCollisionAlgolithm;
     static std::string kSightPlayerCollisionAlgolithm;

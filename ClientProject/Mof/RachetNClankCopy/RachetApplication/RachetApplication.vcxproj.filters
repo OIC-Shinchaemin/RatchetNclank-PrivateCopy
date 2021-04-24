@@ -633,6 +633,12 @@
     <ClCompile Include="Actor\Bullet\EnemyBullet.cpp">
       <Filter>Rachet\Source\Actor\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1186,6 +1192,12 @@
     </ClInclude>
     <ClInclude Include="Actor\Bullet\EnemyBullet.h">
       <Filter>Rachet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

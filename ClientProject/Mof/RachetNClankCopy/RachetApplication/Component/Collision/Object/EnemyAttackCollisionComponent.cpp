@@ -19,7 +19,6 @@ my::EnemyAttackCollisionComponent::~EnemyAttackCollisionComponent() {
 
 std::string my::EnemyAttackCollisionComponent::GetType(void) const {
     return my::CollisionComponentType::kEnemyAttackCollisionComponent;
-    //return "EnemyAttackCollisionComponent";
 }
 
 std::optional<Mof::CSphere> my::EnemyAttackCollisionComponent::GetSphere(void) {
