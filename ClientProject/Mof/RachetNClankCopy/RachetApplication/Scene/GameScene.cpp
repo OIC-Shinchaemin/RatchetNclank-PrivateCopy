@@ -126,6 +126,7 @@ bool my::GameScene::Initialize(void) {
     param->transform.position = Mof::CVector3(5.0f, 0.0f, 0.0f);
     param->transform.rotate = Mof::CVector3(0.0f, math::kPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
+    player->Generate(_resource.lock());
     this->AddElement(player);
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);

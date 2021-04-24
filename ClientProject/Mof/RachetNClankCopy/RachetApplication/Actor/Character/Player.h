@@ -10,8 +10,8 @@
 #include "My/Core/ServiceLocator.h"
 #include "../../Camera/Camera.h"
 #include "../../Camera/CameraController.h"
-
-
+#include "../../ResourceManager.h"
+#include "../../GameDefine.h"
 
 
 namespace my {
@@ -92,7 +92,7 @@ namespace my {
     /// </summary>
     /// <param name=""></param>
     virtual void End(void) override;
-		bool Generate(const std::shared_ptr<Mof::CMeshContainer>& mesh);
+		bool Generate(const std::shared_ptr<ResourceMgr>& ptr);
 		/// <summary>
 		/// 初期化
 		/// </summary>
