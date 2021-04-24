@@ -13,53 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\CameraController">
-      <UniqueIdentifier>{458022cd-f3f2-4434-b67e-a3b7fad33396}</UniqueIdentifier>
+    <Filter Include="ヘッダー ファイル\Utilities">
+      <UniqueIdentifier>{8d7093e8-0bf2-47f9-9d8d-af82273f1c70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\CameraController">
-      <UniqueIdentifier>{4cd1d320-74a0-46bb-95ba-534dae8bfc67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Window">
-      <UniqueIdentifier>{c2208c5e-ceed-4173-9d6c-8b830d3d4ab2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Window">
-      <UniqueIdentifier>{ea30710c-8bfa-48e4-9d64-c8e6434c0797}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Action">
-      <UniqueIdentifier>{318eeed3-9266-4a13-b037-cbac86c922f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Action">
-      <UniqueIdentifier>{dbdb42cc-1dd5-4345-8f0d-5502cbbe7e57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Menu">
-      <UniqueIdentifier>{e0702efc-0f19-4796-be5e-8e424349f622}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Menu">
-      <UniqueIdentifier>{09b0f04d-93a0-4526-bbe8-9788795b0015}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Parameter">
-      <UniqueIdentifier>{e1bcee80-e111-4625-8cfb-ee80d81cac7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Parameter">
-      <UniqueIdentifier>{a912b764-e96c-4d5e-84a9-ce4bc355fc5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Common">
-      <UniqueIdentifier>{a39dbe59-c075-4072-8aa4-939e38ca0c72}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Common">
-      <UniqueIdentifier>{f076ae58-fd0d-496a-a70c-d659616bfe6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Command">
-      <UniqueIdentifier>{1fee8e89-73e3-480b-933f-dc45e38889e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Command">
-      <UniqueIdentifier>{7cb63f4d-9785-434b-9bc4-c0b77918fba3}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Utilities">
+      <UniqueIdentifier>{1836db43-dfb8-4c87-9e2f-fe7edf6b5655}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Stage">
-      <UniqueIdentifier>{9a393e76-4baf-4df8-8d22-9bf980fabec1}</UniqueIdentifier>
+      <UniqueIdentifier>{c385b833-a9da-4357-bb6e-d5d98de8608b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage\Gimmick">
+      <UniqueIdentifier>{468b21c8-3aa1-49e4-9cca-3051006d9e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage\Parser">
+      <UniqueIdentifier>{aa465ea7-150d-4b7e-b8bc-6fb2253a68ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\EditorParam">
+      <UniqueIdentifier>{0cb946c1-e6af-4a6f-afac-9e51d57a4424}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Stage">
-      <UniqueIdentifier>{64c58e12-be8c-4f14-b866-3cc35bb18f05}</UniqueIdentifier>
+      <UniqueIdentifier>{7750e2a9-bbc5-4841-b37d-c7e8df1fbd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage\Gimmick">
+      <UniqueIdentifier>{e0034a0f-1d02-4d43-b429-331659b33e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage\Parser">
+      <UniqueIdentifier>{cb3d4490-fe68-4c04-a0c6-e3c28d0e49f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\EditorParam">
+      <UniqueIdentifier>{db4ddd2d-c67f-41a5-94b0-78e1223001d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,229 +51,79 @@
     <ClCompile Include="GameApp.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-      <Filter>ソース ファイル\CameraController</Filter>
+    <ClCompile Include="Utilities\EditorUtilities.cpp">
+      <Filter>ソース ファイル\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="MouseMoveCameraController.cpp">
-      <Filter>ソース ファイル\CameraController</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshWindow.cpp">
-      <Filter>ソース ファイル\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectWindow.cpp">
-      <Filter>ソース ファイル\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugGui.cpp">
-      <Filter>ソース ファイル\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>ソース ファイル\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorParameter.cpp">
-      <Filter>ソース ファイル\Parameter</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionManager.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="GuiWindowRect.cpp">
-      <Filter>ソース ファイル\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="FileDialog.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshLoad.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshLoadDialog.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshViewCameraController.cpp">
-      <Filter>ソース ファイル\CameraController</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolMenu.cpp">
-      <Filter>ソース ファイル\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseUtilities.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="SaveProject.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadProject.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectDataParse.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="AddObject.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="SaveProjectDialog.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadProjectDialog.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="FileClose.cpp">
-      <Filter>ソース ファイル\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolIcon.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandManager.cpp">
-      <Filter>ソース ファイル\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="StageObjectCommand.cpp">
-      <Filter>ソース ファイル\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectPlantCommand.cpp">
-      <Filter>ソース ファイル\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="StageObjectCommandRegister.cpp">
-      <Filter>ソース ファイル\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectRemoveCommand.cpp">
-      <Filter>ソース ファイル\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshLoadCommand.cpp">
-      <Filter>ソース ファイル\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRemoveCommand.cpp">
-      <Filter>ソース ファイル\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandLogWindow.cpp">
-      <Filter>ソース ファイル\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
+    <ClCompile Include="Stage\Stage.cpp">
       <Filter>ソース ファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\StageObject.cpp">
+      <Filter>ソース ファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\GimmickBase.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Bridge.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Elevator.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\MoveCloud.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\WoodBox.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Parser\JsonStageParser.cpp">
+      <Filter>ソース ファイル\Stage\Parser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>ヘッダー ファイル\CameraController</Filter>
+    <ClInclude Include="Utilities\EditorUtilities.h">
+      <Filter>ヘッダー ファイル\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="DebugGui.h">
-      <Filter>ヘッダー ファイル\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshWindow.h">
-      <Filter>ヘッダー ファイル\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectWindow.h">
-      <Filter>ヘッダー ファイル\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorParameter.h">
-      <Filter>ヘッダー ファイル\Parameter</Filter>
-    </ClInclude>
-    <ClInclude Include="ParameterMap.h">
-      <Filter>ヘッダー ファイル\Parameter</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseMoveCameraController.h">
-      <Filter>ヘッダー ファイル\CameraController</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>ヘッダー ファイル\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionBase.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionManager.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="GuiWindowRect.h">
-      <Filter>ヘッダー ファイル\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetBase.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="FileDialog.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshLoad.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowKeyName.h">
-      <Filter>ヘッダー ファイル\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionKeyName.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshLoadDialog.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshViewCameraController.h">
-      <Filter>ヘッダー ファイル\CameraController</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolMenu.h">
-      <Filter>ヘッダー ファイル\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseUtilities.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="SaveProject.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadProject.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectDataParse.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="AddObject.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="SaveProjectDialog.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadProjectDialog.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="FileClose.h">
-      <Filter>ヘッダー ファイル\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolIcon.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandManager.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="StageObjectCommand.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectPlantCommand.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="StageObjectCommandRegister.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectRemoveCommand.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshLoadCommand.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRemoveCommand.h">
-      <Filter>ヘッダー ファイル\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Cursor.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandLogWindow.h">
-      <Filter>ヘッダー ファイル\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
+    <ClInclude Include="Stage\Stage.h">
       <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Bridge.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Elevator.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\WoodBox.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\JsonStageParser.h">
+      <Filter>ヘッダー ファイル\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\StageParser.h">
+      <Filter>ヘッダー ファイル\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorParam\ParameterKey.h">
+      <Filter>ヘッダー ファイル\EditorParam</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorParam\EditorParameter.h">
+      <Filter>ヘッダー ファイル\EditorParam</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
