@@ -90,15 +90,6 @@ bool my::EnemyComponent::Initialize(void) {
 bool my::EnemyComponent::Update(float delta_time) {
     return true;
 }
-#ifdef _DEBUG
-bool my::EnemyComponent::Render(void) {
-    auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
-    if (coll_com->GetSphere().has_value()) {
-        ::CGraphicsUtilities::RenderLineSphere(coll_com->GetSphere().value(), def::color_rgba::kCyan);
-    } // if
-    return true;
-}
-#endif // _DEBUG
 
 bool my::EnemyComponent::Release(void) {
     super::Release();

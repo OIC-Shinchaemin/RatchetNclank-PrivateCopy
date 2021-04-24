@@ -108,7 +108,7 @@ float my::CameraController::GetDefaultAzimuth(void) const {
 }
 
 float my::CameraController::GetDefaultAltitude(void) const {
-    math::Radian altitude = 5.0f;
+    math::Radian altitude = 25.0f;
     return altitude();
 }
 

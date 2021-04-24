@@ -49,7 +49,7 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
     } // for
 }
 
-bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::GameManager>& observer) {
+bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>&  observer) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if

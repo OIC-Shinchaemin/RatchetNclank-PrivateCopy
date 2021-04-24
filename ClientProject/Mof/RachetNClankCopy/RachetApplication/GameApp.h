@@ -5,6 +5,8 @@
 #include "Game/GameManager.h"
 #include "Camera/CameraManager.h"
 #include "My/UI/UICanvas.h"
+#include "Scene/SceneManager.h"
+#include "GameDefine.h"
 
 
 class CGameApp : public CSingleGameApplication {
@@ -17,9 +19,8 @@ private:
 	std::shared_ptr<my::CameraManager> _camera_manager;
 	//! ƒJƒƒ‰
 	std::shared_ptr<my::UICanvas> _ui_canvas;
-	void RenderScene(void);
-	void Render3D(void);
-	void Render2D(void);
+	//! ƒV[ƒ“
+	std::shared_ptr<my::SceneManager> _scene_manager;
 public:
 	CGameApp(){}
 	virtual ~CGameApp(){	Release();	}

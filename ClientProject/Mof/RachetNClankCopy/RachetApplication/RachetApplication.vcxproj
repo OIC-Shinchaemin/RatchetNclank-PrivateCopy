@@ -241,6 +241,12 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="Scene\ClearScene.cpp" />
+    <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneImplementation.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Stage\Bridge.cpp" />
     <ClCompile Include="Stage\Elevator.cpp" />
     <ClCompile Include="Stage\GimmickBase.cpp" />
@@ -364,6 +370,7 @@
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
+    <ClInclude Include="Component\ComponentDefine.h" />
     <ClInclude Include="Component\Enemy\EnemyAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyDamageComponent.h" />
@@ -410,6 +417,12 @@
     <ClInclude Include="MotionNames.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Scene\ClearScene.h" />
+    <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneDefine.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Stage\Bridge.h" />
     <ClInclude Include="Stage\Elevator.h" />
     <ClInclude Include="Stage\GimmickBase.h" />

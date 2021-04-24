@@ -81,7 +81,7 @@ bool my::CameraComponent::Initialize(void) {
 
     // camera
     _player_view_camera = (std::make_shared<my::Camera>());
-    auto pos = Mof::CVector3(0.0f, 5.0f, 5.0f);
+    auto pos = Mof::CVector3(0.0f, 10.0f, 10.0f);
     _player_view_camera->SetPosition(pos);
     _player_view_camera->SetTarget(math::vec3::kZero);
     _player_view_camera->Initialize();

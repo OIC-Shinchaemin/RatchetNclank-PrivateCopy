@@ -15,11 +15,6 @@ void my::UpdateComponent::SetParam(const rapidjson::Value& param) {
 bool my::UpdateComponent::IsUpdate(void) const {
     return true;
 }
-#ifdef _DEBUG
-bool my::UpdateComponent::IsRender(void) const {
-    return true;
-}
-#endif // _DEBUG
 
 bool my::UpdateComponent::Initialize(void) {
     super::Initialize();

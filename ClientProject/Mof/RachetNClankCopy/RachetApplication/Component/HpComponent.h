@@ -19,6 +19,11 @@ private:
     int _hp;
     //! Hp
     my::Observable<int> _observable;
+    /// <summary>
+    /// 削除
+    /// </summary>
+    /// <param name=""></param>
+    void TryRemoveUI(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -57,9 +62,6 @@ public:
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
-#ifdef _DEBUG
-    virtual bool Render(void) override;
-#endif // _DEBUG
     /// <summary>
     /// 解放
     /// </summary>

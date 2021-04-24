@@ -29,9 +29,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool IsUpdate(void) const override;
-#ifdef _DEBUG
-    virtual bool IsRender(void) const override;
-#endif // !_DEBUG
     /// <summary>
     /// ‰Šú‰»
     /// </summary>

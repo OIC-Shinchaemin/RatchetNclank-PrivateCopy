@@ -24,7 +24,7 @@
 ../Resource/texture/quick_change/background.png
 ../Resource/texture/money/money.png
 ../Resource/texture/lock_on_cursor/cursor.png
-
+../Resource/texture/scene/title.png
 
 ../Resource/motion_names/player.motion_names
 ../Resource/motion_names/enemy.motion_names

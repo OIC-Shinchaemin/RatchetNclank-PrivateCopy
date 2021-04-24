@@ -71,9 +71,6 @@ public:
     /// <param name="delta_time">ŽžŠÔ</param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
-#ifdef _DEBUG
-    virtual bool Render(void) override;
-#endif // _DEBUG
     /// <summary>
     /// ‰ð•ú
     /// </summary>
