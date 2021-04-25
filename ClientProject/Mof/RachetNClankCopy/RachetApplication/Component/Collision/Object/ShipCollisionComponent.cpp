@@ -50,14 +50,3 @@ bool my::ShipCollisionComponent::Initialize(void) {
 std::shared_ptr<my::Component> my::ShipCollisionComponent::Clone(void) {
     return std::make_shared<my::ShipCollisionComponent>(*this);
 }
-
-void my::ShipCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
-    if (!this->GetSphere().has_value()) {
-        return;
-    } // if
-
-    Mof::COLLISIONOUTGEOMETRY info;
-    if (this->GetSphere().value().CollisionMesh(mesh, info)) {
-        super::GetOwner()->End();
-    } // if
-}

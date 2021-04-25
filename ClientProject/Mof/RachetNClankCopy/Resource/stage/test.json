@@ -5,11 +5,46 @@
     "stage/test.mom",
     "stage/sample_cylinder.mom",
     "stage/sample_box.mom",
-    "mesh/box/box1.mom",
-    "mesh/box/box2.mom",
-    "mesh/box/box3.mom"
+    "stage/box/box1.mom",
+    "stage/box/box2.mom",
+    "stage/box/box3.mom",
+    "stage/skybox/Stage_01_efc_mdl_01.mom",
+    "stage/skybox/Stage_01_efc_mdl_02.mom",
+    "stage/skybox/Stage_01_efc_mdl_03.mom",
+    "stage/skybox/Stage_01_efc_mdl_06.mom",
+    "stage/ground/scene.mom"
   ],
   "static_object_list": [
+    {
+      "enable": true,
+      "collision": true,
+      "object_name": "plane",
+      "mesh_no": 12,
+      "pos_x": -10.0,
+      "pos_y": -0.5,
+      "pos_z": -10.0,
+      "scale_x": 1.6,
+      "scale_y": 1.0,
+      "scale_z": 1.6,
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rotation_z": 0.0
+    },
+    {
+      "enable": true,
+      "collision": true,
+      "object_name": "plane",
+      "mesh_no": 12,
+      "pos_x": 0.0,
+      "pos_y": -30.5,
+      "pos_z": -10.0,
+      "scale_x": 6.0,
+      "scale_y": 1.0,
+      "scale_z": 6.0,
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rotation_z": 0.0
+    },
     {
       "enable": true,
       "collision": true,
@@ -75,23 +110,23 @@
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
-      "pos_x": 1.0,
-      "pos_y": 1.0,
-      "pos_z": 1.0
+      "pos_x": 115.0,
+      "pos_y": 0.0,
+      "pos_z": 35.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy1",
-      "pos_x": 2.0,
-      "pos_y": 2.0,
-      "pos_z": 2.0
+      "pos_x": 120.0,
+      "pos_y": 0.0,
+      "pos_z": 35.0
     },
     {
       "builder": "builder/strong_enemy.json",
       "name": "enemy2",
-      "pos_x": 2.0,
-      "pos_y": 2.0,
-      "pos_z": 3.0
+      "pos_x": 120.0,
+      "pos_y": 0.0,
+      "pos_z": 40.0
     }
   ],
   "gimmick_list": [
@@ -100,12 +135,12 @@
       "collision": true,
       "object_name": "elevator",
       "mesh_no": 3,
-      "pos_x": 0.0,
-      "pos_y": 0.0,
-      "pos_z": 0.0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0,
+      "pos_x": 36.0,
+      "pos_y": -1.0,
+      "pos_z": -16.0,
+      "scale_x": 5.0,
+      "scale_y": 0.3,
+      "scale_z": 5.0,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,

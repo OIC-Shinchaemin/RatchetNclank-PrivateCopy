@@ -16,10 +16,11 @@
 #include "../Component/Collision/Algolithm/EnemyBombGloveEffectCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BlasterBulletEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BombGloveBulletEnemyCollisionAlgolithm.h"
+#include "../Component/Collision/Object/CollisionComponentDefine.h"
 
 
 void my::PhysicsWorld::GenerateLayer(void) {
-    
+
     const char* types[] = {
       my::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm.c_str(),
@@ -82,6 +83,10 @@ void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
             } // if
         } // for
     } // for
+
+    for (auto& ptr : work) {
+        _list_for_stage.push_back(ptr.lock());
+    } // for
 }
 
 void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
@@ -93,6 +98,9 @@ void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
             ut::EraseRemove(layer.objects, ptr.lock());
             ut::EraseRemove(layer.targets, ptr.lock());
         } // for
+    } // for
+    for (auto& ptr : work) {
+        ut::EraseRemove(_list_for_stage, ptr.lock());
     } // for
 }
 
@@ -108,7 +116,7 @@ bool my::PhysicsWorld::Update(void) {
                     continue;
                 } // if
 
-                
+
                 if (object == target) {
                     continue;
                 } // if
@@ -137,15 +145,26 @@ bool my::PhysicsWorld::Update(void) {
 }
 
 void my::PhysicsWorld::CollisionStage(Stage* stage) {
-    Mof::LPMeshContainer mesh = &*stage->GetStaticStageMesh();
-    for (auto& layer : _layers) {
-        for (auto& object : layer.objects) {
-            object->CollisionStage(mesh);
+    auto meshes = stage->GetMeshArray();
+    auto objs = stage->GetStaticObjectArray();
+
+    int huge_mesh_no_current_stage_file = 1;
+    
+    for (auto obj : objs) {
+        int mesh_no = obj->GetMeshNo();
+        if (mesh_no == huge_mesh_no_current_stage_file) {
+            continue;
+        } // if
+        auto world = obj->GetWorldMatrix();
+        for (auto com : _list_for_stage) {
+            auto mesh = meshes.at(mesh_no);
+            com->CollisionStage(&*mesh, world);
         } // for
     } // for
 }
 
 void my::PhysicsWorld::Reset(void) {
     _layers.clear();
+    _list_for_stage.clear();
     this->GenerateLayer();
 }

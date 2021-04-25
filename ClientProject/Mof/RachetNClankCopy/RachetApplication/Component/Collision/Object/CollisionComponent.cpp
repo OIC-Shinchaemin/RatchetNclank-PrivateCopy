@@ -80,5 +80,5 @@ bool my::CollisionComponent::ExecuteExitFunction(const std::string& key, const m
     return this->ExecuteFunction(key, info, _on_exit);
 }
 
-void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
+void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
 }

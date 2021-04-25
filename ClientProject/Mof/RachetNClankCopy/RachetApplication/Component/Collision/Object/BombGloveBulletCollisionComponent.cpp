@@ -52,7 +52,7 @@ std::shared_ptr<my::Component> my::BombGloveBulletCollisionComponent::Clone(void
     return std::make_shared<my::BombGloveBulletCollisionComponent>(*this);
 }
 
-void my::BombGloveBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
+void my::BombGloveBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
     if (!this->GetSphere().has_value()) {
         return;
     } // if

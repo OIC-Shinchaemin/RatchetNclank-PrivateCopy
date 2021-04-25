@@ -1,20 +1,30 @@
 #include "WoodBox.h"
 
 bool WoodBox::CollisionStage(void) {
-    if (_stage_mesh == nullptr) {
-        return false;
-    }
-    const float height = 1.0f;
-    const LPMeshContainer stage_mesh = _stage_mesh.get();
-    CRay3D down_ray(_position, Vector3(0, -1, 0));
-    down_ray.Position.y += height;
-    COLLISIONOUTGEOMETRY geo_out;
-    if (down_ray.CollisionMesh(stage_mesh, geo_out)) {
-        if (geo_out.d <= height) {
-            _position.y += (height) - geo_out.d;
-            _gravity = 0.0f;
-            RefreshWorldMatrix();
-            return true;
+    for (auto& it : *_object_array_pointer) {
+        if (!it->IsEnable() || it->GetName() == GetName()) {
+            continue;
+        }
+        const int mesh_no = it->GetMeshNo();
+        if (_mesh_array_pointer->size() <= mesh_no || mesh_no < 0) {
+            continue;
+        }
+        const float height = 1.0f;
+        CRay3D down_ray(_position, Vector3(0, -1, 0));
+        down_ray.Position.y += height;
+        CMatrix44 matrix_inv;
+        it->GetWorldMatrix().Inverse(matrix_inv);
+        CVector3Utilities::TransformCoord (down_ray.Position , matrix_inv, down_ray.Position );
+        CVector3Utilities::TransformNormal(down_ray.Direction, matrix_inv, down_ray.Direction);
+        COLLISIONOUTGEOMETRY geo_out;
+        const LPMeshContainer mesh = (*_mesh_array_pointer)[mesh_no].get();
+        if (down_ray.CollisionMesh(mesh, geo_out)) {
+            if (geo_out.d <= height) {
+                _position.y += (height)-geo_out.d;
+                RefreshWorldMatrix();
+                _gravity = 0.0f;
+                return true;
+            }
         }
     }
     return false;
@@ -27,9 +37,6 @@ bool WoodBox::CollisionBox(WoodBoxPtr& box) {
         return false;
     }
     for (auto& it : *_box_array_pointer) {
-        const float height = 1.0f;
-        CRay3D down_ray(_position, Vector3(0, -1, 0));
-        down_ray.Position.y += height;
         if (!it->IsEnable() || it->GetName() == GetName()) {
             continue;
         }
@@ -37,6 +44,9 @@ bool WoodBox::CollisionBox(WoodBoxPtr& box) {
         if (_mesh_array_pointer->size() <= mesh_no || mesh_no < 0) {
             continue;
         }
+        const float height = 1.0f;
+        CRay3D down_ray(_position, Vector3(0, -1, 0));
+        down_ray.Position.y += height;
         CMatrix44 matrix_inv;
         it->GetWorldMatrix().Inverse(matrix_inv);
         CVector3Utilities::TransformCoord (down_ray.Position , matrix_inv, down_ray.Position );
@@ -61,13 +71,11 @@ WoodBox::WoodBox(bool enable, bool collision, StageObjectType type, std::string 
     , _action_flag(false)
     , _gravity(0.0f)
     , _start_pos(pos)
-    , _stage_mesh(nullptr)
     , _box_array_pointer(nullptr)
     , _mesh_array_pointer(nullptr) {
 }
 
 WoodBox::~WoodBox(void) {
-    _stage_mesh = nullptr;
 }
 
 void WoodBox::Initialize(void) {
@@ -115,12 +123,12 @@ void WoodBox::SetStageObjectData(bool enable, bool collision, StageObjectType ty
     _start_pos = pos;
 }
 
-void WoodBox::SetStageMesh(MeshPtr& mesh) {
-    _stage_mesh = mesh;
-}
-
 void WoodBox::SetBoxArray(WoodBoxArray* array_ptr) {
     _box_array_pointer = array_ptr;
+}
+
+void WoodBox::SetObjectArray(StageObjectArray* array_pointer) {
+    _object_array_pointer = array_pointer;
 }
 
 void WoodBox::SetMeshArray(MeshArray* array_ptr) {

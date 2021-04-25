@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.cpp" />
     <ClCompile Include="..\include\My\Core\State.cpp" />
     <ClCompile Include="..\include\My\Core\StateMachine.cpp" />
     <ClCompile Include="..\include\My\Core\Timer.cpp" />
@@ -256,13 +257,13 @@
     <ClCompile Include="Scene\SceneImplementation.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
-    <ClCompile Include="Stage\Bridge.cpp" />
-    <ClCompile Include="Stage\Elevator.cpp" />
-    <ClCompile Include="Stage\GimmickBase.cpp" />
-    <ClCompile Include="Stage\JsonStageParser.cpp" />
+    <ClCompile Include="Stage\Gimmick\Bridge.cpp" />
+    <ClCompile Include="Stage\Gimmick\Elevator.cpp" />
+    <ClCompile Include="Stage\Gimmick\GimmickBase.cpp" />
+    <ClCompile Include="Stage\Gimmick\WoodBox.cpp" />
+    <ClCompile Include="Stage\Parser\JsonStageParser.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="Stage\StageObject.cpp" />
-    <ClCompile Include="Stage\WoodBox.cpp" />
     <ClCompile Include="State\AI\AICombatState.cpp" />
     <ClCompile Include="State\AI\AIPatrolState.cpp" />
     <ClCompile Include="State\AI\AIState.cpp" />
@@ -287,6 +288,7 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.h" />
     <ClInclude Include="..\include\My\Core\AbstructContainer.h" />
     <ClInclude Include="..\include\My\Core\Define.h" />
     <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h" />
@@ -442,16 +444,16 @@
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h" />
-    <ClInclude Include="Stage\Bridge.h" />
-    <ClInclude Include="Stage\Elevator.h" />
-    <ClInclude Include="Stage\GimmickBase.h" />
-    <ClInclude Include="Stage\JsonStageParser.h" />
+    <ClInclude Include="Stage\Gimmick\Bridge.h" />
+    <ClInclude Include="Stage\Gimmick\Elevator.h" />
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h" />
+    <ClInclude Include="Stage\Gimmick\WoodBox.h" />
+    <ClInclude Include="Stage\Parser\JsonStageParser.h" />
+    <ClInclude Include="Stage\Parser\StageParser.h" />
     <ClInclude Include="Stage\Stage.h" />
     <ClInclude Include="Stage\StageDefine.h" />
     <ClInclude Include="Stage\StageFileFormat.h" />
     <ClInclude Include="Stage\StageObject.h" />
-    <ClInclude Include="Stage\StageParser.h" />
-    <ClInclude Include="Stage\WoodBox.h" />
     <ClInclude Include="State\AI\AICombatState.h" />
     <ClInclude Include="State\AI\AIPatrolState.h" />
     <ClInclude Include="State\AI\AIState.h" />

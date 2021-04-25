@@ -1,6 +1,6 @@
 #pragma once
-#include "Stage.h"
-#include "StageFileFormat.h"
+#include "../Stage.h"
+#include "../StageFileFormat.h"
 
 #include <memory>
 #include <string>

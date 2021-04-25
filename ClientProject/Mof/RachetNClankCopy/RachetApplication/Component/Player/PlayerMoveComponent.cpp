@@ -77,6 +77,14 @@ void my::PlayerMoveComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
+float my::PlayerMoveComponent::GetDefaultMoveSpeed(void) const {
+    return 1.3f;
+}
+
+float my::PlayerMoveComponent::GetMoveSpeed(void) const {
+    return this->_move_speed;
+}
+
 std::string my::PlayerMoveComponent::GetType(void) const {
     return "PlayerMoveComponent";
 }

@@ -1,65 +1,5 @@
 #include "Stage.h"
-#include "JsonStageParser.h"
-
-/// <summary>
-/// 静的なステージメッシュの生成
-/// </summary>
-/// <returns>true : 生成, false : 未生成</returns>
-bool Stage::CreateStaticStageMesh(void) {
-    // 静的オブジェクトがなければ当たり判定用のメッシュは生成しない
-    if (_static_object_array.size() <= 0) {
-        return false;
-    }
-    // メッシュの生成
-    MeshPtr stage_mesh = std::make_shared<CMeshContainer>();
-    for (auto& object : _static_object_array) {
-        // 万が一メッシュ登録していないオブジェクトがいれば弾く
-        // 当たり判定の設定をしていないオブジェクトも弾く
-        if (object->GetMeshNo() < 0 || !object->IsCollisionEnable()) {
-            continue;
-        }
-        const int index = _copy_tmp_array.GetArrayCount();
-        _copy_tmp_array.Add(_mesh_array[object->GetMeshNo()]->CreateCopyObject());
-        LPMeshContainer mesh_tmp   = _copy_tmp_array[index];
-        const int       mesh_count = mesh_tmp->GetMeshCount();
-        for (int i = 0; i < mesh_count; i++) {
-            // オブジェクトの拡大、回転に合わせてジオメトリの再計算
-            const int geo_count = mesh_tmp->GetGeometryCount();
-            for (int j = 0; j < geo_count; j++) {
-                CMatrix44& matrix = mesh_tmp->GetMesh(i)->GetGeometry(j)->GetMatrix();
-            
-                // 現在のデータを取得
-                CVector3 scale, rotate, trans;
-                matrix.GetScaling(scale);
-                matrix.GetRotation(rotate);
-                matrix.GetTranslation(trans);
-                scale  *= object->GetScale();
-                rotate += object->GetRotate();
-                trans  += object->GetPosition();
-
-                // 再計算
-                CMatrix44 scale_, rotate_, trans_;
-                scale_.Scaling(scale * object->GetScale());
-                trans_.Translation(trans * object->GetScale());
-                rotate_.RotationZXY(object->GetRotate());
-                trans_ *= rotate_;
-                matrix  = scale_ * trans_;
-            }
-            // 再計算後のメッシュを登録
-            stage_mesh->GetMesh()->Add(std::move(mesh_tmp->GetMesh(i)));
-        }
-    }
-    // 静的オブジェクトがあっても一つも当たり判定を取らない場合メッシュの追加はしない
-    if (stage_mesh->GetMesh()->GetArrayCount() <= 0) {
-        return false;
-    }
-    // メッシュ配列の最後に追加する
-    stage_mesh->SetName("static_stage_mesh");
-    //auto name = "static_stage_mesh.mom";
-    //stage_mesh->Save(reinterpret_cast<LPMofChar>(&name));
-    _mesh_array.push_back(std::move(stage_mesh));
-    return true;
-}
+#include "Parser/JsonStageParser.h"
 
 void Stage::RenderObject(const StageObjectPtr& obj) {
     if (!obj->IsEnable()) {
@@ -105,9 +45,6 @@ bool Stage::Load(const std::string& path) {
         return false;
     }
 
-    // 静的オブジェクトの判定用メッシュ生成
-    _create_static_stage_mesh = CreateStaticStageMesh();
-
     return true;
 }
 
@@ -120,9 +57,8 @@ void Stage::Initialize(void) {
     }
     for (const auto& box : _woodbox_array) {
         box->Initialize();
-        auto ptr = GetStaticStageMesh();
-        box->SetStageMesh(ptr);
         box->SetBoxArray(&_woodbox_array);
+        box->SetObjectArray(&_static_object_array);
         box->SetMeshArray(&_mesh_array);
         if (box->GetType() == StageObjectType::BoxNanotech) {
             box->SetEnable(true);
@@ -190,19 +126,6 @@ void Stage::Release(void) {
     _static_object_array.clear();
     _box_enable_array_prev.clear();
 
-    // 判定用メッシュの手動解放
-    if (_create_static_stage_mesh) {
-        for (int i = 0; i < _copy_tmp_array.GetArrayCount(); i++) {
-            MOF_SAFE_DELETE(_copy_tmp_array[i]);
-        }
-        const int tail = (_mesh_array.size() - 1);
-        for (int i = 0; i < _mesh_array[tail]->GetMeshCount(); i++) {
-            _mesh_array[tail]->GetMesh()->SetData(nullptr, i);
-        }
-        _mesh_array[tail]->GetMesh()->ReSize(0);
-        _mesh_array[tail] = nullptr;
-    }
-
     for (auto& it : _mesh_array) {
         if (it) {
             it->Release();
@@ -212,23 +135,12 @@ void Stage::Release(void) {
     _mesh_array.clear();
 }
 
-/// <summary>
-/// 静的なステージメッシュを生成したかのフラグ取得
-/// </summary>
-/// <returns>静的なステージメッシュを生成したかのフラグ</returns>
-bool Stage::IsCreateStaticStageMesh(void) const {
-    return _create_static_stage_mesh;
+MeshArray& Stage::GetMeshArray(void) {
+    return _mesh_array;
 }
 
-/// <summary>
-/// 静的なステージメッシュの取得
-/// </summary>
-/// <returns>生成していない場合 nullptr が返る</returns>
-MeshPtr Stage::GetStaticStageMesh(void) {
-    if (_create_static_stage_mesh) {
-        return _mesh_array.back();
-    }
-    return nullptr;
+StageObjectArray& Stage::GetStaticObjectArray(void) {
+    return _static_object_array;
 }
 
 /// <summary>

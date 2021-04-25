@@ -12,4 +12,7 @@ enum class StageObjectType {
     BoxBullet,
     BoxBolt,
     BoxNanotech,
+    MoveCloud_Near,
+    MoveCloud_Middle,
+    MoveCloud_Far,
 };

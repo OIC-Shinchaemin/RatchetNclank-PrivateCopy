@@ -205,12 +205,6 @@
     <Filter Include="Rachet\Source\Scene">
       <UniqueIdentifier>{e10fb131-c044-4268-ab70-1d544e5d595e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Stage">
-      <UniqueIdentifier>{64aec432-eb48-41fc-b6db-c6d95598a53b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Stage">
-      <UniqueIdentifier>{cc87694c-5234-4efc-9b0f-178ef3bca202}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Actor\Ship">
       <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
     </Filter>
@@ -222,6 +216,15 @@
     </Filter>
     <Filter Include="リソース ファイル\stage">
       <UniqueIdentifier>{492cf9dc-39e2-4b04-9c3a-8bc9da18b19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage">
+      <UniqueIdentifier>{b7ada71b-9352-4e63-bea1-d2187881b714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage\Gimmick">
+      <UniqueIdentifier>{89150bce-d500-4066-b762-0ced6d36635c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage\Parser">
+      <UniqueIdentifier>{c883a73b-c37d-4430-b2fd-a54de2e2eb66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -582,27 +585,6 @@
     <ClCompile Include="Scene\ClearScene.cpp">
       <Filter>Rachet\Source\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Stage\WoodBox.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\StageObject.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\JsonStageParser.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Stage.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\GimmickBase.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Elevator.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Bridge.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
@@ -638,6 +620,30 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\GimmickBase.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\WoodBox.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Bridge.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Elevator.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Parser\JsonStageParser.cpp">
+      <Filter>Rachet\Source\Stage\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\StageObject.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1130,36 +1136,6 @@
     <ClInclude Include="Scene\ClearScene.h">
       <Filter>Rachet\Header\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\Bridge.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Elevator.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\GimmickBase.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\JsonStageParser.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageDefine.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageFileFormat.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageObject.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageParser.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\WoodBox.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
@@ -1198,6 +1174,39 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Elevator.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\WoodBox.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Bridge.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\JsonStageParser.h">
+      <Filter>Rachet\Source\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\StageParser.h">
+      <Filter>Rachet\Source\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1245,9 +1254,6 @@
     <None Include="..\Resource\builder\ship.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
-    <None Include="..\Resource\stage\test.json">
-      <Filter>リソース ファイル\stage</Filter>
-    </None>
     <None Include="..\Resource\builder\strong_enemy.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
@@ -1274,6 +1280,9 @@
     </None>
     <None Include="..\Resource\builder\enemy_bullet.json">
       <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\test.json">
+      <Filter>リソース ファイル\stage</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

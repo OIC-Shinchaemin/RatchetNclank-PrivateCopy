@@ -19,6 +19,10 @@ private:
     std::shared_ptr<my::Camera> _player_view_camera;
     //! カメラコントローラ
     my::ServiceLocator<my::CameraController> _camera_controller;
+    //! FPSモード
+    bool _camera_fps_mode;
+    //! FPSカメラ方向
+    float _ideal_fps_camera_angle;
     /// <summary>
     /// 操作
     /// </summary>

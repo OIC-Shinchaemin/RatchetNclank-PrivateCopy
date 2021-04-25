@@ -129,8 +129,10 @@ bool JsonStageParser::GimmickObjectListParse(rapidjson::Document& json, GimmickA
     return true;
 }
 
-#include "Elevator.h"
-#include "Bridge.h"
+#include "../Gimmick/Elevator.h"
+#include "../Gimmick/Bridge.h"
+#include "../Gimmick/WoodBox.h"
+#include "../Gimmick/MoveCloud.h"
 GimmickPtr JsonStageParser::CreateGimmick(StageObjectType type, const rapidjson::Value& data) {
     GimmickPtr ptr = nullptr;
     switch (type) {
@@ -156,6 +158,12 @@ GimmickPtr JsonStageParser::CreateGimmick(StageObjectType type, const rapidjson:
     case StageObjectType::BoxNanotech:
     {
         ptr = std::make_shared<WoodBox>();
+    }break;
+    case StageObjectType::MoveCloud_Near:
+    case StageObjectType::MoveCloud_Middle:
+    case StageObjectType::MoveCloud_Far:
+    {
+        ptr = std::make_shared<MoveCloud>();
     }break;
     }
     return ptr;

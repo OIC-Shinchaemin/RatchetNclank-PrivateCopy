@@ -23,7 +23,7 @@ bool my::NanotechMenu::Render(void) {
     for (int i = 0; i < _hp_max; i++) {
         if (i < _hp) {
             auto circle = Mof::CCircle(pos, radius);
-            ::CGraphicsUtilities::RenderFillCircle(circle, def::color_rgba_u32::kBlack);
+            ::CGraphicsUtilities::RenderFillCircle(circle, def::color_rgba_u32::kYellow);
         } // if
         auto circle = Mof::CCircle(pos, radius);
         ::CGraphicsUtilities::RenderFillCircle(circle, super::_color.ToU32Color());

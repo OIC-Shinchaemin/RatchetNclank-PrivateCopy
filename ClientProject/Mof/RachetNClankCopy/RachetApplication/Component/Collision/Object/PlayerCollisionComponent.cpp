@@ -64,18 +64,27 @@ std::shared_ptr<my::Component> my::PlayerCollisionComponent::Clone(void) {
     return std::make_shared<my::PlayerCollisionComponent>(*this);
 }
 
-void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
+void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
     if (!this->GetRay().has_value()) {
         return;
     } // if
-
+    auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
-    if (this->GetRay().value().CollisionMesh(mesh, info)) {
-        float height = _player_com.lock()->GetHeight();
-        if (info.d <= height) {
-            auto pos = super::GetOwner()->GetPosition();
-            pos.y += height - info.d;
-            super::GetOwner()->SetPosition(pos);
+
+    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
+        auto geometry = mesh->GetGeometry(i);
+        auto temp = geometry->GetMatrix();
+        Mof::CMatrix44 mat = temp * world;
+        geometry->SetMatrix(mat);
+
+        if (ray.CollisionGeometry(geometry, info)) {
+            float height = _player_com.lock()->GetHeight();
+            if (info.d <= height) {
+                auto pos = super::GetOwner()->GetPosition();
+                pos.y += height - info.d;
+                super::GetOwner()->SetPosition(pos);
+            } // if
         } // if
-    } // if
+        geometry->SetMatrix(temp);
+    } // for
 }

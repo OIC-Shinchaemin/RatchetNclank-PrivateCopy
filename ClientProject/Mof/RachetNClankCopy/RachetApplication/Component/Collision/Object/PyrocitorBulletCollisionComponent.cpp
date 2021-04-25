@@ -51,14 +51,3 @@ bool my::PyrocitorBulletCollisionComponent::Initialize(void) {
 std::shared_ptr<my::Component> my::PyrocitorBulletCollisionComponent::Clone(void) {
     return std::make_shared<my::PyrocitorBulletCollisionComponent>(*this);
 }
-
-void my::PyrocitorBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
-    if (!this->GetSphere().has_value()) {
-        return;
-    } // if
-
-    Mof::COLLISIONOUTGEOMETRY info;
-    if (this->GetSphere().value().CollisionMesh(mesh, info)) {
-        super::GetOwner()->End();
-    } // if
-}

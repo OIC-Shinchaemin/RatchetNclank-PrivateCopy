@@ -15,7 +15,8 @@ Elevator::~Elevator(void) {
 
 void Elevator::Initialize(void) {
     _now_timer  = 0.0f;
-    _position   = _start_pos;
+    //_position   = _start_pos;
+    _start_pos = _position;
     _start_flag = false;
     _end_flag   = false;
     RefreshWorldMatrix();

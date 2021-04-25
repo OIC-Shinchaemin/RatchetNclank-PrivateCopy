@@ -8,17 +8,17 @@ using WoodBoxArray = std::vector<WoodBoxPtr>;
 class WoodBox : public GimmickBase {
 protected:
 
-    bool          _action_flag;
+    bool              _action_flag;
+                      
+    float             _gravity;
+                      
+    Vector3           _start_pos;
 
-    float         _gravity;
+    StageObjectArray* _object_array_pointer;
 
-    Vector3       _start_pos;
+    MeshArray*        _mesh_array_pointer;
 
-    MeshPtr       _stage_mesh;
-
-    MeshArray*    _mesh_array_pointer;
-
-    WoodBoxArray* _box_array_pointer;
+    WoodBoxArray*     _box_array_pointer;
 
     bool CollisionStage(void);
 
@@ -43,7 +43,7 @@ public:
     virtual void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
         Vector3 pos, Vector3 scale, Vector3 rotate) override;
 
-    void SetStageMesh(MeshPtr& mesh);
     void SetBoxArray(WoodBoxArray* array_ptr);
+    void SetObjectArray(StageObjectArray* array_pointer);
     void SetMeshArray(MeshArray* array_ptr);
 };

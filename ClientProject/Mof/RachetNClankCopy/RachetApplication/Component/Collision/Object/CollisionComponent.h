@@ -12,7 +12,6 @@
 #include <Mof.h>
 
 #include "../../Component.h"
-#include "../../../Stage/Stage.h"
 
 
 namespace my {
@@ -178,7 +177,7 @@ public:
     /// è’ìÀ
     /// </summary>
     /// <param name="mesh"></param>
-    virtual void CollisionStage(Mof::LPMeshContainer mesh);
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world);
 };
 }
 #endif // !MY_COLLISION_COMPONENT_H

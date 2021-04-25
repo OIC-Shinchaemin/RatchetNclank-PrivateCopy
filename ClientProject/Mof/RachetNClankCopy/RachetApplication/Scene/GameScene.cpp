@@ -38,12 +38,6 @@ bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
 
-    if (auto r= _resource.lock()) {
-        if (auto mesh = r->Get<std::shared_ptr<Mof::CMeshContainer>>("../Resource/mesh/stage/skybox.mom")) {
-            //mesh->Render(Mof::CMatrix44());
-        } // if
-    } // if
-
     _renderer.Render();
     _stage.Render();
     _game_money->Render();
@@ -51,15 +45,19 @@ bool my::GameScene::SceneRender(void) {
 }
 
 my::GameScene::GameScene() :
-    _resource(),
-    _ui_canvas(),
+    _created_actors(),
+    _delete_actors(),
     _game_world(),
     _renderer(),
+    _physic_world(),
     _game_money(),
     _weapon_system(),
     _quick_change(),
     _stage(),
-    _re_initialize(false) {
+    _re_initialize(false),
+    _simple_light(),
+    _resource(),
+    _ui_canvas() {
 }
 
 my::GameScene::~GameScene() {
@@ -115,10 +113,10 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
 
 bool my::GameScene::Initialize(void) {
     // light
-    _light.SetDirection(-math::vec3::kOne);
-    _light.SetDiffuse(def::color_rgba::kWhite);
-    _light.SetAmbient(def::color_rgba::kWhite * 0.8f);
-    ::CGraphicsUtilities::SetDirectionalLight(&_light);
+    _simple_light.SetDirection(-math::vec3::kOne);
+    _simple_light.SetDiffuse(def::color_rgba::kWhite);
+    _simple_light.SetAmbient(def::color_rgba::kWhite * 0.8f);
+    ::CGraphicsUtilities::SetDirectionalLight(&_simple_light);
 
     // game system
     auto save_data = my::SaveData();
@@ -132,7 +130,7 @@ bool my::GameScene::Initialize(void) {
     auto param = new my::Actor::Param();
     // chara
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-        
+
         _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
@@ -141,8 +139,8 @@ bool my::GameScene::Initialize(void) {
         this->AddElement(enemy);
     } // for
 
-    param->transform.position = Mof::CVector3(5.0f, 0.0f, 0.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, math::kPi, 0.0f);
+    param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
+    param->transform.rotate = Mof::CVector3(0.0f, - math::kHalfPi * 0.5f, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
     player->Generate(_resource.lock());
     this->AddElement(player);
@@ -151,8 +149,8 @@ bool my::GameScene::Initialize(void) {
     auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", param);
     this->AddElement(ship);
 
-    
-    
+
+
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 

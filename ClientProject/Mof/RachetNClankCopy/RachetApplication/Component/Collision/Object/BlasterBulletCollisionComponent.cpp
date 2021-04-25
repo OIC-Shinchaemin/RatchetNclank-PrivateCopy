@@ -51,7 +51,7 @@ std::shared_ptr<my::Component> my::BlasterBulletCollisionComponent::Clone(void) 
     return std::make_shared<my::BlasterBulletCollisionComponent>(*this);
 }
 
-void my::BlasterBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
+void my::BlasterBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
     if (!this->GetSphere().has_value()) {
         return;
     } // if

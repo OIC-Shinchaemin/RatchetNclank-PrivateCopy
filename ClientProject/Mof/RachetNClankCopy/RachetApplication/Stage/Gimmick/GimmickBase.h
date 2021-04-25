@@ -1,5 +1,5 @@
 #pragma once
-#include "StageObject.h"
+#include "../StageObject.h"
 
 /// <summary>
 /// ギミックの基底クラス

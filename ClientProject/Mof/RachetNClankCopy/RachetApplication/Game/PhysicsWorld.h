@@ -29,6 +29,9 @@ private:
     std::vector<CollisionLayer> _layers;
     //! ファクトリー
     my::Factory<my::CollisionAlgolithm> collision_algolithm_factory;
+    //! ステージとぶつける用
+    ObjectArray _list_for_stage;
+
     /// <summary>
     /// 生成
     /// </summary>
