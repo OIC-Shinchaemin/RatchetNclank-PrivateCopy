@@ -77,6 +77,15 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
         Mof::CMatrix44 mat = temp * world;
         geometry->SetMatrix(mat);
 
+
+        //Mof::CSphere sphere;
+        //geometry->CalculateSphere(sphere);
+        //if (!sphere.CollisionPoint(super::GetOwner()->GetPosition())) {
+        //    geometry->SetMatrix(temp);
+        //    continue;
+        //} // if
+
+
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _player_com.lock()->GetHeight();
             if (info.d <= height) {

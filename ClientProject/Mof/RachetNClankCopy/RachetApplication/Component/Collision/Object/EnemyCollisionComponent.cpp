@@ -22,7 +22,7 @@ std::string my::EnemyCollisionComponent::GetType(void) const {
     //return "EnemyCollisionComponent";
 }
 
-std::optional<Mof::CSphere> my::EnemyCollisionComponent::GetSphere(void) {    
+std::optional<Mof::CSphere> my::EnemyCollisionComponent::GetSphere(void) {
     _ASSERT_EXPR(!_enemy_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     if (super::GetOwner()->GetState() == my::ActorState::End) {
         return std::optional<Mof::CSphere>();
@@ -65,6 +65,11 @@ std::shared_ptr<my::Component> my::EnemyCollisionComponent::Clone(void) {
 }
 
 void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
+    auto name = *mesh->GetName();
+    if (name != "scene.mom") {
+        return;
+    } // if
+
     if (!this->GetRay().has_value()) {
         return;
     } // if

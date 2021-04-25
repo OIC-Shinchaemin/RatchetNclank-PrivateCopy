@@ -38,6 +38,9 @@ bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
 
+    int fps = ::CUtilities::GetFPS();
+    ::CGraphicsUtilities::RenderString(50.0f, 500.0f, "FPS = %d", fps);
+
     _renderer.Render();
     _stage.Render();
     _game_money->Render();
@@ -140,7 +143,7 @@ bool my::GameScene::Initialize(void) {
     } // for
 
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, - math::kHalfPi * 0.5f, 0.0f);
+    param->transform.rotate = Mof::CVector3(0.0f, - math::kHalfPi * 0.7f, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
     player->Generate(_resource.lock());
     this->AddElement(player);

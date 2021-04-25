@@ -1,6 +1,7 @@
 #include "EnemyComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../Component/VelocityComponent.h"
 #include "../Enemy/EnemyDamageComponent.h"
 #include "../SightRecognitionComponent.h"
 #include "../Collision/Object/EnemyCollisionComponent.h"
@@ -48,6 +49,10 @@ std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
 bool my::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Start();
+    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    velocity_com->SetGravity(2.8f);
+
+
     auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "PlayerCollisionComponent",
