@@ -10,6 +10,7 @@
 #include "../Game/GameSystem/Save/SaveSystem.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
+#include "../Actor//Ship/Ship.h"
 #include "../Factory/ActorBuilder.h"
 
 
@@ -36,7 +37,10 @@ void my::GameScene::ReInitialize(void) {
 bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
-
+    /*
+    int fps = ::CUtilities::GetFPS();
+    ::CGraphicsUtilities::RenderString(50.0f, 500.0f, "FPS = %d", fps);
+    */
     _renderer.Render();
     _stage.Render();
     _game_money->Render();
@@ -44,15 +48,19 @@ bool my::GameScene::SceneRender(void) {
 }
 
 my::GameScene::GameScene() :
-    _resource(),
-    _ui_canvas(),
+    _created_actors(),
+    _delete_actors(),
     _game_world(),
     _renderer(),
+    _physic_world(),
     _game_money(),
     _weapon_system(),
     _quick_change(),
     _stage(),
-    _re_initialize(false) {
+    _re_initialize(false),
+    _simple_light(),
+    _resource(),
+    _ui_canvas() {
 }
 
 my::GameScene::~GameScene() {
@@ -68,6 +76,10 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
     } // if
     if (type == "PlayerDead") {
         _re_initialize = true;
+    } // if
+
+    if (type == "ShipCollision") {
+        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 }
 
@@ -96,13 +108,19 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     _quick_change->SetUICanvas(_ui_canvas);
 
     // stage
-    if (!_stage.Load("../Resource/test.json")) {
+    if (!_stage.Load("../Resource/stage/test.json")) {
         return false;
     } // if
     return true;
 }
 
 bool my::GameScene::Initialize(void) {
+    // light
+    _simple_light.SetDirection(-math::vec3::kOne);
+    _simple_light.SetDiffuse(def::color_rgba::kWhite);
+    _simple_light.SetAmbient(def::color_rgba::kWhite * 0.8f);
+    ::CGraphicsUtilities::SetDirectionalLight(&_simple_light);
+
     // game system
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
@@ -114,20 +132,28 @@ bool my::GameScene::Initialize(void) {
 
     auto param = new my::Actor::Param();
     // chara
-    //for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-    //    _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
-    //    auto builder = enemy_spawn.first.c_str();
-    //    param->name = enemy_spawn.second->GetName();
-    //    param->transform.position = enemy_spawn.second->GetPosition();
-    //    auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
-    //    this->AddElement(enemy);
-    //} // for
+    for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
 
-    param->transform.position = Mof::CVector3(5.0f, 0.0f, 0.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, math::kPi, 0.0f);
+        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+        auto builder = enemy_spawn.first.c_str();
+        param->name = enemy_spawn.second->GetName();
+        param->transform.position = enemy_spawn.second->GetPosition();
+        auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
+        this->AddElement(enemy);
+    } // for
+
+    param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
+    param->transform.rotate = Mof::CVector3(0.0f, - math::kHalfPi * 0.7f, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
     player->Generate(_resource.lock());
     this->AddElement(player);
+
+    param->transform.position = Mof::CVector3(2.0f, 1.0f, 5.0f);
+    auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", param);
+    this->AddElement(ship);
+
+
+
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 
@@ -170,9 +196,6 @@ bool my::GameScene::Update(float delta_time) {
     // collision
     _physic_world.Update();
     _physic_world.CollisionStage(&_stage);
-    ::ImGui::Begin("GameScene");
-    ::ImGui::Text(" ");
-    ::ImGui::End();
     return true;
 }
 

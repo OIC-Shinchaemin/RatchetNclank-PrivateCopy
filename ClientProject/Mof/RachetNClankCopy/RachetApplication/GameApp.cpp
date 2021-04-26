@@ -22,7 +22,7 @@ MofBool CGameApp::Initialize(void) {
     my::Component::SetUICanvas(_ui_canvas);
     my::CameraController::SetCameraManager(_camera_manager);
 
-    _resource_manager->Load("../Resource/resource_path.txt");
+    _resource_manager->Load("scene_resource/general.txt");
     _scene_manager->SetResourceManager(_resource_manager);
     _scene_manager->SetUICanvas(_ui_canvas);
     _scene_manager->Initialize();

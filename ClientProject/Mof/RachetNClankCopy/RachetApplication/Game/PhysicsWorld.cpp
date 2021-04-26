@@ -1,8 +1,11 @@
 #include "PhysicsWorld.h"
 
 #include "My/Core/Utility.h"
+#include "../Component/Collision/Algolithm/CollisionAlgolithmDefine.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyAttackCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
@@ -13,22 +16,26 @@
 #include "../Component/Collision/Algolithm/EnemyBombGloveEffectCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BlasterBulletEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BombGloveBulletEnemyCollisionAlgolithm.h"
+#include "../Component/Collision/Object/CollisionComponentDefine.h"
 
 
 void my::PhysicsWorld::GenerateLayer(void) {
+
     const char* types[] = {
-        "PlayerEnemyCollisionAlgolithm",
-        "PlayerEnemyAttackCollisionAlgolithm",
-        "EnemyPlayerCollisionAlgolithm",
-        "SightPlayerCollisionAlgolithm",
-        "SightEnemyCollisionAlgolithm",
-        "EnemyAttackPlayerCollisionAlgolithm",
-        "EnemyBombGloveBulletCollisionAlgolithm",
-        "EnemyPyrocitorBulletCollisionAlgolithm",
-        "EnemyBlasterBulletCollisionAlgolithm",
-        "EnemyBombGloveEffectCollisionAlgolithm",
-        "BlasterBulletEnemyCollisionAlgolithm",
-        "BombGloveBulletEnemyCollisionAlgolithm",
+      my::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyBombGloveEffectCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
     };
     for (auto type : types) {
         auto temp = CollisionLayer();
@@ -39,18 +46,20 @@ void my::PhysicsWorld::GenerateLayer(void) {
 
 my::PhysicsWorld::PhysicsWorld() :
     _layers() {
-    collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>("PlayerEnemyCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>("PlayerEnemyAttackCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>("EnemyPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>("SightPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>("SightEnemyCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>("EnemyAttackPlayerCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyBombGloveBulletCollisionAlgolithm>("EnemyBombGloveBulletCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyPyrocitorBulletCollisionAlgolithm>("EnemyPyrocitorBulletCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>("EnemyBlasterBulletCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::EnemyBombGloveEffectCollisionAlgolithm>("EnemyBombGloveEffectCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::BlasterBulletEnemyCollisionAlgolithm>("BlasterBulletEnemyCollisionAlgolithm");
-    collision_algolithm_factory.Register<my::BombGloveBulletEnemyCollisionAlgolithm>("BombGloveBulletEnemyCollisionAlgolithm");
+    collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::PlayerEnemyBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::PlayerShipCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyBombGloveBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyPyrocitorBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyBombGloveEffectCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyBombGloveEffectCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::BlasterBulletEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::BombGloveBulletEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm);
 
     this->GenerateLayer();
 }
@@ -74,6 +83,10 @@ void my::PhysicsWorld::AddActor(const ActorPtr& actor) {
             } // if
         } // for
     } // for
+
+    for (auto& ptr : work) {
+        _list_for_stage.push_back(ptr.lock());
+    } // for
 }
 
 void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
@@ -85,6 +98,9 @@ void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
             ut::EraseRemove(layer.objects, ptr.lock());
             ut::EraseRemove(layer.targets, ptr.lock());
         } // for
+    } // for
+    for (auto& ptr : work) {
+        ut::EraseRemove(_list_for_stage, ptr.lock());
     } // for
 }
 
@@ -100,7 +116,7 @@ bool my::PhysicsWorld::Update(void) {
                     continue;
                 } // if
 
-                
+
                 if (object == target) {
                     continue;
                 } // if
@@ -129,15 +145,26 @@ bool my::PhysicsWorld::Update(void) {
 }
 
 void my::PhysicsWorld::CollisionStage(Stage* stage) {
-    Mof::LPMeshContainer mesh = &*stage->GetStaticStageMesh();
-    for (auto& layer : _layers) {
-        for (auto& object : layer.objects) {
-            object->CollisionStage(mesh);
+    auto meshes = stage->GetMeshArray();
+    auto objs = stage->GetStaticObjectArray();
+
+    int huge_mesh_no_current_stage_file = 1;
+    
+    for (auto obj : objs) {
+        int mesh_no = obj->GetMeshNo();
+        if (mesh_no == huge_mesh_no_current_stage_file) {
+            continue;
+        } // if
+        auto world = obj->GetWorldMatrix();
+        for (auto com : _list_for_stage) {
+            auto mesh = meshes.at(mesh_no);
+            com->CollisionStage(&*mesh, world);
         } // for
     } // for
 }
 
 void my::PhysicsWorld::Reset(void) {
     _layers.clear();
+    _list_for_stage.clear();
     this->GenerateLayer();
 }

@@ -42,6 +42,8 @@ private:
     Stage _stage;
     //! 再初期化
     bool _re_initialize;
+    // 光源
+    Mof::CDirectionalLight _simple_light;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! リソース

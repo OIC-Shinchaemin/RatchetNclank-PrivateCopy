@@ -8,9 +8,7 @@
 #include <string>
 
 #include "../../Actor.h"
-#include "../../Actor/Character/Enemy.h"
 #include "../../Behaviour/Executor/INodeExecutor.h"
-#include "../../Factory/BehaviourExecutorFactory.h"
 
 
 namespace state {
@@ -18,7 +16,7 @@ class AIState : public my::State {
     using super = state::AIState;
 protected:
     //! 通知
-    std::weak_ptr<my::Enemy> _enemy;
+    std::weak_ptr<my::Actor> _actor;
     //! ビヘイビア実行
     behaviour::NodeExecutorPtr _behaviour_executor;
     //! パス
@@ -28,7 +26,7 @@ protected:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::Enemy> GetEnemy(void) const;
+    std::shared_ptr<my::Actor> GetActor(void) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -46,8 +44,8 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="ptr"></param>
-    void GenerateBehaviourExecutor(void);
+    /// <param name="path"></param>
+    void GenerateBehaviourExecutor(const std::string& path);
     /// <summary>
     /// 更新
     /// </summary>

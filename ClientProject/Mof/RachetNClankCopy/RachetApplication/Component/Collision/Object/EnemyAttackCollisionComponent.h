@@ -15,7 +15,7 @@ class EnemyAttackCollisionComponent : public my::CollisionComponent {
     using super = my::CollisionComponent;
 private:
     //! 攻撃
-    std::weak_ptr<class EnemyAttackComponent> _attack_com;
+    std::weak_ptr<class EnemyMeleeAttackComponent> _attack_com;
 public:
     /// <summary>
     /// コンストラクタ

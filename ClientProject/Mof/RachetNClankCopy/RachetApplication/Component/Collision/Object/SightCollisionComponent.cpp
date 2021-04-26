@@ -1,5 +1,6 @@
 #include "SightCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
 #include "../../SightRecognitionComponent.h"
 
 
@@ -17,7 +18,7 @@ my::SightCollisionComponent::~SightCollisionComponent() {
 }
 
 std::string my::SightCollisionComponent::GetType(void) const {
-    return "SightCollisionComponent";
+    return my::CollisionComponentType::kSightCollisionComponent;
 }
 
 std::optional<Mof::CSphere> my::SightCollisionComponent::GetSphere(void) {    

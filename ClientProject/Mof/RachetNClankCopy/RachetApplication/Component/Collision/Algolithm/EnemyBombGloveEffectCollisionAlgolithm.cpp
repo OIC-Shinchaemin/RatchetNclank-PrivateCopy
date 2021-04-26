@@ -1,5 +1,7 @@
 #include "EnemyBombGloveEffectCollisionAlgolithm.h"
 
+#include "../Object/CollisionComponentDefine.h"
+
 
 my::EnemyBombGloveEffectCollisionAlgolithm::EnemyBombGloveEffectCollisionAlgolithm() :
     super() {
@@ -9,11 +11,13 @@ my::EnemyBombGloveEffectCollisionAlgolithm::~EnemyBombGloveEffectCollisionAlgoli
 }
 
 const char* my::EnemyBombGloveEffectCollisionAlgolithm::GetLayerType(void) const {
-    return "EnemyCollisionComponent";
+    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
+//    return "EnemyCollisionComponent";
 }
 
 const char* my::EnemyBombGloveEffectCollisionAlgolithm::GetTargetType(void) const {
-    return "BombGloveEffectCollisionComponent";
+    return my::CollisionComponentType::kBombGloveEffectCollisionComponent.c_str();
+    //return "BombGloveEffectCollisionComponent";
 }
 
 bool my::EnemyBombGloveEffectCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {

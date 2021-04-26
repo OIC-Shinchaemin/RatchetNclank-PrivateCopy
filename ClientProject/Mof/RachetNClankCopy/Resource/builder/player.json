@@ -79,7 +79,13 @@
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom"
+        "path": "../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom",
+        "color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
       }
     },
     {

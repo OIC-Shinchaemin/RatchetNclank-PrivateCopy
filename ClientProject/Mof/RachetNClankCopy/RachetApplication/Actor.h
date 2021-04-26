@@ -224,7 +224,7 @@ public:
     /// デバッグ
     /// </summary>
     /// <param name=""></param>
-    virtual void RenderDebug(void);
+    virtual void DebugRender(void);
 };
 }
 #endif // !MY_ACTOR_H

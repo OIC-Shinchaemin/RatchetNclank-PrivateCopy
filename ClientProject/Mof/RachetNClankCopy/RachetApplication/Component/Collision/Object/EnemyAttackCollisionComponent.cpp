@@ -1,6 +1,7 @@
 #include "EnemyAttackCollisionComponent.h"
 
-#include "../../Enemy/EnemyAttackComponent.h"
+#include "CollisionComponentDefine.h"
+#include "../../Enemy/EnemyMeleeAttackComponent.h"
 
 
 my::EnemyAttackCollisionComponent::EnemyAttackCollisionComponent(int priority) :
@@ -17,7 +18,7 @@ my::EnemyAttackCollisionComponent::~EnemyAttackCollisionComponent() {
 }
 
 std::string my::EnemyAttackCollisionComponent::GetType(void) const {
-    return "EnemyAttackCollisionComponent";
+    return my::CollisionComponentType::kEnemyAttackCollisionComponent;
 }
 
 std::optional<Mof::CSphere> my::EnemyAttackCollisionComponent::GetSphere(void) {
@@ -63,7 +64,7 @@ std::optional<my::SightObject> my::EnemyAttackCollisionComponent::GetSightObject
 
 bool my::EnemyAttackCollisionComponent::Initialize(void) {
     super::Initialize();
-    _attack_com = super::GetOwner()->GetComponent<my::EnemyAttackComponent>();
+    _attack_com = super::GetOwner()->GetComponent<my::EnemyMeleeAttackComponent>();
     return true;
 }
 

@@ -1,5 +1,7 @@
 #include "BombGloveEffectCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
+
 
 my::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(int priority) :
     super(priority) {
@@ -13,7 +15,7 @@ my::BombGloveEffectCollisionComponent::~BombGloveEffectCollisionComponent() {
 }
 
 std::string my::BombGloveEffectCollisionComponent::GetType(void) const {
-    return "BombGloveEffectCollisionComponent";
+    return my::CollisionComponentType::kBombGloveEffectCollisionComponent;
 }
 
 std::optional<Mof::CSphere> my::BombGloveEffectCollisionComponent::GetSphere(void) {
@@ -48,15 +50,4 @@ bool my::BombGloveEffectCollisionComponent::Initialize(void) {
 
 std::shared_ptr<my::Component> my::BombGloveEffectCollisionComponent::Clone(void) {
     return std::make_shared<my::BombGloveEffectCollisionComponent>(*this);
-}
-
-void my::BombGloveEffectCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
-    if (!this->GetSphere().has_value()) {
-        return;
-    } // if
-
-    Mof::COLLISIONOUTGEOMETRY info;
-    if (this->GetSphere().value().CollisionMesh(mesh, info)) {
-        super::GetOwner()->End();
-    } // if
 }

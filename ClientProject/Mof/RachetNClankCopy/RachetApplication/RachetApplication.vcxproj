@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.cpp" />
     <ClCompile Include="..\include\My\Core\State.cpp" />
     <ClCompile Include="..\include\My\Core\StateMachine.cpp" />
     <ClCompile Include="..\include\My\Core\Timer.cpp" />
@@ -157,12 +158,14 @@
     <ClCompile Include="Actor\Bullet\BlasterBullet.cpp" />
     <ClCompile Include="Actor\Bullet\BombGloveBullet.cpp" />
     <ClCompile Include="Actor\Bullet\Bullet.cpp" />
+    <ClCompile Include="Actor\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp" />
     <ClCompile Include="Actor\Character\Character.cpp" />
     <ClCompile Include="Actor\Character\Enemy.cpp" />
     <ClCompile Include="Actor\Character\Player.cpp" />
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
+    <ClCompile Include="Actor\Ship\Ship.cpp" />
     <ClCompile Include="Actor\Weapon\Blaster.cpp" />
     <ClCompile Include="Actor\Weapon\BombGlove.cpp" />
     <ClCompile Include="Actor\Weapon\Mechanical.cpp" />
@@ -182,12 +185,15 @@
     <ClCompile Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp" />
@@ -196,17 +202,21 @@
     <ClCompile Include="Component\Collision\Object\BombGloveBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\BombGloveEffectCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
-    <ClCompile Include="Component\Enemy\EnemyAttackComponent.cpp" />
+    <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyIdleComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyMoveComponent.cpp" />
+    <ClCompile Include="Component\Enemy\EnemyRangedAttackComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyStateComponent.cpp" />
     <ClCompile Include="Component\HpComponent.cpp" />
     <ClCompile Include="Component\InvincibleComponent.cpp" />
@@ -247,19 +257,21 @@
     <ClCompile Include="Scene\SceneImplementation.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
-    <ClCompile Include="Stage\Bridge.cpp" />
-    <ClCompile Include="Stage\Elevator.cpp" />
-    <ClCompile Include="Stage\GimmickBase.cpp" />
-    <ClCompile Include="Stage\JsonStageParser.cpp" />
+    <ClCompile Include="Stage\Gimmick\Bridge.cpp" />
+    <ClCompile Include="Stage\Gimmick\Elevator.cpp" />
+    <ClCompile Include="Stage\Gimmick\GimmickBase.cpp" />
+    <ClCompile Include="Stage\Gimmick\WoodBox.cpp" />
+    <ClCompile Include="Stage\Parser\JsonStageParser.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="Stage\StageObject.cpp" />
     <ClCompile Include="State\AI\AICombatState.cpp" />
     <ClCompile Include="State\AI\AIPatrolState.cpp" />
     <ClCompile Include="State\AI\AIState.cpp" />
-    <ClCompile Include="State\EnemyAction\EnemyActionAttackState.cpp" />
+    <ClCompile Include="State\EnemyAction\EnemyActionMeleeAttackState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionGoHomeState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionIdleState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionMoveState.cpp" />
+    <ClCompile Include="State\EnemyAction\EnemyActionRangedAttackState.cpp" />
     <ClCompile Include="State\EnemyAction\EnemyActionState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionAttackState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionIdleState.cpp" />
@@ -276,6 +288,7 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.h" />
     <ClInclude Include="..\include\My\Core\AbstructContainer.h" />
     <ClInclude Include="..\include\My\Core\Define.h" />
     <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h" />
@@ -296,12 +309,14 @@
     <ClInclude Include="Actor\Bullet\BlasterBullet.h" />
     <ClInclude Include="Actor\Bullet\BombGloveBullet.h" />
     <ClInclude Include="Actor\Bullet\Bullet.h" />
+    <ClInclude Include="Actor\Bullet\EnemyBullet.h" />
     <ClInclude Include="Actor\Bullet\PyrocitorBullet.h" />
     <ClInclude Include="Actor\Character\Character.h" />
     <ClInclude Include="Actor\Character\Enemy.h" />
     <ClInclude Include="Actor\Character\Player.h" />
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
+    <ClInclude Include="Actor\Ship\Ship.h" />
     <ClInclude Include="Actor\Weapon\Blaster.h" />
     <ClInclude Include="Actor\Weapon\BombGlove.h" />
     <ClInclude Include="Actor\Weapon\Mechanical.h" />
@@ -325,11 +340,10 @@
     <ClInclude Include="Behaviour\Node\Action\GoHomeNode.h" />
     <ClInclude Include="Behaviour\Node\Action\LookAroundNode.h" />
     <ClInclude Include="Behaviour\Node\Action\MeleeAttackNode.h" />
+    <ClInclude Include="Behaviour\Node\Action\RangedAttackNode.h" />
     <ClInclude Include="Behaviour\Node\CompositeNode.h" />
     <ClInclude Include="Behaviour\Node\ConditionalNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\NotAwayFromHomeNode.h" />
-    <ClInclude Include="Behaviour\Node\Condition\TargetInMeleeAttackRangeNode.h" />
-    <ClInclude Include="Behaviour\Node\Condition\TargetOutOfMeleeAttackRangeNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
     <ClInclude Include="Behaviour\Node\Node.h" />
@@ -350,12 +364,15 @@
     <ClInclude Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h" />
@@ -364,18 +381,22 @@
     <ClInclude Include="Component\Collision\Object\BombGloveBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\BombGloveEffectCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\CollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h" />
     <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentDefine.h" />
-    <ClInclude Include="Component\Enemy\EnemyAttackComponent.h" />
+    <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyDamageComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyIdleComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyMoveComponent.h" />
+    <ClInclude Include="Component\Enemy\EnemyRangedAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyStateComponent.h" />
     <ClInclude Include="Component\HpComponent.h" />
     <ClInclude Include="Component\InvincibleComponent.h" />
@@ -423,22 +444,24 @@
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h" />
-    <ClInclude Include="Stage\Bridge.h" />
-    <ClInclude Include="Stage\Elevator.h" />
-    <ClInclude Include="Stage\GimmickBase.h" />
-    <ClInclude Include="Stage\JsonStageParser.h" />
+    <ClInclude Include="Stage\Gimmick\Bridge.h" />
+    <ClInclude Include="Stage\Gimmick\Elevator.h" />
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h" />
+    <ClInclude Include="Stage\Gimmick\WoodBox.h" />
+    <ClInclude Include="Stage\Parser\JsonStageParser.h" />
+    <ClInclude Include="Stage\Parser\StageParser.h" />
     <ClInclude Include="Stage\Stage.h" />
     <ClInclude Include="Stage\StageDefine.h" />
     <ClInclude Include="Stage\StageFileFormat.h" />
     <ClInclude Include="Stage\StageObject.h" />
-    <ClInclude Include="Stage\StageParser.h" />
     <ClInclude Include="State\AI\AICombatState.h" />
     <ClInclude Include="State\AI\AIPatrolState.h" />
     <ClInclude Include="State\AI\AIState.h" />
-    <ClInclude Include="State\EnemyAction\EnemyActionAttackState.h" />
+    <ClInclude Include="State\EnemyAction\EnemyActionMeleeAttackState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionGoHomeState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionIdleState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionMoveState.h" />
+    <ClInclude Include="State\EnemyAction\EnemyActionRangedAttackState.h" />
     <ClInclude Include="State\EnemyAction\EnemyActionState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionAttackState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionIdleState.h" />
@@ -454,25 +477,32 @@
     <ClInclude Include="UI\QuickChangeMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resource\resource_path.txt" />
+    <Text Include="..\Resource\scene_resource\general.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\behaviour\combat.json" />
     <None Include="..\Resource\behaviour\patrol.json" />
+    <None Include="..\Resource\behaviour\strong_enemy_combat.json" />
+    <None Include="..\Resource\behaviour\strong_enemy_patrol.json" />
+    <None Include="..\Resource\behaviour\weak_enemy_combat.json" />
+    <None Include="..\Resource\behaviour\weak_enemy_patrol.json" />
     <None Include="..\Resource\builder\blaster.json" />
     <None Include="..\Resource\builder\blaster_bullet.json" />
     <None Include="..\Resource\builder\bomb_glove.json" />
     <None Include="..\Resource\builder\bomb_glove_bullet.json" />
     <None Include="..\Resource\builder\bomb_glove_effect.json" />
-    <None Include="..\Resource\builder\enemy.json" />
+    <None Include="..\Resource\builder\enemy_bullet.json" />
     <None Include="..\Resource\builder\particle.json" />
     <None Include="..\Resource\builder\player.json" />
     <None Include="..\Resource\builder\pyrocitor.json" />
     <None Include="..\Resource\builder\pyrocitor_bullet.json" />
+    <None Include="..\Resource\builder\ship.json" />
+    <None Include="..\Resource\builder\strong_enemy.json" />
+    <None Include="..\Resource\builder\weak_enemy.json" />
     <None Include="..\Resource\motion_names\enemy.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
-    <None Include="..\Resource\test.json" />
+    <None Include="..\Resource\stage\test.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RachetApplication.rc" />

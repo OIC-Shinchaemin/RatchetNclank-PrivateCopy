@@ -1,6 +1,7 @@
 #include "EnemyComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../Component/VelocityComponent.h"
 #include "../Enemy/EnemyDamageComponent.h"
 #include "../SightRecognitionComponent.h"
 #include "../Collision/Object/EnemyCollisionComponent.h"
@@ -35,18 +36,30 @@ std::weak_ptr<my::Actor> my::EnemyComponent::GetTarget(void) const {
     return this->_target;
 }
 
+std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
+    if (auto target = this->GetTarget().lock()) {
+        auto pos = target->GetPosition();
+        float player_height = 1.0f;
+        pos.y += player_height ;
+        return pos;
+    } // if
+    return std::optional<Mof::CVector3>();
+}
+
 bool my::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Start();
+    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    velocity_com->SetGravity(2.8f);
+
 
     auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                           "PlayerCollisionComponent",
-                           my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->End(); 
+                               "PlayerCollisionComponent",
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->End();
         return true;
     }));
-    
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "PyrocitorBulletCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
@@ -54,7 +67,7 @@ bool my::EnemyComponent::Initialize(void) {
         return true;
     }));
 
-    
+
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "BlasterBulletCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {

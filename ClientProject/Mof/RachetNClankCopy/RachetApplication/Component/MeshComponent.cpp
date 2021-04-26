@@ -7,14 +7,16 @@ my::MeshComponent::MeshComponent(int priority) :
     super(priority),
     _mesh(),
     _motion_com(),
-    _is_show(true) {
+    _is_show(true),
+    _color() {
 }
 
 my::MeshComponent::MeshComponent(const my::MeshComponent& obj) :
     super(obj._priority),
     _mesh(obj._mesh),
     _motion_com(),
-    _is_show(obj._is_show) {
+    _is_show(obj._is_show),
+    _color(obj._color) {
     super::_path = obj._path;
 }
 
@@ -30,6 +32,17 @@ void my::MeshComponent::SetParam(const rapidjson::Value& param) {
 
     auto temp = super::_resource_manager.lock()->Get<std::shared_ptr<Mof::CMeshContainer>>(param[path].GetString());
     this->SetMesh(temp);
+
+    const char* color = "color";
+    if (param.HasMember(color)) {
+        _ASSERT_EXPR(param[color].IsArray(), L"パラメータの指定された型でありません");
+        for (int i = 0, n = param[color].GetArray().Size(); i < n; i++) {
+            _color.fv[i] = param[color].GetArray()[i].GetFloat();
+        } // for
+    } // if
+    else {
+        _color = math::vec4::kOne;
+    } // else
 }
 
 void my::MeshComponent::SetMesh(const std::shared_ptr<Mof::CMeshContainer>& ptr) {
@@ -66,7 +79,7 @@ bool my::MeshComponent::Render(void) {
         if (auto motion_com = _motion_com.lock()) {
             auto motion = motion_com->GetMotionData();
             motion->RefreshBoneMatrix(world);
-            r->Render(motion);
+            r->Render(motion, _color);
         } // if
         else {
             r->Render(world);

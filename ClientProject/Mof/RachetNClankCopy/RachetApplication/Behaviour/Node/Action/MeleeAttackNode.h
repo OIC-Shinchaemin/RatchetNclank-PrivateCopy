@@ -39,14 +39,14 @@ public:
             return false;
         } // if
 
-        auto attack_com = actor->GetComponent<my::EnemyAttackComponent>();
+        auto attack_com = actor->GetComponent<my::EnemyMeleeAttackComponent>();
         auto pos = target.lock()->GetPosition();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
             auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
             ai_state_com->ChangeState("AICombatState");
 
             auto state_com = actor->GetComponent<my::EnemyStateComponent>();
-            state_com->ChangeState("EnemyActionAttackState");
+            state_com->ChangeState("EnemyActionMeleeAttackState");
             return false;
         } // if
 

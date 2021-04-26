@@ -1,5 +1,7 @@
 #include "EnemyPyrocitorBulletCollisionAlgolithm.h"
 
+#include "../Object/CollisionComponentDefine.h"
+
 
 my::EnemyPyrocitorBulletCollisionAlgolithm::EnemyPyrocitorBulletCollisionAlgolithm() :
     super() {
@@ -9,11 +11,11 @@ my::EnemyPyrocitorBulletCollisionAlgolithm::~EnemyPyrocitorBulletCollisionAlgoli
 }
 
 const char* my::EnemyPyrocitorBulletCollisionAlgolithm::GetLayerType(void) const {
-    return "EnemyCollisionComponent";
+    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
 }
 
 const char* my::EnemyPyrocitorBulletCollisionAlgolithm::GetTargetType(void) const {
-    return "PyrocitorBulletCollisionComponent";
+    return my::CollisionComponentType::kPyrocitorBulletCollisionComponent.c_str();
 }
 
 bool my::EnemyPyrocitorBulletCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {

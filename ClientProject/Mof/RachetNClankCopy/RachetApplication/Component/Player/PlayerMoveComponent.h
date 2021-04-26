@@ -61,6 +61,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    float GetDefaultMoveSpeed(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetMoveSpeed(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
     /// 初期化

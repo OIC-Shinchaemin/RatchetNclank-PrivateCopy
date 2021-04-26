@@ -16,7 +16,7 @@ bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
     auto in = Mof::CVector2(1.0f, 0.0f);
     float move_angle = 0.0f;
 
-    
+
     if (::g_pInput->IsKeyHold(MOFKEY_A)) {
         action = true;
         left = true;
@@ -48,7 +48,7 @@ bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
         } // else if
     } // else if
 
-    if (::g_pInput->IsKeyHold(MOFKEY_J)) {
+    if (::g_pInput->IsKeyHold(MOFKEY_X)) {
         auto v = super::GetOwner()->GetComponent<my::VelocityComponent>();
         v->AddVelocityForce(Mof::CVector3(0.0f, 10.0f, 0.0f));
     } // if
@@ -136,7 +136,18 @@ bool my::PlayerComponent::Initialize(void) {
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
 
-    velocity_com->SetGravity(0.98f);
+    //velocity_com->SetGravity(0.98f);
+    velocity_com->SetGravity(2.8f);
+
+    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
+                               "ShipCollisionComponent",
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->Notify("ShipCollision", super::GetOwner());
+        return true;
+    }));
+
+
 
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
@@ -150,7 +161,7 @@ bool my::PlayerComponent::Initialize(void) {
 
 bool my::PlayerComponent::Update(float delta_time) {
     float angular_speed = 3.5f;
-    float speed = 0.6f;
+    float speed = 1.5f;
 
     if (auto damage_com = _damage_com.lock()) {
         if (!damage_com->IsActive()) {
@@ -175,9 +186,23 @@ bool my::PlayerComponent::Update(float delta_time) {
 
 bool my::PlayerComponent::Release(void) {
     super::Release();
+    if (auto canvas = super::_ui_canvas.lock()) {
+        canvas->RemoveElement("LockOnCursorMenu");
+    } // if
     return true;
 }
 
 std::shared_ptr<my::Component> my::PlayerComponent::Clone(void) {
     return std::make_shared<my::PlayerComponent>(*this);
+}
+
+bool my::PlayerComponent::DebugRender(void) {
+    /*
+    auto pos = super::GetOwner()->GetPosition();
+
+    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "pos.x = %f", pos.x);
+    ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "pos.y = %f", pos.y);
+    ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "pos.z = %f", pos.z);
+    */
+    return true;
 }

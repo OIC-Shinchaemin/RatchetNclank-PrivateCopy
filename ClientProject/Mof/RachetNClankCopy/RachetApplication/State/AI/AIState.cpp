@@ -3,15 +3,15 @@
 #include "../../Factory/FactoryManager.h"
 
 
-std::shared_ptr<my::Enemy> state::AIState::GetEnemy(void) const {
-    if (auto enemy = _enemy.lock()) {
-        return enemy;
+std::shared_ptr<my::Actor> state::AIState::GetActor(void) const {
+    if (auto actor = _actor.lock()) {
+        return actor;
     } // if
     return nullptr;
 }
 
 state::AIState::AIState() :
-    _enemy(),
+    _actor(),
     _behaviour_executor(),
     _behaviour_path() {
 }
@@ -20,18 +20,16 @@ state::AIState::~AIState() {
 }
 
 void state::AIState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
-    this->_enemy = std::dynamic_pointer_cast<my::Enemy>(ptr);
+    this->_actor = ptr;
 }
 
-void state::AIState::GenerateBehaviourExecutor(void) {
-    _behaviour_executor = my::FactoryManager::Singleton().CreateBehaviourExecutor(_behaviour_path.c_str());
-    
-    std::shared_ptr<my::Actor> temp = _enemy.lock();
-    _behaviour_executor->Prepare(temp);
+void state::AIState::GenerateBehaviourExecutor(const std::string& path) {
+    _behaviour_executor = my::FactoryManager::Singleton().CreateBehaviourExecutor(path.c_str());
+    _behaviour_executor->Prepare(_actor.lock());
 }
 
 void state::AIState::Update(float delta_time) {
-    if (auto enemy = this->GetEnemy(); enemy) {
+    if (auto actor = this->GetActor(); actor) {
         _behaviour_executor->Execute();
     } // if
 }

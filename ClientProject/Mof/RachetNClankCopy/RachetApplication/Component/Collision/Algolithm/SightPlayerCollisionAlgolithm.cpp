@@ -1,6 +1,7 @@
 #include "SightPlayerCollisionAlgolithm.h"
 
 #include "My/Core/Math.h"
+#include "../Object/CollisionComponentDefine.h"
 
 
 my::SightPlayerCollisionAlgolithm::SightPlayerCollisionAlgolithm() :
@@ -11,11 +12,11 @@ my::SightPlayerCollisionAlgolithm::~SightPlayerCollisionAlgolithm() {
 }
 
 const char* my::SightPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return "SightCollisionComponent";
+    return my::CollisionComponentType::kSightCollisionComponent.c_str();
 }
 
 const char* my::SightPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return "PlayerCollisionComponent";
+    return my::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
 bool my::SightPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {

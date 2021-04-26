@@ -1,0 +1,18 @@
+{
+  "root": {
+    "index" : 0
+  },
+  "behaviours": [
+    {
+      "type": "SequencerNode",
+      "children": [
+        1
+        
+      ]
+    },
+    {
+      "type": "ActionNode",
+      "derived": "LookAroundNode"
+    }
+  ]
+}

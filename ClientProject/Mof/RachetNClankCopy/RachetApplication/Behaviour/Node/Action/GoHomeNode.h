@@ -6,7 +6,6 @@
 
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyMoveComponent.h"
-#include "../Component/Enemy/EnemyAttackComponent.h"
 
 
 namespace behaviour {
@@ -36,7 +35,7 @@ public:
         state_com->ChangeState("EnemyActionGoHomeState");
 
         float distance = Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition());
-        if (distance > 2.0f) {
+        if (distance > 2.5f) {
             return false;
         } // if
         return true;

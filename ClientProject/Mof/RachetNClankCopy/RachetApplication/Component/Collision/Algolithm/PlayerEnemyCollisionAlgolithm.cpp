@@ -1,6 +1,6 @@
 #include "PlayerEnemyCollisionAlgolithm.h"
 
-#include "../../../Actor/Character/Enemy.h"
+#include "../Object/CollisionComponentDefine.h"
 
 
 my::PlayerEnemyCollisionAlgolithm::PlayerEnemyCollisionAlgolithm() :
@@ -11,17 +11,13 @@ my::PlayerEnemyCollisionAlgolithm::~PlayerEnemyCollisionAlgolithm() {
 }
 
 const char* my::PlayerEnemyCollisionAlgolithm::GetLayerType(void) const {
-    return "PlayerCollisionComponent";
+    return my::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
 const char* my::PlayerEnemyCollisionAlgolithm::GetTargetType(void) const {
-    return "EnemyCollisionComponent";
+    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
 }
-/*
-void my::PlayerEnemyCollisionAlgolithm::Collision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, const my::CollisionInfo& info) {
-    object->ExcuteFunction("EnemyCollisionComponent", info);
-}
-*/
+
 bool my::PlayerEnemyCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {

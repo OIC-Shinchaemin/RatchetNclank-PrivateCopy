@@ -2,7 +2,6 @@
 #define MY_PLAYER_H
 
 
-
 #include "Character.h"
 #include "My/Core/Observer.h"
 

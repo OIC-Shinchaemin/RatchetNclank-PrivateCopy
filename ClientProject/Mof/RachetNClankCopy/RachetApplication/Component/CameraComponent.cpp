@@ -8,9 +8,19 @@
 void my::CameraComponent::ControlByKeyboard(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         _camera_controller.GetService()->AddAzimuth(1.0f);
+
+        if (_camera_fps_mode) {
+            _ideal_fps_camera_angle += math::ToRadian(1.0f);
+        } // if
+
     } // if
     else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
         _camera_controller.GetService()->AddAzimuth(-1.0f);
+
+        if (_camera_fps_mode) {
+            _ideal_fps_camera_angle -= math::ToRadian(1.0f);
+        } // if
+
     } // else if
     else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
         _camera_controller.GetService()->AddAltitude(1.0f);
@@ -18,6 +28,31 @@ void my::CameraComponent::ControlByKeyboard(void) {
     else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
         _camera_controller.GetService()->AddAltitude(-1.0f);
     } // else if
+
+    // chara front
+    if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
+        _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
+                                             _camera_controller.GetService()->GetViewFront().x);
+    } // if
+
+    if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
+        _camera_fps_mode = true;
+        _camera_controller.GetService()->SetDistance(0.1f);
+
+        if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
+            auto rotate = super::GetOwner()->GetRotate();
+            rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
+            super::GetOwner()->SetRotate(rotate);
+        } // if
+    } // if
+    if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+        _camera_fps_mode = false;
+        _camera_controller.GetService()->SetDistance(5.0f);
+
+        float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
+        float azimuth_degree = math::ToDegree(angle_y);
+        _camera_controller.GetService()->SetAzimuth(azimuth_degree);
+    } // if
 }
 
 void my::CameraComponent::ControlByGamepad(void) {
@@ -29,9 +64,16 @@ void my::CameraComponent::ControlByGamepad(void) {
         if (threshold <= std::abs(in.x)) {
             if (0.0f < in.x) {
                 _camera_controller.GetService()->AddAzimuth(1.0f);
+
+                if (_camera_fps_mode) {
+                    _ideal_fps_camera_angle += math::ToRadian(1.0f);
+                } // if
             } // if
             else {
                 _camera_controller.GetService()->AddAzimuth(-1.0f);
+                if (_camera_fps_mode) {
+                    _ideal_fps_camera_angle -= math::ToRadian(1.0f);
+                } // if
             } // else
         } // if
         // y
@@ -44,20 +86,55 @@ void my::CameraComponent::ControlByGamepad(void) {
             } // else 
         } // if
     } // if
+
+
+    // chara front
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_BTN) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
+                                             _camera_controller.GetService()->GetViewFront().x);
+    } // if
+
+    if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) ||
+        ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        _camera_fps_mode = true;
+        _camera_controller.GetService()->SetDistance(0.1f);
+
+        if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
+            auto rotate = super::GetOwner()->GetRotate();
+            rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
+            super::GetOwner()->SetRotate(rotate);
+        } // if
+    } // if
+
+
+    if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) ||
+        ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        _camera_fps_mode = false;
+        _camera_controller.GetService()->SetDistance(5.0f);
+
+        float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
+        float azimuth_degree = math::ToDegree(angle_y);
+        _camera_controller.GetService()->SetAzimuth(azimuth_degree);
+    } // if
 }
 
 my::CameraComponent::CameraComponent(int priority) :
     super(priority),
     _target(),
     _player_view_camera(),
-    _camera_controller() {
+    _camera_controller(),
+    _camera_fps_mode(false),
+    _ideal_fps_camera_angle(0.0f) {
 }
 
 my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     super(obj._priority),
     _target(),
     _player_view_camera(),
-    _camera_controller() {
+    _camera_controller(),
+    _camera_fps_mode(false),
+    _ideal_fps_camera_angle(0.0f) {
 }
 
 my::CameraComponent::~CameraComponent() {
@@ -81,13 +158,21 @@ bool my::CameraComponent::Initialize(void) {
 
     // camera
     _player_view_camera = (std::make_shared<my::Camera>());
-    auto pos = Mof::CVector3(0.0f, 10.0f, 10.0f);
-    _player_view_camera->SetPosition(pos);
-    _player_view_camera->SetTarget(math::vec3::kZero);
     _player_view_camera->Initialize();
+    auto pos = super::GetOwner()->GetPosition();
+    auto offset = math::vec3::kNegUnitZ;
+    offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
+
+    _player_view_camera->SetPosition(pos - offset);
+    _player_view_camera->SetTarget(pos);
+    _player_view_camera->Update();
     _camera_controller.SetService(std::make_shared<my::CameraController>());
     _camera_controller.GetService()->SetCamera(_player_view_camera);
     _camera_controller.GetService()->RegisterGlobalCamera();
+    _camera_controller.GetService()->SetAzimuth(
+        math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
+    _camera_controller.GetService()->SetAltitude(20.0f);
+
     return true;
 }
 
@@ -97,10 +182,16 @@ bool my::CameraComponent::Update(float delta_time) {
 
     auto pos = super::GetOwner()->GetPosition();
     pos.y += 1.0f;
-    //_camera_controller.SetCameraTarget(Mof::CVector3(pos.x, pos.y + super::_height, pos.z));
 
-    _camera_controller.GetService()->SetCameraTarget(pos);
-    //_camera_controller.SetCameraTarget(_target);
+
+    if (_camera_fps_mode) {
+        auto offset = Mof::CVector3(0.0f, 0.0f, 1.0f);
+        offset.RotationY(_ideal_fps_camera_angle + MOF_MATH_HALFPI);
+        _camera_controller.GetService()->SetCameraTarget(pos + offset);
+    } // if
+    else {
+        _camera_controller.GetService()->SetCameraTarget(pos);
+    } // else
     _camera_controller.GetService()->Update();
 
     if (::g_pInput->IsKeyPush(MOFKEY_F1)) {

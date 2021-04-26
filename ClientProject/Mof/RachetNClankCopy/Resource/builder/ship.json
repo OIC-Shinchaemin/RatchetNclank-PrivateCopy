@@ -1,0 +1,17 @@
+{
+  "components": [
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/ship/test.mom"
+      }
+    },
+    {
+      "type": "ShipCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

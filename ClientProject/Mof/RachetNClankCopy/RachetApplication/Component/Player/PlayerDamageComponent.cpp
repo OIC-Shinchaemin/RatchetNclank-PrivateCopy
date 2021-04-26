@@ -7,6 +7,7 @@
 #include "../Player/PlayerIdleComponent.h"
 #include "../InvincibleComponent.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
+#include "../Collision/Object/CollisionComponentDefine.h"
 
 
 my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
@@ -50,9 +51,16 @@ bool my::PlayerDamageComponent::Initialize(void) {
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
-                               "EnemyAttackCollisionComponent",
+                               my::CollisionComponentType::kEnemyAttackCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
 
+        this->Start();
+        _damage_angle = in.angle;
+        return true;
+    }));
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
+                               my::CollisionComponentType::kEnemyBulletCollisionComponent,
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         this->Start();
         _damage_angle = in.angle;
         return true;

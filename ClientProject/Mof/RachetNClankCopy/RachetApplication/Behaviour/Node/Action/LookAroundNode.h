@@ -26,11 +26,11 @@ public:
     /// <summary>
     /// ノードの実行
     /// </summary>
-    /// <param name="actor">実行アクター</param>
+    /// <param name="args">必要な引数</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
+    virtual bool Execute(std::any args) override {
+        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(args);
         auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
 
         if (!target.expired()) {

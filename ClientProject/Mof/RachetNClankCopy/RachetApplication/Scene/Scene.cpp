@@ -57,7 +57,7 @@ void my::Scene::AddSceneObserver(const std::shared_ptr<my::Observer<const SceneM
 
 bool my::Scene::Load(std::shared_ptr<my::Scene::Param> param) {
     _effect = my::SceneEffect();
-    _effect.value().Load("../Resource/fadein.hlsl");
+    _effect.value().Load("../Resource/shader/fadein.hlsl");
     bool seccess = _effect.value().CreateShaderBuffer("cbSceneEffectParam", sizeof(my::cbSceneEffectParam));
     _effect.value().time = 1.0f;
 

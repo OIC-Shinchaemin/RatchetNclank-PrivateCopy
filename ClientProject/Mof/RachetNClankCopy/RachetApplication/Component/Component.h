@@ -135,6 +135,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) = 0;
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool DebugRender(void);
 };
 static bool operator<(const my::Component& a, const my::Component& b) noexcept {
     return a.GetPriority() < b.GetPriority();

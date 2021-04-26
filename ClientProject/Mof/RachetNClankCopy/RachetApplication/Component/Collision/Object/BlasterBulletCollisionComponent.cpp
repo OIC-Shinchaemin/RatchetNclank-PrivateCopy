@@ -1,5 +1,7 @@
 #include "BlasterBulletCollisionComponent.h"
 
+#include "CollisionComponentDefine.h"
+
 
 my::BlasterBulletCollisionComponent::BlasterBulletCollisionComponent(int priority) :
     super(priority) {
@@ -13,7 +15,7 @@ my::BlasterBulletCollisionComponent::~BlasterBulletCollisionComponent() {
 }
 
 std::string my::BlasterBulletCollisionComponent::GetType(void) const {
-    return "BlasterBulletCollisionComponent";
+    return my::CollisionComponentType::kBlasterBulletCollisionComponent;
 }
 
 std::optional<Mof::CSphere> my::BlasterBulletCollisionComponent::GetSphere(void) {
@@ -49,7 +51,7 @@ std::shared_ptr<my::Component> my::BlasterBulletCollisionComponent::Clone(void) 
     return std::make_shared<my::BlasterBulletCollisionComponent>(*this);
 }
 
-void my::BlasterBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh) {
+void my::BlasterBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
     if (!this->GetSphere().has_value()) {
         return;
     } // if

@@ -76,9 +76,6 @@
     <Filter Include="Rachet\Source\Factory">
       <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\motion_type">
-      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Component">
       <UniqueIdentifier>{5882736c-82d9-4cb1-82a6-2d33f365ecc8}</UniqueIdentifier>
     </Filter>
@@ -178,12 +175,6 @@
     <Filter Include="Rachet\Source\State\AI">
       <UniqueIdentifier>{fac0ece7-4437-4700-916b-5c842b8d6b06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Stage">
-      <UniqueIdentifier>{8eda0607-7e3c-4307-b439-cd2639e92fa1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Stage">
-      <UniqueIdentifier>{7956d0d2-11d8-418b-87ba-fe5cfe593950}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Source\Game\GameSystem">
       <UniqueIdentifier>{0517efc8-f9e0-4670-ba41-b85b09bc98e8}</UniqueIdentifier>
     </Filter>
@@ -213,6 +204,27 @@
     </Filter>
     <Filter Include="Rachet\Source\Scene">
       <UniqueIdentifier>{e10fb131-c044-4268-ab70-1d544e5d595e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Ship">
+      <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\scene_resource">
+      <UniqueIdentifier>{e7b0a52a-a213-4e12-a354-b6e5957328f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\motion_names">
+      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\stage">
+      <UniqueIdentifier>{492cf9dc-39e2-4b04-9c3a-8bc9da18b19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage">
+      <UniqueIdentifier>{b7ada71b-9352-4e63-bea1-d2187881b714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage\Gimmick">
+      <UniqueIdentifier>{89150bce-d500-4066-b762-0ced6d36635c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Stage\Parser">
+      <UniqueIdentifier>{c883a73b-c37d-4430-b2fd-a54de2e2eb66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -357,9 +369,6 @@
     <ClCompile Include="Component\AIStateComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Enemy\EnemyAttackComponent.cpp">
-      <Filter>Rachet\Source\Component\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyIdleComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
     </ClCompile>
@@ -423,9 +432,6 @@
     <ClCompile Include="State\EnemyAction\EnemyActionState.cpp">
       <Filter>Rachet\Source\State\EnemyAction</Filter>
     </ClCompile>
-    <ClCompile Include="State\EnemyAction\EnemyActionAttackState.cpp">
-      <Filter>Rachet\Source\State\EnemyAction</Filter>
-    </ClCompile>
     <ClCompile Include="State\AI\AICombatState.cpp">
       <Filter>Rachet\Source\State\AI</Filter>
     </ClCompile>
@@ -467,15 +473,6 @@
     </ClCompile>
     <ClCompile Include="State\PlayerMotion\PlayerMotionDamageState.cpp">
       <Filter>Rachet\Source\State\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\JsonStageParser.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Stage.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\StageObject.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp">
       <Filter>Rachet\Source\Game\GameSystem\Save</Filter>
@@ -570,15 +567,6 @@
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Stage\Bridge.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\Elevator.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage\GimmickBase.cpp">
-      <Filter>Rachet\Source\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>Rachet\Source\Scene</Filter>
     </ClCompile>
@@ -596,6 +584,66 @@
     </ClCompile>
     <ClCompile Include="Scene\ClearScene.cpp">
       <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Ship\Ship.cpp">
+      <Filter>Rachet\Header\Actor\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyRangedAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyAction\EnemyActionMeleeAttackState.cpp">
+      <Filter>Rachet\Source\State\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyAction\EnemyActionRangedAttackState.cpp">
+      <Filter>Rachet\Source\State\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\EnemyBullet.cpp">
+      <Filter>Rachet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\GimmickBase.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\WoodBox.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Bridge.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Elevator.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Parser\JsonStageParser.cpp">
+      <Filter>Rachet\Source\Stage\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\StageObject.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -857,9 +905,6 @@
     <ClInclude Include="Component\Enemy\EnemyStateComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Enemy\EnemyAttackComponent.h">
-      <Filter>Rachet\Header\Component\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Component.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
@@ -882,12 +927,6 @@
       <Filter>Rachet\Header\Behaviour\Node\Action</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Node\Condition\NotAwayFromHomeNode.h">
-      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
-    </ClInclude>
-    <ClInclude Include="Behaviour\Node\Condition\TargetInMeleeAttackRangeNode.h">
-      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
-    </ClInclude>
-    <ClInclude Include="Behaviour\Node\Condition\TargetOutOfMeleeAttackRangeNode.h">
       <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h">
@@ -924,9 +963,6 @@
       <Filter>Rachet\Header\State\EnemyAction</Filter>
     </ClInclude>
     <ClInclude Include="State\EnemyAction\EnemyActionState.h">
-      <Filter>Rachet\Header\State\EnemyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="State\EnemyAction\EnemyActionAttackState.h">
       <Filter>Rachet\Header\State\EnemyAction</Filter>
     </ClInclude>
     <ClInclude Include="State\EnemyAction\EnemyActionGoHomeState.h">
@@ -985,21 +1021,6 @@
     </ClInclude>
     <ClInclude Include="State\PlayerMotion\PlayerMotionDamageState.h">
       <Filter>Rachet\Header\State\PlayerMotion</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\JsonStageParser.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageDefine.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageObject.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageParser.h">
-      <Filter>Rachet\Header\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameSystem\GameMoney.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
@@ -1094,18 +1115,6 @@
     <ClInclude Include="UI\EquipmentWeaponMenu.h">
       <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\StageFileFormat.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\GimmickBase.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Elevator.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Bridge.h">
-      <Filter>Rachet\Header\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\Scene.h">
       <Filter>Rachet\Header\Scene</Filter>
     </ClInclude>
@@ -1127,27 +1136,93 @@
     <ClInclude Include="Scene\ClearScene.h">
       <Filter>Rachet\Header\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Ship\Ship.h">
+      <Filter>Rachet\Header\Actor\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyRangedAttackComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyAction\EnemyActionMeleeAttackState.h">
+      <Filter>Rachet\Header\State\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyAction\EnemyActionRangedAttackState.h">
+      <Filter>Rachet\Header\State\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\RangedAttackNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\EnemyBullet.h">
+      <Filter>Rachet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Elevator.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\WoodBox.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Bridge.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\JsonStageParser.h">
+      <Filter>Rachet\Source\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\StageParser.h">
+      <Filter>Rachet\Source\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>Rachet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resource\resource_path.txt">
-      <Filter>リソース ファイル</Filter>
+    <Text Include="..\Resource\scene_resource\general.txt">
+      <Filter>リソース ファイル\scene_resource</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json">
       <Filter>リソース ファイル\save</Filter>
     </None>
-    <None Include="..\Resource\behaviour\combat.json">
-      <Filter>リソース ファイル\behaviour</Filter>
-    </None>
     <None Include="..\Resource\motion_names\enemy.motion_names">
-      <Filter>リソース ファイル\motion_type</Filter>
+      <Filter>リソース ファイル\motion_names</Filter>
     </None>
     <None Include="..\Resource\motion_names\player.motion_names">
-      <Filter>リソース ファイル\motion_type</Filter>
-    </None>
-    <None Include="..\Resource\builder\enemy.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>リソース ファイル\motion_names</Filter>
     </None>
     <None Include="..\Resource\builder\player.json">
       <Filter>リソース ファイル\builder</Filter>
@@ -1173,14 +1248,41 @@
     <None Include="..\Resource\builder\bomb_glove.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
+    <None Include="..\Resource\builder\bomb_glove_effect.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\ship.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\strong_enemy.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\weak_enemy.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\strong_enemy_patrol.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\weak_enemy_combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\weak_enemy_patrol.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\strong_enemy_combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
+    </None>
     <None Include="..\Resource\behaviour\patrol.json">
       <Filter>リソース ファイル\behaviour</Filter>
     </None>
-    <None Include="..\Resource\test.json">
-      <Filter>リソース ファイル</Filter>
+    <None Include="..\Resource\behaviour\combat.json">
+      <Filter>リソース ファイル\behaviour</Filter>
     </None>
-    <None Include="..\Resource\builder\bomb_glove_effect.json">
+    <None Include="..\Resource\builder\enemy_bullet.json">
       <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\test.json">
+      <Filter>リソース ファイル\stage</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
