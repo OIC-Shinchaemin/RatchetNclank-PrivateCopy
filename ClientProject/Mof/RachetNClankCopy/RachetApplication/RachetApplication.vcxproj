@@ -324,6 +324,12 @@
     <ClInclude Include="Actor\Weapon\Pyrocitor.h" />
     <ClInclude Include="Actor\Weapon\Weapon.h" />
     <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\ChangePatrolNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\LookAroundNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\MeleeAttackNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\MoveToEnemyNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\RangedAttackNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h" />

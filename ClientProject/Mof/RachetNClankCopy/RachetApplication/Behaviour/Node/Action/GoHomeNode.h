@@ -4,8 +4,7 @@
 
 #include "../ActionNode.h"
 
-#include "../Component/Enemy/EnemyStateComponent.h"
-#include "../Component/Enemy/EnemyMoveComponent.h"
+#include "../../Executor/Action/GoHomeNodeExecutor.h"
 
 
 namespace behaviour {
@@ -23,18 +22,26 @@ public:
     /// </summary>
     virtual ~GoHomeNode() = default;
     /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+        return std::make_shared<behaviour::GoHomeNodeExecutor>(ptr);
+    }
+    /// <summary>
     /// ノードの実行
     /// </summary>
-    /// <param name="actor">実行アクター</param>
+    /// <param name="node_args">実行引数</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
+    virtual bool Execute(std::any node_args) override {
+        auto args = std::any_cast<behaviour::GoHomeNodeExecutor::NodeArgs>(node_args);
+        args.state_com.lock()->ChangeState("EnemyActionGoHomeState");
 
-        auto state_com = actor->GetComponent<my::EnemyStateComponent>();
-        state_com->ChangeState("EnemyActionGoHomeState");
-
-        float distance = Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition());
+        float distance = Mof::CVector3Utilities::Distance(
+            args.actor.lock()->GetInitialPosition(), args.actor.lock()->GetPosition());
         if (distance > 2.5f) {
             return false;
         } // if

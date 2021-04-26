@@ -197,12 +197,10 @@ std::shared_ptr<my::Component> my::PlayerComponent::Clone(void) {
 }
 
 bool my::PlayerComponent::DebugRender(void) {
-    /*
     auto pos = super::GetOwner()->GetPosition();
 
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "pos.x = %f", pos.x);
     ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "pos.y = %f", pos.y);
     ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "pos.z = %f", pos.z);
-    */
     return true;
 }

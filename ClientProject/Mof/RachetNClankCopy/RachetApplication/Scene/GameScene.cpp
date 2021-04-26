@@ -37,10 +37,10 @@ void my::GameScene::ReInitialize(void) {
 bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
-    /*
+    
     int fps = ::CUtilities::GetFPS();
     ::CGraphicsUtilities::RenderString(50.0f, 500.0f, "FPS = %d", fps);
-    */
+    
     _renderer.Render();
     _stage.Render();
     _game_money->Render();

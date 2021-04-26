@@ -12,8 +12,7 @@ std::shared_ptr<my::Actor> state::AIState::GetActor(void) const {
 
 state::AIState::AIState() :
     _actor(),
-    _behaviour_executor(),
-    _behaviour_path() {
+    _behaviour_executor() {
 }
 
 state::AIState::~AIState() {

@@ -4,11 +4,7 @@
 
 #include "../ActionNode.h"
 
-#include "../../../Actor.h"
-#include "../../../Actor/Character/Enemy.h"
-#include "../../../Component/AIStateComponent.h"
-#include "../Component/Enemy/EnemyComponent.h"
-#include "../../../Component/Enemy/EnemyStateComponent.h"
+#include "../../Executor/Action/MeleeAttackNodeExecutor.h"
 
 
 namespace behaviour {
@@ -26,27 +22,33 @@ public:
     /// </summary>
     virtual ~MeleeAttackNode() = default;
     /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+        return std::make_shared<behaviour::MeleeAttackNodeExecutor>(ptr);
+    }
+    /// <summary>
     /// ノードの実行
     /// </summary>
-    /// <param name="actor">実行アクター</param>
+    /// <param name="node_args">実行引数</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
-        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
+    virtual bool Execute(std::any node_args) override {
+        auto args = std::any_cast<behaviour::MeleeAttackNodeExecutor::NodeArgs>(node_args);
 
+        auto target = args.enemy_com.lock()->GetTarget();
         if (target.expired()) {
             return false;
         } // if
 
-        auto attack_com = actor->GetComponent<my::EnemyMeleeAttackComponent>();
         auto pos = target.lock()->GetPosition();
+        auto attack_com = args.attack_com.lock();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
-            auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
-            ai_state_com->ChangeState("AICombatState");
-
-            auto state_com = actor->GetComponent<my::EnemyStateComponent>();
-            state_com->ChangeState("EnemyActionMeleeAttackState");
+            args.ai_com.lock()->ChangeState("AICombatState");
+            args.state_com.lock()->ChangeState("EnemyActionMeleeAttackState");
             return false;
         } // if
 

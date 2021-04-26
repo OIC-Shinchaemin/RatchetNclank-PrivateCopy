@@ -4,12 +4,7 @@
 
 #include "../ActionNode.h"
 
-#include "../Component/Enemy/EnemyComponent.h"
-#include "../Component/Enemy/EnemyStateComponent.h"
-#include "../Component/Enemy/EnemyMoveComponent.h"
-#include "../Component/Enemy/EnemyMeleeAttackComponent.h"
-#include "../Component/Enemy/EnemyRangedAttackComponent.h"
-#include "../../../Actor/Character/Enemy.h"
+#include "../../Executor/Action/MoveToEnemyNodeExecutor.h"
 
 
 namespace behaviour {
@@ -27,24 +22,31 @@ public:
     /// </summary>
     virtual ~MoveToEnemyNode() = default;
     /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+        return std::make_shared<behaviour::MoveToEnemyNodeExecutor>(ptr);
+    }
+    /// <summary>
     /// ノードの実行
     /// </summary>
-    /// <param name="actor">実行アクター</param>
+    /// <param name="node_args">実行引数</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override {
-        
-        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
+    virtual bool Execute(std::any node_args) override {
+        auto args = std::any_cast<behaviour::MoveToEnemyNodeExecutor::NodeArgs>(node_args);
+        auto actor = args.actor.lock();
 
-        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
-
+        auto target = args.enemy_com.lock()->GetTarget();
         _ASSERT_EXPR(!target.expired(), L"保持しているポインタが無効です");
-
         Mof::CSphere range_sphere;
-        if (auto com = actor->GetComponent<my::EnemyRangedAttackComponent>(); com) {
+        if (auto com = args.ranged_attack_com.lock(); com) {
             range_sphere = com->GetCanAttackRangeSphere();
         } // if
-        else if (auto com = actor->GetComponent<my::EnemyMeleeAttackComponent>(); com) {
+        else if (auto com = args.melee_attack_com.lock(); com) {
             range_sphere = com->GetCanAttackRangeSphere();
         } // else if
 
@@ -52,9 +54,8 @@ public:
         if (range_sphere.CollisionPoint(pos)) {
             return true;
         } // if
-
-        auto state_com = actor->GetComponent<my::EnemyStateComponent>();
-        state_com->ChangeState("EnemyActionMoveState");
+        
+        args.state_com.lock()->ChangeState("EnemyActionMoveState");
         return false;
     };
 };

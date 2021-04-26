@@ -4,9 +4,7 @@
 
 #include "../ActionNode.h"
 
-#include "../../../Component/AIStateComponent.h"
-#include "../../../Component/Enemy/EnemyComponent.h"
-#include "../../../Component/Enemy/EnemyStateComponent.h"
+#include "../../Executor/Action/LookAroundNodeExecutor.h"
 
 
 namespace behaviour {
@@ -24,23 +22,29 @@ public:
     /// </summary>
     virtual ~LookAroundNode() = default;
     /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+        return std::make_shared<behaviour::LookAroundNodeExecutor>(ptr);
+    }
+    /// <summary>
     /// ノードの実行
     /// </summary>
-    /// <param name="args">必要な引数</param>
+    /// <param name="node_args">実行引数</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any args) override {
-        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(args);
-        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
-
+    virtual bool Execute(std::any node_args) override {
+        auto args = std::any_cast<behaviour::LookAroundNodeExecutor::NodeArgs>(node_args);
+        
+        auto target = args.enemy_com.lock()->GetTarget();
         if (!target.expired()) {
-            auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
-            ai_state_com->ChangeState("AICombatState");
+            args.ai_com.lock()->ChangeState("AICombatState");
             return true;
         } // if
-
-        auto state_com = actor->GetComponent<my::EnemyStateComponent>();
-        state_com->ChangeState("EnemyActionIdleState");
+        args.state_com.lock()->ChangeState("EnemyActionIdleState");
         return false;
     }
 };

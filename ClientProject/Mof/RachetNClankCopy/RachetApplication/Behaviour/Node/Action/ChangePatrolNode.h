@@ -4,7 +4,7 @@
 
 #include "../ActionNode.h"
 
-#include "../../../Component/AIStateComponent.h"
+#include "../../Executor/Action/ChangePatrolNodeExecutor.h"
 
 
 namespace behaviour {
@@ -22,20 +22,25 @@ public:
     /// </summary>
     virtual ~ChangePatrolNode() = default;
     /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+        return std::make_shared<behaviour::ChangePatrolNodeExecutor>(ptr);
+    }
+    /// <summary>
     /// ノードの実行
     /// </summary>
-    /// <param name="actor">実行アクター</param>
+    /// <param name="node_args">実行引数</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override {
-        // componentのポインタを包含するstructを受け取る
-        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
-
+    virtual bool Execute(std::any node_args) override {
+        auto args = std::any_cast<behaviour::ChangePatrolNodeExecutor::NodeArgs>(node_args);
         // can transition state
-        if (1) {
-        } // if
-        auto ai_state_com = actor->GetComponent<my::AIStateComponent>();
-        ai_state_com->ChangeState("AIPatrolState");
+        // if()
+        args.ai_com.lock()->ChangeState("AIPatrolState");
         return true;
     }
 };

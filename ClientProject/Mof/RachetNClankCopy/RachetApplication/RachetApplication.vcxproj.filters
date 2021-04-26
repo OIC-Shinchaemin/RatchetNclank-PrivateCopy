@@ -226,6 +226,18 @@
     <Filter Include="Rachet\Source\Stage\Parser">
       <UniqueIdentifier>{c883a73b-c37d-4430-b2fd-a54de2e2eb66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Executor\Action">
+      <UniqueIdentifier>{92e9bdbd-de41-44ed-907e-b1a010b5b318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Behaviour">
+      <UniqueIdentifier>{8bab79de-c57a-41f4-9751-c1e345576392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Behaviour\Executor">
+      <UniqueIdentifier>{cb01d6b5-23e6-49a8-b901-5d545f3586c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Behaviour\Executor\Action">
+      <UniqueIdentifier>{48d1c6ec-8e30-435c-a35c-a95bde3206d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1207,6 +1219,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.h">
       <Filter>Rachet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\LookAroundNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\ChangePatrolNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\MeleeAttackNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\MoveToEnemyNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\RangedAttackNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
