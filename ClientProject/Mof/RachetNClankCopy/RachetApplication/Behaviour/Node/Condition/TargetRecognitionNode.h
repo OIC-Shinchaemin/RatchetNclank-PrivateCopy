@@ -4,8 +4,7 @@
 
 #include "../ConditionalNode.h"
 
-#include "../../../Actor.h"
-#include "../../../Component/Enemy/EnemyComponent.h"
+#include "../../Executor/Condition/TargetRecognitionNodeExecutor.h"
 
 
 namespace behaviour {
@@ -23,14 +22,23 @@ public:
     /// </summary>
     virtual ~TargetRecognitionNode() = default;
     /// <summary>
-    /// ノードの実行処理
+    /// 作成
     /// </summary>
-    /// <param name="actor">実行アクター</param>
-    /// <returns>Succeeded:実行の成功</returns>
-    /// <returns>Failed:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override {
-        auto actor =  std::any_cast<std::shared_ptr<my::Actor>>(ptr);
-        auto target = actor->GetComponent<my::EnemyComponent>()->GetTarget();
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+        return std::make_shared<behaviour::TargetRecognitionNodeExecutor>(ptr);
+    }
+    /// <summary>
+    /// ノードの実行
+    /// </summary>
+    /// <param name="node_args">実行引数</param>
+    /// <returns>true:実行の成功</returns>
+    /// <returns>false:実行の失敗</returns>
+    virtual bool Execute(std::any node_args) override {
+        auto args = std::any_cast<behaviour::TargetRecognitionNodeExecutor::NodeArgs>(node_args);
+        auto target = args.enemy_com.lock()->GetTarget();
         return !target.expired();
     }
 };

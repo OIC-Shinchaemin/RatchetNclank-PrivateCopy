@@ -332,6 +332,8 @@
     <ClInclude Include="Behaviour\Executor\Action\RangedAttackNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Condition\NotAwayFromHomeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\NodeExecutor.h" />

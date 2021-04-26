@@ -238,6 +238,9 @@
     <Filter Include="Rachet\Source\Behaviour\Executor\Action">
       <UniqueIdentifier>{48d1c6ec-8e30-435c-a35c-a95bde3206d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Executor\Condition">
+      <UniqueIdentifier>{c2d0796b-38af-44b1-a4d3-a7759be11e61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1237,6 +1240,12 @@
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\Action\RangedAttackNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\NotAwayFromHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
