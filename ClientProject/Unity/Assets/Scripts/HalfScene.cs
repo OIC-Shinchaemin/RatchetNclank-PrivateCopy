@@ -15,6 +15,7 @@ public class HalfScene : MonoBehaviour
         playerCount.text = PermanentUI.perm.PlayerCount.ToString();
         if(PermanentUI.perm.PlayerCount<=0)
         {
+            PermanentUI.perm.GameEnd();
             GameOver.SetActive(true);
         }
         Name.text = PermanentUI.perm.nowScene;
@@ -30,7 +31,6 @@ public class HalfScene : MonoBehaviour
 
             if (PermanentUI.perm.PlayerCount <= 0)
             {
-                PermanentUI.perm.GameEnd();
                 SceneManager.LoadScene("TitleScene");
 
             }

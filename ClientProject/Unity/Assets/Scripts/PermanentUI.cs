@@ -56,9 +56,8 @@ public class PermanentUI : MonoBehaviour
 
 
     public void GameEnd()
-    {                
-        cherries = 0;        
-        cherryTaxt.text = cherries.ToString();
+    {
+        Reset();
         ScoreText.text = scoreValue.ToString("D7");
 
         Destroy(gameObject);

@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 412126412}
   - component: {fileID: 412126411}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Welcome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,7 +645,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -703,6 +703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4524ed28d2302bf44b184682365d0930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreText: {fileID: 0}
+  HighScoreText: {fileID: 0}
 --- !u!4 &1439938942
 Transform:
   m_ObjectHideFlags: 0
@@ -803,7 +805,7 @@ GameObject:
   - component: {fileID: 1891789050}
   - component: {fileID: 1891789049}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
