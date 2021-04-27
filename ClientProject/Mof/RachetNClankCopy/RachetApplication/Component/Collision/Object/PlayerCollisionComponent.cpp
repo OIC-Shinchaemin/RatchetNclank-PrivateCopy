@@ -64,7 +64,7 @@ std::shared_ptr<my::Component> my::PlayerCollisionComponent::Clone(void) {
     return std::make_shared<my::PlayerCollisionComponent>(*this);
 }
 
-void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
+void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetRay().has_value()) {
         return;
     } // if
@@ -73,18 +73,26 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
-        auto temp = geometry->GetMatrix();
-        Mof::CMatrix44 mat = temp * world;
+        
+        auto default_matrix = geometry->GetMatrix();
+        Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
 
+        Mof::CVector3 scale; mat.GetScaling(scale);
+        Mof::CVector3 trans; mat.GetTranslation(trans);
 
-        //Mof::CSphere sphere;
-        //geometry->CalculateSphere(sphere);
-        //if (!sphere.CollisionPoint(super::GetOwner()->GetPosition())) {
-        //    geometry->SetMatrix(temp);
-        //    continue;
-        //} // if
+        Mof::CBoxAABB box; geometry->CalculateAABB(box);
+        box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;
+        box.Position.x += trans.x; box.Position.y += trans.y; box.Position.z += trans.z;
+        std::swap(box.Size.y, box.Size.z);
 
+        auto pos = super::GetOwner()->GetPosition();
+        pos.y -= _player_com.lock()->GetHeight();
+        box.Position.y += _player_com.lock()->GetHeight();
+        if (!super::CollisionShpereAABB(this->GetSphere().value(), box)) {
+            geometry->SetMatrix(default_matrix);
+            continue;
+        } // if
 
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _player_com.lock()->GetHeight();
@@ -94,6 +102,6 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
                 super::GetOwner()->SetPosition(pos);
             } // if
         } // if
-        geometry->SetMatrix(temp);
+        geometry->SetMatrix(default_matrix);
     } // for
 }

@@ -6,6 +6,7 @@
 #include "../State/EnemyMotion/EnemyMotionIdleState.h"
 #include "../State/EnemyMotion/EnemyMotionMoveState.h"
 #include "../State/EnemyMotion/EnemyMotionAttackState.h"
+#include "../State/EnemyMotion/EnemyMotionRangedAttackState.h"
 
 
 my::MotionStateComponent::MotionStateComponent(int priority) :
@@ -38,6 +39,7 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterMotionState<state::EnemyMotionIdleState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
+        this->RegisterMotionState<state::EnemyMotionRangedAttackState>(_state_machine);
         _state_machine.ChangeState("EnemyMotionIdleState");
     } // if
     else {

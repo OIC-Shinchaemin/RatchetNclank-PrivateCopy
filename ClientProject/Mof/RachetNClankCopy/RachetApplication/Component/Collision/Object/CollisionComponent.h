@@ -2,6 +2,8 @@
 #define MY_COLLISION_COMPONENT_H
 
 
+#include "../../Component.h"
+
 #include <optional>
 #include <any>
 #include <memory>
@@ -11,7 +13,7 @@
 
 #include <Mof.h>
 
-#include "../../Component.h"
+#include "../../../Stage/StageObject.h"
 
 
 namespace my {
@@ -89,6 +91,14 @@ private:
     /// <param name="in"></param>
     /// <returns></returns>
     bool ExecuteFunction(const std::string& key, const my::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in);
+protected:
+    /// <summary>
+    /// 衝突判定
+    /// </summary>
+    /// <param name="sphere"></param>
+    /// <param name="box"></param>
+    /// <returns></returns>
+    bool CollisionShpereAABB(const Mof::CSphere& sphere, const Mof::CBoxAABB& box);
 public:
     /// <summary>
     /// コンストラクタ
@@ -177,7 +187,8 @@ public:
     /// 衝突
     /// </summary>
     /// <param name="mesh"></param>
-    virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world);
+    /// <param name="obj"></param>
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj);
 };
 }
 #endif // !MY_COLLISION_COMPONENT_H

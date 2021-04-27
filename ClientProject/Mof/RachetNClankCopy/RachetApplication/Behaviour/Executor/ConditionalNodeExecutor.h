@@ -4,8 +4,6 @@
 
 #include "NodeExecutor.h"
 
-#include "My/Core/Trait.h"
-
 #include "../../Actor.h"
 
 

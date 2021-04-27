@@ -31,7 +31,7 @@ void state::EnemyActionIdleState::Enter(void) {
     auto angle_y = math::ToDegree(super::GetActor()->GetRotate().y);
     in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
     float angular_speed = 4.0f;
-    
+
     if (auto idle_com = _idle_com.lock()) {
         idle_com->SetAngularSpeed(angular_speed);
         float angle = idle_com->GetIdealAngle();

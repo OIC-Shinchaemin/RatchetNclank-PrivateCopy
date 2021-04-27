@@ -660,6 +660,9 @@
     <ClCompile Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.cpp">
       <Filter>Rachet\Source\Stage\Gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="State\EnemyMotion\EnemyMotionRangedAttackState.cpp">
+      <Filter>Rachet\Source\State\EnemyMotion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1246,6 +1249,9 @@
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotion\EnemyMotionRangedAttackState.h">
+      <Filter>Rachet\Header\State\EnemyMotion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

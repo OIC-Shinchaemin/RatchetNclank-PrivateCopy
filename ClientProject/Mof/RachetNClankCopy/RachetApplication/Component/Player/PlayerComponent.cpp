@@ -137,7 +137,7 @@ bool my::PlayerComponent::Initialize(void) {
     _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
 
     //velocity_com->SetGravity(0.98f);
-    velocity_com->SetGravity(2.8f);
+    velocity_com->SetGravity(3.5f);
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,

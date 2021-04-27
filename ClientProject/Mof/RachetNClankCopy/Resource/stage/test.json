@@ -24,9 +24,9 @@
       "pos_x": 0.0,
       "pos_y": -0.5,
       "pos_z": 0.0,
-      "scale_x": 1.6,
+      "scale_x": 1.4,
       "scale_y": 1.0,
-      "scale_z": 1.6,
+      "scale_z": 1.4,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0
@@ -168,9 +168,9 @@
       "pos_x": 0.0,
       "pos_y": -30.0,
       "pos_z": 0.0,
-      "scale_x": 0.5,
-      "scale_y": 0.5,
-      "scale_z": 0.5,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0
@@ -203,14 +203,14 @@
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 50.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 40.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy1",
       "pos_x": 55.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 45.0
     },
 
@@ -226,99 +226,190 @@
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 65.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 70.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 60.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 65.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 70.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 65.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 65.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 65.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 55.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 70.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 55.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 75.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 45.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 90.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 45.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 95.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 45.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 85.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 40.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 95.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 40.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 90.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 40.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 85.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 40.0,
-      "pos_y": -30.0,
+      "pos_y": -20.0,
       "pos_z": 85.0
+    },
+
+
+
+
+
+
+
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 165.0,
+      "pos_y": -20.0,
+      "pos_z": 25.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 165.0,
+      "pos_y": -20.0,
+      "pos_z": 27.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 165.0,
+      "pos_y": -20.0,
+      "pos_z": 30.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 170.0,
+      "pos_y": -20.0,
+      "pos_z": 25.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 170.0,
+      "pos_y": -20.0,
+      "pos_z": 30.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 180.0,
+      "pos_y": -20.0,
+      "pos_z": 50.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 184.0,
+      "pos_y": -20.0,
+      "pos_z": 50.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 195.0,
+      "pos_y": -20.0,
+      "pos_z": 45.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 195.0,
+      "pos_y": -20.0,
+      "pos_z": 60.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 190.0,
+      "pos_y": -20.0,
+      "pos_z": 65.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 190.0,
+      "pos_y": -20.0,
+      "pos_z": 55.0
+    },
+    {
+      "builder": "builder/weak_enemy.json",
+      "name": "enemy",
+      "pos_x": 185.0,
+      "pos_y": -20.0,
+      "pos_z": 55.0
     }
+
 
 
 
   ],
   "gimmick_list": [
-
     {
       "enable": true,
       "collision": false,
@@ -327,9 +418,9 @@
       "pos_x": 0.0,
       "pos_y": 0.0,
       "pos_z": 0.0,
-      "scale_x": 0.8,
-      "scale_y": 0.8,
-      "scale_z": 0.8,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -343,9 +434,9 @@
       "pos_x": 0.0,
       "pos_y": 0.0,
       "pos_z": 0.0,
-      "scale_x": 0.8,
-      "scale_y": 0.8,
-      "scale_z": 0.8,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -359,9 +450,9 @@
       "pos_x": 0.0,
       "pos_y": 0.0,
       "pos_z": 0.0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0,
+      "scale_x": 1.5,
+      "scale_y": 1.5,
+      "scale_z": 1.5,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,

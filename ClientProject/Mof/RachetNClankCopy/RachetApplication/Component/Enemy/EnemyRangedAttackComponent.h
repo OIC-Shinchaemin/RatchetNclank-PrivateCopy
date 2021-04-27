@@ -6,6 +6,8 @@
 
 #include <memory>
 
+#include "My/Core/Timer.h"
+
 
 namespace my {
 class EnemyRangedAttackComponent : public my::UpdateComponent {

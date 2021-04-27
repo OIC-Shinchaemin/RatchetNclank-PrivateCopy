@@ -21,6 +21,43 @@ bool my::CollisionComponent::ExecuteFunction(const std::string& key, const my::C
     return false;
 }
 
+bool my::CollisionComponent::CollisionShpereAABB(const Mof::CSphere& sphere, const Mof::CBoxAABB& box) {
+    Mof::CVector3 point;
+    auto pos = sphere.Position;
+    // x
+    if (pos.x < box.Position.x - box.Size.x) {
+        point.x = box.Position.x - box.Size.x;
+    } // if
+    else if (box.Position.x + box.Size.x < pos.x) {
+        point.x = box.Position.x + box.Size.x;
+    } // else if
+    else {
+        point.x = pos.x;
+    } // else
+    // y
+    if (pos.y < box.Position.y - box.Size.y) {
+        point.y = box.Position.y - box.Size.y;
+    } // if
+    else if (box.Position.y + box.Size.y < pos.y) {
+        point.y = box.Position.y + box.Size.y;
+    } // else if
+    else {
+        point.y = pos.y;
+    } // else
+    // z
+    if (pos.z < box.Position.z - box.Size.z) {
+        point.z = box.Position.z - box.Size.z;
+    } // if
+    else if (box.Position.z + box.Size.z < pos.z) {
+        point.z = box.Position.z + box.Size.z;
+    } // else if
+    else {
+        point.z = pos.z;
+    } // else
+    //return Mof::CVector3Utilities::Distance(sphere.Position, point) < std::powf(sphere.r, 2.0f);;
+    return Mof::CVector3Utilities::Distance(sphere.Position, point) < sphere.r;
+}
+
 my::CollisionComponent::CollisionComponent(int priority) :
     super(priority),
     _collisioned(),
@@ -80,5 +117,5 @@ bool my::CollisionComponent::ExecuteExitFunction(const std::string& key, const m
     return this->ExecuteFunction(key, info, _on_exit);
 }
 
-void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
+void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
 }

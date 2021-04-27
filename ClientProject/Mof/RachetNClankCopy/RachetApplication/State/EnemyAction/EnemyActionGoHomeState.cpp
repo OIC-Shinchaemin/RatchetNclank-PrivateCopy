@@ -45,6 +45,11 @@ void state::EnemyActionGoHomeState::Enter(void) {
     if (auto attack_com = _attack_com.lock()) {
         attack_com->End();
     } // if
+
+    if (auto idle_com = _idle_com.lock()) {
+        idle_com->SetAngularSpeed(0.0f);
+    } // if
+
 }
 
 void state::EnemyActionGoHomeState::Exit(void) {

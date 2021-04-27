@@ -57,7 +57,6 @@ bool my::EnemyRangedAttackComponent::Initialize(void) {
 }
 
 bool my::EnemyRangedAttackComponent::Update(float delta_time) {
-    super::End();
     if (auto motion_com = _motion_com.lock()) {
         if (motion_com->IsEndMotion()) {
             super::End();

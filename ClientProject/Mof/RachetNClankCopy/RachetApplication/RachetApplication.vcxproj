@@ -276,6 +276,7 @@
     <ClCompile Include="State\EnemyMotion\EnemyMotionAttackState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionIdleState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionMoveState.cpp" />
+    <ClCompile Include="State\EnemyMotion\EnemyMotionRangedAttackState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionDamageState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionIdleState.cpp" />
@@ -474,6 +475,7 @@
     <ClInclude Include="State\EnemyMotion\EnemyMotionAttackState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionIdleState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionMoveState.h" />
+    <ClInclude Include="State\EnemyMotion\EnemyMotionRangedAttackState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionDamageState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionIdleState.h" />

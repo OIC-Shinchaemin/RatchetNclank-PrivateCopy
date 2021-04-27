@@ -83,7 +83,7 @@ public:
     /// è’ìÀ
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) override;
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
 #endif // !MY_PLAYER_COLLISION_COMPONENT_H

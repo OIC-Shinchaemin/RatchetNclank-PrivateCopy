@@ -19,7 +19,6 @@ my::EnemyCollisionComponent::~EnemyCollisionComponent() {
 
 std::string my::EnemyCollisionComponent::GetType(void) const {
     return my::CollisionComponentType::kEnemyCollisionComponent;
-    //return "EnemyCollisionComponent";
 }
 
 std::optional<Mof::CSphere> my::EnemyCollisionComponent::GetSphere(void) {
@@ -64,12 +63,7 @@ std::shared_ptr<my::Component> my::EnemyCollisionComponent::Clone(void) {
     return std::make_shared<my::EnemyCollisionComponent>(*this);
 }
 
-void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
-    auto name = *mesh->GetName();
-    if (name != "scene.mom") {
-        return;
-    } // if
-
+void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetRay().has_value()) {
         return;
     } // if
@@ -78,10 +72,25 @@ void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, cons
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
-        auto temp = geometry->GetMatrix();
-        Mof::CMatrix44 mat = temp * world;
+        auto default_matrix = geometry->GetMatrix();
+        Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
 
+        Mof::CVector3 scale; mat.GetScaling(scale);
+        Mof::CVector3 trans; mat.GetTranslation(trans);
+
+        Mof::CBoxAABB box; geometry->CalculateAABB(box);
+        box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;
+        box.Position.x += trans.x; box.Position.y += trans.y; box.Position.z += trans.z;
+        std::swap(box.Size.y, box.Size.z);
+
+        auto pos = super::GetOwner()->GetPosition();
+        pos.y -= _enemy_com.lock()->GetHeight();
+        if (!box.CollisionPoint(pos)) {
+            geometry->SetMatrix(default_matrix);
+            continue;
+        } // if
+        
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _enemy_com.lock()->GetHeight();
             if (info.d <= height) {
@@ -90,6 +99,6 @@ void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, cons
                 super::GetOwner()->SetPosition(pos);
             } // if
         } // if
-        geometry->SetMatrix(temp);
+        geometry->SetMatrix(default_matrix);
     } // for
 }
