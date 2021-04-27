@@ -4017,7 +4017,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227470223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.207279, y: 134.29991, z: -10}
+  m_LocalPosition: {x: -14.386761, y: 134.2999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -34155,7 +34155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f771ef6c46e9a43bfbac6d1c624d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: EndScene
+  sceneName: 2-4
   stageChangeable: 0
 --- !u!4 &1589024605
 Transform:

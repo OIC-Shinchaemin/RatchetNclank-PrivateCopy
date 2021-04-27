@@ -32,10 +32,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScoreScene.unity
     guid: 0a8d08da813d31047a927f2f7f1e766a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/2-1.unity
     guid: 3704e061dc8765b45a098b341286d5ff
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/2-2.unity
     guid: bafbcfad79f8f004497fca888b374b31
+  - enabled: 1
+    path: Assets/Scenes/2-3.unity
+    guid: d663ee6a182022b43983a4751bfe405f
+  - enabled: 1
+    path: Assets/Scenes/2-4.unity
+    guid: e4417d55b470197489cc22cbe1117c46
+  - enabled: 1
+    path: Assets/Scenes/2-Boss.unity
+    guid: 2a86b6f4adb28d64cbc6bebc312df2dd
   m_configObjects: {}
