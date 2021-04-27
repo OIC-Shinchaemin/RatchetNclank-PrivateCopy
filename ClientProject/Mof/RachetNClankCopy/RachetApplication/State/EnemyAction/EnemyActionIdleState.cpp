@@ -3,7 +3,11 @@
 
 state::EnemyActionIdleState::EnemyActionIdleState() :
     super(),
-    _idle_com() {
+    _enemy_com(),
+    _idle_com(),
+    _move_com(),
+    _melee_attack_com(),
+    _ranged_attack_com() {
 }
 
 state::EnemyActionIdleState::~EnemyActionIdleState() {
@@ -14,8 +18,8 @@ void state::EnemyActionIdleState::SetActor(const std::shared_ptr<my::Actor>& ptr
     this->_enemy_com = ptr->GetComponent<my::EnemyComponent>();
     this->_idle_com = ptr->GetComponent<my::EnemyIdleComponent>();
     this->_move_com = ptr->GetComponent<my::EnemyMoveComponent>();
-    this->_attack_com = ptr->GetComponent<my::EnemyMeleeAttackComponent>();
-
+    this->_melee_attack_com = ptr->GetComponent<my::EnemyMeleeAttackComponent>();
+    this->_ranged_attack_com = ptr->GetComponent<my::EnemyRangedAttackComponent>();
 }
 
 const char* state::EnemyActionIdleState::GetName(void) const {
@@ -36,6 +40,9 @@ void state::EnemyActionIdleState::Enter(void) {
         idle_com->SetAngularSpeed(angular_speed);
         float angle = idle_com->GetIdealAngle();
         angle += math::ToRadian(0.5f);
+        if (math::ToRadian(360.0f) < angle) {
+            angle = 0.0f;
+        } // if
         idle_com->SetIdealAngle(angle);
         idle_com->Start();
     } // if
@@ -44,6 +51,13 @@ void state::EnemyActionIdleState::Enter(void) {
         move_com->SetAngularSpeed(0.0f);
         move_com->End();
     } // if
+    if (auto melee_attack_com = _melee_attack_com.lock()) {
+        melee_attack_com->End();
+    } // if
+    if (auto ranged_attack_com = _ranged_attack_com.lock()) {
+        ranged_attack_com->End();
+    } // if
+
 }
 
 void state::EnemyActionIdleState::Exit(void) {

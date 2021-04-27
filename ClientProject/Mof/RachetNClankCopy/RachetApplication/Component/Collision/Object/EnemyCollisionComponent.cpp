@@ -86,11 +86,15 @@ void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, cons
 
         auto pos = super::GetOwner()->GetPosition();
         pos.y -= _enemy_com.lock()->GetHeight();
-        if (!box.CollisionPoint(pos)) {
+        box.Position.y += _enemy_com.lock()->GetHeight();
+        if (!super::CollisionShpereAABB(this->GetSphere().value(), box)) {
             geometry->SetMatrix(default_matrix);
             continue;
         } // if
-        
+
+
+
+
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _enemy_com.lock()->GetHeight();
             if (info.d <= height) {

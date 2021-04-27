@@ -39,11 +39,7 @@ public:
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<behaviour::RangedAttackNodeExecutor::NodeArgs>(node_args);
 
-        auto target = args.enemy_com.lock()->GetTarget();
-        if (target.expired()) {
-            return false;
-        } // if
-
+        puts("Execute");
         args.ai_com.lock()->ChangeState("AICombatState");
         args.state_com.lock()->ChangeState("EnemyActionRangedAttackState");
         return false;

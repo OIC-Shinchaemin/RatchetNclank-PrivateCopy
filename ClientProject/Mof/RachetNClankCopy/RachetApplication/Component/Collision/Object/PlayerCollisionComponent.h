@@ -84,6 +84,12 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
+    /// <summary>
+    /// è’ìÀ
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
 }
 #endif // !MY_PLAYER_COLLISION_COMPONENT_H

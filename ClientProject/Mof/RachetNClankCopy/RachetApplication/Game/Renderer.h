@@ -14,6 +14,10 @@ namespace my {
 class Renderer {
     //! キャラクタ
     std::vector<std::shared_ptr<my::Actor>> _actors;
+    //! 表示
+    std::vector<std::shared_ptr<my::Actor>> _enable_actors;
+    //! 非表示
+    std::vector<std::shared_ptr<my::Actor>> _disable_actors;
 public:
     /// <summary>
     /// コンストラクタ

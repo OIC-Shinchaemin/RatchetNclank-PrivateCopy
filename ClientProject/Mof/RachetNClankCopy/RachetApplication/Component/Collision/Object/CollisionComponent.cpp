@@ -119,3 +119,6 @@ bool my::CollisionComponent::ExecuteExitFunction(const std::string& key, const m
 
 void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
 }
+
+void my::CollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
+}

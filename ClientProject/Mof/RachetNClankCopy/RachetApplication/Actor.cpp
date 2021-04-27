@@ -69,6 +69,13 @@ my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
 
+bool my::Actor::IsRender(void) const {
+    //auto sphere = 
+    //::CGraphicsUtilities::GetCamera()->GetViewPosition();
+    // ƒJƒƒ‰‹…‚Éi”¼Œaj‚Í”CˆÓ
+    return true;
+}
+
 void my::Actor::AddComponent(const ComPtr& component) {
     if (component->IsInput()) {
         ut::InsertAscend(_input_components, component);
@@ -160,13 +167,15 @@ bool my::Actor::Update(float delta_time) {
 }
 
 bool my::Actor::Render(void) {
+    bool re = false;
     for (auto& com : _render_components) {
         if (com->IsActive()) {
             com->Render();
             com->DebugRender();
+            re = true;
         } // if
     } // for
-    return true;
+    return re;
 }
 
 bool my::Actor::Release(void) {

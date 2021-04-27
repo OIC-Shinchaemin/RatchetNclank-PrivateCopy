@@ -22,7 +22,7 @@
       "object_name": "plane",
       "mesh_no": 12,
       "pos_x": 0.0,
-      "pos_y": -0.5,
+      "pos_y": -5.5,
       "pos_z": 0.0,
       "scale_x": 1.4,
       "scale_y": 1.0,
@@ -136,7 +136,7 @@
       "object_name": "terrain_1",
       "mesh_no": 0,
       "pos_x": 0.0,
-      "pos_y": -30.0,
+      "pos_y": -35.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -168,9 +168,9 @@
       "pos_x": 0.0,
       "pos_y": -30.0,
       "pos_z": 0.0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0,
+      "scale_x": 0.6,
+      "scale_y": 0.6,
+      "scale_z": 0.6,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0
@@ -196,21 +196,21 @@
       "builder": "builder/strong_enemy.json",
       "name": "enemy2",
       "pos_x": 55.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 25.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 50.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 40.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy1",
       "pos_x": 55.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 45.0
     },
 
@@ -218,7 +218,7 @@
       "builder": "builder/strong_enemy.json",
       "name": "enemy2",
       "pos_x": 65.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 45.0
     },
 
@@ -226,186 +226,37 @@
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 65.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 70.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 60.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 65.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 70.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 65.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 65.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 65.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 55.0,
-      "pos_y": -20.0,
+      "pos_y": -30.0,
       "pos_z": 70.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 55.0,
-      "pos_y": -20.0,
-      "pos_z": 75.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 45.0,
-      "pos_y": -20.0,
-      "pos_z": 90.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 45.0,
-      "pos_y": -20.0,
-      "pos_z": 95.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 45.0,
-      "pos_y": -20.0,
-      "pos_z": 85.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 40.0,
-      "pos_y": -20.0,
-      "pos_z": 95.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 40.0,
-      "pos_y": -20.0,
-      "pos_z": 90.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 40.0,
-      "pos_y": -20.0,
-      "pos_z": 85.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 40.0,
-      "pos_y": -20.0,
-      "pos_z": 85.0
-    },
-
-
-
-
-
-
-
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 165.0,
-      "pos_y": -20.0,
-      "pos_z": 25.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 165.0,
-      "pos_y": -20.0,
-      "pos_z": 27.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 165.0,
-      "pos_y": -20.0,
-      "pos_z": 30.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 170.0,
-      "pos_y": -20.0,
-      "pos_z": 25.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 170.0,
-      "pos_y": -20.0,
-      "pos_z": 30.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 180.0,
-      "pos_y": -20.0,
-      "pos_z": 50.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 184.0,
-      "pos_y": -20.0,
-      "pos_z": 50.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 195.0,
-      "pos_y": -20.0,
-      "pos_z": 45.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 195.0,
-      "pos_y": -20.0,
-      "pos_z": 60.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 190.0,
-      "pos_y": -20.0,
-      "pos_z": 65.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 190.0,
-      "pos_y": -20.0,
-      "pos_z": 55.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 185.0,
-      "pos_y": -20.0,
-      "pos_z": 55.0
     }
-
-
 
 
   ],
@@ -418,9 +269,9 @@
       "pos_x": 0.0,
       "pos_y": 0.0,
       "pos_z": 0.0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0,
+      "scale_x": 0.9,
+      "scale_y": 0.9,
+      "scale_z": 0.9,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -434,9 +285,9 @@
       "pos_x": 0.0,
       "pos_y": 0.0,
       "pos_z": 0.0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0,
+      "scale_x": 0.8,
+      "scale_y": 0.8,
+      "scale_z": 0.8,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -450,9 +301,9 @@
       "pos_x": 0.0,
       "pos_y": 0.0,
       "pos_z": 0.0,
-      "scale_x": 1.5,
-      "scale_y": 1.5,
-      "scale_z": 1.5,
+      "scale_x": 0.9,
+      "scale_y": 0.9,
+      "scale_z": 0.9,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -465,18 +316,18 @@
       "object_name": "elevator",
       "mesh_no": 3,
       "pos_x": 36.0,
-      "pos_y": -1.0,
+      "pos_y": -6.0,
       "pos_z": -16.0,
-      "scale_x": 5.0,
+      "scale_x": 7.0,
       "scale_y": 0.3,
-      "scale_z": 5.0,
+      "scale_z": 7.0,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
       "type": 3,
-      "end_pos_x": 1.0,
-      "end_pos_y": 1.0,
-      "end_pos_z": 1.0,
+      "end_pos_x": 60.0,
+      "end_pos_y": -28.0,
+      "end_pos_z": 6.0,
       "request": 2.0
     },
     {
@@ -484,9 +335,9 @@
       "collision": true,
       "object_name": "bridge",
       "mesh_no": 4,
-      "pos_x": 0.0,
-      "pos_y": 0.0,
-      "pos_z": 0.0,
+      "pos_x": 50.0,
+      "pos_y": -6.0,
+      "pos_z": -20.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
       "scale_z": 1.0,
@@ -504,7 +355,7 @@
       "object_name": "box1",
       "mesh_no": 5,
       "pos_x": 3.0,
-      "pos_y": 0.0,
+      "pos_y": -4.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -520,7 +371,7 @@
       "object_name": "box2",
       "mesh_no": 6,
       "pos_x": 5.0,
-      "pos_y": 0.0,
+      "pos_y": -4.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -536,7 +387,7 @@
       "object_name": "box3",
       "mesh_no": 7,
       "pos_x": 5.0,
-      "pos_y": 1.0,
+      "pos_y": -3.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -552,7 +403,7 @@
       "object_name": "box4",
       "mesh_no": 7,
       "pos_x": -1.0,
-      "pos_y": 0.0,
+      "pos_y": -4.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -568,7 +419,7 @@
       "object_name": "box5",
       "mesh_no": 7,
       "pos_x": -1.0,
-      "pos_y": 1.0,
+      "pos_y": -3.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -584,7 +435,7 @@
       "object_name": "box6",
       "mesh_no": 7,
       "pos_x": -1.0,
-      "pos_y": 2.0,
+      "pos_y": -2.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -600,7 +451,7 @@
       "object_name": "box7",
       "mesh_no": 7,
       "pos_x": -3.0,
-      "pos_y": 0.0,
+      "pos_y": -4.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -616,7 +467,7 @@
       "object_name": "box8",
       "mesh_no": 7,
       "pos_x": -3.0,
-      "pos_y": 1.0,
+      "pos_y": -3.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -632,7 +483,7 @@
       "object_name": "box9",
       "mesh_no": 7,
       "pos_x": -3.0,
-      "pos_y": 2.0,
+      "pos_y": -2.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -648,7 +499,7 @@
       "object_name": "box10",
       "mesh_no": 7,
       "pos_x": -3.0,
-      "pos_y": 3.0,
+      "pos_y": -1.0,
       "pos_z": 0.0,
       "scale_x": 1.0,
       "scale_y": 1.0,
@@ -667,7 +518,7 @@
       "object_name": "box",
       "mesh_no": 6,
       "pos_x": 55.0,
-      "pos_y": 0.0,
+      "pos_y": -29.0,
       "pos_z": 5.0,
       "scale_x": 1.0,
       "scale_y": 1.0,

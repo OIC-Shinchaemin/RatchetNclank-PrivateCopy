@@ -137,10 +137,9 @@ bool my::PhysicsWorld::Update(void) {
 
 void my::PhysicsWorld::CollisionStage(Stage* stage) {
     auto meshes = stage->GetMeshArray();
-    auto objs = stage->GetStaticObjectArray();
-
-    int huge_mesh_no_current_stage_file = 1;
     
+    auto objs = stage->GetStaticObjectArray();
+    int huge_mesh_no_current_stage_file = 1;
     for (auto obj : objs) {
         int mesh_no = obj->GetMeshNo();
         if (mesh_no == huge_mesh_no_current_stage_file) {
@@ -149,6 +148,17 @@ void my::PhysicsWorld::CollisionStage(Stage* stage) {
         for (auto com : _list_for_stage) {
             auto mesh = meshes.at(mesh_no);
             com->CollisionStage(&*mesh, *obj);
+        } // for
+    } // for
+
+
+    auto gimmicks = stage->GetGimmickArray();
+    for (auto gimmick : gimmicks) {
+        int mesh_no = gimmick->GetMeshNo();
+        
+        for (auto com : _list_for_stage) {
+            auto mesh = meshes.at(mesh_no);
+            com->CollisionStageGimmick(&*mesh, gimmick);
         } // for
     } // for
 }

@@ -31,9 +31,11 @@ void state::EnemyActionMeleeAttackState::Enter(void) {
     if (auto move_com = _move_com.lock()) {
         move_com->SetMoveSpeed(0.0f);
         move_com->SetAngularSpeed(0.0f);
+        move_com->End();
     } // if
     if (auto idle_com = _idle_com.lock()) {
         idle_com->SetAngularSpeed(0.0f);
+        idle_com->End();
     } // if
 }
 

@@ -14,17 +14,32 @@ my::Renderer::~Renderer() {
 
 void my::Renderer::AddElement(const std::shared_ptr<my::Actor>& ptr) {
     _actors.push_back(ptr);
+    _enable_actors.push_back(ptr);
 }
 
 void my::Renderer::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
     ut::SwapPopback(_actors, ptr);
+    ut::SwapPopback(_enable_actors, ptr);
+    ut::SwapPopback(_disable_actors, ptr);
 }
 
 bool my::Renderer::Render(void) {
-    for (auto ptr : _actors) {
-        ptr->Render();
+    for (auto ptr : _enable_actors) {
+        // •`‰æ‚µ‚È‚¢”»’è
+        if (!ptr->Render()) {
+            _disable_actors.push_back((ptr));
+        } // if
         ptr->DebugRender();
     } // for
+
+    for (auto ptr : _disable_actors) {
+        ut::SwapPopback(_enable_actors, ptr);
+
+        if (ptr->IsRender()) {
+            _enable_actors.push_back(ptr);
+        } // if
+    } // for
+    
     return true;
 }
 

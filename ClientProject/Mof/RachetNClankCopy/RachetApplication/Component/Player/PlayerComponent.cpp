@@ -161,7 +161,7 @@ bool my::PlayerComponent::Initialize(void) {
 
 bool my::PlayerComponent::Update(float delta_time) {
     float angular_speed = 3.5f;
-    float speed = 1.5f;
+    float speed = 1.8f;
 
     if (auto damage_com = _damage_com.lock()) {
         if (!damage_com->IsActive()) {

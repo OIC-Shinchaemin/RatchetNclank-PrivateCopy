@@ -14,6 +14,7 @@
 #include <Mof.h>
 
 #include "../../../Stage/StageObject.h"
+#include "../../../Stage/Gimmick/GimmickBase.h"
 
 
 namespace my {
@@ -189,6 +190,12 @@ public:
     /// <param name="mesh"></param>
     /// <param name="obj"></param>
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj);
+    /// <summary>
+    /// è’ìÀ
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick);
 };
 }
 #endif // !MY_COLLISION_COMPONENT_H

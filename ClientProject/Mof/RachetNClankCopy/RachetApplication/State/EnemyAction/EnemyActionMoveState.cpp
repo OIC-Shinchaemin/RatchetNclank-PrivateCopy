@@ -26,7 +26,7 @@ void state::EnemyActionMoveState::Update(float delta_time) {
 void state::EnemyActionMoveState::Enter(void) {
     if (auto move_com = _move_com.lock()) {
         auto target = _enemy_com.lock()->GetTarget().lock()->GetPosition();
-        float speed = 0.2f;
+        float speed = 1.0f;
         float angular_speed = 1.0f;
 
         float tilt = 1.0f;
@@ -45,6 +45,7 @@ void state::EnemyActionMoveState::Enter(void) {
     } // if
     if (auto idle_com = _idle_com.lock()) {
         idle_com->SetAngularSpeed(0.0f);
+        idle_com->End();
     } // if
 }
 

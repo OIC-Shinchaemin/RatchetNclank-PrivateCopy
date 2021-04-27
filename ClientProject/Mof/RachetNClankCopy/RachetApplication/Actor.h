@@ -160,6 +160,12 @@ public:
         } // for
     }
     /// <summary>
+    /// •`‰æ”»’è
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsRender(void) const;
+    /// <summary>
     /// ’Ç‰Á
     /// </summary>
     /// <param name="component"></param>
