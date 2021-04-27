@@ -100,7 +100,6 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.magnitude > LimitSpeed)
         {
             rb.velocity = rb.velocity.normalized * LimitSpeed;
-            UnityEngine.Debug.Log("上限中");
         }
     }
 
@@ -306,7 +305,7 @@ public class PlayerController : MonoBehaviour
             else if (hDirection > 0)
             {
                 moveSpeed = speed;
-                transform.localScale = new Vector2(1, 1);
+                transform.localScale = Vector2.one;
                 Left = false;
             }
 
@@ -370,6 +369,7 @@ public class PlayerController : MonoBehaviour
         {
             if (coll.IsTouchingLayers(ground))
             {
+                //UnityEngine.Debug.Log("ぐらうんど");
                 PermanentUI.perm.CountReset();
                 state = State.idle;
             }
