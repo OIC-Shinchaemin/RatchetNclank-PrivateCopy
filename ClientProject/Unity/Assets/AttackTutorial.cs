@@ -42,7 +42,7 @@ public class AttackTutorial : MonoBehaviour
                 localScale.x / lossScale.x * defaultScale.x,
                 1);
 
-        if (attackCount >= 3)
+        if (attackCount >= 5)
         {
             Destroy(gameObject);
         }

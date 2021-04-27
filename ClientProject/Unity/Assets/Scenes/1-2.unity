@@ -975,7 +975,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1797304, y: 0.97542286, z: -10}
+  m_LocalPosition: {x: -3.1797557, y: 0.9760046, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1695,6 +1695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 1-3
+  stageChangeable: 0
 --- !u!4 &1119167034 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8191850628476819197, guid: a48c1648e1efed743a74b82f9ff28f83,
@@ -2522,7 +2523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048924107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1800013, y: 4.6000004, z: -10}
+  m_LocalPosition: {x: -3.1800008, y: 4.6000004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2146550670}
@@ -2788,6 +2789,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7456924894286117421, guid: 61de693b67b59d64bab58a6451dc7f84,
+        type: 3}
+      propertyPath: sceneChange
+      value: 
+      objectReference: {fileID: 1058555800}
     - target: {fileID: 7614450457814219526, guid: 61de693b67b59d64bab58a6451dc7f84,
         type: 3}
       propertyPath: m_Name

@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     [SerializeField] private string sceneName;
-    [HideInInspector] public bool canStageChange;
+    [HideInInspector] public bool stageChangeable = false;
 
     private void Update()
     {
-        if (canStageChange == true)
+        if (stageChangeable == true)
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
 
@@ -31,14 +31,14 @@ public class SceneChange : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            canStageChange = true;
+            stageChangeable = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            canStageChange = false;
+            stageChangeable = false;
         }
     }
 }

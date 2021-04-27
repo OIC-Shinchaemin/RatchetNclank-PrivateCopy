@@ -4122,7 +4122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197220487}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -45.50719, y: 2.9116335, z: -10}
+  m_LocalPosition: {x: -45.50715, y: 2.9052954, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1442609878}
@@ -4639,7 +4639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f771ef6c46e9a43bfbac6d1c624d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: EndScene
+  sceneName: 2-1
+  stageChangeable: 0
 --- !u!61 &1489714809
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5722,6 +5723,11 @@ PrefabInstance:
       propertyPath: ground.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 7456924894286117421, guid: 61de693b67b59d64bab58a6451dc7f84,
+        type: 3}
+      propertyPath: sceneChange
+      value: 
+      objectReference: {fileID: 1489714808}
     - target: {fileID: 7614450457814219526, guid: 61de693b67b59d64bab58a6451dc7f84,
         type: 3}
       propertyPath: m_Name
