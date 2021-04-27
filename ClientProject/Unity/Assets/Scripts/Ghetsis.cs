@@ -22,6 +22,8 @@ public class Ghetsis : MonoBehaviour
 
     private Vector2 nowpos;
 
+    bool damegeOn = false;
+
     void Start()
     {
 
@@ -33,22 +35,24 @@ public class Ghetsis : MonoBehaviour
         {
             BossMove();
 
-            second += Time.deltaTime;
-
-
-            if (second >= 0.3)    //〇秒おきに攻撃
+            if (damegeOn)
             {
-                //memo:x=-2.55y=-3.5
-                Instantiate(bossChild, transform.position, transform.rotation);
+                second += Time.deltaTime;
+                if (second >= 0.3)    //〇秒おきに攻撃
+                {
+                    //memo:x=-2.55y=-3.5
+                    Instantiate(bossChild, transform.position, transform.rotation);
 
-                second = 0;
+                    second = 0;
+                }
+                transform.Rotate(0, 0, this.rotatespeed);
             }
-            transform.Rotate(0, 0, this.rotatespeed);
         }
     }
 
     private void BossMove()
     {
+        //そのうちfor文で書きたいゲーチスの移動コード
         switch (waypoint)
         {
             case 0:
@@ -123,6 +127,7 @@ public class Ghetsis : MonoBehaviour
         if (collision.gameObject.tag == "Throw")
         {
             rotatespeed += 2;
+            damegeOn = true;
         }
     }
 

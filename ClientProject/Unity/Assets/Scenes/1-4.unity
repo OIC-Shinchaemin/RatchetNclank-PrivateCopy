@@ -381,7 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1001 &213886951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1049,7 +1048,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1811168, y: 1.0018258, z: -10}
+  m_LocalPosition: {x: -3.1811233, y: 1.0038114, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1113,7 +1112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &656084826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1814,6 +1812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 1-Boss
+  stageChangeable: 0
 --- !u!1001 &1108800694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2100,7 +2099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1355587589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2142,7 +2140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1359828944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2255,7 +2252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1469086221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2333,7 +2329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1495290427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2375,7 +2370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1506805679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2447,7 +2441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1599497341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2932,7 +2925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1 &2035500630 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2543876206459825738, guid: 1dd3ee025322c674d87daa8b57bf3afc,
@@ -2957,7 +2949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &2035500638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3036,7 +3027,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048924107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.180001, y: 4.6000004, z: -10}
+  m_LocalPosition: {x: -3.1800008, y: 4.6000004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2146550670}
@@ -3116,7 +3107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b7318f34b985543b98f5f959ecdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &2072949413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36504,6 +36494,11 @@ PrefabInstance:
       propertyPath: ground.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 7456924894286117421, guid: 61de693b67b59d64bab58a6451dc7f84,
+        type: 3}
+      propertyPath: sceneChange
+      value: 
+      objectReference: {fileID: 1058555800}
     - target: {fileID: 7614450457814219526, guid: 61de693b67b59d64bab58a6451dc7f84,
         type: 3}
       propertyPath: m_Name

@@ -23,7 +23,6 @@ public class GhetsisChild : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("すゲーチス");
         Destroy(gameObject);
     }
 

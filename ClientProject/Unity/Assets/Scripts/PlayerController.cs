@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool canClimb = false;
     [HideInInspector] public bool bottomLadder = false;
     [HideInInspector] public bool topLadder = false;
-    public Ladder ladder;
+    [HideInInspector] public Ladder ladder;
     private float naturalGravity;
     [SerializeField] float climbSpeed = 3f;
 
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     //int JumpCount;
 
     float hDirection = 0;
+    float LimitSpeed = 30f;
 
     private void Start()
     {
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
         }
+
+        MoveLimit();
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -90,6 +93,15 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("state", (int)state); //アニメーションステータスをセットするとこ
 
         Debug();
+    }
+
+    private void MoveLimit()
+    {
+        if (rb.velocity.magnitude > LimitSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * LimitSpeed;
+            UnityEngine.Debug.Log("上限中");
+        }
     }
 
     private void Debug()
@@ -323,7 +335,7 @@ public class PlayerController : MonoBehaviour
     {
         if (state != State.hurt)
         {
-            if (state != State.atack && state != State.Die)
+            if (state != State.atack && state != State.Die && state != State.climb)
             {
                 if (Input.GetButtonDown("Attack"))
                 {
