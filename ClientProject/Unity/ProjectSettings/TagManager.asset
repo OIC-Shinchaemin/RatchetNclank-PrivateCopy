@@ -13,6 +13,8 @@ TagManager:
   - HpEnemy
   - Bullet
   - Lift
+  - Heart
+  - 1UP
   layers:
   - Default
   - TransparentFX
@@ -28,6 +30,7 @@ TagManager:
   - Enemy
   - Bullet
   - BackGround
+  - 
   - 
   - 
   - 
