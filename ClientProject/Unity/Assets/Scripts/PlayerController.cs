@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     float hDirection = 0;
     float LimitSpeed = 30f;
+    bool isGround;
 
     private void Start()
     {
@@ -57,8 +58,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
-
         if (state == State.climb)
         {
             Climb();
@@ -68,15 +67,15 @@ public class PlayerController : MonoBehaviour
             Movement();
         }
 
+        GroundCheck();
+
         MoveLimit();
 
         if (Input.GetButtonDown("Jump"))
         {
             if (state != State.hurt && state != State.Die)
             {
-                RaycastHit2D lhit = Physics2D.Raycast(rb.position+new Vector2(0.4f,0), Vector2.down, 1.3f, ground);
-                RaycastHit2D rhit = Physics2D.Raycast(rb.position + new Vector2(-0.4f, 0), Vector2.down, 1.3f, ground);
-                if (lhit.collider != null || rhit.collider != null)
+                if (isGround)
                 {
                     Jump();
                 }
@@ -95,12 +94,25 @@ public class PlayerController : MonoBehaviour
         Debug();
     }
 
+    private void GroundCheck()
+    {
+        RaycastHit2D lhit = Physics2D.Raycast(rb.position + new Vector2(0.4f, 0), Vector2.down, 1.3f, ground);
+        RaycastHit2D rhit = Physics2D.Raycast(rb.position + new Vector2(-0.4f, 0), Vector2.down, 1.3f, ground);
+        if (lhit.collider != null || rhit.collider != null)
+        {
+            isGround = true;
+        }
+        else
+        {
+            isGround = false;
+        }
+    }
+
     private void MoveLimit()
     {
         if (rb.velocity.magnitude > LimitSpeed)
         {
             rb.velocity = rb.velocity.normalized * LimitSpeed;
-            UnityEngine.Debug.Log("上限中");
         }
     }
 
@@ -320,7 +332,7 @@ public class PlayerController : MonoBehaviour
             else if (hDirection > 0)
             {
                 moveSpeed = speed;
-                transform.localScale = new Vector2(1, 1);
+                transform.localScale = Vector2.one;
                 Left = false;
             }
 
@@ -330,8 +342,6 @@ public class PlayerController : MonoBehaviour
             }
 
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-
-            //Jumping
             
         }
     }
@@ -382,7 +392,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (state == State.falling)
         {
-            if (coll.IsTouchingLayers(ground))
+            if (isGround)
             {
                 PermanentUI.perm.CountReset();
                 state = State.idle;
@@ -425,7 +435,7 @@ public class PlayerController : MonoBehaviour
 
     private void AtackRelease()
     {
-        if (coll.IsTouchingLayers(ground))
+        if (isGround)
         {
             state = State.idle;
         }
