@@ -12,7 +12,9 @@ StageObject::StageObject(bool enable, bool collision, StageObjectType type, std:
     , _position(pos)
     , _scale(scale)
     , _rotate(rotate)
-    , _world_matrix() {
+    , _world_matrix()
+    , _geometry_boxes() 
+{
     RefreshWorldMatrix();
 }
 
@@ -94,6 +96,10 @@ CMatrix44 StageObject::GetWorldMatrix(void) const {
     return _world_matrix;
 }
 
+Mof::CBoxAABB StageObject::GetGeometryBox(int index) const {
+    return _geometry_boxes.at(index);
+}
+
 /// <summary>
 /// 描画用マトリクスの再計算
 /// </summary>
@@ -105,6 +111,29 @@ void StageObject::RefreshWorldMatrix(void) {
     _world_matrix = scale * rotate * trans;
 }
 
+void StageObject::GenerateCollisionBox(const MeshArray& meshes) {
+    auto mesh = meshes.at(_mesh_no);
+    _geometry_boxes.clear();
+    _geometry_boxes.reserve(mesh->GetGeometryCount());
+
+    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
+        auto geometry = mesh->GetGeometry(i);
+        auto default_matrix = geometry->GetMatrix();
+        Mof::CMatrix44 mat = default_matrix * _world_matrix;
+        geometry->SetMatrix(mat);
+
+        Mof::CVector3 scale; mat.GetScaling(scale);
+        Mof::CVector3 trans; mat.GetTranslation(trans);
+
+        Mof::CBoxAABB box; geometry->CalculateAABB(box);
+        box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;
+        box.Position.x += trans.x; box.Position.y += trans.y; box.Position.z += trans.z;
+        std::swap(box.Size.y, box.Size.z);
+        _geometry_boxes.push_back(box);
+
+        geometry->SetMatrix(default_matrix);
+    } // for
+}
 void StageObject::SetEnable(bool b) {
     _enable = b;
 }

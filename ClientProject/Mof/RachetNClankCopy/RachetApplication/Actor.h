@@ -164,8 +164,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    //bool IsRender(void) const;
     bool InCameraRange(void) const;
+    /// <summary>
+    /// éãêçë‰ì‡îªíË
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool InFrustum(void) const;
     /// <summary>
     /// í«â¡
     /// </summary>

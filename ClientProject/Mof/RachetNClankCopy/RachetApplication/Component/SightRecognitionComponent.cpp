@@ -99,6 +99,7 @@ bool my::SightRecognitionComponent::Initialize(void) {
 }
 
 bool my::SightRecognitionComponent::Update(float delta_time) {
+
     if (auto tag = super::GetOwner()->GetTag(); tag == "Player") {
         if (auto player_com = _player_com.lock()) {
             player_com->SetTarget(nullptr);

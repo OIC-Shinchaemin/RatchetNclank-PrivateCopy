@@ -76,14 +76,7 @@ void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, cons
         Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
 
-        Mof::CVector3 scale; mat.GetScaling(scale);
-        Mof::CVector3 trans; mat.GetTranslation(trans);
-
-        Mof::CBoxAABB box; geometry->CalculateAABB(box);
-        box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;
-        box.Position.x += trans.x; box.Position.y += trans.y; box.Position.z += trans.z;
-        std::swap(box.Size.y, box.Size.z);
-
+        auto box = obj.GetGeometryBox(i);
         auto pos = super::GetOwner()->GetPosition();
         pos.y -= _enemy_com.lock()->GetHeight();
         box.Position.y += _enemy_com.lock()->GetHeight();
@@ -91,9 +84,6 @@ void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, cons
             geometry->SetMatrix(default_matrix);
             continue;
         } // if
-
-
-
 
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _enemy_com.lock()->GetHeight();

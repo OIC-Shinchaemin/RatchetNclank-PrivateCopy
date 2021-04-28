@@ -6,15 +6,15 @@
 my::MotionComponent::MotionComponent(int priority) :
     super(priority),
     _motion(),
-    _motion_names() ,
-    _path(){
+    _motion_names(),
+    _path() {
 }
 
 my::MotionComponent::MotionComponent(const MotionComponent& obj) :
     super(obj._priority),
     _motion(),
-    _motion_names(obj._motion_names) ,
-    _path(obj._path){
+    _motion_names(obj._motion_names),
+    _path(obj._path) {
 }
 
 my::MotionComponent::~MotionComponent() {
@@ -49,12 +49,18 @@ bool my::MotionComponent::Initialize(void) {
     auto mesh_com = super::GetOwner()->GetComponent<my::MeshComponent>();
     if (auto mesh = mesh_com->GetMesh().lock()) {
         _motion = mesh->CreateMotionController();
+
+        for (int i = 0; i < _motion->GetMotionCount(); i++) {
+            std::cout << "_motion->GetMotion(i) = "<< *_motion->GetMotion(i)->GetName() << "\n";
+        } // for
     } // if
     return true;
 }
 
 bool my::MotionComponent::Update(float delta_time) {
-    _motion->AddTimer(delta_time);
+    if (super::GetOwner()->InCameraRange()) {
+        _motion->AddTimer(delta_time);
+    } // if
     return true;
 }
 

@@ -30,7 +30,8 @@ void my::MeshComponent::SetParam(const rapidjson::Value& param) {
     _ASSERT_EXPR(param.HasMember(path), L"指定のパラメータがありません");
     _ASSERT_EXPR(param[path].IsString(), L"パラメータの指定された型でありません");
 
-    auto temp = super::_resource_manager.lock()->Get<std::shared_ptr<Mof::CMeshContainer>>(param[path].GetString());
+    auto p = param[path].GetString();
+    auto temp = super::_resource_manager.lock()->Get<std::shared_ptr<Mof::CMeshContainer>>(p);
     this->SetMesh(temp);
 
     const char* color = "color";
@@ -82,6 +83,8 @@ bool my::MeshComponent::Render(void) {
         if (auto motion_com = _motion_com.lock()) {
             auto motion = motion_com->GetMotionData();
             motion->RefreshBoneMatrix(world);
+
+            // 引数にUVがあるのでこれを増やしていく
             r->Render(motion, _color);
         } // if
         else {

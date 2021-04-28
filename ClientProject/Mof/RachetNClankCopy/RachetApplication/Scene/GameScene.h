@@ -39,7 +39,7 @@ private:
     //! クイックチェンジ
     std::shared_ptr<my::QuickChangeSystem>  _quick_change;
     //! ステージ
-    Stage _stage;
+    Stage* _stage;
     //! 再初期化
     bool _re_initialize;
     // 光源

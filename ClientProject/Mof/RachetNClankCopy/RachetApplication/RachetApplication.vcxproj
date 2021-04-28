@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.cpp" />
     <ClCompile Include="..\include\My\Core\State.cpp" />
     <ClCompile Include="..\include\My\Core\StateMachine.cpp" />
     <ClCompile Include="..\include\My\Core\Timer.cpp" />
@@ -260,6 +259,7 @@
     <ClCompile Include="Stage\Gimmick\Bridge.cpp" />
     <ClCompile Include="Stage\Gimmick\Elevator.cpp" />
     <ClCompile Include="Stage\Gimmick\GimmickBase.cpp" />
+    <ClCompile Include="Stage\Gimmick\MoveCloud.cpp" />
     <ClCompile Include="Stage\Gimmick\WoodBox.cpp" />
     <ClCompile Include="Stage\Parser\JsonStageParser.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
@@ -289,7 +289,6 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.h" />
     <ClInclude Include="..\include\My\Core\AbstructContainer.h" />
     <ClInclude Include="..\include\My\Core\Define.h" />
     <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h" />
@@ -456,6 +455,7 @@
     <ClInclude Include="Stage\Gimmick\Bridge.h" />
     <ClInclude Include="Stage\Gimmick\Elevator.h" />
     <ClInclude Include="Stage\Gimmick\GimmickBase.h" />
+    <ClInclude Include="Stage\Gimmick\MoveCloud.h" />
     <ClInclude Include="Stage\Gimmick\WoodBox.h" />
     <ClInclude Include="Stage\Parser\JsonStageParser.h" />
     <ClInclude Include="Stage\Parser\StageParser.h" />

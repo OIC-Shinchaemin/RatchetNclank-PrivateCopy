@@ -83,6 +83,13 @@ bool my::Actor::InCameraRange(void) const {
     return sphere.CollisionPoint(this->GetPosition());
 }
 
+bool my::Actor::InFrustum(void) const {
+    auto box = Mof::CBoxAABB();
+    
+
+    return false;
+}
+
 void my::Actor::AddComponent(const ComPtr& component) {
     if (component->IsInput()) {
         ut::InsertAscend(_input_components, component);

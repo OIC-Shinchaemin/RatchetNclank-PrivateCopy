@@ -7,7 +7,7 @@
 #include "StageDefine.h"
 
 // 名前の置き換え
-using MeshPtr   = std::shared_ptr<CMeshContainer>;
+using MeshPtr = std::shared_ptr<CMeshContainer>;
 using MeshArray = std::vector<MeshPtr>;
 
 /// <summary>
@@ -33,7 +33,7 @@ protected:
 
     //! ワールド座標
     Vector3          _position;
-    
+
     //! 拡大
     Vector3          _scale;
 
@@ -43,17 +43,19 @@ protected:
     //! 描画用ワールドマトリクス
     CMatrix44        _world_matrix;
 
+    //! 衝突箱
+    std::vector<Mof::CBoxAABB> _geometry_boxes;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     StageObject(bool enable = true, bool collision = true,
-        StageObjectType type = StageObjectType::None, std::string name = "",
-        int mesh_no = -1,
-        Vector3 pos = Vector3(),
-        Vector3 scale = Vector3(1, 1, 1),
-        Vector3 rotate = Vector3());
-    
+                StageObjectType type = StageObjectType::None, std::string name = "",
+                int mesh_no = -1,
+                Vector3 pos = Vector3(),
+                Vector3 scale = Vector3(1, 1, 1),
+                Vector3 rotate = Vector3());
+
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -114,13 +116,25 @@ public:
     CMatrix44 GetWorldMatrix(void) const;
 
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CBoxAABB GetGeometryBox(int index) const;
+
+    /// <summary>
     /// 描画用マトリクスの再計算
     /// </summary>
     void RefreshWorldMatrix(void);
+
+    /// <summary>
+    /// 生成
+    /// </summary>
+    void GenerateCollisionBox(const MeshArray& meshes);
 
     void SetEnable(bool b);
 };
 
 // 置き換え
-using StageObjectPtr   = std::shared_ptr<StageObject>;
+using StageObjectPtr = std::shared_ptr<StageObject>;
 using StageObjectArray = std::vector<StageObjectPtr>;

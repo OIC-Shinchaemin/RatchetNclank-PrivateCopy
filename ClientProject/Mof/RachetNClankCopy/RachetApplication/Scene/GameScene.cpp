@@ -42,7 +42,7 @@ bool my::GameScene::SceneRender(void) {
     ::CGraphicsUtilities::RenderString(50.0f, 500.0f, "FPS = %d", fps);
     
     _renderer.Render();
-    _stage.Render();
+    _stage->Render();
     _game_money->Render();
     return true;
 }
@@ -100,7 +100,7 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _game_money = std::make_unique<my::GameMoney>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-
+    _stage = new Stage();
     _game_money->SetResourceManager(_resource);
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
@@ -108,8 +108,8 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     _quick_change->SetUICanvas(_ui_canvas);
 
     // stage
-    //if (!_stage.Load("../Resource/stage/test.json")) {
-    if (!_stage.Load("../Resource/stage/stage0.json")) {
+    if (!_stage->Load("../Resource/stage/test.json")) {
+    //if (!_stage->Load("../Resource/stage/stage0.json")) {
         return false;
     } // if
     return true;
@@ -128,12 +128,12 @@ bool my::GameScene::Initialize(void) {
     _game_money->Initialize(save_data.GetMoney());
     _weapon_system->Initialize(save_data, shared_from_this());
     _quick_change->Initialize({}, _weapon_system);
-    _stage.Initialize();
+    _stage->Initialize();
 
 
     auto param = new my::Actor::Param();
     // chara
-    for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
+    for (auto enemy_spawn : _stage->GetEnemySpawnArray()) {
 
         _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
         auto builder = enemy_spawn.first.c_str();
@@ -191,12 +191,12 @@ bool my::GameScene::Update(float delta_time) {
 
     // update
     _quick_change->Update();
-    _stage.Update(delta_time);
+    _stage->Update(delta_time);
     _game_world.Update(delta_time);
 
     // collision
     _physic_world.Update();
-    _physic_world.CollisionStage(&_stage);
+    _physic_world.CollisionStage(_stage);
     return true;
 }
 
@@ -207,6 +207,7 @@ bool my::GameScene::Release(void) {
     auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
     my::SaveSystem().Save(save_param);
     _quick_change->Release();
-    _stage.Release();
+    _stage->Release();
+    ut::SafeDelete(_stage);
     return true;
 }

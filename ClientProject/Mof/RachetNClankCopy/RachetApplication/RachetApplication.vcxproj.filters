@@ -657,11 +657,11 @@
     <ClCompile Include="Stage\Stage.cpp">
       <Filter>Rachet\Source\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.cpp">
-      <Filter>Rachet\Source\Stage\Gimmick</Filter>
-    </ClCompile>
     <ClCompile Include="State\EnemyMotion\EnemyMotionRangedAttackState.cpp">
       <Filter>Rachet\Source\State\EnemyMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\MoveCloud.cpp">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1223,9 +1223,6 @@
     <ClInclude Include="Stage\StageObject.h">
       <Filter>Rachet\Source\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Editor\StageEditor\Project\Stage\Gimmick\MoveCloud.h">
-      <Filter>Rachet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
     <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
     </ClInclude>
@@ -1252,6 +1249,9 @@
     </ClInclude>
     <ClInclude Include="State\EnemyMotion\EnemyMotionRangedAttackState.h">
       <Filter>Rachet\Header\State\EnemyMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
+      <Filter>Rachet\Source\Stage\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
