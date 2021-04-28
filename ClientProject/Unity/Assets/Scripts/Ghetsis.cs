@@ -29,7 +29,7 @@ public class Ghetsis : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (bossEvent.GetComponent<BossEvent>().bBoss == true) //ボス戦フラグがたったら
         {
