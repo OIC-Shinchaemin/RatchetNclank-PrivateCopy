@@ -15,23 +15,26 @@ public class Dyna : MonoBehaviour
 
     private float shotspeed = 10f;
 
-    // Start is called before the first frame update
+    public BossEvent bossEvent;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (GetComponent<SpriteRenderer>().isVisible)
+        if (bossEvent.GetComponent<BossEvent>().bBoss == true)
         {
-
-            if (canAttack)
+            if (GetComponent<SpriteRenderer>().isVisible)
             {
-                Attack();
-            }
 
+                if (canAttack)
+                {
+                    Attack();
+                }
+
+            }
         }
     }
 
@@ -67,9 +70,9 @@ public class Dyna : MonoBehaviour
         }
     }
 
-    //public void OnDeathEvent()
-    //{
-    //    bossEvent.bBoss = false;
-    //    bossEvent.TriggerON();
-    //}
+    public void OnDeathEvent()
+    {
+        bossEvent.bBoss = false;
+        bossEvent.TriggerON();
+    }
 }
