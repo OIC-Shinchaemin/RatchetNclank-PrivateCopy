@@ -11,7 +11,7 @@ public class Title : MonoBehaviour
     void Start()
     {
         this.pressA = this.GetComponent<Text>();
-        this.pressA.text = "press the z key";
+        this.pressA.text = "press [z] key";
     }
 
     void Update()
