@@ -65,10 +65,13 @@ bool my::MeshComponent::Initialize(void) {
 
 bool my::MeshComponent::Render(void) {
     if (!this->_is_show) {
-        this->_is_show = true;
+        return false;
+    } // if
+    if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
 
+    // •`‰æ
     if (auto r = _mesh.lock()) {
         Mof::CMatrix44 scale, rotate, translate;
         scale.Scaling(super::GetOwner()->GetScale(), scale);
@@ -102,6 +105,6 @@ std::shared_ptr<my::Component> my::MeshComponent::Clone(void) {
     return std::make_shared<my::MeshComponent>(*this);
 }
 
-void my::MeshComponent::HideByCurrentFrame(void) {
+void my::MeshComponent::Hide(void) {
     this->_is_show = false;
 }

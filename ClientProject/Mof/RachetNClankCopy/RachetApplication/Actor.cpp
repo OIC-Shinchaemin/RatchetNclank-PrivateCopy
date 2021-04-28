@@ -68,12 +68,19 @@ Mof::CVector3 my::Actor::GetInitialPosition(void) const {
 my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
-
+/*
 bool my::Actor::IsRender(void) const {
-    //auto sphere = 
+    //auto sphere =
     //::CGraphicsUtilities::GetCamera()->GetViewPosition();
     // ƒJƒƒ‰‹…‚Éi”¼Œaj‚Í”CˆÓ
     return true;
+}
+*/
+bool my::Actor::InCameraRange(void) const {
+    const int camera_range = 50.0f;
+    auto pos = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
+    auto sphere = Mof::CSphere(pos, camera_range);
+    return sphere.CollisionPoint(this->GetPosition());
 }
 
 void my::Actor::AddComponent(const ComPtr& component) {
@@ -171,7 +178,6 @@ bool my::Actor::Render(void) {
     for (auto& com : _render_components) {
         if (com->IsActive()) {
             com->Render();
-            com->DebugRender();
             re = true;
         } // if
     } // for
@@ -210,4 +216,9 @@ void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
 }
 
 void my::Actor::DebugRender(void) {
+    for (auto& com : _render_components) {
+        if (com->IsActive()) {
+            com->DebugRender();
+        } // if
+    } // for
 }

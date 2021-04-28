@@ -1,6 +1,7 @@
 #include "CollisionComponent.h"
 
 #include "My/Core/Utility.h"
+#include "../../VelocityComponent.h"
 
 
 void my::CollisionComponent::AddCollisionFunc(const std::string& target, const CollisionFunc& obj, std::unordered_map<std::string, FuncArray>& out) {
@@ -54,7 +55,6 @@ bool my::CollisionComponent::CollisionShpereAABB(const Mof::CSphere& sphere, con
     else {
         point.z = pos.z;
     } // else
-    //return Mof::CVector3Utilities::Distance(sphere.Position, point) < std::powf(sphere.r, 2.0f);;
     return Mof::CVector3Utilities::Distance(sphere.Position, point) < sphere.r;
 }
 
@@ -63,10 +63,18 @@ my::CollisionComponent::CollisionComponent(int priority) :
     _collisioned(),
     _on_enter(),
     _on_stay(),
-    _on_exit() {
+    _on_exit(),
+    _velocity_com() {
 }
 
 my::CollisionComponent::~CollisionComponent() {
+}
+
+bool my::CollisionComponent::IsSleep(void) const {
+    if (auto velocity_com = _velocity_com.lock())  {
+        return velocity_com->IsSleep();
+    } // if
+    return false;
 }
 
 void my::CollisionComponent::AddCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr) {
@@ -103,6 +111,12 @@ void my::CollisionComponent::AddCollisionFunc(CollisionFuncType type, const std:
         default:
             break;
     } // switch
+}
+
+bool my::CollisionComponent::Initialize(void) {
+    super::Initialize();
+    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    return true;
 }
 
 bool my::CollisionComponent::ExecuteEnterFunction(const std::string& key, const my::CollisionInfo& info) {

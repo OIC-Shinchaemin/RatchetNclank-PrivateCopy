@@ -77,6 +77,8 @@ private:
     std::unordered_map<std::string, FuncArray> _on_stay;
     //! é¿çsä÷êî
     std::unordered_map<std::string, FuncArray> _on_exit;
+    //! ë¨ìx
+    std::weak_ptr<class VelocityComponent> _velocity_com;
     /// <summary>
     /// í«â¡
     /// </summary>
@@ -141,6 +143,12 @@ public:
     /// <returns></returns>
     virtual std::optional<my::SightObject> GetSightObject(void) = 0;
     /// <summary>
+    /// îªíË
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsSleep(void) const;
+    /// <summary>
     /// í«â¡
     /// </summary>
     /// <param name="ptr"></param>
@@ -163,6 +171,12 @@ public:
     /// <param name="target"></param>
     /// <param name="obj"></param>
     void AddCollisionFunc(CollisionFuncType type, const std::string& target, const CollisionFunc& obj);
+    /// <summary>
+    /// èâä˙âª
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Initialize(void) override;
     /// <summary>
     /// é¿çs
     /// </summary>

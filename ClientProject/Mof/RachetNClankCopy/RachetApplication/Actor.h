@@ -164,7 +164,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool IsRender(void) const;
+    //bool IsRender(void) const;
+    bool InCameraRange(void) const;
     /// <summary>
     /// ’Ç‰Á
     /// </summary>

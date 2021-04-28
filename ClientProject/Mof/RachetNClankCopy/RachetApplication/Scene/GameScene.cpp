@@ -108,7 +108,8 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     _quick_change->SetUICanvas(_ui_canvas);
 
     // stage
-    if (!_stage.Load("../Resource/stage/test.json")) {
+    //if (!_stage.Load("../Resource/stage/test.json")) {
+    if (!_stage.Load("../Resource/stage/stage0.json")) {
         return false;
     } // if
     return true;

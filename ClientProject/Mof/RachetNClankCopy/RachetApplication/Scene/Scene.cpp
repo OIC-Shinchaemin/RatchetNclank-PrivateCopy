@@ -68,7 +68,6 @@ bool my::Scene::Load(std::shared_ptr<my::Scene::Param> param) {
     if (!_rendar_target.CreateTarget(sw, sh,
                                      PIXELFORMAT_R8G8B8A8_UNORM,
                                      BUFFERACCESS_GPUREADWRITE)) {
-        puts("sgd");
         return true;
     } // if
     return true;

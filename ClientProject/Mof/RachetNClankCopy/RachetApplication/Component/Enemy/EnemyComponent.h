@@ -7,13 +7,19 @@
 #include <optional>
 #include <memory>
 
+#include "My/Core/Timer.h"
+
 
 namespace my {
 class EnemyComponent : public my::CharacterComponent {
     using super = my::CharacterComponent;
 private:
+    //! 休止状態切り替え
+    my::Timer _velocity_timer;
     //! 標的
     std::weak_ptr<my::Actor> _target;
+    //! 速度
+    std::weak_ptr<class VelocityComponent> _velocity_com;
 public:
     /// <summary>
     /// コンストラクタ

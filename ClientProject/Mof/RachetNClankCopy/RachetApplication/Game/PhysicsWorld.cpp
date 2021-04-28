@@ -107,7 +107,15 @@ void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
 bool my::PhysicsWorld::Update(void) {
     for (auto& layer : _layers) {
         for (auto& object : layer.objects) {
+            if (object->IsSleep()) {
+                continue;
+            } // if
+
             for (auto& target : layer.targets) {
+                if (target->IsSleep()) {
+                    continue;
+                } // if
+
                 if (object == target) {
                     continue;
                 } // if
@@ -146,6 +154,9 @@ void my::PhysicsWorld::CollisionStage(Stage* stage) {
             continue;
         } // if
         for (auto com : _list_for_stage) {
+            if (com->IsSleep()) {
+                continue;
+            } // if
             auto mesh = meshes.at(mesh_no);
             com->CollisionStage(&*mesh, *obj);
         } // for

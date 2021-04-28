@@ -29,17 +29,18 @@ bool my::Renderer::Render(void) {
         if (!ptr->Render()) {
             _disable_actors.push_back((ptr));
         } // if
+    } // for
+    for (auto ptr : _enable_actors) {
         ptr->DebugRender();
     } // for
 
     for (auto ptr : _disable_actors) {
         ut::SwapPopback(_enable_actors, ptr);
 
-        if (ptr->IsRender()) {
+        if (ptr->InCameraRange()) {
             _enable_actors.push_back(ptr);
         } // if
     } // for
-    
     return true;
 }
 
