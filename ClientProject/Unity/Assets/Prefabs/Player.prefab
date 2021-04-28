@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneChange: {fileID: 0}
+  defaultScale: {x: 0, y: 0}
 --- !u!1 &7614450457814219526
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +615,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3002367426876369064, guid: 585dc6db24311b3408636b0e8f57418f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3002367426876369069, guid: 585dc6db24311b3408636b0e8f57418f,
         type: 3}
       propertyPath: m_RootOrder
@@ -668,6 +674,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002367426876369070, guid: 585dc6db24311b3408636b0e8f57418f,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3002367426876369075, guid: 585dc6db24311b3408636b0e8f57418f,
         type: 3}
