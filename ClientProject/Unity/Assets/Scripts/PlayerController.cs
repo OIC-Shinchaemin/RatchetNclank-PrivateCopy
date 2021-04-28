@@ -124,6 +124,20 @@ public class PlayerController : MonoBehaviour
             PermanentUI.perm.CherryScore();
             
         }
+        if(collision.tag == "Heart")
+        {
+            
+            Destroy(collision.gameObject);
+            PermanentUI.perm.currentHP += 1;
+            PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
+        }
+        if(collision.tag == "1UP")
+        {
+            
+            Destroy(collision.gameObject);
+            PermanentUI.perm.PlayerCount += 1;
+        }
+
         //if(collision.tag=="Powerup")        //チュートリアルで使用したパワーアップコード。現在使用してません。
         //{
         //    Destroy(collision.gameObject);
