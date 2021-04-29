@@ -35,8 +35,8 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="ptr"></param>
-    //void SetTarget(const std::shared_ptr<my::Actor>& ptr);
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>

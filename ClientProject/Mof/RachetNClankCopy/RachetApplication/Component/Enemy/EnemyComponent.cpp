@@ -14,8 +14,6 @@ my::EnemyComponent::EnemyComponent(int priority) :
     _velocity_timer(),
     _target(),
     _velocity_com() {
-    super::_volume = 0.5f;
-    super::_height = 1.0f;
 }
 
 my::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
@@ -109,6 +107,10 @@ bool my::EnemyComponent::Initialize(void) {
 }
 
 bool my::EnemyComponent::Update(float delta_time) {
+
+    if (auto velocity_com = _velocity_com.lock()) {
+        velocity_com->SetUseGravity(false);
+    } // if
     if (_velocity_timer.Tick(delta_time)) {
         if (auto velocity_com = _velocity_com.lock()) {
             bool in_camera_range = super::GetOwner()->InCameraRange();

@@ -21,7 +21,7 @@
       "type": "MotionComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/motion_names/enemy.motion_names"
+        "path": "../Resource/motion_names/skeleton.motion_names"
       }
     },
     {
@@ -40,7 +40,9 @@
     {
       "type": "EnemyComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "height": 2.0,
+        "volume": 0.5
       }
     },
     {

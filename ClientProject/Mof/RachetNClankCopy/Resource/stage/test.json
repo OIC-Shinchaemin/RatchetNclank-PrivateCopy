@@ -256,46 +256,7 @@
       "pos_x": 55.0,
       "pos_y": -30.0,
       "pos_z": 70.0
-    },
-
-
-
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 65.0,
-      "pos_y": -30.0,
-      "pos_z": 70.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 60.0,
-      "pos_y": -30.0,
-      "pos_z": 65.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 70.0,
-      "pos_y": -30.0,
-      "pos_z": 65.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 65.0,
-      "pos_y": -30.0,
-      "pos_z": 65.0
-    },
-    {
-      "builder": "builder/weak_enemy.json",
-      "name": "enemy",
-      "pos_x": 55.0,
-      "pos_y": -30.0,
-      "pos_z": 70.0
     }
-
 
 
   ],

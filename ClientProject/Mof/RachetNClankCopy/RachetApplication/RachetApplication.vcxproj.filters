@@ -1263,9 +1263,6 @@
     <None Include="..\Resource\save\savedata.json">
       <Filter>リソース ファイル\save</Filter>
     </None>
-    <None Include="..\Resource\motion_names\enemy.motion_names">
-      <Filter>リソース ファイル\motion_names</Filter>
-    </None>
     <None Include="..\Resource\motion_names\player.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
@@ -1317,17 +1314,17 @@
     <None Include="..\Resource\behaviour\strong_enemy_combat.json">
       <Filter>リソース ファイル\behaviour</Filter>
     </None>
-    <None Include="..\Resource\behaviour\patrol.json">
-      <Filter>リソース ファイル\behaviour</Filter>
-    </None>
-    <None Include="..\Resource\behaviour\combat.json">
-      <Filter>リソース ファイル\behaviour</Filter>
-    </None>
     <None Include="..\Resource\builder\enemy_bullet.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
     <None Include="..\Resource\stage\test.json">
       <Filter>リソース ファイル\stage</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\skeleton.motion_names">
+      <Filter>リソース ファイル\motion_names</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\chaman.motion_names">
+      <Filter>リソース ファイル\motion_names</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

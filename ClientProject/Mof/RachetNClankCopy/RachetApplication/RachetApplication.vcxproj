@@ -490,8 +490,6 @@
     <Text Include="..\Resource\scene_resource\general.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resource\behaviour\combat.json" />
-    <None Include="..\Resource\behaviour\patrol.json" />
     <None Include="..\Resource\behaviour\strong_enemy_combat.json" />
     <None Include="..\Resource\behaviour\strong_enemy_patrol.json" />
     <None Include="..\Resource\behaviour\weak_enemy_combat.json" />
@@ -509,8 +507,9 @@
     <None Include="..\Resource\builder\ship.json" />
     <None Include="..\Resource\builder\strong_enemy.json" />
     <None Include="..\Resource\builder\weak_enemy.json" />
-    <None Include="..\Resource\motion_names\enemy.motion_names" />
+    <None Include="..\Resource\motion_names\chaman.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />
+    <None Include="..\Resource\motion_names\skeleton.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
     <None Include="..\Resource\stage\test.json" />
   </ItemGroup>

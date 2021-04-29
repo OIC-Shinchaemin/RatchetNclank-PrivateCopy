@@ -30,7 +30,9 @@
     {
       "type": "PlayerComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "height": 1.0,
+        "volume": 0.5
       }
     },
     {
