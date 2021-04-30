@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_COLLISION_COMPONENT_H
-#define MY_PLAYER_COLLISION_COMPONENT_H
+#ifndef MY_CAMERA_COLLISION_COMPONENT_H
+#define MY_CAMERA_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -11,37 +11,26 @@
 
 
 namespace my {
-class PlayerCollisionComponent : public my::CollisionComponent {
+class CameraCollisionComponent : public my::CollisionComponent {
     using super = my::CollisionComponent;
 private:
     //! プレイヤー
-    std::weak_ptr<class PlayerComponent> _player_com;
-    //! プレイヤー
-    std::weak_ptr<class PlayerJumpComponent> _jump_com;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-private:
-    /// <summary>
-    /// 衝突
-    /// </summary>
-    /// <param name="mesh"></param>
-    /// <param name="obj"></param>
-    bool CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj);
+    std::weak_ptr<class CameraComponent> _camera_com;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerCollisionComponent(int priority);
+    CameraCollisionComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerCollisionComponent(const PlayerCollisionComponent& obj);
+    CameraCollisionComponent(const CameraCollisionComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerCollisionComponent();
+    virtual ~CameraCollisionComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -103,4 +92,4 @@ public:
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
 }
-#endif // !MY_PLAYER_COLLISION_COMPONENT_H
+#endif // !MY_CAMERA_COLLISION_COMPONENT_H

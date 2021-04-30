@@ -36,6 +36,12 @@
       }
     },
     {
+      "type": "PlayerStateComponent",
+      "paramater": {
+        "priority": 80
+      }
+    },
+    {
       "type": "PlayerMoveComponent",
       "paramater": {
         "priority": 90
@@ -47,6 +53,13 @@
         "priority": 91
       }
     },
+    {
+      "type": "PlayerJumpComponent",
+      "paramater": {
+        "priority": 91
+      }
+    },
+
     {
       "type": "PlayerDamageComponent",
       "paramater": {
@@ -104,6 +117,12 @@
     },
     {
       "type": "SightCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "CameraCollisionComponent",
       "paramater": {
         "priority": 0
       }

@@ -19,11 +19,18 @@ private:
     float _ideal_angle;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! カメラ
     std::weak_ptr<class CameraComponent> _camera_com;
 
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name="name"></param>
+    void ChageState(const std::string& name);
     virtual void InputMoveVelocity(float speed);
     virtual void InputMoveAngularVelocity(float angle, float speed);
 public:

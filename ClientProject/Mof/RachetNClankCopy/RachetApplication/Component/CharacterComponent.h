@@ -56,12 +56,6 @@ public:
     /// <returns></returns>
     float GetHeight(void) const;
     /// <summary>
-    /// ÉQÉbÉ^Å[
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //std::weak_ptr<my::Actor> GetTarget(void) const;
-    /// <summary>
     /// ï°êª
     /// </summary>
     /// <param name=""></param>

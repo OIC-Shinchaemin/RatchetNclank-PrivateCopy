@@ -18,9 +18,13 @@ private:
     //! カーソル位置
     my::Observable<std::optional<Mof::CVector3>> _observable;
     //! 待機
+    std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! 待機
     std::weak_ptr<class PlayerIdleComponent> _idle_com;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
+    //! ジャンプ
+    std::weak_ptr<class PlayerJumpComponent> _jump_com;
     //! 移動
     std::weak_ptr<class PlayerDamageComponent> _damage_com;
     bool MoveByKeyboard(float angular_speed, float speed);

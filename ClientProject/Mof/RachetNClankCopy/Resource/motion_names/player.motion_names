@@ -2,6 +2,10 @@
   "names": [
     "bse_wait_lp",
     "mov_run_lp",
+    "mov_jump_f_set",
+    "mov_jump_f_u_lp",
+    "mov_jump_f_d_lp",
+    "mov_jump_landing",
     "dam_down_d",
     ""
   ]

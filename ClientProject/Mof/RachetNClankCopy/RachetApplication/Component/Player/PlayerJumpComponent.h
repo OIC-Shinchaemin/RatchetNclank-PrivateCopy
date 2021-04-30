@@ -1,59 +1,44 @@
-#ifndef MY_PLAYER_IDLE_COMPONENT_H
-#define MY_PLAYER_IDLE_COMPONENT_H
+#ifndef MY_PLAYER_JUMP_COMPONENT_H
+#define MY_PLAYER_JUMP_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 #include <memory>
 
-#include "PlayerStateComponent.h"
-
 
 namespace my {
-class PlayerIdleComponent : public my::UpdateComponent {
+class PlayerJumpComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! 回転速度
-    float _angular_speed;
-    //! ラジアン
-    float _ideal_angle;
+    //! 最大
+    float _jump_speed_max;
+    //! 速度
+    float _jump_speed;
+    //! 減少
+    float _jump_decrase;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! モーション
+    std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
-
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
+    virtual void InputJumpVelocity(float speed);
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerIdleComponent(int priority);
+    PlayerJumpComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerIdleComponent(const PlayerIdleComponent& obj);
+    PlayerJumpComponent(const PlayerJumpComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerIdleComponent();
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="speed"></param>
-    void SetAngularSpeed(float speed);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="radian"></param>
-    void SetIdealAngle(float radian);
+    virtual ~PlayerJumpComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -92,4 +77,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_IDLE_COMPONENT_H
+#endif // !MY_PLAYER_JUMP_COMPONENT_H

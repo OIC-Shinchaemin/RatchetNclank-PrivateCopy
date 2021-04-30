@@ -11,10 +11,14 @@ Bridge::Bridge(Vector3 start, bool enable, bool collision, StageObjectType type,
 Bridge::~Bridge(void) {
 }
 
+void Bridge::SetEndPosition(Mof::CVector3 pos) {
+    this->_end_pos = pos;
+}
+
 void Bridge::Initialize(void) {
-    _now_timer  = 0.0f;
+    _now_timer = 0.0f;
     _start_flag = false;
-    _position   = _start_pos;
+    _position = _start_pos;
     RefreshWorldMatrix();
 }
 
@@ -23,7 +27,8 @@ void Bridge::Update(float delta) {
         _now_timer += delta;
     }
     const float t = std::clamp(_now_timer, 0.0f, 1.0f);
-    _position     = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
+    _position = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
+
     RefreshWorldMatrix();
 }
 

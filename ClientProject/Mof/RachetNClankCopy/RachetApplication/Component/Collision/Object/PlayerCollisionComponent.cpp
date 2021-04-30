@@ -2,7 +2,38 @@
 
 #include "CollisionComponentDefine.h"
 #include "../../Player/PlayerComponent.h"
+#include "../../Player/PlayerJumpComponent.h"
+#include "../../VelocityComponent.h"
 
+
+bool my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
+    auto velocity_com = _velocity_com.lock();
+
+    //接触情報
+    COLLISIONOUTGEOMETRY gout;
+    //進行方向へのレイ
+    auto pos = super::GetOwner()->GetPosition();
+    auto velocity = velocity_com->GetVelocity();
+
+    // ステージ上の障害物との当たり判定　
+    float offset = 0.5f;
+    Mof::CRay3D mray(pos, velocity); // 進行方向へのレイ
+    mray.Position.y += offset;
+    if (mray.CollisionMesh(mesh, gout)) {
+        float radius = 1.0f;
+        if (gout.d <= velocity.Length() + radius) {
+            float nd = Mof::CVector3Utilities::Dot(velocity, gout.Normal);
+            nd = MOF_ABS(nd);
+            // 進んだ方向に対して埋まった値の分だけ元に戻してやる
+//			m_Move = (m_Move + gout.Normal * -2 * m_Move.Dot(gout.Normal)) * 0.5f;
+            pos += mray.Direction * (gout.d - (radius - nd));
+            pos += gout.Normal * nd;
+        } // if
+    } // if
+    super::GetOwner()->SetPosition(pos);
+
+    return true;
+}
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     super(priority),
@@ -11,7 +42,8 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
     super(obj._priority),
-    _player_com() {
+    _player_com(),
+    _velocity_com() {
 }
 
 my::PlayerCollisionComponent::~PlayerCollisionComponent() {
@@ -56,6 +88,8 @@ std::optional<my::SightObject> my::PlayerCollisionComponent::GetSightObject(void
 bool my::PlayerCollisionComponent::Initialize(void) {
     super::Initialize();
     _player_com = super::GetOwner()->GetComponent<my::PlayerComponent>();
+    _jump_com = super::GetOwner()->GetComponent<my::PlayerJumpComponent >();
+    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     return true;
 }
 
@@ -72,7 +106,7 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
-        
+
         auto default_matrix = geometry->GetMatrix();
         Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
@@ -83,6 +117,7 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += height - info.d;
                 super::GetOwner()->SetPosition(pos);
+                _jump_com.lock()->End();
             } // if
         } // if
         geometry->SetMatrix(default_matrix);

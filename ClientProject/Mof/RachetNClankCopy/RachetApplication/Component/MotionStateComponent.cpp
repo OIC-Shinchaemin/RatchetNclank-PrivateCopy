@@ -2,6 +2,10 @@
 
 #include "../State/PlayerMotion/PlayerMotionIdleState.h"
 #include "../State/PlayerMotion/PlayerMotionMoveState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpSetState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpUpState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpDownState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpLandingState.h"
 #include "../State/PlayerMotion/PlayerMotionDamageState.h"
 #include "../State/EnemyMotion/EnemyMotionIdleState.h"
 #include "../State/EnemyMotion/EnemyMotionMoveState.h"
@@ -45,6 +49,10 @@ bool my::MotionStateComponent::Initialize(void) {
     else {
         this->RegisterMotionState<state::PlayerMotionIdleState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionMoveState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpSetState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpUpState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpDownState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpLandingState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionDamageState>(_state_machine);
         _state_machine.ChangeState("PlayerMotionIdleState");
     } // else 

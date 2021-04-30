@@ -17,6 +17,7 @@ struct CollisionComponentType {
     static std::string kPyrocitorBulletCollisionComponent;
     static std::string kBlasterBulletCollisionComponent;
     static std::string kBombGloveEffectCollisionComponent;
+    static std::string kCameraCollisionComponent;
 };
 }
 #endif // !MY_COLLISION_COMPONENT_DEFINE_H

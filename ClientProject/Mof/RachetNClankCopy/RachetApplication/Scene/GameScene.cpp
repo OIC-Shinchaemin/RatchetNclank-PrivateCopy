@@ -144,7 +144,6 @@ bool my::GameScene::Initialize(void) {
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
     param->transform.rotate = Mof::CVector3(0.0f, - math::kHalfPi * 0.7f, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
-    player->Generate(_resource.lock());
     this->AddElement(player);
 
     param->transform.position = Mof::CVector3(2.0f, 1.0f, 5.0f);

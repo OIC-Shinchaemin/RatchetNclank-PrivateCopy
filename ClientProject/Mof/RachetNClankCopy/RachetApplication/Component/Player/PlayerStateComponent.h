@@ -1,59 +1,51 @@
-#ifndef MY_PLAYER_IDLE_COMPONENT_H
-#define MY_PLAYER_IDLE_COMPONENT_H
+#ifndef MY_PLAYER_STATE_COMPONENT_H
+#define MY_PLAYER_STATE_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
-#include <memory>
-
-#include "PlayerStateComponent.h"
+#include "My/Core/StateMachine.h"
+#include "My/Core/Timer.h"
 
 
 namespace my {
-class PlayerIdleComponent : public my::UpdateComponent {
+class PlayerStateComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! 回転速度
-    float _angular_speed;
-    //! ラジアン
-    float _ideal_angle;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
     //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
-
+    my::StateMachine _state_machine;
     /// <summary>
-    /// 変更
+    /// 登録
     /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
+    /// <typeparam name="State"></typeparam>
+    /// <param name="out"></param>
+    template<class State>
+    void RegisterState(my::StateMachine& out) {
+        auto shared_this = super::GetOwner();
+        auto ptr = std::make_shared<State>();
+        ptr->SetActor(shared_this);
+        out.RegisterState(ptr);
+    }
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerIdleComponent(int priority);
+    PlayerStateComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerIdleComponent(const PlayerIdleComponent& obj);
+    PlayerStateComponent(const PlayerStateComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerIdleComponent();
+    virtual ~PlayerStateComponent();
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="speed"></param>
-    void SetAngularSpeed(float speed);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="radian"></param>
-    void SetIdealAngle(float radian);
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -69,7 +61,7 @@ public:
     /// <summary>
     /// 更新
     /// </summary>
-    /// <param name="delta_time">時間</param>
+    /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
@@ -85,11 +77,10 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
     /// <summary>
-    /// 開始
+    /// 変更
     /// </summary>
-    /// <param name=""></param>
-    /// <returns>成功</returns>
-    virtual bool Start(void) override;
+    /// <param name="name"></param>
+    void ChangeState(const std::string& name);
 };
 }
-#endif // !MY_PLAYER_IDLE_COMPONENT_H
+#endif // !MY_PLAYER_STATE_COMPONENT_H

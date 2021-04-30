@@ -32,6 +32,8 @@ protected:
     math::Radian _altitude;
     //! 速度
     Mof::CVector3 _velocity;
+    //! 対象
+    Mof::CVector3 _preview_position;
     /// <summary>
     /// 更新
     /// </summary>
@@ -135,6 +137,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector3 GetVelocity(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetPreviewPosition(void) const;
     /// <summary>
     /// 回転
     /// </summary>

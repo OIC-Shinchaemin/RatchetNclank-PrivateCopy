@@ -1,9 +1,12 @@
 #include "PlayerIdleComponent.h"
 
+#include "../../Gamepad.h"
 #include "../VelocityComponent.h"
+#include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
 
 
+/*
 void my::PlayerIdleComponent::InputMoveAngularVelocity(float angle, float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
 
@@ -29,12 +32,20 @@ void my::PlayerIdleComponent::InputMoveAngularVelocity(float angle, float speed)
         velocity_com->AddAngularVelocityForce(accele);
     } // if
 }
+*/
+
+void my::PlayerIdleComponent::ChageState(const std::string& name) {
+    if (auto state_com = _state_com.lock()) {
+        state_com->ChangeState(name);
+    } // if
+}
 
 my::PlayerIdleComponent::PlayerIdleComponent(int priority) :
     super(priority),
     _angular_speed(0.0f),
     _ideal_angle(0.0f),
     _velocity_com(),
+    _state_com(),
     _motion_state_com() {
 }
 
@@ -43,6 +54,7 @@ my::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
     _velocity_com(),
+    _state_com(),
     _motion_state_com() {
 }
 
@@ -65,13 +77,28 @@ bool my::PlayerIdleComponent::Initialize(void) {
     super::Initialize();
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     return true;
 }
 
 bool my::PlayerIdleComponent::Update(float delta_time) {
-    this->InputMoveAngularVelocity(_ideal_angle, _angular_speed);
-    super::End();
+    puts("PlayerIdleComponent");
+    float h = ::g_pGamepad->GetStickHorizontal(); float v = ::g_pGamepad->GetStickVertical();
+    float threshold = 0.5f;
+    auto stick = Mof::CVector2(h, v);
+
+    if (::g_pInput->IsKeyHold(MOFKEY_W) ||
+        ::g_pInput->IsKeyHold(MOFKEY_A) ||
+        ::g_pInput->IsKeyHold(MOFKEY_S) ||
+        ::g_pInput->IsKeyHold(MOFKEY_D) ||
+        stick.Length() > threshold) {
+        this->ChageState("PlayerActionMoveState");
+    } // if
+    else if (::g_pInput->IsKeyPush(MOFKEY_X) || 
+             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+        this->ChageState("PlayerActionJumpState");
+    } // else if
     return true;
 }
 

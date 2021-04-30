@@ -46,7 +46,8 @@ my::CameraController::CameraController() :
     _distance(8.0f),
     _azimuth(270.0f),
     _altitude(this->GetDefaultAltitude()),
-    _velocity() {
+    _velocity(),
+    _preview_position() {
 }
 
 my::CameraController::~CameraController() {
@@ -116,6 +117,10 @@ Mof::CVector3 my::CameraController::GetVelocity(void) const {
     return this->_velocity;
 }
 
+Mof::CVector3 my::CameraController::GetPreviewPosition(void) const {
+    return this->_preview_position;
+}
+
 void my::CameraController::AddAzimuth(float degree) {
     this->_azimuth += degree;
 }
@@ -128,7 +133,6 @@ void my::CameraController::AddAltitude(float degree) {
     if (_altitude >= 45.0f) {
         _altitude = 45.0f;
     } // if
-
 }
 
 bool my::CameraController::HasValidCamara(void) const {
@@ -136,6 +140,7 @@ bool my::CameraController::HasValidCamara(void) const {
 }
 
 bool my::CameraController::Update(void) {
+    _preview_position = _position;
     this->UpdateCameraPosition(_camera);
     return true;
 }
