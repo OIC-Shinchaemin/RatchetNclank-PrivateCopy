@@ -11,7 +11,7 @@ state::PlayerMotionJumpUpState::~PlayerMotionJumpUpState() {
 }
 
 const char* state::PlayerMotionJumpUpState::GetName(void) const {
-    return "PlayerMotionJumpUpState";
+    return state::PlayerMotionStateType::kPlayerMotionJumpUpState.c_str();
 }
 
 void state::PlayerMotionJumpUpState::Update(float delta_time) {

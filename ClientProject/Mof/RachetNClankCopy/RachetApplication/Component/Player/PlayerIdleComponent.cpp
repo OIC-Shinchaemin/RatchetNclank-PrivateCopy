@@ -2,6 +2,7 @@
 
 #include "../../Gamepad.h"
 #include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
@@ -15,8 +16,6 @@ void my::PlayerIdleComponent::ChageState(const std::string& name) {
 
 my::PlayerIdleComponent::PlayerIdleComponent(int priority) :
     super(priority),
-    _angular_speed(0.0f),
-    _ideal_angle(0.0f),
     _velocity_com(),
     _state_com(),
     _motion_state_com() {
@@ -24,22 +23,12 @@ my::PlayerIdleComponent::PlayerIdleComponent(int priority) :
 
 my::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
     super(obj._priority),
-    _angular_speed(obj._angular_speed),
-    _ideal_angle(obj._ideal_angle),
     _velocity_com(),
     _state_com(),
     _motion_state_com() {
 }
 
 my::PlayerIdleComponent::~PlayerIdleComponent() {
-}
-
-void my::PlayerIdleComponent::SetAngularSpeed(float speed) {
-    this->_angular_speed = speed;
-}
-
-void my::PlayerIdleComponent::SetIdealAngle(float radian) {
-    this->_ideal_angle = radian;
 }
 
 std::string my::PlayerIdleComponent::GetType(void) const {
@@ -68,10 +57,15 @@ bool my::PlayerIdleComponent::Update(float delta_time) {
         stick.Length() > threshold) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionMoveState);
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_X) || 
+    else if (::g_pInput->IsKeyPush(MOFKEY_X) ||
              ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
+             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+        this->ChageState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+    } // else if
+
     return true;
 }
 
@@ -90,7 +84,7 @@ bool my::PlayerIdleComponent::Start(void) {
     } // if
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("PlayerMotionIdleState");
+        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionIdleState);
     } // if
     return true;
 }

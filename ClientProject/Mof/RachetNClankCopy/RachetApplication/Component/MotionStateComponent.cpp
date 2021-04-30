@@ -6,6 +6,7 @@
 #include "../State/PlayerMotion/PlayerMotionJumpUpState.h"
 #include "../State/PlayerMotion/PlayerMotionJumpDownState.h"
 #include "../State/PlayerMotion/PlayerMotionJumpLandingState.h"
+#include "../State/PlayerMotion/PlayerMotionMeleeAttackOneState.h"
 #include "../State/PlayerMotion/PlayerMotionDamageState.h"
 #include "../State/EnemyMotion/EnemyMotionIdleState.h"
 #include "../State/EnemyMotion/EnemyMotionMoveState.h"
@@ -53,6 +54,7 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterMotionState<state::PlayerMotionJumpUpState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionJumpDownState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionJumpLandingState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMeleeAttackOneState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionDamageState>(_state_machine);
         _state_machine.ChangeState("PlayerMotionIdleState");
     } // else 

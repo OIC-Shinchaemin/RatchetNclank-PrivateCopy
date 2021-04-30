@@ -11,7 +11,7 @@ state::PlayerMotionJumpLandingState::~PlayerMotionJumpLandingState() {
 }
 
 const char* state::PlayerMotionJumpLandingState::GetName(void) const {
-    return "PlayerMotionJumpLandingState";
+    return state::PlayerMotionStateType::kPlayerMotionJumpLandingState.c_str();
 }
 
 void state::PlayerMotionJumpLandingState::Update(float delta_time) {

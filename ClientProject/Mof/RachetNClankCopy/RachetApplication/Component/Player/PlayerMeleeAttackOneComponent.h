@@ -1,49 +1,46 @@
-#ifndef MY_PLAYER_JUMP_UP_COMPONENT_H
-#define MY_PLAYER_JUMP_UP_COMPONENT_H
+#ifndef MY_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
+#define MY_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 #include <memory>
 
+#include "PlayerStateComponent.h"
+
 
 namespace my {
-class PlayerJumpUpComponent : public my::UpdateComponent {
+class PlayerMeleeAttackOneComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! 最大
-    float _jump_speed_max;
-    //! 速度
-    float _jump_speed;
-    //! 減少
-    float _jump_decrase;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! 移動
-    std::weak_ptr<class PlayerMoveComponent> _move_com;
-
-    virtual void InputJumpVelocity(float speed);
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name="name"></param>
+    void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerJumpUpComponent(int priority);
+    PlayerMeleeAttackOneComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerJumpUpComponent(const PlayerJumpUpComponent& obj);
+    PlayerMeleeAttackOneComponent(const PlayerMeleeAttackOneComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerJumpUpComponent();
+    virtual ~PlayerMeleeAttackOneComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -82,4 +79,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_JUMP_UP_COMPONENT_H
+#endif // !MY_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H

@@ -723,6 +723,18 @@
     <ClCompile Include="State\PlayerAction\PlayerActionJumpLandingState.cpp">
       <Filter>Rachet\Source\State\PlayerAction</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackOneComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotion\PlayerMotionStateImplementation.cpp">
+      <Filter>Rachet\Source\State\PlayerMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackOneState.cpp">
+      <Filter>Rachet\Source\State\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackOneState.cpp">
+      <Filter>Rachet\Source\State\PlayerMotion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1366,6 +1378,18 @@
     </ClInclude>
     <ClInclude Include="State\PlayerAction\PlayerActionJumpLandingState.h">
       <Filter>Rachet\Header\State\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackOneComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotion\PlayerMotionStateDefine.h">
+      <Filter>Rachet\Header\State\PlayerMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackOneState.h">
+      <Filter>Rachet\Header\State\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackOneState.h">
+      <Filter>Rachet\Header\State\PlayerMotion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ state::PlayerMotionIdleState::~PlayerMotionIdleState() {
 }
 
 const char* state::PlayerMotionIdleState::GetName(void) const {
-    return "PlayerMotionIdleState";
+    return state::PlayerMotionStateType::kPlayerMotionIdleState.c_str();
 }
 
 void state::PlayerMotionIdleState::Update(float delta_time) {

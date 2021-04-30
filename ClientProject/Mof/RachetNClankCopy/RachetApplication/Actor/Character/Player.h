@@ -19,6 +19,7 @@ public:
         JumpUp,
         JumpDown,
         JumpLanding,
+        MeleeAttackOne,
         DamageDown,
         CountMax,
     };

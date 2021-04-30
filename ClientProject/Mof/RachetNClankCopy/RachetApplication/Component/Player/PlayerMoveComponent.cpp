@@ -1,6 +1,7 @@
 #include "PlayerMoveComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../State/PlayerAction/PlayerActionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
@@ -53,8 +54,8 @@ void my::PlayerMoveComponent::InputMoveAngularVelocity(float angle, float speed)
 
 my::PlayerMoveComponent::PlayerMoveComponent(int priority) :
     super(priority),
-    _move_speed(0.0f),
-    _angular_speed(0.0f),
+    _move_speed(1.8f),
+    _angular_speed(3.5f),
     _ideal_angle(0.0f),
     _velocity_com(),
     _motion_state_com() {
@@ -109,22 +110,74 @@ bool my::PlayerMoveComponent::Initialize(void) {
 }
 
 bool my::PlayerMoveComponent::Update(float delta_time) {
-    puts("PlayerMoveComponent");
+    Mof::CVector2 in;
+    float move_angle;
+    bool jump_flag = false;
+
+    // flag
+    bool action = this->AquireInputData(in , move_angle);
+    if (::g_pInput->IsKeyPush(MOFKEY_X) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+        jump_flag = true;
+    } // if
+
+    // transition
+    if (jump_flag) {
+        this->ChageState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+    } // if
+    if (action) {
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        this->Move(_move_speed, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
+    } // if
+    else {
+        this->ChageState(state::PlayerActionStateType::kPlayerActionIdleState);
+    } // else
+    return true;
+}
+
+bool my::PlayerMoveComponent::Release(void) {
+    super::Release();
+    return true;
+}
+
+std::shared_ptr<my::Component> my::PlayerMoveComponent::Clone(void) {
+    return std::make_shared<my::PlayerMoveComponent>(*this);
+}
+
+bool my::PlayerMoveComponent::Start(void) {
+    if (this->IsActive()) {
+        return false;
+    } // if
+    super::Start();
+    if (auto motion_state_com = _motion_state_com.lock()) {
+        motion_state_com->ChangeState("PlayerMotionMoveState");
+    } // if
+    return true;
+}
+
+bool my::PlayerMoveComponent::Move(float move_speed, float angular_speed, float ideal_angle) {
+    this->InputMoveAngularVelocity(ideal_angle, angular_speed);
+    this->InputMoveVelocity(move_speed);
+    return true;
+}
+
+bool my::PlayerMoveComponent::AquireInputData(Mof::CVector2& stick, float& move_angle) {
+    move_angle = 0.0f;
+
+    float h = ::g_pGamepad->GetStickHorizontal(); float v = ::g_pGamepad->GetStickVertical();
+    stick = Mof::CVector2(h, v);
+
     bool action = false; bool left = false; bool right = false;
     float threshold = 0.5f;
-    float move_angle = 0.0f;
-    float h = ::g_pGamepad->GetStickHorizontal(); float v = ::g_pGamepad->GetStickVertical();
-    float angular_speed = 3.5f; float speed = 1.8f;
-    auto in = Mof::CVector2(h, v);
 
     // gamepad
-    if (in.Length() > threshold) {
+    if (stick.Length() > threshold) {
         action = true;
     } // if
     // keyboard
     else {
-        in = Mof::CVector2(1.0f, 0.0f);
-        
+        stick = Mof::CVector2(1.0f, 0.0f);
+
         if (::g_pInput->IsKeyHold(MOFKEY_A)) {
             action = true;
             left = true;
@@ -156,40 +209,5 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
             } // else if
         } // else if
     } // else
-
-    in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-    this->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-    this->SetAngularSpeed(angular_speed);
-    this->SetMoveSpeed(speed);
-
-
-    // transition
-    if (action) {
-        this->InputMoveAngularVelocity(_ideal_angle, _angular_speed);
-        this->InputMoveVelocity(_move_speed);
-    } // if
-    else {
-        this->ChageState("PlayerActionIdleState");
-    } // else
-    return true;
-}
-
-bool my::PlayerMoveComponent::Release(void) {
-    super::Release();
-    return true;
-}
-
-std::shared_ptr<my::Component> my::PlayerMoveComponent::Clone(void) {
-    return std::make_shared<my::PlayerMoveComponent>(*this);
-}
-
-bool my::PlayerMoveComponent::Start(void) {
-    if (this->IsActive()) {
-        return false;
-    } // if
-    super::Start();
-    if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("PlayerMotionMoveState");
-    } // if
-    return true;
+    return action;
 }

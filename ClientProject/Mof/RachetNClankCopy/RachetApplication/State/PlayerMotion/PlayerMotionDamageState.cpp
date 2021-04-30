@@ -11,7 +11,7 @@ state::PlayerMotionDamageState::~PlayerMotionDamageState() {
 }
 
 const char* state::PlayerMotionDamageState::GetName(void) const {
-    return "PlayerMotionDamageState";
+    return state::PlayerMotionStateType::kPlayerMotionDamageState.c_str();
 }
 
 void state::PlayerMotionDamageState::Update(float delta_time) {

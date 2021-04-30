@@ -10,7 +10,7 @@ state::PlayerMotionMoveState::~PlayerMotionMoveState() {
 }
 
 const char* state::PlayerMotionMoveState::GetName(void) const {
-    return "PlayerMotionMoveState";
+    return state::PlayerMotionStateType::kPlayerMotionMoveState.c_str();
 }
 
 void state::PlayerMotionMoveState::Update(float delta_time) {

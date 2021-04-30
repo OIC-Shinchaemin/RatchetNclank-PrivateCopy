@@ -1,17 +1,16 @@
 #include "PlayerJumpUpComponent.h"
 
+#include "../../Gamepad.h"
 #include "../../State/PlayerAction/PlayerActionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
+#include "PlayerMoveComponent.h"
 
 
 void my::PlayerJumpUpComponent::InputJumpVelocity(float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
-        //auto accele = Mof::CVector3(0.0f, speed, 0.0f);
-        //auto rotate = super::GetOwner()->GetRotate();
-        //accele.RotateAround(Mof::CVector3(), rotate);
         auto v = velocity_com->GetVelocity();
         v.y = speed;
         velocity_com->SetVelocity(v);
@@ -25,7 +24,8 @@ my::PlayerJumpUpComponent::PlayerJumpUpComponent(int priority) :
     _jump_decrase(1.0f),
     _state_com(),
     _velocity_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
 }
 
 my::PlayerJumpUpComponent::PlayerJumpUpComponent(const PlayerJumpUpComponent& obj) :
@@ -35,7 +35,9 @@ my::PlayerJumpUpComponent::PlayerJumpUpComponent(const PlayerJumpUpComponent& ob
     _jump_decrase(obj._jump_decrase),
     _state_com(),
     _velocity_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
+
 }
 
 my::PlayerJumpUpComponent::~PlayerJumpUpComponent() {
@@ -52,20 +54,31 @@ bool my::PlayerJumpUpComponent::Initialize(void) {
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 
 bool my::PlayerJumpUpComponent::Update(float delta_time) {
     puts("PlayerJumpUpComponent");
-
-    if (0.0f < std::abs(_jump_speed)) {
-        this->InputJumpVelocity(_jump_speed);
-    } // if
-
     auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();
     auto velocity_com = _velocity_com.lock();
+    auto move_com = _move_com.lock();
+
+    if (0.0f < std::abs(_jump_speed)) {
+        this->InputJumpVelocity(_jump_speed);
+    } // if
+    Mof::CVector2 in;
+    float move_angle;
+    bool jump_flag = false;
+
+    // flag
+    if (move_com->AquireInputData(in, move_angle)) {
+        float move_speed = 1.7f; float angular_speed = 3.3f;
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
+    } // if
 
     _jump_speed -= _jump_decrase;
     if (_jump_speed < 0.0f) {

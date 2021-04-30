@@ -79,6 +79,13 @@
     },
 
     {
+      "type": "PlayerMeleeAttackOneComponent",
+      "paramater": {
+        "priority": 91
+      }
+    },
+
+    {
       "type": "PlayerDamageComponent",
       "paramater": {
         "priority": 92

@@ -13,6 +13,7 @@ struct PlayerActionStateType {
     static std::string kPlayerActionJumpUpState;
     static std::string kPlayerActionJumpDownState;
     static std::string kPlayerActionJumpLandingState;
+    static std::string kPlayerActionMeleeAttackOneState;
     static std::string kPlayerActionDamageState;
 };
 }

@@ -19,6 +19,8 @@ private:
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! 移動
+    std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:
     /// <summary>
     /// コンストラクタ

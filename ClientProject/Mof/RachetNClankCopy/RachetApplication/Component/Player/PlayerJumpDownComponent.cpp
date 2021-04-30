@@ -4,18 +4,8 @@
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
+#include "PlayerMoveComponent.h"
 
-
-void my::PlayerJumpDownComponent::InputJumpVelocity(float speed) {
-    if (auto velocity_com = _velocity_com.lock()) {
-        //auto accele = Mof::CVector3(0.0f, speed, 0.0f);
-        //auto rotate = super::GetOwner()->GetRotate();
-        //accele.RotateAround(Mof::CVector3(), rotate);
-        auto v = velocity_com->GetVelocity();
-        v.y = speed;
-        velocity_com->SetVelocity(v);
-    } // if
-}
 
 my::PlayerJumpDownComponent::PlayerJumpDownComponent(int priority) :
     super(priority),
@@ -24,7 +14,8 @@ my::PlayerJumpDownComponent::PlayerJumpDownComponent(int priority) :
     _jump_decrase(1.0f),
     _state_com(),
     _velocity_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
 }
 
 my::PlayerJumpDownComponent::PlayerJumpDownComponent(const PlayerJumpDownComponent& obj) :
@@ -34,7 +25,8 @@ my::PlayerJumpDownComponent::PlayerJumpDownComponent(const PlayerJumpDownCompone
     _jump_decrase(obj._jump_decrase),
     _state_com(),
     _velocity_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
 }
 
 my::PlayerJumpDownComponent::~PlayerJumpDownComponent() {
@@ -51,11 +43,24 @@ bool my::PlayerJumpDownComponent::Initialize(void) {
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 
 bool my::PlayerJumpDownComponent::Update(float delta_time) {
     puts("PlayerJumpDownComponent");
+
+    auto move_com = _move_com.lock();
+
+    Mof::CVector2 in;
+    float move_angle;
+
+    // flag
+    if (move_com->AquireInputData(in, move_angle)) {
+        float move_speed = 1.7f; float angular_speed = 3.3f;
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
+    } // if
     return true;
 }
 

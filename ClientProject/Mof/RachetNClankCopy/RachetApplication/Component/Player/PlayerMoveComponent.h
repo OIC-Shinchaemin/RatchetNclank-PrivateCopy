@@ -31,7 +31,17 @@ private:
     /// </summary>
     /// <param name="name"></param>
     void ChageState(const std::string& name);
+public:
+    /// <summary>
+    /// â¡ë¨
+    /// </summary>
+    /// <param name="speed"></param>
     virtual void InputMoveVelocity(float speed);
+    /// <summary>
+    /// â¡ë¨
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <param name="speed"></param>
     virtual void InputMoveAngularVelocity(float angle, float speed);
 public:
     /// <summary>
@@ -111,6 +121,21 @@ public:
     /// <param name=""></param>
     /// <returns>ê¨å˜</returns>
     virtual bool Start(void) override;
+    /// <summary>
+    /// â¡ë¨
+    /// </summary>
+    /// <param name="move_speed"></param>
+    /// <param name="angular_speed"></param>
+    /// <param name="ideal_angle"></param>
+    /// <returns>é¿çs</returns>
+    bool Move(float move_speed, float angular_speed, float ideal_angle);
+    /// <summary>
+    /// älìæ
+    /// </summary>
+    /// <param name="stick">èoóÕ</param>
+    /// <param name="move_angle">èoóÕ</param>
+    /// <returns></returns>
+    bool AquireInputData(Mof::CVector2& stick, float& move_angle);
 };
 }
 #endif // !MY_PLAYER_MOVE_COMPONENT_H

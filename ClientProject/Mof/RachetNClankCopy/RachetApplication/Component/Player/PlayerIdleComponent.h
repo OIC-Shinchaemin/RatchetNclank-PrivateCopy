@@ -13,17 +13,12 @@ namespace my {
 class PlayerIdleComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! 回転速度
-    float _angular_speed;
-    //! ラジアン
-    float _ideal_angle;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
-
     /// <summary>
     /// 変更
     /// </summary>
@@ -44,16 +39,6 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~PlayerIdleComponent();
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="speed"></param>
-    void SetAngularSpeed(float speed);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="radian"></param>
-    void SetIdealAngle(float radian);
     /// <summary>
     /// ゲッター
     /// </summary>

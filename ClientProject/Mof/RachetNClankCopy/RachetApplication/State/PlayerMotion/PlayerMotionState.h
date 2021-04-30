@@ -8,6 +8,7 @@
 
 #include <Mof.h>
 
+#include "PlayerMotionStateDefine.h"
 #include "../../MotionNames.h"
 #include "../../Actor/Character/Player.h"
 #include "../../Component/MotionComponent.h"
