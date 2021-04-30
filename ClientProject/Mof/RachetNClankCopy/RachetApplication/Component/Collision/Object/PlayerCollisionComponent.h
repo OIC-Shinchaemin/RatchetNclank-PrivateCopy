@@ -16,10 +16,10 @@ class PlayerCollisionComponent : public my::CollisionComponent {
 private:
     //! プレイヤー
     std::weak_ptr<class PlayerComponent> _player_com;
-    //! プレイヤー
-    std::weak_ptr<class PlayerJumpComponent> _jump_com;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! プレイヤー
+    std::weak_ptr<class PlayerStateComponent> _state_com;
 private:
     /// <summary>
     /// 衝突

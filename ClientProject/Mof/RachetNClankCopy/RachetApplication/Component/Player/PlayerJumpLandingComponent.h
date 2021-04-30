@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_JUMP_COMPONENT_H
-#define MY_PLAYER_JUMP_COMPONENT_H
+#ifndef MY_PLAYER_JUMP_LANDING_COMPONENT_H
+#define MY_PLAYER_JUMP_LANDING_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -8,37 +8,32 @@
 
 
 namespace my {
-class PlayerJumpComponent : public my::UpdateComponent {
+class PlayerJumpLandingComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! 最大
-    float _jump_speed_max;
-    //! 速度
-    float _jump_speed;
-    //! 減少
-    float _jump_decrase;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
-    virtual void InputJumpVelocity(float speed);
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerJumpComponent(int priority);
+    PlayerJumpLandingComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerJumpComponent(const PlayerJumpComponent& obj);
+    PlayerJumpLandingComponent(const PlayerJumpLandingComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerJumpComponent();
+    virtual ~PlayerJumpLandingComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -77,4 +72,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_JUMP_COMPONENT_H
+#endif // !MY_PLAYER_JUMP_LANDING_COMPONENT_H

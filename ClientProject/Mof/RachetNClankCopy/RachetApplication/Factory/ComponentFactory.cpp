@@ -11,7 +11,10 @@
 #include "../Component/Player/PlayerStateComponent.h"
 #include "../Component/Player/PlayerIdleComponent.h"
 #include "../Component/Player/PlayerMoveComponent.h"
-#include "../Component/Player/PlayerJumpComponent.h"
+#include "../Component/Player/PlayerJumpSetComponent.h"
+#include "../Component/Player/PlayerJumpUpComponent.h"
+#include "../Component/Player/PlayerJumpDownComponent.h"
+#include "../Component/Player/PlayerJumpLandingComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
@@ -50,7 +53,10 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerIdleComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMoveComponent>();
-    my::ComponentFactory::AddComponentCreator<my::PlayerJumpComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerJumpSetComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerJumpUpComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerJumpDownComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerJumpLandingComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();

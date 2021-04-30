@@ -1,38 +1,11 @@
 #include "PlayerIdleComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../State/PlayerAction/PlayerActionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
 
-
-/*
-void my::PlayerIdleComponent::InputMoveAngularVelocity(float angle, float speed) {
-    if (auto velocity_com = _velocity_com.lock()) {
-
-        float angle_y = angle;
-        if (math::kTwoPi <= angle_y) {
-            angle_y -= math::kTwoPi;
-        } // if
-        else if (angle_y <= 0.0f) {
-            angle_y += math::kTwoPi;
-        } // else if
-
-        auto rotate = super::GetOwner()->GetRotate();
-        // ç∑ï™äpìx
-        angle_y -= rotate.y;
-        if (math::kPi < angle_y) {
-            angle_y -= math::kTwoPi;
-        } // if
-        else if (angle_y < -math::kPi) {
-            angle_y += math::kTwoPi;
-        } // else if
-
-        auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
-        velocity_com->AddAngularVelocityForce(accele);
-    } // if
-}
-*/
 
 void my::PlayerIdleComponent::ChageState(const std::string& name) {
     if (auto state_com = _state_com.lock()) {
@@ -93,11 +66,11 @@ bool my::PlayerIdleComponent::Update(float delta_time) {
         ::g_pInput->IsKeyHold(MOFKEY_S) ||
         ::g_pInput->IsKeyHold(MOFKEY_D) ||
         stick.Length() > threshold) {
-        this->ChageState("PlayerActionMoveState");
+        this->ChageState(state::PlayerActionStateType::kPlayerActionMoveState);
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_X) || 
              ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
-        this->ChageState("PlayerActionJumpState");
+        this->ChageState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // else if
     return true;
 }

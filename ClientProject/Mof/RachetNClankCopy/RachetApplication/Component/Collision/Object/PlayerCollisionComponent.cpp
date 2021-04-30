@@ -1,9 +1,10 @@
 #include "PlayerCollisionComponent.h"
 
 #include "CollisionComponentDefine.h"
+#include "../../../State/PlayerAction/PlayerActionStateDefine.h"
 #include "../../Player/PlayerComponent.h"
-#include "../../Player/PlayerJumpComponent.h"
 #include "../../VelocityComponent.h"
+#include "../../Player/PlayerStateComponent.h"
 
 
 bool my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
@@ -37,13 +38,16 @@ bool my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer m
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     super(priority),
-    _player_com() {
+    _player_com(),
+    _velocity_com(),
+    _state_com() {
 }
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
     super(obj._priority),
     _player_com(),
-    _velocity_com() {
+    _velocity_com(),
+    _state_com() {
 }
 
 my::PlayerCollisionComponent::~PlayerCollisionComponent() {
@@ -88,7 +92,7 @@ std::optional<my::SightObject> my::PlayerCollisionComponent::GetSightObject(void
 bool my::PlayerCollisionComponent::Initialize(void) {
     super::Initialize();
     _player_com = super::GetOwner()->GetComponent<my::PlayerComponent>();
-    _jump_com = super::GetOwner()->GetComponent<my::PlayerJumpComponent >();
+    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     return true;
 }
@@ -117,7 +121,13 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += height - info.d;
                 super::GetOwner()->SetPosition(pos);
-                _jump_com.lock()->End();
+
+                if (auto state_com = _state_com.lock()) {
+                    if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
+                        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
+                    } // if
+                } // if
+
             } // if
         } // if
         geometry->SetMatrix(default_matrix);

@@ -1,11 +1,13 @@
-#include "PlayerJumpComponent.h"
+#include "PlayerJumpUpComponent.h"
 
+#include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
 
 
-void my::PlayerJumpComponent::InputJumpVelocity(float speed) {
+void my::PlayerJumpUpComponent::InputJumpVelocity(float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
         //auto accele = Mof::CVector3(0.0f, speed, 0.0f);
         //auto rotate = super::GetOwner()->GetRotate();
@@ -16,44 +18,51 @@ void my::PlayerJumpComponent::InputJumpVelocity(float speed) {
     } // if
 }
 
-my::PlayerJumpComponent::PlayerJumpComponent(int priority) :
+my::PlayerJumpUpComponent::PlayerJumpUpComponent(int priority) :
     super(priority),
     _jump_speed_max(20.0f),
     _jump_speed(_jump_speed_max),
     _jump_decrase(1.0f),
+    _state_com(),
     _velocity_com(),
     _motion_state_com() {
 }
 
-my::PlayerJumpComponent::PlayerJumpComponent(const PlayerJumpComponent& obj) :
+my::PlayerJumpUpComponent::PlayerJumpUpComponent(const PlayerJumpUpComponent& obj) :
     super(obj._priority),
     _jump_speed_max(obj._jump_speed_max),
     _jump_speed(obj._jump_speed),
     _jump_decrase(obj._jump_decrase),
+    _state_com(),
     _velocity_com(),
     _motion_state_com() {
 }
 
-my::PlayerJumpComponent::~PlayerJumpComponent() {
+my::PlayerJumpUpComponent::~PlayerJumpUpComponent() {
 }
 
-std::string my::PlayerJumpComponent::GetType(void) const {
-    return "PlayerJumpComponent";
+std::string my::PlayerJumpUpComponent::GetType(void) const {
+    return "PlayerJumpUpComponent";
 }
 
-bool my::PlayerJumpComponent::Initialize(void) {
+bool my::PlayerJumpUpComponent::Initialize(void) {
     super::Initialize();
 
+    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     return true;
 }
 
-bool my::PlayerJumpComponent::Update(float delta_time) {
+bool my::PlayerJumpUpComponent::Update(float delta_time) {
+    puts("PlayerJumpUpComponent");
+
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
+
+    auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();
     auto velocity_com = _velocity_com.lock();
@@ -62,32 +71,31 @@ bool my::PlayerJumpComponent::Update(float delta_time) {
     if (_jump_speed < 0.0f) {
         _jump_speed = 0.0f;
         velocity_com->SetGravity(4.8f);
-        motion_state_com->ChangeState("PlayerMotionJumpDownState");
+        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpDownState);
     } // if
-    else if (motion_com->IsEndMotion()) {
-        motion_state_com->ChangeState("PlayerMotionJumpUpState");
-        velocity_com->SetGravity(3.8f);
-        _jump_speed = _jump_speed_max;
-    } // else if
     return true;
 }
 
-bool my::PlayerJumpComponent::Release(void) {
+bool my::PlayerJumpUpComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerJumpComponent::Clone(void) {
-    return std::make_shared<my::PlayerJumpComponent>(*this);
+std::shared_ptr<my::Component> my::PlayerJumpUpComponent::Clone(void) {
+    return std::make_shared<my::PlayerJumpUpComponent>(*this);
 }
 
-bool my::PlayerJumpComponent::Start(void) {
+bool my::PlayerJumpUpComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("PlayerMotionJumpSetState");
+        motion_state_com->ChangeState("PlayerMotionJumpUpState");
     } // if
+    if (auto velocity_com = _velocity_com.lock()) {
+        velocity_com->SetGravity(3.8f);
+    } // if
+    _jump_speed = _jump_speed_max;
     return true;
 }

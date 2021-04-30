@@ -1,27 +1,27 @@
-#ifndef STATE_PLAYER_ACTION_JUMP_STATE_H
-#define STATE_PLAYER_ACTION_JUMP_STATE_H
+#ifndef STATE_PLAYER_ACTION_JUMP_UP_STATE_H
+#define STATE_PLAYER_ACTION_JUMP_UP_STATE_H
 
 
 #include "PlayerActionState.h"
 
-#include "../../Component/Player/PlayerJumpComponent.h"
+#include "../../Component/Player/PlayerJumpUpComponent.h"
 
 
 namespace state {
-class PlayerActionJumpState : public state::PlayerActionState {
+class PlayerActionJumpUpState : public state::PlayerActionState {
     using super = state::PlayerActionState;
 private:
     //! ジャンプ
-    std::weak_ptr<my::PlayerJumpComponent> _jump_com;
+    std::weak_ptr<my::PlayerJumpUpComponent> _jump_com;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    PlayerActionJumpState();
+    PlayerActionJumpUpState();
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerActionJumpState();
+    virtual ~PlayerActionJumpUpState();
     /// <summary>
     /// セッター
     /// </summary>
@@ -50,4 +50,4 @@ public:
     virtual void Exit(void) override;
 };
 }
-#endif // !STATE_PLAYER_ACTION_JUMP_STATE_H
+#endif // !STATE_PLAYER_ACTION_JUMP_UP_STATE_H

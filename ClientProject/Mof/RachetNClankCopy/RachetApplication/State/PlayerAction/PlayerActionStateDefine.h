@@ -9,7 +9,10 @@ namespace state {
 struct PlayerActionStateType {
     static std::string kPlayerActionIdleState;
     static std::string kPlayerActionMoveState;
-    static std::string kPlayerActionJumpState;
+    static std::string kPlayerActionJumpSetState;
+    static std::string kPlayerActionJumpUpState;
+    static std::string kPlayerActionJumpDownState;
+    static std::string kPlayerActionJumpLandingState;
     static std::string kPlayerActionDamageState;
 };
 }

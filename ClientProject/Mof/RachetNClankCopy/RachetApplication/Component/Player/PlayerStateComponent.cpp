@@ -2,7 +2,10 @@
 
 #include "../../State/PlayerAction/PlayerActionIdleState.h"
 #include "../../State/PlayerAction/PlayerActionMoveState.h"
-#include "../../State/PlayerAction/PlayerActionJumpState.h"
+#include "../../State/PlayerAction/PlayerActionJumpSetState.h"
+#include "../../State/PlayerAction/PlayerActionJumpUpState.h"
+#include "../../State/PlayerAction/PlayerActionJumpDownState.h"
+#include "../../State/PlayerAction/PlayerActionJumpLandingState.h"
 
 
 my::PlayerStateComponent::PlayerStateComponent(int priority) :
@@ -33,7 +36,10 @@ bool my::PlayerStateComponent::Initialize(void) {
     // state
     this->RegisterState<state::PlayerActionIdleState>(_state_machine);
     this->RegisterState<state::PlayerActionMoveState>(_state_machine);
-    this->RegisterState<state::PlayerActionJumpState>(_state_machine);
+    this->RegisterState<state::PlayerActionJumpSetState>(_state_machine);
+    this->RegisterState<state::PlayerActionJumpUpState>(_state_machine);
+    this->RegisterState<state::PlayerActionJumpDownState>(_state_machine);
+    this->RegisterState<state::PlayerActionJumpLandingState>(_state_machine);
     _state_machine.ChangeState("PlayerActionIdleState");
     return true;
 }
@@ -55,4 +61,13 @@ std::shared_ptr<my::Component> my::PlayerStateComponent::Clone(void) {
 
 void my::PlayerStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
+}
+
+bool my::PlayerStateComponent::CanTransition(const std::string& name) {
+    if (name == state::PlayerActionStateType::kPlayerActionJumpLandingState) {
+        if (_state_machine.GetCurrentStateName() == state::PlayerActionStateType::kPlayerActionJumpDownState) {
+            return true;
+        } // if
+    } // if
+    return false;
 }

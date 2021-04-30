@@ -28,7 +28,9 @@ private:
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! ジャンプ
-    std::weak_ptr<class PlayerJumpComponent> _jump_com;
+    std::weak_ptr<class PlayerJumpUpComponent> _jump_up_com;
+    //! ジャンプ
+    std::weak_ptr<class PlayerJumpDownComponent> _jump_down_com;
     /// <summary>
     /// 操作
     /// </summary>

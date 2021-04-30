@@ -4,7 +4,8 @@
 #include "../Camera/FollowCameraController.h"
 #include "../Camera/DebugCameraController.h"
 #include "VelocityComponent.h"
-#include "Player/PlayerJumpComponent.h"
+#include "Player/PlayerJumpUpComponent.h"
+#include "Player/PlayerJumpDownComponent.h"
 
 
 void my::CameraComponent::ControlByKeyboard(void) {
@@ -129,7 +130,8 @@ my::CameraComponent::CameraComponent(int priority) :
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
     _preview_position(),
-    _jump_com() {
+    _jump_up_com(),
+    _jump_down_com() {
 }
 
 my::CameraComponent::CameraComponent(const CameraComponent& obj) :
@@ -140,7 +142,8 @@ my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
     _preview_position(),
-    _jump_com() {
+    _jump_up_com(),
+    _jump_down_com() {
 }
 
 my::CameraComponent::~CameraComponent() {
@@ -197,7 +200,8 @@ bool my::CameraComponent::Initialize(void) {
 
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _jump_com = super::GetOwner()->GetComponent<my::PlayerJumpComponent>();
+    _jump_up_com = super::GetOwner()->GetComponent<my::PlayerJumpUpComponent>();
+    _jump_down_com = super::GetOwner()->GetComponent<my::PlayerJumpDownComponent>();
     return true;
 }
 
@@ -214,19 +218,17 @@ bool my::CameraComponent::Update(float delta_time) {
         _camera_controller.GetService()->SetCameraTarget(pos + offset);
     } // if
     else {
-        //if (auto velocity_com = _velocity_com.lock()) {
-        if (auto jump_com = _jump_com.lock()) {
-            //if (0.0f <= velocity_com->GetVelocity().y ) {
-            if (jump_com->IsActive()) {
-                auto temp = pos;
-                temp.y = _preview_position.y;
-                _camera_controller.GetService()->SetCameraTarget(temp);
-            } // if
-            else {
-                _preview_position = pos;
-                _camera_controller.GetService()->SetCameraTarget(pos);
-            } // else
+        auto jump_up_com = _jump_up_com.lock();
+        auto jump_down_com = _jump_down_com.lock();
+        if (jump_up_com->IsActive() || jump_down_com->IsActive()) {
+            auto temp = pos;
+            temp.y = _preview_position.y;
+            _camera_controller.GetService()->SetCameraTarget(temp);
         } // if
+        else {
+            _preview_position = pos;
+            _camera_controller.GetService()->SetCameraTarget(pos);
+        } // else
     } // else
     _camera_controller.GetService()->Update();
 

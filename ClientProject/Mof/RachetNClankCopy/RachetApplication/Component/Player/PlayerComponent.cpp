@@ -5,7 +5,6 @@
 #include "../../Component/VelocityComponent.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
-#include "../Player/PlayerJumpComponent.h"
 #include "../Player/PlayerDamageComponent.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
 #include "../../UI/LockOnCursorMenu.h"
@@ -28,7 +27,6 @@ my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     _state_com(),
     _idle_com(),
     _move_com(),
-    _jump_com(),
     _damage_com() {
 }
 
@@ -55,7 +53,6 @@ bool my::PlayerComponent::Initialize(void) {
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-    _jump_com = super::GetOwner()->GetComponent<my::PlayerJumpComponent>();
     _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
 
     velocity_com->SetGravity(9.8f);

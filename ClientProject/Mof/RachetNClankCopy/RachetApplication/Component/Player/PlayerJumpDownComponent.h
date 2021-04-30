@@ -1,64 +1,53 @@
-#ifndef MY_PLAYER_COMPONENT_H
-#define MY_PLAYER_COMPONENT_H
+#ifndef MY_PLAYER_JUMP_DOWN_COMPONENT_H
+#define MY_PLAYER_JUMP_DOWN_COMPONENT_H
 
 
-#include "../CharacterComponent.h"
+#include "../UpdateComponent.h"
 
 #include <memory>
 
-#include "My/Core/Observable.h"
-
 
 namespace my {
-class PlayerComponent : public my::CharacterComponent {
-    using super = my::CharacterComponent;
+class PlayerJumpDownComponent : public my::UpdateComponent {
+    using super = my::UpdateComponent;
 private:
-    //! 標的
-    std::weak_ptr<my::Actor> _target;
-    //! カーソル位置
-    my::Observable<std::optional<Mof::CVector3>> _observable;
-    //! 待機
+    //! 最大
+    float _jump_speed_max;
+    //! 速度
+    float _jump_speed;
+    //! 減少
+    float _jump_decrase;
+    //! 速度
+    std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! モーション
+    std::weak_ptr<class MotionComponent> _motion_com;
+    //! モーション
+    std::weak_ptr<class MotionStateComponent> _motion_state_com;
+    //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! 待機
-    std::weak_ptr<class PlayerIdleComponent> _idle_com;
-    //! 移動
-    std::weak_ptr<class PlayerMoveComponent> _move_com;
-    //! 移動
-    std::weak_ptr<class PlayerDamageComponent> _damage_com;
-    bool MoveByKeyboard(float angular_speed, float speed);
-    void MoveByGamepad(float angular_speed, float speed);
+
+    virtual void InputJumpVelocity(float speed);
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerComponent(int priority);
+    PlayerJumpDownComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerComponent(const PlayerComponent& obj);
+    PlayerJumpDownComponent(const PlayerJumpDownComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerComponent();
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<my::Actor>& ptr);
+    virtual ~PlayerJumpDownComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    std::weak_ptr<my::Actor> GetTarget(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -84,11 +73,11 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
     /// <summary>
-    /// 描画
+    /// 開始
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool DebugRender(void) override;
+    /// <returns>成功</returns>
+    virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_COMPONENT_H
+#endif // !MY_PLAYER_JUMP_DOWN_COMPONENT_H
