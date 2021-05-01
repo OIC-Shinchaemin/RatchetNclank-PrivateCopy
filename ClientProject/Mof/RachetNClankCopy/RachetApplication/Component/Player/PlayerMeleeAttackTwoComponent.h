@@ -1,16 +1,14 @@
-#ifndef MY_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
-#define MY_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
+#ifndef MY_PLAYER_MELEE_ATTACK_TWO_COMPONENT_H
+#define MY_PLAYER_MELEE_ATTACK_TWO_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 #include <memory>
 
-#include "PlayerStateComponent.h"
-
 
 namespace my {
-class PlayerMeleeAttackOneComponent : public my::UpdateComponent {
+class PlayerMeleeAttackTwoComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
     //! 予約
@@ -33,16 +31,16 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerMeleeAttackOneComponent(int priority);
+    PlayerMeleeAttackTwoComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerMeleeAttackOneComponent(const PlayerMeleeAttackOneComponent& obj);
+    PlayerMeleeAttackTwoComponent(const PlayerMeleeAttackTwoComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerMeleeAttackOneComponent();
+    virtual ~PlayerMeleeAttackTwoComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -81,4 +79,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
+#endif // !MY_PLAYER_MELEE_ATTACK_TWO_COMPONENT_H

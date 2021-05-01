@@ -7,6 +7,8 @@
 #include "../../State/PlayerAction/PlayerActionJumpDownState.h"
 #include "../../State/PlayerAction/PlayerActionJumpLandingState.h"
 #include "../../State/PlayerAction/PlayerActionMeleeAttackOneState.h"
+#include "../../State/PlayerAction/PlayerActionMeleeAttackTwoState.h"
+#include "../../State/PlayerAction/PlayerActionMeleeAttackThreeState.h"
 
 
 my::PlayerStateComponent::PlayerStateComponent(int priority) :
@@ -42,6 +44,8 @@ bool my::PlayerStateComponent::Initialize(void) {
     this->RegisterState<state::PlayerActionJumpDownState>(_state_machine);
     this->RegisterState<state::PlayerActionJumpLandingState>(_state_machine);
     this->RegisterState<state::PlayerActionMeleeAttackOneState>(_state_machine);
+    this->RegisterState<state::PlayerActionMeleeAttackTwoState>(_state_machine);
+    this->RegisterState<state::PlayerActionMeleeAttackThreeState>(_state_machine);
     _state_machine.ChangeState("PlayerActionIdleState");
     return true;
 }

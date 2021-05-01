@@ -735,6 +735,24 @@
     <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackOneState.cpp">
       <Filter>Rachet\Source\State\PlayerMotion</Filter>
     </ClCompile>
+    <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackThreeState.cpp">
+      <Filter>Rachet\Source\State\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackTwoState.cpp">
+      <Filter>Rachet\Source\State\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackThreeState.cpp">
+      <Filter>Rachet\Source\State\PlayerMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackTwoState.cpp">
+      <Filter>Rachet\Source\State\PlayerMotion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1389,6 +1407,24 @@
       <Filter>Rachet\Header\State\PlayerAction</Filter>
     </ClInclude>
     <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackOneState.h">
+      <Filter>Rachet\Header\State\PlayerMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackTwoState.h">
+      <Filter>Rachet\Header\State\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackThreeState.h">
+      <Filter>Rachet\Header\State\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackTwoState.h">
+      <Filter>Rachet\Header\State\PlayerMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackThreeState.h">
       <Filter>Rachet\Header\State\PlayerMotion</Filter>
     </ClInclude>
   </ItemGroup>

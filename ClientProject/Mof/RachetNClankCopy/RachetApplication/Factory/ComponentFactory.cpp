@@ -16,6 +16,8 @@
 #include "../Component/Player/PlayerJumpDownComponent.h"
 #include "../Component/Player/PlayerJumpLandingComponent.h"
 #include "../Component/Player/PlayerMeleeAttackOneComponent.h"
+#include "../Component/Player/PlayerMeleeAttackTwoComponent.h"
+#include "../Component/Player/PlayerMeleeAttackThreeComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
@@ -59,6 +61,8 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpDownComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpLandingComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackOneComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackTwoComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();

@@ -44,13 +44,13 @@
     {
       "type": "PlayerMoveComponent",
       "paramater": {
-        "priority": 90
+        "priority": 92
       }
     },
     {
       "type": "PlayerIdleComponent",
       "paramater": {
-        "priority": 91
+        "priority": 92
       }
     },
     {
@@ -80,6 +80,18 @@
 
     {
       "type": "PlayerMeleeAttackOneComponent",
+      "paramater": {
+        "priority": 91
+      }
+    },
+    {
+      "type": "PlayerMeleeAttackTwoComponent",
+      "paramater": {
+        "priority": 91
+      }
+    },
+    {
+      "type": "PlayerMeleeAttackThreeComponent",
       "paramater": {
         "priority": 91
       }

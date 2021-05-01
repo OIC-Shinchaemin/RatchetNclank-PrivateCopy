@@ -14,6 +14,8 @@ struct PlayerMotionStateType {
     static std::string kPlayerMotionJumpDownState;
     static std::string kPlayerMotionJumpLandingState;
     static std::string kPlayerMotionMeleeAttackOneState;
+    static std::string kPlayerMotionMeleeAttackTwoState;
+    static std::string kPlayerMotionMeleeAttackThreeState;
     static std::string kPlayerMotionDamageState;
 };
 }
