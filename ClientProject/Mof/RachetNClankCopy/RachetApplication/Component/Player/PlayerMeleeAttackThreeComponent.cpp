@@ -7,6 +7,7 @@
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
 #include "../MotionComponent.h"
+#include "PlayerMoveComponent.h"
 
 
 void my::PlayerMeleeAttackThreeComponent::ChageState(const std::string& name) {
@@ -20,7 +21,8 @@ my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priorit
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
 }
 
 my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const PlayerMeleeAttackThreeComponent& obj) :
@@ -28,7 +30,8 @@ my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const Playe
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
 }
 
 my::PlayerMeleeAttackThreeComponent::~PlayerMeleeAttackThreeComponent() {
@@ -45,6 +48,7 @@ bool my::PlayerMeleeAttackThreeComponent::Initialize(void) {
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 
@@ -77,5 +81,16 @@ bool my::PlayerMeleeAttackThreeComponent::Start(void) {
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionMeleeAttackThreeState);
     } // if
+
+    if (auto move_com = _move_com.lock()) {
+        Mof::CVector2 in; float move_angle;
+        float move_speed = 10.0f; float angular_speed = 0.0f; float ideal_angle = super::GetOwner()->GetRotate().y;
+        if (move_com->AquireInputData(in, move_angle)) {
+            in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+            angular_speed = 15.0f; ideal_angle = std::atan2(-in.y, in.x) - math::kHalfPi;
+        } // if
+        move_com->Move(move_speed, angular_speed, ideal_angle);
+    } // if
+
     return true;
 }

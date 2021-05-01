@@ -7,6 +7,7 @@
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
 #include "../MotionComponent.h"
+#include "PlayerMoveComponent.h"
 
 
 void my::PlayerMeleeAttackTwoComponent::ChageState(const std::string& name) {
@@ -21,7 +22,8 @@ my::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(int priority) :
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
 }
 
 my::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(const PlayerMeleeAttackTwoComponent& obj) :
@@ -30,7 +32,8 @@ my::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(const PlayerMel
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _move_com() {
 }
 
 my::PlayerMeleeAttackTwoComponent::~PlayerMeleeAttackTwoComponent() {
@@ -47,6 +50,7 @@ bool my::PlayerMeleeAttackTwoComponent::Initialize(void) {
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 
@@ -91,5 +95,16 @@ bool my::PlayerMeleeAttackTwoComponent::Start(void) {
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionMeleeAttackTwoState);
     } // if
+
+    if (auto move_com = _move_com.lock()) {
+        Mof::CVector2 in; float move_angle;
+        float move_speed = 7.0f; float angular_speed = 0.0f; float ideal_angle = super::GetOwner()->GetRotate().y;
+        if (move_com->AquireInputData(in, move_angle)) {
+            in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+            angular_speed = 15.0f; ideal_angle = std::atan2(-in.y, in.x) - math::kHalfPi;
+        } // if
+        move_com->Move(move_speed, angular_speed, ideal_angle);
+    } // if
+
     return true;
 }

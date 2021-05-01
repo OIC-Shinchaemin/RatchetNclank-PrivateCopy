@@ -11,6 +11,12 @@ namespace my {
 class PlayerJumpSetComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! ジャンプ
+    float _jump_speed;
+    //! ジャンプ
+    float _jump_speed_first;
+    //! ジャンプ
+    float _jump_speed_increase;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション
@@ -19,6 +25,8 @@ private:
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
+    //! 移動
+    std::weak_ptr<class PlayerJumpUpComponent> _jump_com;
 public:
     /// <summary>
     /// コンストラクタ

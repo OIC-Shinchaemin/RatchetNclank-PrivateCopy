@@ -19,9 +19,8 @@ void my::PlayerJumpUpComponent::InputJumpVelocity(float speed) {
 
 my::PlayerJumpUpComponent::PlayerJumpUpComponent(int priority) :
     super(priority),
-    _jump_speed_max(20.0f),
-    _jump_speed(_jump_speed_max),
-    _jump_decrase(1.0f),
+    _jump_speed(0.0f),
+    _jump_decrase(0.4f),
     _state_com(),
     _velocity_com(),
     _motion_state_com(),
@@ -30,8 +29,7 @@ my::PlayerJumpUpComponent::PlayerJumpUpComponent(int priority) :
 
 my::PlayerJumpUpComponent::PlayerJumpUpComponent(const PlayerJumpUpComponent& obj) :
     super(obj._priority),
-    _jump_speed_max(obj._jump_speed_max),
-    _jump_speed(obj._jump_speed),
+    _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
     _state_com(),
     _velocity_com(),
@@ -45,6 +43,10 @@ my::PlayerJumpUpComponent::~PlayerJumpUpComponent() {
 
 std::string my::PlayerJumpUpComponent::GetType(void) const {
     return "PlayerJumpUpComponent";
+}
+
+void my::PlayerJumpUpComponent::SetJumpSpeed(float speed) {
+    this->_jump_speed = speed;
 }
 
 bool my::PlayerJumpUpComponent::Initialize(void) {
@@ -83,7 +85,6 @@ bool my::PlayerJumpUpComponent::Update(float delta_time) {
     _jump_speed -= _jump_decrase;
     if (_jump_speed < 0.0f) {
         _jump_speed = 0.0f;
-        velocity_com->SetGravity(4.8f);
         state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpDownState);
     } // if
     return true;
@@ -107,8 +108,7 @@ bool my::PlayerJumpUpComponent::Start(void) {
         motion_state_com->ChangeState("PlayerMotionJumpUpState");
     } // if
     if (auto velocity_com = _velocity_com.lock()) {
-        velocity_com->SetGravity(3.8f);
+        velocity_com->SetGravity(1.8f);
     } // if
-    _jump_speed = _jump_speed_max;
     return true;
 }

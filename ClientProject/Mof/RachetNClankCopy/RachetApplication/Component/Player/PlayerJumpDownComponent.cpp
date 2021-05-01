@@ -81,5 +81,9 @@ bool my::PlayerJumpDownComponent::Start(void) {
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState("PlayerMotionJumpDownState");
     } // if
+    if (auto velocity_com = _velocity_com.lock()) {
+        velocity_com->SetGravity(2.0f);
+    } // if
+
     return true;
 }

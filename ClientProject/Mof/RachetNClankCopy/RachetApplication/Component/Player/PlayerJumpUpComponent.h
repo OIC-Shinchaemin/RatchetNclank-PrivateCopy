@@ -12,7 +12,7 @@ class PlayerJumpUpComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
     //! 最大
-    float _jump_speed_max;
+    //float _jump_speed_max;
     //! 速度
     float _jump_speed;
     //! 減少
@@ -50,6 +50,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="speed"></param>
+    void SetJumpSpeed(float speed);
     /// <summary>
     /// 初期化
     /// </summary>

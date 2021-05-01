@@ -1,5 +1,6 @@
 #include "PlayerJumpLandingComponent.h"
 
+#include "../../Gamepad.h"
 #include "../../State/PlayerAction/PlayerActionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
@@ -63,6 +64,10 @@ bool my::PlayerJumpLandingComponent::Update(float delta_time) {
 
     if (motion_com->IsEndMotion()) {
         state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
+    } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_X) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // if
     return true;
 }

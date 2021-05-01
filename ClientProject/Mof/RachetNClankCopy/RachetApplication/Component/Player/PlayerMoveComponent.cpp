@@ -19,7 +19,6 @@ void my::PlayerMoveComponent::InputMoveVelocity(float speed) {
         auto accele = Mof::CVector3(0.0f, 0.0f, -speed);
         auto rotate = super::GetOwner()->GetRotate();
         accele.RotateAround(Mof::CVector3(), rotate);
-
         velocity_com->AddVelocityForce(accele);
     } // if
 }
