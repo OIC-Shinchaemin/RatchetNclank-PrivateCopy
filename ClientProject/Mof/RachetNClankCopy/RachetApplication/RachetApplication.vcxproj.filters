@@ -786,6 +786,15 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
+    <ClCompile Include="State\PlayerAction\PlayerActionDoubleJumpState.cpp">
+      <Filter>Rachet\Source\State\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotion\PlayerMotionDoubleJumpState.cpp">
+      <Filter>Rachet\Source\State\PlayerMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1492,6 +1501,15 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerAction\PlayerActionDoubleJumpState.h">
+      <Filter>Rachet\Header\State\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotion\PlayerMotionDoubleJumpState.h">
+      <Filter>Rachet\Header\State\PlayerMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

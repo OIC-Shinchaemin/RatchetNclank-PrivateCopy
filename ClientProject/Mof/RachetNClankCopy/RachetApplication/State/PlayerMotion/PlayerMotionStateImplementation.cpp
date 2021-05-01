@@ -7,6 +7,7 @@ std::string state::PlayerMotionStateType::kPlayerMotionJumpSetState= "PlayerMoti
 std::string state::PlayerMotionStateType::kPlayerMotionJumpUpState= "PlayerMotionJumpUpState";
 std::string state::PlayerMotionStateType::kPlayerMotionJumpDownState= "PlayerMotionJumpDownState";
 std::string state::PlayerMotionStateType::kPlayerMotionJumpLandingState= "PlayerMotionJumpLandingState";
+std::string state::PlayerMotionStateType::kPlayerMotionDoubleJumpState = "PlayerMotionDoubleJumpState";
 std::string state::PlayerMotionStateType::kPlayerMotionMeleeAttackOneState = "PlayerMotionMeleeAttackOneState";
 std::string state::PlayerMotionStateType::kPlayerMotionMeleeAttackOneEndState = "PlayerMotionMeleeAttackOneEndState";
 std::string state::PlayerMotionStateType::kPlayerMotionMeleeAttackTwoState = "PlayerMotionMeleeAttackTwoState";

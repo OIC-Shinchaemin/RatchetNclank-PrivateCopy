@@ -6,6 +6,7 @@
 #include "../State/PlayerMotion/PlayerMotionJumpUpState.h"
 #include "../State/PlayerMotion/PlayerMotionJumpDownState.h"
 #include "../State/PlayerMotion/PlayerMotionJumpLandingState.h"
+#include "../State/PlayerMotion/PlayerMotionDoubleJumpState.h"
 #include "../State/PlayerMotion/PlayerMotionMeleeAttackOneState.h"
 #include "../State/PlayerMotion/PlayerMotionMeleeAttackOneEndState.h"
 #include "../State/PlayerMotion/PlayerMotionMeleeAttackTwoState.h"
@@ -59,6 +60,7 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterMotionState<state::PlayerMotionJumpUpState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionJumpDownState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionJumpLandingState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionDoubleJumpState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionMeleeAttackOneState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionMeleeAttackOneEndState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionMeleeAttackTwoState>(_state_machine);

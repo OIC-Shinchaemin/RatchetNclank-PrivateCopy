@@ -19,6 +19,7 @@ public:
         JumpUp,
         JumpDown,
         JumpLanding,
+        DoubleJump,
         MeleeAttackOne,
         MeleeAttackOneEnd,
         MeleeAttackTwo,

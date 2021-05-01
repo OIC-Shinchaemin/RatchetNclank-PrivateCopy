@@ -6,6 +6,7 @@
 #include "VelocityComponent.h"
 #include "Player/PlayerJumpUpComponent.h"
 #include "Player/PlayerJumpDownComponent.h"
+#include "Player/PlayerDoubleJumpComponent.h"
 
 
 void my::CameraComponent::ControlByKeyboard(void) {
@@ -131,7 +132,8 @@ my::CameraComponent::CameraComponent(int priority) :
     _ideal_fps_camera_angle(0.0f),
     _preview_position(),
     _jump_up_com(),
-    _jump_down_com() {
+    _jump_down_com() ,
+    _double_jump_com() {
 }
 
 my::CameraComponent::CameraComponent(const CameraComponent& obj) :
@@ -143,7 +145,8 @@ my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _ideal_fps_camera_angle(0.0f),
     _preview_position(),
     _jump_up_com(),
-    _jump_down_com() {
+    _jump_down_com(),
+    _double_jump_com(){
 }
 
 my::CameraComponent::~CameraComponent() {
@@ -202,6 +205,7 @@ bool my::CameraComponent::Initialize(void) {
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _jump_up_com = super::GetOwner()->GetComponent<my::PlayerJumpUpComponent>();
     _jump_down_com = super::GetOwner()->GetComponent<my::PlayerJumpDownComponent>();
+    _double_jump_com = super::GetOwner()->GetComponent<my::PlayerDoubleJumpComponent>();
     return true;
 }
 
@@ -220,7 +224,8 @@ bool my::CameraComponent::Update(float delta_time) {
     else {
         auto jump_up_com = _jump_up_com.lock();
         auto jump_down_com = _jump_down_com.lock();
-        if (jump_up_com->IsActive() || jump_down_com->IsActive()) {
+        auto double_jump_com = _double_jump_com.lock();
+        if (jump_up_com->IsActive() || jump_down_com->IsActive() || double_jump_com->IsActive()) {
             auto temp = pos;
             temp.y = _preview_position.y;
             _camera_controller.GetService()->SetCameraTarget(temp);

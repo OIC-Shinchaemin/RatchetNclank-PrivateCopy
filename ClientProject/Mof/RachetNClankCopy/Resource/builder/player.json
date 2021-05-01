@@ -54,6 +54,12 @@
       }
     },
     {
+      "type": "PlayerDoubleJumpComponent",
+      "paramater": {
+        "priority": 90
+      }
+    },
+    {
       "type": "PlayerJumpSetComponent",
       "paramater": {
         "priority": 91

@@ -1,7 +1,8 @@
-#include "PlayerJumpUpComponent.h"
+#include "PlayerDoubleJumpComponent.h"
 
 #include "../../Gamepad.h"
 #include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
@@ -9,7 +10,7 @@
 #include "PlayerMoveComponent.h"
 
 
-void my::PlayerJumpUpComponent::InputJumpVelocity(float speed) {
+void my::PlayerDoubleJumpComponent::InputJumpVelocity(float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
         auto v = velocity_com->GetVelocity();
         v.y = speed;
@@ -17,7 +18,7 @@ void my::PlayerJumpUpComponent::InputJumpVelocity(float speed) {
     } // if
 }
 
-my::PlayerJumpUpComponent::PlayerJumpUpComponent(int priority) :
+my::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
     super(priority),
     _jump_speed(0.0f),
     _jump_decrase(0.4f),
@@ -27,7 +28,7 @@ my::PlayerJumpUpComponent::PlayerJumpUpComponent(int priority) :
     _move_com() {
 }
 
-my::PlayerJumpUpComponent::PlayerJumpUpComponent(const PlayerJumpUpComponent& obj) :
+my::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJumpComponent& obj) :
     super(obj._priority),
     _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
@@ -38,18 +39,18 @@ my::PlayerJumpUpComponent::PlayerJumpUpComponent(const PlayerJumpUpComponent& ob
 
 }
 
-my::PlayerJumpUpComponent::~PlayerJumpUpComponent() {
+my::PlayerDoubleJumpComponent::~PlayerDoubleJumpComponent() {
 }
 
-std::string my::PlayerJumpUpComponent::GetType(void) const {
-    return "PlayerJumpUpComponent";
+std::string my::PlayerDoubleJumpComponent::GetType(void) const {
+    return "PlayerDoubleJumpComponent";
 }
 
-void my::PlayerJumpUpComponent::SetJumpSpeed(float speed) {
+void my::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }
 
-bool my::PlayerJumpUpComponent::Initialize(void) {
+bool my::PlayerDoubleJumpComponent::Initialize(void) {
     super::Initialize();
 
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
@@ -60,8 +61,8 @@ bool my::PlayerJumpUpComponent::Initialize(void) {
     return true;
 }
 
-bool my::PlayerJumpUpComponent::Update(float delta_time) {
-    puts("PlayerJumpUpComponent");
+bool my::PlayerDoubleJumpComponent::Update(float delta_time) {
+    puts("PlayerDoubleJumpComponent");
     auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();
@@ -87,32 +88,30 @@ bool my::PlayerJumpUpComponent::Update(float delta_time) {
         _jump_speed = 0.0f;
         state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpDownState);
     } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_X) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionDoubleJumpState);
-    } // if
     return true;
 }
 
-bool my::PlayerJumpUpComponent::Release(void) {
+bool my::PlayerDoubleJumpComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerJumpUpComponent::Clone(void) {
-    return std::make_shared<my::PlayerJumpUpComponent>(*this);
+std::shared_ptr<my::Component> my::PlayerDoubleJumpComponent::Clone(void) {
+    return std::make_shared<my::PlayerDoubleJumpComponent>(*this);
 }
 
-bool my::PlayerJumpUpComponent::Start(void) {
+bool my::PlayerDoubleJumpComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("PlayerMotionJumpUpState");
+        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionDoubleJumpState);
     } // if
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetGravity(1.8f);
     } // if
+
+    _jump_speed = 10.0f;
     return true;
 }

@@ -31,6 +31,8 @@ private:
     std::weak_ptr<class PlayerJumpUpComponent> _jump_up_com;
     //! ジャンプ
     std::weak_ptr<class PlayerJumpDownComponent> _jump_down_com;
+    //! ジャンプ
+    std::weak_ptr<class PlayerDoubleJumpComponent> _double_jump_com;
     /// <summary>
     /// 操作
     /// </summary>

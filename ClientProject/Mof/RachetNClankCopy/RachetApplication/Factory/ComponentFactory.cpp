@@ -15,6 +15,7 @@
 #include "../Component/Player/PlayerJumpUpComponent.h"
 #include "../Component/Player/PlayerJumpDownComponent.h"
 #include "../Component/Player/PlayerJumpLandingComponent.h"
+#include "../Component/Player/PlayerDoubleJumpComponent.h"
 #include "../Component/Player/PlayerMeleeAttackOneComponent.h"
 #include "../Component/Player/PlayerMeleeAttackOneEndComponent.h"
 #include "../Component/Player/PlayerMeleeAttackTwoComponent.h"
@@ -64,6 +65,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpUpComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpDownComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpLandingComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerDoubleJumpComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackOneComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackOneEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackTwoComponent>();
@@ -98,7 +100,6 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::BombGloveEffectCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::ShipCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraCollisionComponent>();
-    
 }
 
 my::ComponentFactory::~ComponentFactory() {

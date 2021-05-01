@@ -6,6 +6,7 @@
 #include "../../State/PlayerAction/PlayerActionJumpUpState.h"
 #include "../../State/PlayerAction/PlayerActionJumpDownState.h"
 #include "../../State/PlayerAction/PlayerActionJumpLandingState.h"
+#include "../../State/PlayerAction/PlayerActionDoubleJumpState.h"
 #include "../../State/PlayerAction/PlayerActionMeleeAttackOneState.h"
 #include "../../State/PlayerAction/PlayerActionMeleeAttackOneEndState.h"
 #include "../../State/PlayerAction/PlayerActionMeleeAttackTwoState.h"
@@ -46,6 +47,7 @@ bool my::PlayerStateComponent::Initialize(void) {
     this->RegisterState<state::PlayerActionJumpUpState>(_state_machine);
     this->RegisterState<state::PlayerActionJumpDownState>(_state_machine);
     this->RegisterState<state::PlayerActionJumpLandingState>(_state_machine);
+    this->RegisterState<state::PlayerActionDoubleJumpState>(_state_machine);
     this->RegisterState<state::PlayerActionMeleeAttackOneState>(_state_machine);
     this->RegisterState<state::PlayerActionMeleeAttackOneEndState>(_state_machine);
     this->RegisterState<state::PlayerActionMeleeAttackTwoState>(_state_machine);

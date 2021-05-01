@@ -227,6 +227,7 @@
     <ClCompile Include="Component\MotionStateComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDamageComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerIdleComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpDownComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpLandingComponent.cpp" />
@@ -292,6 +293,7 @@
     <ClCompile Include="State\EnemyMotion\EnemyMotionMoveState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionRangedAttackState.cpp" />
     <ClCompile Include="State\EnemyMotion\EnemyMotionState.cpp" />
+    <ClCompile Include="State\PlayerAction\PlayerActionDoubleJumpState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionIdleState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionJumpDownState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionJumpLandingState.cpp" />
@@ -307,6 +309,7 @@
     <ClCompile Include="State\PlayerAction\PlayerActionState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionDamageState.cpp" />
+    <ClCompile Include="State\PlayerMotion\PlayerMotionDoubleJumpState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionIdleState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionJumpDownState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionJumpLandingState.cpp" />
@@ -455,6 +458,7 @@
     <ClInclude Include="Component\MotionStateComponent.h" />
     <ClInclude Include="Component\Player\PlayerComponent.h" />
     <ClInclude Include="Component\Player\PlayerDamageComponent.h" />
+    <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h" />
     <ClInclude Include="Component\Player\PlayerIdleComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpDownComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpLandingComponent.h" />
@@ -530,6 +534,7 @@
     <ClInclude Include="State\EnemyMotion\EnemyMotionMoveState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionRangedAttackState.h" />
     <ClInclude Include="State\EnemyMotion\EnemyMotionState.h" />
+    <ClInclude Include="State\PlayerAction\PlayerActionDoubleJumpState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionIdleState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionJumpDownState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionJumpLandingState.h" />
@@ -545,6 +550,7 @@
     <ClInclude Include="State\PlayerAction\PlayerActionState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionStateDefine.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionDamageState.h" />
+    <ClInclude Include="State\PlayerMotion\PlayerMotionDoubleJumpState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionIdleState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionJumpDownState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionJumpLandingState.h" />
