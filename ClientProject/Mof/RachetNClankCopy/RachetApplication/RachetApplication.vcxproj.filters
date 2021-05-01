@@ -1516,6 +1516,15 @@
     <Text Include="..\Resource\scene_resource\general.txt">
       <Filter>リソース ファイル\scene_resource</Filter>
     </Text>
+    <Text Include="..\Resource\scene_resource\game_scene.txt">
+      <Filter>リソース ファイル\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\clear_scene.txt">
+      <Filter>リソース ファイル\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\title_scene.txt">
+      <Filter>リソース ファイル\scene_resource</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json">

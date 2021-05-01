@@ -21,7 +21,7 @@
       "type": "MotionComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/motion_names/chaman.motion_names"
+        "path": "../Resource/motion_names/skeleton.motion_names"
       }
     },
     {
@@ -99,7 +99,7 @@
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/chaman/scene.mom",
+        "path": "../Resource/mesh/skeleton/skeleton.mom",
         "color": [
           1.0,
           1.0,

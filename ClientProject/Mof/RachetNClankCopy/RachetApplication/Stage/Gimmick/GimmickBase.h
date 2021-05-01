@@ -14,6 +14,13 @@ public:
         Vector3 rotate = Vector3());
     virtual ~GimmickBase(void);
 
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector3 GetPreviewPosition(void) const;
+
     virtual void Initialize(void) = 0;
     virtual void Update(float delta) = 0;
 

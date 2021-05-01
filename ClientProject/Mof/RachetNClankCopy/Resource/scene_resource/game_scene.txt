@@ -1,0 +1,16 @@
+../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom
+../Resource/mesh/skeleton/skeleton.mom
+../Resource/mesh/chaman/scene.mom
+
+../Resource/mesh/omni_wrench/scene.mom
+
+../Resource/texture/icon/bomb_glove.png
+../Resource/texture/icon/pyrocitor.png
+../Resource/texture/icon/blaster.png
+
+../Resource/texture/money/money.png
+../Resource/texture/lock_on_cursor/cursor.png
+
+../Resource/motion_names/player.motion_names
+../Resource/motion_names/skeleton.motion_names
+../Resource/motion_names/chaman.motion_names

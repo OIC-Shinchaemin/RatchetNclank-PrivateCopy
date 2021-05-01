@@ -48,6 +48,8 @@ private:
     std::weak_ptr<my::ResourceMgr> _resource;
     //! ƒŠƒ\[ƒX
     std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! íœ
+    std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
     /// <summary>
     /// ’Ç‰Á
     /// </summary>

@@ -212,7 +212,7 @@ public:
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick);
 #ifdef _DEBUG
     virtual bool IsRender(void) const override {
-        return true;
+        return false;
     }
     virtual bool DebugRender(void) override {
         if (this->GetSphere().has_value()) {

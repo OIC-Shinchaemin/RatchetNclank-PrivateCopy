@@ -3,6 +3,16 @@
 #include "My/Core/Define.h"
 
 
+void my::Scene::LoadComplete(void) {
+    std::lock_guard<std::mutex> lock(_mutex);
+    this->_loaded = true;
+}
+
+bool my::Scene::IsLoaded(void) {
+    std::lock_guard<std::mutex> lock(_mutex);
+    return this->_loaded;
+}
+
 Mof::LPRenderTarget my::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
 }
@@ -11,6 +21,15 @@ bool my::Scene::PreRender(void) {
     // start
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetRenderTarget(_rendar_target.GetRenderTarget(), ::g_pGraphics->GetDepthTarget());
+    return true;
+}
+
+bool my::Scene::LoadingRender(void) {
+    // start
+    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
+    ::g_pGraphics->SetRenderTarget(_rendar_target.GetRenderTarget(), ::g_pGraphics->GetDepthTarget());
+
+    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Now Loading");
     return true;
 }
 
@@ -27,7 +46,7 @@ bool my::Scene::PostRender(void) {
         _effect.value().SetCamera(*camera);
         _effect.value().Enable();
     } // if
-    
+
     // complete prepare
     if (_effect.has_value()) {
         auto& shader = _effect.value().shader;
@@ -45,7 +64,10 @@ my::Scene::Scene() :
     _state(),
     _rendar_target(),
     _default(),
-    _effect() {
+    _effect(),
+    _loaded(false),
+    _mutex(),
+    _load_thread() {
 }
 
 my::Scene::~Scene() {
@@ -96,7 +118,12 @@ bool my::Scene::Update(float delta_time) {
 
 bool my::Scene::Render(void) {
     this->PreRender();
-    this->SceneRender();
+    if (this->IsLoaded()) {
+        this->SceneRender();
+    } // if
+    else {
+        this->LoadingRender();
+    } // else
     this->PostRender();
     return true;
 }

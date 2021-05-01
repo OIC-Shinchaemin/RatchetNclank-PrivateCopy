@@ -15,6 +15,10 @@ void Bridge::SetEndPosition(Mof::CVector3 pos) {
     this->_end_pos = pos;
 }
 
+Mof::CVector3 Bridge::GetPreviewPosition(void) const {
+    return Mof::CVector3();
+}
+
 void Bridge::Initialize(void) {
     _now_timer = 0.0f;
     _start_flag = false;

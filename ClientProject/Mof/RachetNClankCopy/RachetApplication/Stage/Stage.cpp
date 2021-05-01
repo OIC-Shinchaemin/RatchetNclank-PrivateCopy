@@ -110,11 +110,11 @@ void Stage::Render(void) {
     for (const auto& obj : _static_object_array) {
         RenderObject(obj);
     }
-    for (const auto& gimmick : _gimmick_array) {
-        RenderObject(gimmick);
-    }
     for (const auto& box : _woodbox_array) {
         RenderObject(box);
+    }
+    for (const auto& gimmick : _gimmick_array) {
+        RenderObject(gimmick);
     }
 }
 

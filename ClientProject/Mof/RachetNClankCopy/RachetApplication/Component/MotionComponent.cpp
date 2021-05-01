@@ -66,7 +66,10 @@ bool my::MotionComponent::Update(float delta_time) {
 
 bool my::MotionComponent::Release(void) {
     super::Release();
-    ut::SafeDelete(_motion);
+    delete _motion;
+    _motion = nullptr;
+    puts("Release");
+    //ut::SafeDelete(_motion);
     return true;
 }
 

@@ -6,7 +6,7 @@
 
 my::Renderer::Renderer() :
     _actors() {
-    _actors.reserve(256);
+    _actors.reserve(30);
 }
 
 my::Renderer::~Renderer() {
@@ -46,4 +46,6 @@ bool my::Renderer::Render(void) {
 
 void my::Renderer::Reset(void) {
     _actors.clear();
+    _enable_actors.clear();
+    _disable_actors.clear();
 }

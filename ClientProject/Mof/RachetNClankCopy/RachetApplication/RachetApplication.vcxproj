@@ -571,7 +571,10 @@
     <ClInclude Include="UI\QuickChangeMenu.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\Resource\scene_resource\clear_scene.txt" />
+    <Text Include="..\Resource\scene_resource\game_scene.txt" />
     <Text Include="..\Resource\scene_resource\general.txt" />
+    <Text Include="..\Resource\scene_resource\title_scene.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\behaviour\strong_enemy_combat.json" />

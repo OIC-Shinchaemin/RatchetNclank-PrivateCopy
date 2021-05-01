@@ -115,15 +115,19 @@ public:
             auto& data_path = temp;
             if (auto format = std::strstr(data_path.c_str(), ".png"); format) {
                 bool success = this->AddSharedElement<Mof::CTexture>(data_path.c_str());
+                std::cout << "Mof::CTexture success = " << success << "\n";
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".jpg"); format) {
                 bool success = this->AddSharedElement<Mof::CTexture>(data_path.c_str());
+                std::cout << "Mof::CTexture success = " << success << "\n";
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".mom"); format) {
                 bool success = this->AddSharedElement<Mof::CMeshContainer>(data_path.c_str());
+                std::cout << "Mof::CMeshContainer success = " << success << "\n";
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".motion_names"); format) {
                 bool success = this->AddSharedElement<my::MotionNames>(data_path.c_str());
+                std::cout << "Mof::MotionNames success = " << success << "\n";
             } // else if
         } // for
         _is_loaded = true;

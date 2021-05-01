@@ -2,9 +2,12 @@
 #define MY_SCENE_H
 
 
+#include <optional>
 #include <memory>
 #include <string>
 #include <vector>
+#include <thread>
+#include <mutex>
 
 #include <Mof.h>
 
@@ -37,9 +40,27 @@ protected:
     std::optional<my::SceneEffect> _effect;
     //! ‘JˆÚ
     my::Observable<const SceneMessage&> _subject;
+    //! “Ç‚İ‚İÏ‚İ
+    bool _loaded;
+    //! “¯Šú
+    std::mutex _mutex;
+    //! ƒXƒŒƒbƒh
+    std::optional<std::thread> _load_thread;
 protected:
+    /// <summary>
+    /// Š®—¹
+    /// </summary>
+    /// <param name=""></param>
+    void LoadComplete(void);
+    /// <summary>
+    /// ”»’è
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsLoaded(void);   
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
     virtual bool PreRender(void);
+    virtual bool LoadingRender(void);
     virtual bool SceneRender(void);
     virtual bool PostRender(void);
 public:

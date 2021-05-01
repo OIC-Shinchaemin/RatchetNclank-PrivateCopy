@@ -26,6 +26,13 @@ public:
     /// </summary>
     /// <param name="pos"></param>
     void SetEndPosition(Mof::CVector3 pos);
+    
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector3 GetPreviewPosition(void) const override;
 
     virtual void Initialize(void) override;
     virtual void Update(float delta) override;

@@ -39,6 +39,8 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
     };
+
+    
     for (auto type : types) {
         auto temp = CollisionLayer();
         temp.algo = collision_algolithm_factory.Create(type);
