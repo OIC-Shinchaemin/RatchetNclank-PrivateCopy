@@ -81,19 +81,37 @@
     {
       "type": "PlayerMeleeAttackOneComponent",
       "paramater": {
-        "priority": 91
+        "priority": 89
+      }
+    },
+    {
+      "type": "PlayerMeleeAttackOneEndComponent",
+      "paramater": {
+        "priority": 88
       }
     },
     {
       "type": "PlayerMeleeAttackTwoComponent",
       "paramater": {
-        "priority": 91
+        "priority": 87
+      }
+    },
+    {
+      "type": "PlayerMeleeAttackTwoEndComponent",
+      "paramater": {
+        "priority": 86
       }
     },
     {
       "type": "PlayerMeleeAttackThreeComponent",
       "paramater": {
-        "priority": 91
+        "priority": 85
+      }
+    },
+    {
+      "type": "PlayerMeleeAttackThreeEndComponent",
+      "paramater": {
+        "priority": 84
       }
     },
 
@@ -148,6 +166,12 @@
     },
     {
       "type": "PlayerCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "PlayerMeleeAttackCollisionComponent",
       "paramater": {
         "priority": 0
       }

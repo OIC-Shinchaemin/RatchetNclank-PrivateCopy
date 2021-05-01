@@ -58,11 +58,11 @@ bool my::PlayerIdleComponent::Update(float delta_time) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionMoveState);
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_X) ||
-             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
-             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
     } // else if
 

@@ -1,6 +1,7 @@
 #include "EnemyComponent.h"
 
 #include "../../Gamepad.h"
+#include "../Collision/Object/CollisionComponentDefine.h"
 #include "../VelocityComponent.h"
 #include "../Enemy/EnemyDamageComponent.h"
 #include "../SightRecognitionComponent.h"
@@ -63,6 +64,13 @@ bool my::EnemyComponent::Initialize(void) {
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                "PlayerCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        super::GetOwner()->End();
+        return true;
+    }));
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+                               my::CollisionComponentType::kPlayerMeleeAttackCollisionComponent,
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        puts("eeee");
         super::GetOwner()->End();
         return true;
     }));

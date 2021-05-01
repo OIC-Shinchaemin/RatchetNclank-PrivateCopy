@@ -118,7 +118,7 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
     // flag
     bool action = this->AquireInputData(in, move_angle);
     if (::g_pInput->IsKeyPush(MOFKEY_X) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         jump_flag = true;
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||

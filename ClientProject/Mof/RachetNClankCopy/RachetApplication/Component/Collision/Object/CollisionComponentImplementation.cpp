@@ -2,6 +2,7 @@
 
 
 std::string my::CollisionComponentType::kPlayerCollisionComponent = "PlayerCollisionComponent";
+std::string my::CollisionComponentType::kPlayerMeleeAttackCollisionComponent = "PlayerMeleeAttackCollisionComponent";
 std::string my::CollisionComponentType::kEnemyCollisionComponent = "EnemyCollisionComponent";
 std::string my::CollisionComponentType::kEnemyAttackCollisionComponent = "EnemyAttackCollisionComponent";
 std::string my::CollisionComponentType::kEnemyBulletCollisionComponent = "EnemyBulletCollisionComponent";

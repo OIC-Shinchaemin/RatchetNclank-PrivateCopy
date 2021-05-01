@@ -190,6 +190,7 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
@@ -206,6 +207,7 @@
     <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
@@ -231,8 +233,11 @@
     <ClCompile Include="Component\Player\PlayerJumpSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpUpComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackOneComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerMeleeAttackOneEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackThreeComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackTwoComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMoveComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerStateComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
@@ -292,8 +297,11 @@
     <ClCompile Include="State\PlayerAction\PlayerActionJumpLandingState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionJumpSetState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionJumpUpState.cpp" />
+    <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackOneEndState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackOneState.cpp" />
+    <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackThreeEndState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackThreeState.cpp" />
+    <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackTwoEndState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionMeleeAttackTwoState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionMoveState.cpp" />
     <ClCompile Include="State\PlayerAction\PlayerActionState.cpp" />
@@ -304,8 +312,11 @@
     <ClCompile Include="State\PlayerMotion\PlayerMotionJumpLandingState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionJumpSetState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionJumpUpState.cpp" />
+    <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackOneEndState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackOneState.cpp" />
+    <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackThreeEndState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackThreeState.cpp" />
+    <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackTwoEndState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionMeleeAttackTwoState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionMoveState.cpp" />
     <ClCompile Include="State\PlayerMotion\PlayerMotionState.cpp" />
@@ -406,6 +417,7 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
@@ -422,6 +434,7 @@
     <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
@@ -448,8 +461,11 @@
     <ClInclude Include="Component\Player\PlayerJumpSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpUpComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackOneComponent.h" />
+    <ClInclude Include="Component\Player\PlayerMeleeAttackOneEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackThreeComponent.h" />
+    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackTwoComponent.h" />
+    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerMoveComponent.h" />
     <ClInclude Include="Component\Player\PlayerStateComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
@@ -519,8 +535,11 @@
     <ClInclude Include="State\PlayerAction\PlayerActionJumpLandingState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionJumpSetState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionJumpUpState.h" />
+    <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackOneEndState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackOneState.h" />
+    <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackThreeEndState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackThreeState.h" />
+    <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackTwoEndState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionMeleeAttackTwoState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionMoveState.h" />
     <ClInclude Include="State\PlayerAction\PlayerActionState.h" />
@@ -531,8 +550,11 @@
     <ClInclude Include="State\PlayerMotion\PlayerMotionJumpLandingState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionJumpSetState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionJumpUpState.h" />
+    <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackOneEndState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackOneState.h" />
+    <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackThreeEndState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackThreeState.h" />
+    <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackTwoEndState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionMeleeAttackTwoState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionMoveState.h" />
     <ClInclude Include="State\PlayerMotion\PlayerMotionState.h" />

@@ -1,4 +1,4 @@
-#include "PlayerMeleeAttackThreeComponent.h"
+#include "PlayerMeleeAttackOneEndComponent.h"
 
 #include "../../Gamepad.h"
 #include "../../State/PlayerAction/PlayerActionStateDefine.h"
@@ -9,13 +9,13 @@
 #include "../MotionComponent.h"
 
 
-void my::PlayerMeleeAttackThreeComponent::ChageState(const std::string& name) {
+void my::PlayerMeleeAttackOneEndComponent::ChageState(const std::string& name) {
     if (auto state_com = _state_com.lock()) {
         state_com->ChangeState(name);
     } // if
 }
 
-my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priority) :
+my::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(int priority) :
     super(priority),
     _velocity_com(),
     _state_com(),
@@ -23,7 +23,7 @@ my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priorit
     _motion_state_com() {
 }
 
-my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const PlayerMeleeAttackThreeComponent& obj) :
+my::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(const PlayerMeleeAttackOneEndComponent& obj) :
     super(obj._priority),
     _velocity_com(),
     _state_com(),
@@ -31,14 +31,14 @@ my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const Playe
     _motion_state_com() {
 }
 
-my::PlayerMeleeAttackThreeComponent::~PlayerMeleeAttackThreeComponent() {
+my::PlayerMeleeAttackOneEndComponent::~PlayerMeleeAttackOneEndComponent() {
 }
 
-std::string my::PlayerMeleeAttackThreeComponent::GetType(void) const {
-    return "PlayerMeleeAttackThreeComponent";
+std::string my::PlayerMeleeAttackOneEndComponent::GetType(void) const {
+    return "PlayerMeleeAttackOneEndComponent";
 }
 
-bool my::PlayerMeleeAttackThreeComponent::Initialize(void) {
+bool my::PlayerMeleeAttackOneEndComponent::Initialize(void) {
     super::Initialize();
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
@@ -48,34 +48,40 @@ bool my::PlayerMeleeAttackThreeComponent::Initialize(void) {
     return true;
 }
 
-bool my::PlayerMeleeAttackThreeComponent::Update(float delta_time) {
-    puts("PlayerMeleeAttackThreeComponent");
+bool my::PlayerMeleeAttackOneEndComponent::Update(float delta_time) {
+    puts("PlayerMeleeAttackOneEndComponent");
     auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();
 
+
+    if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionMeleeAttackTwoState);
+    } // if
+
     if (motion_com->IsEndMotion()) {
-        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState);
+        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
     return true;
 }
 
-bool my::PlayerMeleeAttackThreeComponent::Release(void) {
+bool my::PlayerMeleeAttackOneEndComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerMeleeAttackThreeComponent::Clone(void) {
-    return std::make_shared<my::PlayerMeleeAttackThreeComponent>(*this);
+std::shared_ptr<my::Component> my::PlayerMeleeAttackOneEndComponent::Clone(void) {
+    return std::make_shared<my::PlayerMeleeAttackOneEndComponent>(*this);
 }
 
-bool my::PlayerMeleeAttackThreeComponent::Start(void) {
+bool my::PlayerMeleeAttackOneEndComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionMeleeAttackThreeState);
+        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionMeleeAttackOneEndState);
     } // if
     return true;
 }

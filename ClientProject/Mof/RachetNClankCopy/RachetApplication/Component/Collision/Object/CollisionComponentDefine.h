@@ -8,6 +8,7 @@
 namespace my {
 struct CollisionComponentType {
     static std::string kPlayerCollisionComponent;
+    static std::string kPlayerMeleeAttackCollisionComponent;
     static std::string kEnemyCollisionComponent;
     static std::string kEnemyAttackCollisionComponent;
     static std::string kEnemyBulletCollisionComponent;

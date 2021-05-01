@@ -115,6 +115,7 @@ void my::CollisionComponent::AddCollisionFunc(CollisionFuncType type, const std:
 
 bool my::CollisionComponent::Initialize(void) {
     super::Initialize();
+    super::_active = true;
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     return true;
 }

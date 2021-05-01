@@ -20,8 +20,11 @@ public:
         JumpDown,
         JumpLanding,
         MeleeAttackOne,
+        MeleeAttackOneEnd,
         MeleeAttackTwo,
+        MeleeAttackTwoEnd,
         MeleeAttackThree,
+        MeleeAttackThreeEnd,
         DamageDown,
         CountMax,
     };

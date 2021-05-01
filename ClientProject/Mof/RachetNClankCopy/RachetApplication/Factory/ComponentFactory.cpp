@@ -16,8 +16,11 @@
 #include "../Component/Player/PlayerJumpDownComponent.h"
 #include "../Component/Player/PlayerJumpLandingComponent.h"
 #include "../Component/Player/PlayerMeleeAttackOneComponent.h"
+#include "../Component/Player/PlayerMeleeAttackOneEndComponent.h"
 #include "../Component/Player/PlayerMeleeAttackTwoComponent.h"
+#include "../Component/Player/PlayerMeleeAttackTwoEndComponent.h"
 #include "../Component/Player/PlayerMeleeAttackThreeComponent.h"
+#include "../Component/Player/PlayerMeleeAttackThreeEndComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
@@ -34,6 +37,7 @@
 #include "../Component/MeshComponent.h"
 #include "../Component/CameraComponent.h"
 #include "../Component/Collision/Object/PlayerCollisionComponent.h"
+#include "../Component/Collision/Object/PlayerMeleeAttackCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyCollisionComponent.h"
 #include "../Component/Collision/Object/SightCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyAttackCollisionComponent.h"
@@ -61,8 +65,11 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpDownComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpLandingComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackOneComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackOneEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackTwoComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackTwoEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();
@@ -80,6 +87,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::SightCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();

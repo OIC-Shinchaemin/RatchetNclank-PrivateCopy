@@ -67,7 +67,7 @@ bool my::PlayerMeleeAttackTwoComponent::Update(float delta_time) {
             state_com->ChangeState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeState);
         } // if
         else {
-            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
+            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionMeleeAttackTwoEndState);
         } // else
     } // if
     return true;
