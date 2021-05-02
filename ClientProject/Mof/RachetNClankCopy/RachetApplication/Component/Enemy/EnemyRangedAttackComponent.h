@@ -20,12 +20,18 @@ private:
     float _volume;
     //! 発射速さ
     float _shot_speed;
+    //! 間隔
+    my::Timer _interval;
+    //! 速度
+    std::weak_ptr<class VelocityComponent> _velocity_com;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
-    //! モーション
+    //! 型
     std::weak_ptr<class EnemyComponent> _enemy_com;
+    //! 状態
+    std::weak_ptr<class EnemyStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ

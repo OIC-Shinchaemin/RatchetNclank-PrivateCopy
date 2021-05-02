@@ -20,6 +20,8 @@ private:
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! ƒvƒŒƒCƒ„[
     std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! Elevator‚Éæ‚Á‚Ä‚¢‚é
+    bool _on_elevator;
 private:
     /// <summary>
     /// Õ“Ë

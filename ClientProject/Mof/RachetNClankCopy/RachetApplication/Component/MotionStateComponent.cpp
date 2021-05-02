@@ -14,10 +14,12 @@
 #include "../State/PlayerMotion/PlayerMotionMeleeAttackThreeState.h"
 #include "../State/PlayerMotion/PlayerMotionMeleeAttackThreeEndState.h"
 #include "../State/PlayerMotion/PlayerMotionDamageState.h"
+#include "../State/PlayerMotion/PlayerMotionDeadState.h"
 #include "../State/EnemyMotion/EnemyMotionIdleState.h"
 #include "../State/EnemyMotion/EnemyMotionMoveState.h"
 #include "../State/EnemyMotion/EnemyMotionAttackState.h"
 #include "../State/EnemyMotion/EnemyMotionRangedAttackState.h"
+#include "../State/EnemyMotion/EnemyMotionDamageState.h"
 
 
 my::MotionStateComponent::MotionStateComponent(int priority) :
@@ -51,6 +53,7 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionRangedAttackState>(_state_machine);
+        this->RegisterMotionState<state::EnemyMotionDamageState>(_state_machine);
         _state_machine.ChangeState("EnemyMotionIdleState");
     } // if
     else {
@@ -68,6 +71,7 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterMotionState<state::PlayerMotionMeleeAttackThreeState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionMeleeAttackThreeEndState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionDamageState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionDeadState>(_state_machine);
         _state_machine.ChangeState("PlayerMotionIdleState");
     } // else 
     return true;

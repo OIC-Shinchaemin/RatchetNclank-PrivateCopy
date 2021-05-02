@@ -1,8 +1,10 @@
 #include "PlayerComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../Actor/Ship/Ship.h"
 #include "../../Component/HpComponent.h"
 #include "../../Component/VelocityComponent.h"
+#include "../../Component/MeshComponent.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
 #include "../Player/PlayerDamageComponent.h"
@@ -12,22 +14,14 @@
 
 my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
-    _target(),
-    _state_com(),
-    _idle_com(),
-    _move_com(),
-    _damage_com() {
+    _target() {
     super::_volume = 0.5f;
     super::_height = 1.0f;
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
-    _target(),
-    _state_com(),
-    _idle_com(),
-    _move_com(),
-    _damage_com() {
+    _target() {
 }
 
 my::PlayerComponent::~PlayerComponent() {
@@ -50,11 +44,6 @@ bool my::PlayerComponent::Initialize(void) {
     super::Start();
 
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
-    _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-    _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
-
     velocity_com->SetGravity(9.8f);
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
@@ -62,6 +51,10 @@ bool my::PlayerComponent::Initialize(void) {
                                "ShipCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         super::GetOwner()->Notify("ShipCollision", super::GetOwner());
+
+        if (std::dynamic_pointer_cast<my::Ship>(std::any_cast<std::shared_ptr<my::Actor>>(in.target))->IsEnable()) {
+            super::GetOwner()->GetComponent<my::MeshComponent>()->Hide();
+        } // if
         return true;
     }));
 
@@ -102,9 +95,5 @@ std::shared_ptr<my::Component> my::PlayerComponent::Clone(void) {
 
 bool my::PlayerComponent::DebugRender(void) {
     auto pos = super::GetOwner()->GetPosition();
-
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "pos.x = %f", pos.x);
-    ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "pos.y = %f", pos.y);
-    ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "pos.z = %f", pos.z);
     return true;
 }

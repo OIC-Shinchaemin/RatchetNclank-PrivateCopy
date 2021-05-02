@@ -40,4 +40,7 @@ void state::EnemyActionMeleeAttackState::Enter(void) {
 }
 
 void state::EnemyActionMeleeAttackState::Exit(void) {
+    if (auto attack_com = _attack_com.lock()) {
+        //attack_com->End();
+    } // if
 }

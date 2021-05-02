@@ -48,6 +48,12 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetHp(void) const;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

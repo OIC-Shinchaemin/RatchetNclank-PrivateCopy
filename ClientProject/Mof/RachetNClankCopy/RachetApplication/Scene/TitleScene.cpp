@@ -8,6 +8,11 @@ bool my::TitleScene::SceneRender(void) {
     ::g_pGraphics->SetDepthEnable(true);
     _stage.Render();
 
+
+    //Mof::CMatrix44 world, scale, rotate, translate;
+    //_water_surface.Render();
+
+
     ::g_pGraphics->SetDepthEnable(false);
     auto text = "Please Press   Start Button or \n               Enter Key !";
     ::CGraphicsUtilities::RenderString(320.0, 400.0f, "%s", text);

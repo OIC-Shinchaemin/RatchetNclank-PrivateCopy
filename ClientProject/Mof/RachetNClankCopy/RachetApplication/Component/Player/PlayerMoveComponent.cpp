@@ -53,7 +53,7 @@ void my::PlayerMoveComponent::InputMoveAngularVelocity(float angle, float speed)
 
 my::PlayerMoveComponent::PlayerMoveComponent(int priority) :
     super(priority),
-    _move_speed(1.8f),
+    _move_speed(2.5f),
     _angular_speed(3.5f),
     _ideal_angle(0.0f),
     _velocity_com(),

@@ -49,7 +49,6 @@ bool my::PlayerMeleeAttackThreeEndComponent::Initialize(void) {
 }
 
 bool my::PlayerMeleeAttackThreeEndComponent::Update(float delta_time) {
-    puts("PlayerMeleeAttackThreeEndComponent");
     auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();

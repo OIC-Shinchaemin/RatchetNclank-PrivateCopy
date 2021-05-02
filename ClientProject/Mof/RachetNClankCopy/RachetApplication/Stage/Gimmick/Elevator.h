@@ -18,6 +18,12 @@ protected:
 
     //! 位置
     Mof::CVector3 _preview_position;
+    //! 位置
+    Mof::CVector3 _initial_position;
+    //! フラグ
+    bool _first_initialized;
+
+
 public:
     Elevator(Vector3 end, float request, bool enable = true, bool collision = true,
         StageObjectType type = StageObjectType::None, std::string name = "",
@@ -39,5 +45,7 @@ public:
 
     virtual void ActionStart(void) override;
     virtual bool IsStart(void) const override;
+
+    virtual void ReInitialize(void) override;
 };
 

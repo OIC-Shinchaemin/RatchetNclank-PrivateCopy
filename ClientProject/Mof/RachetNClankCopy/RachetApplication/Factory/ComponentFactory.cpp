@@ -23,6 +23,7 @@
 #include "../Component/Player/PlayerMeleeAttackThreeComponent.h"
 #include "../Component/Player/PlayerMeleeAttackThreeEndComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
+#include "../Component/Player/PlayerDeadComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyIdleComponent.h"
@@ -32,6 +33,8 @@
 #include "../Component/Enemy/EnemyDamageComponent.h"
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
+#include "../Component/Ship/ShipComponent.h"
+#include "../Component/Ship/ShipMeshComponent.h"
 #include "../Component/MotionStateComponent.h"
 #include "../Component/VelocityComponent.h"
 #include "../Component/TransformComponent.h"
@@ -73,6 +76,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerDeadComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyStateComponent>();
@@ -83,6 +87,8 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::EnemyDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
+    my::ComponentFactory::AddComponentCreator<my::ShipComponent>();
+    my::ComponentFactory::AddComponentCreator<my::ShipMeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::MotionStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::VelocityComponent>();
     my::ComponentFactory::AddComponentCreator<my::TransformComponent>();

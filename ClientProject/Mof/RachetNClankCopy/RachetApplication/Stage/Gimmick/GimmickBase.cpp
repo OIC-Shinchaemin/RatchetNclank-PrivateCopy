@@ -28,3 +28,6 @@ void GimmickBase::SetStageObjectData(bool enable, bool collision, StageObjectTyp
     _scale            = scale;
     _rotate           = rotate;
 }
+
+void GimmickBase::ReInitialize(void) {
+}

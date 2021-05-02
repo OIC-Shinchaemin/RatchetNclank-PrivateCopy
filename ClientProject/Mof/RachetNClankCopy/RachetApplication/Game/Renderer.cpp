@@ -6,7 +6,8 @@
 
 my::Renderer::Renderer() :
     _actors() {
-    _actors.reserve(30);
+    _actors.reserve(64);
+    _enable_actors.reserve(64);
 }
 
 my::Renderer::~Renderer() {

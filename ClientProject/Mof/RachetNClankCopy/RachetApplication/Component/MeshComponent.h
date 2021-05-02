@@ -11,7 +11,7 @@
 namespace my {
 class MeshComponent : public my::RenderComponent {
     using super = my::RenderComponent;
-private:
+protected:
     //! メッシュ
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! アニメーション

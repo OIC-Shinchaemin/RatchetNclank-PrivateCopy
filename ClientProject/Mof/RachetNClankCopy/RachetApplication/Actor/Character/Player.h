@@ -27,7 +27,7 @@ public:
         MeleeAttackThree,
         MeleeAttackThreeEnd,
         DamageA,
-        DamageDown,
+        DamageDead,
         CountMax,
     };
 private:

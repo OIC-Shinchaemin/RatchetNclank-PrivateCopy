@@ -23,7 +23,7 @@ std::optional<Mof::CSphere> my::ShipCollisionComponent::GetSphere(void) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
-    return Mof::CSphere(pos, 0.2f);
+    return Mof::CSphere(pos, 2.0f);
 }
 
 std::optional<Mof::CBoxAABB> my::ShipCollisionComponent::GetBox(void) {

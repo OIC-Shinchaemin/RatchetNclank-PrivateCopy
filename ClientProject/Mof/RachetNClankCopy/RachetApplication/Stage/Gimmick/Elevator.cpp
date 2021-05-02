@@ -8,7 +8,9 @@ Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, Stag
     , _now_timer(0.0f)
     , _start_flag(false)
     , _end_flag(false)
-    , _preview_position(_start_pos) {
+    , _preview_position(_start_pos) 
+    ,_initial_position()
+    ,_first_initialized(false) {
 }
 
 Elevator::~Elevator(void) {
@@ -24,8 +26,16 @@ void Elevator::Initialize(void) {
     _start_pos = _position;
     _start_flag = false;
     _end_flag = false;
+    if (!_first_initialized) {
+        _initial_position = _position;
+    } // if
+    else {
+        _position = _initial_position;
+        _start_pos = _initial_position;
+    } // else
     _preview_position = _start_pos;
     RefreshWorldMatrix();
+    _first_initialized = true;
 }
 
 void Elevator::Update(float delta) {
@@ -60,4 +70,7 @@ void Elevator::ActionStart(void) {
 
 bool Elevator::IsStart(void) const {
     return _start_flag;
+}
+
+void Elevator::ReInitialize(void) {
 }

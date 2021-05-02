@@ -14,6 +14,7 @@
 #include "../../State/PlayerAction/PlayerActionMeleeAttackThreeState.h"
 #include "../../State/PlayerAction/PlayerActionMeleeAttackThreeEndState.h"
 #include "../../State/PlayerAction/PlayerActionDamageState.h"
+#include "../../State/PlayerAction/PlayerActionDeadState.h"
 
 
 my::PlayerStateComponent::PlayerStateComponent(int priority) :
@@ -56,6 +57,7 @@ bool my::PlayerStateComponent::Initialize(void) {
     this->RegisterState<state::PlayerActionMeleeAttackThreeState>(_state_machine);
     this->RegisterState<state::PlayerActionMeleeAttackThreeEndState>(_state_machine);
     this->RegisterState<state::PlayerActionDamageState>(_state_machine);
+    this->RegisterState<state::PlayerActionDeadState>(_state_machine);
     _state_machine.ChangeState("PlayerActionIdleState");
     return true;
 }
@@ -79,11 +81,28 @@ void my::PlayerStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
 
-bool my::PlayerStateComponent::CanTransition(const std::string& name) {
-    if (name == state::PlayerActionStateType::kPlayerActionJumpLandingState) {
-        if (_state_machine.GetCurrentStateName() == state::PlayerActionStateType::kPlayerActionJumpDownState) {
+bool my::PlayerStateComponent::CanTransition(const std::string& next) {
+    using Type = state::PlayerActionStateType;
+
+    auto current = _state_machine.GetCurrentStateName();
+    if (next == Type::kPlayerActionJumpLandingState) {
+        if (current == Type::kPlayerActionJumpDownState) {
             return true;
         } // if
+        else if (current == Type::kPlayerActionDamageState) {
+            return false;
+        } // else if
+    } // if
+    if (next == Type::kPlayerActionDamageState) {
+        if (current == Type::kPlayerActionDamageState) {
+            return false;
+        } // if
+        else if (current == Type::kPlayerActionDeadState) {
+            return false;
+        } // if
+        else {
+            return true;
+        } // else
     } // if
     return false;
 }

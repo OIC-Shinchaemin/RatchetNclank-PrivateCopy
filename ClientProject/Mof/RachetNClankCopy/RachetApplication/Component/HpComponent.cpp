@@ -7,7 +7,7 @@
 
 my::HpComponent::HpComponent(int priority) :
     super(priority),
-    _hp_max(4),
+    _hp_max(0),
     _hp(_hp_max),
     _ui_remove(false) {
 }
@@ -15,7 +15,7 @@ my::HpComponent::HpComponent(int priority) :
 my::HpComponent::HpComponent(const HpComponent& obj) :
     super(obj),
     _hp_max(obj._hp_max),
-    _hp(obj._hp),
+    _hp(_hp_max),
     _ui_remove(obj._ui_remove) {
 }
 
@@ -24,10 +24,19 @@ my::HpComponent::~HpComponent() {
 
 void my::HpComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
+    const char* hp_max = "hp_max";
+
+    _ASSERT_EXPR(param.HasMember(hp_max), L"指定のパラメータがありません");
+    _ASSERT_EXPR(param[hp_max].IsInt(), L"パラメータの指定された型でありません");
+    this->_hp_max = param[hp_max].GetInt();
 }
 
 std::string my::HpComponent::GetType(void) const {
     return "HpComponent";
+}
+
+int my::HpComponent::GetHp(void) const {
+    return this->_hp;
 }
 
 bool my::HpComponent::Initialize(void) {
@@ -80,7 +89,6 @@ void my::HpComponent::Damage(int value) {
     _hp -= value;
     if (_hp <= 0) {
         _hp = 0;
-        super::GetOwner()->End();
     } // if
     _observable.Notify(_hp);
 }

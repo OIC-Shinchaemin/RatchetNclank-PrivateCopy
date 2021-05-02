@@ -49,10 +49,11 @@ bool my::MotionComponent::Initialize(void) {
     auto mesh_com = super::GetOwner()->GetComponent<my::MeshComponent>();
     if (auto mesh = mesh_com->GetMesh().lock()) {
         _motion = mesh->CreateMotionController();
-
+        /*
         for (int i = 0; i < _motion->GetMotionCount(); i++) {
             std::cout << "_motion->GetMotion(i) = "<< *_motion->GetMotion(i)->GetName() << "\n";
         } // for
+        */
     } // if
     return true;
 }
@@ -66,15 +67,19 @@ bool my::MotionComponent::Update(float delta_time) {
 
 bool my::MotionComponent::Release(void) {
     super::Release();
-    delete _motion;
-    _motion = nullptr;
-    puts("Release");
-    //ut::SafeDelete(_motion);
+    ut::SafeDelete(_motion);
     return true;
 }
 
 std::shared_ptr<my::Component> my::MotionComponent::Clone(void) {
     return std::make_shared<my::MotionComponent>(*this);
+}
+
+bool my::MotionComponent::AddTimer(float time) {
+    if (_motion) {
+        return _motion->AddTimer(time);
+    } // if
+    return false;
 }
 
 bool my::MotionComponent::ChangeMotionByName(const char* name, float speed, bool loop, bool same) {

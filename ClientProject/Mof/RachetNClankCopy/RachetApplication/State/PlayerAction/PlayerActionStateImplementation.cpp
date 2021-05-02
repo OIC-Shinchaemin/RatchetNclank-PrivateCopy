@@ -15,3 +15,4 @@ std::string state::PlayerActionStateType::kPlayerActionMeleeAttackTwoEndState = 
 std::string state::PlayerActionStateType::kPlayerActionMeleeAttackThreeState = "PlayerActionMeleeAttackThreeState";
 std::string state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState = "PlayerActionMeleeAttackThreeEndState";
 std::string state::PlayerActionStateType::kPlayerActionDamageState= "PlayerActionDamageState";
+std::string state::PlayerActionStateType::kPlayerActionDeadState = "PlayerActionDeadState";

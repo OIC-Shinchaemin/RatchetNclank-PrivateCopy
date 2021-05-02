@@ -15,14 +15,16 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     super(priority),
     _player_com(),
     _velocity_com(),
-    _state_com() {
+    _state_com(),
+    _on_elevator(false){
 }
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
     super(obj._priority),
     _player_com(),
     _velocity_com(),
-    _state_com() {
+    _state_com() ,
+    _on_elevator(false) {
 }
 
 my::PlayerCollisionComponent::~PlayerCollisionComponent() {
@@ -119,14 +121,12 @@ void my::PlayerCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer me
 
 
     if (gimmick->GetType() == StageObjectType::Elevator) {
-        static bool on_elevator = false;
         auto gimmick_pos = gimmick->GetPosition();
         auto gimmick_pre_pos = gimmick->GetPreviewPosition();
         auto gimmick_move = gimmick_pos - gimmick_pre_pos;
-        float delta = 1.0f / 60.0f;
 
-        auto gimmick_sphere_0 = Mof::CSphere(39.0, -6.0f, -16.0f, 20.0f);
-        auto gimmick_sphere_1 = Mof::CSphere(65.0, -29.0f, 10.0f, 20.0f);
+        auto gimmick_sphere_0 = Mof::CSphere(20.0, -5.0f, -12.0f, 35.0f);
+        auto gimmick_sphere_1 = Mof::CSphere(65.0, -29.0f, 10.0f, 15.0f);
 
         if (gimmick_sphere_0.CollisionSphere(sphere) && !gimmick_sphere_0.CollisionPoint(gimmick_pos)) {
             gimmick->ActionStart();
@@ -154,7 +154,7 @@ void my::PlayerCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer me
 
                     super::GetOwner()->SetPosition(pos);
 
-                    if (!on_elevator) {
+                    if (!_on_elevator) {
                         gimmick->ActionStart();
                     } // if
                     if (auto state_com = _state_com.lock()) {
@@ -162,10 +162,10 @@ void my::PlayerCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer me
                             state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
                         } // if
                     } // if
-                    on_elevator = true;
+                    _on_elevator = true;
                 } // if
                 else {
-                    on_elevator = false;
+                    _on_elevator = false;
                 } // else
 
             } // if

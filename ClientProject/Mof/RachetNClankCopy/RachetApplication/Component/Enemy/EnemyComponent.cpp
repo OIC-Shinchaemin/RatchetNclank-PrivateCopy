@@ -60,43 +60,6 @@ bool my::EnemyComponent::Initialize(void) {
         velocity_com->SetGravity(2.8f);
     } // if
 
-    auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "PlayerCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->End();
-        return true;
-    }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kPlayerMeleeAttackCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        puts("eeee");
-        super::GetOwner()->End();
-        return true;
-    }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "PyrocitorBulletCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
-        return true;
-    }));
-
-
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "BlasterBulletCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
-        return true;
-    }));
-
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "BombGloveEffectCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
-        return true;
-    }));
-
-
     auto sight_coll = super::GetOwner()->GetComponent<my::SightCollisionComponent>();
     sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                  "PlayerCollisionComponent",

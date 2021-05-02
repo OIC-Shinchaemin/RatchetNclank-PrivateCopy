@@ -29,11 +29,11 @@ void my::GameScene::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
             for (auto gimmick : _stage.GetGimmickArray()) {
                 if (gimmick->GetType() == StageObjectType::Bridge) {
                     gimmick->ActionStart();
+                    _bridge_event_subject.Notify("GimmickAction", nullptr);
                 } // if
             } // for
         } // if
     } // if
-
     // remove
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
@@ -50,9 +50,6 @@ void my::GameScene::ReInitialize(void) {
 bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
-
-    int fps = ::CUtilities::GetFPS();
-    ::CGraphicsUtilities::RenderString(50.0f, 500.0f, "FPS = %d", fps);
 
     _renderer.Render();
     _stage.Render();
@@ -91,7 +88,7 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
         _re_initialize = true;
     } // if
 
-    if (type == "ShipCollision") {
+    if (type == "GameClear") {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 }
@@ -161,7 +158,7 @@ bool my::GameScene::Initialize(void) {
         this->AddElement(enemy);
 
         if (event_sphere.CollisionPoint(param->transform.position)) {
-            //_for_bridge_event_actors.push_back(enemy);
+            _for_bridge_event_actors.push_back(enemy);
         } // if
     } // for
 
@@ -171,10 +168,13 @@ bool my::GameScene::Initialize(void) {
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
 
-    param->transform.position = Mof::CVector3(2.0f, 1.0f, 5.0f);
+    param->transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
+    param->name = "ship";
     auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", param);
     this->AddElement(ship);
-
+    _bridge_event_subject.AddObserver(ship);
+    player->AddObserver(ship);
+    
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 

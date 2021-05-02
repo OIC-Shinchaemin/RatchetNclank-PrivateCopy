@@ -7,7 +7,8 @@ state::EnemyActionIdleState::EnemyActionIdleState() :
     _idle_com(),
     _move_com(),
     _melee_attack_com(),
-    _ranged_attack_com() {
+    _ranged_attack_com(),
+    _damage_com() {
 }
 
 state::EnemyActionIdleState::~EnemyActionIdleState() {
@@ -20,6 +21,7 @@ void state::EnemyActionIdleState::SetActor(const std::shared_ptr<my::Actor>& ptr
     this->_move_com = ptr->GetComponent<my::EnemyMoveComponent>();
     this->_melee_attack_com = ptr->GetComponent<my::EnemyMeleeAttackComponent>();
     this->_ranged_attack_com = ptr->GetComponent<my::EnemyRangedAttackComponent>();
+    this->_damage_com = ptr->GetComponent<my::EnemyDamageComponent>();
 }
 
 const char* state::EnemyActionIdleState::GetName(void) const {
@@ -57,8 +59,10 @@ void state::EnemyActionIdleState::Enter(void) {
     if (auto ranged_attack_com = _ranged_attack_com.lock()) {
         ranged_attack_com->End();
     } // if
-
 }
 
 void state::EnemyActionIdleState::Exit(void) {
+    if (auto idle_com = _idle_com.lock()) {
+        //idle_com->End();
+    } // if
 }

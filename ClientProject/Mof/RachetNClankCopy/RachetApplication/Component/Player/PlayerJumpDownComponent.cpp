@@ -48,8 +48,6 @@ bool my::PlayerJumpDownComponent::Initialize(void) {
 }
 
 bool my::PlayerJumpDownComponent::Update(float delta_time) {
-    puts("PlayerJumpDownComponent");
-
     auto move_com = _move_com.lock();
 
     Mof::CVector2 in;

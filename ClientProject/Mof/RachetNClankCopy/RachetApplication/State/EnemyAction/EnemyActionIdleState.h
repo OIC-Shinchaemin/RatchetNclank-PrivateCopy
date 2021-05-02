@@ -9,6 +9,7 @@
 #include "../../Component/Enemy/EnemyMoveComponent.h"
 #include "../../Component/Enemy/EnemyMeleeAttackComponent.h"
 #include "../../Component/Enemy/EnemyRangedAttackComponent.h"
+#include "../../Component/Enemy/EnemyDamageComponent.h"
 
 
 namespace state {
@@ -25,6 +26,8 @@ private:
     std::weak_ptr<my::EnemyMeleeAttackComponent> _melee_attack_com;
     //! 攻撃
     std::weak_ptr<my::EnemyRangedAttackComponent> _ranged_attack_com;
+    //! 攻撃
+    std::weak_ptr<my::EnemyDamageComponent> _damage_com;
 public:
     /// <summary>
     /// コンストラクタ

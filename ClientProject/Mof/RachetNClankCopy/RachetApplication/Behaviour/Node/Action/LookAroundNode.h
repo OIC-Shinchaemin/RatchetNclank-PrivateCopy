@@ -44,7 +44,10 @@ public:
             args.ai_com.lock()->ChangeState("AICombatState");
             return true;
         } // if
-        args.state_com.lock()->ChangeState("EnemyActionIdleState");
+
+        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionIdleState)) {
+            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
+        } // if
         return false;
     }
 };

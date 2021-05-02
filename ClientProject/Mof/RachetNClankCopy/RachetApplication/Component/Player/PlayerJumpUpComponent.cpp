@@ -61,7 +61,6 @@ bool my::PlayerJumpUpComponent::Initialize(void) {
 }
 
 bool my::PlayerJumpUpComponent::Update(float delta_time) {
-    puts("PlayerJumpUpComponent");
     auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();
@@ -77,7 +76,7 @@ bool my::PlayerJumpUpComponent::Update(float delta_time) {
 
     // flag
     if (move_com->AquireInputData(in, move_angle)) {
-        float move_speed = 1.7f; float angular_speed = 3.3f;
+        float move_speed = 2.4f; float angular_speed = 3.3f;
         in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if

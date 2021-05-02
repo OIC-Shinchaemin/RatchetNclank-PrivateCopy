@@ -5,6 +5,7 @@
 #include "../ActionNode.h"
 
 #include "../../Executor/Action/GoHomeNodeExecutor.h"
+#include "../../../State/EnemyAction/EnemyActionStateDefine.h"
 
 
 namespace behaviour {
@@ -38,7 +39,13 @@ public:
     /// <returns>false:é¿çsÇÃé∏îs</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<behaviour::GoHomeNodeExecutor::NodeArgs>(node_args);
-        args.state_com.lock()->ChangeState("EnemyActionGoHomeState");
+        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
+            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
+        } // if
+        else {
+            return false;
+        } // else
+
 
         float distance = Mof::CVector3Utilities::Distance(
             args.actor.lock()->GetInitialPosition(), args.actor.lock()->GetPosition());

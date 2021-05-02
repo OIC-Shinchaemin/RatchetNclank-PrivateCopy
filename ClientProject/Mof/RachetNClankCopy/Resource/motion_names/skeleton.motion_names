@@ -2,6 +2,7 @@
   "names": [
     "skeleton-skeleton|idle",
     "skeleton-skeleton|run",
-    "skeleton-skeleton|attack"
+    "skeleton-skeleton|attack",
+    "skeleton-skeleton|spawn"
   ]
 }

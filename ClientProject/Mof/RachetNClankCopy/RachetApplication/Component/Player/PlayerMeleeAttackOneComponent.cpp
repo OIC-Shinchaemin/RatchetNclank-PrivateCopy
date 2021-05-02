@@ -55,7 +55,6 @@ bool my::PlayerMeleeAttackOneComponent::Initialize(void) {
 }
 
 bool my::PlayerMeleeAttackOneComponent::Update(float delta_time) {
-    puts("PlayerMeleeAttackOneComponent");
     auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();
@@ -97,7 +96,7 @@ bool my::PlayerMeleeAttackOneComponent::Start(void) {
     } // if
     if (auto move_com = _move_com.lock()) {
         Mof::CVector2 in; float move_angle;
-        float move_speed = 7.0f; float angular_speed = 0.0f; float ideal_angle = super::GetOwner()->GetRotate().y;
+        float move_speed = 15.0f; float angular_speed = 0.0f; float ideal_angle = super::GetOwner()->GetRotate().y;
         if (move_com->AquireInputData(in, move_angle)) {
             in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
             angular_speed = 15.0f; ideal_angle = std::atan2(-in.y, in.x) - math::kHalfPi;

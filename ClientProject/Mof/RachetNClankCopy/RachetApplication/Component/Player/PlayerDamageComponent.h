@@ -13,6 +13,8 @@ namespace my {
 class PlayerDamageComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! ”í’e—Ê
+    int _damage_value;
     //! ”í’eŠp“x
     Mof::CVector3 _damage_angle;
     //! ‘¬“x
@@ -23,10 +25,6 @@ private:
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! Hp
     std::weak_ptr<class HpComponent> _hp_com;
-    //! –³“G
-    std::weak_ptr<class InvincibleComponent> _invincible_com;
-    //! ‘Ò‹@
-    std::weak_ptr<class PlayerIdleComponent> _idle_com;
     //! ó‘Ô
     std::weak_ptr<class PlayerStateComponent> _state_com;
 public:

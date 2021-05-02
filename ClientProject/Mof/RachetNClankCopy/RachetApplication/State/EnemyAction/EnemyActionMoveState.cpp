@@ -50,4 +50,7 @@ void state::EnemyActionMoveState::Enter(void) {
 }
 
 void state::EnemyActionMoveState::Exit(void) {
+    if (auto move_com = _move_com.lock()) {
+        //move_com->End();
+    } // if
 }

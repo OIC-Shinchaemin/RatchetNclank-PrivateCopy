@@ -231,7 +231,7 @@ public:
     /// 作成
     /// </summary>
     /// <param name="builder"></param>
-    void Construct(const std::shared_ptr<class IBuilder>& builder);
+    virtual void Construct(const std::shared_ptr<class IBuilder>& builder);
     /// <summary>
     /// デバッグ
     /// </summary>

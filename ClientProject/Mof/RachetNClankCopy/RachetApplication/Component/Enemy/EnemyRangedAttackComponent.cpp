@@ -1,8 +1,11 @@
 #include "EnemyRangedAttackComponent.h"
 
+#include "../../State/EnemyAction/EnemyActionStateDefine.h"
+#include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
 #include "EnemyComponent.h"
+#include "EnemyStateComponent.h"
 #include "../../Actor/Bullet/EnemyBullet.h"
 #include "../../Factory/FactoryManager.h"
 
@@ -12,9 +15,12 @@ my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     _range(3.0f),
     _volume(0.2f),
     _shot_speed(3.0f),
+    _interval(),
+    _velocity_com(),
     _motion_com(),
     _motion_state_com(),
-    _enemy_com() {
+    _enemy_com(),
+    _state_com() {
 }
 
 my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
@@ -22,9 +28,11 @@ my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAtta
     _range(obj._range),
     _volume(obj._volume),
     _shot_speed(obj._shot_speed),
+    _velocity_com(),
     _motion_com(),
     _motion_state_com(),
-    _enemy_com() {
+    _enemy_com(),
+    _state_com() {
 }
 
 my::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
@@ -50,18 +58,46 @@ Mof::CSphere my::EnemyRangedAttackComponent::GetCanAttackRangeSphere(void) const
 bool my::EnemyRangedAttackComponent::Initialize(void) {
     super::Initialize();
 
+    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();
+    _state_com = super::GetOwner()->GetComponent<my::EnemyStateComponent>();
     return true;
 }
 
 bool my::EnemyRangedAttackComponent::Update(float delta_time) {
     if (auto motion_com = _motion_com.lock()) {
         if (motion_com->IsEndMotion()) {
-            super::End();
+            if (auto state_com = _state_com.lock()) {
+                state_com->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
+            } // if
         } // if
     } // if
+
+    if (auto enemy_com = _enemy_com.lock()) {
+        if (auto target = enemy_com->GetTarget().lock()) {
+            auto owner = super::GetOwner();
+            Mof::CVector3 direction = target->GetPosition() - owner->GetPosition();
+            float ideal_y = math::ToDegree(std::atan2(-direction.z, direction.x) + math::kHalfPi + +math::kPi);
+            float current_y = math::ToDegree(owner->GetRotate().y);
+
+            float diff = ideal_y - current_y;
+            if (5.0f < std::abs(diff)) {
+                auto velocity_com = _velocity_com.lock();
+                auto rotate = owner->GetRotate();
+                if (diff < 0.0f) {
+                    
+                    rotate.y -= math::ToRadian(1.0f);
+                } // if
+                else {
+                    rotate.y += math::ToRadian(1.0f);
+                } // 
+                owner->SetRotate(rotate);
+            } // if
+        } // if
+    } // if
+
     return true;
 }
 
@@ -79,6 +115,7 @@ bool my::EnemyRangedAttackComponent::Start(void) {
         return false;
     } // if
     super::Start();
+    _interval.Initialize(2.0f, true);
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState("EnemyMotionAttackState");
     } // if
@@ -99,6 +136,5 @@ bool my::EnemyRangedAttackComponent::Start(void) {
     auto add = my::FactoryManager::Singleton().CreateActor<my::EnemyBullet>("../Resource/builder/enemy_bullet.json", &param);
     add->Start(param);
     super::GetOwner()->Notify("AddRequest", add);
-
     return true;
 }

@@ -40,4 +40,7 @@ void state::EnemyActionRangedAttackState::Enter(void) {
 }
 
 void state::EnemyActionRangedAttackState::Exit(void) {
+    if (auto attack_com = _attack_com.lock()) {
+        attack_com->End();
+    } // if
 }

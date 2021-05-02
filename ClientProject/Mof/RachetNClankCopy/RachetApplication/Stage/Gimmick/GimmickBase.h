@@ -29,6 +29,8 @@ public:
 
     virtual void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
         Vector3 pos, Vector3 scale, Vector3 rotate);
+
+    virtual void ReInitialize(void);
 };
 
 using GimmickPtr   = std::shared_ptr<GimmickBase>;

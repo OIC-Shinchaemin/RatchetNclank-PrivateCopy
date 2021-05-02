@@ -49,7 +49,6 @@ bool my::PlayerMeleeAttackOneEndComponent::Initialize(void) {
 }
 
 bool my::PlayerMeleeAttackOneEndComponent::Update(float delta_time) {
-    puts("PlayerMeleeAttackOneEndComponent");
     auto state_com = _state_com.lock();
     auto motion_com = _motion_com.lock();
     auto motion_state_com = _motion_state_com.lock();

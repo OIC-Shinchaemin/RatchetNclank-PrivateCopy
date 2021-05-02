@@ -86,7 +86,7 @@ public:
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    bool CanTransition(const std::string& name);
+    bool CanTransition(const std::string& next);
 };
 }
 #endif // !MY_PLAYER_STATE_COMPONENT_H

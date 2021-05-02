@@ -13,13 +13,7 @@ public:
         IdleWait,
         MoveRun,
         AttackOne,
-        CountMax,
-    };
-    enum class ActionType {
-        IdleWait,
-        MoveRun,
-        MoveGoHome,
-        AttackOne,
+        Damage,
         CountMax,
     };
 public:

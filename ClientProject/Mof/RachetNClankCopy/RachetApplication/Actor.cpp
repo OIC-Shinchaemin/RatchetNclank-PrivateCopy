@@ -68,16 +68,9 @@ Mof::CVector3 my::Actor::GetInitialPosition(void) const {
 my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
-/*
-bool my::Actor::IsRender(void) const {
-    //auto sphere =
-    //::CGraphicsUtilities::GetCamera()->GetViewPosition();
-    // ƒJƒƒ‰‹…‚Éi”¼Œaj‚Í”CˆÓ
-    return true;
-}
-*/
+
 bool my::Actor::InCameraRange(void) const {
-    const int camera_range = 50.0f;
+    const int camera_range = 30.0f;
     auto pos = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
     auto sphere = Mof::CSphere(pos, camera_range);
     return sphere.CollisionPoint(this->GetPosition());
@@ -85,7 +78,7 @@ bool my::Actor::InCameraRange(void) const {
 
 bool my::Actor::InFrustum(void) const {
     auto box = Mof::CBoxAABB();
-    
+
 
     return false;
 }
@@ -124,7 +117,6 @@ void my::Actor::RemoveComponent(const ComPtr& component) {
     if (component->IsRender()) {
         ut::EraseFind(_render_components, component);
     } // if
-
 
     component->Release();
     ut::EraseFind(_components, component);

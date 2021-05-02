@@ -45,7 +45,6 @@ bool my::PlayerIdleComponent::Initialize(void) {
 }
 
 bool my::PlayerIdleComponent::Update(float delta_time) {
-    puts("PlayerIdleComponent");
     float h = ::g_pGamepad->GetStickHorizontal(); float v = ::g_pGamepad->GetStickVertical();
     float threshold = 0.5f;
     auto stick = Mof::CVector2(h, v);

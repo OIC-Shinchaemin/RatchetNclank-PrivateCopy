@@ -247,6 +247,15 @@
     <Filter Include="Rachet\Source\State\PlayerAction">
       <UniqueIdentifier>{8673bb8c-e692-4f6f-be05-cc69e07c0317}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Component\Ship">
+      <UniqueIdentifier>{557736b1-bc8d-4d54-9172-866e6a1ab630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Ship">
+      <UniqueIdentifier>{cb69f12f-522a-4081-a964-38af85c444ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Ship">
+      <UniqueIdentifier>{67696cee-7d99-4f58-b968-7c92ac796a55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -576,9 +585,6 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Component\InvincibleComponent.cpp">
-      <Filter>Rachet\Source\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
@@ -608,9 +614,6 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor\Ship\Ship.cpp">
-      <Filter>Rachet\Header\Actor\Ship</Filter>
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
@@ -797,6 +800,39 @@
     </ClCompile>
     <ClCompile Include="State\PlayerAction\PlayerActionDamageState.cpp">
       <Filter>Rachet\Source\State\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotion\PlayerMotionDeadState.cpp">
+      <Filter>Rachet\Source\State\PlayerMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerAction\PlayerActionDeadState.cpp">
+      <Filter>Rachet\Source\State\PlayerAction</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDeadComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyAction\EnemyActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotion\EnemyMotionStateImplementation.cpp">
+      <Filter>Rachet\Source\State\EnemyMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyAction\EnemyActionDamageState.cpp">
+      <Filter>Rachet\Source\State\EnemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotion\EnemyMotionDamageState.cpp">
+      <Filter>Rachet\Source\State\EnemyMotion</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\InvincibleComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipMeshComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Ship\Ship.cpp">
+      <Filter>Rachet\Source\Actor\Ship</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1256,9 +1292,6 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Component\InvincibleComponent.h">
-      <Filter>Rachet\Header\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
@@ -1517,6 +1550,36 @@
     <ClInclude Include="State\PlayerAction\PlayerActionDamageState.h">
       <Filter>Rachet\Header\State\PlayerAction</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDeadComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotion\PlayerMotionDeadState.h">
+      <Filter>Rachet\Header\State\PlayerMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerAction\PlayerActionDeadState.h">
+      <Filter>Rachet\Header\State\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyAction\EnemyActionStateDefine.h">
+      <Filter>Rachet\Header\State\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotion\EnemyMotionStateDefine.h">
+      <Filter>Rachet\Header\State\EnemyMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyAction\EnemyActionDamageState.h">
+      <Filter>Rachet\Header\State\EnemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotion\EnemyMotionDamageState.h">
+      <Filter>Rachet\Header\State\EnemyMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InvincibleComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipMeshComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1597,6 +1660,9 @@
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
     <None Include="..\Resource\motion_names\chaman.motion_names">
+      <Filter>リソース ファイル\motion_names</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\ship.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
   </ItemGroup>

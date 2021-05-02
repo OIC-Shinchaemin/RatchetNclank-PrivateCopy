@@ -46,8 +46,6 @@ bool my::PlayerJumpLandingComponent::Initialize(void) {
 }
 
 bool my::PlayerJumpLandingComponent::Update(float delta_time) {
-    puts("PlayerJumpLandingComponent");
-
     auto motion_com = _motion_com.lock();
     auto state_com = _state_com.lock();
     auto move_com = _move_com.lock();

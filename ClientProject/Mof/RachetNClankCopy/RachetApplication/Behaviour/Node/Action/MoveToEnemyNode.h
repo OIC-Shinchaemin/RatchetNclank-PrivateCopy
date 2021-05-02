@@ -55,7 +55,13 @@ public:
             return true;
         } // if
         
-        args.state_com.lock()->ChangeState("EnemyActionMoveState");
+
+        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMoveState)) {
+            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionMoveState);
+        //args.state_com.lock()->ChangeState("EnemyActionMoveState");
+        } // if
+
+        
         return false;
     };
 };

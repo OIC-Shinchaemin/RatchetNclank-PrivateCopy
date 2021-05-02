@@ -48,7 +48,11 @@ public:
         auto attack_com = args.attack_com.lock();
         if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
             args.ai_com.lock()->ChangeState("AICombatState");
-            args.state_com.lock()->ChangeState("EnemyActionMeleeAttackState");
+            
+            if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMeleeAttackState)) {
+                args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionMeleeAttackState);
+                //args.state_com.lock()->ChangeState("EnemyActionMeleeAttackState");
+            } // if
             return false;
         } // if
 

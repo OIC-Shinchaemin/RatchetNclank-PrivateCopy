@@ -17,7 +17,8 @@
     {
       "type": "HpComponent",
       "paramater": {
-        "priority": 0
+        "priority": 0,
+        "hp_max": 4
       }
     },
     {
@@ -123,6 +124,12 @@
 
     {
       "type": "PlayerDamageComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
+      "type": "PlayerDeadComponent",
       "paramater": {
         "priority": 92
       }
