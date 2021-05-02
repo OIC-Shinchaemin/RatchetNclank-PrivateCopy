@@ -27,6 +27,8 @@ private:
     float _angular_drag;
     //! 影響判定
     bool _use_gravity;
+    //! 休止
+    bool _sleep;
 public:
     /// <summary>
     /// コンストラクタ
@@ -63,6 +65,11 @@ public:
     /// <param name="use"></param>
     void SetUseGravity(bool use);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="b"></param>
+    void SetSleep(bool b);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -86,6 +93,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector3 GetVelocityForce(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsSleep(void) const;
     /// <summary>
     /// 追加
     /// </summary>

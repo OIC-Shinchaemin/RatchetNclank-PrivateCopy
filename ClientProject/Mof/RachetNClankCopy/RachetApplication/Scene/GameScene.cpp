@@ -15,6 +15,7 @@
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
+    // add
     ptr->AddObserver(shared_from_this());
     _game_world.AddActor(ptr);
     _renderer.AddElement(ptr);
@@ -22,6 +23,18 @@ void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
 }
 
 void my::GameScene::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
+    if (ptr->GetTag() == "Enemy") {
+        ut::SwapPopback(_for_bridge_event_actors, ptr);
+        if (_for_bridge_event_actors.empty()) {
+            for (auto gimmick : _stage.GetGimmickArray()) {
+                if (gimmick->GetType() == StageObjectType::Bridge) {
+                    gimmick->ActionStart();
+                    _bridge_event_subject.Notify("GimmickAction", nullptr);
+                } // if
+            } // for
+        } // if
+    } // if
+    // remove
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
     _physic_world.RemoveActor(ptr);
@@ -37,10 +50,7 @@ void my::GameScene::ReInitialize(void) {
 bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
-    /*
-    int fps = ::CUtilities::GetFPS();
-    ::CGraphicsUtilities::RenderString(50.0f, 500.0f, "FPS = %d", fps);
-    */
+
     _renderer.Render();
     _stage.Render();
     _game_money->Render();
@@ -78,7 +88,7 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
         _re_initialize = true;
     } // if
 
-    if (type == "ShipCollision") {
+    if (type == "GameClear") {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 }
@@ -100,17 +110,22 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     _weapon_system = std::make_shared<my::WeaponSystem>();
     _game_money = std::make_unique<my::GameMoney>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-
     _game_money->SetResourceManager(_resource);
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
     _quick_change->SetResourceManager(_resource);
     _quick_change->SetUICanvas(_ui_canvas);
 
+    if (auto r = _resource.lock()) {
+        r->Load(param->resource.c_str());
+    } // if
+
     // stage
     if (!_stage.Load("../Resource/stage/test.json")) {
         return false;
     } // if
+
+    _loaded = true;
     return true;
 }
 
@@ -129,31 +144,37 @@ bool my::GameScene::Initialize(void) {
     _quick_change->Initialize({}, _weapon_system);
     _stage.Initialize();
 
-
     auto param = new my::Actor::Param();
     // chara
+    _for_bridge_event_actors.clear();
+    _for_bridge_event_actors.reserve(_stage.GetEnemySpawnArray().size());
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-
+        auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
         _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
         param->transform.position = enemy_spawn.second->GetPosition();
         auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
         this->AddElement(enemy);
+
+        if (event_sphere.CollisionPoint(param->transform.position)) {
+            _for_bridge_event_actors.push_back(enemy);
+        } // if
     } // for
 
+
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, - math::kHalfPi * 0.7f, 0.0f);
+    param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi * 0.7f, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
-    player->Generate(_resource.lock());
     this->AddElement(player);
 
-    param->transform.position = Mof::CVector3(2.0f, 1.0f, 5.0f);
+    param->transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
+    param->name = "ship";
     auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", param);
     this->AddElement(ship);
-
-
-
+    _bridge_event_subject.AddObserver(ship);
+    player->AddObserver(ship);
+    
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 

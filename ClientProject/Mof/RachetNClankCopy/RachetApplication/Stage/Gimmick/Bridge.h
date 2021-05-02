@@ -20,6 +20,19 @@ public:
         Vector3 scale = Vector3(1, 1, 1),
         Vector3 rotate = Vector3());
 	virtual ~Bridge(void);
+ 
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="pos"></param>
+    void SetEndPosition(Mof::CVector3 pos);
+    
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector3 GetPreviewPosition(void) const override;
 
     virtual void Initialize(void) override;
     virtual void Update(float delta) override;

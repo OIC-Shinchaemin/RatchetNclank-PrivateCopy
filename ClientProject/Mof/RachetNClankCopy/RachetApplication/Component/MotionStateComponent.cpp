@@ -2,10 +2,24 @@
 
 #include "../State/PlayerMotion/PlayerMotionIdleState.h"
 #include "../State/PlayerMotion/PlayerMotionMoveState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpSetState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpUpState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpDownState.h"
+#include "../State/PlayerMotion/PlayerMotionJumpLandingState.h"
+#include "../State/PlayerMotion/PlayerMotionDoubleJumpState.h"
+#include "../State/PlayerMotion/PlayerMotionMeleeAttackOneState.h"
+#include "../State/PlayerMotion/PlayerMotionMeleeAttackOneEndState.h"
+#include "../State/PlayerMotion/PlayerMotionMeleeAttackTwoState.h"
+#include "../State/PlayerMotion/PlayerMotionMeleeAttackTwoEndState.h"
+#include "../State/PlayerMotion/PlayerMotionMeleeAttackThreeState.h"
+#include "../State/PlayerMotion/PlayerMotionMeleeAttackThreeEndState.h"
 #include "../State/PlayerMotion/PlayerMotionDamageState.h"
+#include "../State/PlayerMotion/PlayerMotionDeadState.h"
 #include "../State/EnemyMotion/EnemyMotionIdleState.h"
 #include "../State/EnemyMotion/EnemyMotionMoveState.h"
 #include "../State/EnemyMotion/EnemyMotionAttackState.h"
+#include "../State/EnemyMotion/EnemyMotionRangedAttackState.h"
+#include "../State/EnemyMotion/EnemyMotionDamageState.h"
 
 
 my::MotionStateComponent::MotionStateComponent(int priority) :
@@ -38,12 +52,26 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterMotionState<state::EnemyMotionIdleState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
         this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
+        this->RegisterMotionState<state::EnemyMotionRangedAttackState>(_state_machine);
+        this->RegisterMotionState<state::EnemyMotionDamageState>(_state_machine);
         _state_machine.ChangeState("EnemyMotionIdleState");
     } // if
     else {
         this->RegisterMotionState<state::PlayerMotionIdleState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionMoveState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpSetState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpUpState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpDownState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionJumpLandingState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionDoubleJumpState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMeleeAttackOneState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMeleeAttackOneEndState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMeleeAttackTwoState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMeleeAttackTwoEndState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMeleeAttackThreeState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionMeleeAttackThreeEndState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionDamageState>(_state_machine);
+        this->RegisterMotionState<state::PlayerMotionDeadState>(_state_machine);
         _state_machine.ChangeState("PlayerMotionIdleState");
     } // else 
     return true;

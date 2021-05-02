@@ -14,6 +14,13 @@ public:
         Vector3 rotate = Vector3());
     virtual ~GimmickBase(void);
 
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector3 GetPreviewPosition(void) const;
+
     virtual void Initialize(void) = 0;
     virtual void Update(float delta) = 0;
 
@@ -22,6 +29,8 @@ public:
 
     virtual void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
         Vector3 pos, Vector3 scale, Vector3 rotate);
+
+    virtual void ReInitialize(void);
 };
 
 using GimmickPtr   = std::shared_ptr<GimmickBase>;

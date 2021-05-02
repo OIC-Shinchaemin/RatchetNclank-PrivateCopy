@@ -4,17 +4,30 @@
 
 #include "NodeExecutor.h"
 
-#include "My/Core/Trait.h"
-
 #include "../../Actor.h"
 
 
 namespace behaviour {
 class ConditionalNodeExecutor : public behaviour::NodeExecutor {
     using super = behaviour::NodeExecutor;
-private:
+protected:
     //! アクター
     std::weak_ptr<my::Actor> _actor;
+    /// <summary>
+    /// ノード実行
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    behaviour::INodeExecutor::Result ConditionalNodeExecute(std::any args) {
+        // 実行開始
+        super::_state = super::State::Running;
+        if (super::_node->Execute(args)) {
+            super::_state = super::State::Completed;
+            return super::Result::Sucess;
+        } // if
+        super::_state = super::State::Incompleted;
+        return super::Result::Failure;
+    }
 public:
     /// <summary>
     /// コンストラクタ
@@ -41,16 +54,8 @@ public:
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
     virtual behaviour::INodeExecutor::Result Execute(void) override {
-        // 実行開始
-        super::_state = super::State::Running;
         auto temp = _actor.lock();
-        //if (std::dynamic_pointer_cast<behaviour::ConditionalNodeBase>(super::_node)->Execute(temp)) {
-        if (super::_node->Execute(temp)) {
-            super::_state = super::State::Completed;
-            return super::Result::Sucess;
-        } // if
-        super::_state = super::State::Incompleted;
-        return super::Result::Failure;
+        return this->ConditionalNodeExecute(temp);
     }
 };
 }

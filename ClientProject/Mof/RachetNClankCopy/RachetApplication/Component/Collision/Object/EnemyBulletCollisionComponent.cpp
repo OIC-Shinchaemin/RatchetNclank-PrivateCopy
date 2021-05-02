@@ -50,5 +50,5 @@ std::shared_ptr<my::Component> my::EnemyBulletCollisionComponent::Clone(void) {
     return std::make_shared<my::EnemyBulletCollisionComponent>(*this);
 }
 
-void my::EnemyBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
+void my::EnemyBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
 }

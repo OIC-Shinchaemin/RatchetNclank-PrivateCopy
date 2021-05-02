@@ -2,8 +2,7 @@
 
 
 state::EnemyMotionAttackState::EnemyMotionAttackState() :
-    super(),
-    _attack_com() {
+    super() {
     super::_motion_speed = 0.5f;
     super::_motion_loop = false;
 }
@@ -13,7 +12,6 @@ state::EnemyMotionAttackState::~EnemyMotionAttackState() {
 
 void state::EnemyMotionAttackState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     super::SetActor(ptr);
-    _attack_com = ptr->GetComponent<my::EnemyMeleeAttackComponent>();
 }
 
 const char* state::EnemyMotionAttackState::GetName(void) const {
@@ -28,6 +26,4 @@ void state::EnemyMotionAttackState::Enter(void) {
 }
 
 void state::EnemyMotionAttackState::Exit(void) {
-    if (auto attack_com = _attack_com.lock()) {
-    } // if
 }

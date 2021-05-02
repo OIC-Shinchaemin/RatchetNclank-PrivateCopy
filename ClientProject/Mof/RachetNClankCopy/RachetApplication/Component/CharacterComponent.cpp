@@ -3,8 +3,8 @@
 
 my::CharacterComponent::CharacterComponent(int priority) :
     super(priority),
-    _volume(0.5f),
-    _height(1.0f) {
+    _volume(0.0f),
+    _height(0.0f) {
 }
 
 my::CharacterComponent::CharacterComponent(const CharacterComponent& obj) :
@@ -14,6 +14,19 @@ my::CharacterComponent::CharacterComponent(const CharacterComponent& obj) :
 }
 
 my::CharacterComponent::~CharacterComponent() {
+}
+
+void my::CharacterComponent::SetParam(const rapidjson::Value& param) {
+    super::SetParam(param);
+    const char* height = "height";
+    _ASSERT_EXPR(param.HasMember(height), L"指定のパラメータがありません");
+    _ASSERT_EXPR(param[height].IsFloat(), L"パラメータの指定された型でありません");
+    _height = param[height].GetFloat();
+
+    const char* volume = "volume";
+    _ASSERT_EXPR(param.HasMember(volume), L"指定のパラメータがありません");
+    _ASSERT_EXPR(param[volume].IsFloat(), L"パラメータの指定された型でありません");
+    _volume = param[volume].GetFloat();
 }
 
 std::string my::CharacterComponent::GetType(void) const {

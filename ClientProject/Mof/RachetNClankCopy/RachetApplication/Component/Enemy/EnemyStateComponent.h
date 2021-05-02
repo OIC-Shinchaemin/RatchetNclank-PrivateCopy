@@ -81,6 +81,12 @@ public:
     /// </summary>
     /// <param name="name"></param>
     void ChangeState(const std::string& name);
+    /// <summary>
+    /// ”»’è
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    bool CanTransition(const std::string& next);
 };
 }
 #endif // !MY_ENEMY_STATE_COMPONENT_H

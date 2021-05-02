@@ -80,7 +80,7 @@ public:
     /// è’ìÀîªíË
     /// </summary>
     /// <param name="mesh"></param>
-    virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) override;
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
 #endif // !MY_ENEMY_BULLET_COLLISION_COMPONENT_H

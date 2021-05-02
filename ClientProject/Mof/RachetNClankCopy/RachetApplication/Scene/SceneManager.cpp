@@ -9,20 +9,22 @@
 void my::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<my::Scene::Param> param) {
     _scene.reset();
     if (name == my::SceneType::kTitleScene) {
+        param->resource = "../Resource/scene_resource/title_scene.txt";
         auto temp = ut::MakeSharedWithRelease<my::TitleScene>();
         temp->SetResourceManager(_resource);
         _scene = temp;
     } // if
     else if (name == my::SceneType::kGameScene) {
+        param->resource = "../Resource/scene_resource/game_scene.txt";
         auto temp = ut::MakeSharedWithRelease<my::GameScene>();
         temp->SetResourceManager(_resource);
         temp->SetUICanvas(_ui_canvas);
         _scene = temp;
     } // else if
     else if (name == my::SceneType::kClearScene) {
+        param->resource = "../Resource/scene_resource/clear_scene.txt";
         _scene = ut::MakeSharedWithRelease<my::ClearScene>();
     } // else if
-
 
     _scene->AddSceneObserver(shared_from_this());
     _scene->Load(param);

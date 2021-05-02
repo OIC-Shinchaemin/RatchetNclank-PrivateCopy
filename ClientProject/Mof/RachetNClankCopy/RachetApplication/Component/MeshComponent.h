@@ -11,7 +11,7 @@
 namespace my {
 class MeshComponent : public my::RenderComponent {
     using super = my::RenderComponent;
-private:
+protected:
     //! メッシュ
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! アニメーション
@@ -82,10 +82,10 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
     /// <summary>
-    /// このフレーム表示しない
+    /// 表示しない
     /// </summary>
     /// <param name=""></param>
-    void HideByCurrentFrame(void);
+    void Hide(void);
     /// <summary>
     /// 描画
     /// </summary>

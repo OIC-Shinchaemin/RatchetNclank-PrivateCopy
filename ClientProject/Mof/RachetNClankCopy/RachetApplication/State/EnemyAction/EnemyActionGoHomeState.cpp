@@ -28,7 +28,7 @@ void state::EnemyActionGoHomeState::Enter(void) {
         move_com->Start();
 
         Mof::CVector3 target = super::GetActor()->GetInitialPosition();
-        float speed = 0.3f;
+        float speed = 1.2f;
         float angular_speed = 1.0f;
 
         float tilt = 1.0f;
@@ -45,7 +45,16 @@ void state::EnemyActionGoHomeState::Enter(void) {
     if (auto attack_com = _attack_com.lock()) {
         attack_com->End();
     } // if
+
+    if (auto idle_com = _idle_com.lock()) {
+        idle_com->SetAngularSpeed(0.0f);
+        idle_com->End();
+    } // if
+
 }
 
 void state::EnemyActionGoHomeState::Exit(void) {
+    if (auto move_com = _move_com.lock()) {
+        //move_com->End();
+    } // if
 }

@@ -2,6 +2,18 @@
   "names": [
     "bse_wait_lp",
     "mov_run_lp",
+    "mov_jump_f_set",
+    "mov_jump_f_u_lp",
+    "mov_jump_f_d_lp",
+    "mov_jump_landing",
+    "mov_step_b_end",
+    "atk_attack_01",
+    "atk_attack_01_ft",
+    "atk_attack_02",
+    "atk_attack_02_ft",
+    "atk_attack_03",
+    "atk_attack_03_ft",
+    "dam_damage_m_a",
     "dam_down_d",
     ""
   ]

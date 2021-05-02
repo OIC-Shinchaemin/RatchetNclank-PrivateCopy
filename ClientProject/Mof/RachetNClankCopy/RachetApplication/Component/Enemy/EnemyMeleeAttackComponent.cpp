@@ -6,7 +6,7 @@
 
 my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     super(priority),
-    _range(2.0f),
+    _range(1.7f),
     _volume(0.5f),
     _motion_com(),
     _motion_state_com() {

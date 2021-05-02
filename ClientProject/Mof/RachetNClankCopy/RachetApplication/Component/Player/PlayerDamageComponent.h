@@ -13,6 +13,8 @@ namespace my {
 class PlayerDamageComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! 被弾量
+    int _damage_value;
     //! 被弾角度
     Mof::CVector3 _damage_angle;
     //! 速度
@@ -23,10 +25,8 @@ private:
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! Hp
     std::weak_ptr<class HpComponent> _hp_com;
-    //! 無敵
-    std::weak_ptr<class InvincibleComponent> _invincible_com;
-    //! 待機
-    std::weak_ptr<class PlayerIdleComponent> _idle_com;
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ

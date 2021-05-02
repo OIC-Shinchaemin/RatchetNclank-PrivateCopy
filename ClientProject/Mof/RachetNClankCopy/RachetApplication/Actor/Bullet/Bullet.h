@@ -15,12 +15,21 @@ public:
         using super = super::Param;
         //! ‘¬“x
         Mof::CVector3 speed;
+        //! ‚¿å‚Ì‘¬“x
+        Mof::CVector3 inertia;
+
         Param() :
             super() {
         }
         Param(Mof::CVector3 spd) :
             super(),
-            speed(spd) {
+            speed(spd),
+            inertia() {
+        }
+        Param(Mof::CVector3 spd, Mof::CVector3 first_spd) :
+            super(),
+            speed(spd),
+            inertia(first_spd) {
         }
         virtual ~Param() {
         }

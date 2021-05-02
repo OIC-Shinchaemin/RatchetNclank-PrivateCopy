@@ -3,6 +3,10 @@
 #include "../Gamepad.h"
 #include "../Camera/FollowCameraController.h"
 #include "../Camera/DebugCameraController.h"
+#include "VelocityComponent.h"
+#include "Player/PlayerJumpUpComponent.h"
+#include "Player/PlayerJumpDownComponent.h"
+#include "Player/PlayerDoubleJumpComponent.h"
 
 
 void my::CameraComponent::ControlByKeyboard(void) {
@@ -125,7 +129,11 @@ my::CameraComponent::CameraComponent(int priority) :
     _player_view_camera(),
     _camera_controller(),
     _camera_fps_mode(false),
-    _ideal_fps_camera_angle(0.0f) {
+    _ideal_fps_camera_angle(0.0f),
+    _preview_position(),
+    _jump_up_com(),
+    _jump_down_com() ,
+    _double_jump_com() {
 }
 
 my::CameraComponent::CameraComponent(const CameraComponent& obj) :
@@ -134,10 +142,18 @@ my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _player_view_camera(),
     _camera_controller(),
     _camera_fps_mode(false),
-    _ideal_fps_camera_angle(0.0f) {
+    _ideal_fps_camera_angle(0.0f),
+    _preview_position(),
+    _jump_up_com(),
+    _jump_down_com(),
+    _double_jump_com(){
 }
 
 my::CameraComponent::~CameraComponent() {
+}
+
+void my::CameraComponent::SetPosition(Mof::CVector3 pos) {
+    return this->_camera_controller.GetService()->SetCameraPosition(pos);
 }
 
 void my::CameraComponent::SetTarget(Mof::CVector3 pos) {
@@ -150,6 +166,18 @@ std::string my::CameraComponent::GetType(void) const {
 
 Mof::CVector3 my::CameraComponent::GetViewFront(void) const {
     return this->_camera_controller.GetService()->GetViewFront();
+}
+
+Mof::CVector3 my::CameraComponent::GetPosition(void) const {
+    return this->_camera_controller.GetService()->GetCameraPosition();
+}
+
+Mof::CVector3 my::CameraComponent::GetVelocity(void) const {
+    return this->_camera_controller.GetService()->GetVelocity();
+}
+
+Mof::CVector3 my::CameraComponent::GetPreviewPosition(void) const {
+    return this->_camera_controller.GetService()->GetPreviewPosition();
 }
 
 bool my::CameraComponent::Initialize(void) {
@@ -173,6 +201,11 @@ bool my::CameraComponent::Initialize(void) {
         math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
     _camera_controller.GetService()->SetAltitude(20.0f);
 
+
+    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    _jump_up_com = super::GetOwner()->GetComponent<my::PlayerJumpUpComponent>();
+    _jump_down_com = super::GetOwner()->GetComponent<my::PlayerJumpDownComponent>();
+    _double_jump_com = super::GetOwner()->GetComponent<my::PlayerDoubleJumpComponent>();
     return true;
 }
 
@@ -183,14 +216,24 @@ bool my::CameraComponent::Update(float delta_time) {
     auto pos = super::GetOwner()->GetPosition();
     pos.y += 1.0f;
 
-
     if (_camera_fps_mode) {
         auto offset = Mof::CVector3(0.0f, 0.0f, 1.0f);
         offset.RotationY(_ideal_fps_camera_angle + MOF_MATH_HALFPI);
         _camera_controller.GetService()->SetCameraTarget(pos + offset);
     } // if
     else {
-        _camera_controller.GetService()->SetCameraTarget(pos);
+        auto jump_up_com = _jump_up_com.lock();
+        auto jump_down_com = _jump_down_com.lock();
+        auto double_jump_com = _double_jump_com.lock();
+        if (jump_up_com->IsActive() || jump_down_com->IsActive() || double_jump_com->IsActive()) {
+            auto temp = pos;
+            temp.y = _preview_position.y;
+            _camera_controller.GetService()->SetCameraTarget(temp);
+        } // if
+        else {
+            _preview_position = pos;
+            _camera_controller.GetService()->SetCameraTarget(pos);
+        } // else
     } // else
     _camera_controller.GetService()->Update();
 

@@ -19,12 +19,29 @@ private:
     float _ideal_angle;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! カメラ
     std::weak_ptr<class CameraComponent> _camera_com;
 
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name="name"></param>
+    void ChageState(const std::string& name);
+public:
+    /// <summary>
+    /// 加速
+    /// </summary>
+    /// <param name="speed"></param>
     virtual void InputMoveVelocity(float speed);
+    /// <summary>
+    /// 加速
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <param name="speed"></param>
     virtual void InputMoveAngularVelocity(float angle, float speed);
 public:
     /// <summary>
@@ -104,6 +121,21 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
+    /// <summary>
+    /// 加速
+    /// </summary>
+    /// <param name="move_speed"></param>
+    /// <param name="angular_speed"></param>
+    /// <param name="ideal_angle"></param>
+    /// <returns>実行</returns>
+    bool Move(float move_speed, float angular_speed, float ideal_angle);
+    /// <summary>
+    /// 獲得
+    /// </summary>
+    /// <param name="stick">出力</param>
+    /// <param name="move_angle">出力</param>
+    /// <returns></returns>
+    bool AquireInputData(Mof::CVector2& stick, float& move_angle);
 };
 }
 #endif // !MY_PLAYER_MOVE_COMPONENT_H

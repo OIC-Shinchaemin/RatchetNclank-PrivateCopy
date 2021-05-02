@@ -7,6 +7,10 @@ GimmickBase::GimmickBase(bool enable, bool collision, StageObjectType type, std:
 GimmickBase::~GimmickBase(void) {
 }
 
+Mof::CVector3 GimmickBase::GetPreviewPosition(void) const {
+    return Mof::CVector3();
+}
+
 void GimmickBase::ActionStart(void) {
 }
 
@@ -23,4 +27,7 @@ void GimmickBase::SetStageObjectData(bool enable, bool collision, StageObjectTyp
     _position         = pos;
     _scale            = scale;
     _rotate           = rotate;
+}
+
+void GimmickBase::ReInitialize(void) {
 }

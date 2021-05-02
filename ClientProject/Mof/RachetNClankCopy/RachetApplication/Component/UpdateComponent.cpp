@@ -2,7 +2,7 @@
 
 
 my::UpdateComponent::UpdateComponent(int priority) :
-    super(priority){
+    super(priority) {
 }
 
 my::UpdateComponent::~UpdateComponent() {
@@ -36,6 +36,6 @@ bool my::UpdateComponent::Start(void) {
 }
 
 bool my::UpdateComponent::End(void) {
-super::_active = false;
+    super::_active = false;
     return false;
 }

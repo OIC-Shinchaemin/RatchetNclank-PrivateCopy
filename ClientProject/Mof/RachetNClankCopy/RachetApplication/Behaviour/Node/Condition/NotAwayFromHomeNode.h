@@ -3,7 +3,8 @@
 
 
 #include "../ConditionalNode.h"
-#include "../../../Actor.h"
+
+#include "../../Executor/Condition/NotAwayFromHomeNodeExecutor.h"
 
 
 namespace behaviour {
@@ -21,15 +22,25 @@ public:
     /// </summary>
     virtual ~NotAwayFromHomeNode() = default;
     /// <summary>
-    /// ノードの実行処理
+    /// 作成
     /// </summary>
-    /// <param name="actor">実行アクター</param>
-    /// <returns>Succeeded:実行の成功</returns>
-    /// <returns>Failed:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) override {
-        auto actor = std::any_cast<std::shared_ptr<my::Actor>>(ptr);
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+        return std::make_shared<behaviour::NotAwayFromHomeNodeExecutor>(ptr);
+    }
+    /// <summary>
+    /// ノードの実行
+    /// </summary>
+    /// <param name="node_args">実行引数</param>
+    /// <returns>true:実行の成功</returns>
+    /// <returns>false:実行の失敗</returns>
+    virtual bool Execute(std::any node_args) override {
+        auto args = std::any_cast<behaviour::NotAwayFromHomeNodeExecutor::NodeArgs>(node_args);
+        auto actor = args.actor.lock();
 
-        return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) < 5.0f;
+        return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) < 9.5f;
     }
 };
 }

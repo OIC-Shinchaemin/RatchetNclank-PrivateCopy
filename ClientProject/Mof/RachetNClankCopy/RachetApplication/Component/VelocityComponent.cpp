@@ -10,7 +10,8 @@ my::VelocityComponent::VelocityComponent(int priority) :
     _gravity(0.25f),
     _drag(0.8f),
     _angular_drag(0.8f),
-    _use_gravity(true) {
+    _use_gravity(true),
+    _sleep(false) {
 }
 
 my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
@@ -22,7 +23,8 @@ my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
     _gravity(obj._gravity),
     _drag(obj._drag),
     _angular_drag(obj._angular_drag),
-    _use_gravity(obj._use_gravity) {
+    _use_gravity(obj._use_gravity),
+    _sleep(obj._sleep) {
 }
 
 my::VelocityComponent::~VelocityComponent() {
@@ -44,6 +46,10 @@ void my::VelocityComponent::SetUseGravity(bool use) {
     this->_use_gravity = use;
 }
 
+void my::VelocityComponent::SetSleep(bool b) {
+    this->_sleep = b;
+}
+
 std::string my::VelocityComponent::GetType(void) const {
     return "VelocityComponent";
 }
@@ -58,6 +64,10 @@ Mof::CVector3 my::VelocityComponent::GetAngularVelocity(void) const {
 
 Mof::CVector3 my::VelocityComponent::GetVelocityForce(void) const {
     return this->_velocity_force;
+}
+
+bool my::VelocityComponent::IsSleep(void) const {
+    return this->_sleep;
 }
 
 void my::VelocityComponent::AddVelocityForce(Mof::CVector3 accele) {
@@ -75,6 +85,7 @@ bool my::VelocityComponent::Initialize(void) {
 }
 
 bool my::VelocityComponent::Update(float delta_time) {
+
     _angular_velocity += _angular_velocity_force;
     _velocity += _velocity_force;
 

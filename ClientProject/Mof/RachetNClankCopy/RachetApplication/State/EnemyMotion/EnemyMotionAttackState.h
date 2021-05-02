@@ -4,17 +4,10 @@
 
 #include "EnemyMotionState.h"
 
-#include <memory>
-
-#include "../../Component/Enemy/EnemyMeleeAttackComponent.h"
-
 
 namespace state {
 class EnemyMotionAttackState : public state::EnemyMotionState {
     using super = state::EnemyMotionState;
-private:
-    //! 攻撃
-    std::weak_ptr<my::EnemyMeleeAttackComponent> _attack_com;
 public:
     /// <summary>
     /// コンストラクタ

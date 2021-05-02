@@ -3,7 +3,6 @@
 
 state::AIPatrolState::AIPatrolState() :
     super() {
-    super::_behaviour_path = "../Resource/behaviour/patrol.json";
 }
 
 state::AIPatrolState::~AIPatrolState() {

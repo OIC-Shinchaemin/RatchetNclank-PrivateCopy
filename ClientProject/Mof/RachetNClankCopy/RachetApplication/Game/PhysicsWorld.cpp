@@ -7,6 +7,7 @@
 #include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyPlayerMeleeAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
@@ -27,6 +28,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm.c_str(),
@@ -37,6 +39,8 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
     };
+
+    
     for (auto type : types) {
         auto temp = CollisionLayer();
         temp.algo = collision_algolithm_factory.Create(type);
@@ -51,6 +55,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::PlayerEnemyBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerShipCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyPlayerMeleeAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm);
@@ -107,15 +112,14 @@ void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
 bool my::PhysicsWorld::Update(void) {
     for (auto& layer : _layers) {
         for (auto& object : layer.objects) {
-            if (layer.objects.empty()) {
+            if (object->IsSleep()) {
                 continue;
             } // if
 
             for (auto& target : layer.targets) {
-                if (layer.targets.empty()) {
+                if (target->IsSleep()) {
                     continue;
                 } // if
-
 
                 if (object == target) {
                     continue;
@@ -146,19 +150,31 @@ bool my::PhysicsWorld::Update(void) {
 
 void my::PhysicsWorld::CollisionStage(Stage* stage) {
     auto meshes = stage->GetMeshArray();
-    auto objs = stage->GetStaticObjectArray();
-
-    int huge_mesh_no_current_stage_file = 1;
     
+    auto objs = stage->GetStaticObjectArray();
+    int huge_mesh_no_current_stage_file = 1;
     for (auto obj : objs) {
         int mesh_no = obj->GetMeshNo();
         if (mesh_no == huge_mesh_no_current_stage_file) {
             continue;
         } // if
-        auto world = obj->GetWorldMatrix();
+        for (auto com : _list_for_stage) {
+            if (com->IsSleep()) {
+                continue;
+            } // if
+            auto mesh = meshes.at(mesh_no);
+            com->CollisionStage(&*mesh, *obj);
+        } // for
+    } // for
+
+
+    auto gimmicks = stage->GetGimmickArray();
+    for (auto gimmick : gimmicks) {
+        int mesh_no = gimmick->GetMeshNo();
+        
         for (auto com : _list_for_stage) {
             auto mesh = meshes.at(mesh_no);
-            com->CollisionStage(&*mesh, world);
+            com->CollisionStageGimmick(&*mesh, gimmick);
         } // for
     } // for
 }

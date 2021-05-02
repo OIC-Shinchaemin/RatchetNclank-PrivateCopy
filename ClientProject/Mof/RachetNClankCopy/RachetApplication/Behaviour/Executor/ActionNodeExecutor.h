@@ -4,16 +4,36 @@
 
 #include "NodeExecutor.h"
 
-#include "My/Core/Trait.h"
 #include "../../Actor.h"
 
 
 namespace behaviour {
 class ActionNodeExecutor : public behaviour::NodeExecutor {
     using super = behaviour::NodeExecutor;
-private:
+protected:
     //! アクター
     std::weak_ptr<my::Actor> _actor;
+    /// <summary>
+    /// ノード実行
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    behaviour::INodeExecutor::Result ActionNodeExecute(std::any args) {
+        //実行済み
+        if (super::_state == super::State::Completed) {
+            return super::Result::Sucess;
+        } // if
+        else if (super::_state == super::State::Incompleted) {
+            return super::Result::Failure;
+        } // else if
+        //実行開始
+        super::_state = super::State::Running;
+        if (super::_node->Execute(args)) {
+            super::_state = super::State::Completed;
+            return super::Result::Sucess;
+        } // if
+        return super::Result::None;
+    }
 public:
     /// <summary>
     /// コンストラクタ
@@ -40,21 +60,8 @@ public:
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
     virtual behaviour::INodeExecutor::Result Execute(void) override {
-        //実行済み
-        if (super::_state == super::State::Completed) {
-            return super::Result::Sucess;
-        } // if
-        else if (super::_state == super::State::Incompleted) {
-            return super::Result::Failure;
-        } // else if
-        //実行開始
-        super::_state = super::State::Running;
         auto temp = _actor.lock();
-        if (super::_node->Execute(temp)) {
-            super::_state = super::State::Completed;
-            return super::Result::Sucess;
-        } // if
-        return super::Result::None;
+        return this->ActionNodeExecute(temp);
     }
 };
 }

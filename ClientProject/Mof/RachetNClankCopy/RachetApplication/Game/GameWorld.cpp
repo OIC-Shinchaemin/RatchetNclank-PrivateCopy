@@ -3,7 +3,7 @@
 
 my::GameWorld::GameWorld() :
     _actors() {
-    _actors.reserve(256);
+    _actors.reserve(64);
 }
 
 my::GameWorld::~GameWorld() {
@@ -33,10 +33,6 @@ bool my::GameWorld::Input(void) {
 }
 
 bool my::GameWorld::Update(float delta_time) {
-    // delete
-//    ut::EraseRemove(_actors, [](const ActorPtr& actor) {
-//        return actor->GetState() == my::ActorState::End;
-//    });    
     // update
     for (auto& actor : _actors) {
         actor->Update(delta_time);

@@ -69,6 +69,20 @@ my::ActorState my::Actor::GetState(void) const {
     return this->_state;
 }
 
+bool my::Actor::InCameraRange(void) const {
+    const int camera_range = 30.0f;
+    auto pos = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
+    auto sphere = Mof::CSphere(pos, camera_range);
+    return sphere.CollisionPoint(this->GetPosition());
+}
+
+bool my::Actor::InFrustum(void) const {
+    auto box = Mof::CBoxAABB();
+
+
+    return false;
+}
+
 void my::Actor::AddComponent(const ComPtr& component) {
     if (component->IsInput()) {
         ut::InsertAscend(_input_components, component);
@@ -103,7 +117,6 @@ void my::Actor::RemoveComponent(const ComPtr& component) {
     if (component->IsRender()) {
         ut::EraseFind(_render_components, component);
     } // if
-
 
     component->Release();
     ut::EraseFind(_components, component);
@@ -160,13 +173,14 @@ bool my::Actor::Update(float delta_time) {
 }
 
 bool my::Actor::Render(void) {
+    bool re = false;
     for (auto& com : _render_components) {
         if (com->IsActive()) {
             com->Render();
-            com->DebugRender();
+            re = true;
         } // if
     } // for
-    return true;
+    return re;
 }
 
 bool my::Actor::Release(void) {
@@ -201,4 +215,9 @@ void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
 }
 
 void my::Actor::DebugRender(void) {
+    for (auto& com : _render_components) {
+        if (com->IsActive()) {
+            com->DebugRender();
+        } // if
+    } // for
 }

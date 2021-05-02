@@ -7,16 +7,35 @@
 #include <memory>
 
 #include "My/Core/Timer.h"
+#include "../Collision/Object/CollisionComponent.h"
 
 
 namespace my {
 class EnemyDamageComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! 被弾量
+    int _damage_value;
+    //! 被弾角度
+    Mof::CVector3 _damage_angle;
+    //! 速度
+    std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! モーション
+    std::weak_ptr<class MotionComponent> _motion_com;
+    //! モーション
+    std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! Hp
     std::weak_ptr<class HpComponent> _hp_com;
-    ////! 待機
-    std::weak_ptr<class InvincibleComponent> _invincible_com;
+    //! 型
+    std::weak_ptr<class EnemyComponent> _enemy_com;
+    //! 状態
+    std::weak_ptr<class EnemyStateComponent> _state_com;
+private:
+    /// <summary>
+    /// 衝突処理
+    /// </summary>
+    /// <param name=""></param>
+    void CollisionAction(const my::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ

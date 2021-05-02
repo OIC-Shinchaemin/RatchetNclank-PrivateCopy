@@ -6,8 +6,12 @@
 
 #include <memory>
 
+#include "My/Core/ServiceLocator.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "../Camera/Camera.h"
+#include "../Camera/CameraController.h"
+#include "../Stage/Stage.h"
 
 
 namespace my {
@@ -18,6 +22,14 @@ private:
     std::weak_ptr<my::ResourceMgr> _resource;
     //! 画面
     std::weak_ptr<Mof::CTexture> _backbround;
+    //! ステージ
+    Stage _stage;
+    //! カメラ
+    std::shared_ptr<my::Camera> _stage_view_camera;
+    //! カメラコントローラ
+    my::ServiceLocator<my::CameraController> _camera_controller;
+    //! 水面
+    Mof::CTexture _water_surface;
 protected:
     /// <summary>
     /// 描画
@@ -63,6 +75,12 @@ public:
     /// <param name="delta_time">時間</param>
     /// <returns></returns>
     virtual bool Update(float delta_time);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Release(void);
 };
 }
 #endif // !MY_TITLE_SCENE_H

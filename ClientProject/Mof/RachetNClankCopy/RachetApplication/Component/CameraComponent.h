@@ -23,6 +23,16 @@ private:
     bool _camera_fps_mode;
     //! FPSカメラ方向
     float _ideal_fps_camera_angle;
+    //! 対象
+    Mof::CVector3 _preview_position;
+    //! 速度
+    std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! ジャンプ
+    std::weak_ptr<class PlayerJumpUpComponent> _jump_up_com;
+    //! ジャンプ
+    std::weak_ptr<class PlayerJumpDownComponent> _jump_down_com;
+    //! ジャンプ
+    std::weak_ptr<class PlayerDoubleJumpComponent> _double_jump_com;
     /// <summary>
     /// 操作
     /// </summary>
@@ -52,6 +62,11 @@ public:
     /// セッター
     /// </summary>
     /// <param name="pos"></param>
+    void SetPosition(Mof::CVector3 pos);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="pos"></param>
     void SetTarget(Mof::CVector3 pos);
     /// <summary>
     /// ゲッター
@@ -65,6 +80,24 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector3 GetViewFront(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetPosition(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetVelocity(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetPreviewPosition(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

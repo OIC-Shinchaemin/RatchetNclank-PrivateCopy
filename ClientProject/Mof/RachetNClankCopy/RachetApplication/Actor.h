@@ -160,6 +160,18 @@ public:
         } // for
     }
     /// <summary>
+    /// 描画判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool InCameraRange(void) const;
+    /// <summary>
+    /// 視錐台内判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool InFrustum(void) const;
+    /// <summary>
     /// 追加
     /// </summary>
     /// <param name="component"></param>
@@ -219,7 +231,7 @@ public:
     /// 作成
     /// </summary>
     /// <param name="builder"></param>
-    void Construct(const std::shared_ptr<class IBuilder>& builder);
+    virtual void Construct(const std::shared_ptr<class IBuilder>& builder);
     /// <summary>
     /// デバッグ
     /// </summary>

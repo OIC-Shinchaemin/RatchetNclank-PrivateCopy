@@ -17,14 +17,6 @@ private:
     std::weak_ptr<my::Actor> _target;
     //! カーソル位置
     my::Observable<std::optional<Mof::CVector3>> _observable;
-    //! 待機
-    std::weak_ptr<class PlayerIdleComponent> _idle_com;
-    //! 移動
-    std::weak_ptr<class PlayerMoveComponent> _move_com;
-    //! 移動
-    std::weak_ptr<class PlayerDamageComponent> _damage_com;
-    bool MoveByKeyboard(float angular_speed, float speed);
-    void MoveByGamepad(float angular_speed, float speed);
 public:
     /// <summary>
     /// コンストラクタ

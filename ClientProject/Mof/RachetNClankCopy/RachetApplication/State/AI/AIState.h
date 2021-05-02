@@ -19,8 +19,6 @@ protected:
     std::weak_ptr<my::Actor> _actor;
     //! ビヘイビア実行
     behaviour::NodeExecutorPtr _behaviour_executor;
-    //! パス
-    std::string _behaviour_path;
     /// <summary>
     /// ゲッター
     /// </summary>

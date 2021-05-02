@@ -1,6 +1,7 @@
 #include "CollisionComponent.h"
 
 #include "My/Core/Utility.h"
+#include "../../VelocityComponent.h"
 
 
 void my::CollisionComponent::AddCollisionFunc(const std::string& target, const CollisionFunc& obj, std::unordered_map<std::string, FuncArray>& out) {
@@ -21,15 +22,59 @@ bool my::CollisionComponent::ExecuteFunction(const std::string& key, const my::C
     return false;
 }
 
+bool my::CollisionComponent::CollisionShpereAABB(const Mof::CSphere& sphere, const Mof::CBoxAABB& box) {
+    Mof::CVector3 point;
+    auto pos = sphere.Position;
+    // x
+    if (pos.x < box.Position.x - box.Size.x) {
+        point.x = box.Position.x - box.Size.x;
+    } // if
+    else if (box.Position.x + box.Size.x < pos.x) {
+        point.x = box.Position.x + box.Size.x;
+    } // else if
+    else {
+        point.x = pos.x;
+    } // else
+    // y
+    if (pos.y < box.Position.y - box.Size.y) {
+        point.y = box.Position.y - box.Size.y;
+    } // if
+    else if (box.Position.y + box.Size.y < pos.y) {
+        point.y = box.Position.y + box.Size.y;
+    } // else if
+    else {
+        point.y = pos.y;
+    } // else
+    // z
+    if (pos.z < box.Position.z - box.Size.z) {
+        point.z = box.Position.z - box.Size.z;
+    } // if
+    else if (box.Position.z + box.Size.z < pos.z) {
+        point.z = box.Position.z + box.Size.z;
+    } // else if
+    else {
+        point.z = pos.z;
+    } // else
+    return Mof::CVector3Utilities::Distance(sphere.Position, point) < sphere.r;
+}
+
 my::CollisionComponent::CollisionComponent(int priority) :
     super(priority),
     _collisioned(),
     _on_enter(),
     _on_stay(),
-    _on_exit() {
+    _on_exit(),
+    _velocity_com() {
 }
 
 my::CollisionComponent::~CollisionComponent() {
+}
+
+bool my::CollisionComponent::IsSleep(void) const {
+    if (auto velocity_com = _velocity_com.lock())  {
+        return velocity_com->IsSleep();
+    } // if
+    return false;
 }
 
 void my::CollisionComponent::AddCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr) {
@@ -68,6 +113,13 @@ void my::CollisionComponent::AddCollisionFunc(CollisionFuncType type, const std:
     } // switch
 }
 
+bool my::CollisionComponent::Initialize(void) {
+    super::Initialize();
+    super::_active = true;
+    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    return true;
+}
+
 bool my::CollisionComponent::ExecuteEnterFunction(const std::string& key, const my::CollisionInfo& info) {
     return this->ExecuteFunction(key, info, _on_enter);
 }
@@ -80,5 +132,8 @@ bool my::CollisionComponent::ExecuteExitFunction(const std::string& key, const m
     return this->ExecuteFunction(key, info, _on_exit);
 }
 
-void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) {
+void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+}
+
+void my::CollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
 }

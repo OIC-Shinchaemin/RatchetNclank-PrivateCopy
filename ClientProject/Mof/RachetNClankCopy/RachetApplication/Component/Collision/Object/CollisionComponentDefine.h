@@ -8,6 +8,7 @@
 namespace my {
 struct CollisionComponentType {
     static std::string kPlayerCollisionComponent;
+    static std::string kPlayerMeleeAttackCollisionComponent;
     static std::string kEnemyCollisionComponent;
     static std::string kEnemyAttackCollisionComponent;
     static std::string kEnemyBulletCollisionComponent;
@@ -17,6 +18,7 @@ struct CollisionComponentType {
     static std::string kPyrocitorBulletCollisionComponent;
     static std::string kBlasterBulletCollisionComponent;
     static std::string kBombGloveEffectCollisionComponent;
+    static std::string kCameraCollisionComponent;
 };
 }
 #endif // !MY_COLLISION_COMPONENT_DEFINE_H

@@ -35,8 +35,8 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="ptr"></param>
-    //void SetTarget(const std::shared_ptr<my::Actor>& ptr);
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -55,12 +55,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     float GetHeight(void) const;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //std::weak_ptr<my::Actor> GetTarget(void) const;
     /// <summary>
     /// 複製
     /// </summary>

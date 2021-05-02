@@ -1,10 +1,23 @@
 {
   "components": [
     {
-      "type": "MeshComponent",
+      "type": "ShipComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
+      "type": "ShipMeshComponent",
+      "paramater": {
+        "priority": 1,
+        "path": "../Resource/mesh/futuristic_transport_shuttle_animated/scene.mom"
+      }
+    },
+    {
+      "type": "MotionComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/ship/test.mom"
+        "path": "../Resource/motion_names/ship.motion_names"
       }
     },
     {

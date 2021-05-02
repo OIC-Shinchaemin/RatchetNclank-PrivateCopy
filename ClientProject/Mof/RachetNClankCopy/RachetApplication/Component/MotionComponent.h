@@ -110,6 +110,12 @@ public:
         } // if
         return false;
     }
+    /// <summary>
+    /// ŽžŠÔ
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    bool AddTimer(float time);
 };
 }
 #endif // !MY_MOTION_COMPONENT_H

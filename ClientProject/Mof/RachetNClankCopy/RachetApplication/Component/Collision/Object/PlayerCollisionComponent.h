@@ -16,6 +16,19 @@ class PlayerCollisionComponent : public my::CollisionComponent {
 private:
     //! プレイヤー
     std::weak_ptr<class PlayerComponent> _player_com;
+    //! 速度
+    std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! プレイヤー
+    std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! Elevatorに乗っている
+    bool _on_elevator;
+private:
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="obj"></param>
+    bool CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj);
 public:
     /// <summary>
     /// コンストラクタ
@@ -83,7 +96,13 @@ public:
     /// 衝突
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) override;
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
 }
 #endif // !MY_PLAYER_COLLISION_COMPONENT_H

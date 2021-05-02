@@ -40,7 +40,7 @@ bool my::EquipmentWeaponMenu::Render(void) {
             if (auto tex = r->Get<std::shared_ptr<Mof::CTexture>>(it->second.c_str())) {
                 tex->Render(super::_position.x, super::_position.y);
                 ::CGraphicsUtilities::RenderString(super::_position.x, 
-                                                   super::_position.y + 20.0f, 
+                                                   super::_position.y + 64.0f, 
                                                    "bullet count = %d ", _info.bullet_count);
             } // if
         } // if

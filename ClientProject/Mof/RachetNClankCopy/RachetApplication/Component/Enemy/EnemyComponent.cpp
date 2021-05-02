@@ -1,7 +1,8 @@
 #include "EnemyComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../Component/VelocityComponent.h"
+#include "../Collision/Object/CollisionComponentDefine.h"
+#include "../VelocityComponent.h"
 #include "../Enemy/EnemyDamageComponent.h"
 #include "../SightRecognitionComponent.h"
 #include "../Collision/Object/EnemyCollisionComponent.h"
@@ -11,14 +12,16 @@
 
 my::EnemyComponent::EnemyComponent(int priority) :
     super(priority),
-    _target() {
-    super::_volume = 0.5f;
-    super::_height = 1.0f;
+    _velocity_timer(),
+    _target(),
+    _velocity_com() {
 }
 
 my::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
     super(obj),
-    _target() {
+    _velocity_timer(),
+    _target(),
+    _velocity_com() {
 }
 
 my::EnemyComponent::~EnemyComponent() {
@@ -40,7 +43,7 @@ std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
     if (auto target = this->GetTarget().lock()) {
         auto pos = target->GetPosition();
         float player_height = 1.0f;
-        pos.y += player_height ;
+        pos.y += player_height;
         return pos;
     } // if
     return std::optional<Mof::CVector3>();
@@ -49,39 +52,13 @@ std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
 bool my::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Start();
-    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    velocity_com->SetGravity(2.8f);
 
+    _velocity_timer.Initialize(1.0f, true);
 
-    auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "PlayerCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->End();
-        return true;
-    }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "PyrocitorBulletCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
-        return true;
-    }));
-
-
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "BlasterBulletCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
-        return true;
-    }));
-
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               "BombGloveEffectCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->GetComponent<my::EnemyDamageComponent>()->Start();
-        return true;
-    }));
-
+    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    if (auto velocity_com = _velocity_com.lock()) {
+        velocity_com->SetGravity(2.8f);
+    } // if
 
     auto sight_coll = super::GetOwner()->GetComponent<my::SightCollisionComponent>();
     sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
@@ -101,6 +78,23 @@ bool my::EnemyComponent::Initialize(void) {
 }
 
 bool my::EnemyComponent::Update(float delta_time) {
+
+    if (auto velocity_com = _velocity_com.lock()) {
+        velocity_com->SetUseGravity(false);
+    } // if
+    if (_velocity_timer.Tick(delta_time)) {
+        if (auto velocity_com = _velocity_com.lock()) {
+            bool in_camera_range = super::GetOwner()->InCameraRange();
+            if (in_camera_range) {
+                velocity_com->SetSleep(false);
+                velocity_com->SetGravity(1.0f);
+            } // if
+            else {
+                velocity_com->SetSleep(true);
+                velocity_com->SetGravity(0.0f);
+            } // else
+        } // if
+    } // if
     return true;
 }
 

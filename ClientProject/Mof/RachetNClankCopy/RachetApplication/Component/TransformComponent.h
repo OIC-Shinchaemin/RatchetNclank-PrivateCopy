@@ -13,7 +13,6 @@ class TransformComponent : public my::UpdateComponent {
 private:
     //! ‘¬“x
     std::weak_ptr<class VelocityComponent> _velocity_com;
-
     /// <summary>
     /// XV
     /// </summary>

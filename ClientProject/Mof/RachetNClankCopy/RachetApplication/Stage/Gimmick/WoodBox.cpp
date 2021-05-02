@@ -1,8 +1,8 @@
 #include "WoodBox.h"
-
+#include <iostream>
 bool WoodBox::CollisionStage(void) {
     for (auto& it : *_object_array_pointer) {
-        if (!it->IsEnable() || it->GetName() == GetName()) {
+        if (!it->IsEnable() || !it->IsCollisionEnable() || it->GetName() == GetName()) {
             continue;
         }
         const int mesh_no = it->GetMeshNo();

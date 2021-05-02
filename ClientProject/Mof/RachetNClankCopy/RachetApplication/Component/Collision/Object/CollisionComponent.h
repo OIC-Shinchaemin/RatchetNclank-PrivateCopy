@@ -2,6 +2,8 @@
 #define MY_COLLISION_COMPONENT_H
 
 
+#include "../../Component.h"
+
 #include <optional>
 #include <any>
 #include <memory>
@@ -11,7 +13,8 @@
 
 #include <Mof.h>
 
-#include "../../Component.h"
+#include "../../../Stage/StageObject.h"
+#include "../../../Stage/Gimmick/GimmickBase.h"
 
 
 namespace my {
@@ -74,6 +77,8 @@ private:
     std::unordered_map<std::string, FuncArray> _on_stay;
     //! 実行関数
     std::unordered_map<std::string, FuncArray> _on_exit;
+    //! 速度
+    std::weak_ptr<class VelocityComponent> _velocity_com;
     /// <summary>
     /// 追加
     /// </summary>
@@ -89,6 +94,14 @@ private:
     /// <param name="in"></param>
     /// <returns></returns>
     bool ExecuteFunction(const std::string& key, const my::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in);
+protected:
+    /// <summary>
+    /// 衝突判定
+    /// </summary>
+    /// <param name="sphere"></param>
+    /// <param name="box"></param>
+    /// <returns></returns>
+    bool CollisionShpereAABB(const Mof::CSphere& sphere, const Mof::CBoxAABB& box);
 public:
     /// <summary>
     /// コンストラクタ
@@ -130,6 +143,12 @@ public:
     /// <returns></returns>
     virtual std::optional<my::SightObject> GetSightObject(void) = 0;
     /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsSleep(void) const;
+    /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
@@ -152,6 +171,12 @@ public:
     /// <param name="target"></param>
     /// <param name="obj"></param>
     void AddCollisionFunc(CollisionFuncType type, const std::string& target, const CollisionFunc& obj);
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Initialize(void) override;
     /// <summary>
     /// 実行
     /// </summary>
@@ -177,7 +202,25 @@ public:
     /// 衝突
     /// </summary>
     /// <param name="mesh"></param>
-    virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world);
+    /// <param name="obj"></param>
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj);
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick);
+#ifdef _DEBUG
+    virtual bool IsRender(void) const override {
+        return false;
+    }
+    virtual bool DebugRender(void) override {
+        if (this->GetSphere().has_value()) {
+            ::CGraphicsUtilities::RenderLineSphere(this->GetSphere().value(), def::color_rgba::kRed);
+        } // if
+        return true;
+    }
+#endif // _DEBUG
 };
 }
 #endif // !MY_COLLISION_COMPONENT_H

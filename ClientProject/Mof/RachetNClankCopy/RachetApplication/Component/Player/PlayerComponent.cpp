@@ -1,8 +1,10 @@
 #include "PlayerComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../Actor/Ship/Ship.h"
 #include "../../Component/HpComponent.h"
 #include "../../Component/VelocityComponent.h"
+#include "../../Component/MeshComponent.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
 #include "../Player/PlayerDamageComponent.h"
@@ -10,106 +12,16 @@
 #include "../../UI/LockOnCursorMenu.h"
 
 
-bool my::PlayerComponent::MoveByKeyboard(float angular_speed, float speed) {
-    // keyboard
-    bool action = false; bool left = false; bool right = false;
-    auto in = Mof::CVector2(1.0f, 0.0f);
-    float move_angle = 0.0f;
-
-
-    if (::g_pInput->IsKeyHold(MOFKEY_A)) {
-        action = true;
-        left = true;
-        move_angle = 180.0f;
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
-        action = true;
-        right = true;
-        move_angle = 0.0f;
-    } // else if
-    if (::g_pInput->IsKeyHold(MOFKEY_W)) {
-        action = true;
-        move_angle = 90.0f;
-        if (right) {
-            move_angle -= 45.0f;
-        } // if
-        else if (left) {
-            move_angle += 45.0f;
-        } // else if
-    } // else if
-    else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
-        action = true;
-        move_angle = 270.0f;
-        if (right) {
-            move_angle += 45.0f;
-        } // if
-        else if (left) {
-            move_angle -= 45.0f;
-        } // else if
-    } // else if
-
-    if (::g_pInput->IsKeyHold(MOFKEY_X)) {
-        auto v = super::GetOwner()->GetComponent<my::VelocityComponent>();
-        v->AddVelocityForce(Mof::CVector3(0.0f, 10.0f, 0.0f));
-    } // if
-
-
-    if (action) {
-        if (auto move_com = _move_com.lock()) {
-            in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-            move_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-            move_com->SetAngularSpeed(angular_speed);
-            move_com->SetMoveSpeed(speed);
-            move_com->Start();
-        } // if
-    } // if
-    else {
-        if (auto idle_com = _idle_com.lock()) {
-            idle_com->Start();
-        } // if
-    } // else 
-
-    return action;
-}
-
-void my::PlayerComponent::MoveByGamepad(float angular_speed, float speed) {
-    float h = 0.0f;
-    float v = 0.0f;
-    float threshold = 0.5f;
-
-    h = ::g_pGamepad->GetStickHorizontal();
-    v = ::g_pGamepad->GetStickVertical();
-    if (auto in = Mof::CVector2(h, v); in.Length() > threshold) {
-        if (auto move_com = _move_com.lock()) {
-            move_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
-            move_com->SetAngularSpeed(angular_speed);
-            move_com->SetMoveSpeed(speed);
-            move_com->Start();
-        } // if
-    } // if
-    else {
-        if (auto idle_com = _idle_com.lock()) {
-            idle_com->Start();
-        } // if
-    } // else
-}
-
 my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
-    _target(),
-    _idle_com(),
-    _move_com(),
-    _damage_com() {
+    _target() {
     super::_volume = 0.5f;
     super::_height = 1.0f;
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
-    _target(),
-    _idle_com(),
-    _move_com(),
-    _damage_com() {
+    _target() {
 }
 
 my::PlayerComponent::~PlayerComponent() {
@@ -132,22 +44,19 @@ bool my::PlayerComponent::Initialize(void) {
     super::Start();
 
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _idle_com = super::GetOwner()->GetComponent<my::PlayerIdleComponent>();
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-    _damage_com = super::GetOwner()->GetComponent<my::PlayerDamageComponent>();
-
-    //velocity_com->SetGravity(0.98f);
-    velocity_com->SetGravity(2.8f);
+    velocity_com->SetGravity(9.8f);
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
                                "ShipCollisionComponent",
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         super::GetOwner()->Notify("ShipCollision", super::GetOwner());
+
+        if (std::dynamic_pointer_cast<my::Ship>(std::any_cast<std::shared_ptr<my::Actor>>(in.target))->IsEnable()) {
+            super::GetOwner()->GetComponent<my::MeshComponent>()->Hide();
+        } // if
         return true;
     }));
-
-
 
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
@@ -160,18 +69,6 @@ bool my::PlayerComponent::Initialize(void) {
 }
 
 bool my::PlayerComponent::Update(float delta_time) {
-    float angular_speed = 3.5f;
-    float speed = 1.5f;
-
-    if (auto damage_com = _damage_com.lock()) {
-        if (!damage_com->IsActive()) {
-
-            if (!this->MoveByKeyboard(angular_speed, speed)) {
-                this->MoveByGamepad(angular_speed, speed);
-            } // if
-        } // if
-    } // if
-
     if (auto target = _target.lock()) {
         auto enemy_com = target->GetComponent<super>();
         auto pos = target->GetPosition();
@@ -197,12 +94,6 @@ std::shared_ptr<my::Component> my::PlayerComponent::Clone(void) {
 }
 
 bool my::PlayerComponent::DebugRender(void) {
-    /*
     auto pos = super::GetOwner()->GetPosition();
-
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "pos.x = %f", pos.x);
-    ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "pos.y = %f", pos.y);
-    ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "pos.z = %f", pos.z);
-    */
     return true;
 }
