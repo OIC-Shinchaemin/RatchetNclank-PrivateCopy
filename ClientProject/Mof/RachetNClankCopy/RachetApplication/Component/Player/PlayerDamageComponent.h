@@ -27,6 +27,8 @@ private:
     std::weak_ptr<class InvincibleComponent> _invincible_com;
     //! 待機
     std::weak_ptr<class PlayerIdleComponent> _idle_com;
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ

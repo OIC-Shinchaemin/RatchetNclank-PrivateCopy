@@ -13,6 +13,7 @@
 #include "../../State/PlayerAction/PlayerActionMeleeAttackTwoEndState.h"
 #include "../../State/PlayerAction/PlayerActionMeleeAttackThreeState.h"
 #include "../../State/PlayerAction/PlayerActionMeleeAttackThreeEndState.h"
+#include "../../State/PlayerAction/PlayerActionDamageState.h"
 
 
 my::PlayerStateComponent::PlayerStateComponent(int priority) :
@@ -54,6 +55,7 @@ bool my::PlayerStateComponent::Initialize(void) {
     this->RegisterState<state::PlayerActionMeleeAttackTwoEndState>(_state_machine);
     this->RegisterState<state::PlayerActionMeleeAttackThreeState>(_state_machine);
     this->RegisterState<state::PlayerActionMeleeAttackThreeEndState>(_state_machine);
+    this->RegisterState<state::PlayerActionDamageState>(_state_machine);
     _state_machine.ChangeState("PlayerActionIdleState");
     return true;
 }
