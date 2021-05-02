@@ -1,0 +1,79 @@
+#include "GameApp.h"
+
+#include "Gamepad.h"
+#include "My/Core/Define.h"
+
+#include "Component/Component.h"
+#include "Camera/CameraController.h"
+
+
+MofBool CGameApp::Initialize(void) {
+    ::CMofImGui::Setup();
+    my::Gamepad::GetInstance().Create();
+    ::CUtilities::SetCurrentDirectory("Resource");
+
+    _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
+    _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
+    _camera_manager = std::make_shared<my::CameraManager>();
+    _ui_canvas = std::make_shared<my::UICanvas>();
+    _scene_manager = ut::MakeSharedWithRelease<my::SceneManager>();
+
+    my::Component::SetResourceManager(_resource_manager);
+    my::Component::SetUICanvas(_ui_canvas);
+    my::CameraController::SetCameraManager(_camera_manager);
+
+    //_resource_manager->Load("scene_resource/general.txt");
+    _scene_manager->SetResourceManager(_resource_manager);
+    _scene_manager->SetUICanvas(_ui_canvas);
+    _scene_manager->Initialize();
+    return TRUE;
+}
+
+MofBool CGameApp::Input(void) {
+    ::CMofImGui::Refresh();
+    ::g_pInput->RefreshKey();
+    ::g_pGamepad->RefreshKey();
+    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
+        ::PostQuitMessage(0);
+        return false;
+    } // if
+
+    _scene_manager->Input();
+    return TRUE;
+}
+
+MofBool CGameApp::Update(void) {
+    this->Input();
+
+    //float delta = Mof::CUtilities::GetFrameSecond();
+    float delta = 0.01667f;
+    _scene_manager->Update(delta);
+    //_game_manager->Update(delta);
+    _camera_manager->Update();
+    _ui_canvas->Update(delta);
+
+    return TRUE;
+}
+
+MofBool CGameApp::Render(void) {
+    ::CMofImGui::RenderSetup();
+    ::g_pGraphics->RenderStart();
+
+    _scene_manager->Render();
+
+    ::CMofImGui::RenderGui();
+    ::g_pGraphics->RenderEnd();
+    return TRUE;
+}
+
+MofBool CGameApp::Release(void) {
+    _ui_canvas.reset();
+    _camera_manager.reset();
+    _game_manager.reset();
+    _resource_manager.reset();
+    _scene_manager.reset();
+
+    my::Gamepad::GetInstance().Release();
+    ::CMofImGui::Cleanup();
+    return TRUE;
+}

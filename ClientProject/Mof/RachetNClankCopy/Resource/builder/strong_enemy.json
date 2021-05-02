@@ -1,0 +1,132 @@
+{
+  "components": [
+    {
+      "type": "AIStateComponent",
+      "paramater": {
+        "priority": 0,
+        "behaviour": [
+          "../Resource/behaviour/strong_enemy_patrol.json",
+          "../Resource/behaviour/strong_enemy_combat.json"
+        ]
+      }
+    },
+    {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0,
+        "range": 15.0
+      }
+    },
+    {
+      "type": "MotionComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/motion_names/skeleton.motion_names"
+      }
+    },
+    {
+      "type": "HpComponent",
+      "paramater": {
+        "priority": 0,
+        "hp_max": 3
+      }
+    },
+    {
+      "type": "InvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+
+    {
+      "type": "EnemyComponent",
+      "paramater": {
+        "priority": 0,
+        "height": 1.0,
+        "volume": 0.5
+      }
+    },
+    {
+      "type": "EnemyStateComponent",
+      "paramater": {
+        "priority": 80
+      }
+    },
+
+    {
+      "type": "EnemyMoveComponent",
+      "paramater": {
+        "priority": 90
+      }
+    },
+
+    {
+      "type": "EnemyIdleComponent",
+      "paramater": {
+        "priority": 91
+      }
+    },
+    {
+      "type": "EnemyRangedAttackComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
+      "type": "EnemyDamageComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 98
+      }
+    },
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/skeleton/skeleton.mom",
+        "color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+
+    {
+      "type": "EnemyCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "EnemyAttackCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

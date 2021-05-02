@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Utilities">
+      <UniqueIdentifier>{8d7093e8-0bf2-47f9-9d8d-af82273f1c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities">
+      <UniqueIdentifier>{1836db43-dfb8-4c87-9e2f-fe7edf6b5655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage">
+      <UniqueIdentifier>{c385b833-a9da-4357-bb6e-d5d98de8608b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage\Gimmick">
+      <UniqueIdentifier>{468b21c8-3aa1-49e4-9cca-3051006d9e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage\Parser">
+      <UniqueIdentifier>{aa465ea7-150d-4b7e-b8bc-6fb2253a68ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\EditorParam">
+      <UniqueIdentifier>{0cb946c1-e6af-4a6f-afac-9e51d57a4424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage">
+      <UniqueIdentifier>{7750e2a9-bbc5-4841-b37d-c7e8df1fbd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage\Gimmick">
+      <UniqueIdentifier>{e0034a0f-1d02-4d43-b429-331659b33e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Stage\Parser">
+      <UniqueIdentifier>{cb3d4490-fe68-4c04-a0c6-e3c28d0e49f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\EditorParam">
+      <UniqueIdentifier>{db4ddd2d-c67f-41a5-94b0-78e1223001d3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\EditorUtilities.cpp">
+      <Filter>ソース ファイル\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>ソース ファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\StageObject.cpp">
+      <Filter>ソース ファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\GimmickBase.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Bridge.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Elevator.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\MoveCloud.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\WoodBox.cpp">
+      <Filter>ソース ファイル\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Parser\JsonStageParser.cpp">
+      <Filter>ソース ファイル\Stage\Parser</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\EditorUtilities.h">
+      <Filter>ヘッダー ファイル\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>ヘッダー ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Bridge.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Elevator.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\WoodBox.h">
+      <Filter>ヘッダー ファイル\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\JsonStageParser.h">
+      <Filter>ヘッダー ファイル\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\StageParser.h">
+      <Filter>ヘッダー ファイル\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorParam\ParameterKey.h">
+      <Filter>ヘッダー ファイル\EditorParam</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorParam\EditorParameter.h">
+      <Filter>ヘッダー ファイル\EditorParam</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
