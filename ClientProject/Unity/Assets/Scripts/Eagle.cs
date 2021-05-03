@@ -27,7 +27,7 @@ public class Eagle : Enemy
     
     private void Update()
     {
-        if(GetComponent<SpriteRenderer>().isVisible)
+        if (GetComponent<SpriteRenderer>().isVisible && !IsDead && GetComponent<HpEnemy>().Ebiflied == false)   
         {
 
             if (canAttack)
@@ -36,7 +36,7 @@ public class Eagle : Enemy
             }
 
         }
-        if (canMove)
+        if (canMove && !IsDead && GetComponent<HpEnemy>().Ebiflied == false)
         {
             Move();
         }

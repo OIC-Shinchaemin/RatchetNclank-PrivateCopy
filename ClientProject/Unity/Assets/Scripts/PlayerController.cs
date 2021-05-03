@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
 
         if (state == State.falling)
         {
-            enemy.JumpedOn();
+            enemy.Bomb();
             PermanentUI.perm.EnemyScore();
             Jump();
         }
