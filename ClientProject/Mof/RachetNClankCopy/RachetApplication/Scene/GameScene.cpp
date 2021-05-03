@@ -53,7 +53,6 @@ bool my::GameScene::SceneRender(void) {
 
     _renderer.Render();
     _stage.Render();
-    _game_money->Render();
     return true;
 }
 
@@ -63,7 +62,6 @@ my::GameScene::GameScene() :
     _game_world(),
     _renderer(),
     _physic_world(),
-    _game_money(),
     _weapon_system(),
     _quick_change(),
     _stage(),
@@ -108,9 +106,7 @@ std::string my::GameScene::GetName(void) {
 bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     super::Load(param);
     _weapon_system = std::make_shared<my::WeaponSystem>();
-    _game_money = std::make_unique<my::GameMoney>();
     _quick_change = std::make_shared<my::QuickChangeSystem>();
-    _game_money->SetResourceManager(_resource);
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
     _quick_change->SetResourceManager(_resource);
@@ -139,7 +135,6 @@ bool my::GameScene::Initialize(void) {
     // game system
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
-    _game_money->Initialize(save_data.GetMoney());
     _weapon_system->Initialize(save_data, shared_from_this());
     _quick_change->Initialize({}, _weapon_system);
     _stage.Initialize();
@@ -174,7 +169,7 @@ bool my::GameScene::Initialize(void) {
     this->AddElement(ship);
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
-    
+
     _weapon_system->AddMechanicalWeaponObserver(player);
     _quick_change->AddWeaponObserver(_weapon_system);
 
@@ -224,7 +219,7 @@ bool my::GameScene::Release(void) {
     //! save
     std::vector<std::string> weapon;
     _weapon_system->CreateAvailableMechanicalWeaponNames(weapon);
-    auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
+    auto save_param = my::SaveDataParam(0, weapon);
     my::SaveSystem().Save(save_param);
     _quick_change->Release();
     _stage.Release();

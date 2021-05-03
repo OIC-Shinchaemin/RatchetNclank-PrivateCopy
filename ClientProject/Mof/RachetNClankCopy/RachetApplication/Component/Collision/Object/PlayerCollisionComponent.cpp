@@ -16,15 +16,17 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     _player_com(),
     _velocity_com(),
     _state_com(),
-    _on_elevator(false){
+    _on_elevator(false),
+    _abyss_box(Mof::CBoxAABB(Mof::CVector3(0.0f, -45.0f, 0.0f), Mof::CVector3(300.0f, 1.0f, 300.0f))) {    
 }
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
     super(obj._priority),
     _player_com(),
     _velocity_com(),
-    _state_com() ,
-    _on_elevator(false) {
+    _state_com(),
+    _on_elevator(false),
+    _abyss_box(Mof::CBoxAABB(Mof::CVector3(0.0f, -45.0f, 0.0f), Mof::CVector3(300.0f, 1.0f, 300.0f))) {
 }
 
 my::PlayerCollisionComponent::~PlayerCollisionComponent() {
@@ -79,6 +81,10 @@ std::shared_ptr<my::Component> my::PlayerCollisionComponent::Clone(void) {
 }
 
 void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+    if (_abyss_box.CollisionPoint(super::GetOwner()->GetPosition())) {
+        super::GetOwner()->Notify("PlayerDead", super::GetOwner());
+    } // if
+    
     if (!this->GetRay().has_value()) {
         return;
     } // if

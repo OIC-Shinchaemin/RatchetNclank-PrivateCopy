@@ -22,6 +22,8 @@ private:
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! Elevator‚Éæ‚Á‚Ä‚¢‚é
     bool _on_elevator;
+    //! €–S”»’è
+    Mof::CBoxAABB _abyss_box;
 private:
     /// <summary>
     /// Õ“Ë
