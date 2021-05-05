@@ -187,7 +187,7 @@ bool my::GameScene::Update(float delta_time) {
     super::Update(delta_time);
 
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+        //_subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 
 

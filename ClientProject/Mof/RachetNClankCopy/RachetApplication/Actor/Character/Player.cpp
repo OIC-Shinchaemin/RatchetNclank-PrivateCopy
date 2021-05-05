@@ -34,6 +34,10 @@ bool my::Player::Update(float delta_time) {
                 target_pos.y += height;
                 weapon->SetLockOnPosition(target_pos);
             } // if
+            else {
+                weapon->ResetTargetPosition();
+            } // else
+
             weapon->Fire(def::Transform(pos, super::GetRotate()));
         } // if
     } // if

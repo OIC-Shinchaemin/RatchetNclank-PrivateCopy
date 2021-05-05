@@ -8,11 +8,6 @@ bool my::TitleScene::SceneRender(void) {
     ::g_pGraphics->SetDepthEnable(true);
     _stage.Render();
 
-
-    //Mof::CMatrix44 world, scale, rotate, translate;
-    //_water_surface.Render();
-
-
     ::g_pGraphics->SetDepthEnable(false);
     auto text = "Please Press   Start Button or \n               Enter Key !";
     ::CGraphicsUtilities::RenderString(320.0, 400.0f, "%s", text);
@@ -47,7 +42,6 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
         this->LoadComplete();
     } // if
 
-    bool s = _water_surface.Load("../Resource/texture/water/water.jpg");
     // stage
     if (!_stage.Load("../Resource/stage/test.json")) {
         return false;
@@ -72,7 +66,7 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
 
 bool my::TitleScene::Update(float delta_time) {
     super::Update(delta_time);
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) || 
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kGameScene, ""));
     } // if

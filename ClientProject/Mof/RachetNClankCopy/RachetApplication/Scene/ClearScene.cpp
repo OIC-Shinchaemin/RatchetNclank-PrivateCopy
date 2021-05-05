@@ -4,7 +4,7 @@
 
 
 bool my::ClearScene::SceneRender(void) {
-    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
+    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
 
     auto text = "Game Clear !\n";
