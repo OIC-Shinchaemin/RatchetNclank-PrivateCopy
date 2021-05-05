@@ -42,6 +42,10 @@ bool my::Mechanical::Fire(const def::Transform& transform) {
     return true;
 }
 
+void my::Mechanical::ResetTargetPosition(void) {
+    this->_lock_on_position.reset();
+}
+
 bool my::Mechanical::CanFire(void) const {
     return _bullet_count > 0 && _interval < 0.0f;
 }

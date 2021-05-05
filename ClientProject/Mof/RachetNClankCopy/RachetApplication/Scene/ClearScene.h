@@ -37,6 +37,12 @@ public:
     /// <returns></returns>
     virtual std::string GetName(void) override;
     /// <summary>
+    /// “Ç‚İ‚İ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Load(std::shared_ptr<my::Scene::Param> param) override;
+    /// <summary>
     /// XV
     /// </summary>
     /// <param name="delta_time">ŠÔ</param>

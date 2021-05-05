@@ -28,8 +28,6 @@ private:
     std::shared_ptr<my::Camera> _stage_view_camera;
     //! カメラコントローラ
     my::ServiceLocator<my::CameraController> _camera_controller;
-    //! 水面
-    Mof::CTexture _water_surface;
 protected:
     /// <summary>
     /// 描画

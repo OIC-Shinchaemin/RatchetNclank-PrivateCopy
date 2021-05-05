@@ -33,7 +33,7 @@ private:
     //! コリジョン
     my::PhysicsWorld _physic_world;
     //! 金
-    std::unique_ptr<my::GameMoney>  _game_money;
+    //std::unique_ptr<my::GameMoney> _game_money;
     //! 武器
     std::shared_ptr<my::WeaponSystem>  _weapon_system;
     //! クイックチェンジ

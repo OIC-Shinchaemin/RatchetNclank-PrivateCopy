@@ -80,6 +80,11 @@ public:
     /// <param name="transform"></param>
     /// <returns></returns>
     virtual bool Fire(const def::Transform& transform);
+    /// <summary>
+    /// ƒŠƒZƒbƒg
+    /// </summary>
+    /// <param name=""></param>
+    void ResetTargetPosition(void);
 };
 }
 #endif // !MY_MECHANICAL_H
