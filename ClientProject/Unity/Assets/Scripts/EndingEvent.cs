@@ -71,7 +71,7 @@ public class EndingEvent : MonoBehaviour
             {
                 pLeft = true;
             }
-            if (second > 2.5f && second < 4.5f)
+            if (second > 3.0f && second < 4.5f)
             {
                 pstate = State.running;
                 prb.velocity = new Vector2(-3f, prb.velocity.y);
