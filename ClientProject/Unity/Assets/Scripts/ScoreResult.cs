@@ -11,13 +11,14 @@ public class ScoreResult : MonoBehaviour
     private int hiscore;
     private float second;
 
-
+    [SerializeField] private GameObject scoreResult;
     [SerializeField] private TextMeshProUGUI ScoreText;
     [SerializeField] private TextMeshProUGUI HighScoreText;
     [SerializeField] private TextMeshProUGUI NewRecordText;
 
     void Start()
     {
+        
         ScoreLoad();
         ScoreJudge();
         ScoreText.text = PermanentUI.perm.ScoreText.text;
@@ -26,6 +27,7 @@ public class ScoreResult : MonoBehaviour
     }
     private void Update()
     {
+        scoreResult.SetActive(true);
         second += Time.deltaTime;
         if (Input.GetButtonUp("Attack"))
         {
@@ -35,7 +37,7 @@ public class ScoreResult : MonoBehaviour
         {
             ResetScore();
         }
-        if(second >5.0&& isScoreUpdate)
+        if(second >2.0&& isScoreUpdate)
         {
             HighScoreText.text = PermanentUI.perm.ScoreText.text;
             NewRecordText.text = "NewRecord!!";

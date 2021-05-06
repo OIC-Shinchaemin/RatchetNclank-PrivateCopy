@@ -15,14 +15,15 @@ public class PermanentUI : MonoBehaviour
     public int PlayerCount = 3;
     public TextMeshProUGUI cherryTaxt;
     public TextMeshProUGUI healthAmount;
-    public TextMeshProUGUI ScoreText;    
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI stage;
     
     public int scoreValue = 0;
 
     public string nowScene = "1-1";
     public TextMeshProUGUI SceneName;
     public static PermanentUI perm;
-
+    
    
     private void Start()
     {                

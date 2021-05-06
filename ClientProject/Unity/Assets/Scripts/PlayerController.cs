@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float hurtForce = 10f;
     [SerializeField] private AudioSource cherry;
     [SerializeField] private AudioSource footstep;
-
+    
     //ぇぬのコード用
     public bool CanAtack = false;
     [SerializeField] private GameObject atackball;

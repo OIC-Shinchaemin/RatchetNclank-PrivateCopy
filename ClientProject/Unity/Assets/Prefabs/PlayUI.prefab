@@ -826,6 +826,7 @@ MonoBehaviour:
   cherryTaxt: {fileID: 8166933320973538568}
   healthAmount: {fileID: 8166933320510089270}
   ScoreText: {fileID: 2230704725062595106}
+  stage: {fileID: 99771546123628987}
   scoreValue: 0
   nowScene: 1-1
   SceneName: {fileID: 4190555559628173153}
