@@ -291,9 +291,6 @@
     <ClCompile Include="Camera\Camera.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameManager.cpp">
-      <Filter>Rachet\Source\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Renderer.cpp">
       <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
@@ -833,6 +830,9 @@
     </ClCompile>
     <ClCompile Include="Actor\Ship\Ship.cpp">
       <Filter>Rachet\Source\Actor\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameManager.cpp">
+      <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -15,9 +15,7 @@ bool my::TitleScene::SceneRender(void) {
 }
 
 my::TitleScene::TitleScene() :
-    super(),
-    _resource(),
-    _backbround() {
+    super() {
 }
 
 my::TitleScene::~TitleScene() {
@@ -26,21 +24,12 @@ my::TitleScene::~TitleScene() {
 void my::TitleScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
 }
 
-void my::TitleScene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
-    this->_resource = ptr;
-}
-
 std::string my::TitleScene::GetName(void) {
     return my::SceneType::kTitleScene;
 }
 
 bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
     super::Load(param);
-
-    if (auto resource = _resource.lock()) {
-        resource->Load(param->resource.c_str());
-        this->LoadComplete();
-    } // if
 
     // stage
     if (!_stage.Load("../Resource/stage/test.json")) {

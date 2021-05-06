@@ -30,6 +30,8 @@ private:
     my::Observable<const my::Mechanical::Info&> _equipment_subject;
     //! マップ
     std::unordered_map<std::string, std::string> _builder_name_map;
+    //! セーブデータ
+    my::SaveData _save_data;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
@@ -69,12 +71,24 @@ public:
     /// <param name="out"></param>
     void CreateAvailableMechanicalWeaponNames(std::vector<std::string>& out);
     /// <summary>
+    /// 読み込み
+    /// </summary>
+    /// <param name="in"></param>
+    /// <returns></returns>
+    bool Load(my::SaveData& in);
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="in"></param>
     /// <param name="observer"></param>
     /// <returns></returns>
-    bool Initialize(my::SaveData& in, const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);
+    bool Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Release(void);
     /// <summary>
     /// ゲッター
     /// </summary>

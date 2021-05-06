@@ -12,10 +12,8 @@
 #include "../Game/GameWorld.h"
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
-#include "../Game/GameSystem/GameMoney.h"
-#include "../Game/GameSystem/WeaponSystem.h"
-#include "../Game/GameSystem/QuickChangeSystem.h"
 #include "../Stage/Stage.h"
+#include "../Game/GameManager.h"
 
 
 namespace my {
@@ -32,12 +30,6 @@ private:
     my::Renderer _renderer;
     //! コリジョン
     my::PhysicsWorld _physic_world;
-    //! 金
-    //std::unique_ptr<my::GameMoney> _game_money;
-    //! 武器
-    std::shared_ptr<my::WeaponSystem>  _weapon_system;
-    //! クイックチェンジ
-    std::shared_ptr<my::QuickChangeSystem>  _quick_change;
     //! ステージ
     Stage _stage;
     //! 再初期化
@@ -46,8 +38,10 @@ private:
     Mof::CDirectionalLight _simple_light;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
-    //! リソース
+    //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! ゲーム
+    std::weak_ptr<my::GameManager> _game;
     //! 削除
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
     //! ゲームイベント
@@ -98,6 +92,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetGameManager(std::weak_ptr<my::GameManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

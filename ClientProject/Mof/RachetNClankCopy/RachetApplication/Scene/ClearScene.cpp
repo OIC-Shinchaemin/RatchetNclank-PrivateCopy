@@ -30,7 +30,6 @@ std::string my::ClearScene::GetName(void) {
 
 bool my::ClearScene::Load(std::shared_ptr<my::Scene::Param> param) {
     auto re = super::Load(param);
-    super::_loaded = true;
     return re;
 }
 

@@ -12,6 +12,7 @@
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "My/UI/UICanvas.h"
+#include "../Game/GameManager.h"
 
 
 namespace my {
@@ -23,12 +24,14 @@ private:
         std::string name;
         std::shared_ptr<my::Scene::Param> param;
     };
+    //! メッセージ
     std::optional<ChangeMessage> _change_message;
-
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
-    //! リソース
+    //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! ゲーム
+    std::weak_ptr<my::GameManager> _game_manager;
     /// <summary>
     /// 変更
     /// </summary>
@@ -60,6 +63,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetGameManager(std::weak_ptr<my::GameManager> ptr);
     /// <summary>
     /// 初期化
     /// </summary>

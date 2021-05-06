@@ -40,18 +40,7 @@ protected:
     std::optional<my::SceneEffect> _effect;
     //! ‘JˆÚ
     my::Observable<const SceneMessage&> _subject;
-    //! “Ç‚İ‚İÏ‚İ
-    bool _loaded;
-    //! “¯Šú
-    std::mutex _mutex;
-    //! ƒXƒŒƒbƒh
-    std::optional<std::thread> _load_thread;
 protected:
-    /// <summary>
-    /// Š®—¹
-    /// </summary>
-    /// <param name=""></param>
-    void LoadComplete(void);
     /// <summary>
     /// ”»’è
     /// </summary>

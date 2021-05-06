@@ -6,8 +6,6 @@
 
 #include "../Stage/StageDefine.h"
 #include "../Factory/FactoryManager.h"
-#include "../Game/GameSystem/Save/SaveData.h"
-#include "../Game/GameSystem/Save/SaveSystem.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
 #include "../Actor//Ship/Ship.h"
@@ -62,13 +60,12 @@ my::GameScene::GameScene() :
     _game_world(),
     _renderer(),
     _physic_world(),
-    _weapon_system(),
-    _quick_change(),
     _stage(),
     _re_initialize(false),
     _simple_light(),
     _resource(),
-    _ui_canvas() {
+    _ui_canvas(),
+    _game() {
 }
 
 my::GameScene::~GameScene() {
@@ -99,29 +96,23 @@ void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
+void my::GameScene::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
+    this->_game = ptr;
+}
+
 std::string my::GameScene::GetName(void) {
     return my::SceneType::kGameScene;
 }
 
 bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     super::Load(param);
-    _weapon_system = std::make_shared<my::WeaponSystem>();
-    _quick_change = std::make_shared<my::QuickChangeSystem>();
-    _weapon_system->SetResourceManager(_resource);
-    _weapon_system->SetUICanvas(_ui_canvas);
-    _quick_change->SetResourceManager(_resource);
-    _quick_change->SetUICanvas(_ui_canvas);
-
     if (auto r = _resource.lock()) {
         r->Load(param->resource.c_str());
     } // if
-
     // stage
     if (!_stage.Load("../Resource/stage/test.json")) {
         return false;
     } // if
-
-    _loaded = true;
     return true;
 }
 
@@ -132,11 +123,6 @@ bool my::GameScene::Initialize(void) {
     _simple_light.SetAmbient(def::color_rgba::kWhite * 0.8f);
     ::CGraphicsUtilities::SetDirectionalLight(&_simple_light);
 
-    // game system
-    auto save_data = my::SaveData();
-    my::SaveSystem().Fetch(save_data);
-    _weapon_system->Initialize(save_data, shared_from_this());
-    _quick_change->Initialize({}, _weapon_system);
     _stage.Initialize();
 
     auto param = new my::Actor::Param();
@@ -170,8 +156,18 @@ bool my::GameScene::Initialize(void) {
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
 
-    _weapon_system->AddMechanicalWeaponObserver(player);
-    _quick_change->AddWeaponObserver(_weapon_system);
+    
+
+    // game system
+    if (auto game = _game.lock()) {
+        auto weapon_system = game->GetWeaponSystem();
+        auto quick_change = game->GetQuickChange();
+        
+        weapon_system->Initialize(shared_from_this());
+        quick_change->Initialize({}, game->GetWeaponSystem());
+        weapon_system->AddMechanicalWeaponObserver(player);
+        quick_change->AddWeaponObserver(weapon_system);
+    } // if
 
     ut::SafeDelete(param);
     _re_initialize = false;
@@ -185,11 +181,6 @@ bool my::GameScene::Input(void) {
 
 bool my::GameScene::Update(float delta_time) {
     super::Update(delta_time);
-
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        //_subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
-    } // if
-
 
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
@@ -205,7 +196,6 @@ bool my::GameScene::Update(float delta_time) {
     } // if
 
     // update
-    _quick_change->Update();
     _stage.Update(delta_time);
     _game_world.Update(delta_time);
 
@@ -216,12 +206,9 @@ bool my::GameScene::Update(float delta_time) {
 }
 
 bool my::GameScene::Release(void) {
-    //! save
-    std::vector<std::string> weapon;
-    _weapon_system->CreateAvailableMechanicalWeaponNames(weapon);
-    auto save_param = my::SaveDataParam(0, weapon);
-    my::SaveSystem().Save(save_param);
-    _quick_change->Release();
     _stage.Release();
+    if (auto game = _game.lock()) {
+        game->GameSystemRelease();
+    } // if
     return true;
 }

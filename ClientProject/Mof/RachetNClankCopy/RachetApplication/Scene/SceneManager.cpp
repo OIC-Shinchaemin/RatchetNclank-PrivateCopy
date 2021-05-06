@@ -11,7 +11,6 @@ void my::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<my::
     if (name == my::SceneType::kTitleScene) {
         param->resource = "../Resource/scene_resource/title_scene.txt";
         auto temp = ut::MakeSharedWithRelease<my::TitleScene>();
-        temp->SetResourceManager(_resource);
         _scene = temp;
     } // if
     else if (name == my::SceneType::kGameScene) {
@@ -19,6 +18,7 @@ void my::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<my::
         auto temp = ut::MakeSharedWithRelease<my::GameScene>();
         temp->SetResourceManager(_resource);
         temp->SetUICanvas(_ui_canvas);
+        temp->SetGameManager(_game_manager);
         _scene = temp;
     } // else if
     else if (name == my::SceneType::kClearScene) {
@@ -41,7 +41,11 @@ void my::SceneManager::RenderScene(void) {
 
 }
 
-my::SceneManager::SceneManager() {
+my::SceneManager::SceneManager() :
+    _change_message(),
+    _resource(),
+    _ui_canvas(),
+    _game_manager() {
 }
 
 my::SceneManager::~SceneManager() {
@@ -63,6 +67,10 @@ void my::SceneManager::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
     this->_ui_canvas = ptr;
 }
 
+void my::SceneManager::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
+    this->_game_manager = ptr;
+}
+
 bool my::SceneManager::Initialize(void) {
     this->ChangeScene(my::SceneType::kTitleScene, std::make_shared <my::Scene::Param>());
 
@@ -79,7 +87,7 @@ bool my::SceneManager::Update(float delta_time) {
         this->ChangeScene(_change_message.value().name, _change_message.value().param);
         _change_message.reset();
     } // if
-    
+
     _scene->Update(delta_time);
     return true;
 }

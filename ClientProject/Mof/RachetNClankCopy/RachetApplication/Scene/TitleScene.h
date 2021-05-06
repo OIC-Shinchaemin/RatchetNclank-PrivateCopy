@@ -18,10 +18,6 @@ namespace my {
 class TitleScene : public my::Scene {
     using super = my::Scene;
 private:
-    //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
-    //! 画面
-    std::weak_ptr<Mof::CTexture> _backbround;
     //! ステージ
     Stage _stage;
     //! カメラ

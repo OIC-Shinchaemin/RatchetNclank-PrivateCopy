@@ -3,14 +3,8 @@
 #include "My/Core/Define.h"
 
 
-void my::Scene::LoadComplete(void) {
-    std::lock_guard<std::mutex> lock(_mutex);
-    this->_loaded = true;
-}
-
 bool my::Scene::IsLoaded(void) {
-    std::lock_guard<std::mutex> lock(_mutex);
-    return this->_loaded;
+    return true;
 }
 
 Mof::LPRenderTarget my::Scene::GetDefaultRendarTarget(void) const {
@@ -64,10 +58,7 @@ my::Scene::Scene() :
     _state(),
     _rendar_target(),
     _default(),
-    _effect(),
-    _loaded(false),
-    _mutex(),
-    _load_thread() {
+    _effect() {
 }
 
 my::Scene::~Scene() {
