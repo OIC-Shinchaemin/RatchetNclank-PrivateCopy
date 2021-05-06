@@ -36,8 +36,6 @@ private:
     bool _re_initialize;
     // 光源
     Mof::CDirectionalLight _simple_light;
-    //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
@@ -82,11 +80,6 @@ public:
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>

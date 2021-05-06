@@ -13,6 +13,8 @@
 
 #include "SceneDefine.h"
 #include "../Actor.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 
 
 namespace my {
@@ -40,6 +42,8 @@ protected:
     std::optional<my::SceneEffect> _effect;
     //! 遷移
     my::Observable<const SceneMessage&> _subject;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource;
 protected:
     /// <summary>
     /// 判定
@@ -61,6 +65,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Scene();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

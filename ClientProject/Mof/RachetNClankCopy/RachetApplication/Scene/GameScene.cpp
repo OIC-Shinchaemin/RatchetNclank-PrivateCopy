@@ -51,11 +51,6 @@ bool my::GameScene::SceneRender(void) {
 
     _renderer.Render();
     _stage.Render();
-    ::g_pGraphics->SetDepthEnable(false);
-    if (auto resource = _resource.lock()) {
-        auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
-        font->RenderString(30, 500, "ABCDE");
-    }
     return true;
 }
 
@@ -68,7 +63,6 @@ my::GameScene::GameScene() :
     _stage(),
     _re_initialize(false),
     _simple_light(),
-    _resource(),
     _ui_canvas(),
     _game() {
 }
@@ -91,10 +85,6 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
     if (type == "GameClear") {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
-}
-
-void my::GameScene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
-    this->_resource = ptr;
 }
 
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
@@ -186,6 +176,10 @@ bool my::GameScene::Input(void) {
 
 bool my::GameScene::Update(float delta_time) {
     super::Update(delta_time);
+
+    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+    } // if
 
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);

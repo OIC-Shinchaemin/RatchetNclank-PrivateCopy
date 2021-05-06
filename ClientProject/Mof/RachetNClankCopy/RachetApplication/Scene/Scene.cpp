@@ -58,10 +58,15 @@ my::Scene::Scene() :
     _state(),
     _rendar_target(),
     _default(),
-    _effect() {
+    _effect(),
+    _resource(){
 }
 
 my::Scene::~Scene() {
+}
+
+void my::Scene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+    this->_resource = ptr;
 }
 
 void my::Scene::AddSceneObserver(const std::shared_ptr<my::Observer<const SceneMessage&>>& ptr) {

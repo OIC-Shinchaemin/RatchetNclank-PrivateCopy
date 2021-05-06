@@ -7,7 +7,6 @@
 #include <memory>
 
 #include "My/Core/ServiceLocator.h"
-#include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
@@ -46,11 +45,6 @@ public:
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
