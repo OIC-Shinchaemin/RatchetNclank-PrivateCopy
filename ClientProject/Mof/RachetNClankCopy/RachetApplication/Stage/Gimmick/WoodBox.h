@@ -43,6 +43,8 @@ public:
     virtual void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
         Vector3 pos, Vector3 scale, Vector3 rotate) override;
 
+    virtual void SetPosition(const Vector3& pos) override
+        ;
     void SetBoxArray(WoodBoxArray* array_ptr);
     void SetObjectArray(StageObjectArray* array_pointer);
     void SetMeshArray(MeshArray* array_ptr);

@@ -1,5 +1,6 @@
 #include "TitleScene.h"
 #include "../Gamepad.h"
+#include "My/Resource/ResourceFont.h"
 
 
 bool my::TitleScene::SceneRender(void) {
@@ -9,15 +10,16 @@ bool my::TitleScene::SceneRender(void) {
     _stage.Render();
 
     ::g_pGraphics->SetDepthEnable(false);
-    auto text = "Please Press   Start Button or \n               Enter Key !";
-    ::CGraphicsUtilities::RenderString(320.0, 400.0f, "%s", text);
+    if (auto resource = _resource.lock()) {
+        auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
+        auto text = "Please Press   Start Button or \n                          Enter Key !";
+        font->RenderString(220.0, 400.0f, text);
+    } // if
     return true;
 }
 
 my::TitleScene::TitleScene() :
-    super(),
-    _resource(),
-    _backbround() {
+    super() {
 }
 
 my::TitleScene::~TitleScene() {
@@ -26,22 +28,15 @@ my::TitleScene::~TitleScene() {
 void my::TitleScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
 }
 
-void my::TitleScene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
-    this->_resource = ptr;
-}
-
 std::string my::TitleScene::GetName(void) {
     return my::SceneType::kTitleScene;
 }
 
 bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
     super::Load(param);
-
-    if (auto resource = _resource.lock()) {
-        resource->Load(param->resource.c_str());
-        this->LoadComplete();
+    if (auto r = _resource.lock()) {
+        r->Load(param->resource.c_str());
     } // if
-
     // stage
     if (!_stage.Load("../Resource/stage/test.json")) {
         return false;

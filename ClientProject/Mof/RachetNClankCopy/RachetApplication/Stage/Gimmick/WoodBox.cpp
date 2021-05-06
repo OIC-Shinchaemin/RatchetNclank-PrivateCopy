@@ -1,5 +1,6 @@
 #include "WoodBox.h"
 #include <iostream>
+
 bool WoodBox::CollisionStage(void) {
     for (auto& it : *_object_array_pointer) {
         if (!it->IsEnable() || !it->IsCollisionEnable() || it->GetName() == GetName()) {
@@ -92,6 +93,7 @@ void WoodBox::Update(float delta) {
         _gravity    += 10.0f * delta;
         _gravity     = std::min<float>(_gravity, 5.0f);
         _position.y -= _gravity * delta;
+        SetPosition(_position);
         RefreshWorldMatrix();
         collision_stage = CollisionStage();
         collision_box   = CollisionBox(hit_box);
@@ -120,6 +122,11 @@ bool WoodBox::IsStart(void) const {
 
 void WoodBox::SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate) {
     GimmickBase::SetStageObjectData(enable, collision, type, name, mesh_no, pos, scale, rotate);
+    _start_pos = pos;
+}
+
+void WoodBox::SetPosition(const Vector3& pos) {
+    StageObject::SetPosition(pos);
     _start_pos = pos;
 }
 

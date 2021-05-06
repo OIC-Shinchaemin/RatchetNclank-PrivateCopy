@@ -13,6 +13,8 @@
 
 #include "SceneDefine.h"
 #include "../Actor.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 
 
 namespace my {
@@ -40,18 +42,9 @@ protected:
     std::optional<my::SceneEffect> _effect;
     //! 遷移
     my::Observable<const SceneMessage&> _subject;
-    //! 読み込み済み
-    bool _loaded;
-    //! 同期
-    std::mutex _mutex;
-    //! スレッド
-    std::optional<std::thread> _load_thread;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource;
 protected:
-    /// <summary>
-    /// 完了
-    /// </summary>
-    /// <param name=""></param>
-    void LoadComplete(void);
     /// <summary>
     /// 判定
     /// </summary>
@@ -72,6 +65,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Scene();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

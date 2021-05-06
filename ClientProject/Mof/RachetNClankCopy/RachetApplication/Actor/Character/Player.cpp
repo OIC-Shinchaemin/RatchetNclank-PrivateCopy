@@ -49,7 +49,7 @@ bool my::Player::Render(void) {
     return true;
 
     /*
-    // æ­¦å™¨ã‚’è¨­å®šã™ã‚‹ãƒœãƒ¼ãƒ³ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
+    // •Ší‚ğİ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ğæ“¾‚·‚é
     auto motion = super::GetComponent<my::MotionComponent>()->GetMotionData();
     LPBONEMOTIONSTATE pBoneState = motion->GetBoneState("UPP_weapon");
     if (auto weapon = _current_mechanical.lock()) {

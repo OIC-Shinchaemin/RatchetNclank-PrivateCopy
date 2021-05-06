@@ -256,6 +256,9 @@
     <Filter Include="Rachet\Source\Actor\Ship">
       <UniqueIdentifier>{67696cee-7d99-4f58-b968-7c92ac796a55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Base\Resource">
+      <UniqueIdentifier>{674211c3-a625-4d13-b643-3d27df8c1489}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -290,9 +293,6 @@
     </ClCompile>
     <ClCompile Include="Camera\Camera.cpp">
       <Filter>Rachet\Source\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameManager.cpp">
-      <Filter>Rachet\Source\Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Renderer.cpp">
       <Filter>Rachet\Source\Game</Filter>
@@ -833,6 +833,12 @@
     </ClCompile>
     <ClCompile Include="Actor\Ship\Ship.cpp">
       <Filter>Rachet\Source\Actor\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameManager.cpp">
+      <Filter>Rachet\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Resource\ResourceFont.cpp">
+      <Filter>Rachet\Base\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1579,6 +1585,9 @@
     </ClInclude>
     <ClInclude Include="Component\Ship\ShipComponent.h">
       <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Resource\ResourceFont.h">
+      <Filter>Rachet\Base\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

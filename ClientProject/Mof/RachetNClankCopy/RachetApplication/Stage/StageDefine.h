@@ -1,4 +1,5 @@
 #pragma once
+#define STAGEEDITOR
 
 /// <summary>
 /// ステージオブジェクトの種類列挙
@@ -9,10 +10,10 @@ enum class StageObjectType {
     EnemySpawnPoint,   //! 敵出現位置
     Elevator,          //! エレベーター
     Bridge,            //! 橋
-    BoxBullet,
-    BoxBolt,
-    BoxNanotech,
     MoveCloud_Near,
     MoveCloud_Middle,
     MoveCloud_Far,
+    BoxBullet,
+    BoxBolt,
+    BoxNanotech,
 };

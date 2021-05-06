@@ -7,11 +7,16 @@ bool my::ClearScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
 
-    auto text = "Game Clear !\n";
-    ::CGraphicsUtilities::RenderString(400.0, 400.0f, "%s", text);
+    
 
-    text = "Press StartButton or EnterKey";
-    ::CGraphicsUtilities::RenderString(380.0, 450.0f, "%s", text);
+    if (auto resource = _resource.lock()) {
+        auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
+        auto text = "Game Clear !\n";
+        font->RenderString(400.0, 350.0f, text);
+        text = "Please Press   Start Button or \n                          Enter Key !";
+        font->RenderString(260.0, 400.0f, text);
+    } // if
+
     return true;
 }
 
@@ -30,7 +35,6 @@ std::string my::ClearScene::GetName(void) {
 
 bool my::ClearScene::Load(std::shared_ptr<my::Scene::Param> param) {
     auto re = super::Load(param);
-    super::_loaded = true;
     return re;
 }
 

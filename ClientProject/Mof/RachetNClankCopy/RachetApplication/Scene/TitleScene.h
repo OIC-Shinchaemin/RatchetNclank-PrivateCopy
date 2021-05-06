@@ -7,7 +7,6 @@
 #include <memory>
 
 #include "My/Core/ServiceLocator.h"
-#include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
@@ -18,10 +17,6 @@ namespace my {
 class TitleScene : public my::Scene {
     using super = my::Scene;
 private:
-    //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
-    //! 画面
-    std::weak_ptr<Mof::CTexture> _backbround;
     //! ステージ
     Stage _stage;
     //! カメラ
@@ -50,11 +45,6 @@ public:
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

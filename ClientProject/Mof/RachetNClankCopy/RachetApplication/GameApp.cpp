@@ -7,6 +7,7 @@
 #include "Camera/CameraController.h"
 
 
+
 MofBool CGameApp::Initialize(void) {
     ::CMofImGui::Setup();
     my::Gamepad::GetInstance().Create();
@@ -22,7 +23,11 @@ MofBool CGameApp::Initialize(void) {
     my::Component::SetUICanvas(_ui_canvas);
     my::CameraController::SetCameraManager(_camera_manager);
 
-    //_resource_manager->Load("scene_resource/general.txt");
+    _game_manager->SetResourceManager(_resource_manager);
+    _game_manager->SetUICanvas(_ui_canvas);
+    _game_manager->Initialize();
+
+    _scene_manager->SetGameManager(_game_manager);
     _scene_manager->SetResourceManager(_resource_manager);
     _scene_manager->SetUICanvas(_ui_canvas);
     _scene_manager->Initialize();
@@ -45,13 +50,11 @@ MofBool CGameApp::Input(void) {
 MofBool CGameApp::Update(void) {
     this->Input();
 
-    //float delta = Mof::CUtilities::GetFrameSecond();
     float delta = 0.01667f;
+    _game_manager->Update();
     _scene_manager->Update(delta);
-    //_game_manager->Update(delta);
     _camera_manager->Update();
     _ui_canvas->Update(delta);
-
     return TRUE;
 }
 

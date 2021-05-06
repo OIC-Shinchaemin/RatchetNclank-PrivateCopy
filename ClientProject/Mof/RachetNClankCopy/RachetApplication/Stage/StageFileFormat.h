@@ -1,4 +1,5 @@
 #pragma once
+#define TRUE 1
 
 //! 独自ヘッダ
 #define STAGE_FILE_HEADER     "STAGE_FILE_VER_0.01_FILE"
@@ -15,8 +16,7 @@
 /// <summary>
 /// ステージファイル内のチャンク情報タイプ列挙
 /// </summary>
-enum StageFileChank {
-    StageFileChank_
+enum class StageFileChank {
 };
 
 /// <summary>

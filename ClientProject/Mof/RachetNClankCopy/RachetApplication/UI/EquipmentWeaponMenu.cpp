@@ -39,9 +39,15 @@ bool my::EquipmentWeaponMenu::Render(void) {
         if (it != _tex_names.end()) {
             if (auto tex = r->Get<std::shared_ptr<Mof::CTexture>>(it->second.c_str())) {
                 tex->Render(super::_position.x, super::_position.y);
-                ::CGraphicsUtilities::RenderString(super::_position.x, 
-                                                   super::_position.y + 64.0f, 
-                                                   "bullet count = %d ", _info.bullet_count);
+
+
+                if (auto resource = _resource.lock()) {
+                    auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
+                    std::string text = "bullet count = ";
+                    text += std::to_string(_info.bullet_count);
+                    font->RenderString(super::_position.x, super::_position.y + 64.0f, text.c_str());
+                } // if
+
             } // if
         } // if
     } // if

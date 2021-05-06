@@ -44,9 +44,6 @@ my::QuickChangeSystem::QuickChangeSystem() :
 }
 
 my::QuickChangeSystem::~QuickChangeSystem() {
-    if (auto canvas = _ui_canvas.lock()) {
-        canvas->RemoveElement("QuickChangeMenu");
-    } // if
 }
 
 void my::QuickChangeSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -155,6 +152,9 @@ bool my::QuickChangeSystem::Update(void) {
 
 bool my::QuickChangeSystem::Release(void) {
     _items.clear();
+    if (auto canvas = _ui_canvas.lock()) {
+        canvas->RemoveElement("QuickChangeMenu");
+    } // if
     return true;
 }
 

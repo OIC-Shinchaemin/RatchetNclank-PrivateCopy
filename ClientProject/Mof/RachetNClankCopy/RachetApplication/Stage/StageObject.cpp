@@ -134,6 +134,46 @@ void StageObject::GenerateCollisionBox(const MeshArray& meshes) {
         geometry->SetMatrix(default_matrix);
     } // for
 }
+
 void StageObject::SetEnable(bool b) {
     _enable = b;
 }
+
+void StageObject::SetName(const std::string& name) {
+    _name = name;
+}
+
+void StageObject::SetType(StageObjectType type) {
+    _type = type;
+}
+
+void StageObject::SetMeshNo(int no) {
+    _mesh_no = no;
+}
+
+void StageObject::SetPosition(const Vector3& pos) {
+    _position = pos;
+}
+
+#ifdef   STAGEEDITOR
+bool* StageObject::GetEnablePointer(void) {
+    return &_enable;
+}
+bool* StageObject::GetCollisionEnablePointer(void) {
+    return &_collision_enable;
+}
+int* StageObject::GetMeshNoPointer(void) {
+    return &_mesh_no;
+}
+float* StageObject::GetPositionPointer(void) {
+    return _position.fv;
+}
+
+float* StageObject::GetScalePointer(void) {
+    return _scale.fv;
+}
+
+float* StageObject::GetRotationPointer(void) {
+    return _rotate.fv;
+}
+#endif //STAGEEDITOR

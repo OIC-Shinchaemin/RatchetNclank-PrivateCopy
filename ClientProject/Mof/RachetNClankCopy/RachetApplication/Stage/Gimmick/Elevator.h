@@ -23,7 +23,6 @@ protected:
     //! ƒtƒ‰ƒO
     bool _first_initialized;
 
-
 public:
     Elevator(Vector3 end, float request, bool enable = true, bool collision = true,
         StageObjectType type = StageObjectType::None, std::string name = "",
@@ -46,6 +45,20 @@ public:
     virtual void ActionStart(void) override;
     virtual bool IsStart(void) const override;
 
+    Vector3 GetEndPos(void) const;
+    float GetRequest(void) const;
+
+    virtual void SetPosition(const Vector3& pos) override;
+
     virtual void ReInitialize(void) override;
+
+    virtual void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
+        Vector3 pos, Vector3 scale, Vector3 rotate) override;
+
+#ifdef STAGEEDITOR
+    float* GetStartPosPointer(void);
+    float* GetEndPosPointer(void);
+    float* GetRequestPointer(void);
+#endif//STAGEEDITOR
 };
 

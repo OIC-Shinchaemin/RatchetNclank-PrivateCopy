@@ -20,15 +20,15 @@ void Stage::RenderObject(const StageObjectPtr& obj) {
 bool Stage::Load(const std::string& path) {
     // パーサーの準備
     ParseData parse_data;
-    parse_data.mesh_array_pointer = &_mesh_array;
+    parse_data.mesh_array_pointer          = &_mesh_array;
     parse_data.static_object_array_pointer = &_static_object_array;
-    parse_data.enemy_spawn_array_pointer = &_enemy_spawn_array;
-    parse_data.gimmick_array_pointer = &_gimmick_array;
-    parse_data.box_array_pointer = &_woodbox_array;
+    parse_data.enemy_spawn_array_pointer   = &_enemy_spawn_array;
+    parse_data.gimmick_array_pointer       = &_gimmick_array;
+    parse_data.box_array_pointer           = &_woodbox_array;
     StageParserPtr parser = nullptr;
 
     // 拡張子の取得
-    int length = path.find_last_of('.');
+    int length      = path.find_last_of('.');
     std::string ext = path.substr(length);
 
     // パーサーの選択
@@ -52,7 +52,7 @@ bool Stage::Load(const std::string& path) {
 /// 初期化
 /// </summary>
 void Stage::Initialize(void) {
-    for (const auto& object: _static_object_array) {
+    for (const auto& object : _static_object_array) {
         object->GenerateCollisionBox(_mesh_array);
     } // for
     for (const auto& gimmick : _gimmick_array) {
@@ -76,7 +76,7 @@ void Stage::Initialize(void) {
 /// </summary>
 void Stage::Update(float delta) {
     const int box_enable_size = _woodbox_array.size();
-    bool      box_break_flag = false;
+    bool      box_break_flag  = false;
     for (int i = 0; i < box_enable_size; i++) {
         if (_box_enable_array_prev[i] != _woodbox_array[i]->IsEnable()) {
             box_break_flag = true;
@@ -110,11 +110,11 @@ void Stage::Render(void) {
     for (const auto& obj : _static_object_array) {
         RenderObject(obj);
     }
-    for (const auto& box : _woodbox_array) {
-        RenderObject(box);
-    }
     for (const auto& gimmick : _gimmick_array) {
         RenderObject(gimmick);
+    }
+    for (const auto& box : _woodbox_array) {
+        RenderObject(box);
     }
 }
 
@@ -122,10 +122,11 @@ void Stage::Render(void) {
 /// 解放
 /// </summary>
 void Stage::Release(void) {
-    _static_object_array.clear();
-    _enemy_spawn_array.clear();
+
     _woodbox_array.clear();
     _gimmick_array.clear();
+    _enemy_spawn_array.clear();
+    _static_object_array.clear();
     _box_enable_array_prev.clear();
 
     for (auto& it : _mesh_array) {

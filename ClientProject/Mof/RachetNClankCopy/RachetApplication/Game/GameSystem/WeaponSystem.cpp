@@ -10,6 +10,7 @@ my::WeaponSystem::WeaponSystem() :
     _subject(),
     _equipment_subject(),
     _builder_name_map(),
+    _save_data(),
     _resource(),
     _ui_canvas() {
 
@@ -19,9 +20,6 @@ my::WeaponSystem::WeaponSystem() :
 }
 
 my::WeaponSystem::~WeaponSystem() {
-    if (auto canvas = _ui_canvas.lock()) {
-        canvas->RemoveElement("EquipmentWeaponMenu");
-    } // if
 }
 
 void my::WeaponSystem::OnNotify(const std::string& change) {
@@ -52,7 +50,12 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
     } // for
 }
 
-bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>&  observer) {
+bool my::WeaponSystem::Load(my::SaveData& in) {
+    _save_data = in;
+    return true;
+}
+
+bool my::WeaponSystem::Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if
@@ -65,7 +68,7 @@ bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Ob
     } // if
 
     auto param = my::Actor::Param();
-    for (const auto& key : in.GetAvailableMechanicalWeaponsAddress()) {
+    for (const auto& key : _save_data.GetAvailableMechanicalWeaponsAddress()) {
         param.name = key;
 
         auto weapon = my::FactoryManager::Singleton().CreateMechanicalWeapon(
@@ -83,10 +86,17 @@ bool my::WeaponSystem::Initialize(my::SaveData& in, const std::shared_ptr<my::Ob
     return true;
 }
 
+bool my::WeaponSystem::Release(void) {
+    if (auto canvas = _ui_canvas.lock()) {
+        canvas->RemoveElement("EquipmentWeaponMenu");
+    } // if
+    return true;
+}
+
 std::shared_ptr<my::Mechanical> my::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
     auto it = std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
         return pair.first == name;
-                           });
+    });
     if (it != _weapons.end()) {
         return it->second;
     } // if
