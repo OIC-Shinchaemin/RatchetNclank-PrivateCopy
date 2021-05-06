@@ -147,17 +147,11 @@ GimmickPtr JsonStageParser::CreateGimmick(StageObjectType type, const rapidjson:
     } break;
     case StageObjectType::Bridge:
     {
-        Vector3 start;
-        start.x = data["start_pos_x"].GetDouble();
-        start.y = data["start_pos_y"].GetDouble();
-        start.z = data["start_pos_z"].GetDouble();
         Vector3 end;
         end.x = data["end_pos_x"].GetDouble();
         end.y = data["end_pos_y"].GetDouble();
         end.z = data["end_pos_z"].GetDouble();
-        auto temp = std::make_shared<Bridge>(start);
-        temp->SetEndPosition(end);
-        ptr     = temp;
+        ptr     = std::make_shared<Bridge>(end);
     } break;
     case StageObjectType::BoxBullet:
     case StageObjectType::BoxBolt:

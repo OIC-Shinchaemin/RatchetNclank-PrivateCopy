@@ -51,6 +51,11 @@ bool my::GameScene::SceneRender(void) {
 
     _renderer.Render();
     _stage.Render();
+    ::g_pGraphics->SetDepthEnable(false);
+    if (auto resource = _resource.lock()) {
+        auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
+        font->RenderString(30, 500, "ABCDE");
+    }
     return true;
 }
 

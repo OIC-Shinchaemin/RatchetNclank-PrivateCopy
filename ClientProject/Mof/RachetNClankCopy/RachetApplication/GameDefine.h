@@ -9,6 +9,7 @@
 #include "MotionNames.h"
 #include "ResourceManager.h"
 #include "my/Core/FunctionPointerContainer.h"
+#include "my/Resource/ResourceFont.h"
 
 
 namespace my {
@@ -20,7 +21,8 @@ struct Transform {
 using ResourceMgr = my::ResourceManager<
     std::shared_ptr<Mof::CTexture>,
     std::shared_ptr<Mof::CMeshContainer>,
-    std::shared_ptr<my::MotionNames>
+    std::shared_ptr<my::MotionNames>,
+    std::shared_ptr<sip::CResourceFont>
 >;
 
 class Enemy;

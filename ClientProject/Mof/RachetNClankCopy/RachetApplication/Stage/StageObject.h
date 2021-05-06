@@ -7,7 +7,7 @@
 #include "StageDefine.h"
 
 // 名前の置き換え
-using MeshPtr = std::shared_ptr<CMeshContainer>;
+using MeshPtr   = std::shared_ptr<CMeshContainer>;
 using MeshArray = std::vector<MeshPtr>;
 
 /// <summary>
@@ -33,7 +33,7 @@ protected:
 
     //! ワールド座標
     Vector3          _position;
-
+    
     //! 拡大
     Vector3          _scale;
 
@@ -131,10 +131,27 @@ public:
     /// 生成
     /// </summary>
     void GenerateCollisionBox(const MeshArray& meshes);
-
+    
     void SetEnable(bool b);
+
+    void SetName(const std::string& name);
+
+    void SetType(StageObjectType type);
+
+    void SetMeshNo(int no);
+
+    virtual void SetPosition(const Vector3& pos);
+
+#ifdef   STAGEEDITOR
+    virtual bool* GetEnablePointer(void);
+    virtual bool* GetCollisionEnablePointer(void);
+    virtual int* GetMeshNoPointer(void);
+    virtual float* GetPositionPointer(void);
+    virtual float* GetScalePointer(void);
+    virtual float* GetRotationPointer(void);
+#endif //STAGEEDITOR
 };
 
 // 置き換え
-using StageObjectPtr = std::shared_ptr<StageObject>;
+using StageObjectPtr   = std::shared_ptr<StageObject>;
 using StageObjectArray = std::vector<StageObjectPtr>;

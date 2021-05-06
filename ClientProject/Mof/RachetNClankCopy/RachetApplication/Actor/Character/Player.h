@@ -31,41 +31,41 @@ public:
         CountMax,
     };
 private:
-    //! æ­¦å™¨
+    //! •Ší
     std::weak_ptr<my::Mechanical>_current_mechanical;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     Player();
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     ~Player();
     /// <summary>
-    /// é€šçŸ¥
+    /// ’Ê’m
     /// </summary>
     /// <param name="change"></param>
     virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
     /// <summary>
-    /// ãƒ‡ãƒªãƒ¼ãƒˆ
+    /// ƒfƒŠ[ƒg
     /// </summary>
     /// <param name=""></param>
     virtual void End(void) override;
     /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
-    /// è§£æ”¾
+    /// ‰ğ•ú
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>

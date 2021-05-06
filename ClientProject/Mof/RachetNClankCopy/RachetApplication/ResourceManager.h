@@ -10,6 +10,7 @@
 #include <Mof.h>
 
 #include "my/Core/AbstructContainer.h"
+#include "my/Resource/ResourceFont.h"
 #include "MotionNames.h"
 
 
@@ -127,6 +128,10 @@ public:
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".motion_names"); format) {
                 bool success = this->AddSharedElement<my::MotionNames>(data_path.c_str());
+                //std::cout << "Mof::MotionNames success = " << success << "\n";
+            } // else if
+            else if (auto format = std::strstr(data_path.c_str(), ".ttf"); format) {
+                bool success = this->AddSharedElement<sip::CResourceFont>(data_path.c_str());
                 //std::cout << "Mof::MotionNames success = " << success << "\n";
             } // else if
         } // for
