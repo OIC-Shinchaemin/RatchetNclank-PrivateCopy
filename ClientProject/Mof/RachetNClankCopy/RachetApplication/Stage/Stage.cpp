@@ -53,8 +53,9 @@ bool Stage::Load(const std::string& path) {
 /// </summary>
 void Stage::Initialize(void) {
     for (const auto& object : _static_object_array) {
-        object->GenerateCollisionBox(_mesh_array);
+        object->GenerateCollisionVolume(_mesh_array);
     } // for
+
     for (const auto& gimmick : _gimmick_array) {
         gimmick->Initialize();
     }
@@ -109,6 +110,7 @@ void Stage::Update(float delta) {
 void Stage::Render(void) {
     for (const auto& obj : _static_object_array) {
         RenderObject(obj);
+        obj->DebugRender();
     }
     for (const auto& gimmick : _gimmick_array) {
         RenderObject(gimmick);

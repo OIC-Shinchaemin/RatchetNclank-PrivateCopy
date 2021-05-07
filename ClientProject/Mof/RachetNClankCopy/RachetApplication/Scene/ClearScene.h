@@ -9,6 +9,18 @@ namespace my {
 class ClearScene : public my::Scene {
     using super = my::Scene;
 protected:
+/// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <returns></returns>
+    virtual bool SceneUpdate(float delta_time) override;
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <returns></returns>
+    virtual bool LoadingUpdate(float delta_time) override;
     /// <summary>
     /// 描画
     /// </summary>
@@ -42,12 +54,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Load(std::shared_ptr<my::Scene::Param> param) override;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time">時間</param>
-    /// <returns></returns>
-    virtual bool Update(float delta_time);
 };
 }
 #endif // !MY_CLEAR_SCENE_H

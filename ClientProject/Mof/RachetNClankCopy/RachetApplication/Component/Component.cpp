@@ -47,10 +47,6 @@ bool my::Component::IsActive(void) const {
     return this->_active;
 }
 
-bool my::Component::IsInput(void) const {
-    return false;
-}
-
 bool my::Component::IsUpdate(void) const {
     return false;
 }

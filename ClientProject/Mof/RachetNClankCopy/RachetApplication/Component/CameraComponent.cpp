@@ -131,8 +131,10 @@ my::CameraComponent::CameraComponent(int priority) :
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
     _preview_position(),
+    _collisioned_stage(),
+    _preview_angle(),
     _jump_up_com(),
-    _jump_down_com() ,
+    _jump_down_com(),
     _double_jump_com() {
 }
 
@@ -144,9 +146,11 @@ my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
     _preview_position(),
+    _collisioned_stage(),
+    _preview_angle(),
     _jump_up_com(),
     _jump_down_com(),
-    _double_jump_com(){
+    _double_jump_com() {
 }
 
 my::CameraComponent::~CameraComponent() {
@@ -216,10 +220,12 @@ bool my::CameraComponent::Update(float delta_time) {
     auto pos = super::GetOwner()->GetPosition();
     pos.y += 1.0f;
 
+    auto camera_controller = _camera_controller.GetService();
+
     if (_camera_fps_mode) {
         auto offset = Mof::CVector3(0.0f, 0.0f, 1.0f);
         offset.RotationY(_ideal_fps_camera_angle + MOF_MATH_HALFPI);
-        _camera_controller.GetService()->SetCameraTarget(pos + offset);
+        camera_controller->SetCameraTarget(pos + offset);
     } // if
     else {
         auto jump_up_com = _jump_up_com.lock();
@@ -228,14 +234,22 @@ bool my::CameraComponent::Update(float delta_time) {
         if (jump_up_com->IsActive() || jump_down_com->IsActive() || double_jump_com->IsActive()) {
             auto temp = pos;
             temp.y = _preview_position.y;
-            _camera_controller.GetService()->SetCameraTarget(temp);
+            camera_controller->SetCameraTarget(temp);
         } // if
         else {
             _preview_position = pos;
-            _camera_controller.GetService()->SetCameraTarget(pos);
+            camera_controller->SetCameraTarget(pos);
         } // else
+
+        if (_collisioned_stage) {
+            camera_controller->SetAzimuth(math::ToDegree(_preview_angle.x));
+            camera_controller->SetAltitude(math::ToDegree(_preview_angle.y));
+            _collisioned_stage = false;
+        } // if
+        _preview_angle.x = camera_controller->GetAzimuth();
+        _preview_angle.y = camera_controller->GetAltitude();
     } // else
-    _camera_controller.GetService()->Update();
+    camera_controller->Update();
 
     if (::g_pInput->IsKeyPush(MOFKEY_F1)) {
         auto controller = std::make_shared<my::FollowCameraController>();
@@ -261,4 +275,8 @@ bool my::CameraComponent::Release(void) {
 
 std::shared_ptr<my::Component> my::CameraComponent::Clone(void) {
     return std::make_shared<my::CameraComponent>(*this);
+}
+
+void my::CameraComponent::CollisionStage(void) {
+    _collisioned_stage = true;
 }

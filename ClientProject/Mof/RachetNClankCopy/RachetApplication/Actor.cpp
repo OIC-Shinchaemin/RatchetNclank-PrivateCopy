@@ -13,7 +13,6 @@ my::Actor::Actor() :
     _transform(),
     _initial_transform(),
     _components(),
-    _input_components(),
     _update_components(),
     _render_components() {
 }
@@ -84,9 +83,6 @@ bool my::Actor::InFrustum(void) const {
 }
 
 void my::Actor::AddComponent(const ComPtr& component) {
-    if (component->IsInput()) {
-        ut::InsertAscend(_input_components, component);
-    } // if
     if (component->IsUpdate()) {
         ut::InsertAscend(_update_components, component);
     } // if
@@ -108,9 +104,6 @@ void my::Actor::CloneToComponents(const ComArray& com_array) {
 }
 
 void my::Actor::RemoveComponent(const ComPtr& component) {
-    if (component->IsInput()) {
-        ut::EraseFind(_input_components, component);
-    } // if
     if (component->IsUpdate()) {
         ut::EraseFind(_update_components, component);
     } // if
@@ -150,16 +143,8 @@ bool my::Actor::Initialize(my::Actor::Param* param) {
     } // for
     // —Dæ“x‡‚É®—ñ
     std::sort(_components.begin(), _components.end());
-    std::sort(_input_components.begin(), _input_components.end());
     std::sort(_update_components.begin(), _update_components.end());
     std::sort(_render_components.begin(), _render_components.end());
-    return true;
-}
-
-bool my::Actor::Input(void) {
-    for (auto& com : _input_components) {
-        com->Input();
-    } // for
     return true;
 }
 
@@ -199,7 +184,6 @@ bool my::Actor::Render(const Mof::CMatrix44& world) {
 }
 
 bool my::Actor::Release(void) {
-    _input_components.clear();
     _update_components.clear();
     _render_components.clear();
     for (auto& com : _components) {
@@ -211,12 +195,8 @@ bool my::Actor::Release(void) {
 
 void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
     builder->Construct(shared_from_this());
-
     auto& coms = _components;
     // Žd•ª‚¯
-    std::copy_if(coms.begin(), coms.end(), std::back_inserter(_input_components), [](ComPtr com) {
-        return com->IsInput();
-    });
     std::copy_if(coms.begin(), coms.end(), std::back_inserter(_update_components), [](ComPtr com) {
         return com->IsUpdate();
     });

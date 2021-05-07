@@ -22,15 +22,18 @@ private:
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! Elevator‚Éæ‚Á‚Ä‚¢‚é
     bool _on_elevator;
-    //! €–S”»’è
-    Mof::CBoxAABB _abyss_box;
 private:
+    /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetFrontRay(void);
     /// <summary>
     /// Õ“Ë
     /// </summary>
-    /// <param name="mesh"></param>
-    /// <param name="obj"></param>
-    bool CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj);
+    /// <param name="ptr"></param>
+    virtual void CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj);
     /// <summary>
     /// Õ“Ë
     /// </summary>

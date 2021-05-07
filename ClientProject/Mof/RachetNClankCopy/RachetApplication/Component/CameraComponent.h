@@ -25,6 +25,10 @@ private:
     float _ideal_fps_camera_angle;
     //! ‘ÎÛ
     Mof::CVector3 _preview_position;
+    //! Õ“Ë’†
+    bool _collisioned_stage;
+    //! x•ûˆÊŠpy‹ÂŠp
+    Mof::CVector2 _preview_angle;
     //! ‘¬“x
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! ƒWƒƒƒ“ƒv
@@ -122,6 +126,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
+    /// <summary>
+    /// Õ“Ë
+    /// </summary>
+    /// <param name=""></param>
+    void CollisionStage(void);
 };
 }
 #endif // !MY_CAMERA_COMPONENT_H

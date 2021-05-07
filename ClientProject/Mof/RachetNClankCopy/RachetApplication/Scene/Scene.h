@@ -60,6 +60,8 @@ protected:
     void LoadComplete(void);
 
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
+    virtual bool LoadingUpdate(float delta_time);
+    virtual bool SceneUpdate(float delta_time);
     virtual bool PreRender(void);
     virtual bool LoadingRender(void);
     virtual bool SceneRender(void);
@@ -101,12 +103,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void);
-    /// <summary>
-    /// ì¸óÕ
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Input(void);
     /// <summary>
     /// çXêV
     /// </summary>

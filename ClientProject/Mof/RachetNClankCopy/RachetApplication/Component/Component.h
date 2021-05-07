@@ -82,12 +82,6 @@ public:
     /// <returns></returns>
     bool IsActive(void) const;
     /// <summary>
-    /// “ü—Í”»’è
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool IsInput(void) const;
-    /// <summary>
     /// XV”»’è
     /// </summary>
     /// <param name=""></param>

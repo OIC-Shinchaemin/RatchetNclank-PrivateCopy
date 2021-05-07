@@ -127,8 +127,8 @@ void my::CameraController::AddAzimuth(float degree) {
 
 void my::CameraController::AddAltitude(float degree) {
     this->_altitude += degree;
-    if (_altitude <= -15.0f) {
-        _altitude = -15.0f;
+    if (_altitude <= -5.0f) {
+        _altitude = -5.0f;
     } // if
     if (_altitude >= 45.0f) {
         _altitude = 45.0f;

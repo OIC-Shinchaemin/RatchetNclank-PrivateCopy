@@ -3,6 +3,19 @@
 #include "../Gamepad.h"
 
 
+bool my::ClearScene::SceneUpdate(float delta_time) {
+    super::SceneUpdate(delta_time);
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
+        ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        _subject.Notify(my::SceneMessage(my::SceneType::kTitleScene, ""));
+    } // if
+    return true;
+}
+
+bool my::ClearScene::LoadingUpdate(float delta_time) {
+    return false;
+}
+
 bool my::ClearScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
@@ -36,13 +49,4 @@ bool my::ClearScene::Load(std::shared_ptr<my::Scene::Param> param) {
 
     super::LoadComplete();
     return re;
-}
-
-bool my::ClearScene::Update(float delta_time) {
-    super::Update(delta_time);
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
-        ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kTitleScene, ""));
-    } // if
-    return true;
 }

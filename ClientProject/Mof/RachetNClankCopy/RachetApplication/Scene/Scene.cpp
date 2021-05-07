@@ -17,6 +17,21 @@ Mof::LPRenderTarget my::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
 }
 
+bool my::Scene::LoadingUpdate(float delta_time) {
+    return false;
+}
+
+bool my::Scene::SceneUpdate(float delta_time) {
+    if (_effect.has_value()) {
+        _effect.value().Update(delta_time);
+
+        if (_effect.value().IsEnd()) {
+            _effect.reset();
+        } // if
+    } // if    
+    return true;
+}
+
 bool my::Scene::PreRender(void) {
     // start
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
@@ -67,6 +82,10 @@ my::Scene::Scene() :
 }
 
 my::Scene::~Scene() {
+    if (_load_thread.has_value()) {
+        _load_thread.value().join();
+        _load_thread.reset();
+    } // if
 }
 
 void my::Scene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -100,19 +119,18 @@ bool my::Scene::Initialize(void) {
     return true;
 }
 
-bool my::Scene::Input(void) {
-    return false;
-}
-
 bool my::Scene::Update(float delta_time) {
-    if (_effect.has_value()) {
-        _effect.value().Update(delta_time);
-
-        if (_effect.value().IsEnd()) {
-     //       _effect.reset();
+    if (this->IsLoaded()) {
+        if (_load_thread.has_value()) {
+            _load_thread.value().join();
+            _load_thread.reset();
         } // if
-    } // if    
 
+        this->SceneUpdate(delta_time);
+    } // if
+    else {
+        this->LoadingUpdate(delta_time);
+    } // else
     return true;
 }
 

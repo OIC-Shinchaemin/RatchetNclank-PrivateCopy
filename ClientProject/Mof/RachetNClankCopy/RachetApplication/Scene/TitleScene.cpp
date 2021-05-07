@@ -3,6 +3,28 @@
 #include "My/Resource/ResourceFont.h"
 
 
+bool my::TitleScene::SceneUpdate(float delta_time) {
+    super::SceneUpdate(delta_time);
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
+        ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        _subject.Notify(my::SceneMessage(my::SceneType::kGameScene, ""));
+    } // if
+
+
+    auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
+
+    _camera_controller.GetService()->SetAzimuth(
+        math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
+    _camera_controller.GetService()->SetCameraTarget(pos);
+
+    _camera_controller.GetService()->Update();
+    return true;
+}
+
+bool my::TitleScene::LoadingUpdate(float delta_time) {
+    return true;
+}
+
 bool my::TitleScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
@@ -47,7 +69,7 @@ bool my::TitleScene::SceneRender(void) {
     if (auto resource = _resource.lock()) {
         auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
         auto text = "Please Press   Start Button or \n                          Enter Key !";
-        font->RenderString(220.0, 400.0f, text);
+        font->RenderString(220.0, 400.0f, def::color_rgba_u32::kGreen, text);
     } // if
 
     return true;
@@ -56,13 +78,23 @@ bool my::TitleScene::SceneRender(void) {
 bool my::TitleScene::LoadingRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Now Loading");
+    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, def::color_rgba_u32::kRed, "Now Loading");
     return true;
 }
 
 my::TitleScene::TitleScene() :
     super(),
-    _scroll() {
+    _stage(),
+    _stage_view_camera(),
+    _camera_controller(),
+    _mock(),
+    _plane(),
+    _scroll(),
+    _uv_scroll(),
+    gShader(),
+    gShaderBind(),
+    _simple_light(),
+    _motion() {
 }
 
 my::TitleScene::~TitleScene() {
@@ -77,9 +109,6 @@ std::string my::TitleScene::GetName(void) {
 
 bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
     super::Load(param);
-
-
-
 
     super::_load_thread = std::thread([&]() {
         if (!super::IsLoaded()) {
@@ -143,32 +172,7 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
     _camera_controller.GetService()->RegisterGlobalCamera();
     _camera_controller.GetService()->SetAzimuth(0.0f);
     _camera_controller.GetService()->SetAltitude(-10.0f);
-    _camera_controller.GetService()->SetDistance(13.0f);
-    return true;
-}
-
-bool my::TitleScene::Update(float delta_time) {
-    if (super::IsLoaded()) {
-        if (_load_thread.has_value()) {
-            _load_thread.value().join();
-            _load_thread.reset();
-        } // if
-    } // if
-
-    super::Update(delta_time);
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
-        ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kGameScene, ""));
-    } // if
-
-
-    auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
-
-    _camera_controller.GetService()->SetAzimuth(
-        math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
-    _camera_controller.GetService()->SetCameraTarget(pos);
-
-    _camera_controller.GetService()->Update();
+    _camera_controller.GetService()->SetDistance(8.0f);
     return true;
 }
 

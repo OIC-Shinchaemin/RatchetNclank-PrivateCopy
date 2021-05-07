@@ -45,6 +45,40 @@ void my::GameScene::ReInitialize(void) {
     this->Initialize();
 }
 
+bool my::GameScene::SceneUpdate(float delta_time) {
+    super::SceneUpdate(delta_time);
+
+    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+    } // if
+
+    for (auto& ptr : _created_actors) {
+        this->AddElement(ptr);
+    } // for
+    _created_actors.clear();
+    for (auto& ptr : _delete_actors) {
+        this->RemoveElement(ptr);
+    } // for
+    _delete_actors.clear();
+
+    if (_re_initialize) {
+        this->ReInitialize();
+    } // if
+
+    // update
+    _stage.Update(delta_time);
+    _game_world.Update(delta_time);
+
+    // collision
+    _physic_world.Update();
+    _physic_world.CollisionStage(&_stage);
+    return true;
+}
+
+bool my::GameScene::LoadingUpdate(float delta_time) {
+    return false;
+}
+
 bool my::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
@@ -76,7 +110,9 @@ my::GameScene::GameScene() :
     _re_initialize(false),
     _simple_light(),
     _ui_canvas(),
-    _game() {
+    _game(),
+    _for_bridge_event_actors(),
+    _bridge_event_subject() {
 }
 
 my::GameScene::~GameScene() {
@@ -164,13 +200,13 @@ bool my::GameScene::Initialize(void) {
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
 
-    
+
 
     // game system
     if (auto game = _game.lock()) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
-        
+
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize({}, game->GetWeaponSystem());
         weapon_system->AddMechanicalWeaponObserver(player);
@@ -179,41 +215,6 @@ bool my::GameScene::Initialize(void) {
 
     ut::SafeDelete(param);
     _re_initialize = false;
-    return true;
-}
-
-bool my::GameScene::Input(void) {
-    _game_world.Input();
-    return true;
-}
-
-bool my::GameScene::Update(float delta_time) {
-    super::Update(delta_time);
-
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
-    } // if
-
-    for (auto& ptr : _created_actors) {
-        this->AddElement(ptr);
-    } // for
-    _created_actors.clear();
-    for (auto& ptr : _delete_actors) {
-        this->RemoveElement(ptr);
-    } // for
-    _delete_actors.clear();
-
-    if (_re_initialize) {
-        this->ReInitialize();
-    } // if
-
-    // update
-    _stage.Update(delta_time);
-    _game_world.Update(delta_time);
-
-    // collision
-    _physic_world.Update();
-    _physic_world.CollisionStage(&_stage);
     return true;
 }
 

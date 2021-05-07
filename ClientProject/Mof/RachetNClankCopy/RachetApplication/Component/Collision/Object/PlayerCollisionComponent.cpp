@@ -7,9 +7,45 @@
 #include "../../Player/PlayerStateComponent.h"
 
 
-bool my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
-    return true;
+std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetFrontRay(void) {
+    _ASSERT_EXPR(!_player_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    if (super::GetOwner()->GetState() == my::ActorState::End) {
+        return std::optional<Mof::CRay3D>();
+    } // if
+
+    auto pos = super::GetOwner()->GetPosition();
+    pos.y += _player_com.lock()->GetHeight();
+    auto velocity = _velocity_com.lock()->GetVelocity() * 1.0f / 60.0f;
+    return Mof::CRay3D(pos, Mof::CVector3(velocity.x, 0.0f, velocity.z));
 }
+
+void my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
+    Mof::COLLISIONOUTGEOMETRY info;
+    auto ray = this->GetFrontRay().value();
+    float margin = 0.1f;
+
+    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
+        auto geometry = mesh->GetGeometry(i);
+        auto default_matrix = geometry->GetMatrix();
+        Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
+        geometry->SetMatrix(mat);
+
+        auto velocity = _velocity_com.lock()->GetVelocity();
+        velocity *= 1.0f / 60.0f;
+        if (ray.CollisionGeometry(geometry, info)) {
+            if (info.d <= velocity.Length() + margin) {
+                float dot = Mof::CVector3Utilities::Dot(velocity, info.Normal);
+                dot = std::abs(dot);
+                auto pos = super::GetOwner()->GetPosition();
+                pos += ray.Direction * (info.d - (dot)+margin);
+                pos += info.Normal * dot;
+                super::GetOwner()->SetPosition(pos);
+            } // if
+        } // if
+        geometry->SetMatrix(default_matrix);
+    } // for
+}
+
 void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
     auto gimmick_pos = gimmick->GetPosition();
     auto gimmick_pre_pos = gimmick->GetPreviewPosition();
@@ -18,7 +54,6 @@ void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer m
     auto gimmick_sphere_0 = Mof::CSphere(20.0, -5.0f, -12.0f, 35.0f);
     auto gimmick_sphere_1 = Mof::CSphere(65.0, -29.0f, 10.0f, 15.0f);
     auto sphere = this->GetSphere().value();
-
 
     if (gimmick_sphere_0.CollisionSphere(sphere) && !gimmick_sphere_0.CollisionPoint(gimmick_pos)) {
         gimmick->ActionStart();
@@ -40,8 +75,12 @@ void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer m
 
             if (info.d <= height) {
                 auto pos = super::GetOwner()->GetPosition();
-                pos += gimmick_move;
+                //pos += gimmick_move;
                 pos.y += height - info.d;
+
+                if (auto velocity_com = _velocity_com.lock()) {
+                    velocity_com->AddVelocityForce(gimmick_move * 60.0f);
+                } // if
 
 
                 super::GetOwner()->SetPosition(pos);
@@ -98,8 +137,7 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     _player_com(),
     _velocity_com(),
     _state_com(),
-    _on_elevator(false),
-    _abyss_box(Mof::CBoxAABB(Mof::CVector3(0.0f, -45.0f, 0.0f), Mof::CVector3(300.0f, 1.0f, 300.0f))) {
+    _on_elevator(false) {
 }
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
@@ -107,8 +145,7 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComp
     _player_com(),
     _velocity_com(),
     _state_com(),
-    _on_elevator(false),
-    _abyss_box(Mof::CBoxAABB(Mof::CVector3(0.0f, -45.0f, 0.0f), Mof::CVector3(300.0f, 1.0f, 300.0f))) {
+    _on_elevator(false) {
 }
 
 my::PlayerCollisionComponent::~PlayerCollisionComponent() {
@@ -163,15 +200,24 @@ std::shared_ptr<my::Component> my::PlayerCollisionComponent::Clone(void) {
 }
 
 void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
-    return;
-
-    if (_abyss_box.CollisionPoint(super::GetOwner()->GetPosition())) {
-        super::GetOwner()->Notify("PlayerDead", super::GetOwner());
-    } // if
-
     if (!this->GetRay().has_value()) {
         return;
     } // if
+    bool execute = false;
+    auto check_sphere = this->GetSphere().value();
+    check_sphere.r *= 2.0f;
+    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
+        if (check_sphere.CollisionSphere(obj.GetGeometrySphere(i))) {
+            execute = true;
+            break;
+        } // if
+    } // for
+    if (!execute) {
+        return;
+    } // if
+
+    this->CollisionStageFrontRay(mesh, obj);
+
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
 
@@ -182,11 +228,19 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
         Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
 
+        float margin = 0.1f;
         if (ray.CollisionGeometry(geometry, info)) {
+            Mof::CVector3 up(0.0f, 1.0f, 0.0f);
+            float angle = up.DotAngle(info.Normal);
+            float slope_threshold_angle = 30.0f;
+            if (angle > slope_threshold_angle) {
+                continue;
+            } // if
+
             float height = _player_com.lock()->GetHeight();
-            if (info.d <= height) {
+            if (info.d <= height + margin) {
                 auto pos = super::GetOwner()->GetPosition();
-                pos.y += height - info.d;
+                pos.y += height + margin - info.d;
                 super::GetOwner()->SetPosition(pos);
 
                 if (auto state_com = _state_com.lock()) {

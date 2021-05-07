@@ -50,7 +50,6 @@ private:
     def::Transform _initial_transform;
     //! 機能
     ComArray _components;
-    ComArray _input_components;
     ComArray _update_components;
     ComArray _render_components;
 public:
@@ -203,12 +202,6 @@ public:
     /// <param name="param"></param>
     /// <returns></returns>
     virtual bool Initialize(my::Actor::Param* param);
-    /// <summary>
-    /// 入力
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Input(void);
     /// <summary>
     /// 更新
     /// </summary>

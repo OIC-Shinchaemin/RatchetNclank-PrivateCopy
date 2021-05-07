@@ -109,21 +109,7 @@
       "rotation_y": 0.0,
       "rotation_z": 0.0
     },
-    {
-      "enable": true,
-      "collision": true,
-      "object_name": "terrain_3",
-      "mesh_no": 0,
-      "pos_x": 0.0,
-      "pos_y": -30.0,
-      "pos_z": -100.0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0,
-      "rotation_x": 0.0,
-      "rotation_y": 1.0700000524520875,
-      "rotation_z": 0.0
-    },
+
     {
       "enable": true,
       "collision": false,
