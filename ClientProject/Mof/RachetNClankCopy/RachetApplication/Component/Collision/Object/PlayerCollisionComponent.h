@@ -37,6 +37,11 @@ private:
     /// <summary>
     /// è’ìÀ
     /// </summary>
+    /// <param name="ptr"></param>
+    virtual void CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj);
+    /// <summary>
+    /// è’ìÀ
+    /// </summary>
     /// <param name="mesh"></param>
     /// <param name="gimmick"></param>
     virtual void CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info);

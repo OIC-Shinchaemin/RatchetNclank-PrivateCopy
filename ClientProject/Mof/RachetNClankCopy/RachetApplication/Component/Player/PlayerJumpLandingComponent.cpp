@@ -85,7 +85,7 @@ bool my::PlayerJumpLandingComponent::Start(void) {
     } // if
     super::Start();
     if (auto velocity_com = _velocity_com.lock()) {
-        velocity_com->SetGravity(3.8f);
+        velocity_com->SetGravity(9.8f);
     } // if
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState("PlayerMotionJumpLandingState");

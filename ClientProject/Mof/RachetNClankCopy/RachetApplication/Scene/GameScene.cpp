@@ -201,7 +201,6 @@ bool my::GameScene::Initialize(void) {
     player->AddObserver(ship);
 
 
-
     // game system
     if (auto game = _game.lock()) {
         auto weapon_system = game->GetWeaponSystem();
