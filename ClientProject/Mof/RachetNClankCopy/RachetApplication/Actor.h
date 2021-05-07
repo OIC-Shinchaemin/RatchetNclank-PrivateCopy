@@ -50,7 +50,6 @@ private:
     def::Transform _initial_transform;
     //! 機能
     ComArray _components;
-    ComArray _input_components;
     ComArray _update_components;
     ComArray _render_components;
 public:
@@ -204,12 +203,6 @@ public:
     /// <returns></returns>
     virtual bool Initialize(my::Actor::Param* param);
     /// <summary>
-    /// 入力
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Input(void);
-    /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time">時間</param>
@@ -221,6 +214,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void);
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name="world"></param>
+    /// <returns></returns>
+    virtual bool Render(const Mof::CMatrix44& world);
     /// <summary>
     /// 解放
     /// </summary>

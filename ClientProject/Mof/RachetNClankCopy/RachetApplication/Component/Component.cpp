@@ -47,10 +47,6 @@ bool my::Component::IsActive(void) const {
     return this->_active;
 }
 
-bool my::Component::IsInput(void) const {
-    return false;
-}
-
 bool my::Component::IsUpdate(void) const {
     return false;
 }
@@ -76,6 +72,10 @@ bool my::Component::Update(float delta_time) {
 }
 
 bool my::Component::Render(void) {
+    return false;
+}
+
+bool my::Component::Render(const Mof::CMatrix44& world) {
     return false;
 }
 

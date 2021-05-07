@@ -1674,6 +1674,9 @@
     <None Include="..\Resource\motion_names\ship.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
+    <None Include="..\Resource\builder\omni_wrench.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RachetApplication.rc">

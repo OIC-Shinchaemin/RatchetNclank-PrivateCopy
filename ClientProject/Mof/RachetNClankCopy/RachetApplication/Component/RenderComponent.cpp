@@ -34,6 +34,10 @@ bool my::RenderComponent::Render(void) {
     return false;
 }
 
+bool my::RenderComponent::Render(const Mof::CMatrix44& world) {
+    return false;
+}
+
 bool my::RenderComponent::Release(void) {
     super::Release();
     return true;

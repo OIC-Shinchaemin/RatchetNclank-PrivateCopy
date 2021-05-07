@@ -52,12 +52,4 @@ std::shared_ptr<my::Component> my::BlasterBulletCollisionComponent::Clone(void) 
 }
 
 void my::BlasterBulletCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
-    if (!this->GetSphere().has_value()) {
-        return;
-    } // if
-
-    Mof::COLLISIONOUTGEOMETRY info;
-    if (this->GetSphere().value().CollisionMesh(mesh, info)) {
-        super::GetOwner()->End();
-    } // if
 }

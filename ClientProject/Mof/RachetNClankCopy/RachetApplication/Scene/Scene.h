@@ -44,14 +44,24 @@ protected:
     my::Observable<const SceneMessage&> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! 読み込み済み
+    bool _loaded;
+    //! 同期
+    std::mutex _mutex;
+    //! スレッド
+    std::optional<std::thread> _load_thread;
 protected:
     /// <summary>
     /// 判定
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool IsLoaded(void);   
+    bool IsLoaded(void);
+    void LoadComplete(void);
+
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
+    virtual bool LoadingUpdate(float delta_time);
+    virtual bool SceneUpdate(float delta_time);
     virtual bool PreRender(void);
     virtual bool LoadingRender(void);
     virtual bool SceneRender(void);
@@ -93,12 +103,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void);
-    /// <summary>
-    /// 入力
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Input(void);
     /// <summary>
     /// 更新
     /// </summary>

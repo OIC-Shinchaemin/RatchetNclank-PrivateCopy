@@ -4,11 +4,32 @@
 
 
 bool my::Scene::IsLoaded(void) {
-    return true;
+    std::lock_guard<std::mutex> lock(_mutex);
+    return this->_loaded;
+}
+
+void my::Scene::LoadComplete(void) {
+    std::lock_guard<std::mutex> lock(_mutex);
+    _loaded = true;
 }
 
 Mof::LPRenderTarget my::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
+}
+
+bool my::Scene::LoadingUpdate(float delta_time) {
+    return false;
+}
+
+bool my::Scene::SceneUpdate(float delta_time) {
+    if (_effect.has_value()) {
+        _effect.value().Update(delta_time);
+
+        if (_effect.value().IsEnd()) {
+            _effect.reset();
+        } // if
+    } // if    
+    return true;
 }
 
 bool my::Scene::PreRender(void) {
@@ -19,11 +40,6 @@ bool my::Scene::PreRender(void) {
 }
 
 bool my::Scene::LoadingRender(void) {
-    // start
-    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
-    ::g_pGraphics->SetRenderTarget(_rendar_target.GetRenderTarget(), ::g_pGraphics->GetDepthTarget());
-
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Now Loading");
     return true;
 }
 
@@ -59,10 +75,17 @@ my::Scene::Scene() :
     _rendar_target(),
     _default(),
     _effect(),
-    _resource(){
+    _resource(),
+    _loaded(false),
+    _mutex(),
+    _load_thread() {
 }
 
 my::Scene::~Scene() {
+    if (_load_thread.has_value()) {
+        _load_thread.value().join();
+        _load_thread.reset();
+    } // if
 }
 
 void my::Scene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -96,31 +119,30 @@ bool my::Scene::Initialize(void) {
     return true;
 }
 
-bool my::Scene::Input(void) {
-    return false;
-}
-
 bool my::Scene::Update(float delta_time) {
-    if (_effect.has_value()) {
-        _effect.value().Update(delta_time);
-
-        if (_effect.value().IsEnd()) {
-     //       _effect.reset();
+    if (this->IsLoaded()) {
+        if (_load_thread.has_value()) {
+            _load_thread.value().join();
+            _load_thread.reset();
         } // if
-    } // if    
 
+        this->SceneUpdate(delta_time);
+    } // if
+    else {
+        this->LoadingUpdate(delta_time);
+    } // else
     return true;
 }
 
 bool my::Scene::Render(void) {
-    this->PreRender();
     if (this->IsLoaded()) {
+        this->PreRender();
         this->SceneRender();
+        this->PostRender();
     } // if
     else {
         this->LoadingRender();
     } // else
-    this->PostRender();
     return true;
 }
 

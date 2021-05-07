@@ -82,12 +82,6 @@ public:
     /// <returns></returns>
     bool IsActive(void) const;
     /// <summary>
-    /// “ü—Í”»’è
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool IsInput(void) const;
-    /// <summary>
     /// XV”»’è
     /// </summary>
     /// <param name=""></param>
@@ -123,6 +117,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void);
+    /// <summary>
+    /// •`‰æ
+    /// </summary>
+    /// <param name="world"></param>
+    /// <returns></returns>
+    virtual bool Render(const Mof::CMatrix44& world);
     /// <summary>
     /// ‰ğ•ú
     /// </summary>

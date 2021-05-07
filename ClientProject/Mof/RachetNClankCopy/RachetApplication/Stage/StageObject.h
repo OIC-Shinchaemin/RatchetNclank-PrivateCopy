@@ -45,6 +45,8 @@ protected:
 
     //! 衝突箱
     std::vector<Mof::CBoxAABB> _geometry_boxes;
+    //! 衝突箱
+    std::vector<Mof::CSphere> _geometry_spheres;
 public:
     /// <summary>
     /// コンストラクタ
@@ -121,6 +123,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CBoxAABB GetGeometryBox(int index) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CSphere GetGeometrySphere(int index) const;
 
     /// <summary>
     /// 描画用マトリクスの再計算
@@ -130,7 +138,7 @@ public:
     /// <summary>
     /// 生成
     /// </summary>
-    void GenerateCollisionBox(const MeshArray& meshes);
+    void GenerateCollisionVolume(const MeshArray& meshes);
     
     void SetEnable(bool b);
 
@@ -141,6 +149,13 @@ public:
     void SetMeshNo(int no);
 
     virtual void SetPosition(const Vector3& pos);
+
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    void DebugRender(void);
+
 
 #ifdef   STAGEEDITOR
     virtual bool* GetEnablePointer(void);

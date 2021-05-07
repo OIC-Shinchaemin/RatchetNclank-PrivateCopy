@@ -5,7 +5,9 @@
 #include "Character.h"
 #include "My/Core/Observer.h"
 
+#include "../Weapon/OmniWrench.h"
 #include "../Weapon/Mechanical.h"
+#include "../../Component/Player/PlayerComponent.h"
 
 
 namespace my {
@@ -33,6 +35,10 @@ public:
 private:
     //! 武器
     std::weak_ptr<my::Mechanical>_current_mechanical;
+    //! 武器
+    std::shared_ptr<my::OmniWrench> _omniwrench;
+    //! プレイヤー
+    std::weak_ptr<my::PlayerComponent> _player_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,6 +58,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void End(void) override;
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Initialize(void) override;
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    virtual bool Initialize(my::Actor::Param* param) override;
     /// <summary>
     /// 更新
     /// </summary>

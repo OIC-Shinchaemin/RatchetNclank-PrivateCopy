@@ -1,5 +1,8 @@
 #include "StageObject.h"
 
+#include "My/Core/Math.h"
+
+
 /// <summary>
 /// コンストラクタ
 /// </summary>
@@ -13,8 +16,7 @@ StageObject::StageObject(bool enable, bool collision, StageObjectType type, std:
     , _scale(scale)
     , _rotate(rotate)
     , _world_matrix()
-    , _geometry_boxes() 
-{
+    , _geometry_boxes() {
     RefreshWorldMatrix();
 }
 
@@ -100,6 +102,10 @@ Mof::CBoxAABB StageObject::GetGeometryBox(int index) const {
     return _geometry_boxes.at(index);
 }
 
+Mof::CSphere StageObject::GetGeometrySphere(int index) const {
+    return _geometry_spheres.at(index);
+}
+
 /// <summary>
 /// 描画用マトリクスの再計算
 /// </summary>
@@ -111,7 +117,7 @@ void StageObject::RefreshWorldMatrix(void) {
     _world_matrix = scale * rotate * trans;
 }
 
-void StageObject::GenerateCollisionBox(const MeshArray& meshes) {
+void StageObject::GenerateCollisionVolume(const MeshArray& meshes) {
     auto mesh = meshes.at(_mesh_no);
     _geometry_boxes.clear();
     _geometry_boxes.reserve(mesh->GetGeometryCount());
@@ -123,13 +129,26 @@ void StageObject::GenerateCollisionBox(const MeshArray& meshes) {
         geometry->SetMatrix(mat);
 
         Mof::CVector3 scale; mat.GetScaling(scale);
+        Mof::CVector3 rotate; mat.GetRotation(rotate);
         Mof::CVector3 trans; mat.GetTranslation(trans);
+        rotate.x -= math::kPi;
+        rotate.y -= math::kPi;
+        rotate.z -= math::kPi;
+        trans.RotateAround(trans, rotate);
+
 
         Mof::CBoxAABB box; geometry->CalculateAABB(box);
-        box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;
+        Mof::CSphere sphere; geometry->CalculateSphere(sphere);
+        box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;     
         box.Position.x += trans.x; box.Position.y += trans.y; box.Position.z += trans.z;
         std::swap(box.Size.y, box.Size.z);
+
+        sphere.r *= scale.x; 
+        sphere.Position.x += trans.x; sphere.Position.y += trans.y; sphere.Position.z += trans.z;
+
+
         _geometry_boxes.push_back(box);
+        _geometry_spheres.push_back(sphere);
 
         geometry->SetMatrix(default_matrix);
     } // for
@@ -153,6 +172,15 @@ void StageObject::SetMeshNo(int no) {
 
 void StageObject::SetPosition(const Vector3& pos) {
     _position = pos;
+}
+
+void StageObject::DebugRender(void) {
+    for (auto volume: _geometry_spheres) {
+        if (this->IsCollisionEnable()) {
+            //::CGraphicsUtilities::RenderBox(box, Mof::CVector4(1.0f, 0.0f, 0.0f, 0.5f));
+            ::CGraphicsUtilities::RenderLineSphere(volume, Mof::CVector4(1.0f, 0.0f, 0.0f, 0.5f));
+        } // if
+    } // for
 }
 
 #ifdef   STAGEEDITOR

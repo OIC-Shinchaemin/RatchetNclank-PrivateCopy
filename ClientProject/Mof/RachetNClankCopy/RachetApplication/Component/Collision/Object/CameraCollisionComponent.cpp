@@ -65,7 +65,8 @@ void my::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
     auto pos = _camera_com.lock()->GetPosition();
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
-
+    float matgin = 0.1f;
+    float volume = 2.0f;
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
         auto default_matrix = geometry->GetMatrix();
@@ -73,8 +74,8 @@ void my::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
         geometry->SetMatrix(mat);
 
         if (ray.CollisionGeometry(geometry, info)) {
-            if (info.d <= 1.0f) {
-                camera_com->SetPosition(camera_com->GetPreviewPosition());
+            if (info.d <= volume) {
+                camera_com->CollisionStage();
             } // if
         } // if
         geometry->SetMatrix(default_matrix);

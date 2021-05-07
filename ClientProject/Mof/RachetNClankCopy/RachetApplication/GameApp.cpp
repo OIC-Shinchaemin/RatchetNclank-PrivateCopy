@@ -42,8 +42,6 @@ MofBool CGameApp::Input(void) {
         ::PostQuitMessage(0);
         return false;
     } // if
-
-    _scene_manager->Input();
     return TRUE;
 }
 

@@ -22,15 +22,30 @@ private:
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! Elevatorに乗っている
     bool _on_elevator;
-    //! 死亡判定
-    Mof::CBoxAABB _abyss_box;
 private:
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetFrontRay(void);
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="ptr"></param>
+    virtual void CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj);
     /// <summary>
     /// 衝突
     /// </summary>
     /// <param name="mesh"></param>
-    /// <param name="obj"></param>
-    bool CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj);
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info);
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageBridge(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info);
 public:
     /// <summary>
     /// コンストラクタ

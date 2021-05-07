@@ -60,11 +60,29 @@ private:
     void ReInitialize(void);
 protected:
     /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <returns></returns>
+    virtual bool SceneUpdate(float delta_time) override;
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <returns></returns>
+    virtual bool LoadingUpdate(float delta_time) override;
+    /// <summary>
     /// 描画
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool SceneRender(void) override;
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool LoadingRender(void) override;
 public:
     /// <summary>
     /// コンストラクタ
@@ -108,24 +126,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
-    /// <summary>
-    /// 入力
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool Input(void) override;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time">時間</param>
-    /// <returns></returns>
-    virtual bool Update(float delta_time) override;
-    /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual bool Render(void) override;
     /// <summary>
     /// 解放
     /// </summary>
