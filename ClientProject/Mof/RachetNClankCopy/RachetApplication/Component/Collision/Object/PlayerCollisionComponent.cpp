@@ -10,6 +10,88 @@
 bool my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     return true;
 }
+void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
+    auto gimmick_pos = gimmick->GetPosition();
+    auto gimmick_pre_pos = gimmick->GetPreviewPosition();
+    auto gimmick_move = gimmick_pos - gimmick_pre_pos;
+
+    auto gimmick_sphere_0 = Mof::CSphere(20.0, -5.0f, -12.0f, 35.0f);
+    auto gimmick_sphere_1 = Mof::CSphere(65.0, -29.0f, 10.0f, 15.0f);
+    auto sphere = this->GetSphere().value();
+
+
+    if (gimmick_sphere_0.CollisionSphere(sphere) && !gimmick_sphere_0.CollisionPoint(gimmick_pos)) {
+        gimmick->ActionStart();
+    } // if
+    else if (gimmick_sphere_1.CollisionSphere(sphere) && !gimmick_sphere_1.CollisionPoint(gimmick_pos)) {
+        gimmick->ActionStart();
+    } // else if
+
+
+    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
+        auto geometry = mesh->GetGeometry(i);
+
+        auto default_matrix = geometry->GetMatrix();
+        Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
+        geometry->SetMatrix(mat);
+
+        if (ray.CollisionGeometry(geometry, info)) {
+            float height = _player_com.lock()->GetHeight();
+
+            if (info.d <= height) {
+                auto pos = super::GetOwner()->GetPosition();
+                pos += gimmick_move;
+                pos.y += height - info.d;
+
+
+                super::GetOwner()->SetPosition(pos);
+
+                if (!_on_elevator) {
+                    gimmick->ActionStart();
+                } // if
+                if (auto state_com = _state_com.lock()) {
+                    if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
+                        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
+                    } // if
+                } // if
+                _on_elevator = true;
+            } // if
+            else {
+                _on_elevator = false;
+            } // else
+
+        } // if
+        geometry->SetMatrix(default_matrix);
+    } // for
+
+}
+
+void my::PlayerCollisionComponent::CollisionStageBridge(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
+    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
+        auto geometry = mesh->GetGeometry(i);
+
+        auto default_matrix = geometry->GetMatrix();
+        Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
+        geometry->SetMatrix(mat);
+
+        if (ray.CollisionGeometry(geometry, info)) {
+            float height = _player_com.lock()->GetHeight();
+
+            if (info.d <= height) {
+                auto pos = super::GetOwner()->GetPosition();
+                pos.y += height - info.d;
+                super::GetOwner()->SetPosition(pos);
+
+                if (auto state_com = _state_com.lock()) {
+                    if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
+                        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
+                    } // if
+                } // if
+            } // if
+        } // if
+        geometry->SetMatrix(default_matrix);
+    } // for
+}
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     super(priority),
@@ -17,7 +99,7 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     _velocity_com(),
     _state_com(),
     _on_elevator(false),
-    _abyss_box(Mof::CBoxAABB(Mof::CVector3(0.0f, -45.0f, 0.0f), Mof::CVector3(300.0f, 1.0f, 300.0f))) {    
+    _abyss_box(Mof::CBoxAABB(Mof::CVector3(0.0f, -45.0f, 0.0f), Mof::CVector3(300.0f, 1.0f, 300.0f))) {
 }
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
@@ -81,10 +163,12 @@ std::shared_ptr<my::Component> my::PlayerCollisionComponent::Clone(void) {
 }
 
 void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+    return;
+
     if (_abyss_box.CollisionPoint(super::GetOwner()->GetPosition())) {
         super::GetOwner()->Notify("PlayerDead", super::GetOwner());
     } // if
-    
+
     if (!this->GetRay().has_value()) {
         return;
     } // if
@@ -122,87 +206,13 @@ void my::PlayerCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer me
         return;
     } // if
     auto ray = this->GetRay().value();
-    auto sphere = this->GetSphere().value();
     Mof::COLLISIONOUTGEOMETRY info;
 
-
     if (gimmick->GetType() == StageObjectType::Elevator) {
-        auto gimmick_pos = gimmick->GetPosition();
-        auto gimmick_pre_pos = gimmick->GetPreviewPosition();
-        auto gimmick_move = gimmick_pos - gimmick_pre_pos;
-
-        auto gimmick_sphere_0 = Mof::CSphere(20.0, -5.0f, -12.0f, 35.0f);
-        auto gimmick_sphere_1 = Mof::CSphere(65.0, -29.0f, 10.0f, 15.0f);
-
-        if (gimmick_sphere_0.CollisionSphere(sphere) && !gimmick_sphere_0.CollisionPoint(gimmick_pos)) {
-            gimmick->ActionStart();
-        } // if
-        else if (gimmick_sphere_1.CollisionSphere(sphere) && !gimmick_sphere_1.CollisionPoint(gimmick_pos)) {
-            gimmick->ActionStart();
-        } // else if
-
-
-        for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
-            auto geometry = mesh->GetGeometry(i);
-
-            auto default_matrix = geometry->GetMatrix();
-            Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
-            geometry->SetMatrix(mat);
-
-            if (ray.CollisionGeometry(geometry, info)) {
-                float height = _player_com.lock()->GetHeight();
-
-                if (info.d <= height) {
-                    auto pos = super::GetOwner()->GetPosition();
-                    pos += gimmick_move;
-                    pos.y += height - info.d;
-
-
-                    super::GetOwner()->SetPosition(pos);
-
-                    if (!_on_elevator) {
-                        gimmick->ActionStart();
-                    } // if
-                    if (auto state_com = _state_com.lock()) {
-                        if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
-                            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
-                        } // if
-                    } // if
-                    _on_elevator = true;
-                } // if
-                else {
-                    _on_elevator = false;
-                } // else
-
-            } // if
-            geometry->SetMatrix(default_matrix);
-        } // for
+        this->CollisionStageElevator(mesh, gimmick, ray, info);
     } // if
     else if (gimmick->GetType() == StageObjectType::Bridge) {
-        for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
-            auto geometry = mesh->GetGeometry(i);
-
-            auto default_matrix = geometry->GetMatrix();
-            Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
-            geometry->SetMatrix(mat);
-
-            if (ray.CollisionGeometry(geometry, info)) {
-                float height = _player_com.lock()->GetHeight();
-
-                if (info.d <= height) {
-                    auto pos = super::GetOwner()->GetPosition();
-                    pos.y += height - info.d;
-                    super::GetOwner()->SetPosition(pos);
-
-                    if (auto state_com = _state_com.lock()) {
-                        if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
-                            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
-                        } // if
-                    } // if
-                } // if
-            } // if
-            geometry->SetMatrix(default_matrix);
-        } // for
+        this->CollisionStageBridge(mesh, gimmick, ray, info);
     } // else if
 
 }

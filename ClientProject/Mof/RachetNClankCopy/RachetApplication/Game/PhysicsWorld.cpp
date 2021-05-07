@@ -152,12 +152,12 @@ void my::PhysicsWorld::CollisionStage(Stage* stage) {
     auto meshes = stage->GetMeshArray();
     
     auto objs = stage->GetStaticObjectArray();
-    int huge_mesh_no_current_stage_file = 1;
     for (auto obj : objs) {
-        int mesh_no = obj->GetMeshNo();
-        if (mesh_no == huge_mesh_no_current_stage_file) {
+        if (!obj->IsCollisionEnable()) {
             continue;
         } // if
+
+        int mesh_no = obj->GetMeshNo();
         for (auto com : _list_for_stage) {
             if (com->IsSleep()) {
                 continue;

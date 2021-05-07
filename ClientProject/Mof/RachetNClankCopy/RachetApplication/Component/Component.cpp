@@ -79,6 +79,10 @@ bool my::Component::Render(void) {
     return false;
 }
 
+bool my::Component::Render(const Mof::CMatrix44& world) {
+    return false;
+}
+
 bool my::Component::Release(void) {
     _owner.reset();
     return true;

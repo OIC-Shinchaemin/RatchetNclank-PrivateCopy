@@ -12,6 +12,7 @@ my::GameManager::GameManager() :
 }
 
 my::GameManager::~GameManager() {
+    this->GameSystemRelease();
 }
 
 void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {

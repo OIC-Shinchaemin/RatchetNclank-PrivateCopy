@@ -51,6 +51,18 @@ bool my::GameScene::SceneRender(void) {
 
     _renderer.Render();
     _stage.Render();
+
+    ::g_pGraphics->SetDepthEnable(false);
+    float delta_time = ::CUtilities::GetFPS();
+    ::CGraphicsUtilities::RenderString(20.0f, 20.0f, "FPS = %f", delta_time);
+
+    return true;
+}
+
+bool my::GameScene::LoadingRender(void) {
+    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
+    ::g_pGraphics->SetDepthEnable(false);
+    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Now Loading");
     return true;
 }
 
@@ -108,6 +120,7 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     if (!_stage.Load("../Resource/stage/test.json")) {
         return false;
     } // if
+    super::LoadComplete();
     return true;
 }
 

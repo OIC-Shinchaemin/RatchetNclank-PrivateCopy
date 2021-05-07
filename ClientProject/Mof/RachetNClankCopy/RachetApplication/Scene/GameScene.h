@@ -65,6 +65,12 @@ protected:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool SceneRender(void) override;
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool LoadingRender(void) override;
 public:
     /// <summary>
     /// コンストラクタ

@@ -69,7 +69,7 @@ bool my::MeshComponent::Render(void) {
         return false;
     } // if
     if (!super::GetOwner()->InCameraRange()) {
-        return false;
+        //dreturn false;
     } // if
 
     // •`‰æ
@@ -83,8 +83,28 @@ bool my::MeshComponent::Render(void) {
         if (auto motion_com = _motion_com.lock()) {
             auto motion = motion_com->GetMotionData();
             motion->RefreshBoneMatrix(world);
+            r->Render(motion, _color);
+        } // if
+        else {
+            r->Render(world);
+        } // else
+    } // if
+    return true;
+}
 
-            // ˆø”‚ÉUV‚ª‚ ‚é‚Ì‚Å‚±‚ê‚ð‘‚â‚µ‚Ä‚¢‚­
+bool my::MeshComponent::Render(const Mof::CMatrix44& world) {
+    if (!this->_is_show) {
+        return false;
+    } // if
+    if (!super::GetOwner()->InCameraRange()) {
+        return false;
+    } // if
+
+    // •`‰æ
+    if (auto r = _mesh.lock()) {
+        if (auto motion_com = _motion_com.lock()) {
+            auto motion = motion_com->GetMotionData();
+            motion->RefreshBoneMatrix(world);
             r->Render(motion, _color);
         } // if
         else {

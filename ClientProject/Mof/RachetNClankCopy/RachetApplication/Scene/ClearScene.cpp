@@ -7,8 +7,6 @@ bool my::ClearScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
 
-    
-
     if (auto resource = _resource.lock()) {
         auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
         auto text = "Game Clear !\n";
@@ -35,6 +33,8 @@ std::string my::ClearScene::GetName(void) {
 
 bool my::ClearScene::Load(std::shared_ptr<my::Scene::Param> param) {
     auto re = super::Load(param);
+
+    super::LoadComplete();
     return re;
 }
 

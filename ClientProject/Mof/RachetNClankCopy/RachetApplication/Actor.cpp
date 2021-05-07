@@ -164,6 +164,10 @@ bool my::Actor::Input(void) {
 }
 
 bool my::Actor::Update(float delta_time) {
+    if (!this->InCameraRange()) {
+        return false;
+    } // if
+
     for (auto& com : _update_components) {
         if (com->IsActive()) {
             com->Update(delta_time);
@@ -177,6 +181,17 @@ bool my::Actor::Render(void) {
     for (auto& com : _render_components) {
         if (com->IsActive()) {
             com->Render();
+            re = true;
+        } // if
+    } // for
+    return re;
+}
+
+bool my::Actor::Render(const Mof::CMatrix44& world) {
+    bool re = false;
+    for (auto& com : _render_components) {
+        if (com->IsActive()) {
+            com->Render(world);
             re = true;
         } // if
     } // for

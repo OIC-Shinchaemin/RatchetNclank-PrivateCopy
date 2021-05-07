@@ -609,6 +609,7 @@
     <None Include="..\Resource\builder\bomb_glove_bullet.json" />
     <None Include="..\Resource\builder\bomb_glove_effect.json" />
     <None Include="..\Resource\builder\enemy_bullet.json" />
+    <None Include="..\Resource\builder\omni_wrench.json" />
     <None Include="..\Resource\builder\particle.json" />
     <None Include="..\Resource\builder\player.json" />
     <None Include="..\Resource\builder\pyrocitor.json" />

@@ -4,7 +4,13 @@
 
 
 bool my::Scene::IsLoaded(void) {
-    return true;
+    std::lock_guard<std::mutex> lock(_mutex);
+    return this->_loaded;
+}
+
+void my::Scene::LoadComplete(void) {
+    std::lock_guard<std::mutex> lock(_mutex);
+    _loaded = true;
 }
 
 Mof::LPRenderTarget my::Scene::GetDefaultRendarTarget(void) const {
@@ -19,11 +25,6 @@ bool my::Scene::PreRender(void) {
 }
 
 bool my::Scene::LoadingRender(void) {
-    // start
-    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
-    ::g_pGraphics->SetRenderTarget(_rendar_target.GetRenderTarget(), ::g_pGraphics->GetDepthTarget());
-
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Now Loading");
     return true;
 }
 
@@ -59,7 +60,10 @@ my::Scene::Scene() :
     _rendar_target(),
     _default(),
     _effect(),
-    _resource(){
+    _resource(),
+    _loaded(false),
+    _mutex(),
+    _load_thread() {
 }
 
 my::Scene::~Scene() {
@@ -113,14 +117,14 @@ bool my::Scene::Update(float delta_time) {
 }
 
 bool my::Scene::Render(void) {
-    this->PreRender();
     if (this->IsLoaded()) {
+        this->PreRender();
         this->SceneRender();
+        this->PostRender();
     } // if
     else {
         this->LoadingRender();
     } // else
-    this->PostRender();
     return true;
 }
 

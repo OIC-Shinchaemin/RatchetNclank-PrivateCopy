@@ -222,6 +222,12 @@ public:
     /// <returns></returns>
     virtual bool Render(void);
     /// <summary>
+    /// •`‰æ
+    /// </summary>
+    /// <param name="world"></param>
+    /// <returns></returns>
+    virtual bool Render(const Mof::CMatrix44& world);
+    /// <summary>
     /// ‰ð•ú
     /// </summary>
     /// <param name=""></param>

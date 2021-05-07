@@ -68,7 +68,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Render(void) override;
+    virtual bool Render(void) override; 
+    /// <summary>
+    /// •`‰æ
+    /// </summary>
+    /// <param name="world"></param>
+    /// <returns></returns>
+    virtual bool Render(const Mof::CMatrix44& world) override;
     /// <summary>
     /// ‰ð•ú
     /// </summary>

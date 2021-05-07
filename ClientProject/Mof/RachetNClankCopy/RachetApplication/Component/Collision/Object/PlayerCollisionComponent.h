@@ -31,6 +31,18 @@ private:
     /// <param name="mesh"></param>
     /// <param name="obj"></param>
     bool CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj);
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info);
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="gimmick"></param>
+    virtual void CollisionStageBridge(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info);
 public:
     /// <summary>
     /// コンストラクタ

@@ -64,6 +64,8 @@ std::shared_ptr<my::Component> my::EnemyCollisionComponent::Clone(void) {
 }
 
 void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+    return;
+
     if (!this->GetRay().has_value()) {
         return;
     } // if
