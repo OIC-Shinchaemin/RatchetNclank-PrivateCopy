@@ -52,6 +52,21 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
 
 bool my::WeaponSystem::Load(my::SaveData& in) {
     _save_data = in;
+
+    auto param = my::Actor::Param();
+    for (const auto& key : _save_data.GetAvailableMechanicalWeaponsAddress()) {
+        param.name = key;
+
+        auto weapon = my::FactoryManager::Singleton().CreateMechanicalWeapon(
+            key.c_str(), _builder_name_map.at(key), &param);
+        auto it = std::find_if(_weapons.begin(), _weapons.end(), [key](const my::WeaponSystem::Pair& pair) {
+            return pair.first == key;
+        });
+        if (it == _weapons.end()) {
+            _weapons.push_back(std::make_pair(key, weapon));
+        } // if
+    } // for
+
     return true;
 }
 
@@ -68,21 +83,10 @@ bool my::WeaponSystem::Initialize(const std::shared_ptr<my::Observer<const char*
     } // if
 
     auto param = my::Actor::Param();
-    for (const auto& key : _save_data.GetAvailableMechanicalWeaponsAddress()) {
-        param.name = key;
-
-        auto weapon = my::FactoryManager::Singleton().CreateMechanicalWeapon(
-            key.c_str(), _builder_name_map.at(key), &param);
-        weapon->AddObserver(observer);
-        weapon->AddMechanicalInfoObserver(menu);
-        auto it = std::find_if(_weapons.begin(), _weapons.end(), [key](const my::WeaponSystem::Pair& pair) {
-            return pair.first == key;
-        });
-        if (it == _weapons.end()) {
-            _weapons.push_back(std::make_pair(key, weapon));
-        } // if
+    for (auto weapon : _weapons) {
+        weapon.second->AddObserver(observer);
+        weapon.second->AddMechanicalInfoObserver(menu);
     } // for
-
     return true;
 }
 

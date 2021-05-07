@@ -69,7 +69,7 @@ bool my::MeshComponent::Render(void) {
         return false;
     } // if
     if (!super::GetOwner()->InCameraRange()) {
-        //dreturn false;
+        return false;
     } // if
 
     // •`‰æ

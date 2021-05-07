@@ -24,6 +24,9 @@ void my::EnemyDamageComponent::CollisionAction(const my::CollisionInfo& in) {
         accele.RotateAround(math::vec3::kZero, _damage_angle);
         velocity_com->AddVelocityForce(accele);
     } // if
+    auto rotate = super::GetOwner()->GetRotate();
+    rotate.y = _damage_angle.y;
+    super::GetOwner()->SetRotate(rotate);
 }
 
 my::EnemyDamageComponent::EnemyDamageComponent(int priority) :
@@ -150,6 +153,7 @@ bool my::EnemyDamageComponent::Start(void) {
     if (auto motion_com = _motion_com.lock()) {
         motion_com->AddTimer(0.6f);
     } // if
+    /*
 
     if (auto velocity_com = _velocity_com.lock()) {
         float speed = 2.0f;
@@ -159,8 +163,8 @@ bool my::EnemyDamageComponent::Start(void) {
 
         auto rotate = super::GetOwner()->GetRotate();
         rotate.y = _damage_angle.y;
-        super::GetOwner()->SetRotate(rotate);
     } // if
+    */
 
     if (auto hp_com = _hp_com.lock()) {
         hp_com->Damage(_damage_value);

@@ -17,7 +17,6 @@ const char* my::EnemyBombGloveEffectCollisionAlgolithm::GetLayerType(void) const
 
 const char* my::EnemyBombGloveEffectCollisionAlgolithm::GetTargetType(void) const {
     return my::CollisionComponentType::kBombGloveEffectCollisionComponent.c_str();
-    //return "BombGloveEffectCollisionComponent";
 }
 
 bool my::EnemyBombGloveEffectCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {

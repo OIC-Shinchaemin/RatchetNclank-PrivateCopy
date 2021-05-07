@@ -16,7 +16,7 @@ StageObject::StageObject(bool enable, bool collision, StageObjectType type, std:
     , _scale(scale)
     , _rotate(rotate)
     , _world_matrix()
-    , _geometry_boxes() {
+    , _geometry_spheres() {
     RefreshWorldMatrix();
 }
 
@@ -98,10 +98,6 @@ CMatrix44 StageObject::GetWorldMatrix(void) const {
     return _world_matrix;
 }
 
-Mof::CBoxAABB StageObject::GetGeometryBox(int index) const {
-    return _geometry_boxes.at(index);
-}
-
 Mof::CSphere StageObject::GetGeometrySphere(int index) const {
     return _geometry_spheres.at(index);
 }
@@ -119,8 +115,8 @@ void StageObject::RefreshWorldMatrix(void) {
 
 void StageObject::GenerateCollisionVolume(const MeshArray& meshes) {
     auto mesh = meshes.at(_mesh_no);
-    _geometry_boxes.clear();
-    _geometry_boxes.reserve(mesh->GetGeometryCount());
+    _geometry_spheres.clear();
+    _geometry_spheres.reserve(mesh->GetGeometryCount());
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
@@ -136,20 +132,11 @@ void StageObject::GenerateCollisionVolume(const MeshArray& meshes) {
         rotate.z -= math::kPi;
         trans.RotateAround(trans, rotate);
 
-
-        Mof::CBoxAABB box; geometry->CalculateAABB(box);
         Mof::CSphere sphere; geometry->CalculateSphere(sphere);
-        box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;     
-        box.Position.x += trans.x; box.Position.y += trans.y; box.Position.z += trans.z;
-        std::swap(box.Size.y, box.Size.z);
-
         sphere.r *= scale.x; 
         sphere.Position.x += trans.x; sphere.Position.y += trans.y; sphere.Position.z += trans.z;
 
-
-        _geometry_boxes.push_back(box);
         _geometry_spheres.push_back(sphere);
-
         geometry->SetMatrix(default_matrix);
     } // for
 }

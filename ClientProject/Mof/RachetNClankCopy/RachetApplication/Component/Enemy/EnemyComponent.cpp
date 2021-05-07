@@ -42,7 +42,7 @@ std::weak_ptr<my::Actor> my::EnemyComponent::GetTarget(void) const {
 std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
     if (auto target = this->GetTarget().lock()) {
         auto pos = target->GetPosition();
-        float player_height = 1.0f;
+        float player_height = target->GetComponent<my::CharacterComponent>()->GetHeight();
         pos.y += player_height;
         return pos;
     } // if
@@ -57,7 +57,8 @@ bool my::EnemyComponent::Initialize(void) {
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     if (auto velocity_com = _velocity_com.lock()) {
-        velocity_com->SetGravity(2.8f);
+        velocity_com->SetSleep(true);
+        velocity_com->SetGravity(0.0f);
     } // if
 
     auto sight_coll = super::GetOwner()->GetComponent<my::SightCollisionComponent>();
@@ -78,10 +79,10 @@ bool my::EnemyComponent::Initialize(void) {
 }
 
 bool my::EnemyComponent::Update(float delta_time) {
-
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetUseGravity(false);
     } // if
+
     if (_velocity_timer.Tick(delta_time)) {
         if (auto velocity_com = _velocity_com.lock()) {
             bool in_camera_range = super::GetOwner()->InCameraRange();

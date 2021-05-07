@@ -15,6 +15,11 @@ class EnemyCollisionComponent : public my::CollisionComponent {
     using super = my::CollisionComponent;
 private:
     std::weak_ptr<class EnemyComponent> _enemy_com;
+    /// <summary>
+    /// 衝突
+    /// </summary>
+    /// <param name="ptr"></param>
+    virtual void CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj);
 public:
     /// <summary>
     /// コンストラクタ
