@@ -20,8 +20,8 @@ void my::EnemyDamageComponent::CollisionAction(const my::CollisionInfo& in) {
         } // if
     } // if
     if (auto velocity_com = _velocity_com.lock()) {
-        Mof::CVector3 accele = Mof::CVector3(0.0f, 0.0f, -10.0f);
-        accele.RotateAround(math::vec3::kZero, _damage_angle);
+        Mof::CVector3 accele = Mof::CVector3(0.0f, 0.0f, -in.speed);
+        accele.RotateAround(math::vec3::kZero, -_damage_angle);
         velocity_com->AddVelocityForce(accele);
     } // if
     auto rotate = super::GetOwner()->GetRotate();
@@ -74,12 +74,12 @@ bool my::EnemyDamageComponent::Initialize(void) {
                                my::CollisionComponentType::kPlayerCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         auto enemy_com = _enemy_com.lock();
-        auto target = std::any_cast<std::shared_ptr<my::Actor>>(in.target);
+        auto target = in.target.lock();
         
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
         auto length = (enemy_com->GetVolume() * 2.0f) - vec.Length();
         vec.Normal(vec);
-        // “¯‚¶‚¾‚¯—£‚ê‚é
+        // —£‚ê‚é
         auto diff = vec * length * 0.5f; diff.y = 0.0f;
 
         auto pos = super::GetOwner()->GetPosition();

@@ -840,6 +840,9 @@
     <ClCompile Include="..\include\My\Resource\ResourceFont.cpp">
       <Filter>Rachet\Base\Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1588,6 +1591,9 @@
     </ClInclude>
     <ClInclude Include="..\include\My\Resource\ResourceFont.h">
       <Filter>Rachet\Base\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

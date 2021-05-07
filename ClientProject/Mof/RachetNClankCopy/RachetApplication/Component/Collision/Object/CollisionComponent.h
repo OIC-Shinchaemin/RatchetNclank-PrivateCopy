@@ -34,14 +34,15 @@ struct SightObject {
 struct CollisionInfo {
     //! ñÑÇ‹ÇËíl
     float distance = 0.0f;
-    //! ñÑÇ‹ÇËíl
+    //! äpìx
     Mof::CVector3 angle;
+    //! ë¨Ç≥
+    float speed;
 
     //! è’ìÀëŒè€
-    std::any target;
+    std::weak_ptr<my::Actor> target;
     CollisionInfo() : distance(0.0f), angle() {}
     CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle() {}
-    //virtual ~CollisionInfo() {}
 };
 class CollisionComponent : public my::Component {
 public:
