@@ -27,9 +27,6 @@ void state::EnemyActionDamageState::Enter(void) {
     if (auto damage_com = _damage_com.lock()) {
         damage_com->Start();
     } // if
-    if (auto move_com = _move_com.lock()) {
-        move_com->End();
-    } // if
 }
 
 void state::EnemyActionDamageState::Exit(void) {

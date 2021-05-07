@@ -25,11 +25,9 @@ bool my::EnemyBlasterBulletCollisionAlgolithm::IsCollision(std::shared_ptr<my::C
     } // if
     if (object->GetSphere().value().CollisionSphere(target->GetSphere().value())) {
         out.target = target->GetOwner();
-        
-        auto target_pos = target->GetOwner()->GetPosition();
-        Mof::CVector3 direction = target->GetOwner()->GetPosition() - target_pos;
-        direction.Normal(direction);
-        out.angle.y = direction.y;
+        Mof::CVector3 direction = object->GetOwner()->GetPosition() - target->GetOwner()->GetPosition();
+        out.angle.y = std::atan2(-direction.z, direction.x) + math::kHalfPi;
+        out.speed = 30.0f;
         return true;
     } // if
     return false;

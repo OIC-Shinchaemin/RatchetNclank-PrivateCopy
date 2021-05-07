@@ -55,6 +55,6 @@ void state::EnemyActionGoHomeState::Enter(void) {
 
 void state::EnemyActionGoHomeState::Exit(void) {
     if (auto move_com = _move_com.lock()) {
-        //move_com->End();
+        move_com->End();
     } // if
 }
