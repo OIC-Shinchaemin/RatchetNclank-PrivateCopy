@@ -77,7 +77,7 @@ bool my::SightRecognitionComponent::Initialize(void) {
         sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
                                      "EnemyCollisionComponent",
                                      my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-            auto target = std::any_cast<std::shared_ptr<my::Actor>>(in.target);
+            auto target = in.target.lock();
             _recognized.push_back(target);
             return true;
         }));
@@ -90,7 +90,7 @@ bool my::SightRecognitionComponent::Initialize(void) {
         sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
                                      "PlayerCollisionComponent",
                                      my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-            auto target = std::any_cast<std::shared_ptr<my::Actor>>(in.target);
+            auto target = in.target.lock();
             _recognized.push_back(target);
             return true;
         }));

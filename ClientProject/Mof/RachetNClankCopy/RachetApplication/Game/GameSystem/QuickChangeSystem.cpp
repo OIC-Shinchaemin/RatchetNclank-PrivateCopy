@@ -36,7 +36,7 @@ my::QuickChangeSystem::QuickChangeSystem() :
         int angle = n;
         n += 45;
         return angle;
-                  });
+    });
 
     for (auto& degree : _angles) {
         _items.emplace(degree, std::move(my::QuickChangeItem()));
@@ -84,6 +84,9 @@ bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<
         item.SetWeapon(work.at(i).c_str());
         menu->AddWeaponInfo(i, work.at(i).c_str());
     } // for
+
+    _info.color = Mof::CVector4(1.0f, 1.0f, 1.0f, 0.0f);
+    _subject.Notify(_info);
     return true;
 }
 

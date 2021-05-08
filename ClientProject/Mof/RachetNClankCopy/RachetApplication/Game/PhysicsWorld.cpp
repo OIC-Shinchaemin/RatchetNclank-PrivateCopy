@@ -6,6 +6,7 @@
 #include "../Component/Collision/Algolithm/PlayerEnemyAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerMeleeAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
@@ -27,6 +28,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
@@ -54,6 +56,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerEnemyBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerShipCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPlayerMeleeAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);

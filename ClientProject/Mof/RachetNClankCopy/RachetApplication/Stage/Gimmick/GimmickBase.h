@@ -20,6 +20,31 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual Mof::CVector3 GetPreviewPosition(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual float GetRequestTime(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector3 GetMoveValue(void) const ;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CSphere GetStartPositionSphere(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CSphere GetEndPositionSphere(void) const;
+
 
     virtual void Initialize(void) = 0;
     virtual void Update(float delta) = 0;

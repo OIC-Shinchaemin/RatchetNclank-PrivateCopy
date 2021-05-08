@@ -4,6 +4,29 @@
 #include "../../Enemy/EnemyComponent.h"
 
 
+void my::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
+    auto ray = this->GetRay().value();
+    Mof::COLLISIONOUTGEOMETRY info;
+    float margin = 0.1f;
+
+    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
+        auto geometry = mesh->GetGeometry(i);
+        auto default_matrix = geometry->GetMatrix();
+        Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
+        geometry->SetMatrix(mat);
+
+        if (ray.CollisionGeometry(geometry, info)) {
+            float height = _enemy_com.lock()->GetHeight();
+            if (info.d <= height + margin) {
+                auto pos = super::GetOwner()->GetPosition();
+                pos.y += height + margin - info.d;
+                super::GetOwner()->SetPosition(pos);
+            } // if
+        } // if
+        geometry->SetMatrix(default_matrix);
+    } // for
+}
+
 my::EnemyCollisionComponent::EnemyCollisionComponent(int priority) :
     super(priority),
     _enemy_com() {
@@ -64,37 +87,21 @@ std::shared_ptr<my::Component> my::EnemyCollisionComponent::Clone(void) {
 }
 
 void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
-    return;
-
     if (!this->GetRay().has_value()) {
         return;
     } // if
-    auto ray = this->GetRay().value();
-    Mof::COLLISIONOUTGEOMETRY info;
-
+    bool execute = false;
+    auto check_sphere = this->GetSphere().value();
+    check_sphere.r *= 2.0f;
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
-        auto geometry = mesh->GetGeometry(i);
-        auto default_matrix = geometry->GetMatrix();
-        Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
-        geometry->SetMatrix(mat);
-
-        auto box = obj.GetGeometryBox(i);
-        auto pos = super::GetOwner()->GetPosition();
-        pos.y -= _enemy_com.lock()->GetHeight();
-        box.Position.y += _enemy_com.lock()->GetHeight();
-        if (!super::CollisionShpereAABB(this->GetSphere().value(), box)) {
-            geometry->SetMatrix(default_matrix);
-            continue;
+        if (check_sphere.CollisionSphere(obj.GetGeometrySphere(i))) {
+            execute = true;
+            break;
         } // if
-
-        if (ray.CollisionGeometry(geometry, info)) {
-            float height = _enemy_com.lock()->GetHeight();
-            if (info.d <= height) {
-                auto pos = super::GetOwner()->GetPosition();
-                pos.y += height - info.d;
-                super::GetOwner()->SetPosition(pos);
-            } // if
-        } // if
-        geometry->SetMatrix(default_matrix);
     } // for
+
+    if (!execute) {
+        return;
+    } // if
+    this->CollisionStageDownRay(mesh, obj);
 }

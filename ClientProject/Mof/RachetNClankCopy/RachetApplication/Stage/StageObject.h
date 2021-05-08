@@ -43,9 +43,7 @@ protected:
     //! 描画用ワールドマトリクス
     CMatrix44        _world_matrix;
 
-    //! 衝突箱
-    std::vector<Mof::CBoxAABB> _geometry_boxes;
-    //! 衝突箱
+    //! 衝突球
     std::vector<Mof::CSphere> _geometry_spheres;
 public:
     /// <summary>
@@ -122,12 +120,6 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    Mof::CBoxAABB GetGeometryBox(int index) const;
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
     Mof::CSphere GetGeometrySphere(int index) const;
 
     /// <summary>
@@ -155,8 +147,6 @@ public:
     /// </summary>
     /// <param name=""></param>
     void DebugRender(void);
-
-
 #ifdef   STAGEEDITOR
     virtual bool* GetEnablePointer(void);
     virtual bool* GetCollisionEnablePointer(void);

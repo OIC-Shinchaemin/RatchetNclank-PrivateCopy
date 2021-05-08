@@ -88,8 +88,7 @@ bool my::GameScene::SceneRender(void) {
 
     ::g_pGraphics->SetDepthEnable(false);
     float delta_time = ::CUtilities::GetFPS();
-    ::CGraphicsUtilities::RenderString(20.0f, 20.0f, "FPS = %f", delta_time);
-
+    //::CGraphicsUtilities::RenderString(20.0f, 20.0f, "FPS = %f", delta_time);
     return true;
 }
 
@@ -199,7 +198,6 @@ bool my::GameScene::Initialize(void) {
     this->AddElement(ship);
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
-
 
 
     // game system

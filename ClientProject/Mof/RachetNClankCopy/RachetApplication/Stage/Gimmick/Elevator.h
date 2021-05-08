@@ -38,6 +38,30 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual Mof::CVector3 GetPreviewPosition(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual float GetRequestTime(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector3 GetMoveValue(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CSphere GetStartPositionSphere(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CSphere GetEndPositionSphere(void) const;
 
     virtual void Initialize(void) override;
     virtual void Update(float delta) override;

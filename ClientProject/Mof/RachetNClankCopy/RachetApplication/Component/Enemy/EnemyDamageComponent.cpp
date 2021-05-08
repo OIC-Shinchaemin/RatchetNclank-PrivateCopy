@@ -17,12 +17,8 @@ void my::EnemyDamageComponent::CollisionAction(const my::CollisionInfo& in) {
         if (state_com->CanTransition(state::EnemyActionStateType::kEnemyActionDamageState)) {
             state_com->ChangeState(state::EnemyActionStateType::kEnemyActionDamageState);
             _damage_angle.y = in.angle.y;
+            _damage_speed = in.speed;
         } // if
-    } // if
-    if (auto velocity_com = _velocity_com.lock()) {
-        Mof::CVector3 accele = Mof::CVector3(0.0f, 0.0f, -10.0f);
-        accele.RotateAround(math::vec3::kZero, _damage_angle);
-        velocity_com->AddVelocityForce(accele);
     } // if
 }
 
@@ -30,6 +26,7 @@ my::EnemyDamageComponent::EnemyDamageComponent(int priority) :
     super(priority),
     _damage_value(0),
     _damage_angle(),
+    _damage_speed(0.0f),
     _velocity_com(),
     _motion_com(),
     _motion_state_com(),
@@ -42,6 +39,7 @@ my::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) 
     super(obj._priority),
     _damage_value(0),
     _damage_angle(),
+    _damage_speed(0.0f),
     _velocity_com(),
     _motion_com(),
     _motion_state_com(),
@@ -71,12 +69,12 @@ bool my::EnemyDamageComponent::Initialize(void) {
                                my::CollisionComponentType::kPlayerCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         auto enemy_com = _enemy_com.lock();
-        auto target = std::any_cast<std::shared_ptr<my::Actor>>(in.target);
+        auto target = in.target.lock();
         
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
         auto length = (enemy_com->GetVolume() * 2.0f) - vec.Length();
         vec.Normal(vec);
-        // “¯‚¶‚¾‚¯—£‚ê‚é
+        // —£‚ê‚é
         auto diff = vec * length * 0.5f; diff.y = 0.0f;
 
         auto pos = super::GetOwner()->GetPosition();
@@ -146,25 +144,23 @@ bool my::EnemyDamageComponent::Start(void) {
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionDamageState);
-    } // if
-    if (auto motion_com = _motion_com.lock()) {
-        motion_com->AddTimer(0.6f);
+        if (auto motion_com = _motion_com.lock()) {
+            motion_com->AddTimer(0.6f);
+        } // if
     } // if
 
-    if (auto velocity_com = _velocity_com.lock()) {
-        float speed = 2.0f;
-        float angle_y = _damage_angle.y;
-        auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
-        velocity_com->AddAngularVelocityForce(accele);
-
-        auto rotate = super::GetOwner()->GetRotate();
-        rotate.y = _damage_angle.y;
-        super::GetOwner()->SetRotate(rotate);
-    } // if
 
     if (auto hp_com = _hp_com.lock()) {
         hp_com->Damage(_damage_value);
         _damage_value = 0;
     } // if
+    if (auto velocity_com = _velocity_com.lock()) {
+        Mof::CVector3 accele = Mof::CVector3(0.0f, 0.0f, -_damage_speed);
+        accele.RotateAround(math::vec3::kZero, -_damage_angle);
+        velocity_com->AddVelocityForce(accele);
+    } // if
+    auto rotate = super::GetOwner()->GetRotate();
+    rotate.y = _damage_angle.y;
+    super::GetOwner()->SetRotate(rotate);
     return true;
 }

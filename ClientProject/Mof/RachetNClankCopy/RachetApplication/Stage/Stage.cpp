@@ -110,7 +110,7 @@ void Stage::Update(float delta) {
 void Stage::Render(void) {
     for (const auto& obj : _static_object_array) {
         RenderObject(obj);
-        obj->DebugRender();
+        //obj->DebugRender();
     }
     for (const auto& gimmick : _gimmick_array) {
         RenderObject(gimmick);

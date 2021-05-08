@@ -18,6 +18,8 @@ private:
     int _damage_value;
     //! ”í’eŠp“x
     Mof::CVector3 _damage_angle;
+    //! ”í’e‘¬
+    float _damage_speed;
     //! ‘¬“x
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! ƒ‚[ƒVƒ‡ƒ“

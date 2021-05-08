@@ -25,6 +25,10 @@ bool my::EnemyPlayerMeleeAttackCollisionAlgolithm::IsCollision(std::shared_ptr<m
     } // if
     if (object->GetSphere().value().CollisionSphere(target->GetSphere().value())) {
         out.target = target->GetOwner();
+        
+        Mof::CVector3 direction = object->GetOwner()->GetPosition() - target->GetOwner()->GetPosition();
+        out.angle.y = std::atan2(-direction.z, direction.x) + math::kHalfPi;
+        out.speed = 30.0f;
         return true;
     } // if
     return false;

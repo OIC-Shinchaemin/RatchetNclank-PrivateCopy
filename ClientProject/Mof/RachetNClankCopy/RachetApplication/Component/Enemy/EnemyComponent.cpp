@@ -42,7 +42,7 @@ std::weak_ptr<my::Actor> my::EnemyComponent::GetTarget(void) const {
 std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
     if (auto target = this->GetTarget().lock()) {
         auto pos = target->GetPosition();
-        float player_height = 1.0f;
+        float player_height = target->GetComponent<my::CharacterComponent>()->GetHeight();
         pos.y += player_height;
         return pos;
     } // if
@@ -57,14 +57,32 @@ bool my::EnemyComponent::Initialize(void) {
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     if (auto velocity_com = _velocity_com.lock()) {
-        velocity_com->SetGravity(2.8f);
+        velocity_com->SetSleep(true);
+        velocity_com->SetGravity(0.0f);
     } // if
+
+
+    auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
+                               my::CollisionComponentType::kEnemyCollisionComponent,
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        auto target = in.target.lock();
+        Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
+        auto length = (this->GetVolume() * 2.0f) - vec.Length();
+        vec.Normal(vec);
+        // —£‚ê‚é
+        auto diff = vec * length * 0.5f; diff.y = 0.0f;
+
+        auto pos = super::GetOwner()->GetPosition();
+        super::GetOwner()->SetPosition(pos + diff);
+        return true;
+    }));
 
     auto sight_coll = super::GetOwner()->GetComponent<my::SightCollisionComponent>();
     sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                  "PlayerCollisionComponent",
                                  my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        auto target = std::any_cast<std::shared_ptr<my::Actor>>(in.target);
+        auto target = in.target.lock();
         this->SetTarget(target);
         return true;
     }));
@@ -78,10 +96,10 @@ bool my::EnemyComponent::Initialize(void) {
 }
 
 bool my::EnemyComponent::Update(float delta_time) {
-
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetUseGravity(false);
     } // if
+
     if (_velocity_timer.Tick(delta_time)) {
         if (auto velocity_com = _velocity_com.lock()) {
             bool in_camera_range = super::GetOwner()->InCameraRange();
