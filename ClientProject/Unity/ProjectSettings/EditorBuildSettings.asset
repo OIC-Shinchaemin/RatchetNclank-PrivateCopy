@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/EndScene.unity
     guid: e9c703b5c2d383d4ba04b3c35f2298cd
   - enabled: 1
-    path: Assets/Scenes/ScoreScene.unity
+    path: Assets/Scenes/GameOverScene.unity
     guid: 0a8d08da813d31047a927f2f7f1e766a
   - enabled: 1
     path: Assets/Scenes/2-1.unity

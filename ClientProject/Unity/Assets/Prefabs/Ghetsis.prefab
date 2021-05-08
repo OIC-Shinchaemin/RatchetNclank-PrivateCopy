@@ -242,6 +242,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c05bdef29145ec448a2ade19743ca7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  Pop: {fileID: 3418571093655510465, guid: 19575bfad37c4e440be2349ee7dde2f7, type: 3}
+  Ebiflied: 0
   health: 3
   getscore: 100
 --- !u!95 &3691608555301254546

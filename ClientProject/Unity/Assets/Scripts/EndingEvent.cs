@@ -89,6 +89,7 @@ public class EndingEvent : MonoBehaviour
             
             if (second > 1.0f && nstate != State.jumping && nstate != State.falling)
             {
+                BGM.bgm.state = BGM.Musicstate.gameend;
                 ClearText.text = "Game Clear!!";
                 nstate = State.jumping;
 

@@ -11,6 +11,7 @@ public class HpEnemy : Enemy
     public bool Ebiflied = false;
     [SerializeField, Range(1, 50)] private int health = 1;
     [SerializeField] private int getscore = 100;
+    public GameObject Pop;
     //[SerializeField] UnityEvent deathEvent;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,6 +19,7 @@ public class HpEnemy : Enemy
         if (collision.gameObject.tag == "Throw")
         {
             health -= 1;
+
         }
 
         if (health == 0)
@@ -25,7 +27,8 @@ public class HpEnemy : Enemy
             Ebiflied = true;
             Bomb();
             //IsDead = true;
-            //EbiScore();
+            EbiScore();
+
             //anim.SetTrigger("Death");
             //death.Play();
             //rb.velocity = Vector2.zero;
@@ -33,6 +36,7 @@ public class HpEnemy : Enemy
             //GetComponent<Collider2D>().enabled = false;
 
         }
+
     }
 
     //void Start()
@@ -61,6 +65,7 @@ public class HpEnemy : Enemy
     private void EbiScore()
     {
         PermanentUI.perm.scoreValue += getscore;
+        Instantiate(Pop, transform.position, transform.rotation);
         ScoreUpdate();
     }
     private void ScoreUpdate()
