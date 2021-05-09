@@ -5,8 +5,6 @@ using Cinemachine;
 
 public class BossEvent : MonoBehaviour
 {
-
-
     public GameObject player;
     public CinemachineVirtualCamera areaCam;
     public bool bBoss = false;
@@ -22,8 +20,7 @@ public class BossEvent : MonoBehaviour
     {
         if (other.gameObject == player)
         {            
-            bBoss = true;
-
+            bBoss = true;            
         }
     }
 

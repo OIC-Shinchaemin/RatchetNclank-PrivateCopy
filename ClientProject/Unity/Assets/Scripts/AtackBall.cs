@@ -33,10 +33,6 @@ public class AtackBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<SpriteRenderer>().isVisible)
-        {
-            Lost();
-        }
         if (coll.IsTouchingLayers(ground) && !IsBreaking)          //何らかの地形に接触、もしくは画面外に出たら消滅する
         {
             sound.Play();
@@ -44,7 +40,7 @@ public class AtackBall : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.velocity = Vector2.zero;
             IsBreaking = true;
-            
+
         }
     }
 
@@ -59,7 +55,7 @@ public class AtackBall : MonoBehaviour
             coll.enabled = false;
             IsBreaking = true;
         }
-        else if (collision.tag == "Destroy")
+        else if (collision.tag == "Destroy" || !GetComponent<SpriteRenderer>().isVisible)
         {
             Lost();
         }
