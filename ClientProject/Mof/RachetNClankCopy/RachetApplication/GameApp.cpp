@@ -3,6 +3,7 @@
 #include "Gamepad.h"
 #include "My/Core/Define.h"
 
+#include "Factory/FactoryManager.h"
 #include "Component/Component.h"
 #include "Camera/CameraController.h"
 
@@ -13,12 +14,15 @@ MofBool CGameApp::Initialize(void) {
     my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
 
+
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
     _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
     _camera_manager = std::make_shared<my::CameraManager>();
+    _light_manager = std::make_shared<my::LightManager>();
     _ui_canvas = std::make_shared<my::UICanvas>();
     _scene_manager = ut::MakeSharedWithRelease<my::SceneManager>();
 
+    my::FactoryManager::Singleton().SetResourceManager(_resource_manager);
     my::Component::SetResourceManager(_resource_manager);
     my::Component::SetUICanvas(_ui_canvas);
     my::CameraController::SetCameraManager(_camera_manager);
@@ -70,6 +74,7 @@ MofBool CGameApp::Render(void) {
 MofBool CGameApp::Release(void) {
     _ui_canvas.reset();
     _camera_manager.reset();
+    _light_manager.reset();
     _game_manager.reset();
     _resource_manager.reset();
     _scene_manager.reset();

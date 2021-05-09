@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "Game/GameManager.h"
 #include "Camera/CameraManager.h"
+#include "Light/LightManager.h"
 #include "My/UI/UICanvas.h"
 #include "Scene/SceneManager.h"
 #include "GameDefine.h"
@@ -17,7 +18,9 @@ private:
     std::shared_ptr<my::GameManager> _game_manager;
     //! カメラ
     std::shared_ptr<my::CameraManager> _camera_manager;
-    //! カメラ
+    //! ライト
+    std::shared_ptr<my::LightManager> _light_manager;
+    //! UI
     std::shared_ptr<my::UICanvas> _ui_canvas;
     //! シーン
     std::shared_ptr<my::SceneManager> _scene_manager;

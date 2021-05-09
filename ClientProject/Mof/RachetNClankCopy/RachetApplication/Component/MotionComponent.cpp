@@ -49,11 +49,6 @@ bool my::MotionComponent::Initialize(void) {
     auto mesh_com = super::GetOwner()->GetComponent<my::MeshComponent>();
     if (auto mesh = mesh_com->GetMesh().lock()) {
         _motion = mesh->CreateMotionController();
-        /*
-        for (int i = 0; i < _motion->GetMotionCount(); i++) {
-            std::cout << "_motion->GetMotion(i) = "<< *_motion->GetMotion(i)->GetName() << "\n";
-        } // for
-        */
     } // if
     return true;
 }

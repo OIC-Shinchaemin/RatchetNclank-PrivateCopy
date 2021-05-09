@@ -17,6 +17,12 @@ private:
     std::weak_ptr<my::Actor> _target;
     //! カーソル位置
     my::Observable<std::optional<Mof::CVector3>> _observable;
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! 地点
+    std::string _next_terrain;
+    //! アクションフラグ
+    bool _action_enable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -38,6 +44,11 @@ public:
     /// <param name="ptr"></param>
     void SetTarget(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetNextTerrain(const std::string& terrain);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -49,6 +60,30 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::weak_ptr<my::Actor> GetTarget(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::string GetNextTerrain(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsActionEnable(void);
+    /// <summary>
+    /// 有効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool EnableAction(void);
+    /// <summary>
+    /// 無効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool DisableAction(void);
     /// <summary>
     /// 初期化
     /// </summary>

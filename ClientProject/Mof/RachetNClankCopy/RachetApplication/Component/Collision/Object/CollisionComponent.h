@@ -30,19 +30,30 @@ struct SightObject {
         position(pos), rotate(rot) {
     }
 };
-
+struct PlaneObject {
+    //! 視点
+    Mof::CVector3 position;
+    //! 向き
+    Mof::CVector3 normal;
+    PlaneObject() :
+        position(), normal() {
+    }
+    PlaneObject(Mof::CVector3 pos, Mof::CVector3 norm) :
+        position(pos), normal(norm) {
+    }
+};
 struct CollisionInfo {
     //! 埋まり値
     float distance = 0.0f;
     //! 角度
     Mof::CVector3 angle;
     //! 速さ
-    float speed;
-
+    float speed = 0.0f;
     //! 衝突対象
     std::weak_ptr<my::Actor> target;
-    CollisionInfo() : distance(0.0f), angle() {}
-    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle() {}
+
+    CollisionInfo() : distance(0.0f), angle(), speed(0.0f), target(){}
+    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle(), speed(0.0f), target(){}
 };
 class CollisionComponent : public my::Component {
 public:
@@ -136,7 +147,23 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetNextRay(void) {
+        return std::optional<Mof::CRay3D>();
+    };
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual std::optional<Mof::LPMeshContainer> GetMesh(void) = 0;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<my::PlaneObject> GetPlaneObject(void) {
+        return std::optional<my::PlaneObject>();
+    };
     /// <summary>
     /// ゲッター
     /// </summary>

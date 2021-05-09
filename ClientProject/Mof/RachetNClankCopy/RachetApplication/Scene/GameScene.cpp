@@ -1,6 +1,5 @@
 #include "GameScene.h"
 
-
 #include "My/Core/Trait.h"
 #include "My/Core/Utility.h"
 
@@ -9,7 +8,10 @@
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
 #include "../Actor//Ship/Ship.h"
+#include "../Actor//Terrain/Terrain.h"
 #include "../Factory/ActorBuilder.h"
+#include "../Game/GameSystem/Save/SaveData.h"
+#include "../Game/GameSystem/Save/SaveSystem.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -49,7 +51,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+        //_subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 
     for (auto& ptr : _created_actors) {
@@ -70,8 +72,8 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     _game_world.Update(delta_time);
 
     // collision
-    _physic_world.Update();
     _physic_world.CollisionStage(&_stage);
+    _physic_world.Update();
     return true;
 }
 
@@ -107,11 +109,10 @@ my::GameScene::GameScene() :
     _physic_world(),
     _stage(),
     _re_initialize(false),
-    _simple_light(),
     _ui_canvas(),
     _game(),
     _for_bridge_event_actors(),
-    _bridge_event_subject() {
+    _bridge_event_subject(){
 }
 
 my::GameScene::~GameScene() {
@@ -160,12 +161,6 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
 }
 
 bool my::GameScene::Initialize(void) {
-    // light
-    _simple_light.SetDirection(-math::vec3::kOne);
-    _simple_light.SetDiffuse(def::color_rgba::kWhite);
-    _simple_light.SetAmbient(def::color_rgba::kWhite * 0.8f);
-    ::CGraphicsUtilities::SetDirectionalLight(&_simple_light);
-
     _stage.Initialize();
 
     auto param = new my::Actor::Param();
@@ -189,7 +184,7 @@ bool my::GameScene::Initialize(void) {
 
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi * 0.7f, 0.0f);
-    auto player = my::FactoryManager::Singleton().CreateActor<Player>("../Resource/builder/player.json", param);
+    auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
 
     param->transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
@@ -199,17 +194,31 @@ bool my::GameScene::Initialize(void) {
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
 
-
     // game system
     if (auto game = _game.lock()) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
 
+        // game system
+        auto save_data = my::SaveData();
+        my::SaveSystem().Fetch(save_data);
+        weapon_system->Load(save_data);
         weapon_system->Initialize(shared_from_this());
-        quick_change->Initialize({}, game->GetWeaponSystem());
+        quick_change->Initialize({}, weapon_system);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
+        quick_change->AddInfoObserver(player);
     } // if
+
+    def::Transform terrain_transforms[]{
+        def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
+    };
+    for (auto& transform : terrain_transforms) {
+        param->transform.scale = transform.scale;
+        param->transform.position = transform.position;
+        auto terrain = my::FactoryManager::Singleton().CreateActor<my::Terrain>("../Resource/builder/water_flow.json", param);
+        this->AddElement(terrain);
+    } // for
 
     ut::SafeDelete(param);
     _re_initialize = false;

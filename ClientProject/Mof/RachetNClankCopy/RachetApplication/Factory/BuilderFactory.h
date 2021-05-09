@@ -9,6 +9,8 @@
 #include "My/Core/Define.h"
 #include "IBuilder.h"
 #include "ComponentFactory.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 
 
 namespace my {
@@ -18,6 +20,8 @@ private:
     std::map<std::string, std::shared_ptr<my::IBuilder>> _builders;
     //! コンポーネント
     my::ComponentFactory* _component_factory;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,6 +32,11 @@ public:
     /// デストラクタ
     /// </summary>
     ~BuilderFactory();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// 解放
     /// </summary>

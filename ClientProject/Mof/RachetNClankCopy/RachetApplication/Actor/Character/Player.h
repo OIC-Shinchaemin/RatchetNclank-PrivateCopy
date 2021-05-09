@@ -7,11 +7,14 @@
 
 #include "../Weapon/OmniWrench.h"
 #include "../Weapon/Mechanical.h"
+#include "../../Game/GameSystem/QuickChangeSystem.h"
 #include "../../Component/Player/PlayerComponent.h"
 
 
 namespace my {
-class Player : public my::Character, public my::Observer<std::shared_ptr<my::Mechanical>> {
+class Player : public my::Character, 
+    public my::Observer<std::shared_ptr<my::Mechanical>>, 
+    public my::Observer<const my::QuickChangeSystem::Info&> {
     using super = my::Character;
 public:
     enum class MotionType {
@@ -39,6 +42,8 @@ private:
     std::shared_ptr<my::OmniWrench> _omniwrench;
     //! プレイヤー
     std::weak_ptr<my::PlayerComponent> _player_com;
+    //! 有効
+    bool _enable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,10 +59,21 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
     /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const my::QuickChangeSystem::Info& info) override;
+    /// <summary>
     /// デリート
     /// </summary>
     /// <param name=""></param>
     virtual void End(void) override;
+    /// <summary>
+    /// 無効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Disable(void);
     /// <summary>
     /// 初期化
     /// </summary>

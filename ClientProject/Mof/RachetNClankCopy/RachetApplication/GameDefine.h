@@ -12,6 +12,20 @@
 #include "my/Resource/ResourceFont.h"
 
 
+#define DEBUG_PRINT(arg, ...)
+#define TRACE
+#if defined(_DEBUG)
+#undef DEBUG_PRINT
+#undef TRACE 
+#define DEBUG_PRINT(arg, ...)\
+{char str[256]; \
+::sprintf_s(str, arg, __VA_ARGS__); \
+::OutputDebugString(str);std::cout<<str;}
+#define TRACE \
+DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
+#endif // defined (_DEBUG)
+
+
 namespace my {
 struct Transform {
     Mof::CVector3 position = math::vec3::kZero;
@@ -25,42 +39,12 @@ using ResourceMgr = my::ResourceManager<
     std::shared_ptr<sip::CResourceFont>
 >;
 
-class Enemy;
-using FuncPtrEnemyBool = bool(Enemy::*)(void);
-using FuncPtrEnemyFloat = float(Enemy::*)(void);
-using FuncPtrContainer = my::FunctionPointerContainer<
-    FuncPtrEnemyBool,
-    FuncPtrEnemyFloat
->;
-
-
-class Mesh : public Mof::CMeshContainer {
-    using super = Mof::CMeshContainer;
-private:
-    //! Õ“Ë” 
-    Mof::CBoxAABB _collision_box;
-    Mesh() :_collision_box() {
-    }
-
-    virtual MofBool Load(LPCMofChar pName) override {
-        bool re = super::Load(pName);
-    //Mof::CVector3 scale; mat.GetScaling(scale);
-    //Mof::CVector3 trans; mat.GetTranslation(trans);
-
-    //Mof::CBoxAABB box; geometry->CalculateAABB(box);
-    //box.Size.x *= scale.x; box.Size.y *= scale.y; box.Size.z *= scale.z;
-    //box.Position.x += trans.x; box.Position.y += trans.y; box.Position.z += trans.z;
-    //std::swap(box.Size.y, box.Size.z);
-
-    //auto pos = super::GetOwner()->GetPosition();
-    //pos.y -= _enemy_com.lock()->GetHeight();
-    //box.Position.y += _enemy_com.lock()->GetHeight();
-    //if (!super::CollisionShpereAABB(this->GetSphere().value(), box)) {
-    //    geometry->SetMatrix(default_matrix);
-    //    continue;
-    //} // if
-
-        return re;
+struct cbUVScrollParam {
+    Mof::Vector4 value;
+    cbUVScrollParam& operator+=(Mof::CVector2 scroll) {
+        value.x += scroll.x;
+        value.y += scroll.y;
+        return *this;
     }
 };
 }

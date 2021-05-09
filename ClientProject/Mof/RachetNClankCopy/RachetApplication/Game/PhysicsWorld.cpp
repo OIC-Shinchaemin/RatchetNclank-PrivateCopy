@@ -6,6 +6,7 @@
 #include "../Component/Collision/Algolithm/PlayerEnemyAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerWaterFlowCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerMeleeAttackCollisionAlgolithm.h"
@@ -28,6 +29,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm.c_str(),
@@ -42,7 +44,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
     };
 
-    
+
     for (auto type : types) {
         auto temp = CollisionLayer();
         temp.algo = collision_algolithm_factory.Create(type);
@@ -56,6 +58,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerEnemyBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerShipCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::PlayerWaterFlowCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPlayerMeleeAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm);
@@ -153,7 +156,7 @@ bool my::PhysicsWorld::Update(void) {
 
 void my::PhysicsWorld::CollisionStage(Stage* stage) {
     auto meshes = stage->GetMeshArray();
-    
+
     auto objs = stage->GetStaticObjectArray();
     for (auto obj : objs) {
         if (!obj->IsCollisionEnable()) {
@@ -174,7 +177,7 @@ void my::PhysicsWorld::CollisionStage(Stage* stage) {
     auto gimmicks = stage->GetGimmickArray();
     for (auto gimmick : gimmicks) {
         int mesh_no = gimmick->GetMeshNo();
-        
+
         for (auto com : _list_for_stage) {
             auto mesh = meshes.at(mesh_no);
             com->CollisionStageGimmick(&*mesh, gimmick);

@@ -51,6 +51,7 @@
 #include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
 #include "../Component/Collision/Object/BombGloveEffectCollisionComponent.h"
 #include "../Component/Collision/Object/ShipCollisionComponent.h"
+#include "../Component/Collision/Object/WaterFlowCollisionComponent.h"
 #include "../Component/Collision/Object/CameraCollisionComponent.h"
 
 
@@ -105,6 +106,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveEffectCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::ShipCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::WaterFlowCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraCollisionComponent>();
 }
 

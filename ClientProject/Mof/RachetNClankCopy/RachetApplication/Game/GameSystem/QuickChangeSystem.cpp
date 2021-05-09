@@ -30,17 +30,6 @@ my::QuickChangeSystem::QuickChangeSystem() :
     _angles(8),
     _resource(),
     _ui_canvas() {
-
-    int n = 0;
-    std::generate(_angles.begin(), _angles.end(), [&n]() {
-        int angle = n;
-        n += 45;
-        return angle;
-    });
-
-    for (auto& degree : _angles) {
-        _items.emplace(degree, std::move(my::QuickChangeItem()));
-    } // for
 }
 
 my::QuickChangeSystem::~QuickChangeSystem() {
@@ -62,8 +51,23 @@ void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<my::Observer
     _current.AddObserver(ptr);
 }
 
+void my::QuickChangeSystem::AddInfoObserver(const std::shared_ptr<my::Observer<const my::QuickChangeSystem::Info&>>& ptr) {
+    _subject.AddObserver(ptr);
+}
+
 bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
     _ASSERT_EXPR(!_resource.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+
+    int n = 0;
+    std::generate(_angles.begin(), _angles.end(), [&n]() {
+        int angle = n;
+        n += 45;
+        return angle;
+    });
+    for (auto& degree : _angles) {
+        _items.emplace(degree, std::move(my::QuickChangeItem()));
+    } // for
+
     // ui
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("QuickChangeMenu");
@@ -98,6 +102,7 @@ bool my::QuickChangeSystem::Update(void) {
     else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPull(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPull(MOFKEY_RSHIFT)) {
         this->Close();
     } // else if
+
 
     // index
     float x = g_pGamepad->GetStickHorizontal();

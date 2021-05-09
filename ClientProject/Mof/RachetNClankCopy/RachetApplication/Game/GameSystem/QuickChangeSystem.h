@@ -111,6 +111,11 @@ public:
     /// <param name="ptr"></param>
     void AddWeaponObserver(const std::shared_ptr<my::Observer<const std::string&>>& ptr);
     /// <summary>
+    /// ’Ç‰Á
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddInfoObserver(const std::shared_ptr<my::Observer<const my::QuickChangeSystem::Info&>>& ptr);
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name="pos"></param>

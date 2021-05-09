@@ -24,11 +24,6 @@ public:
     /// </summary>
     virtual ~ActorBuilder();
     /// <summary>
-    /// 解放
-    /// </summary>
-    /// <param name=""></param>
-    void Release(void);
-    /// <summary>
     /// セッター
     /// </summary>
     /// <param name="param"></param>
@@ -38,6 +33,11 @@ public:
     /// </summary>
     /// <param name="component"></param>
     void AddComponent(const std::shared_ptr<my::Component>& component);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    virtual void Release(void);
     /// <summary>
     /// 構築
     /// </summary>

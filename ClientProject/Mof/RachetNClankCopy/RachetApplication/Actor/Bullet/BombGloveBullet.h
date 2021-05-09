@@ -18,6 +18,18 @@ public:
     /// </summary>
     virtual ~BombGloveBullet();
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetGravity(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetDrag(void) const;
+    /// <summary>
     /// 更新
     /// </summary>
     /// <param name=""></param>
