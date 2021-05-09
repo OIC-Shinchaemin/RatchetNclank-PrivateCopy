@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     [SerializeField] private string sceneName;
-    [SerializeField] private bool musicstop;
     [HideInInspector] public bool stageChangeable = false;
 
     private void Update()
@@ -17,17 +16,12 @@ public class SceneChange : MonoBehaviour
 
                 if (sceneName == "EndScene")
                 {
-                    BGM.bgm.state = BGM.Musicstate.stop;
                     SceneManager.LoadScene("EndScene");
                 }
                 else
                 {
                     PermanentUI.perm.nowScene = sceneName;
                     PermanentUI.perm.SceneName.text = sceneName;
-                    if(musicstop)
-                    {
-                        BGM.bgm.state = BGM.Musicstate.stop;
-                    }
                     SceneManager.LoadScene("HalfScene");
                 }      
             }
