@@ -21,6 +21,8 @@ private:
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! 地点
     std::string _next_terrain;
+    //! アクションフラグ
+    bool _action_enable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -64,6 +66,24 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::string GetNextTerrain(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsActionEnable(void);
+    /// <summary>
+    /// 有効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool EnableAction(void);
+    /// <summary>
+    /// 無効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool DisableAction(void);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -1,6 +1,7 @@
 #include "PlayerComponent.h"
 
 #include "../../Gamepad.h"
+#include "../../Actor/Character/Player.h"
 #include "../../Actor/Ship/Ship.h"
 #include "../../Component/VelocityComponent.h"
 #include "../../Component/MeshComponent.h"
@@ -15,7 +16,8 @@ my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
     _target(),
     _state_com(),
-    _next_terrain(){
+    _next_terrain(),
+    _action_enable() {
     super::_volume = 0.5f;
     super::_height = 1.0f;
 }
@@ -23,8 +25,9 @@ my::PlayerComponent::PlayerComponent(int priority) :
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
     _target(),
-    _state_com() ,
-    _next_terrain(){
+    _state_com(),
+    _next_terrain(),
+    _action_enable() {
 }
 
 my::PlayerComponent::~PlayerComponent() {
@@ -50,6 +53,20 @@ std::string my::PlayerComponent::GetNextTerrain(void) const {
     return this->_next_terrain;
 }
 
+bool my::PlayerComponent::IsActionEnable(void) {
+    return this->_action_enable;
+}
+
+bool my::PlayerComponent::EnableAction(void) {
+    this->_action_enable = true;
+    return true;
+}
+
+bool my::PlayerComponent::DisableAction(void) {
+    this->_action_enable = false;
+    return true;
+}
+
 bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Start();
@@ -68,9 +85,13 @@ bool my::PlayerComponent::Initialize(void) {
                                my::CollisionComponentType::kShipCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         super::GetOwner()->Notify("ShipCollision", super::GetOwner());
-        
-        if (std::dynamic_pointer_cast<my::Ship>(std::any_cast<std::shared_ptr<my::Actor>>(in.target))->IsEnable()) {
+        if (std::dynamic_pointer_cast<my::Ship>(in.target.lock())->IsEnable()) {
             super::GetOwner()->GetComponent<my::MeshComponent>()->Hide();
+            std::dynamic_pointer_cast<my::Player>(super::GetOwner())->Disable();
+            if (auto canvas = _ui_canvas.lock()) {
+                canvas->RemoveElement("EquipmentWeaponMenu");
+                canvas->RemoveElement("QuickChangeMenu");
+            } // if
         } // if
         return true;
     }));
@@ -79,10 +100,10 @@ bool my::PlayerComponent::Initialize(void) {
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         if (this->GetNextTerrain() == "WaterFlow") {
             auto owner = super::GetOwner();
-            auto velocity_com = owner ->GetComponent<my::VelocityComponent>();
+            auto velocity_com = owner->GetComponent<my::VelocityComponent>();
             auto velocity = velocity_com->GetVelocity() * 1.0f / 60.0f;
             velocity.y = 0.0f;
-            owner->SetPosition(owner->GetPosition() - velocity );
+            owner->SetPosition(owner->GetPosition() - velocity);
         } // if
         return true;
     }));
@@ -100,6 +121,7 @@ bool my::PlayerComponent::Initialize(void) {
 
 bool my::PlayerComponent::Update(float delta_time) {
     _next_terrain = "";
+
     if (auto target = _target.lock()) {
         auto enemy_com = target->GetComponent<super>();
         auto pos = target->GetPosition();

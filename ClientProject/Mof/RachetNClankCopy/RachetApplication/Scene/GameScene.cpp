@@ -10,6 +10,8 @@
 #include "../Actor//Ship/Ship.h"
 #include "../Actor//Terrain/Terrain.h"
 #include "../Factory/ActorBuilder.h"
+#include "../Game/GameSystem/Save/SaveData.h"
+#include "../Game/GameSystem/Save/SaveSystem.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -49,7 +51,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+        //_subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 
     for (auto& ptr : _created_actors) {
@@ -196,8 +198,13 @@ bool my::GameScene::Initialize(void) {
     if (auto game = _game.lock()) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
+
+        // game system
+        auto save_data = my::SaveData();
+        my::SaveSystem().Fetch(save_data);
+        weapon_system->Load(save_data);
         weapon_system->Initialize(shared_from_this());
-        quick_change->Initialize({}, game->GetWeaponSystem());
+        quick_change->Initialize({}, weapon_system);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);

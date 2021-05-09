@@ -9,7 +9,7 @@
 #include "PlayerComponent.h"
 
 
-void my::PlayerMoveComponent::ChageState(const std::string& name) {
+void my::PlayerMoveComponent::ChageState(const std::string& name) {    
     if (auto state_com = _state_com.lock()) {
         state_com->ChangeState(name);
     } // if
@@ -110,6 +110,12 @@ bool my::PlayerMoveComponent::Initialize(void) {
 }
 
 bool my::PlayerMoveComponent::Update(float delta_time) {
+    if (auto type_com = _type_com.lock()) {
+        if (!type_com->IsActionEnable()) {
+            return false;
+        } // if
+    } // if
+
     Mof::CVector2 in;
     float move_angle;
     bool jump_flag = false;
@@ -155,6 +161,11 @@ std::shared_ptr<my::Component> my::PlayerMoveComponent::Clone(void) {
 }
 
 bool my::PlayerMoveComponent::Start(void) {
+    if (auto type_com = _type_com.lock()) {
+        if (!type_com->IsActionEnable()) {
+            //return false;
+        } // if
+    } // if
     if (this->IsActive()) {
         return false;
     } // if

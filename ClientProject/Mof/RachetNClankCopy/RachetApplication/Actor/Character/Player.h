@@ -42,6 +42,8 @@ private:
     std::shared_ptr<my::OmniWrench> _omniwrench;
     //! プレイヤー
     std::weak_ptr<my::PlayerComponent> _player_com;
+    //! 有効
+    bool _enable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -66,6 +68,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void End(void) override;
+    /// <summary>
+    /// 無効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Disable(void);
     /// <summary>
     /// 初期化
     /// </summary>
