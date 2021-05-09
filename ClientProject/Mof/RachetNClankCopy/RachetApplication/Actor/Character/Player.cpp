@@ -19,6 +19,7 @@ bool my::Player::Initialize(void) {
 
 bool my::Player::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
+    _player_com = super::GetComponent<my::PlayerComponent>();
     return true;
 }
 
@@ -37,6 +38,21 @@ my::Player::~Player() {
 
 void my::Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
     _current_mechanical = change;
+}
+
+void my::Player::OnNotify(const my::QuickChangeSystem::Info& info) {
+    if (info.color.a <= 0.0f ) {
+        if (auto player_com = _player_com.lock()) {
+            //puts("Start");
+            //player_com->Start();
+        } // if
+    } // if
+    else if (info.color.a >= 1.0f) {
+        if (auto player_com = _player_com.lock()) {
+            //puts("End");
+            //player_com->End();
+        } // if
+    } // else if
 }
 
 bool my::Player::Update(float delta_time) {

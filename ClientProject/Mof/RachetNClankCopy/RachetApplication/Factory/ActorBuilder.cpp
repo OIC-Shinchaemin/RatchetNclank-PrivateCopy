@@ -9,16 +9,16 @@ my::ActorBuilder::ActorBuilder() :
 my::ActorBuilder::~ActorBuilder() {
 }
 
-void my::ActorBuilder::Release(void) {
-    _components.clear();
-}
-
 void my::ActorBuilder::SetActorParam(const my::Actor::Param& param) {
     this->_param = param;
 }
 
 void my::ActorBuilder::AddComponent(const std::shared_ptr<my::Component>& component) {
     _components.push_back(component);
+}
+
+void my::ActorBuilder::Release(void) {
+    _components.clear();
 }
 
 void my::ActorBuilder::Construct(std::any shared_this) {

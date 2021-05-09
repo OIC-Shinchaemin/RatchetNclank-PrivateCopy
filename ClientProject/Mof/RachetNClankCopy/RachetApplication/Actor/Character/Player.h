@@ -7,11 +7,14 @@
 
 #include "../Weapon/OmniWrench.h"
 #include "../Weapon/Mechanical.h"
+#include "../../Game/GameSystem/QuickChangeSystem.h"
 #include "../../Component/Player/PlayerComponent.h"
 
 
 namespace my {
-class Player : public my::Character, public my::Observer<std::shared_ptr<my::Mechanical>> {
+class Player : public my::Character, 
+    public my::Observer<std::shared_ptr<my::Mechanical>>, 
+    public my::Observer<const my::QuickChangeSystem::Info&> {
     using super = my::Character;
 public:
     enum class MotionType {
@@ -53,6 +56,11 @@ public:
     /// </summary>
     /// <param name="change"></param>
     virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const my::QuickChangeSystem::Info& info) override;
     /// <summary>
     /// デリート
     /// </summary>

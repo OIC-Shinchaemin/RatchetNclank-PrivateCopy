@@ -6,6 +6,7 @@
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
 #include "../CameraComponent.h"
+#include "PlayerComponent.h"
 
 
 void my::PlayerMoveComponent::ChageState(const std::string& name) {
@@ -104,7 +105,7 @@ bool my::PlayerMoveComponent::Initialize(void) {
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _camera_com = super::GetOwner()->GetComponent<my::CameraComponent>();
-
+    _type_com = super::GetOwner()->GetComponent<my::PlayerComponent>();
     return true;
 }
 

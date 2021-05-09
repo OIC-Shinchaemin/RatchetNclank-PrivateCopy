@@ -2,26 +2,26 @@
 
 #include "../../Gamepad.h"
 #include "../../Actor/Ship/Ship.h"
-#include "../../Component/HpComponent.h"
 #include "../../Component/VelocityComponent.h"
 #include "../../Component/MeshComponent.h"
-#include "../Player/PlayerIdleComponent.h"
-#include "../Player/PlayerMoveComponent.h"
-#include "../Player/PlayerDamageComponent.h"
+#include "../../Component/Player/PlayerStateComponent.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
 #include "../../UI/LockOnCursorMenu.h"
+#include "../../State/PlayerAction/PlayerActionStateDefine.h"
 
 
 my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
-    _target() {
+    _target(),
+    _state_com() {
     super::_volume = 0.5f;
     super::_height = 1.0f;
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
-    _target() {
+    _target(),
+    _state_com() {
 }
 
 my::PlayerComponent::~PlayerComponent() {
@@ -43,8 +43,14 @@ bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Start();
 
+    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+
     velocity_com->SetGravity(9.8f);
+    if (auto state_com = _state_com.lock()) {
+        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
+    } // if
+
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,

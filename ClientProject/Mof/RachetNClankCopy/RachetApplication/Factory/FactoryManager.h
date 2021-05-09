@@ -10,6 +10,8 @@
 #include "ActorFactory.h"
 #include "BehaviourFactory.h"
 #include "BehaviourExecutorFactory.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 
 
 namespace my {
@@ -25,6 +27,8 @@ private:
     my::BehaviourFactory _behaviour_node;
     //! ファクトリー
     my::BehaviourExecutorFactory _behaviour_executor;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource;
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -40,6 +44,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     static my::FactoryManager& Singleton(void);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// 作成
     /// </summary>

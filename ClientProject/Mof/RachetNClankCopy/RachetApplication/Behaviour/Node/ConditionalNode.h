@@ -4,7 +4,6 @@
 #include "Node.h"
 
 #include "../Executor/ConditionalNodeExecutor.h"
-#include "ParameterNode.h"
 
 
 namespace behaviour {

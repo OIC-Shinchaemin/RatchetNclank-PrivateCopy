@@ -25,7 +25,8 @@ private:
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! ƒJƒƒ‰
     std::weak_ptr<class CameraComponent> _camera_com;
-
+    //! ó‘Ô
+    std::weak_ptr<class PlayerComponent> _type_com;
     /// <summary>
     /// •ÏX
     /// </summary>

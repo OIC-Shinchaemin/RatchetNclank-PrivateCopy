@@ -34,8 +34,6 @@ private:
     Stage _stage;
     //! Ä‰Šú‰»
     bool _re_initialize;
-    // ŒõŒ¹
-    Mof::CDirectionalLight _simple_light;
     //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ƒQ[ƒ€

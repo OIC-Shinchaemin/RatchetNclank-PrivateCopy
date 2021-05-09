@@ -259,6 +259,18 @@
     <Filter Include="Rachet\Base\Resource">
       <UniqueIdentifier>{674211c3-a625-4d13-b643-3d27df8c1489}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Actor\Terrain">
+      <UniqueIdentifier>{4598c11b-e78f-416e-9a94-6a7471bdf392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Terrain">
+      <UniqueIdentifier>{2d0fb2ae-0b3b-4bba-aa6b-ae07145a7842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Light">
+      <UniqueIdentifier>{0dca7068-b1c9-49e6-85d3-609b1674560e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Light">
+      <UniqueIdentifier>{7b615535-aeb0-454e-aabb-a8de24a9a716}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -843,6 +855,21 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\Terrain\Terrain.cpp">
+      <Filter>Rachet\Source\Actor\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\LightManager.cpp">
+      <Filter>Rachet\Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\TerrainBuilder.cpp">
+      <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -963,9 +990,6 @@
       <Filter>Rachet\Header\Behaviour\Executor</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Node\SequencerNode.h">
-      <Filter>Rachet\Header\Behaviour\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Behaviour\Node\ParameterNode.h">
       <Filter>Rachet\Header\Behaviour\Node</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h">
@@ -1595,6 +1619,21 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Terrain\Terrain.h">
+      <Filter>Rachet\Header\Actor\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\LightManager.h">
+      <Filter>Rachet\Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\TerrainBuilder.h">
+      <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1681,6 +1720,9 @@
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
     <None Include="..\Resource\builder\omni_wrench.json">
+      <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\water_flow.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
   </ItemGroup>

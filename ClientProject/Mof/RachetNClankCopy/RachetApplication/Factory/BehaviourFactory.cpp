@@ -13,7 +13,6 @@
 
 
 my::BehaviourFactory::BehaviourFactory() :
-    _function_pointer_container(),
     _action_factory(),
     _condition_factory() {
     _action_factory.Register<behaviour::AlwaysTrueNode>("AlwaysTrueNode");
@@ -76,15 +75,6 @@ behaviour::ConditionalNodeBase::Operator my::BehaviourFactory::GetConditionalOpe
     return Operator::Equal;
 }
 
-std::shared_ptr<behaviour::FunctionNode<std::shared_ptr<my::Enemy>>> my::BehaviourFactory::CreateFunctionNode(rapidjson::Value& behaviours, uint32_t index) {
-    using namespace behaviour;
-
-    auto function_key = behaviours[index]["function"].GetString();
-    auto function_node = std::make_shared<FunctionNode<std::shared_ptr<my::Enemy> >>(
-        _function_pointer_container.Get<my::FuncPtrEnemyBool>(function_key));
-    return function_node;
-}
-
 std::shared_ptr<behaviour::ActionNodeBase> my::BehaviourFactory::CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
     using namespace behaviour;
     auto derived = behaviours[index]["derived"].GetString();
@@ -112,23 +102,9 @@ std::shared_ptr<behaviour::SequencerNode> my::BehaviourFactory::CreateSequencerN
             auto node = this->CreateConditionalNode(behaviours, children_index);
             sequencer_node->AddChild(node);
         } // if
-        else if (behaviours[children_index]["type"] == "FunctionNode") {
-            auto node = this->CreateFunctionNode(behaviours, children_index);
-            sequencer_node->AddChild(node);
-        } // else if
         else if (behaviours[children_index]["type"] == "DecoratorNode") {
-            auto return_type = std::string(behaviours[children_index]["return"].GetString());
-            if (return_type == "bool") {
-                auto node = this->CreateDecoratorNode<bool>(behaviours, children_index);
-                sequencer_node->AddChild(node);
-            } // if
-            else if (return_type == "float") {
-                auto node = this->CreateDecoratorNode<float>(behaviours, children_index);
-                sequencer_node->AddChild(node);
-            } // if
-
+        
         } // else if
-
         else if (behaviours[children_index]["type"] == "SequencerNode") {
             auto node = this->CreateSequencerNode(behaviours, children_index);
             sequencer_node->AddChild(node);
@@ -157,23 +133,9 @@ std::shared_ptr<behaviour::SelectorNode> my::BehaviourFactory::CreateSelectorNod
             auto node = this->CreateConditionalNode(behaviours, children_index);
             selector_node->AddChild(node);
         } // if
-        else if (behaviours[children_index]["type"] == "FunctionNode") {
-            auto node = this->CreateFunctionNode(behaviours, children_index);
-            selector_node->AddChild(node);
-        } // else if
         else if (behaviours[children_index]["type"] == "DecoratorNode") {
-            auto return_type = std::string(behaviours[children_index]["return"].GetString());
-            if (return_type == "bool") {
-                auto node = this->CreateDecoratorNode<bool>(behaviours, children_index);
-                selector_node->AddChild(node);
-            } // if
-            else if (return_type == "float") {
-                auto node = this->CreateDecoratorNode<float>(behaviours, children_index);
-                selector_node->AddChild(node);
-            } // if
 
         } // else if
-
         else if (behaviours[children_index]["type"] == "SequencerNode") {
             auto node = this->CreateSequencerNode(behaviours, children_index);
             selector_node->AddChild(node);

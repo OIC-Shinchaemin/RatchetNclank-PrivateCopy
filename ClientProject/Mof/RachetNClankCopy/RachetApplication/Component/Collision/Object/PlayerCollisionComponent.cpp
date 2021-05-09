@@ -215,6 +215,19 @@ std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetRay(void) {
     return Mof::CRay3D(pos, math::vec3::kNegUnitY);
 }
 
+std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetNextRay(void) {
+    _ASSERT_EXPR(!_player_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    if (super::GetOwner()->GetState() == my::ActorState::End) {
+        return std::optional<Mof::CRay3D>();
+    } // if
+    auto velocity_com = _velocity_com.lock();
+    auto velocity = velocity_com->GetVelocity();
+    
+    auto pos = super::GetOwner()->GetPosition();
+    pos.y += _player_com.lock()->GetHeight();
+    return Mof::CRay3D(pos + velocity, math::vec3::kNegUnitY);
+}
+
 std::optional<Mof::LPMeshContainer> my::PlayerCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }

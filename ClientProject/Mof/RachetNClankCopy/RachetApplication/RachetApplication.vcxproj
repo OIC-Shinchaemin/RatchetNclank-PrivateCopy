@@ -166,6 +166,7 @@
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
     <ClCompile Include="Actor\Ship\Ship.cpp" />
+    <ClCompile Include="Actor\Terrain\Terrain.cpp" />
     <ClCompile Include="Actor\Weapon\Blaster.cpp" />
     <ClCompile Include="Actor\Weapon\BombGlove.cpp" />
     <ClCompile Include="Actor\Weapon\Mechanical.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp" />
@@ -214,6 +216,7 @@
     <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp" />
@@ -259,6 +262,7 @@
     <ClCompile Include="Factory\ComponentCreator.cpp" />
     <ClCompile Include="Factory\ComponentFactory.cpp" />
     <ClCompile Include="Factory\FactoryManager.cpp" />
+    <ClCompile Include="Factory\TerrainBuilder.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
@@ -270,6 +274,7 @@
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
+    <ClCompile Include="Light\LightManager.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
@@ -372,6 +377,7 @@
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
     <ClInclude Include="Actor\Ship\Ship.h" />
+    <ClInclude Include="Actor\Terrain\Terrain.h" />
     <ClInclude Include="Actor\Weapon\Blaster.h" />
     <ClInclude Include="Actor\Weapon\BombGlove.h" />
     <ClInclude Include="Actor\Weapon\Mechanical.h" />
@@ -410,7 +416,6 @@
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
     <ClInclude Include="Behaviour\Node\Node.h" />
-    <ClInclude Include="Behaviour\Node\ParameterNode.h" />
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
     <ClInclude Include="Behaviour\Node\SimplexNode.h" />
@@ -438,6 +443,7 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h" />
@@ -456,6 +462,7 @@
     <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentDefine.h" />
     <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h" />
@@ -505,6 +512,7 @@
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />
     <ClInclude Include="Factory\IBuilder.h" />
+    <ClInclude Include="Factory\TerrainBuilder.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Gamepad.h" />
@@ -517,6 +525,7 @@
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
+    <ClInclude Include="Light\LightManager.h" />
     <ClInclude Include="MotionNames.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -618,6 +627,7 @@
     <None Include="..\Resource\builder\pyrocitor_bullet.json" />
     <None Include="..\Resource\builder\ship.json" />
     <None Include="..\Resource\builder\strong_enemy.json" />
+    <None Include="..\Resource\builder\water_flow.json" />
     <None Include="..\Resource\builder\weak_enemy.json" />
     <None Include="..\Resource\motion_names\chaman.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />

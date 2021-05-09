@@ -95,6 +95,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetNextRay(void) override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual std::optional<Mof::LPMeshContainer> GetMesh(void) override;
     /// <summary>
     /// ゲッター
