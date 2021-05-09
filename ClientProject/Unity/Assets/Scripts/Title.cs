@@ -18,6 +18,7 @@ public class Title : MonoBehaviour
     {
         if (Input.GetButtonDown("Attack"))
         {
+            BGM.bgm.state = BGM.Musicstate.stop;
             SceneManager.LoadScene("HalfScene");
         }
     }

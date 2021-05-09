@@ -32,15 +32,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float hurtForce = 10f;
     [SerializeField] private AudioSource cherry;
     [SerializeField] private AudioSource footstep;
-
+    
     //ぇぬのコード用
     public bool CanAtack = false;
     [SerializeField] private GameObject atackball;
     [SerializeField] private AudioSource Throwse;
+    [SerializeField] private AudioSource JumpSE;
+    [SerializeField] private AudioSource DamageSE;
+    [SerializeField] private AudioSource GetEbiflySE;
+    [SerializeField] private AudioSource LifeUpSE;
+    [SerializeField] private AudioSource Sound1UP;
+    public GameObject Pop;
+
+
     public bool Left = false;
     private int DCount;
 
-    //本当は使いたくなかった変数たち
+    public bool isBossstage;
+
+    //本当は使いたくなかった変数はもう使われることがなくなった。
     //int JumpCount;
 
     float hDirection = 0;
@@ -77,6 +87,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (isGround)
                 {
+                    JumpSE.Play();
                     Jump();
                 }
             }
@@ -133,21 +144,23 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             PermanentUI.perm.cherries += 1;
             PermanentUI.perm.cherryTaxt.text = PermanentUI.perm.cherries.ToString();
+            Instantiate(Pop, transform.position, transform.rotation);
             PermanentUI.perm.CherryScore();
             
         }
         if(collision.tag == "Heart")
         {
-            
+            LifeUpSE.Play();
             Destroy(collision.gameObject);
             PermanentUI.perm.currentHP += 1;
             PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
         }
         if(collision.tag == "1UP")
         {
-            
+            Sound1UP.Play();
             Destroy(collision.gameObject);
             PermanentUI.perm.PlayerCount += 1;
+            Instantiate(Pop, transform.position, transform.rotation);
         }
 
         //if(collision.tag=="Powerup")        //チュートリアルで使用したパワーアップコード。現在使用してません。
@@ -159,6 +172,7 @@ public class PlayerController : MonoBehaviour
         //}
         if (collision.tag == "AtackMode")
         {
+            GetEbiflySE.Play();
             Destroy(collision.gameObject);
             GetComponent<SpriteRenderer>().color = Color.red;
             CanAtack = true;
@@ -171,6 +185,7 @@ public class PlayerController : MonoBehaviour
             {
                 PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
+                BGM.bgm.state = BGM.Musicstate.death;
             }
         }
         if (collision.gameObject.tag == "Enemy")
@@ -205,12 +220,14 @@ public class PlayerController : MonoBehaviour
 
         if (state == State.falling)
         {
-            enemy.JumpedOn();
+            Instantiate(Pop, enemy.transform.position, enemy.transform.rotation);
+            enemy.Bomb();
             PermanentUI.perm.EnemyScore();
             Jump();
         }
         else if (state != State.hurt)
         {
+            
             state = State.hurt;
 
             HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
@@ -257,6 +274,7 @@ public class PlayerController : MonoBehaviour
             {
                 PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
+                BGM.bgm.state = BGM.Musicstate.death;
 
             }
         }
@@ -298,10 +316,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHealth()
     {
+        DamageSE.Play();
         PermanentUI.perm.currentHP -= 1;
         PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
         if (PermanentUI.perm.currentHP <= 0)
         {
+            BGM.bgm.state = BGM.Musicstate.death;
             PermanentUI.perm.PlayerCount -= 1;
             state = State.Die;
 
@@ -466,6 +486,7 @@ public class PlayerController : MonoBehaviour
             canClimb = false;
             rb.gravityScale = naturalGravity;
             anim.speed = 1f;
+            JumpSE.Play();
             Jump();
             return;
         }
@@ -509,8 +530,15 @@ public class PlayerController : MonoBehaviour
         DCount++;
         if (DCount >= 10)
         {
-            PermanentUI.perm.Reset();
-            SceneManager.LoadScene("HalfScene");
+            if (PermanentUI.perm.PlayerCount > 0)
+            { 
+                PermanentUI.perm.Reset();
+                SceneManager.LoadScene("HalfScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("GameOverScene");
+            }
         }
     }
 }

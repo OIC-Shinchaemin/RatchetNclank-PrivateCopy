@@ -19,42 +19,42 @@ public class Opossum : Enemy
 
     void Update()
     {
-
-
-
-
-
-        if (facingLeft)
+        if(!IsDead&&!GetComponent<HpEnemy>().Ebiflied)
         {
-            if (transform.position.x > leftCap)
+            if (facingLeft)
             {
-                if (transform.localScale.x != 1)
+                if (transform.position.x > leftCap)
                 {
-                    transform.localScale = new Vector3(1, 1);
+                    if (transform.localScale.x != 1)
+                    {
+                        transform.localScale = new Vector3(1, 1);
+                    }
+                    rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+
                 }
-                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+                else
+                {
+                    facingLeft = false;
+                }
 
             }
             else
             {
-                facingLeft = false;
-            }
-
-        }
-        else
-        {
-            if (transform.position.x < rightCap)
-            {
-                if (transform.localScale.x != -1)
+                if (transform.position.x < rightCap)
                 {
-                    transform.localScale = new Vector3(-1, 1);
+                    if (transform.localScale.x != -1)
+                    {
+                        transform.localScale = new Vector3(-1, 1);
+                    }
+                    rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
                 }
-                rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-            }
-            else
-            {
-                facingLeft = true;
+                else
+                {
+                    facingLeft = true;
+                }
             }
         }
+
+        
     }
 }

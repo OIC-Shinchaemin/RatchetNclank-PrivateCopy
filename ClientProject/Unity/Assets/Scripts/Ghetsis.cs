@@ -134,6 +134,7 @@ public class Ghetsis : MonoBehaviour
     public void OnDeathEvent()
     {
         bossEvent.bBoss = false;
+
         bossEvent.TriggerON();
     }
 }
