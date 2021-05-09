@@ -182,19 +182,22 @@ public class PlayerController : MonoBehaviour
 
     void CollisionBullet(Bullet bullet)
     {
-        state = State.hurt;
-
-        HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
-
-        if (bullet.gameObject.transform.position.x > transform.position.x)
+        if (state != State.hurt)
         {
+            state = State.hurt;
 
-            rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+            HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
 
-        }
-        else
-        {
-            rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+            if (bullet.gameObject.transform.position.x > transform.position.x)
+            {
+
+                rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+
+            }
+            else
+            {
+                rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+            }
         }
     }
     void CollisionEnemy(Enemy enemy)
@@ -206,7 +209,7 @@ public class PlayerController : MonoBehaviour
             PermanentUI.perm.EnemyScore();
             Jump();
         }
-        else
+        else if (state != State.hurt)
         {
             state = State.hurt;
 
@@ -274,19 +277,22 @@ public class PlayerController : MonoBehaviour
 
     private void CollisionHpEnemy(HpEnemy HpEnemy)
     {
-        state = State.hurt;
-
-        HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
-
-        if (HpEnemy.gameObject.transform.position.x > transform.position.x)
+        if (state != State.hurt)
         {
+            state = State.hurt;
 
-            rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+            HandleHealth();//ダメージ判定するとこ！HP0になったらリセット！！
 
-        }
-        else
-        {
-            rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+            if (HpEnemy.gameObject.transform.position.x > transform.position.x)
+            {
+
+                rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+
+            }
+            else
+            {
+                rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+            }
         }
     }
 

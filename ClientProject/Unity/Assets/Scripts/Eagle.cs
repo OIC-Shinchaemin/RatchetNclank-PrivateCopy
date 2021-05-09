@@ -47,7 +47,7 @@ public class Eagle : Enemy
         second += Time.deltaTime;
 
 
-        if (second >= 1.0)    //1秒おきに攻撃
+        if (second >= 2.0)    //1秒おきに攻撃
         {
             PlayerPos = player.GetComponent<Transform>().position;
             EaglePos = GetComponent<Transform>().position;

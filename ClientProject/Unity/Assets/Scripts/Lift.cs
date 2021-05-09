@@ -16,11 +16,12 @@ public class Lift : MonoBehaviour
     [SerializeField] private float rightCap;
 
 
+    bool isPlayerRide = false;
 
+    bool Leftmode = false;
+    bool Upmode = false;
 
-    [SerializeField] bool Leftmode = false;
-    [SerializeField] bool Upmode = false;
-
+    [SerializeField] bool playerRideMove = false;
     [SerializeField] bool canMoveX = false;
     [SerializeField] bool canMoveY = true;
 
@@ -34,15 +35,29 @@ public class Lift : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(canMoveX)
+        if (playerRideMove == false)
         {
-            MoveX();
+            if (canMoveX)
+            {
+                MoveX();
+            }
+            if (canMoveY)
+            {
+                MoveY();
+            }
         }
-        if (canMoveY)
+
+        if (playerRideMove == true && isPlayerRide == true)
         {
-            MoveY();
+            if (canMoveX)
+            {
+                MoveX();
+            }
+            if (canMoveY)
+            {
+                MoveY();
+            }
         }
-        
     }
 
     private void MoveY()
@@ -67,6 +82,7 @@ public class Lift : MonoBehaviour
         }
 
     }
+
     private void MoveX()
     {
         if (Leftmode)
@@ -97,5 +113,8 @@ public class Lift : MonoBehaviour
 
     }
 
-
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        isPlayerRide = true;
+    }
 }
