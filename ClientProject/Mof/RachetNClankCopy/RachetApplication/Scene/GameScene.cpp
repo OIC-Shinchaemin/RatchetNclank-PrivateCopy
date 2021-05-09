@@ -70,8 +70,8 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     _game_world.Update(delta_time);
 
     // collision
-    _physic_world.Update();
     _physic_world.CollisionStage(&_stage);
+    _physic_world.Update();
     return true;
 }
 
@@ -204,9 +204,7 @@ bool my::GameScene::Initialize(void) {
     } // if
 
     def::Transform terrain_transforms[]{
-        def::Transform(Mof::CVector3(250.0f, -31.2f, 250.0f), Mof::CVector3(), Mof::CVector3(250.0f, 1.0f, 250.0f)),
-        //def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
-        //def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
+        def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
     };
     for (auto& transform : terrain_transforms) {
         param->transform.scale = transform.scale;

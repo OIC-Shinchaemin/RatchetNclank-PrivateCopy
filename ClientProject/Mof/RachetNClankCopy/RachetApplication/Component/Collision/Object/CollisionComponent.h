@@ -52,8 +52,8 @@ struct CollisionInfo {
     //! è’ìÀëŒè€
     std::weak_ptr<my::Actor> target;
 
-    CollisionInfo() : distance(0.0f), angle(), speed(0.0f), target() {}
-    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle(), speed(0.0f), target() {}
+    CollisionInfo() : distance(0.0f), angle(), speed(0.0f), target(){}
+    CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle(), speed(0.0f), target(){}
 };
 class CollisionComponent : public my::Component {
 public:

@@ -5,6 +5,7 @@
 #include "../../Player/PlayerComponent.h"
 #include "../../VelocityComponent.h"
 #include "../../Player/PlayerStateComponent.h"
+#include "WaterFlowCollisionComponent.h"
 
 
 std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetFrontRay(void) {
@@ -88,6 +89,10 @@ void my::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer me
                 } // if
             } // if
         } // if
+
+        if (this->GetNextRay().value().CollisionGeometry(geometry, info)) {
+            _player_com.lock()->SetNextTerrain("Ground");
+        } // if
         geometry->SetMatrix(default_matrix);
     } // for
 }
@@ -138,6 +143,11 @@ void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer m
                 _on_elevator = false;
             } // else
         } // if
+
+        if (this->GetNextRay().value().CollisionGeometry(geometry, info)) {
+            _player_com.lock()->SetNextTerrain("Ground");
+        } // if
+
         geometry->SetMatrix(default_matrix);
     } // for
 }
@@ -164,6 +174,11 @@ void my::PlayerCollisionComponent::CollisionStageBridge(Mof::LPMeshContainer mes
                 } // if
             } // if
         } // if
+        if (this->GetNextRay().value().CollisionGeometry(geometry, info)) {
+            _player_com.lock()->SetNextTerrain("Ground");
+        } // if
+
+
         geometry->SetMatrix(default_matrix);
     } // for
 }
@@ -220,12 +235,13 @@ std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetNextRay(void) {
     if (super::GetOwner()->GetState() == my::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
-    auto velocity_com = _velocity_com.lock();
-    auto velocity = velocity_com->GetVelocity();
-    
+    auto player_com = _player_com.lock();
+    auto offset = Mof::CVector3(0.0f, 0.0f, -player_com->GetVolume() * 2.0f);
+    offset.RotationY(super::GetOwner()->GetRotate().y);
+
     auto pos = super::GetOwner()->GetPosition();
     pos.y += _player_com.lock()->GetHeight();
-    return Mof::CRay3D(pos + velocity, math::vec3::kNegUnitY);
+    return Mof::CRay3D(pos + offset, math::vec3::kNegUnitY);
 }
 
 std::optional<Mof::LPMeshContainer> my::PlayerCollisionComponent::GetMesh(void) {
@@ -261,7 +277,7 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
             break;
         } // if
     } // for
-    
+
     if (!execute) {
         return;
     } // if

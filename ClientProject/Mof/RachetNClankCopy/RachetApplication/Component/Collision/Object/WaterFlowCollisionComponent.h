@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    //virtual std::optional<my::PlaneObject> GetPlaneObject(void) override;
+    virtual std::optional<my::PlaneObject> GetPlaneObject(void) override;
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>

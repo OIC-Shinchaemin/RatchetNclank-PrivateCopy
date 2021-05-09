@@ -25,14 +25,15 @@ bool my::BombGlove::Fire(const def::Transform& transform) {
     auto param = my::Bullet::Param();
     param.transform = transform;
 
+    auto add = my::FactoryManager::Singleton().CreateActor<my::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);;
     if (super::_lock_on_position.has_value()) {
         Mof::CVector3 direction = super::_lock_on_position.value() - param.transform.position;
         auto v = Mof::CVector3(direction.x, 0.0f, direction.z);
         float time = v.Length() / super::_shot_speed;
 
-        float g = 0.25f * 60.0f;
+        float g = add->GetGravity() * 60.0f;
         float v0 = 0.5f * g * time - direction.y;
-        float v_t  = std::log10(0.98f * 60.0f * time) * super::_shot_speed;
+        float v_t  = std::log10(add->GetDrag() * time * 60.0f) * super::_shot_speed ;
         
         v.Normal(v);
         param.speed = v * v_t;
@@ -44,8 +45,6 @@ bool my::BombGlove::Fire(const def::Transform& transform) {
         param.speed = speed;
         param.speed.y = super::_shot_speed * 0.4f;
     } // else
-
-    auto add = my::FactoryManager::Singleton().CreateActor<my::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);;
     add->Start(param);
     super::Observable::Notify("AddRequest", add);
     return true;

@@ -78,6 +78,7 @@ bool my::Player::Update(float delta_time) {
     return true;
 }
 
+#include "../../Component/Collision/Object/PlayerCollisionComponent.h"
 bool my::Player::Render(void) {
     super::Render();
 
@@ -94,7 +95,6 @@ bool my::Player::Render(void) {
     if (auto mesh = _omniwrench->GetComponent<my::MeshComponent>()) {
         mesh->GetMesh().lock()->Render(mat);
     } // if
-
     return true;
 }
 

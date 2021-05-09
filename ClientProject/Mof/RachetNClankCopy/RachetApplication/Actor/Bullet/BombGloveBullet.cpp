@@ -11,6 +11,14 @@ my::BombGloveBullet::BombGloveBullet() :
 my::BombGloveBullet::~BombGloveBullet() {
 }
 
+float my::BombGloveBullet::GetGravity(void) const {
+    return 0.25f;
+}
+
+float my::BombGloveBullet::GetDrag(void) const {
+    return 1.0f;
+}
+
 bool my::BombGloveBullet::Update(float delta_time) {
     super::BulletUpdate(delta_time);
 
@@ -32,8 +40,7 @@ bool my::BombGloveBullet::Render(void) {
 void my::BombGloveBullet::Start(const my::BombGloveBullet::Param& in) {
     super::Start(in);
     auto v = super::GetComponent<my::VelocityComponent>();
-    v->SetDrag(0.98f);
-    //v->SetDrag(1.0f);
-    v->SetGravity(0.25f);
+    v->SetGravity(this->GetGravity());
+    v->SetDrag(this->GetDrag());
     v->SetUseGravity(true);
 }

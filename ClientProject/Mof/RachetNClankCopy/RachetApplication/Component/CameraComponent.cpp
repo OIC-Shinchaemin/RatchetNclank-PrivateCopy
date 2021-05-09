@@ -51,7 +51,7 @@ void my::CameraComponent::ControlByKeyboard(void) {
     } // if
     if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
         _camera_fps_mode = false;
-        _camera_controller.GetService()->SetDistance(5.0f);
+        _camera_controller.GetService()->SetDistance(_default_distance);
 
         float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
         float azimuth_degree = math::ToDegree(angle_y);
@@ -115,7 +115,7 @@ void my::CameraComponent::ControlByGamepad(void) {
     if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) ||
         ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
         _camera_fps_mode = false;
-        _camera_controller.GetService()->SetDistance(5.0f);
+        _camera_controller.GetService()->SetDistance(_default_distance);
 
         float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
         float azimuth_degree = math::ToDegree(angle_y);
@@ -130,6 +130,7 @@ my::CameraComponent::CameraComponent(int priority) :
     _camera_controller(),
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
+    _default_distance(8.0f),
     _preview_position(),
     _collisioned_stage(),
     _preview_angle(),
@@ -145,6 +146,7 @@ my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _camera_controller(),
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
+    _default_distance(obj._default_distance),
     _preview_position(),
     _collisioned_stage(),
     _preview_angle(),
@@ -193,6 +195,7 @@ bool my::CameraComponent::Initialize(void) {
     _player_view_camera->Initialize();
     auto pos = super::GetOwner()->GetPosition();
     auto offset = math::vec3::kNegUnitZ;
+    offset *= 9.0f;
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
 
     _player_view_camera->SetPosition(pos - offset);
@@ -204,6 +207,7 @@ bool my::CameraComponent::Initialize(void) {
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
     _camera_controller.GetService()->SetAltitude(20.0f);
+    _camera_controller.GetService()->SetDistance(_default_distance);
 
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();

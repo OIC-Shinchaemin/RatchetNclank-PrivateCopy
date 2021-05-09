@@ -23,6 +23,8 @@ private:
     bool _camera_fps_mode;
     //! FPSƒJƒƒ‰•ûŒü
     float _ideal_fps_camera_angle;
+    //! ‹——£
+    float _default_distance;
     //! ‘ÎÛ
     Mof::CVector3 _preview_position;
     //! Õ“Ë’†
