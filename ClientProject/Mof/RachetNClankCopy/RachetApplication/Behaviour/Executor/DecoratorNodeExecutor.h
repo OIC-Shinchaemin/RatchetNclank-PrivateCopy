@@ -10,8 +10,36 @@
 namespace behaviour {
 class DecoratorNodeExecutor : public behaviour::SimplexNodeExecutor {
     using super = behaviour::SimplexNodeExecutor;
+protected:
     //! アクター
     std::weak_ptr<my::Actor> _actor;
+    /// <summary>
+    /// ノード実行
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    behaviour::INodeExecutor::Result DecoratorNodeExecute(std::any args) {
+        // 実行開始
+        super::_state = super::State::Running;
+        if (super::_node->Execute(args)) {
+            for (auto& ptr : super::_children) {
+                auto re = ptr->Execute();
+                if (re == super::Result::Sucess) {
+                    super::_state = super::State::Completed;
+                    return super::Result::Sucess;
+                } // if
+                else if (re == super::Result::None) {
+                    return super::Result::None;
+                } // else if
+                else {
+                    super::_state = super::State::Incompleted;
+                    return super::Result::Failure;
+                } // else
+            } // for
+        } // if
+        super::_state = super::State::Incompleted;
+        return super::Result::Failure;
+    }
 public:
     /// <summary>
     /// コンストラクタ
@@ -41,27 +69,29 @@ public:
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
     virtual behaviour::INodeExecutor::Result Execute(void) override {
-        // 実行開始
-        super::_state = super::State::Running;
         auto temp = _actor.lock();
-        if (super::_node->Execute(temp)) {
-            for (auto& ptr : super::_children) {
-                auto re = ptr->Execute();
-                if (re == super::Result::Sucess) {
-                    super::_state = super::State::Completed;
-                    return super::Result::Sucess;
-                } // if
-                else if (re == super::Result::None) {
-                    return super::Result::None;
-                } // else if
-                else {
-                    super::_state = super::State::Incompleted;
-                    return super::Result::Failure;
-                } // else
-            } // for
-        } // if
-        super::_state = super::State::Incompleted;
-        return super::Result::Failure;
+        return this->DecoratorNodeExecute(temp);
+        // 実行開始
+        //super::_state = super::State::Running;
+        //auto temp = _actor.lock();
+        //if (super::_node->Execute(temp)) {
+        //    for (auto& ptr : super::_children) {
+        //        auto re = ptr->Execute();
+        //        if (re == super::Result::Sucess) {
+        //            super::_state = super::State::Completed;
+        //            return super::Result::Sucess;
+        //        } // if
+        //        else if (re == super::Result::None) {
+        //            return super::Result::None;
+        //        } // else if
+        //        else {
+        //            super::_state = super::State::Incompleted;
+        //            return super::Result::Failure;
+        //        } // else
+        //    } // for
+        //} // if
+        //super::_state = super::State::Incompleted;
+        //return super::Result::Failure;
     }
 };
 }

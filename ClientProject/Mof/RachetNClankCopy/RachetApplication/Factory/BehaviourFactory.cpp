@@ -12,6 +12,8 @@
 #include "../Behaviour/Node/Action/ChangePatrolNode.h"
 #include "../Behaviour/Node/Condition/NotAwayFromHomeNode.h"
 #include "../Behaviour/Node/Condition/TargetRecognitionNode.h"
+#include "../Behaviour/Node/Decorator/TargetInMeleeAttackRange.h"
+#include "../Behaviour/Node/Decorator/TargetInRangedAttackRange.h"
 #include "../Behaviour/Node/DecoratorNode.h"
 
 
@@ -32,6 +34,8 @@ my::BehaviourFactory::BehaviourFactory() :
     _action_factory.Register<behaviour::ChangePatrolNode>("ChangePatrolNode");
     _condition_factory.Register<behaviour::NotAwayFromHomeNode>("NotAwayFromHomeNode");
     _condition_factory.Register<behaviour::TargetRecognitionNode>("TargetRecognitionNode");
+    _decorator_factory.Register<behaviour::TargetInMeleeAttackRangeNode>("TargetInMeleeAttackRangeNode");
+    _decorator_factory.Register<behaviour::TargetInRangedAttackRangeNode>("TargetInRangedAttackRangeNode");
     _decorator_factory.Register<behaviour::DecoratorNodeBase>("DecoratorNode");
 }
 

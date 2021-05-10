@@ -271,6 +271,12 @@
     <Filter Include="Rachet\Source\Light">
       <UniqueIdentifier>{7b615535-aeb0-454e-aabb-a8de24a9a716}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Executor\Decorator">
+      <UniqueIdentifier>{ac49b993-3d5d-453e-8124-d7388469d61b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Node\Decorator">
+      <UniqueIdentifier>{a217c227-216b-44eb-9f38-395ef9362a91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1633,6 +1639,18 @@
     </ClInclude>
     <ClInclude Include="Factory\TerrainBuilder.h">
       <Filter>Rachet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInRangedAttackRange.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInMeleeAttackRange.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInMeleeAttackRangeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInRangedAttackRangeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
