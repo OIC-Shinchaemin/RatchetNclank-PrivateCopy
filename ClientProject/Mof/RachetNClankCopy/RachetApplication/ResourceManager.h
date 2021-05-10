@@ -18,10 +18,6 @@ namespace my {
 template<typename...Types>
 class ResourceManager {
 private:
-    //! 読み込まれたか
-    bool _is_loaded;
-    //! 同期
-    std::mutex _mutex;
     //! コンテナ
     std::tuple<my::AbstructContainer<
         std::unordered_map,
@@ -75,23 +71,11 @@ private:
             this->Release<N + 1>(t);
         } // if
     }
-
 public:
     ResourceManager() :
-        _is_loaded(false),
-        _mutex(),
         _resources() {
     }
     ~ResourceManager() {
-    }
-    /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns>完了フラグ</returns>
-    bool IsLoaded(void) {
-        std::lock_guard<std::mutex> lock(_mutex);
-        return this->_is_loaded;
     }
     /// <summary>
     /// 読み込み
@@ -99,8 +83,6 @@ public:
     /// <param name="path"></param>
     /// <returns></returns>
     bool Load(const char* path) {
-        _is_loaded = false;
-
         std::ifstream stream(path);
         std::vector<std::string> paths;
 
@@ -115,27 +97,21 @@ public:
         for (auto& temp : paths) {
             auto& data_path = temp;
             if (auto format = std::strstr(data_path.c_str(), ".png"); format) {
-                bool success = this->AddSharedElement<Mof::CTexture>(data_path.c_str());
-                //std::cout << "Mof::CTexture success = " << success << "\n";
+                this->AddSharedElement<Mof::CTexture>(data_path.c_str());
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".jpg"); format) {
-                bool success = this->AddSharedElement<Mof::CTexture>(data_path.c_str());
-                //std::cout << "Mof::CTexture success = " << success << "\n";
+                this->AddSharedElement<Mof::CTexture>(data_path.c_str());
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".mom"); format) {
-                bool success = this->AddSharedElement<Mof::CMeshContainer>(data_path.c_str());
-                //std::cout << "Mof::CMeshContainer success = " << success << "\n";
+                this->AddSharedElement<Mof::CMeshContainer>(data_path.c_str());
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".motion_names"); format) {
-                bool success = this->AddSharedElement<my::MotionNames>(data_path.c_str());
-                //std::cout << "Mof::MotionNames success = " << success << "\n";
+                this->AddSharedElement<my::MotionNames>(data_path.c_str());
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".ttf"); format) {
-                bool success = this->AddSharedElement<sip::CResourceFont>(data_path.c_str());
-                //std::cout << "Mof::MotionNames success = " << success << "\n";
+                this->AddSharedElement<sip::CResourceFont>(data_path.c_str());
             } // else if
         } // for
-        _is_loaded = true;
         return true;
     }
     /// <summary>

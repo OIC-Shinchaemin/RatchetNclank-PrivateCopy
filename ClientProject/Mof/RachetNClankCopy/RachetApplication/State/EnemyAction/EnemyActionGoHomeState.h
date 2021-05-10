@@ -4,24 +4,15 @@
 
 #include "EnemyActionState.h"
 
-#include "../../Component/Enemy/EnemyComponent.h"
-#include "../../Component/Enemy/EnemyIdleComponent.h"
 #include "../../Component/Enemy/EnemyMoveComponent.h"
-#include "../../Component/Enemy/EnemyMeleeAttackComponent.h"
 
 
 namespace state {
 class EnemyActionGoHomeState : public state::EnemyActionState {
     using super = state::EnemyActionState;
 private:
-    //! 型
-    std::weak_ptr<my::EnemyComponent> _enemy_com;
-    //! 待機
-    std::weak_ptr<my::EnemyIdleComponent> _idle_com;
     //! 移動
     std::weak_ptr<my::EnemyMoveComponent> _move_com;
-    //! 攻撃
-    std::weak_ptr<my::EnemyMeleeAttackComponent> _attack_com;
 public:
     /// <summary>
     /// コンストラクタ

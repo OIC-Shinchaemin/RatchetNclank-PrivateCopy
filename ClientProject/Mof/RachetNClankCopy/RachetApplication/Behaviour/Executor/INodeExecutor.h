@@ -18,15 +18,15 @@ using NodeExecutorList = std::list<NodeExecutorPtr>;
 class INodeExecutor : public std::enable_shared_from_this<behaviour::INodeExecutor> {
 public:
     enum class State {
-        Inactive, //未実行
-        Running, //実行中
-        Completed, //実行終了
-        Incompleted, //実行失敗
+        Inactive, // 未実行
+        Running, // 実行中
+        Completed, // 実行終了
+        Incompleted, // 実行失敗
     };
     enum class Result {
-        None, //まだ実行前/実行中
-        Sucess, //実行成功
-        Failure, //実行失敗
+        None, // 実行前/実行中
+        Sucess, // 実行成功
+        Failure, // 実行失敗
     };
     /// <summary>
     /// セッター

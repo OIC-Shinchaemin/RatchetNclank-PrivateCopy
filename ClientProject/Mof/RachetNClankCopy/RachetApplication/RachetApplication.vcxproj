@@ -629,7 +629,6 @@
     <None Include="..\Resource\builder\strong_enemy.json" />
     <None Include="..\Resource\builder\water_flow.json" />
     <None Include="..\Resource\builder\weak_enemy.json" />
-    <None Include="..\Resource\motion_names\chaman.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\motion_names\ship.motion_names" />
     <None Include="..\Resource\motion_names\skeleton.motion_names" />

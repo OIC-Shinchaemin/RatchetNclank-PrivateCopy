@@ -4,14 +4,16 @@
   },
   "behaviours": [
     {
-      "type": "SelectorNode",
+      "type": "CompositeNode",
+      "derived": "SelectorNode",
       "children": [
         1,
         4
       ]
     },
     {
-      "type": "SequencerNode",
+      "type": "CompositeNode",
+      "derived": "SequencerNode",
       "children": [
         2,
         3

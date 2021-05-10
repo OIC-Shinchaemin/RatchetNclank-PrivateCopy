@@ -9,7 +9,16 @@
 
 
 
+void CGameApp::ChangeDebugMode(void) noexcept {
+    _debug_flag = !_debug_flag;
+}
+
 MofBool CGameApp::Initialize(void) {
+    _ideal_fps = 60.0f;
+    _ideal_delta_time = 1.0f / _ideal_fps;
+    _debug_fps = _ideal_fps;
+    _debug_delta_time = _ideal_delta_time;
+    _debug_flag = false;
     ::CMofImGui::Setup();
     my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
@@ -46,6 +55,19 @@ MofBool CGameApp::Input(void) {
         ::PostQuitMessage(0);
         return false;
     } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        this->ChangeDebugMode();
+    } // if
+
+    if (_debug_flag) {
+        if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+            _debug_fps += _ideal_delta_time;
+        } // if
+        else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+            _debug_fps -= _ideal_delta_time;
+        } // else if
+        _debug_delta_time = 1.0f / _debug_fps;
+    } // if
     return TRUE;
 }
 
@@ -53,6 +75,10 @@ MofBool CGameApp::Update(void) {
     this->Input();
 
     float delta = 0.01667f;
+    if (_debug_flag) {
+        delta = _debug_delta_time;
+    } // if
+
     _game_manager->Update();
     _scene_manager->Update(delta);
     _camera_manager->Update();
@@ -65,7 +91,11 @@ MofBool CGameApp::Render(void) {
     ::g_pGraphics->RenderStart();
 
     _scene_manager->Render();
-
+    if (_debug_flag) {
+        auto fps = ::CUtilities::GetFPS();
+        ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", fps);
+        ::CGraphicsUtilities::RenderString(10.0f, 60.0f, "debug fps = %f", _debug_fps);
+    } // if
     ::CMofImGui::RenderGui();
     ::g_pGraphics->RenderEnd();
     return TRUE;

@@ -4,10 +4,11 @@
   },
   "behaviours": [
     {
-      "type": "SequencerNode",
+      "type": "CompositeNode",
+      "derived": "SequencerNode",
       "children": [
         1
-        
+
       ]
     },
     {

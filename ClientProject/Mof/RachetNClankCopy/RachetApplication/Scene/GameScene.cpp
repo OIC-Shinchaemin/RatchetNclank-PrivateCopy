@@ -112,7 +112,7 @@ my::GameScene::GameScene() :
     _ui_canvas(),
     _game(),
     _for_bridge_event_actors(),
-    _bridge_event_subject(){
+    _bridge_event_subject() {
 }
 
 my::GameScene::~GameScene() {

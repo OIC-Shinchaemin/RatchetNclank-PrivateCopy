@@ -1,8 +1,10 @@
 #ifndef MY_GAME_DEFINE_H
 #define MY_GAME_DEFINE_H
 
+
 #include <stdexcept>
 #include <string>
+
 #include <Mof.h>
 
 #include "My/Core/Math.h"

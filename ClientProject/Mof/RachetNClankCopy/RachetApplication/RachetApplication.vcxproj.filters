@@ -1713,9 +1713,6 @@
     <None Include="..\Resource\motion_names\skeleton.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
-    <None Include="..\Resource\motion_names\chaman.motion_names">
-      <Filter>リソース ファイル\motion_names</Filter>
-    </None>
     <None Include="..\Resource\motion_names\ship.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
     </None>

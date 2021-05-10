@@ -95,6 +95,9 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
         if (current == Type::kEnemyActionDamageState) {
             return false;
         } // if
+        else if (current == Type::kEnemyActionMeleeAttackState) {
+            return false;
+        } // if
         else {
             return true;
         } // else    

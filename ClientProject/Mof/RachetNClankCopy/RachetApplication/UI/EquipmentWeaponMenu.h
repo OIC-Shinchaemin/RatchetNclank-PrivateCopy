@@ -2,9 +2,14 @@
 #define MY_EQUIPMENT_WEAPON_MENU_H
 
 
+#include "My/UI/UIItem.h"
 #include "My/UI/UIPanel.h"
 
-#include "My/Core/Observable.h"
+#include <memory>
+#include <string>
+#include <unordered_map>
+
+#include "My/Core/Observer.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "../Actor/Weapon/Mechanical.h"

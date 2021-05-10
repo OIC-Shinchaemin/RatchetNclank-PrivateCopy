@@ -51,7 +51,6 @@ public:
             
             if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMeleeAttackState)) {
                 args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionMeleeAttackState);
-                //args.state_com.lock()->ChangeState("EnemyActionMeleeAttackState");
             } // if
             return false;
         } // if

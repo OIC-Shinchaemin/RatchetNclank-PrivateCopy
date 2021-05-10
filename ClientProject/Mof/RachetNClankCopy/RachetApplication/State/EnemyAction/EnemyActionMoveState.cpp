@@ -11,9 +11,7 @@ state::EnemyActionMoveState::~EnemyActionMoveState() {
 void state::EnemyActionMoveState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     super::SetActor(ptr);
     this->_enemy_com = ptr->GetComponent<my::EnemyComponent>();
-    this->_idle_com = ptr->GetComponent<my::EnemyIdleComponent>();
     this->_move_com = ptr->GetComponent<my::EnemyMoveComponent>();
-    this->_attack_com = ptr->GetComponent<my::EnemyMeleeAttackComponent>();
 }
 
 const char* state::EnemyActionMoveState::GetName(void) const {
@@ -39,13 +37,6 @@ void state::EnemyActionMoveState::Enter(void) {
         move_com->SetAngularSpeed(angular_speed);
         move_com->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
         move_com->Start();
-    } // if
-    if (auto attack_com = _attack_com.lock()) {
-        attack_com->End();
-    } // if
-    if (auto idle_com = _idle_com.lock()) {
-        idle_com->SetAngularSpeed(0.0f);
-        idle_com->End();
     } // if
 }
 

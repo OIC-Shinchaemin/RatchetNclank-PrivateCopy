@@ -1,5 +1,7 @@
 #include "BehaviourFactory.h"
 
+#include "../Behaviour/Node/SequencerNode.h"
+#include "../Behaviour/Node/SelectorNode.h"
 #include "../Behaviour/Node/Action/AlwaysTrueNode.h"
 #include "../Behaviour/Node/Action/AlwaysFalseNode.h"
 #include "../Behaviour/Node/Action/GoHomeNode.h"
@@ -13,8 +15,11 @@
 
 
 my::BehaviourFactory::BehaviourFactory() :
+    _composite_factory(),
     _action_factory(),
     _condition_factory() {
+    _composite_factory.Register<behaviour::SequencerNode>("SequencerNode");
+    _composite_factory.Register<behaviour::SelectorNode>("SelectorNode");
     _action_factory.Register<behaviour::AlwaysTrueNode>("AlwaysTrueNode");
     _action_factory.Register<behaviour::AlwaysFalseNode>("AlwaysFalseNode");
     _action_factory.Register<behaviour::GoHomeNode>("GoHomeNode");
@@ -41,38 +46,39 @@ behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* pat
     auto& behaviours = document["behaviours"];
 
     auto type = std::string(behaviours[root_index]["type"].GetString());
-    if (type == "SequencerNode") {
-        rootnode = this->CreateSequencerNode(behaviours, root_index);
-    } // if
-    else if (type == "SelectorNode") {
-        rootnode = this->CreateSelectorNode(behaviours, root_index);
-    } // else if
 
+    if (type == "CompositeNode") {
+        rootnode = this->CreateCompositeNode(behaviours, root_index);
+    } // if
     return rootnode;
 }
 
-behaviour::ConditionalNodeBase::Operator my::BehaviourFactory::GetConditionalOperator(std::string type) {
-    using Operator = behaviour::ConditionalNodeBase::Operator;
-    if (type == "Equal") {
-        return Operator::Equal;
-    } // if
-    else if (type == "NotEqual") {
-        return Operator::NotEqual;
-    } // else if
-    else if (type == "Less") {
-        return Operator::Less;
-    } // else if
-    else if (type == "LessEqual") {
-        return Operator::LessEqual;
-    } // else if
-    else if (type == "Greater") {
-        return Operator::Greater;
-    } // else if
-    else if (type == "GreaterEqual") {
-        return Operator::GreaterEqual;
-    } // else if
-    // default 
-    return Operator::Equal;
+std::shared_ptr<behaviour::CompositeNode> my::BehaviourFactory::CreateCompositeNode(rapidjson::Value& behaviours, uint32_t index) {
+    using namespace behaviour;
+
+    auto derived = behaviours[index]["derived"].GetString();
+    auto composite_node = _composite_factory.Create(derived);
+    
+    auto& children = behaviours[index]["children"];
+    for (size_t i = 0, n = children.Size(); i < n; i++) {
+        auto children_index = children[i].GetInt();
+        if (behaviours[children_index]["type"] == "ActionNode") {
+            auto node = this->CreateActionNode(behaviours, children_index);
+            composite_node->AddChild(node);
+        } // if
+        else if (behaviours[children_index]["type"] == "ConditionalNode") {
+            auto node = this->CreateConditionalNode(behaviours, children_index);
+            composite_node->AddChild(node);
+        } // if
+        else if (behaviours[children_index]["type"] == "DecoratorNode") {
+
+        } // else if
+        else if (behaviours[children_index]["type"] == "CompositeNode") {
+            auto node = this->CreateCompositeNode(behaviours, children_index);
+            composite_node->AddChild(node);
+        } // if
+    } // for
+    return composite_node;
 }
 
 std::shared_ptr<behaviour::ActionNodeBase> my::BehaviourFactory::CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
@@ -85,66 +91,4 @@ std::shared_ptr<behaviour::ConditionalNodeBase> my::BehaviourFactory::CreateCond
     using namespace behaviour;
     auto derived = behaviours[index]["derived"].GetString();
     return _condition_factory.Create(derived);
-}
-
-std::shared_ptr<behaviour::SequencerNode> my::BehaviourFactory::CreateSequencerNode(rapidjson::Value& behaviours, uint32_t index) {
-    using namespace behaviour;
-
-    auto sequencer_node = std::make_shared<SequencerNode>();
-    auto& children = behaviours[index]["children"];
-    for (size_t i = 0, n = children.Size(); i < n; i++) {
-        auto children_index = children[i].GetInt();
-        if (behaviours[children_index]["type"] == "ActionNode") {
-            auto node = this->CreateActionNode(behaviours, children_index);
-            sequencer_node->AddChild(node);
-        } // if
-        else if (behaviours[children_index]["type"] == "ConditionalNode") {
-            auto node = this->CreateConditionalNode(behaviours, children_index);
-            sequencer_node->AddChild(node);
-        } // if
-        else if (behaviours[children_index]["type"] == "DecoratorNode") {
-        
-        } // else if
-        else if (behaviours[children_index]["type"] == "SequencerNode") {
-            auto node = this->CreateSequencerNode(behaviours, children_index);
-            sequencer_node->AddChild(node);
-        } // if
-        else if (behaviours[children_index]["type"] == "SelectorNode") {
-            auto node = this->CreateSelectorNode(behaviours, children_index);
-            sequencer_node->AddChild(node);
-        } // else if
-
-    } // for
-    return sequencer_node;
-}
-
-std::shared_ptr<behaviour::SelectorNode> my::BehaviourFactory::CreateSelectorNode(rapidjson::Value& behaviours, uint32_t index) {
-    using namespace behaviour;
-
-    auto selector_node = std::make_shared<SelectorNode>();
-    auto& children = behaviours[index]["children"];
-    for (size_t i = 0, n = children.Size(); i < n; i++) {
-        auto children_index = children[i].GetInt();
-        if (behaviours[children_index]["type"] == "ActionNode") {
-            auto node = this->CreateActionNode(behaviours, children_index);
-            selector_node->AddChild(node);
-        } // if
-        else if (behaviours[children_index]["type"] == "ConditionalNode") {
-            auto node = this->CreateConditionalNode(behaviours, children_index);
-            selector_node->AddChild(node);
-        } // if
-        else if (behaviours[children_index]["type"] == "DecoratorNode") {
-
-        } // else if
-        else if (behaviours[children_index]["type"] == "SequencerNode") {
-            auto node = this->CreateSequencerNode(behaviours, children_index);
-            selector_node->AddChild(node);
-        } // if
-        else if (behaviours[children_index]["type"] == "SelectorNode") {
-            auto node = this->CreateSelectorNode(behaviours, children_index);
-            selector_node->AddChild(node);
-        } // else if
-
-    } // for
-    return selector_node;
 }

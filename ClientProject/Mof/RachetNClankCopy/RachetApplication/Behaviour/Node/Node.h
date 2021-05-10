@@ -30,15 +30,14 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     const std::string& GetName(void)const noexcept {
-        return _name;
+        return this->_name;
     }
     /// <summary>
     /// ノードの実行
     /// </summary>
-    /// <param name="actor">実行アクター</param>
-    /// <returns>true:実行の成功</returns>
-    /// <returns>false:実行の失敗</returns>
-    virtual bool Execute(std::any ptr) {
+    /// <param name="args"></param>
+    /// <returns></returns>
+    virtual bool Execute(std::any args) {
         return false;
     }
     /// <summary>
