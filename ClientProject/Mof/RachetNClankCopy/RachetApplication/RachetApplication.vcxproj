@@ -633,6 +633,7 @@
     <None Include="..\Resource\motion_names\ship.motion_names" />
     <None Include="..\Resource\motion_names\skeleton.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
+    <None Include="..\Resource\stage\stage.json" />
     <None Include="..\Resource\stage\test.json" />
   </ItemGroup>
   <ItemGroup>

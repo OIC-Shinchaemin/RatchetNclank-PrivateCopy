@@ -1722,6 +1722,9 @@
     <None Include="..\Resource\builder\water_flow.json">
       <Filter>リソース ファイル\builder</Filter>
     </None>
+    <None Include="..\Resource\stage\stage.json">
+      <Filter>リソース ファイル\stage</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RachetApplication.rc">
