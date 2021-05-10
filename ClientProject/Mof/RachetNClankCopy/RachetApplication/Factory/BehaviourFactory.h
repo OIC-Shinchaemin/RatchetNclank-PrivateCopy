@@ -22,6 +22,8 @@ private:
     my::Factory<behaviour::ActionNodeBase> _action_factory;
     //! コンディション
     my::Factory<behaviour::ConditionalNodeBase> _condition_factory;
+    //! デコレーター
+    my::Factory<behaviour::DecoratorNodeBase> _decorator_factory;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,6 +56,13 @@ public:
     /// <param name="index"></param>
     /// <returns></returns>
     std::shared_ptr<behaviour::ConditionalNodeBase> CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index);
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="behaviours"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    std::shared_ptr<behaviour::DecoratorNodeBase> CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index);
 };
 }
 #endif // !MY_BEHAVIOUR_FACTORY_H

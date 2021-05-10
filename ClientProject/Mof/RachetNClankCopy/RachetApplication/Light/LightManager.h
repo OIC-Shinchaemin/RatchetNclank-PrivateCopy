@@ -19,6 +19,12 @@ public:
     /// デストラクタ
     /// </summary>
     ~LightManager();
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Initialize(void);
 };
 }
 #endif // !MY_LIGHT_MANAGER_H

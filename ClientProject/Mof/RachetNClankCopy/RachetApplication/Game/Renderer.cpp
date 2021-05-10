@@ -32,7 +32,7 @@ bool my::Renderer::Render(void) {
         } // if
     } // for
     for (auto ptr : _enable_actors) {
-        //ptr->DebugRender();
+        ptr->DebugRender();
     } // for
 
     for (auto ptr : _disable_actors) {

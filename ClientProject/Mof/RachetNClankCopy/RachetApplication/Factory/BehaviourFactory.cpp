@@ -12,12 +12,14 @@
 #include "../Behaviour/Node/Action/ChangePatrolNode.h"
 #include "../Behaviour/Node/Condition/NotAwayFromHomeNode.h"
 #include "../Behaviour/Node/Condition/TargetRecognitionNode.h"
+#include "../Behaviour/Node/DecoratorNode.h"
 
 
 my::BehaviourFactory::BehaviourFactory() :
     _composite_factory(),
     _action_factory(),
-    _condition_factory() {
+    _condition_factory(),
+    _decorator_factory() {
     _composite_factory.Register<behaviour::SequencerNode>("SequencerNode");
     _composite_factory.Register<behaviour::SelectorNode>("SelectorNode");
     _action_factory.Register<behaviour::AlwaysTrueNode>("AlwaysTrueNode");
@@ -30,6 +32,7 @@ my::BehaviourFactory::BehaviourFactory() :
     _action_factory.Register<behaviour::ChangePatrolNode>("ChangePatrolNode");
     _condition_factory.Register<behaviour::NotAwayFromHomeNode>("NotAwayFromHomeNode");
     _condition_factory.Register<behaviour::TargetRecognitionNode>("TargetRecognitionNode");
+    _decorator_factory.Register<behaviour::DecoratorNodeBase>("DecoratorNode");
 }
 
 behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* path) {
@@ -38,57 +41,74 @@ behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* pat
         return nullptr;
     } // if
     using namespace behaviour;
-    behaviour::CompositeNodePtr rootnode;
     _ASSERT_EXPR(document.HasMember("root"), L"ƒƒ“ƒo‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚¹‚ñ");
     _ASSERT_EXPR(document.HasMember("behaviours"), L"ƒƒ“ƒo‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚¹‚ñ");
 
     auto root_index = document["root"]["index"].GetInt();
     auto& behaviours = document["behaviours"];
-
     auto type = std::string(behaviours[root_index]["type"].GetString());
 
-    if (type == "CompositeNode") {
-        rootnode = this->CreateCompositeNode(behaviours, root_index);
-    } // if
-    return rootnode;
+    return this->CreateCompositeNode(behaviours, root_index);
 }
 
 std::shared_ptr<behaviour::CompositeNode> my::BehaviourFactory::CreateCompositeNode(rapidjson::Value& behaviours, uint32_t index) {
-    using namespace behaviour;
-
     auto derived = behaviours[index]["derived"].GetString();
     auto composite_node = _composite_factory.Create(derived);
-    
+
     auto& children = behaviours[index]["children"];
     for (size_t i = 0, n = children.Size(); i < n; i++) {
         auto children_index = children[i].GetInt();
-        if (behaviours[children_index]["type"] == "ActionNode") {
-            auto node = this->CreateActionNode(behaviours, children_index);
+        if (behaviours[children_index]["type"] == "CompositeNode") {
+            auto node = this->CreateCompositeNode(behaviours, children_index);
             composite_node->AddChild(node);
         } // if
+        else if (behaviours[children_index]["type"] == "ActionNode") {
+            auto node = this->CreateActionNode(behaviours, children_index);
+            composite_node->AddChild(node);
+        } // else if
         else if (behaviours[children_index]["type"] == "ConditionalNode") {
             auto node = this->CreateConditionalNode(behaviours, children_index);
             composite_node->AddChild(node);
         } // if
         else if (behaviours[children_index]["type"] == "DecoratorNode") {
-
-        } // else if
-        else if (behaviours[children_index]["type"] == "CompositeNode") {
-            auto node = this->CreateCompositeNode(behaviours, children_index);
+            auto node = this->CreateDecoratorNode(behaviours, children_index);
             composite_node->AddChild(node);
-        } // if
+        } // else if
     } // for
     return composite_node;
 }
 
 std::shared_ptr<behaviour::ActionNodeBase> my::BehaviourFactory::CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
-    using namespace behaviour;
     auto derived = behaviours[index]["derived"].GetString();
     return _action_factory.Create(derived);
 }
 
 std::shared_ptr<behaviour::ConditionalNodeBase> my::BehaviourFactory::CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
-    using namespace behaviour;
     auto derived = behaviours[index]["derived"].GetString();
     return _condition_factory.Create(derived);
+}
+
+std::shared_ptr<behaviour::DecoratorNodeBase> my::BehaviourFactory::CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index) {
+    auto derived = behaviours[index]["derived"].GetString();
+    auto decorator_node = _decorator_factory.Create(derived);
+
+    auto& child = behaviours[index]["child"];
+    auto child_index = child.GetInt();
+    if (behaviours[child_index]["type"] == "CompositeNode") {
+        auto node = this->CreateCompositeNode(behaviours, child_index);
+        decorator_node->SetChild(node);
+    } // if
+    else if (behaviours[child_index]["type"] == "ActionNode") {
+        auto node = this->CreateActionNode(behaviours, child_index);
+        decorator_node->SetChild(node);
+    } // else if
+    else if (behaviours[child_index]["type"] == "ConditionalNode") {
+        auto node = this->CreateConditionalNode(behaviours, child_index);
+        decorator_node->SetChild(node);
+    } // if
+    else if (behaviours[child_index]["type"] == "DecoratorNode") {
+        auto node = this->CreateDecoratorNode(behaviours, child_index);
+        decorator_node->SetChild(node);
+    } // else if
+    return decorator_node;
 }

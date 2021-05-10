@@ -14,20 +14,15 @@ void CGameApp::ChangeDebugMode(void) noexcept {
 }
 
 MofBool CGameApp::Initialize(void) {
-    _ideal_fps = 60.0f;
-    _ideal_delta_time = 1.0f / _ideal_fps;
-    _debug_fps = _ideal_fps;
-    _debug_delta_time = _ideal_delta_time;
-    _debug_flag = false;
     ::CMofImGui::Setup();
     my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
 
 
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
-    _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
     _camera_manager = std::make_shared<my::CameraManager>();
     _light_manager = std::make_shared<my::LightManager>();
+    _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
     _ui_canvas = std::make_shared<my::UICanvas>();
     _scene_manager = ut::MakeSharedWithRelease<my::SceneManager>();
 
@@ -36,6 +31,8 @@ MofBool CGameApp::Initialize(void) {
     my::Component::SetUICanvas(_ui_canvas);
     my::CameraController::SetCameraManager(_camera_manager);
 
+    _light_manager->Initialize();
+    
     _game_manager->SetResourceManager(_resource_manager);
     _game_manager->SetUICanvas(_ui_canvas);
     _game_manager->Initialize();
