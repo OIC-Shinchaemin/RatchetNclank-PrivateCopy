@@ -11,7 +11,7 @@ public class ScoreResult : MonoBehaviour
     private int hiscore;
     private float second;
 
-
+    [SerializeField] private GameObject scoreResult;
     [SerializeField] private TextMeshProUGUI ScoreText;
     [SerializeField] private TextMeshProUGUI HighScoreText;
     [SerializeField] private TextMeshProUGUI NewRecordText;
@@ -19,16 +19,21 @@ public class ScoreResult : MonoBehaviour
     void Start()
     {
         ScoreLoad();
-        ScoreJudge();
+        if (PermanentUI.perm.PlayerCount > 0)
+        {
+            ScoreJudge();
+        }
         ScoreText.text = PermanentUI.perm.ScoreText.text;
         HighScoreText.text = hiscore.ToString("D7");
         PermanentUI.perm.GameEnd();
     }
     private void Update()
     {
+        scoreResult.SetActive(true);
         second += Time.deltaTime;
         if (Input.GetButtonUp("Attack"))
         {
+            BGM.bgm.GameEnd();
             SceneManager.LoadScene("TitleScene");
         }
         if(Input.GetButtonUp("Jump"))

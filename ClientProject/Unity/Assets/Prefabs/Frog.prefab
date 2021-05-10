@@ -146,6 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6b70e85392e074e86c3d8f01d0d093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   leftCap: 32.54
   rightCap: 46.54
   jumpLength: 3
@@ -280,8 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c05bdef29145ec448a2ade19743ca7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  getscore: 100
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
+  Ebiflied: 0
+  health: 1
+  getscore: 100
+  Pop: {fileID: 3418571093655510465, guid: 19575bfad37c4e440be2349ee7dde2f7, type: 3}
