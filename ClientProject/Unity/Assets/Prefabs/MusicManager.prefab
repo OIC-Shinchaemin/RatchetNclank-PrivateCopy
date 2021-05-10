@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3001603174822598031}
   - component: {fileID: 3001603174822598132}
   - component: {fileID: 3001603174822598135}
+  - component: {fileID: 6897535594947750233}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -828,6 +829,13 @@ MonoBehaviour:
   gameover: {fileID: 3001603174822598031}
   ending: {fileID: 3001603174822598135}
   state: 0
+  isTitle: 0
+  isField: 0
+  isUnder: 0
+  isSky: 0
+  isMiss: 0
+  isGameover: 0
+  isEnd: 0
 --- !u!82 &3001603174822598135
 AudioSource:
   m_ObjectHideFlags: 0
@@ -924,3 +932,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6897535594947750233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001603174822598026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769a6005079c9cd41be19cfa60ce374f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
