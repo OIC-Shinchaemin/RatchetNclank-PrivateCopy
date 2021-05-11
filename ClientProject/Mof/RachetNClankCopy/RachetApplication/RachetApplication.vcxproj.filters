@@ -876,6 +876,9 @@
     <ClCompile Include="Factory\TerrainBuilder.cpp">
       <Filter>Rachet\Source\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1651,6 +1654,9 @@
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\Decorator\TargetInRangedAttackRangeNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

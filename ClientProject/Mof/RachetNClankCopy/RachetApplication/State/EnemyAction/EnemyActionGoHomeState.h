@@ -4,7 +4,7 @@
 
 #include "EnemyActionState.h"
 
-#include "../../Component/Enemy/EnemyMoveComponent.h"
+#include "../../Component/Enemy/EnemyGoHomeComponent.h"
 
 
 namespace state {
@@ -12,7 +12,7 @@ class EnemyActionGoHomeState : public state::EnemyActionState {
     using super = state::EnemyActionState;
 private:
     //! 移動
-    std::weak_ptr<my::EnemyMoveComponent> _move_com;
+    std::weak_ptr<my::EnemyGoHomeComponent> _move_com;
 public:
     /// <summary>
     /// コンストラクタ

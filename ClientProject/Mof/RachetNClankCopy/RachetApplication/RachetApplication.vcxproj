@@ -218,6 +218,7 @@
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
+    <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp" />
@@ -469,6 +470,7 @@
     <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentDefine.h" />
+    <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyDamageComponent.h" />

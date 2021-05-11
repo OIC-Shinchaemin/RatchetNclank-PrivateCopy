@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_MOVE_COMPONENT_H
-#define MY_ENEMY_MOVE_COMPONENT_H
+#ifndef MY_ENEMY_GO_HOME_COMPONENT_H
+#define MY_ENEMY_GO_HOME_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -8,7 +8,7 @@
 
 
 namespace my {
-class EnemyMoveComponent : public my::UpdateComponent {
+class EnemyGoHomeComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
     //! 移動速度
@@ -32,16 +32,16 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    EnemyMoveComponent(int priority);
+    EnemyGoHomeComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    EnemyMoveComponent(const EnemyMoveComponent& obj);
+    EnemyGoHomeComponent(const EnemyGoHomeComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~EnemyMoveComponent();
+    virtual ~EnemyGoHomeComponent();
     /// <summary>
     /// セッター
     /// </summary>
@@ -95,4 +95,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_ENEMY_MOVE_COMPONENT_H
+#endif // !MY_ENEMY_GO_HOME_COMPONENT_H

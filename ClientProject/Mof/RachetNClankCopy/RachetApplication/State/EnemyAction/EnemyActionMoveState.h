@@ -12,8 +12,6 @@ namespace state {
 class EnemyActionMoveState : public state::EnemyActionState {
     using super = state::EnemyActionState;
 private:
-    //! Œ^
-    std::weak_ptr<my::EnemyComponent> _enemy_com;
     //! ˆÚ“®
     std::weak_ptr<my::EnemyMoveComponent> _move_com;
 public:

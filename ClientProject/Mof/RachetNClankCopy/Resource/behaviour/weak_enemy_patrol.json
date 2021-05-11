@@ -8,7 +8,8 @@
       "derived": "SequencerNode",
       "children": [
         1,
-        2
+        2,
+        3
       ]
     },
     {
@@ -18,6 +19,10 @@
     {
       "type": "ActionNode",
       "derived": "LookAroundNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "AlwaysFalseNode"
     }
   ]
 }

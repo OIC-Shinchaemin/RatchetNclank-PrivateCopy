@@ -68,6 +68,9 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
     auto current = _state_machine.GetCurrentStateName();
 
     if (next == Type::kEnemyActionIdleState) {
+        if (current == Type::kEnemyActionIdleState) {
+            return false;
+        } // if
         if (current == Type::kEnemyActionDamageState) {
             return false;
         } // if

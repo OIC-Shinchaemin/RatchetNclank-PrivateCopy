@@ -59,6 +59,12 @@
         "priority": 90
       }
     },
+    {
+      "type": "EnemyGoHomeComponent",
+      "paramater": {
+        "priority": 90
+      }
+    },
 
     {
       "type": "EnemyIdleComponent",
