@@ -19,10 +19,9 @@ public class ScoreResult : MonoBehaviour
     void Start()
     {
         ScoreLoad();
-        if (PermanentUI.perm.PlayerCount > 0)
-        {
-            ScoreJudge();
-        }
+
+        ScoreJudge();
+        
         ScoreText.text = PermanentUI.perm.ScoreText.text;
         HighScoreText.text = hiscore.ToString("D7");
         PermanentUI.perm.GameEnd();
@@ -30,7 +29,7 @@ public class ScoreResult : MonoBehaviour
     private void Update()
     {
         scoreResult.SetActive(true);
-        second += Time.deltaTime;
+        //second += Time.deltaTime;
         if (Input.GetButtonUp("Attack"))
         {
             BGM.bgm.GameEnd();
@@ -40,7 +39,7 @@ public class ScoreResult : MonoBehaviour
         {
             ResetScore();
         }
-        if(second >5.0&& isScoreUpdate)
+        if(/*second >5.0&& */isScoreUpdate)
         {
             HighScoreText.text = PermanentUI.perm.ScoreText.text;
             NewRecordText.text = "NewRecord!!";
