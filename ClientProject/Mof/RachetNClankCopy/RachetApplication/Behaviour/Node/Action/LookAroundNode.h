@@ -39,16 +39,10 @@ public:
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<behaviour::LookAroundNodeExecutor::NodeArgs>(node_args);
         
-        auto target = args.enemy_com.lock()->GetTarget();
-        if (!target.expired()) {
-            args.ai_com.lock()->ChangeState("AICombatState");
-            return true;
-        } // if
-
         if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionIdleState)) {
             args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
         } // if
-        return false;
+        return true;
     }
 };
 }

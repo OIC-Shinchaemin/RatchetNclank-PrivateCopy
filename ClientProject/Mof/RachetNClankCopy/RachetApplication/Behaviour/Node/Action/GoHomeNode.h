@@ -40,19 +40,15 @@ public:
     /// <returns>false:é¿çsÇÃé∏îs</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
-            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
-        } // if
-        else {
-            return false;
-        } // else
-
-
-        float distance = Mof::CVector3Utilities::Distance(
-            args.actor.lock()->GetInitialPosition(), args.actor.lock()->GetPosition());
+        
+        float distance = Mof::CVector3Utilities::Distance(args.actor.lock()->GetInitialPosition(), args.actor.lock()->GetPosition());
         if (distance > args.type_com.lock()->GetHomeDistance() ) {
+            if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
+                args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
+            } // if
             return false;
         } // if
+
         return true;
     }
 };

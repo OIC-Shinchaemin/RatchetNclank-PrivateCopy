@@ -1658,6 +1658,30 @@
     <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\NotRecognizingTargetNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\NotRecognizingTargetNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\ChangeCombatNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\ChangeCombatNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\NotTargetRecognitionNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\NotTargetRecognitionNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">

@@ -2,6 +2,7 @@
 
 #include "../Behaviour/Node/SequencerNode.h"
 #include "../Behaviour/Node/SelectorNode.h"
+
 #include "../Behaviour/Node/Action/AlwaysTrueNode.h"
 #include "../Behaviour/Node/Action/AlwaysFalseNode.h"
 #include "../Behaviour/Node/Action/GoHomeNode.h"
@@ -10,11 +11,16 @@
 #include "../Behaviour/Node/Action/MeleeAttackNode.h"
 #include "../Behaviour/Node/Action/RangedAttackNode.h"
 #include "../Behaviour/Node/Action/ChangePatrolNode.h"
+#include "../Behaviour/Node/Action/ChangeCombatNode.h"
+
 #include "../Behaviour/Node/Condition/NotAwayFromHomeNode.h"
 #include "../Behaviour/Node/Condition/TargetRecognitionNode.h"
+#include "../Behaviour/Node/Condition/NotTargetRecognitionNode.h"
+
 #include "../Behaviour/Node/Decorator/TargetInMeleeAttackRange.h"
 #include "../Behaviour/Node/Decorator/TargetInRangedAttackRange.h"
-#include "../Behaviour/Node/DecoratorNode.h"
+#include "../Behaviour/Node/Decorator/RecognizingTargetNode.h"
+#include "../Behaviour/Node/Decorator/NotRecognizingTargetNode.h"
 
 
 my::BehaviourFactory::BehaviourFactory() :
@@ -24,6 +30,7 @@ my::BehaviourFactory::BehaviourFactory() :
     _decorator_factory() {
     _composite_factory.Register<behaviour::SequencerNode>("SequencerNode");
     _composite_factory.Register<behaviour::SelectorNode>("SelectorNode");
+    
     _action_factory.Register<behaviour::AlwaysTrueNode>("AlwaysTrueNode");
     _action_factory.Register<behaviour::AlwaysFalseNode>("AlwaysFalseNode");
     _action_factory.Register<behaviour::GoHomeNode>("GoHomeNode");
@@ -32,11 +39,17 @@ my::BehaviourFactory::BehaviourFactory() :
     _action_factory.Register<behaviour::MeleeAttackNode>("MeleeAttackNode");
     _action_factory.Register<behaviour::RangedAttackNode>("RangedAttackNode");
     _action_factory.Register<behaviour::ChangePatrolNode>("ChangePatrolNode");
+    _action_factory.Register<behaviour::ChangeCombatNode>("ChangeCombatNode");
+
     _condition_factory.Register<behaviour::NotAwayFromHomeNode>("NotAwayFromHomeNode");
     _condition_factory.Register<behaviour::TargetRecognitionNode>("TargetRecognitionNode");
+    _condition_factory.Register<behaviour::NotTargetRecognitionNode>("NotTargetRecognitionNode");
+    
     _decorator_factory.Register<behaviour::TargetInMeleeAttackRangeNode>("TargetInMeleeAttackRangeNode");
     _decorator_factory.Register<behaviour::TargetInRangedAttackRangeNode>("TargetInRangedAttackRangeNode");
-    _decorator_factory.Register<behaviour::DecoratorNodeBase>("DecoratorNode");
+    _decorator_factory.Register<behaviour::RecognizingTargetNode>("RecognizingTargetNode");
+
+    _decorator_factory.Register<behaviour::NotRecognizingTargetNode>("NotRecognizingTargetNode");
 }
 
 behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* path) {

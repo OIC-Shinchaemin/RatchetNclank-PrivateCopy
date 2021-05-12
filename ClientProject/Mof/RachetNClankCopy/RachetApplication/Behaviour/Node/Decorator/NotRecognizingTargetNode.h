@@ -1,27 +1,27 @@
-#ifndef BEHAVIOUR_TARGET_IN_RANGED_ATTACK_NODE_H
-#define BEHAVIOUR_TARGET_IN_RANGED_ATTACK_NODE_H
+#ifndef BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H
+#define BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H
 
 
 #include "../DecoratorNode.h"
 
-#include "../../Executor/Decorator/TargetInRangedAttackRangeNodeExecutor.h"
+#include "../../Executor/Decorator/NotRecognizingTargetNodeExecutor.h"
 
 
 namespace behaviour {
-class TargetInRangedAttackRangeNode : public behaviour::DecoratorNodeBase {
+class NotRecognizingTargetNode : public behaviour::DecoratorNodeBase {
     using super = behaviour::DecoratorNodeBase;
-    using Executor = behaviour::TargetInRangedAttackRangeNodeExecutor;
+    using Executor = behaviour::NotRecognizingTargetNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    TargetInRangedAttackRangeNode() :
-        super("TargetInRangedAttackRangeNode") {
+    NotRecognizingTargetNode() :
+        super("NotRecognizingTargetNode") {
     }
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~TargetInRangedAttackRangeNode() = default;
+    virtual ~NotRecognizingTargetNode() = default;
     /// <summary>
     /// 作成
     /// </summary>
@@ -40,19 +40,13 @@ public:
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        
+
         auto target = args.enemy_com.lock()->GetTarget();
         if (target.expired()) {
-            return false;
-        } // if
-       
-        auto pos = target.lock()->GetPosition();
-        auto range_sphere = args.ranged_attack_com.lock()->GetCanAttackRangeSphere();
-        if (range_sphere.CollisionPoint(pos)) {
             return true;
         } // if
         return false;
     }
 };
 }
-#endif // !BEHAVIOUR_TARGET_IN_RANGED_ATTACK_NODE_H
+#endif // !BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H

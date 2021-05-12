@@ -1,27 +1,27 @@
-#ifndef BEHAVIOUR_CHANGE_PATROL_NODE_H
-#define BEHAVIOUR_CHANGE_PATROL_NODE_H
+#ifndef BEHAVIOUR_CHANGE_COMBAT_NODE_H
+#define BEHAVIOUR_CHANGE_COMBAT_NODE_H
 
 
 #include "../ActionNode.h"
 
-#include "../../Executor/Action/ChangePatrolNodeExecutor.h"
+#include "../../Executor/Action/ChangeCombatNodeExecutor.h"
 
 
 namespace behaviour {
-class ChangePatrolNode : public behaviour::ActionNodeBase {
+class ChangeCombatNode : public behaviour::ActionNodeBase {
     using super = behaviour::ActionNodeBase;
-    using Executor = behaviour::ChangePatrolNodeExecutor;
+    using Executor = behaviour::ChangeCombatNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    ChangePatrolNode() :
-        super("ChangePatrolNode") {
+    ChangeCombatNode() :
+        super("ChangeCombatNode") {
     }
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~ChangePatrolNode() = default;
+    virtual ~ChangeCombatNode() = default;
     /// <summary>
     /// 作成
     /// </summary>
@@ -41,9 +41,9 @@ public:
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
         // can transition state
         // if()
-        args.ai_com.lock()->ChangeState("AIPatrolState");
+        args.ai_com.lock()->ChangeState("AICombatState");
         return true;
     }
 };
 }
-#endif // !BEHAVIOUR_CHANGE_PATROL_NODE_H
+#endif // !BEHAVIOUR_CHANGE_COMBAT_NODE_H

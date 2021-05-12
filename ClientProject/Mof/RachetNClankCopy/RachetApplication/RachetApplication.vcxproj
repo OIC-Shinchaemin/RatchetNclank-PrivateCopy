@@ -386,6 +386,7 @@
     <ClInclude Include="Actor\Weapon\Pyrocitor.h" />
     <ClInclude Include="Actor\Weapon\Weapon.h" />
     <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\ChangeCombatNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Action\ChangePatrolNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Action\LookAroundNodeExecutor.h" />
@@ -395,10 +396,13 @@
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Condition\NotAwayFromHomeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Condition\NotTargetRecognitionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Decorator\TargetInMeleeAttackRangeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Decorator\TargetInRangedAttackRangeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\NotRecognizingTargetNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\NodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\SelectorNodeExecutor.h" />
@@ -407,6 +411,7 @@
     <ClInclude Include="Behaviour\Node\ActionNode.h" />
     <ClInclude Include="Behaviour\Node\Action\AlwaysFalseNode.h" />
     <ClInclude Include="Behaviour\Node\Action\AlwaysTrueNode.h" />
+    <ClInclude Include="Behaviour\Node\Action\ChangeCombatNode.h" />
     <ClInclude Include="Behaviour\Node\Action\ChangePatrolNode.h" />
     <ClInclude Include="Behaviour\Node\Action\MoveToEnemyNode.h" />
     <ClInclude Include="Behaviour\Node\Action\GoHomeNode.h" />
@@ -416,10 +421,13 @@
     <ClInclude Include="Behaviour\Node\CompositeNode.h" />
     <ClInclude Include="Behaviour\Node\ConditionalNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\NotAwayFromHomeNode.h" />
+    <ClInclude Include="Behaviour\Node\Condition\NotTargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h" />
     <ClInclude Include="Behaviour\Node\Decorator\TargetInMeleeAttackRange.h" />
     <ClInclude Include="Behaviour\Node\Decorator\TargetInRangedAttackRange.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\NotRecognizingTargetNode.h" />
     <ClInclude Include="Behaviour\Node\Node.h" />
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
