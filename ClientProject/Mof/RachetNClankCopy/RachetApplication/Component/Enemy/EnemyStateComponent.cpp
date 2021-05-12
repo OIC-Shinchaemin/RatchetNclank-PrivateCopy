@@ -87,9 +87,13 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
         } // else    
     } // else if
     else if (next == Type::kEnemyActionGoHomeState) {
-        if (current == Type::kEnemyActionDamageState) {
+        if (current == Type::kEnemyActionGoHomeState) {
             return false;
         } // if
+        else if (current == Type::kEnemyActionDamageState) {
+            return false;
+        } // else if
+
         else {
             return true;
         } // else    

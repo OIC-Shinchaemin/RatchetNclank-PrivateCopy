@@ -45,7 +45,7 @@ public:
         if (distance > args.type_com.lock()->GetHomeDistance()) {
             return true;
         } // if
-        return true;
+        return false;
     }
 };
 }
