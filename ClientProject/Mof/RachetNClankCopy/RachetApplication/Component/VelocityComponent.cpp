@@ -66,6 +66,14 @@ Mof::CVector3 my::VelocityComponent::GetVelocityForce(void) const {
     return this->_velocity_force;
 }
 
+float my::VelocityComponent::GetDrag(void) const {
+    return this->_drag;
+}
+
+float my::VelocityComponent::GetGravity(void) const {
+    return this->_gravity;
+}
+
 bool my::VelocityComponent::IsSleep(void) const {
     return this->_sleep;
 }
@@ -85,17 +93,15 @@ bool my::VelocityComponent::Initialize(void) {
 }
 
 bool my::VelocityComponent::Update(float delta_time) {
-
     _angular_velocity += _angular_velocity_force;
     _velocity += _velocity_force;
 
     if (_use_gravity) {
         _velocity.y -= _gravity;
     } // if
+    
     _velocity *= _drag;
     _angular_velocity *= _angular_drag;
-
-    //_prev_velocity_force = _velocity_force;
     _velocity_force = Mof::CVector3();
     _angular_velocity_force = Mof::CVector3();
     return true;

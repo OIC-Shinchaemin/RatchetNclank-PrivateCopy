@@ -55,6 +55,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    virtual float GetVolume(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual float GetHeight(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual Mof::CSphere GetStartPositionSphere(void) const;
     /// <summary>
     /// ゲッター

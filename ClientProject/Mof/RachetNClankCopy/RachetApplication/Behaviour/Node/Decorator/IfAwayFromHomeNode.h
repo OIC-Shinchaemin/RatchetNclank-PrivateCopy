@@ -42,10 +42,7 @@ public:
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
 
         float distance = Mof::CVector3Utilities::Distance(args.actor.lock()->GetInitialPosition(), args.actor.lock()->GetPosition());
-        if (distance > args.type_com.lock()->GetHomeDistance()) {
-            return true;
-        } // if
-        return false;
+        return distance > args.type_com.lock()->GetHomeDistance();
     }
 };
 }

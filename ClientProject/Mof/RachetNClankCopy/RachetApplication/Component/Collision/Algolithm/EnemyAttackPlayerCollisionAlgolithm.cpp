@@ -13,12 +13,10 @@ my::EnemyAttackPlayerCollisionAlgolithm::~EnemyAttackPlayerCollisionAlgolithm() 
 
 const char* my::EnemyAttackPlayerCollisionAlgolithm::GetLayerType(void) const {
     return my::CollisionComponentType::kEnemyAttackCollisionComponent.c_str();
-    //return "EnemyAttackCollisionComponent";
 }
 
 const char* my::EnemyAttackPlayerCollisionAlgolithm::GetTargetType(void) const {
     return my::CollisionComponentType::kPlayerCollisionComponent.c_str();
-    //return "PlayerCollisionComponent";
 }
 
 bool my::EnemyAttackPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {

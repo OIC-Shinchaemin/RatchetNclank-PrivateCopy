@@ -10,7 +10,7 @@
 namespace my {
 class VelocityComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
-private:    
+private:
     //! ë¨ìx
     Mof::CVector3 _velocity;
     //! äpë¨ìx
@@ -21,7 +21,7 @@ private:
     Mof::CVector3 _angular_velocity_force;
     //! å∏ë¨Y
     float _gravity;
-    //! å∏ë¨åWêîXZ
+    //! å∏ë¨åWêî
     float _drag;
     //! å∏ë¨åWêî
     float _angular_drag;
@@ -93,6 +93,18 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector3 GetVelocityForce(void) const;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetDrag(void) const;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetGravity(void) const;
     /// <summary>
     /// îªíË
     /// </summary>

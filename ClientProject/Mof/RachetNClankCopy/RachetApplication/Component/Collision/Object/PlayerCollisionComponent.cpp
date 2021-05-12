@@ -100,6 +100,7 @@ void my::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer me
 void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
     auto sphere = this->GetSphere().value();
 
+    auto gimmick_pos = gimmick->GetPosition();
     auto gimmick_sphere_0 = gimmick->GetStartPositionSphere();
     auto gimmick_sphere_1 = gimmick->GetEndPositionSphere();
     if (gimmick_sphere_0.CollisionSphere(sphere) && !gimmick_sphere_0.CollisionPoint(gimmick->GetPosition()) ||
@@ -115,18 +116,43 @@ void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer m
         Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
         geometry->SetMatrix(mat);
 
+
+
+        float volume = _player_com.lock()->GetVolume();
+        float height = _player_com.lock()->GetHeight();
+        auto pos = super::GetOwner()->GetPosition();
+
+
+        auto player_circle = Mof::CCircle(pos.x, pos.z, volume);
+        auto gimmick_circle = Mof::CCircle(gimmick_pos.x, gimmick_pos.z, gimmick->GetVolume());
+
+        if (pos.y > gimmick_pos.y - gimmick->GetVolume() * 0.5f &&
+            pos.y + height < gimmick_pos.y + gimmick->GetVolume() * 0.5f
+            ) {
+            std::cout << "diff = " << "\n";
+
+            if (player_circle.CollisionCircle(gimmick_circle)) {
+
+                float py = std::sqrt(player_circle.x * player_circle.x + player_circle.y * player_circle.y);
+                float gy = std::sqrt(gimmick_circle.x * gimmick_circle.x + gimmick_circle.y * gimmick_circle.y);
+
+                float diff = std::abs(gy - py);
+
+                std::cout << "diff = " << diff << "\n";
+            } // if
+        } // if
+
+
+
+
+        // down ray
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _player_com.lock()->GetHeight();
 
             if (info.d <= height) {
                 auto pos = super::GetOwner()->GetPosition();
-                if (auto velocity_com = _velocity_com.lock()) {
-                    auto add = Mof::CVector3(std::log10(time) * gimmick_move.x * 60.0f,
-                                             std::log10(time) * gimmick_move.y * 60.0f,
-                                             std::log10(time) * gimmick_move.z * 60.0f);
-                    velocity_com->AddVelocityForce(add);
-                } // if
                 pos.y += height - info.d;
+                pos += gimmick_move;
                 super::GetOwner()->SetPosition(pos);
 
                 if (!_on_elevator) {
