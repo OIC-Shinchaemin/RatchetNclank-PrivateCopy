@@ -38,7 +38,8 @@ public class BossEvent : MonoBehaviour
 
     public void TriggerON()
     {
-        col.isTrigger = true;
         areaCam.Priority = 0;
+        //col.isTrigger = true;
+        Destroy(gameObject);
     }
 }
