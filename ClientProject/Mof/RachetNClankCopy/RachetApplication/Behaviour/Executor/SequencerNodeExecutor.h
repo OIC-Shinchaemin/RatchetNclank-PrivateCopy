@@ -27,6 +27,7 @@ public:
     /// <returns>Succeeded:Às‚Ì¬Œ÷</returns>
     /// <returns>Failed:Às‚Ì¸”s</returns>
     virtual behaviour::INodeExecutor::Result Execute(void) override {
+        /*
         if (super::_current) {
             auto re = super::_current->Execute();
             if (re != super::Result::None) {
@@ -34,6 +35,7 @@ public:
             } // if
             return super::Result::None;
         } // if
+        */
 
 
         // ÀsÏ‚İ

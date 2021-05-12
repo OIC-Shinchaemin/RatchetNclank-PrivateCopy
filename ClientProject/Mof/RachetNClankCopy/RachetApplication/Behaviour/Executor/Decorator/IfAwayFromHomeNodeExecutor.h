@@ -1,43 +1,38 @@
-#ifndef BEHAVIOUR_GO_HOME_NODE_EXECUTOR_H
-#define BEHAVIOUR_GO_HOME_NODE_EXECUTOR_H
+#ifndef BEHAVIOUR_IF_AWAY_FROM_HOME_NODE_EXECUTOR_H
+#define BEHAVIOUR_IF_AWAY_FROM_HOME_NODE_EXECUTOR_H
 
 
-#include "../ActionNodeExecutor.h"
-
-#include <memory>
+#include "../DecoratorNodeExecutor.h"
 
 #include "../../../Component/Enemy/EnemyComponent.h"
-#include "../../../Component/Enemy/EnemyStateComponent.h"
 
 
 namespace behaviour {
-class GoHomeNodeExecutor : public behaviour::ActionNodeExecutor {
-    using super = behaviour::ActionNodeExecutor;
+class IfAwayFromHomeNodeExecutor : public behaviour::DecoratorNodeExecutor {
+    using super = behaviour::DecoratorNodeExecutor;
 public:
     struct NodeArgs {
         //! アクター
         std::weak_ptr<my::Actor> actor;
         //! 型
         std::weak_ptr<my::EnemyComponent> type_com;
-        //! 状態
-        std::weak_ptr<my::EnemyStateComponent> state_com;
     };
 private:
     //! 実行引数
-    behaviour::GoHomeNodeExecutor::NodeArgs _node_args;
+    behaviour::IfAwayFromHomeNodeExecutor::NodeArgs _node_args;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    GoHomeNodeExecutor(const behaviour::NodePtr& node) :
+    IfAwayFromHomeNodeExecutor(const behaviour::SimplexNodePtr& node) :
         super(node),
         _node_args() {
     }
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~GoHomeNodeExecutor() = default;
+    virtual ~IfAwayFromHomeNodeExecutor() = default;
     /// <summary>
     /// 実行時必要なポインタをキャッシュ
     /// </summary>
@@ -47,7 +42,6 @@ public:
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
             _node_args.type_com = actor->GetComponent<my::EnemyComponent>();
-            _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
         } // if
     }
     /// <summary>
@@ -57,8 +51,8 @@ public:
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
     virtual behaviour::INodeExecutor::Result Execute(void) override {
-        return super::ActionNodeExecute(_node_args);
+        return super::DecoratorNodeExecute(_node_args);
     }
 };
 }
-#endif // !BEHAVIOUR_GO_HOME_NODE_EXECUTOR_H
+#endif // !BEHAVIOUR_IF_AWAY_FROM_HOME_NODE_EXECUTOR_H

@@ -12,7 +12,7 @@ class CompositeNodeExecutor : public behaviour::NodeExecutor {
     using super = behaviour::NodeExecutor;
 protected:
     //! 実行中
-    behaviour::NodeExecutorPtr _current;
+    //behaviour::NodeExecutorPtr _current;
 public:
     /// <summary>
     /// コンストラクタ
@@ -46,7 +46,7 @@ public:
     /// <param name=""></param>
     virtual void Reset(void) override {
         super::Reset();
-        _current.reset();
+        //_current.reset();
         for (auto& ptr : super::_children) {
             ptr->Reset();
         } // for

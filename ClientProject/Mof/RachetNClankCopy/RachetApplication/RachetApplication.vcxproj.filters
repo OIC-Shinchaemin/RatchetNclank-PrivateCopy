@@ -1682,6 +1682,12 @@
     <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h">
       <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
     </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfAwayFromHomeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfAwayFromHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">

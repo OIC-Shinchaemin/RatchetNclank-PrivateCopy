@@ -399,6 +399,7 @@
     <ClInclude Include="Behaviour\Executor\Condition\NotTargetRecognitionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\IfAwayFromHomeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Decorator\TargetInMeleeAttackRangeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Decorator\TargetInRangedAttackRangeNodeExecutor.h" />
@@ -424,6 +425,7 @@
     <ClInclude Include="Behaviour\Node\Condition\NotTargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\IfAwayFromHomeNode.h" />
     <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h" />
     <ClInclude Include="Behaviour\Node\Decorator\TargetInMeleeAttackRange.h" />
     <ClInclude Include="Behaviour\Node\Decorator\TargetInRangedAttackRange.h" />

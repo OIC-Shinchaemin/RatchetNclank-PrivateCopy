@@ -21,6 +21,7 @@
 #include "../Behaviour/Node/Decorator/TargetInRangedAttackRange.h"
 #include "../Behaviour/Node/Decorator/RecognizingTargetNode.h"
 #include "../Behaviour/Node/Decorator/NotRecognizingTargetNode.h"
+#include "../Behaviour/Node/Decorator/IfAwayFromHomeNode.h"
 
 
 my::BehaviourFactory::BehaviourFactory() :
@@ -48,8 +49,8 @@ my::BehaviourFactory::BehaviourFactory() :
     _decorator_factory.Register<behaviour::TargetInMeleeAttackRangeNode>("TargetInMeleeAttackRangeNode");
     _decorator_factory.Register<behaviour::TargetInRangedAttackRangeNode>("TargetInRangedAttackRangeNode");
     _decorator_factory.Register<behaviour::RecognizingTargetNode>("RecognizingTargetNode");
-
     _decorator_factory.Register<behaviour::NotRecognizingTargetNode>("NotRecognizingTargetNode");
+    _decorator_factory.Register<behaviour::IfAwayFromHomeNode>("IfAwayFromHomeNode");
 }
 
 behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* path) {
