@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     [SerializeField] private string sceneName;
-    [SerializeField] private bool musicstop;
+    public bool musicstop;
     [HideInInspector] public bool stageChangeable = false;
 
     private void Update()

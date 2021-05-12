@@ -55,6 +55,7 @@ public class BGMSelector : MonoBehaviour
         if (field == true)
         {
             BGM.bgm.state = BGM.Musicstate.stage1;
+ 
         }
         if (sky == true)
         {

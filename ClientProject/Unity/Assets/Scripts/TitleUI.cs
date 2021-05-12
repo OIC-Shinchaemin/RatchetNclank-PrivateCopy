@@ -17,13 +17,15 @@ public class TitleUI : MonoBehaviour
     // Update is called once per frame
     private void ScoreLoad()
     {
-        FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Open, FileAccess.Read);
-        BinaryReader reader = new BinaryReader(f);
+        hiscore = PlayerPrefs.GetInt("HighScore", 0);
 
-        if (reader != null)
-        {
-            hiscore = reader.ReadInt32();
-            reader.Close();
-        }
+        //FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Open, FileAccess.Read);
+        //BinaryReader reader = new BinaryReader(f);
+
+        //if (reader != null)
+        //{
+        //    hiscore = reader.ReadInt32();
+        //    reader.Close();
+        //}
     }
 }

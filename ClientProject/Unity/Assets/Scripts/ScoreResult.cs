@@ -50,21 +50,25 @@ public class ScoreResult : MonoBehaviour
 
     private void ScoreLoad()
     {
-        FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Open, FileAccess.Read);
-        BinaryReader reader = new BinaryReader(f);
+        hiscore = PlayerPrefs.GetInt("HighScore", 0);
 
-        if (reader != null)
-        {
-            hiscore = reader.ReadInt32();
-            reader.Close();
-        }
+
+
+        //FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Open, FileAccess.Read);
+        //BinaryReader reader = new BinaryReader(f);
+
+        //if (reader != null)
+        //{
+        //    hiscore = reader.ReadInt32();
+        //    reader.Close();
+        //}
     }
     private void ResetScore()
     {
-        FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Create, FileAccess.Write);
-        BinaryWriter writer = new BinaryWriter(f);
-        writer.Write(0);
-        writer.Close();
+        //FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Create, FileAccess.Write);
+        //BinaryWriter writer = new BinaryWriter(f);
+        //writer.Write(0);
+        //writer.Close();
 
     }
     private void ScoreJudge()
@@ -81,9 +85,13 @@ public class ScoreResult : MonoBehaviour
 
     private void ScoreSave()
     {
-        FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Create, FileAccess.Write);
-        BinaryWriter writer = new BinaryWriter(f);
-        writer.Write(PermanentUI.perm.scoreValue);
-        writer.Close();
+
+        PlayerPrefs.SetInt("HighScore", PermanentUI.perm.scoreValue);
+        PlayerPrefs.Save();
+
+        //FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Create, FileAccess.Write);
+        //BinaryWriter writer = new BinaryWriter(f);
+        //writer.Write(PermanentUI.perm.scoreValue);
+        //writer.Close();
     }
 }
