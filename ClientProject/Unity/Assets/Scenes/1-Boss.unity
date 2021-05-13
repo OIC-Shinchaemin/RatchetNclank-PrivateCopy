@@ -2350,6 +2350,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 112519062}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &187993373 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3691608555301254545, guid: d9ac229c2888a7441a8bc1481befd746,
+    type: 3}
+  m_PrefabInstance: {fileID: 112519062}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187993370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c05bdef29145ec448a2ade19743ca7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &187993374 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3691608555301254551, guid: d9ac229c2888a7441a8bc1481befd746,
@@ -3901,6 +3913,11 @@ PrefabInstance:
       propertyPath: under
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 896155171350472445, guid: 29fe889cbef56c64cb066a0e225fd808,
+        type: 3}
+      propertyPath: BossHp
+      value: 
+      objectReference: {fileID: 187993373}
     - target: {fileID: 896155171350472445, guid: 29fe889cbef56c64cb066a0e225fd808,
         type: 3}
       propertyPath: bossEvent

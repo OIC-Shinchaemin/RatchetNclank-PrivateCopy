@@ -278,6 +278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 896155171350472445, guid: 29fe889cbef56c64cb066a0e225fd808,
         type: 3}
+      propertyPath: BossHp
+      value: 
+      objectReference: {fileID: 7653281234920726968}
+    - target: {fileID: 896155171350472445, guid: 29fe889cbef56c64cb066a0e225fd808,
+        type: 3}
       propertyPath: bossEvent
       value: 
       objectReference: {fileID: 163353454}

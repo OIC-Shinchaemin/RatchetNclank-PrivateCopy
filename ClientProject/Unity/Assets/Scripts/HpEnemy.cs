@@ -9,7 +9,7 @@ public class HpEnemy : Enemy
     //protected AudioSource death;
     //protected Rigidbody2D rb;
     public bool Ebiflied = false;
-    [SerializeField, Range(1, 50)] private int health = 1;
+    [SerializeField, Range(1, 50)] public int health = 1;
     [SerializeField] private int getscore = 100;
     public GameObject Pop;
     //[SerializeField] UnityEvent deathEvent;

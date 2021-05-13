@@ -10,6 +10,7 @@ public class BGMSelector : MonoBehaviour
     public bool sky;
     public bool under;
     public BossEvent bossEvent;
+    public HpEnemy BossHp;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,12 +40,13 @@ public class BGMSelector : MonoBehaviour
                 MusicChanger.SetActive(true);
             }
         }
-        else
+        else if(BossHp.health <= 0)
         {
             MusicChanger.SetActive(false);
             if (PermanentUI.perm.currentHP > 0)
             {
                 BGMChange();
+                Destroy(gameObject);
 
             }
         }
@@ -56,14 +58,17 @@ public class BGMSelector : MonoBehaviour
         {
             BGM.bgm.state = BGM.Musicstate.stage1;
  
+ 
         }
         if (sky == true)
         {
-            BGM.bgm.state = BGM.Musicstate.stage2;
+            BGM.bgm.state = BGM.Musicstate.stage2; 
+           
         }
         if (under == true)
         {
             BGM.bgm.state = BGM.Musicstate.understage;
+
         }
     }
 
