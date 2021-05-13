@@ -29,11 +29,11 @@ Mof::CVector3 Elevator::GetMoveValue(void) const {
 }
 
 float Elevator::GetVolume(void) const {
-    return 1.0f;
+    return 4.5f;
 }
 
 float Elevator::GetHeight(void) const {
-    return 4.5f;
+    return 1.0f;
 }
 
 Mof::CSphere Elevator::GetStartPositionSphere(void) const {
