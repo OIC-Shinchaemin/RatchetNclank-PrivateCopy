@@ -13,15 +13,18 @@
 #include "../Behaviour/Node/Action/ChangePatrolNode.h"
 #include "../Behaviour/Node/Action/ChangeCombatNode.h"
 
+#include "../Behaviour/Node/Condition/AwayFromHomeNode.h"
 #include "../Behaviour/Node/Condition/NotAwayFromHomeNode.h"
 #include "../Behaviour/Node/Condition/TargetRecognitionNode.h"
 #include "../Behaviour/Node/Condition/NotTargetRecognitionNode.h"
 
 #include "../Behaviour/Node/Decorator/TargetInMeleeAttackRange.h"
+#include "../Behaviour/Node/Decorator/IfTargetOutMeleeAttackRangeNode.h"
 #include "../Behaviour/Node/Decorator/TargetInRangedAttackRange.h"
 #include "../Behaviour/Node/Decorator/RecognizingTargetNode.h"
 #include "../Behaviour/Node/Decorator/NotRecognizingTargetNode.h"
 #include "../Behaviour/Node/Decorator/IfAwayFromHomeNode.h"
+#include "../Behaviour/Node/Decorator/IfCloseFromHomeNode.h"
 
 
 my::BehaviourFactory::BehaviourFactory() :
@@ -42,15 +45,18 @@ my::BehaviourFactory::BehaviourFactory() :
     _action_factory.Register<behaviour::ChangePatrolNode>("ChangePatrolNode");
     _action_factory.Register<behaviour::ChangeCombatNode>("ChangeCombatNode");
 
+    _condition_factory.Register<behaviour::AwayFromHomeNode>("AwayFromHomeNode");
     _condition_factory.Register<behaviour::NotAwayFromHomeNode>("NotAwayFromHomeNode");
     _condition_factory.Register<behaviour::TargetRecognitionNode>("TargetRecognitionNode");
     _condition_factory.Register<behaviour::NotTargetRecognitionNode>("NotTargetRecognitionNode");
     
     _decorator_factory.Register<behaviour::TargetInMeleeAttackRangeNode>("TargetInMeleeAttackRangeNode");
+    _decorator_factory.Register<behaviour::IfTargetOutMeleeAttackRangeNode>("IfTargetOutMeleeAttackRangeNode");
     _decorator_factory.Register<behaviour::TargetInRangedAttackRangeNode>("TargetInRangedAttackRangeNode");
     _decorator_factory.Register<behaviour::RecognizingTargetNode>("RecognizingTargetNode");
     _decorator_factory.Register<behaviour::NotRecognizingTargetNode>("NotRecognizingTargetNode");
     _decorator_factory.Register<behaviour::IfAwayFromHomeNode>("IfAwayFromHomeNode");
+    _decorator_factory.Register<behaviour::IfCloseFromHomeNode>("IfCloseFromHomeNode");
 }
 
 behaviour::CompositeNodePtr my::BehaviourFactory::CreateRootNode(const char* path) {

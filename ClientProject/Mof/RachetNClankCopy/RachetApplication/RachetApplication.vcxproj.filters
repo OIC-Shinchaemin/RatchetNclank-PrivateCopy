@@ -1676,9 +1676,6 @@
     <ClInclude Include="Behaviour\Executor\Condition\NotTargetRecognitionNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
     </ClInclude>
-    <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h">
-      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
-    </ClInclude>
     <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h">
       <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
     </ClInclude>
@@ -1687,6 +1684,27 @@
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\Decorator\IfAwayFromHomeNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfTargetOutMeleeAttackRangeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfTargetOutMeleeAttackRangeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfCloseFromHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfCloseFromHomeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\AwayFromHomeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\AwayFromHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

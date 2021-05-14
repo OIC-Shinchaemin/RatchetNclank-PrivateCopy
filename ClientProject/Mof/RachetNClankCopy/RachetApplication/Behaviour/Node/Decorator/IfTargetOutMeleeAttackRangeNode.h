@@ -1,27 +1,27 @@
-#ifndef BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
-#define BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
+#ifndef BEHAVIOUR_IF_TARGET_OUT_MELEE_ATTACK_NODE_H
+#define BEHAVIOUR_IF_TARGET_OUT_MELEE_ATTACK_NODE_H
 
 
 #include "../DecoratorNode.h"
 
-#include "../../Executor/Decorator/RecognizingTargetNodeExecutor.h"
+#include "../../Executor/Decorator/IfTargetOutMeleeAttackRangeNodeExecutor.h"
 
 
 namespace behaviour {
-class RecognizingTargetNode : public behaviour::DecoratorNodeBase {
+class IfTargetOutMeleeAttackRangeNode : public behaviour::DecoratorNodeBase {
     using super = behaviour::DecoratorNodeBase;
-    using Executor = behaviour::RecognizingTargetNodeExecutor;
+    using Executor = behaviour::IfTargetOutMeleeAttackRangeNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    RecognizingTargetNode() :
-        super("RecognizingTargetNode") {
+    IfTargetOutMeleeAttackRangeNode() :
+        super("IfTargetOutMeleeAttackRangeNode ") {
     }
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~RecognizingTargetNode() = default;
+    virtual ~IfTargetOutMeleeAttackRangeNode() = default;
     /// <summary>
     /// 作成
     /// </summary>
@@ -40,9 +40,16 @@ public:
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
+        
         auto target = args.enemy_com.lock()->GetTarget();
-        return !target.expired();
+        if (target.expired()) {
+            return false;
+        } // if
+
+        auto pos = target.lock()->GetPosition();
+        auto range_sphere = args.melee_attack_com.lock()->GetCanAttackRangeSphere();
+        return !range_sphere.CollisionPoint(pos);
     }
 };
 }
-#endif // !BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
+#endif // !BEHAVIOUR_IF_TARGET_OUT_MELEE_ATTACK_NODE_H

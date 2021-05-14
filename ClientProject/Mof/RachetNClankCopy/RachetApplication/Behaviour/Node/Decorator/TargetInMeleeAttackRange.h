@@ -48,10 +48,7 @@ public:
 
         auto pos = target.lock()->GetPosition();
         auto range_sphere = args.melee_attack_com.lock()->GetCanAttackRangeSphere();
-        if (range_sphere.CollisionPoint(pos)) {
-            return true;
-        } // if
-        return false;
+        return range_sphere.CollisionPoint(pos);
     }
 };
 }

@@ -12,7 +12,7 @@ class CompositeNodeExecutor : public behaviour::NodeExecutor {
     using super = behaviour::NodeExecutor;
 protected:
     //! 実行中
-    //behaviour::NodeExecutorPtr _current;
+    behaviour::NodeExecutorPtr _current;
 public:
     /// <summary>
     /// コンストラクタ

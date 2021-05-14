@@ -1,27 +1,27 @@
-#ifndef BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
-#define BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
+#ifndef BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_H
+#define BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_H
 
 
 #include "../DecoratorNode.h"
 
-#include "../../Executor/Decorator/RecognizingTargetNodeExecutor.h"
+#include "../../Executor/Decorator/IfCloseFromHomeNodeExecutor.h"
 
 
 namespace behaviour {
-class RecognizingTargetNode : public behaviour::DecoratorNodeBase {
+class IfCloseFromHomeNode : public behaviour::DecoratorNodeBase {
     using super = behaviour::DecoratorNodeBase;
-    using Executor = behaviour::RecognizingTargetNodeExecutor;
+    using Executor = behaviour::IfCloseFromHomeNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    RecognizingTargetNode() :
-        super("RecognizingTargetNode") {
+    IfCloseFromHomeNode() :
+        super("IfCloseFromHomeNode") {
     }
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~RecognizingTargetNode() = default;
+    virtual ~IfCloseFromHomeNode() = default;
     /// <summary>
     /// 作成
     /// </summary>
@@ -40,9 +40,10 @@ public:
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        auto target = args.enemy_com.lock()->GetTarget();
-        return !target.expired();
+
+        float distance = Mof::CVector3Utilities::Distance(args.actor.lock()->GetInitialPosition(), args.actor.lock()->GetPosition());
+        return !(distance > args.type_com.lock()->GetHomeDistance());
     }
 };
 }
-#endif // !BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
+#endif // !BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_H

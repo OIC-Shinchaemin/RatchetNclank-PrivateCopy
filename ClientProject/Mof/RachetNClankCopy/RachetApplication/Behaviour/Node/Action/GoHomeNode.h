@@ -44,7 +44,14 @@ public:
         if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
             args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
         } // if
-        return true;
+
+        auto pos = args.actor.lock()->GetPosition();
+        auto init_pos = args.actor.lock()->GetInitialPosition();
+        float distance = Mof::CVector3Utilities::Distance(pos, init_pos);
+        if (distance < args.type_com.lock()->GetHomeDistance()) {
+            return true;
+        } // if
+        return false;
     }
 };
 }

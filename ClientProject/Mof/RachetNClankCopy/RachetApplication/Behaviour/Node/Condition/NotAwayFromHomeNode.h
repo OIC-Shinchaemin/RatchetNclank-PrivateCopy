@@ -40,7 +40,7 @@ public:
         auto args = std::any_cast<behaviour::NotAwayFromHomeNodeExecutor::NodeArgs>(node_args);
         auto actor = args.actor.lock();
 
-        return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) < 9.5f;
+        return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) < 2.0f;
     }
 };
 }

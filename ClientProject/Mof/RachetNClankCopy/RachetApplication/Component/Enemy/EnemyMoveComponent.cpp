@@ -48,6 +48,7 @@ my::EnemyMoveComponent::EnemyMoveComponent(int priority) :
     _move_speed(0.0f),
     _angular_speed(0.0f),
     _ideal_angle(0.0f),
+    _target(),
     _velocity_com(),
     _motion_state_com() {
 }
@@ -57,6 +58,7 @@ my::EnemyMoveComponent::EnemyMoveComponent(const EnemyMoveComponent& obj) :
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
+    _target(),
     _velocity_com(),
     _motion_state_com() {
 }
@@ -76,8 +78,16 @@ void my::EnemyMoveComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
+void my::EnemyMoveComponent::SetTargetPosition(Mof::CVector3 position) {
+    this->_target = position;
+}
+
 std::string my::EnemyMoveComponent::GetType(void) const {
     return "EnemyMoveComponent";
+}
+
+Mof::CVector3 my::EnemyMoveComponent::GetTargetPosition(void) const {
+    return this->_target;
 }
 
 bool my::EnemyMoveComponent::Initialize(void) {
@@ -91,10 +101,8 @@ bool my::EnemyMoveComponent::Initialize(void) {
 }
 
 bool my::EnemyMoveComponent::Update(float delta_time) {
-    Mof::CVector3 target_pos = super::GetOwner()->GetPosition();
     if (auto enemy_com = _enemy_com.lock()) {
         if (auto target = enemy_com->GetTarget().lock()) {
-            target_pos = target->GetPosition();
         } // if
         else {
             if (auto state_com = _action_state_com.lock()) {
@@ -109,7 +117,7 @@ bool my::EnemyMoveComponent::Update(float delta_time) {
 
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
-    auto dir = target_pos - super::GetOwner()->GetPosition();
+    auto dir = _target - super::GetOwner()->GetPosition();
     float angle = std::atan2(dir.z, dir.x);
     in = math::Rotate(in.x, in.y, angle);
 

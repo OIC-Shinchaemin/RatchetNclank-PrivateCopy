@@ -8,6 +8,7 @@
 
 #include "../../../Component/Enemy/EnemyComponent.h"
 #include "../../../Component/Enemy/EnemyStateComponent.h"
+#include "../../../Component/Enemy/EnemyMoveComponent.h"
 #include "../../../Component/Enemy/EnemyMeleeAttackComponent.h"
 #include "../../../Component/Enemy/EnemyRangedAttackComponent.h"
 
@@ -21,6 +22,8 @@ public:
         std::weak_ptr<my::Actor> actor;
         //! エネミー
         std::weak_ptr<my::EnemyComponent> enemy_com;
+        //! エネミー
+        std::weak_ptr<my::EnemyMoveComponent> move_com;
         //! エネミー状態
         std::weak_ptr<my::EnemyStateComponent> state_com;
         //! 近接攻撃
@@ -54,6 +57,7 @@ public:
         if (auto actor = super::_actor.lock()) {
             _node_args.enemy_com = actor->GetComponent<my::EnemyComponent>();
             _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
+            _node_args.move_com = actor->GetComponent<my::EnemyMoveComponent>();
             _node_args.melee_attack_com= actor->GetComponent<my::EnemyMeleeAttackComponent>();
             _node_args.ranged_attack_com = actor->GetComponent<my::EnemyRangedAttackComponent>();
         } // if

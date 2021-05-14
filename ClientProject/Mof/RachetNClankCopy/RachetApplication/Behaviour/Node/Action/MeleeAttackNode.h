@@ -45,16 +45,17 @@ public:
         } // if
 
         auto pos = target.lock()->GetPosition();
-        auto attack_com = args.attack_com.lock();
-        if (attack_com->GetCanAttackRangeSphere().CollisionPoint(pos)) {
-            args.ai_com.lock()->ChangeState("AICombatState");
-            
-            if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMeleeAttackState)) {
-                args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionMeleeAttackState);
-            } // if
+        auto range_sphere = args.attack_com.lock()->GetCanAttackRangeSphere();
+        if (!range_sphere.CollisionPoint(pos)) {
+            args.ai_com.lock()->ChangeState("AIPatrolState");
             return false;
         } // if
-        //return true;
+
+
+        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMeleeAttackState)) {
+            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionMeleeAttackState);
+            return false;
+        } // if
         return false;
     }
 };

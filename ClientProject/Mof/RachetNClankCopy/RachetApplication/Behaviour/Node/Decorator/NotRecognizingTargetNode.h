@@ -42,10 +42,7 @@ public:
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
 
         auto target = args.enemy_com.lock()->GetTarget();
-        if (target.expired()) {
-            return true;
-        } // if
-        return false;
+        return target.expired();
     }
 };
 }

@@ -1,27 +1,27 @@
-#ifndef BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
-#define BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
+#ifndef BEHAVIOUR_AWAY_FROM_HOME_NODE_H
+#define BEHAVIOUR_AWAY_FROM_HOME_NODE_H
 
 
-#include "../DecoratorNode.h"
+#include "../ConditionalNode.h"
 
-#include "../../Executor/Decorator/RecognizingTargetNodeExecutor.h"
+#include "../../Executor/Condition/AwayFromHomeNodeExecutor.h"
 
 
 namespace behaviour {
-class RecognizingTargetNode : public behaviour::DecoratorNodeBase {
-    using super = behaviour::DecoratorNodeBase;
-    using Executor = behaviour::RecognizingTargetNodeExecutor;
+class AwayFromHomeNode : public behaviour::ConditionalNodeBase {
+    using super = behaviour::ConditionalNodeBase;
+    using Executor = behaviour::AwayFromHomeNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    RecognizingTargetNode() :
-        super("RecognizingTargetNode") {
+    AwayFromHomeNode() :
+        super("AwayFromHomeNode") {
     }
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~RecognizingTargetNode() = default;
+    virtual ~AwayFromHomeNode() = default;
     /// <summary>
     /// 作成
     /// </summary>
@@ -29,8 +29,7 @@ public:
     /// <returns></returns>
     virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
         auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
-        auto temp = std::dynamic_pointer_cast<behaviour::SimplexNode>(ptr);
-        return std::make_shared<Executor>(temp);
+        return std::make_shared<behaviour::AwayFromHomeNodeExecutor>(ptr);
     }
     /// <summary>
     /// ノードの実行
@@ -40,9 +39,10 @@ public:
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        auto target = args.enemy_com.lock()->GetTarget();
-        return !target.expired();
+        auto actor = args.actor.lock();
+
+        return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) > 2.0f;
     }
 };
 }
-#endif // !BEHAVIOUR_RECOGNIZING_TARGET_NODE_H
+#endif // !BEHAVIOUR_AWAY_FROM_HOME_NODE_H

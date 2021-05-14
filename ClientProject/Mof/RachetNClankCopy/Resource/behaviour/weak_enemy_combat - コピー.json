@@ -8,40 +8,38 @@
       "derived": "SelectorNode",
       "children": [
         1,
-        2
-
+        6
       ]
-    },
-    {
-      "type": "DecoratorNode",
-      "derived": "NotRecognizingTargetNode",
-      "child": 3
-    },
-    {
-      "type": "ActionNode",
-      "derived": "ChangeCombatNode"
     },
     {
       "type": "CompositeNode",
       "derived": "SequencerNode",
       "children": [
+        2,
+        3,
         4,
-        5,
-        6
+        5
       ]
     },
-
     {
-      "type": "ActionNode",
-      "derived": "GoHomeNode"
+      "type": "ConditionalNode",
+      "derived": "NotAwayFromHomeNode"
+    },
+    {
+      "type": "ConditionalNode",
+      "derived": "TargetRecognitionNode"
     },
     {
       "type": "ActionNode",
-      "derived": "LookAroundNode"
+      "derived": "MoveToEnemyNode"
     },
     {
       "type": "ActionNode",
-      "derived": "AlwaysFalseNode"
+      "derived": "MeleeAttackNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "ChangePatrolNode"
     }
   ]
 }
