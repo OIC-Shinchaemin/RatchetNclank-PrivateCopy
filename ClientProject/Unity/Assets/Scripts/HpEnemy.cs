@@ -65,7 +65,7 @@ public class HpEnemy : Enemy
     private void EbiScore()
     {
         PermanentUI.perm.scoreValue += getscore;
-        Instantiate(Pop, transform.position, transform.rotation);
+        Instantiate(Pop, transform.position, Pop.transform.rotation);
         ScoreUpdate();
     }
     private void ScoreUpdate()

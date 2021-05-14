@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             PermanentUI.perm.cherries += 1;
             PermanentUI.perm.cherryTaxt.text = PermanentUI.perm.cherries.ToString();
-            Instantiate(Pop, transform.position, transform.rotation);
+            Instantiate(Pop, transform.position, Pop.transform.rotation);
             PermanentUI.perm.CherryScore();
             
         }
@@ -179,8 +179,10 @@ public class PlayerController : MonoBehaviour
             PermanentUI.perm.healthAmount.text = PermanentUI.perm.currentHP.ToString();
             if (PermanentUI.perm.currentHP <= 0)
             {
+                PermanentUI.perm.BeforePlayer -= 1;
                 PermanentUI.perm.PlayerCount -= 1;
                 state = State.Die;
+
                 BGM.bgm.state = BGM.Musicstate.death;
             }
         }
@@ -219,7 +221,7 @@ public class PlayerController : MonoBehaviour
 
             enemy.Bomb();
             PermanentUI.perm.EnemyScore();
-            Instantiate(Pop, enemy.transform.position, enemy.transform.rotation);
+            Instantiate(Pop, enemy.transform.position, Pop.transform.rotation);
             Jump();
         }
         else if (state != State.hurt)
@@ -269,6 +271,7 @@ public class PlayerController : MonoBehaviour
             if (PermanentUI.perm.currentHP <= 0)
             {
                 PermanentUI.perm.PlayerCount -= 1;
+                PermanentUI.perm.BeforePlayer -= 1;
                 state = State.Die;
                 BGM.bgm.state = BGM.Musicstate.death;
 
@@ -319,6 +322,7 @@ public class PlayerController : MonoBehaviour
         {
             BGM.bgm.state = BGM.Musicstate.death;
             PermanentUI.perm.PlayerCount -= 1;
+            PermanentUI.perm.BeforePlayer -= 1;
             state = State.Die;
 
             //PermanentUI.perm.Reset();
@@ -508,6 +512,7 @@ public class PlayerController : MonoBehaviour
 
     private void DeathFreeze()
     {
+
         rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
         //coll.isTrigger = true;
