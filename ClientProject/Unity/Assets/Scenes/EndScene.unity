@@ -482,6 +482,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 701514683}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &470526605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470526604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e45ac5ad2e71a49adf7c387f55ef73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstep: {fileID: 470526611}
+--- !u!82 &470526611 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8388371521092655992, guid: 61de693b67b59d64bab58a6451dc7f84,
+    type: 3}
+  m_PrefabInstance: {fileID: 701514683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &483128837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3679,6 +3698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7456924894286117421, guid: 61de693b67b59d64bab58a6451dc7f84, type: 3}
+    - {fileID: 7614450457814219549, guid: 61de693b67b59d64bab58a6451dc7f84, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 61de693b67b59d64bab58a6451dc7f84, type: 3}
 --- !u!1 &800623844
 GameObject:
@@ -4200,6 +4220,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1801818118}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1086686932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086686931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cbd713f188ce24f863609abe2eace8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstep: {fileID: 1086686938}
+--- !u!82 &1086686938 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8388371521092655992, guid: 61de693b67b59d64bab58a6451dc7f84,
+    type: 3}
+  m_PrefabInstance: {fileID: 1801818118}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1098000955
 GameObject:
   m_ObjectHideFlags: 0
@@ -4623,8 +4662,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClearText: {fileID: 58549394}
-  NormalFox: {fileID: 1086686931}
-  PinkFox: {fileID: 470526604}
   ResultController: {fileID: 59589977}
 --- !u!4 &1183006431
 Transform:
@@ -5510,6 +5547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7456924894286117421, guid: 61de693b67b59d64bab58a6451dc7f84, type: 3}
+    - {fileID: 7614450457814219549, guid: 61de693b67b59d64bab58a6451dc7f84, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 61de693b67b59d64bab58a6451dc7f84, type: 3}
 --- !u!1 &1888686054
 GameObject:
