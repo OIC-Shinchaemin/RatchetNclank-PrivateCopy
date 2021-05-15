@@ -253,7 +253,7 @@ bool my::CameraComponent::Update(float delta_time) {
         _preview_angle.x = camera_controller->GetAzimuth();
         _preview_angle.y = camera_controller->GetAltitude();
     } // else
-    camera_controller->Update();
+    camera_controller->Update(delta_time);
 
     if (::g_pInput->IsKeyPush(MOFKEY_F1)) {
         auto controller = std::make_shared<my::FollowCameraController>();

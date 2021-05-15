@@ -173,6 +173,7 @@
     <ClCompile Include="Actor\Weapon\OmniWrench.cpp" />
     <ClCompile Include="Actor\Weapon\Pyrocitor.cpp" />
     <ClCompile Include="Actor\Weapon\Weapon.cpp" />
+    <ClCompile Include="Camera\AutoCameraController.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraManager.cpp" />
@@ -440,6 +441,8 @@
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
     <ClInclude Include="Behaviour\Node\SimplexNode.h" />
+    <ClInclude Include="BezierCurveAnimation.h" />
+    <ClInclude Include="Camera\AutoCameraController.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraManager.h" />

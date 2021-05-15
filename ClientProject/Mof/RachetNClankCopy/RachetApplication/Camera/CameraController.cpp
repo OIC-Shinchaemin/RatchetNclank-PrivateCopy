@@ -139,7 +139,7 @@ bool my::CameraController::HasValidCamara(void) const {
     return _camera.get();
 }
 
-bool my::CameraController::Update(void) {
+bool my::CameraController::Update(float delta_time) {
     _preview_position = _position;
     this->UpdateCameraPosition(_camera);
     return true;

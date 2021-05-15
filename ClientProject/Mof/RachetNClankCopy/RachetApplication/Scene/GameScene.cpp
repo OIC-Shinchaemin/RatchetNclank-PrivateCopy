@@ -74,6 +74,8 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     // collision
     _physic_world.CollisionStage(&_stage);
     _physic_world.Update();
+
+    _stage_view_camera_controller.GetService()->Update(delta_time);
     return true;
 }
 
@@ -87,6 +89,22 @@ bool my::GameScene::SceneRender(void) {
 
     _renderer.Render();
     _stage.Render();
+
+    std::vector<Mof::CVector3> control_points = {
+        Mof::CVector3(180.0f, 12.0f, 30.0f),
+        Mof::CVector3(155.0f, 12.0f, 80.0f),
+        Mof::CVector3(150.0f, 12.0f, 125.0f),
+        Mof::CVector3(120.0f, 12.0f, 150.0f),
+        Mof::CVector3(75.0f, 12.0f, 130.0f),
+        Mof::CVector3(55.0f, 12.0f, 85.0f),
+        Mof::CVector3(55.0f, 12.0f, 85.0f),
+        Mof::CVector3(80.0f, 12.0f, -5.0f),
+    };
+    for (auto& position : control_points) {
+        auto sphere = Mof::CSphere(position, 1.0f);
+        ::CGraphicsUtilities::RenderSphere(sphere, def::color_rgba::kBlack);
+    } // for
+
 
     ::g_pGraphics->SetDepthEnable(false);
     float delta_time = ::CUtilities::GetFPS();
@@ -223,6 +241,13 @@ bool my::GameScene::Initialize(void) {
 
     ut::SafeDelete(param);
     _re_initialize = false;
+
+    _stage_view_camera = std::make_shared<my::Camera>();
+    _stage_view_camera->Initialize();
+    _stage_view_camera->Update();
+    _stage_view_camera_controller.SetService(std::make_shared<my::AutoCameraController>());
+    _stage_view_camera_controller.GetService()->SetCamera(_stage_view_camera);
+    _stage_view_camera_controller.GetService()->RegisterGlobalCamera();
     return true;
 }
 

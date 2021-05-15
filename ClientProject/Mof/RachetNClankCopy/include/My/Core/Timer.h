@@ -21,6 +21,10 @@ public:
     /// </summary>
     ~Timer();
     /// <summary>
+    /// Œ»İ‚ÌŠÔ‚ğ•Ô‚·
+    /// </summary>
+    float operator() (void) const;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name="max"></param>

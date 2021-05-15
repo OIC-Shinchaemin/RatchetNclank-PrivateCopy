@@ -7,8 +7,12 @@
 #include <memory>
 #include <vector>
 
+#include "My/Core/ServiceLocator.h"
 #include "My/Core/Observer.h"
 #include "My/UI/UICanvas.h"
+#include "../Camera/Camera.h"
+#include "../Camera/CameraController.h"
+#include "../Camera/AutoCameraController.h"
 #include "../Game/GameWorld.h"
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
@@ -42,6 +46,10 @@ private:
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
     //! ゲームイベント
     my::Observable<const char*, const std::shared_ptr<my::Actor>& > _bridge_event_subject;
+    //! カメラ
+    std::shared_ptr<my::Camera> _stage_view_camera;
+    //! カメラコントローラ
+    my::ServiceLocator<my::CameraController> _stage_view_camera_controller;
     /// <summary>
     /// 追加
     /// </summary>

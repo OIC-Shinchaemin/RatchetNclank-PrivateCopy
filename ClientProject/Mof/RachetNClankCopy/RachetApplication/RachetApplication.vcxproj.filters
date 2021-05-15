@@ -879,6 +879,9 @@
     <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Camera\AutoCameraController.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1705,6 +1708,12 @@
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\Condition\AwayFromHomeNodeExecutor.h">
       <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\AutoCameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierCurveAnimation.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

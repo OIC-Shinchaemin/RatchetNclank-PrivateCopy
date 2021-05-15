@@ -20,7 +20,7 @@ protected:
     const float _spring;
     //! Œ¸Š’è”
     const float _dumping;
-    //! ‘ÎÛ
+    //! ˆÊ’u
     Mof::CVector3 _position;
     //! ‘ÎÛ
     Mof::CVector3 _target;
@@ -147,12 +147,12 @@ public:
     /// ‰ñ“]
     /// </summary>
     /// <param name="degree"></param>
-    void AddAzimuth(float degree);
+    virtual void AddAzimuth(float degree);
     /// <summary>
     /// ‰ñ“]
     /// </summary>
     /// <param name="degree"></param>
-    void AddAltitude(float degree);
+    virtual void AddAltitude(float degree);
     /// <summary>
     /// ”»’è
     /// </summary>
@@ -162,15 +162,15 @@ public:
     /// <summary>
     /// XV
     /// </summary>
-    /// <param name=""></param>
+    /// <param name="delta_time"></param>
     /// <returns></returns>
-    virtual bool Update(void);
+    virtual bool Update(float delta_time);
     /// <summary>
     /// ‰ğ•ú
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Release(void);
+    virtual bool Release(void);
     /// <summary>
     /// “o˜^
     /// </summary>
