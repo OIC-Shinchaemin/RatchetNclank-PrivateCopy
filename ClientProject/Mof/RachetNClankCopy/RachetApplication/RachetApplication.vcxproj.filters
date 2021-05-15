@@ -888,6 +888,9 @@
     <ClCompile Include="Component\ActionStateComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="State\ActionState.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1726,6 +1729,9 @@
     </ClInclude>
     <ClInclude Include="Component\ActionStateComponent.h">
       <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ActionState.h">
+      <Filter>Rachet\Header\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

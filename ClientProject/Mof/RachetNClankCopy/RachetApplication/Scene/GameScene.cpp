@@ -91,22 +91,6 @@ bool my::GameScene::SceneRender(void) {
     _renderer.Render();
     _stage.Render();
 
-    std::vector<Mof::CVector3> control_points = {
-        Mof::CVector3(180.0f, 12.0f, 30.0f),
-        Mof::CVector3(155.0f, 12.0f, 80.0f),
-        Mof::CVector3(150.0f, 12.0f, 125.0f),
-        Mof::CVector3(120.0f, 12.0f, 150.0f),
-        Mof::CVector3(75.0f, 12.0f, 130.0f),
-        Mof::CVector3(55.0f, 12.0f, 85.0f),
-        Mof::CVector3(55.0f, 12.0f, 85.0f),
-        Mof::CVector3(80.0f, 12.0f, -5.0f),
-    };
-    for (auto& position : control_points) {
-        auto sphere = Mof::CSphere(position, 1.0f);
-        ::CGraphicsUtilities::RenderSphere(sphere, def::color_rgba::kBlack);
-    } // for
-
-
     ::g_pGraphics->SetDepthEnable(false);
     float delta_time = ::CUtilities::GetFPS();
     //::CGraphicsUtilities::RenderString(20.0f, 20.0f, "FPS = %f", delta_time);
@@ -172,8 +156,8 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
         r->Load(param->resource.c_str());
     } // if
     // stage
-    if (!_stage.Load("../Resource/stage/test.json")) {
-    //if (!_stage.Load("../Resource/stage/stage.json")) {
+    //if (!_stage.Load("../Resource/stage/test.json")) {
+    if (!_stage.Load("../Resource/stage/stage.json")) {
         return false;
     } // if
     super::LoadComplete();
@@ -250,7 +234,6 @@ bool my::GameScene::Initialize(void) {
     _stage_view_camera_controller.SetService(auto_camera_controller);
     _stage_view_camera_controller.GetService()->SetCamera(_stage_view_camera);
     _stage_view_camera_controller.GetService()->RegisterGlobalCamera();
-
     auto_camera_controller->AddObserver(player->GetComponent<my::CameraComponent>());
     return true;
 }

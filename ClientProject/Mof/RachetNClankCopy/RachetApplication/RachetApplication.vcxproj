@@ -293,6 +293,7 @@
     <ClCompile Include="Stage\Parser\JsonStageParser.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="Stage\StageObject.cpp" />
+    <ClCompile Include="State\ActionState.cpp" />
     <ClCompile Include="State\AI\AICombatState.cpp" />
     <ClCompile Include="State\AI\AIPatrolState.cpp" />
     <ClCompile Include="State\AI\AIState.cpp" />
@@ -575,6 +576,7 @@
     <ClInclude Include="Stage\StageDefine.h" />
     <ClInclude Include="Stage\StageFileFormat.h" />
     <ClInclude Include="Stage\StageObject.h" />
+    <ClInclude Include="State\ActionState.h" />
     <ClInclude Include="State\AI\AICombatState.h" />
     <ClInclude Include="State\AI\AIPatrolState.h" />
     <ClInclude Include="State\AI\AIState.h" />
