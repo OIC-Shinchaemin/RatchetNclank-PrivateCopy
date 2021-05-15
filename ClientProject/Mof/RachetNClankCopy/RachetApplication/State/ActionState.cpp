@@ -9,10 +9,6 @@ state::ActionState::ActionState() :
 state::ActionState::~ActionState() {
 }
 
-void state::ActionState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
-    _actor = ptr;
-}
-
 void state::ActionState::SetActionComponent(const std::shared_ptr<my::ActionComponent>& ptr) {
     _action_com = ptr;
 }

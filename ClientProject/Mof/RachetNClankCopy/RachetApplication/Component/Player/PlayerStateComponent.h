@@ -34,7 +34,6 @@ private:
     void RegisterState(my::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::ActionState>();
-        ptr->SetActor(shared_this);
         ptr->SetActionComponent(com);
         out.RegisterState(ptr);
     }

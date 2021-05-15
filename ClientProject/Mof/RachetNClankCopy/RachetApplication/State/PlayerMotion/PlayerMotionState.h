@@ -26,7 +26,7 @@ protected:
     //! モーション
     std::weak_ptr<my::MotionComponent> _motion_com;
     //! 状態
-    std::weak_ptr<my::MotionStateComponent> _motion_state_com;
+    //std::weak_ptr<my::MotionStateComponent> _motion_state_com;
     /// <summary>
     /// 変更
     /// </summary>
@@ -38,7 +38,7 @@ protected:
     /// </summary>
     /// <param name="next"></param>
     /// <returns></returns>
-    bool ChangeState(const char* next) const;
+    //bool ChangeState(const char* next) const;
 public:
     /// <summary>
     /// コンストラクタ

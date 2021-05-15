@@ -1,21 +1,6 @@
 #include "PlayerStateComponent.h"
 
-#include "../../State/PlayerAction/PlayerActionIdleState.h"
-#include "../../State/PlayerAction/PlayerActionMoveState.h"
-#include "../../State/PlayerAction/PlayerActionJumpSetState.h"
-#include "../../State/PlayerAction/PlayerActionJumpUpState.h"
-#include "../../State/PlayerAction/PlayerActionJumpDownState.h"
-#include "../../State/PlayerAction/PlayerActionJumpLandingState.h"
-#include "../../State/PlayerAction/PlayerActionDoubleJumpState.h"
-#include "../../State/PlayerAction/PlayerActionMeleeAttackOneState.h"
-#include "../../State/PlayerAction/PlayerActionMeleeAttackOneEndState.h"
-#include "../../State/PlayerAction/PlayerActionMeleeAttackTwoState.h"
-#include "../../State/PlayerAction/PlayerActionMeleeAttackTwoEndState.h"
-#include "../../State/PlayerAction/PlayerActionMeleeAttackThreeState.h"
-#include "../../State/PlayerAction/PlayerActionMeleeAttackThreeEndState.h"
-#include "../../State/PlayerAction/PlayerActionDamageState.h"
-#include "../../State/PlayerAction/PlayerActionDeadState.h"
-
+#include "../../State/PlayerAction/PlayerActionStateDefine.h"
 #include "../Player/PlayerIdleComponent.h"
 #include "../Player/PlayerMoveComponent.h"
 #include "../Player/PlayerJumpSetComponent.h"
@@ -59,24 +44,6 @@ bool my::PlayerStateComponent::Initialize(void) {
     super::Initialize();
     super::Start();
 
-    // state
-    /*
-    this->RegisterState<state::PlayerActionIdleState>(_state_machine);
-    this->RegisterState<state::PlayerActionMoveState>(_state_machine);
-    this->RegisterState<state::PlayerActionJumpSetState>(_state_machine);
-    this->RegisterState<state::PlayerActionJumpUpState>(_state_machine);
-    this->RegisterState<state::PlayerActionJumpDownState>(_state_machine);
-    this->RegisterState<state::PlayerActionJumpLandingState>(_state_machine);
-    this->RegisterState<state::PlayerActionDoubleJumpState>(_state_machine);
-    this->RegisterState<state::PlayerActionMeleeAttackOneState>(_state_machine);
-    this->RegisterState<state::PlayerActionMeleeAttackOneEndState>(_state_machine);
-    this->RegisterState<state::PlayerActionMeleeAttackTwoState>(_state_machine);
-    this->RegisterState<state::PlayerActionMeleeAttackTwoEndState>(_state_machine);
-    this->RegisterState<state::PlayerActionMeleeAttackThreeState>(_state_machine);
-    this->RegisterState<state::PlayerActionMeleeAttackThreeEndState>(_state_machine);
-    this->RegisterState<state::PlayerActionDamageState>(_state_machine);
-    this->RegisterState<state::PlayerActionDeadState>(_state_machine);
-    */
     this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerIdleComponent>());
     this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMoveComponent>());
     this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerJumpSetComponent>());

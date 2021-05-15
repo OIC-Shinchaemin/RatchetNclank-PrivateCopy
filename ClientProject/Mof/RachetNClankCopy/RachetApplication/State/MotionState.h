@@ -1,36 +1,49 @@
-#ifndef STATE_ACTION_STATE_H
-#define STATE_ACTION_STATE_H
+#ifndef STATE_MOTION_STATE_H
+#define STATE_MOTION_STATE_H
 
 
 #include "My/Core/State.h"
 
 #include <memory>
 
-#include "../Actor.h"
-#include "../Component/ActionComponent.h"
+#include <Mof.h>
+
+//#include "PlayerMotionStateDefine.h"
+#include "../Actor/Character/Player.h"
+#include "../Component/MotionComponent.h"
 
 
 namespace state {
-class ActionState : public my::State {
+class MotionState : public my::State {
 private:
-    //! アクター
-    std::weak_ptr<my::Actor> _actor;
-    //! アクション
-    std::weak_ptr<my::ActionComponent> _action_com;
+    //! アニメーション速度
+    float _motion_speed;
+    //! アニメーションループ
+    bool _motion_loop;
+    //! アニメーションフラグ
+    bool _motion_same;
+    //! モーション
+    std::weak_ptr<my::MotionComponent> _motion_com;
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    bool ChangeMotion(my::Player::MotionType type);
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    ActionState();
+    MotionState();
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~ActionState();
+    virtual ~MotionState();
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetActionComponent(const std::shared_ptr<my::ActionComponent>& ptr);
+    virtual void SetActor(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -54,4 +67,4 @@ public:
     virtual void Exit(void) override;
 };
 }
-#endif // !STATE_PLAYER_ACTION_STATE_H
+#endif // !STATE_PLAYER_MOTION_STATE_H
