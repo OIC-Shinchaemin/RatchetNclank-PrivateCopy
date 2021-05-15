@@ -5,7 +5,7 @@
 
 
 
-void my::EnemyIdleComponent ::InputMoveAngularVelocity(float angle, float speed) {
+void my::EnemyIdleComponent::InputMoveAngularVelocity(float angle, float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
 
         float angle_y = angle;
@@ -31,7 +31,7 @@ void my::EnemyIdleComponent ::InputMoveAngularVelocity(float angle, float speed)
     } // if
 }
 
-my::EnemyIdleComponent ::EnemyIdleComponent (int priority) :
+my::EnemyIdleComponent::EnemyIdleComponent(int priority) :
     super(priority),
     _angular_speed(0.0f),
     _ideal_angle(0.0f),
@@ -39,7 +39,7 @@ my::EnemyIdleComponent ::EnemyIdleComponent (int priority) :
     _motion_state_com() {
 }
 
-my::EnemyIdleComponent ::EnemyIdleComponent (const EnemyIdleComponent & obj) :
+my::EnemyIdleComponent::EnemyIdleComponent(const EnemyIdleComponent& obj) :
     super(obj._priority),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
@@ -47,14 +47,14 @@ my::EnemyIdleComponent ::EnemyIdleComponent (const EnemyIdleComponent & obj) :
     _motion_state_com() {
 }
 
-my::EnemyIdleComponent ::~EnemyIdleComponent () {
+my::EnemyIdleComponent ::~EnemyIdleComponent() {
 }
 
-void my::EnemyIdleComponent ::SetAngularSpeed(float speed) {
+void my::EnemyIdleComponent::SetAngularSpeed(float speed) {
     this->_angular_speed = speed;
 }
 
-void my::EnemyIdleComponent ::SetIdealAngle(float radian) {
+void my::EnemyIdleComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
@@ -62,11 +62,11 @@ float my::EnemyIdleComponent::GetIdealAngle(void) const {
     return this->_ideal_angle;
 }
 
-std::string my::EnemyIdleComponent ::GetType(void) const {
+std::string my::EnemyIdleComponent::GetType(void) const {
     return "EnemyIdleComponent";
 }
 
-bool my::EnemyIdleComponent ::Initialize(void) {
+bool my::EnemyIdleComponent::Initialize(void) {
     super::Initialize();
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
@@ -74,25 +74,40 @@ bool my::EnemyIdleComponent ::Initialize(void) {
     return true;
 }
 
-bool my::EnemyIdleComponent ::Update(float delta_time) {
+bool my::EnemyIdleComponent::Update(float delta_time) {
+    float tilt = 1.0f;
+    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
+    auto angle_y = math::ToDegree(super::GetOwner()->GetRotate().y);
+    in = math::Rotate(in.x, in.y, ut::GenerateRandomF(0.0f, math::kTwoPi));
+    float angular_speed = 4.0f;
+
+    this->SetAngularSpeed(angular_speed);
+    float angle = this->GetIdealAngle();
+    angle += math::ToRadian(0.5f);
+    if (math::ToRadian(360.0f) < angle) {
+        angle = 0.0f;
+    } // if
+    this->SetIdealAngle(angle);
+
+
     this->InputMoveAngularVelocity(_ideal_angle, _angular_speed);
-    super::End();
     return true;
 }
 
-bool my::EnemyIdleComponent ::Release(void) {
+bool my::EnemyIdleComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyIdleComponent ::Clone(void) {
+std::shared_ptr<my::Component> my::EnemyIdleComponent::Clone(void) {
     return std::make_shared<my::EnemyIdleComponent >(*this);
 }
 
-bool my::EnemyIdleComponent ::Start(void) {
+bool my::EnemyIdleComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
+    puts("my::EnemyIdleComponent::Start");
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
         motion_state_com->ChangeState("EnemyMotionIdleState");

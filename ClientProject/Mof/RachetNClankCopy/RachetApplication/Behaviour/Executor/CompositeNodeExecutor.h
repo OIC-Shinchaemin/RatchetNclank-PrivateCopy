@@ -46,7 +46,7 @@ public:
     /// <param name=""></param>
     virtual void Reset(void) override {
         super::Reset();
-        _current.reset();
+        //_current.reset();
         for (auto& ptr : super::_children) {
             ptr->Reset();
         } // for

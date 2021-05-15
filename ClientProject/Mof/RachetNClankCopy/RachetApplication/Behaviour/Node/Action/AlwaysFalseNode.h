@@ -26,7 +26,7 @@ public:
     /// <returns>true:Às‚Ì¬Œ÷</returns>
     /// <returns>false:Às‚Ì¸”s</returns>
     virtual bool Execute(std::any ptr) override {
-        return true;
+        return false;
     }
 };
 }

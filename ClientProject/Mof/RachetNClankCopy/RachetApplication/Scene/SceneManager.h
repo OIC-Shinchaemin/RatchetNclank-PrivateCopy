@@ -18,12 +18,12 @@
 namespace my {
 class SceneManager : public std::enable_shared_from_this<my::SceneManager>, public my::Observer<const SceneMessage&> {
 private:
-    std::shared_ptr<my::Scene> _scene;
-    std::shared_ptr<my::Scene> _prev_scene;
     struct ChangeMessage {
         std::string name;
         std::shared_ptr<my::Scene::Param> param;
     };
+    std::shared_ptr<my::Scene> _scene;
+    std::shared_ptr<my::Scene> _prev_scene;
     //! メッセージ
     std::optional<ChangeMessage> _change_message;
     //! リソース

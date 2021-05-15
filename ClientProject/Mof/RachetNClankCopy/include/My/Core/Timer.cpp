@@ -1,5 +1,6 @@
 #include "Timer.h"
 
+
 my::Timer::Timer() :
     _time(0.0f),
     _time_max(0.0f),
@@ -7,6 +8,10 @@ my::Timer::Timer() :
 }
 
 my::Timer::~Timer() {
+}
+
+float my::Timer::operator() (void) const {
+    return this->_time;
 }
 
 void my::Timer::Initialize(float max, bool loop) {

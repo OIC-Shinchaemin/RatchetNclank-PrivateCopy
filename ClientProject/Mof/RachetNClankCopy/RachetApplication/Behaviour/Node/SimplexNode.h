@@ -27,13 +27,17 @@ public:
     /// セッター
     /// </summary>
     /// <param name="node"></param>
-    void SetChild(const behaviour::NodePtr& action) { _child = action; }
+    void SetChild(const behaviour::NodePtr& action) { 
+        this->_child = action; 
+    }
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    behaviour::NodePtr& GetChild(void) { return _child; }
+    behaviour::NodePtr& GetChild(void) { 
+        return this->_child;
+    }
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -13,13 +13,24 @@ public:
         Vector3 scale = Vector3(1, 1, 1),
         Vector3 rotate = Vector3());
     virtual ~GimmickBase(void);
-
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual Mof::CVector3 GetPreviewPosition(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual float GetVolume(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual float GetHeight(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -48,6 +59,7 @@ public:
 
     virtual void Initialize(void) = 0;
     virtual void Update(float delta) = 0;
+    virtual void Render(void);
 
     virtual void ActionStart(void);
     virtual bool IsStart(void) const;

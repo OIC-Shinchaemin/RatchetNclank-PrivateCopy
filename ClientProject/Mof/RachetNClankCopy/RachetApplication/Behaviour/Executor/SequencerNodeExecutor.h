@@ -35,7 +35,6 @@ public:
             return super::Result::None;
         } // if
 
-
         // ÀsÏ‚İ
         if (super::_state == super::State::Completed) {
             return super::Result::Sucess;

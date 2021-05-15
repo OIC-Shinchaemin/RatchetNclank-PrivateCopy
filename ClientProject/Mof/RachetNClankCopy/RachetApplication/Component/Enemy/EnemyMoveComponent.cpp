@@ -1,7 +1,10 @@
 #include "EnemyMoveComponent.h"
 
 #include "../VelocityComponent.h"
+#include "EnemyStateComponent.h"
 #include "../MotionStateComponent.h"
+#include "EnemyComponent.h"
+#include "../../State/EnemyAction/EnemyActionStateDefine.h"
 
 
 void my::EnemyMoveComponent::InputMoveVelocity(float speed) {
@@ -45,6 +48,7 @@ my::EnemyMoveComponent::EnemyMoveComponent(int priority) :
     _move_speed(0.0f),
     _angular_speed(0.0f),
     _ideal_angle(0.0f),
+    _target(),
     _velocity_com(),
     _motion_state_com() {
 }
@@ -54,6 +58,7 @@ my::EnemyMoveComponent::EnemyMoveComponent(const EnemyMoveComponent& obj) :
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
+    _target(),
     _velocity_com(),
     _motion_state_com() {
 }
@@ -73,27 +78,63 @@ void my::EnemyMoveComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
+void my::EnemyMoveComponent::SetTargetPosition(Mof::CVector3 position) {
+    this->_target = position;
+}
+
 std::string my::EnemyMoveComponent::GetType(void) const {
     return "EnemyMoveComponent";
+}
+
+Mof::CVector3 my::EnemyMoveComponent::GetTargetPosition(void) const {
+    return this->_target;
 }
 
 bool my::EnemyMoveComponent::Initialize(void) {
     super::Initialize();
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    _action_state_com = super::GetOwner()->GetComponent<my::EnemyStateComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
-
+    _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();
     return true;
 }
 
 bool my::EnemyMoveComponent::Update(float delta_time) {
+    if (auto enemy_com = _enemy_com.lock()) {
+        if (auto target = enemy_com->GetTarget().lock()) {
+        } // if
+        else {
+            if (auto state_com = _action_state_com.lock()) {
+                if (state_com->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
+                    state_com->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
+                } // if
+            } // if
+        } // else
+    } // if
+    float speed = 1.0f;
+    float angular_speed = 1.0f;
+
+    float tilt = 1.0f;
+    Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
+    auto dir = _target - super::GetOwner()->GetPosition();
+    float angle = std::atan2(dir.z, dir.x);
+    in = math::Rotate(in.x, in.y, angle);
+
+    this->SetMoveSpeed(speed);
+    this->SetAngularSpeed(angular_speed);
+    this->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
+
+    ///////
+
     this->InputMoveAngularVelocity(_ideal_angle, _angular_speed);
     this->InputMoveVelocity(_move_speed);
 
-    if (auto velocity_com = _velocity_com.lock() ) {
+
+    if (auto velocity_com = _velocity_com.lock()) {
         auto temp = velocity_com->GetVelocity();
         if (Mof::CVector2(temp.x, temp.z).Length() < 0.01f) {
-            super::End();
+            //super::End();
         } // if
     } // if
     return true;

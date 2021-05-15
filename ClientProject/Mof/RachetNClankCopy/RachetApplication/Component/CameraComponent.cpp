@@ -158,6 +158,17 @@ my::CameraComponent::CameraComponent(const CameraComponent& obj) :
 my::CameraComponent::~CameraComponent() {
 }
 
+void my::CameraComponent::OnNotify(const my::CameraController::CameraInfo& info) {
+    _player_view_camera->SetPosition(info.position);
+    _player_view_camera->SetTarget(info.target);
+    _player_view_camera->Update();
+    _camera_controller.GetService()->RegisterGlobalCamera();
+    _camera_controller.GetService()->SetAzimuth(
+        math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
+    _camera_controller.GetService()->SetAltitude(20.0f);
+    _camera_controller.GetService()->SetDistance(_default_distance);
+}
+
 void my::CameraComponent::SetPosition(Mof::CVector3 pos) {
     return this->_camera_controller.GetService()->SetCameraPosition(pos);
 }
@@ -193,21 +204,25 @@ bool my::CameraComponent::Initialize(void) {
     // camera
     _player_view_camera = (std::make_shared<my::Camera>());
     _player_view_camera->Initialize();
+    _camera_controller.SetService(std::make_shared<my::CameraController>());
+    _camera_controller.GetService()->SetCamera(_player_view_camera);
+
     auto pos = super::GetOwner()->GetPosition();
     auto offset = math::vec3::kNegUnitZ;
     offset *= 9.0f;
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
-
+    
+    
+    /*
     _player_view_camera->SetPosition(pos - offset);
     _player_view_camera->SetTarget(pos);
     _player_view_camera->Update();
-    _camera_controller.SetService(std::make_shared<my::CameraController>());
-    _camera_controller.GetService()->SetCamera(_player_view_camera);
     _camera_controller.GetService()->RegisterGlobalCamera();
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
     _camera_controller.GetService()->SetAltitude(20.0f);
     _camera_controller.GetService()->SetDistance(_default_distance);
+    */
 
 
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
@@ -253,7 +268,7 @@ bool my::CameraComponent::Update(float delta_time) {
         _preview_angle.x = camera_controller->GetAzimuth();
         _preview_angle.y = camera_controller->GetAltitude();
     } // else
-    camera_controller->Update();
+    camera_controller->Update(delta_time);
 
     if (::g_pInput->IsKeyPush(MOFKEY_F1)) {
         auto controller = std::make_shared<my::FollowCameraController>();

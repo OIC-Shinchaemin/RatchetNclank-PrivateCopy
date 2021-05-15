@@ -10,6 +10,7 @@
 namespace behaviour {
 class LookAroundNode : public behaviour::ActionNodeBase {
     using super = behaviour::ActionNodeBase;
+    using Executor = behaviour::LookAroundNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,7 +29,7 @@ public:
     /// <returns></returns>
     virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
         auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
-        return std::make_shared<behaviour::LookAroundNodeExecutor>(ptr);
+        return std::make_shared<Executor>(ptr);
     }
     /// <summary>
     /// ノードの実行
@@ -37,18 +38,12 @@ public:
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any node_args) override {
-        auto args = std::any_cast<behaviour::LookAroundNodeExecutor::NodeArgs>(node_args);
+        auto args = std::any_cast<Executor::NodeArgs>(node_args);
         
-        auto target = args.enemy_com.lock()->GetTarget();
-        if (!target.expired()) {
-            args.ai_com.lock()->ChangeState("AICombatState");
-            return true;
-        } // if
-
         if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionIdleState)) {
             args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
         } // if
-        return false;
+        return true;
     }
 };
 }

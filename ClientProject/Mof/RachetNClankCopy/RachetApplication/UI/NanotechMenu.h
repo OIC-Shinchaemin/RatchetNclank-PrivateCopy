@@ -2,9 +2,12 @@
 #define MY_NANOTECH_MENU_H
 
 
+#include "My/UI/UIItem.h"
 #include "My/UI/UIPanel.h"
 
-#include "My/Core/Observable.h"
+#include <memory>
+
+#include "My/Core/Observer.h"
 #include "MY/UI/UICanvas.h"
 
 

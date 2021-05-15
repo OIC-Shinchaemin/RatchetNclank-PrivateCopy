@@ -37,7 +37,7 @@ Mof::CVector3 my::Camera::GetViewFront(void) {
 bool my::Camera::Initialize(void) {
     // ƒJƒƒ‰‰Šú‰»
     _camera.SetViewPort();
-    _camera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 1000.0f);
+    _camera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 2000.0f);
     this->Update();
     return true;
 }

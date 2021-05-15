@@ -87,11 +87,11 @@ public:
         } // else if
 
         Mof::CFont font;
-        font.Create(8, "");
+        font.Create(8, "ƒƒCƒŠƒI");
         ::CGraphicsUtilities::RenderString(position.x, position.y, color, _node->GetName().c_str());
         font.Release();
         auto pos = position;
-        pos.x += 200.0f;
+        pos.x += 160.0f;
         for (auto ptr : _children) {
             ptr->DebugRender(pos);
             pos.y += 20.0f;

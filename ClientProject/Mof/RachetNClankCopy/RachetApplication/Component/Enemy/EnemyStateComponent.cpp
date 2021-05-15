@@ -68,6 +68,9 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
     auto current = _state_machine.GetCurrentStateName();
 
     if (next == Type::kEnemyActionIdleState) {
+        if (current == Type::kEnemyActionIdleState) {
+            return false;
+        } // if
         if (current == Type::kEnemyActionDamageState) {
             return false;
         } // if
@@ -84,15 +87,22 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
         } // else    
     } // else if
     else if (next == Type::kEnemyActionGoHomeState) {
-        if (current == Type::kEnemyActionDamageState) {
+        if (current == Type::kEnemyActionGoHomeState) {
             return false;
         } // if
+        else if (current == Type::kEnemyActionDamageState) {
+            return false;
+        } // else if
+
         else {
             return true;
         } // else    
     } // else if
     else if (next == Type::kEnemyActionMeleeAttackState) {
         if (current == Type::kEnemyActionDamageState) {
+            return false;
+        } // if
+        else if (current == Type::kEnemyActionMeleeAttackState) {
             return false;
         } // if
         else {

@@ -12,6 +12,7 @@
 #include "../Factory/ActorBuilder.h"
 #include "../Game/GameSystem/Save/SaveData.h"
 #include "../Game/GameSystem/Save/SaveSystem.h"
+#include "../Component/CameraComponent.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -74,6 +75,8 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     // collision
     _physic_world.CollisionStage(&_stage);
     _physic_world.Update();
+
+    _stage_view_camera_controller.GetService()->Update(delta_time);
     return true;
 }
 
@@ -112,7 +115,7 @@ my::GameScene::GameScene() :
     _ui_canvas(),
     _game(),
     _for_bridge_event_actors(),
-    _bridge_event_subject(){
+    _bridge_event_subject() {
 }
 
 my::GameScene::~GameScene() {
@@ -153,7 +156,8 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
         r->Load(param->resource.c_str());
     } // if
     // stage
-    if (!_stage.Load("../Resource/stage/test.json")) {
+    //if (!_stage.Load("../Resource/stage/test.json")) {
+    if (!_stage.Load("../Resource/stage/stage.json")) {
         return false;
     } // if
     super::LoadComplete();
@@ -183,7 +187,7 @@ bool my::GameScene::Initialize(void) {
 
 
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi * 0.7f, 0.0f);
+    param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
 
@@ -222,6 +226,15 @@ bool my::GameScene::Initialize(void) {
 
     ut::SafeDelete(param);
     _re_initialize = false;
+
+    _stage_view_camera = std::make_shared<my::Camera>();
+    _stage_view_camera->Initialize();
+    _stage_view_camera->Update();
+    auto auto_camera_controller = std::make_shared<my::AutoCameraController>();
+    _stage_view_camera_controller.SetService(auto_camera_controller);
+    _stage_view_camera_controller.GetService()->SetCamera(_stage_view_camera);
+    _stage_view_camera_controller.GetService()->RegisterGlobalCamera();
+    auto_camera_controller->AddObserver(player->GetComponent<my::CameraComponent>());
     return true;
 }
 

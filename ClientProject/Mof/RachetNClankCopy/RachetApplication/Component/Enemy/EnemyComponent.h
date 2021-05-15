@@ -59,6 +59,12 @@ public:
     /// <returns></returns>
     std::optional<Mof::CVector3> GetTargetPosition(void) const;
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetHomeDistance(void) const;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

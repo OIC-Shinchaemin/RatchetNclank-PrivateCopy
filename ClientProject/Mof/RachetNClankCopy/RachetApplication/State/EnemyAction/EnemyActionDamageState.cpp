@@ -3,8 +3,7 @@
 
 state::EnemyActionDamageState::EnemyActionDamageState() :
     super(),
-    _damage_com(),
-    _move_com(){
+    _damage_com() {
 }
 
 state::EnemyActionDamageState::~EnemyActionDamageState() {
@@ -13,7 +12,6 @@ state::EnemyActionDamageState::~EnemyActionDamageState() {
 void state::EnemyActionDamageState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     super::SetActor(ptr);
     this->_damage_com = ptr->GetComponent<my::EnemyDamageComponent>();
-    this->_move_com = ptr->GetComponent<my::EnemyMoveComponent>();
 }
 
 const char* state::EnemyActionDamageState::GetName(void) const {

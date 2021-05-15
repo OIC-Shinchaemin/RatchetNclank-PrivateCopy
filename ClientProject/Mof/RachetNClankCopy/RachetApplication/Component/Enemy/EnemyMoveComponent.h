@@ -17,11 +17,16 @@ private:
     float _angular_speed;
     //! ラジアン
     float _ideal_angle;
+    //! 目標
+    Mof::CVector3 _target;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
+    //! 状態
+    std::weak_ptr<class EnemyStateComponent> _action_state_com;
     //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
-
+    std::weak_ptr<class MotionStateComponent> _motion_state_com;    
+    //! 型
+    std::weak_ptr<class EnemyComponent> _enemy_com;
     virtual void InputMoveVelocity(float speed);
     virtual void InputMoveAngularVelocity(float angle, float speed);
 public:
@@ -55,11 +60,22 @@ public:
     /// <param name="radian"></param>
     void SetIdealAngle(float radian);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="radian"></param>
+    void SetTargetPosition(Mof::CVector3 position);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetTargetPosition(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

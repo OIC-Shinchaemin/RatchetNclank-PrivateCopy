@@ -29,18 +29,24 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const behaviour::NodeList& GetChildren(void) const { return _children; }
+    const behaviour::NodeList& GetChildren(void) const { 
+        return this->_children;
+    }
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    behaviour::NodeList& GetChildren(void) { return _children; }
+    behaviour::NodeList& GetChildren(void) { 
+        return this->_children; 
+    }
     /// <summary>
     /// í«â¡
     /// </summary>
     /// <param name="node"></param>
-    void AddChild(const behaviour::NodePtr& node) { _children.push_back(node); }
+    void AddChild(const behaviour::NodePtr& node) { 
+        _children.push_back(node); 
+    }
 };
 using CompositeNodePtr = std::shared_ptr<behaviour::CompositeNode>;
 }

@@ -6,6 +6,7 @@
 
 #include <memory>
 
+#include "../../../Component/Enemy/EnemyComponent.h"
 #include "../../../Component/Enemy/EnemyStateComponent.h"
 
 
@@ -16,7 +17,9 @@ public:
     struct NodeArgs {
         //! アクター
         std::weak_ptr<my::Actor> actor;
-        //! エネミー
+        //! 型
+        std::weak_ptr<my::EnemyComponent> type_com;
+        //! 状態
         std::weak_ptr<my::EnemyStateComponent> state_com;
     };
 private:
@@ -43,6 +46,7 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
+            _node_args.type_com = actor->GetComponent<my::EnemyComponent>();
             _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
         } // if
     }

@@ -4,30 +4,15 @@
 
 #include "EnemyActionState.h"
 
-#include "../../Component/Enemy/EnemyComponent.h"
 #include "../../Component/Enemy/EnemyIdleComponent.h"
-#include "../../Component/Enemy/EnemyMoveComponent.h"
-#include "../../Component/Enemy/EnemyMeleeAttackComponent.h"
-#include "../../Component/Enemy/EnemyRangedAttackComponent.h"
-#include "../../Component/Enemy/EnemyDamageComponent.h"
 
 
 namespace state {
 class EnemyActionIdleState : public state::EnemyActionState {
     using super = state::EnemyActionState;
 private:
-    //! Œ^
-    std::weak_ptr<my::EnemyComponent> _enemy_com;
     //! ‘Ò‹@
     std::weak_ptr<my::EnemyIdleComponent> _idle_com;
-    //! ˆÚ“®
-    std::weak_ptr<my::EnemyMoveComponent> _move_com;
-    //! UŒ‚
-    std::weak_ptr<my::EnemyMeleeAttackComponent> _melee_attack_com;
-    //! UŒ‚
-    std::weak_ptr<my::EnemyRangedAttackComponent> _ranged_attack_com;
-    //! UŒ‚
-    std::weak_ptr<my::EnemyDamageComponent> _damage_com;
 public:
     /// <summary>
     /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^

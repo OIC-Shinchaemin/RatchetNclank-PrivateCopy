@@ -2,7 +2,6 @@
 #define MY_GAMEPAD_H
 
 
-
 #include <memory>
 
 #include <Mof.h>

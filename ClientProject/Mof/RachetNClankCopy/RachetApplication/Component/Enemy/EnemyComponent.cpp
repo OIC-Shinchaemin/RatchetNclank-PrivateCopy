@@ -49,6 +49,10 @@ std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
     return std::optional<Mof::CVector3>();
 }
 
+float my::EnemyComponent::GetHomeDistance(void) const {
+    return 2.5f;
+}
+
 bool my::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Start();

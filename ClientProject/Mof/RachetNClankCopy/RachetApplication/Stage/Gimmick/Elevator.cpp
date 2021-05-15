@@ -28,6 +28,14 @@ Mof::CVector3 Elevator::GetMoveValue(void) const {
     return this->GetPosition() - this->GetPreviewPosition();
 }
 
+float Elevator::GetVolume(void) const {
+    return 4.5f;
+}
+
+float Elevator::GetHeight(void) const {
+    return 1.0f;
+}
+
 Mof::CSphere Elevator::GetStartPositionSphere(void) const {
     return Mof::CSphere(_start_pos, 20.0f);
 }
@@ -54,6 +62,7 @@ void Elevator::Initialize(void) {
 }
 
 void Elevator::Update(float delta) {
+    _preview_position = _position;
     if (!_start_flag) {
         return;
     }
@@ -64,7 +73,6 @@ void Elevator::Update(float delta) {
         _now_timer += delta;
     }
     const float t = std::clamp((_now_timer / _request_time), 0.0f, 1.0f);
-    _preview_position = _position;
     _position = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
     if (t == 1.0f && !_end_flag) {
         _start_flag = false;

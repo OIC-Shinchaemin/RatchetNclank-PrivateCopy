@@ -17,6 +17,9 @@ public:
     DecoratorNodeBase() :
         super("Decorator") {
     }
+    DecoratorNodeBase(const std::string& name) :
+        super(name) {
+    }
     /// <summary>
     /// デストラクタ
     /// </summary>

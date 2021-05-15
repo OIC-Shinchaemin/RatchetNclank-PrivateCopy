@@ -21,9 +21,9 @@ public:
     /// <summary>
     /// çXêV
     /// </summary>
-    /// <param name=""></param>
+    /// <param name="delta_time"></param>
     /// <returns></returns>
-    virtual bool Update(void) override;
+    virtual bool Update(float delta_time) override;
 };
 }
 #endif // !MY_DEBUG_CAMERA_CONTROLLER_H

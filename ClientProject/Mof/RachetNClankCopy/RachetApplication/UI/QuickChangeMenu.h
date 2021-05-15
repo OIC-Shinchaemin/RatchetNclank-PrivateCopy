@@ -2,9 +2,16 @@
 #define MY_QUICK_CHANGE_MENU_H
 
 
+#include "My/UI/UIItem.h"
 #include "My/UI/UIPanel.h"
 
-#include "My/Core/Observable.h"
+#include <optional>
+#include <memory>
+#include <unordered_map>
+
+#include "My/Core/Observer.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 #include "../Game/GameSystem/QuickChangeSystem.h"
 
 

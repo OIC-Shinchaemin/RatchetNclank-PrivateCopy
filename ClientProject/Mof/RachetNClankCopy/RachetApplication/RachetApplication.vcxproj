@@ -173,11 +173,14 @@
     <ClCompile Include="Actor\Weapon\OmniWrench.cpp" />
     <ClCompile Include="Actor\Weapon\Pyrocitor.cpp" />
     <ClCompile Include="Actor\Weapon\Weapon.cpp" />
+    <ClCompile Include="Camera\AutoCameraController.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\CameraManager.cpp" />
     <ClCompile Include="Camera\DebugCameraController.cpp" />
     <ClCompile Include="Camera\FollowCameraController.cpp" />
+    <ClCompile Include="Component\ActionComponent.cpp" />
+    <ClCompile Include="Component\ActionStateComponent.cpp" />
     <ClCompile Include="Component\AIStateComponent.cpp" />
     <ClCompile Include="Component\Bullet\BlasterBulletComponent.cpp" />
     <ClCompile Include="Component\Bullet\BombGloveBulletComponent.cpp" />
@@ -218,6 +221,7 @@
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
+    <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp" />
@@ -289,6 +293,7 @@
     <ClCompile Include="Stage\Parser\JsonStageParser.cpp" />
     <ClCompile Include="Stage\Stage.cpp" />
     <ClCompile Include="Stage\StageObject.cpp" />
+    <ClCompile Include="State\ActionState.cpp" />
     <ClCompile Include="State\AI\AICombatState.cpp" />
     <ClCompile Include="State\AI\AIPatrolState.cpp" />
     <ClCompile Include="State\AI\AIState.cpp" />
@@ -385,6 +390,7 @@
     <ClInclude Include="Actor\Weapon\Pyrocitor.h" />
     <ClInclude Include="Actor\Weapon\Weapon.h" />
     <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Action\ChangeCombatNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Action\ChangePatrolNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Action\LookAroundNodeExecutor.h" />
@@ -393,9 +399,18 @@
     <ClInclude Include="Behaviour\Executor\Action\RangedAttackNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Condition\AwayFromHomeNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Condition\NotAwayFromHomeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Condition\NotTargetRecognitionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\IfAwayFromHomeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\IfCloseFromHomeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\IfTargetOutMeleeAttackRangeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInMeleeAttackRangeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInRangedAttackRangeNodeExecutor.h" />
+    <ClInclude Include="Behaviour\Executor\Decorator\NotRecognizingTargetNodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\INodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\NodeExecutor.h" />
     <ClInclude Include="Behaviour\Executor\SelectorNodeExecutor.h" />
@@ -404,6 +419,7 @@
     <ClInclude Include="Behaviour\Node\ActionNode.h" />
     <ClInclude Include="Behaviour\Node\Action\AlwaysFalseNode.h" />
     <ClInclude Include="Behaviour\Node\Action\AlwaysTrueNode.h" />
+    <ClInclude Include="Behaviour\Node\Action\ChangeCombatNode.h" />
     <ClInclude Include="Behaviour\Node\Action\ChangePatrolNode.h" />
     <ClInclude Include="Behaviour\Node\Action\MoveToEnemyNode.h" />
     <ClInclude Include="Behaviour\Node\Action\GoHomeNode.h" />
@@ -412,18 +428,31 @@
     <ClInclude Include="Behaviour\Node\Action\RangedAttackNode.h" />
     <ClInclude Include="Behaviour\Node\CompositeNode.h" />
     <ClInclude Include="Behaviour\Node\ConditionalNode.h" />
+    <ClInclude Include="Behaviour\Node\Condition\AwayFromHomeNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\NotAwayFromHomeNode.h" />
+    <ClInclude Include="Behaviour\Node\Condition\NotTargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h" />
     <ClInclude Include="Behaviour\Node\DecoratorNode.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\IfAwayFromHomeNode.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\IfCloseFromHomeNode.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\IfTargetOutMeleeAttackRangeNode.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInMeleeAttackRange.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInRangedAttackRange.h" />
+    <ClInclude Include="Behaviour\Node\Decorator\NotRecognizingTargetNode.h" />
     <ClInclude Include="Behaviour\Node\Node.h" />
     <ClInclude Include="Behaviour\Node\SelectorNode.h" />
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
     <ClInclude Include="Behaviour\Node\SimplexNode.h" />
+    <ClInclude Include="BezierCurveAnimation.h" />
+    <ClInclude Include="Camera\AutoCameraController.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\CameraManager.h" />
     <ClInclude Include="Camera\DebugCameraController.h" />
     <ClInclude Include="Camera\FollowCameraController.h" />
+    <ClInclude Include="Component\ActionComponent.h" />
+    <ClInclude Include="Component\ActionStateComponent.h" />
     <ClInclude Include="Component\AIStateComponent.h" />
     <ClInclude Include="Component\Bullet\BlasterBulletComponent.h" />
     <ClInclude Include="Component\Bullet\BombGloveBulletComponent.h" />
@@ -465,6 +494,7 @@
     <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentDefine.h" />
+    <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyDamageComponent.h" />
@@ -546,6 +576,7 @@
     <ClInclude Include="Stage\StageDefine.h" />
     <ClInclude Include="Stage\StageFileFormat.h" />
     <ClInclude Include="Stage\StageObject.h" />
+    <ClInclude Include="State\ActionState.h" />
     <ClInclude Include="State\AI\AICombatState.h" />
     <ClInclude Include="State\AI\AIPatrolState.h" />
     <ClInclude Include="State\AI\AIState.h" />
@@ -629,11 +660,11 @@
     <None Include="..\Resource\builder\strong_enemy.json" />
     <None Include="..\Resource\builder\water_flow.json" />
     <None Include="..\Resource\builder\weak_enemy.json" />
-    <None Include="..\Resource\motion_names\chaman.motion_names" />
     <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\motion_names\ship.motion_names" />
     <None Include="..\Resource\motion_names\skeleton.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
+    <None Include="..\Resource\stage\stage.json" />
     <None Include="..\Resource\stage\test.json" />
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,7 @@ bool my::Terrain::Initialize(my::Actor::Param* param) {
         auto tex = resource->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/water/water0.jpg");
         _plane->GetMaterial()->GetTextureArray()->Add(tex.get());
     } // if
+
     // shader
     _shader.Load("../Resource/shader/water.hlsl");
     _shader_bind.Create(&_shader);
@@ -49,11 +50,18 @@ bool my::Terrain::Render(void) {
     _shader_bind.SetCamera(::CGraphicsUtilities::GetCamera());
     _shader_bind.SetDirectionalLight(::CGraphicsUtilities::GetDirectionalLight());
     _shader_bind.GetShaderBuffer(0)->SetBuffer(&_uv_scroll);
-    
+
     _plane->Render(world, def::color_rgba::kWhite, &_shader, &_shader_bind);
     return true;
 }
 
 bool my::Terrain::Release(void) {
-    return false;
+    super::Release();
+    //_plane->Release();
+    //delete _plane;
+
+    _resource.reset();
+    _shader_bind.Release();
+    _shader.Release();
+    return true;
 }

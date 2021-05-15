@@ -5,7 +5,6 @@
 #include "EnemyActionState.h"
 
 #include "../../Component/Enemy/EnemyDamageComponent.h"
-#include "../../Component/Enemy/EnemyMoveComponent.h"
 
 
 namespace state {
@@ -14,8 +13,6 @@ class EnemyActionDamageState : public state::EnemyActionState {
 private:
     //! 待機
     std::weak_ptr<my::EnemyDamageComponent> _damage_com;
-    //! 移動
-    std::weak_ptr<my::EnemyMoveComponent> _move_com;
 public:
     /// <summary>
     /// コンストラクタ

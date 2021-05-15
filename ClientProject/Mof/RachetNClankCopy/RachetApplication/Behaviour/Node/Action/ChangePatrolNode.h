@@ -10,6 +10,7 @@
 namespace behaviour {
 class ChangePatrolNode : public behaviour::ActionNodeBase {
     using super = behaviour::ActionNodeBase;
+    using Executor = behaviour::ChangePatrolNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,7 +29,7 @@ public:
     /// <returns></returns>
     virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
         auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
-        return std::make_shared<behaviour::ChangePatrolNodeExecutor>(ptr);
+        return std::make_shared<Executor>(ptr);
     }
     /// <summary>
     /// ノードの実行
@@ -37,7 +38,7 @@ public:
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any node_args) override {
-        auto args = std::any_cast<behaviour::ChangePatrolNodeExecutor::NodeArgs>(node_args);
+        auto args = std::any_cast<Executor::NodeArgs>(node_args);
         // can transition state
         // if()
         args.ai_com.lock()->ChangeState("AIPatrolState");

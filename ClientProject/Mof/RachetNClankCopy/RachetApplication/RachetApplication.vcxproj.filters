@@ -271,6 +271,12 @@
     <Filter Include="Rachet\Source\Light">
       <UniqueIdentifier>{7b615535-aeb0-454e-aabb-a8de24a9a716}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Executor\Decorator">
+      <UniqueIdentifier>{ac49b993-3d5d-453e-8124-d7388469d61b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Behaviour\Node\Decorator">
+      <UniqueIdentifier>{a217c227-216b-44eb-9f38-395ef9362a91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -869,6 +875,21 @@
     </ClCompile>
     <ClCompile Include="Factory\TerrainBuilder.cpp">
       <Filter>Rachet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp">
+      <Filter>Rachet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\AutoCameraController.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\ActionComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\ActionStateComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ActionState.cpp">
+      <Filter>Rachet\Source\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1634,6 +1655,84 @@
     <ClInclude Include="Factory\TerrainBuilder.h">
       <Filter>Rachet\Header\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInRangedAttackRange.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInMeleeAttackRange.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInMeleeAttackRangeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInRangedAttackRangeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\NotRecognizingTargetNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\NotRecognizingTargetNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\ChangeCombatNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\ChangeCombatNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\NotTargetRecognitionNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\NotTargetRecognitionNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfAwayFromHomeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfAwayFromHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfTargetOutMeleeAttackRangeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfTargetOutMeleeAttackRangeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfCloseFromHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfCloseFromHomeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\AwayFromHomeNode.h">
+      <Filter>Rachet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\AwayFromHomeNodeExecutor.h">
+      <Filter>Rachet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\AutoCameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierCurveAnimation.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ActionComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ActionStateComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ActionState.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1713,9 +1812,6 @@
     <None Include="..\Resource\motion_names\skeleton.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
-    <None Include="..\Resource\motion_names\chaman.motion_names">
-      <Filter>リソース ファイル\motion_names</Filter>
-    </None>
     <None Include="..\Resource\motion_names\ship.motion_names">
       <Filter>リソース ファイル\motion_names</Filter>
     </None>
@@ -1724,6 +1820,9 @@
     </None>
     <None Include="..\Resource\builder\water_flow.json">
       <Filter>リソース ファイル\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\stage.json">
+      <Filter>リソース ファイル\stage</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

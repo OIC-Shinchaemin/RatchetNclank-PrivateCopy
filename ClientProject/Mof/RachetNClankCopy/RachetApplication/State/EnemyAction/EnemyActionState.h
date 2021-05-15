@@ -6,8 +6,6 @@
 
 #include <memory>
 
-#include <Mof.h>
-
 #include "EnemyActionStateDefine.h"
 #include "../../Actor.h"
 #include "../../Component/Enemy/EnemyStateComponent.h"

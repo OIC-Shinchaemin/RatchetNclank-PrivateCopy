@@ -11,6 +11,11 @@
 
 namespace my {
 class CameraController {
+public:
+    struct CameraInfo {
+        Mof::CVector3 position;
+        Mof::CVector3 target;
+    };
 protected:
     //! マネージャ
     static std::weak_ptr<my::CameraManager> _manager;
@@ -20,7 +25,7 @@ protected:
     const float _spring;
     //! 減衰定数
     const float _dumping;
-    //! 対象
+    //! 位置
     Mof::CVector3 _position;
     //! 対象
     Mof::CVector3 _target;
@@ -147,12 +152,12 @@ public:
     /// 回転
     /// </summary>
     /// <param name="degree"></param>
-    void AddAzimuth(float degree);
+    virtual void AddAzimuth(float degree);
     /// <summary>
     /// 回転
     /// </summary>
     /// <param name="degree"></param>
-    void AddAltitude(float degree);
+    virtual void AddAltitude(float degree);
     /// <summary>
     /// 判定
     /// </summary>
@@ -162,15 +167,15 @@ public:
     /// <summary>
     /// 更新
     /// </summary>
-    /// <param name=""></param>
+    /// <param name="delta_time"></param>
     /// <returns></returns>
-    virtual bool Update(void);
+    virtual bool Update(float delta_time);
     /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Release(void);
+    virtual bool Release(void);
     /// <summary>
     /// 登録
     /// </summary>

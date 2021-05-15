@@ -2,10 +2,6 @@
 #define STATE_AI_COMBAT_STATE_H
 
 
-#include "My/Core/State.h"
-
-#include <memory>
-
 #include "AIState.h"
 
 

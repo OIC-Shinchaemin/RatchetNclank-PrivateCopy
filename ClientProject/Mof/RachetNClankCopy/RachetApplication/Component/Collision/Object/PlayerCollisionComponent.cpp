@@ -100,6 +100,7 @@ void my::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer me
 void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
     auto sphere = this->GetSphere().value();
 
+    auto gimmick_pos = gimmick->GetPosition();
     auto gimmick_sphere_0 = gimmick->GetStartPositionSphere();
     auto gimmick_sphere_1 = gimmick->GetEndPositionSphere();
     if (gimmick_sphere_0.CollisionSphere(sphere) && !gimmick_sphere_0.CollisionPoint(gimmick->GetPosition()) ||
@@ -115,17 +116,42 @@ void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer m
         Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
         geometry->SetMatrix(mat);
 
+
+
+        float volume = _player_com.lock()->GetVolume();
+        float height = _player_com.lock()->GetHeight();
+        auto pos = super::GetOwner()->GetPosition();
+
+
+        auto player_circle = Mof::CCircle(pos.x, pos.z, volume);
+        auto gimmick_circle = Mof::CCircle(gimmick_pos.x, gimmick_pos.z, gimmick->GetVolume());
+        float gimmick_top = gimmick_pos.y + gimmick->GetHeight() * 0.5f;
+        float gimmick_bottom = gimmick_pos.y - gimmick->GetHeight() * 0.5f;
+        if (gimmick_top > sphere.Position.y && gimmick_bottom < sphere.Position.y) {
+            if (player_circle.CollisionCircle(gimmick_circle)) {
+                Mof::CVector2 player_pos(player_circle.x, player_circle.y);
+                Mof::CVector2 gimmick_pos(gimmick_circle.x, gimmick_circle.y);
+                float direction = std::atan2(gimmick_pos.y - player_pos.y, gimmick_pos.x - player_pos.x) + math::kHalfPi;
+                auto distance = Mof::CVector2Utilities::Distance(player_pos, gimmick_pos);
+                float diff = (gimmick_circle.r + player_circle.r) - distance;
+                
+                auto add = math::Rotate(0.0f, diff, direction);
+                auto pos = super::GetOwner()->GetPosition();
+                pos.x += add.x;
+                pos.z += add.y;
+                super::GetOwner()->SetPosition(pos);
+            } // if
+        } // if
+
+
+
+
+        // down ray
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _player_com.lock()->GetHeight();
-
             if (info.d <= height) {
                 auto pos = super::GetOwner()->GetPosition();
-                if (auto velocity_com = _velocity_com.lock()) {
-                    auto add = Mof::CVector3(std::log10(time) * gimmick_move.x * 60.0f,
-                                             std::log10(time) * gimmick_move.y * 60.0f,
-                                             std::log10(time) * gimmick_move.z * 60.0f);
-                    velocity_com->AddVelocityForce(add);
-                } // if
+                pos += gimmick_move;
                 pos.y += height - info.d;
                 super::GetOwner()->SetPosition(pos);
 

@@ -55,7 +55,7 @@ bool my::AIStateComponent::Update(float delta_time) {
     if (_thinking_time.Tick(delta_time)) {
         _state_machine.Update(delta_time);
     } // if
-    return false;
+    return true;
 }
 
 bool my::AIStateComponent::Release(void) {
