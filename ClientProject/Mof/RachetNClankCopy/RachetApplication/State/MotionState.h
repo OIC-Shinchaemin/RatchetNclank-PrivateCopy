@@ -5,31 +5,47 @@
 #include "My/Core/State.h"
 
 #include <memory>
+#include <string>
 
-#include <Mof.h>
-
-//#include "PlayerMotionStateDefine.h"
-#include "../Actor/Character/Player.h"
 #include "../Component/MotionComponent.h"
 
 
 namespace state {
 class MotionState : public my::State {
+public:
+    struct Param {
+        //! 名前
+        const char* state_name;
+        //! タイプ
+        int motion_type;
+        //! アニメーション速度
+        float motion_speed;
+        //! アニメーションループ
+        bool motion_loop;
+        //! アニメーションフラグ
+        bool motion_same;
+
+        Param() :
+            state_name(),
+            motion_type(),
+            motion_speed(),
+            motion_loop(),
+            motion_same() {
+        }
+        template<typename Enum>
+        Param(const std::string& name, Enum type, float speed = 1.0f, bool loop = true, bool same = true) :
+            state_name(name),
+            motion_type(type),
+            motion_speed(speed),
+            motion_loop(loop),
+            motion_same(same) {
+        }
+    };
 private:
-    //! アニメーション速度
-    float _motion_speed;
-    //! アニメーションループ
-    bool _motion_loop;
-    //! アニメーションフラグ
-    bool _motion_same;
+    //! パラメータ
+    Param _param;
     //! モーション
     std::weak_ptr<my::MotionComponent> _motion_com;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    bool ChangeMotion(my::Player::MotionType type);
 public:
     /// <summary>
     /// コンストラクタ
@@ -44,6 +60,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     virtual void SetActor(const std::shared_ptr<my::Actor>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="param"></param>
+    void SetParam(const state::MotionState::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>

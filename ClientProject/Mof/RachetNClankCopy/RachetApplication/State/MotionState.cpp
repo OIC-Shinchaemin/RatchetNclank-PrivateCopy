@@ -1,21 +1,9 @@
 #include "MotionState.h"
 
 
-bool state::MotionState::ChangeMotion(my::Player::MotionType type) {
-    if (auto motion_com = _motion_com.lock()) {
-        return motion_com->ChangeMotion(type, _motion_speed, _motion_loop, _motion_same);
-    } // if
-    return false;
-}
-
 state::MotionState::MotionState() :
-    _motion_speed(1.0f),
-    _motion_loop(true),
-    _motion_same(true),
+    _param(),
     _motion_com() {
-
-    _motion_loop = false;
-    _motion_same = false;
 }
 
 state::MotionState::~MotionState() {
@@ -25,16 +13,25 @@ void state::MotionState::SetActor(const std::shared_ptr<my::Actor>& ptr) {
     _motion_com = ptr->GetComponent<my::MotionComponent>();
 }
 
+void state::MotionState::SetParam(const state::MotionState::Param& param) {
+    _param = param;
+}
+
 const char* state::MotionState::GetName(void) const {
-    //return state::PlayerMotionStateType::kPlayerMotionDoubleJumpState.c_str();
-    return "";
+    return _param.state_name;
 }
 
 void state::MotionState::Update(float delta_time) {
 }
 
 void state::MotionState::Enter(void) {
-    this->ChangeMotion(my::Player::MotionType::DoubleJump);
+    if (auto motion_com = _motion_com.lock()) {
+        motion_com->ChangeMotion(
+            _param.motion_type,
+            _param.motion_speed,
+            _param.motion_loop,
+            _param.motion_same);
+    } // if
 }
 
 void state::MotionState::Exit(void) {

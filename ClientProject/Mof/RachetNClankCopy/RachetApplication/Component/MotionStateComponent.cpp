@@ -72,6 +72,47 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterMotionState<state::PlayerMotionMeleeAttackThreeEndState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionDamageState>(_state_machine);
         this->RegisterMotionState<state::PlayerMotionDeadState>(_state_machine);
+        /*
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        this->RegisterState(_state_machine, state::MotionState::Param(
+            state::PlayerMotionStateType::kPlayerMotionIdleState,
+            my::Player::MotionType::IdleWait, 1.0f, true, true));
+        */
+
+
+
         _state_machine.ChangeState("PlayerMotionIdleState");
     } // else 
     return true;

@@ -6,8 +6,8 @@
 
 #include "My/Core/StateMachine.h"
 #include "My/Core/Timer.h"
-
 #include "../../State/ActionState.h"
+
 
 namespace my {
 class PlayerStateComponent : public my::UpdateComponent {
@@ -20,17 +20,6 @@ private:
     /// </summary>
     /// <typeparam name="State"></typeparam>
     /// <param name="out"></param>
-    /*
-    template<class State>
-    void RegisterState(my::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
-        auto shared_this = super::GetOwner();
-        auto ptr = std::make_shared<State>();
-        ptr->SetActor(shared_this);
-        ptr->SetActionComponent(com);
-        out.RegisterState(ptr);
-    }
-    */
-
     void RegisterState(my::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::ActionState>();

@@ -5,6 +5,7 @@
 #include "UpdateComponent.h"
 
 #include "My/Core/StateMachine.h"
+#include "../State/MotionState.h"
 
 
 namespace my {
@@ -18,6 +19,14 @@ private:
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<State>();
         ptr->SetActor(shared_this);
+        out.RegisterState(ptr);
+    }
+
+    void RegisterState(my::StateMachine& out, const state::MotionState::Param& param) {
+        auto shared_this = super::GetOwner();
+        auto ptr = std::make_shared<state::MotionState>();
+        ptr->SetActor(shared_this);
+        ptr->SetParam(param);
         out.RegisterState(ptr);
     }
 public:
