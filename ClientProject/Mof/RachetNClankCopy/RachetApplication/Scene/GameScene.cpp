@@ -12,6 +12,7 @@
 #include "../Factory/ActorBuilder.h"
 #include "../Game/GameSystem/Save/SaveData.h"
 #include "../Game/GameSystem/Save/SaveSystem.h"
+#include "../Component/CameraComponent.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -202,7 +203,7 @@ bool my::GameScene::Initialize(void) {
 
 
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi * 0.7f, 0.0f);
+    param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
 
@@ -245,9 +246,12 @@ bool my::GameScene::Initialize(void) {
     _stage_view_camera = std::make_shared<my::Camera>();
     _stage_view_camera->Initialize();
     _stage_view_camera->Update();
-    _stage_view_camera_controller.SetService(std::make_shared<my::AutoCameraController>());
+    auto auto_camera_controller = std::make_shared<my::AutoCameraController>();
+    _stage_view_camera_controller.SetService(auto_camera_controller);
     _stage_view_camera_controller.GetService()->SetCamera(_stage_view_camera);
     _stage_view_camera_controller.GetService()->RegisterGlobalCamera();
+
+    auto_camera_controller->AddObserver(player->GetComponent<my::CameraComponent>());
     return true;
 }
 

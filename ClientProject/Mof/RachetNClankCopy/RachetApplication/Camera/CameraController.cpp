@@ -38,8 +38,8 @@ void my::CameraController::SetCameraManager(const std::shared_ptr<my::CameraMana
 }
 
 my::CameraController::CameraController() :
-    _spring(50.0f),
-    _dumping(std::sqrt(_spring) * 2.0f),
+    _spring(30.0f),
+    _dumping(std::sqrtf(_spring) * 2.0f),
     _camera(),
     _position(),
     _target(),

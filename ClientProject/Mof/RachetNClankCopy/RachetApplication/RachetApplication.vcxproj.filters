@@ -882,6 +882,12 @@
     <ClCompile Include="Camera\AutoCameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Component\ActionComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\ActionStateComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1714,6 +1720,12 @@
     </ClInclude>
     <ClInclude Include="BezierCurveAnimation.h">
       <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ActionComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ActionStateComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

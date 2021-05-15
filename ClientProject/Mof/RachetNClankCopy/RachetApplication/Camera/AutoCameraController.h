@@ -3,14 +3,17 @@
 
 
 #include "CameraController.h"
+#include "My/Core/Observable.h"
 
 #include "My/Core/Timer.h"
 #include "../BezierCurveAnimation.h"
 
 
 namespace my {
-class AutoCameraController : public my::CameraController {
+class AutoCameraController : public my::CameraController,
+    public my::Observable<const my::CameraController::CameraInfo&> {
     using super = my::CameraController;
+    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! 時間
     float _time;
@@ -29,6 +32,11 @@ public:
     /// コンストラクタ
     /// </summary>
     ~AutoCameraController();
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>

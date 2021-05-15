@@ -4,13 +4,14 @@
 
 #include "UpdateComponent.h"
 
+#include "My/Core/Observable.h"
 #include "My/Core/ServiceLocator.h"
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
 
 
 namespace my {
-class CameraComponent : public my::UpdateComponent {
+class CameraComponent : public my::UpdateComponent, public my::Observer<const my::CameraController::CameraInfo&> {
     using super = my::UpdateComponent;
 private:
     //! 対象
@@ -64,6 +65,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~CameraComponent();
+    /// <summary>
+    /// イベント
+    /// </summary>
+    /// <param name="info"></param>
+    virtual void OnNotify(const my::CameraController::CameraInfo& info) override;
     /// <summary>
     /// セッター
     /// </summary>

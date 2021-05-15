@@ -11,6 +11,11 @@
 
 namespace my {
 class CameraController {
+public:
+    struct CameraInfo {
+        Mof::CVector3 position;
+        Mof::CVector3 target;
+    };
 protected:
     //! マネージャ
     static std::weak_ptr<my::CameraManager> _manager;
