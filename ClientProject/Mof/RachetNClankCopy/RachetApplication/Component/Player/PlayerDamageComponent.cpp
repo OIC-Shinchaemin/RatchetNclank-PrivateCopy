@@ -39,6 +39,10 @@ std::string my::PlayerDamageComponent::GetType(void) const {
     return "PlayerDamageComponent";
 }
 
+std::string_view my::PlayerDamageComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionDamageState;
+}
+
 bool my::PlayerDamageComponent::Initialize(void) {
     super::Initialize();
 

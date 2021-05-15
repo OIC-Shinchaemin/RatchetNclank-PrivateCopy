@@ -2,14 +2,14 @@
 #define MY_PLAYER_MELEE_ATTACK_TWO_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerMeleeAttackTwoComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerMeleeAttackTwoComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! ó\ñÒ
     bool _next_reserve;
@@ -49,6 +49,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const override;
     /// <summary>
     /// èâä˙âª
     /// </summary>

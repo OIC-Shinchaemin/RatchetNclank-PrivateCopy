@@ -46,6 +46,10 @@ std::string my::PlayerDoubleJumpComponent::GetType(void) const {
     return "PlayerDoubleJumpComponent";
 }
 
+std::string_view my::PlayerDoubleJumpComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionDoubleJumpState;
+}
+
 void my::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }

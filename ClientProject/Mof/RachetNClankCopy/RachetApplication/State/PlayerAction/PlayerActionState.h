@@ -19,7 +19,7 @@ private:
     //! アクター
     std::weak_ptr<my::Actor> _actor;
     //! 状態
-    std::weak_ptr<my::PlayerStateComponent> _state_com;
+    //std::weak_ptr<my::PlayerStateComponent> _state_com;
 protected:
     /// <summary>
     /// ゲッター
@@ -32,7 +32,7 @@ protected:
     /// </summary>
     /// <param name="next"></param>
     /// <returns></returns>
-    bool ChangeState(const char* next) const;
+    //bool ChangeState(const char* next) const;
 public:
     /// <summary>
     /// コンストラクタ

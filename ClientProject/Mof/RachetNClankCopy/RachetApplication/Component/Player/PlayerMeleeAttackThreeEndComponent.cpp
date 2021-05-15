@@ -38,6 +38,10 @@ std::string my::PlayerMeleeAttackThreeEndComponent::GetType(void) const {
     return "PlayerMeleeAttackThreeEndComponent";
 }
 
+std::string_view my::PlayerMeleeAttackThreeEndComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState;
+}
+
 bool my::PlayerMeleeAttackThreeEndComponent::Initialize(void) {
     super::Initialize();
 

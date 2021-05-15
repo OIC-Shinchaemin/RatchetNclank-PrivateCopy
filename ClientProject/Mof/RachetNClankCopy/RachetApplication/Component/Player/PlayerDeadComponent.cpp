@@ -26,6 +26,10 @@ std::string my::PlayerDeadComponent::GetType(void) const {
     return "PlayerDeadComponent";
 }
 
+std::string_view my::PlayerDeadComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionDeadState;
+}
+
 bool my::PlayerDeadComponent::Initialize(void) {
     super::Initialize();
 

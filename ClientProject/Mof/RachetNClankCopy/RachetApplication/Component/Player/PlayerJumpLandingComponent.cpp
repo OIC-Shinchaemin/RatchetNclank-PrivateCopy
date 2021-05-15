@@ -34,6 +34,10 @@ std::string my::PlayerJumpLandingComponent::GetType(void) const {
     return "PlayerJumpLandingComponent";
 }
 
+std::string_view my::PlayerJumpLandingComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionJumpLandingState;
+}
+
 bool my::PlayerJumpLandingComponent::Initialize(void) {
     super::Initialize();
 

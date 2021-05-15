@@ -8,7 +8,7 @@ my::AutoCameraController::AutoCameraController() :
     _bezier_curve_animation_position(_time),
     _bezier_curve_animation_target(_time) {
 
-    _timer.Initialize(_time, true);
+    _timer.Initialize(_time, false, true);
     std::vector<Mof::CVector3> control_points_position = {
     Mof::CVector3(180.0f, 12.0f, 30.0f),
     Mof::CVector3(155.0f, 12.0f, 80.0f),
@@ -48,8 +48,10 @@ bool my::AutoCameraController::Update(float delta_time) {
         Observable::Notify(info);
     } // if
 
-    auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());
-    _camera->SetPosition(pos);
-    _camera->SetTarget(Mof::CVector3(5.0f, 0.0f, -5.0f));
+    if (_timer() <= _time) {
+        auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());
+        _camera->SetPosition(pos);
+        _camera->SetTarget(Mof::CVector3(5.0f, 0.0f, -5.0f));
+    } // if
     return true;
 }

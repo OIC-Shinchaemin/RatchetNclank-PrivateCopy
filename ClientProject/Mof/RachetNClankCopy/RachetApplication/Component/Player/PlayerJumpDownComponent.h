@@ -2,14 +2,14 @@
 #define MY_PLAYER_JUMP_DOWN_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerJumpDownComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerJumpDownComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! ç≈ëÂ
     float _jump_speed_max;
@@ -48,6 +48,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const override;
     /// <summary>
     /// èâä˙âª
     /// </summary>

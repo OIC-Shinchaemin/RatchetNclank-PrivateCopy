@@ -1,9 +1,6 @@
 #include "ActionComponent.h"
 
 
-void my::ActionComponent::ChageState(const std::string& name) {
-}
-
 my::ActionComponent::ActionComponent(int priority) :
     super(priority) {
 }
@@ -19,24 +16,6 @@ std::string my::ActionComponent::GetType(void) const {
     return "ActionComponent";
 }
 
-bool my::ActionComponent::Initialize(void) {
-    super::Initialize();
-    return true;
-}
-
-bool my::ActionComponent::Update(float delta_time) {
-    return true;
-}
-
-bool my::ActionComponent::Release(void) {
-    super::Release();
-    return true;
-}
-
-std::shared_ptr<my::Component> my::ActionComponent::Clone(void) {
-    return std::make_shared<my::ActionComponent>(*this);
-}
-
-bool my::ActionComponent::Start(void) {
-    return true;
+std::string_view my::ActionComponent::GetStateType(void) const {
+    return std::string_view();
 }

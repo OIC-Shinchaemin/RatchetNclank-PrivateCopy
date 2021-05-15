@@ -35,6 +35,10 @@ std::string my::PlayerIdleComponent::GetType(void) const {
     return "PlayerIdleComponent";
 }
 
+std::string_view my::PlayerIdleComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionIdleState;
+}
+
 bool my::PlayerIdleComponent::Initialize(void) {
     super::Initialize();
 

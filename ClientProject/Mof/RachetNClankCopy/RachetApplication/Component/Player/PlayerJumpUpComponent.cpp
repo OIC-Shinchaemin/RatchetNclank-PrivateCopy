@@ -45,6 +45,10 @@ std::string my::PlayerJumpUpComponent::GetType(void) const {
     return "PlayerJumpUpComponent";
 }
 
+std::string_view my::PlayerJumpUpComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionJumpUpState;
+}
+
 void my::PlayerJumpUpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }

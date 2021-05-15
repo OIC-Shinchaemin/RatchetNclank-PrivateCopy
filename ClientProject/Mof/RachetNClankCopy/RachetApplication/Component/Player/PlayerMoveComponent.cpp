@@ -98,6 +98,10 @@ std::string my::PlayerMoveComponent::GetType(void) const {
     return "PlayerMoveComponent";
 }
 
+std::string_view my::PlayerMoveComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionMoveState;
+}
+
 bool my::PlayerMoveComponent::Initialize(void) {
     super::Initialize();
 

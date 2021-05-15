@@ -40,6 +40,10 @@ std::string my::PlayerJumpSetComponent::GetType(void) const {
     return "PlayerJumpSetComponent";
 }
 
+std::string_view my::PlayerJumpSetComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionJumpSetState;
+}
+
 bool my::PlayerJumpSetComponent::Initialize(void) {
     super::Initialize();
 

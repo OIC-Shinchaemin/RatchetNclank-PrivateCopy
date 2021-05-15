@@ -2,7 +2,7 @@
 #define MY_PLAYER_DAMAGE_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
@@ -10,8 +10,8 @@
 
 
 namespace my {
-class PlayerDamageComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerDamageComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! îÌíeó 
     int _damage_value;
@@ -48,6 +48,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const override;
     /// <summary>
     /// èâä˙âª
     /// </summary>

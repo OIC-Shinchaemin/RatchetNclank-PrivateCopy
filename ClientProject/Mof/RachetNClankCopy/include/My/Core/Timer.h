@@ -11,6 +11,8 @@ private:
     float _time_max;
     //! ループ
     bool _loop;
+    //! ストップ
+    bool _stop;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,8 +31,9 @@ public:
     /// </summary>
     /// <param name="max"></param>
     /// <param name="loop"></param>
+    /// <param name="stop"></param>
     /// <returns></returns>
-    void Initialize(float max, bool loop);
+    void Initialize(float max, bool loop, bool stop = false);
     /// <summary>
     /// 更新
     /// </summary>
