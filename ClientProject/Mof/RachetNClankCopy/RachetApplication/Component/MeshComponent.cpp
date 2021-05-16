@@ -12,7 +12,7 @@ my::MeshComponent::MeshComponent(int priority) :
 }
 
 my::MeshComponent::MeshComponent(const my::MeshComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _mesh(obj._mesh),
     _motion_com(),
     _is_show(obj._is_show),
@@ -80,28 +80,6 @@ bool my::MeshComponent::Render(void) {
         translate.Translation(super::GetOwner()->GetPosition(), translate);
         auto world = scale * rotate * translate;
 
-        if (auto motion_com = _motion_com.lock()) {
-            auto motion = motion_com->GetMotionData();
-            motion->RefreshBoneMatrix(world);
-            r->Render(motion, _color);
-        } // if
-        else {
-            r->Render(world);
-        } // else
-    } // if
-    return true;
-}
-
-bool my::MeshComponent::Render(const Mof::CMatrix44& world) {
-    if (!this->_is_show) {
-        return false;
-    } // if
-    if (!super::GetOwner()->InCameraRange()) {
-        return false;
-    } // if
-
-    // •`‰æ
-    if (auto r = _mesh.lock()) {
         if (auto motion_com = _motion_com.lock()) {
             auto motion = motion_com->GetMotionData();
             motion->RefreshBoneMatrix(world);

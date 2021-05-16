@@ -750,6 +750,9 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerWeaponComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1468,6 +1471,9 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerWeaponComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

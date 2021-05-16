@@ -24,7 +24,7 @@ my::PlayerMeleeAttackThreeEndComponent::PlayerMeleeAttackThreeEndComponent(int p
 }
 
 my::PlayerMeleeAttackThreeEndComponent::PlayerMeleeAttackThreeEndComponent(const PlayerMeleeAttackThreeEndComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _state_com(),
     _motion_com(),

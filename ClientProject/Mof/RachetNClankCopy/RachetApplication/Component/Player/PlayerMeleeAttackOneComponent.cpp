@@ -27,7 +27,7 @@ my::PlayerMeleeAttackOneComponent::PlayerMeleeAttackOneComponent(int priority) :
 }
 
 my::PlayerMeleeAttackOneComponent::PlayerMeleeAttackOneComponent(const PlayerMeleeAttackOneComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _next_reserve(false),
     _velocity_com(),
     _state_com(),

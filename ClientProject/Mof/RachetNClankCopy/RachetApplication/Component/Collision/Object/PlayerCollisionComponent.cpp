@@ -218,7 +218,7 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
 }
 
 my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _player_com(),
     _velocity_com(),
     _state_com(),

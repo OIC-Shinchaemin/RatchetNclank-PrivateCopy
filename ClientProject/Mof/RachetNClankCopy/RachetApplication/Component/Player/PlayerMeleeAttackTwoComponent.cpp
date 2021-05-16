@@ -27,7 +27,7 @@ my::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(int priority) :
 }
 
 my::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(const PlayerMeleeAttackTwoComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _next_reserve(false),
     _velocity_com(),
     _state_com(),

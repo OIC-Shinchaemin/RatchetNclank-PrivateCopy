@@ -10,7 +10,7 @@ my::CameraCollisionComponent::CameraCollisionComponent(int priority) :
 }
 
 my::CameraCollisionComponent::CameraCollisionComponent(const CameraCollisionComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _camera_com() {
 }
 

@@ -1,44 +1,38 @@
-#ifndef MY_SHIP_COMPONENT_H
-#define MY_SHIP_COMPONENT_H
+#ifndef MY_PLAYER_WEAPON_COMPONENT_H
+#define MY_PLAYER_WEAPON_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
-#include <memory>
-
-#include "My/Core/Timer.h"
-#include "My/Core/ServiceLocator.h"
-#include "../../Camera/Camera.h"
-#include "../../Camera/CameraController.h"
-
 
 namespace my {
-class ShipComponent : public my::UpdateComponent {
+class PlayerWeaponComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
-    //! タイマー
-    my::Timer _timer;
-    //! フラグ
-    bool _take_off;
-    //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _camera_controller;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
+    //! 武器
+    std::weak_ptr<my::Actor> _weapon;
+    //! 衝突制御
+    std::weak_ptr<class OmniWrenchCollisionComponent> _weapon_coll_com;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    ShipComponent(int priority);
+    PlayerWeaponComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    ShipComponent(const ShipComponent& obj);
+    PlayerWeaponComponent(const PlayerWeaponComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~ShipComponent();
+    virtual ~PlayerWeaponComponent();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -54,15 +48,15 @@ public:
     /// <summary>
     /// 更新
     /// </summary>
-    /// <param name="delta_time">時間</param>
+    /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
-    /// 開始
+    /// 解放
     /// </summary>
     /// <param name=""></param>
-    /// <returns>成功</returns>
-    virtual bool Activate(void) override;
+    /// <returns></returns>
+    virtual bool Release(void) override;
     /// <summary>
     /// 複製
     /// </summary>
@@ -71,4 +65,4 @@ public:
     virtual std::shared_ptr<my::Component> Clone(void) override;
 };
 }
-#endif // !MY_SHIP_COMPONENT_H
+#endif // !MY_PLAYER_WEAPON_COMPONENT_H

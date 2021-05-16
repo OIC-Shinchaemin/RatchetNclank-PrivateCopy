@@ -9,7 +9,7 @@ my::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(int priority) :
 }
 
 my::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(const OmniWrenchCollisionComponent& obj) :
-    super(obj._priority) ,
+    super(obj) ,
     _offset(obj._offset){
 }
 

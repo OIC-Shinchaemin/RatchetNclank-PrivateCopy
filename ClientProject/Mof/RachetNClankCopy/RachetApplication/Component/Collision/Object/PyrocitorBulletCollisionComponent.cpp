@@ -8,7 +8,7 @@ my::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(int pri
 }
 
 my::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(const PyrocitorBulletCollisionComponent& obj) :
-    super(obj._priority) {
+    super(obj) {
 }
 
 my::PyrocitorBulletCollisionComponent::~PyrocitorBulletCollisionComponent() {

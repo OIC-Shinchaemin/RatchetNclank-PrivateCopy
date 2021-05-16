@@ -4,6 +4,7 @@
 std::weak_ptr<my::ResourceMgr> my::Component::_resource_manager;
 std::weak_ptr<my::UICanvas> my::Component::_ui_canvas;
 
+
 void my::Component::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
     _resource_manager = ptr;
 }
@@ -16,6 +17,12 @@ my::Component::Component(int priority) :
     _owner(),
     _priority(priority),
     _active(false) {
+}
+
+my::Component::Component(const Component& obj) :
+    _owner(),
+    _priority(obj._priority),
+    _active(obj._active) {
 }
 
 my::Component::~Component() {
@@ -58,6 +65,16 @@ bool my::Component::IsRender(void) const {
     return false;
 }
 
+bool my::Component::Activate(void) {
+    this->_active = true;
+    return true;
+}
+
+bool my::Component::Inactivate(void) {
+    this->_active = false;
+    return true;
+}
+
 bool my::Component::Initialize(void) {
     _ASSERT_EXPR(!_owner.expired(), L"コンポーネントのアクターが登録されていません");
     return true;
@@ -75,15 +92,12 @@ bool my::Component::Render(void) {
     return false;
 }
 
-bool my::Component::Render(const Mof::CMatrix44& world) {
-    return false;
-}
-
 bool my::Component::Release(void) {
     _owner.reset();
     return true;
 }
-
+#ifdef _DEBUG
 bool my::Component::DebugRender(void) {
     return false;
 }
+#endif // _DEBUG

@@ -59,11 +59,11 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
     /// <summary>
-    /// ŠJn
+    /// —LŒø‰»
     /// </summary>
     /// <param name=""></param>
     /// <returns>¬Œ÷</returns>
-    virtual bool Start(void) override;
+    virtual bool Activate(void) override;
 };
 }
 #endif // !MY_PLAYER_INVINCIBLE_COMPONENT_H

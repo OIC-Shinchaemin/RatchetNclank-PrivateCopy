@@ -217,12 +217,6 @@ public:
     /// <returns></returns>
     virtual bool Render(void);
     /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name="world"></param>
-    /// <returns></returns>
-    virtual bool Render(const Mof::CMatrix44& world);
-    /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
@@ -233,11 +227,6 @@ public:
     /// </summary>
     /// <param name="builder"></param>
     virtual void Construct(const std::shared_ptr<class IBuilder>& builder);
-    /// <summary>
-    /// デバッグ
-    /// </summary>
-    /// <param name=""></param>
-    virtual void DebugRender(void);
 };
 }
 #endif // !MY_ACTOR_H

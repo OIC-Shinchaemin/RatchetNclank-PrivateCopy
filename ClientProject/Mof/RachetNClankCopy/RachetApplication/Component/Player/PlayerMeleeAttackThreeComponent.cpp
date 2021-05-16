@@ -26,7 +26,7 @@ my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priorit
 }
 
 my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const PlayerMeleeAttackThreeComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _state_com(),
     _motion_com(),

@@ -54,7 +54,7 @@ my::EnemyMoveComponent::EnemyMoveComponent(int priority) :
 }
 
 my::EnemyMoveComponent::EnemyMoveComponent(const EnemyMoveComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),

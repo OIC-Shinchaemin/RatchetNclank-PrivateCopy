@@ -31,9 +31,6 @@ bool my::Renderer::Render(void) {
             _disable_actors.push_back((ptr));
         } // if
     } // for
-    for (auto ptr : _enable_actors) {
-        ptr->DebugRender();
-    } // for
 
     for (auto ptr : _disable_actors) {
         ut::SwapPopback(_enable_actors, ptr);

@@ -36,7 +36,7 @@ my::EnemyDamageComponent::EnemyDamageComponent(int priority) :
 }
 
 my::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _damage_value(0),
     _damage_angle(),
     _damage_speed(0.0f),

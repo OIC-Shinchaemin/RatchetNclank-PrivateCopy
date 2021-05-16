@@ -5,6 +5,10 @@ my::UpdateComponent::UpdateComponent(int priority) :
     super(priority) {
 }
 
+my::UpdateComponent::UpdateComponent(const UpdateComponent& obj) :
+    super(obj) {
+}
+
 my::UpdateComponent::~UpdateComponent() {
 }
 
@@ -28,14 +32,4 @@ bool my::UpdateComponent::Update(float delta_time) {
 bool my::UpdateComponent::Release(void) {
     super::Release();
     return true;
-}
-
-bool my::UpdateComponent::Start(void) {
-    super::_active = true;
-    return true;
-}
-
-bool my::UpdateComponent::End(void) {
-    super::_active = false;
-    return false;
 }

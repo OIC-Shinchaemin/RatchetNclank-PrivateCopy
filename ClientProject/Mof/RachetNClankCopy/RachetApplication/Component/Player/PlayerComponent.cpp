@@ -69,8 +69,8 @@ bool my::PlayerComponent::DisableAction(void) {
 
 bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
-
+    super::Activate();
+    
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
 

@@ -6,6 +6,10 @@ my::RenderComponent::RenderComponent(int priority) :
     _path() {
 }
 
+my::RenderComponent::RenderComponent(const RenderComponent& obj) :
+    super(obj) {
+}
+
 my::RenderComponent::~RenderComponent() {
 }
 
@@ -26,15 +30,11 @@ bool my::RenderComponent::IsRender(void) const {
 
 bool my::RenderComponent::Initialize(void) {
     super::Initialize();
-    super::_active = true;
+    super::Activate();
     return true;
 }
 
 bool my::RenderComponent::Render(void) {
-    return false;
-}
-
-bool my::RenderComponent::Render(const Mof::CMatrix44& world) {
     return false;
 }
 

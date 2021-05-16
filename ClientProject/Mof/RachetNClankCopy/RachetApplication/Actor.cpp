@@ -3,7 +3,7 @@
 #include "My/Core/Math.h"
 #include "My/Core/Utility.h"
 #include "Component/Component.h"
-#include "Factory/IBuilder.h"
+#include "Factory/Builder/IBuilder.h"
 
 
 my::Actor::Actor() :
@@ -163,17 +163,9 @@ bool my::Actor::Render(void) {
     for (auto& com : _render_components) {
         if (com->IsActive()) {
             com->Render();
-            re = true;
-        } // if
-    } // for
-    return re;
-}
-
-bool my::Actor::Render(const Mof::CMatrix44& world) {
-    bool re = false;
-    for (auto& com : _render_components) {
-        if (com->IsActive()) {
-            com->Render(world);
+#ifdef _DEBUG
+            com->DebugRender();
+#endif // _DEBUG
             re = true;
         } // if
     } // for
@@ -203,13 +195,5 @@ void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
 
     for (auto& c : _components) {
         c->SetOwner(shared_from_this());
-    } // for
-}
-
-void my::Actor::DebugRender(void) {
-    for (auto& com : _render_components) {
-        if (com->IsActive()) {
-            com->DebugRender();
-        } // if
     } // for
 }

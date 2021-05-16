@@ -14,7 +14,7 @@ my::Ship::~Ship() {
 void my::Ship::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
     if (type == "ShipCollision") {
         if (_enable) {
-            super::GetComponent<my::ShipComponent>()->Start();
+            super::GetComponent<my::ShipComponent>()->Activate();
         } // if
     } // if
     else if (type == "GimmickAction") {

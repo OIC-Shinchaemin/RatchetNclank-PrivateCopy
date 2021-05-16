@@ -1,7 +1,7 @@
 #include "Terrain.h"
 
 #include "my/Core/Math.h"
-#include "../../Factory/IBuilder.h"
+#include "../../Factory/Builder/IBuilder.h"
 
 
 my::Terrain::Terrain() :

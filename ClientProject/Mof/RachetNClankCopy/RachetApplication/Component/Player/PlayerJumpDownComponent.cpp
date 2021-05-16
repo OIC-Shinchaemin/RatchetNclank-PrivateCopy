@@ -21,7 +21,7 @@ my::PlayerJumpDownComponent::PlayerJumpDownComponent(int priority) :
 }
 
 my::PlayerJumpDownComponent::PlayerJumpDownComponent(const PlayerJumpDownComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _jump_speed_max(obj._jump_speed_max),
     _jump_speed(obj._jump_speed),
     _jump_decrase(obj._jump_decrase),

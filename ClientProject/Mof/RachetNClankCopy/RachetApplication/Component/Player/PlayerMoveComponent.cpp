@@ -62,7 +62,7 @@ my::PlayerMoveComponent::PlayerMoveComponent(int priority) :
 }
 
 my::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),

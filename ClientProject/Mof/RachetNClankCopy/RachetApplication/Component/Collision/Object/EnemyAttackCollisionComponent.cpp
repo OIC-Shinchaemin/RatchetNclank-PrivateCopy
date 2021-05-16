@@ -10,7 +10,7 @@ my::EnemyAttackCollisionComponent::EnemyAttackCollisionComponent(int priority) :
 }
 
 my::EnemyAttackCollisionComponent::EnemyAttackCollisionComponent(const EnemyAttackCollisionComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _attack_com() {
 }
 

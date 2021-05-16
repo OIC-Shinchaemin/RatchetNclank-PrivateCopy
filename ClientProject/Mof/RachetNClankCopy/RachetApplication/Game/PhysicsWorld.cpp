@@ -121,11 +121,17 @@ void my::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
 bool my::PhysicsWorld::Update(void) {
     for (auto& layer : _layers) {
         for (auto& object : layer.objects) {
+            if (!object->IsActive()) {
+                continue;
+            } // if
             if (object->IsSleep()) {
                 continue;
             } // if
-
+            
             for (auto& target : layer.targets) {
+                if (!target->IsActive()) {
+                    continue;
+                } // if
                 if (target->IsSleep()) {
                     continue;
                 } // if

@@ -253,6 +253,7 @@
     <ClCompile Include="Component\Player\PlayerMeleeAttackTwoEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMoveComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerStateComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerWeaponComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipMeshComponent.cpp" />
@@ -485,6 +486,7 @@
     <ClInclude Include="Component\Player\PlayerMeleeAttackTwoEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerMoveComponent.h" />
     <ClInclude Include="Component\Player\PlayerStateComponent.h" />
+    <ClInclude Include="Component\Player\PlayerWeaponComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
     <ClInclude Include="Component\Ship\ShipComponent.h" />
     <ClInclude Include="Component\Ship\ShipMeshComponent.h" />

@@ -33,7 +33,7 @@ my::TransformComponent::TransformComponent(int priority) :
 }
 
 my::TransformComponent::TransformComponent(const TransformComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com() {
 }
 
@@ -46,7 +46,7 @@ std::string my::TransformComponent::GetType(void) const {
 
 bool my::TransformComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     return true;
 }

@@ -140,7 +140,7 @@ my::CameraComponent::CameraComponent(int priority) :
 }
 
 my::CameraComponent::CameraComponent(const CameraComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _target(),
     _player_view_camera(),
     _camera_controller(),
@@ -199,7 +199,7 @@ Mof::CVector3 my::CameraComponent::GetPreviewPosition(void) const {
 
 bool my::CameraComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
 
     // camera
     _player_view_camera = (std::make_shared<my::Camera>());

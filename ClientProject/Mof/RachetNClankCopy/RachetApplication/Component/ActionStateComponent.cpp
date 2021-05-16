@@ -7,7 +7,7 @@ my::ActionStateComponent::ActionStateComponent(int priority) :
 }
 
 my::ActionStateComponent::ActionStateComponent(const ActionStateComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _state_machine(obj._state_machine) {
 }
 
@@ -24,7 +24,7 @@ std::string my::ActionStateComponent::GetType(void) const {
 
 bool my::ActionStateComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
     return true;
 }
 

@@ -13,7 +13,7 @@ my::PlayerDeadComponent::PlayerDeadComponent(int priority) :
 }
 
 my::PlayerDeadComponent::PlayerDeadComponent(const PlayerDeadComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _motion_com(),
     _motion_state_com() {
 }

@@ -12,7 +12,7 @@ my::MotionStateComponent::MotionStateComponent(int priority) :
 }
 
 my::MotionStateComponent::MotionStateComponent(const MotionStateComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _state_machine(obj._state_machine) {
 }
 
@@ -29,7 +29,7 @@ std::string my::MotionStateComponent::GetType(void) const {
 
 bool my::MotionStateComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
 
     using Param = state::MotionState::Param;
 

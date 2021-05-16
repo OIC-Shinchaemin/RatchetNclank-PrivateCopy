@@ -9,7 +9,7 @@ my::EnemyStateComponent::EnemyStateComponent(int priority) :
 }
 
 my::EnemyStateComponent::EnemyStateComponent(const EnemyStateComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _state_machine(obj._state_machine) {
 }
 
@@ -26,7 +26,7 @@ std::string my::EnemyStateComponent::GetType(void) const {
 
 bool my::EnemyStateComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
 
     // state
     std::vector<std::weak_ptr<my::ActionComponent>> work;

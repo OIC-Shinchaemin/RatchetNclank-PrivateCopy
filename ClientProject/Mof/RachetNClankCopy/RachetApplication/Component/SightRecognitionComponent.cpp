@@ -31,15 +31,15 @@ my::SightRecognitionComponent::SightRecognitionComponent(int priority) :
     _range(0.0f),
     _player_com(),
     _enemy_com() {
-    super::_active = true;
+    super::Activate();
 }
 
 my::SightRecognitionComponent::SightRecognitionComponent(const SightRecognitionComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _range(obj._range),
     _player_com(),
     _enemy_com() {
-    super::_active = true;
+    super::Activate();
 }
 
 my::SightRecognitionComponent::~SightRecognitionComponent() {

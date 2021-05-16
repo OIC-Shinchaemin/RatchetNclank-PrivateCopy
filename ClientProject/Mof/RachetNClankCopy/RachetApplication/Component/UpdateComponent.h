@@ -15,6 +15,11 @@ public:
     /// <param name="priority"></param>
     UpdateComponent(int priority);
     /// <summary>
+    /// コピーコンストラクタ
+    /// </summary>
+    /// <param name="obj"></param>
+    UpdateComponent(const UpdateComponent& obj);
+    /// <summary>
     /// デストラクタ
     /// </summary>
     virtual ~UpdateComponent();
@@ -47,18 +52,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Release(void) override;
-    /// <summary>
-    /// 開始
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns>成功</returns>
-    virtual bool Start(void);
-    /// <summary>
-    /// 終了
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool End(void);
 };
 }
 #endif // !MY_UPDATE_COMPONENT_H

@@ -11,7 +11,7 @@ my::MotionComponent::MotionComponent(int priority) :
 }
 
 my::MotionComponent::MotionComponent(const MotionComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _motion(),
     _motion_names(obj._motion_names),
     _path(obj._path) {
@@ -45,7 +45,7 @@ bool my::MotionComponent::IsEndMotion(void) const {
 
 bool my::MotionComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
     auto mesh_com = super::GetOwner()->GetComponent<my::MeshComponent>();
     if (auto mesh = mesh_com->GetMesh().lock()) {
         _motion = mesh->CreateMotionController();

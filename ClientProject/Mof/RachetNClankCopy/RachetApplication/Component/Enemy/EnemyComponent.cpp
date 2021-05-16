@@ -55,7 +55,7 @@ float my::EnemyComponent::GetHomeDistance(void) const {
 
 bool my::EnemyComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
 
     _velocity_timer.Initialize(1.0f, true);
 

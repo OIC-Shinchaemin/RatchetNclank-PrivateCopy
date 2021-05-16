@@ -22,7 +22,7 @@ my::PlayerIdleComponent::PlayerIdleComponent(int priority) :
 }
 
 my::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _state_com(),
     _motion_state_com() {

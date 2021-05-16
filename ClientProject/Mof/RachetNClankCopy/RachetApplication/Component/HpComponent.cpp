@@ -41,7 +41,7 @@ int my::HpComponent::GetHp(void) const {
 
 bool my::HpComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
     _hp = _hp_max;
 
     auto tag = super::GetOwner()->GetTag();
