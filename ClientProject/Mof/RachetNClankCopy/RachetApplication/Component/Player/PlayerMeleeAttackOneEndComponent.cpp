@@ -24,7 +24,7 @@ my::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(int prior
 }
 
 my::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(const PlayerMeleeAttackOneEndComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _state_com(),
     _motion_com(),

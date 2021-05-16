@@ -10,12 +10,6 @@
 namespace my {
 class ActionComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
-private:
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    //void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,6 +37,18 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string_view GetStateType(void) const;
+    /// <summary>
+    /// 開始
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>成功</returns>
+    virtual bool Start(void);
+    /// <summary>
+    /// 終了
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool End(void);
 };
 }
 #endif // !MY_ACTION_COMPONENT_H

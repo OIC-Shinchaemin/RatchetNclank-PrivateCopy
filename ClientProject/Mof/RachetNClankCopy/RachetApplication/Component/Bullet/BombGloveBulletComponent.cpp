@@ -48,7 +48,7 @@ std::string my::BombGloveBulletComponent::GetType(void) const {
 
 bool my::BombGloveBulletComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
 
     auto coll_com = super::GetOwner()->GetComponent<my::BombGloveBulletCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,

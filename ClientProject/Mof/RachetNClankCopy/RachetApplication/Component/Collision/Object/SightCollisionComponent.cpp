@@ -10,7 +10,7 @@ my::SightCollisionComponent::SightCollisionComponent(int priority) :
 }
 
 my::SightCollisionComponent::SightCollisionComponent(const SightCollisionComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _sight_recognition() {
 }
 

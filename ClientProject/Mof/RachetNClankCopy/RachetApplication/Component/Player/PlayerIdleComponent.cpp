@@ -22,7 +22,7 @@ my::PlayerIdleComponent::PlayerIdleComponent(int priority) :
 }
 
 my::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _state_com(),
     _motion_state_com() {
@@ -68,6 +68,12 @@ bool my::PlayerIdleComponent::Update(float delta_time) {
              ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
     } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_U) || 
+             (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X) && ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_R_BTN))) {
+        this->ChageState(state::PlayerActionStateType::kPlayerActionThrowAttackSetState);
+    } // else if
+
+
 
     return true;
 }

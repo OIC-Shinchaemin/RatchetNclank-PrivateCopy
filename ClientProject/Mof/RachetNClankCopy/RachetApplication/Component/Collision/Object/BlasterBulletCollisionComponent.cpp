@@ -8,7 +8,7 @@ my::BlasterBulletCollisionComponent::BlasterBulletCollisionComponent(int priorit
 }
 
 my::BlasterBulletCollisionComponent::BlasterBulletCollisionComponent(const BlasterBulletCollisionComponent& obj) :
-    super(obj._priority) {
+    super(obj) {
 }
 
 my::BlasterBulletCollisionComponent::~BlasterBulletCollisionComponent() {

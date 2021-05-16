@@ -9,7 +9,7 @@
 #include "../Actor/Character/Player.h"
 #include "../Actor//Ship/Ship.h"
 #include "../Actor//Terrain/Terrain.h"
-#include "../Factory/ActorBuilder.h"
+#include "../Factory/Builder/ActorBuilder.h"
 #include "../Game/GameSystem/Save/SaveData.h"
 #include "../Game/GameSystem/Save/SaveSystem.h"
 #include "../Component/CameraComponent.h"
@@ -197,6 +197,12 @@ bool my::GameScene::Initialize(void) {
     this->AddElement(ship);
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
+
+    param->name = "weapon";
+    param->tag = "omni_wrench";
+    auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", param);
+    player->AddChild(omniwrench);
+    this->AddElement(omniwrench);
 
     // game system
     if (auto game = _game.lock()) {

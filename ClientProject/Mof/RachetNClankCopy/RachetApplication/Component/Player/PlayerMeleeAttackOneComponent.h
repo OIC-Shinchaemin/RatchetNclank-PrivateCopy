@@ -25,6 +25,8 @@ private:
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! ˆÚ“®
     std::weak_ptr<class PlayerMoveComponent> _move_com;
+    //! •Ší
+    std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
     /// <summary>
     /// •ÏX
     /// </summary>
@@ -87,6 +89,12 @@ public:
     /// <param name=""></param>
     /// <returns>¬Œ÷</returns>
     virtual bool Start(void) override;
+    /// <summary>
+    /// I—¹
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>¬Œ÷</returns>
+    virtual bool End(void) override;
 };
 }
 #endif // !MY_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H

@@ -24,7 +24,7 @@ my::PlayerMeleeAttackTwoEndComponent::PlayerMeleeAttackTwoEndComponent(int prior
 }
 
 my::PlayerMeleeAttackTwoEndComponent::PlayerMeleeAttackTwoEndComponent(const PlayerMeleeAttackTwoEndComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _state_com(),
     _motion_com(),

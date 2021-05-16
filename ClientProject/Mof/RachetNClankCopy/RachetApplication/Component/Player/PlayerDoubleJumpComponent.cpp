@@ -29,7 +29,7 @@ my::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
 }
 
 my::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJumpComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
     _state_com(),

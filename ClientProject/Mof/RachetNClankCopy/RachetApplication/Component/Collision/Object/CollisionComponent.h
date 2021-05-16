@@ -239,15 +239,12 @@ public:
     /// <param name="gimmick"></param>
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick);
 #ifdef _DEBUG
-    virtual bool IsRender(void) const override {
-        return false;
-    }
-    virtual bool DebugRender(void) override {
-        if (this->GetSphere().has_value()) {
-            ::CGraphicsUtilities::RenderLineSphere(this->GetSphere().value(), def::color_rgba::kRed);
-        } // if
-        return true;
-    }
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool DebugRender(void) override;    
 #endif // _DEBUG
 };
 }

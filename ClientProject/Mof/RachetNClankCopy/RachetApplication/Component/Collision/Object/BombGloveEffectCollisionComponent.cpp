@@ -8,7 +8,7 @@ my::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(int pri
 }
 
 my::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(const BombGloveEffectCollisionComponent& obj) :
-    super(obj._priority) {
+    super(obj) {
 }
 
 my::BombGloveEffectCollisionComponent::~BombGloveEffectCollisionComponent() {

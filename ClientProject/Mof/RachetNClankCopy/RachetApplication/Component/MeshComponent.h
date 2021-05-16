@@ -16,8 +16,6 @@ protected:
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! アニメーション
     std::weak_ptr<class MotionComponent> _motion_com;
-    //! 非表示フラグ
-    bool _is_show;
     //! 表示色
     Mof::CVector4 _color;
 public:
@@ -70,12 +68,6 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override; 
     /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name="world"></param>
-    /// <returns></returns>
-    virtual bool Render(const Mof::CMatrix44& world) override;
-    /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
@@ -87,17 +79,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
-    /// <summary>
-    /// 表示しない
-    /// </summary>
-    /// <param name=""></param>
-    void Hide(void);
-    /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool DebugRender(void) override;
 };
 }
 #endif // !MY_MESH_COMPONENT_H

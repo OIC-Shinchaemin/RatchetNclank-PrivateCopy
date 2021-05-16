@@ -1,4 +1,6 @@
 {
+  "type": "OmniWrench",
+
   "components": [
     {
       "type": "MeshComponent",
@@ -6,6 +8,13 @@
         "priority": 0,
         "path": "../Resource/mesh/Chara/Wep_01_ion_mdl_01.mom"
       }
+    },
+    {
+      "type": "OmniWrenchCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
     }
+
   ]
 }

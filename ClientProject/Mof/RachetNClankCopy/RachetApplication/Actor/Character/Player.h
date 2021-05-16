@@ -31,6 +31,9 @@ public:
         MeleeAttackTwoEnd,
         MeleeAttackThree,
         MeleeAttackThreeEnd,
+        ThrowAttackSet,
+        ThrowAttack,
+        ThrowAttackEnd,
         DamageA,
         DamageDead,
         CountMax,
@@ -39,7 +42,9 @@ private:
     //! 武器
     std::weak_ptr<my::Mechanical>_current_mechanical;
     //! 武器
-    std::shared_ptr<my::OmniWrench> _omniwrench;
+    //std::shared_ptr<my::OmniWrench> _omniwrench;
+    //! 子アクター
+    std::vector<std::shared_ptr<my::Actor>> _children;
     //! プレイヤー
     std::weak_ptr<my::PlayerComponent> _player_com;
     //! 有効
@@ -64,6 +69,12 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(const my::QuickChangeSystem::Info& info) override;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Actor> GetChild(const std::string& tag) const;
+    /// <summary>
     /// デリート
     /// </summary>
     /// <param name=""></param>
@@ -74,6 +85,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Disable(void);
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddChild(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

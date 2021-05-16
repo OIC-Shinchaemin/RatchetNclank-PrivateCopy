@@ -22,7 +22,7 @@ my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
 }
 
 my::PlayerDamageComponent::PlayerDamageComponent(const PlayerDamageComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _damage_value(),
     _damage_angle(),
     _velocity_com(),

@@ -12,7 +12,7 @@ my::AIStateComponent::AIStateComponent(int priority) :
 }
 
 my::AIStateComponent::AIStateComponent(const AIStateComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _state_machine(obj._state_machine),
     _behaviour_path(obj._behaviour_path){
 }
@@ -41,7 +41,7 @@ std::string my::AIStateComponent::GetType(void) const {
 
 bool my::AIStateComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
     _thinking_time.Initialize(0.0f, true);
 
     // state
@@ -71,7 +71,9 @@ void my::AIStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
 
+#ifdef _DEBUG
 bool my::AIStateComponent::DebugRender(void) {
     _state_machine.DebugRender();
     return false;
 }
+#endif // _DEBUG

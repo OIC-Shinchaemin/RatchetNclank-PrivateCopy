@@ -11,6 +11,7 @@ std::string my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm = "SightP
 std::string my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm = "SightEnemyCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm = "kEnemyEnemyCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm = "EnemyAttackPlayerCollisionAlgolithm";
+std::string my::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm = "EnemyOmniWrenchCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm = "EnemyBombGloveBulletCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm = "EnemyPyrocitorBulletCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm = "EnemyBlasterBulletCollisionAlgolithm";

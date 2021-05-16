@@ -7,7 +7,7 @@ my::InvincibleComponent::InvincibleComponent(int priority) :
 }
 
 my::InvincibleComponent::InvincibleComponent(const InvincibleComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _invincible() {
 }
 
@@ -25,7 +25,7 @@ bool my::InvincibleComponent::Initialize(void) {
 
 bool my::InvincibleComponent::Update(float delta_time) {
     if (_invincible.Tick(delta_time)) {
-        super::End();
+        super::Inactivate();
     } // if
     return true;
 }
@@ -39,11 +39,12 @@ std::shared_ptr<my::Component> my::InvincibleComponent::Clone(void) {
     return std::make_shared<my::InvincibleComponent>(*this);
 }
 
-bool my::InvincibleComponent::Start(void) {
+bool my::InvincibleComponent::Activate(void) {
     if (this->IsActive()) {
         return false;
     } // if
-    super::Start();
+
+    super::Activate();
     _invincible.Initialize(1.0f, false);
     return true;
 }

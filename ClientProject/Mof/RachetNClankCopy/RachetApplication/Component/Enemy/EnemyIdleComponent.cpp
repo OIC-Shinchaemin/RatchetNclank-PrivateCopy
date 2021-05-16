@@ -40,7 +40,7 @@ my::EnemyIdleComponent::EnemyIdleComponent(int priority) :
 }
 
 my::EnemyIdleComponent::EnemyIdleComponent(const EnemyIdleComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
     _velocity_com(),

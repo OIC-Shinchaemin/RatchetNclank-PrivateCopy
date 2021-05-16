@@ -4,6 +4,10 @@
 
 #include <assert.h>
 
+#include <typeinfo>
+
+#include <stdexcept>
+
 #include <utility>
 #include <tuple>
 #include <optional>
@@ -12,8 +16,10 @@
 #include <type_traits>
 #include <functional>
 #include <memory>
+#include <typeindex>
 
 #include <string>
+#include <string_view>
 
 #include <array>
 #include <vector>
@@ -37,6 +43,6 @@
 #include "rapidjson/ostreamwrapper.h"
 
 #include <Mof.h>
-#include <imgui/MofImGui.h>
+
 
 #endif // !MY_HEADER_H

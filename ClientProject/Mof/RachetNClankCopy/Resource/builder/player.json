@@ -42,6 +42,14 @@
         "priority": 80
       }
     },
+
+    {
+      "type": "PlayerWeaponComponent",
+      "paramater": {
+        "priority": 85
+      }
+    },
+
     {
       "type": "PlayerMoveComponent",
       "paramater": {
@@ -122,6 +130,27 @@
       }
     },
 
+
+    {
+      "type": "PlayerThrowAttackSetComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
+    {
+      "type": "PlayerThrowAttackComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
+    {
+      "type": "PlayerThrowAttackEndComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
+
+
     {
       "type": "PlayerDamageComponent",
       "paramater": {
@@ -179,12 +208,6 @@
     },
     {
       "type": "PlayerCollisionComponent",
-      "paramater": {
-        "priority": 0
-      }
-    },
-    {
-      "type": "PlayerMeleeAttackCollisionComponent",
       "paramater": {
         "priority": 0
       }

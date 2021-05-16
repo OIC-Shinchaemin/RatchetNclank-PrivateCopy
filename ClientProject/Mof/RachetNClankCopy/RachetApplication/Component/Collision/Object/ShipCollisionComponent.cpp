@@ -8,7 +8,7 @@ my::ShipCollisionComponent::ShipCollisionComponent(int priority) :
 }
 
 my::ShipCollisionComponent::ShipCollisionComponent(const ShipCollisionComponent& obj) :
-    super(obj._priority) {
+    super(obj) {
 }
 
 my::ShipCollisionComponent::~ShipCollisionComponent() {

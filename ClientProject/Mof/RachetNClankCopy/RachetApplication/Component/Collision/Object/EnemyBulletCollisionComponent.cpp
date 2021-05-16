@@ -8,7 +8,7 @@ my::EnemyBulletCollisionComponent::EnemyBulletCollisionComponent(int priority) :
 }
 
 my::EnemyBulletCollisionComponent::EnemyBulletCollisionComponent(const EnemyBulletCollisionComponent& obj) :
-    super(obj._priority) {
+    super(obj) {
 }
 
 my::EnemyBulletCollisionComponent::~EnemyBulletCollisionComponent() {

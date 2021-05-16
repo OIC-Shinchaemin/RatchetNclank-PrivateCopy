@@ -8,13 +8,27 @@
 #include "../../Factory/ActorFactory.h"
 
 
+std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
+    auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<my::Actor>& ptr) {
+        return ptr->GetTag() == tag;
+    });
+    if (it == _children.end()) {
+        return nullptr;
+    } // if
+    return *it;
+}
+
 void my::Player::End(void) {
     Observable::Notify("PlayerDead", shared_from_this());
 }
 
 bool my::Player::Disable(void) {
-    this->_enable = false;    
+    this->_enable = false;
     return true;
+}
+
+void my::Player::AddChild(const std::shared_ptr<my::Actor>& ptr) {
+    this->_children.push_back(ptr);
 }
 
 bool my::Player::Initialize(void) {
@@ -34,11 +48,6 @@ my::Player::Player() :
     _current_mechanical(),
     _enable(true) {
     super::SetTag("Player");
-
-    auto param = super::Param();
-    param.name = "weapon";
-    param.tag = "omni_wrench";
-    _omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", &param);
 }
 
 my::Player::~Player() {
@@ -85,6 +94,16 @@ bool my::Player::Update(float delta_time) {
         } // if
     } // if
 
+
+    // 武器を設定するボーンの情報を取得する
+    auto motion = super::GetComponent<my::MotionComponent>()->GetMotionData();
+    LPBONEMOTIONSTATE bone_state = motion->GetBoneState("UPP_weapon");
+    Mof::CMatrix44 mat = bone_state->pBone->GetRotationOffsetMatrix() * bone_state->BoneMatrix;
+    for (auto actor : _children) {
+        Mof::CVector3 translate, rotate, scale;
+        mat.GetTranslation(translate); mat.GetRotation(rotate); mat.GetScaling(scale);
+        actor->SetPosition(translate); actor->SetRotate(rotate); actor->SetScale(scale);
+    } // for
     return true;
 }
 
@@ -94,23 +113,13 @@ bool my::Player::Render(void) {
     } // if
     super::Render();
 
-    // 武器を設定するボーンの情報を取得する
-    auto motion = super::GetComponent<my::MotionComponent>()->GetMotionData();
-    LPBONEMOTIONSTATE bone_state = motion->GetBoneState("UPP_weapon");
-    Mof::CMatrix44 mat = bone_state->pBone->GetRotationOffsetMatrix() * bone_state->BoneMatrix;
-    if (auto weapon = _current_mechanical.lock()) {
-        weapon->Render(mat);
-    } // if
-    else {
-        if (auto mesh = _omniwrench->GetComponent<my::MeshComponent>()) {
-            mesh->GetMesh().lock()->Render(mat);
-        } // if
-    } // else
+    //_omniwrench->Render();
     return true;
 }
 
 bool my::Player::Release(void) {
     super::Release();
+    _children.clear();
     _current_mechanical.reset();
     return true;
 }

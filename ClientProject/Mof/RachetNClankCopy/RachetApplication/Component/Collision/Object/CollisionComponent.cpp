@@ -115,7 +115,7 @@ void my::CollisionComponent::AddCollisionFunc(CollisionFuncType type, const std:
 
 bool my::CollisionComponent::Initialize(void) {
     super::Initialize();
-    super::_active = true;
+    super::Activate();
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     return true;
 }
@@ -137,3 +137,12 @@ void my::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const Sta
 
 void my::CollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
 }
+
+#ifdef _DEBUG
+bool my::CollisionComponent::DebugRender(void) {
+    if (this->GetSphere().has_value()) {
+        ::CGraphicsUtilities::RenderLineSphere(this->GetSphere().value(), def::color_rgba::kRed);
+    } // if
+    return true;
+}
+#endif // _DEBUG

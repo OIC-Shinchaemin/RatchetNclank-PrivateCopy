@@ -22,7 +22,7 @@ my::PlayerJumpSetComponent::PlayerJumpSetComponent(int priority) :
 }
 
 my::PlayerJumpSetComponent::PlayerJumpSetComponent(const PlayerJumpSetComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _jump_speed(0.0f),
     _jump_speed_first(obj._jump_speed_first),
     _jump_speed_increase(obj._jump_speed_increase),

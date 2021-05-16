@@ -36,7 +36,7 @@ my::EnemyDamageComponent::EnemyDamageComponent(int priority) :
 }
 
 my::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _damage_value(0),
     _damage_angle(),
     _damage_speed(0.0f),
@@ -86,7 +86,7 @@ bool my::EnemyDamageComponent::Initialize(void) {
         return true;
     }));
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kPlayerMeleeAttackCollisionComponent,
+                               my::CollisionComponentType::kOmniWrenchCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);

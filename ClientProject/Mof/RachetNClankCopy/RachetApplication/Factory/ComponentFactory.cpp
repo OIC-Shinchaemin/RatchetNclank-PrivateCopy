@@ -22,8 +22,12 @@
 #include "../Component/Player/PlayerMeleeAttackTwoEndComponent.h"
 #include "../Component/Player/PlayerMeleeAttackThreeComponent.h"
 #include "../Component/Player/PlayerMeleeAttackThreeEndComponent.h"
+#include "../Component/Player/PlayerThrowAttackSetComponent.h"
+#include "../Component/Player/PlayerThrowAttackComponent.h"
+#include "../Component/Player/PlayerThrowAttackEndComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Player/PlayerDeadComponent.h"
+#include "../Component/Player/PlayerWeaponComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyIdleComponent.h"
@@ -42,11 +46,12 @@
 #include "../Component/MeshComponent.h"
 #include "../Component/CameraComponent.h"
 #include "../Component/Collision/Object/PlayerCollisionComponent.h"
-#include "../Component/Collision/Object/PlayerMeleeAttackCollisionComponent.h"
+//#include "../Component/Collision/Object/PlayerMeleeAttackCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyCollisionComponent.h"
 #include "../Component/Collision/Object/SightCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyAttackCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyBulletCollisionComponent.h"
+#include "../Component/Collision/Object/OmniWrenchCollisionComponent.h"
 #include "../Component/Collision/Object/BombGloveBulletCollisionComponent.h"
 #include "../Component/Collision/Object/PyrocitorBulletCollisionComponent.h"
 #include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
@@ -77,8 +82,12 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackTwoEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeEndComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackSetComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDeadComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerWeaponComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyStateComponent>();
@@ -98,11 +107,12 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerCollisionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackCollisionComponent>();
+    //my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::SightCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyBulletCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::OmniWrenchCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::PyrocitorBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();

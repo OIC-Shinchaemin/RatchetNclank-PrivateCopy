@@ -19,7 +19,7 @@ my::PlayerJumpLandingComponent::PlayerJumpLandingComponent(int priority) :
 }
 
 my::PlayerJumpLandingComponent::PlayerJumpLandingComponent(const PlayerJumpLandingComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _motion_com(),
     _motion_state_com(),

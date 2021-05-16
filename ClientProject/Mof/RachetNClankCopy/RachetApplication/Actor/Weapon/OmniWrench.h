@@ -17,6 +17,12 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~OmniWrench();
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(void) override;
 };
 }
 #endif // !MY_OMNI_WRENCH_H

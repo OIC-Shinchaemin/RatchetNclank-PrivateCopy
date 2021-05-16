@@ -7,10 +7,11 @@
 #include <map>
 
 #include "My/Core/Define.h"
-#include "IBuilder.h"
+#include "Builder/IBuilder.h"
 #include "ComponentFactory.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "Factory.h"
 
 
 namespace my {

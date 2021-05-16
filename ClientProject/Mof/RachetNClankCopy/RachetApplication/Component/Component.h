@@ -18,15 +18,15 @@ class Component : public std::enable_shared_from_this<my::Component> {
 private:
     //! この機能の所有者
     std::weak_ptr<my::Actor> _owner;
-protected:
     //! 小さいほど処理される順番が早い
     int _priority;
+    //! 有効
+    bool _active;
+protected:
     //! リソース
     static std::weak_ptr<my::ResourceMgr> _resource_manager;
     //! リソース
     static std::weak_ptr<my::UICanvas> _ui_canvas;
-    //! 有効
-    bool _active;
 public:
     /// <summary>
     /// セッター
@@ -43,6 +43,11 @@ public:
     /// </summary>
     /// <param name="priority">優先度</param>
     Component(int priority);
+    /// <summary>
+    /// コピーコンストラクタ
+    /// </summary>
+    /// <param name="obj"></param>
+    Component(const Component& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -94,6 +99,18 @@ public:
     /// <returns></returns>
     virtual bool IsRender(void) const;
     /// <summary>
+    /// 有効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Activate(void);
+    /// <summary>
+    /// 無効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Inactivate(void);
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
@@ -118,12 +135,6 @@ public:
     /// <returns></returns>
     virtual bool Render(void);
     /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name="world"></param>
-    /// <returns></returns>
-    virtual bool Render(const Mof::CMatrix44& world);
-    /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
@@ -135,12 +146,14 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) = 0;
+#ifdef _DEBUG
     /// <summary>
     /// デバッグ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool DebugRender(void);
+#endif // _DEBUG
 };
 static bool operator<(const my::Component& a, const my::Component& b) noexcept {
     return a.GetPriority() < b.GetPriority();

@@ -62,7 +62,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns>¬Œ÷</returns>
-    virtual bool Start(void) override;
+    virtual bool Activate(void) override;
     /// <summary>
     /// •¡»
     /// </summary>

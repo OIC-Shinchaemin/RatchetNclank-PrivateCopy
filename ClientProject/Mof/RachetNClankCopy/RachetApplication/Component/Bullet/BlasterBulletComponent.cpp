@@ -20,7 +20,7 @@ std::string my::BlasterBulletComponent::GetType(void) const {
 
 bool my::BlasterBulletComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
 
     auto coll_com = super::GetOwner()->GetComponent<my::BlasterBulletCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,

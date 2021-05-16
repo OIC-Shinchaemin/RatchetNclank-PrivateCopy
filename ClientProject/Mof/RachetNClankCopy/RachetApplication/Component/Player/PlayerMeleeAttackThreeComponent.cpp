@@ -8,6 +8,7 @@
 #include "../MotionStateComponent.h"
 #include "../MotionComponent.h"
 #include "PlayerMoveComponent.h"
+#include "PlayerWeaponComponent.h"
 
 
 void my::PlayerMeleeAttackThreeComponent::ChageState(const std::string& name) {
@@ -22,16 +23,18 @@ my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priorit
     _state_com(),
     _motion_com(),
     _motion_state_com(),
-    _move_com() {
+    _move_com(),
+    _weapon_com() {
 }
 
 my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const PlayerMeleeAttackThreeComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity_com(),
     _state_com(),
     _motion_com(),
     _motion_state_com(),
-    _move_com() {
+    _move_com(),
+    _weapon_com() {
 }
 
 my::PlayerMeleeAttackThreeComponent::~PlayerMeleeAttackThreeComponent() {
@@ -53,6 +56,7 @@ bool my::PlayerMeleeAttackThreeComponent::Initialize(void) {
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<my::PlayerWeaponComponent>();
     return true;
 }
 
@@ -95,5 +99,16 @@ bool my::PlayerMeleeAttackThreeComponent::Start(void) {
         move_com->Move(move_speed, angular_speed, ideal_angle);
     } // if
 
+    if (auto weapon_com = _weapon_com.lock()) {
+        weapon_com->Activate();
+    } // if
+    return true;
+}
+
+bool my::PlayerMeleeAttackThreeComponent::End(void) {
+    super::End();
+    if (auto weapon_com = _weapon_com.lock()) {
+        weapon_com->Inactivate();
+    } // if
     return true;
 }

@@ -8,6 +8,7 @@ std::string my::CollisionComponentType::kEnemyAttackCollisionComponent = "EnemyA
 std::string my::CollisionComponentType::kEnemyBulletCollisionComponent = "EnemyBulletCollisionComponent";
 std::string my::CollisionComponentType::kSightCollisionComponent = "SightCollisionComponent";
 std::string my::CollisionComponentType::kShipCollisionComponent = "ShipCollisionComponent";
+std::string my::CollisionComponentType::kOmniWrenchCollisionComponent = "OmniWrenchCollisionComponent";
 std::string my::CollisionComponentType::kBombGloveBulletCollisionComponent = "BombGloveBulletCollisionComponent";
 std::string my::CollisionComponentType::kPyrocitorBulletCollisionComponent = "PyrocitorBulletCollisionComponent";
 std::string my::CollisionComponentType::kBlasterBulletCollisionComponent = "BlasterBulletCollisionComponent";

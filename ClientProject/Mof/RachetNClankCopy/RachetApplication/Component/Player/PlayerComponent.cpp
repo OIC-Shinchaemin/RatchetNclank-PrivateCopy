@@ -69,8 +69,8 @@ bool my::PlayerComponent::DisableAction(void) {
 
 bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
-
+    super::Activate();
+    
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
 
@@ -86,7 +86,7 @@ bool my::PlayerComponent::Initialize(void) {
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         super::GetOwner()->Notify("ShipCollision", super::GetOwner());
         if (std::dynamic_pointer_cast<my::Ship>(in.target.lock())->IsEnable()) {
-            super::GetOwner()->GetComponent<my::MeshComponent>()->Hide();
+            super::GetOwner()->GetComponent<my::MeshComponent>()->Inactivate();
             std::dynamic_pointer_cast<my::Player>(super::GetOwner())->Disable();
             if (auto canvas = _ui_canvas.lock()) {
                 canvas->RemoveElement("EquipmentWeaponMenu");
@@ -144,9 +144,4 @@ bool my::PlayerComponent::Release(void) {
 
 std::shared_ptr<my::Component> my::PlayerComponent::Clone(void) {
     return std::make_shared<my::PlayerComponent>(*this);
-}
-
-bool my::PlayerComponent::DebugRender(void) {
-    auto pos = super::GetOwner()->GetPosition();
-    return true;
 }

@@ -9,7 +9,7 @@ my::PlayerStateComponent::PlayerStateComponent(int priority) :
 }
 
 my::PlayerStateComponent::PlayerStateComponent(const PlayerStateComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _state_machine(obj._state_machine) {
 }
 
@@ -26,7 +26,7 @@ std::string my::PlayerStateComponent::GetType(void) const {
 
 bool my::PlayerStateComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
     
     std::vector<std::weak_ptr<my::ActionComponent>> work;
     super::GetOwner()->GetComponents<my::ActionComponent>(work);

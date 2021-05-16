@@ -15,7 +15,7 @@ my::VelocityComponent::VelocityComponent(int priority) :
 }
 
 my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
-    super(obj._priority),
+    super(obj),
     _velocity(obj._velocity),
     _angular_velocity(obj._angular_velocity),
     _velocity_force(obj._velocity_force),
@@ -88,7 +88,7 @@ void my::VelocityComponent::AddAngularVelocityForce(Mof::CVector3 accele) {
 
 bool my::VelocityComponent::Initialize(void) {
     super::Initialize();
-    super::Start();
+    super::Activate();
     return true;
 }
 

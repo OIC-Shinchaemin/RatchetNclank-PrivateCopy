@@ -20,6 +20,11 @@ public:
     /// <param name="priority"></param>
     RenderComponent(int priority);
     /// <summary>
+    /// コピーコンストラクタ
+    /// </summary>
+    /// <param name="obj"></param>
+    RenderComponent(const RenderComponent& obj);
+    /// <summary>
     /// デストラクタ
     /// </summary>
     virtual ~RenderComponent();
@@ -53,23 +58,11 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
-    /// 描画
-    /// </summary>
-    /// <param name="world"></param>
-    /// <returns></returns>
-    virtual bool Render(const Mof::CMatrix44& world) override;
-    /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Release(void) override;
-    /// <summary>
-    /// デバッグ
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool DebugRender(void) override;
 };
 }
 #endif // !MY_RENDER_COMPONENT_H
