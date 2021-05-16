@@ -10,7 +10,7 @@ public class Dyna : MonoBehaviour
     [SerializeField] private GameObject eagleBullet;
     [SerializeField] private GameObject player;
 
-    private float moveSpeed = .04f;
+    private float moveSpeed = .25f;
 
     private Vector3 playerPos;
     private Vector3 dynaPos;
@@ -40,7 +40,7 @@ public class Dyna : MonoBehaviour
         defaultPosition = transform.localPosition;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (bossEvent.GetComponent<BossEvent>().bBoss == true)
         {

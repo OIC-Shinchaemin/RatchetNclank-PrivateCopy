@@ -18,7 +18,7 @@ public class Ghetsis : MonoBehaviour
     float second;
 
     float rotatespeed = 0;
-    public Vector2 movespeed = new Vector2(1f, 1f);
+    private Vector2 movespeed = new Vector2(.25f, .25f);
 
     private Vector2 nowpos;
 
@@ -29,7 +29,7 @@ public class Ghetsis : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (bossEvent.GetComponent<BossEvent>().bBoss == true) //ボス戦フラグがたったら
         {
@@ -126,7 +126,7 @@ public class Ghetsis : MonoBehaviour
     {
         if (collision.gameObject.tag == "Throw")
         {
-            rotatespeed += 2;
+            rotatespeed += 7;
             damegeOn = true;
         }
     }

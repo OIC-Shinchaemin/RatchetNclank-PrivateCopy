@@ -20,29 +20,27 @@ public class HalfScene : MonoBehaviour
         }
         Name.text = PermanentUI.perm.nowScene;
         PermanentUI.perm.SceneName.text = PermanentUI.perm.nowScene;
+
+        Invoke("SceneChange", 2);
     }
     // Update is called once per frame
     void Update()
     {
-        delaytime++;
-        if (delaytime > 300)
+
+    }
+
+    private void SceneChange()
+    {
+        if (PermanentUI.perm.PlayerCount <= 0)
+        {
+            SceneManager.LoadScene("TitleScene");
+
+        }
+        else
         {
 
+            SceneManager.LoadScene(PermanentUI.perm.nowScene);
 
-            if (PermanentUI.perm.PlayerCount <= 0)
-            {
-                SceneManager.LoadScene("TitleScene");
-
-            }
-            else
-            {
-
-                SceneManager.LoadScene(PermanentUI.perm.nowScene);
-
-            }
-
-
-
-        } 
+        }
     }
 }
