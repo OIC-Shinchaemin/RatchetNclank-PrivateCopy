@@ -4,8 +4,8 @@
 
 #include "IBuilder.h"
 
-#include "../Actor.h"
-#include "../Component/Component.h"
+#include "../../Actor.h"
+#include "../../Component/Component.h"
 
 
 namespace my {

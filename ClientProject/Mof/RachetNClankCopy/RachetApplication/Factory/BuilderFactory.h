@@ -11,6 +11,7 @@
 #include "ComponentFactory.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "Factory.h"
 
 
 namespace my {

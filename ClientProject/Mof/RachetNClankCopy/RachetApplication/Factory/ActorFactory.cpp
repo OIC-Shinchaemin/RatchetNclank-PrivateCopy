@@ -10,7 +10,6 @@ my::ActorFactory::ActorFactory(my::BuilderFactory* builder_factory) :
     _builder_factory(builder_factory),
     _builders() ,
     _mechanical_factory(){
-
     _mechanical_factory.Register<my::BombGlove>("BombGlove");
     _mechanical_factory.Register<my::Pyrocitor>("Pyrocitor");
     _mechanical_factory.Register<my::Blaster>("Blaster");

@@ -1,4 +1,6 @@
 {
+  "type": "OmniWrench",
+
   "components": [
     {
       "type": "MeshComponent",

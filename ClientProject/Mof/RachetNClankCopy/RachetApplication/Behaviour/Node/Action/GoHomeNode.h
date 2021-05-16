@@ -5,7 +5,7 @@
 #include "../ActionNode.h"
 
 #include "../../Executor/Action/GoHomeNodeExecutor.h"
-#include "../../../State/EnemyAction/EnemyActionStateDefine.h"
+#include "../../../State/EnemyActionStateDefine.h"
 
 
 namespace behaviour {

@@ -198,6 +198,12 @@ bool my::GameScene::Initialize(void) {
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
 
+    param->name = "weapon";
+    param->tag = "omni_wrench";
+    auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", param);
+    player->AddChild(omniwrench);
+    this->AddElement(omniwrench);
+
     // game system
     if (auto game = _game.lock()) {
         auto weapon_system = game->GetWeaponSystem();

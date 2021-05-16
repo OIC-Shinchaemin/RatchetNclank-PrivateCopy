@@ -1,34 +1,34 @@
-#ifndef MY_TERRAIN_BUILDER_H
-#define MY_TERRAIN_BUILDER_H
+#ifndef MY_OMNI_WRENCH_BUILDER_H
+#define MY_OMNI_WRENCH_BUILDER_H
 
 
 #include "ActorBuilder.h"
 
-#include "../Actor/Terrain/Terrain.h"
-#include "../ResourceManager.h"
-#include "../GameDefine.h"
+#include "../../Actor/Weapon/OmniWrench.h"
+//#include "../ResourceManager.h"
+//#include "../GameDefine.h"
 
 
 namespace my {
-class TerrainBuilder : public my::ActorBuilder {
+class OmniWrenchBuilder : public my::ActorBuilder {
     using super = my::ActorBuilder;
 private:
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    //std::weak_ptr<my::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    TerrainBuilder();
+    OmniWrenchBuilder();
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~TerrainBuilder();    
+    virtual ~OmniWrenchBuilder();
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    //void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// 解放
     /// </summary>
@@ -41,4 +41,4 @@ public:
     virtual void Construct(std::any shared_this) override;
 };
 }
-#endif // !MY_TERRAIN_BUILDER_H
+#endif // !MY_OMNI_WRENCH_BUILDER_H

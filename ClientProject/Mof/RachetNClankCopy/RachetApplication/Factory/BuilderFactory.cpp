@@ -3,9 +3,11 @@
 #include "../Component/Component.h"
 #include "ActorBuilder.h"
 #include "TerrainBuilder.h"
+#include "OmniWrenchBuilder.h"
 
 
 my::BuilderFactory::BuilderFactory(my::ComponentFactory* component_factory) :
+    _builders(),
     _component_factory(component_factory),
     _resource() {
 }
@@ -32,16 +34,20 @@ std::shared_ptr<my::IBuilder> my::BuilderFactory::Create(const char* path) const
     } // if
 
     std::shared_ptr<my::ActorBuilder>  builder;
-    if (!document.HasMember("type")) {
-        builder = std::make_shared<my::ActorBuilder>();
-    } // if
-    else {
+    if (document.HasMember("type")) {
         std::string type = document["type"].GetString();
         if (type == "Terrain") {
             auto temp = std::make_shared<my::TerrainBuilder>();
             temp->SetResourceManager(_resource);
             builder = temp;
         } // if
+        else if (type == "OmniWrench") {
+            auto temp = std::make_shared<my::OmniWrenchBuilder>();
+            builder = temp;
+        } // else if
+    } // if
+    else {
+        builder = std::make_shared<my::ActorBuilder>();
     } // else
 
 

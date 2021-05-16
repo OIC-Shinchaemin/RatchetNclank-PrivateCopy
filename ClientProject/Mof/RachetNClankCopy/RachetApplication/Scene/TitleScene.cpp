@@ -11,6 +11,8 @@ bool my::TitleScene::SceneUpdate(float delta_time) {
         _subject.Notify(my::SceneMessage(my::SceneType::kGameScene, ""));
     } // if
 
+    //_demo_actor->Update(delta_time);
+
     auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
@@ -102,7 +104,6 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
             _camera_controller.GetService()->SetAzimuth(0.0f);
             _camera_controller.GetService()->SetAltitude(-10.0f);
             _camera_controller.GetService()->SetDistance(8.0f);
-
         } // if
     });
 
