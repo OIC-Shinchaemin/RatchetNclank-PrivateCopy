@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lift : MonoBehaviour
 {
     //速度
-    [SerializeField, Range(0.01f,0.1f)] private float moveSpeed = 0.5f;
+    [SerializeField, Range(0.01f,0.1f)] private float moveSpeed;
     //上限
     [SerializeField] private float topCap;
     //下限
@@ -33,7 +33,7 @@ public class Lift : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         if (playerRideMove == false)
         {
@@ -56,6 +56,24 @@ public class Lift : MonoBehaviour
             if (canMoveY)
             {
                 MoveY();
+            }
+        }
+
+
+
+        if (leftCap == rightCap)
+        {
+            if (Mathf.Abs(transform.position.x) - leftCap <= 0.1f)
+            {
+                canMoveX = false;
+            }
+        }
+
+        if (topCap == underCap)
+        {
+            if (Mathf.Abs(transform.position.y) - topCap <= 0.1f)
+            {
+                canMoveY = false;
             }
         }
     }
