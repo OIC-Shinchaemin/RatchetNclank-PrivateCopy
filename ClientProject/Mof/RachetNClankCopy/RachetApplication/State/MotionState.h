@@ -34,8 +34,8 @@ public:
         }
         template<typename Enum>
         Param(const std::string& name, Enum type, float speed = 1.0f, bool loop = true, bool same = true) :
-            state_name(name),
-            motion_type(type),
+            state_name(name.c_str()),
+            motion_type(static_cast<int>(type)),
             motion_speed(speed),
             motion_loop(loop),
             motion_same(same) {

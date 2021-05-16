@@ -22,12 +22,12 @@ private:
         out.RegisterState(ptr);
     }
 
-    void RegisterState(my::StateMachine& out, const state::MotionState::Param& param) {
+    void RegisterState(const state::MotionState::Param& param) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::MotionState>();
         ptr->SetActor(shared_this);
         ptr->SetParam(param);
-        out.RegisterState(ptr);
+        _state_machine.RegisterState(ptr);
     }
 public:
     /// <summary>

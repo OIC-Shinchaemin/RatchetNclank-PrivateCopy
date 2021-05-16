@@ -1,25 +1,9 @@
 #include "MotionStateComponent.h"
 
-#include "../State/PlayerMotion/PlayerMotionIdleState.h"
-#include "../State/PlayerMotion/PlayerMotionMoveState.h"
-#include "../State/PlayerMotion/PlayerMotionJumpSetState.h"
-#include "../State/PlayerMotion/PlayerMotionJumpUpState.h"
-#include "../State/PlayerMotion/PlayerMotionJumpDownState.h"
-#include "../State/PlayerMotion/PlayerMotionJumpLandingState.h"
-#include "../State/PlayerMotion/PlayerMotionDoubleJumpState.h"
-#include "../State/PlayerMotion/PlayerMotionMeleeAttackOneState.h"
-#include "../State/PlayerMotion/PlayerMotionMeleeAttackOneEndState.h"
-#include "../State/PlayerMotion/PlayerMotionMeleeAttackTwoState.h"
-#include "../State/PlayerMotion/PlayerMotionMeleeAttackTwoEndState.h"
-#include "../State/PlayerMotion/PlayerMotionMeleeAttackThreeState.h"
-#include "../State/PlayerMotion/PlayerMotionMeleeAttackThreeEndState.h"
-#include "../State/PlayerMotion/PlayerMotionDamageState.h"
-#include "../State/PlayerMotion/PlayerMotionDeadState.h"
-#include "../State/EnemyMotion/EnemyMotionIdleState.h"
-#include "../State/EnemyMotion/EnemyMotionMoveState.h"
-#include "../State/EnemyMotion/EnemyMotionAttackState.h"
-#include "../State/EnemyMotion/EnemyMotionRangedAttackState.h"
-#include "../State/EnemyMotion/EnemyMotionDamageState.h"
+#include "../State/PlayerMotionStateDefine.h"
+#include "../State/EnemyMotionStateDefine.h"
+#include "../Actor/Character/Player.h"
+#include "../Actor/Character/Enemy.h"
 
 
 my::MotionStateComponent::MotionStateComponent(int priority) :
@@ -47,73 +31,42 @@ bool my::MotionStateComponent::Initialize(void) {
     super::Initialize();
     super::Start();
 
+    using Param = state::MotionState::Param;
+
     // ŠO•”‚æ‚èì¬‚³‚ê‚½‚à‚Ì‚ðŽæ“¾
     if (super::GetOwner()->GetTag() == "Enemy") {
-        this->RegisterMotionState<state::EnemyMotionIdleState>(_state_machine);
-        this->RegisterMotionState<state::EnemyMotionMoveState>(_state_machine);
-        this->RegisterMotionState<state::EnemyMotionAttackState>(_state_machine);
-        this->RegisterMotionState<state::EnemyMotionRangedAttackState>(_state_machine);
-        this->RegisterMotionState<state::EnemyMotionDamageState>(_state_machine);
-        _state_machine.ChangeState("EnemyMotionIdleState");
+        using State = state::EnemyMotionStateType;
+        using Type = my::Enemy::MotionType;
+
+        this->RegisterState(Param(State::kEnemyMotionIdleState, Type::IdleWait, 1.0f, true, false));
+        this->RegisterState(Param(State::kEnemyMotionMoveState, Type::MoveRun, 1.0f, true, false));
+        this->RegisterState(Param(State::kEnemyMotionMeleeAttackState, Type::AttackOne, 1.0f, false, false));
+        this->RegisterState(Param(State::kEnemyMotionRangedAttackState, Type::AttackOne, 1.0f, false, false));
+        this->RegisterState(Param(State::kEnemyMotionDamageState, Type::Damage, 1.0f, false, false));
+
+        _state_machine.ChangeState(State::kEnemyMotionIdleState);
     } // if
     else {
-        this->RegisterMotionState<state::PlayerMotionIdleState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionMoveState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionJumpSetState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionJumpUpState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionJumpDownState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionJumpLandingState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionDoubleJumpState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionMeleeAttackOneState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionMeleeAttackOneEndState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionMeleeAttackTwoState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionMeleeAttackTwoEndState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionMeleeAttackThreeState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionMeleeAttackThreeEndState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionDamageState>(_state_machine);
-        this->RegisterMotionState<state::PlayerMotionDeadState>(_state_machine);
-        /*
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        this->RegisterState(_state_machine, state::MotionState::Param(
-            state::PlayerMotionStateType::kPlayerMotionIdleState,
-            my::Player::MotionType::IdleWait, 1.0f, true, true));
-        */
+        using State = state::PlayerMotionStateType;
+        using Type = my::Player::MotionType;
 
-
-
-        _state_machine.ChangeState("PlayerMotionIdleState");
+        this->RegisterState(Param(State::kPlayerMotionIdleState, Type::IdleWait, 1.0f, true, false));
+        this->RegisterState(Param(State::kPlayerMotionMoveState, Type::MoveRun, 1.0f, true, false));
+        this->RegisterState(Param(State::kPlayerMotionJumpSetState, Type::JumpSet, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionJumpUpState, Type::JumpUp, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionJumpDownState, Type::JumpDown, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionJumpLandingState, Type::JumpLanding, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionDoubleJumpState, Type::DoubleJump, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionMeleeAttackOneState, Type::MeleeAttackOne, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionMeleeAttackOneEndState, Type::MeleeAttackOneEnd, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionMeleeAttackTwoState, Type::MeleeAttackTwo, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionMeleeAttackTwoEndState, Type::MeleeAttackTwoEnd, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionMeleeAttackThreeState, Type::MeleeAttackThree, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionMeleeAttackThreeEndState, Type::MeleeAttackThreeEnd, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionDamageState, Type::DamageA, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionDeadState, Type::DamageDead, 1.0f, false, false));
+        
+        _state_machine.ChangeState(State::kPlayerMotionIdleState);
     } // else 
     return true;
 }
