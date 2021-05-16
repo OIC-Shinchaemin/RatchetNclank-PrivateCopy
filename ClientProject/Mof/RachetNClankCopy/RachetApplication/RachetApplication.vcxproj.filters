@@ -753,6 +753,15 @@
     <ClCompile Include="Component\Player\PlayerWeaponComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackEndComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1473,6 +1482,15 @@
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerWeaponComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackEndComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>

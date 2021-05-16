@@ -130,6 +130,27 @@
       }
     },
 
+
+    {
+      "type": "PlayerThrowAttackSetComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
+    {
+      "type": "PlayerThrowAttackComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
+    {
+      "type": "PlayerThrowAttackEndComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
+
+
     {
       "type": "PlayerDamageComponent",
       "paramater": {

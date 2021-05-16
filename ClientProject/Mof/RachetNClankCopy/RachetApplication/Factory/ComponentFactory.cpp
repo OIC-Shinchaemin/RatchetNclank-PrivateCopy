@@ -22,6 +22,9 @@
 #include "../Component/Player/PlayerMeleeAttackTwoEndComponent.h"
 #include "../Component/Player/PlayerMeleeAttackThreeComponent.h"
 #include "../Component/Player/PlayerMeleeAttackThreeEndComponent.h"
+#include "../Component/Player/PlayerThrowAttackSetComponent.h"
+#include "../Component/Player/PlayerThrowAttackComponent.h"
+#include "../Component/Player/PlayerThrowAttackEndComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Player/PlayerDeadComponent.h"
 #include "../Component/Player/PlayerWeaponComponent.h"
@@ -79,6 +82,9 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackTwoEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeEndComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackSetComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDeadComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerWeaponComponent>();

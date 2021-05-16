@@ -63,9 +63,15 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterState(Param(State::kPlayerMotionMeleeAttackTwoEndState, Type::MeleeAttackTwoEnd, 1.0f, false, false));
         this->RegisterState(Param(State::kPlayerMotionMeleeAttackThreeState, Type::MeleeAttackThree, 1.0f, false, false));
         this->RegisterState(Param(State::kPlayerMotionMeleeAttackThreeEndState, Type::MeleeAttackThreeEnd, 1.0f, false, false));
+
+        this->RegisterState(Param(State::kPlayerMotionThrowAttackSetState, Type::ThrowAttackSet, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionThrowAttackState, Type::ThrowAttack, 1.0f, false, false));
+        this->RegisterState(Param(State::kPlayerMotionThrowAttackEndState, Type::ThrowAttackEnd, 1.0f, false, false));
+
+
         this->RegisterState(Param(State::kPlayerMotionDamageState, Type::DamageA, 1.0f, false, false));
         this->RegisterState(Param(State::kPlayerMotionDeadState, Type::DamageDead, 1.0f, false, false));
-        
+
         _state_machine.ChangeState(State::kPlayerMotionIdleState);
     } // else 
     return true;
