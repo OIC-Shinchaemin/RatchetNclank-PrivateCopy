@@ -1,8 +1,8 @@
 #include "PlayerMeleeAttackTwoEndComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
@@ -36,6 +36,10 @@ my::PlayerMeleeAttackTwoEndComponent::~PlayerMeleeAttackTwoEndComponent() {
 
 std::string my::PlayerMeleeAttackTwoEndComponent::GetType(void) const {
     return "PlayerMeleeAttackTwoEndComponent";
+}
+
+std::string_view my::PlayerMeleeAttackTwoEndComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionMeleeAttackTwoEndState;
 }
 
 bool my::PlayerMeleeAttackTwoEndComponent::Initialize(void) {

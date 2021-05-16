@@ -2,14 +2,14 @@
 #define MY_ENEMY_MOVE_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class EnemyMoveComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class EnemyMoveComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! 移動速度
     float _move_speed;
@@ -70,6 +70,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

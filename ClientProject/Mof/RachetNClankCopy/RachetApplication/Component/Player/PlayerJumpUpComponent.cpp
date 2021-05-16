@@ -1,7 +1,7 @@
 #include "PlayerJumpUpComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
@@ -43,6 +43,10 @@ my::PlayerJumpUpComponent::~PlayerJumpUpComponent() {
 
 std::string my::PlayerJumpUpComponent::GetType(void) const {
     return "PlayerJumpUpComponent";
+}
+
+std::string_view my::PlayerJumpUpComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionJumpUpState;
 }
 
 void my::PlayerJumpUpComponent::SetJumpSpeed(float speed) {

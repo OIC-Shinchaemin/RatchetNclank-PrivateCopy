@@ -1,8 +1,8 @@
 #include "PlayerDoubleJumpComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
@@ -44,6 +44,10 @@ my::PlayerDoubleJumpComponent::~PlayerDoubleJumpComponent() {
 
 std::string my::PlayerDoubleJumpComponent::GetType(void) const {
     return "PlayerDoubleJumpComponent";
+}
+
+std::string_view my::PlayerDoubleJumpComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionDoubleJumpState;
 }
 
 void my::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {

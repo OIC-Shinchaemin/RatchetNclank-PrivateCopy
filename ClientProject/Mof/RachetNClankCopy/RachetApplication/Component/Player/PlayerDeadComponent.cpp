@@ -1,10 +1,9 @@
 #include "PlayerDeadComponent.h"
 
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
-//#include "../Player/PlayerStateComponent.h"
 
 
 my::PlayerDeadComponent::PlayerDeadComponent(int priority) :
@@ -24,6 +23,10 @@ my::PlayerDeadComponent::~PlayerDeadComponent() {
 
 std::string my::PlayerDeadComponent::GetType(void) const {
     return "PlayerDeadComponent";
+}
+
+std::string_view my::PlayerDeadComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionDeadState;
 }
 
 bool my::PlayerDeadComponent::Initialize(void) {

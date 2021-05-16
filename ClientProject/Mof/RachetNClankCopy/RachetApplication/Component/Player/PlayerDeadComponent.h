@@ -2,7 +2,7 @@
 #define MY_PLAYER_DEAD_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
@@ -10,8 +10,8 @@
 
 
 namespace my {
-class PlayerDeadComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerDeadComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
@@ -40,6 +40,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const override;
     /// <summary>
     /// 初期化
     /// </summary>

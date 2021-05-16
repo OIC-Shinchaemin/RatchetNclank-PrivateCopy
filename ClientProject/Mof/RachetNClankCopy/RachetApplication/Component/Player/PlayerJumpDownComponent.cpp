@@ -1,5 +1,7 @@
 #include "PlayerJumpDownComponent.h"
 
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
@@ -34,6 +36,10 @@ my::PlayerJumpDownComponent::~PlayerJumpDownComponent() {
 
 std::string my::PlayerJumpDownComponent::GetType(void) const {
     return "PlayerJumpDownComponent";
+}
+
+std::string_view my::PlayerJumpDownComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionJumpDownState;
 }
 
 bool my::PlayerJumpDownComponent::Initialize(void) {

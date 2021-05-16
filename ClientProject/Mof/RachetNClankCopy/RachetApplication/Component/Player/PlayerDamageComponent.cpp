@@ -1,8 +1,8 @@
 #include "PlayerDamageComponent.h"
 
 #include "../Collision/Object/CollisionComponentDefine.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
@@ -37,6 +37,10 @@ my::PlayerDamageComponent::~PlayerDamageComponent() {
 
 std::string my::PlayerDamageComponent::GetType(void) const {
     return "PlayerDamageComponent";
+}
+
+std::string_view my::PlayerDamageComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionDamageState;
 }
 
 bool my::PlayerDamageComponent::Initialize(void) {

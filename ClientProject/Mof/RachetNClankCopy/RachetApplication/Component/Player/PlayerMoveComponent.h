@@ -2,14 +2,14 @@
 #define MY_PLAYER_MOVE_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerMoveComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerMoveComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! 移動速度
     float _move_speed;
@@ -92,6 +92,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const override;
     /// <summary>
     /// 初期化
     /// </summary>

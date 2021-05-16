@@ -2,14 +2,14 @@
 #define MY_PLAYER_JUMP_SET_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerJumpSetComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerJumpSetComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! ジャンプ
     float _jump_speed;
@@ -48,6 +48,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const override;
     /// <summary>
     /// 初期化
     /// </summary>

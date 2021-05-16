@@ -1,8 +1,8 @@
 #include "PlayerIdleComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
@@ -33,6 +33,10 @@ my::PlayerIdleComponent::~PlayerIdleComponent() {
 
 std::string my::PlayerIdleComponent::GetType(void) const {
     return "PlayerIdleComponent";
+}
+
+std::string_view my::PlayerIdleComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionIdleState;
 }
 
 bool my::PlayerIdleComponent::Initialize(void) {

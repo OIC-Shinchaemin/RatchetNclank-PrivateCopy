@@ -1,7 +1,7 @@
 #include "PlayerMoveComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"
@@ -96,6 +96,10 @@ float my::PlayerMoveComponent::GetMoveSpeed(void) const {
 
 std::string my::PlayerMoveComponent::GetType(void) const {
     return "PlayerMoveComponent";
+}
+
+std::string_view my::PlayerMoveComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionMoveState;
 }
 
 bool my::PlayerMoveComponent::Initialize(void) {

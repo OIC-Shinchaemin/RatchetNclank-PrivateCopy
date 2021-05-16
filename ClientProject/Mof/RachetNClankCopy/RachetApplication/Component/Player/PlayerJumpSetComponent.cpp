@@ -1,7 +1,7 @@
 #include "PlayerJumpSetComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
@@ -38,6 +38,10 @@ my::PlayerJumpSetComponent::~PlayerJumpSetComponent() {
 
 std::string my::PlayerJumpSetComponent::GetType(void) const {
     return "PlayerJumpSetComponent";
+}
+
+std::string_view my::PlayerJumpSetComponent::GetStateType(void) const {
+    return state::PlayerActionStateType::kPlayerActionJumpSetState;
 }
 
 bool my::PlayerJumpSetComponent::Initialize(void) {

@@ -2,14 +2,14 @@
 #define MY_ENEMY_MELEE_ATTACK_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class EnemyMeleeAttackComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class EnemyMeleeAttackComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
 private:
     //! 攻撃範囲
@@ -41,6 +41,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

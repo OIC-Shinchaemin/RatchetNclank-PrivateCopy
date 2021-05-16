@@ -4,7 +4,7 @@
 #include "EnemyStateComponent.h"
 #include "../MotionStateComponent.h"
 #include "EnemyComponent.h"
-#include "../../State/EnemyAction/EnemyActionStateDefine.h"
+#include "../../State/EnemyActionStateDefine.h"
 
 
 void my::EnemyMoveComponent::InputMoveVelocity(float speed) {
@@ -84,6 +84,10 @@ void my::EnemyMoveComponent::SetTargetPosition(Mof::CVector3 position) {
 
 std::string my::EnemyMoveComponent::GetType(void) const {
     return "EnemyMoveComponent";
+}
+
+std::string_view my::EnemyMoveComponent::GetStateType(void) const {
+    return state::EnemyActionStateType::kEnemyActionMoveState;
 }
 
 Mof::CVector3 my::EnemyMoveComponent::GetTargetPosition(void) const {

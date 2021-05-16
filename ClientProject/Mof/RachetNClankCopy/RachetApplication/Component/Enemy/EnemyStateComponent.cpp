@@ -1,11 +1,6 @@
 #include "EnemyStateComponent.h"
 
-#include "../../State/EnemyAction/EnemyActionIdleState.h"
-#include "../../State/EnemyAction/EnemyActionMoveState.h"
-#include "../../State/EnemyAction/EnemyActionGoHomeState.h"
-#include "../../State/EnemyAction/EnemyActionMeleeAttackState.h"
-#include "../../State/EnemyAction/EnemyActionRangedAttackState.h"
-#include "../../State/EnemyAction/EnemyActionDamageState.h"
+#include "../../State/EnemyActionStateDefine.h"
 
 
 my::EnemyStateComponent::EnemyStateComponent(int priority) :
@@ -34,12 +29,14 @@ bool my::EnemyStateComponent::Initialize(void) {
     super::Start();
 
     // state
-    this->RegisterState<state::EnemyActionIdleState>(_state_machine);
-    this->RegisterState<state::EnemyActionMoveState>(_state_machine);
-    this->RegisterState<state::EnemyActionMeleeAttackState>(_state_machine);
-    this->RegisterState<state::EnemyActionRangedAttackState>(_state_machine);
-    this->RegisterState<state::EnemyActionGoHomeState>(_state_machine);
-    this->RegisterState<state::EnemyActionDamageState>(_state_machine);
+    std::vector<std::weak_ptr<my::ActionComponent>> work;
+    super::GetOwner()->GetComponents<my::ActionComponent>(work);
+    for (auto weak : work) {
+        if (auto com = weak.lock()) {
+            this->RegisterState(_state_machine, com);
+        } // if
+    } // for
+
     _state_machine.ChangeState("EnemyActionIdleState");
     return true;
 }

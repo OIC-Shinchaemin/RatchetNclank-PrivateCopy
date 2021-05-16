@@ -1,6 +1,6 @@
 #include "EnemyRangedAttackComponent.h"
 
-#include "../../State/EnemyAction/EnemyActionStateDefine.h"
+#include "../../State/EnemyActionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
@@ -40,6 +40,10 @@ my::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
 
 std::string my::EnemyRangedAttackComponent::GetType(void) const {
     return "EnemyRangedAttackComponent";
+}
+
+std::string_view my::EnemyRangedAttackComponent::GetStateType(void) const {
+    return state::EnemyActionStateType::kEnemyActionRangedAttackState;
 }
 
 float my::EnemyRangedAttackComponent::GetRange(void) const {

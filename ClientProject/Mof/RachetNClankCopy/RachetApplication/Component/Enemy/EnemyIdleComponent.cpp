@@ -2,7 +2,7 @@
 
 #include "../VelocityComponent.h"
 #include "../MotionStateComponent.h"
-
+#include "../../State/EnemyActionStateDefine.h"
 
 
 void my::EnemyIdleComponent::InputMoveAngularVelocity(float angle, float speed) {
@@ -64,6 +64,10 @@ float my::EnemyIdleComponent::GetIdealAngle(void) const {
 
 std::string my::EnemyIdleComponent::GetType(void) const {
     return "EnemyIdleComponent";
+}
+
+std::string_view my::EnemyIdleComponent::GetStateType(void) const {
+    return state::EnemyActionStateType::kEnemyActionIdleState;
 }
 
 bool my::EnemyIdleComponent::Initialize(void) {

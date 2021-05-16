@@ -2,7 +2,7 @@
 #define MY_PLAYER_IDLE_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
+#include "../ActionComponent.h"
 
 #include <memory>
 
@@ -10,8 +10,8 @@
 
 
 namespace my {
-class PlayerIdleComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class PlayerIdleComponent : public my::ActionComponent {
+    using super = my::ActionComponent;
 private:
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
@@ -45,6 +45,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::string_view GetStateType(void) const override;
     /// <summary>
     /// 初期化
     /// </summary>
