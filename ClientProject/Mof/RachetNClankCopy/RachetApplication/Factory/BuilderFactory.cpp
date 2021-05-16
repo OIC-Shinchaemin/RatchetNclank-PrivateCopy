@@ -1,9 +1,9 @@
 #include "BuilderFactory.h"
 
 #include "../Component/Component.h"
-#include "ActorBuilder.h"
-#include "TerrainBuilder.h"
-#include "OmniWrenchBuilder.h"
+#include "Builder/ActorBuilder.h"
+#include "Builder/TerrainBuilder.h"
+#include "Builder/OmniWrenchBuilder.h"
 
 
 my::BuilderFactory::BuilderFactory(my::ComponentFactory* component_factory) :

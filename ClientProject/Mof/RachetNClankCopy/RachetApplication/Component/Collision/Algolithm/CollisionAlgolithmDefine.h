@@ -18,6 +18,7 @@ struct CollisionAlgolithmType {
     static std::string kSightEnemyCollisionAlgolithm;
     static std::string kEnemyEnemyCollisionAlgolithm;
     static std::string kEnemyAttackPlayerCollisionAlgolithm;
+    static std::string kEnemyOmniWrenchCollisionAlgolithm;
     static std::string kEnemyBombGloveBulletCollisionAlgolithm;
     static std::string kEnemyPyrocitorBulletCollisionAlgolithm;
     static std::string kEnemyBlasterBulletCollisionAlgolithm;

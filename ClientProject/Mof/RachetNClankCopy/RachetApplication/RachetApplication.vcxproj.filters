@@ -744,6 +744,12 @@
     <ClCompile Include="Factory\Builder\ActorBuilder.cpp">
       <Filter>Rachet\Source\Factory\Builder</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1456,6 +1462,12 @@
     </ClInclude>
     <ClInclude Include="Factory\Builder\ActorBuilder.h">
       <Filter>Rachet\Header\Factory\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

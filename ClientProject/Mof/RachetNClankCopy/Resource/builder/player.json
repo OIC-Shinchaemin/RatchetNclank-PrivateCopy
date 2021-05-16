@@ -184,12 +184,6 @@
       }
     },
     {
-      "type": "PlayerMeleeAttackCollisionComponent",
-      "paramater": {
-        "priority": 0
-      }
-    },
-    {
       "type": "SightCollisionComponent",
       "paramater": {
         "priority": 0

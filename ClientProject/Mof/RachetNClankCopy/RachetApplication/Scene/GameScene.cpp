@@ -9,7 +9,7 @@
 #include "../Actor/Character/Player.h"
 #include "../Actor//Ship/Ship.h"
 #include "../Actor//Terrain/Terrain.h"
-#include "../Factory/ActorBuilder.h"
+#include "../Factory/Builder/ActorBuilder.h"
 #include "../Game/GameSystem/Save/SaveData.h"
 #include "../Game/GameSystem/Save/SaveSystem.h"
 #include "../Component/CameraComponent.h"

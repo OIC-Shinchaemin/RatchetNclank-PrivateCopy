@@ -42,11 +42,12 @@
 #include "../Component/MeshComponent.h"
 #include "../Component/CameraComponent.h"
 #include "../Component/Collision/Object/PlayerCollisionComponent.h"
-#include "../Component/Collision/Object/PlayerMeleeAttackCollisionComponent.h"
+//#include "../Component/Collision/Object/PlayerMeleeAttackCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyCollisionComponent.h"
 #include "../Component/Collision/Object/SightCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyAttackCollisionComponent.h"
 #include "../Component/Collision/Object/EnemyBulletCollisionComponent.h"
+#include "../Component/Collision/Object/OmniWrenchCollisionComponent.h"
 #include "../Component/Collision/Object/BombGloveBulletCollisionComponent.h"
 #include "../Component/Collision/Object/PyrocitorBulletCollisionComponent.h"
 #include "../Component/Collision/Object/BlasterBulletCollisionComponent.h"
@@ -98,11 +99,12 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerCollisionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackCollisionComponent>();
+    //my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::SightCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyBulletCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::OmniWrenchCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::PyrocitorBulletCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>();

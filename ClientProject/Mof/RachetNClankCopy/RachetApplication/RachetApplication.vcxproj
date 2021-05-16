@@ -195,6 +195,7 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
@@ -214,6 +215,7 @@
     <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp" />
@@ -424,6 +426,7 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
@@ -443,6 +446,7 @@
     <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h" />

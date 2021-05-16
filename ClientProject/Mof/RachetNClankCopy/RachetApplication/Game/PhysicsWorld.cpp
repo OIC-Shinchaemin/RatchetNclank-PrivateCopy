@@ -13,6 +13,7 @@
 #include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyOmniWrenchCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyBombGloveBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPyrocitorBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyBlasterBulletCollisionAlgolithm.h"
@@ -36,6 +37,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm.c_str(),
@@ -65,6 +67,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyOmniWrenchCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyBombGloveBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPyrocitorBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyBlasterBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm);

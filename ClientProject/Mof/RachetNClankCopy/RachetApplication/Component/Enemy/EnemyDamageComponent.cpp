@@ -86,7 +86,7 @@ bool my::EnemyDamageComponent::Initialize(void) {
         return true;
     }));
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kPlayerMeleeAttackCollisionComponent,
+                               my::CollisionComponentType::kOmniWrenchCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);

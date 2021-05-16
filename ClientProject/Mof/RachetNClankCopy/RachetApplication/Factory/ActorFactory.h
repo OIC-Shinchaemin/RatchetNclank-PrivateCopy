@@ -8,7 +8,7 @@
 
 #include "My/Core/Define.h"
 #include "../Actor.h"
-#include "IBuilder.h"
+#include "Builder/IBuilder.h"
 #include "BuilderFactory.h"
 #include "Factory.h"
 #include "../Actor/Weapon/Mechanical.h"
