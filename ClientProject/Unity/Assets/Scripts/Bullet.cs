@@ -12,11 +12,11 @@ public class Bullet : MonoBehaviour
     void Update()
     {
 
-        activetime += Time.deltaTime;
-        if(activetime >=2.0)
-        {
-            Destroy(this.gameObject);
-        }
+        //activetime += Time.deltaTime;
+        //if(activetime >=2.0)
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D other)
