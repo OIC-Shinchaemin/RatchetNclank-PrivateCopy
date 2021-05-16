@@ -2,6 +2,7 @@
 
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
+#include "../../State/EnemyActionStateDefine.h"
 
 
 my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
@@ -25,6 +26,10 @@ my::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
 
 std::string my::EnemyMeleeAttackComponent::GetType(void) const {
     return "EnemyMeleeAttackComponent";
+}
+
+std::string_view my::EnemyMeleeAttackComponent::GetStateType(void) const {
+    return state::EnemyActionStateType::kEnemyActionMeleeAttackState;
 }
 
 float my::EnemyMeleeAttackComponent::GetRange(void) const {

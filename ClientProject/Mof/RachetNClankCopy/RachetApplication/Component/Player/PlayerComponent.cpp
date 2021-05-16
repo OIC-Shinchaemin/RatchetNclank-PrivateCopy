@@ -9,7 +9,7 @@
 #include "../Collision/Object/PlayerCollisionComponent.h"
 #include "../Collision/Object/CollisionComponentDefine.h"
 #include "../../UI/LockOnCursorMenu.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
 
 
 my::PlayerComponent::PlayerComponent(int priority) :

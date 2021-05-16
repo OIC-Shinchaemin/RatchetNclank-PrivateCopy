@@ -1,22 +1,6 @@
 #include "PlayerStateComponent.h"
 
 #include "../../State/PlayerActionStateDefine.h"
-#include "../Player/PlayerIdleComponent.h"
-#include "../Player/PlayerMoveComponent.h"
-#include "../Player/PlayerJumpSetComponent.h"
-#include "../Player/PlayerJumpUpComponent.h"
-#include "../Player/PlayerJumpDownComponent.h"
-#include "../Player/PlayerJumpLandingComponent.h"
-#include "../Player/PlayerDoubleJumpComponent.h"
-#include "../Player/PlayerMeleeAttackOneComponent.h"
-#include "../Player/PlayerMeleeAttackOneEndComponent.h"
-#include "../Player/PlayerMeleeAttackTwoComponent.h"
-#include "../Player/PlayerMeleeAttackTwoEndComponent.h"
-#include "../Player/PlayerMeleeAttackThreeComponent.h"
-#include "../Player/PlayerMeleeAttackThreeEndComponent.h"
-#include "../Player/PlayerDamageComponent.h"
-#include "../Player/PlayerDeadComponent.h"
-
 
 
 my::PlayerStateComponent::PlayerStateComponent(int priority) :
@@ -43,23 +27,14 @@ std::string my::PlayerStateComponent::GetType(void) const {
 bool my::PlayerStateComponent::Initialize(void) {
     super::Initialize();
     super::Start();
-
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerIdleComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMoveComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerJumpSetComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerJumpUpComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerJumpDownComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerJumpLandingComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerDoubleJumpComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMeleeAttackOneComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMeleeAttackOneEndComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMeleeAttackTwoComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMeleeAttackTwoEndComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMeleeAttackThreeComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerMeleeAttackThreeEndComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerDamageComponent>());
-    this->RegisterState(_state_machine, super::GetOwner()->GetComponent<my::PlayerDeadComponent>());
-
+    
+    std::vector<std::weak_ptr<my::ActionComponent>> work;
+    super::GetOwner()->GetComponents<my::ActionComponent>(work);
+    for (auto weak : work) {
+        if (auto com = weak.lock()) {
+            this->RegisterState(_state_machine, com);
+        } // if
+    } // for
     _state_machine.ChangeState("PlayerActionIdleState");
     return true;
 }

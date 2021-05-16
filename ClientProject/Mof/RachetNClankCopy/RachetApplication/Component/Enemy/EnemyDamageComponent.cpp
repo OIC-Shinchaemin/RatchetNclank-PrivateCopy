@@ -1,8 +1,7 @@
 #include "EnemyDamageComponent.h"
 
 #include "../Collision/Object/CollisionComponentDefine.h"
-#include "../../State/EnemyAction/EnemyActionStateDefine.h"
-#include "../../State/EnemyMotionStateDefine.h"
+#include "../../State/EnemyActionStateDefine.h"
 #include "../../State/EnemyMotionStateDefine.h"
 #include "EnemyComponent.h"
 #include "EnemyStateComponent.h"
@@ -53,6 +52,10 @@ my::EnemyDamageComponent::~EnemyDamageComponent() {
 
 std::string my::EnemyDamageComponent::GetType(void) const {
     return "EnemyDamageComponent";
+}
+
+std::string_view my::EnemyDamageComponent::GetStateType(void) const {
+    return state::EnemyActionStateType::kEnemyActionDamageState;
 }
 
 bool my::EnemyDamageComponent::Initialize(void) {

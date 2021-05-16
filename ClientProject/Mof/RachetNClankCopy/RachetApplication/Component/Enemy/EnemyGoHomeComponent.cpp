@@ -4,7 +4,7 @@
 #include "EnemyStateComponent.h"
 #include "../MotionStateComponent.h"
 #include "EnemyComponent.h"
-#include "../../State/EnemyAction/EnemyActionStateDefine.h"
+#include "../../State/EnemyActionStateDefine.h"
 
 
 void my::EnemyGoHomeComponent::InputMoveVelocity(float speed) {
@@ -78,6 +78,10 @@ void my::EnemyGoHomeComponent::SetIdealAngle(float radian) {
 
 std::string my::EnemyGoHomeComponent::GetType(void) const {
     return "EnemyGoHomeComponent";
+}
+
+std::string_view my::EnemyGoHomeComponent::GetStateType(void) const {
+    return state::EnemyActionStateType::kEnemyActionGoHomeState;
 }
 
 bool my::EnemyGoHomeComponent::Initialize(void) {

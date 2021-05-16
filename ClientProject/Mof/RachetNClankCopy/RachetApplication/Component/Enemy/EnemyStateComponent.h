@@ -6,6 +6,7 @@
 
 #include "My/Core/StateMachine.h"
 #include "My/Core/Timer.h"
+#include "../../State/ActionState.h"
 
 
 namespace my {
@@ -24,6 +25,17 @@ private:
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<State>();
         ptr->SetActor(shared_this);
+        out.RegisterState(ptr);
+    }
+    /// <summary>
+    /// “o˜^
+    /// </summary>
+    /// <typeparam name="State"></typeparam>
+    /// <param name="out"></param>
+    void RegisterState(my::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
+        auto shared_this = super::GetOwner();
+        auto ptr = std::make_shared<state::ActionState>();
+        ptr->SetActionComponent(com);
         out.RegisterState(ptr);
     }
 public:
