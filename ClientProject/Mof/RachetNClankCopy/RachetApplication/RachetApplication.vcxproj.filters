@@ -259,9 +259,6 @@
     <Filter Include="Rachet\Header\Behaviour\Node\Decorator">
       <UniqueIdentifier>{a217c227-216b-44eb-9f38-395ef9362a91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\State\PlayerAction">
-      <UniqueIdentifier>{8802516a-e776-4b80-824d-1deeeec67656}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -753,17 +750,17 @@
     <ClCompile Include="State\ActionState.cpp">
       <Filter>Rachet\Source\State</Filter>
     </ClCompile>
-    <ClCompile Include="State\PlayerAction\PlayerActionStateImplementation.cpp">
-      <Filter>Rachet\Header\State\PlayerAction</Filter>
-    </ClCompile>
     <ClCompile Include="State\MotionState.cpp">
       <Filter>Rachet\Source\State</Filter>
     </ClCompile>
-    <ClCompile Include="State\PlayerMotionStateImplementation.cpp">
-      <Filter>Rachet\Header\State</Filter>
+    <ClCompile Include="State\PlayerActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
     </ClCompile>
     <ClCompile Include="State\EnemyMotionStateImplementation.cpp">
-      <Filter>Rachet\Header\State</Filter>
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1484,9 +1481,6 @@
     <ClInclude Include="State\ActionState.h">
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
-    <ClInclude Include="State\PlayerAction\PlayerActionStateDefine.h">
-      <Filter>Rachet\Header\State\PlayerAction</Filter>
-    </ClInclude>
     <ClInclude Include="State\MotionState.h">
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
@@ -1494,6 +1488,9 @@
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
     <ClInclude Include="State\EnemyMotionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerActionStateDefine.h">
       <Filter>Rachet\Header\State</Filter>
     </ClInclude>
   </ItemGroup>

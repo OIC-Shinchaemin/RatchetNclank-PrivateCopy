@@ -1,7 +1,7 @@
 #include "PlayerJumpUpComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
 #include "PlayerStateComponent.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"

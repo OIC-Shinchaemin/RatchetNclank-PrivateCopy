@@ -1,10 +1,9 @@
 #include "PlayerDeadComponent.h"
 
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
-//#include "../Player/PlayerStateComponent.h"
 
 
 my::PlayerDeadComponent::PlayerDeadComponent(int priority) :

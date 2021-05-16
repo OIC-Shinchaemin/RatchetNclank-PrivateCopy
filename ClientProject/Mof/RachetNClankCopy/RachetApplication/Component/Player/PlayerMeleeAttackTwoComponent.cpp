@@ -1,8 +1,8 @@
 #include "PlayerMeleeAttackTwoComponent.h"
 
 #include "../../Gamepad.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionStateComponent.h"

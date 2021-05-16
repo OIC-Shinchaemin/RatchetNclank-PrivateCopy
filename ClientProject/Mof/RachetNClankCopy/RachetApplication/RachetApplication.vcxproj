@@ -307,7 +307,7 @@
     <ClCompile Include="State\EnemyAction\EnemyActionStateImplementation.cpp" />
     <ClCompile Include="State\EnemyMotionStateImplementation.cpp" />
     <ClCompile Include="State\MotionState.cpp" />
-    <ClCompile Include="State\PlayerAction\PlayerActionStateImplementation.cpp" />
+    <ClCompile Include="State\PlayerActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerMotionStateImplementation.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
@@ -553,7 +553,7 @@
     <ClInclude Include="State\EnemyAction\EnemyActionStateDefine.h" />
     <ClInclude Include="State\EnemyMotionStateDefine.h" />
     <ClInclude Include="State\MotionState.h" />
-    <ClInclude Include="State\PlayerAction\PlayerActionStateDefine.h" />
+    <ClInclude Include="State\PlayerActionStateDefine.h" />
     <ClInclude Include="State\PlayerMotionStateDefine.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
     <ClInclude Include="UI\LockOnCursorMenu.h" />

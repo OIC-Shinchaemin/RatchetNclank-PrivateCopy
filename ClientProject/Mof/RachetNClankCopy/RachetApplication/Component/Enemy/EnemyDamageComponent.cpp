@@ -2,7 +2,8 @@
 
 #include "../Collision/Object/CollisionComponentDefine.h"
 #include "../../State/EnemyAction/EnemyActionStateDefine.h"
-#include "../../State/EnemyMotion/EnemyMotionStateDefine.h"
+#include "../../State/EnemyMotionStateDefine.h"
+#include "../../State/EnemyMotionStateDefine.h"
 #include "EnemyComponent.h"
 #include "EnemyStateComponent.h"
 #include "../VelocityComponent.h"

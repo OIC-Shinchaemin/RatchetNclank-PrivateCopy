@@ -1,8 +1,8 @@
 #include "PlayerDamageComponent.h"
 
 #include "../Collision/Object/CollisionComponentDefine.h"
-#include "../../State/PlayerAction/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotion/PlayerMotionStateDefine.h"
+#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/PlayerMotionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
