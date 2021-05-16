@@ -40,6 +40,18 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// —LŒø‰»
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Activate(void) override;
+    /// <summary>
+    /// –³Œø‰»
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Inactivate(void) override;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

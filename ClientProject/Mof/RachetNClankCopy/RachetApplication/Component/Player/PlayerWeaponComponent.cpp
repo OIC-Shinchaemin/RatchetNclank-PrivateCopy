@@ -1,6 +1,7 @@
 #include "PlayerWeaponComponent.h"
 
 #include "../Collision/Object/OmniWrenchCollisionComponent.h"
+#include "../../Actor/Character/Player.h"
 
 
 my::PlayerWeaponComponent::PlayerWeaponComponent(int priority) :
@@ -22,6 +23,27 @@ void my::PlayerWeaponComponent::SetParam(const rapidjson::Value& param) {
 
 std::string my::PlayerWeaponComponent::GetType(void) const {
     return "PlayerWeaponComponent";
+}
+
+bool my::PlayerWeaponComponent::Activate(void) {
+    super::Activate();
+    
+    auto owner =  std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+    _weapon = owner->GetChild("OmniWrench");
+    if (auto weapon = _weapon.lock()) {
+        _weapon_coll_com = weapon->GetComponent<my::OmniWrenchCollisionComponent>();        
+    } // if
+    if (auto weapon_coll_com = _weapon_coll_com.lock()) {
+        weapon_coll_com->Activate();
+    } // if
+    return true;
+}
+
+bool my::PlayerWeaponComponent::Inactivate(void) {
+    if (auto weapon_coll_com = _weapon_coll_com.lock()) {
+        weapon_coll_com->Inactivate();
+    } // if
+    return true;
 }
 
 bool my::PlayerWeaponComponent::Initialize(void) {

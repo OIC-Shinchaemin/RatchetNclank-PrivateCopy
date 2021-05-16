@@ -66,6 +66,12 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(const my::QuickChangeSystem::Info& info) override;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Actor> GetChild(const std::string& tag) const;
+    /// <summary>
     /// デリート
     /// </summary>
     /// <param name=""></param>

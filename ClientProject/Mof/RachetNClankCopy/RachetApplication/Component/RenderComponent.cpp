@@ -42,7 +42,3 @@ bool my::RenderComponent::Release(void) {
     super::Release();
     return true;
 }
-
-bool my::RenderComponent::DebugRender(void) {
-    return false;
-}

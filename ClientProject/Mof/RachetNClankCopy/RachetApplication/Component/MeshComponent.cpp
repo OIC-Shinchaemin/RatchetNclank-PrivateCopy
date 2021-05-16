@@ -7,7 +7,6 @@ my::MeshComponent::MeshComponent(int priority) :
     super(priority),
     _mesh(),
     _motion_com(),
-    _is_show(true),
     _color() {
 }
 
@@ -15,7 +14,6 @@ my::MeshComponent::MeshComponent(const my::MeshComponent& obj) :
     super(obj),
     _mesh(obj._mesh),
     _motion_com(),
-    _is_show(obj._is_show),
     _color(obj._color) {
     super::_path = obj._path;
 }
@@ -65,9 +63,6 @@ bool my::MeshComponent::Initialize(void) {
 }
 
 bool my::MeshComponent::Render(void) {
-    if (!this->_is_show) {
-        return false;
-    } // if
     if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
@@ -92,10 +87,6 @@ bool my::MeshComponent::Render(void) {
     return true;
 }
 
-bool my::MeshComponent::DebugRender(void) {
-    return true;
-}
-
 bool my::MeshComponent::Release(void) {
     super::Release();
     _mesh.reset();
@@ -104,8 +95,4 @@ bool my::MeshComponent::Release(void) {
 
 std::shared_ptr<my::Component> my::MeshComponent::Clone(void) {
     return std::make_shared<my::MeshComponent>(*this);
-}
-
-void my::MeshComponent::Hide(void) {
-    this->_is_show = false;
 }

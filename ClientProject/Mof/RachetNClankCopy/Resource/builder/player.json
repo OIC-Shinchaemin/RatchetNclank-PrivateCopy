@@ -42,6 +42,14 @@
         "priority": 80
       }
     },
+
+    {
+      "type": "PlayerWeaponComponent",
+      "paramater": {
+        "priority": 85
+      }
+    },
+
     {
       "type": "PlayerMoveComponent",
       "paramater": {

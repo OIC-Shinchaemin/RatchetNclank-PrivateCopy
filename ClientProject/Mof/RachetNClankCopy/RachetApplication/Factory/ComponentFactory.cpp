@@ -24,6 +24,7 @@
 #include "../Component/Player/PlayerMeleeAttackThreeEndComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Player/PlayerDeadComponent.h"
+#include "../Component/Player/PlayerWeaponComponent.h"
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyIdleComponent.h"
@@ -80,6 +81,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackThreeEndComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDeadComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerWeaponComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyStateComponent>();

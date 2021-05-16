@@ -71,7 +71,9 @@ void my::AIStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
 
+#ifdef _DEBUG
 bool my::AIStateComponent::DebugRender(void) {
     _state_machine.DebugRender();
     return false;
 }
+#endif // _DEBUG

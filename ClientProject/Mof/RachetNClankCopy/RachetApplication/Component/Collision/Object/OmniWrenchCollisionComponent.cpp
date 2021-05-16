@@ -49,6 +49,7 @@ std::optional<my::SightObject> my::OmniWrenchCollisionComponent::GetSightObject(
 
 bool my::OmniWrenchCollisionComponent::Initialize(void) {
     super::Initialize();
+    super::Inactivate();
     return true;
 }
 

@@ -296,7 +296,6 @@ namespace Mof {
 				@return			TRUE			正常終了<br>
 								それ以外		解放エラー、エラーコードを返す。
 		*//**************************************************************************/
-		//virtual MofBool CMQOModel::Release(LPMofVoid pData = NULL);
 		virtual MofBool Release(LPMofVoid pData = NULL);
 		
 		//----------------------------------------------------------------------------

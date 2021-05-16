@@ -63,12 +63,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Release(void) override;
-    /// <summary>
-    /// デバッグ
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool DebugRender(void) override;
 };
 }
 #endif // !MY_RENDER_COMPONENT_H

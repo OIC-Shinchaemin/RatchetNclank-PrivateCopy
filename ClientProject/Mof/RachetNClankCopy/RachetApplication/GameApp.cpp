@@ -14,10 +14,8 @@ void CGameApp::ChangeDebugMode(void) noexcept {
 }
 
 MofBool CGameApp::Initialize(void) {
-    ::CMofImGui::Setup();
     my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
-
 
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
     _camera_manager = std::make_shared<my::CameraManager>();
@@ -32,7 +30,7 @@ MofBool CGameApp::Initialize(void) {
     my::CameraController::SetCameraManager(_camera_manager);
 
     _light_manager->Initialize();
-    
+
     _game_manager->SetResourceManager(_resource_manager);
     _game_manager->SetUICanvas(_ui_canvas);
     _game_manager->Initialize();
@@ -45,7 +43,6 @@ MofBool CGameApp::Initialize(void) {
 }
 
 MofBool CGameApp::Input(void) {
-    ::CMofImGui::Refresh();
     ::g_pInput->RefreshKey();
     ::g_pGamepad->RefreshKey();
     if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
@@ -84,7 +81,6 @@ MofBool CGameApp::Update(void) {
 }
 
 MofBool CGameApp::Render(void) {
-    ::CMofImGui::RenderSetup();
     ::g_pGraphics->RenderStart();
 
     _scene_manager->Render();
@@ -93,7 +89,7 @@ MofBool CGameApp::Render(void) {
         ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", fps);
         ::CGraphicsUtilities::RenderString(10.0f, 60.0f, "debug fps = %f", _debug_fps);
     } // if
-    ::CMofImGui::RenderGui();
+
     ::g_pGraphics->RenderEnd();
     return TRUE;
 }
@@ -107,6 +103,5 @@ MofBool CGameApp::Release(void) {
     _scene_manager.reset();
 
     my::Gamepad::GetInstance().Release();
-    ::CMofImGui::Cleanup();
     return TRUE;
 }

@@ -8,6 +8,16 @@
 #include "../../Factory/ActorFactory.h"
 
 
+std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
+    auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<my::Actor>& ptr) {
+        return ptr->GetTag() == tag;
+    });
+    if (it == _children.end()) {
+        return nullptr;
+    } // if
+    return *it;
+}
+
 void my::Player::End(void) {
     Observable::Notify("PlayerDead", shared_from_this());
 }

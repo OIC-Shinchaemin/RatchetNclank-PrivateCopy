@@ -149,7 +149,6 @@ bool my::Actor::Initialize(my::Actor::Param* param) {
 }
 
 bool my::Actor::Update(float delta_time) {
-
     for (auto& com : _update_components) {
         if (com->IsActive()) {
             com->Update(delta_time);

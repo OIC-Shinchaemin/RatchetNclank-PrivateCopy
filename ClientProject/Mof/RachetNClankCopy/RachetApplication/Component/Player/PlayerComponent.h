@@ -108,12 +108,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<my::Component> Clone(void) override;
-    /// <summary>
-    /// •`‰æ
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual bool DebugRender(void) override;
 };
 }
 #endif // !MY_PLAYER_COMPONENT_H
