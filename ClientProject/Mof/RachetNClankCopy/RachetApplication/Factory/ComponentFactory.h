@@ -29,7 +29,7 @@ public:
     /// ‰ð•ú
     /// </summary>
     /// <param name=""></param>
-    void Release(void);
+    bool Release(void);
     /// <summary>
     /// ’Ç‰Á
     /// </summary>

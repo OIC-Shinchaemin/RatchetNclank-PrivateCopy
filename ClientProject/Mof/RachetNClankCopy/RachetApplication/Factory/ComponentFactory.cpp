@@ -36,6 +36,12 @@
 #include "../Component/Enemy/EnemyMeleeAttackComponent.h"
 #include "../Component/Enemy/EnemyRangedAttackComponent.h"
 #include "../Component/Enemy/EnemyDamageComponent.h"
+
+#include "../Component/Weapon/OmniWrenchActionStateComponent.h"
+#include "../Component/Weapon/OmniWrenchDefaultComponent.h"
+#include "../Component/Weapon/OmniWrenchThrowedComponent.h"
+
+
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
 #include "../Component/Ship/ShipComponent.h"
@@ -97,6 +103,11 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::EnemyMeleeAttackComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyRangedAttackComponent>();
     my::ComponentFactory::AddComponentCreator<my::EnemyDamageComponent>();
+
+    my::ComponentFactory::AddComponentCreator<my::OmniWrenchActionStateComponent>();
+    my::ComponentFactory::AddComponentCreator<my::OmniWrenchDefaultComponent>();
+    my::ComponentFactory::AddComponentCreator<my::OmniWrenchThrowedComponent>();
+
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::ShipComponent>();
@@ -126,12 +137,13 @@ my::ComponentFactory::~ComponentFactory() {
 }
 
 
-void my::ComponentFactory::Release(void) {
+bool my::ComponentFactory::Release(void) {
     for (auto& factory : _component_creators) {
         factory.second->Release();
         factory.second.reset();
     } // for
     _component_creators.clear();
+    return true;
 }
 
 std::shared_ptr<my::Component> my::ComponentFactory::Create(const std::string& key, const rapidjson::Value& param) const {

@@ -25,6 +25,14 @@ std::string my::ActionStateComponent::GetType(void) const {
 bool my::ActionStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
+
+    std::vector<std::weak_ptr<my::ActionComponent>> work;
+    super::GetOwner()->GetComponents<my::ActionComponent>(work);
+    for (auto weak : work) {
+        if (auto com = weak.lock()) {
+            this->RegisterState(_state_machine, com);
+        } // if
+    } // for
     return true;
 }
 
@@ -35,6 +43,7 @@ bool my::ActionStateComponent::Update(float delta_time) {
 
 bool my::ActionStateComponent::Release(void) {
     super::Release();
+    _state_machine.Release();
     return true;
 }
 
