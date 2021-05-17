@@ -75,7 +75,6 @@ bool my::MeshComponent::Render(void) {
         
         scale.Scaling(owner->GetScale(), scale);
         quat.ConvertMatrixTranspose(rotate);
-        //rotate.RotationZXY(owner->GetRotate());
         translate.Translation(owner->GetPosition(), translate);
 
         Mof::CMatrix44 world = scale * rotate * translate;

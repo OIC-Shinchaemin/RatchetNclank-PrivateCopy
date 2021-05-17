@@ -100,8 +100,7 @@ bool my::Player::Update(float delta_time) {
     LPBONEMOTIONSTATE bone_state = motion->GetBoneState("UPP_weapon");
     Mof::CMatrix44 mat = bone_state->pBone->GetRotationOffsetMatrix() * bone_state->BoneMatrix;
     for (auto actor : _children) {
-        actor->SetParentTransform(mat);
-        /*
+        //actor->SetParentTransform(mat);
         Mof::CVector3 scale, rotate, translate;
 
         mat.GetScaling(scale);
@@ -110,12 +109,6 @@ bool my::Player::Update(float delta_time) {
         actor->SetScale(scale);
         actor->SetPosition(translate);
         actor->SetRotate(rotate);
-        */
-        /*
-        Mof::CVector3 rotate, scale;
-        mat.GetRotation(rotate); mat.GetScaling(scale);
-        actor->SetRotate(rotate); actor->SetScale(scale);
-        */
     } // for
     return true;
 }

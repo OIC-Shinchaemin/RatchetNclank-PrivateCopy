@@ -14,7 +14,7 @@ void my::OmniWrenchThrowedComponent::ChageState(const std::string& name) {
 
 my::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(int priority) :
     super(priority),
-    _move_speed(10.0f),
+    _move_speed(39.0f),
     _moved_distance(0.0f),
     _moved_distance_threshold(800.0f),
     _ideal_move_direction(),
@@ -60,28 +60,21 @@ bool my::OmniWrenchThrowedComponent::Initialize(void) {
 }
 
 bool my::OmniWrenchThrowedComponent::Update(float delta_time) {
-    /*
     if (_moved_distance_threshold < _moved_distance) {
-        if (auto weapon_owner = _weapon_owner.lock()) {
-            auto parent = super::GetOwner()->GetParentTransform().value();
-            Mof::CVector3 parent_pos;
-            parent.GetTranslation(parent_pos);
-
-            auto target_pos = weapon_owner->GetPosition();
-            auto pos = super::GetOwner()->GetPosition() + parent_pos;
-            _ideal_move_direction = pos - target_pos;
-            _ideal_move_direction.x = 0.0f;
-            _ideal_move_direction.z = 0.0f;
+        if (auto state_com = _action_state_com.lock()) {
+            auto state = state::OmniWrenchActionStateType::kOmniWrenchActionDefaultState;
+            if (state_com->CanTransition(state)) {
+                state_com->ChangeState(state);
+            } // if
         } // if
     } // if
-    */
 
+    puts("OmniWrenchThrowedComponent");
     if (auto velocity_com = _velocity_com.lock()) {
         Mof::CVector3 v = math::vec3::kNegUnitZ * _move_speed;
         v.RotateAround(math::vec3::kZero, _ideal_move_direction);
-        //_local_translate += v;
-        //velocity_com->AddVelocityForce(v);
-        //_moved_distance += v.Length();
+        velocity_com->AddVelocityForce(v);
+        _moved_distance += v.Length();
     } // if
     return true;
 }
@@ -110,19 +103,6 @@ bool my::OmniWrenchThrowedComponent::Start(void) {
     if (auto owner = _weapon_owner.lock()) {
         _ideal_move_direction = owner->GetRotate();
     } // if
-
-    _local_translate = Mof::CVector3();
-
-    auto owner = super::GetOwner();
-    Mof::CVector3 scale, rotate, translate;
-    auto mat = super::GetOwner()->GetParentTransform().value();
-    mat.GetScaling(scale);
-    mat.GetRotation(rotate);
-    mat.GetTranslation(translate);
-    owner ->SetScale(scale);
-    owner ->SetPosition(translate);
-    owner ->SetRotate(rotate);
-    
     return true;
 }
 
