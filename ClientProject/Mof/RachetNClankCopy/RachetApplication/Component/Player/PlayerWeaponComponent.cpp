@@ -1,17 +1,27 @@
 #include "PlayerWeaponComponent.h"
 
-#include "../Collision/Object/OmniWrenchCollisionComponent.h"
 #include "../../Actor/Character/Player.h"
+#include "PlayerThrowAttackComponent.h"
+#include "../Collision/Object/OmniWrenchCollisionComponent.h"
+#include "../Weapon/OmniWrenchActionStateComponent.h"
+#include "../Weapon/OmniWrenchThrowedComponent.h"
+#include "../../State/OmniWrenchActionStateDefine.h"
 
 
 my::PlayerWeaponComponent::PlayerWeaponComponent(int priority) :
     super(priority),
     _weapon(),
+    _throw_attack_com(),
+    _weapon_action_state_com(),
     _weapon_coll_com() {
 }
 
 my::PlayerWeaponComponent::PlayerWeaponComponent(const PlayerWeaponComponent& obj) :
-    super(obj) {
+    super(obj),
+    _weapon(),
+    _throw_attack_com(),
+    _weapon_action_state_com(),
+    _weapon_coll_com() {
 }
 
 my::PlayerWeaponComponent::~PlayerWeaponComponent() {
@@ -27,14 +37,26 @@ std::string my::PlayerWeaponComponent::GetType(void) const {
 
 bool my::PlayerWeaponComponent::Activate(void) {
     super::Activate();
-    
-    auto owner =  std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+
+    auto owner = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
     _weapon = owner->GetChild("OmniWrench");
     if (auto weapon = _weapon.lock()) {
-        _weapon_coll_com = weapon->GetComponent<my::OmniWrenchCollisionComponent>();        
+        _weapon_coll_com = weapon->GetComponent<my::OmniWrenchCollisionComponent>();
+        _weapon_action_state_com = weapon->GetComponent<my::OmniWrenchActionStateComponent>();
+
+        auto throw_com = weapon->GetComponent<my::OmniWrenchThrowedComponent>();
+        throw_com->SetWeaponOwner(super::GetOwner());
     } // if
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {
         weapon_coll_com->Activate();
+    } // if
+    // throw
+    if (auto throw_attack_com = _throw_attack_com.lock()) {
+        if (throw_attack_com->IsActive()) {
+            if (auto weapon_action_state_com = _weapon_action_state_com.lock()) {
+                weapon_action_state_com->ChangeState(state::OmniWrenchActionStateType::kOmniWrenchActionThrowedState);
+            } // if
+        } // if
     } // if
     return true;
 }
@@ -49,14 +71,13 @@ bool my::PlayerWeaponComponent::Inactivate(void) {
 bool my::PlayerWeaponComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
+
+    _throw_attack_com = super::GetOwner()->GetComponent<my::PlayerThrowAttackComponent>();
     return true;
 }
 
 bool my::PlayerWeaponComponent::Update(float delta_time) {
-    if (auto weapon = _weapon.lock()) {
-        _weapon_coll_com = weapon->GetComponent<my::OmniWrenchCollisionComponent>();
-    } // if
-    return false;
+    return true;
 }
 
 bool my::PlayerWeaponComponent::Release(void) {

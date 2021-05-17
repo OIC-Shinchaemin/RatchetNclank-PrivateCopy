@@ -5,6 +5,7 @@
 #include "UpdateComponent.h"
 
 #include "My/Core/StateMachine.h"
+#include "../State/ActionState.h"
 
 
 namespace my {
@@ -13,11 +14,15 @@ class ActionStateComponent : public my::UpdateComponent {
 private:
     //! èÛë‘
     my::StateMachine _state_machine;
-    template<class State>
-    void RegisterMotionState(my::StateMachine& out) {
+    /// <summary>
+    /// ìoò^
+    /// </summary>
+    /// <typeparam name="State"></typeparam>
+    /// <param name="out"></param>
+    void RegisterState(my::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
         auto shared_this = super::GetOwner();
-        auto ptr = std::make_shared<State>();
-        ptr->SetActor(shared_this);
+        auto ptr = std::make_shared<state::ActionState>();
+        ptr->SetActionComponent(com);
         out.RegisterState(ptr);
     }
 public:

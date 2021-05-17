@@ -2,6 +2,7 @@
 #define MY_ACTOR_H
 
 
+#include <optional>
 #include <memory>
 #include <string>
 #include <vector>
@@ -50,6 +51,8 @@ private:
     def::Transform _transform;
     //! トランスフォーム
     def::Transform _initial_transform;
+    //! トランスフォーム
+    std::optional<Mof::CMatrix44> _parent_transform;
     //! 機能
     ComArray _components;
     ComArray _update_components;
@@ -88,6 +91,11 @@ public:
     /// </summary>
     /// <param name="scale"></param>
     void SetScale(Mof::CVector3 scale);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="transform"></param>
+    void SetParentTransform(std::optional<Mof::CMatrix44> transform);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -130,6 +138,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector3 GetInitialPosition(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::optional<Mof::CMatrix44> GetParentTransform(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

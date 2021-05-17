@@ -259,6 +259,12 @@
     <Filter Include="Rachet\Source\Factory\Builder">
       <UniqueIdentifier>{01534295-06e6-4519-a38c-12387d9b3c88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Component\Weapon">
+      <UniqueIdentifier>{e65bf001-c5e9-4aae-ba98-462ca64d800d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Weapon">
+      <UniqueIdentifier>{94cb0e0c-0632-41b0-b66f-ad29f47dffb4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -761,6 +767,18 @@
     </ClCompile>
     <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrenchThrowedComponent.cpp">
+      <Filter>Rachet\Source\Component\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrenchActionStateComponent.cpp">
+      <Filter>Rachet\Source\Component\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="State\OmniWrenchActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrenchDefaultComponent.cpp">
+      <Filter>Rachet\Source\Component\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1492,6 +1510,18 @@
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerThrowAttackComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrenchThrowedComponent.h">
+      <Filter>Rachet\Header\Component\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrenchActionStateComponent.h">
+      <Filter>Rachet\Header\Component\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="State\OmniWrenchActionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrenchDefaultComponent.h">
+      <Filter>Rachet\Header\Component\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -338,6 +338,9 @@
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Component\UpdateComponent.cpp" />
     <ClCompile Include="Component\VelocityComponent.cpp" />
+    <ClCompile Include="Component\Weapon\OmniWrenchActionStateComponent.cpp" />
+    <ClCompile Include="Component\Weapon\OmniWrenchDefaultComponent.cpp" />
+    <ClCompile Include="Component\Weapon\OmniWrenchThrowedComponent.cpp" />
     <ClCompile Include="Factory\ActorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
@@ -381,6 +384,7 @@
     <ClCompile Include="State\EnemyActionStateImplementation.cpp" />
     <ClCompile Include="State\EnemyMotionStateImplementation.cpp" />
     <ClCompile Include="State\MotionState.cpp" />
+    <ClCompile Include="State\OmniWrenchActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerMotionStateImplementation.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
@@ -574,6 +578,9 @@
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Component\UpdateComponent.h" />
     <ClInclude Include="Component\VelocityComponent.h" />
+    <ClInclude Include="Component\Weapon\OmniWrenchActionStateComponent.h" />
+    <ClInclude Include="Component\Weapon\OmniWrenchDefaultComponent.h" />
+    <ClInclude Include="Component\Weapon\OmniWrenchThrowedComponent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
@@ -627,6 +634,7 @@
     <ClInclude Include="State\EnemyActionStateDefine.h" />
     <ClInclude Include="State\EnemyMotionStateDefine.h" />
     <ClInclude Include="State\MotionState.h" />
+    <ClInclude Include="State\OmniWrenchActionStateDefine.h" />
     <ClInclude Include="State\PlayerActionStateDefine.h" />
     <ClInclude Include="State\PlayerMotionStateDefine.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />

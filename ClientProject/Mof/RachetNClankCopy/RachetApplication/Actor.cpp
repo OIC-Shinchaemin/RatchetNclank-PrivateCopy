@@ -40,6 +40,10 @@ void my::Actor::SetScale(Mof::CVector3 scale) {
     this->_transform.scale = scale;
 }
 
+void my::Actor::SetParentTransform(std::optional<Mof::CMatrix44> transform) {
+    this->_parent_transform = transform;
+}
+
 std::string my::Actor::GetName(void) const {
     return this->_name;
 }
@@ -62,6 +66,10 @@ Mof::CVector3 my::Actor::GetScale(void) const {
 
 Mof::CVector3 my::Actor::GetInitialPosition(void) const {
     return this->_initial_transform.position;
+}
+
+std::optional<Mof::CMatrix44> my::Actor::GetParentTransform(void) const {
+    return this->_parent_transform;
 }
 
 my::ActorState my::Actor::GetState(void) const {

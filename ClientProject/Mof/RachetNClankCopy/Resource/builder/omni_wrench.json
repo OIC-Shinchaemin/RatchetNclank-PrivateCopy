@@ -10,6 +10,38 @@
       }
     },
     {
+      "type": "OmniWrenchActionStateComponent",
+      "paramater": {
+        "priority": 50
+      }
+    },
+    {
+      "type": "OmniWrenchThrowedComponent",
+      "paramater": {
+        "priority": 50
+      }
+    },
+    {
+      "type": "OmniWrenchDefaultComponent",
+      "paramater": {
+        "priority": 50
+      }
+    },
+
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+
+    {
       "type": "OmniWrenchCollisionComponent",
       "paramater": {
         "priority": 0
