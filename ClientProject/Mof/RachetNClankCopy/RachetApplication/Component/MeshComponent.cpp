@@ -67,14 +67,24 @@ bool my::MeshComponent::Render(void) {
         return false;
     } // if
 
+    auto owner = super::GetOwner();
     // •`‰æ
     if (auto r = _mesh.lock()) {
         Mof::CMatrix44 scale, rotate, translate;
-        scale.Scaling(super::GetOwner()->GetScale(), scale);
-        rotate.RotationZXY(super::GetOwner()->GetRotate());
-        translate.Translation(super::GetOwner()->GetPosition(), translate);
-        auto world = scale * rotate * translate;
+        Mof::CQuaternion quat; quat.Rotation(owner->GetRotate());
+        
+        scale.Scaling(owner->GetScale(), scale);
+        quat.ConvertMatrixTranspose(rotate);
+        //rotate.RotationZXY(owner->GetRotate());
+        translate.Translation(owner->GetPosition(), translate);
 
+        Mof::CMatrix44 world = scale * rotate * translate;
+        /*
+        if (owner->GetParentTransform().has_value()) {
+            auto parent = owner->GetParentTransform().value();
+            world = world * parent;
+        } // if
+        */
         if (auto motion_com = _motion_com.lock()) {
             auto motion = motion_com->GetMotionData();
             motion->RefreshBoneMatrix(world);

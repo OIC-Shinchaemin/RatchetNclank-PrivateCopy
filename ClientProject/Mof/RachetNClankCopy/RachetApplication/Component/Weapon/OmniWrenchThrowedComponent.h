@@ -11,6 +11,8 @@ namespace my {
 class OmniWrenchThrowedComponent : public my::ActionComponent {
     using super = my::ActionComponent;
 private:
+    //! ‘JˆÚ
+    Mof::CVector3 _local_translate;
     //! ‘¬‚³
     float _move_speed;
     //! ˆÚ“®‚µ‚½‹——£

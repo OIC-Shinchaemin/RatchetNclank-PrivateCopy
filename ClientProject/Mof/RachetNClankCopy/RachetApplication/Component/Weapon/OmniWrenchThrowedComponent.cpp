@@ -21,7 +21,7 @@ my::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(int priority) :
     _weapon_owner(),
     _velocity_com(),
     _action_state_com(),
-    _collision_com(){
+    _collision_com() {
 }
 
 my::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(const OmniWrenchThrowedComponent& obj) :
@@ -32,7 +32,7 @@ my::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(const OmniWrenchThrow
     _ideal_move_direction(),
     _weapon_owner(),
     _velocity_com(),
-    _action_state_com() ,
+    _action_state_com(),
     _collision_com() {
 }
 
@@ -60,29 +60,28 @@ bool my::OmniWrenchThrowedComponent::Initialize(void) {
 }
 
 bool my::OmniWrenchThrowedComponent::Update(float delta_time) {
+    /*
     if (_moved_distance_threshold < _moved_distance) {
         if (auto weapon_owner = _weapon_owner.lock()) {
+            auto parent = super::GetOwner()->GetParentTransform().value();
+            Mof::CVector3 parent_pos;
+            parent.GetTranslation(parent_pos);
+
             auto target_pos = weapon_owner->GetPosition();
-            auto pos = super::GetOwner()->GetPosition();
+            auto pos = super::GetOwner()->GetPosition() + parent_pos;
             _ideal_move_direction = pos - target_pos;
             _ideal_move_direction.x = 0.0f;
             _ideal_move_direction.z = 0.0f;
         } // if
-        /*
-        if (auto action_state_com = _action_state_com.lock()) {
-            auto state = state::OmniWrenchActionStateType::kOmniWrenchActionDefaultState;
-            if (action_state_com->CanTransition(state)) {
-                action_state_com->ChangeState(state);
-            } // if
-        } // if
-        */
     } // if
-    
+    */
+
     if (auto velocity_com = _velocity_com.lock()) {
         Mof::CVector3 v = math::vec3::kNegUnitZ * _move_speed;
         v.RotateAround(math::vec3::kZero, _ideal_move_direction);
-        velocity_com->AddVelocityForce(v);
-        _moved_distance += v.Length();
+        //_local_translate += v;
+        //velocity_com->AddVelocityForce(v);
+        //_moved_distance += v.Length();
     } // if
     return true;
 }
@@ -111,14 +110,26 @@ bool my::OmniWrenchThrowedComponent::Start(void) {
     if (auto owner = _weapon_owner.lock()) {
         _ideal_move_direction = owner->GetRotate();
     } // if
+
+    _local_translate = Mof::CVector3();
+
+    auto owner = super::GetOwner();
+    Mof::CVector3 scale, rotate, translate;
+    auto mat = super::GetOwner()->GetParentTransform().value();
+    mat.GetScaling(scale);
+    mat.GetRotation(rotate);
+    mat.GetTranslation(translate);
+    owner ->SetScale(scale);
+    owner ->SetPosition(translate);
+    owner ->SetRotate(rotate);
+    
     return true;
 }
 
 bool my::OmniWrenchThrowedComponent::End(void) {
     super::End();
-    if (auto collision_com = _collision_com.lock() ) {
+    if (auto collision_com = _collision_com.lock()) {
         collision_com->Inactivate();
     } // if
-
     return true;
 }
