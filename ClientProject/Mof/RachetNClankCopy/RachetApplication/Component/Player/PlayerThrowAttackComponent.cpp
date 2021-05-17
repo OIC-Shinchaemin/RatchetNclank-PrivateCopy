@@ -11,14 +11,26 @@
 #include "PlayerWeaponComponent.h"
 
 
+void my::PlayerThrowAttackComponent::ChageState(const std::string& name) {
+    if (auto state_com = _state_com.lock()) {
+        state_com->ChangeState(name);
+    } // if
+}
+
 my::PlayerThrowAttackComponent::PlayerThrowAttackComponent(int priority) :
-    super(priority)
-{
+    super(priority),
+    _state_com(),
+    _motion_com(),
+    _motion_state_com(),
+    _weapon_com() {
 }
 
 my::PlayerThrowAttackComponent::PlayerThrowAttackComponent(const PlayerThrowAttackComponent& obj) :
-    super(obj)
-{
+    super(obj),
+    _state_com(),
+    _motion_com(),
+    _motion_state_com(),
+    _weapon_com() {
 }
 
 my::PlayerThrowAttackComponent::~PlayerThrowAttackComponent() {
@@ -34,10 +46,18 @@ std::string_view my::PlayerThrowAttackComponent::GetStateType(void) const {
 
 bool my::PlayerThrowAttackComponent::Initialize(void) {
     super::Initialize();
+    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
+    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<my::PlayerWeaponComponent>();
     return true;
 }
 
 bool my::PlayerThrowAttackComponent::Update(float delta_time) {
+    auto motion_com = _motion_com.lock();
+    if (motion_com->IsEndMotion()) {
+        this->ChageState(state::PlayerActionStateType::kPlayerActionThrowAttackEndState);
+    } // if
     return true;
 }
 
@@ -51,37 +71,23 @@ std::shared_ptr<my::Component> my::PlayerThrowAttackComponent::Clone(void) {
 }
 
 bool my::PlayerThrowAttackComponent::Start(void) {
-    /*
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
-    _next_reserve = false;
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionMeleeAttackOneState);
-    } // if
-    if (auto move_com = _move_com.lock()) {
-        Mof::CVector2 in; float move_angle;
-        float move_speed = 15.0f; float angular_speed = 0.0f; float ideal_angle = super::GetOwner()->GetRotate().y;
-        if (move_com->AquireInputData(in, move_angle)) {
-            in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-            angular_speed = 15.0f; ideal_angle = std::atan2(-in.y, in.x) - math::kHalfPi;
-        } // if
-        move_com->Move(move_speed, angular_speed, ideal_angle);
+        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionThrowAttackState);
     } // if
     if (auto weapon_com = _weapon_com.lock()) {
         weapon_com->Activate();
     } // if
-    */
     return true;
 }
 
 bool my::PlayerThrowAttackComponent::End(void) {
-    /*
     super::End();
     if (auto weapon_com = _weapon_com.lock()) {
         weapon_com->Inactivate();
     } // if
-    */
     return true;
 }

@@ -12,6 +12,20 @@
 namespace my {
 class PlayerThrowAttackEndComponent : public my::ActionComponent {
     using super = my::ActionComponent;
+private:
+    //! 状態
+    std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! モーション
+    std::weak_ptr<class MotionComponent> _motion_com;
+    //! モーション
+    std::weak_ptr<class MotionStateComponent> _motion_state_com;
+    //! 武器
+    std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name="name"></param>
+    void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ
