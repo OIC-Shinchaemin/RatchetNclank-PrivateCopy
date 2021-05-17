@@ -11,6 +11,8 @@ class PlayerWeaponComponent : public my::UpdateComponent {
 private:
     //! •Ší
     std::weak_ptr<my::Actor> _weapon;
+    //! ó‘Ô
+    std::weak_ptr<class OmniWrenchActionStateComponent> _weapon_action_state_com;
     //! Õ“Ë§Œä
     std::weak_ptr<class OmniWrenchCollisionComponent> _weapon_coll_com;
 public:

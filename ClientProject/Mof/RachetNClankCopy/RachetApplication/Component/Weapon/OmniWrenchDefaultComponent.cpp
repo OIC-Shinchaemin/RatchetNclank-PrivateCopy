@@ -59,7 +59,6 @@ bool my::OmniWrenchDefaultComponent::Start(void) {
         return false;
     } // if
     super::Start();
-    this->ChageState(state::OmniWrenchActionStateType::kOmniWrenchActionThrowedState);
     return true;
 }
 

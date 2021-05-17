@@ -11,10 +11,22 @@ namespace my {
 class OmniWrenchThrowedComponent : public my::ActionComponent {
     using super = my::ActionComponent;
 private:
+    //! 速さ
+    float _move_speed;
+    //! 移動した距離
+    float _moved_distance;
+    //! 閾値
+    float _moved_distance_threshold;
+    //! 進行方向
+    Mof::CVector3 _ideal_move_direction;
+    //! 所有者
+    std::weak_ptr<my::Actor> _weapon_owner;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! 状態
-    std::weak_ptr<class OmniWrenchActionStateComponent > _action_state_com;
+    std::weak_ptr<class OmniWrenchActionStateComponent> _action_state_com;
+    //! 衝突
+    std::weak_ptr<class OmniWrenchCollisionComponent> _collision_com;
     /// <summary>
     /// 変更
     /// </summary>
@@ -35,6 +47,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~OmniWrenchThrowedComponent();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetWeaponOwner(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

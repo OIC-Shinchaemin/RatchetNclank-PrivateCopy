@@ -29,6 +29,19 @@
     },
 
     {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+
+    {
       "type": "OmniWrenchCollisionComponent",
       "paramater": {
         "priority": 0

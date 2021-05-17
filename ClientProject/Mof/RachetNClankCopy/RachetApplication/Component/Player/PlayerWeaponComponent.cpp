@@ -1,7 +1,10 @@
 #include "PlayerWeaponComponent.h"
 
-#include "../Collision/Object/OmniWrenchCollisionComponent.h"
 #include "../../Actor/Character/Player.h"
+#include "../Collision/Object/OmniWrenchCollisionComponent.h"
+#include "../Weapon/OmniWrenchActionStateComponent.h"
+#include "../Weapon/OmniWrenchThrowedComponent.h"
+#include "../../State/OmniWrenchActionStateDefine.h"
 
 
 my::PlayerWeaponComponent::PlayerWeaponComponent(int priority) :
@@ -32,16 +35,23 @@ bool my::PlayerWeaponComponent::Activate(void) {
     _weapon = owner->GetChild("OmniWrench");
     if (auto weapon = _weapon.lock()) {
         _weapon_coll_com = weapon->GetComponent<my::OmniWrenchCollisionComponent>();        
+        _weapon_action_state_com = weapon->GetComponent<my::OmniWrenchActionStateComponent>();
+    
+        auto throw_com = weapon->GetComponent<my::OmniWrenchThrowedComponent>();
+        throw_com->SetWeaponOwner(super::GetOwner());
     } // if
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {
         weapon_coll_com->Activate();
+    } // if
+    if (auto weapon_action_state_com = _weapon_action_state_com.lock()) {
+        weapon_action_state_com->ChangeState(state::OmniWrenchActionStateType::kOmniWrenchActionThrowedState);
     } // if
     return true;
 }
 
 bool my::PlayerWeaponComponent::Inactivate(void) {
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {
-        weapon_coll_com->Inactivate();
+        //weapon_coll_com->Inactivate();
     } // if
     return true;
 }
@@ -53,10 +63,7 @@ bool my::PlayerWeaponComponent::Initialize(void) {
 }
 
 bool my::PlayerWeaponComponent::Update(float delta_time) {
-    if (auto weapon = _weapon.lock()) {
-        _weapon_coll_com = weapon->GetComponent<my::OmniWrenchCollisionComponent>();
-    } // if
-    return false;
+    return true;
 }
 
 bool my::PlayerWeaponComponent::Release(void) {

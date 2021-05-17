@@ -3,6 +3,7 @@
 #include "../VelocityComponent.h"
 #include "OmniWrenchActionStateComponent.h"
 #include "../../State/OmniWrenchActionStateDefine.h"
+#include "../Collision/Object/OmniWrenchCollisionComponent.h"
 
 
 void my::OmniWrenchThrowedComponent::ChageState(const std::string& name) {
@@ -13,17 +14,33 @@ void my::OmniWrenchThrowedComponent::ChageState(const std::string& name) {
 
 my::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(int priority) :
     super(priority),
+    _move_speed(10.0f),
+    _moved_distance(0.0f),
+    _moved_distance_threshold(800.0f),
+    _ideal_move_direction(),
+    _weapon_owner(),
     _velocity_com(),
-    _action_state_com() {
+    _action_state_com(),
+    _collision_com(){
 }
 
 my::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(const OmniWrenchThrowedComponent& obj) :
     super(obj),
+    _move_speed(obj._move_speed),
+    _moved_distance(0.0f),
+    _moved_distance_threshold(obj._moved_distance_threshold),
+    _ideal_move_direction(),
+    _weapon_owner(),
     _velocity_com(),
-    _action_state_com() {
+    _action_state_com() ,
+    _collision_com() {
 }
 
 my::OmniWrenchThrowedComponent::~OmniWrenchThrowedComponent() {
+}
+
+void my::OmniWrenchThrowedComponent::SetWeaponOwner(const std::shared_ptr<my::Actor>& ptr) {
+    this->_weapon_owner = ptr;
 }
 
 std::string my::OmniWrenchThrowedComponent::GetType(void) const {
@@ -38,10 +55,35 @@ bool my::OmniWrenchThrowedComponent::Initialize(void) {
     super::Initialize();
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _action_state_com = super::GetOwner()->GetComponent<my::OmniWrenchActionStateComponent>();
+    _collision_com = super::GetOwner()->GetComponent<my::OmniWrenchCollisionComponent>();
     return true;
 }
 
 bool my::OmniWrenchThrowedComponent::Update(float delta_time) {
+    if (_moved_distance_threshold < _moved_distance) {
+        if (auto weapon_owner = _weapon_owner.lock()) {
+            auto target_pos = weapon_owner->GetPosition();
+            auto pos = super::GetOwner()->GetPosition();
+            _ideal_move_direction = pos - target_pos;
+            _ideal_move_direction.x = 0.0f;
+            _ideal_move_direction.z = 0.0f;
+        } // if
+        /*
+        if (auto action_state_com = _action_state_com.lock()) {
+            auto state = state::OmniWrenchActionStateType::kOmniWrenchActionDefaultState;
+            if (action_state_com->CanTransition(state)) {
+                action_state_com->ChangeState(state);
+            } // if
+        } // if
+        */
+    } // if
+    
+    if (auto velocity_com = _velocity_com.lock()) {
+        Mof::CVector3 v = math::vec3::kNegUnitZ * _move_speed;
+        v.RotateAround(math::vec3::kZero, _ideal_move_direction);
+        velocity_com->AddVelocityForce(v);
+        _moved_distance += v.Length();
+    } // if
     return true;
 }
 
@@ -58,11 +100,25 @@ bool my::OmniWrenchThrowedComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
-    super::Start();
+    super::Activate();
+    if (auto velocity_com = _velocity_com.lock()) {
+        velocity_com->SetUseGravity(false);
+    } // if
+    if (auto collision_com = _collision_com.lock()) {
+        collision_com->Activate();
+    } // if
+    _moved_distance = 0.0f;
+    if (auto owner = _weapon_owner.lock()) {
+        _ideal_move_direction = owner->GetRotate();
+    } // if
     return true;
 }
 
 bool my::OmniWrenchThrowedComponent::End(void) {
     super::End();
+    if (auto collision_com = _collision_com.lock() ) {
+        collision_com->Inactivate();
+    } // if
+
     return true;
 }
