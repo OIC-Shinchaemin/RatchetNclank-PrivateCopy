@@ -315,6 +315,7 @@
     <ClCompile Include="Component\Player\PlayerDeadComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerIdleComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerJumpAttackComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpAttackSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpDownComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpLandingComponent.cpp" />
@@ -556,6 +557,7 @@
     <ClInclude Include="Component\Player\PlayerDeadComponent.h" />
     <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h" />
     <ClInclude Include="Component\Player\PlayerIdleComponent.h" />
+    <ClInclude Include="Component\Player\PlayerJumpAttackComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpAttackSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpDownComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpLandingComponent.h" />

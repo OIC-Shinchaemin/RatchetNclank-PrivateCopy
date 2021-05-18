@@ -36,6 +36,7 @@ public:
         ThrowAttackEnd,
 
         JumpAttackSet,
+        JumpAttack,
 
         DamageA,
         DamageDead,

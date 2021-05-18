@@ -27,6 +27,7 @@
 #include "../Component/Player/PlayerThrowAttackComponent.h"
 #include "../Component/Player/PlayerThrowAttackEndComponent.h"
 #include "../Component/Player/PlayerJumpAttackSetComponent.h"
+#include "../Component/Player/PlayerJumpAttackComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Player/PlayerDeadComponent.h"
 #include "../Component/Player/PlayerWeaponComponent.h"
@@ -96,6 +97,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackEndComponent>();
 
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpAttackSetComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerJumpAttackComponent>();
 
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDeadComponent>();

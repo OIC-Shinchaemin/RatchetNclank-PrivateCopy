@@ -20,6 +20,7 @@ void my::PlayerJumpAttackSetComponent::ChageState(const std::string& name) {
 
 my::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(int priority) :
     super(priority),
+    _velocity_com(),
     _state_com(),
     _motion_com(),
     _motion_state_com(),
@@ -28,6 +29,7 @@ my::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(int priority) :
 
 my::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(const PlayerJumpAttackSetComponent& obj) :
     super(obj),
+    _velocity_com(),
     _state_com(),
     _motion_com(),
     _motion_state_com(),
@@ -47,6 +49,7 @@ std::string_view my::PlayerJumpAttackSetComponent::GetStateType(void) const {
 
 bool my::PlayerJumpAttackSetComponent::Initialize(void) {
     super::Initialize();
+    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
@@ -58,9 +61,16 @@ bool my::PlayerJumpAttackSetComponent::Update(float delta_time) {
     auto motion_com = _motion_com.lock();
 
     if (motion_com->IsEndMotion()) {
-        //this->ChageState(state::PlayerActionStateType::kPlayerActionJumpAttackState);
-        this->ChageState(state::PlayerActionStateType::kPlayerActionIdleState);
+        this->ChageState(state::PlayerActionStateType::kPlayerActionJumpAttackState);
+        //this->ChageState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
+
+    if (auto velocity_com = _velocity_com.lock()) {
+        float speed = 5.0f;
+        auto velocity = Mof::CVector3(0.0f, speed, 0.0f);
+        velocity_com->AddVelocityForce(velocity);
+    } // if
+
     return true;
 }
 
