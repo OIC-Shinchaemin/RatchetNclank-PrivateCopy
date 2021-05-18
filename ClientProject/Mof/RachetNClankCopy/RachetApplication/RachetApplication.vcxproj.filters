@@ -780,6 +780,9 @@
     <ClCompile Include="Component\Weapon\OmniWrenchDefaultComponent.cpp">
       <Filter>Rachet\Source\Component\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpAttackSetComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1522,6 +1525,9 @@
     </ClInclude>
     <ClInclude Include="Component\Weapon\OmniWrenchDefaultComponent.h">
       <Filter>Rachet\Header\Component\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpAttackSetComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

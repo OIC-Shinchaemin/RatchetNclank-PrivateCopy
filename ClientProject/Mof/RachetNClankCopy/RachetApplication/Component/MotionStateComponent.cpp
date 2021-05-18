@@ -68,6 +68,7 @@ bool my::MotionStateComponent::Initialize(void) {
         this->RegisterState(Param(State::kPlayerMotionThrowAttackState, Type::ThrowAttack, 1.0f, false, false));
         this->RegisterState(Param(State::kPlayerMotionThrowAttackEndState, Type::ThrowAttackEnd, 1.0f, false, false));
 
+        this->RegisterState(Param(State::kPlayerMotionJumpAttackSetState, Type::JumpAttackSet , 1.0f, false, false));
 
         this->RegisterState(Param(State::kPlayerMotionDamageState, Type::DamageA, 1.0f, false, false));
         this->RegisterState(Param(State::kPlayerMotionDeadState, Type::DamageDead, 1.0f, false, false));

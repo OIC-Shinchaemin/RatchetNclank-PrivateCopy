@@ -17,5 +17,8 @@ std::string state::PlayerMotionStateType::kPlayerMotionMeleeAttackThreeEndState 
 std::string state::PlayerMotionStateType::kPlayerMotionThrowAttackSetState = "PlayerMotionThrowAttackSetState";
 std::string state::PlayerMotionStateType::kPlayerMotionThrowAttackState = "PlayerMotionThrowAttackState";
 std::string state::PlayerMotionStateType::kPlayerMotionThrowAttackEndState = "PlayerMotionThrowAttackEndState";
+std::string state::PlayerMotionStateType::kPlayerMotionJumpAttackSetState = "PlayerMotionJumpAttackSetState";
+//std::string state::PlayerMotionStateType::kPlayerMotionJumpAttackState = "PlayerMotionJumpAttackState";
+//std::string state::PlayerMotionStateType::kPlayerMotionJumpAttackEndState = "PlayerMotionJumpAttackEndState";
 std::string state::PlayerMotionStateType::kPlayerMotionDamageState = "PlayerMotionDamageState";
 std::string state::PlayerMotionStateType::kPlayerMotionDeadState = "PlayerMotionDeadState";

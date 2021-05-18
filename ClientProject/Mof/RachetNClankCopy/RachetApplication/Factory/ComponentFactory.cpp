@@ -7,6 +7,7 @@
 #include "../Component/MotionComponent.h"
 #include "../Component/HpComponent.h"
 #include "../Component/InvincibleComponent.h"
+
 #include "../Component/Player/PlayerComponent.h"
 #include "../Component/Player/PlayerStateComponent.h"
 #include "../Component/Player/PlayerIdleComponent.h"
@@ -25,9 +26,11 @@
 #include "../Component/Player/PlayerThrowAttackSetComponent.h"
 #include "../Component/Player/PlayerThrowAttackComponent.h"
 #include "../Component/Player/PlayerThrowAttackEndComponent.h"
+#include "../Component/Player/PlayerJumpAttackSetComponent.h"
 #include "../Component/Player/PlayerDamageComponent.h"
 #include "../Component/Player/PlayerDeadComponent.h"
 #include "../Component/Player/PlayerWeaponComponent.h"
+
 #include "../Component/Enemy/EnemyComponent.h"
 #include "../Component/Enemy/EnemyStateComponent.h"
 #include "../Component/Enemy/EnemyIdleComponent.h"
@@ -91,6 +94,9 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackSetComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerThrowAttackEndComponent>();
+
+    my::ComponentFactory::AddComponentCreator<my::PlayerJumpAttackSetComponent>();
+
     my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerDeadComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerWeaponComponent>();

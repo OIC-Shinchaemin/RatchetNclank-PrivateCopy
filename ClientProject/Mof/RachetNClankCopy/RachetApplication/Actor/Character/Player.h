@@ -34,6 +34,9 @@ public:
         ThrowAttackSet,
         ThrowAttack,
         ThrowAttackEnd,
+
+        JumpAttackSet,
+
         DamageA,
         DamageDead,
         CountMax,

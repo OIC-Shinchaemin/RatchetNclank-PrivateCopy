@@ -94,6 +94,13 @@ bool my::PlayerJumpUpComponent::Update(float delta_time) {
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         state_com->ChangeState(state::PlayerActionStateType::kPlayerActionDoubleJumpState);
     } // if
+
+    else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpAttackSetState);
+    } // else if
+
+
     return true;
 }
 

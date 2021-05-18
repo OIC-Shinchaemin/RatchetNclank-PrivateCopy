@@ -150,6 +150,12 @@
       }
     },
 
+    {
+      "type": "PlayerJumpAttackSetComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
 
     {
       "type": "PlayerDamageComponent",
