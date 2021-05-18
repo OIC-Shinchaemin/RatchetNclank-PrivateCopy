@@ -19,6 +19,7 @@ void my::PlayerJumpAttackComponent::ChageState(const std::string& name) {
 
 my::PlayerJumpAttackComponent::PlayerJumpAttackComponent(int priority) :
     super(priority),
+    _down_speed(7.0f),
     _velocity_com(),
     _state_com(),
     _motion_com(),
@@ -28,6 +29,7 @@ my::PlayerJumpAttackComponent::PlayerJumpAttackComponent(int priority) :
 
 my::PlayerJumpAttackComponent::PlayerJumpAttackComponent(const PlayerJumpAttackComponent& obj) :
     super(obj),
+    _down_speed(obj._down_speed),
     _velocity_com(),
     _state_com(),
     _motion_com(),
@@ -60,6 +62,11 @@ bool my::PlayerJumpAttackComponent::Update(float delta_time) {
     auto motion_com = _motion_com.lock();
     if (motion_com->IsEndMotion()) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionIdleState);
+    } // if
+
+    if (auto velocity_com = _velocity_com.lock()) {
+        auto velocity = Mof::CVector3(0.0f, -_down_speed, 0.0f);
+        velocity_com->AddVelocityForce(velocity);
     } // if
     return true;
 }

@@ -13,6 +13,8 @@ namespace my {
 class PlayerJumpAttackSetComponent : public my::ActionComponent {
     using super = my::ActionComponent;
 private:
+    //! ë¨Ç≥
+    float _up_speed;
     //! ë¨ìx
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! èÛë‘
