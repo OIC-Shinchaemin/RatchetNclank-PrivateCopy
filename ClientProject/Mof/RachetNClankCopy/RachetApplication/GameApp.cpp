@@ -7,6 +7,7 @@
 #include "Component/Component.h"
 #include "Camera/CameraController.h"
 
+#include <filesystem>
 
 
 void CGameApp::ChangeDebugMode(void) noexcept {
@@ -15,7 +16,11 @@ void CGameApp::ChangeDebugMode(void) noexcept {
 
 MofBool CGameApp::Initialize(void) {
     my::Gamepad::GetInstance().Create();
+
+    std::cout << std::filesystem::current_path() ;
     ::CUtilities::SetCurrentDirectory("Resource");
+    std::cout << std::filesystem::current_path() ;
+
 
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
     _camera_manager = std::make_shared<my::CameraManager>();

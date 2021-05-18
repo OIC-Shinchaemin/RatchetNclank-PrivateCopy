@@ -14,7 +14,9 @@
 
 void my::PlayerJumpAttackSetComponent::ChageState(const std::string& name) {
     if (auto state_com = _state_com.lock()) {
-        state_com->ChangeState(name);
+        if (state_com->CanTransition(name)) {
+            state_com->ChangeState(name);
+        } // if
     } // if
 }
 
@@ -64,12 +66,11 @@ bool my::PlayerJumpAttackSetComponent::Update(float delta_time) {
     if (motion_com->IsEndMotion()) {
         this->ChageState(state::PlayerActionStateType::kPlayerActionJumpAttackState);
     } // if
-    
+
     if (auto velocity_com = _velocity_com.lock()) {
         auto velocity = Mof::CVector3(0.0f, _up_speed, 0.0f);
         velocity_com->AddVelocityForce(velocity);
     } // if
-
     return true;
 }
 
