@@ -40,6 +40,28 @@ private:
     std::weak_ptr<class PlayerJumpDownComponent> _jump_down_com;
     //! ジャンプ
     std::weak_ptr<class PlayerDoubleJumpComponent> _double_jump_com;
+
+
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void TurnLeft(void);
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void TurnRight(void);
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void LookUp(void);
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void LookDown(void);
     /// <summary>
     /// 操作
     /// </summary>

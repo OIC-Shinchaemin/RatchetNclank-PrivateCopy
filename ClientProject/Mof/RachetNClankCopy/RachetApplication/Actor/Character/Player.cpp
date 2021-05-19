@@ -92,7 +92,7 @@ bool my::Player::Update(float delta_time) {
 
             if (auto target = super::GetComponent<my::PlayerComponent>()->GetTarget().lock()) {
                 auto target_pos = target->GetPosition();
-                auto target_height = 1.0f;
+                auto target_height = 0.5f;
                 target_pos.y += target_height;
                 weapon->SetLockOnPosition(target_pos);
             } // if

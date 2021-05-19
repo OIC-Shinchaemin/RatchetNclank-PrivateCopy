@@ -9,28 +9,40 @@
 #include "Player/PlayerDoubleJumpComponent.h"
 
 
+void my::CameraComponent::TurnLeft(void) {
+    _camera_controller.GetService()->AddAzimuth(1.0f);
+    if (_camera_fps_mode) {
+        _ideal_fps_camera_angle += math::ToRadian(1.0f);
+    } // if
+}
+
+void my::CameraComponent::TurnRight(void) {
+    _camera_controller.GetService()->AddAzimuth(-1.0f);
+    if (_camera_fps_mode) {
+        _ideal_fps_camera_angle -= math::ToRadian(1.0f);
+    } // if
+}
+
+void my::CameraComponent::LookUp(void) {
+    _camera_controller.GetService()->AddAltitude(1.0f);
+}
+
+void my::CameraComponent::LookDown(void) {
+    _camera_controller.GetService()->AddAltitude(-1.0f);
+}
+
 void my::CameraComponent::ControlByKeyboard(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
-        _camera_controller.GetService()->AddAzimuth(1.0f);
-
-        if (_camera_fps_mode) {
-            _ideal_fps_camera_angle += math::ToRadian(1.0f);
-        } // if
-
+        this->TurnLeft();
     } // if
     else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
-        _camera_controller.GetService()->AddAzimuth(-1.0f);
-
-        if (_camera_fps_mode) {
-            _ideal_fps_camera_angle -= math::ToRadian(1.0f);
-        } // if
-
+        this->TurnRight();
     } // else if
     else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-        _camera_controller.GetService()->AddAltitude(1.0f);
+        this->LookUp();
     } // else if
     else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-        _camera_controller.GetService()->AddAltitude(-1.0f);
+        this->LookDown();
     } // else if
 
     // chara front
@@ -67,17 +79,10 @@ void my::CameraComponent::ControlByGamepad(void) {
         // x
         if (threshold <= std::abs(in.x)) {
             if (0.0f < in.x) {
-                _camera_controller.GetService()->AddAzimuth(1.0f);
-
-                if (_camera_fps_mode) {
-                    _ideal_fps_camera_angle += math::ToRadian(1.0f);
-                } // if
+                this->TurnLeft();
             } // if
             else {
-                _camera_controller.GetService()->AddAzimuth(-1.0f);
-                if (_camera_fps_mode) {
-                    _ideal_fps_camera_angle -= math::ToRadian(1.0f);
-                } // if
+                this->TurnRight();
             } // else
         } // if
         // y
@@ -213,18 +218,6 @@ bool my::CameraComponent::Initialize(void) {
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
     
     
-    /*
-    _player_view_camera->SetPosition(pos - offset);
-    _player_view_camera->SetTarget(pos);
-    _player_view_camera->Update();
-    _camera_controller.GetService()->RegisterGlobalCamera();
-    _camera_controller.GetService()->SetAzimuth(
-        math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
-    _camera_controller.GetService()->SetAltitude(20.0f);
-    _camera_controller.GetService()->SetDistance(_default_distance);
-    */
-
-
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _jump_up_com = super::GetOwner()->GetComponent<my::PlayerJumpUpComponent>();
     _jump_down_com = super::GetOwner()->GetComponent<my::PlayerJumpDownComponent>();
