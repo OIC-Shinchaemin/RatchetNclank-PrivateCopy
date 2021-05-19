@@ -57,8 +57,13 @@ bool my::Terrain::Render(void) {
 
 bool my::Terrain::Release(void) {
     super::Release();
-    //_plane->Release();
-    //delete _plane;
+
+    auto work = _plane->GetMaterial()->GetTextureArray();
+    for (int i = 0, n = work->GetArrayCount(); i < n; i++) {
+        work->GetData(i) = nullptr;
+    } // for
+    _plane->Release();
+    delete _plane;
 
     _resource.reset();
     _shader_bind.Release();
