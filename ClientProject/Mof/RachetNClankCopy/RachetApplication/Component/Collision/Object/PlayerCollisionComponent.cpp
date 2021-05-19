@@ -8,6 +8,16 @@
 #include "WaterFlowCollisionComponent.h"
 
 
+void my::PlayerCollisionComponent::ChangeState(void) {
+    if (auto state_com = _state_com.lock()) {
+        for (auto& state : _next_status) {
+            if (state_com->CanTransition(state)) {
+                state_com->ChangeState(state);
+            } // if
+        } // for
+    } // if
+}
+
 std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetFrontRay(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     if (super::GetOwner()->GetState() == my::ActorState::End) {
@@ -82,11 +92,10 @@ void my::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer me
                 pos.y += height + margin - info.d;
                 super::GetOwner()->SetPosition(pos);
 
-                if (auto state_com = _state_com.lock()) {
-                    if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
-                        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
-                    } // if
-                } // if
+                
+                this->ChangeState();
+
+
             } // if
         } // if
 
@@ -158,11 +167,8 @@ void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer m
                 if (!_on_elevator) {
                     gimmick->ActionStart();
                 } // if
-                if (auto state_com = _state_com.lock()) {
-                    if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
-                        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
-                    } // if
-                } // if
+                this->ChangeState();
+
                 _on_elevator = true;
             } // if
             else {
@@ -193,11 +199,8 @@ void my::PlayerCollisionComponent::CollisionStageBridge(Mof::LPMeshContainer mes
                 pos.y += height - info.d;
                 super::GetOwner()->SetPosition(pos);
 
-                if (auto state_com = _state_com.lock()) {
-                    if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionJumpLandingState)) {
-                        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpLandingState);
-                    } // if
-                } // if
+                this->ChangeState();
+
             } // if
         } // if
         if (this->GetNextRay().value().CollisionGeometry(geometry, info)) {
@@ -223,6 +226,8 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComp
     _velocity_com(),
     _state_com(),
     _on_elevator(false) {
+    _next_status.push_back(state::PlayerActionStateType::kPlayerActionJumpLandingState);
+    _next_status.push_back(state::PlayerActionStateType::kPlayerActionIdleState);
 }
 
 my::PlayerCollisionComponent::~PlayerCollisionComponent() {

@@ -17,9 +17,8 @@ my::PlayerComponent::PlayerComponent(int priority) :
     _target(),
     _state_com(),
     _next_terrain(),
-    _action_enable() {
-    super::_volume = 0.5f;
-    super::_height = 1.0f;
+    _action_enable()
+{
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
@@ -27,7 +26,8 @@ my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     _target(),
     _state_com(),
     _next_terrain(),
-    _action_enable() {
+    _action_enable()
+{
 }
 
 my::PlayerComponent::~PlayerComponent() {

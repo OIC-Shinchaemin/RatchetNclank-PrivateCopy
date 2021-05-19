@@ -35,14 +35,14 @@ Mof::CSphere GimmickBase::GetStartPositionSphere(void) const {
 Mof::CSphere GimmickBase::GetEndPositionSphere(void) const {
     return Mof::CSphere();
 }
-
-void GimmickBase::Render(void) {
+#ifdef _DEBUG
+void GimmickBase::DebugRender(void) {
     auto sphere = Mof::CSphere(this->GetPosition(), this->GetVolume());
     auto sphere2 = Mof::CSphere(this->GetPosition(), this->GetHeight());
     ::CGraphicsUtilities::RenderLineSphere(sphere, Mof::CVector4(1.0f, 1.0f, 5.0f, 1.0f));
-    ::CGraphicsUtilities::RenderLineSphere(sphere2, Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f));
-    
+    ::CGraphicsUtilities::RenderLineSphere(sphere2, Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f));    
 }
+#endif // _DEBUG
 
 void GimmickBase::ActionStart(void) {
 }

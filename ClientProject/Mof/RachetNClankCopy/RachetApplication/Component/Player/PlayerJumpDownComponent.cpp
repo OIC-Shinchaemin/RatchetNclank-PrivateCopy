@@ -1,5 +1,6 @@
 #include "PlayerJumpDownComponent.h"
 
+#include "../../Gamepad.h"
 #include "../../State/PlayerActionStateDefine.h"
 #include "../../State/PlayerMotionStateDefine.h"
 #include "PlayerStateComponent.h"
@@ -55,6 +56,7 @@ bool my::PlayerJumpDownComponent::Initialize(void) {
 
 bool my::PlayerJumpDownComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
+    auto state_com = _state_com.lock();
 
     Mof::CVector2 in;
     float move_angle;
@@ -65,6 +67,12 @@ bool my::PlayerJumpDownComponent::Update(float delta_time) {
         in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
+
+    if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
+             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpAttackSetState);
+    } // if
+
     return true;
 }
 
@@ -83,7 +91,7 @@ bool my::PlayerJumpDownComponent::Start(void) {
     } // if
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("PlayerMotionJumpDownState");
+        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionJumpDownState);
     } // if
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetGravity(2.0f);

@@ -59,7 +59,9 @@ public:
 
     virtual void Initialize(void) = 0;
     virtual void Update(float delta) = 0;
-    virtual void Render(void);
+#ifdef _DEBUG
+    virtual void DebugRender(void);
+#endif // _DEBUG
 
     virtual void ActionStart(void);
     virtual bool IsStart(void) const;

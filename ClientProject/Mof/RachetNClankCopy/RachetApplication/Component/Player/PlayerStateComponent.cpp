@@ -27,7 +27,7 @@ std::string my::PlayerStateComponent::GetType(void) const {
 bool my::PlayerStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-    
+
     std::vector<std::weak_ptr<my::ActionComponent>> work;
     super::GetOwner()->GetComponents<my::ActionComponent>(work);
     for (auto weak : work) {
@@ -70,7 +70,7 @@ bool my::PlayerStateComponent::CanTransition(const std::string& next) {
             return false;
         } // else if
     } // if
-    if (next == Type::kPlayerActionDamageState) {
+    else if (next == Type::kPlayerActionDamageState) {
         if (current == Type::kPlayerActionDamageState) {
             return false;
         } // if
@@ -80,6 +80,18 @@ bool my::PlayerStateComponent::CanTransition(const std::string& next) {
         else {
             return true;
         } // else
-    } // if
+    } // else if
+    else if (next == Type::kPlayerActionIdleState) {
+        if (current == Type::kPlayerActionJumpAttackState) {
+            return true;
+        } // if
+    } // else if
+    else if (next == Type::kPlayerActionJumpAttackState) {
+        if (current == Type::kPlayerActionJumpAttackSetState) {
+            return true;
+        } // if
+    } // else if
+
+
     return false;
 }

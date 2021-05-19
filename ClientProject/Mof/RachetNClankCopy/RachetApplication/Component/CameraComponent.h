@@ -20,6 +20,10 @@ private:
     std::shared_ptr<my::Camera> _player_view_camera;
     //! カメラコントローラ
     my::ServiceLocator<my::CameraController> _camera_controller;
+    //! プレイヤービュー
+    std::shared_ptr<my::CameraController> _follow_camera_controller;
+    //! フロントビュー
+    std::shared_ptr<my::CameraController> _fps_camera_controller;
     //! FPSモード
     bool _camera_fps_mode;
     //! FPSカメラ方向
@@ -40,6 +44,43 @@ private:
     std::weak_ptr<class PlayerJumpDownComponent> _jump_down_com;
     //! ジャンプ
     std::weak_ptr<class PlayerDoubleJumpComponent> _double_jump_com;
+
+
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void TurnLeft(void);
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void TurnRight(void);
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void LookUp(void);
+    /// <summary>
+    /// 角度設定
+    /// </summary>
+    /// <param name=""></param>
+    void LookDown(void);
+    /// <summary>
+    /// 設定
+    /// </summary>
+    /// <param name=""></param>
+    void IdealAngle(void);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name=""></param>
+    void UpdateFPSMode(void);
+    /// <summary>
+    /// 終了
+    /// </summary>
+    /// <param name=""></param>
+    void ExitFPSMode(void);
     /// <summary>
     /// 操作
     /// </summary>

@@ -8,15 +8,10 @@
 #include "Camera/CameraController.h"
 
 
-
-void CGameApp::ChangeDebugMode(void) noexcept {
-    _debug_flag = !_debug_flag;
-}
-
 MofBool CGameApp::Initialize(void) {
-    my::Gamepad::GetInstance().Create();
     ::CUtilities::SetCurrentDirectory("Resource");
 
+    my::Gamepad::GetInstance().Create();
     _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
     _camera_manager = std::make_shared<my::CameraManager>();
     _light_manager = std::make_shared<my::LightManager>();
@@ -45,23 +40,13 @@ MofBool CGameApp::Initialize(void) {
 MofBool CGameApp::Input(void) {
     ::g_pInput->RefreshKey();
     ::g_pGamepad->RefreshKey();
+
+#ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
         ::PostQuitMessage(0);
         return false;
     } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        this->ChangeDebugMode();
-    } // if
-
-    if (_debug_flag) {
-        if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-            _debug_fps += _ideal_delta_time;
-        } // if
-        else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-            _debug_fps -= _ideal_delta_time;
-        } // else if
-        _debug_delta_time = 1.0f / _debug_fps;
-    } // if
+#endif // _DEBUG
     return TRUE;
 }
 
@@ -69,9 +54,6 @@ MofBool CGameApp::Update(void) {
     this->Input();
 
     float delta = 0.01667f;
-    if (_debug_flag) {
-        delta = _debug_delta_time;
-    } // if
 
     _game_manager->Update();
     _scene_manager->Update(delta);
@@ -84,12 +66,11 @@ MofBool CGameApp::Render(void) {
     ::g_pGraphics->RenderStart();
 
     _scene_manager->Render();
-    if (_debug_flag) {
-        auto fps = ::CUtilities::GetFPS();
-        ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", fps);
-        ::CGraphicsUtilities::RenderString(10.0f, 60.0f, "debug fps = %f", _debug_fps);
-    } // if
-
+#ifdef _DEBUG
+    auto fps = ::CUtilities::GetFPS();
+    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", fps);
+#endif // _DEBUG
+    
     ::g_pGraphics->RenderEnd();
     return TRUE;
 }

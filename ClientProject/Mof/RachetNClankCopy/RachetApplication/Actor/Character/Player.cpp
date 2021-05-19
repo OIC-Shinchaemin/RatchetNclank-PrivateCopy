@@ -11,7 +11,7 @@
 std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
     auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<my::Actor>& ptr) {
         return ptr->GetTag() == tag;
-    });
+                           });
     if (it == _children.end()) {
         return nullptr;
     } // if
@@ -32,7 +32,7 @@ void my::Player::AddChild(const std::shared_ptr<my::Actor>& ptr) {
 }
 
 bool my::Player::Initialize(void) {
-    super::Initialize();
+    this->Initialize();
     return true;
 }
 
@@ -41,6 +41,10 @@ bool my::Player::Initialize(my::Actor::Param* param) {
     _enable = true;
 
     _player_com = super::GetComponent<my::PlayerComponent>();
+    if (auto motion_com = super::GetComponent<my::MotionComponent>(); motion_com) {
+        auto motion = motion_com->GetMotionData();
+        _upp_bone_state = motion->GetBoneState("UPP_weapon");
+    } // if
     return true;
 }
 
@@ -76,15 +80,20 @@ bool my::Player::Update(float delta_time) {
     } // if
 
     super::Update(delta_time);
+
+    // 武器を設定するボーンの情報を取得する
+    Mof::CMatrix44 mat = _upp_bone_state->pBone->GetRotationOffsetMatrix() * _upp_bone_state->BoneMatrix;
+
     if (auto weapon = _current_mechanical.lock()) {
         weapon->Update(delta_time);
         if (weapon->IsAction() && weapon->CanFire()) {
-            auto pos = super::GetPosition();
-            auto height = super::GetComponent<my::PlayerComponent>()->GetHeight();
-            pos.y += height;
+            Mof::CVector3 pos;
+            mat.GetTranslation(pos);
+
             if (auto target = super::GetComponent<my::PlayerComponent>()->GetTarget().lock()) {
                 auto target_pos = target->GetPosition();
-                target_pos.y += height;
+                auto target_height = 0.5f;
+                target_pos.y += target_height;
                 weapon->SetLockOnPosition(target_pos);
             } // if
             else {
@@ -94,11 +103,6 @@ bool my::Player::Update(float delta_time) {
         } // if
     } // if
 
-
-    // 武器を設定するボーンの情報を取得する
-    auto motion = super::GetComponent<my::MotionComponent>()->GetMotionData();
-    LPBONEMOTIONSTATE bone_state = motion->GetBoneState("UPP_weapon");
-    Mof::CMatrix44 mat = bone_state->pBone->GetRotationOffsetMatrix() * bone_state->BoneMatrix;
     for (auto actor : _children) {
         //actor->SetParentTransform(mat);
         Mof::CVector3 scale, rotate, translate;

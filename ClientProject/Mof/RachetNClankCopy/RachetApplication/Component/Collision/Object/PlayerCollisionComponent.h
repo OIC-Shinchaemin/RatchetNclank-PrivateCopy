@@ -22,7 +22,14 @@ private:
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! Elevatorに乗っている
     bool _on_elevator;
+    //! 落下rayとStageの衝突時遷移する状態
+    std::vector<std::string> _next_status;
 private:
+    /// <summary>
+    /// 変更
+    /// </summary>
+    /// <param name=""></param>
+    void ChangeState(void);
     /// <summary>
     /// ゲッター
     /// </summary>
