@@ -53,6 +53,8 @@ private:
     std::weak_ptr<my::PlayerComponent> _player_com;
     //! 有効
     bool _enable;
+    //! 腕の位置
+    Mof::LPBONEMOTIONSTATE _upp_bone_state;
 public:
     /// <summary>
     /// コンストラクタ

@@ -3,6 +3,7 @@
 #include "../VelocityComponent.h"
 #include "../MotionStateComponent.h"
 #include "../../State/EnemyActionStateDefine.h"
+#include "../../State/EnemyMotionStateDefine.h"
 
 
 void my::EnemyIdleComponent::InputMoveAngularVelocity(float angle, float speed) {
@@ -111,10 +112,9 @@ bool my::EnemyIdleComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
-    puts("my::EnemyIdleComponent::Start");
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("EnemyMotionIdleState");
+        motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionIdleState);
     } // if
     return true;
 }

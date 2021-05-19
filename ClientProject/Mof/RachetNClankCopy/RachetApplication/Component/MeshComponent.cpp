@@ -78,12 +78,12 @@ bool my::MeshComponent::Render(void) {
         translate.Translation(owner->GetPosition(), translate);
 
         Mof::CMatrix44 world = scale * rotate * translate;
-        /*
+
         if (owner->GetParentTransform().has_value()) {
             auto parent = owner->GetParentTransform().value();
             world = world * parent;
         } // if
-        */
+
         if (auto motion_com = _motion_com.lock()) {
             auto motion = motion_com->GetMotionData();
             motion->RefreshBoneMatrix(world);

@@ -50,11 +50,11 @@ void my::GameScene::ReInitialize(void) {
 
 bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
-
+#ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        //_subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
-
+#endif // _DEBUG
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
     } // for
@@ -92,8 +92,6 @@ bool my::GameScene::SceneRender(void) {
     _stage.Render();
 
     ::g_pGraphics->SetDepthEnable(false);
-    float delta_time = ::CUtilities::GetFPS();
-    //::CGraphicsUtilities::RenderString(20.0f, 20.0f, "FPS = %f", delta_time);
     return true;
 }
 

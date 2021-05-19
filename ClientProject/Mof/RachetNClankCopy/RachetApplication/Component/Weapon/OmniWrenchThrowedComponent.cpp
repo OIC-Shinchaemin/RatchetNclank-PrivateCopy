@@ -68,8 +68,7 @@ bool my::OmniWrenchThrowedComponent::Update(float delta_time) {
             } // if
         } // if
     } // if
-
-    puts("OmniWrenchThrowedComponent");
+    
     if (auto velocity_com = _velocity_com.lock()) {
         Mof::CVector3 v = math::vec3::kNegUnitZ * _move_speed;
         v.RotateAround(math::vec3::kZero, _ideal_move_direction);
