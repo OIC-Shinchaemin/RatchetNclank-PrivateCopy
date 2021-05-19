@@ -31,6 +31,31 @@ void my::CameraComponent::LookDown(void) {
     _camera_controller.GetService()->AddAltitude(-1.0f);
 }
 
+void my::CameraComponent::IdealAngle(void) {
+    _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
+                                         _camera_controller.GetService()->GetViewFront().x);
+}
+
+void my::CameraComponent::UpdateFPSMode(void) {
+    _camera_fps_mode = true;
+    _camera_controller.GetService()->SetDistance(0.1f);
+
+    if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
+        auto rotate = super::GetOwner()->GetRotate();
+        rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
+        super::GetOwner()->SetRotate(rotate);
+    } // if
+}
+
+void my::CameraComponent::ExitFPSMode(void) {
+    _camera_fps_mode = false;
+    _camera_controller.GetService()->SetDistance(_default_distance);
+
+    float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
+    float azimuth_degree = math::ToDegree(angle_y);
+    _camera_controller.GetService()->SetAzimuth(azimuth_degree);
+}
+
 void my::CameraComponent::ControlByKeyboard(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         this->TurnLeft();
@@ -47,27 +72,13 @@ void my::CameraComponent::ControlByKeyboard(void) {
 
     // chara front
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
-        _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
-                                             _camera_controller.GetService()->GetViewFront().x);
+        this->IdealAngle();
     } // if
-
-    if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
-        _camera_fps_mode = true;
-        _camera_controller.GetService()->SetDistance(0.1f);
-
-        if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
-            auto rotate = super::GetOwner()->GetRotate();
-            rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
-            super::GetOwner()->SetRotate(rotate);
-        } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
+        this->UpdateFPSMode();
     } // if
-    if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
-        _camera_fps_mode = false;
-        _camera_controller.GetService()->SetDistance(_default_distance);
-
-        float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
-        float azimuth_degree = math::ToDegree(angle_y);
-        _camera_controller.GetService()->SetAzimuth(azimuth_degree);
+    else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+        this->ExitFPSMode();
     } // if
 }
 
@@ -88,44 +99,27 @@ void my::CameraComponent::ControlByGamepad(void) {
         // y
         if (threshold <= std::abs(in.y)) {
             if (0.0f < in.y) {
-                _camera_controller.GetService()->AddAltitude(1.0f);
+                this->LookUp();
             } // if
             else {
-                _camera_controller.GetService()->AddAltitude(-1.0f);
+                this->LookDown();
             } // else 
         } // if
     } // if
 
-
     // chara front
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_BTN) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_TRIGGER)) {
-        _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
-                                             _camera_controller.GetService()->GetViewFront().x);
+        this->IdealAngle();
     } // if
-
-    if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) ||
+    else if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) ||
         ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
-        _camera_fps_mode = true;
-        _camera_controller.GetService()->SetDistance(0.1f);
-
-        if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
-            auto rotate = super::GetOwner()->GetRotate();
-            rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
-            super::GetOwner()->SetRotate(rotate);
-        } // if
-    } // if
-
-
-    if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) ||
+        this->UpdateFPSMode();
+    } // else if
+    else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) ||
         ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
-        _camera_fps_mode = false;
-        _camera_controller.GetService()->SetDistance(_default_distance);
-
-        float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
-        float azimuth_degree = math::ToDegree(angle_y);
-        _camera_controller.GetService()->SetAzimuth(azimuth_degree);
-    } // if
+        this->ExitFPSMode();
+    } // else if
 }
 
 my::CameraComponent::CameraComponent(int priority) :

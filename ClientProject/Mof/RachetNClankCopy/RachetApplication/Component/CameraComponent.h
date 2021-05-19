@@ -63,6 +63,21 @@ private:
     /// <param name=""></param>
     void LookDown(void);
     /// <summary>
+    /// ê›íË
+    /// </summary>
+    /// <param name=""></param>
+    void IdealAngle(void);
+    /// <summary>
+    /// çXêV
+    /// </summary>
+    /// <param name=""></param>
+    void UpdateFPSMode(void);
+    /// <summary>
+    /// èIóπ
+    /// </summary>
+    /// <param name=""></param>
+    void ExitFPSMode(void);
+    /// <summary>
     /// ëÄçÏ
     /// </summary>
     /// <param name=""></param>
