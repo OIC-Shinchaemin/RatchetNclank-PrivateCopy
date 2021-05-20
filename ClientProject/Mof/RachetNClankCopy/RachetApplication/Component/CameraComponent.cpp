@@ -88,12 +88,9 @@ void my::CameraComponent::ControlByKeyboardFirstPerson(void) {
         _current_mode = my::CameraComponent::CameraMode::Follow;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         auto con = _controller_map.at(_current_mode); _camera_controller.SetService(con);
-        _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
-                                             _camera_controller.GetService()->GetViewFront().x);
-
         
-        float angle_y = super::GetOwner()->GetRotate().y - math::kPi - math::kHalfPi;
-        float azimuth_degree = math::ToDegree(angle_y);
+        float ideal_angle_y = super::GetOwner()->GetRotate().y + math::kHalfPi;
+        float azimuth_degree = math::ToDegree(ideal_angle_y);
         _camera_controller.GetService()->SetAzimuth(azimuth_degree);
     } // if
 }
