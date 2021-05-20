@@ -1,56 +1,25 @@
 #include "CameraController.h"
 
-#include "My/Core/Define.h"
-#include "My/Core/Utility.h"
-
 
 std::weak_ptr<my::CameraManager> my::CameraController::_manager;
 
-
-void my::CameraController::UpdateCameraPosition(const std::shared_ptr<my::Camera>& camera) {
-    camera->SetTarget(_target);
-
-    auto offset = this->SphericalToCartesian(_distance, _azimuth(), _altitude());
-    auto ideal_pos = _target + offset;
-
-    auto displace = _position - ideal_pos;
-    auto accel = (displace * (-_spring)) - (_velocity * _dumping);
-
-    _velocity += accel * def::kDeltaTime;
-    _position += _velocity * def::kDeltaTime;
-
-    camera->SetPosition(_position);
-}
-
-Mof::CVector3 my::CameraController::SphericalToCartesian(Mof::CVector3 spherical) const {
-    return this->SphericalToCartesian(spherical.x, spherical.y, spherical.z);
-}
-
-Mof::CVector3 my::CameraController::SphericalToCartesian(float distance, float azimuth, float altitude) const {
-    float x = distance * std::cosf(azimuth) * std::sinf(altitude - math::kHalfPi);
-    float y = distance * std::sinf(azimuth) * std::sinf(altitude - math::kHalfPi);
-    float z = distance * std::cosf(altitude - math::kHalfPi);
-    return Mof::CVector3(x, z, -y);
-}
 
 void my::CameraController::SetCameraManager(const std::shared_ptr<my::CameraManager>& ptr) {
     _manager = ptr;
 }
 
 my::CameraController::CameraController() :
-    _spring(30.0f),
-    _dumping(std::sqrtf(_spring) * 2.0f),
     _camera(),
     _position(),
     _target(),
-    _distance(8.0f),
-    _azimuth(270.0f),
-    _altitude(this->GetDefaultAltitude()),
-    _velocity(),
     _preview_position() {
 }
 
 my::CameraController::~CameraController() {
+}
+
+my::CameraController::operator bool(void) const {
+    return _camera.get();
 }
 
 void my::CameraController::SetCamera(const std::shared_ptr<my::Camera>& ptr) {
@@ -66,15 +35,15 @@ void my::CameraController::SetCameraTarget(Mof::CVector3 pos) {
 }
 
 void my::CameraController::SetDistance(float value) {
-    this->_distance = value;
+    this->_param.distance = value;
 }
 
 void my::CameraController::SetAzimuth(float degree) {
-    this->_azimuth = degree;
+    this->_param.azimuth = degree;
 }
 
 void my::CameraController::SetAltitude(float degree) {
-    this->_altitude = degree;
+    this->_param.altitude = degree;
 }
 
 std::shared_ptr<my::Camera> my::CameraController::GetCamera(void) const {
@@ -96,11 +65,11 @@ Mof::CVector3 my::CameraController::GetViewFront(void) const {
 }
 
 float my::CameraController::GetAzimuth(void) const {
-    return _azimuth();
+    return this->_param.azimuth();
 }
 
 float my::CameraController::GetAltitude(void) const {
-    return _altitude();
+    return this->_param.altitude();
 }
 
 float my::CameraController::GetDefaultAzimuth(void) const {
@@ -114,7 +83,7 @@ float my::CameraController::GetDefaultAltitude(void) const {
 }
 
 Mof::CVector3 my::CameraController::GetVelocity(void) const {
-    return this->_velocity;
+    return this->_param.velocity;
 }
 
 Mof::CVector3 my::CameraController::GetPreviewPosition(void) const {
@@ -122,26 +91,25 @@ Mof::CVector3 my::CameraController::GetPreviewPosition(void) const {
 }
 
 void my::CameraController::AddAzimuth(float degree) {
-    this->_azimuth += degree;
+    this->_param.azimuth += degree;
 }
 
 void my::CameraController::AddAltitude(float degree) {
-    this->_altitude += degree;
-    if (_altitude <= -5.0f) {
-        _altitude = -5.0f;
+    _param.altitude += degree;
+    if (_param.altitude <= -5.0f) {
+        _param.altitude = -5.0f;
     } // if
-    if (_altitude >= 45.0f) {
-        _altitude = 45.0f;
+    if (_param.altitude >= 45.0f) {
+        _param.altitude = 45.0f;
     } // if
 }
-
-bool my::CameraController::HasValidCamara(void) const {
-    return _camera.get();
-}
-
+/*
 bool my::CameraController::Update(float delta_time) {
-    _preview_position = _position;
-    this->UpdateCameraPosition(_camera);
+    return true;
+}
+*/
+
+bool my::CameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {
     return true;
 }
 

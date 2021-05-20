@@ -41,8 +41,9 @@ public:
     /// çXêV
     /// </summary>
     /// <param name="delta_time"></param>
+    /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time) override;
+    virtual bool Update(float delta_time, const my::CameraController::CameraInfo& info) override;
 };
 }
 #endif // !MY_AUTO_CAMERA_CONTROLLER_H

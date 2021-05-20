@@ -76,7 +76,8 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     _physic_world.CollisionStage(&_stage);
     _physic_world.Update();
 
-    _stage_view_camera_controller.GetService()->Update(delta_time);
+    auto camera_info = my::CameraController::CameraInfo();
+    _stage_view_camera_controller.GetService()->Update(delta_time, camera_info);
     return true;
 }
 

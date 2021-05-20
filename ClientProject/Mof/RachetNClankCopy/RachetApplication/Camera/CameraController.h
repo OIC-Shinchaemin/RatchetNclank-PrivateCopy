@@ -12,38 +12,47 @@
 namespace my {
 class CameraController {
 public:
+    struct Param {
+        //! Z軸を中心とした方位角θ
+        math::Radian azimuth;
+        //! XY平面空の符号付回転角度（仰角）φ
+        math::Radian altitude;
+        // 距離
+        float distance;
+        //! ばね定数
+        float spring;
+        //! 減衰定数
+        float dumping;
+        //! 速度
+        Mof::CVector3 velocity;
+    };
     struct CameraInfo {
         Mof::CVector3 position;
         Mof::CVector3 target;
+        Mof::CVector3 rotate;
+
+        CameraInfo() :
+            position(),
+            target() {
+        }
+        CameraInfo(Mof::CVector3 pos, Mof::CVector3 tar) :
+            position(pos),
+            target(tar) {
+        }
     };
 protected:
     //! マネージャ
     static std::weak_ptr<my::CameraManager> _manager;
     //! カメラ
     std::shared_ptr<my::Camera>_camera;
-    //! ばね定数
-    const float _spring;
-    //! 減衰定数
-    const float _dumping;
     //! 位置
     Mof::CVector3 _position;
     //! 対象
     Mof::CVector3 _target;
-    // 距離
-    float _distance;
-    //! Z軸を中心とした方位角θ
-    math::Radian _azimuth;
-    //! XY平面空の符号付回転角度（仰角）φ
-    math::Radian _altitude;
-    //! 速度
-    Mof::CVector3 _velocity;
-    //! 対象
+    //! 位置
     Mof::CVector3 _preview_position;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name=""></param>
-    void UpdateCameraPosition(const std::shared_ptr<my::Camera>& camera);
+    //! パラメータ
+    my::CameraController::Param _param;
     /// <summary>
     /// 球座標系→直行座標系
     /// </summary>
@@ -64,6 +73,11 @@ public:
     /// コンストラクタ
     /// </summary>
     ~CameraController();
+    /// <summary>
+    /// カメラ所有判定
+    /// </summary>
+    /// <param name=""></param>
+    operator bool(void) const;
     /// <summary>
     /// セッター
     /// </summary>
@@ -159,17 +173,18 @@ public:
     /// <param name="degree"></param>
     virtual void AddAltitude(float degree);
     /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    bool HasValidCamara(void) const;
-    /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time);
+    //virtual bool Update(float delta_time);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="info"></param>
+    /// <returns></returns>
+    virtual bool Update(float delta_time, const my::CameraController::CameraInfo& info);
     /// <summary>
     /// 解放
     /// </summary>

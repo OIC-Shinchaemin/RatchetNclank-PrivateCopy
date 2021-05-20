@@ -2,7 +2,6 @@
 
 
 state::ActionState::ActionState() :
-    _actor(),
     _action_com() {
 }
 

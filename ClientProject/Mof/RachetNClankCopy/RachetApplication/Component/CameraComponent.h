@@ -17,13 +17,14 @@ private:
     //! 対象
     Mof::CVector3 _target;
     //! カメラ
-    std::shared_ptr<my::Camera> _player_view_camera;
+    std::shared_ptr<my::Camera> _camera;
     //! カメラコントローラ
     my::ServiceLocator<my::CameraController> _camera_controller;
     //! プレイヤービュー
     std::shared_ptr<my::CameraController> _follow_camera_controller;
     //! フロントビュー
-    std::shared_ptr<my::CameraController> _fps_camera_controller;
+    std::shared_ptr<my::CameraController> _fpv_camera_controller;
+
     //! FPSモード
     bool _camera_fps_mode;
     //! FPSカメラ方向

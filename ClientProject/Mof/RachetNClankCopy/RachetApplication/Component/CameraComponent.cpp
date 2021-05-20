@@ -2,6 +2,7 @@
 
 #include "../Gamepad.h"
 #include "../Camera/FollowCameraController.h"
+#include "../Camera/FirstPersonCameraController.h"
 #include "../Camera/DebugCameraController.h"
 #include "VelocityComponent.h"
 #include "Player/PlayerJumpUpComponent.h"
@@ -75,6 +76,7 @@ void my::CameraComponent::ControlByKeyboard(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
         this->IdealAngle();
+        _camera_controller.SetService(_fpv_camera_controller);
     } // if
     else if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
         this->UpdateFPSMode();
@@ -82,6 +84,7 @@ void my::CameraComponent::ControlByKeyboard(void) {
     else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         this->ExitFPSMode();
+        _camera_controller.SetService(_follow_camera_controller);
     } // if
 }
 
@@ -115,6 +118,8 @@ void my::CameraComponent::ControlByGamepad(void) {
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_TRIGGER)) {
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
         this->IdealAngle();
+
+        _camera_controller.SetService(_fpv_camera_controller);
     } // if
     else if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) ||
              ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
@@ -124,13 +129,15 @@ void my::CameraComponent::ControlByGamepad(void) {
              ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         this->ExitFPSMode();
+
+        _camera_controller.SetService(_follow_camera_controller);
     } // else if
 }
 
 my::CameraComponent::CameraComponent(int priority) :
     super(priority),
     _target(),
-    _player_view_camera(),
+    _camera(),
     _camera_controller(),
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
@@ -146,7 +153,7 @@ my::CameraComponent::CameraComponent(int priority) :
 my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     super(obj),
     _target(),
-    _player_view_camera(),
+    _camera(),
     _camera_controller(),
     _camera_fps_mode(false),
     _ideal_fps_camera_angle(0.0f),
@@ -163,9 +170,9 @@ my::CameraComponent::~CameraComponent() {
 }
 
 void my::CameraComponent::OnNotify(const my::CameraController::CameraInfo& info) {
-    _player_view_camera->SetPosition(info.position);
-    _player_view_camera->SetTarget(info.target);
-    _player_view_camera->Update();
+    _camera->SetPosition(info.position);
+    _camera->SetTarget(info.target);
+    _camera->Update();
     _camera_controller.GetService()->RegisterGlobalCamera();
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
@@ -206,10 +213,14 @@ bool my::CameraComponent::Initialize(void) {
     super::Activate();
 
     // camera
-    _player_view_camera = (std::make_shared<my::Camera>());
-    _player_view_camera->Initialize();
-    _camera_controller.SetService(std::make_shared<my::CameraController>());
-    _camera_controller.GetService()->SetCamera(_player_view_camera);
+    _camera = (std::make_shared<my::Camera>());
+    _camera->Initialize();
+    _follow_camera_controller = std::make_shared<my::FollowCameraController>();
+    _fpv_camera_controller = std::make_shared<my::FirstPersonCameraController>();
+    _follow_camera_controller->SetCamera(_camera);
+    _fpv_camera_controller->SetCamera(_camera);
+    _camera_controller.SetService(_follow_camera_controller);
+    //_camera_controller.GetService()->SetCamera(_camera);
 
     auto pos = super::GetOwner()->GetPosition();
     auto offset = math::vec3::kNegUnitZ;
@@ -233,10 +244,15 @@ bool my::CameraComponent::Update(float delta_time) {
 
     auto camera_controller = _camera_controller.GetService();
 
+    auto camera_info = my::CameraController::CameraInfo();
+    camera_info.rotate = super::GetOwner()->GetRotate();
+    camera_info.position = super::GetOwner()->GetPosition();
+    
     if (_camera_fps_mode) {
         auto offset = Mof::CVector3(0.0f, 0.0f, 1.0f);
         offset.RotationY(_ideal_fps_camera_angle + MOF_MATH_HALFPI);
         camera_controller->SetCameraTarget(pos + offset);
+        camera_info.target = pos + offset;
     } // if
     else {
         auto jump_up_com = _jump_up_com.lock();
@@ -246,10 +262,12 @@ bool my::CameraComponent::Update(float delta_time) {
             auto temp = pos;
             temp.y = _preview_position.y;
             camera_controller->SetCameraTarget(temp);
+            camera_info.target = temp;
         } // if
         else {
             _preview_position = pos;
             camera_controller->SetCameraTarget(pos);
+            camera_info.target = pos;
         } // else
 
         if (_collisioned_stage) {
@@ -260,7 +278,7 @@ bool my::CameraComponent::Update(float delta_time) {
         _preview_angle.x = camera_controller->GetAzimuth();
         _preview_angle.y = camera_controller->GetAltitude();
     } // else
-    camera_controller->Update(delta_time);
+    camera_controller->Update(delta_time, camera_info);
 
     if (::g_pInput->IsKeyPush(MOFKEY_F1)) {
         auto controller = std::make_shared<my::FollowCameraController>();
@@ -280,7 +298,7 @@ bool my::CameraComponent::Update(float delta_time) {
 bool my::CameraComponent::Release(void) {
     super::Release();
     _camera_controller.GetService()->Release();
-    _player_view_camera.reset();
+    _camera.reset();
     _state_com.reset();
     return true;
 }
