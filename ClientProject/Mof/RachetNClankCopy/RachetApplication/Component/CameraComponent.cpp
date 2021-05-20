@@ -241,12 +241,12 @@ bool my::CameraComponent::Update(float delta_time) {
 
     auto pos = super::GetOwner()->GetPosition();
     pos.y += 1.0f;
-
+    
     auto camera_controller = _camera_controller.GetService();
 
     auto camera_info = my::CameraController::CameraInfo();
     camera_info.rotate = super::GetOwner()->GetRotate();
-    camera_info.position = super::GetOwner()->GetPosition();
+    camera_info.position = pos;
     
     if (_camera_fps_mode) {
         auto offset = Mof::CVector3(0.0f, 0.0f, 1.0f);

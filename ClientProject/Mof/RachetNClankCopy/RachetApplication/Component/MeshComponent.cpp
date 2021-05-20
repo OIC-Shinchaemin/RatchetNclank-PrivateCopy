@@ -15,7 +15,6 @@ my::MeshComponent::MeshComponent(const my::MeshComponent& obj) :
     _mesh(obj._mesh),
     _motion_com(),
     _color(obj._color) {
-    super::_path = obj._path;
 }
 
 my::MeshComponent::~MeshComponent() {
@@ -59,6 +58,15 @@ std::weak_ptr<Mof::CMeshContainer> my::MeshComponent::GetMesh(void) const {
 bool my::MeshComponent::Initialize(void) {
     super::Initialize();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
+
+#ifdef _DEBUG
+    auto mesh = this->_mesh.lock();
+    auto bone_array = mesh->GetBone();
+    for (int i = 0, n = bone_array->GetArrayCount(); i < n; i++) {
+        auto bone = bone_array->GetData(i);
+        std::cout << "bone->GetName() = " << *bone->GetName() << "\n";
+    } // for
+#endif // _DEBUG
     return true;
 }
 
@@ -72,7 +80,7 @@ bool my::MeshComponent::Render(void) {
     if (auto r = _mesh.lock()) {
         Mof::CMatrix44 scale, rotate, translate;
         Mof::CQuaternion quat; quat.Rotation(owner->GetRotate());
-        
+
         scale.Scaling(owner->GetScale(), scale);
         quat.ConvertMatrixTranspose(rotate);
         translate.Translation(owner->GetPosition(), translate);
