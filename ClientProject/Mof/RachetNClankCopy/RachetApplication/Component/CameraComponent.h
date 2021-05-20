@@ -13,6 +13,10 @@
 namespace my {
 class CameraComponent : public my::UpdateComponent, public my::Observer<const my::CameraController::CameraInfo&> {
     using super = my::UpdateComponent;
+    enum class CameraMode {
+        Follow,
+        FirstPerson,
+    };
 private:
     //! 対象
     Mof::CVector3 _target;
@@ -20,31 +24,22 @@ private:
     std::shared_ptr<my::Camera> _camera;
     //! カメラコントローラ
     my::ServiceLocator<my::CameraController> _camera_controller;
-    //! プレイヤービュー
-    std::shared_ptr<my::CameraController> _follow_camera_controller;
-    //! フロントビュー
-    std::shared_ptr<my::CameraController> _fpv_camera_controller;
-
-    //! FPSモード
-    bool _camera_fps_mode;
+    //! モード
+    my::CameraComponent::CameraMode _current_mode;
+    //! コントローラ
+    std::unordered_map<my::CameraComponent::CameraMode, std::shared_ptr<my::CameraController>> _controller_map;
+    
+    
     //! FPSカメラ方向
     float _ideal_fps_camera_angle;
     //! 距離
     float _default_distance;
     //! 対象
     Mof::CVector3 _preview_position;
-    //! 衝突中
-    bool _collisioned_stage;
     //! x方位角y仰角
     Mof::CVector2 _preview_angle;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! ジャンプ
-    std::weak_ptr<class PlayerJumpUpComponent> _jump_up_com;
-    //! ジャンプ
-    std::weak_ptr<class PlayerJumpDownComponent> _jump_down_com;
-    //! ジャンプ
-    std::weak_ptr<class PlayerDoubleJumpComponent> _double_jump_com;
+    //! 衝突中
+    bool _collisioned_stage;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
     /// <summary>
@@ -92,6 +87,18 @@ private:
     /// </summary>
     /// <param name=""></param>
     void ControlByGamepad(void);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="controller"></param>
+    void UpdateFollow(float delta_time, std::shared_ptr<my::CameraController> controller);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="controller"></param>
+    void UpdateFirstPerson(float delta_time, std::shared_ptr<my::CameraController> controller);
 public:
     /// <summary>
     /// コンストラクタ
@@ -181,6 +188,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     void CollisionStage(void);
+#ifdef _DEBUG
+    virtual bool DebugRender(void) override;
+#endif // _DEBUG
 };
 }
 #endif // !MY_CAMERA_COMPONENT_H
