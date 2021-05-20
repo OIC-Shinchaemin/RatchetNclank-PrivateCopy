@@ -29,11 +29,6 @@ void my::CameraComponent::LookDown(void) {
     _camera_controller.GetService()->AddAltitude(-1.0f);
 }
 
-void my::CameraComponent::IdealAngle(void) {
-    _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
-                                         _camera_controller.GetService()->GetViewFront().x);
-}
-
 void my::CameraComponent::UpdateFPSMode(void) {
     _current_mode = my::CameraComponent::CameraMode::FirstPerson;
 
@@ -44,15 +39,28 @@ void my::CameraComponent::UpdateFPSMode(void) {
     } // if
 }
 
-void my::CameraComponent::ExitFPSMode(void) {
-    _current_mode = my::CameraComponent::CameraMode::Follow;
-
-    float angle_y = super::GetOwner()->GetRotate().y - math::kPi - MOF_MATH_HALFPI;
-    float azimuth_degree = math::ToDegree(angle_y);
-    _camera_controller.GetService()->SetAzimuth(azimuth_degree);
+void my::CameraComponent::ControlByKeyboardFollow(void) {
+    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+        this->TurnLeft();
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+        this->TurnRight();
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+        this->LookUp();
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+        this->LookDown();
+    } // else if
+    // chara front
+    if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
+        _current_mode = my::CameraComponent::CameraMode::FirstPerson;
+        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
+        auto con = _controller_map.at(_current_mode); _camera_controller.SetService(con);
+    } // if
 }
 
-void my::CameraComponent::ControlByKeyboard(void) {
+void my::CameraComponent::ControlByKeyboardFirstPerson(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         this->TurnLeft();
     } // if
@@ -66,23 +74,40 @@ void my::CameraComponent::ControlByKeyboard(void) {
         this->LookDown();
     } // else if
 
-    // chara front
-    if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
-        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
-        this->IdealAngle();
-        auto con = _controller_map.at(_current_mode);
-        _camera_controller.SetService(con);
-    } // if
-    else if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
-        this->UpdateFPSMode();
+
+    if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
+        /*
+        if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
+            auto rotate = super::GetOwner()->GetRotate();
+            rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
+            super::GetOwner()->SetRotate(rotate);
+        } // if
+        */
     } // if
     else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+        _current_mode = my::CameraComponent::CameraMode::Follow;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
-        this->ExitFPSMode();
-        //_camera_controller.SetService(_follow_camera_controller);
-        auto con = _controller_map.at(_current_mode);
-        _camera_controller.SetService(con);
+        auto con = _controller_map.at(_current_mode); _camera_controller.SetService(con);
+        _ideal_fps_camera_angle = std::atan2(-_camera_controller.GetService()->GetViewFront().z,
+                                             _camera_controller.GetService()->GetViewFront().x);
+
+        
+        float angle_y = super::GetOwner()->GetRotate().y - math::kPi - math::kHalfPi;
+        float azimuth_degree = math::ToDegree(angle_y);
+        _camera_controller.GetService()->SetAzimuth(azimuth_degree);
     } // if
+}
+
+void my::CameraComponent::ControlByKeyboard(void) {
+    using Mode = my::CameraComponent::CameraMode;
+    switch (_current_mode) {
+        case Mode::Follow:
+            this->ControlByKeyboardFollow();
+            break;
+        case Mode::FirstPerson:
+            this->ControlByKeyboardFirstPerson();
+            break;
+    } // switch
 }
 
 void my::CameraComponent::ControlByGamepad(void) {
@@ -113,22 +138,12 @@ void my::CameraComponent::ControlByGamepad(void) {
     // chara front
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_BTN) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_TRIGGER)) {
-        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
-        this->IdealAngle();
-        auto con = _controller_map.at(_current_mode);
-        _camera_controller.SetService(con);
     } // if
     else if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) ||
              ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
-        this->UpdateFPSMode();
     } // else if
     else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) ||
              ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
-        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
-        this->ExitFPSMode();
-
-        auto con = _controller_map.at(_current_mode);
-        _camera_controller.SetService(con);
     } // else if
 }
 
@@ -164,10 +179,10 @@ void my::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<my
     auto pos = super::GetOwner()->GetPosition();
     auto camera_info = my::CameraController::CameraInfo();
 
-    auto offset = Mof::CVector3(0.0f, 0.0f, 1.0f);
-    offset.RotationY(_ideal_fps_camera_angle + MOF_MATH_HALFPI);
-    controller->SetCameraTarget(pos + offset);
-    camera_info.target = pos + offset;
+    pos.y += 1.0f;
+    camera_info.position = pos;
+    camera_info.rotate = super::GetOwner()->GetRotate();
+
     controller->Update(delta_time, camera_info);
 }
 
@@ -242,13 +257,12 @@ Mof::CVector3 my::CameraComponent::GetPreviewPosition(void) const {
 bool my::CameraComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
+    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
 
     // camera
+    using Mode = my::CameraComponent::CameraMode;
     _camera = (std::make_shared<my::Camera>());
     _camera->Initialize();
-
-    using Mode = my::CameraComponent::CameraMode;
-
     _controller_map.emplace(Mode::Follow, std::make_shared<my::FollowCameraController>());
     _controller_map.emplace(Mode::FirstPerson, std::make_shared<my::FirstPersonCameraController>());
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
@@ -256,18 +270,14 @@ bool my::CameraComponent::Initialize(void) {
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
 
     auto pos = super::GetOwner()->GetPosition();
-    auto offset = math::vec3::kNegUnitZ;
-    offset *= 9.0f;
+    auto offset = Mof::CVector3(math::vec3::kNegUnitZ  * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
-
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     return true;
 }
 
 bool my::CameraComponent::Update(float delta_time) {
     this->ControlByGamepad();
     this->ControlByKeyboard();
-
 
     auto camera_controller = _camera_controller.GetService();
     using Mode = my::CameraComponent::CameraMode;
@@ -277,16 +287,6 @@ bool my::CameraComponent::Update(float delta_time) {
         case Mode::FirstPerson:
             this->UpdateFirstPerson(delta_time, camera_controller); break;
     } // switch
-
-    /*
-    auto pos = super::GetOwner()->GetPosition();
-    pos.y += 1.0f;
-    auto camera_info = my::CameraController::CameraInfo();
-    camera_info.rotate = super::GetOwner()->GetRotate();
-    camera_info.position = pos;
-    if (_current_mode == my::CameraComponent::CameraMode::FirstPerson) {
-    } // if
-    */
     return true;
 }
 

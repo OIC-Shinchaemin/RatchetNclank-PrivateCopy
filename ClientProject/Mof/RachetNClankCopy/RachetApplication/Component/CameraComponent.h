@@ -63,20 +63,20 @@ private:
     /// <param name=""></param>
     void LookDown(void);
     /// <summary>
-    /// ê›íË
-    /// </summary>
-    /// <param name=""></param>
-    void IdealAngle(void);
-    /// <summary>
     /// çXêV
     /// </summary>
     /// <param name=""></param>
     void UpdateFPSMode(void);
     /// <summary>
-    /// èIóπ
+    /// ëÄçÏ
     /// </summary>
     /// <param name=""></param>
-    void ExitFPSMode(void);
+    void ControlByKeyboardFollow(void);
+    /// <summary>
+    /// ëÄçÏ
+    /// </summary>
+    /// <param name=""></param>
+    void ControlByKeyboardFirstPerson(void);
     /// <summary>
     /// ëÄçÏ
     /// </summary>
