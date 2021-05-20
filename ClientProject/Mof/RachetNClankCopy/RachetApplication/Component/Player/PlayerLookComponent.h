@@ -1,33 +1,32 @@
-#ifndef MY_PLAYER_THROW_ATTACK_COMPONENT_H
-#define MY_PLAYER_THROW_ATTACK_COMPONENT_H
+#ifndef MY_PLAYER_LOOK_COMPONENT_H
+#define MY_PLAYER_LOOK_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
 
 #include <memory>
 
+#include "My/Core/Timer.h"
+
 
 namespace my {
-class PlayerThrowAttackComponent : public my::PlayerActionComponent {
+class PlayerLookComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
-private:
-    //! 武器
-    std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    PlayerThrowAttackComponent(int priority);
+    PlayerLookComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    PlayerThrowAttackComponent(const PlayerThrowAttackComponent& obj);
+    PlayerLookComponent(const PlayerLookComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~PlayerThrowAttackComponent();
+    virtual ~PlayerLookComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -45,7 +44,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Initialize(void) override;
+    //virtual bool Initialize(void) override;
     /// <summary>
     /// 更新
     /// </summary>
@@ -57,7 +56,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Release(void) override;
+    //virtual bool Release(void) override;
     /// <summary>
     /// 複製
     /// </summary>
@@ -70,12 +69,6 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
-    /// <summary>
-    /// 終了
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns>成功</returns>
-    virtual bool End(void) override;
 };
 }
-#endif // !MY_PLAYER_THROW_ATTACK_COMPONENT_H
+#endif // !MY_PLAYER_LOOK_COMPONENT_H

@@ -786,6 +786,12 @@
     <ClCompile Include="Component\Player\PlayerJumpAttackComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerLookComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerActionComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1533,6 +1539,12 @@
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerJumpAttackComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerLookComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerActionComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>

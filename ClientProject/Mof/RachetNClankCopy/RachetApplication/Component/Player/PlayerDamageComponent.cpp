@@ -1,13 +1,7 @@
 #include "PlayerDamageComponent.h"
 
-#include "../Collision/Object/CollisionComponentDefine.h"
-#include "../../State/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotionStateDefine.h"
-#include "../VelocityComponent.h"
-#include "../MotionComponent.h"
-#include "../MotionStateComponent.h"
 #include "../HpComponent.h"
-#include "../Player/PlayerStateComponent.h"
+#include "../Collision/Object/CollisionComponentDefine.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
 
 
@@ -15,9 +9,6 @@ my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
     super(priority),
     _damage_value(),
     _damage_angle(),
-    _velocity_com(),
-    _motion_com(),
-    _motion_state_com(),
     _hp_com() {
 }
 
@@ -25,11 +16,7 @@ my::PlayerDamageComponent::PlayerDamageComponent(const PlayerDamageComponent& ob
     super(obj),
     _damage_value(),
     _damage_angle(),
-    _velocity_com(),
-    _motion_com(),
-    _motion_state_com(),
-    _hp_com(),
-    _state_com() {
+    _hp_com() {
 }
 
 my::PlayerDamageComponent::~PlayerDamageComponent() {
@@ -45,33 +32,26 @@ std::string_view my::PlayerDamageComponent::GetStateType(void) const {
 
 bool my::PlayerDamageComponent::Initialize(void) {
     super::Initialize();
-
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _hp_com = super::GetOwner()->GetComponent<my::HpComponent>();
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                my::CollisionComponentType::kEnemyAttackCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        auto state_com = _state_com.lock();
-        if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionDamageState)) {
+        if (super::CanTransitionActionState(state::PlayerActionStateType::kPlayerActionDamageState)) {
             this->_damage_value = 1;
             this->_damage_angle = in.angle;
-            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionDamageState);
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
         } // if
         return true;
     }));
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                my::CollisionComponentType::kEnemyBulletCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        auto state_com = _state_com.lock();
-        if (state_com->CanTransition(state::PlayerActionStateType::kPlayerActionDamageState)) {
+        if (super::CanTransitionActionState(state::PlayerActionStateType::kPlayerActionDamageState)) {
             this->_damage_value = 1;
             this->_damage_angle = in.angle;
-            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionDamageState);
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
         } // if
         return true;
     }));
@@ -79,17 +59,15 @@ bool my::PlayerDamageComponent::Initialize(void) {
 }
 
 bool my::PlayerDamageComponent::Update(float delta_time) {
-    if (auto motion_com = _motion_com.lock()) {
-        auto state_com = _state_com.lock();
-        if (motion_com->IsEndMotion()) {
-            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
-        } // if
+    if (super::IsEndMotion()) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
     return true;
 }
 
 bool my::PlayerDamageComponent::Release(void) {
     super::Release();
+    _hp_com.reset();
     return true;
 }
 
@@ -102,21 +80,18 @@ bool my::PlayerDamageComponent::Start(void) {
         return false;
     } // if
     super::Start();
-    if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionDamageState);
-    } // if
-    if (auto velocity_com = _velocity_com.lock()) {
-        auto accele = Mof::CVector3(0.0f, 0.0f, -10.0f);
+    super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionDamageState);
 
-        accele.RotateAround(math::vec3::kZero, _damage_angle);
-        velocity_com->SetVelocity(math::vec3::kZero);
-        velocity_com->AddVelocityForce(accele);
-    } // if
+    auto velocity_com = super::GetVelocityComponent();
+    auto accele = Mof::CVector3(0.0f, 0.0f, -10.0f);
+    accele.RotateAround(math::vec3::kZero, _damage_angle);
+    velocity_com->SetVelocity(math::vec3::kZero);
+    velocity_com->AddVelocityForce(accele);
+
     if (auto hp_com = _hp_com.lock()) {
         hp_com->Damage(_damage_value);
         if (hp_com->GetHp() == 0) {
-            auto state_com = _state_com.lock();
-            state_com->ChangeState(state::PlayerActionStateType::kPlayerActionDeadState);
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDeadState);
         } // if
         _damage_value = 0;
     } // if

@@ -1,30 +1,19 @@
 #include "PlayerDoubleJumpComponent.h"
 
-#include "../../Gamepad.h"
-#include "../../State/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotionStateDefine.h"
-#include "PlayerStateComponent.h"
-#include "../VelocityComponent.h"
-#include "../MotionComponent.h"
-#include "../MotionStateComponent.h"
 #include "PlayerMoveComponent.h"
 
 
 void my::PlayerDoubleJumpComponent::InputJumpVelocity(float speed) {
-    if (auto velocity_com = _velocity_com.lock()) {
-        auto v = velocity_com->GetVelocity();
-        v.y = speed;
-        velocity_com->SetVelocity(v);
-    } // if
+    auto velocity_com = super::GetVelocityComponent();
+    auto v = velocity_com->GetVelocity();
+    v.y = speed;
+    velocity_com->SetVelocity(v);
 }
 
 my::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
     super(priority),
     _jump_speed(0.0f),
     _jump_decrase(0.4f),
-    _state_com(),
-    _velocity_com(),
-    _motion_state_com(),
     _move_com() {
 }
 
@@ -32,11 +21,7 @@ my::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJumpC
     super(obj),
     _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
-    _state_com(),
-    _velocity_com(),
-    _motion_state_com(),
     _move_com() {
-
 }
 
 my::PlayerDoubleJumpComponent::~PlayerDoubleJumpComponent() {
@@ -56,22 +41,11 @@ void my::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {
 
 bool my::PlayerDoubleJumpComponent::Initialize(void) {
     super::Initialize();
-
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 
-bool my::PlayerDoubleJumpComponent::Update(float delta_time) {
-    auto state_com = _state_com.lock();
-    auto motion_com = _motion_com.lock();
-    auto motion_state_com = _motion_state_com.lock();
-    auto velocity_com = _velocity_com.lock();
-    auto move_com = _move_com.lock();
-
+bool my::PlayerDoubleJumpComponent::Update(float delta_time) {      
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
@@ -80,6 +54,7 @@ bool my::PlayerDoubleJumpComponent::Update(float delta_time) {
     bool jump_flag = false;
 
     // flag
+    auto move_com = _move_com.lock();
     if (move_com->AquireInputData(in, move_angle)) {
         float move_speed = 1.7f; float angular_speed = 3.3f;
         in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
@@ -89,13 +64,14 @@ bool my::PlayerDoubleJumpComponent::Update(float delta_time) {
     _jump_speed -= _jump_decrase;
     if (_jump_speed < 0.0f) {
         _jump_speed = 0.0f;
-        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionJumpDownState);
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpDownState);
     } // if
     return true;
 }
 
 bool my::PlayerDoubleJumpComponent::Release(void) {
     super::Release();
+    _move_com.reset();
     return true;
 }
 
@@ -108,13 +84,11 @@ bool my::PlayerDoubleJumpComponent::Start(void) {
         return false;
     } // if
     super::Start();
-    if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionDoubleJumpState);
-    } // if
-    if (auto velocity_com = _velocity_com.lock()) {
-        velocity_com->SetGravity(1.8f);
-    } // if
+    super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionDoubleJumpState);
 
+    auto velocity_com = super::GetVelocityComponent();
+    velocity_com->SetGravity(1.8f);
+    
     _jump_speed = 10.0f;
     return true;
 }

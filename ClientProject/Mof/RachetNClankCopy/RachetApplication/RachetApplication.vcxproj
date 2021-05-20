@@ -310,6 +310,7 @@
     <ClCompile Include="Component\MeshComponent.cpp" />
     <ClCompile Include="Component\MotionComponent.cpp" />
     <ClCompile Include="Component\MotionStateComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerActionComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDamageComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDeadComponent.cpp" />
@@ -321,6 +322,7 @@
     <ClCompile Include="Component\Player\PlayerJumpLandingComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpUpComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerLookComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackOneComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackOneEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackThreeComponent.cpp" />
@@ -552,6 +554,7 @@
     <ClInclude Include="Component\MeshComponent.h" />
     <ClInclude Include="Component\MotionComponent.h" />
     <ClInclude Include="Component\MotionStateComponent.h" />
+    <ClInclude Include="Component\Player\PlayerActionComponent.h" />
     <ClInclude Include="Component\Player\PlayerComponent.h" />
     <ClInclude Include="Component\Player\PlayerDamageComponent.h" />
     <ClInclude Include="Component\Player\PlayerDeadComponent.h" />
@@ -563,6 +566,7 @@
     <ClInclude Include="Component\Player\PlayerJumpLandingComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpUpComponent.h" />
+    <ClInclude Include="Component\Player\PlayerLookComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackOneComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackOneEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackThreeComponent.h" />

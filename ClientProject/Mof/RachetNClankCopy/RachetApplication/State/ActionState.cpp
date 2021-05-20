@@ -25,13 +25,13 @@ void state::ActionState::Update(float delta_time) {
 }
 
 void state::ActionState::Enter(void) {
-    if (auto attack_com = _action_com.lock()) {
-        attack_com->Start();
+    if (auto action_com = _action_com.lock()) {
+        action_com->Start();
     } // if
 }
 
 void state::ActionState::Exit(void) {
-    if (auto attack_com = _action_com.lock()) {
-        attack_com->End();
+    if (auto action_com = _action_com.lock()) {
+        action_com->End();
     } // if
 }

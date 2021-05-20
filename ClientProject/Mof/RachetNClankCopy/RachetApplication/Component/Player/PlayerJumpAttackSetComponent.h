@@ -2,34 +2,19 @@
 #define MY_PLAYER_JUMP_ATTACK_SET_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
-#include "PlayerStateComponent.h"
-
 
 namespace my {
-class PlayerJumpAttackSetComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerJumpAttackSetComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
     //! 速さ
     float _up_speed;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! 武器
     std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ
@@ -87,12 +72,6 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
-    /// <summary>
-    /// 終了
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns>成功</returns>
-    virtual bool End(void) override;
 };
 }
 #endif // !MY_PLAYER_JUMP_ATTACK_SET_COMPONENT_H

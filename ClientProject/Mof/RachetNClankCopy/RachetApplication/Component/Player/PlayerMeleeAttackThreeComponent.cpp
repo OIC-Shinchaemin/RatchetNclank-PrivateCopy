@@ -1,38 +1,17 @@
 #include "PlayerMeleeAttackThreeComponent.h"
 
-#include "../../Gamepad.h"
-#include "../../State/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotionStateDefine.h"
-#include "../VelocityComponent.h"
-#include "PlayerStateComponent.h"
-#include "../MotionStateComponent.h"
-#include "../MotionComponent.h"
 #include "PlayerMoveComponent.h"
 #include "PlayerWeaponComponent.h"
 
 
-void my::PlayerMeleeAttackThreeComponent::ChageState(const std::string& name) {
-    if (auto state_com = _state_com.lock()) {
-        state_com->ChangeState(name);
-    } // if
-}
-
 my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priority) :
     super(priority),
-    _velocity_com(),
-    _state_com(),
-    _motion_com(),
-    _motion_state_com(),
     _move_com(),
     _weapon_com() {
 }
 
 my::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const PlayerMeleeAttackThreeComponent& obj) :
     super(obj),
-    _velocity_com(),
-    _state_com(),
-    _motion_com(),
-    _motion_state_com(),
     _move_com(),
     _weapon_com() {
 }
@@ -51,28 +30,22 @@ std::string_view my::PlayerMeleeAttackThreeComponent::GetStateType(void) const {
 bool my::PlayerMeleeAttackThreeComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     _weapon_com = super::GetOwner()->GetComponent<my::PlayerWeaponComponent>();
     return true;
 }
 
 bool my::PlayerMeleeAttackThreeComponent::Update(float delta_time) {
-    auto state_com = _state_com.lock();
-    auto motion_com = _motion_com.lock();
-    auto motion_state_com = _motion_state_com.lock();
-
-    if (motion_com->IsEndMotion()) {
-        state_com->ChangeState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState);
+    if (super::IsEndMotion()) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState);
     } // if
     return true;
 }
 
 bool my::PlayerMeleeAttackThreeComponent::Release(void) {
     super::Release();
+    _move_com.reset();
+    _weapon_com.reset();
     return true;
 }
 
@@ -85,9 +58,7 @@ bool my::PlayerMeleeAttackThreeComponent::Start(void) {
         return false;
     } // if
     super::Start();
-    if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionMeleeAttackThreeState);
-    } // if
+    super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionMeleeAttackThreeState);
 
     if (auto move_com = _move_com.lock()) {
         Mof::CVector2 in; float move_angle;

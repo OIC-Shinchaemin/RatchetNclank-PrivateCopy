@@ -20,5 +20,6 @@ std::string state::PlayerActionStateType::kPlayerActionThrowAttackEndState = "Pl
 std::string state::PlayerActionStateType::kPlayerActionJumpAttackSetState = "PlayerActionJumpAttackSetState";
 std::string state::PlayerActionStateType::kPlayerActionJumpAttackState = "PlayerActionJumpAttackState";
 //std::string state::PlayerActionStateType::kPlayerActionJumpAttackEndState = "PlayerActionJumpAttackEndState";
+std::string state::PlayerActionStateType::kPlayerActionLookState = "PlayerActionLookState";
 std::string state::PlayerActionStateType::kPlayerActionDamageState= "PlayerActionDamageState";
 std::string state::PlayerActionStateType::kPlayerActionDeadState = "PlayerActionDeadState";

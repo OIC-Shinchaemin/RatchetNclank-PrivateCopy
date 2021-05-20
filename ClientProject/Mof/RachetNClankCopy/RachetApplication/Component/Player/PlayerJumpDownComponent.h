@@ -2,14 +2,14 @@
 #define MY_PLAYER_JUMP_DOWN_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerJumpDownComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerJumpDownComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
     //! 最大
     float _jump_speed_max;
@@ -17,14 +17,6 @@ private:
     float _jump_speed;
     //! 減少
     float _jump_decrase;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;     
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:

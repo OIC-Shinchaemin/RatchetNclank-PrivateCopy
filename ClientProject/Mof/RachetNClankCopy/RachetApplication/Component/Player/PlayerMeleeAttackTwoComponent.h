@@ -2,34 +2,21 @@
 #define MY_PLAYER_MELEE_ATTACK_TWO_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerMeleeAttackTwoComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerMeleeAttackTwoComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
     //! 予約
     bool _next_reserve;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
     //! 武器
     std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ

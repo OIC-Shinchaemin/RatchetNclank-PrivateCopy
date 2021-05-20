@@ -2,14 +2,14 @@
 #define MY_PLAYER_MOVE_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerMoveComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerMoveComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
     //! 移動速度
     float _move_speed;
@@ -17,21 +17,10 @@ private:
     float _angular_speed;
     //! ラジアン
     float _ideal_angle;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
-    //! カメラ
-    std::weak_ptr<class CameraComponent> _camera_com;
     //! 状態
     std::weak_ptr<class PlayerComponent> _type_com;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
+    //! カメラ
+    std::weak_ptr<class CameraComponent> _camera_com;
 public:
     /// <summary>
     /// 加速

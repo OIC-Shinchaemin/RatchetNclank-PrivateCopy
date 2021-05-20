@@ -2,34 +2,19 @@
 #define MY_PLAYER_JUMP_ATTACK_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
-#include "PlayerStateComponent.h"
-
 
 namespace my {
-class PlayerJumpAttackComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerJumpAttackComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
     //! 速さ
     float _down_speed;
-    //! 状態
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! 武器
     std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ

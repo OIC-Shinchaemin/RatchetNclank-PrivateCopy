@@ -2,14 +2,14 @@
 #define MY_PLAYER_JUMP_SET_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
 
 namespace my {
-class PlayerJumpSetComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerJumpSetComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
     //! ジャンプ
     float _jump_speed;
@@ -17,12 +17,6 @@ private:
     float _jump_speed_first;
     //! ジャンプ
     float _jump_speed_increase;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
     //! 移動

@@ -1,42 +1,17 @@
 #include "PlayerJumpAttackSetComponent.h"
 
-#include "../../Gamepad.h"
-#include "../../State/PlayerActionStateDefine.h"
-#include "../../State/PlayerMotionStateDefine.h"
-#include "../VelocityComponent.h"
-#include "PlayerStateComponent.h"
-#include "../MotionStateComponent.h"
-#include "../MotionComponent.h"
-#include "PlayerMoveComponent.h"
 #include "PlayerWeaponComponent.h"
 
-
-
-void my::PlayerJumpAttackSetComponent::ChageState(const std::string& name) {
-    if (auto state_com = _state_com.lock()) {
-        if (state_com->CanTransition(name)) {
-            state_com->ChangeState(name);
-        } // if
-    } // if
-}
 
 my::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(int priority) :
     super(priority),
     _up_speed(5.0f),
-    _velocity_com(),
-    _state_com(),
-    _motion_com(),
-    _motion_state_com(),
     _weapon_com() {
 }
 
 my::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(const PlayerJumpAttackSetComponent& obj) :
     super(obj),
     _up_speed(obj._up_speed),
-    _velocity_com(),
-    _state_com(),
-    _motion_com(),
-    _motion_state_com(),
     _weapon_com() {
 }
 
@@ -53,29 +28,24 @@ std::string_view my::PlayerJumpAttackSetComponent::GetStateType(void) const {
 
 bool my::PlayerJumpAttackSetComponent::Initialize(void) {
     super::Initialize();
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
     _weapon_com = super::GetOwner()->GetComponent<my::PlayerWeaponComponent>();
     return true;
 }
 
 bool my::PlayerJumpAttackSetComponent::Update(float delta_time) {
-    auto motion_com = _motion_com.lock();
-    if (motion_com->IsEndMotion()) {
-        this->ChageState(state::PlayerActionStateType::kPlayerActionJumpAttackState);
+    if (super::IsEndMotion()) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpAttackState);
     } // if
 
-    if (auto velocity_com = _velocity_com.lock()) {
-        auto velocity = Mof::CVector3(0.0f, _up_speed, 0.0f);
-        velocity_com->AddVelocityForce(velocity);
-    } // if
+    auto velocity_com = super::GetVelocityComponent();
+    auto velocity = Mof::CVector3(0.0f, _up_speed, 0.0f);
+    velocity_com->AddVelocityForce(velocity);
     return true;
 }
 
 bool my::PlayerJumpAttackSetComponent::Release(void) {
     super::Release();
+    _weapon_com.reset();
     return true;
 }
 
@@ -88,13 +58,6 @@ bool my::PlayerJumpAttackSetComponent::Start(void) {
         return false;
     } // if
     super::Start();
-    if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionJumpAttackSetState);
-    } // if
-    return true;
-}
-
-bool my::PlayerJumpAttackSetComponent::End(void) {
-    super::End();
+    super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionJumpAttackSetState);
     return true;
 }
