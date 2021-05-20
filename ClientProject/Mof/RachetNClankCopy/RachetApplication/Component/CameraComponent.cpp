@@ -7,6 +7,7 @@
 #include "Player/PlayerJumpUpComponent.h"
 #include "Player/PlayerJumpDownComponent.h"
 #include "Player/PlayerDoubleJumpComponent.h"
+#include "Player/PlayerStateComponent.h"
 
 
 void my::CameraComponent::TurnLeft(void) {
@@ -72,12 +73,14 @@ void my::CameraComponent::ControlByKeyboard(void) {
 
     // chara front
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
+        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
         this->IdealAngle();
     } // if
     else if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
         this->UpdateFPSMode();
     } // if
     else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         this->ExitFPSMode();
     } // if
 }
@@ -110,14 +113,16 @@ void my::CameraComponent::ControlByGamepad(void) {
     // chara front
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_BTN) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
         this->IdealAngle();
     } // if
     else if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) ||
-        ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+             ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
         this->UpdateFPSMode();
     } // else if
     else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) ||
-        ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+             ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         this->ExitFPSMode();
     } // else if
 }
@@ -210,12 +215,12 @@ bool my::CameraComponent::Initialize(void) {
     auto offset = math::vec3::kNegUnitZ;
     offset *= 9.0f;
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
-    
-    
+
     _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     _jump_up_com = super::GetOwner()->GetComponent<my::PlayerJumpUpComponent>();
     _jump_down_com = super::GetOwner()->GetComponent<my::PlayerJumpDownComponent>();
     _double_jump_com = super::GetOwner()->GetComponent<my::PlayerDoubleJumpComponent>();
+    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     return true;
 }
 
@@ -276,6 +281,7 @@ bool my::CameraComponent::Release(void) {
     super::Release();
     _camera_controller.GetService()->Release();
     _player_view_camera.reset();
+    _state_com.reset();
     return true;
 }
 

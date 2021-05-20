@@ -87,6 +87,9 @@ public:
     /// <param name="name"></param>
     /// <returns></returns>
     bool CanTransition(const std::string& next);
+#ifdef _DEBUG
+    virtual bool DebugRender(void) override;
+#endif // _DEBUG
 };
 }
 #endif // !MY_PLAYER_STATE_COMPONENT_H

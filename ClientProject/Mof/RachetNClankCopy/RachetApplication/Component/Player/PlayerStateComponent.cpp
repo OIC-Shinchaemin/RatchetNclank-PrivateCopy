@@ -95,3 +95,9 @@ bool my::PlayerStateComponent::CanTransition(const std::string& next) {
 
     return false;
 }
+
+bool my::PlayerStateComponent::DebugRender(void) {
+    ::CGraphicsUtilities::RenderString(
+    20.0f, 100.0f, "player state = %s" , this->_state_machine.GetCurrentStateName());
+    return true;
+}

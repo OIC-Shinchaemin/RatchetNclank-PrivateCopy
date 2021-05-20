@@ -163,6 +163,12 @@
       }
     },
 
+    {
+      "type": "PlayerLookComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
 
     {
       "type": "PlayerDamageComponent",

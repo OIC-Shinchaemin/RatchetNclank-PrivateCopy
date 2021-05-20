@@ -44,8 +44,8 @@ private:
     std::weak_ptr<class PlayerJumpDownComponent> _jump_down_com;
     //! ƒWƒƒƒ“ƒv
     std::weak_ptr<class PlayerDoubleJumpComponent> _double_jump_com;
-
-
+    //! ó‘Ô
+    std::weak_ptr<class PlayerStateComponent> _state_com;
     /// <summary>
     /// Šp“xİ’è
     /// </summary>
