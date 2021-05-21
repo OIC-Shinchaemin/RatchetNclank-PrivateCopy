@@ -9,16 +9,10 @@
 
 void my::CameraComponent::TurnLeft(void) {
     _camera_controller.GetService()->AddAzimuth(1.0f);
-    if (_current_mode == my::CameraComponent::CameraMode::FirstPerson) {
-        _ideal_fps_camera_angle += math::ToRadian(1.0f);
-    } // if
 }
 
 void my::CameraComponent::TurnRight(void) {
     _camera_controller.GetService()->AddAzimuth(-1.0f);
-    if (_current_mode == my::CameraComponent::CameraMode::FirstPerson) {
-        _ideal_fps_camera_angle -= math::ToRadian(1.0f);
-    } // if
 }
 
 void my::CameraComponent::LookUp(void) {
@@ -27,16 +21,6 @@ void my::CameraComponent::LookUp(void) {
 
 void my::CameraComponent::LookDown(void) {
     _camera_controller.GetService()->AddAltitude(-1.0f);
-}
-
-void my::CameraComponent::UpdateFPSMode(void) {
-    _current_mode = my::CameraComponent::CameraMode::FirstPerson;
-
-    if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
-        auto rotate = super::GetOwner()->GetRotate();
-        rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
-        super::GetOwner()->SetRotate(rotate);
-    } // if
 }
 
 void my::CameraComponent::ControlByKeyboardFollow(void) {
@@ -54,8 +38,8 @@ void my::CameraComponent::ControlByKeyboardFollow(void) {
     } // else if
     // chara front
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
-        auto pos = super::GetOwner()->GetPosition();
-        pos.y += 1.0f;
+        auto eye_pos = super::GetOwner()->GetPosition();
+        eye_pos.y += 1.0f;
 
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
         auto front = _controller_map.at(_current_mode)->GetViewFront();
@@ -67,7 +51,7 @@ void my::CameraComponent::ControlByKeyboardFollow(void) {
         auto info = my::CameraController::CameraInfo();
         info.start_position = prev_pos;
         info.camera_front = front;
-        info.ideal_position = pos;
+        info.ideal_position = eye_pos;
         con->SetInfo(info);
         _camera_controller.SetService(con);
     } // if
@@ -94,8 +78,7 @@ void my::CameraComponent::ControlByKeyboardFirstPerson(void) {
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         float ideal_angle_y = super::GetOwner()->GetRotate().y + math::kHalfPi;
         auto info = my::CameraController::CameraInfo();
-        info.position = prev_pos;
-        info.rotate = super::GetOwner()->GetRotate();
+        info.start_position = prev_pos;
 
         auto con = _controller_map.at(_current_mode);
         con->SetAzimuth(math::ToDegree(ideal_angle_y));
@@ -166,12 +149,12 @@ void my::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<my::Cam
     auto state_com = _state_com.lock();
     if (state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpUpState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpDownState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionDoubleJumpState)) {
         pos.y = _preview_position.y;
-        camera_info.target = pos;
+        camera_info.target_position = pos;
         controller->Update(delta_time, camera_info);
         return;
     } // if
     _preview_position = pos;
-    camera_info.target = pos;
+    camera_info.target_position = pos;
     _preview_angle.x = controller->GetAzimuth();
     _preview_angle.y = controller->GetAltitude();
     controller->Update(delta_time, camera_info);
@@ -182,9 +165,7 @@ void my::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<my
     auto camera_info = my::CameraController::CameraInfo();
 
     pos.y += 1.0f;
-    camera_info.position = pos;
-    ///camera_info.rotate = super::GetOwner()->GetRotate();
-
+    camera_info.ideal_position = pos;
     controller->Update(delta_time, camera_info);
 }
 
@@ -218,8 +199,8 @@ my::CameraComponent::~CameraComponent() {
 }
 
 void my::CameraComponent::OnNotify(const my::CameraController::CameraInfo& info) {
-    _camera->SetPosition(info.position);
-    _camera->SetTarget(info.target);
+    _camera->SetPosition(info.start_position);
+    _camera->SetTarget(info.target_position);
     _camera->Update();
     _camera_controller.GetService()->RegisterGlobalCamera();
     _camera_controller.GetService()->SetAzimuth(
@@ -300,7 +281,7 @@ std::shared_ptr<my::Component> my::CameraComponent::Clone(void) {
 void my::CameraComponent::CollisionStage(void) {
     _collisioned_stage = true;
 }
-
+#ifdef _DEBUG
 bool my::CameraComponent::DebugRender(void) {
     auto render = [](const char* name) {
         ::CGraphicsUtilities::RenderString(
@@ -319,3 +300,4 @@ bool my::CameraComponent::DebugRender(void) {
     } // switch
     return true;
 }
+#endif // _DEBUG

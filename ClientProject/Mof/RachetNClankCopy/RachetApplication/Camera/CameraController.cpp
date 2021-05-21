@@ -49,8 +49,8 @@ void my::CameraController::SetAltitude(float degree) {
 }
 
 void my::CameraController::SetInfo(const my::CameraController::CameraInfo& info) {
-    _position = info.position;
-    _target = info.target;
+    _position = info.start_position;
+    _target = info.target_position;
 }
 
 std::shared_ptr<my::Camera> my::CameraController::GetCamera(void) const {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mof.h"
+#include "My/Core/Define.h"
 #include "Camera/CameraManager.h"
 #include "My/Core/ServiceLocator.h"
 #include "Camera/Camera.h"
@@ -26,11 +27,14 @@ private:
     //! コントローラ
     std::unordered_map<test::CameraMode, std::shared_ptr<my::CameraController>> _controller_map;
     //! アクター
-    Mof::CSphere _player;
-    //! メッシュ
     Mof::CMeshContainer _gizmo;
+    //! ワールドマトリクス
+    def::Transform _transform;
 
+    void InputFollow(std::shared_ptr<my::CameraController> controller);
+    void InputFirstPerson(std::shared_ptr<my::CameraController> controller);
     void UpdateFollow(float delta_time, std::shared_ptr<my::CameraController> controller);
+    void UpdateFirstPerson(float delta_time, std::shared_ptr<my::CameraController> controller);
 public:
     CGameApp() :
         _camera_manager(),
@@ -39,8 +43,8 @@ public:
         _camera_controller(),
         _current_mode(test::CameraMode::Follow),
         _controller_map(),
-        _player(Mof::CSphere(Mof::CVector3(), 1.0f)),
-        _gizmo() {
+        _gizmo(),
+        _transform() {
     }
     virtual ~CGameApp() { Release(); }
     virtual MofBool Initialize(void);

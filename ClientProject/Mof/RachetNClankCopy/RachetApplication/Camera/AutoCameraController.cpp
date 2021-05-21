@@ -43,8 +43,8 @@ bool my::AutoCameraController::Update(float delta_time, const my::CameraControll
     if (_timer.Tick(delta_time)) {
         auto info = super::CameraInfo();
         auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());
-        info.position = pos;
-        info.target = math::vec3::kZero;
+        info.start_position = pos;
+        info.target_position = math::vec3::kZero;
         Observable::Notify(info);
     } // if
 

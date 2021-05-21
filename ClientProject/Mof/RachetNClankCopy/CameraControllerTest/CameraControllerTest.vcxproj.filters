@@ -29,9 +29,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestApp.cpp">
-      <Filter>Test\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\RachetApplication\Gamepad.cpp">
       <Filter>Test\Source</Filter>
     </ClCompile>
@@ -65,14 +62,14 @@
     <ClCompile Include="..\RachetApplication\Camera\FollowCameraController.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="TestApp.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
     <ClCompile Include="WinMain.cpp">
-      <Filter>Test\Source</Filter>
+      <Filter>Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TestApp.h">
-      <Filter>Test\Header</Filter>
-    </ClInclude>
     <ClInclude Include="..\RachetApplication\Gamepad.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
@@ -135,6 +132,9 @@
     </ClInclude>
     <ClInclude Include="..\include\My\Core\State.h">
       <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TestApp.h">
+      <Filter>Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

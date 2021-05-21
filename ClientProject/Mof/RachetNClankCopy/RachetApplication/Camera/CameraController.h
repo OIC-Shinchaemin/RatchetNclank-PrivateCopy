@@ -27,20 +27,13 @@ public:
         Mof::CVector3 velocity;
     };
     struct CameraInfo {
-        Mof::CVector3 position;
-        Mof::CVector3 target;
-        Mof::CVector3 rotate;
+        Mof::CVector3 target_position;
         Mof::CVector3 start_position;
         Mof::CVector3 ideal_position;
         Mof::CVector3 camera_front;
         
         CameraInfo() :
-            position(),
-            target() {
-        }
-        CameraInfo(Mof::CVector3 pos, Mof::CVector3 tar) :
-            position(pos),
-            target(tar) {
+            target_position() {
         }
     };
 protected:

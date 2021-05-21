@@ -95,9 +95,10 @@ bool my::PlayerStateComponent::CanTransition(std::string_view next) const {
     } // else if
     return false;
 }
-
+#ifdef _DEBUG
 bool my::PlayerStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 100.0f, "player state = %s", this->_state_machine.GetCurrentStateName());
     return true;
 }
+#endif // _DEBUG

@@ -8,48 +8,85 @@
 #include "Camera/DebugCameraController.h"
 
 
-void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<my::CameraController> controller) {
+void test::CGameApp::InputFollow(std::shared_ptr<my::CameraController> controller) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
-        _camera_controller.GetService()->AddAzimuth(1.0f);
+        controller->AddAzimuth(1.0f);
     } // if
     else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
-        _camera_controller.GetService()->AddAzimuth(-1.0f);
+        controller->AddAzimuth(-1.0f);
     } // else if
     else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
-        _camera_controller.GetService()->AddAltitude(1.0f);
+        controller->AddAltitude(1.0f);
     } // else if
     else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
-        _camera_controller.GetService()->AddAltitude(-1.0f);
+        controller->AddAltitude(-1.0f);
     } // else if
-    // chara front
-    /*
+
+    // change
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
-        auto pos = super::GetOwner()->GetPosition();
-        pos.y += 1.0f;
-
-        auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
-        auto front = _controller_map.at(_current_mode)->GetViewFront();
-
+        auto pos = _transform.position;
+        auto prev_pos = controller->GetCameraPosition();
+        auto front = controller->GetViewFront();
         _current_mode = CameraMode::FirstPerson;
-        auto con = _controller_map.at(_current_mode);
 
         auto info = my::CameraController::CameraInfo();
         info.start_position = prev_pos;
         info.camera_front = front;
         info.ideal_position = pos;
+
+        auto con = _controller_map.at(_current_mode);
         con->SetInfo(info);
         _camera_controller.SetService(con);
     } // if
-    */
+}
 
+void test::CGameApp::InputFirstPerson(std::shared_ptr<my::CameraController> controller) {
+    if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+        controller->AddAzimuth(1.0f);
+    } // if
+    else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+        controller->AddAzimuth(-1.0f);
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_UP)) {
+        controller->AddAltitude(1.0f);
+    } // else if
+    else if (::g_pInput->IsKeyHold(MOFKEY_DOWN)) {
+        controller->AddAltitude(-1.0f);
+    } // else if
+
+    // change
+    if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+        auto prev_pos = controller->GetCameraPosition();
+        auto camera_front = controller->GetViewFront();
+        _current_mode = CameraMode::Follow;
+
+        float ideal_angle_y = _transform.rotate.y + math::kHalfPi;
+        auto info = my::CameraController::CameraInfo();
+        info.position = prev_pos;
+
+        auto con = _controller_map.at(_current_mode);
+        con->SetInfo(info);
+        _camera_controller.SetService(con);
+    } // if
+}
+
+void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<my::CameraController> controller) {
     auto info = my::CameraController::CameraInfo();
-    info.target = _player.Position;
-    controller->Update(delta_time, info);
+    info.target = _transform.position;
+    _camera_controller.GetService()->Update(delta_time, info);
+}
+
+void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<my::CameraController> controller) {
+    auto info = my::CameraController::CameraInfo();
+    auto pos = _transform.position;
+    pos.y += 1.0f;
+    info.ideal_position = pos;
+    _camera_controller.GetService()->Update(delta_time, info);
 }
 
 MofBool test::CGameApp::Initialize(void) {
-    ::CUtilities::SetCurrentDirectory("Resource");
-    bool loaded = _gizmo.Load("test/gizmo.mom");
+    ::CUtilities::SetCurrentDirectory("TestResource");
+    bool loaded = _gizmo.Load("gizmo.mom");
 
     my::Gamepad::GetInstance().Create();
     _camera_manager = std::make_shared<my::CameraManager>();
@@ -69,7 +106,7 @@ MofBool test::CGameApp::Initialize(void) {
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
     _camera_controller.GetService()->RegisterGlobalCamera();
 
-    auto pos = _player.Position;
+    auto pos = _transform.position;
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ);
     offset.RotateAround(math::vec3::kZero, math::vec3::kZero);
 
@@ -92,17 +129,37 @@ MofBool test::CGameApp::Input(void) {
     float speed = 2.0f;
     float move = 1.0f / 60.0f * speed;
     if (::g_pInput->IsKeyHold(MOFKEY_A)) {
-        _player.x += move;
+        _transform.position.x += move;
     } // if
     else if (::g_pInput->IsKeyHold(MOFKEY_D)) {
-        _player.x -= move;
+        _transform.position.x -= move;
     } // else if
     if (::g_pInput->IsKeyHold(MOFKEY_W)) {
-        _player.z -= move;
+        _transform.position.z -= move;
     } // else if
     else if (::g_pInput->IsKeyHold(MOFKEY_S)) {
-        _player.z += move;
+        _transform.position.z += move;
     } // else if
+
+    if (::g_pInput->IsKeyHold(MOFKEY_E)) {
+        _transform.rotate.y -= move;
+    } // if
+    if (::g_pInput->IsKeyHold(MOFKEY_R)) {
+        _transform.rotate.y += move;
+    } // if
+
+
+    // camera
+    auto controller = _camera_controller.GetService();
+    using Mode = CameraMode;
+    switch (_current_mode) {
+        case Mode::Follow:
+            this->InputFollow(controller);
+            break;
+        case Mode::FirstPerson:
+            this->InputFirstPerson(controller);
+            break;
+    } // switch
     return TRUE;
 }
 
@@ -117,6 +174,7 @@ MofBool test::CGameApp::Update(void) {
             this->UpdateFollow(delta_time, controller);
             break;
         case Mode::FirstPerson:
+            this->UpdateFirstPerson(delta_time, controller);
             break;
     } // switch
     _camera_manager->Update();
@@ -129,16 +187,35 @@ MofBool test::CGameApp::Render(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetRenderTarget(::g_pGraphics->GetRenderTarget(), ::g_pGraphics->GetDepthTarget());
     ::g_pGraphics->SetDepthEnable(true);
-    _gizmo.Render(Mof::Matrix44());
+    _gizmo.Render(_transform.Matrix());
+    _gizmo.Render(Mof::CMatrix44());
+
+
     ::CGraphicsUtilities::RenderGrid(2, 20, MOF_COLOR_WHITE, PLANEAXIS_ALL);
-
-
-    ::CGraphicsUtilities::RenderSphere(_player, def::color_rgba::kRed);
 
     ::g_pGraphics->SetDepthEnable(false);
 
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Camera Controller Test Application ");
     ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "FPS = %d", ::CUtilities::GetFPS());
+    using Mode = CameraMode;
+    switch (_current_mode) {
+        case Mode::Follow:
+            ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "Mode = Follow");
+            break;
+        case Mode::FirstPerson:
+            ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "Mode = FirstPerson");
+            break;
+    } // switch
+
+    auto actor_pos = _transform.position;
+    auto camera_pos = _camera_controller.GetService()->GetCameraPosition();
+    ::CGraphicsUtilities::RenderString(10.0f, 100.0f, "actor_pos.x = %f", actor_pos.x);
+    ::CGraphicsUtilities::RenderString(10.0f, 120.0f, "actor_pos.y = %f", actor_pos.y);
+    ::CGraphicsUtilities::RenderString(10.0f, 140.0f, "actor_pos.z = %f", actor_pos.z);
+    ::CGraphicsUtilities::RenderString(10.0f, 160.0f, "camera_pos.x = %f", camera_pos.x);
+    ::CGraphicsUtilities::RenderString(10.0f, 180.0f, "camera_pos.y = %f", camera_pos.y);
+    ::CGraphicsUtilities::RenderString(10.0f, 200.0f, "camera_pos.z = %f", camera_pos.z);
+
 
     ::g_pGraphics->RenderEnd();
     return TRUE;
