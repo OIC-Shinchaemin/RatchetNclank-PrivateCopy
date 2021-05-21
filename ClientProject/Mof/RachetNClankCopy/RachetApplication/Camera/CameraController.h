@@ -12,10 +12,14 @@
 namespace my {
 class CameraController {
 public:
+    enum class CameraMode {
+        Follow,
+        FirstPerson,
+    };
     struct Param {
-        //! Z²‚ğ’†S‚Æ‚µ‚½•ûˆÊŠpƒÆ
+        //! •ûˆÊŠpƒÆ
         math::Radian azimuth;
-        //! XY•½–Ê‹ó‚Ì•„†•t‰ñ“]Šp“xi‹ÂŠpjƒÓ
+        //! •„†•t‰ñ“]Šp“xi‹ÂŠpjƒÓ
         math::Radian altitude;
         // ‹——£
         float distance;
@@ -31,9 +35,12 @@ public:
         Mof::CVector3 start_position;
         Mof::CVector3 ideal_position;
         Mof::CVector3 camera_front;
-        
+
         CameraInfo() :
-            target_position() {
+            target_position(),
+            start_position(),
+            ideal_position(),
+            camera_front() {
         }
     };
 protected:

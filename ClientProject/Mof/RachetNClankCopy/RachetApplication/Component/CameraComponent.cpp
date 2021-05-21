@@ -44,7 +44,7 @@ void my::CameraComponent::ControlByKeyboardFollow(void) {
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
         auto front = _controller_map.at(_current_mode)->GetViewFront();
 
-        _current_mode = my::CameraComponent::CameraMode::FirstPerson;
+        _current_mode = my::CameraController::CameraMode::FirstPerson;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
         auto con = _controller_map.at(_current_mode);
 
@@ -71,10 +71,25 @@ void my::CameraComponent::ControlByKeyboardFirstPerson(void) {
         this->LookDown();
     } // else if
 
-    if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+    if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
+        auto camera_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+        auto eye_pos = super::GetOwner()->GetPosition();
+        eye_pos.y += 1.0f;
+
+        float diff = std::fabs(camera_pos.Length() - eye_pos.Length());
+        if (diff < 0.1f) {
+            auto camera_front = _controller_map.at(_current_mode)->GetViewFront();
+
+            float angle_y = std::atan2(-camera_front.z, camera_front.x) - math::kHalfPi;
+            auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
+            super::GetOwner()->SetRotate(angle);
+        } // if
+    } // if
+
+    else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
 
-        _current_mode = my::CameraComponent::CameraMode::Follow;
+        _current_mode = my::CameraController::CameraMode::Follow;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         float ideal_angle_y = super::GetOwner()->GetRotate().y + math::kHalfPi;
         auto info = my::CameraController::CameraInfo();
@@ -84,11 +99,11 @@ void my::CameraComponent::ControlByKeyboardFirstPerson(void) {
         con->SetAzimuth(math::ToDegree(ideal_angle_y));
         con->SetInfo(info);
         _camera_controller.SetService(con);
-    } // if
+    } // else if
 }
 
 void my::CameraComponent::ControlByKeyboard(void) {
-    using Mode = my::CameraComponent::CameraMode;
+    using Mode = my::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->ControlByKeyboardFollow();
@@ -161,11 +176,11 @@ void my::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<my::Cam
 }
 
 void my::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<my::CameraController> controller) {
-    auto pos = super::GetOwner()->GetPosition();
-    auto camera_info = my::CameraController::CameraInfo();
+    auto eye_pos = super::GetOwner()->GetPosition();
+    eye_pos.y += 1.0f;
 
-    pos.y += 1.0f;
-    camera_info.ideal_position = pos;
+    auto camera_info = my::CameraController::CameraInfo();
+    camera_info.ideal_position = eye_pos;
     controller->Update(delta_time, camera_info);
 }
 
@@ -174,7 +189,7 @@ my::CameraComponent::CameraComponent(int priority) :
     _target(),
     _camera(),
     _camera_controller(),
-    _current_mode(my::CameraComponent::CameraMode::Follow),
+    _current_mode(my::CameraController::CameraMode::Follow),
     _ideal_fps_camera_angle(0.0f),
     _default_distance(8.0f),
     _preview_position(),
@@ -187,7 +202,7 @@ my::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _target(),
     _camera(),
     _camera_controller(),
-    _current_mode(my::CameraComponent::CameraMode::Follow),
+    _current_mode(my::CameraController::CameraMode::Follow),
     _ideal_fps_camera_angle(0.0f),
     _default_distance(obj._default_distance),
     _preview_position(),
@@ -235,7 +250,7 @@ bool my::CameraComponent::Initialize(void) {
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
 
     // camera
-    using Mode = my::CameraComponent::CameraMode;
+    using Mode = my::CameraController::CameraMode;
     _camera = (std::make_shared<my::Camera>());
     _camera->Initialize();
     _controller_map.emplace(Mode::Follow, std::make_shared<my::FollowCameraController>());
@@ -255,7 +270,7 @@ bool my::CameraComponent::Update(float delta_time) {
     this->ControlByKeyboard();
 
     auto camera_controller = _camera_controller.GetService();
-    using Mode = my::CameraComponent::CameraMode;
+    using Mode = my::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->UpdateFollow(delta_time, camera_controller); break;
@@ -287,7 +302,7 @@ bool my::CameraComponent::DebugRender(void) {
         ::CGraphicsUtilities::RenderString(
             20.0f, 200.0f, "camera state = %s", name);
     };
-    using Mode = my::CameraComponent::CameraMode;
+    using Mode = my::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             render("Mode::Follow");

@@ -8,10 +8,6 @@
 #include "Camera/CameraController.h"
 
 namespace test {
-enum class CameraMode {
-    Follow,
-    FirstPerson,
-};
 class CGameApp : public CSingleGameApplication {
 private:
     //! カメラ
@@ -23,9 +19,9 @@ private:
     //! カメラコントローラ
     my::ServiceLocator<my::CameraController> _camera_controller;
     //! モード
-    test::CameraMode _current_mode;
+    my::CameraController::CameraMode _current_mode;
     //! コントローラ
-    std::unordered_map<test::CameraMode, std::shared_ptr<my::CameraController>> _controller_map;
+    std::unordered_map<my::CameraController::CameraMode, std::shared_ptr<my::CameraController>> _controller_map;
     //! アクター
     Mof::CMeshContainer _gizmo;
     //! ワールドマトリクス
@@ -41,7 +37,7 @@ public:
         _target(),
         _camera(),
         _camera_controller(),
-        _current_mode(test::CameraMode::Follow),
+        _current_mode(my::CameraController::CameraMode::Follow),
         _controller_map(),
         _gizmo(),
         _transform() {

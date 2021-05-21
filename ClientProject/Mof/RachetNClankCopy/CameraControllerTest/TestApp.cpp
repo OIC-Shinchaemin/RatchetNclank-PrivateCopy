@@ -22,19 +22,20 @@ void test::CGameApp::InputFollow(std::shared_ptr<my::CameraController> controlle
         controller->AddAltitude(-1.0f);
     } // else if
 
-    // change
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
-        auto pos = _transform.position;
-        auto prev_pos = controller->GetCameraPosition();
-        auto front = controller->GetViewFront();
-        _current_mode = CameraMode::FirstPerson;
+        auto eye_pos = _transform.position;
+        eye_pos.y += 1.0f;
+
+        auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+        auto front = _controller_map.at(_current_mode)->GetViewFront();
+
+        _current_mode = my::CameraController::CameraMode::FirstPerson;
+        auto con = _controller_map.at(_current_mode);
 
         auto info = my::CameraController::CameraInfo();
         info.start_position = prev_pos;
         info.camera_front = front;
-        info.ideal_position = pos;
-
-        auto con = _controller_map.at(_current_mode);
+        info.ideal_position = eye_pos;
         con->SetInfo(info);
         _camera_controller.SetService(con);
     } // if
@@ -54,25 +55,40 @@ void test::CGameApp::InputFirstPerson(std::shared_ptr<my::CameraController> cont
         controller->AddAltitude(-1.0f);
     } // else if
 
-    // change
-    if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
-        auto prev_pos = controller->GetCameraPosition();
-        auto camera_front = controller->GetViewFront();
-        _current_mode = CameraMode::Follow;
+    if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
+        auto camera_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+        auto eye_pos = _transform.position;
+        eye_pos.y += 1.0f;
 
+        float diff = std::fabs(camera_pos.Length() - eye_pos.Length());
+        if (diff < 0.1f) {
+            auto camera_front = _controller_map.at(_current_mode)->GetViewFront();
+
+            float angle_y = std::atan2(-camera_front.z, camera_front.x) - math::kHalfPi;
+            auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
+
+            _transform.rotate = angle;
+        } // if
+    } // if
+
+    else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+        auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+
+        _current_mode = my::CameraController::CameraMode::Follow;
         float ideal_angle_y = _transform.rotate.y + math::kHalfPi;
         auto info = my::CameraController::CameraInfo();
-        info.position = prev_pos;
+        info.start_position = prev_pos;
 
         auto con = _controller_map.at(_current_mode);
+        con->SetAzimuth(math::ToDegree(ideal_angle_y));
         con->SetInfo(info);
         _camera_controller.SetService(con);
-    } // if
+    } // else if
 }
 
 void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<my::CameraController> controller) {
     auto info = my::CameraController::CameraInfo();
-    info.target = _transform.position;
+    info.target_position = _transform.position;
     _camera_controller.GetService()->Update(delta_time, info);
 }
 
@@ -93,7 +109,7 @@ MofBool test::CGameApp::Initialize(void) {
     my::CameraController::SetCameraManager(_camera_manager);
 
 
-    using Mode = test::CameraMode;
+    using Mode = my::CameraController::CameraMode;
     _camera = std::make_shared<my::Camera>();
     _camera->Initialize();
     _controller_map.clear();
@@ -151,7 +167,7 @@ MofBool test::CGameApp::Input(void) {
 
     // camera
     auto controller = _camera_controller.GetService();
-    using Mode = CameraMode;
+    using Mode = my::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->InputFollow(controller);
@@ -168,7 +184,7 @@ MofBool test::CGameApp::Update(void) {
 
     float delta_time = 1.0f / 60.0f;
     auto controller = _camera_controller.GetService();
-    using Mode = CameraMode;
+    using Mode = my::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->UpdateFollow(delta_time, controller);
@@ -197,7 +213,7 @@ MofBool test::CGameApp::Render(void) {
 
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Camera Controller Test Application ");
     ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "FPS = %d", ::CUtilities::GetFPS());
-    using Mode = CameraMode;
+    using Mode = my::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "Mode = Follow");
