@@ -79,10 +79,15 @@ struct Transform {
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CMatrix44 Matrix(void) {
-        auto mat = Mof::CMatrix44();
-        mat.RotationZXY(rotate);
-        mat.SetTranslation(position);
-        return mat;
+        Mof::CMatrix44 s, r, t;
+        Mof::CQuaternion quat; quat.Rotation(rotate);
+
+        s.Scaling(scale, s);
+        quat.ConvertMatrixTranspose(r);
+        t.Translation(position, t);
+
+        Mof::CMatrix44 world = s * r * t;
+        return world;
     }
 };
 } // namespace

@@ -40,7 +40,16 @@ static Mof::CVector2 Rotate(float x, float y, float theta) {
 
     return Mof::CVector2(temp_x, temp_y);
 };
+static Mof::CVector3 SphericalToCartesian(float distance, float azimuth, float altitude) {
+    float x = distance * std::cosf(azimuth) * std::sinf(altitude - math::kHalfPi);
+    float y = distance * std::sinf(azimuth) * std::sinf(altitude - math::kHalfPi);
+    float z = distance * std::cosf(altitude - math::kHalfPi);
+    return Mof::CVector3(x, z, -y);
+}
 
+static Mof::CVector3 SphericalToCartesian(Mof::CVector3 spherical) {
+    return math::SphericalToCartesian(spherical.x, spherical.y, spherical.z);
+}
 class Radian {
     float _degree;
 public:

@@ -11,7 +11,7 @@ namespace my {
 class RenderComponent : public my::Component {
     using super = my::Component;
 protected:
-    //! 描画リソース
+    //! リソース
     std::string _path;
 public:
     /// <summary>

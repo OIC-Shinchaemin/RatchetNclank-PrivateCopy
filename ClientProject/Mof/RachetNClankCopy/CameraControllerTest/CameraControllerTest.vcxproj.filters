@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{8e503e1a-34c3-4ce7-b9b0-1192f9ab8b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Base">
+      <UniqueIdentifier>{2b4b02a4-9f64-451b-bad9-442319d23515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Base\Core">
+      <UniqueIdentifier>{7fb6a5b7-ab48-4515-afdb-9421f6898f8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header">
+      <UniqueIdentifier>{98e67644-f228-404c-bbdd-7c602eff25ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header\Camera">
+      <UniqueIdentifier>{82f12785-a375-458e-b2b2-1ac606d6f1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Test\Source\Camera">
+      <UniqueIdentifier>{6a2cae96-227e-4bfd-acdc-f186cf3fe6cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\RachetApplication\Gamepad.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\StateMachine.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\Timer.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\State.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Camera\AutoCameraController.cpp">
+      <Filter>Test\Header\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Camera\Camera.cpp">
+      <Filter>Test\Header\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Camera\CameraController.cpp">
+      <Filter>Test\Header\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Camera\CameraManager.cpp">
+      <Filter>Test\Header\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Camera\DebugCameraController.cpp">
+      <Filter>Test\Header\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Camera\FirstPersonCameraController.cpp">
+      <Filter>Test\Header\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Camera\FollowCameraController.cpp">
+      <Filter>Test\Header\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="TestApp.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\RachetApplication\Gamepad.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Camera\Camera.h">
+      <Filter>Test\Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Camera\CameraController.h">
+      <Filter>Test\Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Camera\CameraManager.h">
+      <Filter>Test\Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Camera\DebugCameraController.h">
+      <Filter>Test\Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Camera\FirstPersonCameraController.h">
+      <Filter>Test\Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Camera\FollowCameraController.h">
+      <Filter>Test\Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Camera\AutoCameraController.h">
+      <Filter>Test\Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\StateMachine.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Timer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Trait.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Utility.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\AbstructContainer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Define.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Header.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Math.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Observable.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Observer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\ServiceLocator.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\State.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TestApp.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

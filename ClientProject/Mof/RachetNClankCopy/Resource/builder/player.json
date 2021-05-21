@@ -163,6 +163,12 @@
       }
     },
 
+    {
+      "type": "PlayerLookComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
 
     {
       "type": "PlayerDamageComponent",
@@ -191,13 +197,13 @@
     {
       "type": "VelocityComponent",
       "paramater": {
-        "priority": 99
+        "priority": 199
       }
     },
     {
       "type": "TransformComponent",
       "paramater": {
-        "priority": 100
+        "priority": 200
       }
     },
     {
@@ -216,7 +222,7 @@
     {
       "type": "CameraComponent",
       "paramater": {
-        "priority": 200
+        "priority": 100
       }
     },
     {

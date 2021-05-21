@@ -6,15 +6,12 @@
 
 #include <memory>
 
-#include "../Actor.h"
 #include "../Component/ActionComponent.h"
 
 
 namespace state {
 class ActionState : public my::State {
 private:
-    //! アクター
-    std::weak_ptr<my::Actor> _actor;
     //! アクション
     std::weak_ptr<my::ActionComponent> _action_com;
 public:

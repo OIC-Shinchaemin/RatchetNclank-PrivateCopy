@@ -4,9 +4,11 @@
 
 #include "../UpdateComponent.h"
 
+#include <string_view>
+
 #include "My/Core/StateMachine.h"
-#include "My/Core/Timer.h"
 #include "../../State/ActionState.h"
+#include "../../State/PlayerActionStateDefine.h"
 
 
 namespace my {
@@ -53,6 +55,12 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// îªíË
+    /// </summary>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    bool IsEqual(std::string_view state) const;
+    /// <summary>
     /// èâä˙âª
     /// </summary>
     /// <param name=""></param>
@@ -86,7 +94,10 @@ public:
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    bool CanTransition(const std::string& next);
+    bool CanTransition(std::string_view next) const;
+#ifdef _DEBUG
+    virtual bool DebugRender(void) override;
+#endif // _DEBUG
 };
 }
 #endif // !MY_PLAYER_STATE_COMPONENT_H

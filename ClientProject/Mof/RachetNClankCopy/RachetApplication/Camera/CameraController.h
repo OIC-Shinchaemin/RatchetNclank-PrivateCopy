@@ -12,44 +12,50 @@
 namespace my {
 class CameraController {
 public:
+    enum class CameraMode {
+        Follow,
+        FirstPerson,
+    };
+    struct Param {
+        //! 方位角θ
+        math::Radian azimuth;
+        //! 符号付回転角度（仰角）φ
+        math::Radian altitude;
+        // 距離
+        float distance;
+        //! ばね定数
+        float spring;
+        //! 減衰定数
+        float dumping;
+        //! 速度
+        Mof::CVector3 velocity;
+    };
     struct CameraInfo {
-        Mof::CVector3 position;
-        Mof::CVector3 target;
+        Mof::CVector3 target_position;
+        Mof::CVector3 start_position;
+        Mof::CVector3 ideal_position;
+        Mof::CVector3 camera_front;
+
+        CameraInfo() :
+            target_position(),
+            start_position(),
+            ideal_position(),
+            camera_front() {
+        }
     };
 protected:
     //! マネージャ
     static std::weak_ptr<my::CameraManager> _manager;
     //! カメラ
     std::shared_ptr<my::Camera>_camera;
-    //! ばね定数
-    const float _spring;
-    //! 減衰定数
-    const float _dumping;
     //! 位置
     Mof::CVector3 _position;
     //! 対象
     Mof::CVector3 _target;
-    // 距離
-    float _distance;
-    //! Z軸を中心とした方位角θ
-    math::Radian _azimuth;
-    //! XY平面空の符号付回転角度（仰角）φ
-    math::Radian _altitude;
-    //! 速度
-    Mof::CVector3 _velocity;
-    //! 対象
+    //! 位置
     Mof::CVector3 _preview_position;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name=""></param>
-    void UpdateCameraPosition(const std::shared_ptr<my::Camera>& camera);
-    /// <summary>
-    /// 球座標系→直行座標系
-    /// </summary>
-    /// <param name="camera"></param>
-    Mof::CVector3 SphericalToCartesian(Mof::CVector3 spherical) const;
-    Mof::CVector3 SphericalToCartesian(float x, float y, float z) const;
+    //! パラメータ
+    my::CameraController::Param _param;
 public:
     /// <summary>
     /// セッター
@@ -65,20 +71,15 @@ public:
     /// </summary>
     ~CameraController();
     /// <summary>
+    /// カメラ所有判定
+    /// </summary>
+    /// <param name=""></param>
+    operator bool(void) const;
+    /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
     void SetCamera(const std::shared_ptr<my::Camera>& ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="pos"></param>
-    void SetCameraPosition(Mof::CVector3 pos);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="pos"></param>
-    void SetCameraTarget(Mof::CVector3 pos);
     /// <summary>
     /// セッター
     /// </summary>
@@ -94,6 +95,11 @@ public:
     /// </summary>
     /// <param name="degree"></param>
     void SetAltitude(float degree);
+    /// <summary>
+    /// セット
+    /// </summary>
+    /// <param name="info"></param>
+    virtual void SetInfo(const my::CameraController::CameraInfo& info);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -159,17 +165,18 @@ public:
     /// <param name="degree"></param>
     virtual void AddAltitude(float degree);
     /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    bool HasValidCamara(void) const;
-    /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time);
+    //virtual bool Update(float delta_time);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="info"></param>
+    /// <returns></returns>
+    virtual bool Update(float delta_time, const my::CameraController::CameraInfo& info);
     /// <summary>
     /// 解放
     /// </summary>

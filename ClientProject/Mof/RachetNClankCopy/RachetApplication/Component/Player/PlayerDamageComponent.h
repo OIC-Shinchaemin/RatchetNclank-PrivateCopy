@@ -2,31 +2,21 @@
 #define MY_PLAYER_DAMAGE_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
-#include "My/Core/Timer.h"
-
 
 namespace my {
-class PlayerDamageComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerDamageComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
     //! 被弾量
     int _damage_value;
     //! 被弾角度
     Mof::CVector3 _damage_angle;
-    //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! Hp
     std::weak_ptr<class HpComponent> _hp_com;
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ

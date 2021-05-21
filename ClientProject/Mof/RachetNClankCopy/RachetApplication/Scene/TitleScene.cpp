@@ -2,6 +2,7 @@
 #include "../Gamepad.h"
 #include "My/Resource/ResourceFont.h"
 #include "../Factory/FactoryManager.h"
+#include "../Camera/FollowCameraController.h"
 
 
 bool my::TitleScene::SceneUpdate(float delta_time) {
@@ -13,11 +14,14 @@ bool my::TitleScene::SceneUpdate(float delta_time) {
 
     //_demo_actor->Update(delta_time);
 
+    auto camera_info = my::CameraController::CameraInfo();
+
     auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
-    _camera_controller.GetService()->SetCameraTarget(pos);
-    _camera_controller.GetService()->Update(delta_time);
+    //_camera_controller.GetService()->SetCameraTarget(pos);
+    camera_info.target_position = pos;
+    _camera_controller.GetService()->Update(delta_time, camera_info);
     return true;
 }
 
@@ -98,7 +102,7 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
             _stage_view_camera->SetTarget(pos);
             _stage_view_camera->Initialize();
             _stage_view_camera->Update();
-            _camera_controller.SetService(std::make_shared<my::CameraController>());
+            _camera_controller.SetService(std::make_shared<my::FollowCameraController>());
             _camera_controller.GetService()->SetCamera(_stage_view_camera);
             _camera_controller.GetService()->RegisterGlobalCamera();
             _camera_controller.GetService()->SetAzimuth(0.0f);

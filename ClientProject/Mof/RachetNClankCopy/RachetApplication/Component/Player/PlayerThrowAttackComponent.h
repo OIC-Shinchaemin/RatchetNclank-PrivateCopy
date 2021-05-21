@@ -2,30 +2,17 @@
 #define MY_PLAYER_THROW_ATTACK_COMPONENT_H
 
 
-#include "../ActionComponent.h"
+#include "PlayerActionComponent.h"
 
 #include <memory>
 
-#include "PlayerStateComponent.h"
-
 
 namespace my {
-class PlayerThrowAttackComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+class PlayerThrowAttackComponent : public my::PlayerActionComponent {
+    using super = my::PlayerActionComponent;
 private:
-    //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! 武器
     std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ

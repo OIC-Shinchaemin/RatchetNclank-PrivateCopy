@@ -7,7 +7,8 @@ my::RenderComponent::RenderComponent(int priority) :
 }
 
 my::RenderComponent::RenderComponent(const RenderComponent& obj) :
-    super(obj) {
+    super(obj),
+    _path(obj._path){
 }
 
 my::RenderComponent::~RenderComponent() {

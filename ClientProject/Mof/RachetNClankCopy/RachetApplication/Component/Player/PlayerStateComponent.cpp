@@ -1,7 +1,5 @@
 #include "PlayerStateComponent.h"
 
-#include "../../State/PlayerActionStateDefine.h"
-
 
 my::PlayerStateComponent::PlayerStateComponent(int priority) :
     super(priority),
@@ -22,6 +20,10 @@ void my::PlayerStateComponent::SetParam(const rapidjson::Value& param) {
 
 std::string my::PlayerStateComponent::GetType(void) const {
     return "PlayerStateComponent";
+}
+
+bool my::PlayerStateComponent::IsEqual(std::string_view state) const {
+    return _state_machine.GetCurrentStateName() == state;
 }
 
 bool my::PlayerStateComponent::Initialize(void) {
@@ -58,7 +60,7 @@ void my::PlayerStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
 
-bool my::PlayerStateComponent::CanTransition(const std::string& next) {
+bool my::PlayerStateComponent::CanTransition(std::string_view next) const {
     using Type = state::PlayerActionStateType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -91,7 +93,12 @@ bool my::PlayerStateComponent::CanTransition(const std::string& next) {
             return true;
         } // if
     } // else if
-
-
     return false;
 }
+#ifdef _DEBUG
+bool my::PlayerStateComponent::DebugRender(void) {
+    ::CGraphicsUtilities::RenderString(
+        20.0f, 100.0f, "player state = %s", this->_state_machine.GetCurrentStateName());
+    return true;
+}
+#endif // _DEBUG
