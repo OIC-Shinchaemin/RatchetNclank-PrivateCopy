@@ -32,6 +32,7 @@ my::FollowCameraController::~FollowCameraController() {
 
 bool my::FollowCameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {
     _preview_position = _position;
+    _target = info.target;
     this->UpdateCameraPosition(delta_time, _camera);
     return true;
 }

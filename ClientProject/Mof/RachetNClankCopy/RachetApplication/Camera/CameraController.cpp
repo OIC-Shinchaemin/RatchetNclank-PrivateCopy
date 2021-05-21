@@ -26,6 +26,7 @@ void my::CameraController::SetCamera(const std::shared_ptr<my::Camera>& ptr) {
     this->_camera = ptr;
 }
 
+/*
 void my::CameraController::SetCameraPosition(Mof::CVector3 pos) {
     this->_position = pos;
 }
@@ -33,6 +34,7 @@ void my::CameraController::SetCameraPosition(Mof::CVector3 pos) {
 void my::CameraController::SetCameraTarget(Mof::CVector3 pos) {
     this->_target = pos;
 }
+*/
 
 void my::CameraController::SetDistance(float value) {
     this->_param.distance = value;
@@ -44,6 +46,11 @@ void my::CameraController::SetAzimuth(float degree) {
 
 void my::CameraController::SetAltitude(float degree) {
     this->_param.altitude = degree;
+}
+
+void my::CameraController::SetInfo(const my::CameraController::CameraInfo& info) {
+    _position = info.position;
+    _target = info.target;
 }
 
 std::shared_ptr<my::Camera> my::CameraController::GetCamera(void) const {
@@ -103,11 +110,6 @@ void my::CameraController::AddAltitude(float degree) {
         _param.altitude = 45.0f;
     } // if
 }
-/*
-bool my::CameraController::Update(float delta_time) {
-    return true;
-}
-*/
 
 bool my::CameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {
     return true;

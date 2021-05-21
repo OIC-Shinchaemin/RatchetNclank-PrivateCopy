@@ -19,7 +19,7 @@ bool my::TitleScene::SceneUpdate(float delta_time) {
     auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
-    _camera_controller.GetService()->SetCameraTarget(pos);
+    //_camera_controller.GetService()->SetCameraTarget(pos);
     camera_info.target = pos;
     _camera_controller.GetService()->Update(delta_time, camera_info);
     return true;

@@ -120,16 +120,6 @@ public:
     /// <param name="info"></param>
     virtual void OnNotify(const my::CameraController::CameraInfo& info) override;
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="pos"></param>
-    void SetPosition(Mof::CVector3 pos);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="pos"></param>
-    void SetTarget(Mof::CVector3 pos);
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>

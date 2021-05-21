@@ -24,6 +24,11 @@ public:
     /// </summary>
     ~FirstPersonCameraController();
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="info"></param>
+    virtual void SetInfo(const my::CameraController::CameraInfo& info) override;
+    /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>

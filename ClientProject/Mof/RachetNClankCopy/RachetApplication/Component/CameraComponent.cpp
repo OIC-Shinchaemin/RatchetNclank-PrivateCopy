@@ -54,9 +54,22 @@ void my::CameraComponent::ControlByKeyboardFollow(void) {
     } // else if
     // chara front
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
+        auto pos = super::GetOwner()->GetPosition();
+        pos.y += 1.0f;
+
+        auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+        auto front = _controller_map.at(_current_mode)->GetViewFront();
+
         _current_mode = my::CameraComponent::CameraMode::FirstPerson;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
-        auto con = _controller_map.at(_current_mode); _camera_controller.SetService(con);
+        auto con = _controller_map.at(_current_mode);
+
+        auto info = my::CameraController::CameraInfo();
+        info.start_position = prev_pos;
+        info.camera_front = front;
+        info.ideal_position = pos;
+        con->SetInfo(info);
+        _camera_controller.SetService(con);
     } // if
 }
 
@@ -74,24 +87,20 @@ void my::CameraComponent::ControlByKeyboardFirstPerson(void) {
         this->LookDown();
     } // else if
 
+    if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
+        auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
 
-    if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
-        /*
-        if (_camera_controller.GetService()->GetVelocity().Length() < 0.5f) {
-            auto rotate = super::GetOwner()->GetRotate();
-            rotate.y = _ideal_fps_camera_angle - math::kHalfPi;
-            super::GetOwner()->SetRotate(rotate);
-        } // if
-        */
-    } // if
-    else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
         _current_mode = my::CameraComponent::CameraMode::Follow;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
-        auto con = _controller_map.at(_current_mode); _camera_controller.SetService(con);
-        
         float ideal_angle_y = super::GetOwner()->GetRotate().y + math::kHalfPi;
-        float azimuth_degree = math::ToDegree(ideal_angle_y);
-        _camera_controller.GetService()->SetAzimuth(azimuth_degree);
+        auto info = my::CameraController::CameraInfo();
+        info.position = prev_pos;
+        info.rotate = super::GetOwner()->GetRotate();
+
+        auto con = _controller_map.at(_current_mode);
+        con->SetAzimuth(math::ToDegree(ideal_angle_y));
+        con->SetInfo(info);
+        _camera_controller.SetService(con);
     } // if
 }
 
@@ -157,16 +166,12 @@ void my::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<my::Cam
     auto state_com = _state_com.lock();
     if (state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpUpState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpDownState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionDoubleJumpState)) {
         pos.y = _preview_position.y;
-        controller->SetCameraTarget(pos);
+        camera_info.target = pos;
         controller->Update(delta_time, camera_info);
         return;
     } // if
-    else {
-        _preview_position = pos;
-        controller->SetCameraTarget(pos);
-        camera_info.target = pos;
-    } // else
-
+    _preview_position = pos;
+    camera_info.target = pos;
     _preview_angle.x = controller->GetAzimuth();
     _preview_angle.y = controller->GetAltitude();
     controller->Update(delta_time, camera_info);
@@ -178,7 +183,7 @@ void my::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<my
 
     pos.y += 1.0f;
     camera_info.position = pos;
-    camera_info.rotate = super::GetOwner()->GetRotate();
+    ///camera_info.rotate = super::GetOwner()->GetRotate();
 
     controller->Update(delta_time, camera_info);
 }
@@ -223,14 +228,6 @@ void my::CameraComponent::OnNotify(const my::CameraController::CameraInfo& info)
     _camera_controller.GetService()->SetDistance(_default_distance);
 }
 
-void my::CameraComponent::SetPosition(Mof::CVector3 pos) {
-    return this->_camera_controller.GetService()->SetCameraPosition(pos);
-}
-
-void my::CameraComponent::SetTarget(Mof::CVector3 pos) {
-    this->_target = pos;
-}
-
 std::string my::CameraComponent::GetType(void) const {
     return "CameraComponent";
 }
@@ -267,7 +264,7 @@ bool my::CameraComponent::Initialize(void) {
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
 
     auto pos = super::GetOwner()->GetPosition();
-    auto offset = Mof::CVector3(math::vec3::kNegUnitZ  * _default_distance);
+    auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
     return true;
 }

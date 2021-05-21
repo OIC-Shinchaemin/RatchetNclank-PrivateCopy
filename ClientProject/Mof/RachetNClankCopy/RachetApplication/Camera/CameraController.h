@@ -30,7 +30,10 @@ public:
         Mof::CVector3 position;
         Mof::CVector3 target;
         Mof::CVector3 rotate;
-
+        Mof::CVector3 start_position;
+        Mof::CVector3 ideal_position;
+        Mof::CVector3 camera_front;
+        
         CameraInfo() :
             position(),
             target() {
@@ -53,12 +56,6 @@ protected:
     Mof::CVector3 _preview_position;
     //! パラメータ
     my::CameraController::Param _param;
-    /// <summary>
-    /// 球座標系→直行座標系
-    /// </summary>
-    /// <param name="camera"></param>
-    Mof::CVector3 SphericalToCartesian(Mof::CVector3 spherical) const;
-    Mof::CVector3 SphericalToCartesian(float x, float y, float z) const;
 public:
     /// <summary>
     /// セッター
@@ -86,16 +83,6 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="pos"></param>
-    void SetCameraPosition(Mof::CVector3 pos);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="pos"></param>
-    void SetCameraTarget(Mof::CVector3 pos);
-    /// <summary>
-    /// セッター
-    /// </summary>
     /// <param name="value"></param>
     void SetDistance(float value);
     /// <summary>
@@ -108,6 +95,11 @@ public:
     /// </summary>
     /// <param name="degree"></param>
     void SetAltitude(float degree);
+    /// <summary>
+    /// セット
+    /// </summary>
+    /// <param name="info"></param>
+    virtual void SetInfo(const my::CameraController::CameraInfo& info);
     /// <summary>
     /// ゲッター
     /// </summary>
