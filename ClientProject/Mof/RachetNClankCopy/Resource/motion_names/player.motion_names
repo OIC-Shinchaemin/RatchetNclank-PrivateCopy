@@ -59,14 +59,14 @@
 
 
     {
-      "name": "mov_step_b_start",
+      "name": "mov_m_step_b_start",
       "speed": 0.5,
       "loop": false,
       "same": false,
       "state": "PlayerMotionCartwheelJumpSetState"
     },
     {
-      "name": "mov_step_b",
+      "name": "mov_m_step_b",
       "speed": 0.5,
       "loop": false,
       "same": false,

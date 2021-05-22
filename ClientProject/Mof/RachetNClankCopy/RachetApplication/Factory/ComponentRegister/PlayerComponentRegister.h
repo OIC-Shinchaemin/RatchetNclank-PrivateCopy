@@ -8,6 +8,7 @@ my::ComponentFactory::AddComponentCreator<my::PlayerJumpUpComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerJumpDownComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerJumpLandingComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerDoubleJumpComponent>();
+my::ComponentFactory::AddComponentCreator<my::PlayerCartwheelJumpComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackOneComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackOneEndComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerMeleeAttackTwoComponent>();

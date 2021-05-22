@@ -10,6 +10,7 @@
 #include "PlayerJumpDownComponent.h"
 #include "PlayerJumpLandingComponent.h"
 #include "PlayerDoubleJumpComponent.h"
+#include "PlayerCartwheelJumpComponent.h"
 #include "PlayerMeleeAttackOneComponent.h"
 #include "PlayerMeleeAttackOneEndComponent.h"
 #include "PlayerMeleeAttackTwoComponent.h"

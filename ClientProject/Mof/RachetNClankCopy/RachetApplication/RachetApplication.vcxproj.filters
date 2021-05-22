@@ -801,6 +801,9 @@
     <ClCompile Include="Component\Player\PlayerCrouchComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerCartwheelJumpComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1579,6 +1582,9 @@
     </ClInclude>
     <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h">
       <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerCartwheelJumpComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
