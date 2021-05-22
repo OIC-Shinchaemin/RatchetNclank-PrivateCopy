@@ -795,6 +795,9 @@
     <ClCompile Include="Camera\FirstPersonCameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerCrouchComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1552,6 +1555,9 @@
     </ClInclude>
     <ClInclude Include="Camera\FirstPersonCameraController.h">
       <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerCrouchComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

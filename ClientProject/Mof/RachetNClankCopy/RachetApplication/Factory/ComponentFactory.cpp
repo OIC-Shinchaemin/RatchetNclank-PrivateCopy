@@ -12,6 +12,7 @@
 #include "../Component/Player/PlayerStateComponent.h"
 #include "../Component/Player/PlayerIdleComponent.h"
 #include "../Component/Player/PlayerMoveComponent.h"
+#include "../Component/Player/PlayerCrouchComponent.h"
 #include "../Component/Player/PlayerJumpSetComponent.h"
 #include "../Component/Player/PlayerJumpUpComponent.h"
 #include "../Component/Player/PlayerJumpDownComponent.h"
@@ -82,6 +83,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::PlayerStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerIdleComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerMoveComponent>();
+    my::ComponentFactory::AddComponentCreator<my::PlayerCrouchComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpSetComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpUpComponent>();
     my::ComponentFactory::AddComponentCreator<my::PlayerJumpDownComponent>();

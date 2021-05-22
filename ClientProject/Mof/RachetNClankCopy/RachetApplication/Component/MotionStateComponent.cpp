@@ -52,6 +52,7 @@ bool my::MotionStateComponent::Initialize(void) {
 
         this->RegisterState(Param(State::kPlayerMotionIdleState, Type::IdleWait, 1.0f, true, false));
         this->RegisterState(Param(State::kPlayerMotionMoveState, Type::MoveRun, 1.0f, true, false));
+        this->RegisterState(Param(State::kPlayerMotionCrouchState, Type::Crouch, 1.0f, true, false));
         this->RegisterState(Param(State::kPlayerMotionJumpSetState, Type::JumpSet, 1.0f, false, false));
         this->RegisterState(Param(State::kPlayerMotionJumpUpState, Type::JumpUp, 1.0f, false, false));
         this->RegisterState(Param(State::kPlayerMotionJumpDownState, Type::JumpDown, 1.0f, false, false));

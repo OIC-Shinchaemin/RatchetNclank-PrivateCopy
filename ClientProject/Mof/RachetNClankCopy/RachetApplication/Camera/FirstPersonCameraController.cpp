@@ -1,15 +1,12 @@
 #include "FirstPersonCameraController.h"
 
 
-void my::FirstPersonCameraController::UpdateCameraPosition(float delta_time, const my::CameraController::CameraInfo& info, const std::shared_ptr<my::Camera>& camera) {
-}
-
 my::FirstPersonCameraController::FirstPersonCameraController() :
     super() {
     _param.azimuth = 0.0f;
     _param.altitude = 0.0f;
     _param.distance = 1.0f;
-    _param.spring = 20.0f;
+    _param.spring = 25.0f;
     _param.dumping = std::sqrtf(_param.spring) * 1.5f;
 }
 

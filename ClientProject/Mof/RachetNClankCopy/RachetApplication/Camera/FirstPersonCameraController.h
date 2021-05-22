@@ -8,12 +8,6 @@
 namespace my {
 class FirstPersonCameraController: public my::CameraController {
     using super = my::CameraController;
-private:
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name=""></param>
-    void UpdateCameraPosition(float delta_time, const my::CameraController::CameraInfo& info, const std::shared_ptr<my::Camera>& camera);
 public:
     /// <summary>
     /// コンストラクタ

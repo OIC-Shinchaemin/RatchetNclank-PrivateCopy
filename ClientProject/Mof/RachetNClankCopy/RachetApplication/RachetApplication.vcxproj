@@ -313,6 +313,7 @@
     <ClCompile Include="Component\MotionStateComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerActionComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerCrouchComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDamageComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDeadComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp" />
@@ -558,6 +559,7 @@
     <ClInclude Include="Component\MotionStateComponent.h" />
     <ClInclude Include="Component\Player\PlayerActionComponent.h" />
     <ClInclude Include="Component\Player\PlayerComponent.h" />
+    <ClInclude Include="Component\Player\PlayerCrouchComponent.h" />
     <ClInclude Include="Component\Player\PlayerDamageComponent.h" />
     <ClInclude Include="Component\Player\PlayerDeadComponent.h" />
     <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h" />

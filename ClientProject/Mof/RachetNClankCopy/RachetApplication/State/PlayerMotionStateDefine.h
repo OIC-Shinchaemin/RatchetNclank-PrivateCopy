@@ -9,6 +9,7 @@ namespace state {
 struct PlayerMotionStateType {
     static std::string kPlayerMotionIdleState;
     static std::string kPlayerMotionMoveState;
+    static std::string kPlayerMotionCrouchState;
     static std::string kPlayerMotionJumpSetState;
     static std::string kPlayerMotionJumpUpState;
     static std::string kPlayerMotionJumpDownState;

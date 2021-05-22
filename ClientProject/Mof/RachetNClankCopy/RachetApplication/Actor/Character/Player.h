@@ -20,6 +20,7 @@ public:
     enum class MotionType {
         IdleWait,
         MoveRun,
+        Crouch,
         JumpSet,
         JumpUp,
         JumpDown,

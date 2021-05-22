@@ -57,6 +57,12 @@
       }
     },
     {
+      "type": "PlayerCrouchComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
       "type": "PlayerIdleComponent",
       "paramater": {
         "priority": 92

@@ -3,6 +3,7 @@
 
 std::string state::PlayerMotionStateType::kPlayerMotionIdleState = "PlayerMotionIdleState";
 std::string state::PlayerMotionStateType::kPlayerMotionMoveState = "PlayerMotionMoveState";
+std::string state::PlayerMotionStateType::kPlayerMotionCrouchState = "PlayerMotionCrouchState";
 std::string state::PlayerMotionStateType::kPlayerMotionJumpSetState = "PlayerMotionJumpSetState";
 std::string state::PlayerMotionStateType::kPlayerMotionJumpUpState = "PlayerMotionJumpUpState";
 std::string state::PlayerMotionStateType::kPlayerMotionJumpDownState = "PlayerMotionJumpDownState";
