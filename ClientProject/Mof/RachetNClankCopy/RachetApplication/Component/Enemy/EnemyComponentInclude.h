@@ -1,0 +1,8 @@
+#include "EnemyComponent.h"
+#include "EnemyStateComponent.h"
+#include "EnemyIdleComponent.h"
+#include "EnemyMoveComponent.h"
+#include "EnemyGoHomeComponent.h"
+#include "EnemyMeleeAttackComponent.h"
+#include "EnemyRangedAttackComponent.h"
+#include "EnemyDamageComponent.h"

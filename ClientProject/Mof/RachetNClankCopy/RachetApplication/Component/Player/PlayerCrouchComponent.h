@@ -4,31 +4,31 @@
 
 #include "PlayerActionComponent.h"
 
+#include <functional>
 #include <memory>
+#include <string_view>
+#include <vector>
 
 
 namespace my {
 class PlayerCrouchComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
 private:
+    struct Transition {
+        std::string_view state;
+        std::function<bool(void)> condition;
+        Transition(std::string_view name, std::function<bool(void)> lambda) : 
+            state(name), condition(lambda) {
+        }
+    };
+    //! 遷移
+    std::vector<Transition> _transition_pairs;
     //! 回転速度
     float _angular_speed;
     //! ラジアン
     float _ideal_angle;
     //! カメラ
-    std::weak_ptr<class CameraComponent> _camera_com;
-public:
-    /// <summary>
-    /// 加速
-    /// </summary>
-    /// <param name="speed"></param>
-    //virtual void InputMoveVelocity(float speed);
-    /// <summary>
-    /// 加速
-    /// </summary>
-    /// <param name="angle"></param>
-    /// <param name="speed"></param>
-    //virtual void InputMoveAngularVelocity(float angle, float speed);
+    std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:
     /// <summary>
     /// コンストラクタ

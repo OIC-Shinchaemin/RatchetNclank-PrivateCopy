@@ -29,10 +29,18 @@ void my::MotionComponent::SetParam(const rapidjson::Value& param) {
 
     auto temp = super::_resource_manager.lock()->Get<std::shared_ptr<my::MotionNames>>(param[path].GetString());
     _motion_names = temp;
+
 }
 
 std::string my::MotionComponent::GetType(void) const {
     return "MotionComponent";
+}
+
+const std::shared_ptr<my::MotionNames> my::MotionComponent::GetMotionInfoMap(void) const {
+    if (auto info = _motion_names.lock()) {
+        return info;
+    } // if
+    return nullptr;
 }
 
 Mof::LPMeshMotionController my::MotionComponent::GetMotionData(void) const {

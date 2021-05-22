@@ -265,6 +265,9 @@
     <Filter Include="Rachet\Header\Component\Weapon">
       <UniqueIdentifier>{94cb0e0c-0632-41b0-b66f-ad29f47dffb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Factory\ComponentRegister">
+      <UniqueIdentifier>{e9111719-68d3-4b4e-8894-fe7bdacd2cb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1558,6 +1561,24 @@
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerCrouchComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerComponentInclude.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyComponentInclude.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponentInclude.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\CollisionComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

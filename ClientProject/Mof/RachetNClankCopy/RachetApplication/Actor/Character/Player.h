@@ -17,6 +17,7 @@ class Player : public my::Character,
     public my::Observer<const my::QuickChangeSystem::Info&> {
     using super = my::Character;
 public:
+    /*
     enum class MotionType {
         IdleWait,
         MoveRun,
@@ -43,6 +44,7 @@ public:
         DamageDead,
         CountMax,
     };
+    */
 private:
     //! •Ší
     std::weak_ptr<my::Mechanical>_current_mechanical;

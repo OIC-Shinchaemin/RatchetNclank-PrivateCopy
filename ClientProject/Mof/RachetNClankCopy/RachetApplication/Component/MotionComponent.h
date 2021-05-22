@@ -61,6 +61,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    const std::shared_ptr<my::MotionNames> GetMotionInfoMap(void) const;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     Mof::LPMeshMotionController GetMotionData(void) const;
     /// <summary>
     /// îªíË

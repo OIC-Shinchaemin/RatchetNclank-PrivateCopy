@@ -1,8 +1,40 @@
 {
-  "names": [
-    "skeleton-skeleton|idle",
-    "skeleton-skeleton|run",
-    "skeleton-skeleton|attack",
-    "skeleton-skeleton|spawn"
+
+  "info": [
+    {
+      "name": "skeleton-skeleton|idle",
+      "speed": 1.0,
+      "loop": true,
+      "same": false,
+      "state": "EnemyMotionIdleState"
+    },
+    {
+      "name": "skeleton-skeleton|run",
+      "speed": 1.0,
+      "loop": true,
+      "same": false,
+      "state": "EnemyMotionMoveState"
+    },
+    {
+      "name": "skeleton-skeleton|attack",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "EnemyMotionMeleeAttackState"
+    },
+    {
+      "name": "skeleton-skeleton|attack",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "EnemyMotionRangedAttackState"
+    },
+    {
+      "name": "skeleton-skeleton|spawn",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "EnemyMotionDamageState"
+    }
   ]
 }

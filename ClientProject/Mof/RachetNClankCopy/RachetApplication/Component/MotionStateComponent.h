@@ -14,14 +14,8 @@ class MotionStateComponent : public my::UpdateComponent {
 private:
     //! èÛë‘
     my::StateMachine _state_machine;
-    template<class State>
-    void RegisterMotionState(my::StateMachine& out) {
-        auto shared_this = super::GetOwner();
-        auto ptr = std::make_shared<State>();
-        ptr->SetActor(shared_this);
-        out.RegisterState(ptr);
-    }
-
+    //! 
+    std::weak_ptr<class MotionComponent> _motion_com;
     void RegisterState(const state::MotionState::Param& param) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::MotionState>();

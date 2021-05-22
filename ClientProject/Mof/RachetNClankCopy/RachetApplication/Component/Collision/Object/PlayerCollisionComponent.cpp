@@ -13,6 +13,7 @@ void my::PlayerCollisionComponent::ChangeState(void) {
         for (auto& state : _next_status) {
             if (state_com->CanTransition(state)) {
                 state_com->ChangeState(state);
+                break;
             } // if
         } // for
     } // if
@@ -91,11 +92,7 @@ void my::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer me
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += height + margin - info.d;
                 super::GetOwner()->SetPosition(pos);
-
-                
                 this->ChangeState();
-
-
             } // if
         } // if
 
