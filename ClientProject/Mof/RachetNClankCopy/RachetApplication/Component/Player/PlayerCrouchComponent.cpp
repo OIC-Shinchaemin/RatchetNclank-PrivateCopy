@@ -47,9 +47,9 @@ bool my::PlayerCrouchComponent::Initialize(void) {
     using Type = state::PlayerActionStateType;
     _transition_pairs.push_back(Transition(Type::kPlayerActionIdleState,
                                            []() { return ::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN); }));
-
     _transition_pairs.push_back(Transition(Type::kPlayerActionThrowAttackSetState,
                                            []() { return ::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X); }));
+
     return true;
 }
 
@@ -57,10 +57,8 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
     for (auto& transition : _transition_pairs) {
         if (transition.condition()) {
             auto state = transition.state.data();
-            if (super::CanTransitionActionState(state)) {
-                super::ChangeActionState(state);
-                break;
-            } // if
+            super::ChangeActionState(state);
+            break;
         } // if
     } // for
 
@@ -71,6 +69,7 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
             move_com->Move(0.0f, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
         } // if
     } // if
+    return true;
     return true;
 }
 
@@ -90,5 +89,6 @@ bool my::PlayerCrouchComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionCrouchState);
+    //super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionCartwheelJumpState);
     return true;
 }

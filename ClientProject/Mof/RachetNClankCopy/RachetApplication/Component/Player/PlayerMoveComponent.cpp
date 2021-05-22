@@ -117,7 +117,7 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
     } // else if
 
     // transition
-    if (jump_flag) {        
+    if (jump_flag) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // if
     else if (attack_flag) {

@@ -57,7 +57,22 @@
       "state": "PlayerMotionDoubleJumpState"
     },
 
-    
+
+    {
+      "name": "mov_step_b_start",
+      "speed": 0.5,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionCartwheelJumpSetState"
+    },
+    {
+      "name": "mov_step_b",
+      "speed": 0.5,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionCartwheelJumpState"
+    },
+
     {
       "name": "atk_attack_01",
       "speed": 1.0,
@@ -101,7 +116,6 @@
       "same": false,
       "state": "PlayerMotionMeleeAttackThreeEndState"
     },
-
 
 
 
