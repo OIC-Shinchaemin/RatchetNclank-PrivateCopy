@@ -11,12 +11,12 @@ namespace my {
 class PlayerCartwheelJumpComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
 private:
-    //! Å‘å
-    //float _jump_speed_max;
     //! ‘¬“x
     float _jump_speed;
     //! Œ¸­
     float _jump_decrase;
+    //! •ûŒü
+    float _move_angle;
     //! ˆÚ“®
     std::weak_ptr<class PlayerMoveComponent> _move_com;
     /// <summary>

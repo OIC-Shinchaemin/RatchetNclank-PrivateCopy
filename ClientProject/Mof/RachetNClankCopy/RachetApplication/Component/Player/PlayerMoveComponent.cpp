@@ -106,26 +106,14 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
     bool attack_flag = false;
 
     // flag
-    bool action = this->AquireInputData(in, move_angle);
-    if (::g_pInput->IsKeyPush(MOFKEY_X) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        jump_flag = true;
-    } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
-             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
-        attack_flag = true;
-    } // else if
-
-    // transition
-    if (jump_flag) {
+    if (::g_pInput->IsKeyPush(MOFKEY_X) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // if
-    else if (attack_flag) {
+    else if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
     } // else if
 
-
-    if (action) {
+    if (this->AquireInputData(in, move_angle)) {
         in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         this->Move(_move_speed, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
@@ -177,7 +165,8 @@ bool my::PlayerMoveComponent::AquireInputData(Mof::CVector2& stick, float& move_
 
     // gamepad
     if (stick.Length() > threshold) {
-        action = true;
+        move_angle = std::atan2(-stick.y, stick.x) - math::kHalfPi;
+        return true;
     } // if
     // keyboard
     else {

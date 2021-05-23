@@ -49,18 +49,56 @@ bool my::PlayerCrouchComponent::Initialize(void) {
                                            []() { return ::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN); }));
     _transition_pairs.push_back(Transition(Type::kPlayerActionThrowAttackSetState,
                                            []() { return ::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X); }));
-
     return true;
 }
 
 bool my::PlayerCrouchComponent::Update(float delta_time) {
+    using Type = state::PlayerActionStateType;
+    if (::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN)) {
+        super::ChangeActionState(Type::kPlayerActionIdleState);
+    } // if
+    else if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+        super::ChangeActionState(Type::kPlayerActionThrowAttackSetState);
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_C) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+
+        float owner_rotate_y = super::GetOwner()->GetRotate().y;
+        std::cout << "math::ToDegree(owner_rotate_y) = " << math::ToDegree(owner_rotate_y) << "\n";
+        auto move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+
+        Mof::CVector2 in; float move_angle;
+        move_com->AquireInputData(in, move_angle);
+        std::cout << "math::ToDegree(move_angle) = " << math::ToDegree(move_angle) << "\n";
+        //super::ChangeActionState(Type::kPlayerActionCartwheelJumpState);
+    } // else if
+    auto move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+
+    Mof::CVector2 in; float move_angle;
+    move_com->AquireInputData(in, move_angle);
+    //move_angle += math::kTwoPi;
+    move_angle += math::kPi;
+    move_angle -= math::kHalfPi;
+
+    MOF_NORMALIZE_RADIANANGLE(move_angle);
+    
+    std::cout << "math::ToDegree(move_angle) = " << math::ToDegree(move_angle) << "\n";
+    float owner_rotate_y = super::GetOwner()->GetRotate().y;
+    std::cout << "math::ToDegree(owner_rotate_y) = " << math::ToDegree(owner_rotate_y) << "\n";
+
+    /*
     for (auto& transition : _transition_pairs) {
         if (transition.condition()) {
             auto state = transition.state.data();
             super::ChangeActionState(state);
-            break;
+            breadhk;
         } // if
     } // for
+    */
+
+
+
+
+
 
     if (auto move_com = _move_com.lock()) {
         Mof::CVector2 in;
