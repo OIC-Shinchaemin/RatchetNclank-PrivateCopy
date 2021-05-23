@@ -57,6 +57,11 @@ public:
     /// <param name="speed"></param>
     void SetJumpSpeed(float speed);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="speed"></param>
+    void SetMoveAngle(float radian);
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>

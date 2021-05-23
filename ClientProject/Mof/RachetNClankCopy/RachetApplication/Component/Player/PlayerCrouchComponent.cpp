@@ -1,6 +1,8 @@
 #include "PlayerCrouchComponent.h"
 
+#include "../CameraComponent.h"
 #include "PlayerMoveComponent.h"
+#include "PlayerCartwheelJumpComponent.h"
 
 
 my::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
@@ -14,7 +16,7 @@ my::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
 my::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent& obj) :
     super(obj),
     _transition_pairs(),
-    _angular_speed(2.0f),
+    _angular_speed(0.4f),
     _ideal_angle(),
     _move_com() {
 }
@@ -61,41 +63,34 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
         super::ChangeActionState(Type::kPlayerActionThrowAttackSetState);
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_C) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+        if (auto move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>()) {
+            auto camera_com = super::GetOwner()->GetComponent<my::CameraComponent>();
 
-        float owner_rotate_y = super::GetOwner()->GetRotate().y;
-        std::cout << "math::ToDegree(owner_rotate_y) = " << math::ToDegree(owner_rotate_y) << "\n";
-        auto move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+            Mof::CVector2 in; float move_angle;
+            if (move_com->AquireInputData(in, move_angle)) {
+                in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+                auto view_front = camera_com->GetViewFront();
+                float camera_angle_y = std::atan2(-view_front.z, view_front.x);
+                float move_angle = std::atan2(-in.y, in.x);
+                move_angle += camera_angle_y;
+                MOF_NORMALIZE_RADIANANGLE(move_angle);
 
-        Mof::CVector2 in; float move_angle;
-        move_com->AquireInputData(in, move_angle);
-        std::cout << "math::ToDegree(move_angle) = " << math::ToDegree(move_angle) << "\n";
-        //super::ChangeActionState(Type::kPlayerActionCartwheelJumpState);
-    } // else if
-    auto move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-
-    Mof::CVector2 in; float move_angle;
-    move_com->AquireInputData(in, move_angle);
-    //move_angle += math::kTwoPi;
-    move_angle += math::kPi;
-    move_angle -= math::kHalfPi;
-
-    MOF_NORMALIZE_RADIANANGLE(move_angle);
-    
-    std::cout << "math::ToDegree(move_angle) = " << math::ToDegree(move_angle) << "\n";
-    float owner_rotate_y = super::GetOwner()->GetRotate().y;
-    std::cout << "math::ToDegree(owner_rotate_y) = " << math::ToDegree(owner_rotate_y) << "\n";
-
-    /*
-    for (auto& transition : _transition_pairs) {
-        if (transition.condition()) {
-            auto state = transition.state.data();
-            super::ChangeActionState(state);
-            breadhk;
+                float owner_rotate_y = super::GetOwner()->GetRotate().y;
+                auto owner_circle_position = Mof::CVector2(std::cosf(owner_rotate_y), std::sinf(owner_rotate_y));
+                auto input_circle_position = Mof::CVector2(std::cosf(move_angle), std::sinf(move_angle));
+                float distance = Mof::CVector2Utilities::Distance(owner_circle_position, input_circle_position);
+                if (1.0f < distance) {
+                    move_com->AquireInputData(in, move_angle);
+                    move_angle += math::kHalfPi + camera_angle_y;
+                    
+                    MOF_NORMALIZE_RADIANANGLE(move_angle);
+                    super::GetOwner()->GetComponent<my::PlayerCartwheelJumpComponent>()->SetMoveAngle(move_angle);
+                    super::ChangeActionState(Type::kPlayerActionCartwheelJumpState);
+                } // if
+            } // if
         } // if
-    } // for
-    */
 
-
+    } // else if
 
 
 

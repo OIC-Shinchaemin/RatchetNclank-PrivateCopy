@@ -41,6 +41,10 @@ void my::PlayerCartwheelJumpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }
 
+void my::PlayerCartwheelJumpComponent::SetMoveAngle(float radian) {
+    this->_move_angle = radian;
+}
+
 bool my::PlayerCartwheelJumpComponent::Initialize(void) {
     super::Initialize();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
@@ -51,16 +55,16 @@ bool my::PlayerCartwheelJumpComponent::Update(float delta_time) {
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
-
-    // flag
     if (auto move_com = _move_com.lock()) {
-        Mof::CVector2 in;
-        float move_speed = 1.7f; 
-        in = math::Rotate(in.x, in.y, math::ToRadian(_move_angle));
-        move_com->Move(move_speed, 0.0f, std::atan2(-in.y, in.x) - math::kHalfPi);
+        float move_speed = 1.7f;
+        
+        auto velocity_com = super::GetVelocityComponent();
+        auto accele = Mof::CVector3(0.0f, 0.0f, -move_speed);
+        accele.RotationY(_move_angle);
+        velocity_com->AddVelocityForce(accele);
     } // if
     _jump_speed -= _jump_decrase;
-    
+
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpDownState);
     } // if
@@ -87,17 +91,5 @@ bool my::PlayerCartwheelJumpComponent::Start(void) {
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->SetGravity(1.8f);
     _jump_speed = 10.0f;
-    
-
-    float owner_rotate_y = super::GetOwner()->GetRotate().y;
-    std::cout << "math::ToDegree(owner_rotate_y)" << math::ToDegree(owner_rotate_y) << "\n";
-
-    if (auto move_com = _move_com.lock()) {
-        Mof::CVector2 in;
-        move_com->AquireInputData(in, _move_angle);
-    } // if
-    std::cout << "math::ToDegree(_move_angle)" << math::ToDegree(_move_angle) << "\n";
-
-
     return true;
 }
