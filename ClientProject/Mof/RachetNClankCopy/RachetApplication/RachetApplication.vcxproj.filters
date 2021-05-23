@@ -265,6 +265,15 @@
     <Filter Include="Rachet\Header\Component\Weapon">
       <UniqueIdentifier>{94cb0e0c-0632-41b0-b66f-ad29f47dffb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Factory\ComponentRegister">
+      <UniqueIdentifier>{e9111719-68d3-4b4e-8894-fe7bdacd2cb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Player\Action">
+      <UniqueIdentifier>{89820cd2-84c3-4bff-99a0-937d40541bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Player\Action">
+      <UniqueIdentifier>{add77942-3359-4581-b852-9dc9e0bfc3e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -411,12 +420,6 @@
     <ClCompile Include="Component\Enemy\EnemyStateComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Player\PlayerIdleComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerMoveComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Component.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
@@ -467,9 +470,6 @@
     </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp">
       <Filter>Rachet\Source\Component\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerDamageComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp">
       <Filter>Rachet\Source\Game\GameSystem\Save</Filter>
@@ -636,47 +636,11 @@
     <ClCompile Include="Component\Player\PlayerStateComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Player\PlayerJumpLandingComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerJumpSetComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerJumpUpComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerJumpDownComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerMeleeAttackOneComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerMeleeAttackOneEndComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeEndComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoEndComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerDeadComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
     <ClCompile Include="Component\InvincibleComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
@@ -759,15 +723,6 @@
     <ClCompile Include="Component\Player\PlayerWeaponComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Player\PlayerThrowAttackComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerThrowAttackEndComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Weapon\OmniWrenchThrowedComponent.cpp">
       <Filter>Rachet\Source\Component\Weapon</Filter>
     </ClCompile>
@@ -780,20 +735,80 @@
     <ClCompile Include="Component\Weapon\OmniWrenchDefaultComponent.cpp">
       <Filter>Rachet\Source\Component\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Player\PlayerJumpAttackSetComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerJumpAttackComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerLookComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Player\PlayerActionComponent.cpp">
-      <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\FirstPersonCameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerActionComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerCartwheelJumpComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerCrouchComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDamageComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDeadComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerIdleComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpAttackSetComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpDownComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpLandingComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpSetComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpUpComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerLookComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackOneComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackOneEndComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeEndComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoEndComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMoveComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackEndComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1031,12 +1046,6 @@
     <ClInclude Include="Component\AIStateComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Player\PlayerMoveComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerIdleComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyIdleComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
     </ClInclude>
@@ -1123,9 +1132,6 @@
     </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyComponent.h">
       <Filter>Rachet\Header\Component\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerDamageComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameSystem\GameMoney.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
@@ -1334,47 +1340,11 @@
     <ClInclude Include="Component\Player\PlayerStateComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Player\PlayerJumpUpComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerJumpLandingComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerJumpSetComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerJumpDownComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerMeleeAttackOneComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerMeleeAttackOneEndComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoEndComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeEndComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerDeadComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
     <ClInclude Include="Component\InvincibleComponent.h">
       <Filter>Rachet\Header\Component</Filter>
@@ -1517,15 +1487,6 @@
     <ClInclude Include="Component\Player\PlayerWeaponComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerThrowAttackEndComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerThrowAttackComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Weapon\OmniWrenchThrowedComponent.h">
       <Filter>Rachet\Header\Component\Weapon</Filter>
     </ClInclude>
@@ -1538,20 +1499,98 @@
     <ClInclude Include="Component\Weapon\OmniWrenchDefaultComponent.h">
       <Filter>Rachet\Header\Component\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Player\PlayerJumpAttackSetComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerJumpAttackComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerLookComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Player\PlayerActionComponent.h">
-      <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Camera\FirstPersonCameraController.h">
       <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerComponentInclude.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyComponentInclude.h">
+      <Filter>Rachet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponentInclude.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\CollisionComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerActionComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerCrouchComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerCartwheelJumpComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDamageComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDeadComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerIdleComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpAttackComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpAttackSetComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpDownComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpLandingComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpSetComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpUpComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerLookComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackOneComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackOneEndComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeEndComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMoveComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoEndComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackEndComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

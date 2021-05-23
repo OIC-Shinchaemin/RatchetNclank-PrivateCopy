@@ -12,39 +12,13 @@
 
 
 namespace my {
-class Player : public my::Character, 
-    public my::Observer<std::shared_ptr<my::Mechanical>>, 
+class Player : public my::Character,
+    public my::Observer<std::shared_ptr<my::Mechanical>>,
     public my::Observer<const my::QuickChangeSystem::Info&> {
     using super = my::Character;
-public:
-    enum class MotionType {
-        IdleWait,
-        MoveRun,
-        JumpSet,
-        JumpUp,
-        JumpDown,
-        JumpLanding,
-        DoubleJump,
-        MeleeAttackOne,
-        MeleeAttackOneEnd,
-        MeleeAttackTwo,
-        MeleeAttackTwoEnd,
-        MeleeAttackThree,
-        MeleeAttackThreeEnd,
-        ThrowAttackSet,
-        ThrowAttack,
-        ThrowAttackEnd,
-
-        JumpAttackSet,
-        JumpAttack,
-
-        DamageA,
-        DamageDead,
-        CountMax,
-    };
 private:
     //! 武器
-    std::weak_ptr<my::Mechanical>_current_mechanical;
+    std::weak_ptr<my::Mechanical> _current_mechanical;
     //! 武器
     //std::shared_ptr<my::OmniWrench> _omniwrench;
     //! 子アクター

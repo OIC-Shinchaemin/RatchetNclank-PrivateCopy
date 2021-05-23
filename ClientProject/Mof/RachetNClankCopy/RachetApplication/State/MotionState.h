@@ -16,6 +16,8 @@ public:
     struct Param {
         //! 名前
         const char* state_name;
+        //! 名前
+        const char* motion_name;
         //! タイプ
         int motion_type;
         //! アニメーション速度
@@ -24,17 +26,18 @@ public:
         bool motion_loop;
         //! アニメーションフラグ
         bool motion_same;
-
         Param() :
             state_name(),
+            motion_name(),
             motion_type(),
             motion_speed(),
             motion_loop(),
             motion_same() {
         }
         template<typename Enum>
-        Param(const std::string& name, Enum type, float speed = 1.0f, bool loop = true, bool same = true) :
-            state_name(name.c_str()),
+        Param(const std::string& state, const std::string& name, Enum type, float speed = 1.0f, bool loop = true, bool same = true) :
+            state_name(state.c_str()),
+            motion_name(name.c_str()),
             motion_type(static_cast<int>(type)),
             motion_speed(speed),
             motion_loop(loop),

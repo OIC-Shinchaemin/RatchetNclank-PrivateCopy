@@ -8,13 +8,26 @@ Mof::CVector3 my::TransformComponent::UpdateRotate(float delta_time, Mof::CVecto
     if (sleep_threshold < velocity.Length()) {
         rotate += velocity * delta_time;
     } // if
-
+    /*
+    if ((a) >= MOF_MATH_2PI) {
+        a -= MOF_MATH_2PI;
+    } // if
+    else {
+        if ((a) < 0.0f) {
+            a += MOF_MATH_2PI;
+        } // if
+        else {
+            a;
+        } // else
+    } // else
+    */
+    //MOF_NORMALIZE_RADIANANGLE(rotate.y);
     if (math::kTwoPi <= rotate.y) {
         rotate.y -= math::kTwoPi;
     } // if
     else if (rotate.y <= 0.0f) {
         rotate.y += math::kTwoPi;
-    } // else if
+    } // else
     return rotate;
 }
 

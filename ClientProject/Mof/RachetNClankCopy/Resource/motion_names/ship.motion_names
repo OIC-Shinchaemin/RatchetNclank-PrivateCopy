@@ -1,7 +1,18 @@
 {
-  "names": [
-    "Default Take",
-    "Transport_Shuttle_V4",
-    ""
+  "info": [
+    {
+      "name": "Default Take",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": ""
+    },
+    {
+      "name": "Transport_Shuttle_V4",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": ""
+    }
   ]
 }

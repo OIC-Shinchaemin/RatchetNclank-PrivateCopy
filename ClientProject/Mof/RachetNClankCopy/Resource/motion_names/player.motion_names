@@ -1,27 +1,188 @@
 {
-  "names": [
-    "bse_wait_lp",
-    "mov_run_lp",
-    "mov_jump_f_set",
-    "mov_jump_f_u_lp",
-    "mov_jump_f_d_lp",
-    "mov_jump_landing",
-    "mov_step_b_end",
-    "atk_attack_01",
-    "atk_attack_01_ft",
-    "atk_attack_02",
-    "atk_attack_02_ft",
-    "atk_attack_03",
-    "atk_attack_03_ft",
-    "atk_straight_set",
-    "atk_straight",
-    "atk_straight_ft",
+  "info": [
+    {
+      "name": "bse_wait_lp",
+      "speed": 1.0,
+      "loop": true,
+      "same": false,
+      "state": "PlayerMotionIdleState"
+    },
+    {
+      "name": "mov_run_lp",
+      "speed": 1.0,
+      "loop": true,
+      "same": false,
+      "state": "PlayerMotionMoveState"
+    },
+    {
+      "name": "atk_charge_set_lp",
+      "speed": 1.0,
+      "loop": true,
+      "same": false,
+      "state": "PlayerMotionCrouchState"
+    },
+    {
+      "name": "mov_jump_f_set",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionJumpSetState"
+    },
+    {
+      "name": "mov_jump_f_u_lp",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionJumpUpState"
+    },
+    {
+      "name": "mov_jump_f_d_lp",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionJumpDownState"
+    },
+    {
+      "name": "mov_jump_landing",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionJumpLandingState"
+    },
+    {
+      "name": "mov_step_b_end",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionDoubleJumpState"
+    },
 
-    "atk_jump_03",
-    "atk_jump_01",
 
-    "dam_damage_m_a",
-    "dam_down_d",
-    ""
+    {
+      "name": "mov_m_step_b_start",
+      "speed": 0.5,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionCartwheelJumpSetState"
+    },
+    {
+      "name": "mov_m_step_b",
+      "speed": 0.5,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionCartwheelJumpState"
+    },
+
+    {
+      "name": "atk_attack_01",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionMeleeAttackOneState"
+    },
+    {
+      "name": "atk_attack_01_ft",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionMeleeAttackOneEndState"
+    },
+    {
+      "name": "atk_attack_02",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionMeleeAttackTwoState"
+    },
+    {
+      "name": "atk_attack_02_ft",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionMeleeAttackTwoEndState"
+    },
+    {
+      "name": "atk_attack_03",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionMeleeAttackThreeState"
+    },
+
+    {
+      "name": "atk_attack_03_ft",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionMeleeAttackThreeEndState"
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "name": "atk_straight_set",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionThrowAttackSetState"
+    },
+    {
+      "name": "atk_straight",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionThrowAttackState"
+    },
+    {
+      "name": "atk_straight_ft",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionThrowAttackEndState"
+    },
+    {
+      "name": "atk_jump_03",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionJumpAttackSetState"
+    },
+    {
+      "name": "atk_jump_01",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionJumpAttackState"
+    },
+    {
+      "name": "dam_damage_m_a",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionDamageState"
+    },
+    {
+      "name": "dam_down_d",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "PlayerMotionDeadState"
+    }
+
+
+
+
+
+
   ]
 }

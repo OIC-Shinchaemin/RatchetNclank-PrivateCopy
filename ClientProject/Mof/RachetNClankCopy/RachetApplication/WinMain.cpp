@@ -8,7 +8,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 #endif // CONSOLE
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     Mof::LPFramework pFrame = new Mof::CDX11GameFramework();
-    Mof::WINDOWSGAMEFRAMEWORKINITIALIZEINFO Info;
+    Mof::WINDOWSGAMEFRAMEWORKINITIALIZEINFO Info;    
+    Info.WindowCreateInfo.px = 450.0f;
+    Info.WindowCreateInfo.py = 20.0f;
     Info.pApplication = new CGameApp();
     Info.Flag = MOF_FRAMEWORK_GRAPHICSINITIALIZE | MOF_FRAMEWORK_INPUTINITIALIZE | MOF_FRAMEWORK_APPLICATIONINITIALIZE;
     if (pFrame->Initialize(&Info)) {

@@ -312,7 +312,9 @@
     <ClCompile Include="Component\MotionComponent.cpp" />
     <ClCompile Include="Component\MotionStateComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerActionComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerCartwheelJumpComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerCrouchComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDamageComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDeadComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp" />
@@ -531,6 +533,7 @@
     <ClInclude Include="Component\Collision\Object\CameraCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\CollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h" />
+    <ClInclude Include="Component\Collision\Object\CollisionComponentInclude.h" />
     <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
@@ -543,6 +546,7 @@
     <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentDefine.h" />
+    <ClInclude Include="Component\Enemy\EnemyComponentInclude.h" />
     <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyComponent.h" />
@@ -557,7 +561,10 @@
     <ClInclude Include="Component\MotionComponent.h" />
     <ClInclude Include="Component\MotionStateComponent.h" />
     <ClInclude Include="Component\Player\PlayerActionComponent.h" />
+    <ClInclude Include="Component\Player\PlayerCartwheelJumpComponent.h" />
+    <ClInclude Include="Component\Player\PlayerComponentInclude.h" />
     <ClInclude Include="Component\Player\PlayerComponent.h" />
+    <ClInclude Include="Component\Player\PlayerCrouchComponent.h" />
     <ClInclude Include="Component\Player\PlayerDamageComponent.h" />
     <ClInclude Include="Component\Player\PlayerDeadComponent.h" />
     <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h" />
@@ -601,6 +608,9 @@
     <ClInclude Include="Factory\Builder\TerrainBuilder.h" />
     <ClInclude Include="Factory\ComponentCreator.h" />
     <ClInclude Include="Factory\ComponentFactory.h" />
+    <ClInclude Include="Factory\ComponentRegister\CollisionComponentRegister.h" />
+    <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h" />
+    <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />

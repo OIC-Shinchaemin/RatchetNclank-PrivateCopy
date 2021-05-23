@@ -93,6 +93,11 @@ bool my::PlayerStateComponent::CanTransition(std::string_view next) const {
             return true;
         } // if
     } // else if
+    else if (next == Type::kPlayerActionThrowAttackSetState) {
+        if (current == Type::kPlayerActionCrouchState) {
+            return true;
+        } // if
+    } // else if
     return false;
 }
 #ifdef _DEBUG

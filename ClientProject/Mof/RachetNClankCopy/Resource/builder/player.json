@@ -57,6 +57,12 @@
       }
     },
     {
+      "type": "PlayerCrouchComponent",
+      "paramater": {
+        "priority": 92
+      }
+    },
+    {
       "type": "PlayerIdleComponent",
       "paramater": {
         "priority": 92
@@ -64,6 +70,12 @@
     },
     {
       "type": "PlayerDoubleJumpComponent",
+      "paramater": {
+        "priority": 90
+      }
+    },
+    {
+      "type": "PlayerCartwheelJumpComponent",
       "paramater": {
         "priority": 90
       }
