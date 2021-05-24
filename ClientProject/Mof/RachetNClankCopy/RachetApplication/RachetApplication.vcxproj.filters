@@ -274,17 +274,11 @@
     <Filter Include="Rachet\Header\Component\Weapon\OmniWrench">
       <UniqueIdentifier>{20c591a8-4d3e-4996-a818-959ba0fb102b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Component\Weapon\Blaster">
-      <UniqueIdentifier>{deff356c-adb3-4d9d-ae53-ffbc3d74fad5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Source\Component\Weapon">
       <UniqueIdentifier>{3964a09b-0c7a-47a3-9cd3-ab68c78cc300}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Source\Component\Weapon\OmniWrench">
       <UniqueIdentifier>{d2d7b52e-e01f-41b1-8910-3bde8bc2b663}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Component\Weapon\Blaster">
-      <UniqueIdentifier>{1e583bb3-3b36-443a-8c30-028c5cbf7660}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -648,9 +642,6 @@
     <ClCompile Include="Component\Player\PlayerStateComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
@@ -821,9 +812,6 @@
     </ClCompile>
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp">
       <Filter>Rachet\Source\Component\Weapon\OmniWrench</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Weapon\Blaster\BlasterComponent.cpp">
-      <Filter>Rachet\Source\Component\Weapon\Blaster</Filter>
     </ClCompile>
     <ClCompile Include="Component\Player\PlayerMechanicalWeaponComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
@@ -1361,9 +1349,6 @@
     <ClInclude Include="Component\Player\PlayerStateComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
@@ -1618,9 +1603,6 @@
     </ClInclude>
     <ClInclude Include="Factory\ComponentRegister\OmniWrenchComponentRegister.h">
       <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Weapon\Blaster\BlasterComponent.h">
-      <Filter>Rachet\Header\Component\Weapon\Blaster</Filter>
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerMechanicalWeaponComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>

@@ -15,6 +15,8 @@ class PlayerShotAttackComponent : public my::PlayerActionComponent {
 private:
     //! 武器
     std::weak_ptr<my::Mechanical> _weapon;
+    //! 移動
+    std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -72,12 +74,6 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
-    /// <summary>
-    /// 終了
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns>成功</returns>
-    virtual bool End(void) override;
 };
 }
 #endif // !MY_PLAYER_SHOT_ATTACK_COMPONENT_H

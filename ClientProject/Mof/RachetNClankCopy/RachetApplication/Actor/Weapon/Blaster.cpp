@@ -20,13 +20,13 @@ bool my::Blaster::IsAction(void) const {
     return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_V);
 }
 
-bool my::Blaster::Fire(const def::Transform& transform) {    
+bool my::Blaster::Fire(const def::Transform& transform) {
     super::Fire(transform);
     auto param = my::Bullet::Param();
     param.transform = transform;
 
     if (super::_lock_on_position.has_value()) {
-        Mof::CVector3 direction =  super::_lock_on_position.value() - param.transform.position;
+        Mof::CVector3 direction = super::_lock_on_position.value() - param.transform.position;
         direction.Normal(direction);
         param.speed = direction * _shot_speed;
         super::_lock_on_position.reset();

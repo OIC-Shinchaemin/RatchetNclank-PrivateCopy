@@ -291,7 +291,6 @@
     <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp" />
-    <ClCompile Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
@@ -347,7 +346,6 @@
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Component\UpdateComponent.cpp" />
     <ClCompile Include="Component\VelocityComponent.cpp" />
-    <ClCompile Include="Component\Weapon\Blaster\BlasterComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp" />
@@ -541,7 +539,6 @@
     <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h" />
-    <ClInclude Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
@@ -600,7 +597,6 @@
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Component\UpdateComponent.h" />
     <ClInclude Include="Component\VelocityComponent.h" />
-    <ClInclude Include="Component\Weapon\Blaster\BlasterComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchComponentInclude.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />

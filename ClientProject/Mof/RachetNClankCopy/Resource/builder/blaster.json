@@ -1,12 +1,6 @@
 {
   "components": [
     {
-      "type": "BlasterComponent",
-      "paramater": {
-        "priority": 0
-      }
-    },
-    {
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,
