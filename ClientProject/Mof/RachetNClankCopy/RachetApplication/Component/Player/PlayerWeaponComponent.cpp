@@ -37,13 +37,14 @@ std::string my::PlayerWeaponComponent::GetType(void) const {
 
 bool my::PlayerWeaponComponent::Activate(void) {
     super::Activate();
-
+    
     auto owner = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
     _weapon = owner->GetChild("OmniWrench");
     if (auto weapon = _weapon.lock()) {
+        // cache
         _weapon_coll_com = weapon->GetComponent<my::OmniWrenchCollisionComponent>();
         _weapon_action_state_com = weapon->GetComponent<my::OmniWrenchActionStateComponent>();
-
+        
         auto throw_com = weapon->GetComponent<my::OmniWrenchThrowedComponent>();
         throw_com->SetWeaponOwner(super::GetOwner());
     } // if

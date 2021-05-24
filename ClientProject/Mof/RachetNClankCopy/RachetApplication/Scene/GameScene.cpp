@@ -10,8 +10,6 @@
 #include "../Actor//Ship/Ship.h"
 #include "../Actor//Terrain/Terrain.h"
 #include "../Factory/Builder/ActorBuilder.h"
-#include "../Game/GameSystem/Save/SaveData.h"
-#include "../Game/GameSystem/Save/SaveSystem.h"
 #include "../Component/CameraComponent.h"
 
 
@@ -155,9 +153,11 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
         r->Load(param->resource.c_str());
     } // if
     // stage
-    //if (!_stage.Load("../Resource/stage/test.json")) {
     if (!_stage.Load("../Resource/stage/stage.json")) {
         return false;
+    } // if
+
+    if (auto game = _game.lock()) {
     } // if
     super::LoadComplete();
     return true;
@@ -167,7 +167,8 @@ bool my::GameScene::Initialize(void) {
     _stage.Initialize();
 
     auto param = new my::Actor::Param();
-    // chara
+
+    // enemy
     _for_bridge_event_actors.clear();
     _for_bridge_event_actors.reserve(_stage.GetEnemySpawnArray().size());
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
@@ -183,13 +184,13 @@ bool my::GameScene::Initialize(void) {
             _for_bridge_event_actors.push_back(enemy);
         } // if
     } // for
-
-
+    // player
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
 
+    // ship
     param->transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
     param->name = "ship";
     auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", param);
@@ -197,25 +198,26 @@ bool my::GameScene::Initialize(void) {
     _bridge_event_subject.AddObserver(ship);
     player->AddObserver(ship);
 
-    param->name = "weapon";
-    param->tag = "OmniWrench";
-    auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", param);
-    player->AddChild(omniwrench);
-    this->AddElement(omniwrench);
-
     // game system
     if (auto game = _game.lock()) {
+        game->GameSystemLoad();
+
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
-
         // game system
-        weapon_system->Initialize(shared_from_this());
-        quick_change->Initialize({}, weapon_system);
+        weapon_system->Initialize();
+        quick_change->Initialize(weapon_system);
+        
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
+        
+        auto weapons = weapon_system->GetWeaponMap();
+        for (auto& pair : weapons) {
+            player->AddChild(pair.second);
+        } // for
     } // if
-
+    // terrain
     def::Transform terrain_transforms[]{
         def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
     };
@@ -225,7 +227,7 @@ bool my::GameScene::Initialize(void) {
         auto terrain = my::FactoryManager::Singleton().CreateActor<my::Terrain>("../Resource/builder/water_flow.json", param);
         this->AddElement(terrain);
     } // for
-
+    
     ut::SafeDelete(param);
     _re_initialize = false;
 

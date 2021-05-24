@@ -21,16 +21,16 @@ private:
     std::weak_ptr<my::Mechanical> _current_mechanical;
     //! 武器
     std::shared_ptr<my::OmniWrench> _omniwrench;
-    //! 子アクター
+    //! 武器
     std::vector<std::shared_ptr<my::Actor>> _children;
     //! 武器
-    std::weak_ptr<my::Weapon> _current_weapon;
+    std::shared_ptr<my::Weapon> _current_weapon;
     //! プレイヤー
     std::weak_ptr<my::PlayerComponent> _player_com;
-    //! 有効
-    bool _enable;
     //! 腕の位置
     Mof::LPBONEMOTIONSTATE _upp_bone_state;
+    //! 有効
+    bool _enable;
 public:
     /// <summary>
     /// コンストラクタ

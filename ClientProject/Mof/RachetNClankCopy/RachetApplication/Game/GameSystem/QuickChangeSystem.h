@@ -118,9 +118,9 @@ public:
     /// <summary>
     /// ‰Šú‰»
     /// </summary>
-    /// <param name="pos"></param>
+    /// <param name="weapon_system"></param>
     /// <returns></returns>
-    bool Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system);
+    bool Initialize(const std::shared_ptr<my::WeaponSystem>& weapon_system);
     /// <summary>
     /// XV
     /// </summary>

@@ -13,7 +13,7 @@ my::WeaponSystem::WeaponSystem() :
     _save_data(),
     _resource(),
     _ui_canvas() {
-
+    
     _builder_name_map.emplace("BombGlove", "../Resource/builder/bomb_glove.json");
     _builder_name_map.emplace("Pyrocitor", "../Resource/builder/pyrocitor.json");
     _builder_name_map.emplace("Blaster", "../Resource/builder/blaster.json");
@@ -29,8 +29,8 @@ void my::WeaponSystem::OnNotify(const std::string& change) {
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
     
     using namespace std::literals::string_literals;
-    auto name = weapon ? weapon->GetName().c_str() : ""s;
-    _equipment_subject.Notify(my::Mechanical::Info(bullet_count, name.c_str()));
+    std::string_view name = weapon ? weapon->GetName().c_str() : ""s;
+    _equipment_subject.Notify(my::Mechanical::Info(bullet_count, name.data()));
 }
 
 void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -39,6 +39,10 @@ void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
 
 void my::WeaponSystem::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
+}
+
+const std::vector<my::WeaponSystem::Pair>& my::WeaponSystem::GetWeaponMap(void) const {
+    return this->_weapons;
 }
 
 void my::WeaponSystem::AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Mechanical>>>& ptr) {
@@ -54,7 +58,7 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
 
 bool my::WeaponSystem::Load(my::SaveData& in) {
     _save_data = in;
-
+    
     auto param = my::Actor::Param();
     for (const auto& key : _save_data.GetAvailableMechanicalWeaponsAddress()) {
         param.name = key;
@@ -72,7 +76,7 @@ bool my::WeaponSystem::Load(my::SaveData& in) {
     return true;
 }
 
-bool my::WeaponSystem::Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer) {
+bool my::WeaponSystem::Initialize(void) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if
@@ -87,7 +91,7 @@ bool my::WeaponSystem::Initialize(const std::shared_ptr<my::Observer<const char*
     // weapon
     auto param = my::Actor::Param();
     for (auto weapon : _weapons) {
-        weapon.second->AddObserver(observer);
+        //weapon.second->AddObserver(observer);
         weapon.second->AddMechanicalInfoObserver(menu);
     } // for
     return true;

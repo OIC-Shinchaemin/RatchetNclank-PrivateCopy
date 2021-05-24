@@ -52,6 +52,11 @@ public:
     /// <returns></returns>
     std::shared_ptr<my::QuickChangeSystem> GetQuickChange(void) const;
     /// <summary>
+    /// “Ç‚İ‚İ
+    /// </summary>
+    /// <param name=""></param>
+    void GameSystemLoad(void);
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

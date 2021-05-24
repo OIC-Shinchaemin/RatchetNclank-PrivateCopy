@@ -61,6 +61,12 @@ public:
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    const std::vector<my::WeaponSystem::Pair>& GetWeaponMap(void) const;
+    /// <summary>
     /// ’Ç‰Á
     /// </summary>
     /// <param name="ptr"></param>
@@ -79,10 +85,8 @@ public:
     /// <summary>
     /// ‰Šú‰»
     /// </summary>
-    /// <param name="in"></param>
-    /// <param name="observer"></param>
     /// <returns></returns>
-    bool Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);
+    bool Initialize(void);
     /// <summary>
     /// ‰ğ•ú
     /// </summary>
