@@ -8,7 +8,6 @@
 my::Pyrocitor::Pyrocitor() :
     super() {
     super::SetName("Pyrocitor");
-    //super::_mesh = my::ResourceLocator::GetResource<Mof::CMeshContainer>("../Resource/mesh/pyrocitor/scene.mom");
     super::_shot_speed = 2.0f;
     super::_interval_max = 0.06f;
     super::_bullet_count = 240;
@@ -18,7 +17,7 @@ my::Pyrocitor::~Pyrocitor() {
 }
 
 bool my::Pyrocitor::IsAction(void) const {
-    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_SPACE);
+    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_V);
 }
 
 bool my::Pyrocitor::Fire(const def::Transform& transform) {

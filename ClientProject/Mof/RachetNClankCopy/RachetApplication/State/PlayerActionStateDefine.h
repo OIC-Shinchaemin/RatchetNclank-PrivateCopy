@@ -27,6 +27,7 @@ struct PlayerActionStateType {
     static std::string kPlayerActionThrowAttackEndState;
     static std::string kPlayerActionJumpAttackSetState;
     static std::string kPlayerActionJumpAttackState;
+    static std::string kPlayerActionShotAttackState;
     static std::string kPlayerActionLookState;
     static std::string kPlayerActionDamageState;
     static std::string kPlayerActionDeadState;

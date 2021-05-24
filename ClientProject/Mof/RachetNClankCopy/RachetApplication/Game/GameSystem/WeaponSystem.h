@@ -25,7 +25,7 @@ private:
     //! 武器
     std::vector<Pair> _weapons;
     //! 通知用
-    my::Observable<std::shared_ptr<my::Mechanical>> _subject;
+    my::Observable<std::shared_ptr<my::Weapon>> _subject;
     //! 通知用
     my::Observable<const my::Mechanical::Info&> _equipment_subject;
     //! マップ
@@ -61,10 +61,16 @@ public:
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    const std::vector<my::WeaponSystem::Pair>& GetWeaponMap(void) const;
+    /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Mechanical>>>& ptr);
+    void AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Weapon>>>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -79,7 +85,6 @@ public:
     /// <summary>
     /// 初期化
     /// </summary>
-    /// <param name="in"></param>
     /// <param name="observer"></param>
     /// <returns></returns>
     bool Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);

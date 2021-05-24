@@ -12,7 +12,7 @@ class PlayerThrowAttackComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
 private:
     //! 武器
-    std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
+    std::weak_ptr<class PlayerOmniWrenchComponent> _weapon_com;
 public:
     /// <summary>
     /// コンストラクタ

@@ -24,7 +24,6 @@
 
 
 void my::PhysicsWorld::GenerateLayer(void) {
-
     const char* types[] = {
       my::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm.c_str(),

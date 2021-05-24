@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Rachet">
       <UniqueIdentifier>{ee6ebebb-e1b2-41b5-8a2e-5cbe8cd42389}</UniqueIdentifier>
     </Filter>
@@ -27,9 +23,6 @@
     </Filter>
     <Filter Include="Rachet\Source\Game">
       <UniqueIdentifier>{2496ac41-fe9a-4995-b36c-2cb20993aa75}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\save">
-      <UniqueIdentifier>{df540a94-66f5-4b59-a889-76236bcb6e05}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Header\Factory">
       <UniqueIdentifier>{b96171b7-57c7-4532-aba0-a5aeb2ee59f8}</UniqueIdentifier>
@@ -70,9 +63,6 @@
     <Filter Include="Rachet\Header\Behaviour\Node">
       <UniqueIdentifier>{c5513471-6a03-479d-b8c3-ba7d84591e9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\behaviour">
-      <UniqueIdentifier>{3be1d213-4b2d-4d51-a4aa-2ec5d4dc7c2e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Source\Factory">
       <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
     </Filter>
@@ -81,9 +71,6 @@
     </Filter>
     <Filter Include="Rachet\Source\Component">
       <UniqueIdentifier>{4f7a0cc8-eb0a-483a-a36c-2d03f2b326b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\builder">
-      <UniqueIdentifier>{38822f9b-b1ef-4bf7-8b94-f3483a8de732}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Header\Actor">
       <UniqueIdentifier>{06c272ec-f183-4117-aed0-17d30ef8bd5c}</UniqueIdentifier>
@@ -190,15 +177,6 @@
     <Filter Include="Rachet\Header\Actor\Ship">
       <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル\scene_resource">
-      <UniqueIdentifier>{e7b0a52a-a213-4e12-a354-b6e5957328f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\motion_names">
-      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\stage">
-      <UniqueIdentifier>{492cf9dc-39e2-4b04-9c3a-8bc9da18b19f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Source\Stage">
       <UniqueIdentifier>{b7ada71b-9352-4e63-bea1-d2187881b714}</UniqueIdentifier>
     </Filter>
@@ -259,12 +237,6 @@
     <Filter Include="Rachet\Source\Factory\Builder">
       <UniqueIdentifier>{01534295-06e6-4519-a38c-12387d9b3c88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Source\Component\Weapon">
-      <UniqueIdentifier>{e65bf001-c5e9-4aae-ba98-462ca64d800d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Header\Component\Weapon">
-      <UniqueIdentifier>{94cb0e0c-0632-41b0-b66f-ad29f47dffb4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Factory\ComponentRegister">
       <UniqueIdentifier>{e9111719-68d3-4b4e-8894-fe7bdacd2cb1}</UniqueIdentifier>
     </Filter>
@@ -273,6 +245,40 @@
     </Filter>
     <Filter Include="Rachet\Source\Component\Player\Action">
       <UniqueIdentifier>{add77942-3359-4581-b852-9dc9e0bfc3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource\save">
+      <UniqueIdentifier>{df540a94-66f5-4b59-a889-76236bcb6e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\behaviour">
+      <UniqueIdentifier>{3be1d213-4b2d-4d51-a4aa-2ec5d4dc7c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\builder">
+      <UniqueIdentifier>{38822f9b-b1ef-4bf7-8b94-f3483a8de732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\scene_resource">
+      <UniqueIdentifier>{e7b0a52a-a213-4e12-a354-b6e5957328f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\motion_names">
+      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\stage">
+      <UniqueIdentifier>{492cf9dc-39e2-4b04-9c3a-8bc9da18b19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Weapon">
+      <UniqueIdentifier>{3c30a394-d063-4f3d-afe5-6d70cd7d2a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Weapon\OmniWrench">
+      <UniqueIdentifier>{20c591a8-4d3e-4996-a818-959ba0fb102b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Weapon">
+      <UniqueIdentifier>{3964a09b-0c7a-47a3-9cd3-ab68c78cc300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Weapon\OmniWrench">
+      <UniqueIdentifier>{d2d7b52e-e01f-41b1-8910-3bde8bc2b663}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -636,9 +642,6 @@
     <ClCompile Include="Component\Player\PlayerStateComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
@@ -720,20 +723,11 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Player\PlayerWeaponComponent.cpp">
+    <ClCompile Include="Component\Player\PlayerOmniWrenchComponent.cpp">
       <Filter>Rachet\Source\Component\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Weapon\OmniWrenchThrowedComponent.cpp">
-      <Filter>Rachet\Source\Component\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Weapon\OmniWrenchActionStateComponent.cpp">
-      <Filter>Rachet\Source\Component\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="State\OmniWrenchActionStateImplementation.cpp">
       <Filter>Rachet\Source\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Weapon\OmniWrenchDefaultComponent.cpp">
-      <Filter>Rachet\Source\Component\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="Camera\FirstPersonCameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
@@ -808,6 +802,21 @@
       <Filter>Rachet\Source\Component\Player\Action</Filter>
     </ClCompile>
     <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.cpp">
+      <Filter>Rachet\Source\Component\Weapon\OmniWrench</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp">
+      <Filter>Rachet\Source\Component\Weapon\OmniWrench</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp">
+      <Filter>Rachet\Source\Component\Weapon\OmniWrench</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMechanicalWeaponComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerShotAttackComponent.cpp">
       <Filter>Rachet\Source\Component\Player\Action</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1340,9 +1349,6 @@
     <ClInclude Include="Component\Player\PlayerStateComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\PlayerMeleeAttackCollisionComponent.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
@@ -1484,20 +1490,11 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Player\PlayerWeaponComponent.h">
+    <ClInclude Include="Component\Player\PlayerOmniWrenchComponent.h">
       <Filter>Rachet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Weapon\OmniWrenchThrowedComponent.h">
-      <Filter>Rachet\Header\Component\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Weapon\OmniWrenchActionStateComponent.h">
-      <Filter>Rachet\Header\Component\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="State\OmniWrenchActionStateDefine.h">
       <Filter>Rachet\Header\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Weapon\OmniWrenchDefaultComponent.h">
-      <Filter>Rachet\Header\Component\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Camera\FirstPersonCameraController.h">
       <Filter>Rachet\Header\Camera</Filter>
@@ -1592,101 +1589,122 @@
     <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h">
       <Filter>Rachet\Header\Component\Player\Action</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.h">
+      <Filter>Rachet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h">
+      <Filter>Rachet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h">
+      <Filter>Rachet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchComponentInclude.h">
+      <Filter>Rachet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\OmniWrenchComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMechanicalWeaponComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerShotAttackComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
-      <Filter>リソース ファイル\scene_resource</Filter>
+      <Filter>Resource\scene_resource</Filter>
     </Text>
     <Text Include="..\Resource\scene_resource\game_scene.txt">
-      <Filter>リソース ファイル\scene_resource</Filter>
+      <Filter>Resource\scene_resource</Filter>
     </Text>
     <Text Include="..\Resource\scene_resource\clear_scene.txt">
-      <Filter>リソース ファイル\scene_resource</Filter>
+      <Filter>Resource\scene_resource</Filter>
     </Text>
     <Text Include="..\Resource\scene_resource\title_scene.txt">
-      <Filter>リソース ファイル\scene_resource</Filter>
+      <Filter>Resource\scene_resource</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json">
-      <Filter>リソース ファイル\save</Filter>
+      <Filter>Resource\save</Filter>
     </None>
     <None Include="..\Resource\motion_names\player.motion_names">
-      <Filter>リソース ファイル\motion_names</Filter>
+      <Filter>Resource\motion_names</Filter>
     </None>
     <None Include="..\Resource\builder\player.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\particle.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\pyrocitor_bullet.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\bomb_glove_bullet.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\blaster_bullet.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\pyrocitor.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\blaster.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\bomb_glove.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\bomb_glove_effect.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\ship.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\strong_enemy.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\weak_enemy.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\behaviour\strong_enemy_patrol.json">
-      <Filter>リソース ファイル\behaviour</Filter>
+      <Filter>Resource\behaviour</Filter>
     </None>
     <None Include="..\Resource\behaviour\weak_enemy_combat.json">
-      <Filter>リソース ファイル\behaviour</Filter>
+      <Filter>Resource\behaviour</Filter>
     </None>
     <None Include="..\Resource\behaviour\weak_enemy_patrol.json">
-      <Filter>リソース ファイル\behaviour</Filter>
+      <Filter>Resource\behaviour</Filter>
     </None>
     <None Include="..\Resource\behaviour\strong_enemy_combat.json">
-      <Filter>リソース ファイル\behaviour</Filter>
+      <Filter>Resource\behaviour</Filter>
     </None>
     <None Include="..\Resource\builder\enemy_bullet.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\stage\test.json">
-      <Filter>リソース ファイル\stage</Filter>
+      <Filter>Resource\stage</Filter>
     </None>
     <None Include="..\Resource\motion_names\skeleton.motion_names">
-      <Filter>リソース ファイル\motion_names</Filter>
+      <Filter>Resource\motion_names</Filter>
     </None>
     <None Include="..\Resource\motion_names\ship.motion_names">
-      <Filter>リソース ファイル\motion_names</Filter>
+      <Filter>Resource\motion_names</Filter>
     </None>
     <None Include="..\Resource\builder\omni_wrench.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\water_flow.json">
-      <Filter>リソース ファイル\builder</Filter>
+      <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\stage\stage.json">
-      <Filter>リソース ファイル\stage</Filter>
+      <Filter>Resource\stage</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RachetApplication.rc">
-      <Filter>リソース ファイル</Filter>
+      <Filter>Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

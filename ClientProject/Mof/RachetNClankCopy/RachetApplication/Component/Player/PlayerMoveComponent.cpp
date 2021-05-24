@@ -1,5 +1,6 @@
 #include "PlayerMoveComponent.h"
 
+#include "../../Actor/Character/Player.h"
 #include "PlayerComponent.h"
 #include "../CameraComponent.h"
 
@@ -111,6 +112,12 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+        auto owner = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+        if (owner->GetCurrentMechanical()) {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+        } // if
     } // else if
 
     if (this->AquireInputData(in, move_angle)) {

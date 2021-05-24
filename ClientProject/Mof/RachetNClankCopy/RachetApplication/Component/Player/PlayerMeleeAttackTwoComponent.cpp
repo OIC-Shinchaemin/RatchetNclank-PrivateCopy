@@ -1,7 +1,7 @@
 #include "PlayerMeleeAttackTwoComponent.h"
 
 #include "PlayerMoveComponent.h"
-#include "PlayerWeaponComponent.h"
+#include "PlayerOmniWrenchComponent.h"
 
 
 my::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(int priority) :
@@ -33,7 +33,7 @@ bool my::PlayerMeleeAttackTwoComponent::Initialize(void) {
     super::Initialize();
 
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-    _weapon_com = super::GetOwner()->GetComponent<my::PlayerWeaponComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<my::PlayerOmniWrenchComponent>();
     return true;
 }
 

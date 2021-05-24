@@ -17,11 +17,7 @@
 #include "../Component/Player/PlayerComponentInclude.h"
 #include "../Component/Enemy/EnemyComponentInclude.h"
 #include "../Component/Collision/Object/CollisionComponentInclude.h"
-
-
-#include "../Component/Weapon/OmniWrenchActionStateComponent.h"
-#include "../Component/Weapon/OmniWrenchDefaultComponent.h"
-#include "../Component/Weapon/OmniWrenchThrowedComponent.h"
+#include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
 
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
@@ -46,11 +42,8 @@ my::ComponentFactory::ComponentFactory() :
 #include "ComponentRegister/PlayerComponentRegister.h"
 #include "ComponentRegister/EnemyComponentRegister.h"
 #include "ComponentRegister/CollisionComponentRegister.h"
-    
-    my::ComponentFactory::AddComponentCreator<my::OmniWrenchActionStateComponent>();
-    my::ComponentFactory::AddComponentCreator<my::OmniWrenchDefaultComponent>();
-    my::ComponentFactory::AddComponentCreator<my::OmniWrenchThrowedComponent>();
-
+#include "ComponentRegister/OmniWrenchComponentRegister.h"
+        
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::ShipComponent>();

@@ -1,7 +1,7 @@
 #include "PlayerMeleeAttackOneComponent.h"
 
 #include "PlayerMoveComponent.h"
-#include "PlayerWeaponComponent.h"
+#include "PlayerOmniWrenchComponent.h"
 
 
 my::PlayerMeleeAttackOneComponent::PlayerMeleeAttackOneComponent(int priority) :
@@ -32,7 +32,7 @@ std::string_view my::PlayerMeleeAttackOneComponent::GetStateType(void) const {
 bool my::PlayerMeleeAttackOneComponent::Initialize(void) {
     super::Initialize();
     _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-    _weapon_com = super::GetOwner()->GetComponent<my::PlayerWeaponComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<my::PlayerOmniWrenchComponent>();
     return true;
 }
 

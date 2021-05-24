@@ -1,21 +1,26 @@
 #include "Player.h"
 
 #include "../../Gamepad.h"
-#include "../../Component/MeshComponent.h"
 #include "../../Component/MotionComponent.h"
 #include "../../Component/Player/PlayerComponent.h"
 #include "../../Factory/FactoryManager.h"
-#include "../../Factory/ActorFactory.h"
 
 
 std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
     auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<my::Actor>& ptr) {
         return ptr->GetTag() == tag;
-                           });
+    });
     if (it == _children.end()) {
         return nullptr;
     } // if
     return *it;
+}
+
+std::shared_ptr<my::Mechanical> my::Player::GetCurrentMechanical(void) const {
+    if (auto weapon = this->_current_mechanical.lock()) {
+        return weapon;
+    } // if
+    return nullptr;
 }
 
 void my::Player::End(void) {
@@ -50,15 +55,30 @@ bool my::Player::Initialize(my::Actor::Param* param) {
 
 my::Player::Player() :
     _current_mechanical(),
+    _omniwrench(),
+    _children(),
+    _current_weapon(),
+    _player_com(),
+    _upp_bone_state(),
     _enable(true) {
     super::SetTag("Player");
+
+    auto param = super::Param();
+    param.name = "weapon";
+    param.tag = "OmniWrench";
+    auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", &param);
+    this->AddChild(omniwrench);
+    this->_current_weapon = omniwrench;
 }
 
 my::Player::~Player() {
 }
 
-void my::Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
-    _current_mechanical = change;
+void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
+    if (auto mechanical = std::dynamic_pointer_cast<my::Mechanical>(change) ) {
+        _current_mechanical = mechanical;
+    } // if
+    _current_weapon = change;
 }
 
 void my::Player::OnNotify(const my::QuickChangeSystem::Info& info) {
@@ -78,12 +98,29 @@ bool my::Player::Update(float delta_time) {
     if (!_enable) {
         return false;
     } // if
-
     super::Update(delta_time);
 
-    // •Ší‚ðÝ’è‚·‚éƒ{[ƒ“‚Ìî•ñ‚ðŽæ“¾‚·‚é
+    // children transform
     Mof::CMatrix44 mat = _upp_bone_state->pBone->GetRotationOffsetMatrix() * _upp_bone_state->BoneMatrix;
+    Mof::CVector3 scale, rotate, translate;
+    mat.GetScaling(scale); mat.GetRotation(rotate); mat.GetTranslation(translate);
+    /*
+    for (auto& actor : _children) {
+        actor->SetScale(scale);
+        actor->SetPosition(translate);
+        actor->SetRotate(rotate);
+    } // for
+    */
+    if (_current_weapon) {
+        _current_weapon->SetScale(scale);
+        _current_weapon->SetPosition(translate);
+        _current_weapon->SetRotate(rotate);
+        _current_weapon->Update(delta_time);
+    } // if
 
+
+    /*
+    // children update
     if (auto weapon = _current_mechanical.lock()) {
         weapon->Update(delta_time);
         if (weapon->IsAction() && weapon->CanFire()) {
@@ -102,18 +139,7 @@ bool my::Player::Update(float delta_time) {
             weapon->Fire(def::Transform(pos, super::GetRotate()));
         } // if
     } // if
-
-    for (auto actor : _children) {
-        //actor->SetParentTransform(mat);
-        Mof::CVector3 scale, rotate, translate;
-
-        mat.GetScaling(scale);
-        mat.GetRotation(rotate);
-        mat.GetTranslation(translate);
-        actor->SetScale(scale);
-        actor->SetPosition(translate);
-        actor->SetRotate(rotate);
-    } // for
+    */
     return true;
 }
 
@@ -122,14 +148,19 @@ bool my::Player::Render(void) {
         return false;
     } // if
     super::Render();
-
-    //_omniwrench->Render();
+    if (_current_weapon) {
+        _current_weapon->Render();
+    } // if
     return true;
 }
 
 bool my::Player::Release(void) {
     super::Release();
-    _children.clear();
     _current_mechanical.reset();
+    _omniwrench.reset();
+    _children.clear();
+    _current_weapon.reset();
+    _player_com.reset();;
+    _upp_bone_state = nullptr;
     return true;
 }

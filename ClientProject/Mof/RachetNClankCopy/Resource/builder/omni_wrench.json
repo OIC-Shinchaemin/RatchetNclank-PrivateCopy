@@ -6,7 +6,7 @@
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/Chara/Wep_01_ion_mdl_01.mom"
+        "path": "../Resource/mesh/omni_wrench/scene450.mom"
       }
     },
     {

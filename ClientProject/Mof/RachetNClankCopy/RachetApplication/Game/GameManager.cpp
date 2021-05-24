@@ -12,7 +12,6 @@ my::GameManager::GameManager() :
 }
 
 my::GameManager::~GameManager() {
-    this->GameSystemRelease();
 }
 
 void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
@@ -31,12 +30,17 @@ std::shared_ptr<my::QuickChangeSystem> my::GameManager::GetQuickChange(void) con
     return this->_quick_change;
 }
 
+void my::GameManager::GameSystemLoad(void) {
+    auto save_data = my::SaveData();
+    my::SaveSystem().Fetch(save_data);
+    _weapon_system->Load(save_data);
+}
+
 bool my::GameManager::Initialize(void) {
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
     _quick_change->SetResourceManager(_resource);
     _quick_change->SetUICanvas(_ui_canvas);
-
     return true;
 }
 
@@ -46,7 +50,6 @@ bool my::GameManager::Update(void) {
 }
 
 bool my::GameManager::Release(void) {
-    this->GameSystemRelease();
     return true;
 }
 

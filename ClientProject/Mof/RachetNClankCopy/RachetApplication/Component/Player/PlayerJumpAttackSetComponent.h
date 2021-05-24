@@ -14,7 +14,7 @@ private:
     //! 速さ
     float _up_speed;
     //! 武器
-    std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
+    std::weak_ptr<class PlayerOmniWrenchComponent> _weapon_com;
 public:
     /// <summary>
     /// コンストラクタ

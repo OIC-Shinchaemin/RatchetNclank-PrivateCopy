@@ -13,22 +13,24 @@
 
 namespace my {
 class Player : public my::Character,
-    public my::Observer<std::shared_ptr<my::Mechanical>>,
+    public my::Observer<std::shared_ptr<my::Weapon>>,
     public my::Observer<const my::QuickChangeSystem::Info&> {
     using super = my::Character;
 private:
     //! 武器
     std::weak_ptr<my::Mechanical> _current_mechanical;
     //! 武器
-    //std::shared_ptr<my::OmniWrench> _omniwrench;
-    //! 子アクター
+    std::shared_ptr<my::OmniWrench> _omniwrench;
+    //! 武器
     std::vector<std::shared_ptr<my::Actor>> _children;
+    //! 武器
+    std::shared_ptr<my::Weapon> _current_weapon;
     //! プレイヤー
     std::weak_ptr<my::PlayerComponent> _player_com;
-    //! 有効
-    bool _enable;
     //! 腕の位置
     Mof::LPBONEMOTIONSTATE _upp_bone_state;
+    //! 有効
+    bool _enable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -42,7 +44,7 @@ public:
     /// 通知
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
+    virtual void OnNotify(std::shared_ptr<my::Weapon> change) override;
     /// <summary>
     /// 通知
     /// </summary>
@@ -54,6 +56,12 @@ public:
     /// <param name="tag"></param>
     /// <returns></returns>
     std::shared_ptr<my::Actor> GetChild(const std::string& tag) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Mechanical> GetCurrentMechanical(void) const;
     /// <summary>
     /// デリート
     /// </summary>

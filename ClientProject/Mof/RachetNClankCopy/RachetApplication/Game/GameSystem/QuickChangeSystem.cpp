@@ -55,7 +55,7 @@ void my::QuickChangeSystem::AddInfoObserver(const std::shared_ptr<my::Observer<c
     _subject.AddObserver(ptr);
 }
 
-bool my::QuickChangeSystem::Initialize(Mof::CVector2 pos, const std::shared_ptr<my::WeaponSystem>& weapon_system) {
+bool my::QuickChangeSystem::Initialize(const std::shared_ptr<my::WeaponSystem>& weapon_system) {
     _ASSERT_EXPR(!_resource.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ğ•Û‚µ‚Ä‚¢‚Ü‚·");
 
     int n = 0;
