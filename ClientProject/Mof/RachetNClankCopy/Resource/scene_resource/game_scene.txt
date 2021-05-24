@@ -9,9 +9,6 @@
 ../Resource/mesh/blaster_bullet/scene.mom
 ../Resource/mesh/pyrocitor_bullet/scene.mom
 
-
-
-
 ../Resource/texture/icon/bomb_glove.png
 ../Resource/texture/icon/pyrocitor.png
 ../Resource/texture/icon/blaster.png

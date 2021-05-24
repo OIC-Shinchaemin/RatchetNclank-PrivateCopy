@@ -822,6 +822,9 @@
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp">
       <Filter>Rachet\Source\Component\Weapon\OmniWrench</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Weapon\Blaster\BlasterComponent.cpp">
+      <Filter>Rachet\Source\Component\Weapon\Blaster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1609,6 +1612,9 @@
     </ClInclude>
     <ClInclude Include="Factory\ComponentRegister\OmniWrenchComponentRegister.h">
       <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\Blaster\BlasterComponent.h">
+      <Filter>Rachet\Header\Component\Weapon\Blaster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

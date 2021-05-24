@@ -1,6 +1,11 @@
 {
-
   "components": [
+    {
+      "type": "BlasterComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
     {
       "type": "MeshComponent",
       "paramater": {
@@ -8,5 +13,6 @@
         "path": "../Resource/mesh/blaster/scene300.mom"
       }
     }
+
   ]
 }

@@ -97,12 +97,22 @@ bool my::Player::Update(float delta_time) {
     Mof::CMatrix44 mat = _upp_bone_state->pBone->GetRotationOffsetMatrix() * _upp_bone_state->BoneMatrix;
     Mof::CVector3 scale, rotate, translate;
     mat.GetScaling(scale); mat.GetRotation(rotate); mat.GetTranslation(translate);
+    /*
     for (auto& actor : _children) {
         actor->SetScale(scale);
         actor->SetPosition(translate);
         actor->SetRotate(rotate);
     } // for
-    
+    */
+    if (_current_weapon) {
+        _current_weapon->SetScale(scale);
+        _current_weapon->SetPosition(translate);
+        _current_weapon->SetRotate(rotate);
+        _current_weapon->Update(delta_time);
+    } // if
+
+
+    /*
     // children update
     if (auto weapon = _current_mechanical.lock()) {
         weapon->Update(delta_time);
@@ -122,7 +132,7 @@ bool my::Player::Update(float delta_time) {
             weapon->Fire(def::Transform(pos, super::GetRotate()));
         } // if
     } // if
-
+    */
     return true;
 }
 

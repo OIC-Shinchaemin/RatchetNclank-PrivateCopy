@@ -345,6 +345,7 @@
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Component\UpdateComponent.cpp" />
     <ClCompile Include="Component\VelocityComponent.cpp" />
+    <ClCompile Include="Component\Weapon\Blaster\BlasterComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp" />
@@ -595,6 +596,7 @@
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Component\UpdateComponent.h" />
     <ClInclude Include="Component\VelocityComponent.h" />
+    <ClInclude Include="Component\Weapon\Blaster\BlasterComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchComponentInclude.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />

@@ -19,6 +19,8 @@
 #include "../Component/Collision/Object/CollisionComponentInclude.h"
 #include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
 
+#include "../Component/Weapon/Blaster/BlasterComponent.h"
+
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
 #include "../Component/Ship/ShipComponent.h"
@@ -44,6 +46,7 @@ my::ComponentFactory::ComponentFactory() :
 #include "ComponentRegister/CollisionComponentRegister.h"
 #include "ComponentRegister/OmniWrenchComponentRegister.h"
         
+    my::ComponentFactory::AddComponentCreator<my::BlasterComponent>();
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::ShipComponent>();
