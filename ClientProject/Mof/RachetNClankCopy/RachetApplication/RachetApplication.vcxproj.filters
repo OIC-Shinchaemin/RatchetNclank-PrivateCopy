@@ -825,6 +825,12 @@
     <ClCompile Include="Component\Weapon\Blaster\BlasterComponent.cpp">
       <Filter>Rachet\Source\Component\Weapon\Blaster</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMechanicalWeaponComponent.cpp">
+      <Filter>Rachet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerShotAttackComponent.cpp">
+      <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1615,6 +1621,12 @@
     </ClInclude>
     <ClInclude Include="Component\Weapon\Blaster\BlasterComponent.h">
       <Filter>Rachet\Header\Component\Weapon\Blaster</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMechanicalWeaponComponent.h">
+      <Filter>Rachet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerShotAttackComponent.h">
+      <Filter>Rachet\Header\Component\Player\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

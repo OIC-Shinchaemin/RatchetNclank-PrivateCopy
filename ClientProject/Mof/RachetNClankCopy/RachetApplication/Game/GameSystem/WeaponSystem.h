@@ -85,8 +85,9 @@ public:
     /// <summary>
     /// ‰Šú‰»
     /// </summary>
+    /// <param name="observer"></param>
     /// <returns></returns>
-    bool Initialize(void);
+    bool Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);
     /// <summary>
     /// ‰ğ•ú
     /// </summary>

@@ -3,8 +3,8 @@
 #include "../../Actor/Character/Player.h"
 #include "PlayerThrowAttackComponent.h"
 #include "../Collision/Object/OmniWrenchCollisionComponent.h"
-#include "../Weapon/OmniWrenchActionStateComponent.h"
-#include "../Weapon/OmniWrenchThrowedComponent.h"
+#include "../Weapon/OmniWrench/OmniWrenchActionStateComponent.h"
+#include "../Weapon/OmniWrench/OmniWrenchThrowedComponent.h"
 #include "../../State/OmniWrenchActionStateDefine.h"
 
 

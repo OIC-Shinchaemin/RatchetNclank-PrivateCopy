@@ -76,7 +76,7 @@ bool my::WeaponSystem::Load(my::SaveData& in) {
     return true;
 }
 
-bool my::WeaponSystem::Initialize(void) {
+bool my::WeaponSystem::Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if
@@ -91,7 +91,7 @@ bool my::WeaponSystem::Initialize(void) {
     // weapon
     auto param = my::Actor::Param();
     for (auto weapon : _weapons) {
-        //weapon.second->AddObserver(observer);
+        weapon.second->AddObserver(observer);
         weapon.second->AddMechanicalInfoObserver(menu);
     } // for
     return true;

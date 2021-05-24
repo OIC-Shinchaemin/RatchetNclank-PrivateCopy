@@ -57,6 +57,12 @@ public:
     /// <returns></returns>
     std::shared_ptr<my::Actor> GetChild(const std::string& tag) const;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Mechanical> GetCurrentMechanical(void) const;
+    /// <summary>
     /// デリート
     /// </summary>
     /// <param name=""></param>

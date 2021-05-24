@@ -16,6 +16,13 @@ std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
     return *it;
 }
 
+std::shared_ptr<my::Mechanical> my::Player::GetCurrentMechanical(void) const {
+    if (auto weapon = this->_current_mechanical.lock()) {
+        return weapon;
+    } // if
+    return nullptr;
+}
+
 void my::Player::End(void) {
     Observable::Notify("PlayerDead", shared_from_this());
 }

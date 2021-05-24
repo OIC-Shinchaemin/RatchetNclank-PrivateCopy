@@ -22,6 +22,7 @@
 #include "PlayerThrowAttackEndComponent.h"
 #include "PlayerJumpAttackSetComponent.h"
 #include "PlayerJumpAttackComponent.h"
+#include "PlayerShotAttackComponent.h"
 #include "PlayerLookComponent.h"
 #include "PlayerDamageComponent.h"
 #include "PlayerDeadComponent.h"

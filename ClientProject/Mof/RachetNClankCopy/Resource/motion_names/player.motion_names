@@ -164,6 +164,19 @@
       "same": false,
       "state": "PlayerMotionJumpAttackState"
     },
+
+
+    {
+      "name": "mov_b_dash_lp",
+      "speed": 1.0,
+      "loop": true,
+      "same": false,
+      "state": "PlayerMotionShotAttackState"
+    },
+
+
+
+
     {
       "name": "dam_damage_m_a",
       "speed": 1.0,

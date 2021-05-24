@@ -326,6 +326,7 @@
     <ClCompile Include="Component\Player\PlayerJumpSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerJumpUpComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerLookComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerMechanicalWeaponComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackOneComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackOneEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackThreeComponent.cpp" />
@@ -333,6 +334,7 @@
     <ClCompile Include="Component\Player\PlayerMeleeAttackTwoComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMeleeAttackTwoEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerMoveComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerShotAttackComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerStateComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerThrowAttackComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerThrowAttackEndComponent.cpp" />
@@ -577,6 +579,7 @@
     <ClInclude Include="Component\Player\PlayerJumpSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerJumpUpComponent.h" />
     <ClInclude Include="Component\Player\PlayerLookComponent.h" />
+    <ClInclude Include="Component\Player\PlayerMechanicalWeaponComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackOneComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackOneEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackThreeComponent.h" />
@@ -584,6 +587,7 @@
     <ClInclude Include="Component\Player\PlayerMeleeAttackTwoComponent.h" />
     <ClInclude Include="Component\Player\PlayerMeleeAttackTwoEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerMoveComponent.h" />
+    <ClInclude Include="Component\Player\PlayerShotAttackComponent.h" />
     <ClInclude Include="Component\Player\PlayerStateComponent.h" />
     <ClInclude Include="Component\Player\PlayerThrowAttackComponent.h" />
     <ClInclude Include="Component\Player\PlayerThrowAttackEndComponent.h" />

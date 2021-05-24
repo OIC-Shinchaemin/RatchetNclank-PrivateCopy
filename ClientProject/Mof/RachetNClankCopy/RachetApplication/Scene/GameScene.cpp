@@ -205,7 +205,7 @@ bool my::GameScene::Initialize(void) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         // game system
-        weapon_system->Initialize();
+        weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
         
         weapon_system->AddMechanicalWeaponObserver(player);

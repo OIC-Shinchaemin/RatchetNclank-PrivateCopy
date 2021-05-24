@@ -175,6 +175,15 @@
       }
     },
 
+
+    {
+      "type": "PlayerShotAttackComponent",
+      "paramater": {
+        "priority": 84
+      }
+    },
+
+
     {
       "type": "PlayerLookComponent",
       "paramater": {
