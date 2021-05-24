@@ -68,6 +68,7 @@ bool my::PlayerShotAttackComponent::Start(void) {
 
     auto owner = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
     _weapon = owner->GetCurrentMechanical();
+    owner->OnNotify(_weapon.lock());
     auto pos = super::GetOwner()->GetPosition();
     auto rotate = super::GetOwner()->GetRotate();
     _weapon.lock()->Fire(def::Transform(pos, rotate));
