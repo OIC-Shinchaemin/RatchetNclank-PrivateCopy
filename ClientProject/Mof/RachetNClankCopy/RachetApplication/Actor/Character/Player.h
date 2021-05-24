@@ -13,7 +13,7 @@
 
 namespace my {
 class Player : public my::Character,
-    public my::Observer<std::shared_ptr<my::Mechanical>>,
+    public my::Observer<std::shared_ptr<my::Weapon>>,
     public my::Observer<const my::QuickChangeSystem::Info&> {
     using super = my::Character;
 private:
@@ -44,7 +44,7 @@ public:
     /// ’Ê’m
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(std::shared_ptr<my::Mechanical> change) override;
+    virtual void OnNotify(std::shared_ptr<my::Weapon> change) override;
     /// <summary>
     /// ’Ê’m
     /// </summary>

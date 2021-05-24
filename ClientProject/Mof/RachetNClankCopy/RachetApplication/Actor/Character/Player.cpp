@@ -1,11 +1,9 @@
 #include "Player.h"
 
 #include "../../Gamepad.h"
-#include "../../Component/MeshComponent.h"
 #include "../../Component/MotionComponent.h"
 #include "../../Component/Player/PlayerComponent.h"
 #include "../../Factory/FactoryManager.h"
-#include "../../Factory/ActorFactory.h"
 
 
 std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
@@ -69,8 +67,10 @@ my::Player::Player() :
 my::Player::~Player() {
 }
 
-void my::Player::OnNotify(std::shared_ptr<my::Mechanical> change) {
-    _current_mechanical = change;
+void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
+    if (auto mechanical = std::dynamic_pointer_cast<my::Mechanical>(change) ) {
+        _current_mechanical = mechanical;
+    } // if
     _current_weapon = change;
 }
 
@@ -102,6 +102,7 @@ bool my::Player::Update(float delta_time) {
         actor->SetPosition(translate);
         actor->SetRotate(rotate);
     } // for
+    
     // children update
     if (auto weapon = _current_mechanical.lock()) {
         weapon->Update(delta_time);

@@ -25,7 +25,7 @@ private:
     //! 武器
     std::vector<Pair> _weapons;
     //! 通知用
-    my::Observable<std::shared_ptr<my::Mechanical>> _subject;
+    my::Observable<std::shared_ptr<my::Weapon>> _subject;
     //! 通知用
     my::Observable<const my::Mechanical::Info&> _equipment_subject;
     //! マップ
@@ -70,7 +70,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Mechanical>>>& ptr);
+    void AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Weapon>>>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

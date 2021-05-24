@@ -45,7 +45,7 @@ const std::vector<my::WeaponSystem::Pair>& my::WeaponSystem::GetWeaponMap(void) 
     return this->_weapons;
 }
 
-void my::WeaponSystem::AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Mechanical>>>& ptr) {
+void my::WeaponSystem::AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Weapon>>>& ptr) {
     _subject.AddObserver(ptr);
 }
 

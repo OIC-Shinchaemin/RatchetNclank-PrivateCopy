@@ -16,7 +16,7 @@ private:
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
     //! 武器
-    std::weak_ptr<class PlayerWeaponComponent> _weapon_com;
+    std::weak_ptr<class PlayerOmniWrenchComponent> _weapon_com;
 public:
     /// <summary>
     /// コンストラクタ

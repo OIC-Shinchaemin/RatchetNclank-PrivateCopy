@@ -337,7 +337,7 @@
     <ClCompile Include="Component\Player\PlayerThrowAttackComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerThrowAttackEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp" />
-    <ClCompile Include="Component\Player\PlayerWeaponComponent.cpp" />
+    <ClCompile Include="Component\Player\PlayerOmniWrenchComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipMeshComponent.cpp" />
@@ -345,9 +345,9 @@
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Component\UpdateComponent.cpp" />
     <ClCompile Include="Component\VelocityComponent.cpp" />
-    <ClCompile Include="Component\Weapon\OmniWrenchActionStateComponent.cpp" />
-    <ClCompile Include="Component\Weapon\OmniWrenchDefaultComponent.cpp" />
-    <ClCompile Include="Component\Weapon\OmniWrenchThrowedComponent.cpp" />
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.cpp" />
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp" />
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp" />
     <ClCompile Include="Factory\ActorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
@@ -587,7 +587,7 @@
     <ClInclude Include="Component\Player\PlayerThrowAttackComponent.h" />
     <ClInclude Include="Component\Player\PlayerThrowAttackEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h" />
-    <ClInclude Include="Component\Player\PlayerWeaponComponent.h" />
+    <ClInclude Include="Component\Player\PlayerOmniWrenchComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
     <ClInclude Include="Component\Ship\ShipComponent.h" />
     <ClInclude Include="Component\Ship\ShipMeshComponent.h" />
@@ -595,9 +595,10 @@
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Component\UpdateComponent.h" />
     <ClInclude Include="Component\VelocityComponent.h" />
-    <ClInclude Include="Component\Weapon\OmniWrenchActionStateComponent.h" />
-    <ClInclude Include="Component\Weapon\OmniWrenchDefaultComponent.h" />
-    <ClInclude Include="Component\Weapon\OmniWrenchThrowedComponent.h" />
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.h" />
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchComponentInclude.h" />
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
@@ -610,6 +611,7 @@
     <ClInclude Include="Factory\ComponentFactory.h" />
     <ClInclude Include="Factory\ComponentRegister\CollisionComponentRegister.h" />
     <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h" />
+    <ClInclude Include="Factory\ComponentRegister\OmniWrenchComponentRegister.h" />
     <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />

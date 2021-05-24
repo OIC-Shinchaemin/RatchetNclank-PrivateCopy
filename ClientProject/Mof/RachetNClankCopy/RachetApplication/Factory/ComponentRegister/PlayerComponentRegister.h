@@ -23,4 +23,4 @@ my::ComponentFactory::AddComponentCreator<my::PlayerJumpAttackComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerLookComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerDamageComponent>();
 my::ComponentFactory::AddComponentCreator<my::PlayerDeadComponent>();
-my::ComponentFactory::AddComponentCreator<my::PlayerWeaponComponent>();
+my::ComponentFactory::AddComponentCreator<my::PlayerOmniWrenchComponent>();

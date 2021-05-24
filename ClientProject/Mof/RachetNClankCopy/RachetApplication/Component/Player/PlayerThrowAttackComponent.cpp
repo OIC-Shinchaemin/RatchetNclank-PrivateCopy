@@ -1,6 +1,6 @@
 #include "PlayerThrowAttackComponent.h"
 
-#include "PlayerWeaponComponent.h"
+#include "PlayerOmniWrenchComponent.h"
 
 
 my::PlayerThrowAttackComponent::PlayerThrowAttackComponent(int priority) :
@@ -26,7 +26,7 @@ std::string_view my::PlayerThrowAttackComponent::GetStateType(void) const {
 
 bool my::PlayerThrowAttackComponent::Initialize(void) {
     super::Initialize();
-    _weapon_com = super::GetOwner()->GetComponent<my::PlayerWeaponComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<my::PlayerOmniWrenchComponent>();
     return true;
 }
 

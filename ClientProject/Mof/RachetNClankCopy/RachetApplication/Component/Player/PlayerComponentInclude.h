@@ -1,6 +1,6 @@
 #include "PlayerComponent.h"
 #include "PlayerStateComponent.h"
-#include "PlayerWeaponComponent.h"
+#include "PlayerOmniWrenchComponent.h"
 
 #include "PlayerIdleComponent.h"
 #include "PlayerMoveComponent.h"
