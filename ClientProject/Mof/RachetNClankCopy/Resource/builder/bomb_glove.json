@@ -5,7 +5,7 @@
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/bomb_glove/scene.mom"
+        "path": "../Resource/mesh/bomb_glove/scene100.mom"
       }
     }
   ]

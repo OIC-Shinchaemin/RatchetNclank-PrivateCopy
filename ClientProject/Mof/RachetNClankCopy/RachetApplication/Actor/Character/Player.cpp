@@ -11,7 +11,7 @@
 std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
     auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<my::Actor>& ptr) {
         return ptr->GetTag() == tag;
-                           });
+    });
     if (it == _children.end()) {
         return nullptr;
     } // if
@@ -49,7 +49,7 @@ bool my::Player::Initialize(my::Actor::Param* param) {
 }
 
 my::Player::Player() :
-    _current_mechanical(),
+    _current_weapon(),
     _enable(true) {
     super::SetTag("Player");
 }
@@ -103,6 +103,9 @@ bool my::Player::Update(float delta_time) {
         } // if
     } // if
 
+    //_omniwrench = std::dynamic_pointer_cast<my::OmniWrench>(this->GetChild("OmniWrench"));
+    //_omniwrench->Update(delta_time);
+    
     for (auto actor : _children) {
         //actor->SetParentTransform(mat);
         Mof::CVector3 scale, rotate, translate;
@@ -114,6 +117,7 @@ bool my::Player::Update(float delta_time) {
         actor->SetPosition(translate);
         actor->SetRotate(rotate);
     } // for
+    
     return true;
 }
 
@@ -122,14 +126,15 @@ bool my::Player::Render(void) {
         return false;
     } // if
     super::Render();
-
-    //_omniwrench->Render();
+    if (_omniwrench) {
+    //    _omniwrench->Render();
+    } // if
     return true;
 }
 
 bool my::Player::Release(void) {
     super::Release();
-    _children.clear();
+    //_children.clear();
     _current_mechanical.reset();
     return true;
 }

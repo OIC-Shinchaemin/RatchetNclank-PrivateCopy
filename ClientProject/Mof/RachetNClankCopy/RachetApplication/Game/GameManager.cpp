@@ -37,6 +37,9 @@ bool my::GameManager::Initialize(void) {
     _quick_change->SetResourceManager(_resource);
     _quick_change->SetUICanvas(_ui_canvas);
 
+    auto save_data = my::SaveData();
+    my::SaveSystem().Fetch(save_data);
+    _weapon_system->Load(save_data);
     return true;
 }
 

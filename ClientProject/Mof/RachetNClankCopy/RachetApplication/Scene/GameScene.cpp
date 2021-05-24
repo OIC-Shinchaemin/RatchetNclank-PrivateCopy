@@ -198,7 +198,7 @@ bool my::GameScene::Initialize(void) {
     player->AddObserver(ship);
 
     param->name = "weapon";
-    param->tag = "omni_wrench";
+    param->tag = "OmniWrench";
     auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", param);
     player->AddChild(omniwrench);
     this->AddElement(omniwrench);
@@ -209,9 +209,6 @@ bool my::GameScene::Initialize(void) {
         auto quick_change = game->GetQuickChange();
 
         // game system
-        auto save_data = my::SaveData();
-        my::SaveSystem().Fetch(save_data);
-        weapon_system->Load(save_data);
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize({}, weapon_system);
         weapon_system->AddMechanicalWeaponObserver(player);

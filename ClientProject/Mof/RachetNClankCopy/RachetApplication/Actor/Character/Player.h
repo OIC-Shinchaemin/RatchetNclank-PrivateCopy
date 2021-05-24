@@ -20,9 +20,11 @@ private:
     //! 武器
     std::weak_ptr<my::Mechanical> _current_mechanical;
     //! 武器
-    //std::shared_ptr<my::OmniWrench> _omniwrench;
+    std::shared_ptr<my::OmniWrench> _omniwrench;
     //! 子アクター
     std::vector<std::shared_ptr<my::Actor>> _children;
+    //! 武器
+    std::weak_ptr<my::Weapon> _current_weapon;
     //! プレイヤー
     std::weak_ptr<my::PlayerComponent> _player_com;
     //! 有効

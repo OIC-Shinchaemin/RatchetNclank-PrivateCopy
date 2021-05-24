@@ -5,7 +5,7 @@
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/blaster/scene.mom"
+        "path": "../Resource/mesh/blaster/scene300.mom"
       }
     }
   ]

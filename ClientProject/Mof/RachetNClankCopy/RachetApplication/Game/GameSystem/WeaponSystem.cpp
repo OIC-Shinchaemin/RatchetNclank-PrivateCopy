@@ -27,7 +27,9 @@ void my::WeaponSystem::OnNotify(const std::string& change) {
     auto weapon = this->GetMechanicalWeapon(change);
 
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
-    std::string name = weapon ? weapon->GetName().c_str() : "";
+    
+    using namespace std::literals::string_literals;
+    auto name = weapon ? weapon->GetName().c_str() : ""s;
     _equipment_subject.Notify(my::Mechanical::Info(bullet_count, name.c_str()));
 }
 
@@ -82,6 +84,7 @@ bool my::WeaponSystem::Initialize(const std::shared_ptr<my::Observer<const char*
         canvas->AddElement(menu);
     } // if
 
+    // weapon
     auto param = my::Actor::Param();
     for (auto weapon : _weapons) {
         weapon.second->AddObserver(observer);
