@@ -247,6 +247,7 @@
     <ClCompile Include="Actor\Weapon\OmniWrench.cpp" />
     <ClCompile Include="Actor\Weapon\Pyrocitor.cpp" />
     <ClCompile Include="Actor\Weapon\Weapon.cpp" />
+    <ClCompile Include="BridgeEvent.cpp" />
     <ClCompile Include="Camera\AutoCameraController.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
@@ -378,6 +379,7 @@
     <ClCompile Include="Scene\SceneImplementation.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="ShipEvent.cpp" />
     <ClCompile Include="Stage\Gimmick\Bridge.cpp" />
     <ClCompile Include="Stage\Gimmick\Elevator.cpp" />
     <ClCompile Include="Stage\Gimmick\GimmickBase.cpp" />
@@ -495,6 +497,7 @@
     <ClInclude Include="Behaviour\Node\SequencerNode.h" />
     <ClInclude Include="Behaviour\Node\SimplexNode.h" />
     <ClInclude Include="BezierCurveAnimation.h" />
+    <ClInclude Include="BridgeEvent.h" />
     <ClInclude Include="Camera\AutoCameraController.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
@@ -642,6 +645,7 @@
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="ShipEvent.h" />
     <ClInclude Include="Stage\Gimmick\Bridge.h" />
     <ClInclude Include="Stage\Gimmick\Elevator.h" />
     <ClInclude Include="Stage\Gimmick\GimmickBase.h" />

@@ -18,6 +18,8 @@
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
 #include "../Game/GameManager.h"
+#include "../BridgeEvent.h"
+#include "../ShipEvent.h"
 
 
 namespace my {
@@ -43,7 +45,10 @@ private:
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
     //! 削除
-    std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
+    //std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
+    std::shared_ptr<my::BridgeEvent>  _bridge_event;
+    //! ゲームイベント
+    std::shared_ptr<my::ShipEvent>  _ship_event;
     //! ゲームイベント
     //my::Observable<const char*, const std::shared_ptr<my::Actor>& > _bridge_event_subject;
     //! カメラ

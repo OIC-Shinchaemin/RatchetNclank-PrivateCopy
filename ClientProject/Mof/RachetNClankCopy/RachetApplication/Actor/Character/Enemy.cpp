@@ -10,6 +10,6 @@ my::Enemy::~Enemy() {
 }
 
 void my::Enemy::End(void) {
-    super::End();
     Observable::Notify("EnemyDead", shared_from_this());
+    super::End();
 }

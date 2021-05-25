@@ -822,6 +822,12 @@
     <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
+    <ClCompile Include="ShipEvent.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BridgeEvent.cpp">
+      <Filter>Rachet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1615,6 +1621,12 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipEvent.h">
+      <Filter>Rachet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BridgeEvent.h">
+      <Filter>Rachet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

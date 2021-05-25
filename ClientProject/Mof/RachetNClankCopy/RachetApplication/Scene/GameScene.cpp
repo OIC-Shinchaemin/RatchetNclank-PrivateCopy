@@ -22,23 +22,6 @@ void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
 }
 
 void my::GameScene::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
-    if (ptr ->GetTag() == "Enemy") {
-        ut::SwapPopback(_for_bridge_event_actors, ptr);
-        if (_for_bridge_event_actors.empty()) {
-            for (auto gimmick : _stage.GetGimmickArray()) {
-                if (gimmick->GetType() == StageObjectType::Bridge) {
-                    // ship
-                    auto param = my::Actor::Param();
-                    param.transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
-                    param.name = "ship";
-                    auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", &param);
-                    this->AddElement(ship);
-                    gimmick->ActionStart();
-                } // if
-            } // for
-        } // if
-    } // if
-
     // remove
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
@@ -59,10 +42,13 @@ bool my::GameScene::SceneUpdate(float delta_time) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
     if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+        _bridge_event->AllDelete();
+        /*
         for (auto actor : _for_bridge_event_actors) {
             actor->End();
             //_delete_actors.push_back(actor);
         } // for
+        */
     } // if
 
 #endif // _DEBUG
@@ -123,8 +109,10 @@ my::GameScene::GameScene() :
     _stage(),
     _re_initialize(false),
     _ui_canvas(),
-    _game(),
-    _for_bridge_event_actors(){
+    _game(){ 
+//    _for_bridge_event_actors() {
+    _bridge_event = std::make_shared<my::BridgeEvent>();
+    _ship_event = std::make_shared<my::ShipEvent>();
 }
 
 my::GameScene::~GameScene() {
@@ -197,17 +185,23 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
         game->GameSystemLoad();
     } // if
     super::LoadComplete();
+
+    _ship_event->GetShipEventSubject().AddObserver(shared_from_this());
+    _bridge_event->AddObserver(_ship_event);
     return true;
 }
 
 bool my::GameScene::Initialize(void) {
     _stage.Initialize();
+    _bridge_event->SetStage(&_stage);
+    _bridge_event->Initialize();
+
 
     auto param = new my::Actor::Param();
 
     // enemy
-    _for_bridge_event_actors.clear();
-    _for_bridge_event_actors.reserve(_stage.GetEnemySpawnArray().size());
+    //_for_bridge_event_actors.clear();
+    //_for_bridge_event_actors.reserve(_stage.GetEnemySpawnArray().size());
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
         auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
         _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
@@ -218,7 +212,8 @@ bool my::GameScene::Initialize(void) {
         this->AddElement(enemy);
 
         if (event_sphere.CollisionPoint(param->transform.position)) {
-            _for_bridge_event_actors.push_back(enemy);
+            _bridge_event->AddTriggerActor(enemy);
+            //_for_bridge_event_actors.push_back(enemy);
         } // if
     } // for
     // player
@@ -235,11 +230,11 @@ bool my::GameScene::Initialize(void) {
         // game system
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
-        
+
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
-        
+
         auto weapons = weapon_system->GetWeaponMap();
         for (auto& pair : weapons) {
             player->AddChild(pair.second);
@@ -255,7 +250,7 @@ bool my::GameScene::Initialize(void) {
         auto terrain = my::FactoryManager::Singleton().CreateActor<my::Terrain>("../Resource/builder/water_flow.json", param);
         this->AddElement(terrain);
     } // for
-    
+
     ut::SafeDelete(param);
     _re_initialize = false;
 
