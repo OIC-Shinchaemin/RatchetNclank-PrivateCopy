@@ -277,6 +277,7 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp" />
@@ -524,6 +525,7 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h" />

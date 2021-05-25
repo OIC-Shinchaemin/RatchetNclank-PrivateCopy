@@ -45,7 +45,7 @@ private:
     //! 削除
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
     //! ゲームイベント
-    my::Observable<const char*, const std::shared_ptr<my::Actor>& > _bridge_event_subject;
+    //my::Observable<const char*, const std::shared_ptr<my::Actor>& > _bridge_event_subject;
     //! カメラ
     std::shared_ptr<my::Camera> _stage_view_camera;
     //! カメラコントローラ

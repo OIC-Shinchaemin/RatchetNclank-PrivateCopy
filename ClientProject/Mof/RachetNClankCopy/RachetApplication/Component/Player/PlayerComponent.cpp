@@ -2,7 +2,6 @@
 
 #include "../../Gamepad.h"
 #include "../../Actor/Character/Player.h"
-#include "../../Actor/Ship/Ship.h"
 #include "../../Component/VelocityComponent.h"
 #include "../../Component/MeshComponent.h"
 #include "../../Component/Player/PlayerStateComponent.h"
@@ -17,8 +16,7 @@ my::PlayerComponent::PlayerComponent(int priority) :
     _target(),
     _state_com(),
     _next_terrain(),
-    _action_enable()
-{
+    _action_enable() {
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
@@ -26,8 +24,7 @@ my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     _target(),
     _state_com(),
     _next_terrain(),
-    _action_enable()
-{
+    _action_enable() {
 }
 
 my::PlayerComponent::~PlayerComponent() {
@@ -70,7 +67,7 @@ bool my::PlayerComponent::DisableAction(void) {
 bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-    
+
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
 
@@ -84,17 +81,14 @@ bool my::PlayerComponent::Initialize(void) {
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
                                my::CollisionComponentType::kShipCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        super::GetOwner()->Notify("ShipCollision", super::GetOwner());
-        if (std::dynamic_pointer_cast<my::Ship>(in.target.lock())->IsEnable()) {
-            super::GetOwner()->GetComponent<my::MeshComponent>()->Inactivate();
-            std::dynamic_pointer_cast<my::Player>(super::GetOwner())->Disable();
-            if (auto canvas = _ui_canvas.lock()) {
-                canvas->RemoveElement("EquipmentWeaponMenu");
-                canvas->RemoveElement("QuickChangeMenu");
-            } // if
+        if (auto canvas = _ui_canvas.lock()) {
+            canvas->RemoveElement("EquipmentWeaponMenu");
+            canvas->RemoveElement("QuickChangeMenu");
         } // if
+        super::GetOwner()->End();
         return true;
     }));
+
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
                                my::CollisionComponentType::kWaterFlowCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {

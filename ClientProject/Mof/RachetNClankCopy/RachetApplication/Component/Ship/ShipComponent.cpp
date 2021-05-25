@@ -3,6 +3,8 @@
 #include "../../Actor/Ship/Ship.h"
 #include "../MotionComponent.h"
 #include "../../Camera/FollowCameraController.h"
+#include "../Collision/Object/ShipCollisionComponent.h"
+#include "../Collision/Object/CollisionComponentDefine.h"
 
 
 my::ShipComponent::ShipComponent(int priority) :
@@ -31,6 +33,15 @@ std::string my::ShipComponent::GetType(void) const {
 bool my::ShipComponent::Initialize(void) {
     super::Initialize();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
+
+    auto coll_com = super::GetOwner()->GetComponent<my::ShipCollisionComponent>();
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+                               my::CollisionComponentType::kPlayerCollisionComponent,
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        this->Activate();
+        return true;
+    }));
+
     return true;
 }
 

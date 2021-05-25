@@ -22,17 +22,23 @@ void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
 }
 
 void my::GameScene::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
-    if (ptr->GetTag() == "Enemy") {
+    if (ptr ->GetTag() == "Enemy") {
         ut::SwapPopback(_for_bridge_event_actors, ptr);
         if (_for_bridge_event_actors.empty()) {
             for (auto gimmick : _stage.GetGimmickArray()) {
                 if (gimmick->GetType() == StageObjectType::Bridge) {
+                    // ship
+                    auto param = my::Actor::Param();
+                    param.transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
+                    param.name = "ship";
+                    auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", &param);
+                    this->AddElement(ship);
                     gimmick->ActionStart();
-                    _bridge_event_subject.Notify("GimmickAction", nullptr);
                 } // if
             } // for
         } // if
     } // if
+
     // remove
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
@@ -52,6 +58,13 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+        for (auto actor : _for_bridge_event_actors) {
+            actor->End();
+            //_delete_actors.push_back(actor);
+        } // for
+    } // if
+
 #endif // _DEBUG
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
@@ -111,8 +124,7 @@ my::GameScene::GameScene() :
     _re_initialize(false),
     _ui_canvas(),
     _game(),
-    _for_bridge_event_actors(),
-    _bridge_event_subject() {
+    _for_bridge_event_actors(){
 }
 
 my::GameScene::~GameScene() {
@@ -124,15 +136,39 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
         _created_actors.push_back(ptr);
     } // if
     if (type == "DeleteRequest") {
+        ptr->RemoveObserver(shared_from_this());
         _delete_actors.push_back(ptr);
     } // if
     if (type == "PlayerDead") {
+        // retry
         _re_initialize = true;
     } // if
-
     if (type == "GameClear") {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
+
+    /*
+    if (ptr->GetTag() == "Enemy") {
+        ut::SwapPopback(_for_bridge_event_actors, ptr);
+        if (_for_bridge_event_actors.empty()) {
+            for (auto gimmick : _stage.GetGimmickArray()) {
+                if (gimmick->GetType() == StageObjectType::Bridge) {
+                    // ship
+                    auto param = my::Actor::Param();
+                    param.transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
+                    param.name = "ship";
+                    auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", &param);
+                    this->AddElement(ship);
+
+                    gimmick->ActionStart();
+                    //_bridge_event_subject.Notify("GimmickAction", nullptr);
+                } // if
+            } // for
+        } // if
+    } // if
+    */
+
+
 }
 
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
@@ -158,6 +194,7 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     } // if
 
     if (auto game = _game.lock()) {
+        game->GameSystemLoad();
     } // if
     super::LoadComplete();
     return true;
@@ -190,17 +227,8 @@ bool my::GameScene::Initialize(void) {
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
 
-    // ship
-    param->transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
-    param->name = "ship";
-    auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", param);
-    this->AddElement(ship);
-    _bridge_event_subject.AddObserver(ship);
-    player->AddObserver(ship);
-
     // game system
     if (auto game = _game.lock()) {
-        game->GameSystemLoad();
 
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();

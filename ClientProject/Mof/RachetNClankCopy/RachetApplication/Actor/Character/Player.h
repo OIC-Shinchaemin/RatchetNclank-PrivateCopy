@@ -66,7 +66,7 @@ public:
     /// ƒfƒŠ[ƒg
     /// </summary>
     /// <param name=""></param>
-    virtual void End(void) override;
+    //virtual void End(void) override;
     /// <summary>
     /// –³Œø‰»
     /// </summary>

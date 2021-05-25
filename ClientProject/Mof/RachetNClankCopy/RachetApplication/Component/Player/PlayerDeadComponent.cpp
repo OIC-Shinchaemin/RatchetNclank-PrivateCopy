@@ -22,7 +22,8 @@ std::string_view my::PlayerDeadComponent::GetStateType(void) const {
 
 bool my::PlayerDeadComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
-        super::GetOwner()->End();
+        //super::GetOwner()->End();
+        super::GetOwner()->Notify("PlayerDead", super::GetOwner());
     } // if
     return true;
 }
