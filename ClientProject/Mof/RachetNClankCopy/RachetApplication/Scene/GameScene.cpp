@@ -36,13 +36,15 @@ bool my::GameScene::SceneUpdate(float delta_time) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
     if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
-        auto tmep = _stage_view_camera_controller.GetService();
-        auto controller = std::dynamic_pointer_cast<my::AutoCameraController>(tmep);
-        controller->ForceTick(controller->GetTimeMax());
         _bridge_event->AllDelete();
     } // if
 #endif // _DEBUG
-    
+    _stage_view_event->Update(delta_time);
+    if (_re_initialize) {
+        this->ReInitialize();
+    } // if
+
+
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
     } // for
@@ -52,10 +54,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     } // for
     _delete_actors.clear();
 
-    if (_re_initialize) {
-        this->ReInitialize();
-    } // if
-
+    
     // update
     _stage.Update(delta_time);
     _game_world.Update(delta_time);
@@ -63,9 +62,6 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     // collision
     _physic_world.CollisionStage(&_stage);
     _physic_world.Update();
-
-    auto camera_info = my::CameraController::CameraInfo();
-    _stage_view_camera_controller.GetService()->Update(delta_time, camera_info);
     return true;
 }
 
@@ -103,8 +99,7 @@ my::GameScene::GameScene() :
     _game(),
     _bridge_event(std::make_shared<my::BridgeEvent>()),
     _ship_event(std::make_shared<my::ShipEvent>()),
-    _stage_view_camera(),
-    _stage_view_camera_controller() {
+    _stage_view_event(std::make_shared<my::StageViewEvent>()) {
 }
 
 my::GameScene::~GameScene() {
@@ -164,6 +159,7 @@ bool my::GameScene::Initialize(void) {
     _stage.Initialize();
     _bridge_event->SetStage(&_stage);
     _bridge_event->Initialize();
+    _stage_view_event->Initialize();
 
     auto param = new my::Actor::Param();
     // enemy
@@ -185,6 +181,7 @@ bool my::GameScene::Initialize(void) {
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
+    _stage_view_event->GetSubject()->AddObserver(player->GetComponent<my::CameraComponent>());
 
     // game system
     if (auto game = _game.lock()) {
@@ -217,15 +214,6 @@ bool my::GameScene::Initialize(void) {
 
     ut::SafeDelete(param);
     _re_initialize = false;
-
-    _stage_view_camera = std::make_shared<my::Camera>();
-    _stage_view_camera->Initialize();
-    _stage_view_camera->Update();
-    auto auto_camera_controller = std::make_shared<my::AutoCameraController>();
-    _stage_view_camera_controller.SetService(auto_camera_controller);
-    _stage_view_camera_controller.GetService()->SetCamera(_stage_view_camera);
-    _stage_view_camera_controller.GetService()->RegisterGlobalCamera();
-    auto_camera_controller->AddObserver(player->GetComponent<my::CameraComponent>());
     return true;
 }
 

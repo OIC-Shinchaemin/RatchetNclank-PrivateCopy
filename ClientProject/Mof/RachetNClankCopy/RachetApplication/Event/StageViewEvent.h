@@ -43,6 +43,12 @@ public:
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Observable<const my::CameraController::CameraInfo&>> GetSubject(void) const;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

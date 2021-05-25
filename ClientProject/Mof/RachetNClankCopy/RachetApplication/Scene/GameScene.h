@@ -7,16 +7,13 @@
 #include <memory>
 #include <vector>
 
-#include "My/Core/ServiceLocator.h"
 #include "My/UI/UICanvas.h"
-#include "../Camera/Camera.h"
-#include "../Camera/CameraController.h"
-#include "../Camera/AutoCameraController.h"
+#include "../Game/GameManager.h"
+
 #include "../Game/GameWorld.h"
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
-#include "../Game/GameManager.h"
 #include "../Event/BridgeEvent.h"
 #include "../Event/ShipEvent.h"
 #include "../Event/StageViewEvent.h"
@@ -50,12 +47,9 @@ private:
     std::shared_ptr<my::BridgeEvent>  _bridge_event;
     //! ゲームイベント
     std::shared_ptr<my::ShipEvent>  _ship_event;
-
-
-    //! カメラ
-    std::shared_ptr<my::Camera> _stage_view_camera;
-    //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _stage_view_camera_controller;
+    //! ゲームイベント
+    std::shared_ptr<my::StageViewEvent> _stage_view_event;
+    
     /// <summary>
     /// 追加
     /// </summary>
