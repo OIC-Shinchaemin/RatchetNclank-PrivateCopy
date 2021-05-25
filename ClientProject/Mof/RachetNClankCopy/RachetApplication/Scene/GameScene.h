@@ -44,13 +44,14 @@ private:
     std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
-    //! 削除
-    //std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
+
+
+    //! ゲームイベント
     std::shared_ptr<my::BridgeEvent>  _bridge_event;
     //! ゲームイベント
     std::shared_ptr<my::ShipEvent>  _ship_event;
-    //! ゲームイベント
-    //my::Observable<const char*, const std::shared_ptr<my::Actor>& > _bridge_event_subject;
+
+
     //! カメラ
     std::shared_ptr<my::Camera> _stage_view_camera;
     //! カメラコントローラ

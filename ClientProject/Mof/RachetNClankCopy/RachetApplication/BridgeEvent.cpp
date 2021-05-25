@@ -1,6 +1,8 @@
 #include "BridgeEvent.h"
 
-my::BridgeEvent::BridgeEvent() {
+my::BridgeEvent::BridgeEvent() :
+    _for_bridge_event_actors(),
+    _stage() {
 }
 
 my::BridgeEvent::~BridgeEvent() {

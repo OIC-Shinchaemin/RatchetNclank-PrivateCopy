@@ -5,7 +5,6 @@
 #include "My/Core/Observer.h"
 
 #include <memory>
-#include <vector>
 
 #include "Actor.h"
 #include "BridgeEvent.h"
@@ -19,8 +18,6 @@ class ShipEvent :
 private:
     //! 通知用
     my::Observable<const char*, const std::shared_ptr<my::Actor>& > _ship_event_subject;
-    //! 通知アクター
-    //std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
 public:
     /// <summary>
     /// コンストラクタ

@@ -109,10 +109,11 @@ my::GameScene::GameScene() :
     _stage(),
     _re_initialize(false),
     _ui_canvas(),
-    _game(){ 
-//    _for_bridge_event_actors() {
-    _bridge_event = std::make_shared<my::BridgeEvent>();
-    _ship_event = std::make_shared<my::ShipEvent>();
+    _game(),
+    _bridge_event(std::make_shared<my::BridgeEvent>()),
+    _ship_event(std::make_shared<my::ShipEvent>()),
+    _stage_view_camera(),
+    _stage_view_camera_controller() {
 }
 
 my::GameScene::~GameScene() {
@@ -134,29 +135,6 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
     if (type == "GameClear") {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
-
-    /*
-    if (ptr->GetTag() == "Enemy") {
-        ut::SwapPopback(_for_bridge_event_actors, ptr);
-        if (_for_bridge_event_actors.empty()) {
-            for (auto gimmick : _stage.GetGimmickArray()) {
-                if (gimmick->GetType() == StageObjectType::Bridge) {
-                    // ship
-                    auto param = my::Actor::Param();
-                    param.transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
-                    param.name = "ship";
-                    auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", &param);
-                    this->AddElement(ship);
-
-                    gimmick->ActionStart();
-                    //_bridge_event_subject.Notify("GimmickAction", nullptr);
-                } // if
-            } // for
-        } // if
-    } // if
-    */
-
-
 }
 
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
@@ -200,8 +178,6 @@ bool my::GameScene::Initialize(void) {
     auto param = new my::Actor::Param();
 
     // enemy
-    //_for_bridge_event_actors.clear();
-    //_for_bridge_event_actors.reserve(_stage.GetEnemySpawnArray().size());
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
         auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
         _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
@@ -213,7 +189,6 @@ bool my::GameScene::Initialize(void) {
 
         if (event_sphere.CollisionPoint(param->transform.position)) {
             _bridge_event->AddTriggerActor(enemy);
-            //_for_bridge_event_actors.push_back(enemy);
         } // if
     } // for
     // player
@@ -240,6 +215,8 @@ bool my::GameScene::Initialize(void) {
             player->AddChild(pair.second);
         } // for
     } // if
+
+
     // terrain
     def::Transform terrain_transforms[]{
         def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
