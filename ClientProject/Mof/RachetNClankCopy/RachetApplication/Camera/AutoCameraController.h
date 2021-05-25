@@ -16,6 +16,8 @@ class AutoCameraController : public my::CameraController,
     using Observable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! 時間
+    float _time_max;
+    //! 時間
     float _time;
     //! 時間
     my::Timer _timer;
@@ -32,6 +34,17 @@ public:
     /// コンストラクタ
     /// </summary>
     ~AutoCameraController();
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetTimeMax(void) const;
+    /// <summary>
+    /// 強制的に進める
+    /// </summary>
+    /// <param name="time"></param>
+    void ForceTick(float time);
     /// <summary>
     /// 追加
     /// </summary>

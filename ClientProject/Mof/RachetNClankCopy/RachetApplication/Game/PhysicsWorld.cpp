@@ -9,7 +9,7 @@
 #include "../Component/Collision/Algolithm/PlayerWaterFlowCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyPlayerMeleeAttackCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyOmniWrenchCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
@@ -33,7 +33,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
-      my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm.c_str(),
@@ -64,7 +64,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::PlayerWaterFlowCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<my::EnemyPlayerMeleeAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerMeleeAttackCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyOmniWrenchCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm);

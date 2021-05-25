@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "My/Core/ServiceLocator.h"
-#include "My/Core/Observer.h"
 #include "My/UI/UICanvas.h"
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
@@ -18,8 +17,9 @@
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
 #include "../Game/GameManager.h"
-#include "../BridgeEvent.h"
-#include "../ShipEvent.h"
+#include "../Event/BridgeEvent.h"
+#include "../Event/ShipEvent.h"
+#include "../Event/StageViewEvent.h"
 
 
 namespace my {

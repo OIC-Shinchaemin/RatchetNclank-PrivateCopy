@@ -280,6 +280,12 @@
     <Filter Include="Rachet\Source\Component\Weapon\OmniWrench">
       <UniqueIdentifier>{d2d7b52e-e01f-41b1-8910-3bde8bc2b663}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Event">
+      <UniqueIdentifier>{af05ce0d-6a2c-4428-ac8e-32d6846c29b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Event">
+      <UniqueIdentifier>{4ec4b52a-e2cd-4186-90a9-4ab7466fb794}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -822,11 +828,14 @@
     <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="ShipEvent.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Event\StageViewEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="BridgeEvent.cpp">
-      <Filter>Rachet\Source</Filter>
+    <ClCompile Include="Event\BridgeEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\ShipEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1622,11 +1631,14 @@
     <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="ShipEvent.h">
-      <Filter>Rachet\Header</Filter>
+    <ClInclude Include="Event\StageViewEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
     </ClInclude>
-    <ClInclude Include="BridgeEvent.h">
-      <Filter>Rachet\Header</Filter>
+    <ClInclude Include="Event\ShipEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\BridgeEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

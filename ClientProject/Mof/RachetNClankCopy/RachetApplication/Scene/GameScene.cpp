@@ -1,15 +1,9 @@
 #include "GameScene.h"
 
-#include "My/Core/Trait.h"
-#include "My/Core/Utility.h"
-
-#include "../Stage/StageDefine.h"
 #include "../Factory/FactoryManager.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
-#include "../Actor//Ship/Ship.h"
 #include "../Actor//Terrain/Terrain.h"
-#include "../Factory/Builder/ActorBuilder.h"
 #include "../Component/CameraComponent.h"
 
 
@@ -42,16 +36,13 @@ bool my::GameScene::SceneUpdate(float delta_time) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
     if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+        auto tmep = _stage_view_camera_controller.GetService();
+        auto controller = std::dynamic_pointer_cast<my::AutoCameraController>(tmep);
+        controller->ForceTick(controller->GetTimeMax());
         _bridge_event->AllDelete();
-        /*
-        for (auto actor : _for_bridge_event_actors) {
-            actor->End();
-            //_delete_actors.push_back(actor);
-        } // for
-        */
     } // if
-
 #endif // _DEBUG
+    
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
     } // for
@@ -174,9 +165,7 @@ bool my::GameScene::Initialize(void) {
     _bridge_event->SetStage(&_stage);
     _bridge_event->Initialize();
 
-
     auto param = new my::Actor::Param();
-
     // enemy
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
         auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
@@ -199,7 +188,6 @@ bool my::GameScene::Initialize(void) {
 
     // game system
     if (auto game = _game.lock()) {
-
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         // game system
@@ -215,7 +203,6 @@ bool my::GameScene::Initialize(void) {
             player->AddChild(pair.second);
         } // for
     } // if
-
 
     // terrain
     def::Transform terrain_transforms[]{

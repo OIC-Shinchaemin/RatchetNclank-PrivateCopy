@@ -3,7 +3,8 @@
 
 my::AutoCameraController::AutoCameraController() :
     super(),
-    _time(6.0f),
+    _time_max(6.0f),
+    _time(_time_max),
     _timer(),
     _bezier_curve_animation_position(_time),
     _bezier_curve_animation_target(_time) {
@@ -33,6 +34,21 @@ my::AutoCameraController::AutoCameraController() :
 }
 
 my::AutoCameraController::~AutoCameraController() {
+}
+
+float my::AutoCameraController::GetTimeMax(void) const {
+    return this->_time_max;
+}
+
+void my::AutoCameraController::ForceTick(float time) {
+    if (_timer.Tick(time)) {
+        auto info = super::CameraInfo();
+        auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());
+        info.start_position = pos;
+        info.target_position = math::vec3::kZero;
+        Observable::Notify(info);
+    } // if
+
 }
 
 void my::AutoCameraController::AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr) {
