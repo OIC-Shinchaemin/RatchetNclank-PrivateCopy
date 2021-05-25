@@ -7,6 +7,24 @@
       }
     },
     {
+      "type": "ShipIdleComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
+      "type": "ShipTakeoffComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
+      "type": "ShipLandingComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
       "type": "ShipMeshComponent",
       "paramater": {
         "priority": 1,

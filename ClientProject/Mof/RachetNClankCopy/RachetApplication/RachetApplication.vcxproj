@@ -341,8 +341,13 @@
     <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerOmniWrenchComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipActionComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipIdleComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipLandingComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipMeshComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipStateComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipTakeoffComponent.cpp" />
     <ClCompile Include="Component\SightRecognitionComponent.cpp" />
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Component\UpdateComponent.cpp" />
@@ -399,6 +404,8 @@
     <ClCompile Include="State\OmniWrenchActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerMotionStateImplementation.cpp" />
+    <ClCompile Include="State\ShipActionStateImplementation.cpp" />
+    <ClCompile Include="State\ShipMotionStateImplementation.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
@@ -596,8 +603,14 @@
     <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerOmniWrenchComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
+    <ClInclude Include="Component\Ship\ShipActionComponent.h" />
     <ClInclude Include="Component\Ship\ShipComponent.h" />
+    <ClInclude Include="Component\Ship\ShipComponentInclude.h" />
+    <ClInclude Include="Component\Ship\ShipIdleComponent.h" />
+    <ClInclude Include="Component\Ship\ShipLandingComponent.h" />
     <ClInclude Include="Component\Ship\ShipMeshComponent.h" />
+    <ClInclude Include="Component\Ship\ShipStateComponent.h" />
+    <ClInclude Include="Component\Ship\ShipTakeoffComponent.h" />
     <ClInclude Include="Component\SightRecognitionComponent.h" />
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Component\UpdateComponent.h" />
@@ -623,6 +636,7 @@
     <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h" />
     <ClInclude Include="Factory\ComponentRegister\OmniWrenchComponentRegister.h" />
     <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h" />
+    <ClInclude Include="Factory\ComponentRegister\ShipComponentRegister.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />
@@ -669,6 +683,8 @@
     <ClInclude Include="State\OmniWrenchActionStateDefine.h" />
     <ClInclude Include="State\PlayerActionStateDefine.h" />
     <ClInclude Include="State\PlayerMotionStateDefine.h" />
+    <ClInclude Include="State\ShipActionStateDefine.h" />
+    <ClInclude Include="State\ShipMotionStateDefine.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
     <ClInclude Include="UI\LockOnCursorMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />

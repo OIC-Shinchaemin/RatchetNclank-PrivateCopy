@@ -837,6 +837,27 @@
     <ClCompile Include="Event\ShipEvent.cpp">
       <Filter>Rachet\Source\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Ship\ShipActionComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipStateComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ShipActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ShipMotionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipIdleComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipTakeoffComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipLandingComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1639,6 +1660,33 @@
     </ClInclude>
     <ClInclude Include="Event\BridgeEvent.h">
       <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipActionComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipStateComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ShipActionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ShipMotionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\ShipComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipComponentInclude.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipIdleComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipLandingComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipTakeoffComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

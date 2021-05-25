@@ -43,4 +43,4 @@ public:
     virtual std::shared_ptr<my::Component> Clone(void) override;
 };
 }
-#endif // !MY_MESH_COMPONENT_H
+#endif // !MY_SHIP_MESH_COMPONENT_H
