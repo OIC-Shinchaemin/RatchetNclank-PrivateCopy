@@ -10,6 +10,8 @@
 
 #include "../Actor.h"
 #include "../Stage/Stage.h"
+#include "../Camera/Camera.h"
+#include "../Camera/FirstPersonCameraController.h"
 
 
 namespace my {
@@ -23,6 +25,12 @@ private:
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
     //! ステージ
     Stage* _stage;
+    //! カメラ
+    std::shared_ptr<my::Camera> _bridge_view_camera;
+    //! カメラコントローラ
+    my::FirstPersonCameraController _bridge_view_camera_controller;
+    //! 位置
+    Mof::CVector3 _ideal_position;
 public:
     /// <summary>
     /// コンストラクタ
@@ -49,6 +57,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Initialize(void);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <returns></returns>
+    bool Update(float delta_time);
     /// <summary>
     /// 追加
     /// </summary>

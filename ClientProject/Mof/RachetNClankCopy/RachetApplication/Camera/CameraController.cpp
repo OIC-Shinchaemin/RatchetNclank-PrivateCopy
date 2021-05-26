@@ -48,6 +48,10 @@ void my::CameraController::SetAltitude(float degree) {
     this->_param.altitude = degree;
 }
 
+void my::CameraController::SetDumping(float value) {
+    this->_param.dumping = value;
+}
+
 void my::CameraController::SetInfo(const my::CameraController::CameraInfo& info) {
     _position = info.start_position;
     _target = info.target_position;

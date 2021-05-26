@@ -40,6 +40,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     } // if
 #endif // _DEBUG
     _stage_view_event->Update(delta_time);
+    _bridge_event->Update(delta_time);
     if (_re_initialize) {
         this->ReInitialize();
     } // if

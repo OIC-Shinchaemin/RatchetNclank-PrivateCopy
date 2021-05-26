@@ -142,6 +142,15 @@ bool my::Player::Render(void) {
     if (_current_weapon) {
         _current_weapon->Render();
     } // if
+
+
+#ifdef _DEBUG
+    auto pos = super::GetPosition();
+    ::CGraphicsUtilities::RenderString(50.0f, 300.0f, "pos x = %f", pos.x);
+    ::CGraphicsUtilities::RenderString(50.0f, 320.0f, "pos y = %f", pos.y);
+    ::CGraphicsUtilities::RenderString(50.0f, 340.0f, "pos z = %f", pos.z);
+#endif // _DEBUG
+
     return true;
 }
 

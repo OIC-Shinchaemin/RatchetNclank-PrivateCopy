@@ -96,6 +96,11 @@ public:
     /// <param name="degree"></param>
     void SetAltitude(float degree);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetDumping(float value);
+    /// <summary>
     /// セット
     /// </summary>
     /// <param name="info"></param>

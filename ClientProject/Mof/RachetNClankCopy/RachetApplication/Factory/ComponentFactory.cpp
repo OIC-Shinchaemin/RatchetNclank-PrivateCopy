@@ -37,7 +37,6 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
 
-
 #include "ComponentRegister/PlayerComponentRegister.h"
 #include "ComponentRegister/EnemyComponentRegister.h"
 #include "ComponentRegister/CollisionComponentRegister.h"
