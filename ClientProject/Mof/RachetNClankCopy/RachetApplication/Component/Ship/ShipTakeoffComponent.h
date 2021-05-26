@@ -4,10 +4,19 @@
 
 #include "ShipActionComponent.h"
 
+#include <memory>
+
+#include "My/Core/Timer.h"
+
 
 namespace my {
 class ShipTakeoffComponent : public my::ShipActionComponent {
     using super = my::ShipActionComponent;
+private:
+    //! タイマー
+    my::Timer _timer;
+    //! モーション
+    //std::weak_ptr<class MotionComponent> _motion_com;
 public:
     /// <summary>
     /// コンストラクタ

@@ -21,6 +21,20 @@ std::string_view my::ShipTakeoffComponent::GetStateType(void) const {
 }
 
 bool my::ShipTakeoffComponent::Update(float delta_time) {
+    /*
+    if (_timer.Tick(delta_time)) {
+        _take_off = true;
+    } // if
+    auto pos = super::GetOwner()->GetPosition();
+    if (_take_off) {
+        pos.y += 0.1f;
+        super::GetOwner()->SetPosition(pos);
+    } // if
+
+    if (pos.y > 10.0f) {
+        super::GetOwner()->Notify("GameClear", super::GetOwner());
+    } // if
+    */
     return true;
 }
 
@@ -34,5 +48,13 @@ bool my::ShipTakeoffComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::ShipMotionStateType::kShipMotionTakeoffState);
+
+    /*
+    if (auto motion_com = _motion_com.lock()) {
+        motion_com->ChangeMotion(my::Ship::MotionType::Default);
+        _timer.Initialize(7.0f, false);
+    } // if
+    */
+
     return true;
 }

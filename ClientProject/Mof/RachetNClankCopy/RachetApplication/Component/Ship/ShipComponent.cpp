@@ -70,16 +70,6 @@ bool my::ShipComponent::Activate(void) {
         motion_com->ChangeMotion(my::Ship::MotionType::Default);
         _timer.Initialize(7.0f, false);
     } // if
-
-    auto prev = ::CGraphicsUtilities::GetCamera();
-    auto camera = std::make_shared<my::Camera>();
-    camera->SetPosition(prev->GetViewPosition());
-    camera->SetTarget(prev->GetTargetPosition());
-    camera->Initialize();
-    camera->Update();
-    _camera_controller.SetService(std::make_shared<my::CameraController>());
-    _camera_controller.GetService()->SetCamera(camera);
-    _camera_controller.GetService()->RegisterGlobalCamera();
     return true;
 }
 
