@@ -858,6 +858,9 @@
     <ClCompile Include="Component\Ship\ShipLandingComponent.cpp">
       <Filter>Rachet\Source\Component\Ship</Filter>
     </ClCompile>
+    <ClCompile Include="Camera\PointCameraController.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1687,6 +1690,9 @@
     </ClInclude>
     <ClInclude Include="Component\Ship\ShipTakeoffComponent.h">
       <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\PointCameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

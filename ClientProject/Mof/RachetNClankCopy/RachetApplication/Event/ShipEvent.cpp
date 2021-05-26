@@ -5,7 +5,13 @@
 
 
 my::ShipEvent::ShipEvent() :
-    _ship_event_subject() {
+    _ship_event_subject() ,
+    _ship_view_camera(),
+    _ship_view_camera_controller(),
+    _ideal_position() {
+    
+    _ship_view_camera_controller.SetAzimuth(0.0f);
+    _ship_view_camera_controller.SetAltitude(0.0f);
 }
 
 my::ShipEvent::~ShipEvent() {
@@ -14,8 +20,10 @@ my::ShipEvent::~ShipEvent() {
 void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
 }
 
-void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<my::BridgeEvent>& ptr) {
-    if (type == "BridgeEventActionStart") {
+void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<StageObject>& ptr) {
+    //if (type == "BridgeActionEnd const char* type, const std::shared_ptr<StageObject>& ptr") {
+    if (type == "BridgeActionEnd") {
+        puts("ShipEvent::OnNotify");
         // ship
         auto param = my::Actor::Param();
         param.transform.position = Mof::CVector3(10.0f, -4.0f, -25.0f);
@@ -23,9 +31,40 @@ void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<my::BridgeE
         auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", &param);
         //! ゲームイベント
         _ship_event_subject.Notify("AddRequest", ship);
+        _ship_view_camera_controller.RegisterGlobalCamera();
+        _ship_view_camera_controller.SetInfo(_info);
     } // if
+}
+
+void my::ShipEvent::OnNotify(const my::CameraController::CameraInfo& info) {
+    puts("ShipEvent::OnNotify const my::CameraController::CameraInfo& info");
+    this->_info = info;
+
+    //_info.ideal_position = _ideal_position;
+    _info.target_position = Mof::CVector3(10.0f, -4.0f, -25.0f);
+    _info.start_position = info.start_position;
+    _info.camera_front = info.camera_front;
+    _ship_view_camera_controller.SetInfo(_info);
 }
 
 my::Observable<const char*, const std::shared_ptr<my::Actor>&>& my::ShipEvent::GetShipEventSubject(void) {
     return this->_ship_event_subject;
+}
+
+bool my::ShipEvent::Initialize(void) {
+    _ideal_position = Mof::CVector3();
+
+    _ship_view_camera = std::make_shared<my::Camera>();
+    _ship_view_camera->Initialize();
+    _ship_view_camera->Update();
+    _ship_view_camera_controller.SetCamera(_ship_view_camera);
+    _ship_view_camera->Update();
+    return true;
+}
+
+bool my::ShipEvent::Update(float delta_time) {
+    auto info = my::CameraController::CameraInfo();
+    info.ideal_position = Mof::CVector3();
+    _ship_view_camera_controller.Update(delta_time, info);
+    return true;
 }

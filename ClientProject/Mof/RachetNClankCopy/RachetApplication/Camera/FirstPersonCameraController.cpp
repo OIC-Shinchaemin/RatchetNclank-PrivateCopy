@@ -14,6 +14,7 @@ my::FirstPersonCameraController::~FirstPersonCameraController() {
 }
 
 void my::FirstPersonCameraController::SetInfo(const my::CameraController::CameraInfo& info) {
+    puts("FirstPersonCameraController");
     _position = info.start_position;
 
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _param.distance);

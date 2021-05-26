@@ -11,6 +11,7 @@
 #include "../Actor.h"
 #include "../Stage/Stage.h"
 #include "../Camera/Camera.h"
+#include "../Camera/PointCameraController.h"
 #include "../Camera/FirstPersonCameraController.h"
 
 
@@ -18,8 +19,9 @@ namespace my {
 class BridgeEvent :
     public std::enable_shared_from_this<my::BridgeEvent>,
     public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
-    public my::Observable<const char*, const std::shared_ptr<my::BridgeEvent>&> {
-    using Observable = my::Observable<const char*, const std::shared_ptr<my::BridgeEvent>&>;
+    public my::Observable<const my::CameraController::CameraInfo&>
+{
+    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! 通知アクター
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;

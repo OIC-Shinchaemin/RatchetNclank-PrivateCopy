@@ -41,10 +41,10 @@ bool my::GameScene::SceneUpdate(float delta_time) {
 #endif // _DEBUG
     _stage_view_event->Update(delta_time);
     _bridge_event->Update(delta_time);
+    _ship_event->Update(delta_time);
     if (_re_initialize) {
         this->ReInitialize();
     } // if
-
 
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
@@ -156,11 +156,22 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     return true;
 }
 
+#include "../Stage/Gimmick/Bridge.h"
 bool my::GameScene::Initialize(void) {
     _stage.Initialize();
     _bridge_event->SetStage(&_stage);
     _bridge_event->Initialize();
+    _ship_event->Initialize();
     _stage_view_event->Initialize();
+    _bridge_event->AddObserver(_ship_event);
+
+    for (auto gimmick : _stage.GetGimmickArray()) {
+        auto temp = std::dynamic_pointer_cast<Bridge>(gimmick);
+        if (temp) {
+            temp->AddObserver(_ship_event);
+        } // if
+    } // for
+    
 
     auto param = new my::Actor::Param();
     // enemy

@@ -254,6 +254,7 @@
     <ClCompile Include="Camera\DebugCameraController.cpp" />
     <ClCompile Include="Camera\FirstPersonCameraController.cpp" />
     <ClCompile Include="Camera\FollowCameraController.cpp" />
+    <ClCompile Include="Camera\PointCameraController.cpp" />
     <ClCompile Include="Component\ActionComponent.cpp" />
     <ClCompile Include="Component\ActionStateComponent.cpp" />
     <ClCompile Include="Component\AIStateComponent.cpp" />
@@ -512,6 +513,7 @@
     <ClInclude Include="Camera\DebugCameraController.h" />
     <ClInclude Include="Camera\FirstPersonCameraController.h" />
     <ClInclude Include="Camera\FollowCameraController.h" />
+    <ClInclude Include="Camera\PointCameraController.h" />
     <ClInclude Include="Component\ActionComponent.h" />
     <ClInclude Include="Component\ActionStateComponent.h" />
     <ClInclude Include="Component\AIStateComponent.h" />

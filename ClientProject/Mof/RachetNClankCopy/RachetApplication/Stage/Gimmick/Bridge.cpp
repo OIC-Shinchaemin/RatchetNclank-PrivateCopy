@@ -5,33 +5,50 @@ Bridge::Bridge(Vector3 end, bool enable, bool collision, StageObjectType type, s
     , _start_pos(pos)
     , _end_pos(end)
     , _now_timer(0.0f)
-    , _start_flag(false) {
+    , _start_flag(false)
+    , _request_time(0.0f)
+    , _actioned(false){
 }
 
 Bridge::~Bridge(void) {
 }
 
-void Bridge::SetEndPosition(Mof::CVector3 pos) {
+void Bridge::SetEndPosition(Mof::Vector3 pos) {
     this->_end_pos = pos;
+}
+
+void Bridge::SetTime(float time) {
+    this->_request_time = time;
 }
 
 Mof::CVector3 Bridge::GetPreviewPosition(void) const {
     return Mof::CVector3();
 }
 
+float Bridge::GetRequestTime(void) const {
+    return this->_request_time;
+}
+
 void Bridge::Initialize(void) {
-    _now_timer  = 0.0f;
+    _now_timer = 0.0f;
     _start_flag = false;
-    _position   = _start_pos;
+    _position = _start_pos;
     RefreshWorldMatrix();
 }
 
 void Bridge::Update(float delta) {
     if (_start_flag) {
         _now_timer += delta;
+        float time = Bridge::GetRequestTime();
+        if (!_actioned && time <= _now_timer) {
+            // action end
+            Observable::Notify("BridgeActionEnd", shared_from_this());
+            _actioned = true;
+        } // if
     }
+    
     const float t = std::clamp(_now_timer, 0.0f, 1.0f);
-    _position     = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
+    _position = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
     RefreshWorldMatrix();
 }
 
