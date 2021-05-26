@@ -7,8 +7,8 @@ my::BridgeEvent::BridgeEvent() :
     _bridge_view_camera_controller(),
     _ideal_position() {
     _ideal_position = Mof::CVector3(60.0f, 0.0f, 0.0f);
-    float d = 8.0f;
-    _bridge_view_camera_controller.SetDumping(d);
+    _bridge_view_camera_controller.SetSpring(15.0f);
+    _bridge_view_camera_controller.SetDumping(10.0f);
 }
 
 my::BridgeEvent::~BridgeEvent() {
@@ -28,16 +28,28 @@ void my::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor
             auto globel = Mof::CGraphicsUtilities::GetCamera();
             info.start_position = globel->GetViewPosition();
             info.camera_front = globel->GetViewFront();
-            info.ideal_position = _ideal_position;
-
-            _bridge_view_camera_controller.SetInfo(info);
+            
+            
             for (auto gimmick : _stage->GetGimmickArray()) {
 
                 if (gimmick->GetType() == StageObjectType::Bridge) {
+                    {
+                        /*
+                        _ideal_position.x = gimmick->GetPosition().x + 2.0f;
+                        _ideal_position.y = gimmick->GetPosition().y + 25.0f;
+                        _ideal_position.z = gimmick->GetPosition().z + -2.0f;
+                        info.ideal_position = _ideal_position;
+                        */
+                        info.ideal_position = _ideal_position;
+                    }
+                    
                     gimmick->ActionStart();
                     Observable::Notify("BridgeEventActionStart", shared_from_this());
                 } // if
             } // for
+
+
+            _bridge_view_camera_controller.SetInfo(info);
         } // if
     } // if
 }

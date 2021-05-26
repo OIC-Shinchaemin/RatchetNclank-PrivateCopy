@@ -99,6 +99,11 @@ public:
     /// セッター
     /// </summary>
     /// <param name="value"></param>
+    void SetSpring(float value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
     void SetDumping(float value);
     /// <summary>
     /// セット
