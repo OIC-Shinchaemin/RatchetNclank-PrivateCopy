@@ -13,8 +13,8 @@ my::StageViewEvent::StageViewEvent() :
 my::StageViewEvent::~StageViewEvent() {
 }
 
-void my::StageViewEvent::AddCameraOvserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr) {
-    _subject.AddObserver(ptr);
+my::StageViewEvent::CameraObservable* my::StageViewEvent::GetCameraObservable(void) {
+    return &this->_camera_subject;
 }
 
 bool my::StageViewEvent::Initialize(void) {
@@ -36,7 +36,7 @@ bool my::StageViewEvent::Update(float delta_time) {
         auto info = my::CameraController::CameraInfo();
         info.start_position = _stage_view_camera_controller->GetCameraPosition();
         info.target_position = math::vec3::kZero;
-        _subject.Notify(info);
+        _camera_subject.Notify(info);
         auto ptr = super::GetSubject();
         ptr->Notify("DeleteRequest", shared_from_this());
     } // if

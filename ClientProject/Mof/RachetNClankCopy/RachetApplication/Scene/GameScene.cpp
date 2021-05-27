@@ -6,6 +6,9 @@
 #include "../Actor//Terrain/Terrain.h"
 #include "../Component/CameraComponent.h"
 #include "../Stage/Gimmick/Bridge.h"
+#include "../Event/BridgeEvent.h"
+#include "../Event/ShipEvent.h"
+#include "../Event/StageViewEvent.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -182,9 +185,8 @@ bool my::GameScene::Initialize(void) {
     bridge_event->Initialize();
     ship_event->Initialize();
     stage_view_event->Initialize();
-    bridge_event->AddObserver(ship_event);
+    bridge_event->GetCameraSubject()->AddObserver(ship_event);
     ship_event->GetShipEventSubject().AddObserver(shared_from_this());
-    bridge_event->AddObserver(ship_event);
 
     for (auto gimmick : _stage.GetGimmickArray()) {
         auto temp = std::dynamic_pointer_cast<Bridge>(gimmick);
@@ -214,7 +216,7 @@ bool my::GameScene::Initialize(void) {
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
-    stage_view_event->AddCameraOvserver(player->GetComponent<my::CameraComponent>());
+    stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<my::CameraComponent>());
     ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
 
 
@@ -230,7 +232,7 @@ bool my::GameScene::Initialize(void) {
         quick_change->Initialize(weapon_system);
         auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
         help_desk->OnNotify(quest);
-        bridge_event->AddQuestObserver(help_desk);
+        bridge_event->GetQuestSubject()->AddObserver(help_desk);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);

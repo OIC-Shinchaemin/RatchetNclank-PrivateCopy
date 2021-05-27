@@ -18,15 +18,9 @@ my::ShipEvent::ShipEvent() :
 
 my::ShipEvent::~ShipEvent() {
 }
-/*
-void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
-}
-*/
 
 void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<StageObject>& ptr) {
-    //if (type == "BridgeActionEnd const char* type, const std::shared_ptr<StageObject>& ptr") {
     if (type == "BridgeActionEnd") {
-        puts("ShipEvent::OnNotify");
         // ship
         auto param = my::Actor::Param();
         param.transform.position = Mof::CVector3(10.0f, 9.0f, -25.0f);
@@ -44,7 +38,6 @@ void my::ShipEvent::OnNotify(const my::CameraController::CameraInfo& info) {
     puts("ShipEvent::OnNotify const my::CameraController::CameraInfo& info");
     this->_info = info;
 
-    //_info.ideal_position = _ideal_position;
     _info.target_position = Mof::CVector3(10.0f, -4.0f, -25.0f);
     _info.start_position = info.start_position;
     _info.camera_front = info.camera_front;
@@ -58,7 +51,11 @@ void my::ShipEvent::SetCameraComponent(const std::shared_ptr<my::Observer<const 
 my::Observable<const char*, const std::shared_ptr<my::Actor>&>& my::ShipEvent::GetShipEventSubject(void) {
     return this->_ship_event_subject;
 }
-
+/*
+my::Observable<const my::CameraController::CameraInfo&>* my::ShipEvent::GetCameraSubject(void) {
+    return &this->_camera_subject;
+}
+*/
 bool my::ShipEvent::Initialize(void) {
     _ideal_position = Mof::CVector3();
 

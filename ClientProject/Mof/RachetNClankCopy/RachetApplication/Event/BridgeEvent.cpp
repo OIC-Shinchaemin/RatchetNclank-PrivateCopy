@@ -41,11 +41,9 @@ void my::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor
                     info.ideal_position = _ideal_position;
                     
                     {
-                        
                         auto send_info = my::CameraController::CameraInfo();
-                        //send_info.camera_front = globel->GetViewFront();
                         send_info.start_position = _ideal_position;
-                        Observable::Notify(send_info);
+                        _camera_subject.Notify(send_info);
                     }
                     gimmick->ActionStart();
                 } // if
@@ -59,13 +57,13 @@ void my::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor
 void my::BridgeEvent::SetStage(Stage* ptr) {
     this->_stage = ptr;
 }
-/*
-my::Observable<const my::GameQuest&> my::BridgeEvent::GetQuestSubject(void) const {
-    return this->_quest_subject;
+
+my::Observable<const my::CameraController::CameraInfo&>* my::BridgeEvent::GetCameraSubject(void) {
+    return &this->_camera_subject;
 }
-*/
-void my::BridgeEvent::AddQuestObserver(const std::shared_ptr<my::Observer<const my::GameQuest&>>& ptr) {
-    this->_quest_subject.AddObserver(ptr);
+
+my::Observable<const my::GameQuest&>* my::BridgeEvent::GetQuestSubject(void) {
+    return &this->_quest_subject;
 }
 
 bool my::BridgeEvent::EventActorsEmpty(void) const {

@@ -12,18 +12,13 @@
 #include "../Actor.h"
 #include "../Stage/Stage.h"
 #include "../Camera/Camera.h"
-#include "../Camera/PointCameraController.h"
 #include "../Camera/FirstPersonCameraController.h"
 #include "../Game/GameSystem/GameQuest.h"
 
 
 namespace my {
-class BridgeEvent : public my::Event,
-    public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
-    public my::Observable<const my::CameraController::CameraInfo&> {
+class BridgeEvent : public my::Event, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
     using super = my::Event;
-    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
-    using QuestObservable = my::Observable<const my::GameQuest&>;
 private:
     //! 通知アクター
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
@@ -36,7 +31,9 @@ private:
     //! 位置
     Mof::CVector3 _ideal_position;
     //! 通知用
-    QuestObservable _quest_subject;
+    my::Observable<const my::CameraController::CameraInfo&> _camera_subject;
+    //! 通知用
+    my::Observable<const my::GameQuest&> _quest_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -58,10 +55,17 @@ public:
     /// <param name="ptr"></param>
     void SetStage(Stage* ptr);
     /// <summary>
-    /// 追加
+    /// ゲッター
     /// </summary>
-    /// <param name="ptr"></param>
-    void AddQuestObserver(const std::shared_ptr<my::Observer<const my::GameQuest&>>& ptr);
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<const my::CameraController::CameraInfo&>* GetCameraSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<const my::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// 判定
     /// </summary>

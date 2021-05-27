@@ -12,17 +12,16 @@
 
 
 namespace my {
-class StageViewEvent : public my::Event, public my::Observable<const char*, const std::shared_ptr<my::StageViewEvent>&> {
+class StageViewEvent : public my::Event {
     using super = my::Event;
-    using Observable = my::Observable<const char*, const std::shared_ptr<my::StageViewEvent>&>;
     using CameraObservable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! カメラ
     std::shared_ptr<my::Camera> _stage_view_camera;
     //! カメラコントローラ
     std::shared_ptr<my::AutoCameraController> _stage_view_camera_controller;
-    //! 通知
-    CameraObservable _subject;
+    //! 通知用
+    my::StageViewEvent::CameraObservable _camera_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,10 +32,11 @@ public:
     /// </summary>
     ~StageViewEvent();
     /// <summary>
-    /// 追加
+    /// ゲッター
     /// </summary>
-    /// <param name="ptr"></param>
-    void AddCameraOvserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::StageViewEvent::CameraObservable* GetCameraObservable(void);
     /// <summary>
     /// 初期化
     /// </summary>

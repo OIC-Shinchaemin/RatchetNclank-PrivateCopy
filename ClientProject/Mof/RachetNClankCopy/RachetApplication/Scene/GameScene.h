@@ -15,9 +15,6 @@
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
 #include "../Event/Event.h"
-#include "../Event/BridgeEvent.h"
-#include "../Event/ShipEvent.h"
-#include "../Event/StageViewEvent.h"
 
 
 namespace my {

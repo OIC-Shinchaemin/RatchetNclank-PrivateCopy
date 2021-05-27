@@ -9,7 +9,7 @@
 
 #include "BridgeEvent.h"
 #include "../Stage/StageObject.h"
-#include "../Camera/FirstPersonCameraController.h"
+#include "../Camera/PointCameraController.h"
 
 
 namespace my {
@@ -24,13 +24,14 @@ private:
     std::shared_ptr<my::Camera> _ship_view_camera;
     //! カメラコントローラ
     my::PointCameraController _ship_view_camera_controller;
-    //my::FirstPersonCameraController _ship_view_camera_controller;
     //! 位置
     Mof::CVector3 _ideal_position;
     //! カメラ情報
     my::CameraController::CameraInfo _info;
     //! プレイヤービュー
     std::weak_ptr<my::Observer<const my::CameraController::CameraInfo&>> _camera_com;
+    //! 通知用
+    //my::Observable<const my::CameraController::CameraInfo&> _camera_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -40,11 +41,6 @@ public:
     /// デストラクタ
     /// </summary>
     ~ShipEvent();
-    /// <summary>
-    /// 通知イベント
-    /// </summary>
-    /// <param name=""></param>
-    //virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
     /// <summary>
     /// 通知イベント
     /// </summary>
@@ -68,6 +64,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     my::Observable<const char*, const std::shared_ptr<my::Actor>&>& GetShipEventSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    //my::Observable<const my::CameraController::CameraInfo&>* GetCameraSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>
