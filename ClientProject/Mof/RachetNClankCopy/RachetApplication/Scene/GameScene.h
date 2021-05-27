@@ -21,7 +21,8 @@
 
 
 namespace my {
-class GameScene : public my::Scene {
+class GameScene : public my::Scene,
+    public my::Observer<const char*, const std::shared_ptr<my::Event>&> {
     using super = my::Scene;
 private:
     //! 追加
@@ -44,12 +45,6 @@ private:
     std::weak_ptr<my::GameManager> _game;
 
 
-    //! ゲームイベント
-    //std::shared_ptr<my::BridgeEvent>  _bridge_event;
-    //! ゲームイベント
-    //std::shared_ptr<my::ShipEvent>  _ship_event;
-    //! ゲームイベント
-    //std::shared_ptr<my::StageViewEvent> _stage_view_event;
     //! ゲームイベント
     std::vector<std::shared_ptr<my::Event>> _events;
 
@@ -107,6 +102,12 @@ public:
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name=""></param>
+    /// <param name=""></param>
+    virtual void OnNotify(const char* type, const std::shared_ptr<my::Event>& ptr) override;
     /// <summary>
     /// セッター
     /// </summary>

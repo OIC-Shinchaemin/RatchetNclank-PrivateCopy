@@ -17,12 +17,7 @@ my::PointCameraController::~PointCameraController() {
 void my::PointCameraController::SetInfo(const my::CameraController::CameraInfo& info) {
     super::_position = info.start_position;
     super::_target = info.target_position;
-//    _ideal_position = info.ideal_position;
     _ideal_position = Mof::CVector3();
-}
-
-void my::PointCameraController::AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr) {
-    Observable::AddObserver(ptr);
 }
 
 bool my::PointCameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {

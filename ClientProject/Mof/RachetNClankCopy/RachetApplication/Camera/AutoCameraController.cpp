@@ -40,28 +40,32 @@ float my::AutoCameraController::GetTimeMax(void) const {
     return this->_time_max;
 }
 
+bool my::AutoCameraController::IsCompleted(void) const {
+    return _time_max <= _timer();
+}
+
 void my::AutoCameraController::ForceTick(float time) {
     if (_timer.Tick(time)) {
         auto info = super::CameraInfo();
         auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());
         info.start_position = pos;
         info.target_position = math::vec3::kZero;
-        Observable::Notify(info);
+        //Observable::Notify(info);
     } // if
 
 }
-
+/*
 void my::AutoCameraController::AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr) {
     Observable::AddObserver(ptr);
 }
-
+*/
 bool my::AutoCameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {
     if (_timer.Tick(delta_time)) {
         auto info = super::CameraInfo();
         auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());
         info.start_position = pos;
         info.target_position = math::vec3::kZero;
-        Observable::Notify(info);
+        //Observable::Notify(info);
     } // if
 
     if (_timer() <= _time) {

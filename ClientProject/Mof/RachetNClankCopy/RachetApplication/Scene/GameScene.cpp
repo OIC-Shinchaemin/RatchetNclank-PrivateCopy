@@ -120,6 +120,15 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
     } // if
 }
 
+void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Event>& ptr) {
+    if (type == "AddRequest") {
+    } // if
+    else if (type == "DeleteRequest") {
+        ptr->GetSubject()->RemoveObserver(std::dynamic_pointer_cast<my::GameScene>(shared_from_this()));
+        ut::EraseRemove(_events, ptr);
+    } // else if
+}
+
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
@@ -162,6 +171,12 @@ bool my::GameScene::Initialize(void) {
     _events.push_back(ship_event);
     _events.push_back(stage_view_event);
 
+    for (auto& e : _events) {
+        auto ptr = std::dynamic_pointer_cast<my::GameScene>(shared_from_this());
+        auto sub = e->GetSubject();
+        sub->AddObserver(ptr);
+    } // for
+
 
     bridge_event->SetStage(&_stage);
     bridge_event->Initialize();
@@ -199,7 +214,7 @@ bool my::GameScene::Initialize(void) {
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
-    stage_view_event->GetSubject()->AddObserver(player->GetComponent<my::CameraComponent>());
+    stage_view_event->AddCameraOvserver(player->GetComponent<my::CameraComponent>());
     ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
 
 
