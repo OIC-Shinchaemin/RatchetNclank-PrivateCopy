@@ -20,6 +20,12 @@ std::string_view my::ShipIdleComponent::GetStateType(void) const {
     return state::ShipActionStateType::kShipActionIdleState;
 }
 
+bool my::ShipIdleComponent::Initialize(void) {
+    super::Initialize();
+
+    return true;
+}
+
 bool my::ShipIdleComponent::Update(float delta_time) {
     return true;
 }

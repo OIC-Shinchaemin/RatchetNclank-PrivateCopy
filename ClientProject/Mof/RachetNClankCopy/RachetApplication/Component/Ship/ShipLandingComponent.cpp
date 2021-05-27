@@ -21,6 +21,9 @@ std::string_view my::ShipLandingComponent::GetStateType(void) const {
 }
 
 bool my::ShipLandingComponent::Update(float delta_time) {
+    auto pos = super::GetOwner()->GetPosition();
+    pos.y -= 0.1f;
+    super::GetOwner()->SetPosition(pos);
     return true;
 }
 

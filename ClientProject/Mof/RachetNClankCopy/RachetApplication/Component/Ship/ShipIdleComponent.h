@@ -36,6 +36,12 @@ public:
     /// <returns></returns>
     virtual std::string_view GetStateType(void) const override;
     /// <summary>
+    /// ‰Šú‰»
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Initialize(void) override;
+    /// <summary>
     /// XV
     /// </summary>
     /// <param name="delta_time">ŠÔ</param>

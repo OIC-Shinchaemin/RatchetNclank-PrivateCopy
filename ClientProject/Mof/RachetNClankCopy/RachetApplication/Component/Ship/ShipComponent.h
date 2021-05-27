@@ -24,6 +24,8 @@ private:
     my::ServiceLocator<my::CameraController> _camera_controller;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
+    //! モーション
+    std::weak_ptr<class ShipStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ

@@ -21,20 +21,9 @@ std::string_view my::ShipTakeoffComponent::GetStateType(void) const {
 }
 
 bool my::ShipTakeoffComponent::Update(float delta_time) {
-    /*
-    if (_timer.Tick(delta_time)) {
-        _take_off = true;
-    } // if
     auto pos = super::GetOwner()->GetPosition();
-    if (_take_off) {
-        pos.y += 0.1f;
-        super::GetOwner()->SetPosition(pos);
-    } // if
-
-    if (pos.y > 10.0f) {
-        super::GetOwner()->Notify("GameClear", super::GetOwner());
-    } // if
-    */
+    pos.y += 0.1f;
+    super::GetOwner()->SetPosition(pos);
     return true;
 }
 

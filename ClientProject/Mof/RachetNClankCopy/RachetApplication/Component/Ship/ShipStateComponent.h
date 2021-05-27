@@ -8,7 +8,7 @@
 
 #include "My/Core/StateMachine.h"
 #include "../../State/ActionState.h"
-#include "../../State/PlayerActionStateDefine.h"
+#include "../../State/ShipActionStateDefine.h"
 
 
 namespace my {

@@ -5,14 +5,17 @@
 #include "../../Camera/FollowCameraController.h"
 #include "../Collision/Object/ShipCollisionComponent.h"
 #include "../Collision/Object/CollisionComponentDefine.h"
+#include "ShipStateComponent.h"
+
 
 
 my::ShipComponent::ShipComponent(int priority) :
-    super(priority) ,
+    super(priority),
     _timer(),
     _take_off(false),
     _camera_controller(),
-    _motion_com(){
+    _motion_com(),
+    _state_com() {
 }
 
 my::ShipComponent::ShipComponent(const ShipComponent& obj) :
@@ -20,7 +23,8 @@ my::ShipComponent::ShipComponent(const ShipComponent& obj) :
     _timer(),
     _take_off(false),
     _camera_controller(),
-    _motion_com() {
+    _motion_com(),
+    _state_com() {
 }
 
 my::ShipComponent::~ShipComponent() {
@@ -33,12 +37,22 @@ std::string my::ShipComponent::GetType(void) const {
 bool my::ShipComponent::Initialize(void) {
     super::Initialize();
     _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
+    _state_com = super::GetOwner()->GetComponent<my::ShipStateComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<my::ShipCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                my::CollisionComponentType::kPlayerCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         this->Activate();
+
+        if (auto state_com = _state_com.lock()) {
+            
+            if (state_com->CanTransition(state::ShipActionStateType::kShipActionTakeoffState)) {
+                state_com->ChangeState(state::ShipActionStateType::kShipActionTakeoffState);
+            } // if
+
+        } // if
+
         return true;
     }));
 
@@ -46,14 +60,7 @@ bool my::ShipComponent::Initialize(void) {
 }
 
 bool my::ShipComponent::Update(float delta_time) {
-    if (_timer.Tick(delta_time)) {
-        _take_off = true;
-    } // if
     auto pos = super::GetOwner()->GetPosition();
-    if (_take_off) {
-        pos.y += 0.1f;
-        super::GetOwner()->SetPosition(pos);
-    } // if
 
     if (pos.y > 10.0f) {
         super::GetOwner()->Notify("GameClear", super::GetOwner());
@@ -66,10 +73,12 @@ bool my::ShipComponent::Activate(void) {
         return false;
     } // if
     super::Activate();
+    /*
     if (auto motion_com = _motion_com.lock()) {
         motion_com->ChangeMotion(my::Ship::MotionType::Default);
         _timer.Initialize(7.0f, false);
     } // if
+    */
     return true;
 }
 

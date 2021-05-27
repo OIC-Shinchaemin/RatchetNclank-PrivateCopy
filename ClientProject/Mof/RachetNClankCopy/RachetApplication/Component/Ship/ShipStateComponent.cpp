@@ -37,12 +37,15 @@ bool my::ShipStateComponent::Initialize(void) {
             this->RegisterState(_state_machine, com);
         } // if
     } // for
-    _state_machine.ChangeState("ShipActionIdleState");
+
+    //_state_machine.ChangeState(state::ShipActionStateType::kShipActionIdleState);
+    _state_machine.ChangeState(state::ShipActionStateType::kShipActionLandingState);
     return true;
 }
 
 bool my::ShipStateComponent::Update(float delta_time) {
     _state_machine.Update(delta_time);
+    std::cout << "ship state = " << _state_machine.GetCurrentStateName() << "\n";
     return false;
 }
 
@@ -61,49 +64,30 @@ void my::ShipStateComponent::ChangeState(const std::string& name) {
 }
 
 bool my::ShipStateComponent::CanTransition(std::string_view next) const {
-    using Type = state::PlayerActionStateType;
-
+    using Type = state::ShipActionStateType;
     auto current = _state_machine.GetCurrentStateName();
-    if (next == Type::kPlayerActionJumpLandingState) {
-        if (current == Type::kPlayerActionJumpDownState) {
+    if (current == Type::kShipActionIdleState) {
+        if (next == Type::kShipActionTakeoffState) {
             return true;
         } // if
-        else if (current == Type::kPlayerActionDamageState) {
-            return false;
-        } // else if
     } // if
-    else if (next == Type::kPlayerActionDamageState) {
-        if (current == Type::kPlayerActionDamageState) {
-            return false;
-        } // if
-        else if (current == Type::kPlayerActionDeadState) {
-            return false;
-        } // if
-        else {
-            return true;
-        } // else
-    } // else if
-    else if (next == Type::kPlayerActionIdleState) {
-        if (current == Type::kPlayerActionJumpAttackState) {
+    else if (current == Type::kShipActionLandingState) {
+        if (next == Type::kShipActionIdleState) {
             return true;
         } // if
     } // else if
-    else if (next == Type::kPlayerActionJumpAttackState) {
-        if (current == Type::kPlayerActionJumpAttackSetState) {
-            return true;
-        } // if
-    } // else if
-    else if (next == Type::kPlayerActionThrowAttackSetState) {
-        if (current == Type::kPlayerActionCrouchState) {
+    else if (current == Type::kShipActionTakeoffState) {
+        if (next == Type::kShipActionIdleState) {
             return true;
         } // if
     } // else if
     return false;
 }
+
 #ifdef _DEBUG
 bool my::ShipStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
-        20.0f, 100.0f, "player state = %s", this->_state_machine.GetCurrentStateName());
+        20.0f, 100.0f, "ship state = %s", this->_state_machine.GetCurrentStateName());
     return true;
 }
 #endif // _DEBUG

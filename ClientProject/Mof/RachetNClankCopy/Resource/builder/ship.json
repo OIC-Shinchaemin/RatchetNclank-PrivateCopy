@@ -7,6 +7,12 @@
       }
     },
     {
+      "type": "ShipStateComponent",
+      "paramater": {
+        "priority": 2
+      }
+    },
+    {
       "type": "ShipIdleComponent",
       "paramater": {
         "priority": 1
