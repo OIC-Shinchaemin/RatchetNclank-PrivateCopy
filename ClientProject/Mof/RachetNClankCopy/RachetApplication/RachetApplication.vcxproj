@@ -254,6 +254,7 @@
     <ClCompile Include="Camera\DebugCameraController.cpp" />
     <ClCompile Include="Camera\FirstPersonCameraController.cpp" />
     <ClCompile Include="Camera\FollowCameraController.cpp" />
+    <ClCompile Include="Camera\PointCameraController.cpp" />
     <ClCompile Include="Component\ActionComponent.cpp" />
     <ClCompile Include="Component\ActionStateComponent.cpp" />
     <ClCompile Include="Component\AIStateComponent.cpp" />
@@ -277,6 +278,7 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp" />
@@ -340,8 +342,13 @@
     <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerOmniWrenchComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipActionComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipIdleComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipLandingComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipMeshComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipStateComponent.cpp" />
+    <ClCompile Include="Component\Ship\ShipTakeoffComponent.cpp" />
     <ClCompile Include="Component\SightRecognitionComponent.cpp" />
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Component\UpdateComponent.cpp" />
@@ -349,6 +356,9 @@
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp" />
+    <ClCompile Include="Event\BridgeEvent.cpp" />
+    <ClCompile Include="Event\ShipEvent.cpp" />
+    <ClCompile Include="Event\StageViewEvent.cpp" />
     <ClCompile Include="Factory\ActorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
@@ -363,6 +373,7 @@
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameSystem\GameMoney.cpp" />
+    <ClCompile Include="Game\GameSystem\HelpDesk.cpp" />
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveSystem.cpp" />
@@ -395,6 +406,8 @@
     <ClCompile Include="State\OmniWrenchActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerActionStateImplementation.cpp" />
     <ClCompile Include="State\PlayerMotionStateImplementation.cpp" />
+    <ClCompile Include="State\ShipActionStateImplementation.cpp" />
+    <ClCompile Include="State\ShipMotionStateImplementation.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
@@ -501,6 +514,7 @@
     <ClInclude Include="Camera\DebugCameraController.h" />
     <ClInclude Include="Camera\FirstPersonCameraController.h" />
     <ClInclude Include="Camera\FollowCameraController.h" />
+    <ClInclude Include="Camera\PointCameraController.h" />
     <ClInclude Include="Component\ActionComponent.h" />
     <ClInclude Include="Component\ActionStateComponent.h" />
     <ClInclude Include="Component\AIStateComponent.h" />
@@ -524,6 +538,7 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h" />
@@ -591,8 +606,14 @@
     <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerOmniWrenchComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
+    <ClInclude Include="Component\Ship\ShipActionComponent.h" />
     <ClInclude Include="Component\Ship\ShipComponent.h" />
+    <ClInclude Include="Component\Ship\ShipComponentInclude.h" />
+    <ClInclude Include="Component\Ship\ShipIdleComponent.h" />
+    <ClInclude Include="Component\Ship\ShipLandingComponent.h" />
     <ClInclude Include="Component\Ship\ShipMeshComponent.h" />
+    <ClInclude Include="Component\Ship\ShipStateComponent.h" />
+    <ClInclude Include="Component\Ship\ShipTakeoffComponent.h" />
     <ClInclude Include="Component\SightRecognitionComponent.h" />
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Component\UpdateComponent.h" />
@@ -601,6 +622,9 @@
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchComponentInclude.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h" />
+    <ClInclude Include="Event\BridgeEvent.h" />
+    <ClInclude Include="Event\ShipEvent.h" />
+    <ClInclude Include="Event\StageViewEvent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
@@ -615,6 +639,7 @@
     <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h" />
     <ClInclude Include="Factory\ComponentRegister\OmniWrenchComponentRegister.h" />
     <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h" />
+    <ClInclude Include="Factory\ComponentRegister\ShipComponentRegister.h" />
     <ClInclude Include="Factory\Creator.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryManager.h" />
@@ -623,6 +648,7 @@
     <ClInclude Include="Gamepad.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameSystem\GameMoney.h" />
+    <ClInclude Include="Game\GameSystem\HelpDesk.h" />
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveSystem.h" />
@@ -661,6 +687,8 @@
     <ClInclude Include="State\OmniWrenchActionStateDefine.h" />
     <ClInclude Include="State\PlayerActionStateDefine.h" />
     <ClInclude Include="State\PlayerMotionStateDefine.h" />
+    <ClInclude Include="State\ShipActionStateDefine.h" />
+    <ClInclude Include="State\ShipMotionStateDefine.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
     <ClInclude Include="UI\LockOnCursorMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />

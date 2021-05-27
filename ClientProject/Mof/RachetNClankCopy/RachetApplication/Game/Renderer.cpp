@@ -34,7 +34,6 @@ bool my::Renderer::Render(void) {
 
     for (auto ptr : _disable_actors) {
         ut::SwapPopback(_enable_actors, ptr);
-
         if (ptr->InCameraRange()) {
             _enable_actors.push_back(ptr);
         } // if

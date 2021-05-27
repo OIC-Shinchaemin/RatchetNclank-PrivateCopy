@@ -18,11 +18,10 @@
 #include "../Component/Enemy/EnemyComponentInclude.h"
 #include "../Component/Collision/Object/CollisionComponentInclude.h"
 #include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
+#include "../Component/Ship/ShipComponentInclude.h"
 
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
-#include "../Component/Ship/ShipComponent.h"
-#include "../Component/Ship/ShipMeshComponent.h"
 
 
 my::ComponentFactory::ComponentFactory() :
@@ -38,17 +37,14 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
 
-
 #include "ComponentRegister/PlayerComponentRegister.h"
 #include "ComponentRegister/EnemyComponentRegister.h"
 #include "ComponentRegister/CollisionComponentRegister.h"
 #include "ComponentRegister/OmniWrenchComponentRegister.h"
-        
+#include "ComponentRegister/ShipComponentRegister.h"
+       
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
-    my::ComponentFactory::AddComponentCreator<my::ShipComponent>();
-    my::ComponentFactory::AddComponentCreator<my::ShipMeshComponent>();
-
 }
 
 my::ComponentFactory::~ComponentFactory() {

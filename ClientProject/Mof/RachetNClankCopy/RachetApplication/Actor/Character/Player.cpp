@@ -23,10 +23,6 @@ std::shared_ptr<my::Mechanical> my::Player::GetCurrentMechanical(void) const {
     return nullptr;
 }
 
-void my::Player::End(void) {
-    Observable::Notify("PlayerDead", shared_from_this());
-}
-
 bool my::Player::Disable(void) {
     this->_enable = false;
     return true;
@@ -54,6 +50,7 @@ bool my::Player::Initialize(my::Actor::Param* param) {
 }
 
 my::Player::Player() :
+    super(),
     _current_mechanical(),
     _omniwrench(),
     _children(),
@@ -104,13 +101,7 @@ bool my::Player::Update(float delta_time) {
     Mof::CMatrix44 mat = _upp_bone_state->pBone->GetRotationOffsetMatrix() * _upp_bone_state->BoneMatrix;
     Mof::CVector3 scale, rotate, translate;
     mat.GetScaling(scale); mat.GetRotation(rotate); mat.GetTranslation(translate);
-    /*
-    for (auto& actor : _children) {
-        actor->SetScale(scale);
-        actor->SetPosition(translate);
-        actor->SetRotate(rotate);
-    } // for
-    */
+    
     if (_current_weapon) {
         _current_weapon->SetScale(scale);
         _current_weapon->SetPosition(translate);
@@ -151,6 +142,15 @@ bool my::Player::Render(void) {
     if (_current_weapon) {
         _current_weapon->Render();
     } // if
+
+
+#ifdef _DEBUG
+    auto pos = super::GetPosition();
+    ::CGraphicsUtilities::RenderString(50.0f, 300.0f, "pos x = %f", pos.x);
+    ::CGraphicsUtilities::RenderString(50.0f, 320.0f, "pos y = %f", pos.y);
+    ::CGraphicsUtilities::RenderString(50.0f, 340.0f, "pos z = %f", pos.z);
+#endif // _DEBUG
+
     return true;
 }
 

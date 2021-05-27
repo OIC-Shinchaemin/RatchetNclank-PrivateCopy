@@ -14,6 +14,10 @@ namespace my {
 class ShipCollisionComponent : public my::CollisionComponent {
     using super = my::CollisionComponent;
 private:
+    //! 状態
+    std::weak_ptr<class ShipStateComponent> _state_com;
+    //! 高さ
+    float _height;
 public:
     /// <summary>
     /// コンストラクタ
@@ -80,8 +84,9 @@ public:
     /// <summary>
     /// 衝突
     /// </summary>
-    /// <param name="ptr"></param>
-    //virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) override;
+    /// <param name="mesh"></param>
+    /// <param name="obj"></param>
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
 #endif // !MY_SHIP_COLLISION_COMPONENT_H

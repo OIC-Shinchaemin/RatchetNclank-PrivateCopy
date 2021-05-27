@@ -25,6 +25,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Enemy();
+    /// <summary>
+    /// デリート
+    /// </summary>
+    /// <param name=""></param>
+    virtual void End(void) override;
 };
 }
 #endif // !MY_ENEMY_H

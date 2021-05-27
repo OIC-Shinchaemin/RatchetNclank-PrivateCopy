@@ -280,6 +280,12 @@
     <Filter Include="Rachet\Source\Component\Weapon\OmniWrench">
       <UniqueIdentifier>{d2d7b52e-e01f-41b1-8910-3bde8bc2b663}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Event">
+      <UniqueIdentifier>{af05ce0d-6a2c-4428-ac8e-32d6846c29b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Event">
+      <UniqueIdentifier>{4ec4b52a-e2cd-4186-90a9-4ab7466fb794}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -818,6 +824,45 @@
     </ClCompile>
     <ClCompile Include="Component\Player\PlayerShotAttackComponent.cpp">
       <Filter>Rachet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\StageViewEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\BridgeEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\ShipEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipActionComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipStateComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ShipActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ShipMotionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipIdleComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipTakeoffComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipLandingComponent.cpp">
+      <Filter>Rachet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\PointCameraController.cpp">
+      <Filter>Rachet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\HelpDesk.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1609,6 +1654,51 @@
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerShotAttackComponent.h">
       <Filter>Rachet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\StageViewEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\ShipEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\BridgeEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipActionComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipStateComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ShipActionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ShipMotionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\ShipComponentRegister.h">
+      <Filter>Rachet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipComponentInclude.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipIdleComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipLandingComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipTakeoffComponent.h">
+      <Filter>Rachet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\PointCameraController.h">
+      <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\HelpDesk.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

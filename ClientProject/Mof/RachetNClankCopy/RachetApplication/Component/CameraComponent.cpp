@@ -23,6 +23,9 @@ void my::CameraComponent::LookDown(void) {
     _camera_controller.GetService()->AddAltitude(-1.0f);
 }
 
+void my::CameraComponent::UpdateFPSMode(void) {
+}
+
 void my::CameraComponent::ControlByKeyboardFollow(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         this->TurnLeft();

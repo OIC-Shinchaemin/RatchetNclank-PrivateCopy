@@ -17,7 +17,8 @@ namespace my {
 enum class ActorState {
     Active, // 更新、描画する
     Inactive, // 更新、描画しない
-    Pause, // 更新しない
+    Pause, // 更新しない、描画する
+    Hide, // 更新する、描画しない
     End // 削除
 };
 class Actor : public std::enable_shared_from_this<my::Actor>, public my::Observable<const char*, const std::shared_ptr<my::Actor>&> {

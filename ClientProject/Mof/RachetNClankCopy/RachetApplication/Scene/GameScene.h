@@ -7,17 +7,16 @@
 #include <memory>
 #include <vector>
 
-#include "My/Core/ServiceLocator.h"
-#include "My/Core/Observer.h"
 #include "My/UI/UICanvas.h"
-#include "../Camera/Camera.h"
-#include "../Camera/CameraController.h"
-#include "../Camera/AutoCameraController.h"
+#include "../Game/GameManager.h"
+
 #include "../Game/GameWorld.h"
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
-#include "../Game/GameManager.h"
+#include "../Event/BridgeEvent.h"
+#include "../Event/ShipEvent.h"
+#include "../Event/StageViewEvent.h"
 
 
 namespace my {
@@ -42,14 +41,15 @@ private:
     std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
-    //! 削除
-    std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
+
+
     //! ゲームイベント
-    my::Observable<const char*, const std::shared_ptr<my::Actor>& > _bridge_event_subject;
-    //! カメラ
-    std::shared_ptr<my::Camera> _stage_view_camera;
-    //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _stage_view_camera_controller;
+    std::shared_ptr<my::BridgeEvent>  _bridge_event;
+    //! ゲームイベント
+    std::shared_ptr<my::ShipEvent>  _ship_event;
+    //! ゲームイベント
+    std::shared_ptr<my::StageViewEvent> _stage_view_event;
+    
     /// <summary>
     /// 追加
     /// </summary>

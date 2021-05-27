@@ -7,6 +7,30 @@
       }
     },
     {
+      "type": "ShipStateComponent",
+      "paramater": {
+        "priority": 2
+      }
+    },
+    {
+      "type": "ShipIdleComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
+      "type": "ShipTakeoffComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
+      "type": "ShipLandingComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
       "type": "ShipMeshComponent",
       "paramater": {
         "priority": 1,
@@ -18,6 +42,12 @@
       "paramater": {
         "priority": 0,
         "path": "../Resource/motion_names/ship.motion_names"
+      }
+    },
+    {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 10
       }
     },
     {
