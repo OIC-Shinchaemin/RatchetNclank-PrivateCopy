@@ -5,6 +5,7 @@
 #include "../Actor/Character/Player.h"
 #include "../Actor//Terrain/Terrain.h"
 #include "../Component/CameraComponent.h"
+#include "../Stage/Gimmick/Bridge.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -39,9 +40,18 @@ bool my::GameScene::SceneUpdate(float delta_time) {
         _bridge_event->AllDelete();
     } // if
 #endif // _DEBUG
+    
     _stage_view_event->Update(delta_time);
     _bridge_event->Update(delta_time);
     _ship_event->Update(delta_time);
+    if (_bridge_event->EventActorsEmpty()) {
+        if (auto game = _game.lock()) {
+            auto quest = my::GameQuest(my::GameQuest::Type::GoHome);
+            game->GetHelpDesk()->OnNotify(quest);
+        } // if
+    } // if
+
+    
     if (_re_initialize) {
         this->ReInitialize();
     } // if
@@ -156,7 +166,6 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     return true;
 }
 
-#include "../Stage/Gimmick/Bridge.h"
 bool my::GameScene::Initialize(void) {
     _stage.Initialize();
     _bridge_event->SetStage(&_stage);
@@ -201,11 +210,14 @@ bool my::GameScene::Initialize(void) {
     if (auto game = _game.lock()) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
+        auto help_desk = game->GetHelpDesk();
         // game system
-        game->GetHelpDesk()->Initialize();
+
+        help_desk ->Initialize();
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
-
+        auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
+        help_desk->OnNotify(quest);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);

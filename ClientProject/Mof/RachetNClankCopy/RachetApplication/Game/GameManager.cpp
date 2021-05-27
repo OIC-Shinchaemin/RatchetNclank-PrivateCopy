@@ -53,7 +53,6 @@ bool my::GameManager::Initialize(void) {
 
 bool my::GameManager::Update(void) {
     _quick_change->Update();
-    //_help_desk->Update();
     return true;
 }
 

@@ -22,6 +22,8 @@ void my::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor
         } // if
 
         if (_for_bridge_event_actors.empty()) {
+            //Observable::Notify();
+
             // view
             _bridge_view_camera_controller.RegisterGlobalCamera();
             auto info = my::CameraController::CameraInfo();
@@ -52,6 +54,10 @@ void my::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor
 
 void my::BridgeEvent::SetStage(Stage* ptr) {
     this->_stage = ptr;
+}
+
+bool my::BridgeEvent::EventActorsEmpty(void) const {
+    return _for_bridge_event_actors.empty();
 }
 
 bool my::BridgeEvent::Initialize(void) {

@@ -19,8 +19,7 @@ namespace my {
 class BridgeEvent :
     public std::enable_shared_from_this<my::BridgeEvent>,
     public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
-    public my::Observable<const my::CameraController::CameraInfo&>
-{
+    public my::Observable<const my::CameraController::CameraInfo&> {
     using Observable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! 通知アクター
@@ -53,6 +52,12 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetStage(Stage* ptr);
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool EventActorsEmpty(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

@@ -12,7 +12,7 @@
 #include "My/Core/Observer.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
-#include "../Game/GameSystem/QuickChangeSystem.h"
+#include "../Game/GameSystem/HelpDesk.h"
 
 
 namespace my {
@@ -50,9 +50,11 @@ public:
     virtual bool Render(void) override;
 };
 */
-class HelpDeskMenu : public my::UIPanel {
+class HelpDeskMenu : public my::UIPanel, public my::Observer<const my::HelpDesk::Info&> {
     using super = my::UIPanel;
 private:
+    //! 表示文字
+    my::HelpDesk::Info _infomation;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
 public:
@@ -61,6 +63,11 @@ public:
     /// </summary>
     /// <param name="name"></param>
     HelpDeskMenu(const char* name);
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="info"></param>
+    virtual void OnNotify(const my::HelpDesk::Info& info);
     /// <summary>
     /// セッター
     /// </summary>
