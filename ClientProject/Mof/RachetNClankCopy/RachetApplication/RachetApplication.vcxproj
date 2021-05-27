@@ -357,6 +357,8 @@
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp" />
     <ClCompile Include="Event\BridgeEvent.cpp" />
+    <ClCompile Include="Event\Event.cpp" />
+    <ClCompile Include="Event\EventManager.cpp" />
     <ClCompile Include="Event\ShipEvent.cpp" />
     <ClCompile Include="Event\StageViewEvent.cpp" />
     <ClCompile Include="Factory\ActorFactory.cpp" />
@@ -625,6 +627,8 @@
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h" />
     <ClInclude Include="Event\BridgeEvent.h" />
+    <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Event\EventManager.h" />
     <ClInclude Include="Event\ShipEvent.h" />
     <ClInclude Include="Event\StageViewEvent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />

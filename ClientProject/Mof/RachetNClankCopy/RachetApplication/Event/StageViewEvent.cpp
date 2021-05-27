@@ -2,15 +2,17 @@
 
 
 my::StageViewEvent::StageViewEvent() :
+    super(),
     _stage_view_camera(),
     _stage_view_camera_controller() {
 }
 
 my::StageViewEvent::~StageViewEvent() {
 }
-
+/*
 void my::StageViewEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
 }
+*/
 
 std::shared_ptr<my::Observable<const my::CameraController::CameraInfo&>> my::StageViewEvent::GetSubject(void) const {
     return std::dynamic_pointer_cast<my::AutoCameraController>(_stage_view_camera_controller.GetService());

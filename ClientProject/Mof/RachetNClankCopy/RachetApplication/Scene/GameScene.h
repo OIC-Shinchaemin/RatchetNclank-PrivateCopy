@@ -14,6 +14,7 @@
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
+#include "../Event/Event.h"
 #include "../Event/BridgeEvent.h"
 #include "../Event/ShipEvent.h"
 #include "../Event/StageViewEvent.h"
@@ -44,12 +45,14 @@ private:
 
 
     //! ゲームイベント
-    std::shared_ptr<my::BridgeEvent>  _bridge_event;
+    //std::shared_ptr<my::BridgeEvent>  _bridge_event;
     //! ゲームイベント
-    std::shared_ptr<my::ShipEvent>  _ship_event;
+    //std::shared_ptr<my::ShipEvent>  _ship_event;
     //! ゲームイベント
-    std::shared_ptr<my::StageViewEvent> _stage_view_event;
-    
+    //std::shared_ptr<my::StageViewEvent> _stage_view_event;
+    //! ゲームイベント
+    std::vector<std::shared_ptr<my::Event>> _events;
+
     /// <summary>
     /// 追加
     /// </summary>

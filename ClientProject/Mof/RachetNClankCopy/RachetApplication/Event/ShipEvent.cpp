@@ -6,6 +6,7 @@
 
 
 my::ShipEvent::ShipEvent() :
+    super(),
     _ship_event_subject(),
     _ship_view_camera(),
     _ship_view_camera_controller(),
@@ -17,9 +18,10 @@ my::ShipEvent::ShipEvent() :
 
 my::ShipEvent::~ShipEvent() {
 }
-
+/*
 void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
 }
+*/
 
 void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<StageObject>& ptr) {
     //if (type == "BridgeActionEnd const char* type, const std::shared_ptr<StageObject>& ptr") {

@@ -870,6 +870,12 @@
     <ClCompile Include="Game\GameSystem\GameQuest.cpp">
       <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Event.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1711,6 +1717,12 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\GameQuest.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventManager.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Event.h">
+      <Filter>Rachet\Header\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

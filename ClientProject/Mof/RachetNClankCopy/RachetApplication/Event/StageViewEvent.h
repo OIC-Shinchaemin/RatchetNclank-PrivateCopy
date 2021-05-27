@@ -2,6 +2,7 @@
 #define MY_STAGE_VIEW_EVENT_H
 
 
+#include "Event.h"
 #include "My/Core/Observer.h"
 #include "My/Core/Observable.h"
 
@@ -17,10 +18,9 @@
 
 
 namespace my {
-class StageViewEvent :
-    public std::enable_shared_from_this<my::StageViewEvent>,
-    public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
+class StageViewEvent : public my::Event,
     public my::Observable<const char*, const std::shared_ptr<my::StageViewEvent>&> {
+    using super = my::Event;
     using Observable = my::Observable<const char*, const std::shared_ptr<my::StageViewEvent>&>;
 private:
     //! カメラ
@@ -37,12 +37,6 @@ public:
     /// </summary>
     ~StageViewEvent();
     /// <summary>
-    /// 通知イベント
-    /// </summary>
-    /// <param name=""></param>
-    /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -53,13 +47,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Initialize(void);
+    virtual bool Initialize(void) override;
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    bool Update(float delta_time);
+    virtual bool Update(float delta_time) override;
 };
 }
 #endif // !MY_BRIDGE_EVENT_H

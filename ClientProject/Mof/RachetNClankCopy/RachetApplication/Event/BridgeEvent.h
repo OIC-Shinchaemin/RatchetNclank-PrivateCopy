@@ -2,6 +2,7 @@
 #define MY_BRIDGE_EVENT_H
 
 
+#include "Event.h"
 #include "My/Core/Observer.h"
 #include "My/Core/Observable.h"
 
@@ -13,14 +14,16 @@
 #include "../Camera/Camera.h"
 #include "../Camera/PointCameraController.h"
 #include "../Camera/FirstPersonCameraController.h"
+#include "../Game/GameSystem/GameQuest.h"
 
 
 namespace my {
-class BridgeEvent :
-    public std::enable_shared_from_this<my::BridgeEvent>,
+class BridgeEvent : public my::Event,
     public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
     public my::Observable<const my::CameraController::CameraInfo&> {
+    using super = my::Event;
     using Observable = my::Observable<const my::CameraController::CameraInfo&>;
+    using QuestObservable = my::Observable<const my::GameQuest&>;
 private:
     //! 通知アクター
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
@@ -32,6 +35,8 @@ private:
     my::FirstPersonCameraController _bridge_view_camera_controller;
     //! 位置
     Mof::CVector3 _ideal_position;
+    //! 通知用
+    QuestObservable _quest_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -53,6 +58,11 @@ public:
     /// <param name="ptr"></param>
     void SetStage(Stage* ptr);
     /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddQuestObserver(const std::shared_ptr<my::Observer<const my::GameQuest&>>& ptr);
+    /// <summary>
     /// 判定
     /// </summary>
     /// <param name=""></param>
@@ -63,13 +73,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Initialize(void);
+    virtual bool Initialize(void) override;
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    bool Update(float delta_time);
+    virtual bool Update(float delta_time) override;
     /// <summary>
     /// 追加
     /// </summary>

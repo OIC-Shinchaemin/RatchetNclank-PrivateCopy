@@ -2,24 +2,21 @@
 #define MY_SHIP_EVENT_H
 
 
+#include "Event.h"
 #include "My/Core/Observer.h"
 
 #include <memory>
 
-#include "../Actor.h"
 #include "BridgeEvent.h"
 #include "../Stage/StageObject.h"
 #include "../Camera/FirstPersonCameraController.h"
 
 
 namespace my {
-class ShipEvent :
-    public std::enable_shared_from_this<my::ShipEvent>,
-    public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
+class ShipEvent : public my::Event,
     public my::Observer<const my::CameraController::CameraInfo&>,
-    //public my::Observer<const char*, const std::shared_ptr<my::BridgeEvent>&>,
-    public my::Observer<const char*, const std::shared_ptr<StageObject>&>
-{
+    public my::Observer<const char*, const std::shared_ptr<StageObject>&> {
+    using super = my::Event;
 private:
     //! 通知用
     my::Observable<const char*, const std::shared_ptr<my::Actor>& > _ship_event_subject;
@@ -47,8 +44,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name=""></param>
-    /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
+    //virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
     /// <summary>
     /// 通知イベント
     /// </summary>
@@ -77,13 +73,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Initialize(void);
+    virtual bool Initialize(void) override;
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    bool Update(float delta_time);
+    virtual bool Update(float delta_time) override;
 };
 }
 #endif // !MY_SHIP_EVENT_H

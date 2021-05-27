@@ -1,6 +1,8 @@
 #include "BridgeEvent.h"
 
+
 my::BridgeEvent::BridgeEvent() :
+    super(),
     _for_bridge_event_actors(),
     _stage(),
     _bridge_view_camera(),
@@ -17,12 +19,14 @@ my::BridgeEvent::~BridgeEvent() {
 void my::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
     if (type == "EnemyDead") {
         if (ptr) {
-            ptr->RemoveObserver(shared_from_this());
+            ptr->RemoveObserver(std::dynamic_pointer_cast<my::BridgeEvent>(shared_from_this()));
             ut::SwapPopback(_for_bridge_event_actors, ptr);
         } // if
 
         if (_for_bridge_event_actors.empty()) {
-            //Observable::Notify();
+            auto quest = my::GameQuest(my::GameQuest::Type::GoHome);
+            _quest_subject.Notify(quest);
+
 
             // view
             _bridge_view_camera_controller.RegisterGlobalCamera();
@@ -55,6 +59,14 @@ void my::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<my::Actor
 void my::BridgeEvent::SetStage(Stage* ptr) {
     this->_stage = ptr;
 }
+/*
+my::Observable<const my::GameQuest&> my::BridgeEvent::GetQuestSubject(void) const {
+    return this->_quest_subject;
+}
+*/
+void my::BridgeEvent::AddQuestObserver(const std::shared_ptr<my::Observer<const my::GameQuest&>>& ptr) {
+    this->_quest_subject.AddObserver(ptr);
+}
 
 bool my::BridgeEvent::EventActorsEmpty(void) const {
     return _for_bridge_event_actors.empty();
@@ -74,12 +86,16 @@ bool my::BridgeEvent::Update(float delta_time) {
     auto camera_info = my::CameraController::CameraInfo();
     camera_info.ideal_position = _ideal_position;
     _bridge_view_camera_controller.Update(delta_time, camera_info);
+
+    if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+        this->AllDelete();
+    } // if
     return true;
 }
 
 void my::BridgeEvent::AddTriggerActor(const std::shared_ptr<my::Actor>& ptr) {
     _for_bridge_event_actors.push_back(ptr);
-    ptr->AddObserver(shared_from_this());
+    ptr->AddObserver(std::dynamic_pointer_cast<my::BridgeEvent>(shared_from_this()));
 }
 
 void my::BridgeEvent::AllDelete(void) {
