@@ -15,8 +15,8 @@ class ShipTakeoffComponent : public my::ShipActionComponent {
 private:
     //! タイマー
     my::Timer _timer;
-    //! モーション
-    //std::weak_ptr<class MotionComponent> _motion_com;
+    //! 上昇
+    bool _takeoff;
 public:
     /// <summary>
     /// コンストラクタ

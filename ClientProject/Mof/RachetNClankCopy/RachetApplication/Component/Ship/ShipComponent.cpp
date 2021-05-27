@@ -11,18 +11,12 @@
 
 my::ShipComponent::ShipComponent(int priority) :
     super(priority),
-    _timer(),
-    _take_off(false),
-    _camera_controller(),
     _motion_com(),
     _state_com() {
 }
 
 my::ShipComponent::ShipComponent(const ShipComponent& obj) :
     super(obj),
-    _timer(),
-    _take_off(false),
-    _camera_controller(),
     _motion_com(),
     _state_com() {
 }
@@ -50,7 +44,6 @@ bool my::ShipComponent::Initialize(void) {
             if (state_com->CanTransition(state::ShipActionStateType::kShipActionTakeoffState)) {
                 state_com->ChangeState(state::ShipActionStateType::kShipActionTakeoffState);
             } // if
-
         } // if
 
         return true;

@@ -3,11 +3,16 @@
 
 
 #include "ShipActionComponent.h"
+#include "My/Core/Observable.h"
+
+#include "../../Camera/CameraController.h"
 
 
 namespace my {
-class ShipLandingComponent : public my::ShipActionComponent {
+class ShipLandingComponent : public my::ShipActionComponent,
+    public my::Observable<const my::CameraController::CameraInfo&> {
     using super = my::ShipActionComponent;
+    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
 public:
     /// <summary>
     /// コンストラクタ
@@ -36,6 +41,11 @@ public:
     /// <returns></returns>
     virtual std::string_view GetStateType(void) const override;
     /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    void AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
+    /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time">時間</param>
@@ -53,6 +63,12 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
+    /// <summary>
+    /// 終了
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>成功</returns>
+    virtual bool End(void) override;
 };
 }
 #endif // !MY_SHIP_LANDING_COMPONENT_H

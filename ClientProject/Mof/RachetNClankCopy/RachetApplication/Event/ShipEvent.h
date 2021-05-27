@@ -32,6 +32,8 @@ private:
     Mof::CVector3 _ideal_position;
     //! カメラ情報
     my::CameraController::CameraInfo _info;
+    //! プレイヤービュー
+    std::weak_ptr<my::Observer<const my::CameraController::CameraInfo&>> _camera_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -59,6 +61,11 @@ public:
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const my::CameraController::CameraInfo& info) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetCameraComponent(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

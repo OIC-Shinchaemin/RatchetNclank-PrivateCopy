@@ -77,7 +77,7 @@ bool my::ShipStateComponent::CanTransition(std::string_view next) const {
         } // if
     } // else if
     else if (current == Type::kShipActionTakeoffState) {
-        if (next == Type::kShipActionIdleState) {
+        if (next == Type::kShipActionLandingState) {
             return true;
         } // if
     } // else if

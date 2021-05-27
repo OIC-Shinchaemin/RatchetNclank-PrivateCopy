@@ -45,6 +45,12 @@
       }
     },
     {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 10
+      }
+    },
+    {
       "type": "ShipCollisionComponent",
       "paramater": {
         "priority": 0

@@ -194,6 +194,8 @@ bool my::GameScene::Initialize(void) {
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
     _stage_view_event->GetSubject()->AddObserver(player->GetComponent<my::CameraComponent>());
+    _ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
+
 
     // game system
     if (auto game = _game.lock()) {

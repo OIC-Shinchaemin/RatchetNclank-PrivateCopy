@@ -2,11 +2,15 @@
 
 
 my::ShipTakeoffComponent::ShipTakeoffComponent(int priority) :
-    super(priority) {
+    super(priority),
+    _timer(),
+    _takeoff(false) {
 }
 
 my::ShipTakeoffComponent::ShipTakeoffComponent(const ShipTakeoffComponent& obj) :
-    super(obj) {
+    super(obj),
+    _timer(),
+    _takeoff(false) {
 }
 
 my::ShipTakeoffComponent::~ShipTakeoffComponent() {
@@ -21,9 +25,15 @@ std::string_view my::ShipTakeoffComponent::GetStateType(void) const {
 }
 
 bool my::ShipTakeoffComponent::Update(float delta_time) {
-    auto pos = super::GetOwner()->GetPosition();
-    pos.y += 0.1f;
-    super::GetOwner()->SetPosition(pos);
+    if (_timer.Tick(delta_time)) {
+        _takeoff = true;
+    } // if
+    if (_takeoff) {
+        puts("_takeoff");
+        auto pos = super::GetOwner()->GetPosition();
+        pos.y += 0.1f;
+        super::GetOwner()->SetPosition(pos);
+    } // if
     return true;
 }
 
@@ -37,13 +47,8 @@ bool my::ShipTakeoffComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::ShipMotionStateType::kShipMotionTakeoffState);
+    _timer.Initialize(7.0f, false);
 
-    /*
-    if (auto motion_com = _motion_com.lock()) {
-        motion_com->ChangeMotion(my::Ship::MotionType::Default);
-        _timer.Initialize(7.0f, false);
-    } // if
-    */
 
     return true;
 }

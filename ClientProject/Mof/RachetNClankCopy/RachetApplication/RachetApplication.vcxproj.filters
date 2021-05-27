@@ -861,6 +861,9 @@
     <ClCompile Include="Camera\PointCameraController.cpp">
       <Filter>Rachet\Source\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameSystem\HelpDesk.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1693,6 +1696,9 @@
     </ClInclude>
     <ClInclude Include="Camera\PointCameraController.h">
       <Filter>Rachet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\HelpDesk.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

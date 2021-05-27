@@ -6,22 +6,11 @@
 
 #include <memory>
 
-#include "My/Core/Timer.h"
-#include "My/Core/ServiceLocator.h"
-#include "../../Camera/Camera.h"
-#include "../../Camera/CameraController.h"
-
 
 namespace my {
-class ShipComponent : public my::UpdateComponent {
+class ShipComponent : public my::UpdateComponent{
     using super = my::UpdateComponent;
 private:
-    //! タイマー
-    my::Timer _timer;
-    //! フラグ
-    bool _take_off;
-    //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _camera_controller;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション

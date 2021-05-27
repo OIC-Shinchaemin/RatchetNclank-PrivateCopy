@@ -11,7 +11,8 @@
 
 
 namespace my {
-class CameraComponent : public my::UpdateComponent, public my::Observer<const my::CameraController::CameraInfo&> {
+class CameraComponent : public my::UpdateComponent, 
+    public my::Observer<const my::CameraController::CameraInfo&> {
     using super = my::UpdateComponent;
 private:
     //! ‘ÎÛ
