@@ -409,6 +409,7 @@
     <ClCompile Include="State\ShipActionStateImplementation.cpp" />
     <ClCompile Include="State\ShipMotionStateImplementation.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
+    <ClCompile Include="UI\HelpDeskMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
@@ -690,6 +691,7 @@
     <ClInclude Include="State\ShipActionStateDefine.h" />
     <ClInclude Include="State\ShipMotionStateDefine.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
+    <ClInclude Include="UI\HelpDeskMenu.h" />
     <ClInclude Include="UI\LockOnCursorMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />

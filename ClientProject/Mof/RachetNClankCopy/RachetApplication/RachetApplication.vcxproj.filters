@@ -864,6 +864,9 @@
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp">
       <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
+    <ClCompile Include="UI\HelpDeskMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1699,6 +1702,9 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\HelpDesk.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\HelpDeskMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

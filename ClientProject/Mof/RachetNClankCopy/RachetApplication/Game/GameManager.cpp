@@ -7,6 +7,7 @@
 my::GameManager::GameManager() :
     _weapon_system(std::make_shared<my::WeaponSystem>()),
     _quick_change(std::make_shared<my::QuickChangeSystem>()),
+    _help_desk(std::make_shared<my::HelpDesk>()),
     _resource(),
     _ui_canvas() {
 }
@@ -30,6 +31,10 @@ std::shared_ptr<my::QuickChangeSystem> my::GameManager::GetQuickChange(void) con
     return this->_quick_change;
 }
 
+std::shared_ptr<my::HelpDesk> my::GameManager::GetHelpDesk(void) const {
+    return this->_help_desk;
+}
+
 void my::GameManager::GameSystemLoad(void) {
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
@@ -41,11 +46,14 @@ bool my::GameManager::Initialize(void) {
     _weapon_system->SetUICanvas(_ui_canvas);
     _quick_change->SetResourceManager(_resource);
     _quick_change->SetUICanvas(_ui_canvas);
+    _help_desk->SetResourceManager(_resource);
+    _help_desk->SetUICanvas(_ui_canvas);
     return true;
 }
 
 bool my::GameManager::Update(void) {
     _quick_change->Update();
+    //_help_desk->Update();
     return true;
 }
 
@@ -61,4 +69,5 @@ void my::GameManager::GameSystemRelease(void) {
     my::SaveSystem().Save(save_param);
     _quick_change->Release();
     _weapon_system->Release();
+    _help_desk->Release();
 }

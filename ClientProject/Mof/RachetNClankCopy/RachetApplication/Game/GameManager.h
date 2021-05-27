@@ -7,6 +7,7 @@
 #include "GameSystem/GameMoney.h"
 #include "GameSystem/WeaponSystem.h"
 #include "GameSystem/QuickChangeSystem.h"
+#include "GameSystem/HelpDesk.h"
 
 
 namespace my {
@@ -16,6 +17,8 @@ private:
     std::shared_ptr<my::WeaponSystem>  _weapon_system;
     //! クイックチェンジ
     std::shared_ptr<my::QuickChangeSystem>  _quick_change;
+    //! ヘルプデスク
+    std::shared_ptr<my::HelpDesk>  _help_desk;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
@@ -51,6 +54,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<my::QuickChangeSystem> GetQuickChange(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::HelpDesk> GetHelpDesk(void) const;
     /// <summary>
     /// 読み込み
     /// </summary>

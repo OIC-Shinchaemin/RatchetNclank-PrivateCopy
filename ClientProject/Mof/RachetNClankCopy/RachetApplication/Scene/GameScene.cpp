@@ -202,6 +202,7 @@ bool my::GameScene::Initialize(void) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         // game system
+        game->GetHelpDesk()->Initialize();
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
 
