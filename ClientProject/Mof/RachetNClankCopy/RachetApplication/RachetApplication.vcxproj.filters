@@ -876,6 +876,12 @@
     <ClCompile Include="Event\Event.cpp">
       <Filter>Rachet\Source\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventReferenceTable.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1722,6 +1728,12 @@
       <Filter>Rachet\Header\Event</Filter>
     </ClInclude>
     <ClInclude Include="Event\Event.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\RegisterGlobalCameraEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventReferenceTable.h">
       <Filter>Rachet\Header\Event</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "Event.h"
+#include "EventReferenceTable.h"
 
 
 namespace my {
@@ -14,6 +15,8 @@ class EventManager :
 private:
     //! ゲームイベント
     std::vector<std::shared_ptr<my::Event>> _events;
+    //! データ
+    //my::EventReferenceTable _table;
 public:
     /// <summary>
     /// コンストラクタ

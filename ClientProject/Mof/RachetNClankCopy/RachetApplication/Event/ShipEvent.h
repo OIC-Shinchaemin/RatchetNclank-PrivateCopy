@@ -30,8 +30,6 @@ private:
     my::CameraController::CameraInfo _info;
     //! プレイヤービュー
     std::weak_ptr<my::Observer<const my::CameraController::CameraInfo&>> _camera_com;
-    //! 通知用
-    //my::Observable<const my::CameraController::CameraInfo&> _camera_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,22 +52,11 @@ public:
     /// <param name=""></param>
     virtual void OnNotify(const my::CameraController::CameraInfo& info) override;
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetCameraComponent(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const char*, const std::shared_ptr<my::Actor>&>& GetShipEventSubject(void);
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //my::Observable<const my::CameraController::CameraInfo&>* GetCameraSubject(void);
+    my::Observable<const char*, const std::shared_ptr<my::Actor>&>* GetShipEventSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -9,6 +9,7 @@
 #include "../Event/BridgeEvent.h"
 #include "../Event/ShipEvent.h"
 #include "../Event/StageViewEvent.h"
+#include "../Event/EventReferenceTable.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -160,6 +161,7 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
 
 bool my::GameScene::Initialize(void) {
     _stage.Initialize();
+    my::EventReferenceTable::Singleton().Reset();
 
     std::shared_ptr<my::BridgeEvent> bridge_event;
     std::shared_ptr<my::ShipEvent> ship_event;
@@ -176,7 +178,7 @@ bool my::GameScene::Initialize(void) {
     ship_event->Initialize();
     stage_view_event->Initialize();
     bridge_event->GetCameraSubject()->AddObserver(ship_event);
-    ship_event->GetShipEventSubject().AddObserver(shared_from_this());
+    ship_event->GetShipEventSubject()->AddObserver(shared_from_this());
 
     for (auto gimmick : _stage.GetGimmickArray()) {
         auto temp = std::dynamic_pointer_cast<Bridge>(gimmick);
@@ -184,7 +186,7 @@ bool my::GameScene::Initialize(void) {
             temp->AddObserver(ship_event);
         } // if
     } // for
-
+    
 
     auto param = new my::Actor::Param();
     // enemy
@@ -207,7 +209,7 @@ bool my::GameScene::Initialize(void) {
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<my::CameraComponent>());
-    ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
+    //ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
 
 
     // game system

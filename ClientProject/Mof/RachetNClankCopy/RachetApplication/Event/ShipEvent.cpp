@@ -3,6 +3,8 @@
 #include "../Factory/FactoryManager.h"
 #include "../Actor//Ship/Ship.h"
 #include "../Component/Ship/ShipLandingComponent.h"
+#include "../Event/EventReferenceTable.h"
+#include "../Component/CameraComponent.h"
 
 
 my::ShipEvent::ShipEvent() :
@@ -26,7 +28,10 @@ void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<StageObject
         param.transform.position = Mof::CVector3(10.0f, 9.0f, -25.0f);
         param.name = "ship";
         auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", &param);
-        ship->GetComponent<my::ShipLandingComponent>()->AddObserver(_camera_com.lock());
+        auto com = my::EventReferenceTable::Singleton().Get<std::shared_ptr<my::CameraComponent>>("CameraComponent");
+        ship->GetComponent<my::ShipLandingComponent>()->AddObserver(com);
+        
+
         //! ゲームイベント
         _ship_event_subject.Notify("AddRequest", ship);
         _ship_view_camera_controller.RegisterGlobalCamera();
@@ -44,12 +49,8 @@ void my::ShipEvent::OnNotify(const my::CameraController::CameraInfo& info) {
     _ship_view_camera_controller.SetInfo(_info);
 }
 
-void my::ShipEvent::SetCameraComponent(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr) {
-    _camera_com = ptr;
-}
-
-my::Observable<const char*, const std::shared_ptr<my::Actor>&>& my::ShipEvent::GetShipEventSubject(void) {
-    return this->_ship_event_subject;
+my::Observable<const char*, const std::shared_ptr<my::Actor>&>* my::ShipEvent::GetShipEventSubject(void) {
+    return &this->_ship_event_subject;
 }
 
 bool my::ShipEvent::Initialize(void) {

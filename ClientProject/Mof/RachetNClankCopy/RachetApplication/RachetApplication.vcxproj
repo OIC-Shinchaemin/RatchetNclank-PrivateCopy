@@ -359,6 +359,8 @@
     <ClCompile Include="Event\BridgeEvent.cpp" />
     <ClCompile Include="Event\Event.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
+    <ClCompile Include="Event\EventReferenceTable.cpp" />
+    <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp" />
     <ClCompile Include="Event\ShipEvent.cpp" />
     <ClCompile Include="Event\StageViewEvent.cpp" />
     <ClCompile Include="Factory\ActorFactory.cpp" />
@@ -629,6 +631,8 @@
     <ClInclude Include="Event\BridgeEvent.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventManager.h" />
+    <ClInclude Include="Event\EventReferenceTable.h" />
+    <ClInclude Include="Event\RegisterGlobalCameraEvent.h" />
     <ClInclude Include="Event\ShipEvent.h" />
     <ClInclude Include="Event\StageViewEvent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />
