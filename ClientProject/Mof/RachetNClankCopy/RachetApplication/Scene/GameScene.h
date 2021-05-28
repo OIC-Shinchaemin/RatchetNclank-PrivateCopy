@@ -9,17 +9,15 @@
 
 #include "My/UI/UICanvas.h"
 #include "../Game/GameManager.h"
-
+#include "../Event/EventManager.h"
 #include "../Game/GameWorld.h"
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
-#include "../Event/Event.h"
 
 
 namespace my {
-class GameScene : public my::Scene,
-    public my::Observer<const char*, const std::shared_ptr<my::Event>&> {
+class GameScene : public my::Scene {
     using super = my::Scene;
 private:
     //! 追加
@@ -40,11 +38,8 @@ private:
     std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
-
-
-    //! ゲームイベント
-    std::vector<std::shared_ptr<my::Event>> _events;
-
+    //! イベント
+    std::weak_ptr<my::EventManager> _event;
     /// <summary>
     /// 追加
     /// </summary>
@@ -100,12 +95,6 @@ public:
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
     /// <summary>
-    /// 通知イベント
-    /// </summary>
-    /// <param name=""></param>
-    /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<my::Event>& ptr) override;
-    /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
@@ -115,6 +104,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetGameManager(std::weak_ptr<my::GameManager> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEventManager(std::weak_ptr<my::EventManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

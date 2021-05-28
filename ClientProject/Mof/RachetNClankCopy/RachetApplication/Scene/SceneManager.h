@@ -13,6 +13,7 @@
 #include "../GameDefine.h"
 #include "My/UI/UICanvas.h"
 #include "../Game/GameManager.h"
+#include "../Event/EventManager.h"
 
 
 namespace my {
@@ -32,6 +33,8 @@ private:
     std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game_manager;
+    //! ゲームイベント
+    std::weak_ptr<my::EventManager> _event_manager;
     /// <summary>
     /// 変更
     /// </summary>
@@ -68,6 +71,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetGameManager(std::weak_ptr<my::GameManager> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEventManager(std::weak_ptr<my::EventManager> ptr);
     /// <summary>
     /// 初期化
     /// </summary>

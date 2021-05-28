@@ -51,11 +51,7 @@ void my::ShipEvent::SetCameraComponent(const std::shared_ptr<my::Observer<const 
 my::Observable<const char*, const std::shared_ptr<my::Actor>&>& my::ShipEvent::GetShipEventSubject(void) {
     return this->_ship_event_subject;
 }
-/*
-my::Observable<const my::CameraController::CameraInfo&>* my::ShipEvent::GetCameraSubject(void) {
-    return &this->_camera_subject;
-}
-*/
+
 bool my::ShipEvent::Initialize(void) {
     _ideal_position = Mof::CVector3();
 

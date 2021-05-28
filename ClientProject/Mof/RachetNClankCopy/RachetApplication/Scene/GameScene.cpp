@@ -40,9 +40,9 @@ bool my::GameScene::SceneUpdate(float delta_time) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 #endif // _DEBUG
-    for (auto& e : _events) {
-        e->Update(delta_time);
-    } // for
+    if (auto e = _event.lock() ) {
+        e->UpdateGameEvent(delta_time);
+    } // if
 
     if (_re_initialize) {
         this->ReInitialize();
@@ -99,7 +99,8 @@ my::GameScene::GameScene() :
     _stage(),
     _re_initialize(false),
     _ui_canvas(),
-    _game() {
+    _game(),
+    _event() {
 }
 
 my::GameScene::~GameScene() {
@@ -123,21 +124,16 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
     } // if
 }
 
-void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Event>& ptr) {
-    if (type == "AddRequest") {
-    } // if
-    else if (type == "DeleteRequest") {
-        ptr->GetSubject()->RemoveObserver(std::dynamic_pointer_cast<my::GameScene>(shared_from_this()));
-        ut::EraseRemove(_events, ptr);
-    } // else if
-}
-
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
 void my::GameScene::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
     this->_game = ptr;
+}
+
+void my::GameScene::SetEventManager(std::weak_ptr<my::EventManager> ptr) {
+    this->_event = ptr;
 }
 
 std::string my::GameScene::GetName(void) {
@@ -165,21 +161,15 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
 bool my::GameScene::Initialize(void) {
     _stage.Initialize();
 
-    auto bridge_event = std::make_shared<my::BridgeEvent>();
-    auto ship_event = std::make_shared<my::ShipEvent>();
-    auto stage_view_event = std::make_shared<my::StageViewEvent>();
-
-    _events.clear();
-    _events.push_back(bridge_event);
-    _events.push_back(ship_event);
-    _events.push_back(stage_view_event);
-
-    for (auto& e : _events) {
-        auto ptr = std::dynamic_pointer_cast<my::GameScene>(shared_from_this());
-        auto sub = e->GetSubject();
-        sub->AddObserver(ptr);
-    } // for
-
+    std::shared_ptr<my::BridgeEvent> bridge_event;
+    std::shared_ptr<my::ShipEvent> ship_event;
+    std::shared_ptr<my::StageViewEvent> stage_view_event;
+    if (auto e = _event.lock()) {
+        e->InitializeGameEvent();
+        bridge_event = e->CreateGameEvent<my::BridgeEvent>();
+        ship_event = e->CreateGameEvent<my::ShipEvent>();
+        stage_view_event = e->CreateGameEvent<my::StageViewEvent>();
+    } // if
 
     bridge_event->SetStage(&_stage);
     bridge_event->Initialize();

@@ -2,9 +2,10 @@
 
 #include "Mof.h"
 #include "ResourceManager.h"
-#include "Game/GameManager.h"
 #include "Camera/CameraManager.h"
 #include "Light/LightManager.h"
+#include "Game/GameManager.h"
+#include "Event/EventManager.h"
 #include "My/UI/UICanvas.h"
 #include "Scene/SceneManager.h"
 #include "GameDefine.h"
@@ -20,6 +21,8 @@ private:
     std::shared_ptr<my::LightManager> _light_manager;
     //! ゲーム
     std::shared_ptr<my::GameManager> _game_manager;
+    //! イベント
+    std::shared_ptr<my::EventManager> _event_manager;
     //! UI
     std::shared_ptr<my::UICanvas> _ui_canvas;
     //! シーン
