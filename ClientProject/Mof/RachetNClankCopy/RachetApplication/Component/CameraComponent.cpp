@@ -5,6 +5,7 @@
 #include "../Camera/FirstPersonCameraController.h"
 #include "../Camera/DebugCameraController.h"
 #include "Player/PlayerStateComponent.h"
+#include "../Event/EventReferenceTable.h"
 
 
 void my::CameraComponent::TurnLeft(void) {
@@ -265,6 +266,8 @@ bool my::CameraComponent::Initialize(void) {
     auto pos = super::GetOwner()->GetPosition();
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
+
+    my::EventReferenceTable::Singleton().Register("CameraComponent", std::dynamic_pointer_cast<my::CameraComponent>(shared_from_this()));
     return true;
 }
 
@@ -289,6 +292,8 @@ bool my::CameraComponent::Release(void) {
     _camera_controller.GetService()->Release();
     _controller_map.clear();
     _state_com.reset();
+
+    my::EventReferenceTable::Singleton().Dispose("CameraComponent");
     return true;
 }
 

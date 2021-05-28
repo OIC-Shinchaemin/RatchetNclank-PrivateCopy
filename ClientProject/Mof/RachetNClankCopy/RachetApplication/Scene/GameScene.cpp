@@ -5,6 +5,11 @@
 #include "../Actor/Character/Player.h"
 #include "../Actor//Terrain/Terrain.h"
 #include "../Component/CameraComponent.h"
+#include "../Stage/Gimmick/Bridge.h"
+#include "../Event/BridgeEvent.h"
+#include "../Event/ShipEvent.h"
+#include "../Event/StageViewEvent.h"
+#include "../Event/EventReferenceTable.h"
 
 
 void my::GameScene::AddElement(const std::shared_ptr<my::Actor>& ptr) {
@@ -35,13 +40,11 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
-        _bridge_event->AllDelete();
-    } // if
 #endif // _DEBUG
-    _stage_view_event->Update(delta_time);
-    _bridge_event->Update(delta_time);
-    _ship_event->Update(delta_time);
+    if (auto e = _event.lock() ) {
+        e->UpdateGameEvent(delta_time);
+    } // if
+
     if (_re_initialize) {
         this->ReInitialize();
     } // if
@@ -55,7 +58,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     } // for
     _delete_actors.clear();
 
-    
+
     // update
     _stage.Update(delta_time);
     _game_world.Update(delta_time);
@@ -98,9 +101,7 @@ my::GameScene::GameScene() :
     _re_initialize(false),
     _ui_canvas(),
     _game(),
-    _bridge_event(std::make_shared<my::BridgeEvent>()),
-    _ship_event(std::make_shared<my::ShipEvent>()),
-    _stage_view_event(std::make_shared<my::StageViewEvent>()) {
+    _event() {
 }
 
 my::GameScene::~GameScene() {
@@ -132,6 +133,10 @@ void my::GameScene::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
     this->_game = ptr;
 }
 
+void my::GameScene::SetEventManager(std::weak_ptr<my::EventManager> ptr) {
+    this->_event = ptr;
+}
+
 std::string my::GameScene::GetName(void) {
     return my::SceneType::kGameScene;
 }
@@ -151,24 +156,34 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
     } // if
     super::LoadComplete();
 
-    _ship_event->GetShipEventSubject().AddObserver(shared_from_this());
-    _bridge_event->AddObserver(_ship_event);
     return true;
 }
 
-#include "../Stage/Gimmick/Bridge.h"
 bool my::GameScene::Initialize(void) {
     _stage.Initialize();
-    _bridge_event->SetStage(&_stage);
-    _bridge_event->Initialize();
-    _ship_event->Initialize();
-    _stage_view_event->Initialize();
-    _bridge_event->AddObserver(_ship_event);
+    my::EventReferenceTable::Singleton().Reset();
+
+    std::shared_ptr<my::BridgeEvent> bridge_event;
+    std::shared_ptr<my::ShipEvent> ship_event;
+    std::shared_ptr<my::StageViewEvent> stage_view_event;
+    if (auto e = _event.lock()) {
+        e->InitializeGameEvent();
+        bridge_event = e->CreateGameEvent<my::BridgeEvent>();
+        ship_event = e->CreateGameEvent<my::ShipEvent>();
+        stage_view_event = e->CreateGameEvent<my::StageViewEvent>();
+    } // if
+
+    bridge_event->SetStage(&_stage);
+    bridge_event->Initialize();
+    ship_event->Initialize();
+    stage_view_event->Initialize();
+    bridge_event->GetCameraSubject()->AddObserver(ship_event);
+    ship_event->GetShipEventSubject()->AddObserver(shared_from_this());
 
     for (auto gimmick : _stage.GetGimmickArray()) {
         auto temp = std::dynamic_pointer_cast<Bridge>(gimmick);
         if (temp) {
-            temp->AddObserver(_ship_event);
+            temp->AddObserver(ship_event);
         } // if
     } // for
     
@@ -185,7 +200,7 @@ bool my::GameScene::Initialize(void) {
         this->AddElement(enemy);
 
         if (event_sphere.CollisionPoint(param->transform.position)) {
-            _bridge_event->AddTriggerActor(enemy);
+            bridge_event->AddTriggerActor(enemy);
         } // if
     } // for
     // player
@@ -193,18 +208,23 @@ bool my::GameScene::Initialize(void) {
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
-    _stage_view_event->GetSubject()->AddObserver(player->GetComponent<my::CameraComponent>());
-    _ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
+    stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<my::CameraComponent>());
+    //ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
 
 
     // game system
     if (auto game = _game.lock()) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
+        auto help_desk = game->GetHelpDesk();
         // game system
+
+        help_desk->Initialize();
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
-
+        auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
+        help_desk->OnNotify(quest);
+        bridge_event->GetQuestSubject()->AddObserver(help_desk);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);

@@ -2,31 +2,26 @@
 #define MY_STAGE_VIEW_EVENT_H
 
 
-#include "My/Core/Observer.h"
+#include "Event.h"
 #include "My/Core/Observable.h"
 
 #include <memory>
-#include <vector>
 
-#include "My/Core/ServiceLocator.h"
-#include "My/UI/UICanvas.h"
-#include "../Actor.h"
 #include "../Camera/Camera.h"
-#include "../Camera/CameraController.h"
 #include "../Camera/AutoCameraController.h"
 
 
 namespace my {
-class StageViewEvent :
-    public std::enable_shared_from_this<my::StageViewEvent>,
-    public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
-    public my::Observable<const char*, const std::shared_ptr<my::StageViewEvent>&> {
-    using Observable = my::Observable<const char*, const std::shared_ptr<my::StageViewEvent>&>;
+class StageViewEvent : public my::Event {
+    using super = my::Event;
+    using CameraObservable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! カメラ
     std::shared_ptr<my::Camera> _stage_view_camera;
     //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _stage_view_camera_controller;
+    std::shared_ptr<my::AutoCameraController> _stage_view_camera_controller;
+    //! 通知用
+    my::StageViewEvent::CameraObservable _camera_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -37,29 +32,23 @@ public:
     /// </summary>
     ~StageViewEvent();
     /// <summary>
-    /// 通知イベント
-    /// </summary>
-    /// <param name=""></param>
-    /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::Observable<const my::CameraController::CameraInfo&>> GetSubject(void) const;
+    my::StageViewEvent::CameraObservable* GetCameraObservable(void);
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Initialize(void);
+    virtual bool Initialize(void) override;
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    bool Update(float delta_time);
+    virtual bool Update(float delta_time) override;
 };
 }
 #endif // !MY_BRIDGE_EVENT_H

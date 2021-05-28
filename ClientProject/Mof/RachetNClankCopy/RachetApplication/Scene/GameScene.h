@@ -9,14 +9,11 @@
 
 #include "My/UI/UICanvas.h"
 #include "../Game/GameManager.h"
-
+#include "../Event/EventManager.h"
 #include "../Game/GameWorld.h"
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
-#include "../Event/BridgeEvent.h"
-#include "../Event/ShipEvent.h"
-#include "../Event/StageViewEvent.h"
 
 
 namespace my {
@@ -41,15 +38,8 @@ private:
     std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
-
-
-    //! ゲームイベント
-    std::shared_ptr<my::BridgeEvent>  _bridge_event;
-    //! ゲームイベント
-    std::shared_ptr<my::ShipEvent>  _ship_event;
-    //! ゲームイベント
-    std::shared_ptr<my::StageViewEvent> _stage_view_event;
-    
+    //! イベント
+    std::weak_ptr<my::EventManager> _event;
     /// <summary>
     /// 追加
     /// </summary>
@@ -114,6 +104,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetGameManager(std::weak_ptr<my::GameManager> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEventManager(std::weak_ptr<my::EventManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

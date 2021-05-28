@@ -864,6 +864,24 @@
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp">
       <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
+    <ClCompile Include="UI\HelpDeskMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GameQuest.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Event.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventReferenceTable.cpp">
+      <Filter>Rachet\Source\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1699,6 +1717,24 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\HelpDesk.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\HelpDeskMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GameQuest.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventManager.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Event.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\RegisterGlobalCameraEvent.h">
+      <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventReferenceTable.h">
+      <Filter>Rachet\Header\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

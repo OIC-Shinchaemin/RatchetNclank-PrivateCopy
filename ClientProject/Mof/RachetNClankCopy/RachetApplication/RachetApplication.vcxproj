@@ -357,6 +357,10 @@
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp" />
     <ClCompile Include="Event\BridgeEvent.cpp" />
+    <ClCompile Include="Event\Event.cpp" />
+    <ClCompile Include="Event\EventManager.cpp" />
+    <ClCompile Include="Event\EventReferenceTable.cpp" />
+    <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp" />
     <ClCompile Include="Event\ShipEvent.cpp" />
     <ClCompile Include="Event\StageViewEvent.cpp" />
     <ClCompile Include="Factory\ActorFactory.cpp" />
@@ -373,6 +377,7 @@
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameSystem\GameMoney.cpp" />
+    <ClCompile Include="Game\GameSystem\GameQuest.cpp" />
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp" />
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
@@ -409,6 +414,7 @@
     <ClCompile Include="State\ShipActionStateImplementation.cpp" />
     <ClCompile Include="State\ShipMotionStateImplementation.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
+    <ClCompile Include="UI\HelpDeskMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
@@ -623,6 +629,10 @@
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h" />
     <ClInclude Include="Event\BridgeEvent.h" />
+    <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Event\EventManager.h" />
+    <ClInclude Include="Event\EventReferenceTable.h" />
+    <ClInclude Include="Event\RegisterGlobalCameraEvent.h" />
     <ClInclude Include="Event\ShipEvent.h" />
     <ClInclude Include="Event\StageViewEvent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />
@@ -648,6 +658,7 @@
     <ClInclude Include="Gamepad.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameSystem\GameMoney.h" />
+    <ClInclude Include="Game\GameSystem\GameQuest.h" />
     <ClInclude Include="Game\GameSystem\HelpDesk.h" />
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />
@@ -690,6 +701,7 @@
     <ClInclude Include="State\ShipActionStateDefine.h" />
     <ClInclude Include="State\ShipMotionStateDefine.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
+    <ClInclude Include="UI\HelpDeskMenu.h" />
     <ClInclude Include="UI\LockOnCursorMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />

@@ -2,6 +2,7 @@
 #define MY_BRIDGE_EVENT_H
 
 
+#include "Event.h"
 #include "My/Core/Observer.h"
 #include "My/Core/Observable.h"
 
@@ -11,17 +12,13 @@
 #include "../Actor.h"
 #include "../Stage/Stage.h"
 #include "../Camera/Camera.h"
-#include "../Camera/PointCameraController.h"
 #include "../Camera/FirstPersonCameraController.h"
+#include "../Game/GameSystem/GameQuest.h"
 
 
 namespace my {
-class BridgeEvent :
-    public std::enable_shared_from_this<my::BridgeEvent>,
-    public my::Observer<const char*, const std::shared_ptr<my::Actor>&>,
-    public my::Observable<const my::CameraController::CameraInfo&>
-{
-    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
+class BridgeEvent : public my::Event, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
+    using super = my::Event;
 private:
     //! 通知アクター
     std::vector<std::shared_ptr<my::Actor>> _for_bridge_event_actors;
@@ -33,6 +30,10 @@ private:
     my::FirstPersonCameraController _bridge_view_camera_controller;
     //! 位置
     Mof::CVector3 _ideal_position;
+    //! 通知用
+    my::Observable<const my::CameraController::CameraInfo&> _camera_subject;
+    //! 通知用
+    my::Observable<const my::GameQuest&> _quest_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,17 +55,35 @@ public:
     /// <param name="ptr"></param>
     void SetStage(Stage* ptr);
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<const my::CameraController::CameraInfo&>* GetCameraSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<const my::GameQuest&>* GetQuestSubject(void);
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool EventActorsEmpty(void) const;
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Initialize(void);
+    virtual bool Initialize(void) override;
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    bool Update(float delta_time);
+    virtual bool Update(float delta_time) override;
     /// <summary>
     /// 追加
     /// </summary>

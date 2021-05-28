@@ -16,6 +16,7 @@ MofBool CGameApp::Initialize(void) {
     _camera_manager = std::make_shared<my::CameraManager>();
     _light_manager = std::make_shared<my::LightManager>();
     _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
+    _event_manager = ut::MakeSharedWithRelease<my::EventManager>();
     _ui_canvas = std::make_shared<my::UICanvas>();
     _scene_manager = ut::MakeSharedWithRelease<my::SceneManager>();
 
@@ -30,8 +31,9 @@ MofBool CGameApp::Initialize(void) {
     _game_manager->SetUICanvas(_ui_canvas);
     _game_manager->Initialize();
 
-    _scene_manager->SetGameManager(_game_manager);
     _scene_manager->SetResourceManager(_resource_manager);
+    _scene_manager->SetGameManager(_game_manager);
+    _scene_manager->SetEventManager(_event_manager);
     _scene_manager->SetUICanvas(_ui_canvas);
     _scene_manager->Initialize();
     return TRUE;

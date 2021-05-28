@@ -3,14 +3,11 @@
 
 
 #include "CameraController.h"
-#include "My/Core/Observable.h"
 
 
 namespace my {
-class PointCameraController : public my::CameraController,
-    public my::Observable<const my::CameraController::CameraInfo&> {
+class PointCameraController : public my::CameraController {
     using super = my::CameraController;
-    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! à íu
     Mof::CVector3 _ideal_position;
@@ -28,11 +25,6 @@ public:
     /// </summary>
     /// <param name="info"></param>
     virtual void SetInfo(const my::CameraController::CameraInfo& info) override;
-    /// <summary>
-    /// í«â¡
-    /// </summary>
-    /// <param name="ptr"></param>
-    void AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// çXêV
     /// </summary>

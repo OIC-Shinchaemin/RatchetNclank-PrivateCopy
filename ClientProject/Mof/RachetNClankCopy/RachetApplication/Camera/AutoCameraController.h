@@ -3,17 +3,14 @@
 
 
 #include "CameraController.h"
-#include "My/Core/Observable.h"
 
 #include "My/Core/Timer.h"
 #include "../BezierCurveAnimation.h"
 
 
 namespace my {
-class AutoCameraController : public my::CameraController,
-    public my::Observable<const my::CameraController::CameraInfo&> {
+class AutoCameraController : public my::CameraController {
     using super = my::CameraController;
-    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! 時間
     float _time_max;
@@ -41,6 +38,12 @@ public:
     /// <returns></returns>
     float GetTimeMax(void) const;
     /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsCompleted(void) const;
+    /// <summary>
     /// 強制的に進める
     /// </summary>
     /// <param name="time"></param>
@@ -49,7 +52,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
+    //void AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>
