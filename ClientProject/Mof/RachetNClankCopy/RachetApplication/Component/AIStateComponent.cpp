@@ -7,7 +7,7 @@
 my::AIStateComponent::AIStateComponent(int priority) :
     super(priority),
     _state_machine(),
-    _thinking_time(),
+    _thinking_timer(),
     _behaviour_path(){
 }
 
@@ -42,7 +42,7 @@ std::string my::AIStateComponent::GetType(void) const {
 bool my::AIStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-    _thinking_time.Initialize(0.0f, true);
+    _thinking_timer.Initialize(0.2f, true);
 
     // state
     this->RegisterState<state::AIPatrolState>(_state_machine, _behaviour_path.at(0));
@@ -52,7 +52,7 @@ bool my::AIStateComponent::Initialize(void) {
 }
 
 bool my::AIStateComponent::Update(float delta_time) {
-    if (_thinking_time.Tick(delta_time)) {
+    if (_thinking_timer.Tick(delta_time)) {
         _state_machine.Update(delta_time);
     } // if
     return true;

@@ -39,8 +39,6 @@ public:
     /// <returns>false:Às‚Ì¸”s</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        // can transition state
-        // if()
         args.ai_com.lock()->ChangeState("AICombatState");
         return true;
     }

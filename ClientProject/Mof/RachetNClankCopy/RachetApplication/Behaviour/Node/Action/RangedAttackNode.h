@@ -41,7 +41,6 @@ public:
         args.ai_com.lock()->ChangeState("AICombatState");
         if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionRangedAttackState)) {
             args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionRangedAttackState);
-            //args.state_com.lock()->ChangeState("EnemyActionRangedAttackState");
         } // if
         return false;
     }
