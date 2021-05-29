@@ -60,12 +60,12 @@ my::Player::Player() :
     _enable(true) {
     super::SetTag("Player");
 
-    auto param = super::Param();
-    param.name = "weapon";
-    param.tag = "OmniWrench";
-    auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", &param);
-    this->AddChild(omniwrench);
-    this->_current_weapon = omniwrench;
+    //auto param = super::Param();
+    //param.name = "weapon";
+    //param.tag = "OmniWrench";
+    //auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", &param);
+    //this->AddChild(omniwrench);
+    //this->_current_weapon = omniwrench;
 }
 
 my::Player::~Player() {

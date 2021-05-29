@@ -36,7 +36,7 @@ bool my::PlayerDamageComponent::Initialize(void) {
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kEnemyAttackCollisionComponent,
+                               my::CollisionComponentType::kEnemyMeleeAttackCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         if (super::CanTransitionActionState(state::PlayerActionStateType::kPlayerActionDamageState)) {
             this->_damage_value = 1;

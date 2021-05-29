@@ -1,7 +1,7 @@
 #include "PlayerCollisionComponent.h"
 #include "EnemyCollisionComponent.h"
 #include "SightCollisionComponent.h"
-#include "EnemyAttackCollisionComponent.h"
+#include "EnemyMeleeAttackCollisionComponent.h"
 #include "EnemyBulletCollisionComponent.h"
 #include "OmniWrenchCollisionComponent.h"
 #include "BombGloveBulletCollisionComponent.h"

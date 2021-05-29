@@ -6,6 +6,8 @@
 
 #include <memory>
 
+#include "My/Core/Timer.h"
+
 
 namespace my {
 class EnemyMeleeAttackComponent : public my::ActionComponent {
@@ -16,10 +18,14 @@ private:
     float _range;
     //! サイズ
     float _volume;
+    //! 攻撃開始までの猶予
+    my::Timer _wait;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
+    //! モーション
+    std::weak_ptr<class EnemyMeleeAttackCollisionComponent> _collision_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -95,6 +101,12 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
+    /// <summary>
+    /// 終了
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>成功</returns>
+    virtual bool End(void) override;
 };
 }
 #endif // !MY_ENEMY_ATTACK_COMPONENT_H

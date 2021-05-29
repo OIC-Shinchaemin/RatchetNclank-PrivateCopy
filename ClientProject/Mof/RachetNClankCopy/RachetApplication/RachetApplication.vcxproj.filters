@@ -474,10 +474,10 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.cpp">
+    <ClCompile Include="Component\Collision\Algolithm\EnemyMeleeAttackPlayerCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.cpp">
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyMeleeAttackCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp">
@@ -882,6 +882,9 @@
     <ClCompile Include="Event\EventReferenceTable.cpp">
       <Filter>Rachet\Source\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1196,10 +1199,10 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\EnemyAttackPlayerCollisionAlgolithm.h">
+    <ClInclude Include="Component\Collision\Algolithm\EnemyMeleeAttackPlayerCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyAttackCollisionAlgolithm.h">
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyMeleeAttackCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyComponent.h">
@@ -1735,6 +1738,9 @@
     </ClInclude>
     <ClInclude Include="Event\EventReferenceTable.h">
       <Filter>Rachet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

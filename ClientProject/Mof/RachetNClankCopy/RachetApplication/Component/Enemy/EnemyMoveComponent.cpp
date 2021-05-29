@@ -106,19 +106,11 @@ bool my::EnemyMoveComponent::Initialize(void) {
 }
 
 bool my::EnemyMoveComponent::Update(float delta_time) {
-    /*
     if (auto enemy_com = _enemy_com.lock()) {
         if (auto target = enemy_com->GetTarget().lock()) {
+            _target = target->GetPosition();
         } // if
-        else {
-            if (auto state_com = _action_state_com.lock()) {
-                if (state_com->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
-                    //state_com->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
-                } // if
-            } // if
-        } // else
     } // if
-    */
 
     float speed = 1.0f;
     float angular_speed = 1.0f;
