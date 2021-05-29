@@ -95,7 +95,7 @@ bool my::PlayerComponent::Initialize(void) {
         if (this->GetNextTerrain() == "WaterFlow") {
             auto owner = super::GetOwner();
             auto velocity_com = owner->GetComponent<my::VelocityComponent>();
-            auto velocity = velocity_com->GetVelocity() * 1.0f / 60.0f;
+            auto velocity = velocity_com->GetVelocity() * def::kDeltaTime;
             velocity.y = 0.0f;
             owner->SetPosition(owner->GetPosition() - velocity);
         } // if

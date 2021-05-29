@@ -6,7 +6,8 @@
 
 
 namespace def {
-constexpr float kDeltaTime = 0.01667f;
+constexpr float kFPS = 60.0f;
+constexpr float kDeltaTime = 1.0f / kFPS;
 constexpr uint32_t kWindowWidth = 1024;
 constexpr uint32_t kWindowHeight = 768;
 constexpr float kWindowWidthF = static_cast<float>(def::kWindowWidth);

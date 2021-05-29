@@ -100,6 +100,7 @@ bool my::EnemyGoHomeComponent::Update(float delta_time) {
         if (auto target = enemy_com->GetTarget().lock()) {
             target_pos = target->GetPosition();
         } // if
+        /*
         else {
             if (auto state_com = _action_state_com.lock()) {
                 if (state_com->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
@@ -107,6 +108,7 @@ bool my::EnemyGoHomeComponent::Update(float delta_time) {
                 } // if
             } // if
         } // else
+        */
     } // if
 
     Mof::CVector3 target = super::GetOwner()->GetInitialPosition();

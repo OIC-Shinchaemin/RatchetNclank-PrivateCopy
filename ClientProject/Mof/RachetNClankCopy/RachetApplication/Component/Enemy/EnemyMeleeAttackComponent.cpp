@@ -3,6 +3,7 @@
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
 #include "../../State/EnemyActionStateDefine.h"
+#include "../../State/EnemyMotionStateDefine.h"
 
 
 my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
@@ -78,7 +79,7 @@ bool my::EnemyMeleeAttackComponent::Start(void) {
     } // if
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("EnemyMotionAttackState");
+        motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionMeleeAttackState);
     } // if
     return true;
 }

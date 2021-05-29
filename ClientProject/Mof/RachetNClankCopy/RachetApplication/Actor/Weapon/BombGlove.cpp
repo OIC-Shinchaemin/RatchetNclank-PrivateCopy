@@ -31,9 +31,9 @@ bool my::BombGlove::Fire(const def::Transform& transform) {
         auto v = Mof::CVector3(direction.x, 0.0f, direction.z);
         float time = v.Length() / super::_shot_speed;
 
-        float g = add->GetGravity() * 60.0f;
+        float g = add->GetGravity() * def::kFPS;
         float v0 = 0.5f * g * time - direction.y;
-        float v_t  = std::log10(add->GetDrag() * time * 60.0f) * super::_shot_speed ;
+        float v_t  = std::log10(add->GetDrag() * time * def::kFPS) * super::_shot_speed ;
         
         v.Normal(v);
         param.speed = v * v_t;
