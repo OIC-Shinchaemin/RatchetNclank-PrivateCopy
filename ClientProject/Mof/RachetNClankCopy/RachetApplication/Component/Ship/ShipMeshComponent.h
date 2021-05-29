@@ -2,12 +2,15 @@
 #define MY_SHIP_MESH_COMPONENT_H
 
 
-#include "../MeshComponent.h"
+#include "../AnimationMeshComponent.h"
 
 
 namespace my {
-class ShipMeshComponent : public my::MeshComponent {
-    using super = my::MeshComponent;
+class ShipMeshComponent : public my::AnimationMeshComponent {
+    using super = my::AnimationMeshComponent;
+private:
+    //! メッシュ
+    Mof::LPMesh _ship_mesh;
 public:
     /// <summary>
     /// コンストラクタ
@@ -23,6 +26,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~ShipMeshComponent();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>

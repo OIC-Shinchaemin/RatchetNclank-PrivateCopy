@@ -885,6 +885,9 @@
     <ClCompile Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Component\AnimationMeshComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1741,6 +1744,9 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\AnimationMeshComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

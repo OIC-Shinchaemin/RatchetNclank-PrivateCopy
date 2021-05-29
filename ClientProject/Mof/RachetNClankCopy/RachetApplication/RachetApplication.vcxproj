@@ -258,6 +258,7 @@
     <ClCompile Include="Component\ActionComponent.cpp" />
     <ClCompile Include="Component\ActionStateComponent.cpp" />
     <ClCompile Include="Component\AIStateComponent.cpp" />
+    <ClCompile Include="Component\AnimationMeshComponent.cpp" />
     <ClCompile Include="Component\Bullet\BlasterBulletComponent.cpp" />
     <ClCompile Include="Component\Bullet\BombGloveBulletComponent.cpp" />
     <ClCompile Include="Component\CameraComponent.cpp" />
@@ -525,6 +526,7 @@
     <ClInclude Include="Component\ActionComponent.h" />
     <ClInclude Include="Component\ActionStateComponent.h" />
     <ClInclude Include="Component\AIStateComponent.h" />
+    <ClInclude Include="Component\AnimationMeshComponent.h" />
     <ClInclude Include="Component\Bullet\BlasterBulletComponent.h" />
     <ClInclude Include="Component\Bullet\BombGloveBulletComponent.h" />
     <ClInclude Include="Component\CameraComponent.h" />
