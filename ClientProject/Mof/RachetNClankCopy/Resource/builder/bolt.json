@@ -1,6 +1,12 @@
 {
   "components": [
     {
+      "type": "BoltComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
       "type": "VelocityComponent",
       "paramater": {
         "priority": 99

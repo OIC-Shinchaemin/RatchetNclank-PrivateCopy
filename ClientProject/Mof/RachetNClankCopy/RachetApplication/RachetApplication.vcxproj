@@ -265,6 +265,7 @@
     <ClCompile Include="Component\CameraComponent.cpp" />
     <ClCompile Include="Component\CharacterComponent.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp" />
@@ -292,7 +293,6 @@
     <ClCompile Include="Component\Collision\Object\CameraCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp" />
-    <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.cpp" />
@@ -313,6 +313,7 @@
     <ClCompile Include="Component\Enemy\EnemyStateComponent.cpp" />
     <ClCompile Include="Component\HpComponent.cpp" />
     <ClCompile Include="Component\InvincibleComponent.cpp" />
+    <ClCompile Include="Component\Item\BoltComponent.cpp" />
     <ClCompile Include="Component\MeshComponent.cpp" />
     <ClCompile Include="Component\MotionComponent.cpp" />
     <ClCompile Include="Component\MotionStateComponent.cpp" />
@@ -534,6 +535,7 @@
     <ClInclude Include="Component\CameraComponent.h" />
     <ClInclude Include="Component\CharacterComponent.h" />
     <ClInclude Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h" />
@@ -562,7 +564,6 @@
     <ClInclude Include="Component\Collision\Object\CollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h" />
     <ClInclude Include="Component\Collision\Object\CollisionComponentInclude.h" />
-    <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.h" />
@@ -585,6 +586,7 @@
     <ClInclude Include="Component\Enemy\EnemyStateComponent.h" />
     <ClInclude Include="Component\HpComponent.h" />
     <ClInclude Include="Component\InvincibleComponent.h" />
+    <ClInclude Include="Component\Item\BoltComponent.h" />
     <ClInclude Include="Component\MeshComponent.h" />
     <ClInclude Include="Component\MotionComponent.h" />
     <ClInclude Include="Component\MotionStateComponent.h" />

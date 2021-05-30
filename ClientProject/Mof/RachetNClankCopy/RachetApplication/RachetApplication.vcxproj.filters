@@ -286,6 +286,12 @@
     <Filter Include="Rachet\Header\Event">
       <UniqueIdentifier>{4ec4b52a-e2cd-4186-90a9-4ab7466fb794}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Component\Item">
+      <UniqueIdentifier>{6f96d691-f125-4ab8-9bf6-2b36f1b2e915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Item">
+      <UniqueIdentifier>{c0d27538-e0e0-4762-aa31-8dcb25c8fadf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -508,9 +514,6 @@
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp">
@@ -891,6 +894,12 @@
     <ClCompile Include="Component\Collision\Object\BoltCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltComponent.cpp">
+      <Filter>Rachet\Source\Actor\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1239,9 +1248,6 @@
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\CollisionComponent.h">
@@ -1753,6 +1759,12 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\BoltCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
