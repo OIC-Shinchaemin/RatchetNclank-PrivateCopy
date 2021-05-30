@@ -97,9 +97,7 @@ bool my::EnemyRangedAttackComponent::Update(float delta_time) {
     
     if (auto motion_com = _motion_com.lock()) {
         if (motion_com->IsEndMotion()) {
-            
             _state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
-            //super::End();
         } // if
     } // if
     return true;

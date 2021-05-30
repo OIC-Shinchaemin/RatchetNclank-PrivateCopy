@@ -13,6 +13,8 @@ class PlayerDamageComponent : public my::PlayerActionComponent {
 private:
     //! ”í’e—Ê
     int _damage_value;
+    //! ”í’e‘¬“x
+    float _damage_speed;
     //! ”í’eŠp“x
     Mof::CVector3 _damage_angle;
     //! Hp

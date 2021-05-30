@@ -57,14 +57,6 @@ public:
             return false;
         } // if
         return false;
-        /*
-        auto args = std::any_cast<behaviour::RangedAttackNodeExecutor::NodeArgs>(node_args);
-        args.ai_com.lock()->ChangeState("AICombatState");
-        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionRangedAttackState)) {
-            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionRangedAttackState);
-        } // if
-        return false;
-        */
     }
 };
 }
