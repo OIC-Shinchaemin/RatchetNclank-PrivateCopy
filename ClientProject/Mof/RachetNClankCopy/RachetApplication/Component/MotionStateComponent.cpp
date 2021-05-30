@@ -64,5 +64,8 @@ std::shared_ptr<my::Component> my::MotionStateComponent::Clone(void) {
 }
 
 void my::MotionStateComponent::ChangeState(const std::string& name) {
+    if (super::GetOwner()->GetTag() == "Enemy") {
+        ;
+    } // if
     _state_machine.ChangeState(name);
 }

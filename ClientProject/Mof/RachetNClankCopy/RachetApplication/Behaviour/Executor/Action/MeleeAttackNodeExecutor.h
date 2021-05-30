@@ -22,13 +22,13 @@ public:
         std::weak_ptr<my::Actor> actor;
         //! AI
         std::weak_ptr<my::AIStateComponent> ai_com;
-        //! AI
+        //! モーション
         std::weak_ptr<my::MotionComponent> motion_com;
         //! エネミー
         std::weak_ptr<my::EnemyComponent> enemy_com;
         //! エネミー状態
         std::weak_ptr<my::EnemyStateComponent> state_com;
-        //! エネミー状態
+        //! 攻撃
         std::weak_ptr<my::EnemyMeleeAttackComponent> attack_com;
     };
 private:

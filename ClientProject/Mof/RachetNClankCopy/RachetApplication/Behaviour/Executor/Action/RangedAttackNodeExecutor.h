@@ -7,8 +7,10 @@
 #include <memory>
 
 #include "../../../Component/AIStateComponent.h"
+#include "../../../Component/MotionComponent.h"
 #include "../../../Component/Enemy/EnemyComponent.h"
 #include "../../../Component/Enemy/EnemyStateComponent.h"
+#include "../../../Component/Enemy/EnemyRangedAttackComponent.h"
 
 
 namespace behaviour {
@@ -20,10 +22,14 @@ public:
         std::weak_ptr<my::Actor> actor;
         //! AI
         std::weak_ptr<my::AIStateComponent> ai_com;
+        //! モーション
+        std::weak_ptr<my::MotionComponent> motion_com;
         //! エネミー
         std::weak_ptr<my::EnemyComponent> enemy_com;
         //! エネミー状態
         std::weak_ptr<my::EnemyStateComponent> state_com;
+        //! 攻撃
+        std::weak_ptr<my::EnemyRangedAttackComponent> attack_com;
     };
 private:
     //! 実行引数
@@ -51,7 +57,9 @@ public:
         if (auto actor = super::_actor.lock()) {
             _node_args.ai_com = actor->GetComponent<my::AIStateComponent>();
             _node_args.enemy_com = actor->GetComponent<my::EnemyComponent>();
+            _node_args.motion_com = actor->GetComponent<my::MotionComponent>();
             _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
+            _node_args.attack_com = actor->GetComponent<my::EnemyRangedAttackComponent>();
         } // if
     }
     /// <summary>

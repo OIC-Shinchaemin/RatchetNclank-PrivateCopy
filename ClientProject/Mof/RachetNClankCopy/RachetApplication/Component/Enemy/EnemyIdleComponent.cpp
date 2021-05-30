@@ -80,6 +80,7 @@ bool my::EnemyIdleComponent::Initialize(void) {
 }
 
 bool my::EnemyIdleComponent::Update(float delta_time) {
+    puts("EnemyIdleComponent");
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
     auto angle_y = math::ToDegree(super::GetOwner()->GetRotate().y);

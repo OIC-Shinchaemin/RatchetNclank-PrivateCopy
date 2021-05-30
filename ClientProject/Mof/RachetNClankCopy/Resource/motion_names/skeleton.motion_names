@@ -26,7 +26,7 @@
       "name": "skeleton-skeleton|attack",
       "speed": 1.0,
       "loop": false,
-      "same": false,
+      "same": true,
       "state": "EnemyMotionRangedAttackState"
     },
     {

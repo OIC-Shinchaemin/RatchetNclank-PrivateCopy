@@ -1,6 +1,7 @@
 #include "EnemyRangedAttackComponent.h"
 
 #include "../../State/EnemyActionStateDefine.h"
+#include "../../State/EnemyMotionStateDefine.h"
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
@@ -71,14 +72,6 @@ bool my::EnemyRangedAttackComponent::Initialize(void) {
 }
 
 bool my::EnemyRangedAttackComponent::Update(float delta_time) {
-    if (auto motion_com = _motion_com.lock()) {
-        if (motion_com->IsEndMotion()) {
-            if (auto state_com = _state_com.lock()) {
-                state_com->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
-            } // if
-        } // if
-    } // if
-
     if (auto enemy_com = _enemy_com.lock()) {
         if (auto target = enemy_com->GetTarget().lock()) {
             auto owner = super::GetOwner();
@@ -101,7 +94,14 @@ bool my::EnemyRangedAttackComponent::Update(float delta_time) {
             } // if
         } // if
     } // if
-
+    
+    if (auto motion_com = _motion_com.lock()) {
+        if (motion_com->IsEndMotion()) {
+            
+            _state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
+            //super::End();
+        } // if
+    } // if
     return true;
 }
 
@@ -119,10 +119,10 @@ bool my::EnemyRangedAttackComponent::Start(void) {
         return false;
     } // if
     super::Start();
-    _interval.Initialize(2.0f, true);
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("EnemyMotionAttackState");
+        motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionRangedAttackState);
     } // if
+
     _ASSERT_EXPR(_enemy_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
     auto enemy_com = _enemy_com.lock();
 
