@@ -103,7 +103,7 @@
       }
     },
     {
-      "type": "MeshComponent",
+      "type": "AnimationMeshComponent",
       "paramater": {
         "priority": 0,
         "path": "../Resource/mesh/skeleton/skeleton.mom",
@@ -129,7 +129,7 @@
       }
     },
     {
-      "type": "EnemyAttackCollisionComponent",
+      "type": "EnemyMeleeAttackCollisionComponent",
       "paramater": {
         "priority": 0
       }

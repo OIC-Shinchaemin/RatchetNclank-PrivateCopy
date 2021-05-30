@@ -27,6 +27,7 @@ bool my::PlayerEnemyBulletCollisionAlgolithm::IsCollision(std::shared_ptr<my::Co
         auto pos = object->GetOwner()->GetPosition();
         auto target_pos = target->GetOwner()->GetPosition();
         out.angle.y = target->GetOwner()->GetRotate().y;
+        out.speed = 30.0f;
         return true;
     } // if
     return false;

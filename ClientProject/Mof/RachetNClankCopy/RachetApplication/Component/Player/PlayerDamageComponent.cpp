@@ -8,6 +8,7 @@
 my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
     super(priority),
     _damage_value(),
+    _damage_speed(),
     _damage_angle(),
     _hp_com() {
 }
@@ -15,6 +16,7 @@ my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
 my::PlayerDamageComponent::PlayerDamageComponent(const PlayerDamageComponent& obj) :
     super(obj),
     _damage_value(),
+    _damage_speed(),
     _damage_angle(),
     _hp_com() {
 }
@@ -36,10 +38,11 @@ bool my::PlayerDamageComponent::Initialize(void) {
 
     auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kEnemyAttackCollisionComponent,
+                               my::CollisionComponentType::kEnemyMeleeAttackCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         if (super::CanTransitionActionState(state::PlayerActionStateType::kPlayerActionDamageState)) {
             this->_damage_value = 1;
+            this->_damage_speed = in.speed;
             this->_damage_angle = in.angle;
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
         } // if
@@ -50,6 +53,7 @@ bool my::PlayerDamageComponent::Initialize(void) {
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         if (super::CanTransitionActionState(state::PlayerActionStateType::kPlayerActionDamageState)) {
             this->_damage_value = 1;
+            this->_damage_speed = in.speed;
             this->_damage_angle = in.angle;
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
         } // if
@@ -83,7 +87,7 @@ bool my::PlayerDamageComponent::Start(void) {
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionDamageState);
 
     auto velocity_com = super::GetVelocityComponent();
-    auto accele = Mof::CVector3(0.0f, 0.0f, -10.0f);
+    auto accele = Mof::CVector3(0.0f, 0.0f, -_damage_speed);
     accele.RotateAround(math::vec3::kZero, _damage_angle);
     velocity_com->SetVelocity(math::vec3::kZero);
     velocity_com->AddVelocityForce(accele);

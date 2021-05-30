@@ -1,19 +1,15 @@
 #include "MeshComponent.h"
 
-#include "MotionComponent.h"
-
 
 my::MeshComponent::MeshComponent(int priority) :
     super(priority),
     _mesh(),
-    _motion_com(),
     _color() {
 }
 
 my::MeshComponent::MeshComponent(const my::MeshComponent& obj) :
     super(obj),
     _mesh(obj._mesh),
-    _motion_com(),
     _color(obj._color) {
 }
 
@@ -29,7 +25,7 @@ void my::MeshComponent::SetParam(const rapidjson::Value& param) {
 
     auto p = param[path].GetString();
     auto temp = super::_resource_manager.lock()->Get<std::shared_ptr<Mof::CMeshContainer>>(p);
-    this->SetMesh(temp);
+    this->SetMeshContainer(temp);
 
     const char* color = "color";
     if (param.HasMember(color)) {
@@ -43,7 +39,7 @@ void my::MeshComponent::SetParam(const rapidjson::Value& param) {
     } // else
 }
 
-void my::MeshComponent::SetMesh(const std::shared_ptr<Mof::CMeshContainer>& ptr) {
+void my::MeshComponent::SetMeshContainer(const std::shared_ptr<Mof::CMeshContainer>& ptr) {
     this->_mesh = ptr;
 }
 
@@ -51,23 +47,12 @@ std::string my::MeshComponent::GetType(void) const {
     return "MeshComponent";
 }
 
-std::weak_ptr<Mof::CMeshContainer> my::MeshComponent::GetMesh(void) const {
-    return this->_mesh;
+std::shared_ptr<Mof::CMeshContainer> my::MeshComponent::GetMeshContainer(void) const {
+    return this->_mesh.lock();
 }
 
-bool my::MeshComponent::Initialize(void) {
-    super::Initialize();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-
-#ifdef _DEBUG
-    auto mesh = this->_mesh.lock();
-    auto bone_array = mesh->GetBone();
-    for (int i = 0, n = bone_array->GetArrayCount(); i < n; i++) {
-        auto bone = bone_array->GetData(i);
-        std::cout << "bone->GetName() = " << *bone->GetName() << "\n";
-    } // for
-#endif // _DEBUG
-    return true;
+Mof::CVector4 my::MeshComponent::GetColor(void) const {
+    return this->_color;
 }
 
 bool my::MeshComponent::Render(void) {
@@ -77,7 +62,7 @@ bool my::MeshComponent::Render(void) {
 
     auto owner = super::GetOwner();
     // •`‰æ
-    if (auto r = _mesh.lock()) {
+    if (auto mesh = this->GetMeshContainer(); mesh) {
         Mof::CMatrix44 scale, rotate, translate;
         Mof::CQuaternion quat; quat.Rotation(owner->GetRotate());
 
@@ -86,20 +71,7 @@ bool my::MeshComponent::Render(void) {
         translate.Translation(owner->GetPosition(), translate);
 
         Mof::CMatrix44 world = scale * rotate * translate;
-
-        if (owner->GetParentTransform().has_value()) {
-            auto parent = owner->GetParentTransform().value();
-            world = world * parent;
-        } // if
-
-        if (auto motion_com = _motion_com.lock()) {
-            auto motion = motion_com->GetMotionData();
-            motion->RefreshBoneMatrix(world);
-            r->Render(motion, _color);
-        } // if
-        else {
-            r->Render(world);
-        } // else
+        mesh->Render(world);
     } // if
     return true;
 }

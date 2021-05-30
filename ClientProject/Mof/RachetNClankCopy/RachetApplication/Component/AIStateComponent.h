@@ -15,7 +15,7 @@ private:
     //! 状態
     my::StateMachine _state_machine;
     //! タイマー
-    my::Timer _thinking_time;
+    my::Timer _thinking_timer;
     //! 作成パス
     std::vector<std::string> _behaviour_path;
 

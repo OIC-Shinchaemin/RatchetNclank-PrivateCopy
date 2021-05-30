@@ -24,6 +24,10 @@ std::string my::EnemyStateComponent::GetType(void) const {
     return "EnemyStateComponent";
 }
 
+bool my::EnemyStateComponent::IsEqual(std::string_view state) const {
+    return this->_state_machine.GetCurrentStateName() == state;
+}
+
 bool my::EnemyStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
@@ -79,6 +83,9 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
         if (current == Type::kEnemyActionDamageState) {
             return false;
         } // if
+        else if (current == Type::kEnemyActionMoveState) {
+            return false;
+        } // else if
         else {
             return true;
         } // else    
@@ -127,3 +134,11 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
     } // else if
     return false;
 }
+
+#ifdef _DEBUG
+bool my::EnemyStateComponent::DebugRender(void) {
+    ::CGraphicsUtilities::RenderString(
+        20.0f, 600.0f, "enemy state = %s", this->_state_machine.GetCurrentStateName());
+    return true;
+}
+#endif // _DEBUG

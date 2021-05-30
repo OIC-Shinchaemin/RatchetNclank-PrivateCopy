@@ -8,28 +8,28 @@
       "derived": "SelectorNode",
       "children": [
         1,
-        4
+        2
       ]
+    },
+    {
+      "type": "DecoratorNode",
+      "derived": "RecognizingTargetNode",
+      "child": 3
+    },
+    {
+      "type": "ActionNode",
+      "derived": "ChangePatrolNode"
     },
     {
       "type": "CompositeNode",
       "derived": "SequencerNode",
       "children": [
-        2,
-        3
+        4
       ]
-    },
-    {
-      "type": "ConditionalNode",
-      "derived": "TargetRecognitionNode"
     },
     {
       "type": "ActionNode",
       "derived": "RangedAttackNode"
-    },
-    {
-      "type": "ActionNode",
-      "derived": "ChangePatrolNode"
     }
   ]
 }

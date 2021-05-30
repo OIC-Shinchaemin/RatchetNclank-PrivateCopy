@@ -147,7 +147,8 @@ bool my::GameScene::Load(std::shared_ptr<my::Scene::Param> param) {
         r->Load(param->resource.c_str());
     } // if
     // stage
-    if (!_stage.Load("../Resource/stage/stage.json")) {
+    //if (!_stage.Load("../Resource/stage/stage.json")) {
+    if (!_stage.Load("../Resource/stage/test.json")) {
         return false;
     } // if
 
@@ -209,6 +210,15 @@ bool my::GameScene::Initialize(void) {
     auto player = my::FactoryManager::Singleton().CreateActor<my::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<my::CameraComponent>());
+
+    {
+        param->name = "weapon";
+        param->tag = "OmniWrench";
+        auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", param);
+        player->AddChild(omniwrench);
+        this->AddElement(omniwrench);
+    }
+
     //ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
 
 

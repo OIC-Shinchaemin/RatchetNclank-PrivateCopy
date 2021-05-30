@@ -158,7 +158,7 @@
   ],
     "enemy_spawn_list": [
         {
-            "builder": "builder/weak_enemy.json",
+            "builder": "builder/strong_enemy.json",
             "name": "enemy",
             "pos_x": 50.0,
             "pos_y": -30.0,

@@ -65,6 +65,12 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// îªíË
+    /// </summary>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    bool IsEqual(std::string_view state) const;
+    /// <summary>
     /// èâä˙âª
     /// </summary>
     /// <param name=""></param>
@@ -99,6 +105,9 @@ public:
     /// <param name="name"></param>
     /// <returns></returns>
     bool CanTransition(const std::string& next);
+#ifdef _DEBUG
+    virtual bool DebugRender(void) override;
+#endif // _DEBUG
 };
 }
 #endif // !MY_ENEMY_STATE_COMPONENT_H

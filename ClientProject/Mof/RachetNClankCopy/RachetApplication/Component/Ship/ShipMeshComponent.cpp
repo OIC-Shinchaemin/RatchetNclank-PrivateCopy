@@ -8,10 +8,15 @@ my::ShipMeshComponent::ShipMeshComponent(int priority) :
 }
 
 my::ShipMeshComponent::ShipMeshComponent(const my::ShipMeshComponent& obj) :
-    super(obj){
+    super(obj) {
 }
 
 my::ShipMeshComponent::~ShipMeshComponent() {
+}
+
+void my::ShipMeshComponent::SetParam(const rapidjson::Value& param) {
+    super::SetParam(param);
+    _ship_mesh = super::GetMeshContainer()->GetMesh()->GetData(1);
 }
 
 std::string my::ShipMeshComponent::GetType(void) const {
@@ -24,23 +29,16 @@ bool my::ShipMeshComponent::Render(void) {
     } // if
 
     // •`‰æ
-    if (auto r = _mesh.lock()) {
-        Mof::CMatrix44 scale, rotate, translate;
-        scale.Scaling(super::GetOwner()->GetScale(), scale);
-        rotate.RotationZXY(super::GetOwner()->GetRotate());
-        translate.Translation(super::GetOwner()->GetPosition(), translate);
-        auto world = scale * rotate * translate;
+    Mof::CMatrix44 scale, rotate, translate;
+    scale.Scaling(super::GetOwner()->GetScale(), scale);
+    rotate.RotationZXY(super::GetOwner()->GetRotate());
+    translate.Translation(super::GetOwner()->GetPosition(), translate);
+    auto world = scale * rotate * translate;
 
-        auto mesh = r->GetMesh()->GetData(1);
-        if (auto motion_com = _motion_com.lock()) {
-            auto motion = motion_com->GetMotionData();
-            motion->RefreshBoneMatrix(world);
-            // ˆø”‚ÉUV‚ª‚ ‚é‚Ì‚Å‚±‚ê‚ð‘‚â‚µ‚Ä‚¢‚­
-            mesh->Render(motion, _color);
-        } // if
-        else {
-            mesh->Render(world);
-        } // else
+    if (auto motion_com = _motion_com.lock()) {
+        auto motion = motion_com->GetMotionData();
+        motion->RefreshBoneMatrix(world);
+        _ship_mesh->Render(motion, super::GetColor());
     } // if
     return true;
 }

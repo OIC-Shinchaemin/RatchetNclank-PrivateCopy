@@ -1,7 +1,7 @@
 my::ComponentFactory::AddComponentCreator<my::PlayerCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::EnemyCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::SightCollisionComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyAttackCollisionComponent>();
+my::ComponentFactory::AddComponentCreator<my::EnemyMeleeAttackCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::EnemyBulletCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::OmniWrenchCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::BombGloveBulletCollisionComponent>();

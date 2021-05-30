@@ -5,6 +5,7 @@
 #include "../MotionStateComponent.h"
 #include "EnemyComponent.h"
 #include "../../State/EnemyActionStateDefine.h"
+#include "../../State/EnemyMotionStateDefine.h"
 
 
 void my::EnemyMoveComponent::InputMoveVelocity(float speed) {
@@ -107,15 +108,10 @@ bool my::EnemyMoveComponent::Initialize(void) {
 bool my::EnemyMoveComponent::Update(float delta_time) {
     if (auto enemy_com = _enemy_com.lock()) {
         if (auto target = enemy_com->GetTarget().lock()) {
+            _target = target->GetPosition();
         } // if
-        else {
-            if (auto state_com = _action_state_com.lock()) {
-                if (state_com->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
-                    state_com->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
-                } // if
-            } // if
-        } // else
     } // if
+
     float speed = 1.0f;
     float angular_speed = 1.0f;
 
@@ -129,18 +125,12 @@ bool my::EnemyMoveComponent::Update(float delta_time) {
     this->SetAngularSpeed(angular_speed);
     this->SetIdealAngle(std::atan2(-in.y, in.x) - math::kHalfPi);
 
-    ///////
+    //
 
     this->InputMoveAngularVelocity(_ideal_angle, _angular_speed);
     this->InputMoveVelocity(_move_speed);
 
 
-    if (auto velocity_com = _velocity_com.lock()) {
-        auto temp = velocity_com->GetVelocity();
-        if (Mof::CVector2(temp.x, temp.z).Length() < 0.01f) {
-            //super::End();
-        } // if
-    } // if
     return true;
 }
 
@@ -159,7 +149,7 @@ bool my::EnemyMoveComponent::Start(void) {
     } // if
     super::Start();
     if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState("EnemyMotionMoveState");
+        motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionMoveState);
     } // if
     return true;
 }

@@ -3,7 +3,7 @@
 #include "My/Core/Utility.h"
 #include "../Component/Collision/Algolithm/CollisionAlgolithmDefine.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerEnemyAttackCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerEnemyMeleeAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerWaterFlowCollisionAlgolithm.h"
@@ -12,7 +12,7 @@
 #include "../Component/Collision/Algolithm/EnemyOmniWrenchCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyAttackPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/EnemyMeleeAttackPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyOmniWrenchCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyBombGloveBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPyrocitorBulletCollisionAlgolithm.h"
@@ -27,7 +27,7 @@
 void my::PhysicsWorld::GenerateLayer(void) {
     const char* types[] = {
       my::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
-      my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
@@ -36,7 +36,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
-      my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm.c_str(),
@@ -58,7 +58,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
 my::PhysicsWorld::PhysicsWorld() :
     _layers() {
     collision_algolithm_factory.Register<my::PlayerEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm);
-    collision_algolithm_factory.Register<my::PlayerEnemyAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyAttackCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::PlayerEnemyMeleeAttackCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerEnemyBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerShipCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerWaterFlowCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
@@ -67,7 +67,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::EnemyOmniWrenchCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::SightEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
-    collision_algolithm_factory.Register<my::EnemyAttackPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyAttackPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::EnemyMeleeAttackPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyOmniWrenchCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyBombGloveBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPyrocitorBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm);

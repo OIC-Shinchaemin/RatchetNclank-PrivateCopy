@@ -4,18 +4,15 @@
 
 #include "RenderComponent.h"
 
-#include <vector>
 #include <memory>
 
 
 namespace my {
 class MeshComponent : public my::RenderComponent {
     using super = my::RenderComponent;
-protected:
+private:
     //! メッシュ
     std::weak_ptr<Mof::CMeshContainer> _mesh;
-    //! アニメーション
-    std::weak_ptr<class MotionComponent> _motion_com;
     //! 表示色
     Mof::CVector4 _color;
 public:
@@ -42,7 +39,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="mesh"></param>
-    void SetMesh(const std::shared_ptr<Mof::CMeshContainer>& ptr);
+    void SetMeshContainer(const std::shared_ptr<Mof::CMeshContainer>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -54,13 +51,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<Mof::CMeshContainer> GetMesh(void) const;
+    std::shared_ptr<Mof::CMeshContainer> GetMeshContainer(void) const;
     /// <summary>
-    /// 初期化
+    /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Initialize(void) override;
+    Mof::CVector4 GetColor(void) const;
     /// <summary>
     /// 描画
     /// </summary>

@@ -55,7 +55,7 @@ bool my::MotionComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     auto mesh_com = super::GetOwner()->GetComponent<my::MeshComponent>();
-    if (auto mesh = mesh_com->GetMesh().lock()) {
+    if (auto mesh = mesh_com->GetMeshContainer()) {
         _motion = mesh->CreateMotionController();
     } // if
     return true;

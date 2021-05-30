@@ -27,7 +27,7 @@ std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetFrontRay(void) {
 
     auto pos = super::GetOwner()->GetPosition();
     pos.y += _player_com.lock()->GetHeight();
-    auto velocity = _velocity_com.lock()->GetVelocity() * 1.0f / 60.0f;
+    auto velocity = _velocity_com.lock()->GetVelocity() * def::kDeltaTime;
     auto dir = Mof::CVector3(velocity.x, 0.0f, velocity.z);
     pos -= dir;
     return Mof::CRay3D(pos, dir);
@@ -45,7 +45,7 @@ void my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer m
         geometry->SetMatrix(mat);
 
         auto velocity = _velocity_com.lock()->GetVelocity();
-        velocity *= 1.0f / 60.0f;
+        velocity *= def::kDeltaTime;
 
         if (ray.CollisionGeometry(geometry, info)) {
             Mof::CVector3 up(0.0f, 1.0f, 0.0f);

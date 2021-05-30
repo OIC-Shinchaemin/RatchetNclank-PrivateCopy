@@ -8,7 +8,7 @@
 namespace my {
 struct CollisionAlgolithmType {
     static std::string kPlayerEnemyCollisionAlgolithm;
-    static std::string kPlayerEnemyAttackCollisionAlgolithm;
+    static std::string kPlayerEnemyMeleeAttackCollisionAlgolithm;
     static std::string kPlayerEnemyBulletCollisionAlgolithm;
     static std::string kPlayerShipCollisionAlgolithm;
     static std::string kPlayerWaterFlowCollisionAlgolithm;
@@ -17,7 +17,7 @@ struct CollisionAlgolithmType {
     static std::string kSightPlayerCollisionAlgolithm;
     static std::string kSightEnemyCollisionAlgolithm;
     static std::string kEnemyEnemyCollisionAlgolithm;
-    static std::string kEnemyAttackPlayerCollisionAlgolithm;
+    static std::string kEnemyMeleeAttackPlayerCollisionAlgolithm;
     static std::string kEnemyOmniWrenchCollisionAlgolithm;
     static std::string kEnemyBombGloveBulletCollisionAlgolithm;
     static std::string kEnemyPyrocitorBulletCollisionAlgolithm;

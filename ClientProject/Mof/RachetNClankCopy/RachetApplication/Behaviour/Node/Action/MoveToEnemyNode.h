@@ -40,23 +40,20 @@ public:
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
         auto target = args.enemy_com.lock()->GetTarget();
-        
+
         if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMoveState)) {
             args.move_com.lock()->SetTargetPosition(target.lock()->GetPosition());
             args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionMoveState);
         } // if
 
         Mof::CSphere range_sphere;
-        if (auto com = args.ranged_attack_com.lock(); com) {
+        if (auto com = args.melee_attack_com.lock(); com) {
             range_sphere = com->GetCanAttackRangeSphere();
-        } // if
-        else if (auto com = args.melee_attack_com.lock(); com) {
-            range_sphere = com->GetCanAttackRangeSphere();
-        } // else if
-
-        auto pos = target.lock()->GetPosition();
-        if (range_sphere.CollisionPoint(pos)) {
-            return true;
+            
+            auto pos = target.lock()->GetPosition();
+            if (range_sphere.CollisionPoint(pos)) {
+                return true;
+            } // if
         } // if
         return false;
     };
