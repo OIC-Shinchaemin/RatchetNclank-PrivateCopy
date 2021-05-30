@@ -211,6 +211,7 @@ bool my::GameScene::Initialize(void) {
     this->AddElement(player);
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<my::CameraComponent>());
 
+
     {
         param->name = "weapon";
         param->tag = "OmniWrench";

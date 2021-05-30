@@ -37,15 +37,12 @@ bool my::ShipStateComponent::Initialize(void) {
             this->RegisterState(_state_machine, com);
         } // if
     } // for
-
-    //_state_machine.ChangeState(state::ShipActionStateType::kShipActionIdleState);
     _state_machine.ChangeState(state::ShipActionStateType::kShipActionLandingState);
     return true;
 }
 
 bool my::ShipStateComponent::Update(float delta_time) {
     _state_machine.Update(delta_time);
-    std::cout << "ship state = " << _state_machine.GetCurrentStateName() << "\n";
     return false;
 }
 

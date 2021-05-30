@@ -102,7 +102,8 @@ void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<my::Cam
 
 MofBool test::CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("TestResource");
-    bool loaded = _gizmo.Load("gizmo.mom");
+//    bool loaded = _gizmo.Load("gizmo.mom");
+    bool loaded = _gizmo.Load("bolt/scene02.mom");
 
     my::Gamepad::GetInstance().Create();
     _camera_manager = std::make_shared<my::CameraManager>();

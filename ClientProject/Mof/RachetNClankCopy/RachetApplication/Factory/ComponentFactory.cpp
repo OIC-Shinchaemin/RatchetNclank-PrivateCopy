@@ -45,6 +45,9 @@ my::ComponentFactory::ComponentFactory() :
 #include "ComponentRegister/OmniWrenchComponentRegister.h"
 #include "ComponentRegister/ShipComponentRegister.h"
        
+    my::ComponentFactory::AddComponentCreator<my::BoltCollisionComponent>();
+
+
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
 }

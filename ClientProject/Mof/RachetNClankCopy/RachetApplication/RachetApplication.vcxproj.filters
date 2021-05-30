@@ -888,6 +888,9 @@
     <ClCompile Include="Component\AnimationMeshComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BoltCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1748,6 +1751,9 @@
     <ClInclude Include="Component\AnimationMeshComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BoltCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1838,6 +1844,9 @@
     </None>
     <None Include="..\Resource\stage\stage.json">
       <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\builder\bolt.json">
+      <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

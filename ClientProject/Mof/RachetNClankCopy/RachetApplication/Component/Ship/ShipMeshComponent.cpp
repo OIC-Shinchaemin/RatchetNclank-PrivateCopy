@@ -4,11 +4,13 @@
 
 
 my::ShipMeshComponent::ShipMeshComponent(int priority) :
-    super(priority) {
+    super(priority) ,
+    _ship_mesh(){
 }
 
 my::ShipMeshComponent::ShipMeshComponent(const my::ShipMeshComponent& obj) :
-    super(obj) {
+    super(obj) ,
+    _ship_mesh(obj._ship_mesh){
 }
 
 my::ShipMeshComponent::~ShipMeshComponent() {
@@ -41,6 +43,12 @@ bool my::ShipMeshComponent::Render(void) {
         _ship_mesh->Render(motion, super::GetColor());
     } // if
     return true;
+}
+
+bool my::ShipMeshComponent::Release(void) {
+    super::Release();
+    _ship_mesh = nullptr;
+    return false;
 }
 
 std::shared_ptr<my::Component> my::ShipMeshComponent::Clone(void) {
