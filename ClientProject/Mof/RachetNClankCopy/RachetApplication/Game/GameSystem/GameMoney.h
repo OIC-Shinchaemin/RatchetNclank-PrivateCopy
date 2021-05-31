@@ -7,29 +7,26 @@
 
 #include <Mof.h>
 
+#include "My/Core/Observable.h"
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
+#include "MY/UI/UICanvas.h"
+#include "Save/SaveData.h"
 
 
 namespace my {
-class GameMoney {
+class GameMoney : public std::enable_shared_from_this<my::GameMoney>, public my::Observer<int> {
 private:
-//! 名前
-    std::string _name;
-    //! 背景
-    std::weak_ptr<Mof::CTexture> _texture;
+    //! お金
+    std::uint32_t _value;
     //! 位置
     Mof::CVector2 _position;
-    //! 色
-    Mof::CVector4 _color;
-    //! お金
-    uint32_t _value;
-    //! フォント
-    Mof::CFont _font;
-    //! フォント
-    std::size_t _font_size;
+    //! 通知用
+    my::Observable<int> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! UI
+    std::weak_ptr<my::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -40,10 +37,20 @@ public:
     /// </summary>
     ~GameMoney();
     /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name=""></param>
+    virtual void OnNotify(int add_money) override;
+    /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -51,17 +58,28 @@ public:
     /// <returns></returns>
     std::uint32_t GetValue(void) const;
     /// <summary>
+    /// 読み込み
+    /// </summary>
+    /// <param name="in"></param>
+    /// <returns></returns>
+    bool Load(my::SaveData& in);
+    /// <summary>
     /// 初期化
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name=""></param>
     /// <returns></returns>
-    bool Initialize(uint32_t value);
+    bool Initialize(void);
     /// <summary>
     /// 入力
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Render(void);
+    //bool Render(void);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <returns></returns>
+    bool Release(void);
 };
 }
 #endif // !MY_GAME_MONEY_H

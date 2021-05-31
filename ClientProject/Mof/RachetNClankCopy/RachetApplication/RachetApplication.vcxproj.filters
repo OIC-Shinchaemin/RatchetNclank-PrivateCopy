@@ -927,7 +927,7 @@
     <ClCompile Include="Actor\Item\Bolt.cpp">
       <Filter>Rachet\Source\Actor\Item</Filter>
     </ClCompile>
-    <ClCompile Include="UI\MoneyMenu.cpp">
+    <ClCompile Include="UI\GameMoneyMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1820,7 +1820,7 @@
     <ClInclude Include="Actor\Item\Bolt.h">
       <Filter>Rachet\Header\Actor\Item</Filter>
     </ClInclude>
-    <ClInclude Include="UI\MoneyMenu.h">
+    <ClInclude Include="UI\GameMoneyMenu.h">
       <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -67,6 +67,7 @@ public:
     virtual void Reset(void) override {
         _state = super::State::Inactive;
     }
+#ifdef _DEBUG
     /// <summary>
     /// デバッグ
     /// </summary>
@@ -98,8 +99,9 @@ public:
         } // for
     }
     virtual void DebugRender(void) override {
-        this->DebugRender(Mof::CVector2(100.0f, 100.0f));
+        //this->DebugRender(Mof::CVector2(100.0f, 100.0f));
     }
+#endif // _DEBUG
 };
 }
 #endif // !BEHAVIOUR_NODE_EXECUTOR_H
