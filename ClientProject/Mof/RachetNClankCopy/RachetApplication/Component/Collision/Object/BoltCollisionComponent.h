@@ -18,6 +18,8 @@ private:
     float _height;
     //! 大きさ
     float _volume;
+    //! 状態
+    std::weak_ptr<class BoltActionStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ

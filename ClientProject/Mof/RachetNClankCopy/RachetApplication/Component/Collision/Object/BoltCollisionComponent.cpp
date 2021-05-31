@@ -2,18 +2,21 @@
 
 #include "CollisionComponentDefine.h"
 #include "../../VelocityComponent.h"
+#include "../../Item/BoltActionStateComponent.h"
 
 
 my::BoltCollisionComponent::BoltCollisionComponent(int priority) :
     super(priority),
     _height(0.2f),
-    _volume(_height){
+    _volume(_height),
+    _state_com(){
 }
 
 my::BoltCollisionComponent::BoltCollisionComponent(const BoltCollisionComponent& obj) :
     super(obj),
     _height(obj._height),
-    _volume(obj._volume) {
+    _volume(obj._volume),
+    _state_com() {
 }
 
 my::BoltCollisionComponent::~BoltCollisionComponent() {
@@ -54,6 +57,8 @@ std::optional<my::SightObject> my::BoltCollisionComponent::GetSightObject(void) 
 
 bool my::BoltCollisionComponent::Initialize(void) {
     super::Initialize();
+
+    _state_com = super::GetOwner()->GetComponent<my::BoltActionStateComponent>();
     return true;
 }
 
@@ -65,6 +70,10 @@ void my::BoltCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const
     if (!this->GetSphere().has_value()) {
         return;
     } // if
+    if (_state_com.lock()->IsEqual(state::BoltActionType::kGravitate)) {
+        return;
+    } // if
+
 
     auto sphere = this->GetSphere().value();
     Mof::COLLISIONOUTGEOMETRY info;
@@ -80,6 +89,11 @@ void my::BoltCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += _height - info.d;
                 super::GetOwner()->SetPosition(pos);
+
+                
+                if (_state_com.lock()->CanTransition(state::BoltActionType::kDefault)) {
+                    _state_com.lock()->ChangeState(state::BoltActionType::kDefault);
+                } // if
             } // if
         } // if
         geometry->SetMatrix(default_matrix);

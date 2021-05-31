@@ -240,6 +240,7 @@
     <ClCompile Include="Actor\Character\Player.cpp" />
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
+    <ClCompile Include="Actor\Item\Bolt.cpp" />
     <ClCompile Include="Actor\Ship\Ship.cpp" />
     <ClCompile Include="Actor\Terrain\Terrain.cpp" />
     <ClCompile Include="Actor\Weapon\Blaster.cpp" />
@@ -313,7 +314,12 @@
     <ClCompile Include="Component\Enemy\EnemyStateComponent.cpp" />
     <ClCompile Include="Component\HpComponent.cpp" />
     <ClCompile Include="Component\InvincibleComponent.cpp" />
+    <ClCompile Include="Component\Item\BoltActionComponent.cpp" />
+    <ClCompile Include="Component\Item\BoltActionStateComponent.cpp" />
     <ClCompile Include="Component\Item\BoltComponent.cpp" />
+    <ClCompile Include="Component\Item\BoltDefaultComponent.cpp" />
+    <ClCompile Include="Component\Item\BoltGravitateComponent.cpp" />
+    <ClCompile Include="Component\Item\BoltMovedComponent.cpp" />
     <ClCompile Include="Component\MeshComponent.cpp" />
     <ClCompile Include="Component\MotionComponent.cpp" />
     <ClCompile Include="Component\MotionStateComponent.cpp" />
@@ -410,6 +416,7 @@
     <ClCompile Include="State\AI\AICombatState.cpp" />
     <ClCompile Include="State\AI\AIPatrolState.cpp" />
     <ClCompile Include="State\AI\AIState.cpp" />
+    <ClCompile Include="State\BoltActionStateImplementation.cpp" />
     <ClCompile Include="State\EnemyActionStateImplementation.cpp" />
     <ClCompile Include="State\EnemyMotionStateImplementation.cpp" />
     <ClCompile Include="State\MotionState.cpp" />
@@ -454,6 +461,7 @@
     <ClInclude Include="Actor\Character\Player.h" />
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
+    <ClInclude Include="Actor\Item\Bolt.h" />
     <ClInclude Include="Actor\Ship\Ship.h" />
     <ClInclude Include="Actor\Terrain\Terrain.h" />
     <ClInclude Include="Actor\Weapon\Blaster.h" />
@@ -586,7 +594,13 @@
     <ClInclude Include="Component\Enemy\EnemyStateComponent.h" />
     <ClInclude Include="Component\HpComponent.h" />
     <ClInclude Include="Component\InvincibleComponent.h" />
+    <ClInclude Include="Component\Item\BoltActionComponent.h" />
+    <ClInclude Include="Component\Item\BoltActionStateComponent.h" />
     <ClInclude Include="Component\Item\BoltComponent.h" />
+    <ClInclude Include="Component\Item\BoltComponentInclude.h" />
+    <ClInclude Include="Component\Item\BoltDefaultComponent.h" />
+    <ClInclude Include="Component\Item\BoltGravitateComponent.h" />
+    <ClInclude Include="Component\Item\BoltMovedComponent.h" />
     <ClInclude Include="Component\MeshComponent.h" />
     <ClInclude Include="Component\MotionComponent.h" />
     <ClInclude Include="Component\MotionStateComponent.h" />
@@ -701,6 +715,7 @@
     <ClInclude Include="State\AI\AICombatState.h" />
     <ClInclude Include="State\AI\AIPatrolState.h" />
     <ClInclude Include="State\AI\AIState.h" />
+    <ClInclude Include="State\BoltActionStateDefine.h" />
     <ClInclude Include="State\EnemyActionStateDefine.h" />
     <ClInclude Include="State\EnemyMotionStateDefine.h" />
     <ClInclude Include="State\MotionState.h" />

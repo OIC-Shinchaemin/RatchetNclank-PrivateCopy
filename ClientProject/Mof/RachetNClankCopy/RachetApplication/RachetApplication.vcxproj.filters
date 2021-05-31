@@ -292,6 +292,12 @@
     <Filter Include="Rachet\Source\Actor\Item">
       <UniqueIdentifier>{c0d27538-e0e0-4762-aa31-8dcb25c8fadf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Component\Item">
+      <UniqueIdentifier>{d58bb449-615b-4b2f-a961-e913177a72f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Item">
+      <UniqueIdentifier>{8db5e219-e28c-416f-8827-ddad306d2a27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -898,6 +904,27 @@
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
     <ClCompile Include="Component\Item\BoltComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltActionStateComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="State\BoltActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltDefaultComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltActionComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltGravitateComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltMovedComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Item\Bolt.cpp">
       <Filter>Rachet\Source\Actor\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1765,6 +1792,30 @@
     </ClInclude>
     <ClInclude Include="Component\Item\BoltComponent.h">
       <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltActionStateComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="State\BoltActionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltDefaultComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltActionComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltGravitateComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltMovedComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltComponentInclude.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Item\Bolt.h">
+      <Filter>Rachet\Header\Actor\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

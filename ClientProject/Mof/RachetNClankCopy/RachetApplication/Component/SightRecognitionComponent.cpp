@@ -81,7 +81,6 @@ bool my::SightRecognitionComponent::Initialize(void) {
             _recognized.push_back(target);
             return true;
         }));
-
     } // if
     else if (tag == "Enemy") {
         _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();

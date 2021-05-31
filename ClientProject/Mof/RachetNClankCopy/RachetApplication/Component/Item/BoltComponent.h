@@ -4,13 +4,18 @@
 
 #include "../UpdateComponent.h"
 
+#include "../../Actor/Item/Bolt.h"
 
 namespace my {
 class BoltComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! アクターパラメータ
+    my::Bolt::Param _param;
+    //! 移動先
+    std::weak_ptr<my::Actor> _player;
     //! 状態
-    //std::weak_ptr<class PlayerStateComponent> _state_com;
+    std::weak_ptr<class BoltActionStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,11 +32,29 @@ public:
     /// </summary>
     virtual ~BoltComponent();
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    void SetActorParam(const my::Bolt::Param& param);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    const my::Bolt::Param& GetActorParam(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

@@ -7,6 +7,45 @@
       }
     },
     {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0,
+        "range": 10.0
+      }
+    },
+    {
+      "type": "BoltActionStateComponent",
+      "paramater": {
+        "priority": 2
+      }
+    },
+    {
+      "type": "ActionComponent",
+      "paramater": {
+        "priority": 3,
+        "children": [
+          {
+            "type": "BoltDefaultComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "BoltMovedComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "BoltGravitateComponent",
+            "paramater": {
+              "priority": 1
+            }
+          }
+        ]
+      }
+    },
+    {
       "type": "VelocityComponent",
       "paramater": {
         "priority": 99
@@ -27,6 +66,12 @@
     },
     {
       "type": "BoltCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
       "paramater": {
         "priority": 0
       }

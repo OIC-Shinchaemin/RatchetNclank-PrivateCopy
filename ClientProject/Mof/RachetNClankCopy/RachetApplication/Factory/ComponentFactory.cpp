@@ -21,8 +21,7 @@
 #include "../Component/Collision/Object/CollisionComponentInclude.h"
 #include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
 #include "../Component/Ship/ShipComponentInclude.h"
-
-#include "../Component/Item/BoltComponent.h"
+#include "../Component/Item/BoltComponentInclude.h"
 
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
@@ -51,6 +50,10 @@ my::ComponentFactory::ComponentFactory() :
        
     my::ComponentFactory::AddComponentCreator<my::BoltCollisionComponent>();
     my::ComponentFactory::AddComponentCreator<my::BoltComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltActionStateComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltDefaultComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltMovedComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltGravitateComponent>();
 
 
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
