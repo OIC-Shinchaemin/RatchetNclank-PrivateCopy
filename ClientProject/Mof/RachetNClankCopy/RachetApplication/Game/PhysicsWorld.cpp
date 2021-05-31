@@ -21,6 +21,7 @@
 #include "../Component/Collision/Algolithm/BlasterBulletEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BombGloveBulletEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/ShipPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/BoltPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Object/CollisionComponentDefine.h"
 
 
@@ -45,6 +46,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm.c_str(),
     };
 
 
@@ -76,6 +78,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::BlasterBulletEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::BombGloveBulletEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::ShipPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::BoltPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm);
 
     this->GenerateLayer();
 }

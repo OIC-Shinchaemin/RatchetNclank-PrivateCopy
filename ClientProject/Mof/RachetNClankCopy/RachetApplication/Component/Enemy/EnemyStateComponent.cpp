@@ -4,32 +4,37 @@
 
 
 my::EnemyStateComponent::EnemyStateComponent(int priority) :
-    super(priority),
-    _state_machine() {
+    super(priority)//
+    //,
+    //_state_machine() 
+{
 }
 
 my::EnemyStateComponent::EnemyStateComponent(const EnemyStateComponent& obj) :
-    super(obj),
-    _state_machine(obj._state_machine) {
+    super(obj)
+    //,
+    //_state_machine(obj._state_machine) 
+{
 }
 
 my::EnemyStateComponent::~EnemyStateComponent() {
 }
-
+/*
 void my::EnemyStateComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
 }
-
+*/
 std::string my::EnemyStateComponent::GetType(void) const {
     return "EnemyStateComponent";
 }
-
+/*
 bool my::EnemyStateComponent::IsEqual(std::string_view state) const {
     return this->_state_machine.GetCurrentStateName() == state;
 }
-
+*/
 bool my::EnemyStateComponent::Initialize(void) {
     super::Initialize();
+    /*
     super::Activate();
 
     // state
@@ -40,11 +45,12 @@ bool my::EnemyStateComponent::Initialize(void) {
             this->RegisterState(_state_machine, com);
         } // if
     } // for
-
-    _state_machine.ChangeState("EnemyActionIdleState");
+    */
+    super::ChangeState("EnemyActionIdleState");
+    //_state_machine.ChangeState("EnemyActionIdleState");
     return true;
 }
-
+/*
 bool my::EnemyStateComponent::Update(float delta_time) {
     _state_machine.Update(delta_time);
     return false;
@@ -55,14 +61,15 @@ bool my::EnemyStateComponent::Release(void) {
     _state_machine.Release();
     return true;
 }
-
+*/
 std::shared_ptr<my::Component> my::EnemyStateComponent::Clone(void) {
     return std::make_shared<my::EnemyStateComponent>(*this);
 }
-
+/*
 void my::EnemyStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
+*/
 
 bool my::EnemyStateComponent::CanTransition(const std::string& next) {
     using Type = state::EnemyActionStateType;

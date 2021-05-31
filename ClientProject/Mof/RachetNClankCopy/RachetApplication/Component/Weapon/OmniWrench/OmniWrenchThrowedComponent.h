@@ -29,11 +29,6 @@ private:
     std::weak_ptr<class OmniWrenchActionStateComponent> _action_state_com;
     //! 衝突
     std::weak_ptr<class OmniWrenchCollisionComponent> _collision_com;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    void ChageState(const std::string& name);
 public:
     /// <summary>
     /// コンストラクタ

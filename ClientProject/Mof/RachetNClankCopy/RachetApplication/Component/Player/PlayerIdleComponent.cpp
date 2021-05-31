@@ -47,8 +47,6 @@ bool my::PlayerIdleComponent::Update(float delta_time) {
     else if (::g_pInput->IsKeyPush(MOFKEY_U) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_R_BTN)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionCrouchState);
     } // else if
-
-
     return true;
 }
 

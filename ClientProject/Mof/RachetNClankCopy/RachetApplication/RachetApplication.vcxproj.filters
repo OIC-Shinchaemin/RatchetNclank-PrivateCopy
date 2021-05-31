@@ -286,6 +286,18 @@
     <Filter Include="Rachet\Header\Event">
       <UniqueIdentifier>{4ec4b52a-e2cd-4186-90a9-4ab7466fb794}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Header\Component\Item">
+      <UniqueIdentifier>{6f96d691-f125-4ab8-9bf6-2b36f1b2e915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Item">
+      <UniqueIdentifier>{c0d27538-e0e0-4762-aa31-8dcb25c8fadf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Item">
+      <UniqueIdentifier>{d58bb449-615b-4b2f-a961-e913177a72f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Item">
+      <UniqueIdentifier>{8db5e219-e28c-416f-8827-ddad306d2a27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -508,9 +520,6 @@
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp">
-      <Filter>Rachet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Object\EnemyAttackCollisionComponent.cpp">
       <Filter>Rachet\Source\Component\Collision\Object</Filter>
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp">
@@ -888,6 +897,36 @@
     <ClCompile Include="Component\AnimationMeshComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BoltCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltActionStateComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="State\BoltActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltDefaultComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltActionComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltGravitateComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltMovedComponent.cpp">
+      <Filter>Rachet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Item\Bolt.cpp">
+      <Filter>Rachet\Source\Actor\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1236,9 +1275,6 @@
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h">
-      <Filter>Rachet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\EnemyAttackCollisionComponent.h">
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\CollisionComponent.h">
@@ -1748,6 +1784,39 @@
     <ClInclude Include="Component\AnimationMeshComponent.h">
       <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BoltCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltActionStateComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="State\BoltActionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltDefaultComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltActionComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltGravitateComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltMovedComponent.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltComponentInclude.h">
+      <Filter>Rachet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Item\Bolt.h">
+      <Filter>Rachet\Header\Actor\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1838,6 +1907,9 @@
     </None>
     <None Include="..\Resource\stage\stage.json">
       <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\builder\bolt.json">
+      <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

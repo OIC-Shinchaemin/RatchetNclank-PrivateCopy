@@ -4,6 +4,7 @@
 
 #include "../Component/AIStateComponent.h"
 #include "../Component/SightRecognitionComponent.h"
+#include "../Component/ActionComponent.h"
 #include "../Component/MotionComponent.h"
 #include "../Component/HpComponent.h"
 #include "../Component/InvincibleComponent.h"
@@ -20,6 +21,7 @@
 #include "../Component/Collision/Object/CollisionComponentInclude.h"
 #include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
 #include "../Component/Ship/ShipComponentInclude.h"
+#include "../Component/Item/BoltComponentInclude.h"
 
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
@@ -29,6 +31,7 @@ my::ComponentFactory::ComponentFactory() :
     _component_creators() {
     my::ComponentFactory::AddComponentCreator<my::AIStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::SightRecognitionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::ActionComponent>();
     my::ComponentFactory::AddComponentCreator<my::MotionComponent>();
     my::ComponentFactory::AddComponentCreator<my::HpComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
@@ -45,6 +48,14 @@ my::ComponentFactory::ComponentFactory() :
 #include "ComponentRegister/OmniWrenchComponentRegister.h"
 #include "ComponentRegister/ShipComponentRegister.h"
        
+    my::ComponentFactory::AddComponentCreator<my::BoltCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltActionStateComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltDefaultComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltMovedComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BoltGravitateComponent>();
+
+
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
     my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
 }

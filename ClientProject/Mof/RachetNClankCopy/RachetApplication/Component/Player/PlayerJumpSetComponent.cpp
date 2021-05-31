@@ -35,8 +35,8 @@ std::string_view my::PlayerJumpSetComponent::GetStateType(void) const {
 
 bool my::PlayerJumpSetComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-    _jump_com = super::GetOwner()->GetComponent<my::PlayerJumpUpComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
+    _jump_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerJumpUpComponent>();
     return true;
 }
 

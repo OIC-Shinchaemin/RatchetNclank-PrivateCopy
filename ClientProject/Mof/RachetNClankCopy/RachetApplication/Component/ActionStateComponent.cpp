@@ -1,5 +1,7 @@
 #include "ActionStateComponent.h"
 
+#include "ActionComponent.h"
+
 
 my::ActionStateComponent::ActionStateComponent(int priority) :
     super(priority),
@@ -14,25 +16,25 @@ my::ActionStateComponent::ActionStateComponent(const ActionStateComponent& obj) 
 my::ActionStateComponent::~ActionStateComponent() {
 }
 
-void my::ActionStateComponent::SetParam(const rapidjson::Value& param) {
-    super::SetParam(param);
-}
-
 std::string my::ActionStateComponent::GetType(void) const {
     return "ActionStateComponent";
+}
+
+bool my::ActionStateComponent::IsEqual(std::string_view state) const {
+    return _state_machine.GetCurrentStateName() == state;
 }
 
 bool my::ActionStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    std::vector<std::weak_ptr<my::ActionComponent>> work;
-    super::GetOwner()->GetComponents<my::ActionComponent>(work);
-    for (auto weak : work) {
-        if (auto com = weak.lock()) {
-            this->RegisterState(_state_machine, com);
-        } // if
+    auto work = super::GetOwner()->GetComponent<my::ActionComponent>()->GetChildren();
+    for (auto pair : work) {
+        this->RegisterState(_state_machine, pair.second);
+        _action_map.emplace(pair.second->GetStateType().data(), pair.second->GetType().c_str());
     } // for
+    super::GetOwner()->GetComponent<my::ActionComponent>()->Activate();
+    
     return true;
 }
 
@@ -53,4 +55,7 @@ std::shared_ptr<my::Component> my::ActionStateComponent::Clone(void) {
 
 void my::ActionStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
+    if (auto it = _action_map.find(name); it != _action_map.end()) {
+        super::GetOwner()->GetComponent<my::ActionComponent>()->ChangeAction(it->second.c_str());
+    } // if
 }

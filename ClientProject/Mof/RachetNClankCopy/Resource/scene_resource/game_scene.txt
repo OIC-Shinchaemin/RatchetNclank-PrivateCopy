@@ -5,6 +5,7 @@
 ../Resource/mesh/blaster/scene300.mom
 ../Resource/mesh/skeleton/skeleton.mom
 ../Resource/mesh/futuristic_transport_shuttle_animated/scene.mom
+../Resource/mesh/bolt/scene01.mom
 
 ../Resource/mesh/bomb_glove_bullet/scene.mom
 ../Resource/mesh/pyrocitor_bullet/scene.mom

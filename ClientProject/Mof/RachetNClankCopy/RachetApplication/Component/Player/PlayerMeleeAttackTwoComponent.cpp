@@ -32,7 +32,7 @@ std::string_view my::PlayerMeleeAttackTwoComponent::GetStateType(void) const {
 bool my::PlayerMeleeAttackTwoComponent::Initialize(void) {
     super::Initialize();
 
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
     _weapon_com = super::GetOwner()->GetComponent<my::PlayerOmniWrenchComponent>();
     return true;
 }

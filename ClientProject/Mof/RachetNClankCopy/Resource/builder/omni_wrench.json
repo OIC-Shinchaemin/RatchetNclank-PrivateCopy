@@ -16,15 +16,23 @@
       }
     },
     {
-      "type": "OmniWrenchThrowedComponent",
+      "type": "ActionComponent",
       "paramater": {
-        "priority": 50
-      }
-    },
-    {
-      "type": "OmniWrenchDefaultComponent",
-      "paramater": {
-        "priority": 50
+        "priority": 90,
+        "children": [
+          {
+            "type": "OmniWrenchThrowedComponent",
+            "paramater": {
+              "priority": 50
+            }
+          },
+          {
+            "type": "OmniWrenchDefaultComponent",
+            "paramater": {
+              "priority": 50
+            }
+          }
+        ]
       }
     },
 

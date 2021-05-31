@@ -153,7 +153,6 @@ bool my::EnemyDamageComponent::Start(void) {
         } // if
     } // if
 
-
     if (auto hp_com = _hp_com.lock()) {
         hp_com->Damage(_damage_value);
         _damage_value = 0;

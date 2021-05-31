@@ -44,6 +44,12 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
+    /// ‰ğ•ú
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Release(void) override;
+    /// <summary>
     /// •¡»
     /// </summary>
     /// <param name=""></param>

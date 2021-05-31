@@ -9,5 +9,6 @@
 #include "BlasterBulletCollisionComponent.h"
 #include "BombGloveEffectCollisionComponent.h"
 #include "ShipCollisionComponent.h"
+#include "BoltCollisionComponent.h"
 #include "WaterFlowCollisionComponent.h"
 #include "CameraCollisionComponent.h"

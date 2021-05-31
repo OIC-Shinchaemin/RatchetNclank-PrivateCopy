@@ -157,13 +157,13 @@
     }
   ],
     "enemy_spawn_list": [
-        {
-            "builder": "builder/strong_enemy.json",
-            "name": "enemy",
-            "pos_x": 50.0,
-            "pos_y": -30.0,
-            "pos_z": 40.0
-        }
+      {
+        "builder": "builder/weak_enemy.json",
+        "name": "enemy",
+        "pos_x": 55.0,
+        "pos_y": -30.0,
+        "pos_z": 40.0
+      }
     ],
   "gimmick_list": [
     {

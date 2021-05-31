@@ -20,7 +20,6 @@ const char* state::ActionState::GetName(void) const {
 }
 
 void state::ActionState::Update(float delta_time) {
-
 }
 
 void state::ActionState::Enter(void) {

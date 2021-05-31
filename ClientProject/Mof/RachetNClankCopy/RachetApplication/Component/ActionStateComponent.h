@@ -4,6 +4,8 @@
 
 #include "UpdateComponent.h"
 
+#include <string_view>
+
 #include "My/Core/StateMachine.h"
 #include "../State/ActionState.h"
 
@@ -12,8 +14,11 @@ namespace my {
 class ActionStateComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+protected:
     //! 状態
     my::StateMachine _state_machine;
+    //! ステート,コンポーネント
+    std::unordered_map<std::string, std::string> _action_map;
     /// <summary>
     /// 登録
     /// </summary>
@@ -41,16 +46,17 @@ public:
     /// </summary>
     virtual ~ActionStateComponent();
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="param"></param>
-    virtual void SetParam(const rapidjson::Value& param) override;
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    bool IsEqual(std::string_view state) const;
     /// <summary>
     /// 初期化
     /// </summary>

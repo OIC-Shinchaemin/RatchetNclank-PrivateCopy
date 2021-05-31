@@ -159,7 +159,7 @@
     },
     {
       "name": "atk_jump_01",
-      "speed": 1.0,
+      "speed": 0.5,
       "loop": false,
       "same": false,
       "state": "PlayerMotionJumpAttackState"

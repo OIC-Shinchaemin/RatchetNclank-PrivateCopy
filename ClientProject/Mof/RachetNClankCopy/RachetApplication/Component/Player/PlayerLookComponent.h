@@ -4,10 +4,6 @@
 
 #include "PlayerActionComponent.h"
 
-#include <memory>
-
-#include "My/Core/Timer.h"
-
 
 namespace my {
 class PlayerLookComponent : public my::PlayerActionComponent {

@@ -13,21 +13,29 @@
       }
     },
     {
-      "type": "ShipIdleComponent",
+      "type": "ActionComponent",
       "paramater": {
-        "priority": 1
-      }
-    },
-    {
-      "type": "ShipTakeoffComponent",
-      "paramater": {
-        "priority": 1
-      }
-    },
-    {
-      "type": "ShipLandingComponent",
-      "paramater": {
-        "priority": 1
+        "priority": 3,
+        "children": [
+          {
+            "type": "ShipIdleComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "ShipTakeoffComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "ShipLandingComponent",
+            "paramater": {
+              "priority": 1
+            }
+          }
+        ]
       }
     },
     {

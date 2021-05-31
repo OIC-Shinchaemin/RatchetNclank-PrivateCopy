@@ -56,7 +56,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetOwner(const std::shared_ptr<my::Actor>& ptr);
+    virtual void SetOwner(const std::shared_ptr<my::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

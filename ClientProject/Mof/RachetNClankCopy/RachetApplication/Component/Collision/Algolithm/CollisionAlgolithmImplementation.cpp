@@ -19,3 +19,4 @@ std::string my::CollisionAlgolithmType::kEnemyBombGloveEffectCollisionAlgolithm 
 std::string my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm = "BlasterBulletEnemyCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm = "BombGloveBulletEnemyCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm = "ShipPlayerCollisionAlgolithm";
+std::string my::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm = "BoltPlayerCollisionAlgolithm";

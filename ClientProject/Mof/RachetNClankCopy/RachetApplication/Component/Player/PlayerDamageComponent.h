@@ -19,6 +19,16 @@ private:
     Mof::CVector3 _damage_angle;
     //! Hp
     std::weak_ptr<class HpComponent> _hp_com;
+    /// <summary>
+    /// 吹っ飛ぶ
+    /// </summary>
+    /// <param name=""></param>
+    void DamegeAccele(void);
+    /// <summary>
+    /// ダメージ
+    /// </summary>
+    /// <param name=""></param>
+    void Damege(void);
 public:
     /// <summary>
     /// コンストラクタ

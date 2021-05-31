@@ -28,7 +28,7 @@
       "type": "HpComponent",
       "paramater": {
         "priority": 0,
-        "hp_max": 2
+        "hp_max": 1
       }
     },
     {
@@ -53,37 +53,47 @@
       }
     },
 
+
     {
-      "type": "EnemyMoveComponent",
+      "type": "ActionComponent",
       "paramater": {
-        "priority": 90
-      }
-    },
-    {
-      "type": "EnemyGoHomeComponent",
-      "paramater": {
-        "priority": 90
+        "priority": 85,
+        "children": [
+          {
+            "type": "EnemyMoveComponent",
+            "paramater": {
+              "priority": 90
+            }
+          },
+          {
+            "type": "EnemyGoHomeComponent",
+            "paramater": {
+              "priority": 90
+            }
+          },
+
+          {
+            "type": "EnemyIdleComponent",
+            "paramater": {
+              "priority": 91
+            }
+          },
+          {
+            "type": "EnemyMeleeAttackComponent",
+            "paramater": {
+              "priority": 92
+            }
+          },
+          {
+            "type": "EnemyDamageComponent",
+            "paramater": {
+              "priority": 92
+            }
+          }
+        ]
       }
     },
 
-    {
-      "type": "EnemyIdleComponent",
-      "paramater": {
-        "priority": 91
-      }
-    },
-    {
-      "type": "EnemyMeleeAttackComponent",
-      "paramater": {
-        "priority": 92
-      }
-    },
-    {
-      "type": "EnemyDamageComponent",
-      "paramater": {
-        "priority": 92
-      }
-    },
     {
       "type": "MotionStateComponent",
       "paramater": {

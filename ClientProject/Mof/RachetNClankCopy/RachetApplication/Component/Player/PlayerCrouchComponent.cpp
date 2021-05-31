@@ -7,7 +7,7 @@
 
 my::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
     super(priority),
-    _transition_pairs(),
+    //_transition_pairs(),
     _angular_speed(),
     _ideal_angle(),
     _move_com() {
@@ -15,7 +15,7 @@ my::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
 
 my::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent& obj) :
     super(obj),
-    _transition_pairs(),
+    //_transition_pairs(),
     _angular_speed(0.4f),
     _ideal_angle(),
     _move_com() {
@@ -42,15 +42,17 @@ std::string_view my::PlayerCrouchComponent::GetStateType(void) const {
 
 bool my::PlayerCrouchComponent::Initialize(void) {
     super::Initialize();
-    _transition_pairs.reserve(2);
+    //_transition_pairs.reserve(2);
 
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
-
+    //_move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
+    /*
     using Type = state::PlayerActionStateType;
     _transition_pairs.push_back(Transition(Type::kPlayerActionIdleState,
                                            []() { return ::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN); }));
     _transition_pairs.push_back(Transition(Type::kPlayerActionThrowAttackSetState,
                                            []() { return ::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X); }));
+    */
     return true;
 }
 

@@ -54,73 +54,81 @@
     },
 
     {
-      "type": "EnemyMoveComponent",
+      "type": "ActionComponent",
       "paramater": {
-        "priority": 90
-      }
-    },
+        "priority": 85,
+        "children": [
+          {
+            "type": "EnemyMoveComponent",
+            "paramater": {
+              "priority": 90
+            }
+          },
 
-    {
-      "type": "EnemyIdleComponent",
-      "paramater": {
-        "priority": 91
-      }
-    },
-    {
-      "type": "EnemyRangedAttackComponent",
-      "paramater": {
-        "priority": 92
-      }
-    },
-    {
-      "type": "EnemyDamageComponent",
-      "paramater": {
-        "priority": 92
-      }
-    },
-    {
-      "type": "MotionStateComponent",
-      "paramater": {
-        "priority": 98
-      }
-    },
-    {
-      "type": "VelocityComponent",
-      "paramater": {
-        "priority": 99
-      }
-    },
-    {
-      "type": "TransformComponent",
-      "paramater": {
-        "priority": 100
-      }
-    },
-    {
-      "type": "AnimationMeshComponent",
-      "paramater": {
-        "priority": 0,
-        "path": "../Resource/mesh/skeleton/skeleton.mom",
-        "color": [
-          1.0,
-          1.0,
-          1.0,
-          1.0
+          {
+            "type": "EnemyIdleComponent",
+            "paramater": {
+              "priority": 91
+            }
+          },
+          {
+            "type": "EnemyRangedAttackComponent",
+            "paramater": {
+              "priority": 92
+            }
+          },
+          {
+            "type": "EnemyDamageComponent",
+            "paramater": {
+              "priority": 92
+            }
+          }
         ]
       }
     },
+          {
+            "type": "MotionStateComponent",
+            "paramater": {
+              "priority": 98
+            }
+          },
+          {
+            "type": "VelocityComponent",
+            "paramater": {
+              "priority": 99
+            }
+          },
+          {
+            "type": "TransformComponent",
+            "paramater": {
+              "priority": 100
+            }
+          },
+          {
+            "type": "AnimationMeshComponent",
+            "paramater": {
+              "priority": 0,
+              "path": "../Resource/mesh/skeleton/skeleton.mom",
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            }
+          },
 
-    {
-      "type": "EnemyCollisionComponent",
-      "paramater": {
-        "priority": 0
+          {
+            "type": "EnemyCollisionComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "SightCollisionComponent",
+            "paramater": {
+              "priority": 0
+            }
+          }
+        ]
       }
-    },
-    {
-      "type": "SightCollisionComponent",
-      "paramater": {
-        "priority": 0
-      }
-    }
-  ]
-}
