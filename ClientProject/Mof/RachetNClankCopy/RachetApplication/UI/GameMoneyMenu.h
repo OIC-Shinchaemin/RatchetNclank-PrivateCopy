@@ -11,6 +11,7 @@
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "../Game/GameSystem/GameMoney.h"
+#include "My/Core/Timer.h"
 
 
 namespace my {
@@ -19,6 +20,12 @@ class GameMoneyMenu : public my::UIPanel, public my::Observer<int> {
 private:
     //! お金
     int _money;
+    //! 表示
+    bool _show;
+    //! 時間
+    float _time_max;
+    //! 非表示タイマー
+    my::Timer _hide_timer;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
@@ -50,6 +57,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Update(float delta_time);
     /// <summary>
     /// 描画
     /// </summary>

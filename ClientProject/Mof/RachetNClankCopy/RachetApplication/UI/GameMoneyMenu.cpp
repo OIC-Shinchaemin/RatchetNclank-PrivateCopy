@@ -4,12 +4,17 @@
 my::GameMoneyMenu::GameMoneyMenu(const char* name) :
     super(name),
     _money(),
+    _show(true),
+    _time_max(5.0f),
+    _hide_timer(),
     _resource(),
     _ui_canvas() {
 }
 
 void my::GameMoneyMenu::OnNotify(int money) {
     this->_money = money;
+    this->_show = true;
+    this->_hide_timer.Initialize(_time_max, false);
 }
 
 void my::GameMoneyMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -29,7 +34,20 @@ bool my::GameMoneyMenu::Initialize(void) {
     return true;
 }
 
+bool my::GameMoneyMenu::Update(float delta_time) {
+    super::Update(delta_time);
+
+    if (_hide_timer.Tick(delta_time)) {
+        _show = false;
+    } // if
+    return true;
+}
+
 bool my::GameMoneyMenu::Render(void) {
+    if (!this->_show) {
+        return false;
+    } // if
+    
     if (auto tex = super::_texture.lock()) {
         auto pos = super::_position;
         tex->Render(pos.x, pos.y);
