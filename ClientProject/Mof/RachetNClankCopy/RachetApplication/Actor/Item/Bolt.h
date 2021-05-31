@@ -4,6 +4,8 @@
 
 #include "../../Actor.h"
 
+#include "My/Core/Observable.h"
+
 
 namespace my {
 class Bolt : public my::Actor {
@@ -20,6 +22,8 @@ private:
     Mof::CVector3 _init_speed;
     //! 回転
     Mof::CVector3 _init_angle;
+    //! 通知用
+    my::Observable<int> _money_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,6 +33,17 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Bolt();
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<int>* GetMoneySubject(void);
+    /// <summary>
+    /// デリート
+    /// </summary>
+    /// <param name=""></param>
+    virtual void End(void) override;
     /// <summary>
     /// 初期化
     /// </summary>

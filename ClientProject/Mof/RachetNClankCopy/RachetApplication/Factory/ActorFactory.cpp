@@ -8,8 +8,9 @@
 
 my::ActorFactory::ActorFactory(my::BuilderFactory* builder_factory) :
     _builder_factory(builder_factory),
-    _builders() ,
-    _mechanical_factory(){
+    _builders(),
+    _mechanical_factory(),
+    _game() {
     _mechanical_factory.Register<my::BombGlove>("BombGlove");
     _mechanical_factory.Register<my::Pyrocitor>("Pyrocitor");
     _mechanical_factory.Register<my::Blaster>("Blaster");
@@ -17,6 +18,10 @@ my::ActorFactory::ActorFactory(my::BuilderFactory* builder_factory) :
 
 my::ActorFactory::~ActorFactory() {
     this->Release();
+}
+
+void my::ActorFactory::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
+    this->_game = ptr;
 }
 
 std::shared_ptr<my::IBuilder> my::ActorFactory::GetBuilder(const std::string& key) {
@@ -40,7 +45,7 @@ std::shared_ptr<my::Mechanical> my::ActorFactory::CreateMechanicalWeapon(const c
         auto builder = _builder_factory->Create(builder_key.c_str());
         this->AddBuilder(builder_key, builder);
     } // if
-    
+
     auto ptr = _mechanical_factory.Create(type);
     ptr->Construct(_builders.at(builder_key));
     ptr->Initialize(param);

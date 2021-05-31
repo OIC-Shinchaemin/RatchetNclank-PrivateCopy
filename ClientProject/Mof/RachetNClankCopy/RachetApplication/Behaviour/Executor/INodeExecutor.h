@@ -51,12 +51,14 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void Reset(void) = 0;
+#ifdef _DEBUG
     /// <summary>
     /// デバッグ
     /// </summary>
     /// <typeparam name="Actor"></typeparam>
     virtual void DebugRender(Mof::CVector2 position) = 0;
     virtual void DebugRender(void) = 0;
+#endif // _DEBUG
 };
 }
 #endif // !BEHAVIOUR_INODE_EXECUTOR_H

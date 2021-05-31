@@ -228,8 +228,10 @@ bool my::GameScene::Initialize(void) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         auto help_desk = game->GetHelpDesk();
+        auto game_money= game->GetGameMoney();
         // game system
 
+        game_money->Initialize();
         help_desk->Initialize();
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
