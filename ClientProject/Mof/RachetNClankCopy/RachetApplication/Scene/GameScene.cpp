@@ -25,12 +25,6 @@ void my::GameScene::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
     _physic_world.RemoveActor(ptr);
-
-    if (ptr->GetTag() == "Enemy") {
-        if (auto game = _game.lock()) {
-            game->GetGameMoney()->OnNotify(10);
-        } // if
-    } // if
 }
 
 void my::GameScene::ReInitialize(void) {

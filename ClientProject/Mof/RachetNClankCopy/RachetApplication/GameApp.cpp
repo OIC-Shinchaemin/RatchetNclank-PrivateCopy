@@ -21,6 +21,7 @@ MofBool CGameApp::Initialize(void) {
     _scene_manager = ut::MakeSharedWithRelease<my::SceneManager>();
 
     my::FactoryManager::Singleton().SetResourceManager(_resource_manager);
+    my::FactoryManager::Singleton().SetGameManager(_game_manager);
     my::Component::SetResourceManager(_resource_manager);
     my::Component::SetUICanvas(_ui_canvas);
     my::CameraController::SetCameraManager(_camera_manager);

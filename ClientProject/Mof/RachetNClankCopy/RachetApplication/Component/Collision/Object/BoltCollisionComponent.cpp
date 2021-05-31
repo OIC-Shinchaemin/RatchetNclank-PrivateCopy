@@ -89,11 +89,10 @@ void my::BoltCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += _height - info.d;
                 super::GetOwner()->SetPosition(pos);
-
                 
-                if (_state_com.lock()->CanTransition(state::BoltActionType::kDefault)) {
+                //if (_state_com.lock()->CanTransition(state::BoltActionType::kDefault)) {
                     _state_com.lock()->ChangeState(state::BoltActionType::kDefault);
-                } // if
+                //} // if
             } // if
         } // if
         geometry->SetMatrix(default_matrix);

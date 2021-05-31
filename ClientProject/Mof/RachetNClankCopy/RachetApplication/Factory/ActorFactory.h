@@ -7,11 +7,13 @@
 #include <map>
 
 #include "My/Core/Define.h"
+#include "../Game/GameManager.h"
 #include "../Actor.h"
 #include "Builder/IBuilder.h"
 #include "BuilderFactory.h"
 #include "Factory.h"
 #include "../Actor/Weapon/Mechanical.h"
+#include "../Actor/Item/Bolt.h"
 
 
 namespace my {
@@ -23,6 +25,8 @@ private:
     std::map<std::string, std::shared_ptr<my::IBuilder>> _builders;
     //! Mechanical
     my::Factory<my::Mechanical> _mechanical_factory;
+    //! ゲーム
+    std::weak_ptr<my::GameManager> _game;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,6 +37,11 @@ public:
     /// デストラクタ
     /// </summary>
     ~ActorFactory();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetGameManager(std::weak_ptr<my::GameManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -66,6 +75,14 @@ public:
         } // if
 
         auto ptr = ut::MakeSharedWithRelease<T>();
+        
+        if constexpr (std::is_same<T, my::Bolt>::value) {
+            if (auto game = _game.lock()) {
+                ptr->GetMoneySubject()->AddObserver(game->GetGameMoney());
+            } // if
+        } // if
+
+
         ptr->Construct(_builders.at(builder_key));
         ptr->Initialize(param);
         return ptr;

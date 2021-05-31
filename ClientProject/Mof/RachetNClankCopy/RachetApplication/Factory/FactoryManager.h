@@ -12,6 +12,7 @@
 #include "BehaviourExecutorFactory.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "../Game/GameManager.h"
 
 
 namespace my {
@@ -29,6 +30,8 @@ private:
     my::BehaviourExecutorFactory _behaviour_executor;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! ゲーム
+    std::weak_ptr<my::GameManager> _game;
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -49,6 +52,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetGameManager(std::weak_ptr<my::GameManager> ptr);
     /// <summary>
     /// 作成
     /// </summary>

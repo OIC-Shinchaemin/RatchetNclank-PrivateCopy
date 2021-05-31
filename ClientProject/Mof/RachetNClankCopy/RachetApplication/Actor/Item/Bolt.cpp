@@ -4,10 +4,20 @@
 
 
 my::Bolt::Bolt() :
-    super() {
+    super(),
+    _money_subject(){
 }
 
 my::Bolt::~Bolt() {
+}
+
+my::Observable<int>* my::Bolt::GetMoneySubject(void) {
+    return &this->_money_subject;
+}
+
+void my::Bolt::End(void) {
+    _money_subject.Notify(1);
+    super::End();
 }
 
 bool my::Bolt::Initialize(my::Actor::Param* param) {

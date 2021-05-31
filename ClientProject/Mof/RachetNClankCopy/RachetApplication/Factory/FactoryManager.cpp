@@ -7,7 +7,8 @@ my::FactoryManager::FactoryManager() :
     _actor(&_builder),
     _behaviour_node(),
     _behaviour_executor(&_behaviour_node),
-    _resource() {
+    _resource(),
+    _game() {
 }
 
 my::FactoryManager::~FactoryManager() {
@@ -21,6 +22,11 @@ my::FactoryManager& my::FactoryManager::Singleton(void) {
 void my::FactoryManager::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource = ptr;
     _builder.SetResourceManager(_resource);
+}
+
+void my::FactoryManager::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
+    this->_game = ptr;
+    _actor.SetGameManager(_game);
 }
 
 std::shared_ptr<my::Component> my::FactoryManager::CreateComponent(const char* name, const rapidjson::Value& param) const {

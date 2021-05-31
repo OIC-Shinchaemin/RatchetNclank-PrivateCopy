@@ -6,7 +6,6 @@
 
 my::GameMoney::GameMoney() :
     _value(),
-    _position(),
     _subject(),
     _resource(),
     _ui_canvas() {
@@ -48,6 +47,7 @@ bool my::GameMoney::Initialize(void) {
     _subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(_resource);
+    menu->Initialize();
     if (auto canvas = _ui_canvas.lock()) {
         canvas->AddElement(menu);
     } // if

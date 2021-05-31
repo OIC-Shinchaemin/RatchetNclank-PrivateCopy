@@ -19,8 +19,6 @@ class GameMoney : public std::enable_shared_from_this<my::GameMoney>, public my:
 private:
     //! お金
     std::uint32_t _value;
-    //! 位置
-    Mof::CVector2 _position;
     //! 通知用
     my::Observable<int> _subject;
     //! リソース

@@ -45,6 +45,12 @@ public:
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
+    /// ‰Šú‰»
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Initialize(void) override;
+    /// <summary>
     /// •`‰æ
     /// </summary>
     /// <param name=""></param>

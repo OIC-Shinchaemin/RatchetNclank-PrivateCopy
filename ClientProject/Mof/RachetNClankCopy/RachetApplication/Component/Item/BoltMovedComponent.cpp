@@ -41,7 +41,7 @@ bool my::BoltMovedComponent::Update(float delta_time) {
 
     _speed *= _decrase;
     _angle *= _decrase;
-    if (_speed.Length() < 0.1f || _angle.Length() < 0.1f) {
+    if (_speed.Length() < 0.2f || _angle.Length() < 0.2) {
         super::ChangeAction(state::BoltActionType::kDefault);
     } // if
     return true;
