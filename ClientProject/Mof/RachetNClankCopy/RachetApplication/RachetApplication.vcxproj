@@ -428,6 +428,7 @@
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\HelpDeskMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
+    <ClCompile Include="UI\MoneyMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -727,6 +728,7 @@
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
     <ClInclude Include="UI\HelpDeskMenu.h" />
     <ClInclude Include="UI\LockOnCursorMenu.h" />
+    <ClInclude Include="UI\MoneyMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
   </ItemGroup>
