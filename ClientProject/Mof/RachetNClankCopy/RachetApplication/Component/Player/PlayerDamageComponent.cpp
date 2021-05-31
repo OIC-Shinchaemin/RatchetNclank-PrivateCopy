@@ -5,6 +5,27 @@
 #include "../Collision/Object/PlayerCollisionComponent.h"
 
 
+void my::PlayerDamageComponent::DamegeAccele(void) {
+    auto velocity_com = super::GetVelocityComponent();
+    auto accele = Mof::CVector3(0.0f, 0.0f, -_damage_speed);
+    accele.RotateAround(math::vec3::kZero, _damage_angle);
+    velocity_com->SetVelocity(math::vec3::kZero);
+    velocity_com->AddVelocityForce(accele);
+}
+
+void my::PlayerDamageComponent::Damege(void) {
+    if (auto hp_com = _hp_com.lock()) {
+        hp_com->Damage(_damage_value);
+        if (hp_com->GetHp() == 0) {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDeadState);
+        } // if
+        else {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
+        } // else
+        _damage_value = 0;
+    } // if
+}
+
 my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
     super(priority),
     _damage_value(),
@@ -44,7 +65,8 @@ bool my::PlayerDamageComponent::Initialize(void) {
             this->_damage_value = 1;
             this->_damage_speed = in.speed;
             this->_damage_angle = in.angle;
-            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
+            this->DamegeAccele();
+            this->Damege();
         } // if
         return true;
     }));
@@ -55,7 +77,9 @@ bool my::PlayerDamageComponent::Initialize(void) {
             this->_damage_value = 1;
             this->_damage_speed = in.speed;
             this->_damage_angle = in.angle;
-            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
+            this->DamegeAccele();
+            this->Damege();
+            //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
         } // if
         return true;
     }));
@@ -85,19 +109,5 @@ bool my::PlayerDamageComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionDamageState);
-
-    auto velocity_com = super::GetVelocityComponent();
-    auto accele = Mof::CVector3(0.0f, 0.0f, -_damage_speed);
-    accele.RotateAround(math::vec3::kZero, _damage_angle);
-    velocity_com->SetVelocity(math::vec3::kZero);
-    velocity_com->AddVelocityForce(accele);
-
-    if (auto hp_com = _hp_com.lock()) {
-        hp_com->Damage(_damage_value);
-        if (hp_com->GetHp() == 0) {
-            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDeadState);
-        } // if
-        _damage_value = 0;
-    } // if
     return true;
 }

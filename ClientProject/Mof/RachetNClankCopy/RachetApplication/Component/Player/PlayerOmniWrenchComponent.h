@@ -62,12 +62,6 @@ public:
     /// <returns></returns>
     virtual bool Initialize(void) override;
     /// <summary>
-    /// XV
-    /// </summary>
-    /// <param name="delta_time"></param>
-    /// <returns></returns>
-    virtual bool Update(float delta_time) override;
-    /// <summary>
     /// ‰ğ•ú
     /// </summary>
     /// <param name=""></param>

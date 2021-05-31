@@ -7,7 +7,6 @@
 #include "../SightRecognitionComponent.h"
 #include "../Collision/Object/EnemyCollisionComponent.h"
 #include "../Collision/Object/SightCollisionComponent.h"
-#include "../Collision/Object/EnemyAttackCollisionComponent.h"
 
 
 my::EnemyComponent::EnemyComponent(int priority) :

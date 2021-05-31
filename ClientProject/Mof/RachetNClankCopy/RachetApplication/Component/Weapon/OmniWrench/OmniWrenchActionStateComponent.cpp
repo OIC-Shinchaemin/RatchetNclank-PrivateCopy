@@ -2,20 +2,14 @@
 
 
 my::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(int priority) :
-    super(priority),
-    _state_machine() {
+    super(priority) {
 }
 
 my::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(const OmniWrenchActionStateComponent& obj) :
-    super(obj),
-    _state_machine(obj._state_machine) {
+    super(obj) {
 }
 
 my::OmniWrenchActionStateComponent::~OmniWrenchActionStateComponent() {
-}
-
-void my::OmniWrenchActionStateComponent::SetParam(const rapidjson::Value& param) {
-    super::SetParam(param);
 }
 
 std::string my::OmniWrenchActionStateComponent::GetType(void) const {
@@ -24,38 +18,13 @@ std::string my::OmniWrenchActionStateComponent::GetType(void) const {
 
 bool my::OmniWrenchActionStateComponent::Initialize(void) {
     super::Initialize();
-    super::Activate();
-    
-    std::vector<std::weak_ptr<my::ActionComponent>> work;
-    super::GetOwner()->GetComponents<my::ActionComponent>(work);
-    for (auto weak : work) {
-        if (auto com = weak.lock()) {
-            this->RegisterState(_state_machine, com);
-        } // if
-    } // for
     using Type = state::OmniWrenchActionStateType;
-
-    _state_machine.ChangeState(Type::kOmniWrenchActionDefaultState);
-    return true;
-}
-
-bool my::OmniWrenchActionStateComponent::Update(float delta_time) {
-    _state_machine.Update(delta_time);
-    return false;
-}
-
-bool my::OmniWrenchActionStateComponent::Release(void) {
-    super::Release();
-    _state_machine.Release();
+    super::ChangeState(Type::kOmniWrenchActionDefaultState);
     return true;
 }
 
 std::shared_ptr<my::Component> my::OmniWrenchActionStateComponent::Clone(void) {
     return std::make_shared<my::OmniWrenchActionStateComponent>(*this);
-}
-
-void my::OmniWrenchActionStateComponent::ChangeState(const std::string& name) {
-    _state_machine.ChangeState(name);
 }
 
 bool my::OmniWrenchActionStateComponent::CanTransition(const std::string& next) {
@@ -74,3 +43,11 @@ bool my::OmniWrenchActionStateComponent::CanTransition(const std::string& next) 
     } // if
     return false;
 }
+
+#ifdef _DEBUG
+bool my::OmniWrenchActionStateComponent::DebugRender(void) {
+    ::CGraphicsUtilities::RenderString(
+        20.0f, 400.0f, "omniwrench state = %s", this->_state_machine.GetCurrentStateName());
+    return true;
+}
+#endif // _DEBUG

@@ -47,7 +47,7 @@ void my::PlayerCartwheelJumpComponent::SetMoveAngle(float radian) {
 
 bool my::PlayerCartwheelJumpComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 

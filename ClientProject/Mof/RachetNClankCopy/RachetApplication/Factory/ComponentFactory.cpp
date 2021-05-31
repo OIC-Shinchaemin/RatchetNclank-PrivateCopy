@@ -4,6 +4,7 @@
 
 #include "../Component/AIStateComponent.h"
 #include "../Component/SightRecognitionComponent.h"
+#include "../Component/ActionComponent.h"
 #include "../Component/MotionComponent.h"
 #include "../Component/HpComponent.h"
 #include "../Component/InvincibleComponent.h"
@@ -31,6 +32,7 @@ my::ComponentFactory::ComponentFactory() :
     _component_creators() {
     my::ComponentFactory::AddComponentCreator<my::AIStateComponent>();
     my::ComponentFactory::AddComponentCreator<my::SightRecognitionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::ActionComponent>();
     my::ComponentFactory::AddComponentCreator<my::MotionComponent>();
     my::ComponentFactory::AddComponentCreator<my::HpComponent>();
     my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();

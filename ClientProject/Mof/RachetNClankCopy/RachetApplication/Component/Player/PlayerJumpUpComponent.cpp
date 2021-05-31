@@ -42,7 +42,7 @@ void my::PlayerJumpUpComponent::SetJumpSpeed(float speed) {
 
 bool my::PlayerJumpUpComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 

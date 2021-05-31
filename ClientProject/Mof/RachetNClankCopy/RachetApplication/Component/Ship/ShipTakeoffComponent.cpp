@@ -29,7 +29,6 @@ bool my::ShipTakeoffComponent::Update(float delta_time) {
         _takeoff = true;
     } // if
     if (_takeoff) {
-        puts("_takeoff");
         auto pos = super::GetOwner()->GetPosition();
         pos.y += 0.1f;
         super::GetOwner()->SetPosition(pos);

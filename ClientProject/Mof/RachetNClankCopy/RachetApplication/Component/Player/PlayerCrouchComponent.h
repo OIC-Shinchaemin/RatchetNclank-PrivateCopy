@@ -22,7 +22,7 @@ private:
         }
     };
     //! ‘JˆÚ
-    std::vector<Transition> _transition_pairs;
+    //std::vector<Transition> _transition_pairs;
     //! ‰ñ“]‘¬“x
     float _angular_speed;
     //! ƒ‰ƒWƒAƒ“

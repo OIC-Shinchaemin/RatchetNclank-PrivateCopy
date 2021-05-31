@@ -29,7 +29,8 @@ void my::ShipEvent::OnNotify(const char* type, const std::shared_ptr<StageObject
         param.name = "ship";
         auto ship = my::FactoryManager::Singleton().CreateActor<my::Ship>("../Resource/builder/ship.json", &param);
         auto com = my::EventReferenceTable::Singleton().Get<std::shared_ptr<my::CameraComponent>>("CameraComponent");
-        ship->GetComponent<my::ShipLandingComponent>()->AddObserver(com);
+        //ship->GetComponent<my::ShipLandingComponent>()->AddObserver(com);
+        ship->GetComponent<my::ActionComponent>()->GetComponent<my::ShipLandingComponent>()->AddObserver(com);
         
 
         //! ゲームイベント

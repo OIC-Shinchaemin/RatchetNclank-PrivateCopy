@@ -2,16 +2,17 @@
 #define MY_ENEMY_STATE_COMPONENT_H
 
 
-#include "../UpdateComponent.h"
-
+#include "../ActionStateComponent.h"
+/*
 #include "My/Core/StateMachine.h"
 #include "My/Core/Timer.h"
 #include "../../State/ActionState.h"
-
+*/
 
 namespace my {
-class EnemyStateComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+class EnemyStateComponent : public my::ActionStateComponent {
+    using super = my::ActionStateComponent;
+/*
 private:
     //! 状態
     my::StateMachine _state_machine;
@@ -38,6 +39,7 @@ private:
         ptr->SetActionComponent(com);
         out.RegisterState(ptr);
     }
+*/
 public:
     /// <summary>
     /// コンストラクタ
@@ -57,7 +59,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="param"></param>
-    virtual void SetParam(const rapidjson::Value& param) override;
+    //virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -69,7 +71,7 @@ public:
     /// </summary>
     /// <param name="state"></param>
     /// <returns></returns>
-    bool IsEqual(std::string_view state) const;
+    //bool IsEqual(std::string_view state) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -81,13 +83,13 @@ public:
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time) override;
+    //virtual bool Update(float delta_time) override;
     /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Release(void) override;
+    //virtual bool Release(void) override;
     /// <summary>
     /// 複製
     /// </summary>
@@ -98,7 +100,7 @@ public:
     /// 変更
     /// </summary>
     /// <param name="name"></param>
-    void ChangeState(const std::string& name);
+    //void ChangeState(const std::string& name);
     /// <summary>
     /// 判定
     /// </summary>

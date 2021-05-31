@@ -57,9 +57,9 @@ public:
         if (auto actor = super::_actor.lock()) {
             _node_args.enemy_com = actor->GetComponent<my::EnemyComponent>();
             _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
-            _node_args.move_com = actor->GetComponent<my::EnemyMoveComponent>();
-            _node_args.melee_attack_com= actor->GetComponent<my::EnemyMeleeAttackComponent>();
-            _node_args.ranged_attack_com = actor->GetComponent<my::EnemyRangedAttackComponent>();
+            _node_args.move_com = actor->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyMoveComponent>();
+            _node_args.melee_attack_com= actor->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyMeleeAttackComponent>();
+            _node_args.ranged_attack_com = actor->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyRangedAttackComponent>();
         } // if
     }
     /// <summary>

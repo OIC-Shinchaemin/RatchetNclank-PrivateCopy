@@ -59,7 +59,7 @@ public:
             _node_args.enemy_com = actor->GetComponent<my::EnemyComponent>();
             _node_args.motion_com = actor->GetComponent<my::MotionComponent>();
             _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
-            _node_args.attack_com = actor->GetComponent<my::EnemyRangedAttackComponent>();
+            _node_args.attack_com = actor->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyRangedAttackComponent>();
         } // if
     }
     /// <summary>

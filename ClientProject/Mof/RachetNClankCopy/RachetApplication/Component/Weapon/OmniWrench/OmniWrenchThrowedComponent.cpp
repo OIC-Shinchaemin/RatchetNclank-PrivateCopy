@@ -5,15 +5,9 @@
 #include "../../Collision/Object/OmniWrenchCollisionComponent.h"
 
 
-void my::OmniWrenchThrowedComponent::ChageState(const std::string& name) {
-    if (auto state_com = _action_state_com.lock()) {
-        state_com->ChangeState(name);
-    } // if
-}
-
 my::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(int priority) :
     super(priority),
-    _move_speed(39.0f),
+    _move_speed(25.0f),
     _moved_distance(0.0f),
     _moved_distance_threshold(800.0f),
     _ideal_move_direction(),

@@ -29,7 +29,7 @@ std::string_view my::PlayerShotAttackComponent::GetStateType(void) const {
 
 bool my::PlayerShotAttackComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 

@@ -45,7 +45,7 @@ public:
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
             _node_args.enemy_com = actor->GetComponent<my::EnemyComponent>();
-            _node_args.ranged_attack_com = actor->GetComponent<my::EnemyRangedAttackComponent>();
+            _node_args.ranged_attack_com = actor->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyRangedAttackComponent>();
         } // if
     }
     /// <summary>

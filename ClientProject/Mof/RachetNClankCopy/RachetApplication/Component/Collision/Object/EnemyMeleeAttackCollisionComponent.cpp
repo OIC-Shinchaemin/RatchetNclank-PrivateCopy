@@ -62,7 +62,7 @@ std::optional<my::SightObject> my::EnemyMeleeAttackCollisionComponent::GetSightO
 bool my::EnemyMeleeAttackCollisionComponent::Initialize(void) {
     super::Initialize();
     this->Inactivate();
-    _attack_com = super::GetOwner()->GetComponent<my::EnemyMeleeAttackComponent>();
+    _attack_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyMeleeAttackComponent>();
     return true;
 }
 

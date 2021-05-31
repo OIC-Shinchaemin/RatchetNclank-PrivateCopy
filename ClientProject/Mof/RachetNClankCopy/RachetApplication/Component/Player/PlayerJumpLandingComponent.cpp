@@ -26,7 +26,7 @@ std::string_view my::PlayerJumpLandingComponent::GetStateType(void) const {
 
 bool my::PlayerJumpLandingComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
     return true;
 }
 
