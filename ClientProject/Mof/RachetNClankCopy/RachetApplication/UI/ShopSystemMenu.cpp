@@ -45,9 +45,15 @@ bool my::ShopSystemMenu::Render(void) {
     auto pos = super::_position;
     rect.Translation(pos);
     ::CGraphicsUtilities::RenderFillRect(rect, def::color_rgba_u32::kRed);
-    pos.y += 10.0f;
-    ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・△で閉じる　Lキー・○✕で買う");
-    pos.y += 10.0f;
+    pos.y += 20.0f;
+
+    if (_infomation.select) {
+        ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・△で戻る　Lキー・○✕で買う");
+    } // if
+    else {
+        ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・△で閉じる　Lキー・○✕で買う");
+    } // else
+    pos.y += 20.0f;
     ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Shop index = %d  count = %d select = %d",
                                        _infomation.index, _infomation.count, _infomation.select);
 

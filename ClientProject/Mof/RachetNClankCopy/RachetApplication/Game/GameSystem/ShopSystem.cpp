@@ -86,45 +86,57 @@ bool my::ShopSystem::Update(float delta_time) {
         _info_subject.Notify(_infomation);
         return false;
     } // if
+
     if (::g_pInput->IsKeyPush(MOFKEY_M)) {
-        if (_infomation.enable) {
-            _infomation.enable = false;
-            _info_subject.Notify(_infomation);
+        if (!_infomation.select) {
+            if (_infomation.enable) {
+                _infomation.enable = false;
+                _info_subject.Notify(_infomation);
+            } // if
         } // if
     } // if
+    
+    if (_infomation.enable) {
+        if (_infomation.select) {
+            if (::g_pInput->IsKeyPush(MOFKEY_Z)) {
+                this->Buy();
+            } // if
+            else if (::g_pInput->IsKeyPush(MOFKEY_M)) {
+                _infomation.select = false;
+                _infomation.count = 0;
+                _info_subject.Notify(_infomation);
+            } // else if
+            else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+                _infomation.count++;
+                
+                _info_subject.Notify(_infomation);
+            } // else if
+            else if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+                _infomation.count--;
+                if (_infomation.count < 0) {
+                    _infomation.count = 0;
+                } // if
 
+                _info_subject.Notify(_infomation);
+            } // else if
 
-    /*
-    if (_infomation.select) {
-        if (::g_pInput->IsKeyPush(MOFKEY_P)) {
-            this->Buy();
         } // if
-        else if (::g_pInput->IsKeyPush(MOFKEY_O)) {
-            _infomation.select = false;
-            _infomation.count = 0;
-            _info_subject.Notify(_infomation);
-        } // else if
-        else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
-            _infomation.count++;
-            _info_subject.Notify(_infomation);
-        } // else if
-        else if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
-            _infomation.count--;
-            _info_subject.Notify(_infomation);
-        } // else if
+        else {
+            if (::g_pInput->IsKeyPush(MOFKEY_Z)) {
+                _infomation.select = true;
+                _info_subject.Notify(_infomation);
+            } // if
+            else if (::g_pInput->IsKeyPush(MOFKEY_RIGHT)) {
+                _infomation.index++;
+                _info_subject.Notify(_infomation);
+            } // else if
+            else if (::g_pInput->IsKeyPush(MOFKEY_LEFT)) {
+                _infomation.index--;
 
+                _info_subject.Notify(_infomation);
+            } // else if
+        } // else
     } // if
-    else {
-        if (::g_pInput->IsKeyPush(MOFKEY_RIGHT)) {
-            _infomation.index++;
-            _info_subject.Notify(_infomation);
-        } // if
-        else if (::g_pInput->IsKeyPush(MOFKEY_LEFT)) {
-            _infomation.index--;
-            _info_subject.Notify(_infomation);
-        } // else if
-    } // else
-    */
     return true;
 }
 
