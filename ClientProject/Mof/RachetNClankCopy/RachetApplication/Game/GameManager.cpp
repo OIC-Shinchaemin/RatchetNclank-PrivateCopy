@@ -5,6 +5,8 @@
 
 
 my::GameManager::GameManager() :
+    _update_system(),
+    _disable_systems(),
     _weapon_system(std::make_shared<my::WeaponSystem>()),
     _quick_change(std::make_shared<my::QuickChangeSystem>()),
     _help_desk(std::make_shared<my::HelpDesk>()),
@@ -16,6 +18,10 @@ my::GameManager::GameManager() :
 }
 
 my::GameManager::~GameManager() {
+}
+
+void my::GameManager::OnNotify(const std::shared_ptr<my::ShopSystem>& ptr) {
+    _update_system.push_back(ptr);
 }
 
 void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
@@ -65,18 +71,32 @@ bool my::GameManager::Initialize(void) {
     _game_money->SetUICanvas(_ui_canvas);
     _shop_system->SetResourceManager(_resource);
     _shop_system->SetUICanvas(_ui_canvas);
+    
+    _shop_system->GetSubject()->AddObserver(shared_from_this());
     return true;
 }
 
 bool my::GameManager::Update(void) {
+    /*
+    for (auto ptr : _update_system) {
+        if (!ptr->Update(def::kDeltaTime)) {
+            _disable_systems.push_back(ptr);
+        } // if
+    } // for
+    
+    for (auto ptr : _disable_systems) {
+        ut::SwapPopback(_update_system, ptr);
+    } // for
+
     _quick_change->Update();
-    _shop_system->Update(def::kDeltaTime);
+    */
     return true;
 }
 
 bool my::GameManager::Release(void) {
     _shop_system->GetChargeInfoSubject()->RemoveObserver(_weapon_system);
-
+    _update_system.clear();
+    _disable_systems.clear();
     _weapon_system.reset();
     _quick_change.reset();
     _help_desk.reset();
@@ -87,6 +107,21 @@ bool my::GameManager::Release(void) {
     return true;
 }
 
+void my::GameManager::GameSystemUpdate(float delta_time) {
+    for (auto ptr : _update_system) {
+        if (!ptr->Update(delta_time)) {
+            _disable_systems.push_back(ptr);
+        } // if
+    } // for
+
+    for (auto ptr : _disable_systems) {
+        ut::EraseRemove(_update_system, ptr);
+    } // for
+    _disable_systems.clear();
+
+    _quick_change->Update();
+}
+
 void my::GameManager::GameSystemRelease(void) {
    //! save
     std::vector<std::string> weapon;
@@ -94,9 +129,12 @@ void my::GameManager::GameSystemRelease(void) {
 
     auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
     my::SaveSystem().Save(save_param);
+    _update_system.clear();
+    _disable_systems.clear();
     _quick_change->Release();
     _weapon_system->Release();
     _help_desk->Release();
     _game_money->Release();
     _shop_system->Release();
+    _shop_system->GetSubject()->RemoveObserver(shared_from_this());
 }

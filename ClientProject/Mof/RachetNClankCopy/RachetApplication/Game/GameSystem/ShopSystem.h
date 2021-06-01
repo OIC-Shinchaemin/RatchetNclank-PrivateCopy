@@ -38,7 +38,7 @@ public:
             enable(flag),
             index(0),
             select(false),
-            count(0){
+            count(0) {
         }
     };
     struct Item {
@@ -57,7 +57,9 @@ private:
     //! 構成情報
     my::ShopSystem::Info _infomation;
     //! 通知用
-    my::Observable<const my::ShopSystem::Info&> _subject;
+    my::Observable<const std::shared_ptr<my::ShopSystem>&> _subject;
+    //! 通知用
+    my::Observable<const my::ShopSystem::Info&> _info_subject;
     //! 通知用
     my::Observable<const my::ChargeInfo&> _buy_subject;
     //! セーブデータ
@@ -103,7 +105,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    my::Observable<const std::shared_ptr<my::ShopSystem>&>* GetSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     my::Observable<const my::ChargeInfo&>* GetChargeInfoSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsEnable(void) const;
     /// <summary>
     /// 読み込み
     /// </summary>

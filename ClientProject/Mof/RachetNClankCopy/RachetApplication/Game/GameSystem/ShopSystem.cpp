@@ -5,7 +5,7 @@
 
 void my::ShopSystem::Buy(void) {
     //auto current = _items.at(_infomation.index);
-    
+
     auto charge_info = my::ChargeInfo();
     charge_info.size = _infomation.count;
     //charge_info.type = current.name;
@@ -15,12 +15,13 @@ void my::ShopSystem::Buy(void) {
 
     _infomation.count = 0;
     _infomation.select = false;
-    _subject.Notify(_infomation);
+    _info_subject.Notify(_infomation);
 }
 
 my::ShopSystem::ShopSystem() :
     _infomation(),
     _subject(),
+    _info_subject(),
     _resource(),
     _ui_canvas() {
 }
@@ -30,7 +31,8 @@ my::ShopSystem::~ShopSystem() {
 
 void my::ShopSystem::OnNotify(bool flag) {
     _infomation.enable = flag;
-    _subject.Notify(_infomation);
+    _info_subject.Notify(_infomation);
+    _subject.Notify(shared_from_this());
 }
 
 void my::ShopSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -41,8 +43,16 @@ void my::ShopSystem::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
+my::Observable<const std::shared_ptr<my::ShopSystem>&>* my::ShopSystem::GetSubject(void) {
+    return &this->_subject;
+}
+
 my::Observable<const my::ChargeInfo&>* my::ShopSystem::GetChargeInfoSubject(void) {
     return &this->_buy_subject;
+}
+
+bool my::ShopSystem::IsEnable(void) const {
+    return this->_infomation.enable;
 }
 
 bool my::ShopSystem::Load(my::SaveData& in) {
@@ -61,7 +71,7 @@ bool my::ShopSystem::Initialize(void) {
         canvas->RemoveElement("ShopSystemMenu");
     } // if
     auto menu = std::make_shared< my::ShopSystemMenu>("ShopSystemMenu");
-    _subject.AddObserver(menu);
+    _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(_resource);
     menu->Initialize();
@@ -72,13 +82,19 @@ bool my::ShopSystem::Initialize(void) {
 }
 
 bool my::ShopSystem::Update(float delta_time) {
-    //std::cout << "update start" << "\n";
-
-    if (::g_pInput->IsKeyPush(MOFKEY_L)) {
-        _infomation.select = true;
-        _subject.Notify(_infomation);
+    if (!_infomation.enable) {
+        _info_subject.Notify(_infomation);
+        return false;
+    } // if
+    if (::g_pInput->IsKeyPush(MOFKEY_M)) {
+        if (_infomation.enable) {
+            _infomation.enable = false;
+            _info_subject.Notify(_infomation);
+        } // if
     } // if
 
+
+    /*
     if (_infomation.select) {
         if (::g_pInput->IsKeyPush(MOFKEY_P)) {
             this->Buy();
@@ -86,33 +102,30 @@ bool my::ShopSystem::Update(float delta_time) {
         else if (::g_pInput->IsKeyPush(MOFKEY_O)) {
             _infomation.select = false;
             _infomation.count = 0;
-            _subject.Notify(_infomation);
+            _info_subject.Notify(_infomation);
         } // else if
         else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
             _infomation.count++;
-            _subject.Notify(_infomation);
+            _info_subject.Notify(_infomation);
         } // else if
         else if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
             _infomation.count--;
-            _subject.Notify(_infomation);
+            _info_subject.Notify(_infomation);
         } // else if
 
     } // if
     else {
         if (::g_pInput->IsKeyPush(MOFKEY_RIGHT)) {
             _infomation.index++;
-            _subject.Notify(_infomation);
+            _info_subject.Notify(_infomation);
         } // if
         else if (::g_pInput->IsKeyPush(MOFKEY_LEFT)) {
             _infomation.index--;
-            _subject.Notify(_infomation);
+            _info_subject.Notify(_infomation);
         } // else if
     } // else
-
-
-
-      //std::cout << "update end" << "\n";
-    return false;
+    */
+    return true;
 }
 
 bool my::ShopSystem::Release(void) {

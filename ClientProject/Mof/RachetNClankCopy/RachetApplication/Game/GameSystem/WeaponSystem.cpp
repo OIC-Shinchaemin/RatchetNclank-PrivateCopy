@@ -38,6 +38,7 @@ void my::WeaponSystem::OnNotify(const my::ChargeInfo& info) {
     if (info.size) {
         weapon->AddBullet(info.size);
     } // if
+    _equipment_subject.Notify(my::Mechanical::Info(weapon->GetBulletCount(), weapon->GetName().c_str() ));
 }
 
 void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {

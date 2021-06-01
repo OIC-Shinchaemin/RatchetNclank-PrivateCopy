@@ -36,22 +36,24 @@ void my::GameScene::ReInitialize(void) {
 
 bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
+    if (auto e = _event.lock()) {
+        e->UpdateGameEvent(delta_time);
+    } // if
+    if (auto game = _game.lock()) {
+        game->GameSystemUpdate(delta_time);
+    } // if
+
 #ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 
-    if (::g_pInput->IsKeyPush(MOFKEY_M)) {
-        _game.lock()->GetShopSystem()->OnNotify(true);
+    if (::g_pInput->IsKeyPush(MOFKEY_O)) {
+        if (!_game.lock()->GetShopSystem()->IsEnable()) {
+            _game.lock()->GetShopSystem()->OnNotify(true);
+        } // if
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_N)) {
-        _game.lock()->GetShopSystem()->OnNotify(false);
-    } // else if
-
 #endif // _DEBUG
-    if (auto e = _event.lock()) {
-        e->UpdateGameEvent(delta_time);
-    } // if
 
     if (_re_initialize) {
         this->ReInitialize();

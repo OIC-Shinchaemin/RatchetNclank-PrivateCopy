@@ -1,4 +1,4 @@
-#include "ShopSystemMenu.h"
+﻿#include "ShopSystemMenu.h"
 
 
 my::ShopSystemMenu::ShopSystemMenu(const char* name) :
@@ -39,9 +39,18 @@ bool my::ShopSystemMenu::Render(void) {
     if (!_infomation.enable) {
         return false;
     } // if
+
+    puts("ShopSystemMenu");
+    auto rect = Mof::CRectangle(0.0f, 0.0f, 512.0f, 512.0f);
     auto pos = super::_position;
+    rect.Translation(pos);
+    ::CGraphicsUtilities::RenderFillRect(rect, def::color_rgba_u32::kRed);
+    pos.y += 10.0f;
+    ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・△で閉じる　Lキー・○✕で買う");
+    pos.y += 10.0f;
     ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Shop index = %d  count = %d select = %d",
                                        _infomation.index, _infomation.count, _infomation.select);
+
 
     super::Render();
     return true;

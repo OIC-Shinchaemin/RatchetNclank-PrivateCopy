@@ -13,8 +13,14 @@
 
 
 namespace my {
-class GameManager : public std::enable_shared_from_this<my::GameManager> {
+class GameManager : 
+    public std::enable_shared_from_this<my::GameManager>,
+    public my::Observer<const std::shared_ptr<my::ShopSystem>&> {
 private:
+    //! 更新用
+    std::vector<std::shared_ptr<my::ShopSystem>> _update_system;
+    //! 更新用
+    std::vector<std::shared_ptr<my::ShopSystem>> _disable_systems;
     //! 武器
     std::shared_ptr<my::WeaponSystem>  _weapon_system;
     //! クイックチェンジ
@@ -38,6 +44,11 @@ public:
     /// デストラクタ
     /// </summary>
     ~GameManager();
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="ptr"></param>
+    virtual void OnNotify(const std::shared_ptr<my::ShopSystem>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -101,6 +112,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Release(void);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name=""></param>
+    void GameSystemUpdate(float delta_time);
     /// <summary>
     /// 解放
     /// </summary>
