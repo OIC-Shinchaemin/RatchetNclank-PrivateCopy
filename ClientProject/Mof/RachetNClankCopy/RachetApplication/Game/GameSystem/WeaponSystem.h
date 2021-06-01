@@ -19,7 +19,16 @@
 
 
 namespace my {
-class WeaponSystem : public my::Observer<const std::string&> {
+struct ChargeInfo {
+    //! 武器
+    std::string type;
+    //! 装填数
+    std::uint32_t size;
+};
+class WeaponSystem : 
+    public my::Observer<const std::string&>,
+    public my::Observer<const my::ChargeInfo&>
+{
     using Pair = std::pair<std::string, std::shared_ptr<my::Mechanical>>;
 private:
     //! 武器
@@ -50,6 +59,11 @@ public:
     /// </summary>
     /// <param name="change"></param>
     virtual void OnNotify(const std::string& change) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const my::ChargeInfo& info) override;
     /// <summary>
     /// セッター
     /// </summary>

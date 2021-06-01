@@ -9,8 +9,10 @@ my::GameManager::GameManager() :
     _quick_change(std::make_shared<my::QuickChangeSystem>()),
     _help_desk(std::make_shared<my::HelpDesk>()),
     _game_money(std::make_shared<my::GameMoney>()),
+    _shop_system(std::make_shared<my::ShopSystem>()),
     _resource(),
     _ui_canvas() {
+    _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
 }
 
 my::GameManager::~GameManager() {
@@ -40,11 +42,16 @@ std::shared_ptr<my::GameMoney> my::GameManager::GetGameMoney(void) const {
     return this->_game_money;
 }
 
+std::shared_ptr<my::ShopSystem> my::GameManager::GetShopSystem(void) const {
+    return this->_shop_system;
+}
+
 void my::GameManager::GameSystemLoad(void) {
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
     _weapon_system->Load(save_data);
     _game_money->Load(save_data);
+    _shop_system->Load(save_data);
 }
 
 bool my::GameManager::Initialize(void) {
@@ -56,19 +63,25 @@ bool my::GameManager::Initialize(void) {
     _help_desk->SetUICanvas(_ui_canvas);
     _game_money->SetResourceManager(_resource);
     _game_money->SetUICanvas(_ui_canvas);
+    _shop_system->SetResourceManager(_resource);
+    _shop_system->SetUICanvas(_ui_canvas);
     return true;
 }
 
 bool my::GameManager::Update(void) {
     _quick_change->Update();
+    _shop_system->Update(def::kDeltaTime);
     return true;
 }
 
 bool my::GameManager::Release(void) {
+    _shop_system->GetChargeInfoSubject()->RemoveObserver(_weapon_system);
+
     _weapon_system.reset();
     _quick_change.reset();
     _help_desk.reset();
     _game_money.reset();
+    _shop_system.reset();
     _resource.reset();
     _ui_canvas.reset();
     return true;
@@ -78,10 +91,12 @@ void my::GameManager::GameSystemRelease(void) {
    //! save
     std::vector<std::string> weapon;
     _weapon_system->CreateAvailableMechanicalWeaponNames(weapon);
-    auto save_param = my::SaveDataParam(0, weapon);
+
+    auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
     my::SaveSystem().Save(save_param);
     _quick_change->Release();
     _weapon_system->Release();
     _help_desk->Release();
     _game_money->Release();
+    _shop_system->Release();
 }

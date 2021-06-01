@@ -13,7 +13,7 @@ my::WeaponSystem::WeaponSystem() :
     _save_data(),
     _resource(),
     _ui_canvas() {
-    
+
     _builder_name_map.emplace("BombGlove", "../Resource/builder/bomb_glove.json");
     _builder_name_map.emplace("Pyrocitor", "../Resource/builder/pyrocitor.json");
     _builder_name_map.emplace("Blaster", "../Resource/builder/blaster.json");
@@ -27,10 +27,17 @@ void my::WeaponSystem::OnNotify(const std::string& change) {
     auto weapon = this->GetMechanicalWeapon(change);
 
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
-    
+
     using namespace std::literals::string_literals;
     std::string_view name = weapon ? weapon->GetName().c_str() : ""s;
     _equipment_subject.Notify(my::Mechanical::Info(bullet_count, name.data()));
+}
+
+void my::WeaponSystem::OnNotify(const my::ChargeInfo& info) {
+    auto weapon = this->GetMechanicalWeapon(info.type);
+    if (info.size) {
+        weapon->AddBullet(info.size);
+    } // if
 }
 
 void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -58,7 +65,7 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
 
 bool my::WeaponSystem::Load(my::SaveData& in) {
     _save_data = in;
-    
+
     auto param = my::Actor::Param();
     for (const auto& key : _save_data.GetAvailableMechanicalWeaponsAddress()) {
         param.name = key;

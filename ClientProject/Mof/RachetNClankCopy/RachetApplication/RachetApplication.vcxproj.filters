@@ -174,9 +174,6 @@
     <Filter Include="Rachet\Source\Scene">
       <UniqueIdentifier>{e10fb131-c044-4268-ab70-1d544e5d595e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Header\Actor\Ship">
-      <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Source\Stage">
       <UniqueIdentifier>{b7ada71b-9352-4e63-bea1-d2187881b714}</UniqueIdentifier>
     </Filter>
@@ -206,9 +203,6 @@
     </Filter>
     <Filter Include="Rachet\Source\Component\Ship">
       <UniqueIdentifier>{cb69f12f-522a-4081-a964-38af85c444ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Source\Actor\Ship">
-      <UniqueIdentifier>{67696cee-7d99-4f58-b968-7c92ac796a55}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rachet\Base\Resource">
       <UniqueIdentifier>{674211c3-a625-4d13-b643-3d27df8c1489}</UniqueIdentifier>
@@ -297,6 +291,18 @@
     </Filter>
     <Filter Include="Rachet\Header\Actor\Item">
       <UniqueIdentifier>{8db5e219-e28c-416f-8827-ddad306d2a27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Facility">
+      <UniqueIdentifier>{08860e39-ff2e-43ac-9093-ec793bae084a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Facility">
+      <UniqueIdentifier>{1e8d34b1-9b92-4dda-8f8d-fda374d2a763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Actor\Vehicle">
+      <UniqueIdentifier>{67696cee-7d99-4f58-b968-7c92ac796a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Actor\Vehicle">
+      <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -670,7 +676,7 @@
       <Filter>Rachet\Source\Component\Ship</Filter>
     </ClCompile>
     <ClCompile Include="Actor\Ship\Ship.cpp">
-      <Filter>Rachet\Source\Actor\Ship</Filter>
+      <Filter>Rachet\Source\Actor\Vehicle</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameManager.cpp">
       <Filter>Rachet\Source\Game</Filter>
@@ -928,6 +934,15 @@
       <Filter>Rachet\Source\Actor\Item</Filter>
     </ClCompile>
     <ClCompile Include="UI\GameMoneyMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Facility\Shop.cpp">
+      <Filter>Rachet\Source\Actor\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\ShopSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ShopSystemMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1365,7 +1380,7 @@
       <Filter>Rachet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Actor\Ship\Ship.h">
-      <Filter>Rachet\Header\Actor\Ship</Filter>
+      <Filter>Rachet\Header\Actor\Vehicle</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
@@ -1823,6 +1838,15 @@
     <ClInclude Include="UI\GameMoneyMenu.h">
       <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Facility\Shop.h">
+      <Filter>Rachet\Header\Actor\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\ShopSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\ShopSystemMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1915,6 +1939,9 @@
       <Filter>Resource\stage</Filter>
     </None>
     <None Include="..\Resource\builder\bolt.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\shop.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

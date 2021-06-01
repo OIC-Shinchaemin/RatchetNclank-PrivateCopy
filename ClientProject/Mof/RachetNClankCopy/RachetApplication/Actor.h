@@ -35,7 +35,8 @@ public:
         //! トランスフォーム
         def::Transform transform;
         Param() :
-            name(),
+            name("nameless"),
+            tag("none"),
             transform(){
         }
         virtual ~Param() {

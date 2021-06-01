@@ -40,8 +40,16 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
+
+    if (::g_pInput->IsKeyPush(MOFKEY_M)) {
+        _game.lock()->GetShopSystem()->OnNotify(true);
+    } // if
+    else if (::g_pInput->IsKeyPush(MOFKEY_N)) {
+        _game.lock()->GetShopSystem()->OnNotify(false);
+    } // else if
+
 #endif // _DEBUG
-    if (auto e = _event.lock() ) {
+    if (auto e = _event.lock()) {
         e->UpdateGameEvent(delta_time);
     } // if
 
@@ -187,7 +195,7 @@ bool my::GameScene::Initialize(void) {
             temp->AddObserver(ship_event);
         } // if
     } // for
-    
+
 
     auto param = new my::Actor::Param();
     // enemy
@@ -228,9 +236,11 @@ bool my::GameScene::Initialize(void) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         auto help_desk = game->GetHelpDesk();
-        auto game_money= game->GetGameMoney();
+        auto game_money = game->GetGameMoney();
+        auto ship_system = game->GetShopSystem();
         // game system
 
+        ship_system->Initialize();
         game_money->Initialize();
         help_desk->Initialize();
         weapon_system->Initialize(shared_from_this());
@@ -259,12 +269,15 @@ bool my::GameScene::Initialize(void) {
         this->AddElement(terrain);
     } // for
 
+
+
     ut::SafeDelete(param);
     _re_initialize = false;
     return true;
 }
 
 bool my::GameScene::Release(void) {
+    super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {
         game->GameSystemRelease();

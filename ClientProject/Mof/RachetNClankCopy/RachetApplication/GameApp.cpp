@@ -79,13 +79,13 @@ MofBool CGameApp::Render(void) {
 }
 
 MofBool CGameApp::Release(void) {
-    _ui_canvas.reset();
-    _camera_manager.reset();
-    _light_manager.reset();
-    _game_manager.reset();
-    _resource_manager.reset();
     _scene_manager.reset();
-
+    _ui_canvas.reset();
+    _event_manager.reset();
+    _game_manager.reset();
+    _light_manager.reset();
+    _camera_manager.reset();
+    _resource_manager.reset();
     my::Gamepad::GetInstance().Release();
     return TRUE;
 }

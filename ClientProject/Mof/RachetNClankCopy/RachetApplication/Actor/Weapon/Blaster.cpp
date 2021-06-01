@@ -10,7 +10,8 @@ my::Blaster::Blaster() :
     super::SetName("Blaster");
     super::_shot_speed = 5.0f;
     super::_interval_max = 0.06f;
-    super::_bullet_count = 200;
+    super::_bullet_count_max = 200;
+    super::_bullet_count = super::_bullet_count_max;
 }
 
 my::Blaster::~Blaster() {
