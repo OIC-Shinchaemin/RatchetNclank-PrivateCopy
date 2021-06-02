@@ -56,6 +56,14 @@ void my::ShopSystem::OnNotify(bool flag) {
     _infomation.weapon = _items.at(_infomation.index).name;
     _info_subject.Notify(_infomation);
     _subject.Notify(shared_from_this());
+
+    if (auto weapon_system = _weapon_system.lock()) {
+        auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
+        auto info = my::Mechanical::Info();
+        info.bullet_count = weapon->GetBulletCount();
+        info.name = weapon->GetName();
+        _equipment_weapon_menu_subject.Notify(info);
+    } // if
 }
 
 void my::ShopSystem::SetWeaponSystem(std::weak_ptr<my::WeaponSystem> ptr) {

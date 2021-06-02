@@ -30,7 +30,7 @@ void my::WeaponSystem::OnNotify(const std::string& change) {
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
 
     using namespace std::literals::string_literals;
-    std::string_view name = weapon ? weapon->GetName().c_str() : ""s;
+    auto name = weapon ? weapon->GetName().c_str() : ""s;
     _equipment_subject.Notify(my::Mechanical::Info(bullet_count, name.data()));
 }
 
