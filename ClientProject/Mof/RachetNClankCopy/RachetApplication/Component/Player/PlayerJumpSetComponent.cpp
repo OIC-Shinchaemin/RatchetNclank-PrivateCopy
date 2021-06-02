@@ -73,13 +73,6 @@ bool my::PlayerJumpSetComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
-    /*
-    if (auto type_com = _type_com.lock()) {
-        if (!type_com->IsActive()) {
-            return false;
-        } // if
-    } // if
-    */
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionJumpSetState);
     _jump_speed = _jump_speed_first;

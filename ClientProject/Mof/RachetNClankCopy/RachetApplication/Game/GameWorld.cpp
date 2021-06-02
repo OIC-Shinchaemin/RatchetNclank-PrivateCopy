@@ -24,6 +24,14 @@ void my::GameWorld::RemoveActor(const ActorPtr& actor) {
     ut::SwapPopback(_actors, actor);
 }
 
+bool my::GameWorld::Input(void) {
+    // input
+    for (auto& actor : _actors) {
+        actor->Input();
+    } // for
+    return true;
+}
+
 bool my::GameWorld::Update(float delta_time) {
     // update
     for (auto& actor : _actors) {

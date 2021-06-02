@@ -94,7 +94,6 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
         } // if
     } // if
     return true;
-    return true;
 }
 
 bool my::PlayerCrouchComponent::Release(void) {

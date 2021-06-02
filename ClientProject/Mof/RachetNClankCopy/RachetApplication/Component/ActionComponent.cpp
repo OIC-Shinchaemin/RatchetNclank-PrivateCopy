@@ -65,6 +65,10 @@ const std::unordered_map<std::string, std::shared_ptr<my::ActionComponent>>& my:
     return this->_children;
 }
 
+bool my::ActionComponent::IsInput(void) const {
+    return true;
+}
+
 bool my::ActionComponent::Initialize(void) {
     super::Initialize();
     // コンポーネントの初期化

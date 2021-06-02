@@ -78,6 +78,12 @@ public:
     /// <returns></returns>
     const std::unordered_map<std::string, std::shared_ptr<my::ActionComponent>>& GetChildren(void);
     /// <summary>
+    /// “ü—Í”»’è
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool IsInput(void) const override;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

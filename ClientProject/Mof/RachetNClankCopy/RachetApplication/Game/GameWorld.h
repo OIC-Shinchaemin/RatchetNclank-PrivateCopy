@@ -40,6 +40,12 @@ public:
     /// <param name="actor"></param>
     void RemoveActor(const ActorPtr& actor);
     /// <summary>
+    /// “ü—Í
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool Input(void);
+    /// <summary>
     /// XV
     /// </summary>
     /// <param name="delta_time">ŠÔ</param>

@@ -73,11 +73,6 @@ bool my::PlayerJumpDownComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionJumpDownState);
-    /*
-    if (auto motion_state_com = _motion_state_com.lock()) {
-        motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionJumpDownState);
-    } // if
-    */
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->SetGravity(2.0f);

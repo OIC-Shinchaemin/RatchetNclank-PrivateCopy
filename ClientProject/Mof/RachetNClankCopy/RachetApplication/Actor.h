@@ -15,8 +15,9 @@
 
 namespace my {
 enum class ActorState {
-    Active, // 更新、描画する
-    Inactive, // 更新、描画しない
+    Active, // 入力、更新、描画する
+    Inactive, // 入力、更新、描画しない
+    Sleep, // 入力しない、 更新しない、描画する
     Pause, // 更新しない、描画する
     Hide, // 更新する、描画しない
     End // 削除
@@ -57,6 +58,7 @@ private:
     std::optional<Mof::CMatrix44> _parent_transform;
     //! 機能
     ComArray _components;
+    ComArray _input_components;
     ComArray _update_components;
     ComArray _render_components;
 public:
@@ -220,6 +222,12 @@ public:
     /// <param name="param"></param>
     /// <returns></returns>
     virtual bool Initialize(my::Actor::Param* param);
+    /// <summary>
+    /// 入力
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void);
     /// <summary>
     /// 更新
     /// </summary>
