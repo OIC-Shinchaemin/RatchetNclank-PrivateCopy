@@ -4,6 +4,7 @@
 
 #include "My/Core/Observer.h"
 
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -23,22 +24,26 @@ public:
         //! 表示
         bool enable;
         //! アイテムのインデックス
-        std::uint32_t index;
+        int  index;
         //! 項目選択中
         bool select;
         //! 購入数
-        std::uint32_t count;
+        int count;
+        //! 名前
+        std::string weapon;
         Info() :
             enable(false),
             index(0),
             select(false),
-            count(0) {
+            count(0),
+            weapon() {
         }
         Info(bool flag) :
             enable(flag),
             index(0),
             select(false),
-            count(0) {
+            count(0),
+            weapon() {
         }
     };
     struct Item {
@@ -62,10 +67,16 @@ private:
     my::Observable<const my::ShopSystem::Info&> _info_subject;
     //! 通知用
     my::Observable<const my::ChargeInfo&> _buy_subject;
+    //! 通知用
+    my::Observable<const my::Mechanical::Info&> _equipment_weapon_menu_subject;
     //! セーブデータ
     my::SaveData _save_data;
     //! 購入可能ラインナップ
     std::vector<my::ShopSystem::Item> _items;
+    //! 武器
+    std::optional<std::string>_prev_weapon;
+    //! 武器
+    std::weak_ptr<my::WeaponSystem> _weapon_system;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
@@ -76,6 +87,11 @@ private:
     /// </summary>
     /// <param name=""></param>
     void Buy(void);
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name=""></param>
+    void NotifyEquipmentWeaponMenu(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -90,6 +106,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void OnNotify(bool flag) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetWeaponSystem(std::weak_ptr<my::WeaponSystem> ptr);
     /// <summary>
     /// セッター
     /// </summary>

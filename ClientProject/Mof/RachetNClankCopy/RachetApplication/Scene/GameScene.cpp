@@ -239,14 +239,13 @@ bool my::GameScene::Initialize(void) {
         auto quick_change = game->GetQuickChange();
         auto help_desk = game->GetHelpDesk();
         auto game_money = game->GetGameMoney();
-        auto ship_system = game->GetShopSystem();
+        auto shop_system = game->GetShopSystem();
         // game system
-
-        ship_system->Initialize();
-        game_money->Initialize();
-        help_desk->Initialize();
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
+        game_money->Initialize();
+        help_desk->Initialize();
+        shop_system->Initialize();
         auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
         help_desk->OnNotify(quest);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);

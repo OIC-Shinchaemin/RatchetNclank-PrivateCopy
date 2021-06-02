@@ -15,6 +15,7 @@ my::GameManager::GameManager() :
     _resource(),
     _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
+    _shop_system->SetWeaponSystem(_weapon_system);
 }
 
 my::GameManager::~GameManager() {
@@ -97,11 +98,11 @@ bool my::GameManager::Release(void) {
     _shop_system->GetChargeInfoSubject()->RemoveObserver(_weapon_system);
     _update_system.clear();
     _disable_systems.clear();
+    _shop_system.reset();
     _weapon_system.reset();
     _quick_change.reset();
     _help_desk.reset();
     _game_money.reset();
-    _shop_system.reset();
     _resource.reset();
     _ui_canvas.reset();
     return true;
@@ -131,10 +132,11 @@ void my::GameManager::GameSystemRelease(void) {
     my::SaveSystem().Save(save_param);
     _update_system.clear();
     _disable_systems.clear();
+    _shop_system->Release();
     _quick_change->Release();
     _weapon_system->Release();
     _help_desk->Release();
     _game_money->Release();
-    _shop_system->Release();
     _shop_system->GetSubject()->RemoveObserver(shared_from_this());
+
 }

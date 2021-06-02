@@ -56,6 +56,9 @@ bool my::ShopSystemMenu::Render(void) {
     pos.y += 20.0f;
     ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Shop index = %d  count = %d select = %d",
                                        _infomation.index, _infomation.count, _infomation.select);
+    pos.y += 20.0f;
+    ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Weapon = %s",
+                                       _infomation.weapon.c_str());
 
 
     super::Render();

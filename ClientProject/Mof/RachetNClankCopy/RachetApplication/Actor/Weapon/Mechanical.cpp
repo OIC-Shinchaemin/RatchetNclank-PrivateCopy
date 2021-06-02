@@ -22,6 +22,10 @@ int my::Mechanical::GetBulletCount(void) const {
     return this->_bullet_count;
 }
 
+int my::Mechanical::GetBulletCountDecrased(void) const {
+    return this->_bullet_count_max - this->GetBulletCount();
+}
+
 bool my::Mechanical::IsAction(void) const {
     return false;
 }

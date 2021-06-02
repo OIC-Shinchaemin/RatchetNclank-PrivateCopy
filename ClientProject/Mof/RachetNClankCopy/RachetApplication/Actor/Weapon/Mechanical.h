@@ -55,6 +55,12 @@ public:
     /// <returns></returns>
     int GetBulletCount(void) const;
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetBulletCountDecrased(void) const;
+    /// <summary>
     /// “ü—Í”»’è
     /// </summary>
     /// <param name=""></param>

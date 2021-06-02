@@ -7,6 +7,7 @@
 
 my::WeaponSystem::WeaponSystem() :
     _weapons(),
+    _current_mechanical(),
     _subject(),
     _equipment_subject(),
     _builder_name_map(),
@@ -25,7 +26,7 @@ my::WeaponSystem::~WeaponSystem() {
 void my::WeaponSystem::OnNotify(const std::string& change) {
     _subject.Notify(this->GetMechanicalWeapon(change));
     auto weapon = this->GetMechanicalWeapon(change);
-
+    _current_mechanical = weapon;
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
 
     using namespace std::literals::string_literals;
@@ -47,6 +48,10 @@ void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
 
 void my::WeaponSystem::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
+}
+
+std::shared_ptr<my::Mechanical> my::WeaponSystem::GetCurrentMechanicalWeapon(void) const {
+    return this->_current_mechanical;
 }
 
 const std::vector<my::WeaponSystem::Pair>& my::WeaponSystem::GetWeaponMap(void) const {
@@ -113,6 +118,7 @@ bool my::WeaponSystem::Release(void) {
 }
 
 std::shared_ptr<my::Mechanical> my::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
+    _current_mechanical.reset();
     auto it = std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
         return pair.first == name;
     });

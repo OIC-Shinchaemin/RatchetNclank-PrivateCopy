@@ -33,6 +33,8 @@ class WeaponSystem :
 private:
     //! 武器
     std::vector<Pair> _weapons;
+    //! 武器
+    std::shared_ptr<my::Mechanical> _current_mechanical;
     //! 通知用
     my::Observable<std::shared_ptr<my::Weapon>> _subject;
     //! 通知用
@@ -74,6 +76,12 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::Mechanical> GetCurrentMechanicalWeapon(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
