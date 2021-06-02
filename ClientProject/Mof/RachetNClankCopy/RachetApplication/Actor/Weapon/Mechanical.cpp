@@ -5,6 +5,7 @@ my::Mechanical::Mechanical() :
     _shot_speed(0.0f),
     _interval(0.0f),
     _interval_max(0.0f),
+    _bullet_count_max(0),
     _bullet_count(0),
     _lock_on_position(),
     _subject(){
@@ -19,6 +20,10 @@ void my::Mechanical::SetLockOnPosition(Mof::CVector3 position) {
 
 int my::Mechanical::GetBulletCount(void) const {
     return this->_bullet_count;
+}
+
+int my::Mechanical::GetBulletCountDecrased(void) const {
+    return this->_bullet_count_max - this->GetBulletCount();
 }
 
 bool my::Mechanical::IsAction(void) const {
@@ -48,6 +53,13 @@ void my::Mechanical::ResetTargetPosition(void) {
 
 bool my::Mechanical::CanFire(void) const {
     return _bullet_count > 0 && _interval < 0.0f;
+}
+
+void my::Mechanical::AddBullet(std::uint32_t count) {
+    _bullet_count += count;
+    if (_bullet_count_max < _bullet_count) {
+        _bullet_count = _bullet_count_max;
+    } // if
 }
 
 void my::Mechanical::AddMechanicalInfoObserver(const std::shared_ptr<my::Observer<const my::Mechanical::Info&>>& ptr) {

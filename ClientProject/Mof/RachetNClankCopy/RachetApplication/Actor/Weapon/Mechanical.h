@@ -27,6 +27,8 @@ protected:
     //! 間隔
     float _interval_max;
     //! サイズ
+    int _bullet_count_max;
+    //! サイズ
     int _bullet_count;
     //! 対象位置
     std::optional<Mof::CVector3> _lock_on_position;
@@ -53,6 +55,12 @@ public:
     /// <returns></returns>
     int GetBulletCount(void) const;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetBulletCountDecrased(void) const;
+    /// <summary>
     /// 入力判定
     /// </summary>
     /// <param name=""></param>
@@ -64,6 +72,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool CanFire(void) const;
+    /// <summary>
+    /// 装填
+    /// </summary>
+    /// <param name="count"></param>
+    void AddBullet(std::uint32_t count);
     /// <summary>
     /// 追加
     /// </summary>

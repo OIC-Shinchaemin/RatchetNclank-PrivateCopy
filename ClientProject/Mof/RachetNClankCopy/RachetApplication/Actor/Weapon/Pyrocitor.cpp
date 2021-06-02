@@ -10,7 +10,8 @@ my::Pyrocitor::Pyrocitor() :
     super::SetName("Pyrocitor");
     super::_shot_speed = 2.0f;
     super::_interval_max = 0.06f;
-    super::_bullet_count = 240;
+    super::_bullet_count_max = 240;
+    super::_bullet_count = super::_bullet_count_max;
 }
 
 my::Pyrocitor::~Pyrocitor() {

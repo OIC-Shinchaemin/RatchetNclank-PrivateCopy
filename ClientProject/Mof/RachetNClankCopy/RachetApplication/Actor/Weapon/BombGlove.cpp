@@ -10,7 +10,8 @@ my::BombGlove::BombGlove() :
     super::SetName("BombGlove");
     super::_shot_speed = 10.0f;
     super::_interval_max = 0.9f;
-    super::_bullet_count = 40;
+    super::_bullet_count_max = 40;
+    super::_bullet_count = super::_bullet_count_max;
 }
 
 my::BombGlove::~BombGlove() {

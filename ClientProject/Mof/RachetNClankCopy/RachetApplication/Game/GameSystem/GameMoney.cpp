@@ -12,6 +12,8 @@ my::GameMoney::GameMoney() :
 }
 
 my::GameMoney::~GameMoney() {
+    _resource.reset();
+    _ui_canvas.reset();
 }
 
 void my::GameMoney::OnNotify(int add_money) {
@@ -58,7 +60,5 @@ bool my::GameMoney::Release(void) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("GameMoneyMenu");
     } // if
-    _resource.reset();
-    _ui_canvas.reset();
     return false;
 }

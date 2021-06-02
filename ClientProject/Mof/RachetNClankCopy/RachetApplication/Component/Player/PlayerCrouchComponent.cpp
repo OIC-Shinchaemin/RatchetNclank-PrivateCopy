@@ -7,7 +7,6 @@
 
 my::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
     super(priority),
-    //_transition_pairs(),
     _angular_speed(),
     _ideal_angle(),
     _move_com() {
@@ -15,7 +14,6 @@ my::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
 
 my::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent& obj) :
     super(obj),
-    //_transition_pairs(),
     _angular_speed(0.4f),
     _ideal_angle(),
     _move_com() {
@@ -42,17 +40,7 @@ std::string_view my::PlayerCrouchComponent::GetStateType(void) const {
 
 bool my::PlayerCrouchComponent::Initialize(void) {
     super::Initialize();
-    //_transition_pairs.reserve(2);
-
-    //_move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>();
     _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
-    /*
-    using Type = state::PlayerActionStateType;
-    _transition_pairs.push_back(Transition(Type::kPlayerActionIdleState,
-                                           []() { return ::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN); }));
-    _transition_pairs.push_back(Transition(Type::kPlayerActionThrowAttackSetState,
-                                           []() { return ::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X); }));
-    */
     return true;
 }
 
@@ -65,7 +53,7 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
         super::ChangeActionState(Type::kPlayerActionThrowAttackSetState);
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_C) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        if (auto move_com = super::GetOwner()->GetComponent<my::PlayerMoveComponent>()) {
+        if (auto move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>()) {
             auto camera_com = super::GetOwner()->GetComponent<my::CameraComponent>();
 
             Mof::CVector2 in; float move_angle;
@@ -81,12 +69,13 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
                 auto owner_circle_position = Mof::CVector2(std::cosf(owner_rotate_y), std::sinf(owner_rotate_y));
                 auto input_circle_position = Mof::CVector2(std::cosf(move_angle), std::sinf(move_angle));
                 float distance = Mof::CVector2Utilities::Distance(owner_circle_position, input_circle_position);
-                if (1.0f < distance) {
+                float distance_threshold = 1.3f;
+                if (distance_threshold < distance) {
                     move_com->AquireInputData(in, move_angle);
                     move_angle += math::kHalfPi + camera_angle_y;
                     
                     MOF_NORMALIZE_RADIANANGLE(move_angle);
-                    super::GetOwner()->GetComponent<my::PlayerCartwheelJumpComponent>()->SetMoveAngle(move_angle);
+                    super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerCartwheelJumpComponent>()->SetMoveAngle(move_angle);
                     super::ChangeActionState(Type::kPlayerActionCartwheelJumpState);
                 } // if
             } // if
@@ -124,6 +113,5 @@ bool my::PlayerCrouchComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionCrouchState);
-    //super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionCartwheelJumpState);
     return true;
 }

@@ -36,14 +36,24 @@ void my::GameScene::ReInitialize(void) {
 
 bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
+    if (auto e = _event.lock()) {
+        e->UpdateGameEvent(delta_time);
+    } // if
+    if (auto game = _game.lock()) {
+        game->GameSystemUpdate(delta_time);
+    } // if
+
 #ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
-#endif // _DEBUG
-    if (auto e = _event.lock() ) {
-        e->UpdateGameEvent(delta_time);
+
+    if (::g_pInput->IsKeyPush(MOFKEY_O)) {
+        if (!_game.lock()->GetShopSystem()->IsEnable()) {
+            _game.lock()->GetShopSystem()->OnNotify(true);
+        } // if
     } // if
+#endif // _DEBUG
 
     if (_re_initialize) {
         this->ReInitialize();
@@ -187,7 +197,7 @@ bool my::GameScene::Initialize(void) {
             temp->AddObserver(ship_event);
         } // if
     } // for
-    
+
 
     auto param = new my::Actor::Param();
     // enemy
@@ -228,13 +238,14 @@ bool my::GameScene::Initialize(void) {
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         auto help_desk = game->GetHelpDesk();
-        auto game_money= game->GetGameMoney();
+        auto game_money = game->GetGameMoney();
+        auto shop_system = game->GetShopSystem();
         // game system
-
-        game_money->Initialize();
-        help_desk->Initialize();
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
+        game_money->Initialize();
+        help_desk->Initialize();
+        shop_system->Initialize();
         auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
         help_desk->OnNotify(quest);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);
@@ -259,12 +270,15 @@ bool my::GameScene::Initialize(void) {
         this->AddElement(terrain);
     } // for
 
+
+
     ut::SafeDelete(param);
     _re_initialize = false;
     return true;
 }
 
 bool my::GameScene::Release(void) {
+    super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {
         game->GameSystemRelease();

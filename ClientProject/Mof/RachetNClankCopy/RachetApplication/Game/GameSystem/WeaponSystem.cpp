@@ -7,13 +7,14 @@
 
 my::WeaponSystem::WeaponSystem() :
     _weapons(),
+    _current_mechanical(),
     _subject(),
     _equipment_subject(),
     _builder_name_map(),
     _save_data(),
     _resource(),
     _ui_canvas() {
-    
+
     _builder_name_map.emplace("BombGlove", "../Resource/builder/bomb_glove.json");
     _builder_name_map.emplace("Pyrocitor", "../Resource/builder/pyrocitor.json");
     _builder_name_map.emplace("Blaster", "../Resource/builder/blaster.json");
@@ -25,12 +26,20 @@ my::WeaponSystem::~WeaponSystem() {
 void my::WeaponSystem::OnNotify(const std::string& change) {
     _subject.Notify(this->GetMechanicalWeapon(change));
     auto weapon = this->GetMechanicalWeapon(change);
-
+    _current_mechanical = weapon;
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
-    
+
     using namespace std::literals::string_literals;
-    std::string_view name = weapon ? weapon->GetName().c_str() : ""s;
+    auto name = weapon ? weapon->GetName().c_str() : ""s;
     _equipment_subject.Notify(my::Mechanical::Info(bullet_count, name.data()));
+}
+
+void my::WeaponSystem::OnNotify(const my::ChargeInfo& info) {
+    auto weapon = this->GetMechanicalWeapon(info.type);
+    if (info.size) {
+        weapon->AddBullet(info.size);
+    } // if
+    _equipment_subject.Notify(my::Mechanical::Info(weapon->GetBulletCount(), weapon->GetName().c_str() ));
 }
 
 void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -39,6 +48,10 @@ void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
 
 void my::WeaponSystem::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
+}
+
+std::shared_ptr<my::Mechanical> my::WeaponSystem::GetCurrentMechanicalWeapon(void) const {
+    return this->_current_mechanical;
 }
 
 const std::vector<my::WeaponSystem::Pair>& my::WeaponSystem::GetWeaponMap(void) const {
@@ -58,7 +71,7 @@ void my::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::str
 
 bool my::WeaponSystem::Load(my::SaveData& in) {
     _save_data = in;
-    
+
     auto param = my::Actor::Param();
     for (const auto& key : _save_data.GetAvailableMechanicalWeaponsAddress()) {
         param.name = key;
@@ -105,6 +118,7 @@ bool my::WeaponSystem::Release(void) {
 }
 
 std::shared_ptr<my::Mechanical> my::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
+    _current_mechanical.reset();
     auto it = std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
         return pair.first == name;
     });

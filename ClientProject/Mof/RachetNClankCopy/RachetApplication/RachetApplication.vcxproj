@@ -240,6 +240,7 @@
     <ClCompile Include="Actor\Character\Player.cpp" />
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
+    <ClCompile Include="Actor\Facility\Shop.cpp" />
     <ClCompile Include="Actor\Item\Bolt.cpp" />
     <ClCompile Include="Actor\Ship\Ship.cpp" />
     <ClCompile Include="Actor\Terrain\Terrain.cpp" />
@@ -393,6 +394,7 @@
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveSystem.cpp" />
+    <ClCompile Include="Game\GameSystem\ShopSystem.cpp" />
     <ClCompile Include="Game\GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
@@ -431,6 +433,7 @@
     <ClCompile Include="UI\GameMoneyMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
+    <ClCompile Include="UI\ShopSystemMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -462,6 +465,7 @@
     <ClInclude Include="Actor\Character\Player.h" />
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
+    <ClInclude Include="Actor\Facility\Shop.h" />
     <ClInclude Include="Actor\Item\Bolt.h" />
     <ClInclude Include="Actor\Ship\Ship.h" />
     <ClInclude Include="Actor\Terrain\Terrain.h" />
@@ -687,6 +691,7 @@
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveSystem.h" />
+    <ClInclude Include="Game\GameSystem\ShopSystem.h" />
     <ClInclude Include="Game\GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
@@ -731,6 +736,7 @@
     <ClInclude Include="UI\GameMoneyMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
+    <ClInclude Include="UI\ShopSystemMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\clear_scene.txt" />
@@ -756,6 +762,7 @@
     <None Include="..\Resource\builder\pyrocitor.json" />
     <None Include="..\Resource\builder\pyrocitor_bullet.json" />
     <None Include="..\Resource\builder\ship.json" />
+    <None Include="..\Resource\builder\shop.json" />
     <None Include="..\Resource\builder\strong_enemy.json" />
     <None Include="..\Resource\builder\water_flow.json" />
     <None Include="..\Resource\builder\weak_enemy.json" />
