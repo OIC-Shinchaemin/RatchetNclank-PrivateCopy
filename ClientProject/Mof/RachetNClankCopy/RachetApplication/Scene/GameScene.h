@@ -115,6 +115,7 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetName(void) override;
+
     /// <summary>
     /// “Ç‚İ‚İ
     /// </summary>

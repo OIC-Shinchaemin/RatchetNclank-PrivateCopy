@@ -85,9 +85,11 @@ bool my::BridgeEvent::Update(float delta_time) {
     camera_info.ideal_position = _ideal_position;
     _bridge_view_camera_controller.Update(delta_time, camera_info);
 
-    if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+#ifdef _DEBUG
+    if (::g_pInput->IsKeyPush(MOFKEY_B)) {
         this->AllDelete();
     } // if
+#endif // _DEBUG
     return true;
 }
 

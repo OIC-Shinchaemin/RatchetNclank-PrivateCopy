@@ -18,6 +18,10 @@ my::GameMoney::~GameMoney() {
 
 void my::GameMoney::OnNotify(int add_money) {
     this->_value += add_money;
+    if (this->_value < 0) {
+        this->_value = 0;
+    } // if
+    
     _subject.Notify(_value);
 }
 

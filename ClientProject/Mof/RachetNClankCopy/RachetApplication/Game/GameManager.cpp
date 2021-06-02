@@ -16,6 +16,7 @@ my::GameManager::GameManager() :
     _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
     _shop_system->SetWeaponSystem(_weapon_system);
+    _shop_system->SetGameMoney(_game_money);
 }
 
 my::GameManager::~GameManager() {

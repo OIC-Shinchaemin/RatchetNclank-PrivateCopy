@@ -40,7 +40,6 @@ bool my::ShopSystemMenu::Render(void) {
         return false;
     } // if
 
-    puts("ShopSystemMenu");
     auto rect = Mof::CRectangle(0.0f, 0.0f, 512.0f, 512.0f);
     auto pos = super::_position;
     rect.Translation(pos);

@@ -14,6 +14,7 @@
 #include "MY/UI/UICanvas.h"
 #include "Save/SaveData.h"
 #include "WeaponSystem.h"
+#include "GameMoney.h"
 
 
 namespace my {
@@ -49,12 +50,15 @@ public:
     struct Item {
         std::string name;
         bool enable;
+        int price;
         Item() :
             name(),
+            price(),
             enable(false) {
         }
-        Item(const char* str, bool flag) :
+        Item(const char* str, int value, bool flag) :
             name(str),
+            price(value),
             enable(flag) {
         }
     };
@@ -69,6 +73,8 @@ private:
     my::Observable<const my::ChargeInfo&> _buy_subject;
     //! 通知用
     my::Observable<const my::Mechanical::Info&> _equipment_weapon_menu_subject;
+    //! 通知用
+    my::Observable<int> game_money_menu_subject;
     //! セーブデータ
     my::SaveData _save_data;
     //! 購入可能ラインナップ
@@ -77,6 +83,8 @@ private:
     std::optional<std::string>_prev_weapon;
     //! 武器
     std::weak_ptr<my::WeaponSystem> _weapon_system;
+    //! お金
+    std::weak_ptr<my::GameMoney> _game_money;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
@@ -92,6 +100,11 @@ private:
     /// </summary>
     /// <param name=""></param>
     void NotifyEquipmentWeaponMenu(void);
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name=""></param>
+    void NotifyGameMoneyMenu(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -111,6 +124,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetWeaponSystem(std::weak_ptr<my::WeaponSystem> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetGameMoney(std::weak_ptr<my::GameMoney> ptr);
     /// <summary>
     /// セッター
     /// </summary>
