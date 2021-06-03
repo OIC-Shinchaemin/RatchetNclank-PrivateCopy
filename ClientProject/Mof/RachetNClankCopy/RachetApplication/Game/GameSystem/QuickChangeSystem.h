@@ -2,6 +2,7 @@
 #define MY_QUICK_CHANGE_SYSTEM_H
 
 
+#include "GameSystem.h"
 #include "My/Core/Observable.h"
 
 #include <optional>
@@ -36,7 +37,11 @@ public:
     /// <returns></returns>
     const char* GetWeapon(void) const;
 };
-class QuickChangeSystem : public std::enable_shared_from_this<my::QuickChangeSystem> {
+
+class QuickChangeSystem :
+    public my::GameSystem {
+    using super = my::GameSystem;
+    using This = my::QuickChangeSystem;
     using Observable = my::Observable<Mof::CVector4>;
     enum class State {
         Enter,
@@ -51,7 +56,9 @@ public:
     };
 private:
     //! 色
-    my::QuickChangeSystem::Info _info;
+    This::Info _infomation;
+    //! 通知用
+    //my::Observable<const std::shared_ptr<This>&> _subject;
     //! 状態
     State _state;
     //! アルファ
@@ -65,11 +72,11 @@ private:
     //! 通知用
     my::Observable<const std::string&> _current;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    //std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    //std::weak_ptr<my::UICanvas> _ui_canvas;
     //! 監視対象
-    my::Observable<const my::QuickChangeSystem::Info&> _subject;
+    my::Observable<const This::Info&> _info_subject;
     /// <summary>
     /// 開く
     /// </summary>
@@ -90,15 +97,26 @@ public:
     /// </summary>
     ~QuickChangeSystem();
     /// <summary>
-    /// セッター
+    /// 通知
     /// </summary>
-    /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <param name=""></param>
+    virtual void OnNotify(bool flag) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    //void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    //void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    ///my::Observable<const std::shared_ptr<This>&>* GetSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -126,7 +144,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Update(void);
+    virtual bool Update(float delta_time) override;
     /// <summary>
     /// 解放
     /// </summary>

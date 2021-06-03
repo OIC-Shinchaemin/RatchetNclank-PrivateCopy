@@ -61,7 +61,7 @@ public:
     /// <summary>
     /// 通知イベント
     /// </summary>
-    /// <param name="money"></param>
+    /// <param name="info"></param>
     virtual void OnNotify(const my::ShopSystem::Info& info) override;
     /// <summary>
     /// セッター

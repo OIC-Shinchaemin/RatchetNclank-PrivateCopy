@@ -35,6 +35,10 @@ bool my::PlayerMeleeAttackThreeComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerMeleeAttackThreeComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerMeleeAttackThreeComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState);

@@ -51,6 +51,10 @@ bool my::PlayerCartwheelJumpComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerCartwheelJumpComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerCartwheelJumpComponent::Update(float delta_time) {
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);

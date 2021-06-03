@@ -86,6 +86,10 @@ bool my::PlayerDamageComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerDamageComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerDamageComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);

@@ -27,6 +27,12 @@ public:
     /// <returns></returns>
     const char* GetCurrentStateName(void) const;
     /// <summary>
+    /// ”»’è
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool EnableState(void) const;
+    /// <summary>
     /// “o˜^
     /// </summary>
     /// <typeparam name="T"></typeparam>

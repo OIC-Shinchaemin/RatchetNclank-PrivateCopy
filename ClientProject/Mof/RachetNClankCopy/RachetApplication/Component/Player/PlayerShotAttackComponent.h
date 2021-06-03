@@ -12,9 +12,22 @@
 namespace my {
 class PlayerShotAttackComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
+    struct InputInfo {
+        Mof::CVector2 in;
+        float move_angle = 0.0f;
+        bool move_flag = false;
+        void Reset(void) {
+            in.x = 0.0f;
+            in.y = 0.0f;
+            move_angle = 0.0f;
+            move_flag = false;
+        }
+    };
 private:
     //! •Ší
     std::weak_ptr<my::Mechanical> _weapon;
+    //! “ü—Íî•ñ
+    my::PlayerShotAttackComponent::InputInfo _input_info;
     //! ˆÚ“®
     std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:
@@ -50,6 +63,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
+    /// <summary>
+    /// “ü—Í
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void) override;
     /// <summary>
     /// XV
     /// </summary>

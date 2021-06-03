@@ -20,12 +20,14 @@ std::string_view my::PlayerMeleeAttackOneEndComponent::GetStateType(void) const 
     return state::PlayerActionStateType::kPlayerActionMeleeAttackOneEndState;
 }
 
-bool my::PlayerMeleeAttackOneEndComponent::Update(float delta_time) {
-    if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+bool my::PlayerMeleeAttackOneEndComponent::Input(void) {
+    if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackTwoState);
     } // if
+    return true;
+}
 
+bool my::PlayerMeleeAttackOneEndComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if

@@ -22,7 +22,7 @@ private:
     //! 地点
     std::string _next_terrain;
     //! アクションフラグ
-    bool _action_enable;
+    //bool _action_enable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -71,19 +71,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool IsActionEnable(void);
+    //bool IsActionEnable(void);
     /// <summary>
     /// 有効化
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool EnableAction(void);
+    //bool EnableAction(void);
     /// <summary>
     /// 無効化
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool DisableAction(void);
+    //bool DisableAction(void);
     /// <summary>
     /// 初期化
     /// </summary>

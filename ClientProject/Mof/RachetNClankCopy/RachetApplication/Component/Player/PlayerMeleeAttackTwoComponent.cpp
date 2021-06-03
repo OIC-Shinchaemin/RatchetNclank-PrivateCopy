@@ -37,12 +37,16 @@ bool my::PlayerMeleeAttackTwoComponent::Initialize(void) {
     return true;
 }
 
-bool my::PlayerMeleeAttackTwoComponent::Update(float delta_time) {
+bool my::PlayerMeleeAttackTwoComponent::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         _next_reserve = true;
     } // if
 
+    return true;
+}
+
+bool my::PlayerMeleeAttackTwoComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         if (_next_reserve) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeState);

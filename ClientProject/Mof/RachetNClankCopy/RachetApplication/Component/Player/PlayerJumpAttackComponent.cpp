@@ -32,6 +32,10 @@ bool my::PlayerJumpAttackComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerJumpAttackComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerJumpAttackComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);

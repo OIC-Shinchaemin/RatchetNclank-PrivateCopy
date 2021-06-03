@@ -6,6 +6,16 @@
 #include "Factory/Builder/IBuilder.h"
 
 
+void my::Actor::Activate(void) {
+    this->_state = my::ActorState::Active;
+}
+void my::Actor::Sleep(void) {
+    this->_state = my::ActorState::Sleep;
+}
+void my::Actor::Pause(void) {
+    this->_state = my::ActorState::Pause;
+}
+
 my::Actor::Actor() :
     _state(my::ActorState::Active),
     _name(),
@@ -13,6 +23,7 @@ my::Actor::Actor() :
     _transform(),
     _initial_transform(),
     _components(),
+    _input_components(),
     _update_components(),
     _render_components() {
 }
@@ -91,6 +102,9 @@ bool my::Actor::InFrustum(void) const {
 }
 
 void my::Actor::AddComponent(const ComPtr& component) {
+    if (component->IsInput()) {
+        ut::InsertAscend(_input_components, component);
+    } // if
     if (component->IsUpdate()) {
         ut::InsertAscend(_update_components, component);
     } // if
@@ -112,6 +126,9 @@ void my::Actor::CloneToComponents(const ComArray& com_array) {
 }
 
 void my::Actor::RemoveComponent(const ComPtr& component) {
+    if (component->IsInput()) {
+        ut::EraseFind(_input_components, component);
+    } // if
     if (component->IsUpdate()) {
         ut::EraseFind(_update_components, component);
     } // if
@@ -151,8 +168,18 @@ bool my::Actor::Initialize(my::Actor::Param* param) {
     } // for
     // —Dæ“x‡‚É®—ñ
     std::sort(_components.begin(), _components.end());
+    std::sort(_input_components.begin(), _input_components.end());
     std::sort(_update_components.begin(), _update_components.end());
     std::sort(_render_components.begin(), _render_components.end());
+    return true;
+}
+
+bool my::Actor::Input(void) {
+    for (auto& com : _input_components) {
+        if (com->IsActive()) {
+            com->Input();
+        } // if
+    } // for
     return true;
 }
 
@@ -180,6 +207,7 @@ bool my::Actor::Render(void) {
 }
 
 bool my::Actor::Release(void) {
+    _input_components.clear();
     _update_components.clear();
     _render_components.clear();
     for (auto& com : _components) {
@@ -193,9 +221,15 @@ void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
     builder->Construct(shared_from_this());
     auto& coms = _components;
     // Žd•ª‚¯
+
+    std::copy_if(coms.begin(), coms.end(), std::back_inserter(_input_components), [](ComPtr com) {
+        return com->IsInput();
+    });
+
     std::copy_if(coms.begin(), coms.end(), std::back_inserter(_update_components), [](ComPtr com) {
         return com->IsUpdate();
     });
+
     std::copy_if(coms.begin(), coms.end(), std::back_inserter(_render_components), [](ComPtr com) {
         return com->IsRender();
     });

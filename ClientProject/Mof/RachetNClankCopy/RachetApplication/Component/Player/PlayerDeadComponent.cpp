@@ -20,6 +20,10 @@ std::string_view my::PlayerDeadComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionDeadState;
 }
 
+bool my::PlayerDeadComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerDeadComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::GetOwner()->Notify("PlayerDead", super::GetOwner());

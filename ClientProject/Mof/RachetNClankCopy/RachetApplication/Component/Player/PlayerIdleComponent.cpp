@@ -22,10 +22,11 @@ std::string_view my::PlayerIdleComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionIdleState;
 }
 
-bool my::PlayerIdleComponent::Update(float delta_time) {
-    float h = ::g_pGamepad->GetStickHorizontal(); float v = ::g_pGamepad->GetStickVertical();
+bool my::PlayerIdleComponent::Input(void) {
+    float horizontal = ::g_pGamepad->GetStickHorizontal();
+    float vertical = ::g_pGamepad->GetStickVertical();
     float threshold = 0.5f;
-    auto stick = Mof::CVector2(h, v);
+    auto stick = Mof::CVector2(horizontal, vertical);
 
     if (::g_pInput->IsKeyHold(MOFKEY_W) || ::g_pInput->IsKeyHold(MOFKEY_A) ||
         ::g_pInput->IsKeyHold(MOFKEY_S) || ::g_pInput->IsKeyHold(MOFKEY_D) ||
@@ -47,6 +48,11 @@ bool my::PlayerIdleComponent::Update(float delta_time) {
     else if (::g_pInput->IsKeyPush(MOFKEY_U) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_R_BTN)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionCrouchState);
     } // else if
+    
+    return true;
+}
+
+bool my::PlayerIdleComponent::Update(float delta_time) {
     return true;
 }
 

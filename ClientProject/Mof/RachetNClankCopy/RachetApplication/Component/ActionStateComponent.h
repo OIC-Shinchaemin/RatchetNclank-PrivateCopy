@@ -4,6 +4,8 @@
 
 #include "UpdateComponent.h"
 
+#include <optional>
+#include <string>
 #include <string_view>
 
 #include "My/Core/StateMachine.h"
@@ -14,6 +16,8 @@ namespace my {
 class ActionStateComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
+    //! ó\ñÒ
+    std::optional<std::string> _next_state;
 protected:
     //! èÛë‘
     my::StateMachine _state_machine;

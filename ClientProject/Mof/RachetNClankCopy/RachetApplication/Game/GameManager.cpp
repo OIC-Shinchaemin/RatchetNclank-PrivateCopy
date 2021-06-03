@@ -16,12 +16,13 @@ my::GameManager::GameManager() :
     _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
     _shop_system->SetWeaponSystem(_weapon_system);
+    _shop_system->SetGameMoney(_game_money);
 }
 
 my::GameManager::~GameManager() {
 }
 
-void my::GameManager::OnNotify(const std::shared_ptr<my::ShopSystem>& ptr) {
+void my::GameManager::OnNotify(const std::shared_ptr<my::GameSystem>& ptr) {
     _update_system.push_back(ptr);
 }
 
@@ -62,6 +63,9 @@ void my::GameManager::GameSystemLoad(void) {
 }
 
 bool my::GameManager::Initialize(void) {
+    _quick_change->GetSubject()->AddObserver(shared_from_this());
+    _shop_system->GetSubject()->AddObserver(shared_from_this());
+
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
     _quick_change->SetResourceManager(_resource);
@@ -72,25 +76,10 @@ bool my::GameManager::Initialize(void) {
     _game_money->SetUICanvas(_ui_canvas);
     _shop_system->SetResourceManager(_resource);
     _shop_system->SetUICanvas(_ui_canvas);
-    
-    _shop_system->GetSubject()->AddObserver(shared_from_this());
     return true;
 }
 
-bool my::GameManager::Update(void) {
-    /*
-    for (auto ptr : _update_system) {
-        if (!ptr->Update(def::kDeltaTime)) {
-            _disable_systems.push_back(ptr);
-        } // if
-    } // for
-    
-    for (auto ptr : _disable_systems) {
-        ut::SwapPopback(_update_system, ptr);
-    } // for
-
-    _quick_change->Update();
-    */
+bool my::GameManager::Update(float _delta_time) {
     return true;
 }
 
@@ -119,8 +108,6 @@ void my::GameManager::GameSystemUpdate(float delta_time) {
         ut::EraseRemove(_update_system, ptr);
     } // for
     _disable_systems.clear();
-
-    _quick_change->Update();
 }
 
 void my::GameManager::GameSystemRelease(void) {
@@ -138,5 +125,5 @@ void my::GameManager::GameSystemRelease(void) {
     _help_desk->Release();
     _game_money->Release();
     _shop_system->GetSubject()->RemoveObserver(shared_from_this());
-
+    _quick_change->GetSubject()->RemoveObserver(shared_from_this());
 }

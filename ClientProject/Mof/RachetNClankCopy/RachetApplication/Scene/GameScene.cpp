@@ -1,8 +1,10 @@
 #include "GameScene.h"
 
+#include "../Gamepad.h"
 #include "../Factory/FactoryManager.h"
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
+#include "../Actor/Facility/Shop.h"
 #include "../Actor//Terrain/Terrain.h"
 #include "../Component/CameraComponent.h"
 #include "../Stage/Gimmick/Bridge.h"
@@ -47,12 +49,6 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
-
-    if (::g_pInput->IsKeyPush(MOFKEY_O)) {
-        if (!_game.lock()->GetShopSystem()->IsEnable()) {
-            _game.lock()->GetShopSystem()->OnNotify(true);
-        } // if
-    } // if
 #endif // _DEBUG
 
     if (_re_initialize) {
@@ -69,10 +65,14 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     _delete_actors.clear();
 
 
-    // update
-    _stage.Update(delta_time);
-    _game_world.Update(delta_time);
-
+    if (_state != This::State::GamePause) {
+        // input
+        _game_world.Input();
+        
+        // update
+        _stage.Update(delta_time);
+        _game_world.Update(delta_time);
+    } // if
     // collision
     _physic_world.CollisionStage(&_stage);
     _physic_world.Update();
@@ -111,7 +111,8 @@ my::GameScene::GameScene() :
     _re_initialize(false),
     _ui_canvas(),
     _game(),
-    _event() {
+    _event(),
+    _state(This::State::Active) {
 }
 
 my::GameScene::~GameScene() {
@@ -133,6 +134,15 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
     if (type == "GameClear") {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
+}
+
+void my::GameScene::OnNotify(const my::ShopSystem::Info& info) {
+    if (info.close) {
+        this->_state = This::State::Active;
+    } // if
+    else {
+        this->_state = This::State::GamePause;
+    } // else
 }
 
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
@@ -221,6 +231,12 @@ bool my::GameScene::Initialize(void) {
     this->AddElement(player);
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<my::CameraComponent>());
 
+    {
+        param->transform.position = Mof::CVector3(15.0f, -5.0f, 7.0f);
+        param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
+        auto shop = my::FactoryManager::Singleton().CreateActor<my::Shop >("../Resource/builder/shop.json", param);
+        this->AddElement(shop);
+    }
 
     {
         param->name = "weapon";
@@ -240,6 +256,11 @@ bool my::GameScene::Initialize(void) {
         auto help_desk = game->GetHelpDesk();
         auto game_money = game->GetGameMoney();
         auto shop_system = game->GetShopSystem();
+
+        shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<This>(shared_from_this()));
+        player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
+        player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
+        player->PushNotificationableSubject("QuickChange");
         // game system
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
@@ -252,6 +273,7 @@ bool my::GameScene::Initialize(void) {
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
+        //shop_system->GetInfoSubject()->AddObserver(player);
 
         auto weapons = weapon_system->GetWeaponMap();
         for (auto& pair : weapons) {
@@ -274,6 +296,8 @@ bool my::GameScene::Initialize(void) {
 
     ut::SafeDelete(param);
     _re_initialize = false;
+
+    _player = player;
     return true;
 }
 
@@ -281,6 +305,10 @@ bool my::GameScene::Release(void) {
     super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {
+        //_shop_system_subject.RemoveObserver(game->GetShopSystem());
+        //_quick_change_subject.RemoveObserver(game->GetQuickChange());
+
+
         game->GameSystemRelease();
     } // if
     return true;

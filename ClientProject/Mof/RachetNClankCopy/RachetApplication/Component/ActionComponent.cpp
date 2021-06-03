@@ -65,6 +65,10 @@ const std::unordered_map<std::string, std::shared_ptr<my::ActionComponent>>& my:
     return this->_children;
 }
 
+bool my::ActionComponent::IsInput(void) const {
+    return true;
+}
+
 bool my::ActionComponent::Initialize(void) {
     super::Initialize();
     // コンポーネントの初期化
@@ -74,8 +78,18 @@ bool my::ActionComponent::Initialize(void) {
     return true;
 }
 
+bool my::ActionComponent::Input(void) {
+    if (_current_action) {
+        _current_action->Input();
+    } // if
+    return false;
+}
+
 bool my::ActionComponent::Update(float delta_time) {
-    return _current_action->Update(delta_time);
+    if (_current_action) {
+        _current_action->Update(delta_time);
+    } // if
+    return false;
 }
 
 bool my::ActionComponent::Release(void) {

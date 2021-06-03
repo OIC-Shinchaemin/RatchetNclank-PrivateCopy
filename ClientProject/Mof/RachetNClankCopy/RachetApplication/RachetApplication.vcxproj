@@ -282,6 +282,7 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
@@ -301,6 +302,7 @@
     <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\ShopCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp" />
@@ -390,6 +392,7 @@
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameSystem\GameMoney.cpp" />
     <ClCompile Include="Game\GameSystem\GameQuest.cpp" />
+    <ClCompile Include="Game\GameSystem\GameSystem.cpp" />
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp" />
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
@@ -563,6 +566,7 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
@@ -583,6 +587,7 @@
     <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\ShopCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h" />
@@ -687,6 +692,7 @@
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameSystem\GameMoney.h" />
     <ClInclude Include="Game\GameSystem\GameQuest.h" />
+    <ClInclude Include="Game\GameSystem\GameSystem.h" />
     <ClInclude Include="Game\GameSystem\HelpDesk.h" />
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />

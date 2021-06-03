@@ -13,6 +13,19 @@
 namespace my {
 class PlayerCrouchComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
+    using This = my::PlayerCrouchComponent;
+    struct InputInfo {
+        Mof::CVector2 in;
+        float move_angle = 0.0f;
+        bool move_flag = false;
+
+        void Reset(void) {
+            in.x = 0.0f;
+            in.y = 0.0f;
+            move_angle = 0.0f;
+            move_flag = false;
+        }
+    };
 private:
     struct Transition {
         std::string_view state;
@@ -27,6 +40,8 @@ private:
     float _angular_speed;
     //! ラジアン
     float _ideal_angle;
+    //! 入力情報
+    This::InputInfo _input_info;
     //! カメラ
     std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:
@@ -72,6 +87,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
+    /// <summary>
+    /// 入力
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void) override;
     /// <summary>
     /// 更新
     /// </summary>

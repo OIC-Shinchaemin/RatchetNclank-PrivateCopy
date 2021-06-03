@@ -15,10 +15,11 @@
 
 namespace my {
 enum class ActorState {
-    Active, // 更新、描画する
-    Inactive, // 更新、描画しない
-    Pause, // 更新しない、描画する
-    Hide, // 更新する、描画しない
+    Active, // 入力、更新、描画する
+    Inactive, // 入力、更新、描画しない
+    Sleep, // 入力しない、 更新する、描画する
+    Pause, // 入力しない、更新しない、描画する
+    Hide, // 入力する、更新する、描画しない
     End // 削除
 };
 class Actor : public std::enable_shared_from_this<my::Actor>, public my::Observable<const char*, const std::shared_ptr<my::Actor>&> {
@@ -57,8 +58,23 @@ private:
     std::optional<Mof::CMatrix44> _parent_transform;
     //! 機能
     ComArray _components;
+    ComArray _input_components;
     ComArray _update_components;
     ComArray _render_components;
+
+protected:
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Activate(void);
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Sleep(void);
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Pause(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -220,6 +236,12 @@ public:
     /// <param name="param"></param>
     /// <returns></returns>
     virtual bool Initialize(my::Actor::Param* param);
+    /// <summary>
+    /// 入力
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void);
     /// <summary>
     /// 更新
     /// </summary>

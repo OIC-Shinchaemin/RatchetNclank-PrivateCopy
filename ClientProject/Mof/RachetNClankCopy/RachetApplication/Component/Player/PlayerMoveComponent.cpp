@@ -44,7 +44,8 @@ my::PlayerMoveComponent::PlayerMoveComponent(int priority) :
     super(priority),
     _move_speed(2.5f),
     _angular_speed(3.5f),
-    _ideal_angle(0.0f) {
+    _ideal_angle(0.0f),
+    _input_info() {
 }
 
 my::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
@@ -52,6 +53,7 @@ my::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
+    _input_info(),
     _camera_com() {
 }
 
@@ -94,18 +96,7 @@ bool my::PlayerMoveComponent::Initialize(void) {
     return true;
 }
 
-bool my::PlayerMoveComponent::Update(float delta_time) {
-    if (auto type_com = _type_com.lock()) {
-        if (!type_com->IsActionEnable()) {
-            return false;
-        } // if
-    } // if
-
-    Mof::CVector2 in;
-    float move_angle;
-    bool jump_flag = false;
-    bool attack_flag = false;
-
+bool my::PlayerMoveComponent::Input(void) {
     // flag
     if (::g_pInput->IsKeyPush(MOFKEY_X) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
@@ -120,13 +111,28 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
         } // if
     } // else if
 
-    if (this->AquireInputData(in, move_angle)) {
+
+    auto& [in, move_angle, move_flag, jump_flag, attack_flag] = _input_info;
+    move_flag = this->AquireInputData(in, move_angle);
+    if (move_flag) {
         in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-        this->Move(_move_speed, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
     else {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // else
+
+    return false;
+}
+
+bool my::PlayerMoveComponent::Update(float delta_time) {
+    if (_input_info.move_flag) {
+        this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
+    } // if
+    else {
+        //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
+    } // else
+
+    _input_info.Reset();
     return true;
 }
 
@@ -142,11 +148,6 @@ std::shared_ptr<my::Component> my::PlayerMoveComponent::Clone(void) {
 }
 
 bool my::PlayerMoveComponent::Start(void) {
-    if (auto type_com = _type_com.lock()) {
-        if (!type_com->IsActionEnable()) {
-            //return false;
-        } // if
-    } // if
     if (this->IsActive()) {
         return false;
     } // if

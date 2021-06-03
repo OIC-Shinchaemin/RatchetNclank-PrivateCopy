@@ -20,12 +20,16 @@ std::string_view my::PlayerMeleeAttackTwoEndComponent::GetStateType(void) const 
     return state::PlayerActionStateType::kPlayerActionMeleeAttackTwoEndState;
 }
 
-bool my::PlayerMeleeAttackTwoEndComponent::Update(float delta_time) {
+bool my::PlayerMeleeAttackTwoEndComponent::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeState);
     } // if
 
+    return true;
+}
+
+bool my::PlayerMeleeAttackTwoEndComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if

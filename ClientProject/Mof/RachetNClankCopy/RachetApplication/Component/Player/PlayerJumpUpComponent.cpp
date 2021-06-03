@@ -46,37 +46,56 @@ bool my::PlayerJumpUpComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerJumpUpComponent::Input(void) {
+    if (::g_pInput->IsKeyPush(MOFKEY_X) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDoubleJumpState);
+    } // if
+    else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
+             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpAttackSetState);
+    } // else if
+
+    auto move_com = _move_com.lock();
+    auto& [in, move_angle, move_flag] = _input_info;
+    // flag
+    move_flag = move_com->AquireInputData(in, move_angle);
+    if (move_flag) {
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        //float move_speed = 2.4f; float angular_speed = 3.3f;
+        //move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
+    } // if
+
+
+    return true;
+}
+
 bool my::PlayerJumpUpComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
-    Mof::CVector2 in;
-    float move_angle;
-    bool jump_flag = false;
 
+
+
+//    Mof::CVector2 in;
+//    float move_angle;
+
+    auto& [in, move_angle, move_flag] = _input_info;
     // flag
-    if (move_com->AquireInputData(in, move_angle)) {
+    if (move_flag) {
         float move_speed = 2.4f; float angular_speed = 3.3f;
-        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
+
+    /// 
 
     _jump_speed -= _jump_decrase;
     if (_jump_speed < 0.0f) {
         _jump_speed = 0.0f;
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpDownState);
     } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_X) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDoubleJumpState);
-    } // if
-
-    else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
-             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpAttackSetState);
-    } // else if
     return true;
 }
 

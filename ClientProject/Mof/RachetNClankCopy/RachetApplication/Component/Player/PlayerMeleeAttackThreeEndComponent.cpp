@@ -20,6 +20,10 @@ std::string_view my::PlayerMeleeAttackThreeEndComponent::GetStateType(void) cons
     return state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState;
 }
 
+bool my::PlayerMeleeAttackThreeEndComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerMeleeAttackThreeEndComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);

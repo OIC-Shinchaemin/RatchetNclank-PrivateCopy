@@ -30,6 +30,10 @@ bool my::PlayerThrowAttackSetComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerThrowAttackSetComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerThrowAttackSetComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionThrowAttackState);
@@ -53,13 +57,5 @@ bool my::PlayerThrowAttackSetComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionThrowAttackSetState);
-    //if (auto motion_state_com = _motion_state_com.lock()) {
-        //motion_state_com->ChangeState(state::PlayerMotionStateType::kPlayerMotionThrowAttackSetState);
-    //} // if
-    /*
-    if (auto weapon_com = _weapon_com.lock()) {
-        weapon_com->Activate();
-    } // if
-    */
     return true;
 }

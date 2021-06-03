@@ -10,6 +10,22 @@
 namespace my {
 class PlayerMoveComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
+    struct InputInfo {
+        Mof::CVector2 in;
+        float move_angle = 0.0f;
+        bool move_flag = false;
+        bool jump_flag = false;
+        bool attack_flag = false;
+
+        void Reset(void) {
+            in.x = 0.0f;
+            in.y = 0.0f;
+            move_angle = 0.0f;
+            move_flag = false;
+            jump_flag = false;
+            attack_flag = false;
+        }
+    };
 private:
     //! 移動速度
     float _move_speed;
@@ -17,6 +33,8 @@ private:
     float _angular_speed;
     //! ラジアン
     float _ideal_angle;
+    //! 入力情報
+    my::PlayerMoveComponent::InputInfo _input_info;
     //! 状態
     std::weak_ptr<class PlayerComponent> _type_com;
     //! カメラ
@@ -93,6 +111,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
+    /// <summary>
+    /// 入力
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void) override;
     /// <summary>
     /// 更新
     /// </summary>

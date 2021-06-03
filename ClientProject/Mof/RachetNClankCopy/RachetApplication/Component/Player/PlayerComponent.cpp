@@ -15,16 +15,20 @@ my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
     _target(),
     _state_com(),
-    _next_terrain(),
-    _action_enable() {
+    _next_terrain()
+    //,
+    //_action_enable()
+{
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
     _target(),
     _state_com(),
-    _next_terrain(),
-    _action_enable() {
+    _next_terrain()
+    //,
+    //_action_enable() 
+{
 }
 
 my::PlayerComponent::~PlayerComponent() {
@@ -48,20 +52,6 @@ std::weak_ptr<my::Actor> my::PlayerComponent::GetTarget(void) const {
 
 std::string my::PlayerComponent::GetNextTerrain(void) const {
     return this->_next_terrain;
-}
-
-bool my::PlayerComponent::IsActionEnable(void) {
-    return this->_action_enable;
-}
-
-bool my::PlayerComponent::EnableAction(void) {
-    this->_action_enable = true;
-    return true;
-}
-
-bool my::PlayerComponent::DisableAction(void) {
-    this->_action_enable = false;
-    return true;
 }
 
 bool my::PlayerComponent::Initialize(void) {
@@ -101,6 +91,23 @@ bool my::PlayerComponent::Initialize(void) {
         } // if
         return true;
     }));
+
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+                               my::CollisionComponentType::kShopCollisionComponent,
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+        player->PushNotificationableSubject("ShopSystem");
+        return true;
+    }));
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Exit,
+                               my::CollisionComponentType::kShopCollisionComponent,
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+        player->PopNotificationableSubject("ShopSystem");
+        return true;
+    }));
+
+
 
 
     if (auto canvas = super::_ui_canvas.lock()) {
