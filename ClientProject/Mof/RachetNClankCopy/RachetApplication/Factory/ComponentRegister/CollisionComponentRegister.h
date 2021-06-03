@@ -12,3 +12,4 @@ my::ComponentFactory::AddComponentCreator<my::ShipCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::BoltCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::WaterFlowCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::CameraCollisionComponent>();
+my::ComponentFactory::AddComponentCreator<my::ShopCollisionComponent>();

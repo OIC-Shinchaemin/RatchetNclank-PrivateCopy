@@ -49,22 +49,6 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
-
-
-    if (::g_pInput->IsKeyPush(MOFKEY_O)) {
-        _player->PushNotificationableSubject("ShopSystem");
-    } // if
-        /*
-        if (!_game.lock()->GetShopSystem()->IsEnable()) {
-            _game.lock()->GetShopSystem()->OnNotify(true);
-        } // if
-        //
-    } // if
-    /*
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_RSHIFT)) {
-        _quick_change_subject.Notify(true);
-    } // if
-    */
 #endif // _DEBUG
 
     if (_re_initialize) {
@@ -80,13 +64,15 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     } // for
     _delete_actors.clear();
 
-    // input
-    _game_world.Input();
 
-    // update
-    _stage.Update(delta_time);
-    _game_world.Update(delta_time);
-
+    if (_state != This::State::GamePause) {
+        // input
+        _game_world.Input();
+        
+        // update
+        _stage.Update(delta_time);
+        _game_world.Update(delta_time);
+    } // if
     // collision
     _physic_world.CollisionStage(&_stage);
     _physic_world.Update();
@@ -125,7 +111,8 @@ my::GameScene::GameScene() :
     _re_initialize(false),
     _ui_canvas(),
     _game(),
-    _event() {
+    _event(),
+    _state(This::State::Active) {
 }
 
 my::GameScene::~GameScene() {
@@ -150,6 +137,12 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
 }
 
 void my::GameScene::OnNotify(const my::ShopSystem::Info& info) {
+    if (info.close) {
+        this->_state = This::State::Active;
+    } // if
+    else {
+        this->_state = This::State::GamePause;
+    } // else
 }
 
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
@@ -264,7 +257,7 @@ bool my::GameScene::Initialize(void) {
         auto game_money = game->GetGameMoney();
         auto shop_system = game->GetShopSystem();
 
-        
+        shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<This>(shared_from_this()));
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
         player->PushNotificationableSubject("QuickChange");
@@ -280,7 +273,7 @@ bool my::GameScene::Initialize(void) {
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
-        shop_system->GetInfoSubject()->AddObserver(player);
+        //shop_system->GetInfoSubject()->AddObserver(player);
 
         auto weapons = weapon_system->GetWeaponMap();
         for (auto& pair : weapons) {
@@ -314,8 +307,8 @@ bool my::GameScene::Release(void) {
     if (auto game = _game.lock()) {
         //_shop_system_subject.RemoveObserver(game->GetShopSystem());
         //_quick_change_subject.RemoveObserver(game->GetQuickChange());
-        
-        
+
+
         game->GameSystemRelease();
     } // if
     return true;

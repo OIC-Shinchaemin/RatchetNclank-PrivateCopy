@@ -12,3 +12,4 @@
 #include "BoltCollisionComponent.h"
 #include "WaterFlowCollisionComponent.h"
 #include "CameraCollisionComponent.h"
+#include "ShopCollisionComponent.h"

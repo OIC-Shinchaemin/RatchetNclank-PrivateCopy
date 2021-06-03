@@ -12,6 +12,12 @@
         "priority": 0,
         "path": "../Resource/mesh/shop/scene.mom"
       }
+    },
+    {
+      "type": "ShopCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
     }
   ]
 }

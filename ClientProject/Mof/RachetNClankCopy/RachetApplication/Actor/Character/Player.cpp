@@ -14,13 +14,11 @@ my::Player::Player() :
     _current_weapon(),
     _player_com(),
     _upp_bone_state(),
-    _shop_system_subject(),
-    _quick_change_subject(),
+    _shop_system_subject("ShopSystem"),
+    _quick_change_subject("QuickChange"),
     _notificationable_subject_map(),
-    _notificationable_subject_stack(),
-    _notificationable_subject_name() {
+    _notificationable_subject_stack() {
     super::SetTag("Player");
-
     _notificationable_subject_map.emplace("QuickChange", &_quick_change_subject);
     _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
 }
@@ -46,19 +44,19 @@ void my::Player::OnNotify(const my::QuickChangeSystem::Info& info) {
         super::Sleep();
     } // else if
 }
-
+/*
 void my::Player::OnNotify(const my::ShopSystem::Info& info) {
     if (info.close) {
         this->PopNotificationableSubject();
     } // if
 }
-
+*/
 my::Observable<bool>* my::Player::GetShopSystemSubject(void) {
-    return &this->_shop_system_subject;
+    return &this->_shop_system_subject.subject;
 }
 
 my::Observable<bool>* my::Player::GetQuickChangeSubject(void) {
-    return &this->_quick_change_subject;
+    return &this->_quick_change_subject.subject;
 }
 
 std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
@@ -85,37 +83,17 @@ void my::Player::AddChild(const std::shared_ptr<my::Actor>& ptr) {
 void my::Player::PushNotificationableSubject(const std::string& name) {
     auto subject = _notificationable_subject_map.at(name);
     _notificationable_subject_stack.push(subject);
-    /*
-    if (name == "QuickChange") {
-        _notificationable_subject = this->GetQuickChangeSubject();
-        _notificationable_subject_name = "QuickChange";
-    } // if
-    else if (name == "ShopSystem") {
-        _notificationable_subject = this->GetShopSystemSubject();
-        _notificationable_subject_name = "ShopSystem";
-    } // else if
-    */
-    /*
-    IState state = mStates[name];
-    mStack.Push(state);
-    */
 }
 
 void my::Player::PopNotificationableSubject(void) {
     _notificationable_subject_stack.pop();
 }
-/*
-void my::Player::ChangeNotificationableSubject(const std::string& name) {
-    if (name == "QuickChange") {
-        _notificationable_subject = this->GetQuickChangeSubject();
-        _notificationable_subject_name = "QuickChange";
+void my::Player::PopNotificationableSubject(const std::string& name) {
+    auto& subject = _notificationable_subject_stack.top();
+    if (subject->name == name) {
+        this->PopNotificationableSubject();
     } // if
-    else if (name == "ShopSystem") {
-        _notificationable_subject = this->GetShopSystemSubject();
-        _notificationable_subject_name = "ShopSystem";
-    } // else if
 }
-*/
 
 bool my::Player::Initialize(void) {
     this->Initialize();
@@ -135,27 +113,12 @@ bool my::Player::Initialize(my::Actor::Param* param) {
 
 bool my::Player::Input(void) {
     super::Input();
-    /*
-    if (::g_pInput->IsKeyPush(MOFKEY_O)) {
-        _shop_system_subject.Notify(true);
-    } // if
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_RSHIFT)) {
-        _quick_change_subject.Notify(true);
-    } // if
-    */
     if (!_notificationable_subject_stack.empty()) {
-        auto subject = _notificationable_subject_stack.top();
-        if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) ) {
-            subject->Notify(true);
+        auto& subject = _notificationable_subject_stack.top();
+        if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
+            subject->subject.Notify(true);
         } // if
     } // if
-/*
-    if (_notificationable_subject) {
-        if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_RSHIFT)) {
-            _notificationable_subject->Notify(true);
-        } // if
-    } // if
-*/
     return true;
 }
 
@@ -199,7 +162,6 @@ bool my::Player::Update(float delta_time) {
     return true;
 }
 
-#include <stack>
 bool my::Player::Render(void) {
     super::Render();
     if (_current_weapon) {
@@ -226,8 +188,8 @@ bool my::Player::Render(void) {
 bool my::Player::Release(void) {
     super::Release();
 
-    _shop_system_subject.Clear();
-    _quick_change_subject.Clear();
+    _shop_system_subject.subject.Clear();
+    _quick_change_subject.subject.Clear();
     _current_mechanical.reset();
     _omniwrench.reset();
     _children.clear();

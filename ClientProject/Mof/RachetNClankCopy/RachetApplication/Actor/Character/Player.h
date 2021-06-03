@@ -18,9 +18,16 @@
 namespace my {
 class Player : public my::Character,
     public my::Observer<std::shared_ptr<my::Weapon>>,
-    public my::Observer<const my::QuickChangeSystem::Info&>, 
-    public my::Observer<const my::ShopSystem::Info&> {
+    public my::Observer<const my::QuickChangeSystem::Info&> {
     using super = my::Character;
+    struct ObservablePair {
+        std::string name;
+        my::Observable<bool> subject;
+        ObservablePair(const char* str) :
+            name(str),
+            subject (){
+        }
+    };
 private:
     //! 武器
     std::weak_ptr<my::Mechanical> _current_mechanical;
@@ -37,18 +44,13 @@ private:
     //! 有効
     //bool _enable;
     //! 通知用
-    my::Observable<bool> _shop_system_subject;
+    ObservablePair _shop_system_subject;
     //! 通知用
-    my::Observable<bool> _quick_change_subject;
+    ObservablePair _quick_change_subject;
     //! 通知用
-    my::Observable<bool>* _notificationable_subject;
+    std::unordered_map<std::string, ObservablePair* >_notificationable_subject_map;
     //! 通知用
-    std::unordered_map<std::string, my::Observable<bool>* >_notificationable_subject_map;
-    //! 通知用
-    //std::vector<my::Observable<bool>* >_notificationable_subject_stack;
-    std::stack<my::Observable<bool>* >_notificationable_subject_stack;
-    //! 名前
-    std::string _notificationable_subject_name;
+    std::stack<ObservablePair*>_notificationable_subject_stack;
 public:
     /// <summary>
     /// コンストラクタ
@@ -72,7 +74,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const my::ShopSystem::Info& info) override;
+    //virtual void OnNotify(const my::ShopSystem::Info& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -98,12 +100,6 @@ public:
     /// <returns></returns>
     std::shared_ptr<my::Mechanical> GetCurrentMechanical(void) const;
     /// <summary>
-    /// 無効化
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //bool Disable(void);
-    /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
@@ -112,13 +108,17 @@ public:
     /// プッシュ
     /// </summary>
     /// <param name="name"></param>
-    //void ChangeNotificationableSubject(const std::string& name);
     void PushNotificationableSubject(const std::string& name);
     /// <summary>
     /// ポップ
     /// </summary>
     /// <param name=""></param>
     void PopNotificationableSubject(void);
+    /// <summary>
+    /// プッシュ
+    /// </summary>
+    /// <param name="name"></param>
+    void PopNotificationableSubject(const std::string& name);
     /// <summary>
     /// 初期化
     /// </summary>

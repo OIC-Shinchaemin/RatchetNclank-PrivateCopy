@@ -948,6 +948,12 @@
     <ClCompile Include="Game\GameSystem\GameSystem.cpp">
       <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\ShopCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1852,6 +1858,12 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\GameSystem.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\ShopCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

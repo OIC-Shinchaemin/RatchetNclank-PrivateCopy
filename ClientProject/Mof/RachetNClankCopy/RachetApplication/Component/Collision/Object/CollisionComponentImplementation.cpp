@@ -16,3 +16,4 @@ std::string my::CollisionComponentType::kBlasterBulletCollisionComponent = "Blas
 std::string my::CollisionComponentType::kBombGloveEffectCollisionComponent = "BombGloveEffectCollisionComponent";
 std::string my::CollisionComponentType::kWaterFlowCollisionComponent = "WaterFlowCollisionComponent";
 std::string my::CollisionComponentType::kCameraCollisionComponent = "CameraCollisionComponent";
+std::string my::CollisionComponentType::kShopCollisionComponent = "ShopCollisionComponent";
