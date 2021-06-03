@@ -10,7 +10,22 @@
 namespace my {
 class PlayerJumpLandingComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
+    using This = my::PlayerJumpLandingComponent;
+    struct InputInfo {
+        Mof::CVector2 in;
+        float move_angle = 0.0f;
+        bool move_flag = false;
+
+        void Reset(void) {
+            in.x = 0.0f;
+            in.y = 0.0f;
+            move_angle = 0.0f;
+            move_flag = false;
+        }
+    };
 private:
+    //! “ü—Íî•ñ
+    This::InputInfo _input_info;
     //! ˆÚ“®
     std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:

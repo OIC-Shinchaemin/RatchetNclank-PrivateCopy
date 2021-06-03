@@ -61,6 +61,20 @@ private:
     ComArray _input_components;
     ComArray _update_components;
     ComArray _render_components;
+
+protected:
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Activate(void);
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Sleep(void);
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Pause(void);
 public:
     /// <summary>
     /// コンストラクタ

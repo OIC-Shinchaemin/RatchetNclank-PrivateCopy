@@ -10,13 +10,26 @@
 namespace my {
 class PlayerDoubleJumpComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
+    using This = my::PlayerDoubleJumpComponent;
+    struct InputInfo {
+        Mof::CVector2 in;
+        float move_angle = 0.0f;
+        bool move_flag = false;
+
+        void Reset(void) {
+            in.x = 0.0f;
+            in.y = 0.0f;
+            move_angle = 0.0f;
+            move_flag = false;
+        }
+    };
 private:
-    //! Å‘å
-    //float _jump_speed_max;
     //! ‘¬“x
     float _jump_speed;
     //! Œ¸­
     float _jump_decrase;
+    //! “ü—Íî•ñ
+    This::InputInfo _input_info;
     //! ˆÚ“®
     std::weak_ptr<class PlayerMoveComponent> _move_com;
     /// <summary>

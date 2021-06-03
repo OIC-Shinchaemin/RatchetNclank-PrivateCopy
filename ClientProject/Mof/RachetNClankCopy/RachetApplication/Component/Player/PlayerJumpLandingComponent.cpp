@@ -5,11 +5,13 @@
 
 my::PlayerJumpLandingComponent::PlayerJumpLandingComponent(int priority) :
     super(priority),
+    _input_info(),
     _move_com() {
 }
 
 my::PlayerJumpLandingComponent::PlayerJumpLandingComponent(const PlayerJumpLandingComponent& obj) :
     super(obj),
+    _input_info(),
     _move_com() {
 }
 
@@ -31,19 +33,29 @@ bool my::PlayerJumpLandingComponent::Initialize(void) {
 }
 
 bool my::PlayerJumpLandingComponent::Input(void) {
-    return false;
+    auto move_com = _move_com.lock();
+    auto& [in, move_angle, move_flag] = _input_info;
+    move_flag = move_com->AquireInputData(in, move_angle);
+
+    if (move_flag) {
+        //float move_speed = 1.7f; float angular_speed = 3.3f;
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        //move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
+    } // if
+
+    return true;
 }
 
 bool my::PlayerJumpLandingComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 
-    Mof::CVector2 in;
-    float move_angle;
+    //Mof::CVector2 in;
+    //float move_angle;
 
-    // flag
-    if (move_com->AquireInputData(in, move_angle)) {
+    auto& [in, move_angle, move_flag] = _input_info;
+    if (move_flag) {
         float move_speed = 1.7f; float angular_speed = 3.3f;
-        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+        //in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
 
@@ -54,6 +66,8 @@ bool my::PlayerJumpLandingComponent::Update(float delta_time) {
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // if
+    _input_info.Reset();
+
     return true;
 }
 

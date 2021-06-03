@@ -6,6 +6,16 @@
 #include "Factory/Builder/IBuilder.h"
 
 
+void my::Actor::Activate(void) {
+    this->_state = my::ActorState::Active;
+}
+void my::Actor::Sleep(void) {
+    this->_state = my::ActorState::Sleep;
+}
+void my::Actor::Pause(void) {
+    this->_state = my::ActorState::Pause;
+}
+
 my::Actor::Actor() :
     _state(my::ActorState::Active),
     _name(),

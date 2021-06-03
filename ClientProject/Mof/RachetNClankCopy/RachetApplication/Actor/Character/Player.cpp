@@ -48,7 +48,22 @@ bool my::Player::Initialize(my::Actor::Param* param) {
     } // if
     return true;
 }
+/*
+bool my::Player::Input(void) {
+    if (::g_pInput->IsKeyHold(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
+        super::Sleep();
+    } // if
+    if (::g_pInput->IsKeyPull(MOFKEY_LSHIFT)) {
+        super::Activate();
+    } // else if
 
+    if (super::GetState() == my::ActorState::Active) {
+        puts("super::Input()");
+        super::Input();
+    } // if
+    return false;
+}
+*/
 my::Player::Player() :
     super(),
     _current_mechanical(),
@@ -72,7 +87,7 @@ my::Player::~Player() {
 }
 
 void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
-    if (auto mechanical = std::dynamic_pointer_cast<my::Mechanical>(change) ) {
+    if (auto mechanical = std::dynamic_pointer_cast<my::Mechanical>(change)) {
         _current_mechanical = mechanical;
     } // if
     _current_weapon = change;
@@ -101,7 +116,7 @@ bool my::Player::Update(float delta_time) {
     Mof::CMatrix44 mat = _upp_bone_state->pBone->GetRotationOffsetMatrix() * _upp_bone_state->BoneMatrix;
     Mof::CVector3 scale, rotate, translate;
     mat.GetScaling(scale); mat.GetRotation(rotate); mat.GetTranslation(translate);
-    
+
     if (_current_weapon) {
         _current_weapon->SetScale(scale);
         _current_weapon->SetPosition(translate);

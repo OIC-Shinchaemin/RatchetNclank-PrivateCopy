@@ -10,6 +10,19 @@
 namespace my {
 class PlayerJumpSetComponent : public my::PlayerActionComponent {
     using super = my::PlayerActionComponent;
+    using This = my::PlayerJumpSetComponent;
+    struct InputInfo {
+        Mof::CVector2 in;
+        float move_angle = 0.0f;
+        bool move_flag = false;
+
+        void Reset(void) {
+            in.x = 0.0f;
+            in.y = 0.0f;
+            move_angle = 0.0f;
+            move_flag = false;
+        }
+    };
 private:
     //! ジャンプ
     float _jump_speed;
@@ -17,6 +30,8 @@ private:
     float _jump_speed_first;
     //! ジャンプ
     float _jump_speed_increase;
+    //! 入力情報
+    This::InputInfo _input_info;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
     //! 移動

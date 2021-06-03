@@ -117,9 +117,11 @@ bool my::PlayerMoveComponent::Input(void) {
         } // if
     } // else if
 
-    _input_info.move_flag = this->AquireInputData(_input_info.in, _input_info.move_angle);
-    if (_input_info.move_flag) {
-        _input_info.in = math::Rotate(_input_info.in.x, _input_info.in.y, math::ToRadian(_input_info.move_angle));
+
+    auto& [in, move_angle, move_flag, jump_flag, attack_flag] = _input_info;
+    move_flag = this->AquireInputData(in, move_angle);
+    if (move_flag) {
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         //this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
     } // if
     else {
@@ -137,7 +139,10 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
     bool attack_flag = false;
     */
 
-    this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
+
+    if (_input_info.move_flag) {
+        this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
+    } // if
     _input_info.Reset();
 
 

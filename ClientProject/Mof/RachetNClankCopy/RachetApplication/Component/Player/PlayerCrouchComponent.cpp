@@ -9,6 +9,7 @@ my::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
     super(priority),
     _angular_speed(),
     _ideal_angle(),
+    _input_info(),
     _move_com() {
 }
 
@@ -16,6 +17,7 @@ my::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent& ob
     super(obj),
     _angular_speed(0.4f),
     _ideal_angle(),
+    _input_info(),
     _move_com() {
 }
 
@@ -45,10 +47,6 @@ bool my::PlayerCrouchComponent::Initialize(void) {
 }
 
 bool my::PlayerCrouchComponent::Input(void) {
-    return false;
-}
-
-bool my::PlayerCrouchComponent::Update(float delta_time) {
     using Type = state::PlayerActionStateType;
     if (::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN)) {
         super::ChangeActionState(Type::kPlayerActionIdleState);
@@ -56,12 +54,14 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
     else if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(Type::kPlayerActionThrowAttackSetState);
     } // else if
-    else if (::g_pInput->IsKeyPush(MOFKEY_C) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        if (auto move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>()) {
-            auto camera_com = super::GetOwner()->GetComponent<my::CameraComponent>();
 
-            Mof::CVector2 in; float move_angle;
-            if (move_com->AquireInputData(in, move_angle)) {
+
+    if (auto move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>()) {
+        auto camera_com = super::GetOwner()->GetComponent<my::CameraComponent>();
+
+        Mof::CVector2 in; float move_angle;
+        if (move_com->AquireInputData(in, move_angle)) {
+            if (::g_pInput->IsKeyPush(MOFKEY_C) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
                 in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
                 auto view_front = camera_com->GetViewFront();
                 float camera_angle_y = std::atan2(-view_front.z, view_front.x);
@@ -73,11 +73,11 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
                 auto owner_circle_position = Mof::CVector2(std::cosf(owner_rotate_y), std::sinf(owner_rotate_y));
                 auto input_circle_position = Mof::CVector2(std::cosf(move_angle), std::sinf(move_angle));
                 float distance = Mof::CVector2Utilities::Distance(owner_circle_position, input_circle_position);
-                float distance_threshold = 1.3f;
+                float distance_threshold = 0.8f;
                 if (distance_threshold < distance) {
                     move_com->AquireInputData(in, move_angle);
                     move_angle += math::kHalfPi + camera_angle_y;
-                    
+
                     MOF_NORMALIZE_RADIANANGLE(move_angle);
                     super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerCartwheelJumpComponent>()->SetMoveAngle(move_angle);
                     super::ChangeActionState(Type::kPlayerActionCartwheelJumpState);
@@ -85,17 +85,24 @@ bool my::PlayerCrouchComponent::Update(float delta_time) {
             } // if
         } // if
 
-    } // else if
+    } // if
 
+    auto move_com = _move_com.lock();
+    auto& [in, move_angle, move_flag] = _input_info;
+    move_flag = move_com->AquireInputData(in, move_angle);
 
+    if (move_flag) {
+        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
+    } // if
 
+    return true;
+}
 
-    if (auto move_com = _move_com.lock()) {
-        Mof::CVector2 in;
-        if (move_com->AquireInputData(in, _ideal_angle)) {
-            in = math::Rotate(in.x, in.y, math::ToRadian(_ideal_angle));
-            move_com->Move(0.0f, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
-        } // if
+bool my::PlayerCrouchComponent::Update(float delta_time) {
+    auto move_com = _move_com.lock();
+    auto& [in, move_angle, move_flag] = _input_info;
+    if (move_flag) {
+        move_com->Move(0.0f, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
     return true;
 }
