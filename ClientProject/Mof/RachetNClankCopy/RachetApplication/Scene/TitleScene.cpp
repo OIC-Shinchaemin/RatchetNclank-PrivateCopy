@@ -11,6 +11,10 @@ bool my::TitleScene::SceneUpdate(float delta_time) {
         ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kGameScene, ""));
     } // if
+    else if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
+             ::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+        _subject.Notify(my::SceneMessage(my::SceneType::kDescriptionScene, ""));
+    } // else if
 
     //_demo_actor->Update(delta_time);
 

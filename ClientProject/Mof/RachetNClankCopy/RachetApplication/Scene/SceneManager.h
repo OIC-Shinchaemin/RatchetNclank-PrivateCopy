@@ -35,6 +35,9 @@ private:
     std::weak_ptr<my::GameManager> _game_manager;
     //! ゲームイベント
     std::weak_ptr<my::EventManager> _event_manager;
+    //! ファクトリー
+    my::Factory<my::Scene> _factory;
+
     /// <summary>
     /// 変更
     /// </summary>

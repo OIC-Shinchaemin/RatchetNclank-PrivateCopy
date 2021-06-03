@@ -954,6 +954,9 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\DescriptionScene.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1864,6 +1867,9 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\DescriptionScene.h">
+      <Filter>Rachet\Header\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

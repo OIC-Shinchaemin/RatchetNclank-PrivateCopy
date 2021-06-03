@@ -404,6 +404,7 @@
     <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="Light\LightManager.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
+    <ClCompile Include="Scene\DescriptionScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneImplementation.cpp" />
@@ -707,6 +708,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene\ClearScene.h" />
+    <ClInclude Include="Scene\DescriptionScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />

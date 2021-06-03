@@ -4,18 +4,23 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "ClearScene.h"
+#include "DescriptionScene.h"
 
 
 void my::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<my::Scene::Param> param) {
     _scene.reset();
     if (name == my::SceneType::kTitleScene) {
         param->resource = "../Resource/scene_resource/title_scene.txt";
-        auto temp = ut::MakeSharedWithRelease<my::TitleScene>();
+        //auto temp = ut::MakeSharedWithRelease<my::TitleScene>();
+        auto temp = _factory.Create(name);
+        //ut::MakeSharedWithRelease<my::TitleScene>();
         temp->SetResourceManager(_resource);
         _scene = temp;
     } // if
     else if (name == my::SceneType::kGameScene) {
         param->resource = "../Resource/scene_resource/game_scene.txt";
+        //auto temp = ut::MakeSharedWithRelease<my::GameScene>();
+        //auto temp = _factory.Create(name);
         auto temp = ut::MakeSharedWithRelease<my::GameScene>();
         temp->SetResourceManager(_resource);
         temp->SetGameManager(_game_manager);
@@ -25,7 +30,15 @@ void my::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<my::
     } // else if
     else if (name == my::SceneType::kClearScene) {
         param->resource = "../Resource/scene_resource/clear_scene.txt";
-        auto temp = ut::MakeSharedWithRelease<my::ClearScene>();
+        //auto temp = ut::MakeSharedWithRelease<my::ClearScene>();
+        auto temp = _factory.Create(name);
+        temp->SetResourceManager(_resource);
+        _scene = temp;
+    } // else if
+    else if (name == my::SceneType::kDescriptionScene) {
+        param->resource = "../Resource/scene_resource/clear_scene.txt";
+        //auto temp = ut::MakeSharedWithRelease<my::DescriptionScene>();
+        auto temp = _factory.Create(name);
         temp->SetResourceManager(_resource);
         _scene = temp;
     } // else if
@@ -51,6 +64,11 @@ my::SceneManager::SceneManager() :
     _ui_canvas(),
     _game_manager(),
     _event_manager() {
+
+    _factory.Register<my::TitleScene>(my::SceneType::kTitleScene);
+    _factory.Register<my::GameScene>(my::SceneType::kGameScene);
+    _factory.Register<my::ClearScene>(my::SceneType::kClearScene);
+    _factory.Register<my::DescriptionScene>(my::SceneType::kDescriptionScene);
 }
 
 my::SceneManager::~SceneManager() {
