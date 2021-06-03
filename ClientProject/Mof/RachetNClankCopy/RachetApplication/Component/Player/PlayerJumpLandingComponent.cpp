@@ -30,6 +30,10 @@ bool my::PlayerJumpLandingComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerJumpLandingComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerJumpLandingComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 

@@ -30,6 +30,10 @@ bool my::PlayerThrowAttackEndComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerThrowAttackEndComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerThrowAttackEndComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);

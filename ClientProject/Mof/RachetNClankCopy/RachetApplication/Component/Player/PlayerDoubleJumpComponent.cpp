@@ -45,6 +45,10 @@ bool my::PlayerDoubleJumpComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerDoubleJumpComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerDoubleJumpComponent::Update(float delta_time) {      
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);

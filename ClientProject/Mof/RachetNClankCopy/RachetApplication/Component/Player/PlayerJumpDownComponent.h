@@ -53,6 +53,12 @@ public:
     /// <returns></returns>
     virtual bool Initialize(void) override;
     /// <summary>
+    /// “ü—Í
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void) override;
+    /// <summary>
     /// XV
     /// </summary>
     /// <param name="delta_time">ŠÔ</param>

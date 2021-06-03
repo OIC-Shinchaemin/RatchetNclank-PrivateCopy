@@ -44,6 +44,10 @@ bool my::PlayerCrouchComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerCrouchComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerCrouchComponent::Update(float delta_time) {
     using Type = state::PlayerActionStateType;
     if (::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN)) {

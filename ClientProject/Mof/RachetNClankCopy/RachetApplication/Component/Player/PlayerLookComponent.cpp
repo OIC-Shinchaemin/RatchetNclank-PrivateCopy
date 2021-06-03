@@ -20,6 +20,10 @@ std::string_view my::PlayerLookComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionLookState;
 }
 
+bool my::PlayerLookComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerLookComponent::Update(float delta_time) {
     return true;
 }

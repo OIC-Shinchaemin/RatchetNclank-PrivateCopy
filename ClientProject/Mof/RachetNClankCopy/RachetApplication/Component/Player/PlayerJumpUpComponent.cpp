@@ -46,6 +46,10 @@ bool my::PlayerJumpUpComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerJumpUpComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerJumpUpComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 

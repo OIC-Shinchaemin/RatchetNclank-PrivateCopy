@@ -44,7 +44,8 @@ my::PlayerMoveComponent::PlayerMoveComponent(int priority) :
     super(priority),
     _move_speed(2.5f),
     _angular_speed(3.5f),
-    _ideal_angle(0.0f) {
+    _ideal_angle(0.0f),
+    _input_info() {
 }
 
 my::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
@@ -52,6 +53,7 @@ my::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
+    _input_info(),
     _camera_com() {
 }
 
@@ -94,17 +96,12 @@ bool my::PlayerMoveComponent::Initialize(void) {
     return true;
 }
 
-bool my::PlayerMoveComponent::Update(float delta_time) {
+bool my::PlayerMoveComponent::Input(void) {
     if (auto type_com = _type_com.lock()) {
         if (!type_com->IsActionEnable()) {
             return false;
         } // if
     } // if
-
-    Mof::CVector2 in;
-    float move_angle;
-    bool jump_flag = false;
-    bool attack_flag = false;
 
     // flag
     if (::g_pInput->IsKeyPush(MOFKEY_X) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
@@ -120,13 +117,55 @@ bool my::PlayerMoveComponent::Update(float delta_time) {
         } // if
     } // else if
 
-    if (this->AquireInputData(in, move_angle)) {
-        in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
-        this->Move(_move_speed, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
+    _input_info.move_flag = this->AquireInputData(_input_info.in, _input_info.move_angle);
+    if (_input_info.move_flag) {
+        _input_info.in = math::Rotate(_input_info.in.x, _input_info.in.y, math::ToRadian(_input_info.move_angle));
+        //this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
     } // if
     else {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // else
+
+    return false;
+}
+
+bool my::PlayerMoveComponent::Update(float delta_time) {
+    /*
+    Mof::CVector2 in;
+    float move_angle;
+    bool jump_flag = false;
+    bool attack_flag = false;
+    */
+
+    this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
+    _input_info.Reset();
+
+
+    /*
+    // flag
+    if (::g_pInput->IsKeyPush(MOFKEY_X) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+    } // if
+    else if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+    } // else if
+    else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+        auto owner = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+        if (owner->GetCurrentMechanical()) {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+        } // if
+    } // else if
+
+    _input_info.move_flag = this->AquireInputData(_input_info.in, _input_info.move_angle);
+    if (_input_info.move_flag) {
+        _input_info .in= math::Rotate(_input_info.in.x, _input_info.in.y, math::ToRadian(_input_info.move_angle));
+        this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
+    } // if
+    else {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
+    } // else
+    */
+
     return true;
 }
 

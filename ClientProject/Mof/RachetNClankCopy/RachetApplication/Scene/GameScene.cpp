@@ -68,6 +68,8 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     } // for
     _delete_actors.clear();
 
+    // input
+    _game_world.Input();
 
     // update
     _stage.Update(delta_time);

@@ -36,6 +36,10 @@ bool my::PlayerJumpDownComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerJumpDownComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerJumpDownComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 

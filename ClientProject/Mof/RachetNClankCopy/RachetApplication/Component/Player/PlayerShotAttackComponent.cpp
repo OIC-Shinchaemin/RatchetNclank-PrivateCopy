@@ -33,6 +33,10 @@ bool my::PlayerShotAttackComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerShotAttackComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerShotAttackComponent::Update(float delta_time) {
     if (auto move_com = _move_com.lock()) {
         Mof::CVector2 in;    float move_angle;

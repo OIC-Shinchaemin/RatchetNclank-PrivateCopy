@@ -78,6 +78,13 @@ bool my::ActionComponent::Initialize(void) {
     return true;
 }
 
+bool my::ActionComponent::Input(void) {
+    if (_current_action) {
+        _current_action->Input();
+    } // if
+    return false;
+}
+
 bool my::ActionComponent::Update(float delta_time) {
     return _current_action->Update(delta_time);
 }

@@ -37,6 +37,10 @@ bool my::PlayerMeleeAttackTwoComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerMeleeAttackTwoComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerMeleeAttackTwoComponent::Update(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {

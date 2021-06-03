@@ -40,6 +40,10 @@ bool my::PlayerJumpSetComponent::Initialize(void) {
     return true;
 }
 
+bool my::PlayerJumpSetComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerJumpSetComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 

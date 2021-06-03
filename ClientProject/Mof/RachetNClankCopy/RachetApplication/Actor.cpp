@@ -92,6 +92,9 @@ bool my::Actor::InFrustum(void) const {
 }
 
 void my::Actor::AddComponent(const ComPtr& component) {
+    if (component->IsInput()) {
+        ut::InsertAscend(_input_components, component);
+    } // if
     if (component->IsUpdate()) {
         ut::InsertAscend(_update_components, component);
     } // if
@@ -113,6 +116,9 @@ void my::Actor::CloneToComponents(const ComArray& com_array) {
 }
 
 void my::Actor::RemoveComponent(const ComPtr& component) {
+    if (component->IsInput()) {
+        ut::EraseFind(_input_components, component);
+    } // if
     if (component->IsUpdate()) {
         ut::EraseFind(_update_components, component);
     } // if
@@ -191,6 +197,7 @@ bool my::Actor::Render(void) {
 }
 
 bool my::Actor::Release(void) {
+    _input_components.clear();
     _update_components.clear();
     _render_components.clear();
     for (auto& com : _components) {

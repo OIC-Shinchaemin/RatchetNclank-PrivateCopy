@@ -27,7 +27,10 @@ void my::GameWorld::RemoveActor(const ActorPtr& actor) {
 bool my::GameWorld::Input(void) {
     // input
     for (auto& actor : _actors) {
-        actor->Input();
+        auto state = actor->GetState();
+        if (state == my::ActorState::Active) {
+            actor->Input();
+        } // if
     } // for
     return true;
 }
@@ -35,7 +38,12 @@ bool my::GameWorld::Input(void) {
 bool my::GameWorld::Update(float delta_time) {
     // update
     for (auto& actor : _actors) {
-        actor->Update(delta_time);
+        auto state = actor->GetState();
+        if (state == my::ActorState::Active ||
+            state == my::ActorState::Sleep ||
+            state == my::ActorState::Hide) {
+            actor->Update(delta_time);
+        } // if
     } // for
     return true;
 }

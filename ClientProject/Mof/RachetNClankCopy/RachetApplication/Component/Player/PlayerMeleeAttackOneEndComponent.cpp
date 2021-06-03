@@ -20,6 +20,10 @@ std::string_view my::PlayerMeleeAttackOneEndComponent::GetStateType(void) const 
     return state::PlayerActionStateType::kPlayerActionMeleeAttackOneEndState;
 }
 
+bool my::PlayerMeleeAttackOneEndComponent::Input(void) {
+    return false;
+}
+
 bool my::PlayerMeleeAttackOneEndComponent::Update(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
