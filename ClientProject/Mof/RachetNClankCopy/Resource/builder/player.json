@@ -53,7 +53,7 @@
     {
       "type": "ActionComponent",
       "paramater": {
-        "priority": 90,
+        "priority": 79,
         "children": [
           {
             "type": "PlayerIdleComponent",

@@ -390,6 +390,7 @@
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameSystem\GameMoney.cpp" />
     <ClCompile Include="Game\GameSystem\GameQuest.cpp" />
+    <ClCompile Include="Game\GameSystem\GameSystem.cpp" />
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp" />
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
@@ -687,6 +688,7 @@
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameSystem\GameMoney.h" />
     <ClInclude Include="Game\GameSystem\GameQuest.h" />
+    <ClInclude Include="Game\GameSystem\GameSystem.h" />
     <ClInclude Include="Game\GameSystem\HelpDesk.h" />
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />

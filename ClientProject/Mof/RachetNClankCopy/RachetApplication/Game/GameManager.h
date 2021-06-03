@@ -4,6 +4,7 @@
 
 #include <memory>
 
+#include "GameSystem/GameSystem.h"
 #include "GameSystem/GameMoney.h"
 #include "GameSystem/WeaponSystem.h"
 #include "GameSystem/QuickChangeSystem.h"
@@ -15,12 +16,12 @@
 namespace my {
 class GameManager : 
     public std::enable_shared_from_this<my::GameManager>,
-    public my::Observer<const std::shared_ptr<my::ShopSystem>&> {
+    public my::Observer<const std::shared_ptr<my::GameSystem>&> {
 private:
     //! 更新用
-    std::vector<std::shared_ptr<my::ShopSystem>> _update_system;
+    std::vector<std::shared_ptr<my::GameSystem>> _update_system;
     //! 更新用
-    std::vector<std::shared_ptr<my::ShopSystem>> _disable_systems;
+    std::vector<std::shared_ptr<my::GameSystem>> _disable_systems;
     //! 武器
     std::shared_ptr<my::WeaponSystem>  _weapon_system;
     //! クイックチェンジ
@@ -48,7 +49,7 @@ public:
     /// 通知
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void OnNotify(const std::shared_ptr<my::ShopSystem>& ptr);
+    virtual void OnNotify(const std::shared_ptr<my::GameSystem>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -104,8 +105,7 @@ public:
     /// 更新
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
-    bool Update(void);
+    bool Update(float delta_time);
     /// <summary>
     /// 解放
     /// </summary>

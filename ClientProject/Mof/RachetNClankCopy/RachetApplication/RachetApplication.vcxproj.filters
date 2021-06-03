@@ -945,6 +945,9 @@
     <ClCompile Include="UI\ShopSystemMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameSystem\GameSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1846,6 +1849,9 @@
     </ClInclude>
     <ClInclude Include="UI\ShopSystemMenu.h">
       <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GameSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

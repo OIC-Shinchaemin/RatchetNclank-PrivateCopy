@@ -3,6 +3,25 @@
 #include "../../UI/ShopSystemMenu.h"
 
 
+bool my::ShopSystem::Close(void) {
+    _infomation.close = true;
+    _info_subject.Notify(_infomation);
+    if (auto weapon_system = _weapon_system.lock()) {
+        auto info = my::Mechanical::Info();
+        if (_prev_weapon.has_value()) {
+            auto prev = weapon_system->GetMechanicalWeapon(_prev_weapon.value());
+            info.bullet_count = prev->GetBulletCount();
+            info.name = prev->GetName();
+        } // if
+        _equipment_weapon_menu_subject.Notify(info);
+    } // if
+    if (auto game_money = _game_money.lock()) {
+        game_money_menu_subject.Notify(game_money->GetValue());
+    } // if
+
+    return false;
+}
+
 void my::ShopSystem::Buy(void) {
     auto current = _items.at(_infomation.index);
 
@@ -41,7 +60,6 @@ void my::ShopSystem::NotifyGameMoneyMenu(void) {
 
 my::ShopSystem::ShopSystem() :
     _infomation(),
-    _subject(),
     _info_subject(),
     _equipment_weapon_menu_subject(),
     game_money_menu_subject(),
@@ -49,9 +67,7 @@ my::ShopSystem::ShopSystem() :
     _items(),
     _prev_weapon(),
     _weapon_system(),
-    _game_money(),
-    _resource(),
-    _ui_canvas() {
+    _game_money(){
 }
 
 my::ShopSystem::~ShopSystem() {
@@ -60,6 +76,9 @@ my::ShopSystem::~ShopSystem() {
 }
 
 void my::ShopSystem::OnNotify(bool flag) {
+    super::OnNotify(flag);
+    _infomation.close = false;
+
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetCurrentMechanicalWeapon();
         if (weapon) {
@@ -71,7 +90,7 @@ void my::ShopSystem::OnNotify(bool flag) {
     _infomation.enable = flag;
     _infomation.weapon = _items.at(_infomation.index).name;
     _info_subject.Notify(_infomation);
-    _subject.Notify(shared_from_this());
+    //_subject.Notify(shared_from_this());
 
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
@@ -93,16 +112,8 @@ void my::ShopSystem::SetGameMoney(std::weak_ptr<my::GameMoney> ptr) {
     this->_game_money = ptr;
 }
 
-void my::ShopSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
-    this->_resource = ptr;
-}
-
-void my::ShopSystem::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
-    this->_ui_canvas = ptr;
-}
-
-my::Observable<const std::shared_ptr<my::ShopSystem>&>* my::ShopSystem::GetSubject(void) {
-    return &this->_subject;
+my::Observable<const my::ShopSystem::Info&>* my::ShopSystem::GetInfoSubject(void) {
+    return &this->_info_subject;
 }
 
 my::Observable<const my::ChargeInfo&>* my::ShopSystem::GetChargeInfoSubject(void) {
@@ -135,19 +146,19 @@ bool my::ShopSystem::Load(my::SaveData& in) {
 }
 
 bool my::ShopSystem::Initialize(void) {
-    if (auto canvas = _ui_canvas.lock()) {
+    if (auto canvas = super::GetUICanvas() ) {
         canvas->RemoveElement("ShopSystemMenu");
     } // if
     auto menu = std::make_shared< my::ShopSystemMenu>("ShopSystemMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
-    menu->SetResourceManager(_resource);
+    menu->SetResourceManager(super::GetResource());
     menu->Initialize();
-    if (auto canvas = _ui_canvas.lock()) {
+    if (auto canvas = super::GetUICanvas()) {
         canvas->AddElement(menu);
     } // if
 
-    if (auto canvas = _ui_canvas.lock()) {
+    if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
             auto menu = std::dynamic_pointer_cast<my::Observer<const my::Mechanical::Info&>>(temp);
@@ -163,22 +174,10 @@ bool my::ShopSystem::Initialize(void) {
 }
 
 bool my::ShopSystem::Update(float delta_time) {
-    if (!_infomation.enable) {
-        _info_subject.Notify(_infomation);
-        if (auto weapon_system = _weapon_system.lock()) {
-            auto info = my::Mechanical::Info();
-            if (_prev_weapon.has_value()) {
-                auto prev = weapon_system->GetMechanicalWeapon(_prev_weapon.value());
-                info.bullet_count = prev->GetBulletCount();
-                info.name = prev->GetName();
-            } // if
-            _equipment_weapon_menu_subject.Notify(info);
-        } // if
-        if (auto game_money = _game_money .lock()) {
-            game_money_menu_subject.Notify(game_money->GetValue());
-        } // if
-        return false;
+    if (!_infomation.enable) {        
+        return this->Close();
     } // if
+    _infomation.close = false;
 
     if (::g_pInput->IsKeyPush(MOFKEY_M)) {
         if (!_infomation.select) {
@@ -268,11 +267,11 @@ bool my::ShopSystem::Update(float delta_time) {
 }
 
 bool my::ShopSystem::Release(void) {
-    if (auto canvas = _ui_canvas.lock()) {
+    if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("ShopSystemMenu");
     } // if
 
-    if (auto canvas = _ui_canvas.lock()) {
+    if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
             auto menu = std::dynamic_pointer_cast<my::Observer<const my::Mechanical::Info&>>(temp);

@@ -86,7 +86,10 @@ bool my::ActionComponent::Input(void) {
 }
 
 bool my::ActionComponent::Update(float delta_time) {
-    return _current_action->Update(delta_time);
+    if (_current_action) {
+        _current_action->Update(delta_time);
+    } // if
+    return false;
 }
 
 bool my::ActionComponent::Release(void) {

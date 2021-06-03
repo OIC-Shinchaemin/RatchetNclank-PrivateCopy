@@ -37,6 +37,10 @@ bool my::PlayerStateComponent::CanTransition(std::string_view next) const {
         else if (current == Type::kPlayerActionDamageState) {
             return false;
         } // else if
+        else if (current == Type::kPlayerActionJumpAttackState) {
+            return false;
+        } // else if
+
     } // if
     else if (next == Type::kPlayerActionDamageState) {
         if (current == Type::kPlayerActionDamageState) {

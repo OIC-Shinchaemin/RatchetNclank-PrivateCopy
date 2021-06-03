@@ -14,12 +14,24 @@
 #include "../Game/Renderer.h"
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
+#include "../Game/GameSystem/ShopSystem.h"
 
+
+#include "../Actor/Character/Player.h"
 
 namespace my {
-class GameScene : public my::Scene {
+class GameScene : public my::Scene, public my::Observer<const my::ShopSystem::Info&> {
+
     using super = my::Scene;
+    using This = my::GameScene;
+public:
+    enum class State {
+        Active,
+        GamePause
+    };
 private:
+    //! 状態
+    This::State _state;
     //! 追加
     std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! 削除
@@ -40,6 +52,13 @@ private:
     std::weak_ptr<my::GameManager> _game;
     //! イベント
     std::weak_ptr<my::EventManager> _event;
+
+
+    std::shared_ptr < my::Player > _player;
+    //! テスト
+    //my::Observable<bool> _shop_system_subject;
+    //my::Observable<bool> _quick_change_subject;
+
     /// <summary>
     /// 追加
     /// </summary>
@@ -94,6 +113,11 @@ public:
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="info"></param>
+    virtual void OnNotify(const my::ShopSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>

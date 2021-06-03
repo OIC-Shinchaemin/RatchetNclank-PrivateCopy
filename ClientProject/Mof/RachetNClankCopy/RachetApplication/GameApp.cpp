@@ -58,7 +58,7 @@ MofBool CGameApp::Update(void) {
 
     float delta = 0.01667f;
 
-    _game_manager->Update();
+    _game_manager->Update(delta);
     _scene_manager->Update(delta);
     _camera_manager->Update();
     _ui_canvas->Update(delta);

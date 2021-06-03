@@ -29,7 +29,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Release(void) override;
-
 };
 }
 #endif // !MY_SHOP_H

@@ -6,6 +6,61 @@
 #include "../../Factory/FactoryManager.h"
 
 
+my::Player::Player() :
+    super(),
+    _current_mechanical(),
+    _omniwrench(),
+    _children(),
+    _current_weapon(),
+    _player_com(),
+    _upp_bone_state(),
+    _shop_system_subject(),
+    _quick_change_subject(),
+    _notificationable_subject_map(),
+    _notificationable_subject_stack(),
+    _notificationable_subject_name() {
+    super::SetTag("Player");
+
+    _notificationable_subject_map.emplace("QuickChange", &_quick_change_subject);
+    _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
+}
+
+my::Player::~Player() {
+}
+
+void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
+    if (auto mechanical = std::dynamic_pointer_cast<my::Mechanical>(change)) {
+        _current_mechanical = mechanical;
+    } // if
+    else {
+        _current_mechanical.reset();
+    } // else
+    _current_weapon = change;
+}
+
+void my::Player::OnNotify(const my::QuickChangeSystem::Info& info) {
+    if (info.color.a <= 0.0f) {
+        super::Activate();
+    } // if
+    else if (info.color.a >= 1.0f) {
+        super::Sleep();
+    } // else if
+}
+
+void my::Player::OnNotify(const my::ShopSystem::Info& info) {
+    if (info.close) {
+        this->PopNotificationableSubject();
+    } // if
+}
+
+my::Observable<bool>* my::Player::GetShopSystemSubject(void) {
+    return &this->_shop_system_subject;
+}
+
+my::Observable<bool>* my::Player::GetQuickChangeSubject(void) {
+    return &this->_quick_change_subject;
+}
+
 std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
     auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<my::Actor>& ptr) {
         return ptr->GetTag() == tag;
@@ -23,14 +78,44 @@ std::shared_ptr<my::Mechanical> my::Player::GetCurrentMechanical(void) const {
     return nullptr;
 }
 
-bool my::Player::Disable(void) {
-    this->_enable = false;
-    return true;
-}
-
 void my::Player::AddChild(const std::shared_ptr<my::Actor>& ptr) {
     this->_children.push_back(ptr);
 }
+
+void my::Player::PushNotificationableSubject(const std::string& name) {
+    auto subject = _notificationable_subject_map.at(name);
+    _notificationable_subject_stack.push(subject);
+    /*
+    if (name == "QuickChange") {
+        _notificationable_subject = this->GetQuickChangeSubject();
+        _notificationable_subject_name = "QuickChange";
+    } // if
+    else if (name == "ShopSystem") {
+        _notificationable_subject = this->GetShopSystemSubject();
+        _notificationable_subject_name = "ShopSystem";
+    } // else if
+    */
+    /*
+    IState state = mStates[name];
+    mStack.Push(state);
+    */
+}
+
+void my::Player::PopNotificationableSubject(void) {
+    _notificationable_subject_stack.pop();
+}
+/*
+void my::Player::ChangeNotificationableSubject(const std::string& name) {
+    if (name == "QuickChange") {
+        _notificationable_subject = this->GetQuickChangeSubject();
+        _notificationable_subject_name = "QuickChange";
+    } // if
+    else if (name == "ShopSystem") {
+        _notificationable_subject = this->GetShopSystemSubject();
+        _notificationable_subject_name = "ShopSystem";
+    } // else if
+}
+*/
 
 bool my::Player::Initialize(void) {
     this->Initialize();
@@ -39,7 +124,6 @@ bool my::Player::Initialize(void) {
 
 bool my::Player::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
-    _enable = true;
 
     _player_com = super::GetComponent<my::PlayerComponent>();
     if (auto motion_com = super::GetComponent<my::MotionComponent>(); motion_com) {
@@ -48,68 +132,34 @@ bool my::Player::Initialize(my::Actor::Param* param) {
     } // if
     return true;
 }
-/*
+
 bool my::Player::Input(void) {
-    if (::g_pInput->IsKeyHold(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
-        super::Sleep();
+    super::Input();
+    /*
+    if (::g_pInput->IsKeyPush(MOFKEY_O)) {
+        _shop_system_subject.Notify(true);
     } // if
-    if (::g_pInput->IsKeyPull(MOFKEY_LSHIFT)) {
-        super::Activate();
-    } // else if
-
-    if (super::GetState() == my::ActorState::Active) {
-        puts("super::Input()");
-        super::Input();
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_RSHIFT)) {
+        _quick_change_subject.Notify(true);
     } // if
-    return false;
-}
+    */
+    if (!_notificationable_subject_stack.empty()) {
+        auto subject = _notificationable_subject_stack.top();
+        if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) ) {
+            subject->Notify(true);
+        } // if
+    } // if
+/*
+    if (_notificationable_subject) {
+        if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPush(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPush(MOFKEY_RSHIFT)) {
+            _notificationable_subject->Notify(true);
+        } // if
+    } // if
 */
-my::Player::Player() :
-    super(),
-    _current_mechanical(),
-    _omniwrench(),
-    _children(),
-    _current_weapon(),
-    _player_com(),
-    _upp_bone_state(),
-    _enable(true) {
-    super::SetTag("Player");
-
-    //auto param = super::Param();
-    //param.name = "weapon";
-    //param.tag = "OmniWrench";
-    //auto omniwrench = my::FactoryManager::Singleton().CreateActor<my::OmniWrench>("builder/omni_wrench.json", &param);
-    //this->AddChild(omniwrench);
-    //this->_current_weapon = omniwrench;
-}
-
-my::Player::~Player() {
-}
-
-void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
-    if (auto mechanical = std::dynamic_pointer_cast<my::Mechanical>(change)) {
-        _current_mechanical = mechanical;
-    } // if
-    _current_weapon = change;
-}
-
-void my::Player::OnNotify(const my::QuickChangeSystem::Info& info) {
-    if (info.color.a <= 0.0f) {
-        if (auto player_com = _player_com.lock()) {
-            player_com->EnableAction();
-        } // if
-    } // if
-    else if (info.color.a >= 1.0f) {
-        if (auto player_com = _player_com.lock()) {
-            player_com->DisableAction();
-        } // if
-    } // else if
+    return true;
 }
 
 bool my::Player::Update(float delta_time) {
-    if (!_enable) {
-        return false;
-    } // if
     super::Update(delta_time);
 
     // children transform
@@ -149,21 +199,25 @@ bool my::Player::Update(float delta_time) {
     return true;
 }
 
+#include <stack>
 bool my::Player::Render(void) {
-    if (!_enable) {
-        return false;
-    } // if
     super::Render();
     if (_current_weapon) {
         _current_weapon->Render();
     } // if
-
 
 #ifdef _DEBUG
     auto pos = super::GetPosition();
     ::CGraphicsUtilities::RenderString(50.0f, 300.0f, "pos x = %f", pos.x);
     ::CGraphicsUtilities::RenderString(50.0f, 320.0f, "pos y = %f", pos.y);
     ::CGraphicsUtilities::RenderString(50.0f, 340.0f, "pos z = %f", pos.z);
+
+    if (!_notificationable_subject_stack.empty()) {
+        auto subject = _notificationable_subject_stack.top();
+        if (subject) {
+            ::CGraphicsUtilities::RenderString(50.0f, 360.0f, "_notificationable_subject_stack.size() = %d", _notificationable_subject_stack.size());
+        } // if
+    } // if
 #endif // _DEBUG
 
     return true;
@@ -171,6 +225,9 @@ bool my::Player::Render(void) {
 
 bool my::Player::Release(void) {
     super::Release();
+
+    _shop_system_subject.Clear();
+    _quick_change_subject.Clear();
     _current_mechanical.reset();
     _omniwrench.reset();
     _children.clear();

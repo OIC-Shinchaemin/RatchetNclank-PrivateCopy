@@ -40,6 +40,13 @@ public:
     /// </summary>
     /// <param name="...args"></param>
     void Notify(NotifyArgs... args);
+    /// <summary>
+    /// ‰Šú‰»
+    /// </summary>
+    /// <param name=""></param>
+    void Clear(void) {
+        _observers.clear();
+    }
 };
 template<class ...NotifyArgs>
 inline Observable<NotifyArgs...>::Observable() {

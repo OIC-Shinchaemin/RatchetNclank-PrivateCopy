@@ -15,16 +15,20 @@ my::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
     _target(),
     _state_com(),
-    _next_terrain(),
-    _action_enable() {
+    _next_terrain()
+    //,
+    //_action_enable()
+{
 }
 
 my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
     _target(),
     _state_com(),
-    _next_terrain(),
-    _action_enable() {
+    _next_terrain()
+    //,
+    //_action_enable() 
+{
 }
 
 my::PlayerComponent::~PlayerComponent() {
@@ -49,7 +53,7 @@ std::weak_ptr<my::Actor> my::PlayerComponent::GetTarget(void) const {
 std::string my::PlayerComponent::GetNextTerrain(void) const {
     return this->_next_terrain;
 }
-
+/*
 bool my::PlayerComponent::IsActionEnable(void) {
     return this->_action_enable;
 }
@@ -63,7 +67,7 @@ bool my::PlayerComponent::DisableAction(void) {
     this->_action_enable = false;
     return true;
 }
-
+*/
 bool my::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Activate();

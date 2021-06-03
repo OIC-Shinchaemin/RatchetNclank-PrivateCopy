@@ -5,6 +5,10 @@ const char* my::StateMachine::GetCurrentStateName(void) const {
     return _current_state->GetName();
 }
 
+bool my::StateMachine::EnableState(void) const {
+    return _current_state.get();
+}
+
 void my::StateMachine::RegisterState(const std::shared_ptr<my::State>& ptr) {
     _status.emplace(ptr->GetName(), ptr);
 }

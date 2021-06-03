@@ -5,16 +5,21 @@
 #include "Character.h"
 #include "My/Core/Observer.h"
 
+#include <stack>
+#include <unordered_map>
+
 #include "../Weapon/OmniWrench.h"
 #include "../Weapon/Mechanical.h"
 #include "../../Game/GameSystem/QuickChangeSystem.h"
+#include "../../Game/GameSystem/ShopSystem.h"
 #include "../../Component/Player/PlayerComponent.h"
 
 
 namespace my {
 class Player : public my::Character,
     public my::Observer<std::shared_ptr<my::Weapon>>,
-    public my::Observer<const my::QuickChangeSystem::Info&> {
+    public my::Observer<const my::QuickChangeSystem::Info&>, 
+    public my::Observer<const my::ShopSystem::Info&> {
     using super = my::Character;
 private:
     //! 武器
@@ -30,7 +35,20 @@ private:
     //! 腕の位置
     Mof::LPBONEMOTIONSTATE _upp_bone_state;
     //! 有効
-    bool _enable;
+    //bool _enable;
+    //! 通知用
+    my::Observable<bool> _shop_system_subject;
+    //! 通知用
+    my::Observable<bool> _quick_change_subject;
+    //! 通知用
+    my::Observable<bool>* _notificationable_subject;
+    //! 通知用
+    std::unordered_map<std::string, my::Observable<bool>* >_notificationable_subject_map;
+    //! 通知用
+    //std::vector<my::Observable<bool>* >_notificationable_subject_stack;
+    std::stack<my::Observable<bool>* >_notificationable_subject_stack;
+    //! 名前
+    std::string _notificationable_subject_name;
 public:
     /// <summary>
     /// コンストラクタ
@@ -51,6 +69,23 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(const my::QuickChangeSystem::Info& info) override;
     /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="info"></param>
+    virtual void OnNotify(const my::ShopSystem::Info& info) override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<bool>* GetShopSystemSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<bool>* GetQuickChangeSubject(void);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name="tag"></param>
@@ -63,21 +98,27 @@ public:
     /// <returns></returns>
     std::shared_ptr<my::Mechanical> GetCurrentMechanical(void) const;
     /// <summary>
-    /// デリート
-    /// </summary>
-    /// <param name=""></param>
-    //virtual void End(void) override;
-    /// <summary>
     /// 無効化
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool Disable(void);
+    //bool Disable(void);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
     void AddChild(const std::shared_ptr<my::Actor>& ptr);
+    /// <summary>
+    /// プッシュ
+    /// </summary>
+    /// <param name="name"></param>
+    //void ChangeNotificationableSubject(const std::string& name);
+    void PushNotificationableSubject(const std::string& name);
+    /// <summary>
+    /// ポップ
+    /// </summary>
+    /// <param name=""></param>
+    void PopNotificationableSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -95,7 +136,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    //virtual bool Input(void) override;
+    virtual bool Input(void) override;
     /// <summary>
     /// 更新
     /// </summary>
