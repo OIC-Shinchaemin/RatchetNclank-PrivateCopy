@@ -383,6 +383,8 @@
     <ClCompile Include="Factory\BuilderFactory.cpp" />
     <ClCompile Include="Factory\Builder\ActorBuilder.cpp" />
     <ClCompile Include="Factory\Builder\OmniWrenchBuilder.cpp" />
+    <ClCompile Include="Factory\Builder\Scene\GameSceneBuilder.cpp" />
+    <ClCompile Include="Factory\Builder\Scene\SceneBuilder.cpp" />
     <ClCompile Include="Factory\Builder\TerrainBuilder.cpp" />
     <ClCompile Include="Factory\ComponentCreator.cpp" />
     <ClCompile Include="Factory\ComponentFactory.cpp" />
@@ -676,6 +678,8 @@
     <ClInclude Include="Factory\Builder\ActorBuilder.h" />
     <ClInclude Include="Factory\Builder\IBuilder.h" />
     <ClInclude Include="Factory\Builder\OmniWrenchBuilder.h" />
+    <ClInclude Include="Factory\Builder\Scene\GameSceneBuilder.h" />
+    <ClInclude Include="Factory\Builder\Scene\SceneBuilder.h" />
     <ClInclude Include="Factory\Builder\TerrainBuilder.h" />
     <ClInclude Include="Factory\ComponentCreator.h" />
     <ClInclude Include="Factory\ComponentFactory.h" />

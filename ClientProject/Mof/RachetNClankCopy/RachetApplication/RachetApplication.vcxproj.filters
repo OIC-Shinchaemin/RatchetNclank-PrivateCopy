@@ -304,6 +304,12 @@
     <Filter Include="Rachet\Header\Actor\Vehicle">
       <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Factory\Builder\Scene">
+      <UniqueIdentifier>{036ac15c-22a3-4d3d-a999-256a96c96508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Factory\Builder\Scene">
+      <UniqueIdentifier>{328257a5-3ba1-4c7a-9ec6-7c40e9174c92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -956,6 +962,12 @@
     </ClCompile>
     <ClCompile Include="Scene\DescriptionScene.cpp">
       <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\SceneBuilder.cpp">
+      <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\GameSceneBuilder.cpp">
+      <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1870,6 +1882,12 @@
     </ClInclude>
     <ClInclude Include="Scene\DescriptionScene.h">
       <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\SceneBuilder.h">
+      <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\GameSceneBuilder.h">
+      <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

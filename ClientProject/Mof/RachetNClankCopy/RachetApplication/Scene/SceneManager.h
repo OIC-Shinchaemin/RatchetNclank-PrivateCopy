@@ -14,6 +14,7 @@
 #include "My/UI/UICanvas.h"
 #include "../Game/GameManager.h"
 #include "../Event/EventManager.h"
+#include "../Factory/Builder/IBuilder.h"
 
 
 namespace my {
@@ -37,7 +38,9 @@ private:
     std::weak_ptr<my::EventManager> _event_manager;
     //! ファクトリー
     my::Factory<my::Scene> _factory;
-
+    //! ビルダー
+    std::unordered_map<std::string, std::shared_ptr<my::IBuilder>> _builders;
+    
     /// <summary>
     /// 変更
     /// </summary>

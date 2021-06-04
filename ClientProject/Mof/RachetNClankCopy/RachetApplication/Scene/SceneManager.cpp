@@ -5,43 +5,44 @@
 #include "GameScene.h"
 #include "ClearScene.h"
 #include "DescriptionScene.h"
+#include "../Factory/Builder/Scene/SceneBuilder.h"
+#include "../Factory/Builder/Scene/GameSceneBuilder.h"
 
 
 void my::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<my::Scene::Param> param) {
+
     _scene.reset();
     if (name == my::SceneType::kTitleScene) {
         param->resource = "../Resource/scene_resource/title_scene.txt";
-        //auto temp = ut::MakeSharedWithRelease<my::TitleScene>();
-        auto temp = _factory.Create(name);
-        //ut::MakeSharedWithRelease<my::TitleScene>();
-        temp->SetResourceManager(_resource);
-        _scene = temp;
+        //_scene = _factory.Create(name);
+        //_builder->Construct(_scene);
     } // if
     else if (name == my::SceneType::kGameScene) {
         param->resource = "../Resource/scene_resource/game_scene.txt";
         //auto temp = ut::MakeSharedWithRelease<my::GameScene>();
         //auto temp = _factory.Create(name);
-        auto temp = ut::MakeSharedWithRelease<my::GameScene>();
-        temp->SetResourceManager(_resource);
-        temp->SetGameManager(_game_manager);
-        temp->SetEventManager(_event_manager);
-        temp->SetUICanvas(_ui_canvas);
-        _scene = temp;
+        //auto temp = ut::MakeSharedWithRelease<my::GameScene>();
+        //_builder->Construct(temp);
+        //temp->SetResourceManager(_resource);
+        //temp->SetGameManager(_game_manager);
+        //temp->SetEventManager(_event_manager);
+        //temp->SetUICanvas(_ui_canvas);
+        //_scene = temp;
     } // else if
     else if (name == my::SceneType::kClearScene) {
         param->resource = "../Resource/scene_resource/clear_scene.txt";
-        //auto temp = ut::MakeSharedWithRelease<my::ClearScene>();
-        auto temp = _factory.Create(name);
-        temp->SetResourceManager(_resource);
-        _scene = temp;
+        //_scene = _factory.Create(name);
+        //_builder->Construct(_scene);
     } // else if
     else if (name == my::SceneType::kDescriptionScene) {
         param->resource = "../Resource/scene_resource/clear_scene.txt";
-        //auto temp = ut::MakeSharedWithRelease<my::DescriptionScene>();
-        auto temp = _factory.Create(name);
-        temp->SetResourceManager(_resource);
-        _scene = temp;
+        //_scene = _factory.Create(name);
+        //_builder->Construct(_scene);
     } // else if
+
+    _scene = _factory.Create(name);
+    _builders.at(name)->Construct(_scene);
+
 
     _scene->AddSceneObserver(shared_from_this());
     _scene->Load(param);
@@ -99,8 +100,24 @@ void my::SceneManager::SetEventManager(std::weak_ptr<my::EventManager> ptr) {
 }
 
 bool my::SceneManager::Initialize(void) {
-    this->ChangeScene(my::SceneType::kTitleScene, std::make_shared <my::Scene::Param>());
+    {
+        auto temp = ut::MakeSharedWithRelease<builder::SceneBuilder>();
+        temp->SetResourceManager(_resource);
+        _builders.emplace(my::SceneType::kTitleScene, temp); ;
+        _builders.emplace(my::SceneType::kClearScene, temp); ;
+        _builders.emplace(my::SceneType::kDescriptionScene, temp); ;
+    }
+    {
+        auto temp = ut::MakeSharedWithRelease<builder::GameSceneBuilder>();
+        temp->SetResourceManager(_resource);
+        temp->SetUICanvas(_ui_canvas);
+        temp->SetGameManager(_game_manager);
+        temp->SetEventManager(_event_manager);
+        _builders.emplace(my::SceneType::kGameScene, temp); ;
+    }
 
+
+    this->ChangeScene(my::SceneType::kTitleScene, std::make_shared <my::Scene::Param>());
     return true;
 }
 
