@@ -52,7 +52,7 @@ my::SceneManager::SceneManager() :
 my::SceneManager::~SceneManager() {
 }
 
-void my::SceneManager::OnNotify(const SceneMessage& mesage) {
+void my::SceneManager::OnNotify(const scene::SceneMessage& mesage) {
     _change_message = ChangeMessage();
     _change_message.value().name = mesage.type_name;
     if (mesage.info_name == "") {

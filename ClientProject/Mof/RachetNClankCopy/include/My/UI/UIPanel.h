@@ -93,7 +93,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time);
+    [[nodiscard]] virtual bool Update(float delta_time);
     /// <summary>
     /// •`‰æ
     /// </summary>

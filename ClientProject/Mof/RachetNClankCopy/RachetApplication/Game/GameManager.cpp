@@ -14,7 +14,7 @@ my::GameManager::GameManager() :
     _shop_system(std::make_shared<my::ShopSystem>()),
     _option_system(std::make_shared<my::OptionSystem>()),
     _resource(),
-    _ui_canvas() {
+    _ui_canvas(){
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
     _shop_system->SetWeaponSystem(_weapon_system);
     _shop_system->SetGameMoney(_game_money);

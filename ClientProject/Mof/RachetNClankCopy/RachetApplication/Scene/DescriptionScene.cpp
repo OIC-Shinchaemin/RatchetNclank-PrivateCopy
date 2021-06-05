@@ -7,7 +7,7 @@ bool my::DescriptionScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kTitleScene, ""));
+        _subject.Notify(scene::SceneMessage(my::SceneType::kTitleScene, ""));
     } // if
     return true;
 }

@@ -92,7 +92,7 @@ void my::Scene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::Scene::AddSceneObserver(const std::shared_ptr<my::Observer<const SceneMessage&>>& ptr) {
+void my::Scene::AddSceneObserver(const std::shared_ptr<my::Observer<const scene::SceneMessage&>>& ptr) {
     _subject.AddObserver(ptr);
 }
 

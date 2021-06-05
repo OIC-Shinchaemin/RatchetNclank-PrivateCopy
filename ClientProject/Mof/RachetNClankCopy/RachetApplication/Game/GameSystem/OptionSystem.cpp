@@ -14,11 +14,29 @@ my::OptionSystem::OptionSystem() :
 
 my::OptionSystem::~OptionSystem() {
 }
-
+void my::OptionSystem::OnNotify(bool flag) {
+    super::OnNotify(flag);
+    _infomation.enter = true;
+    _info_subject.Notify(_infomation);
+    _infomation.enter = false;
+}
+/*
+void my::OptionSystem::OnNotify(const std::shared_ptr<my::OptionSystem>& pop) {
+    _next.pop();
+}
+*/
 my::Observable<const my::OptionSystem::Info&>* my::OptionSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
+my::Observable<const my::scene::SceneMessage&>* my::OptionSystem::GetSceneMessageSubject(void) {
+    return &this->_scene_message_subject;
+}
+/*
+void my::OptionSystem::PushSystem(const std::shared_ptr<my::OptionSystem>& next) {
+    _next.push(next);
+}
+*/
 void my::OptionSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
     _item.push_back(elem);
     _info_subject.Notify(_infomation);
@@ -46,7 +64,6 @@ bool my::OptionSystem::Initialize(void) {
 }
 
 bool my::OptionSystem::Input(void) {
-
     if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
         _item_index++;
         if (_item_index > _item.size() - 1) {
@@ -61,13 +78,18 @@ bool my::OptionSystem::Input(void) {
     } // else if
 
     if (::g_pInput->IsKeyPush(MOFKEY_Z)) {
-        puts("OptionSystem::Update_execute_list.push_back");
         _execute_list.push_back(_item.at(_item_index));
     } // if
-    return false;
+    return true;
 }
 bool my::OptionSystem::Update(float delta_time) {
-    //puts("OptionSystem::Update");
+    /*
+    if (!_next.empty()) {
+        auto ptr = _next.top();
+        return ptr->Update(delta_time);
+    } // if
+    */
+
     this->Input();
     std::vector<std::shared_ptr<ElemType>> remove_list;
     for (auto ptr : _execute_list) {
@@ -80,7 +102,6 @@ bool my::OptionSystem::Update(float delta_time) {
     } // for
     remove_list.clear();
 
-    //std::cout << "_item_index = " << _item_index << "\n";
     if (!_item.empty()) {
         auto item = _item.at(_item_index);
     } // if
@@ -88,6 +109,8 @@ bool my::OptionSystem::Update(float delta_time) {
 }
 
 bool my::OptionSystem::Release(void) {
+    _item.clear();
+    _info_subject.Clear();
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("OptionSystemMenu");
     } // if

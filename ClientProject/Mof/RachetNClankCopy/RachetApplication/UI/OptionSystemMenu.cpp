@@ -9,7 +9,9 @@ my::OptionSystemMenu::OptionSystemMenu(const char* name) :
 }
 
 void my::OptionSystemMenu::OnNotify(const my::OptionSystem::Info& info) {
-    super::Notify(shared_from_this(), "Enable");
+    if (info.enter) {
+        super::Notify(shared_from_this(), "Enable");
+    } // if
 
     if (info.items->size() != super::_items.size()) {
         this->AddItem(**(info.items->end() - 1));

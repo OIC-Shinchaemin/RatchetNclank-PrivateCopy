@@ -23,8 +23,6 @@ struct ResourcePath {
     static std::string kClearScene;
     static std::string kDescriptionScene;
 };
-}
-
 struct SceneMessage {
     std::string type_name;
     std::string info_name;
@@ -32,6 +30,10 @@ struct SceneMessage {
         type_name(type), info_name(info) {
     }
 };
+
+
+}
+
 
 struct ShaderPair {
     //! シェーダ

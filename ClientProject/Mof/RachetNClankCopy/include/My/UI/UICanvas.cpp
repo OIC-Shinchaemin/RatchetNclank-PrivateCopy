@@ -2,7 +2,9 @@
 
 
 my::UICanvas::UICanvas() :
-    _panels() {
+    _panels(),
+    _enable_list(),
+    _disable_list(){
 }
 
 my::UICanvas::~UICanvas() {
@@ -39,6 +41,8 @@ void my::UICanvas::AddElement(const ElemPtr& elem) {
 void my::UICanvas::RemoveElement(const ElemPtr& elem) {
     elem->RemoveObserver(shared_from_this());
     ut::EraseRemove(_panels, elem);
+    ut::EraseRemove(_enable_list, elem);
+    ut::EraseRemove(_disable_list, elem);
 }
 
 bool my::UICanvas::RemoveElement(const std::string& name) {

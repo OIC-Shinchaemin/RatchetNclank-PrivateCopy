@@ -4,6 +4,11 @@
 
 #include "GameSystem.h"
 
+#include <stack>
+
+#include "../../Scene/SceneDefine.h"
+
+
 namespace my {
 class OptionSystemItem : public std::enable_shared_from_this<my::OptionSystemItem> {
     using this_type = my::OptionSystemItem;
@@ -41,11 +46,14 @@ public:
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    [[nodiscard]]virtual bool Execute(void);
+    [[nodiscard]] virtual bool Execute(void);
 };
 
 
-class OptionSystem : public my::GameSystem {
+class OptionSystem : public my::GameSystem
+//    ,
+//    public my::Observer<const  std::shared_ptr<my::OptionSystem >&> 
+{
     using super = my::GameSystem;
     using this_type = my::OptionSystem;
     using ElemType = my::OptionSystemItem;
@@ -53,7 +61,7 @@ public:
     struct Info {
         bool enter = false;
         bool exit = false;
-        std::vector<std::shared_ptr<ElemType>>* items;
+        std::vector<std::shared_ptr<ElemType>>* items = nullptr;
     };
 private:
     //! 情報
@@ -67,9 +75,11 @@ private:
     //! インデックス
     int _item_index;
     //! 次
-    //std::shared_ptr<this_type> _next;
-    //! 次
-    //std::shared_ptr<this_type> _next;
+    //std::stack <std::shared_ptr<this_type>> _next;
+    //! 通知用
+    //my::Observable<const  std::shared_ptr<my::OptionSystem >&> option_system_subject;
+    //! 通知用
+    my::Observable<const scene::SceneMessage&> _scene_message_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -80,11 +90,33 @@ public:
     /// </summary>
     ~OptionSystem();
     /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name=""></param>
+    virtual void OnNotify(bool flag) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="pop"></param>
+    //virtual void OnNotify(const std::shared_ptr<my::OptionSystem>& pop);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     my::Observable<const this_type::Info&>* GetInfoSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<const my::scene::SceneMessage&>* GetSceneMessageSubject(void);
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="next"></param>
+    /// <returns></returns>
+    //void PushSystem(const std::shared_ptr<my::OptionSystem>& next);
     /// <summary>
     /// 追加
     /// </summary>

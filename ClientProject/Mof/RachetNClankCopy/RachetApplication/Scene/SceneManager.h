@@ -20,7 +20,7 @@
 
 
 namespace my {
-class SceneManager : public std::enable_shared_from_this<my::SceneManager>, public my::Observer<const SceneMessage&> {
+class SceneManager : public std::enable_shared_from_this<my::SceneManager>, public my::Observer<const scene::SceneMessage&> {
 private:
     struct ChangeMessage {
         std::string name;
@@ -88,7 +88,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const SceneMessage& mesage) override;
+    virtual void OnNotify(const scene::SceneMessage& mesage) override;
     /// <summary>
     /// セッター
     /// </summary>

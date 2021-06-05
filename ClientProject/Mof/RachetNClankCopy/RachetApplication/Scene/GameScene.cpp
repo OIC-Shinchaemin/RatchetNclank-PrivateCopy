@@ -40,7 +40,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 #ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+        _subject.Notify(scene::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 #endif // _DEBUG
 
@@ -124,7 +124,7 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
         _re_initialize = true;
     } // if
     if (type == "GameClear") {
-        _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
+        _subject.Notify(scene::SceneMessage(my::SceneType::kClearScene, ""));
     } // if
 }
 

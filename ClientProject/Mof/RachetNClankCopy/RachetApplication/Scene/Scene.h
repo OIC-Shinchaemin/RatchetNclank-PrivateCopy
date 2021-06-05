@@ -42,7 +42,7 @@ protected:
     //! ポストエフェクト
     std::optional<my::SceneEffect> _effect;
     //! 遷移
-    my::Observable<const SceneMessage&> _subject;
+    my::Observable<const scene::SceneMessage&> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! 読み込み済み
@@ -91,7 +91,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void AddSceneObserver(const std::shared_ptr<my::Observer<const SceneMessage&>>& ptr);
+    void AddSceneObserver(const std::shared_ptr<my::Observer<const scene::SceneMessage&>>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>
