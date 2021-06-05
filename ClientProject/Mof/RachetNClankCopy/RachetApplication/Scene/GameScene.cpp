@@ -102,7 +102,7 @@ my::GameScene::GameScene() :
     _physic_world(),
     _stage(),
     _re_initialize(false),
-    _ui_canvas(),
+    //_ui_canvas(),
     _game(),
     _event() {
 }
@@ -136,11 +136,11 @@ void my::GameScene::OnNotify(const my::ShopSystem::Info& info) {
         this->_state = super::State::Pause;
     } // else
 }
-
+/*
 void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
-
+*/
 void my::GameScene::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
     this->_game = ptr;
 }

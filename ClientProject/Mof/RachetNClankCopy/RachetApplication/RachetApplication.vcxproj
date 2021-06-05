@@ -443,6 +443,7 @@
     <ClCompile Include="UI\OptionSystemMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="UI\ShopSystemMenu.cpp" />
+    <ClCompile Include="UI\TitleInfoMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -755,6 +756,7 @@
     <ClInclude Include="UI\OptionSystemMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="UI\ShopSystemMenu.h" />
+    <ClInclude Include="UI\TitleInfoMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\clear_scene.txt" />

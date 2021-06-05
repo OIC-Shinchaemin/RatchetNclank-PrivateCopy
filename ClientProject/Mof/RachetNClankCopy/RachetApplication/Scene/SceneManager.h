@@ -49,12 +49,14 @@ private:
     void RegisterBuilder(const std::string& name) {
             auto ptr = ut::MakeSharedWithRelease<Builder>();
             ptr->SetResourceManager(_resource);
+            ptr->SetUICanvas(_ui_canvas);
             _builders.emplace(name, ptr); ;
     }
     template<>
     void RegisterBuilder<builder::TitleSceneBuilder>(const std::string& name) {
         auto ptr = ut::MakeSharedWithRelease<builder::TitleSceneBuilder>();
         ptr->SetResourceManager(_resource);
+        ptr->SetUICanvas(_ui_canvas);
         ptr->SetGameManager(_game_manager);
         _builders.emplace(name, ptr); ;
     }

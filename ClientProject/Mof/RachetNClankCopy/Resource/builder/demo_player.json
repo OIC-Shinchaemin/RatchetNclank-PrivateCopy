@@ -15,13 +15,6 @@
       }
     },
     {
-      "type": "HpComponent",
-      "paramater": {
-        "priority": 0,
-        "hp_max": 4
-      }
-    },
-    {
       "type": "InvincibleComponent",
       "paramater": {
         "priority": 93

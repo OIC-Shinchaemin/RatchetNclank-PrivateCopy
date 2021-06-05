@@ -7,7 +7,6 @@
 #include <memory>
 #include <vector>
 
-#include "My/UI/UICanvas.h"
 #include "../Game/GameManager.h"
 #include "../Event/EventManager.h"
 #include "../Game/GameWorld.h"
@@ -39,7 +38,7 @@ private:
     //! 再初期化
     bool _re_initialize;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    //std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
     //! イベント
@@ -114,7 +113,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    //void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// セッター
     /// </summary>

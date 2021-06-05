@@ -7,7 +7,6 @@
 #include <memory>
 
 #include "../../../Scene/GameScene.h"
-#include "My/UI/UICanvas.h"
 #include "../../../Game/GameManager.h"
 #include "../../../Event/EventManager.h"
 
@@ -16,8 +15,6 @@ namespace builder {
 class GameSceneBuilder : public builder::SceneBuilder {
     using super = builder::SceneBuilder;
 private:
-    //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
     //! イベント
@@ -31,11 +28,6 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~GameSceneBuilder();
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// セッター
     /// </summary>

@@ -3,6 +3,7 @@
 #include "My/Resource/ResourceFont.h"
 #include "../Factory/FactoryManager.h"
 #include "../Camera/FollowCameraController.h"
+#include "../UI/TitleInfoMenu.h"
 
 
 bool my::TitleScene::SceneUpdate(float delta_time) {
@@ -18,9 +19,6 @@ bool my::TitleScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_S)) {
         _option_system_subject.Notify(true);
     } // if
-
-
-
 
 
     _demo_actor->Update(delta_time);
@@ -46,14 +44,7 @@ bool my::TitleScene::SceneRender(void) {
 
     _demo_actor->Render();
     _stage.Render();
-
-
     ::g_pGraphics->SetDepthEnable(false);
-    if (auto resource = _resource.lock()) {
-        auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
-        auto text = "Please Press   Start Button or \n                          Enter Key !";
-        font->RenderString(220.0, 400.0f, def::color_rgba_u32::kGreen, text);
-    } // if
     return true;
 }
 
@@ -102,7 +93,7 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
 
     super::_load_thread = std::thread([&]() {
         if (!super::IsLoaded()) {
-            ::CoInitialize(NULL);
+            auto re = ::CoInitialize(NULL);
             auto path = "../Resource/scene_resource/game_scene.txt";
             if (auto r = _resource.lock()) {
                 r->Load(path);
@@ -135,28 +126,45 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
             _camera_controller.GetService()->SetAltitude(-10.0f);
             _camera_controller.GetService()->SetDistance(8.0f);
         } // if
+
+
+
+        if (auto canvas = super::GetUICanvas()) {
+            canvas->RemoveElement("TitleInfoMenu");
+        } // if
+        auto menu = std::make_shared< my::TitleInfoMenu>("TitleInfoMenu");
+        _title_menu_subject.AddObserver(menu);
+        menu->SetResourceManager(super::GetResource());
+        if (auto canvas = super::GetUICanvas()) {
+            canvas->AddElement(menu);
+        } // if
+        _title_menu_subject.Notify(true);
+
+
+        if (auto game = _game.lock()) {
+            auto option_system = game->GetOptionSystem();
+
+            _option_system_subject.AddObserver(option_system);
+            option_system->GetTitleMenuSubject()->AddObserver(menu);
+
+            auto item0 = std::make_shared<my::OptionSystemItem>([&]() {
+                _subject.Notify(scene::SceneMessage(my::SceneType::kDescriptionScene, ""));
+                return true;
+            });
+            item0->SetText("Yes");
+            auto item1 = std::make_shared<my::OptionSystemItem>([&]() {
+                _subject.Notify(scene::SceneMessage(my::SceneType::kGameScene, ""));
+                return true;
+            });
+            item1->SetText("No");
+            option_system->Initialize();
+            option_system->AddItem(item0);
+            option_system->AddItem(item1);
+        } // if
+
     });
 
-    if (auto game = _game.lock()) {
-        auto option_system = game->GetOptionSystem();
-
-        _option_system_subject.AddObserver(option_system);
-
-        auto item0 = std::make_shared<my::OptionSystemItem>([&]() {
-            _subject.Notify(scene::SceneMessage(my::SceneType::kDescriptionScene, ""));
-            return true;
-        });
-        item0->SetText("Yes");
-        auto item1 = std::make_shared<my::OptionSystemItem>([&]() {
-            _subject.Notify(scene::SceneMessage(my::SceneType::kGameScene, ""));
-            return true;
-        });
-        item1->SetText("No");
-        option_system->Initialize();
-        option_system->AddItem(item0);
-        option_system->AddItem(item1);
-    } // if
-
+    
     return true;
 }
 
@@ -170,6 +178,7 @@ bool my::TitleScene::Release(void) {
     if (auto game = _game.lock()) {
         game->GetOptionSystem()->Release();
         _option_system_subject.Clear();
+        _title_menu_subject.Clear();
     } // if
 
     _stage.Release();

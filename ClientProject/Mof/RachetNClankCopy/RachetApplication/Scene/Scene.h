@@ -15,6 +15,7 @@
 #include "../Actor.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "My/UI/UICanvas.h"
 
 
 namespace my {
@@ -45,6 +46,8 @@ protected:
     my::Observable<const scene::SceneMessage&> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! UI
+    std::weak_ptr<my::UICanvas> _ui_canvas;
     //! 読み込み済み
     bool _loaded;
     //! 同期
@@ -60,6 +63,8 @@ protected:
     bool IsLoaded(void);
     void LoadComplete(void);
 
+    std::shared_ptr<my::ResourceMgr> GetResource(void) const;
+    std::shared_ptr<my::UICanvas> GetUICanvas(void) const;
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
     virtual bool LoadingUpdate(float delta_time);
     virtual bool SceneUpdate(float delta_time);
@@ -81,6 +86,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

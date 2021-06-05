@@ -9,6 +9,7 @@
 #include "../../../Scene/Scene.h"
 #include "../../../ResourceManager.h"
 #include "../../../GameDefine.h"
+#include "My/UI/UICanvas.h"
 
 
 namespace builder {
@@ -17,6 +18,8 @@ class SceneBuilder : public my::IBuilder {
 private:
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
+    //! UI
+    std::weak_ptr<my::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,6 +34,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// 解放
     /// </summary>

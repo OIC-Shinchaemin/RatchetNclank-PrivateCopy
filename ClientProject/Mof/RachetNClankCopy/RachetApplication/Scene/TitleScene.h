@@ -32,6 +32,8 @@ private:
     std::shared_ptr<my::Player> _demo_actor;
     //! 通知用
     my::Observable<bool> _option_system_subject;
+    //! 通知用
+    my::Observable<bool> _title_menu_subject;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
 protected:

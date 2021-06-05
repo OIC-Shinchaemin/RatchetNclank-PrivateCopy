@@ -978,6 +978,9 @@
     <ClCompile Include="Factory\Builder\Scene\TitleSceneBuilder.cpp">
       <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="UI\TitleInfoMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1906,6 +1909,9 @@
     </ClInclude>
     <ClInclude Include="Factory\Builder\Scene\TitleSceneBuilder.h">
       <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\TitleInfoMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

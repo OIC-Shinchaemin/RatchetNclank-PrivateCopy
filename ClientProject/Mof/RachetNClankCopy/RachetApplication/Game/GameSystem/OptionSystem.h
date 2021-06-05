@@ -61,6 +61,7 @@ public:
     struct Info {
         bool enter = false;
         bool exit = false;
+        int index = 0;
         std::vector<std::shared_ptr<ElemType>>* items = nullptr;
     };
 private:
@@ -80,6 +81,8 @@ private:
     //my::Observable<const  std::shared_ptr<my::OptionSystem >&> option_system_subject;
     //! 通知用
     my::Observable<const scene::SceneMessage&> _scene_message_subject;
+    //! 通知用
+    my::Observable<bool> _title_menu_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -111,6 +114,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     my::Observable<const my::scene::SceneMessage&>* GetSceneMessageSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<bool>* GetTitleMenuSubject(void);
     /// <summary>
     /// 追加
     /// </summary>

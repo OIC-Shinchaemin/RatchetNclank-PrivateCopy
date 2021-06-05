@@ -8,7 +8,8 @@ my::OptionSystem::OptionSystem() :
     _infomation(),
     _info_subject(),
     _item(),
-    _item_index() {
+    _item_index(),
+    _title_menu_subject(){
     _infomation.items = &_item;
 }
 
@@ -16,6 +17,7 @@ my::OptionSystem::~OptionSystem() {
 }
 void my::OptionSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
+    _title_menu_subject.Notify(false);
     _infomation.enter = true;
     _info_subject.Notify(_infomation);
     _infomation.enter = false;
@@ -31,6 +33,9 @@ my::Observable<const my::OptionSystem::Info&>* my::OptionSystem::GetInfoSubject(
 
 my::Observable<const my::scene::SceneMessage&>* my::OptionSystem::GetSceneMessageSubject(void) {
     return &this->_scene_message_subject;
+}
+my::Observable<bool>* my::OptionSystem::GetTitleMenuSubject(void) {
+    return &this->_title_menu_subject;
 }
 /*
 void my::OptionSystem::PushSystem(const std::shared_ptr<my::OptionSystem>& next) {
@@ -69,12 +74,16 @@ bool my::OptionSystem::Input(void) {
         if (_item_index > _item.size() - 1) {
             _item_index = _item.size() - 1;
         } // if
+        _infomation.index = _item_index;
+        _info_subject.Notify(_infomation);
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_DOWN)) {
         _item_index--;
         if (_item_index < 0) {
             _item_index = 0;
         } // if
+        _infomation.index = _item_index;
+        _info_subject.Notify(_infomation);
     } // else if
 
     if (::g_pInput->IsKeyPush(MOFKEY_Z)) {
@@ -111,6 +120,7 @@ bool my::OptionSystem::Update(float delta_time) {
 bool my::OptionSystem::Release(void) {
     _item.clear();
     _info_subject.Clear();
+    _title_menu_subject.Clear();
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("OptionSystemMenu");
     } // if
