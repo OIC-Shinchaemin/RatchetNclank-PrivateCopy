@@ -15,6 +15,8 @@
 #include "../Game/GameManager.h"
 #include "../Event/EventManager.h"
 #include "../Factory/Builder/IBuilder.h"
+#include "../Factory/Builder/Scene/TitleSceneBuilder.h"
+#include "../Factory/Builder/Scene/GameSceneBuilder.h"
 
 
 namespace my {
@@ -40,7 +42,32 @@ private:
     my::Factory<my::Scene> _factory;
     //! ビルダー
     std::unordered_map<std::string, std::shared_ptr<my::IBuilder>> _builders;
-    
+    //! タイプ,パス
+    std::unordered_map<std::string, std::string> _reousrce_paths;
+
+    template<typename Builder>
+    void RegisterBuilder(const std::string& name) {
+            auto ptr = ut::MakeSharedWithRelease<Builder>();
+            ptr->SetResourceManager(_resource);
+            _builders.emplace(name, ptr); ;
+    }
+    template<>
+    void RegisterBuilder<builder::TitleSceneBuilder>(const std::string& name) {
+        auto ptr = ut::MakeSharedWithRelease<builder::TitleSceneBuilder>();
+        ptr->SetResourceManager(_resource);
+        ptr->SetGameManager(_game_manager);
+        _builders.emplace(name, ptr); ;
+    }
+    template<>
+    void RegisterBuilder<builder::GameSceneBuilder>(const std::string& name) {
+        auto ptr = ut::MakeSharedWithRelease<builder::GameSceneBuilder>();
+        ptr->SetResourceManager(_resource);
+        ptr->SetUICanvas(_ui_canvas);
+        ptr->SetGameManager(_game_manager);
+        ptr->SetEventManager(_event_manager);
+        _builders.emplace(name, ptr); ;
+    }
+
     /// <summary>
     /// 変更
     /// </summary>

@@ -18,13 +18,14 @@
 
 
 namespace my {
-enum class SceneState {
-    Active,
-    Pause,
-    End
-};
 class Scene : public std::enable_shared_from_this<my::Scene>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
+    using this_type = my::Scene;
 public:
+   enum class State {
+        Active,    
+        Pause,
+        End
+    };
     struct Param {
         //! 名前
         std::string name;
@@ -33,7 +34,7 @@ public:
     };
 protected:
     //! 状態
-    my::SceneState _state;
+    this_type::State _state;
     //! カラーリソース
     Mof::CTexture _rendar_target;
     //! デフォルトのレンダーターゲット

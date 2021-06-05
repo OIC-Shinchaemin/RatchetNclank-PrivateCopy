@@ -71,7 +71,7 @@ bool my::Scene::PostRender(void) {
 }
 
 my::Scene::Scene() :
-    _state(),
+    _state(this_type::State::Active),
     _rendar_target(),
     _default(),
     _effect(),

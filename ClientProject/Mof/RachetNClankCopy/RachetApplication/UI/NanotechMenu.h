@@ -53,6 +53,12 @@ public:
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
+    /// XV
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Update(float delta_time) override;
+    /// <summary>
     /// •`‰æ
     /// </summary>
     /// <param name=""></param>

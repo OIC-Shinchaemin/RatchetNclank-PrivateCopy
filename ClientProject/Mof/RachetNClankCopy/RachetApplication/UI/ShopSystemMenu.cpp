@@ -10,6 +10,7 @@ my::ShopSystemMenu::ShopSystemMenu(const char* name) :
 }
 
 void my::ShopSystemMenu::OnNotify(const my::ShopSystem::Info& info) {
+    super::Notify(shared_from_this(), "Enable");
     _infomation = info;
 }
 

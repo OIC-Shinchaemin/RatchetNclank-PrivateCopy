@@ -15,8 +15,15 @@ bool my::TitleScene::SceneUpdate(float delta_time) {
              ::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kDescriptionScene, ""));
     } // else if
+    if (::g_pInput->IsKeyPush(MOFKEY_S)) {
+        _option_system_subject.Notify(true);
+    } // if
 
-    //_demo_actor->Update(delta_time);
+
+    
+
+
+    _demo_actor->Update(delta_time);
 
     auto camera_info = my::CameraController::CameraInfo();
 
@@ -62,13 +69,28 @@ my::TitleScene::TitleScene() :
     _stage(),
     _stage_view_camera(),
     _camera_controller(),
-    _demo_actor() {
+    _demo_actor() ,
+    _game(){
 }
 
 my::TitleScene::~TitleScene() {
+    _game.reset();
 }
 
 void my::TitleScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
+}
+
+void my::TitleScene::OnNotify(const my::OptionSystem::Info& info) {
+    if (info.enter) {
+        this->_state = super::State::Pause;
+    } // if
+    if (info.exit) {
+        this->_state = super::State::Active;
+    } // if
+}
+
+void my::TitleScene::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
+    this->_game = ptr;
 }
 
 std::string my::TitleScene::GetName(void) {
@@ -93,7 +115,7 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
             auto actor_param = my::Actor::Param();
             actor_param .transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
             actor_param .transform.position = Mof::CVector3(10.0f, -5.0f, -15.0f);
-            _demo_actor = my::FactoryManager::Singleton().CreateActor<my::Player>("builder/player.json", &actor_param);
+            _demo_actor = my::FactoryManager::Singleton().CreateActor<my::Player>("builder/demo_player.json", &actor_param);
 
             ::CoUninitialize();            
             super::LoadComplete();
@@ -115,11 +137,41 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
         } // if
     });
 
+    if(auto game = _game.lock()){
+        auto option_system = game->GetOptionSystem();
+
+        _option_system_subject.AddObserver(option_system);
+        
+        auto item0 = std::make_shared<my::OptionSystemItem>([&]() {
+            _subject.Notify(my::SceneMessage(my::SceneType::kDescriptionScene, ""));
+            return true;
+        });
+        item0->SetText("Yes");
+        auto item1 = std::make_shared<my::OptionSystemItem>([&]() {
+            _subject.Notify(my::SceneMessage(my::SceneType::kGameScene, ""));
+            return true;
+        });
+        item1->SetText("No");
+        option_system->Initialize();
+        option_system->AddItem(item0);
+        option_system->AddItem(item1);
+    } // if
+
+    return true;
+}
+
+bool my::TitleScene::Initialize(void) {
+    super::Initialize();
     return true;
 }
 
 bool my::TitleScene::Release(void) {
     super::Release();
+    if (auto game = _game.lock()) {
+        //_option_system_subject.RemoveObserver(game->GetOptionSystem());
+        _option_system_subject.Clear();
+    } // if
+
     _stage.Release();
     return true;
 }

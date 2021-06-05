@@ -969,6 +969,15 @@
     <ClCompile Include="Factory\Builder\Scene\GameSceneBuilder.cpp">
       <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameSystem\OptionSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\OptionSystemMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\TitleSceneBuilder.cpp">
+      <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1889,6 +1898,15 @@
     <ClInclude Include="Factory\Builder\Scene\GameSceneBuilder.h">
       <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameSystem\OptionSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\OptionSystemMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\TitleSceneBuilder.h">
+      <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1901,6 +1919,9 @@
       <Filter>Resource\scene_resource</Filter>
     </Text>
     <Text Include="..\Resource\scene_resource\title_scene.txt">
+      <Filter>Resource\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\description_scene.txt">
       <Filter>Resource\scene_resource</Filter>
     </Text>
   </ItemGroup>
@@ -1984,6 +2005,9 @@
       <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\shop.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\demo_player.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

@@ -60,8 +60,9 @@ bool my::PlayerComponent::Initialize(void) {
 
     _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-
-    velocity_com->SetGravity(9.8f);
+    if (velocity_com) {
+        velocity_com->SetGravity(9.8f);
+    } // if
     if (auto state_com = _state_com.lock()) {
         state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if

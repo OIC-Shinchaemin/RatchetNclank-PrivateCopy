@@ -224,12 +224,6 @@
       }
     },
     {
-      "type": "VelocityComponent",
-      "paramater": {
-        "priority": 199
-      }
-    },
-    {
       "type": "TransformComponent",
       "paramater": {
         "priority": 200

@@ -38,13 +38,6 @@ void my::GameScene::ReInitialize(void) {
 
 bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
-    if (auto e = _event.lock()) {
-        e->UpdateGameEvent(delta_time);
-    } // if
-    if (auto game = _game.lock()) {
-        game->GameSystemUpdate(delta_time);
-    } // if
-
 #ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(my::SceneMessage(my::SceneType::kClearScene, ""));
@@ -65,7 +58,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     _delete_actors.clear();
 
 
-    if (_state != This::State::GamePause) {
+    if (_state != super::State::Pause) {
         // input
         _game_world.Input();
         
@@ -111,8 +104,7 @@ my::GameScene::GameScene() :
     _re_initialize(false),
     _ui_canvas(),
     _game(),
-    _event(),
-    _state(This::State::Active) {
+    _event() {
 }
 
 my::GameScene::~GameScene() {
@@ -138,10 +130,10 @@ void my::GameScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>&
 
 void my::GameScene::OnNotify(const my::ShopSystem::Info& info) {
     if (info.close) {
-        this->_state = This::State::Active;
+        this->_state = super::State::Active;
     } // if
     else {
-        this->_state = This::State::GamePause;
+        this->_state = super::State::Pause;
     } // else
 }
 
@@ -257,7 +249,7 @@ bool my::GameScene::Initialize(void) {
         auto game_money = game->GetGameMoney();
         auto shop_system = game->GetShopSystem();
 
-        shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<This>(shared_from_this()));
+        shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<this_type>(shared_from_this()));
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
         player->PushNotificationableSubject("QuickChange");

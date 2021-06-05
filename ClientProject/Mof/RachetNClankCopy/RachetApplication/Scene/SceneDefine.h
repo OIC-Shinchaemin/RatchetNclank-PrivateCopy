@@ -16,6 +16,15 @@ struct SceneType {
     static std::string kClearScene;
     static std::string kDescriptionScene;
 };
+namespace scene {
+struct ResourcePath {
+    static std::string kTitleScene;
+    static std::string kGameScene;
+    static std::string kClearScene;
+    static std::string kDescriptionScene;
+};
+}
+
 struct SceneMessage {
     std::string type_name;
     std::string info_name;

@@ -7,6 +7,8 @@ my::HelpDeskMenu::HelpDeskMenu(const char* name) :
 }
 
 void my::HelpDeskMenu::OnNotify(const my::HelpDesk::Info& info) {
+    super::Notify(shared_from_this(), "Enable");
+
     _infomation = info;
 }
 
@@ -15,7 +17,8 @@ void my::HelpDeskMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
 }
 
 bool my::HelpDeskMenu::Update(float delta_time) {
-    return false;
+    // ˆê’èŽžŠÔ•\Ž¦‚µ‚½‚çfalse‚ð•Ô‚·
+    return true;
 }
 
 bool my::HelpDeskMenu::Render(void) {

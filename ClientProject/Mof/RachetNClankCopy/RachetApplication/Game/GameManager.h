@@ -11,6 +11,7 @@
 #include "GameSystem/HelpDesk.h"
 #include "GameSystem/GameMoney.h"
 #include "GameSystem/ShopSystem.h"
+#include "GameSystem/OptionSystem.h"
 
 
 namespace my {
@@ -32,6 +33,8 @@ private:
     std::shared_ptr<my::GameMoney> _game_money;
     //! ショップ
     std::shared_ptr<my::ShopSystem> _shop_system;
+    //! オプション
+    std::shared_ptr<my::OptionSystem> _option_system;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
@@ -91,6 +94,12 @@ public:
     /// <returns></returns>
     std::shared_ptr<my::ShopSystem> GetShopSystem(void) const;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::OptionSystem> GetOptionSystem(void) const;
+    /// <summary>
     /// 読み込み
     /// </summary>
     /// <param name=""></param>
@@ -112,11 +121,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool Release(void);
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name=""></param>
-    void GameSystemUpdate(float delta_time);
     /// <summary>
     /// 解放
     /// </summary>

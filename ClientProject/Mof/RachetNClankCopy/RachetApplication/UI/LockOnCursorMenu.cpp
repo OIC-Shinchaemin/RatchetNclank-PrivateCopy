@@ -8,6 +8,8 @@ my::LockOnCursorMenu::LockOnCursorMenu(const char* name) :
 }
 
 void my::LockOnCursorMenu::OnNotify(std::optional<Mof::CVector3> position) {
+    super::Notify(shared_from_this(), "Enable");
+
     _position = position;
 }
 

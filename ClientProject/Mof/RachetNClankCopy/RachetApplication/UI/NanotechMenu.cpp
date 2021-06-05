@@ -9,11 +9,20 @@ my::NanotechMenu::NanotechMenu(const char* name) :
 }
 
 void my::NanotechMenu::OnNotify(int hp) {
+    super::Notify(shared_from_this(), "Enable");
     this->_hp = hp;
 }
 
 void my::NanotechMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
     this->_ui_canvas = ptr;
+}
+
+bool my::NanotechMenu::Update(float delta_time) {
+    if (_hp < 0) {
+        return false;
+    } // if
+
+    return true;
 }
 
 bool my::NanotechMenu::Render(void) {
@@ -29,7 +38,6 @@ bool my::NanotechMenu::Render(void) {
         ::CGraphicsUtilities::RenderFillCircle(circle, super::_color.ToU32Color());
         pos.x += radius * 2.0f;
     } // for
-    super::Render();
     return true;
 }
 

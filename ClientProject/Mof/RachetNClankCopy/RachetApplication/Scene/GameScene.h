@@ -21,17 +21,9 @@
 
 namespace my {
 class GameScene : public my::Scene, public my::Observer<const my::ShopSystem::Info&> {
-
     using super = my::Scene;
-    using This = my::GameScene;
-public:
-    enum class State {
-        Active,
-        GamePause
-    };
+    using this_type = my::GameScene;
 private:
-    //! ó‘Ô
-    This::State _state;
     //! ’Ç‰Á
     std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! íœ
