@@ -6,6 +6,7 @@
 
 
 namespace my {
+class GamePauseSystemMenu;
 class GamePauseSystem : public my::GameSystem {
     using super = my::GameSystem;
     using this_type = my::GamePauseSystem;
@@ -14,23 +15,16 @@ public:
         bool enter = false;
         bool exit = false;
         int index = 0;
-        //std::vector<std::shared_ptr<ElemType>>* items = nullptr;
     };
 private:
     //! 情報
     this_type::Info _infomation;
     //! 通知用
     my::Observable<const this_type::Info&> _info_subject;
-    //! 子供
-    //std::vector<std::shared_ptr<ElemType>> _item;
-    //! 子供
-    //std::vector<std::shared_ptr<ElemType>> _execute_list;
     //! インデックス
     int _item_index;
-    //! 通知用
-    //my::Observable<const scene::SceneMessage&> _scene_message_subject;
-    //! 通知用
-    //my::Observable<bool> _title_menu_subject;
+    //! UI地蔵
+    my::UICreator<class GamePauseSystemMenu> _ui_creator;
 public:
     /// <summary>
     /// コンストラクタ
@@ -51,24 +45,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     my::Observable<const this_type::Info&>* GetInfoSubject(void);
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //my::Observable<const my::scene::SceneMessage&>* GetSceneMessageSubject(void);
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //my::Observable<bool>* GetTitleMenuSubject(void);
-    /// <summary>
-    /// 追加
-    /// </summary>
-    /// <param name="elem"></param>
-    /// <returns></returns>
-    //void AddItem(const std::shared_ptr<ElemType>& elem);
     /// <summary>
     /// 初期化
     /// </summary>

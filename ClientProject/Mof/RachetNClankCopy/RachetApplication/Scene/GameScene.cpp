@@ -39,10 +39,14 @@ void my::GameScene::ReInitialize(void) {
 bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 #ifdef _DEBUG
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(scene::SceneMessage(my::SceneType::kClearScene, ""));
-    } // if
+    //if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+    //    _subject.Notify(scene::SceneMessage(my::SceneType::kClearScene, ""));
+    //} // if
 #endif // _DEBUG
+    if (::g_pInput->IsKeyPush(MOFKEY_I)) {
+        _pause_menu_subject.Notify(true);
+    } // if
+
 
     if (_re_initialize) {
         this->ReInitialize();
@@ -235,28 +239,34 @@ bool my::GameScene::Initialize(void) {
 
     // game system
     if (auto game = _game.lock()) {
+        auto pause_system = game->GetGamePauseSystem();
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         auto help_desk = game->GetHelpDesk();
         auto game_money = game->GetGameMoney();
         auto shop_system = game->GetShopSystem();
 
+        
         shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<this_type>(shared_from_this()));
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
         player->PushNotificationableSubject("QuickChange");
+
         // game system
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
         game_money->Initialize();
         help_desk->Initialize();
         shop_system->Initialize();
+        pause_system->Initialize();
+        
         auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
         help_desk->OnNotify(quest);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
+        _pause_menu_subject.AddObserver(pause_system);
 
         auto weapons = weapon_system->GetWeaponMap();
         for (auto& pair : weapons) {
@@ -289,7 +299,7 @@ bool my::GameScene::Release(void) {
         //_shop_system_subject.RemoveObserver(game->GetShopSystem());
         //_quick_change_subject.RemoveObserver(game->GetQuickChange());
 
-
+        _pause_menu_subject.Clear();
         game->GameSystemRelease();
     } // if
     return true;
