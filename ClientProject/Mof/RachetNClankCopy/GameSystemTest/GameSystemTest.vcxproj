@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{73d854f5-54a2-4446-9541-dd0870927878}</ProjectGuid>
+    <RootNamespace>GameSystemTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RachetApplication</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../MofLibrary/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RachetApplication</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../MofLibrary/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\My\Core\AbstructContainer.h" />
+    <ClInclude Include="..\include\My\Core\Define.h" />
+    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h" />
+    <ClInclude Include="..\include\My\Core\Header.h" />
+    <ClInclude Include="..\include\My\Core\Math.h" />
+    <ClInclude Include="..\include\My\Core\Observable.h" />
+    <ClInclude Include="..\include\My\Core\Observer.h" />
+    <ClInclude Include="..\include\My\Core\ServiceLocator.h" />
+    <ClInclude Include="..\include\My\Core\State.h" />
+    <ClInclude Include="..\include\My\Core\StateMachine.h" />
+    <ClInclude Include="..\include\My\Core\Timer.h" />
+    <ClInclude Include="..\include\My\Core\Trait.h" />
+    <ClInclude Include="..\include\My\Core\Utility.h" />
+    <ClInclude Include="..\include\My\UI\UICanvas.h" />
+    <ClInclude Include="..\include\My\UI\UIItem.h" />
+    <ClInclude Include="..\include\My\UI\UIPanel.h" />
+    <ClInclude Include="..\RachetApplication\Actor.h" />
+    <ClInclude Include="..\RachetApplication\GameApp.h" />
+    <ClInclude Include="..\RachetApplication\GameDefine.h" />
+    <ClInclude Include="..\RachetApplication\Gamepad.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameManager.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameMoney.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameQuest.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameSystem.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\HelpDesk.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveData.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\ShopSystem.h" />
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\WeaponSystem.h" />
+    <ClInclude Include="..\RachetApplication\ResourceManager.h" />
+    <ClInclude Include="..\RachetApplication\UI\EquipmentWeaponMenu.h" />
+    <ClInclude Include="..\RachetApplication\UI\GameMoneyMenu.h" />
+    <ClInclude Include="..\RachetApplication\UI\HelpDeskMenu.h" />
+    <ClInclude Include="..\RachetApplication\UI\LockOnCursorMenu.h" />
+    <ClInclude Include="..\RachetApplication\UI\NanotechMenu.h" />
+    <ClInclude Include="..\RachetApplication\UI\QuickChangeMenu.h" />
+    <ClInclude Include="..\RachetApplication\UI\ShopSystemMenu.h" />
+    <ClInclude Include="TestApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\include\My\Core\State.cpp" />
+    <ClCompile Include="..\include\My\Core\StateMachine.cpp" />
+    <ClCompile Include="..\include\My\Core\Timer.cpp" />
+    <ClCompile Include="..\include\My\UI\UICanvas.cpp" />
+    <ClCompile Include="..\include\My\UI\UIItem.cpp" />
+    <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
+    <ClCompile Include="..\RachetApplication\Actor.cpp" />
+    <ClCompile Include="..\RachetApplication\Gamepad.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameManager.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameMoney.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameQuest.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameSystem.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\HelpDesk.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveData.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\ShopSystem.cpp" />
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\WeaponSystem.cpp" />
+    <ClCompile Include="..\RachetApplication\UI\EquipmentWeaponMenu.cpp" />
+    <ClCompile Include="..\RachetApplication\UI\GameMoneyMenu.cpp" />
+    <ClCompile Include="..\RachetApplication\UI\HelpDeskMenu.cpp" />
+    <ClCompile Include="..\RachetApplication\UI\LockOnCursorMenu.cpp" />
+    <ClCompile Include="..\RachetApplication\UI\NanotechMenu.cpp" />
+    <ClCompile Include="..\RachetApplication\UI\QuickChangeMenu.cpp" />
+    <ClCompile Include="..\RachetApplication\UI\ShopSystemMenu.cpp" />
+    <ClCompile Include="TestApp.cpp" />
+    <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

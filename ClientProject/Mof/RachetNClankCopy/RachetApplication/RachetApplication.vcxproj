@@ -383,6 +383,9 @@
     <ClCompile Include="Factory\BuilderFactory.cpp" />
     <ClCompile Include="Factory\Builder\ActorBuilder.cpp" />
     <ClCompile Include="Factory\Builder\OmniWrenchBuilder.cpp" />
+    <ClCompile Include="Factory\Builder\Scene\GameSceneBuilder.cpp" />
+    <ClCompile Include="Factory\Builder\Scene\SceneBuilder.cpp" />
+    <ClCompile Include="Factory\Builder\Scene\TitleSceneBuilder.cpp" />
     <ClCompile Include="Factory\Builder\TerrainBuilder.cpp" />
     <ClCompile Include="Factory\ComponentCreator.cpp" />
     <ClCompile Include="Factory\ComponentFactory.cpp" />
@@ -394,6 +397,7 @@
     <ClCompile Include="Game\GameSystem\GameQuest.cpp" />
     <ClCompile Include="Game\GameSystem\GameSystem.cpp" />
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp" />
+    <ClCompile Include="Game\GameSystem\OptionSystem.cpp" />
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveSystem.cpp" />
@@ -404,6 +408,7 @@
     <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="Light\LightManager.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
+    <ClCompile Include="Scene\DescriptionScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneImplementation.cpp" />
@@ -435,8 +440,10 @@
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\GameMoneyMenu.cpp" />
     <ClCompile Include="UI\NanotechMenu.cpp" />
+    <ClCompile Include="UI\OptionSystemMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="UI\ShopSystemMenu.cpp" />
+    <ClCompile Include="UI\TitleInfoMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -675,6 +682,9 @@
     <ClInclude Include="Factory\Builder\ActorBuilder.h" />
     <ClInclude Include="Factory\Builder\IBuilder.h" />
     <ClInclude Include="Factory\Builder\OmniWrenchBuilder.h" />
+    <ClInclude Include="Factory\Builder\Scene\GameSceneBuilder.h" />
+    <ClInclude Include="Factory\Builder\Scene\SceneBuilder.h" />
+    <ClInclude Include="Factory\Builder\Scene\TitleSceneBuilder.h" />
     <ClInclude Include="Factory\Builder\TerrainBuilder.h" />
     <ClInclude Include="Factory\ComponentCreator.h" />
     <ClInclude Include="Factory\ComponentFactory.h" />
@@ -694,6 +704,7 @@
     <ClInclude Include="Game\GameSystem\GameQuest.h" />
     <ClInclude Include="Game\GameSystem\GameSystem.h" />
     <ClInclude Include="Game\GameSystem\HelpDesk.h" />
+    <ClInclude Include="Game\GameSystem\OptionSystem.h" />
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveSystem.h" />
@@ -707,6 +718,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene\ClearScene.h" />
+    <ClInclude Include="Scene\DescriptionScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
@@ -741,11 +753,14 @@
     <ClInclude Include="UI\LockOnCursorMenu.h" />
     <ClInclude Include="UI\GameMoneyMenu.h" />
     <ClInclude Include="UI\NanotechMenu.h" />
+    <ClInclude Include="UI\OptionSystemMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="UI\ShopSystemMenu.h" />
+    <ClInclude Include="UI\TitleInfoMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\clear_scene.txt" />
+    <Text Include="..\Resource\scene_resource\description_scene.txt" />
     <Text Include="..\Resource\scene_resource\game_scene.txt" />
     <Text Include="..\Resource\scene_resource\general.txt" />
     <Text Include="..\Resource\scene_resource\title_scene.txt" />
@@ -761,6 +776,7 @@
     <None Include="..\Resource\builder\bomb_glove.json" />
     <None Include="..\Resource\builder\bomb_glove_bullet.json" />
     <None Include="..\Resource\builder\bomb_glove_effect.json" />
+    <None Include="..\Resource\builder\demo_player.json" />
     <None Include="..\Resource\builder\enemy_bullet.json" />
     <None Include="..\Resource\builder\omni_wrench.json" />
     <None Include="..\Resource\builder\particle.json" />

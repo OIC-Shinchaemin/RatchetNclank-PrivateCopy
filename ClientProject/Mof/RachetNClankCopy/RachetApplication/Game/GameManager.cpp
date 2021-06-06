@@ -12,8 +12,9 @@ my::GameManager::GameManager() :
     _help_desk(std::make_shared<my::HelpDesk>()),
     _game_money(std::make_shared<my::GameMoney>()),
     _shop_system(std::make_shared<my::ShopSystem>()),
+    _option_system(std::make_shared<my::OptionSystem>()),
     _resource(),
-    _ui_canvas() {
+    _ui_canvas(){
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
     _shop_system->SetWeaponSystem(_weapon_system);
     _shop_system->SetGameMoney(_game_money);
@@ -54,6 +55,10 @@ std::shared_ptr<my::ShopSystem> my::GameManager::GetShopSystem(void) const {
     return this->_shop_system;
 }
 
+std::shared_ptr<my::OptionSystem> my::GameManager::GetOptionSystem(void) const {
+    return this->_option_system;
+}
+
 void my::GameManager::GameSystemLoad(void) {
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
@@ -65,6 +70,7 @@ void my::GameManager::GameSystemLoad(void) {
 bool my::GameManager::Initialize(void) {
     _quick_change->GetSubject()->AddObserver(shared_from_this());
     _shop_system->GetSubject()->AddObserver(shared_from_this());
+    _option_system->GetSubject()->AddObserver(shared_from_this());
 
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
@@ -76,10 +82,8 @@ bool my::GameManager::Initialize(void) {
     _game_money->SetUICanvas(_ui_canvas);
     _shop_system->SetResourceManager(_resource);
     _shop_system->SetUICanvas(_ui_canvas);
-    return true;
-}
-
-bool my::GameManager::Update(float _delta_time) {
+    _option_system->SetResourceManager(_resource);
+    _option_system->SetUICanvas(_ui_canvas);
     return true;
 }
 
@@ -91,13 +95,14 @@ bool my::GameManager::Release(void) {
     _weapon_system.reset();
     _quick_change.reset();
     _help_desk.reset();
+    _option_system.reset();
     _game_money.reset();
     _resource.reset();
     _ui_canvas.reset();
     return true;
 }
 
-void my::GameManager::GameSystemUpdate(float delta_time) {
+bool my::GameManager::Update(float delta_time) {
     for (auto ptr : _update_system) {
         if (!ptr->Update(delta_time)) {
             _disable_systems.push_back(ptr);
@@ -108,6 +113,7 @@ void my::GameManager::GameSystemUpdate(float delta_time) {
         ut::EraseRemove(_update_system, ptr);
     } // for
     _disable_systems.clear();
+    return true;
 }
 
 void my::GameManager::GameSystemRelease(void) {
@@ -119,11 +125,15 @@ void my::GameManager::GameSystemRelease(void) {
     my::SaveSystem().Save(save_param);
     _update_system.clear();
     _disable_systems.clear();
+    
     _shop_system->Release();
     _quick_change->Release();
     _weapon_system->Release();
     _help_desk->Release();
+    _option_system->Release();
     _game_money->Release();
+
     _shop_system->GetSubject()->RemoveObserver(shared_from_this());
     _quick_change->GetSubject()->RemoveObserver(shared_from_this());
+    _option_system->GetSubject()->RemoveObserver(shared_from_this());
 }

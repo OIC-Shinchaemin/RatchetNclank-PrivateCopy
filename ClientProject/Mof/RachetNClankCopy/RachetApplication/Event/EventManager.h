@@ -53,8 +53,7 @@ public:
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
-    //bool Update(float delta_time);
-    bool UpdateGameEvent(float delta_time);
+    bool Update(float delta_time);
     /// <summary>
     /// ‰ð•ú
     /// </summary>

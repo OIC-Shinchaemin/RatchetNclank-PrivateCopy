@@ -25,6 +25,8 @@ my::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
 }
 
 void my::EquipmentWeaponMenu::OnNotify(const my::Mechanical::Info& info) {
+    super::Notify(shared_from_this(), "Enable");
+    //super::Notify()
     _info.name = info.name;
     _info.bullet_count = info.bullet_count;
 }

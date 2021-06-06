@@ -7,7 +7,6 @@
 #include <memory>
 #include <vector>
 
-#include "My/UI/UICanvas.h"
 #include "../Game/GameManager.h"
 #include "../Event/EventManager.h"
 #include "../Game/GameWorld.h"
@@ -21,17 +20,9 @@
 
 namespace my {
 class GameScene : public my::Scene, public my::Observer<const my::ShopSystem::Info&> {
-
     using super = my::Scene;
-    using This = my::GameScene;
-public:
-    enum class State {
-        Active,
-        GamePause
-    };
+    using this_type = my::GameScene;
 private:
-    //! 状態
-    This::State _state;
     //! 追加
     std::vector<std::shared_ptr<my::Actor>> _created_actors;
     //! 削除
@@ -47,7 +38,7 @@ private:
     //! 再初期化
     bool _re_initialize;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    //std::weak_ptr<my::UICanvas> _ui_canvas;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
     //! イベント
@@ -122,7 +113,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    //void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// セッター
     /// </summary>

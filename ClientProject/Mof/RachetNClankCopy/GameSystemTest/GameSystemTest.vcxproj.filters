@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Test">
+      <UniqueIdentifier>{f8226ed8-78a5-48f5-addf-41082b42d548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Test\Base">
+      <UniqueIdentifier>{76ed52c4-a657-481c-8cdf-2901affa03bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Test\Header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Test\Base\Core">
+      <UniqueIdentifier>{4a76d441-3fb0-4c94-a88a-5537cb1f1f11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Base\UI">
+      <UniqueIdentifier>{d5e4056b-9fb9-4882-8c9e-bd3dbc7f0af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source\Game">
+      <UniqueIdentifier>{044d16ea-f6b7-49e4-a1a3-052e601d606d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source\Game\GameSystem">
+      <UniqueIdentifier>{388a7780-b98f-4504-a2c0-d2e94d6d6869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source\Game\GameSystem\Save">
+      <UniqueIdentifier>{502abb5d-98a9-498e-bdbd-2b1224ebd4f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source\UI">
+      <UniqueIdentifier>{81b80ef8-4863-4baa-abbc-91bbc7d00581}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestApp.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\State.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\StateMachine.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\Core\Timer.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Gamepad.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\UI\UIItem.cpp">
+      <Filter>Test\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\UI\UIPanel.cpp">
+      <Filter>Test\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\My\UI\UICanvas.cpp">
+      <Filter>Test\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameSystem.cpp">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\HelpDesk.cpp">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.cpp">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\ShopSystem.cpp">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\WeaponSystem.cpp">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameMoney.cpp">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameQuest.cpp">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.cpp">
+      <Filter>Test\Source\Game\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveData.cpp">
+      <Filter>Test\Source\Game\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Game\GameManager.cpp">
+      <Filter>Test\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\UI\HelpDeskMenu.cpp">
+      <Filter>Test\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\UI\LockOnCursorMenu.cpp">
+      <Filter>Test\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\UI\NanotechMenu.cpp">
+      <Filter>Test\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\UI\QuickChangeMenu.cpp">
+      <Filter>Test\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\UI\ShopSystemMenu.cpp">
+      <Filter>Test\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\UI\EquipmentWeaponMenu.cpp">
+      <Filter>Test\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\UI\GameMoneyMenu.cpp">
+      <Filter>Test\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RachetApplication\Actor.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestApp.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Observable.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Observer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\ServiceLocator.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\State.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\StateMachine.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Timer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Trait.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Utility.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\AbstructContainer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Define.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Header.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\Core\Math.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Gamepad.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\UI\UICanvas.h">
+      <Filter>Test\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\UI\UIItem.h">
+      <Filter>Test\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\My\UI\UIPanel.h">
+      <Filter>Test\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameSystem.h">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\HelpDesk.h">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.h">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\ShopSystem.h">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\WeaponSystem.h">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameMoney.h">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameQuest.h">
+      <Filter>Test\Source\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveData.h">
+      <Filter>Test\Source\Game\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.h">
+      <Filter>Test\Source\Game\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Game\GameManager.h">
+      <Filter>Test\Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\GameApp.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\GameDefine.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\ResourceManager.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\UI\HelpDeskMenu.h">
+      <Filter>Test\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\UI\LockOnCursorMenu.h">
+      <Filter>Test\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\UI\NanotechMenu.h">
+      <Filter>Test\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\UI\QuickChangeMenu.h">
+      <Filter>Test\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\UI\ShopSystemMenu.h">
+      <Filter>Test\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\UI\EquipmentWeaponMenu.h">
+      <Filter>Test\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\UI\GameMoneyMenu.h">
+      <Filter>Test\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RachetApplication\Actor.h">
+      <Filter>Test\Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

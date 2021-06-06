@@ -16,6 +16,10 @@ class UICanvas : public std::enable_shared_from_this<my::UICanvas>, public my::O
 private:
     //! UIパネル
     std::vector<ElemPtr> _panels;
+    //! UIパネル
+    std::vector<ElemPtr> _enable_list;
+    //! UIパネル
+    std::vector<ElemPtr> _disable_list;
 public:
     /// <summary>
     /// コンストラクタ
@@ -30,7 +34,7 @@ public:
     /// </summary>
     /// <param name="observable"></param>
     /// <param name="event"></param>
-    virtual void OnNotify(const std::shared_ptr<my::UIPanel>& observable, const char* event) override;
+    virtual void OnNotify(const std::shared_ptr<my::UIPanel>& ptr, const char* event) override;
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -12,6 +12,8 @@ my::GameMoneyMenu::GameMoneyMenu(const char* name) :
 }
 
 void my::GameMoneyMenu::OnNotify(int money) {
+    super::Notify(shared_from_this(), "Enable");
+    
     this->_money = money;
     this->_show = true;
     this->_hide_timer.Initialize(_time_max, false);

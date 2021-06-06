@@ -56,12 +56,14 @@ MofBool CGameApp::Input(void) {
 MofBool CGameApp::Update(void) {
     this->Input();
 
-    float delta = 0.01667f;
+    float delta_time = 0.01667f;
 
-    _game_manager->Update(delta);
-    _scene_manager->Update(delta);
+
+    _event_manager->Update(delta_time);
+    _game_manager->Update(delta_time);
+    _scene_manager->Update(delta_time);
     _camera_manager->Update();
-    _ui_canvas->Update(delta);
+    _ui_canvas->Update(delta_time);
     return TRUE;
 }
 
@@ -73,7 +75,7 @@ MofBool CGameApp::Render(void) {
     auto fps = ::CUtilities::GetFPS();
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", fps);
 #endif // _DEBUG
-    
+
     ::g_pGraphics->RenderEnd();
     return TRUE;
 }

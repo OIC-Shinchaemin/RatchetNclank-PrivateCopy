@@ -1,6 +1,7 @@
 #ifndef MY_GAME_QUEST_H
 #define MY_GAME_QUEST_H
 
+
 namespace my {
 class GameQuest {
 public:

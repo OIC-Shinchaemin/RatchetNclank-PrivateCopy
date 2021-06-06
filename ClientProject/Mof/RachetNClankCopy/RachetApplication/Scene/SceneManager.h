@@ -14,27 +14,77 @@
 #include "My/UI/UICanvas.h"
 #include "../Game/GameManager.h"
 #include "../Event/EventManager.h"
+#include "../Factory/Builder/IBuilder.h"
+#include "../Factory/Builder/Scene/TitleSceneBuilder.h"
+#include "../Factory/Builder/Scene/GameSceneBuilder.h"
 
 
 namespace my {
-class SceneManager : public std::enable_shared_from_this<my::SceneManager>, public my::Observer<const SceneMessage&> {
-private:
+class SceneManager : public std::enable_shared_from_this<my::SceneManager>, public my::Observer<const scene::SceneMessage&> {
+    using this_type = my::SceneManager;
     struct ChangeMessage {
         std::string name;
         std::shared_ptr<my::Scene::Param> param;
     };
+    struct Managers {
+        //! リソース
+        std::weak_ptr<my::ResourceMgr> resource;
+        //! UI
+        std::weak_ptr<my::UICanvas> ui_canvas;
+        //! ゲーム
+        std::weak_ptr<my::GameManager> game_manager;
+        //! ゲームイベント
+        std::weak_ptr<my::EventManager> event_manager;
+    };
+    struct CreateStruct {
+        //! ファクトリー
+        my::Factory<my::Scene> factory;
+        //! ビルダー
+        std::unordered_map<std::string, std::shared_ptr<my::IBuilder>> builders;
+        //! タイプ,パス
+        std::unordered_map<std::string, std::string> reousrce_paths;
+    };
+private:
+    //! 現在
     std::shared_ptr<my::Scene> _scene;
+    //! 前
     std::shared_ptr<my::Scene> _prev_scene;
     //! メッセージ
     std::optional<ChangeMessage> _change_message;
-    //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
-    //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
-    //! ゲーム
-    std::weak_ptr<my::GameManager> _game_manager;
-    //! ゲームイベント
-    std::weak_ptr<my::EventManager> _event_manager;
+    //! 管理オブジェクト
+    this_type::Managers _managers;
+    //! 作成オブジェクト
+    this_type::CreateStruct _create_struct;
+
+
+    template<typename Builder>
+    void RegisterBuilder(const std::string& name) {
+            auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
+            auto ptr = ut::MakeSharedWithRelease<Builder>();
+            ptr->SetResourceManager(resource);
+            ptr->SetUICanvas(ui_canvas);
+            _create_struct.builders.emplace(name, ptr); ;
+    }
+    template<>
+    void RegisterBuilder<builder::TitleSceneBuilder>(const std::string& name) {
+        auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
+        auto ptr = ut::MakeSharedWithRelease<builder::TitleSceneBuilder>();
+        ptr->SetResourceManager(resource);
+        ptr->SetUICanvas(ui_canvas);
+        ptr->SetGameManager(game_manager);
+        _create_struct.builders.emplace(name, ptr); ;
+    }
+    template<>
+    void RegisterBuilder<builder::GameSceneBuilder>(const std::string& name) {
+        auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
+        auto ptr = ut::MakeSharedWithRelease<builder::GameSceneBuilder>();
+        ptr->SetResourceManager(resource);
+        ptr->SetUICanvas(ui_canvas);
+        ptr->SetGameManager(game_manager);
+        ptr->SetEventManager(event_manager);
+        _create_struct.builders.emplace(name, ptr); ;
+    }
+
     /// <summary>
     /// 変更
     /// </summary>
@@ -55,7 +105,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const SceneMessage& mesage) override;
+    virtual void OnNotify(const scene::SceneMessage& mesage) override;
     /// <summary>
     /// セッター
     /// </summary>

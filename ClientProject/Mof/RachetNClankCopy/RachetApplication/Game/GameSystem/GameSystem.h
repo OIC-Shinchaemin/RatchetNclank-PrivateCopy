@@ -21,15 +21,14 @@
 namespace my {
 class GameSystem : public std::enable_shared_from_this<my::GameSystem>,
     public my::Observer<bool> {
-    using This = my::GameSystem;
+    using this_type = my::GameSystem;
 private:
     //! 通知用
-    my::Observable<const std::shared_ptr<This>&> _subject;
+    my::Observable<const std::shared_ptr<this_type>&> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
-
 protected:
     /// <summary>
     /// ゲッター
@@ -72,13 +71,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const std::shared_ptr<This>&>* GetSubject(void);
+    my::Observable<const std::shared_ptr<this_type>&>* GetSubject(void);
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time);
+    [[nodiscard]] virtual bool Update(float delta_time);
 };
 }
 #endif // !MY_GAME_SYSTEM_H

@@ -13,6 +13,20 @@ void my::Scene::LoadComplete(void) {
     _loaded = true;
 }
 
+std::shared_ptr<my::ResourceMgr> my::Scene::GetResource(void) const {
+    if (auto ptr = _resource.lock()) {
+        return ptr;
+    } // if
+    return nullptr;
+}
+
+std::shared_ptr<my::UICanvas> my::Scene::GetUICanvas(void) const {
+    if (auto ptr = _ui_canvas.lock()) {
+        return ptr;
+    } // if
+    return nullptr;
+}
+
 Mof::LPRenderTarget my::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
 }
@@ -71,11 +85,12 @@ bool my::Scene::PostRender(void) {
 }
 
 my::Scene::Scene() :
-    _state(),
+    _state(this_type::State::Active),
     _rendar_target(),
     _default(),
     _effect(),
     _resource(),
+    _ui_canvas(),
     _loaded(false),
     _mutex(),
     _load_thread() {
@@ -92,7 +107,11 @@ void my::Scene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::Scene::AddSceneObserver(const std::shared_ptr<my::Observer<const SceneMessage&>>& ptr) {
+void my::Scene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+    this->_ui_canvas = ptr;
+}
+
+void my::Scene::AddSceneObserver(const std::shared_ptr<my::Observer<const scene::SceneMessage&>>& ptr) {
     _subject.AddObserver(ptr);
 }
 

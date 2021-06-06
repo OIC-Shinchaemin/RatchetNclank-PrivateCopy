@@ -38,6 +38,8 @@ my::QuickChangeMenu::QuickChangeMenu(const char* name) :
 }
 
 void my::QuickChangeMenu::OnNotify(const my::QuickChangeSystem::Info& info) {
+    super::Notify(shared_from_this(), "Enable");
+
     this->SetColor(info.color);
     _current_index = info.current_index;
 }
@@ -59,7 +61,7 @@ void my::QuickChangeMenu::AddWeaponInfo(uint32_t index, const char* name) {
 }
 
 bool my::QuickChangeMenu::Update(float delta_time) {
-    return false;
+    return true;
 }
 
 bool my::QuickChangeMenu::Render(void) {

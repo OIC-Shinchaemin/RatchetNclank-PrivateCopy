@@ -22,7 +22,7 @@ bool my::EventManager::InitializeGameEvent(void) {
     return true;
 }
 
-bool my::EventManager::UpdateGameEvent(float delta_time) {
+bool my::EventManager::Update(float delta_time) {
     for (auto& e : _events) {
         e->Update(delta_time);
     } // for

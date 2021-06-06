@@ -304,6 +304,12 @@
     <Filter Include="Rachet\Header\Actor\Vehicle">
       <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Factory\Builder\Scene">
+      <UniqueIdentifier>{036ac15c-22a3-4d3d-a999-256a96c96508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Factory\Builder\Scene">
+      <UniqueIdentifier>{328257a5-3ba1-4c7a-9ec6-7c40e9174c92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -953,6 +959,27 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\DescriptionScene.cpp">
+      <Filter>Rachet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\SceneBuilder.cpp">
+      <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\GameSceneBuilder.cpp">
+      <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\OptionSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\OptionSystemMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\TitleSceneBuilder.cpp">
+      <Filter>Rachet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\TitleInfoMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1865,6 +1892,27 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\DescriptionScene.h">
+      <Filter>Rachet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\SceneBuilder.h">
+      <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\GameSceneBuilder.h">
+      <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\OptionSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\OptionSystemMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\TitleSceneBuilder.h">
+      <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\TitleInfoMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -1877,6 +1925,9 @@
       <Filter>Resource\scene_resource</Filter>
     </Text>
     <Text Include="..\Resource\scene_resource\title_scene.txt">
+      <Filter>Resource\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\description_scene.txt">
       <Filter>Resource\scene_resource</Filter>
     </Text>
   </ItemGroup>
@@ -1960,6 +2011,9 @@
       <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\shop.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\demo_player.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

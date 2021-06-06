@@ -1,5 +1,6 @@
 #include "GameSystem.h"
 
+
 std::shared_ptr<my::ResourceMgr> my::GameSystem::GetResource(void) const {
     if (auto ptr = _resource.lock()) {
         return ptr;

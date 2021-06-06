@@ -1,9 +1,11 @@
 #include "BuilderFactory.h"
 
+/*
 #include "../Component/Component.h"
 #include "Builder/ActorBuilder.h"
 #include "Builder/TerrainBuilder.h"
 #include "Builder/OmniWrenchBuilder.h"
+*/
 
 
 my::BuilderFactory::BuilderFactory(my::ComponentFactory* component_factory) :
@@ -27,6 +29,10 @@ void my::BuilderFactory::Release(void) {
 std::shared_ptr<my::IBuilder> my::BuilderFactory::Create(const char* path) const {
     // actor builder のみ
 
+    // builderフォルダのファイル構成をきれいにする
+    // パスで作成するCreateBuilderのtemplate引数を変える
+    // 2回もioが入って無駄
+    
     // 作成
     rapidjson::Document document;
     if (!ut::ParseJsonDocument(path, document)) {
@@ -37,38 +43,14 @@ std::shared_ptr<my::IBuilder> my::BuilderFactory::Create(const char* path) const
     if (document.HasMember("type")) {
         std::string type = document["type"].GetString();
         if (type == "Terrain") {
-            auto temp = std::make_shared<my::TerrainBuilder>();
-            temp->SetResourceManager(_resource);
-            builder = temp;
+            return this->CreateBuilder<my::TerrainBuilder>(path);
         } // if
         else if (type == "OmniWrench") {
-            auto temp = std::make_shared<my::OmniWrenchBuilder>();
-            builder = temp;
+            return this->CreateBuilder<my::OmniWrenchBuilder>(path);
         } // else if
     } // if
     else {
-        builder = std::make_shared<my::ActorBuilder>();
+        return this->CreateBuilder<my::ActorBuilder>(path);
     } // else
-
-
-    if (document.HasMember("components")) {
-        const auto& components = document["components"];
-        _ASSERT_EXPR(components.IsArray(), L"指定された型でありません");
-        for (int i = 0; i < components.Size(); i++) {
-            _ASSERT_EXPR(components[i].HasMember("type"), L"タイプがありません");
-            _ASSERT_EXPR(components[i]["type"].IsString(), L"タイプが指定された型でありません");
-            _ASSERT_EXPR(components[i].HasMember("paramater"), L"パラメータがありません");
-            _ASSERT_EXPR(components[i]["paramater"].IsObject(), L"パラメータが指定された型でありません");
-
-            auto& param = components[i]["paramater"];
-
-            // 値の設定
-            std::string type = components[i]["type"].GetString();
-
-            auto com = _component_factory->Create(type.c_str(), param);
-            builder->AddComponent(com);
-        } // for
-    } // if
-
     return builder;
 }

@@ -23,7 +23,7 @@ class ShopSystem :
     public my::GameSystem
 {
     using super = my::GameSystem;
-    using This = my::ShopSystem;
+    using this_type = my::ShopSystem;
 public:
     struct Info {
         //! 表示
@@ -72,11 +72,11 @@ public:
     };
 private:
     //! 構成情報
-    This::Info _infomation;
+    this_type::Info _infomation;
     //! 通知用
     //my::Observable<const std::shared_ptr<This>&> _subject;
     //! 通知用
-    my::Observable<const This::Info&> _info_subject;
+    my::Observable<const this_type::Info&> _info_subject;
     //! 通知用
     my::Observable<const my::ChargeInfo&> _buy_subject;
     //! 通知用
@@ -86,7 +86,7 @@ private:
     //! セーブデータ
     my::SaveData _save_data;
     //! 購入可能ラインナップ
-    std::vector<This::Item> _items;
+    std::vector<this_type::Item> _items;
     //! 武器
     std::optional<std::string>_prev_weapon;
     //! 武器
@@ -144,7 +144,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const This::Info&>* GetInfoSubject(void);
+    my::Observable<const this_type::Info&>* GetInfoSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
