@@ -102,7 +102,6 @@ my::GameScene::GameScene() :
     _physic_world(),
     _stage(),
     _re_initialize(false),
-    //_ui_canvas(),
     _game(),
     _event() {
 }
@@ -136,11 +135,7 @@ void my::GameScene::OnNotify(const my::ShopSystem::Info& info) {
         this->_state = super::State::Pause;
     } // else
 }
-/*
-void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
-    this->_ui_canvas = ptr;
-}
-*/
+
 void my::GameScene::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
     this->_game = ptr;
 }
@@ -229,7 +224,6 @@ bool my::GameScene::Initialize(void) {
         auto shop = my::FactoryManager::Singleton().CreateActor<my::Shop >("../Resource/builder/shop.json", param);
         this->AddElement(shop);
     }
-
     {
         param->name = "weapon";
         param->tag = "OmniWrench";
@@ -237,8 +231,6 @@ bool my::GameScene::Initialize(void) {
         player->AddChild(omniwrench);
         this->AddElement(omniwrench);
     }
-
-    //ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
 
 
     // game system
@@ -265,7 +257,6 @@ bool my::GameScene::Initialize(void) {
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
-        //shop_system->GetInfoSubject()->AddObserver(player);
 
         auto weapons = weapon_system->GetWeaponMap();
         for (auto& pair : weapons) {
@@ -288,8 +279,6 @@ bool my::GameScene::Initialize(void) {
 
     ut::SafeDelete(param);
     _re_initialize = false;
-
-    _player = player;
     return true;
 }
 
