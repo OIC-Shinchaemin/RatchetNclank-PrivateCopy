@@ -15,10 +15,11 @@
 #include "My/Core/Observable.h"
 #include "../Game/GameManager.h"
 #include "../Game/GameSystem/OptionSystem.h"
+#include "../UI/TitleInfoMenu.h"
 
 
 namespace my {
-class TitleScene : public my::Scene ,
+class TitleScene : public my::Scene,
     public my::Observer<const my::OptionSystem::Info&> {
     using super = my::Scene;
 private:
@@ -36,6 +37,8 @@ private:
     my::Observable<bool> _title_menu_subject;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
+    //! UI地蔵
+    my::UICreator<my::TitleInfoMenu> _ui_creator;
 protected:
     /// <summary>
     /// 更新

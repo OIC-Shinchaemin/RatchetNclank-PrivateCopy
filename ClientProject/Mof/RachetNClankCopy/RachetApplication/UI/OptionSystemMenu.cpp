@@ -31,7 +31,7 @@ void my::OptionSystemMenu::AddItem(const my::OptionSystemItem& in) {
     auto elem = std::make_shared<my::OptionSystemMenuItem>(in.GetText().c_str());
     elem->SetText(in.GetText());
     elem->SetPosition(super::_position);
-    super::_position.y += 20.0f;
+    super::_position.y -= 20.0f;
 
     super::AddElement(elem);
 }

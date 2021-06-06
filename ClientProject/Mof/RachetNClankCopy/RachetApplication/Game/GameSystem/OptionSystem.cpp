@@ -9,7 +9,7 @@ my::OptionSystem::OptionSystem() :
     _info_subject(),
     _item(),
     _item_index(),
-    _title_menu_subject(){
+    _title_menu_subject() {
     _infomation.items = &_item;
 }
 
@@ -22,11 +22,7 @@ void my::OptionSystem::OnNotify(bool flag) {
     _info_subject.Notify(_infomation);
     _infomation.enter = false;
 }
-/*
-void my::OptionSystem::OnNotify(const std::shared_ptr<my::OptionSystem>& pop) {
-    _next.pop();
-}
-*/
+
 my::Observable<const my::OptionSystem::Info&>* my::OptionSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
@@ -37,11 +33,7 @@ my::Observable<const my::scene::SceneMessage&>* my::OptionSystem::GetSceneMessag
 my::Observable<bool>* my::OptionSystem::GetTitleMenuSubject(void) {
     return &this->_title_menu_subject;
 }
-/*
-void my::OptionSystem::PushSystem(const std::shared_ptr<my::OptionSystem>& next) {
-    _next.push(next);
-}
-*/
+
 void my::OptionSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
     _item.push_back(elem);
     _info_subject.Notify(_infomation);
@@ -86,34 +78,36 @@ bool my::OptionSystem::Input(void) {
         _info_subject.Notify(_infomation);
     } // else if
 
-    if (::g_pInput->IsKeyPush(MOFKEY_Z)) {
-        _execute_list.push_back(_item.at(_item_index));
+    if (!_item.empty()) {
+        if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+            _execute_list.push_back(_item.at(_item_index));
+        } // if
     } // if
     return true;
 }
 bool my::OptionSystem::Update(float delta_time) {
-    /*
-    if (!_next.empty()) {
-        auto ptr = _next.top();
-        return ptr->Update(delta_time);
-    } // if
-    */
-
     this->Input();
+    if (!_execute_list.empty()) {
+        for (auto ptr : _execute_list) {
+            if (ptr->Execute()) {
+            } // if
+        } // for
+        _execute_list.clear();
+        return false;
+    } // if
+    /*
     std::vector<std::shared_ptr<ElemType>> remove_list;
     for (auto ptr : _execute_list) {
         if (ptr->Execute()) {
             remove_list.push_back(ptr);
         } // if
     } // for
+    
     for (auto ptr : remove_list) {
         ut::EraseRemove(_execute_list, ptr);
     } // for
     remove_list.clear();
-
-    if (!_item.empty()) {
-        auto item = _item.at(_item_index);
-    } // if
+    */
     return true;
 }
 

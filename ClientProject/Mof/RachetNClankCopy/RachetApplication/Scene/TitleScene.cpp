@@ -3,11 +3,11 @@
 #include "My/Resource/ResourceFont.h"
 #include "../Factory/FactoryManager.h"
 #include "../Camera/FollowCameraController.h"
-#include "../UI/TitleInfoMenu.h"
 
 
 bool my::TitleScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
+    /*
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _subject.Notify(scene::SceneMessage(my::SceneType::kGameScene, ""));
@@ -16,7 +16,9 @@ bool my::TitleScene::SceneUpdate(float delta_time) {
              ::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
         _subject.Notify(scene::SceneMessage(my::SceneType::kDescriptionScene, ""));
     } // else if
-    if (::g_pInput->IsKeyPush(MOFKEY_S)) {
+    */
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
+        ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _option_system_subject.Notify(true);
     } // if
 
@@ -61,7 +63,8 @@ my::TitleScene::TitleScene() :
     _stage_view_camera(),
     _camera_controller(),
     _demo_actor(),
-    _game() {
+    _game(),
+    _ui_creator("TitleInfoMenu") {
 }
 
 my::TitleScene::~TitleScene() {
@@ -128,16 +131,9 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
         } // if
 
 
-
-        if (auto canvas = super::GetUICanvas()) {
-            canvas->RemoveElement("TitleInfoMenu");
-        } // if
-        auto menu = std::make_shared< my::TitleInfoMenu>("TitleInfoMenu");
-        _title_menu_subject.AddObserver(menu);
+        auto menu = _ui_creator.Create(super::GetUICanvas());
         menu->SetResourceManager(super::GetResource());
-        if (auto canvas = super::GetUICanvas()) {
-            canvas->AddElement(menu);
-        } // if
+        _title_menu_subject.AddObserver(menu);
         _title_menu_subject.Notify(true);
 
 
@@ -151,12 +147,13 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
                 _subject.Notify(scene::SceneMessage(my::SceneType::kDescriptionScene, ""));
                 return true;
             });
-            item0->SetText("Yes");
+            item0->SetText("操作説明");
+
             auto item1 = std::make_shared<my::OptionSystemItem>([&]() {
                 _subject.Notify(scene::SceneMessage(my::SceneType::kGameScene, ""));
                 return true;
             });
-            item1->SetText("No");
+            item1->SetText("ゲームスタート");
             option_system->Initialize();
             option_system->AddItem(item0);
             option_system->AddItem(item1);
@@ -164,7 +161,7 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
 
     });
 
-    
+
     return true;
 }
 

@@ -10,11 +10,12 @@
 
 
 void my::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<my::Scene::Param> param) {
+    auto& [factory, builders, reousrce_paths] = _create_struct;
+
     _scene.reset();
-    
-    _scene = _factory.Create(name);
-    _builders.at(name)->Construct(_scene);
-    param->resource  = _reousrce_paths.at(name);
+    _scene = factory.Create(name);
+    builders.at(name)->Construct(_scene);
+    param->resource = reousrce_paths.at(name);
 
     _scene->AddSceneObserver(shared_from_this());
     _scene->Load(param);
@@ -25,7 +26,7 @@ void my::SceneManager::RenderScene(void) {
     _scene->Render();
 
     ::g_pGraphics->SetDepthEnable(false);
-    if (auto canvas = _ui_canvas.lock()) {
+    if (auto canvas = _managers.ui_canvas.lock()) {
         canvas->Render();
     } // if
 
@@ -33,20 +34,19 @@ void my::SceneManager::RenderScene(void) {
 
 my::SceneManager::SceneManager() :
     _change_message(),
-    _resource(),
-    _ui_canvas(),
-    _game_manager(),
-    _event_manager() {
+    _managers(),
+    _create_struct(){
+    auto& [factory, builders, reousrce_paths] = _create_struct;
 
-    _factory.Register<my::TitleScene>(my::SceneType::kTitleScene);
-    _factory.Register<my::GameScene>(my::SceneType::kGameScene);
-    _factory.Register<my::ClearScene>(my::SceneType::kClearScene);
-    _factory.Register<my::DescriptionScene>(my::SceneType::kDescriptionScene);
+    factory.Register<my::TitleScene>(my::SceneType::kTitleScene);
+    factory.Register<my::GameScene>(my::SceneType::kGameScene);
+    factory.Register<my::ClearScene>(my::SceneType::kClearScene);
+    factory.Register<my::DescriptionScene>(my::SceneType::kDescriptionScene);
 
-    _reousrce_paths.emplace(my::SceneType::kTitleScene, my::scene::ResourcePath::kTitleScene);
-    _reousrce_paths.emplace(my::SceneType::kGameScene, my::scene::ResourcePath::kGameScene);
-    _reousrce_paths.emplace(my::SceneType::kClearScene, my::scene::ResourcePath::kClearScene);
-    _reousrce_paths.emplace(my::SceneType::kDescriptionScene, my::scene::ResourcePath::kDescriptionScene);
+    reousrce_paths.emplace(my::SceneType::kTitleScene, my::scene::ResourcePath::kTitleScene);
+    reousrce_paths.emplace(my::SceneType::kGameScene, my::scene::ResourcePath::kGameScene);
+    reousrce_paths.emplace(my::SceneType::kClearScene, my::scene::ResourcePath::kClearScene);
+    reousrce_paths.emplace(my::SceneType::kDescriptionScene, my::scene::ResourcePath::kDescriptionScene);
 }
 
 my::SceneManager::~SceneManager() {
@@ -61,19 +61,19 @@ void my::SceneManager::OnNotify(const scene::SceneMessage& mesage) {
 }
 
 void my::SceneManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
-    this->_resource = ptr;
+    this->_managers.resource = ptr;
 }
 
 void my::SceneManager::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
-    this->_ui_canvas = ptr;
+    this->_managers.ui_canvas = ptr;
 }
 
 void my::SceneManager::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
-    this->_game_manager = ptr;
+    this->_managers.game_manager = ptr;
 }
 
 void my::SceneManager::SetEventManager(std::weak_ptr<my::EventManager> ptr) {
-    this->_event_manager = ptr;
+    this->_managers.event_manager = ptr;
 }
 
 bool my::SceneManager::Initialize(void) {
