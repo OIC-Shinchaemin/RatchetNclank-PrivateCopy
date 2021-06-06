@@ -14,9 +14,57 @@
 
 
 namespace my {
+class GamePauseSystemMenuItem : public my::UIItem {
+    using super = my::UIItem;
+private:
+    //! 表示テキスト
+    std::string _text;
+public:
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="name"></param>
+    GamePauseSystemMenuItem(const char* name);
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~GamePauseSystemMenuItem();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="text"></param>
+    void SetText(const std::string& text);
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="tex"></param>
+    /// <param name="color"></param>
+    /// <returns></returns>
+    //bool Initialize(Mof::CVector2 pos, const std::shared_ptr<Mof::CTexture>& tex, const Mof::CVector4& color);
+    /// <summary>
+    /// 入力
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void) override;
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Update(float delta_time) override;
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(void) override;
+};
 class GamePauseSystemMenu : public my::UIPanel,
     public my::Observer<const my::GamePauseSystem::Info&> {
     using super = my::UIPanel;
+    using ElemType = my::GamePauseSystemMenuItem;
 private:
     //! 情報
     my::GamePauseSystem::Info _infomation;
@@ -49,7 +97,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="in"></param>
-    //void AddItem(const my::OptionSystemItem& in);
+    void AddItem(const my::GamePauseSystemItem& in);
     /// <summary>
     /// 初期化
     /// </summary>

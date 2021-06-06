@@ -65,7 +65,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     if (_state != super::State::Pause) {
         // input
         _game_world.Input();
-        
+
         // update
         _stage.Update(delta_time);
         _game_world.Update(delta_time);
@@ -246,7 +246,7 @@ bool my::GameScene::Initialize(void) {
         auto game_money = game->GetGameMoney();
         auto shop_system = game->GetShopSystem();
 
-        
+
         shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<this_type>(shared_from_this()));
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
@@ -259,7 +259,7 @@ bool my::GameScene::Initialize(void) {
         help_desk->Initialize();
         shop_system->Initialize();
         pause_system->Initialize();
-        
+
         auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
         help_desk->OnNotify(quest);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);
@@ -272,6 +272,22 @@ bool my::GameScene::Initialize(void) {
         for (auto& pair : weapons) {
             player->AddChild(pair.second);
         } // for
+
+
+        auto item0 = std::make_shared<my::GamePauseSystemItem>([&]() {
+            _subject.Notify(scene::SceneMessage(my::SceneType::kTitleScene, ""));
+            return true;
+        });
+        item0->SetText("タイトルに戻る");
+
+        auto item1 = std::make_shared<my::GamePauseSystemItem>([&]() {
+            _subject.Notify(scene::SceneMessage(my::SceneType::kGameScene, ""));
+            return true;
+        });
+        item1->SetText("リトライ");
+        pause_system->AddItem(item0);
+        pause_system->AddItem(item1);
+
     } // if
 
     // terrain
@@ -284,7 +300,6 @@ bool my::GameScene::Initialize(void) {
         auto terrain = my::FactoryManager::Singleton().CreateActor<my::Terrain>("../Resource/builder/water_flow.json", param);
         this->AddElement(terrain);
     } // for
-
 
 
     ut::SafeDelete(param);
