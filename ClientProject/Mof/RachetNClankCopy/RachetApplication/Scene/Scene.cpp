@@ -138,6 +138,10 @@ bool my::Scene::Initialize(void) {
     return true;
 }
 
+bool my::Scene::Input(void) {
+    return true;
+}
+
 bool my::Scene::Update(float delta_time) {
     if (this->IsLoaded()) {
         if (_load_thread.has_value()) {

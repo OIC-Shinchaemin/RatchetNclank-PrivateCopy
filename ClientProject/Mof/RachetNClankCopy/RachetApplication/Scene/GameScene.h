@@ -37,19 +37,14 @@ private:
     Stage _stage;
     //! 再初期化
     bool _re_initialize;
-    //! UI
-    //std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! メニュー
+    my::Observable<bool> _pause_menu_subject;
+
+
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
     //! イベント
     std::weak_ptr<my::EventManager> _event;
-
-
-    std::shared_ptr < my::Player > _player;
-    //! テスト
-    //my::Observable<bool> _shop_system_subject;
-    //my::Observable<bool> _quick_change_subject;
-
     /// <summary>
     /// 追加
     /// </summary>
@@ -113,11 +108,6 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
     void SetGameManager(std::weak_ptr<my::GameManager> ptr);
     /// <summary>
     /// セッター
@@ -143,6 +133,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
+    /// <summary>
+    /// 入力
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void);
     /// <summary>
     /// 解放
     /// </summary>

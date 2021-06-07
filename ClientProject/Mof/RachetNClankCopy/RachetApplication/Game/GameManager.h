@@ -12,6 +12,7 @@
 #include "GameSystem/GameMoney.h"
 #include "GameSystem/ShopSystem.h"
 #include "GameSystem/OptionSystem.h"
+#include "GameSystem/GamePauseSystem.h"
 
 
 namespace my {
@@ -35,10 +36,18 @@ private:
     std::shared_ptr<my::ShopSystem> _shop_system;
     //! オプション
     std::shared_ptr<my::OptionSystem> _option_system;
+    //! ポーズ
+    std::shared_ptr<my::GamePauseSystem> _pause_system;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
+
+    template<typename T>
+    void SetPtr(T ptr) {
+        ptr->SetResourceManager(_resource);
+        ptr->SetUICanvas(_ui_canvas);
+    }
 public:
     /// <summary>
     /// コンストラクタ
@@ -99,6 +108,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<my::OptionSystem> GetOptionSystem(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<my::GamePauseSystem> GetGamePauseSystem(void) const;
     /// <summary>
     /// 読み込み
     /// </summary>

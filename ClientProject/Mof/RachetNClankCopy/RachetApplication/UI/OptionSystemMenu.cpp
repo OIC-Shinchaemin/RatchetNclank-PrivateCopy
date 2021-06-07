@@ -17,6 +17,9 @@ void my::OptionSystemMenu::OnNotify(const my::OptionSystem::Info& info) {
     if (info.items->size() != super::_items.size()) {
         this->AddItem(**(info.items->end() - 1));
     } // if
+    else if (info.items->empty()) {
+        _items.clear();
+    } // else if
 }
 
 void my::OptionSystemMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {

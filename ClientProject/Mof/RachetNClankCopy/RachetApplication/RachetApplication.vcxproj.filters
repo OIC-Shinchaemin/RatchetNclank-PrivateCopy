@@ -981,6 +981,12 @@
     <ClCompile Include="UI\TitleInfoMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameSystem\GamePauseSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GamePauseSystemMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -1911,6 +1917,12 @@
       <Filter>Rachet\Header\Factory\Builder\Scene</Filter>
     </ClInclude>
     <ClInclude Include="UI\TitleInfoMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GamePauseSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GamePauseSystemMenu.h">
       <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
   </ItemGroup>

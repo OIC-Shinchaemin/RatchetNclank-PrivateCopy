@@ -24,6 +24,7 @@ class Scene : public std::enable_shared_from_this<my::Scene>, public my::Observe
 public:
    enum class State {
         Active,    
+        Sleep,
         Pause,
         End
     };
@@ -114,6 +115,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void);
+    /// <summary>
+    /// “ü—Í
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void);
     /// <summary>
     /// XV
     /// </summary>

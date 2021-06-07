@@ -13,8 +13,9 @@ my::GameManager::GameManager() :
     _game_money(std::make_shared<my::GameMoney>()),
     _shop_system(std::make_shared<my::ShopSystem>()),
     _option_system(std::make_shared<my::OptionSystem>()),
+    _pause_system(std::make_shared<my::GamePauseSystem>()),
     _resource(),
-    _ui_canvas(){
+    _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
     _shop_system->SetWeaponSystem(_weapon_system);
     _shop_system->SetGameMoney(_game_money);
@@ -59,6 +60,10 @@ std::shared_ptr<my::OptionSystem> my::GameManager::GetOptionSystem(void) const {
     return this->_option_system;
 }
 
+std::shared_ptr<my::GamePauseSystem> my::GameManager::GetGamePauseSystem(void) const {
+    return this->_pause_system;
+}
+
 void my::GameManager::GameSystemLoad(void) {
     auto save_data = my::SaveData();
     my::SaveSystem().Fetch(save_data);
@@ -71,7 +76,16 @@ bool my::GameManager::Initialize(void) {
     _quick_change->GetSubject()->AddObserver(shared_from_this());
     _shop_system->GetSubject()->AddObserver(shared_from_this());
     _option_system->GetSubject()->AddObserver(shared_from_this());
+    _pause_system->GetSubject()->AddObserver(shared_from_this());
 
+    this->SetPtr(_weapon_system);
+    this->SetPtr(_quick_change);
+    this->SetPtr(_help_desk);
+    this->SetPtr(_game_money);
+    this->SetPtr(_shop_system);
+    this->SetPtr(_option_system);
+    this->SetPtr(_pause_system);
+    /*
     _weapon_system->SetResourceManager(_resource);
     _weapon_system->SetUICanvas(_ui_canvas);
     _quick_change->SetResourceManager(_resource);
@@ -84,10 +98,19 @@ bool my::GameManager::Initialize(void) {
     _shop_system->SetUICanvas(_ui_canvas);
     _option_system->SetResourceManager(_resource);
     _option_system->SetUICanvas(_ui_canvas);
+    _pause_system->SetResourceManager(_resource);
+    _pause_system->SetUICanvas(_ui_canvas);
+    */
     return true;
 }
 
 bool my::GameManager::Release(void) {
+//    _option_system->GetSubject()->RemoveObserver(shared_from_this());
+//    _pause_system->GetSubject()->RemoveObserver(shared_from_this());
+
+    _option_system->Release();
+    _pause_system->Release();
+
     _shop_system->GetChargeInfoSubject()->RemoveObserver(_weapon_system);
     _update_system.clear();
     _disable_systems.clear();
@@ -96,6 +119,7 @@ bool my::GameManager::Release(void) {
     _quick_change.reset();
     _help_desk.reset();
     _option_system.reset();
+    _pause_system.reset();
     _game_money.reset();
     _resource.reset();
     _ui_canvas.reset();
@@ -125,15 +149,14 @@ void my::GameManager::GameSystemRelease(void) {
     my::SaveSystem().Save(save_param);
     _update_system.clear();
     _disable_systems.clear();
-    
+
+
     _shop_system->Release();
     _quick_change->Release();
     _weapon_system->Release();
     _help_desk->Release();
-    _option_system->Release();
     _game_money->Release();
 
     _shop_system->GetSubject()->RemoveObserver(shared_from_this());
     _quick_change->GetSubject()->RemoveObserver(shared_from_this());
-    _option_system->GetSubject()->RemoveObserver(shared_from_this());
 }

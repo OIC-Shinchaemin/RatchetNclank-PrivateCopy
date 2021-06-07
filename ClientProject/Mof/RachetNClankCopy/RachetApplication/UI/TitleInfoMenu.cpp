@@ -30,7 +30,7 @@ bool my::TitleInfoMenu::Initialize(void) {
 }
 
 bool my::TitleInfoMenu::Update(float delta_time) {
-    super::Update(delta_time);
+    //super::Update(delta_time);
     return true;
 }
 
@@ -41,7 +41,7 @@ bool my::TitleInfoMenu::Render(void) {
     super::Render();
     if (auto resource = _resource.lock()) {
         //auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
-        auto text = "Please Press   Start Button or \n                          Enter Key !";
+        auto text = "Please Press   Start Button or \n                    Enter Key !";
         ::CGraphicsUtilities:: RenderString(220.0, 400.0f, def::color_rgba_u32::kGreen, text);
     } // if
     return true;

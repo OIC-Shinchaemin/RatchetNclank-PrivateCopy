@@ -133,6 +133,12 @@ public:
     /// <returns></returns>
     bool Initialize(void);
     /// <summary>
+    /// “ü—Í
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void);
+    /// <summary>
     /// XV
     /// </summary>
     /// <param name="delta_time">ŠÔ</param>

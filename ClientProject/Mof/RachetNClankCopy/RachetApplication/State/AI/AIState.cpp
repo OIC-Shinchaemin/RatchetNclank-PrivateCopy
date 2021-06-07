@@ -39,7 +39,8 @@ void state::AIState::Enter(void) {
 
 void state::AIState::Exit(void) {
 }
-
+#ifdef _DEBUG
 void state::AIState::DebugRender(void) {
     _behaviour_executor->DebugRender();
 }
+#endif // _DEBUG

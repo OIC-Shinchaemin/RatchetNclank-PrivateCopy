@@ -39,10 +39,11 @@ void my::GameScene::ReInitialize(void) {
 bool my::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 #ifdef _DEBUG
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(scene::SceneMessage(my::SceneType::kClearScene, ""));
-    } // if
+    //if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+    //    _subject.Notify(scene::SceneMessage(my::SceneType::kClearScene, ""));
+    //} // if
 #endif // _DEBUG
+
 
     if (_re_initialize) {
         this->ReInitialize();
@@ -61,7 +62,7 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     if (_state != super::State::Pause) {
         // input
         _game_world.Input();
-        
+
         // update
         _stage.Update(delta_time);
         _game_world.Update(delta_time);
@@ -102,7 +103,6 @@ my::GameScene::GameScene() :
     _physic_world(),
     _stage(),
     _re_initialize(false),
-    //_ui_canvas(),
     _game(),
     _event() {
 }
@@ -136,11 +136,7 @@ void my::GameScene::OnNotify(const my::ShopSystem::Info& info) {
         this->_state = super::State::Pause;
     } // else
 }
-/*
-void my::GameScene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
-    this->_ui_canvas = ptr;
-}
-*/
+
 void my::GameScene::SetGameManager(std::weak_ptr<my::GameManager> ptr) {
     this->_game = ptr;
 }
@@ -190,6 +186,7 @@ bool my::GameScene::Initialize(void) {
     bridge_event->Initialize();
     ship_event->Initialize();
     stage_view_event->Initialize();
+
     bridge_event->GetCameraSubject()->AddObserver(ship_event);
     ship_event->GetShipEventSubject()->AddObserver(shared_from_this());
 
@@ -229,7 +226,6 @@ bool my::GameScene::Initialize(void) {
         auto shop = my::FactoryManager::Singleton().CreateActor<my::Shop >("../Resource/builder/shop.json", param);
         this->AddElement(shop);
     }
-
     {
         param->name = "weapon";
         param->tag = "OmniWrench";
@@ -238,39 +234,66 @@ bool my::GameScene::Initialize(void) {
         this->AddElement(omniwrench);
     }
 
-    //ship_event->SetCameraComponent(player->GetComponent<my::CameraComponent>());
-
 
     // game system
     if (auto game = _game.lock()) {
+        auto pause_system = game->GetGamePauseSystem();
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         auto help_desk = game->GetHelpDesk();
         auto game_money = game->GetGameMoney();
         auto shop_system = game->GetShopSystem();
 
+
         shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<this_type>(shared_from_this()));
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
         player->PushNotificationableSubject("QuickChange");
+
         // game system
         weapon_system->Initialize(shared_from_this());
         quick_change->Initialize(weapon_system);
         game_money->Initialize();
         help_desk->Initialize();
         shop_system->Initialize();
+        pause_system->Initialize();
+
         auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
         help_desk->OnNotify(quest);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
-        //shop_system->GetInfoSubject()->AddObserver(player);
+        _pause_menu_subject.AddObserver(pause_system);
 
         auto weapons = weapon_system->GetWeaponMap();
         for (auto& pair : weapons) {
             player->AddChild(pair.second);
         } // for
+
+
+        auto item0 = std::make_shared<my::GamePauseSystemItem>([&]() {
+            _subject.Notify(scene::SceneMessage(my::SceneType::kTitleScene, ""));
+            return true;
+        });
+        item0->SetText("タイトルに戻る");
+
+        auto item1 = std::make_shared<my::GamePauseSystemItem>([&]() {
+            _subject.Notify(scene::SceneMessage(my::SceneType::kGameScene, ""));
+            return true;
+        });
+        item1->SetText("リトライ");
+
+        auto item2 = std::make_shared<my::GamePauseSystemItem>([&]() {
+            _game.lock()->GetGamePauseSystem()->Inactive();
+            this->_state = super::State::Active;
+            return true;
+        });
+        item2->SetText("もどる");
+
+        pause_system->AddItem(item0);
+        pause_system->AddItem(item1);
+        pause_system->AddItem(item2);
     } // if
 
     // terrain
@@ -285,11 +308,24 @@ bool my::GameScene::Initialize(void) {
     } // for
 
 
-
     ut::SafeDelete(param);
     _re_initialize = false;
+    return true;
+}
 
-    _player = player;
+bool my::GameScene::Input(void) {
+    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        if (auto game = _game.lock()) {
+            if (!game->GetGamePauseSystem()->IsActive()) {
+                if (!_event.lock()->GetEvent<my::StageViewEvent>()) {
+                    if (this->_state != super::State::Pause) {
+                        this->_state = super::State::Pause;
+                        _pause_menu_subject.Notify(true);
+                    } // if
+                } // if
+            } // if
+        } // if
+    } // if
     return true;
 }
 
@@ -297,10 +333,10 @@ bool my::GameScene::Release(void) {
     super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {
+        game->GetGamePauseSystem()->Clear();
         //_shop_system_subject.RemoveObserver(game->GetShopSystem());
         //_quick_change_subject.RemoveObserver(game->GetQuickChange());
-
-
+        _pause_menu_subject.Clear();
         game->GameSystemRelease();
     } // if
     return true;
