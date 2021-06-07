@@ -37,7 +37,7 @@ bool my::NanotechItemMovedComponent::Update(float delta_time) {
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->AddVelocityForce(_speed);
-    velocity_com->AddAngularVelocityForce(_angle);
+    //velocity_com->AddAngularVelocityForce(_angle);
 
     _speed *= _decrase;
     _angle *= _decrase;

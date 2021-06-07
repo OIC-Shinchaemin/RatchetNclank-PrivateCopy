@@ -1059,6 +1059,9 @@
     <ClCompile Include="Component\Item\NanotechItem\NanotechItemMovedComponent.cpp">
       <Filter>Rachet\Source\Component\Item\Nanotech</Filter>
     </ClCompile>
+    <ClCompile Include="Component\BillboardComponent.cpp">
+      <Filter>Rachet\Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -2062,6 +2065,9 @@
     </ClInclude>
     <ClInclude Include="Component\Item\NanotechItem\NanotechItemActionStateComponent.h">
       <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\BillboardComponent.h">
+      <Filter>Rachet\Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

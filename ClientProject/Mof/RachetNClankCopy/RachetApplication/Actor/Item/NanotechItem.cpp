@@ -1,6 +1,6 @@
 #include "NanotechItem.h"
 
-//#include "../../Component/Item/NanotechItemComponent.h"
+#include "../../Component/Item/NanotechItem/NanotechItemComponent.h"
 
 
 my::NanotechItem::NanotechItem() :
@@ -24,11 +24,11 @@ void my::NanotechItem::End(void) {
 
 bool my::NanotechItem::Initialize(my::Actor::Param* param) {
     super::Initialize(param);
-    auto NanotechItem_param = dynamic_cast<my::NanotechItem::Param*>(param);
+    auto nanotechitem_param = dynamic_cast<my::NanotechItem::Param*>(param);
     
-    _init_speed = NanotechItem_param->speed;
-    _init_angle = NanotechItem_param->angle;
+    _init_speed = nanotechitem_param ->speed;
+    _init_angle = nanotechitem_param ->angle;
     
-    //super::GetComponent<my::NanotechItemComponent>()->SetActorParam(*NanotechItem_param);
+    super::GetComponent<my::NanotechItemComponent>()->SetActorParam(*nanotechitem_param);
     return true;
 }

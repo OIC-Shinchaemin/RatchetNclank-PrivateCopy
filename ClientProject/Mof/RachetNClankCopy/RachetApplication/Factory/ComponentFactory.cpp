@@ -12,6 +12,7 @@
 #include "../Component/VelocityComponent.h"
 #include "../Component/TransformComponent.h"
 #include "../Component/MeshComponent.h"
+#include "../Component/BillboardComponent.h"
 #include "../Component/AnimationMeshComponent.h"
 #include "../Component/CameraComponent.h"
 
@@ -41,6 +42,7 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::VelocityComponent>();
     my::ComponentFactory::AddComponentCreator<my::TransformComponent>();
     my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BillboardComponent>();
     my::ComponentFactory::AddComponentCreator<my::AnimationMeshComponent>();
     my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
 

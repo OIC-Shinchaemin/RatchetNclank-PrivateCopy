@@ -1,6 +1,6 @@
 #include "BulletItem.h"
 
-//#include "../../Component/Item/BulletItemComponent.h"
+#include "../../Component/Item/BulletItem/BulletItemComponent.h"
 
 
 my::BulletItem::BulletItem() :
@@ -29,6 +29,6 @@ bool my::BulletItem::Initialize(my::Actor::Param* param) {
     _init_speed = bulletitem_param->speed;
     _init_angle = bulletitem_param->angle;
     
-    //super::GetComponent<my::BulletItemComponent>()->SetActorParam(*BulletItem_param);
+    super::GetComponent<my::BulletItemComponent>()->SetActorParam(*bulletitem_param);
     return true;
 }

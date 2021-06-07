@@ -58,10 +58,10 @@
       }
     },
     {
-      "type": "MeshComponent",
+      "type": "BillboardComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/bolt/scene01.mom"
+        "path": "../Resource/texture/icon/nanotech.png"
       }
     },
     {
