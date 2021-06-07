@@ -9,12 +9,30 @@ my::GamePauseSystemMenu::GamePauseSystemMenu(const char* name) :
 
 void my::GamePauseSystemMenu::OnNotify(const my::GamePauseSystem::Info& info) {
     this->_infomation = info;
-    if (info.enter) {
+    if (info.enable) {
+        super::_position = Mof::CVector2(500.0f, 400.0f);
         super::Notify(shared_from_this(), "Enable");
     } // if
+    /*
     else if (info.push_item) {
         this->AddItem(**(info.items->end() - 1));
     } // else if
+    */
+    
+    else if (info.items && info.items->size() != super::_items.size()) {
+        this->_items.clear();
+        for (auto item : *info.items) {
+            this->AddItem(*item);
+        } // for
+        //this->AddItem(**(info.items->end() - 1));
+    } // else if
+
+    
+    else if (info.items->empty()) {
+        this->_items.clear();
+    } // else if
+
+
 }
 
 void my::GamePauseSystemMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -39,14 +57,14 @@ bool my::GamePauseSystemMenu::Initialize(void) {
 }
 
 bool my::GamePauseSystemMenu::Update(float delta_time) {
-    if (_infomation.exit) {
+    if (!_infomation.enable) {
         return false;
     } // if
 
     int index = 0;
     for (auto elem : super::_items) {
         elem->SetColor(def::color_rgba::kGreen);
-        if (index == _infomation.index) {
+        if (_infomation.index.has_value() && index == _infomation.index) {
             elem->SetColor(def::color_rgba::kRed);
         } // if
         index++;

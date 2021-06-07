@@ -50,8 +50,7 @@ public:
 };
 
 
-class OptionSystem : public my::GameSystem
-{
+class OptionSystem : public my::GameSystem {
     using super = my::GameSystem;
     using this_type = my::OptionSystem;
     using ElemType = my::OptionSystemItem;
@@ -61,6 +60,12 @@ public:
         bool exit = false;
         int index = 0;
         std::vector<std::shared_ptr<ElemType>>* items = nullptr;
+        
+        void Reset(void) {
+            enter = false;
+            exit = false;
+            index = 0;
+        }
     };
 private:
     //! èÓïÒ

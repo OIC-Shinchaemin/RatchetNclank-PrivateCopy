@@ -44,12 +44,12 @@ MofBool CGameApp::Input(void) {
     ::g_pInput->RefreshKey();
     ::g_pGamepad->RefreshKey();
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
         ::PostQuitMessage(0);
         return false;
     } // if
-#endif // _DEBUG
+//#endif // _DEBUG
     return TRUE;
 }
 
@@ -58,6 +58,7 @@ MofBool CGameApp::Update(void) {
 
     float delta_time = 0.01667f;
 
+    _scene_manager->Input();
 
     _event_manager->Update(delta_time);
     _game_manager->Update(delta_time);

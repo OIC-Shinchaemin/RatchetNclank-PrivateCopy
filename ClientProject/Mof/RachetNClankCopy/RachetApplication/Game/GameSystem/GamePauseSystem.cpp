@@ -6,11 +6,8 @@
 my::GamePauseSystem::GamePauseSystem() :
     _infomation(),
     _info_subject(),
-    _item_index(),
-    _ui_creator(typeid(decltype(_ui_creator)).name() ){
-    _infomation.items = &_items;
-
-    std::cout << "typeid(decltype(_ui_creator)).name()" << typeid(decltype(_ui_creator)).name() << "\n";
+    //_item_index(),
+    _ui_creator(typeid(decltype(_ui_creator)).name()) {
 }
 
 my::GamePauseSystem::~GamePauseSystem() {
@@ -19,9 +16,15 @@ my::GamePauseSystem::~GamePauseSystem() {
 void my::GamePauseSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     if (flag) {
-        _infomation.enter = true;
+        _infomation.Reset();
+
+
+        puts("");
+        _infomation.items = &_items;
+        _infomation.enable = true;
+        //_infomation.enter = true;
         _info_subject.Notify(_infomation);
-        _infomation.enter = false;
+        //_infomation.enter = false;
     } // if
 }
 
@@ -30,46 +33,77 @@ my::Observable<const my::GamePauseSystem::Info&>* my::GamePauseSystem::GetInfoSu
 }
 
 void my::GamePauseSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
+    _infomation.items = &_items;
+
     _items.push_back(elem);
-    _infomation.push_item = true;
+    //_infomation.push_item = true;
     _info_subject.Notify(_infomation);
-    _infomation.push_item = false;
+    //_infomation.push_item = false;
+}
+
+bool my::GamePauseSystem::IsActive(void) const {
+    return this->_infomation.enable;
+}
+
+void my::GamePauseSystem::Inactive(void) {
+    this->_infomation.enable = false;
+}
+
+void my::GamePauseSystem::Clear(void) {
+    _items.clear();
 }
 
 bool my::GamePauseSystem::Initialize(void) {
+    _infomation.items = &_items;
     auto menu = _ui_creator.Create(super::GetUICanvas());
     menu->SetResourceManager(super::GetResource());
     _info_subject.AddObserver(menu);
+
     return true;
 }
 
 bool my::GamePauseSystem::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
-        _item_index++;
-        if (_item_index > _items.size() - 1) {
-            _item_index = _items.size() - 1;
+        if (_infomation.index.has_value()) {
+            _infomation.index.value()++;
+            if (_infomation.index.value() > _items.size() - 1) {
+                _infomation.index = _items.size() - 1;
+            } // if
+            _infomation.index = _infomation.index.value();
+            _info_subject.Notify(_infomation);
         } // if
-        _infomation.index = _item_index;
-        _info_subject.Notify(_infomation);
+        else {
+            _infomation.index = 0;
+        } // else
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_DOWN)) {
-        _item_index--;
-        if (_item_index < 0) {
-            _item_index = 0;
+        if (_infomation.index.has_value()) {
+            _infomation.index.value()--;
+            if (_infomation.index.value() < 0) {
+                _infomation.index = 0;
+            } // if
+            _infomation.index = _infomation.index.value();
+            _info_subject.Notify(_infomation);
         } // if
-        _infomation.index = _item_index;
-        _info_subject.Notify(_infomation);
+        else {
+            _infomation.index = 0;
+        } // else
+
     } // else if
 
-    if (!_items.empty()) {
+    if (!_items.empty() && _infomation.index.has_value()) {
         if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-            _execute_list.push_back(_items.at(_item_index));
+            _execute_list.push_back(_items.at(_infomation.index.value()));
         } // if
     } // if
     return true;
 }
 
 bool my::GamePauseSystem::Update(float delta_time) {
+    if (!_infomation.enable) {
+        return false;
+    } // if
+
     this->Input();
     if (!_execute_list.empty()) {
         for (auto ptr : _execute_list) {
@@ -77,6 +111,12 @@ bool my::GamePauseSystem::Update(float delta_time) {
             } // if
         } // for
         _execute_list.clear();
+        _infomation.index.reset();
+        this->_infomation.enable = false;
+        
+        _infomation.Reset();
+        //_infomation.exit = true;
+        _info_subject.Notify(_infomation);
         return false;
     } // if
     return true;

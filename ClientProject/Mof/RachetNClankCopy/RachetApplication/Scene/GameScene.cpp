@@ -43,9 +43,6 @@ bool my::GameScene::SceneUpdate(float delta_time) {
     //    _subject.Notify(scene::SceneMessage(my::SceneType::kClearScene, ""));
     //} // if
 #endif // _DEBUG
-    if (::g_pInput->IsKeyPush(MOFKEY_I)) {
-        _pause_menu_subject.Notify(true);
-    } // if
 
 
     if (_re_initialize) {
@@ -189,6 +186,7 @@ bool my::GameScene::Initialize(void) {
     bridge_event->Initialize();
     ship_event->Initialize();
     stage_view_event->Initialize();
+
     bridge_event->GetCameraSubject()->AddObserver(ship_event);
     ship_event->GetShipEventSubject()->AddObserver(shared_from_this());
 
@@ -285,9 +283,17 @@ bool my::GameScene::Initialize(void) {
             return true;
         });
         item1->SetText("ƒŠƒgƒ‰ƒC");
+
+        auto item2 = std::make_shared<my::GamePauseSystemItem>([&]() {
+            _game.lock()->GetGamePauseSystem()->Inactive();
+            this->_state = super::State::Active;
+            return true;
+        });
+        item2->SetText("‚à‚Ç‚é");
+
         pause_system->AddItem(item0);
         pause_system->AddItem(item1);
-
+        pause_system->AddItem(item2);
     } // if
 
     // terrain
@@ -307,13 +313,29 @@ bool my::GameScene::Initialize(void) {
     return true;
 }
 
+bool my::GameScene::Input(void) {
+    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        if (auto game = _game.lock()) {
+            if (!game->GetGamePauseSystem()->IsActive()) {
+                if (!_event.lock()->GetEvent<my::StageViewEvent>()) {
+                    if (this->_state != super::State::Pause) {
+                        this->_state = super::State::Pause;
+                        _pause_menu_subject.Notify(true);
+                    } // if
+                } // if
+            } // if
+        } // if
+    } // if
+    return true;
+}
+
 bool my::GameScene::Release(void) {
     super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {
+        game->GetGamePauseSystem()->Clear();
         //_shop_system_subject.RemoveObserver(game->GetShopSystem());
         //_quick_change_subject.RemoveObserver(game->GetQuickChange());
-
         _pause_menu_subject.Clear();
         game->GameSystemRelease();
     } // if

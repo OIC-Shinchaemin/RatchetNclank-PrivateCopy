@@ -105,6 +105,12 @@ bool my::GameManager::Initialize(void) {
 }
 
 bool my::GameManager::Release(void) {
+//    _option_system->GetSubject()->RemoveObserver(shared_from_this());
+//    _pause_system->GetSubject()->RemoveObserver(shared_from_this());
+
+    _option_system->Release();
+    _pause_system->Release();
+
     _shop_system->GetChargeInfoSubject()->RemoveObserver(_weapon_system);
     _update_system.clear();
     _disable_systems.clear();
@@ -144,16 +150,13 @@ void my::GameManager::GameSystemRelease(void) {
     _update_system.clear();
     _disable_systems.clear();
 
-    _pause_system->Release();
+
     _shop_system->Release();
     _quick_change->Release();
     _weapon_system->Release();
     _help_desk->Release();
-    _option_system->Release();
     _game_money->Release();
 
-    _pause_system->GetSubject()->RemoveObserver(shared_from_this());
     _shop_system->GetSubject()->RemoveObserver(shared_from_this());
     _quick_change->GetSubject()->RemoveObserver(shared_from_this());
-    _option_system->GetSubject()->RemoveObserver(shared_from_this());
 }

@@ -87,6 +87,10 @@ bool my::SceneManager::Initialize(void) {
     return true;
 }
 
+bool my::SceneManager::Input(void) {
+    return _scene->Input();
+}
+
 bool my::SceneManager::Update(float delta_time) {
     if (_change_message.has_value()) {
         this->ChangeScene(_change_message.value().name, _change_message.value().param);

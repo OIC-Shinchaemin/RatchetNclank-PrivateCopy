@@ -59,11 +59,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void Exit(void) override;
+#ifdef _DEBUG
     /// <summary>
     /// デバッグ
     /// </summary>
     /// <param name=""></param>
     virtual void DebugRender(void) override;
+#endif // _DEBUG
 };
 }
 #endif // !STATE_AI_STATE_H

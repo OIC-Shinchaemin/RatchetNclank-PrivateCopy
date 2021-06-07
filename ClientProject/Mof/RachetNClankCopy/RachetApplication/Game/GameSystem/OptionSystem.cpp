@@ -92,6 +92,9 @@ bool my::OptionSystem::Update(float delta_time) {
             if (ptr->Execute()) {
             } // if
         } // for
+        _infomation.Reset();
+        _info_subject.Notify(_infomation);
+            
         _execute_list.clear();
         return false;
     } // if

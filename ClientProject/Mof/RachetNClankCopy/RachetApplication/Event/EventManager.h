@@ -42,6 +42,16 @@ public:
         this->_events.push_back(ptr);
         return ptr;
     }
+    template<typename T>
+    std::shared_ptr<T>GetEvent(void) const {
+        for (auto& e : _events) {
+            auto ret = std::dynamic_pointer_cast<T>(e);
+            if (ret) {
+                return ret;
+            } // if
+        } // for
+        return nullptr;
+    }
     /// <summary>
     /// ‰Šú‰»
     /// </summary>

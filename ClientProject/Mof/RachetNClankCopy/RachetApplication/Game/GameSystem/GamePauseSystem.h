@@ -4,6 +4,7 @@
 
 #include "GameSystem.h"
 
+#include <optional>
 #include <memory>
 #include <vector>
 
@@ -54,11 +55,20 @@ class GamePauseSystem : public my::GameSystem {
     using ElemType = my::GamePauseSystemItem;
 public:
     struct Info {
-        bool enter = false;
-        bool exit = false;
-        bool push_item = false;
-        int index = 0;
+        bool enable = false;
+        //bool enter = false;
+        //bool exit = false;
+        //bool push_item = false;
+        std::optional<int> index = 0;
         std::vector<std::shared_ptr<ElemType>>* items;
+        void Reset(void) {
+            enable = false;
+            //enter = false;
+            //exit = false;
+            //push_item = false;
+            index.reset();
+            ///items = nullptr;
+        }
     };
 private:
 private:
@@ -71,7 +81,7 @@ private:
     //! 子供
     std::vector<std::shared_ptr<ElemType>> _execute_list;
     //! インデックス
-    int _item_index;
+    //std::optional<int> _item_index;
     //! UI地蔵
     my::UICreator<class GamePauseSystemMenu> _ui_creator;
 public:
@@ -100,6 +110,22 @@ public:
     /// <param name="elem"></param>
     /// <returns></returns>
     void AddItem(const std::shared_ptr<ElemType>& elem);
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsActive(void) const;
+    /// <summary>
+    /// 無効化
+    /// </summary>
+    /// <param name=""></param>
+    void Inactive(void);
+    /// <summary>
+    /// クリア
+    /// </summary>
+    /// <param name=""></param>
+    void Clear(void);
     /// <summary>
     /// 初期化
     /// </summary>
