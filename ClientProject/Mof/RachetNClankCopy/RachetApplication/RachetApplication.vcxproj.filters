@@ -310,6 +310,18 @@
     <Filter Include="Rachet\Header\Factory\Builder\Scene">
       <UniqueIdentifier>{328257a5-3ba1-4c7a-9ec6-7c40e9174c92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Source\Component\Item\BulletItem">
+      <UniqueIdentifier>{fd254d98-d8ae-4250-af77-e059573795bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Item\BulletItem">
+      <UniqueIdentifier>{b46313ee-e12b-45af-9ab2-f6b4fa866a7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Header\Component\Item\NanotechItem">
+      <UniqueIdentifier>{0ce58548-5fe7-40cf-b176-b35da0049d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Source\Component\Item\Nanotech">
+      <UniqueIdentifier>{4e897ce6-0996-4653-910d-50004c14120d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -986,6 +998,66 @@
     </ClCompile>
     <ClCompile Include="UI\GamePauseSystemMenu.cpp">
       <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Item\BulletItem.cpp">
+      <Filter>Rachet\Source\Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemActionStateComponent.cpp">
+      <Filter>Rachet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemComponent.cpp">
+      <Filter>Rachet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemDefaultComponent.cpp">
+      <Filter>Rachet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemGravitateComponent.cpp">
+      <Filter>Rachet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemMovedComponent.cpp">
+      <Filter>Rachet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemActionComponent.cpp">
+      <Filter>Rachet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="State\BulletItemActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\NanotechItemActionStateImplementation.cpp">
+      <Filter>Rachet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\NanotechItemCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BulletItemCollisionComponent.cpp">
+      <Filter>Rachet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BulletItemPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Item\NanotechItem.cpp">
+      <Filter>Rachet\Source\Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemActionComponent.cpp">
+      <Filter>Rachet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemActionStateComponent.cpp">
+      <Filter>Rachet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemComponent.cpp">
+      <Filter>Rachet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemDefaultComponent.cpp">
+      <Filter>Rachet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemGravitateComponent.cpp">
+      <Filter>Rachet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemMovedComponent.cpp">
+      <Filter>Rachet\Source\Component\Item\Nanotech</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1925,6 +1997,72 @@
     <ClInclude Include="UI\GamePauseSystemMenu.h">
       <Filter>Rachet\Header\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Item\BulletItem.h">
+      <Filter>Rachet\Header\Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemActionStateComponent.h">
+      <Filter>Rachet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemComponent.h">
+      <Filter>Rachet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemComponentInclude.h">
+      <Filter>Rachet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemDefaultComponent.h">
+      <Filter>Rachet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemGravitateComponent.h">
+      <Filter>Rachet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemMovedComponent.h">
+      <Filter>Rachet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemActionComponent.h">
+      <Filter>Rachet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="State\NanotechItemActionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\BulletItemActionStateDefine.h">
+      <Filter>Rachet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BulletItemCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\NanotechItemCollisionComponent.h">
+      <Filter>Rachet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BulletItemPlayerCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Item\NanotechItem.h">
+      <Filter>Rachet\Header\Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemComponent.h">
+      <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemComponentInclude.h">
+      <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemDefaultComponent.h">
+      <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemGravitateComponent.h">
+      <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemMovedComponent.h">
+      <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemActionComponent.h">
+      <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemActionStateComponent.h">
+      <Filter>Rachet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -2026,6 +2164,12 @@
       <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\demo_player.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bullet_item.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\nanotech.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

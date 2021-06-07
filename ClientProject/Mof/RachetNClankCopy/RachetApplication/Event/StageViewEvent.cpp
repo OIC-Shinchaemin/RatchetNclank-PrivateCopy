@@ -23,11 +23,9 @@ bool my::StageViewEvent::Initialize(void) {
 }
 
 bool my::StageViewEvent::Update(float delta_time) {
-#ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
         _stage_view_camera_controller->ForceTick(_stage_view_camera_controller->GetTimeMax());
     } // if
-#endif // _DEBUG
 
     auto camera_info = my::CameraController::CameraInfo();
     _stage_view_camera_controller->Update(delta_time, camera_info);

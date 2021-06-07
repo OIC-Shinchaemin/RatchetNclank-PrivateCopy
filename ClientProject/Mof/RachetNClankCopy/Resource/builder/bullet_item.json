@@ -1,0 +1,80 @@
+{
+  "components": [
+    {
+      "type": "BulletItemComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0,
+        "range": 10.0
+      }
+    },
+    {
+      "type": "BulletItemActionStateComponent",
+      "paramater": {
+        "priority": 2
+      }
+    },
+    {
+      "type": "ActionComponent",
+      "paramater": {
+        "priority": 3,
+        "children": [
+          {
+            "type": "BulletItemDefaultComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "BulletItemMovedComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "BulletItemGravitateComponent",
+            "paramater": {
+              "priority": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/bolt/scene01.mom"
+      }
+    },
+    {
+      "type": "BulletItemCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

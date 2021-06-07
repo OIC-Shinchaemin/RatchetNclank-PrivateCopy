@@ -10,6 +10,8 @@ my::ComponentFactory::AddComponentCreator<my::BlasterBulletCollisionComponent>()
 my::ComponentFactory::AddComponentCreator<my::BombGloveEffectCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::ShipCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::BoltCollisionComponent>();
+my::ComponentFactory::AddComponentCreator<my::BulletItemCollisionComponent>();
+my::ComponentFactory::AddComponentCreator<my::NanotechItemCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::WaterFlowCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::CameraCollisionComponent>();
 my::ComponentFactory::AddComponentCreator<my::ShopCollisionComponent>();

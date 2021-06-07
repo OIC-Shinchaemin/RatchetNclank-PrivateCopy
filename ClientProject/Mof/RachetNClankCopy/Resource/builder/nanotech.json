@@ -1,0 +1,80 @@
+{
+  "components": [
+    {
+      "type": "NanotechItemComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0,
+        "range": 10.0
+      }
+    },
+    {
+      "type": "NanotechItemActionStateComponent",
+      "paramater": {
+        "priority": 2
+      }
+    },
+    {
+      "type": "ActionComponent",
+      "paramater": {
+        "priority": 3,
+        "children": [
+          {
+            "type": "NanotechItemDefaultComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "NanotechItemMovedComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "NanotechItemGravitateComponent",
+            "paramater": {
+              "priority": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/bolt/scene01.mom"
+      }
+    },
+    {
+      "type": "NanotechItemCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

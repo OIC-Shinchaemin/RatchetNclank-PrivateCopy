@@ -22,6 +22,8 @@
 #include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
 #include "../Component/Ship/ShipComponentInclude.h"
 #include "../Component/Item/BoltComponentInclude.h"
+#include "../Component/Item/BulletItem/BulletItemComponentInclude.h"
+#include "../Component/Item/NanotechItem/NanotechItemComponentInclude.h"
 
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
@@ -54,6 +56,20 @@ my::ComponentFactory::ComponentFactory() :
     my::ComponentFactory::AddComponentCreator<my::BoltDefaultComponent>();
     my::ComponentFactory::AddComponentCreator<my::BoltMovedComponent>();
     my::ComponentFactory::AddComponentCreator<my::BoltGravitateComponent>();
+
+    my::ComponentFactory::AddComponentCreator<my::BulletItemCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BulletItemComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BulletItemActionStateComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BulletItemDefaultComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BulletItemMovedComponent>();
+    my::ComponentFactory::AddComponentCreator<my::BulletItemGravitateComponent>();
+
+    my::ComponentFactory::AddComponentCreator<my::NanotechItemCollisionComponent>();
+    my::ComponentFactory::AddComponentCreator<my::NanotechItemComponent>();
+    my::ComponentFactory::AddComponentCreator<my::NanotechItemActionStateComponent>();
+    my::ComponentFactory::AddComponentCreator<my::NanotechItemDefaultComponent>();
+    my::ComponentFactory::AddComponentCreator<my::NanotechItemMovedComponent>();
+    my::ComponentFactory::AddComponentCreator<my::NanotechItemGravitateComponent>();
 
 
     my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
