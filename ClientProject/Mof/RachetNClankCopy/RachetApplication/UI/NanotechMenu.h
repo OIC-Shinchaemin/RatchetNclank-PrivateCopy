@@ -9,6 +9,8 @@
 
 #include "My/Core/Observer.h"
 #include "MY/UI/UICanvas.h"
+#include "../ResourceManager.h"
+#include "../GameDefine.h"
 
 
 namespace my {
@@ -36,6 +38,8 @@ private:
     int _hp;
     //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! リソース
+    std::weak_ptr<my::ResourceMgr> _resource_manager;
 public:
     /// <summary>
     /// コンストラクタ
@@ -47,6 +51,11 @@ public:
     /// </summary>
     /// <param name="hp"></param>
     virtual void OnNotify(int hp) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>

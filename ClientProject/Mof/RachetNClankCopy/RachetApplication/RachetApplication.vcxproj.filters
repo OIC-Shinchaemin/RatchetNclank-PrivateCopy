@@ -1062,6 +1062,9 @@
     <ClCompile Include="Component\BillboardComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp">
+      <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -2068,6 +2071,9 @@
     </ClInclude>
     <ClInclude Include="Component\BillboardComponent.h">
       <Filter>Rachet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h">
+      <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

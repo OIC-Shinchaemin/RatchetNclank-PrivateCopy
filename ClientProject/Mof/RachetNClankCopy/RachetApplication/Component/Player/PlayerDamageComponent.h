@@ -29,6 +29,11 @@ private:
     /// </summary>
     /// <param name=""></param>
     void Damege(void);
+    /// <summary>
+    /// 回復
+    /// </summary>
+    /// <param name=""></param>
+    void Heal(void);
 public:
     /// <summary>
     /// コンストラクタ

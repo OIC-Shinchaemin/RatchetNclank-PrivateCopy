@@ -6,6 +6,7 @@
 #include "../../../Component/Collision/Object/CollisionComponentDefine.h"
 #include "../../../Component/Collision/Object/SightCollisionComponent.h"
 #include "BulletItemActionStateComponent.h"
+#include "../../BillboardComponent.h"
 
 
 my::BulletItemComponent::BulletItemComponent(int priority) :
@@ -48,9 +49,30 @@ bool my::BulletItemComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
+
+
     _state_com = super::GetOwner()->GetComponent<my::BulletItemActionStateComponent>();
     auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
     velocity_com->SetGravity(0.8f);
+
+    auto billboard_com = super::GetOwner()->GetComponent<my::BillboardComponent>();
+    if (auto r = _resource_manager.lock()) {
+        std::unordered_map<my::BulletItem::Type, std::string> path_map = {
+            {my::BulletItem::Type::BombGlove, "../Resource/texture/icon/bomb_glove.png"},
+            {my::BulletItem::Type::Pyrocitor, "../Resource/texture/icon/pyrocitor.png"},
+            {my::BulletItem::Type::Blaster,   "../Resource/texture/icon/blaster.png"},
+        };
+
+
+
+
+
+        auto tex = r->Get<std::shared_ptr<Mof::CTexture>>(path_map.at(this->_param.type).c_str());
+
+        billboard_com->SetTexture(tex);
+    } // if
+
+
 
     auto coll_com = super::GetOwner()->GetComponent<my::BulletItemCollisionComponent>();
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,

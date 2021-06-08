@@ -63,6 +63,8 @@ void my::Enemy::End(void) {
         param.angle.x = param.speed.x;
         param.angle.y = param.speed.y;
         param.angle.z = param.speed.z;
+        param.type = static_cast <my::BulletItem::Type>(ut::GenerateRandom(0, static_cast<int>(my::BulletItem::Type::CountMax) - 1));
+        param.count = ut::GenerateRandom(0.0f, 10);
 
         auto item = my::FactoryManager::Singleton().CreateActor<my::BulletItem>("../Resource/builder/bullet_item.json", &param);
         item->GetComponent<my::BulletItemActionStateComponent>()->ChangeState(state::BulletItemActionType::kMoved);

@@ -26,6 +26,12 @@ void my::PlayerDamageComponent::Damege(void) {
     } // if
 }
 
+void my::PlayerDamageComponent::Heal(void) {
+    if (auto hp_com = _hp_com.lock()) {
+        hp_com->Heal(1);
+    } // if
+}
+
 my::PlayerDamageComponent::PlayerDamageComponent(int priority) :
     super(priority),
     _damage_value(),
@@ -70,6 +76,15 @@ bool my::PlayerDamageComponent::Initialize(void) {
         } // if
         return true;
     }));
+
+    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+                               my::CollisionComponentType::kNanotechItemCollisionComponent,
+                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+        this->Heal();
+        return true;
+    }));
+
+
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
                                my::CollisionComponentType::kEnemyBulletCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {

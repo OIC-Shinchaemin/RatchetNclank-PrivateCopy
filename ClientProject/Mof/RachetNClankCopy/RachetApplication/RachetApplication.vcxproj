@@ -314,6 +314,7 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
@@ -628,6 +629,7 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />

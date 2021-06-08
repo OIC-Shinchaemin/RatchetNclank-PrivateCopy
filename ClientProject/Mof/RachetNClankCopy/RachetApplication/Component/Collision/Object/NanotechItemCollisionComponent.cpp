@@ -7,7 +7,7 @@
 
 my::NanotechItemCollisionComponent::NanotechItemCollisionComponent(int priority) :
     super(priority),
-    _height(0.2f),
+    _height(0.4f),
     _volume(_height),
     _state_com(){
 }
