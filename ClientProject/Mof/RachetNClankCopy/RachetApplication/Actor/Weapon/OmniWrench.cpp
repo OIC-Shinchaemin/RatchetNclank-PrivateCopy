@@ -8,3 +8,10 @@ my::OmniWrench::OmniWrench() :
 
 my::OmniWrench ::~OmniWrench() {
 }
+
+bool my::OmniWrench::Initialize(my::Actor::Param* param) {
+    super::Initialize(param);
+
+    super::SetScale(Mof::CVector3());
+    return true;
+}

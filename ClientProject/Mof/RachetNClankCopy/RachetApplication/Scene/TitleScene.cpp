@@ -7,16 +7,6 @@
 
 bool my::TitleScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
-    /*
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
-        ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(scene::SceneMessage(my::SceneType::kGameScene, ""));
-    } // if
-    else if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
-             ::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
-        _subject.Notify(scene::SceneMessage(my::SceneType::kDescriptionScene, ""));
-    } // else if
-    */
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _option_system_subject.Notify(true);
@@ -155,8 +145,8 @@ bool my::TitleScene::Load(std::shared_ptr<my::Scene::Param> param) {
             });
             item1->SetText("ゲームスタート");
             option_system->Initialize();
-            option_system->AddItem(item0);
             option_system->AddItem(item1);
+            option_system->AddItem(item0);
         } // if
 
     });

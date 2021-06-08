@@ -10,6 +10,7 @@
 #include "My/UI/UICanvas.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "My/Core/Timer.h"
 
 
 namespace my {
@@ -22,12 +23,22 @@ private:
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! フォント
+    Mof::CFont _font;
+    //! 表示
+    my::Timer _show_timer;
+    //! 開始
+    bool _start;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="name"></param>
     TitleInfoMenu(const char* name);
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    virtual ~TitleInfoMenu();
     /// <summary>
     /// 通知イベント
     /// </summary>

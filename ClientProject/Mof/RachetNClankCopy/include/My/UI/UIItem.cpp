@@ -25,6 +25,14 @@ void my::UIItem::SetColor(const Mof::CVector4 color) {
     this->_color = color;
 }
 
+Mof::CVector2 my::UIItem::GetPosition(void) const {
+    return this->_position;
+}
+
+Mof::CVector2 my::UIItem::GetSize(void) const {
+    return Mof::CVector2();
+}
+
 Mof::CRectangle my::UIItem::GetRectangle(void) const {
     auto rect = _rectangle;
     rect.Translation(_position);

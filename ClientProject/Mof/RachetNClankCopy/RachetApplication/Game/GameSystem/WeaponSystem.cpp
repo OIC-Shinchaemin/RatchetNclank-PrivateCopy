@@ -26,6 +26,9 @@ my::WeaponSystem::~WeaponSystem() {
 void my::WeaponSystem::OnNotify(const std::string& change) {
     _subject.Notify(this->GetMechanicalWeapon(change));
     auto weapon = this->GetMechanicalWeapon(change);
+    if (_current_mechanical) {
+        _current_mechanical->SetScale(math::vec3::kZero);
+    } // if
     _current_mechanical = weapon;
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
 

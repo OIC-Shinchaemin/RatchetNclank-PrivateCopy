@@ -19,6 +19,8 @@ class OptionSystemMenuItem : public my::UIItem {
 private:
     //! 表示テキスト
     std::string _text;
+    //! フォント
+    Mof::CFont* _font;
 public:
     /// <summary>
     /// コンストラクタ
@@ -34,6 +36,17 @@ public:
     /// </summary>
     /// <param name="text"></param>
     void SetText(const std::string& text);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetFont(Mof::CFont* ptr);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector2 GetSize(void) const override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -71,12 +84,19 @@ private:
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<my::UICanvas> _ui_canvas;
+    //! フォント
+    Mof::CFont _font;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="name"></param>
     OptionSystemMenu(const char* name);
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    /// <param name="name"></param>
+    ~OptionSystemMenu();
     /// <summary>
     /// 通知イベント
     /// </summary>

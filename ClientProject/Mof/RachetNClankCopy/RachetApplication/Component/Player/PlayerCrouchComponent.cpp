@@ -73,7 +73,7 @@ bool my::PlayerCrouchComponent::Input(void) {
                 auto owner_circle_position = Mof::CVector2(std::cosf(owner_rotate_y), std::sinf(owner_rotate_y));
                 auto input_circle_position = Mof::CVector2(std::cosf(move_angle), std::sinf(move_angle));
                 float distance = Mof::CVector2Utilities::Distance(owner_circle_position, input_circle_position);
-                float distance_threshold = 0.8f;
+                float distance_threshold = 0.6f;
                 if (distance_threshold < distance) {
                     move_com->AquireInputData(in, move_angle);
                     move_angle += math::kHalfPi + camera_angle_y;
