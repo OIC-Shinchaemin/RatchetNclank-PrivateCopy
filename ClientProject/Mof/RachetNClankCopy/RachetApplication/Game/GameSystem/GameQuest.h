@@ -6,8 +6,11 @@ namespace my {
 class GameQuest {
 public:
     enum class Type {
+        ToFront,
         EnemyDestroy,
         GoHome,
+        ShopAccessStart,
+        ShopAccessEnd,
     };
 private:
     //! É^ÉCÉv

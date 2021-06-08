@@ -23,6 +23,10 @@ public:
         std::string text;
     };
 private:
+    //! î•ñ
+    Info _info;
+    //! î•ñ
+    Info _prev_info;
     //! ’B¬‚µ‚½‚¢‚±‚Æ
     //my::GameQuest _current_quest;
     //! ’Ê’m—p

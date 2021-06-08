@@ -18,7 +18,7 @@ my::BombGlove::~BombGlove() {
 }
 
 bool my::BombGlove::IsAction(void) const {
-    return ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyPush(MOFKEY_V);
+    return ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyPush(MOFKEY_M);
 }
 
 bool my::BombGlove::Fire(const def::Transform& transform) {

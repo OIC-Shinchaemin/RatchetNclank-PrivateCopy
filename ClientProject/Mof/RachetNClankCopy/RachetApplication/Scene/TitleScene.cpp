@@ -41,9 +41,9 @@ bool my::TitleScene::SceneRender(void) {
 }
 
 bool my::TitleScene::LoadingRender(void) {
-    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
+    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, def::color_rgba_u32::kRed, "Now Loading");
+    ::CGraphicsUtilities::RenderString(800.0f, 700.0f, def::color_rgba_u32::kWhite, "Now Loading...");
     return true;
 }
 

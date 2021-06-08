@@ -43,7 +43,7 @@ bool my::PlayerJumpSetComponent::Initialize(void) {
 bool my::PlayerJumpSetComponent::Input(void) {
     ;
 
-    if (::g_pInput->IsKeyHold(MOFKEY_X) ||
+    if (::g_pInput->IsKeyHold(MOFKEY_J) ||
         ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_A)) {
         _jump_speed += _jump_speed_increase;
     } // else if

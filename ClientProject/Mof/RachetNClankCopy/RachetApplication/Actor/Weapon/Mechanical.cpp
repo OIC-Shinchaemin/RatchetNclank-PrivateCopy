@@ -22,6 +22,10 @@ int my::Mechanical::GetBulletCount(void) const {
     return this->_bullet_count;
 }
 
+int my::Mechanical::GetBulletCountMax(void) const {
+    return this->_bullet_count_max;
+}
+
 int my::Mechanical::GetBulletCountDecrased(void) const {
     return this->_bullet_count_max - this->GetBulletCount();
 }
@@ -43,7 +47,7 @@ bool my::Mechanical::Fire(const def::Transform& transform) {
     } // if
     _interval = _interval_max;
     
-    _subject.Notify(my::Mechanical::Info(this->_bullet_count, this->GetName().c_str()));
+    _subject.Notify(my::Mechanical::Info(this->_bullet_count, this->_bullet_count_max, this->GetName().c_str()));
     return true;
 }
 

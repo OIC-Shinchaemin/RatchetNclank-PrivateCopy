@@ -98,13 +98,13 @@ bool my::PlayerMoveComponent::Initialize(void) {
 
 bool my::PlayerMoveComponent::Input(void) {
     // flag
-    if (::g_pInput->IsKeyPush(MOFKEY_X) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
+    else if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
     } // else if
-    else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+    else if (::g_pInput->IsKeyPush(MOFKEY_M) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
         auto owner = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
         if (owner->GetCurrentMechanical()) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);

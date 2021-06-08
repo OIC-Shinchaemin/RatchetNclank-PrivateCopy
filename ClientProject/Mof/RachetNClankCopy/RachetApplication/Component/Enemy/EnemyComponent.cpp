@@ -7,6 +7,7 @@
 #include "../SightRecognitionComponent.h"
 #include "../Collision/Object/EnemyCollisionComponent.h"
 #include "../Collision/Object/SightCollisionComponent.h"
+#include "../../Actor/Character/Enemy.h"
 
 
 my::EnemyComponent::EnemyComponent(int priority) :
@@ -107,10 +108,14 @@ bool my::EnemyComponent::Update(float delta_time) {
         if (auto velocity_com = _velocity_com.lock()) {
             bool in_camera_range = super::GetOwner()->InCameraRange();
             if (in_camera_range) {
+                auto owner = std::dynamic_pointer_cast<my::Enemy>(super::GetOwner());
+                owner->GetQuestSubject()->Notify(my::GameQuest::GameQuest(my::GameQuest::Type::EnemyDestroy));
                 velocity_com->SetSleep(false);
                 velocity_com->SetGravity(1.0f);
             } // if
             else {
+                auto owner = std::dynamic_pointer_cast<my::Enemy>(super::GetOwner());
+                owner->GetQuestSubject()->Notify(my::GameQuest::GameQuest(my::GameQuest::Type::ToFront));
                 velocity_com->SetSleep(true);
                 velocity_com->SetGravity(0.0f);
             } // else

@@ -38,7 +38,7 @@ bool my::PlayerMeleeAttackTwoComponent::Initialize(void) {
 }
 
 bool my::PlayerMeleeAttackTwoComponent::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
+    if (::g_pInput->IsKeyPush(MOFKEY_N) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         _next_reserve = true;
     } // if

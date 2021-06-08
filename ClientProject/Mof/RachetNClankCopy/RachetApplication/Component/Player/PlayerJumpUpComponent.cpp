@@ -47,11 +47,11 @@ bool my::PlayerJumpUpComponent::Initialize(void) {
 }
 
 bool my::PlayerJumpUpComponent::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_X) ||
+    if (::g_pInput->IsKeyPush(MOFKEY_J) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDoubleJumpState);
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
+    else if (::g_pInput->IsKeyPush(MOFKEY_N) ||
              ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpAttackSetState);
     } // else if

@@ -4,6 +4,8 @@
 
 
 my::HelpDesk::HelpDesk() :
+    _info(),
+    _prev_info(),
     _subject(),
     _resource(),
     _ui_canvas() {
@@ -16,9 +18,22 @@ void my::HelpDesk::OnNotify(const my::GameQuest& quest) {
     auto info = Info();
     if (quest.GetType() == my::GameQuest::Type::EnemyDestroy) {
         info.text = "敵をすべて倒せ！";
+        _info.text = info.text;
     } // if
     else if (quest.GetType() == my::GameQuest::Type::GoHome) {
         info.text = "船に乗ってゲームクリア！";
+        _info.text = info.text;
+    } // else if
+    else if (quest.GetType() == my::GameQuest::Type::ToFront) {
+        info.text = "前に進め";
+        _info.text = info.text;
+    } // else if
+    else if (quest.GetType() == my::GameQuest::Type::ShopAccessStart) {
+        _prev_info.text = _info.text;
+        info.text = "Shiftキー/Yボタンでショップにアクセス";
+    } // else if
+    else if (quest.GetType() == my::GameQuest::Type::ShopAccessEnd) {
+        info.text = _prev_info.text;
     } // else if
     _subject.Notify(info);
 }

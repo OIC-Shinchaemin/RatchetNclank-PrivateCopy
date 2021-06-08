@@ -6,6 +6,7 @@ my::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
     _info(),
     _tex_names(),
     _resource() {
+    this->SetPosition(Mof::CVector2(10.0f, 700.0f));
     _tex_names.emplace("", "");
     _tex_names.emplace("BombGlove", "../Resource/texture/icon/bomb_glove.png");
     _tex_names.emplace("Pyrocitor", "../Resource/texture/icon/pyrocitor.png");
@@ -29,6 +30,7 @@ void my::EquipmentWeaponMenu::OnNotify(const my::Mechanical::Info& info) {
     //super::Notify()
     _info.name = info.name;
     _info.bullet_count = info.bullet_count;
+    _info.bullet_count_max = info.bullet_count_max;
 }
 
 void my::EquipmentWeaponMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
@@ -40,14 +42,25 @@ bool my::EquipmentWeaponMenu::Render(void) {
         auto it = _tex_names.find(_info.name);
         if (it != _tex_names.end()) {
             if (auto tex = r->Get<std::shared_ptr<Mof::CTexture>>(it->second.c_str())) {
-                tex->Render(super::_position.x, super::_position.y);
-
+                tex->RenderScale(super::_position.x, super::_position.y, 0.7f);
 
                 if (auto resource = _resource.lock()) {
                     auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
-                    std::string text = "bullet count = ";
-                    text += std::to_string(_info.bullet_count);
-                    font->RenderString(super::_position.x, super::_position.y + 64.0f, text.c_str());
+                    //std::string text = "bullet count = ";
+                    std::string text = std::to_string(_info.bullet_count);
+
+                    auto color = def::color_rgba_u32::kBlack;
+                    float per = 1.0f;
+                    if (!(_info.bullet_count_max <= 0)) {
+                        per = _info.bullet_count / _info.bullet_count_max;
+                    } // if
+                    if (per < 0.6f) {
+                        color = def::color_rgba_u32::kYellow;
+                    } // if
+                    else if (per < 0.2f) {
+                        color = def::color_rgba_u32::kRed;
+                    } // else if
+                    font->RenderString(super::_position.x + 48.0f, super::_position.y + 12.0f, color, text.c_str());
                 } // if
 
             } // if

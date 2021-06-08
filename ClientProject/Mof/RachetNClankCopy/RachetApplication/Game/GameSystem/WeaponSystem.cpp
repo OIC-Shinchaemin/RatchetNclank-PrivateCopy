@@ -31,10 +31,11 @@ void my::WeaponSystem::OnNotify(const std::string& change) {
     } // if
     _current_mechanical = weapon;
     int bullet_count = weapon ? weapon->GetBulletCount() : 0;
+    int bullet_count_max = weapon ? weapon->GetBulletCountMax() : 0;
 
     using namespace std::literals::string_literals;
     auto name = weapon ? weapon->GetName().c_str() : ""s;
-    _equipment_subject.Notify(my::Mechanical::Info(bullet_count, name.data()));
+    _equipment_subject.Notify(my::Mechanical::Info(bullet_count, bullet_count_max, name.data()));
 }
 
 void my::WeaponSystem::OnNotify(const my::ChargeInfo& info) {
@@ -42,7 +43,7 @@ void my::WeaponSystem::OnNotify(const my::ChargeInfo& info) {
     if (info.size) {
         weapon->AddBullet(info.size);
     } // if
-    _equipment_subject.Notify(my::Mechanical::Info(weapon->GetBulletCount(), weapon->GetName().c_str() ));
+    _equipment_subject.Notify(my::Mechanical::Info(weapon->GetBulletCount(), weapon->GetBulletCountMax(), weapon->GetName().c_str() ));
 }
 
 void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {

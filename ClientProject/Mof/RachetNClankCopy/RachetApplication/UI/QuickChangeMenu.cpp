@@ -6,7 +6,8 @@ my::QuickChangeMenu::QuickChangeMenu(const char* name) :
     _distance(128.0f),
     _tex_names(),
     _resource() {
-    super::_position = Mof::CVector2(256.0f, 256.0f);
+    //super::_position = Mof::CVector2(256.0f, 256.0f);
+    super::_position = Mof::CVector2(506.0f, 336.0f);
     _tex_names.emplace("", "");
     _tex_names.emplace("BombGlove", "../Resource/texture/icon/bomb_glove.png");
     _tex_names.emplace("Pyrocitor", "../Resource/texture/icon/pyrocitor.png");

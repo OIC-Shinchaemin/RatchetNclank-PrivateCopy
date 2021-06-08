@@ -199,20 +199,7 @@ bool my::GameScene::Initialize(void) {
 
 
     auto param = new my::Actor::Param();
-    // enemy
-    for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-        auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
-        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
-        auto builder = enemy_spawn.first.c_str();
-        param->name = enemy_spawn.second->GetName();
-        param->transform.position = enemy_spawn.second->GetPosition();
-        auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
-        this->AddElement(enemy);
 
-        if (event_sphere.CollisionPoint(param->transform.position)) {
-            bridge_event->AddTriggerActor(enemy);
-        } // if
-    } // for
     // player
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
@@ -249,6 +236,7 @@ bool my::GameScene::Initialize(void) {
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
         player->PushNotificationableSubject("QuickChange");
+        player->GetQuestSubject()->AddObserver(help_desk);
 
         // game system
         weapon_system->Initialize(shared_from_this());
@@ -258,7 +246,7 @@ bool my::GameScene::Initialize(void) {
         shop_system->Initialize();
         pause_system->Initialize();
 
-        auto quest = my::GameQuest(my::GameQuest::Type::EnemyDestroy);
+        auto quest = my::GameQuest(my::GameQuest::Type::ToFront);
         help_desk->OnNotify(quest);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);
         weapon_system->AddMechanicalWeaponObserver(player);
@@ -295,6 +283,24 @@ bool my::GameScene::Initialize(void) {
         pause_system->AddItem(item1);
         pause_system->AddItem(item2);
     } // if
+
+
+    auto help_desk = _game.lock()->GetHelpDesk();
+    // enemy
+    for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
+        auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
+        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+        auto builder = enemy_spawn.first.c_str();
+        param->name = enemy_spawn.second->GetName();
+        param->transform.position = enemy_spawn.second->GetPosition();
+        auto enemy = my::FactoryManager::Singleton().CreateActor<my::Enemy>(builder, param);
+        this->AddElement(enemy);
+        enemy->GetQuestSubject()->AddObserver(help_desk);
+
+        if (event_sphere.CollisionPoint(param->transform.position)) {
+            bridge_event->AddTriggerActor(enemy);
+        } // if
+    } // for
 
     // terrain
     def::Transform terrain_transforms[]{

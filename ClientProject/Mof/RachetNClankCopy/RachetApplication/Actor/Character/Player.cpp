@@ -33,6 +33,10 @@ void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
     else {
         _current_mechanical.reset();
     } // else
+
+    if (_current_weapon) {
+        _current_weapon->SetScale(math::vec3::kZero);
+    } // if
     _current_weapon = change;
 }
 
@@ -57,6 +61,10 @@ my::Observable<bool>* my::Player::GetShopSystemSubject(void) {
 
 my::Observable<bool>* my::Player::GetQuickChangeSubject(void) {
     return &this->_quick_change_subject.subject;
+}
+
+my::Observable<const my::GameQuest&>* my::Player::GetQuestSubject(void) {
+    return &this->_quest_subject;
 }
 
 std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
@@ -188,6 +196,7 @@ bool my::Player::Render(void) {
 bool my::Player::Release(void) {
     super::Release();
 
+    _quest_subject.Clear();
     _shop_system_subject.subject.Clear();
     _quick_change_subject.subject.Clear();
     _current_mechanical.reset();
