@@ -51,6 +51,7 @@ bool my::HpComponent::Initialize(void) {
             _ui_remove = true;
             auto menu = std::make_shared<my::NanotechMenu>("NanotechMenu");
             _observable.AddObserver(menu);
+            menu->SetResourceManager(_resource_manager);
             menu->SetPosition(Mof::CVector2(512.0f - 32.0f * 2.0f - 16.0f, 50.0f));
             menu->SetColor(Mof::CVector4(0.1f, 0.3f, 0.5f, 0.5f));
             canvas->AddElement(menu);

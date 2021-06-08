@@ -42,7 +42,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    //void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
     /// <summary>
     /// 描画
     /// </summary>

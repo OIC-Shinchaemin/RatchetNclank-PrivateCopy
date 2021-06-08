@@ -5,6 +5,7 @@ std::string my::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolith
 std::string my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm = "PlayerEnemyBulletCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm = "PlayerShipCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm = "PlayerWaterFlowCollisionAlgolithm";
+std::string my::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm = "PlayerNanotechItemCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm = "EnemyPlayerCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm = "EnemyOmniWrenchAttackCollisionAlgolithm ";
 std::string my::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm = "SightPlayerCollisionAlgolithm";
@@ -20,4 +21,6 @@ std::string my::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm = 
 std::string my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm = "BombGloveBulletEnemyCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm = "ShipPlayerCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm = "BoltPlayerCollisionAlgolithm";
+std::string my::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm = "kBulletItemPlayerCollisionAlgolithm";
+std::string my::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm = "kNanotechItemPlayerCollisionAlgolithm";
 std::string my::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm = "PlayerShopCollisionAlgolithm";

@@ -10,6 +10,8 @@
 #include "BombGloveEffectCollisionComponent.h"
 #include "ShipCollisionComponent.h"
 #include "BoltCollisionComponent.h"
+#include "BulletItemCollisionComponent.h"
+#include "NanotechItemCollisionComponent.h"
 #include "WaterFlowCollisionComponent.h"
 #include "CameraCollisionComponent.h"
 #include "ShopCollisionComponent.h"

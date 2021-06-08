@@ -14,6 +14,7 @@
 #include "Factory.h"
 #include "../Actor/Weapon/Mechanical.h"
 #include "../Actor/Item/Bolt.h"
+#include "../Actor/Item/BulletItem.h"
 
 
 namespace my {
@@ -81,6 +82,12 @@ public:
                 ptr->GetMoneySubject()->AddObserver(game->GetGameMoney());
             } // if
         } // if
+        else if constexpr (std::is_same<T, my::BulletItem>::value) {
+            if (auto game = _game.lock()) {
+                ptr->GetWeaponSystemSubject()->AddObserver(game->GetWeaponSystem());
+            } // if
+        } // else if
+
 
 
         ptr->Construct(_builders.at(builder_key));

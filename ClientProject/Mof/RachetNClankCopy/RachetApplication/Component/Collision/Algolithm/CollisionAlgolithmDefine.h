@@ -12,6 +12,7 @@ struct CollisionAlgolithmType {
     static std::string kPlayerEnemyBulletCollisionAlgolithm;
     static std::string kPlayerShipCollisionAlgolithm;
     static std::string kPlayerWaterFlowCollisionAlgolithm;
+    static std::string kPlayerNanotechItemCollisionAlgolithm;
     static std::string kEnemyPlayerCollisionAlgolithm;
     static std::string kEnemyOmniWrenchAttackCollisionAlgolithm;
     static std::string kSightPlayerCollisionAlgolithm;
@@ -27,6 +28,8 @@ struct CollisionAlgolithmType {
     static std::string kBombGloveBulletEnemyCollisionAlgolithm;
     static std::string kShipPlayerCollisionAlgolithm;
     static std::string kBoltPlayerCollisionAlgolithm;
+    static std::string kBulletItemPlayerCollisionAlgolithm;
+    static std::string kNanotechItemPlayerCollisionAlgolithm;
     static std::string kPlayerShopCollisionAlgolithm;
 };
 }

@@ -7,6 +7,7 @@
 #include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerWaterFlowCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerNanotechItemCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/EnemyOmniWrenchCollisionAlgolithm.h"
@@ -22,6 +23,8 @@
 #include "../Component/Collision/Algolithm/BombGloveBulletEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/ShipPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/BoltPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/BulletItemPlayerCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/NanotechItemPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShopCollisionAlgolithm.h"
 #include "../Component/Collision/Object/CollisionComponentDefine.h"
 
@@ -33,6 +36,7 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm.c_str(),
@@ -48,6 +52,8 @@ void my::PhysicsWorld::GenerateLayer(void) {
       my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm.c_str(),
+      my::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm.c_str(),
       my::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm.c_str(),
     };
 
@@ -66,6 +72,7 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::PlayerEnemyBulletCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerShipCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerWaterFlowCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::PlayerNanotechItemCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::EnemyOmniWrenchCollisionAlgolithm>(my::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm);
@@ -81,6 +88,8 @@ my::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<my::BombGloveBulletEnemyCollisionAlgolithm>(my::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<my::ShipPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::BoltPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::BulletItemPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<my::NanotechItemPlayerCollisionAlgolithm>(my::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<my::PlayerShopCollisionAlgolithm>(my::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm);
 
     this->GenerateLayer();
