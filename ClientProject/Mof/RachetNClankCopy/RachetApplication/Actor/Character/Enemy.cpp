@@ -13,12 +13,20 @@
 #include "../../State/NanotechItemActionStateDefine.h"
 
 
+void my::Enemy::Activate(void) {
+    super::Activate();
+}
+
 my::Enemy::Enemy() :
     super() {
     super::SetTag("Enemy");
 }
 
 my::Enemy::~Enemy() {
+}
+
+my::Observable<const my::GameQuest&>* my::Enemy::GetQuestSubject(void) {
+    return &this->_quest_subject;
 }
 
 void my::Enemy::End(void) {
@@ -96,6 +104,7 @@ void my::Enemy::End(void) {
 
 
 
+    _quest_subject.Clear();
     Observable::Notify("EnemyDead", shared_from_this());
     super::End();
 }

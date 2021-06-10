@@ -13,10 +13,15 @@ public:
         //! íeêî
         int bullet_count;
         //! íeêî
+        int bullet_count_max;
+        //! íeêî
         std::string name;
 
         Info() = default;
-        Info(int size, const char* str) :bullet_count(size), name(str) {
+        Info(int size, int max, const char* str) :
+            bullet_count(size), 
+            bullet_count_max(max),
+            name(str) {
         };
     };
 protected:
@@ -54,6 +59,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     int GetBulletCount(void) const;
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetBulletCountMax(void) const;
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>

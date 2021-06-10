@@ -18,7 +18,7 @@ my::Blaster::~Blaster() {
 }
 
 bool my::Blaster::IsAction(void) const {
-    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_V);
+    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_M);
 }
 
 bool my::Blaster::Fire(const def::Transform& transform) {

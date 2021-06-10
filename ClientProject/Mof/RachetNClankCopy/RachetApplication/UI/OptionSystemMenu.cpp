@@ -5,7 +5,17 @@ my::OptionSystemMenu::OptionSystemMenu(const char* name) :
     super(name),
     _infomation(),
     _resource(),
-    _ui_canvas() {
+    _ui_canvas(),
+    _font() {
+    bool loaded_font = _font.Create(34, "");
+    _ASSERT_EXPR(loaded_font, L"フォントを作成できませんでした");
+
+    this->SetPosition(Mof::CVector2(440.0f, 420.0f));
+    
+}
+
+my::OptionSystemMenu::~OptionSystemMenu() {
+    _font.Release();
 }
 
 void my::OptionSystemMenu::OnNotify(const my::OptionSystem::Info& info) {
@@ -32,9 +42,14 @@ void my::OptionSystemMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
 
 void my::OptionSystemMenu::AddItem(const my::OptionSystemItem& in) {
     auto elem = std::make_shared<my::OptionSystemMenuItem>(in.GetText().c_str());
+    elem->SetFont(&_font);
     elem->SetText(in.GetText());
-    elem->SetPosition(super::_position);
-    super::_position.y -= 20.0f;
+
+    auto screen_center = Mof::CVector2(def::kWindowWidthF, def::kWindowHeightF) * 0.5f;
+    auto half_size = elem->GetSize() * 0.5f;
+    auto pos = Mof::CVector2(screen_center.x - half_size.x, super::_position.y);
+    elem->SetPosition(pos);
+    super::_position.y += 40.0f;
 
     super::AddElement(elem);
 }
@@ -46,8 +61,10 @@ bool my::OptionSystemMenu::Initialize(void) {
 
 bool my::OptionSystemMenu::Update(float delta_time) {
     int index = 0;
+
+
     for (auto elem : super::_items) {
-        elem->SetColor(def::color_rgba::kGreen);
+        elem->SetColor(def::color_rgba::kWhite);
         if (index == _infomation.index) {
             elem->SetColor(def::color_rgba::kRed);
         } // if
@@ -65,14 +82,25 @@ bool my::OptionSystemMenu::Render(void) {
 
 my::OptionSystemMenuItem::OptionSystemMenuItem(const char* name) :
     super(name),
-    _text() {
+    _text(),
+    _font() {
 }
 
 my::OptionSystemMenuItem::~OptionSystemMenuItem() {
+    _font = nullptr;
 }
 
 void my::OptionSystemMenuItem::SetText(const std::string& text) {
     this->_text = text;
+}
+
+void my::OptionSystemMenuItem::SetFont(Mof::CFont* ptr) {
+    this->_font = ptr;
+}
+
+Mof::CVector2 my::OptionSystemMenuItem::GetSize(void) const {
+    float size = 12.0f;
+    return Mof::CVector2(size * _text.size(), size);
 }
 
 bool my::OptionSystemMenuItem::Input(void) {
@@ -88,6 +116,16 @@ bool my::OptionSystemMenuItem::Render(void) {
     auto pos = super::_position;
     auto color = super::_color.ToU32Color();
     ::CGraphicsUtilities::RenderString(
+        pos.x + 1, pos.y + 1, def::color_rgba_u32::kBlack, _text.c_str());
+    ::CGraphicsUtilities::RenderString(
         pos.x, pos.y, color, _text.c_str());
+
+
+#ifdef _DEBUG
+    auto rect = Mof::CRectangle(0.0f, 0.0f, this->GetSize().x, this->GetSize().y);
+    rect.Translation(pos);
+    ::CGraphicsUtilities::RenderRect(rect, def::color_rgba_u32::kRed);
+#endif // _DEBUG
+
     return true;
 }

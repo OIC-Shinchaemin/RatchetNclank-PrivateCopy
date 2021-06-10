@@ -18,7 +18,7 @@ my::Pyrocitor::~Pyrocitor() {
 }
 
 bool my::Pyrocitor::IsAction(void) const {
-    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_V);
+    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_M);
 }
 
 bool my::Pyrocitor::Fire(const def::Transform& transform) {

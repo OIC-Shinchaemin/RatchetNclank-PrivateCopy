@@ -17,6 +17,12 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~OmniWrench();
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    virtual bool Initialize(my::Actor::Param* param) override;
 };
 }
 #endif // !MY_OMNI_WRENCH_H

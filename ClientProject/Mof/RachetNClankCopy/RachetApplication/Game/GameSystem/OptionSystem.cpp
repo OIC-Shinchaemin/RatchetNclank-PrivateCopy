@@ -15,8 +15,10 @@ my::OptionSystem::OptionSystem() :
 
 my::OptionSystem::~OptionSystem() {
 }
+
 void my::OptionSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
+    _item_index = 0;
     _title_menu_subject.Notify(false);
     _infomation.enter = true;
     _info_subject.Notify(_infomation);
@@ -47,7 +49,6 @@ bool my::OptionSystem::Initialize(void) {
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(super::GetResource());
-    menu->SetPosition(Mof::CVector2(400.0f, 400.0f));
     if (auto resource = super::GetResource()) {
         auto tex = resource->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/ui/black.png");
         menu->SetTexture(tex);
@@ -62,20 +63,24 @@ bool my::OptionSystem::Initialize(void) {
 
 bool my::OptionSystem::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
-        _item_index++;
-        if (_item_index > _item.size() - 1) {
-            _item_index = _item.size() - 1;
-        } // if
-        _infomation.index = _item_index;
-        _info_subject.Notify(_infomation);
-    } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN)) {
         _item_index--;
         if (_item_index < 0) {
             _item_index = 0;
         } // if
         _infomation.index = _item_index;
         _info_subject.Notify(_infomation);
+
+        
+    } // if
+    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN)) {
+        _item_index++;
+        if (_item_index > _item.size() - 1) {
+            _item_index = _item.size() - 1;
+        } // if
+        _infomation.index = _item_index;
+        _info_subject.Notify(_infomation);
+
+    
     } // else if
 
     if (!_item.empty()) {

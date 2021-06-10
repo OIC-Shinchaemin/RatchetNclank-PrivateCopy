@@ -25,12 +25,27 @@ bool my::DescriptionScene::SceneRender(void) {
     if (auto resource = _resource.lock()) {
         auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
 
-        auto text = "スタートボタン・シフトキーでタイトルに戻る";
-        ::CGraphicsUtilities::RenderString(260.0, 300.0f, text);
+        const char* text;
+        
+        text = "ゲームの操作説明";
+        ::CGraphicsUtilities::RenderString(400.0, 100.0f, text);
 
-        text = "ゲームの操作説明\nESCAPEキーでゲーム終了\nZキーで攻撃\nXキーでジャンプ\nShiftキーで変更 武器選択はShift長押しで0~8キー\nVキーで武器が選択されていれば武器使用\n \WASDキーで移動\n十字キーでカメラ移動\nQキーでカメラ補正\n";
+        text = " ◆ ESCAPEキーでゲーム終了\n\n \
+◆ Zキーで攻撃\n\n \
+◆ Xキーでジャンプ\n\n \
+◆ Shiftキーで変更 武器選択はShift長押しで0~8キー\n\n \
+◆ Vキーで武器が選択されていれば武器使用\n\n \
+◆ WASDキーで移動\n\n \
+◆ 十字キーでカメラ移動\n\n \
+◆ Qキーでカメラ補正\n";
         //font->RenderString(400.0, 350.0f, text);
-        ::CGraphicsUtilities::RenderString(400.0, 350.0f, text);
+        ::CGraphicsUtilities::RenderString(130.0 + 1, 240.0f + 1, def::color_rgba_u32::kBlue, text);
+        ::CGraphicsUtilities::RenderString(130.0, 240.0f, text);
+
+
+
+        text = "Startボタン・Shiftキーでタイトルに戻る";
+        ::CGraphicsUtilities::RenderString(460.0, 700.0f, text);
     } // if
 
     return true;

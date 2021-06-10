@@ -7,6 +7,7 @@ my::NanotechMenu::NanotechMenu(const char* name) :
     _hp(_hp_max),
     _resource_manager(),
     _ui_canvas() {
+    this->SetPosition(Mof::CVector2(800.0f, 24.0f));
 }
 
 void my::NanotechMenu::OnNotify(int hp) {
@@ -39,21 +40,13 @@ bool my::NanotechMenu::Render(void) {
         empty_tex = r->Get<std::shared_ptr<Mof::CTexture> >("../Resource/texture/nanotech/nanotech_empty.png");
     } // if
 
-
     auto size = Mof::CVector2(tex->GetWidth(), tex->GetHeight());
     auto half_size = size * 0.5f;
-    float radius = 32.0f;
     for (int i = 0; i < _hp_max; i++) {
-        empty_tex->Render(pos.x - half_size.x, pos.y - half_size.y);
         if (i < _hp) {
-            auto circle = Mof::CCircle(pos, radius);
-            ::CGraphicsUtilities::RenderFillCircle(circle, def::color_rgba_u32::kYellow);
-            tex->Render(pos.x - half_size.x, pos.y - half_size.y);
+            tex->Render(      pos.x - half_size.x, pos.y - half_size.y);
         } // if
-        
-        auto circle = Mof::CCircle(pos, radius);
-        ::CGraphicsUtilities::RenderFillCircle(circle, super::_color.ToU32Color());
-        pos.x += radius * 2.0f;
+        pos.x += 32.0f * 2.0f;
     } // for
     return true;
 }

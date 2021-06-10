@@ -57,6 +57,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    Mof::CVector2 GetPosition(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual Mof::CVector2 GetSize(void) const;
+    /// <summary> 
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     Mof::CRectangle GetRectangle(void) const;
     /// <summary>
     /// 初期化

@@ -13,6 +13,7 @@
 #include "../../Game/GameSystem/QuickChangeSystem.h"
 #include "../../Game/GameSystem/ShopSystem.h"
 #include "../../Component/Player/PlayerComponent.h"
+#include "../../Game/GameSystem/GameQuest.h"
 
 
 namespace my {
@@ -47,6 +48,8 @@ private:
     ObservablePair _shop_system_subject;
     //! 通知用
     ObservablePair _quick_change_subject;
+    //! 通知用
+    my::Observable<const my::GameQuest&> _quest_subject;
     //! 通知用
     std::unordered_map<std::string, ObservablePair* >_notificationable_subject_map;
     //! 通知用
@@ -87,6 +90,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     my::Observable<bool>* GetQuickChangeSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    my::Observable<const my::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>

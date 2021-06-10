@@ -52,7 +52,7 @@ bool my::PlayerShotAttackComponent::Input(void) {
         } // if
     } // if
 
-    if (::g_pInput->IsKeyPull(MOFKEY_V) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_B)) {
+    if (::g_pInput->IsKeyPull(MOFKEY_M) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_B)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
 

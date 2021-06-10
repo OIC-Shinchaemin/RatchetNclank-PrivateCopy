@@ -9,6 +9,7 @@
 #include "../Collision/Object/CollisionComponentDefine.h"
 #include "../../UI/LockOnCursorMenu.h"
 #include "../../State/PlayerActionStateDefine.h"
+#include "../../Game/GameSystem/GameQuest.h"
 
 
 my::PlayerComponent::PlayerComponent(int priority) :
@@ -97,13 +98,16 @@ bool my::PlayerComponent::Initialize(void) {
                                my::CollisionComponentType::kShopCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         auto player = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+        player->GetQuestSubject()->Notify(my::GameQuest::Type::ShopAccessStart);
         player->PushNotificationableSubject("ShopSystem");
+
         return true;
     }));
     coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Exit,
                                my::CollisionComponentType::kShopCollisionComponent,
                                my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
         auto player = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+        player->GetQuestSubject()->Notify(my::GameQuest::Type::ShopAccessEnd);
         player->PopNotificationableSubject("ShopSystem");
         return true;
     }));
