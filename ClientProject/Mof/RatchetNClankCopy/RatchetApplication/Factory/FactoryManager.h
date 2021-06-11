@@ -1,5 +1,5 @@
-#ifndef RATCHET_FACTORY_MANAGER_H
-#define RATCHET_FACTORY_MANAGER_H
+#ifndef RATCHET_FACTORY_FACTORY_MANAGER_H
+#define RATCHET_FACTORY_FACTORY_MANAGER_H
 
 
 #include "../GameDefine.h"
@@ -16,18 +16,19 @@
 
 
 namespace ratchet {
+namespace factory {
 class FactoryManager {
 private:
     //! コンポーネント
-    ratchet::ComponentFactory _component;
+    ratchet::factory::ComponentFactory _component;
     //! ビルダー
-    ratchet::BuilderFactory _builder;
+    ratchet::factory::BuilderFactory _builder;
     //! アクター
-    ratchet::ActorFactory _actor;
+    ratchet::factory::ActorFactory _actor;
     //! ファクトリー
-    ratchet::BehaviourFactory _behaviour_node;
+    ratchet::factory::BehaviourFactory _behaviour_node;
     //! ファクトリー
-    ratchet::BehaviourExecutorFactory _behaviour_executor;
+    ratchet::factory::BehaviourExecutorFactory _behaviour_executor;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! ゲーム
@@ -46,7 +47,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    static ratchet::FactoryManager& Singleton(void);
+    static ratchet::factory::FactoryManager& Singleton(void);
     /// <summary>
     /// セッター
     /// </summary>
@@ -96,4 +97,5 @@ public:
     behaviour::NodeExecutorPtr CreateBehaviourExecutor(const char* key);
 };
 }
-#endif // !RATCHET_FACTORY_MANAGER_H
+}
+#endif // !RATCHET_FACTORY_FACTORY_MANAGER_H

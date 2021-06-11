@@ -99,7 +99,7 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             auto actor_param = ratchet::Actor::Param();
             actor_param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
             actor_param.transform.position = Mof::CVector3(10.0f, -5.0f, -15.0f);
-            _demo_actor = ratchet::FactoryManager::Singleton().CreateActor<ratchet::Player>("builder/demo_player.json", &actor_param);
+            _demo_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Player>("builder/demo_player.json", &actor_param);
 
             ::CoUninitialize();
             super::LoadComplete();

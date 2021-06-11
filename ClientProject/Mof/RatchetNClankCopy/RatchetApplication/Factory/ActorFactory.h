@@ -1,5 +1,5 @@
-#ifndef RATCHET_ACTOR_FACTORY_H
-#define RATCHET_ACTOR_FACTORY_H
+#ifndef RATCHET_FACTORY_ACTOR_FACTORY_H
+#define RATCHET_FACTORY_ACTOR_FACTORY_H
 
 
 #include <memory>
@@ -18,14 +18,15 @@
 
 
 namespace ratchet {
+namespace factory {
 class ActorFactory {
 private:
     //! ファクトリー
-    ratchet::BuilderFactory* _builder_factory;
+    ratchet::factory::BuilderFactory* _builder_factory;
     //! 保持しているBulder
     std::map<std::string, std::shared_ptr<ratchet::factory::builder::IBuilder>> _builders;
     //! Mechanical
-    ratchet::Factory<ratchet::Mechanical> _mechanical_factory;
+    ratchet::factory::Factory<ratchet::Mechanical> _mechanical_factory;
     //! ゲーム
     std::weak_ptr<ratchet::GameManager> _game;
 public:
@@ -33,7 +34,7 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="builder_factory"></param>
-    ActorFactory(ratchet::BuilderFactory* builder_factory);
+    ActorFactory(ratchet::factory::BuilderFactory* builder_factory);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -76,7 +77,7 @@ public:
         } // if
 
         auto ptr = ut::MakeSharedWithRelease<T>();
-        
+
         if constexpr (std::is_same<T, ratchet::Bolt>::value) {
             if (auto game = _game.lock()) {
                 ptr->GetMoneySubject()->AddObserver(game->GetGameMoney());
@@ -101,7 +102,7 @@ public:
     /// <param name="builder_key"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Mechanical> CreateMechanicalWeapon(const char* type,const std::string& builder_key, ratchet::Actor::Param* param);
+    std::shared_ptr<ratchet::Mechanical> CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::Actor::Param* param);
     /// <summary>
     /// 解放
     /// </summary>
@@ -109,4 +110,5 @@ public:
     void Release(void);
 };
 }
-#endif // !RATCHET_ACTOR_FACTORY_H
+}
+#endif // !RATCHET_FACTORY_ACTOR_FACTORY_H

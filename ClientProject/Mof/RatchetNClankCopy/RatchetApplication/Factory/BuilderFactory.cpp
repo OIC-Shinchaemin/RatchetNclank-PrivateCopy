@@ -1,32 +1,25 @@
 #include "BuilderFactory.h"
 
-/*
-#include "../Component/Component.h"
-#include "Builder/ActorBuilder.h"
-#include "Builder/TerrainBuilder.h"
-#include "Builder/OmniWrenchBuilder.h"
-*/
 
-
-ratchet::BuilderFactory::BuilderFactory(ratchet::ComponentFactory* component_factory) :
+ratchet::factory::BuilderFactory::BuilderFactory(ratchet::factory::ComponentFactory* component_factory) :
     _builders(),
     _component_factory(component_factory),
     _resource() {
 }
 
-ratchet::BuilderFactory::~BuilderFactory() {
+ratchet::factory::BuilderFactory::~BuilderFactory() {
     this->Release();
 }
 
-void ratchet::BuilderFactory::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
+void ratchet::factory::BuilderFactory::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void ratchet::BuilderFactory::Release(void) {
+void ratchet::factory::BuilderFactory::Release(void) {
     _component_factory = nullptr;
 }
 
-std::shared_ptr<ratchet::factory::builder::IBuilder> ratchet::BuilderFactory::Create(const char* path) const {
+std::shared_ptr<ratchet::factory::builder::IBuilder> ratchet::factory::BuilderFactory::Create(const char* path) const {
     // actor builder のみ
 
     // builderフォルダのファイル構成をきれいにする

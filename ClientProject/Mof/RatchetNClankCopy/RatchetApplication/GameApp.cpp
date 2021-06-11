@@ -20,8 +20,8 @@ MofBool CGameApp::Initialize(void) {
     _ui_canvas = std::make_shared<base::ui::UICanvas>();
     _scene_manager = ut::MakeSharedWithRelease<ratchet::scene::SceneManager>();
 
-    ratchet::FactoryManager::Singleton().SetResourceManager(_resource_manager);
-    ratchet::FactoryManager::Singleton().SetGameManager(_game_manager);
+    ratchet::factory::FactoryManager::Singleton().SetResourceManager(_resource_manager);
+    ratchet::factory::FactoryManager::Singleton().SetGameManager(_game_manager);
     ratchet::Component::SetResourceManager(_resource_manager);
     ratchet::Component::SetUICanvas(_ui_canvas);
     ratchet::camera::CameraController::SetCameraManager(_camera_manager);

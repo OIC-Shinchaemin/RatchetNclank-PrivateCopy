@@ -1,5 +1,5 @@
-#ifndef RATCHET_CREATOR_H
-#define RATCHET_CREATOR_H
+#ifndef RATCHET_FACTORY_CREATOR_H
+#define RATCHET_FACTORY_CREATOR_H
 
 
 #include <memory>
@@ -8,6 +8,7 @@
 
 
 namespace ratchet {
+namespace factory {
 template <typename T>
 class ICreator {
 public:
@@ -19,7 +20,7 @@ public:
     virtual std::shared_ptr<T> Create(void) const = 0;
 };
 template <typename Base, typename Derived>
-class Creator : public ratchet::ICreator<Base> {
+class Creator : public ratchet::factory::ICreator<Base> {
 public:
     /// <summary>
     /// çÏê¨
@@ -34,4 +35,5 @@ public:
     }
 };
 }
-#endif // !RATCHET_CREATOR_H
+}
+#endif // !RATCHET_FACTORY_CREATOR_H

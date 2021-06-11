@@ -1,5 +1,5 @@
-#ifndef RATCHET_BUILDER_FACTORY_H
-#define RATCHET_BUILDER_FACTORY_H
+#ifndef RATCHET_FACTORY_BUILDER_FACTORY_H
+#define RATCHET_FACTORY_BUILDER_FACTORY_H
 
 
 #include <memory>
@@ -20,12 +20,13 @@
 
 
 namespace ratchet {
+namespace factory {
 class BuilderFactory {
 private:
     //! 保持しているBulder
     std::map<std::string, std::shared_ptr<ratchet::factory::builder::IBuilder>> _builders;
     //! コンポーネント
-    ratchet::ComponentFactory* _component_factory;
+    ratchet::factory::ComponentFactory* _component_factory;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
 
@@ -100,7 +101,7 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="component_factory"></param>
-    BuilderFactory(ratchet::ComponentFactory* component_factory);
+    BuilderFactory(ratchet::factory::ComponentFactory* component_factory);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -123,4 +124,5 @@ public:
     std::shared_ptr<ratchet::factory::builder::IBuilder> Create(const char* path) const;
 };
 }
-#endif // !RATCHET_ACTOR_FACTORY_H
+}
+#endif // !RATCHET_FACTORY_ACTOR_FACTORY_H

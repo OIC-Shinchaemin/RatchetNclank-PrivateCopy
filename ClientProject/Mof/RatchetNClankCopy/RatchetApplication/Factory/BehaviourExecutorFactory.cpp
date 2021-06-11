@@ -1,7 +1,7 @@
 #include "BehaviourExecutorFactory.h"
 
 
-ratchet::BehaviourExecutorFactory::BehaviourExecutorFactory(ratchet::BehaviourFactory* behaviour_factory) :
+ratchet::factory::BehaviourExecutorFactory::BehaviourExecutorFactory(ratchet::factory::BehaviourFactory* behaviour_factory) :
     _behaviour_map() {
     _behaviour_map.emplace("../Resource/behaviour/patrol.json",
                            behaviour_factory->CreateRootNode("../Resource/behaviour/patrol.json"));
@@ -19,7 +19,7 @@ ratchet::BehaviourExecutorFactory::BehaviourExecutorFactory(ratchet::BehaviourFa
 
 }
 
-ratchet::behaviour::NodeExecutorPtr ratchet::BehaviourExecutorFactory::Create(const char* key) const {
+ratchet::behaviour::NodeExecutorPtr ratchet::factory::BehaviourExecutorFactory::Create(const char* key) const {
     auto it = _behaviour_map.find(key);
     if (it != _behaviour_map.end()) {
         return it->second->CreateExecutor();

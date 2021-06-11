@@ -27,7 +27,7 @@
 #include "../Behaviour/Node/Decorator/IfCloseFromHomeNode.h"
 
 
-ratchet::BehaviourFactory::BehaviourFactory() :
+ratchet::factory::BehaviourFactory::BehaviourFactory() :
     _composite_factory(),
     _action_factory(),
     _condition_factory(),
@@ -59,7 +59,7 @@ ratchet::BehaviourFactory::BehaviourFactory() :
     _decorator_factory.Register<ratchet::behaviour::IfCloseFromHomeNode>("IfCloseFromHomeNode");
 }
 
-ratchet::behaviour::CompositeNodePtr ratchet::BehaviourFactory::CreateRootNode(const char* path) {
+ratchet::behaviour::CompositeNodePtr ratchet::factory::BehaviourFactory::CreateRootNode(const char* path) {
     rapidjson::Document document;
     if (!ut::ParseJsonDocument(path, document)) {
         return nullptr;
@@ -75,7 +75,7 @@ ratchet::behaviour::CompositeNodePtr ratchet::BehaviourFactory::CreateRootNode(c
     return this->CreateCompositeNode(behaviours, root_index);
 }
 
-std::shared_ptr<ratchet::behaviour::CompositeNode> ratchet::BehaviourFactory::CreateCompositeNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::CompositeNode> ratchet::factory::BehaviourFactory::CreateCompositeNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     auto composite_node = _composite_factory.Create(derived);
 
@@ -102,17 +102,17 @@ std::shared_ptr<ratchet::behaviour::CompositeNode> ratchet::BehaviourFactory::Cr
     return composite_node;
 }
 
-std::shared_ptr<ratchet::behaviour::ActionNodeBase> ratchet::BehaviourFactory::CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::ActionNodeBase> ratchet::factory::BehaviourFactory::CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     return _action_factory.Create(derived);
 }
 
-std::shared_ptr<ratchet::behaviour::ConditionalNodeBase> ratchet::BehaviourFactory::CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::ConditionalNodeBase> ratchet::factory::BehaviourFactory::CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     return _condition_factory.Create(derived);
 }
 
-std::shared_ptr<ratchet::behaviour::DecoratorNodeBase> ratchet::BehaviourFactory::CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::DecoratorNodeBase> ratchet::factory::BehaviourFactory::CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     auto decorator_node = _decorator_factory.Create(derived);
 

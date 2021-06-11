@@ -28,7 +28,7 @@ private:
     //! 衝突処理対象
     std::vector<CollisionLayer> _layers;
     //! ファクトリー
-    ratchet::Factory<ratchet::CollisionAlgolithm> collision_algolithm_factory;
+    ratchet::factory::Factory<ratchet::CollisionAlgolithm> collision_algolithm_factory;
     //! ステージとぶつける用
     ObjectArray _list_for_stage;
 

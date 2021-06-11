@@ -20,7 +20,7 @@ bool ratchet::BombGloveBulletComponent::CollisionEnemy(const ratchet::CollisionI
     info.init_param = std::move(param);
     info.update_param = std::move(update_param);
 
-    auto effect = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
+    auto effect = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
     effect->Start(std::move(info));
     super::GetOwner()->Notify("AddRequest", effect);
 
@@ -67,7 +67,7 @@ bool ratchet::BombGloveBulletComponent::Initialize(void) {
         info.init_param = std::move(param);
         info.update_param = std::move(update_param);
  
-        auto effect = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
+        auto effect = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
         effect->Start(std::move(info));
         super::GetOwner()->Notify("AddRequest", effect);
 

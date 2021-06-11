@@ -135,7 +135,7 @@ bool ratchet::EnemyRangedAttackComponent::Start(void) {
     direction.Normal(direction);
     param.speed = direction * _shot_speed;
 
-    auto add = ratchet::FactoryManager::Singleton().CreateActor<ratchet::EnemyBullet>("../Resource/builder/ENEMY_bullet.json", &param);
+    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::EnemyBullet>("../Resource/builder/ENEMY_bullet.json", &param);
     add->Start(param);
     super::GetOwner()->Notify("AddRequest", add);
     return true;

@@ -1,5 +1,5 @@
-#ifndef RATCHET_BEHAVIOUR_EXECUTOR_FACTORY_H
-#define RATCHET_BEHAVIOUR_EXECUTOR_FACTORY_H
+#ifndef RATCHET_FACTORY_BEHAVIOUR_EXECUTOR_FACTORY_H
+#define RATCHET_FACTORY_BEHAVIOUR_EXECUTOR_FACTORY_H
 
 
 #include <memory>
@@ -11,6 +11,7 @@
 
 
 namespace ratchet {
+namespace factory {
 class BehaviourExecutorFactory {
     //! マップ
     std::unordered_map<std::string, behaviour::CompositeNodePtr > _behaviour_map;
@@ -19,7 +20,7 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="behaviour_factory"></param>
-    BehaviourExecutorFactory(ratchet::BehaviourFactory* behaviour_factory);
+    BehaviourExecutorFactory(ratchet::factory::BehaviourFactory* behaviour_factory);
     /// <summary>
     /// 作成
     /// </summary>
@@ -28,4 +29,5 @@ public:
     behaviour::NodeExecutorPtr Create(const char* key) const;
 };
 }
-#endif // !RATCHET_BEHAVIOUR_EXECUTOR_FACTORY_H
+}
+#endif // !RATCHET_FACTORY_BEHAVIOUR_EXECUTOR_FACTORY_H

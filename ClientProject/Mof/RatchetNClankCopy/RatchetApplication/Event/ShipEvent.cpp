@@ -27,7 +27,7 @@ void ratchet::event::ShipEvent::OnNotify(const char* type, const std::shared_ptr
         auto param = ratchet::Actor::Param();
         param.transform.position = Mof::CVector3(10.0f, 9.0f, -25.0f);
         param.name = "ship";
-        auto ship = ratchet::FactoryManager::Singleton().CreateActor<ratchet::Ship>("../Resource/builder/ship.json", &param);
+        auto ship = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Ship>("../Resource/builder/ship.json", &param);
         auto com = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::CameraComponent>>("CameraComponent");
         //ship->GetComponent<ratchet::ShipLandingComponent>()->AddObserver(com);
         ship->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::ShipLandingComponent>()->AddObserver(com);

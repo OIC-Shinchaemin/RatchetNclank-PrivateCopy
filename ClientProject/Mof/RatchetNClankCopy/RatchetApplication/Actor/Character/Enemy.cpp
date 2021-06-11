@@ -49,7 +49,7 @@ void ratchet::Enemy::End(void) {
             param.angle.y = param.speed.y;
             param.angle.z = param.speed.z;
 
-            auto bolt = ratchet::FactoryManager::Singleton().CreateActor<ratchet::Bolt>("../Resource/builder/bolt.json", &param);
+            auto bolt = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Bolt>("../Resource/builder/bolt.json", &param);
             bolt->GetComponent<ratchet::BoltActionStateComponent>()->ChangeState(state::BoltActionType::kMoved);
             Observable::Notify("AddRequest", bolt);
         } // for
@@ -74,7 +74,7 @@ void ratchet::Enemy::End(void) {
         param.type = static_cast <ratchet::BulletItem::Type>(ut::GenerateRandom(0, static_cast<int>(ratchet::BulletItem::Type::CountMax) - 1));
         param.count = ut::GenerateRandom(0.0f, 10);
 
-        auto item = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BulletItem>("../Resource/builder/bullet_item.json", &param);
+        auto item = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BulletItem>("../Resource/builder/bullet_item.json", &param);
         item->GetComponent<ratchet::BulletItemActionStateComponent>()->ChangeState(state::BulletItemActionType::kMoved);
         Observable::Notify("AddRequest", item);
     }
@@ -97,7 +97,7 @@ void ratchet::Enemy::End(void) {
         param.angle.z = param.speed.z;
 
 
-        auto item = ratchet::FactoryManager::Singleton().CreateActor<ratchet::NanotechItem>("../Resource/builder/nanotech.json", &param);
+        auto item = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::NanotechItem>("../Resource/builder/nanotech.json", &param);
         item->GetComponent<ratchet::NanotechItemActionStateComponent>()->ChangeState(state::NanotechItemActionType::kMoved);
         Observable::Notify("AddRequest", item);
     }

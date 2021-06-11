@@ -203,20 +203,20 @@ bool ratchet::scene::GameScene::Initialize(void) {
     // player
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-    auto player = ratchet::FactoryManager::Singleton().CreateActor<ratchet::Player>("../Resource/builder/player.json", param);
+    auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::CameraComponent>());
 
     {
         param->transform.position = Mof::CVector3(15.0f, -5.0f, 7.0f);
         param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-        auto shop = ratchet::FactoryManager::Singleton().CreateActor<ratchet::Shop >("../Resource/builder/shop.json", param);
+        auto shop = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Shop >("../Resource/builder/shop.json", param);
         this->AddElement(shop);
     }
     {
         param->name = "weapon";
         param->tag = "OmniWrench";
-        auto omniwrench = ratchet::FactoryManager::Singleton().CreateActor<ratchet::OmniWrench>("builder/omni_wrench.json", param);
+        auto omniwrench = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::OmniWrench>("builder/omni_wrench.json", param);
         player->AddChild(omniwrench);
         this->AddElement(omniwrench);
     }
@@ -293,7 +293,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
         param->transform.position = enemy_spawn.second->GetPosition();
-        auto enemy = ratchet::FactoryManager::Singleton().CreateActor<ratchet::Enemy>(builder, param);
+        auto enemy = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Enemy>(builder, param);
         this->AddElement(enemy);
         enemy->GetQuestSubject()->AddObserver(help_desk);
 
@@ -309,7 +309,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
     for (auto& transform : terrain_transforms) {
         param->transform.scale = transform.scale;
         param->transform.position = transform.position;
-        auto terrain = ratchet::FactoryManager::Singleton().CreateActor<ratchet::Terrain>("../Resource/builder/water_flow.json", param);
+        auto terrain = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Terrain>("../Resource/builder/water_flow.json", param);
         this->AddElement(terrain);
     } // for
 

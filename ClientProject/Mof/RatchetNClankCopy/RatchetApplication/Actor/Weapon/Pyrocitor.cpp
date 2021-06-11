@@ -31,7 +31,7 @@ bool ratchet::Pyrocitor::Fire(const def::Transform& transform) {
     param.speed = speed;
     param.speed.y = _shot_speed * 0.2f;
 
-    auto add = ratchet::FactoryManager::Singleton().CreateActor<ratchet::PyrocitorBullet>("../Resource/builder/pyrocitor_bullet.json", &param);
+    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::PyrocitorBullet>("../Resource/builder/pyrocitor_bullet.json", &param);
     add->Start(param);
     Observable::Notify("AddRequest", add);
     return true;

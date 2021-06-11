@@ -1,5 +1,5 @@
-#ifndef RATCHET_COMPONENT_CREATOR_H
-#define RATCHET_COMPONENT_CREATOR_H
+#ifndef RATCHET_FACTORY_COMPONENT_CREATOR_H
+#define RATCHET_FACTORY_COMPONENT_CREATOR_H
 
 
 #include <memory>
@@ -10,6 +10,7 @@
 
 
 namespace ratchet {
+namespace factory {
 class ComponentCreator {
 private:
     //! ÉRÉsÅ[å≥
@@ -51,4 +52,5 @@ public:
     void Release(void);
 };
 }
-#endif // !RATCHET_COMPONENT_CREATOR_H
+}
+#endif // !RATCHET_FACTORY_COMPONENT_CREATOR_H

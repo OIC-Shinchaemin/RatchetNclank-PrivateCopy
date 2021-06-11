@@ -26,7 +26,7 @@ bool ratchet::BombGlove::Fire(const def::Transform& transform) {
     auto param = ratchet::Bullet::Param();
     param.transform = transform;
 
-    auto add = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);;
+    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);;
     if (super::_lock_on_position.has_value()) {
         Mof::CVector3 direction = super::_lock_on_position.value() - param.transform.position;
         auto v = Mof::CVector3(direction.x, 0.0f, direction.z);

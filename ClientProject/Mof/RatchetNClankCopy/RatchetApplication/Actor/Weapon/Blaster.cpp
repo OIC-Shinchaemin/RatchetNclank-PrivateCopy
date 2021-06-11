@@ -38,7 +38,7 @@ bool ratchet::Blaster::Fire(const def::Transform& transform) {
         param.speed = speed;
     } // else
 
-    auto add = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BlasterBullet>("../Resource/builder/blaster_bullet.json", &param);
+    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BlasterBullet>("../Resource/builder/blaster_bullet.json", &param);
     add->Start(param);
     Observable::Notify("AddRequest", add);
     return true;

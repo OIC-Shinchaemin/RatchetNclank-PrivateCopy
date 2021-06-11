@@ -80,7 +80,7 @@ bool ratchet::WeaponSystem::Load(ratchet::SaveData& in) {
     for (const auto& key : _save_data.GetAvailableMechanicalWeaponsAddress()) {
         param.name = key;
 
-        auto weapon = ratchet::FactoryManager::Singleton().CreateMechanicalWeapon(
+        auto weapon = ratchet::factory::FactoryManager::Singleton().CreateMechanicalWeapon(
             key.c_str(), _builder_name_map.at(key), &param);
         auto it = std::find_if(_weapons.begin(), _weapons.end(), [key](const ratchet::WeaponSystem::Pair& pair) {
             return pair.first == key;

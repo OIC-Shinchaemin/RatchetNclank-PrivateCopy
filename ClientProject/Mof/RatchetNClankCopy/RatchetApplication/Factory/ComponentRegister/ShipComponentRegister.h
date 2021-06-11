@@ -1,6 +1,6 @@
-ratchet::ComponentFactory::AddComponentCreator<ratchet::ShipComponent>();
-ratchet::ComponentFactory::AddComponentCreator<ratchet::ShipMeshComponent>();
-ratchet::ComponentFactory::AddComponentCreator<ratchet::ShipStateComponent>();
-ratchet::ComponentFactory::AddComponentCreator<ratchet::ShipIdleComponent>();
-ratchet::ComponentFactory::AddComponentCreator<ratchet::ShipLandingComponent>();
-ratchet::ComponentFactory::AddComponentCreator<ratchet::ShipTakeoffComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::ShipComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::ShipMeshComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::ShipStateComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::ShipIdleComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::ShipLandingComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::ShipTakeoffComponent>();

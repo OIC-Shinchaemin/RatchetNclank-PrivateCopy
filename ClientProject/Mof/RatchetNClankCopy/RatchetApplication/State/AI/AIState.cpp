@@ -23,7 +23,7 @@ void ratchet::state::ai::AIState::SetActor(const std::shared_ptr<ratchet::Actor>
 }
 
 void ratchet::state::ai::AIState::GenerateBehaviourExecutor(const std::string& path) {
-    _behaviour_executor = ratchet::FactoryManager::Singleton().CreateBehaviourExecutor(path.c_str());
+    _behaviour_executor = ratchet::factory::FactoryManager::Singleton().CreateBehaviourExecutor(path.c_str());
     _behaviour_executor->Prepare(_actor.lock());
 }
 

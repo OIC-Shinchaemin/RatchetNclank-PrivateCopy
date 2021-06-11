@@ -39,7 +39,7 @@ class SceneManager : public std::enable_shared_from_this<ratchet::scene::SceneMa
     };
     struct CreateStruct {
         //! ファクトリー
-        ratchet::Factory<ratchet::scene::Scene> factory;
+        ratchet::factory::Factory<ratchet::scene::Scene> factory;
         //! ビルダー
         std::unordered_map<std::string, std::shared_ptr<ratchet::factory::builder::IBuilder>> builders;
         //! タイプ,パス

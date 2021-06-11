@@ -1,5 +1,5 @@
-#ifndef RATCHET_BEHAVIOUR_FACTORY_H
-#define RATCHET_BEHAVIOUR_FACTORY_H
+#ifndef RATCHET_FACTORY_BEHAVIOUR_FACTORY_H
+#define RATCHET_FACTORY_BEHAVIOUR_FACTORY_H
 
 
 #include <memory>
@@ -14,16 +14,17 @@
 
 
 namespace ratchet {
+namespace factory {
 class BehaviourFactory {
 private:
     //! コンポジット
-    ratchet::Factory<behaviour::CompositeNode> _composite_factory;
+    ratchet::factory::Factory<behaviour::CompositeNode> _composite_factory;
     //! アクション
-    ratchet::Factory<behaviour::ActionNodeBase> _action_factory;
+    ratchet::factory::Factory<behaviour::ActionNodeBase> _action_factory;
     //! コンディション
-    ratchet::Factory<behaviour::ConditionalNodeBase> _condition_factory;
+    ratchet::factory::Factory<behaviour::ConditionalNodeBase> _condition_factory;
     //! デコレーター
-    ratchet::Factory<behaviour::DecoratorNodeBase> _decorator_factory;
+    ratchet::factory::Factory<behaviour::DecoratorNodeBase> _decorator_factory;
 public:
     /// <summary>
     /// コンストラクタ
@@ -65,4 +66,5 @@ public:
     std::shared_ptr<behaviour::DecoratorNodeBase> CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index);
 };
 }
-#endif // !RATCHET_BEHAVIOUR_FACTORY_H
+}
+#endif // !RATCHET_FACTORY_BEHAVIOUR_FACTORY_H

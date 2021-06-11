@@ -47,7 +47,7 @@ void ratchet::ActionComponent::SetParam(const rapidjson::Value& param) {
             auto& child_param = child["paramater"];
             std::string type = child["type"].GetString();
 
-            auto com = ratchet::FactoryManager::Singleton().CreateComponent(type.c_str(), child_param);
+            auto com = ratchet::factory::FactoryManager::Singleton().CreateComponent(type.c_str(), child_param);
             _children.emplace(com->GetType(), std::dynamic_pointer_cast<ratchet::ActionComponent>(com));
         } // for
     } // if
