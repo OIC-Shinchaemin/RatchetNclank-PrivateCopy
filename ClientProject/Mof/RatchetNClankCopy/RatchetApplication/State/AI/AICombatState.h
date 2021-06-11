@@ -1,13 +1,15 @@
-#ifndef STATE_AI_COMBAT_STATE_H
-#define STATE_AI_COMBAT_STATE_H
+#ifndef RATCHET_STATE_AI_AI_COMBAT_STATE_H
+#define RATCHET_STATE_AI_AI_COMBAT_STATE_H
 
 
 #include "AIState.h"
 
 
+namespace ratchet {
 namespace state {
-class AICombatState : public state::AIState {
-    using super = state::AIState;
+namespace ai {
+class AICombatState : public ratchet::state::ai::AIState {
+    using super = ratchet::state::ai::AIState;
 public:
     /// <summary>
     /// コンストラクタ
@@ -25,4 +27,6 @@ public:
     virtual const char* GetName(void) const override;
 };
 }
-#endif // !STATE_AI_COMBAT_STATE_H
+}
+}
+#endif // !RATCHET_STATE_AI_AI_COMBAT_STATE_H

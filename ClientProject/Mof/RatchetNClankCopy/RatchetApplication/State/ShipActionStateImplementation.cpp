@@ -1,6 +1,6 @@
 #include "ShipActionStateDefine.h"
 
 
-std::string state::ShipActionStateType::kShipActionIdleState = "ShipActionIdleState";
-std::string state::ShipActionStateType::kShipActionLandingState = "ShipActionLandingState";
-std::string state::ShipActionStateType::kShipActionTakeoffState = "ShipActionTakeoffState";
+std::string ratchet::state::ShipActionStateType::kShipActionIdleState = "ShipActionIdleState";
+std::string ratchet::state::ShipActionStateType::kShipActionLandingState = "ShipActionLandingState";
+std::string ratchet::state::ShipActionStateType::kShipActionTakeoffState = "ShipActionTakeoffState";

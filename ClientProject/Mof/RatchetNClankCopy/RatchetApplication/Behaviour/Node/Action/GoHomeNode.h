@@ -41,8 +41,8 @@ public:
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
 
-        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionGoHomeState)) {
-            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionGoHomeState);
+        if (args.state_com.lock()->CanTransition(ratchet::state::EnemyActionStateType::kEnemyActionGoHomeState)) {
+            args.state_com.lock()->ChangeState(ratchet::state::EnemyActionStateType::kEnemyActionGoHomeState);
         } // if
 
         auto pos = args.actor.lock()->GetPosition();

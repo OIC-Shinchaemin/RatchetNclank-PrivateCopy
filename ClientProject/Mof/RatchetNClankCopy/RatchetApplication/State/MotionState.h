@@ -1,5 +1,5 @@
-#ifndef STATE_MOTION_STATE_H
-#define STATE_MOTION_STATE_H
+#ifndef RATCHET_STATE_MOTION_STATE_H
+#define RATCHET_STATE_MOTION_STATE_H
 
 
 #include "Base/Core/State.h"
@@ -10,6 +10,7 @@
 #include "../Component/MotionComponent.h"
 
 
+namespace ratchet {
 namespace state {
 class MotionState : public base::core::State {
 public:
@@ -91,4 +92,5 @@ public:
     virtual void Exit(void) override;
 };
 }
-#endif // !STATE_PLAYER_MOTION_STATE_H
+}
+#endif // !RATCHET_STATE_PLAYER_MOTION_STATE_H

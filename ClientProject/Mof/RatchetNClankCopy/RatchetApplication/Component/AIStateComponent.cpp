@@ -45,8 +45,8 @@ bool ratchet::AIStateComponent::Initialize(void) {
     _thinking_timer.Initialize(0.2f, true);
 
     // state
-    this->RegisterState<state::AIPatrolState>(_state_machine, _behaviour_path.at(0));
-    this->RegisterState<state::AICombatState>(_state_machine, _behaviour_path.at(1));
+    this->RegisterState<ratchet::state::ai::AIPatrolState>(_state_machine, _behaviour_path.at(0));
+    this->RegisterState<ratchet::state::ai::AICombatState>(_state_machine, _behaviour_path.at(1));
     _state_machine.ChangeState("AIPatrolState");
     return true;
 }

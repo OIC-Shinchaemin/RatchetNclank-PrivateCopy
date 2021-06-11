@@ -1,6 +1,6 @@
 #include "BulletItemActionStateDefine.h"
 
 
-std::string state::BulletItemActionType::kDefault = "Default";
-std::string state::BulletItemActionType::kMoved = "Moved";
-std::string state::BulletItemActionType::kGravitate = "Gravitate";
+std::string ratchet::state::BulletItemActionType::kDefault = "Default";
+std::string ratchet::state::BulletItemActionType::kMoved = "Moved";
+std::string ratchet::state::BulletItemActionType::kGravitate = "Gravitate";

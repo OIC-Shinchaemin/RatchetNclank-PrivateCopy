@@ -9,6 +9,7 @@
 #include "../Component/ActionComponent.h"
 
 
+namespace ratchet {
 namespace state {
 class ActionState : public base::core::State {
 private:
@@ -50,5 +51,6 @@ public:
     /// <param name=""></param>
     virtual void Exit(void) override;
 };
+}
 }
 #endif // !RATCHET_STATE_PLAYER_ACTION_STATE_H

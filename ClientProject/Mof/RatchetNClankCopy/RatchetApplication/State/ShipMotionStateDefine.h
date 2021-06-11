@@ -1,9 +1,10 @@
-#ifndef STATE_SHIP_MOTION_STATE_DEFINE_H
-#define STATE_SHIP_MOTION_STATE_DEFINE_H
+#ifndef RATCHET_STATE_SHIP_MOTION_STATE_DEFINE_H
+#define RATCHET_STATE_SHIP_MOTION_STATE_DEFINE_H
 
 
 #include <string>
 
+namespace ratchet {
 
 namespace state {
 struct ShipMotionStateType {
@@ -12,4 +13,5 @@ struct ShipMotionStateType {
     static std::string kShipMotionTakeoffState;
 };
 }
-#endif // !STATE_SHIP_MOTION_STATE_DEFINE_H
+}
+#endif // !RATCHET_STATE_SHIP_MOTION_STATE_DEFINE_H

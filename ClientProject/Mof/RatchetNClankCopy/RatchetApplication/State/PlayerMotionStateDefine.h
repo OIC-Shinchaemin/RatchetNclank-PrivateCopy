@@ -1,10 +1,11 @@
-#ifndef STATE_PLAYER_MOTION_STATE_DEFINE_H
-#define STATE_PLAYER_MOTION_STATE_DEFINE_H
+#ifndef RATCHET_STATE_PLAYER_MOTION_STATE_DEFINE_H
+#define RATCHET_STATE_PLAYER_MOTION_STATE_DEFINE_H
 
 
 #include <string>
 
 
+namespace ratchet {
 namespace state {
 struct PlayerMotionStateType {
     static std::string kPlayerMotionIdleState;
@@ -33,4 +34,5 @@ struct PlayerMotionStateType {
     static std::string kPlayerMotionDeadState;
 };
 }
-#endif // !STATE_PLAYER_MOTION_STATE_DEFINE_H
+}
+#endif // !RATCHET_STATE_PLAYER_MOTION_STATE_DEFINE_H

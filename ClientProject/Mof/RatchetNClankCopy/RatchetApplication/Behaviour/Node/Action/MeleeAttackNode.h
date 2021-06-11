@@ -46,13 +46,13 @@ public:
         _ASSERT_EXPR(!args.motion_com.expired(), L"無効なポインタを保持しています");
         _ASSERT_EXPR(!args.state_com.expired(), L"無効なポインタを保持しています");
 
-        if (args.state_com.lock()->IsEqual(state::EnemyActionStateType::kEnemyActionMeleeAttackState) &&
+        if (args.state_com.lock()->IsEqual(ratchet::state::EnemyActionStateType::kEnemyActionMeleeAttackState) &&
             args.motion_com.lock()->IsEndMotion()) {
             args.ai_com.lock()->ChangeState("AICombatState");
             return false;
         } // if
-        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMeleeAttackState)) {
-            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionMeleeAttackState);
+        if (args.state_com.lock()->CanTransition(ratchet::state::EnemyActionStateType::kEnemyActionMeleeAttackState)) {
+            args.state_com.lock()->ChangeState(ratchet::state::EnemyActionStateType::kEnemyActionMeleeAttackState);
             return false;
         } // if
         return false;

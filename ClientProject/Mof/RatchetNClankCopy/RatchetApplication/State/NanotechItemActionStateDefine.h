@@ -1,10 +1,11 @@
-#ifndef STATE_NANOTECH_ITEM_ACTION_STATE_DEFINE_H
-#define STATE_NANOTECH_ITEM_ACTION_STATE_DEFINE_H
+#ifndef RATCHET_STATE_NANOTECH_ITEM_ACTION_STATE_DEFINE_H
+#define RATCHET_STATE_NANOTECH_ITEM_ACTION_STATE_DEFINE_H
 
 
 #include <string>
 
 
+namespace ratchet {
 namespace state {
 struct NanotechItemActionType {
     static std::string kDefault;
@@ -12,4 +13,5 @@ struct NanotechItemActionType {
     static std::string kGravitate;
 };
 }
-#endif // !STATE_NANOTECH_ITEM_ACTION_STATE_DEFINE_H
+}
+#endif // !RATCHET_STATE_NANOTECH_ITEM_ACTION_STATE_DEFINE_H

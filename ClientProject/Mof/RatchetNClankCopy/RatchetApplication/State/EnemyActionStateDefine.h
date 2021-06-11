@@ -1,10 +1,11 @@
-#ifndef STATE_ENEMY_ACTION_STATE_DEFINE_H
-#define STATE_ENEMY_ACTION_STATE_DEFINE_H
+#ifndef RATCHET_STATE_ENEMY_ACTION_STATE_DEFINE_H
+#define RATCHET_STATE_ENEMY_ACTION_STATE_DEFINE_H
 
 
 #include <string>
 
 
+namespace ratchet {
 namespace state {
 struct EnemyActionStateType {
     static std::string kEnemyActionIdleState;
@@ -15,4 +16,5 @@ struct EnemyActionStateType {
     static std::string kEnemyActionDamageState;
 };
 }
-#endif // !STATE_ENEMY_ACTION_STATE_DEFINE_H
+}
+#endif // !RATCHET_STATE_ENEMY_ACTION_STATE_DEFINE_H

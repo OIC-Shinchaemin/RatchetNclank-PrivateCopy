@@ -1,10 +1,11 @@
-#ifndef STATE_BULLET_ITEM_ACTION_STATE_DEFINE_H
-#define STATE_BULLET_ITEM_ACTION_STATE_DEFINE_H
+#ifndef RATCHET_STATE_BULLET_ITEM_ACTION_STATE_DEFINE_H
+#define RATCHET_STATE_BULLET_ITEM_ACTION_STATE_DEFINE_H
 
 
 #include <string>
 
 
+namespace ratchet {
 namespace state {
 struct BulletItemActionType {
     static std::string kDefault;
@@ -12,4 +13,5 @@ struct BulletItemActionType {
     static std::string kGravitate;
 };
 }
-#endif // !STATE_BULLET_ITEM_ACTION_STATE_DEFINE_H
+}
+#endif // !RATCHET_STATE_BULLET_ITEM_ACTION_STATE_DEFINE_H

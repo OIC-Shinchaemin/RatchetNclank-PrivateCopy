@@ -1,5 +1,5 @@
-#ifndef STATE_AI_STATE_H
-#define STATE_AI_STATE_H
+#ifndef RATCHET_STATE_AI_AI_STATE_H
+#define RATCHET_STATE_AI_AI_STATE_H
 
 
 #include "Base/Core/State.h"
@@ -11,9 +11,11 @@
 #include "../../Behaviour/Executor/INodeExecutor.h"
 
 
+namespace ratchet {
 namespace state {
+namespace ai {
 class AIState : public base::core::State {
-    using super = state::AIState;
+    using super = base::core::State;
 protected:
     //! ’Ê’m
     std::weak_ptr<ratchet::Actor> _actor;
@@ -68,4 +70,6 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !STATE_AI_STATE_H
+}
+}
+#endif // !RATCHET_STATE_AI_AI_STATE_H

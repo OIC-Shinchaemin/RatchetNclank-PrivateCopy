@@ -1,13 +1,13 @@
 #include "AICombatState.h"
 
 
-state::AICombatState::AICombatState() :
+ratchet::state::ai::AICombatState::AICombatState() :
     super() {
 }
 
-state::AICombatState ::~AICombatState() {
+ratchet::state::ai::AICombatState ::~AICombatState() {
 }
 
-const char* state::AICombatState::GetName(void) const {
+const char* ratchet::state::ai::AICombatState::GetName(void) const {
     return "AICombatState";
 }

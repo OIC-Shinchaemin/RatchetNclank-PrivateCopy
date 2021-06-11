@@ -1,6 +1,6 @@
 #include "NanotechItemActionStateDefine.h"
 
 
-std::string state::NanotechItemActionType::kDefault = "Default";
-std::string state::NanotechItemActionType::kMoved = "Moved";
-std::string state::NanotechItemActionType::kGravitate = "Gravitate";
+std::string ratchet::state::NanotechItemActionType::kDefault = "Default";
+std::string ratchet::state::NanotechItemActionType::kMoved = "Moved";
+std::string ratchet::state::NanotechItemActionType::kGravitate = "Gravitate";

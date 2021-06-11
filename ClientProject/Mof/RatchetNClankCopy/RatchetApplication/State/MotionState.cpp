@@ -1,30 +1,30 @@
 #include "MotionState.h"
 
 
-state::MotionState::MotionState() :
+ratchet::state::MotionState::MotionState() :
     _param(),
     _motion_com() {
 }
 
-state::MotionState::~MotionState() {
+ratchet::state::MotionState::~MotionState() {
 }
 
-void state::MotionState::SetActor(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::state::MotionState::SetActor(const std::shared_ptr<ratchet::Actor>& ptr) {
     _motion_com = ptr->GetComponent<ratchet::MotionComponent>();
 }
 
-void state::MotionState::SetParam(const state::MotionState::Param& param) {
+void ratchet::state::MotionState::SetParam(const ratchet::state::MotionState::Param& param) {
     _param = param;
 }
 
-const char* state::MotionState::GetName(void) const {
+const char* ratchet::state::MotionState::GetName(void) const {
     return _param.state_name;
 }
 
-void state::MotionState::Update(float delta_time) {
+void ratchet::state::MotionState::Update(float delta_time) {
 }
 
-void state::MotionState::Enter(void) {
+void ratchet::state::MotionState::Enter(void) {
     if (auto motion_com = _motion_com.lock()) {
         motion_com->ChangeMotion(
             _param.motion_type,
@@ -34,5 +34,5 @@ void state::MotionState::Enter(void) {
     } // if
 }
 
-void state::MotionState::Exit(void) {
+void ratchet::state::MotionState::Exit(void) {
 }

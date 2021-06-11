@@ -1,13 +1,13 @@
 #include "AIPatrolState.h"
 
 
-state::AIPatrolState::AIPatrolState() :
+ratchet::state::ai::AIPatrolState::AIPatrolState() :
     super() {
 }
 
-state::AIPatrolState::~AIPatrolState() {
+ratchet::state::ai::AIPatrolState::~AIPatrolState() {
 }
 
-const char* state::AIPatrolState::GetName(void) const {
+const char* ratchet::state::ai::AIPatrolState::GetName(void) const {
     return "AIPatrolState";
 }

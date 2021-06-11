@@ -1,10 +1,11 @@
-#ifndef STATE_BOLT_ACTION_STATE_DEFINE_H
-#define STATE_BOLT_ACTION_STATE_DEFINE_H
+#ifndef RATCHET_STATE_BOLT_ACTION_STATE_DEFINE_H
+#define RATCHET_STATE_BOLT_ACTION_STATE_DEFINE_H
 
 
 #include <string>
 
 
+namespace ratchet {
 namespace state {
 struct BoltActionType {
     static std::string kDefault;
@@ -12,4 +13,5 @@ struct BoltActionType {
     static std::string kGravitate;
 };
 }
-#endif // !STATE_BOLT_ACTION_STATE_DEFINE_H
+}
+#endif // !RATCHET_STATE_BOLT_ACTION_STATE_DEFINE_H

@@ -40,8 +40,8 @@ public:
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
         
-        if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionIdleState)) {
-            args.state_com.lock()->ChangeState(state::EnemyActionStateType::kEnemyActionIdleState);
+        if (args.state_com.lock()->CanTransition(ratchet::state::EnemyActionStateType::kEnemyActionIdleState)) {
+            args.state_com.lock()->ChangeState(ratchet::state::EnemyActionStateType::kEnemyActionIdleState);
         } // if
         return true;
     }
