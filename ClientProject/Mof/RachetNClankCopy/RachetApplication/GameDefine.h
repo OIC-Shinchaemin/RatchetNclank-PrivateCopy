@@ -40,15 +40,15 @@ private:
     //! –¼‘O
     std::string _name;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 
-    std::shared_ptr<my::UICanvas> GetUICanvas(void) const {
+    std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const {
         if (auto ptr = _ui_canvas.lock()) {
             return ptr;
         } // if
         return nullptr;
     }
-    void TryRemove(const std::shared_ptr<my::UICanvas>& ui) {
+    void TryRemove(const std::shared_ptr<base::ui::UICanvas>& ui) {
         if (auto canvas = this->GetUICanvas()) {
             canvas->RemoveElement(_name.c_str());
         } // if
@@ -65,7 +65,7 @@ public:
         _ui_canvas.reset();
     }
 
-    std::shared_ptr<UI> Create(const std::shared_ptr<my::UICanvas>& ui) {
+    std::shared_ptr<UI> Create(const std::shared_ptr<base::ui::UICanvas>& ui) {
         this->_ui_canvas = ui;
 
         std::shared_ptr<UI> menu;

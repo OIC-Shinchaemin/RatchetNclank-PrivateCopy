@@ -29,7 +29,7 @@ void my::GameMoney::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::GameMoney::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void my::GameMoney::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 

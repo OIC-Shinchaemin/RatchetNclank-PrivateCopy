@@ -14,7 +14,7 @@ class ShipTakeoffComponent : public my::ShipActionComponent {
     using super = my::ShipActionComponent;
 private:
     //! タイマー
-    my::Timer _timer;
+    base::core::Timer _timer;
     //! 上昇
     bool _takeoff;
 public:

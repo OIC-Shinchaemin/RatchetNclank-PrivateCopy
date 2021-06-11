@@ -15,11 +15,12 @@
 #include "../Actor.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
+#include "Base/Core/Observer.h"
 #include "Base/UI/UICanvas.h"
 
 
 namespace my {
-class Scene : public std::enable_shared_from_this<my::Scene>, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
+class Scene : public std::enable_shared_from_this<my::Scene>, public base::core::Observer<const char*, const std::shared_ptr<my::Actor>&> {
     using this_type = my::Scene;
 public:
    enum class State {
@@ -44,11 +45,11 @@ protected:
     //! ポストエフェクト
     std::optional<my::SceneEffect> _effect;
     //! 遷移
-    my::Observable<const scene::SceneMessage&> _subject;
+    base::core::Observable<const scene::SceneMessage&> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! 読み込み済み
     bool _loaded;
     //! 同期
@@ -65,7 +66,7 @@ protected:
     void LoadComplete(void);
 
     std::shared_ptr<my::ResourceMgr> GetResource(void) const;
-    std::shared_ptr<my::UICanvas> GetUICanvas(void) const;
+    std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
     virtual bool LoadingUpdate(float delta_time);
     virtual bool SceneUpdate(float delta_time);
@@ -91,7 +92,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -102,7 +103,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void AddSceneObserver(const std::shared_ptr<my::Observer<const scene::SceneMessage&>>& ptr);
+    void AddSceneObserver(const std::shared_ptr<base::core::Observer<const scene::SceneMessage&>>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

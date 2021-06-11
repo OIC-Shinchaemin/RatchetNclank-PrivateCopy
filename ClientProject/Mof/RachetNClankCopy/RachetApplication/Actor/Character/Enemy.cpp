@@ -25,7 +25,7 @@ my::Enemy::Enemy() :
 my::Enemy::~Enemy() {
 }
 
-my::Observable<const my::GameQuest&>* my::Enemy::GetQuestSubject(void) {
+base::core::Observable<const my::GameQuest&>* my::Enemy::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 

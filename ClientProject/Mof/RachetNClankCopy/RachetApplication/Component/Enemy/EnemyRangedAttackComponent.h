@@ -21,7 +21,7 @@ private:
     //! ”­Ë‘¬‚³
     float _shot_speed;
     //! ŠÔŠu
-    my::Timer _interval;
+    base::core::Timer _interval;
     //! ‘¬“x
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! ƒ‚[ƒVƒ‡ƒ“

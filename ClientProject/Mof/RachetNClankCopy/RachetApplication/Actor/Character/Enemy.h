@@ -20,7 +20,7 @@ public:
     };
 private:
     //! 通知用
-    my::Observable<const my::GameQuest&> _quest_subject;
+    base::core::Observable<const my::GameQuest&> _quest_subject;
     /// <summary>
     /// 状態変更
     /// </summary>
@@ -39,7 +39,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const my::GameQuest&>* GetQuestSubject(void);
+    base::core::Observable<const my::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// デリート
     /// </summary>

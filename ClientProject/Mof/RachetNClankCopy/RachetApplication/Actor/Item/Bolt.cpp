@@ -11,7 +11,7 @@ my::Bolt::Bolt() :
 my::Bolt::~Bolt() {
 }
 
-my::Observable<int>* my::Bolt::GetMoneySubject(void) {
+base::core::Observable<int>* my::Bolt::GetMoneySubject(void) {
     return &this->_money_subject;
 }
 

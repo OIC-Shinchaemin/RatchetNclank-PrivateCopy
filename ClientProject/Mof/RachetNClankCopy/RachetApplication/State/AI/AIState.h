@@ -12,7 +12,7 @@
 
 
 namespace state {
-class AIState : public my::State {
+class AIState : public base::core::State {
     using super = state::AIState;
 protected:
     //! ’Ê’m

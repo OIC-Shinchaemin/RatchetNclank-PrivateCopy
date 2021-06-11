@@ -71,7 +71,7 @@ private:
     //! 情報
     this_type::Info _infomation;
     //! 通知用
-    my::Observable<const this_type::Info&> _info_subject;
+    base::core::Observable<const this_type::Info&> _info_subject;
     //! 子供
     std::vector<std::shared_ptr<ElemType>> _item;
     //! 子供
@@ -79,9 +79,9 @@ private:
     //! インデックス
     int _item_index;
     //! 通知用
-    my::Observable<const scene::SceneMessage&> _scene_message_subject;
+    base::core::Observable<const scene::SceneMessage&> _scene_message_subject;
     //! 通知用
-    my::Observable<bool> _title_menu_subject;
+    base::core::Observable<bool> _title_menu_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -101,19 +101,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const this_type::Info&>* GetInfoSubject(void);
+    base::core::Observable<const this_type::Info&>* GetInfoSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const my::scene::SceneMessage&>* GetSceneMessageSubject(void);
+    base::core::Observable<const my::scene::SceneMessage&>* GetSceneMessageSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<bool>* GetTitleMenuSubject(void);
+    base::core::Observable<bool>* GetTitleMenuSubject(void);
     /// <summary>
     /// 追加
     /// </summary>

@@ -16,8 +16,8 @@
 
 
 namespace my {
-class QuickChangeMenuItem : public my::UIItem {
-    using super = my::UIItem;
+class QuickChangeMenuItem : public base::ui::UIItem {
+    using super = base::ui::UIItem;
 public:
     /// <summary>
     /// コンストラクタ
@@ -48,8 +48,8 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class QuickChangeMenu : public my::UIPanel, public my::Observer<const my::QuickChangeSystem::Info&> {
-    using super = my::UIPanel;
+class QuickChangeMenu : public base::ui::UIPanel, public base::core::Observer<const my::QuickChangeSystem::Info&> {
+    using super = base::ui::UIPanel;
 private:
     //! 半径
     float _distance;

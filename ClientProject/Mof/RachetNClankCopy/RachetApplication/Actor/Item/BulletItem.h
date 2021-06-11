@@ -38,7 +38,7 @@ private:
     //! 数
     int _item_count;
     //! 通知用
-    my::Observable<const my::ChargeInfo&> _weapon_system_subject;
+    base::core::Observable<const my::ChargeInfo&> _weapon_system_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -59,7 +59,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const my::ChargeInfo&>* GetWeaponSystemSubject(void);
+    base::core::Observable<const my::ChargeInfo&>* GetWeaponSystemSubject(void);
     /// <summary>
     /// デリート
     /// </summary>

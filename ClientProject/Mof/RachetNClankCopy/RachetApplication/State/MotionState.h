@@ -11,7 +11,7 @@
 
 
 namespace state {
-class MotionState : public my::State {
+class MotionState : public base::core::State {
 public:
     struct Param {
         //! –¼‘O

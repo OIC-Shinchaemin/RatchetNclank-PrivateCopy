@@ -1,5 +1,5 @@
-#ifndef MY_TRAIT_H
-#define MY_TRAIT_H
+#ifndef BASE_CORE_TRAIT_H
+#define BASE_CORE_TRAIT_H
 
 
 #include "Header.h"
@@ -134,4 +134,4 @@ struct has_func_release_impl {
 template <class T, class...Args>
 class has_func_release : public decltype(has_func_release_impl::check<T>(std::declval<T>(), std::forward<Args>(Args())...)) {};
 } // namespace
-#endif // !MY_TRAIT_H
+#endif // !BASE_CORE_TRAIT_H

@@ -38,7 +38,7 @@ protected:
     //! ‘¬‚³
     Mof::CVector3 _speed;
     //! ŠÔ
-    my::Timer _exist_time;
+    base::core::Timer _exist_time;
 
     /// <summary>
     /// XV

@@ -24,7 +24,7 @@ private:
     //! イベント
     std::shared_ptr<my::EventManager> _event_manager;
     //! UI
-    std::shared_ptr<my::UICanvas> _ui_canvas;
+    std::shared_ptr<base::ui::UICanvas> _ui_canvas;
     //! シーン
     std::shared_ptr<my::SceneManager> _scene_manager;
 public:

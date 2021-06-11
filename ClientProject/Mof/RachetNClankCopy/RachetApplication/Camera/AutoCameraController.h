@@ -17,7 +17,7 @@ private:
     //! 時間
     float _time;
     //! 時間
-    my::Timer _timer;
+    base::core::Timer _timer;
     //! アニメーション
     my::BezierCurveAnimation _bezier_curve_animation_position;
     //! アニメーション
@@ -52,7 +52,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    //void AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
+    //void AddObserver(const std::shared_ptr<base::core::Observer<const my::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>

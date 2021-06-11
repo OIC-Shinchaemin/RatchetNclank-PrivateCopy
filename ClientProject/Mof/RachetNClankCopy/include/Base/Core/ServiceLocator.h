@@ -1,11 +1,12 @@
-#ifndef MY_SERVICE_LOCATOR_H
-#define MY_SERVICE_LOCATOR_H
+#ifndef BASE_CORE_SERVICE_LOCATOR_H
+#define BASE_CORE_SERVICE_LOCATOR_H
 
 
 #include <memory>
 
 
-namespace my {
+namespace base {
+namespace core {
 template<class Service>
 class ServiceLocator {
 private:
@@ -48,4 +49,5 @@ inline std::shared_ptr<Service> ServiceLocator<Service>::GetService(void) const 
     return this->_service;
 }
 }
-#endif // !MY_SERVICE_LOCATOR_H
+}
+#endif // !BASE_CORE_SERVICE_LOCATOR_H

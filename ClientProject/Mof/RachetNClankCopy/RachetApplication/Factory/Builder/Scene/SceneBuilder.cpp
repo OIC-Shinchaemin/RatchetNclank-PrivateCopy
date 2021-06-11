@@ -14,7 +14,7 @@ void builder::SceneBuilder::SetResourceManager(std::weak_ptr<my::ResourceMgr> pt
     this->_resource = ptr;
 }
 
-void builder::SceneBuilder::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void builder::SceneBuilder::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas= ptr;
 }
 

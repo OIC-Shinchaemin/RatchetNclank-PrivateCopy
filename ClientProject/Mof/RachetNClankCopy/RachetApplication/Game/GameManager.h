@@ -18,7 +18,7 @@
 namespace my {
 class GameManager : 
     public std::enable_shared_from_this<my::GameManager>,
-    public my::Observer<const std::shared_ptr<my::GameSystem>&> {
+    public base::core::Observer<const std::shared_ptr<my::GameSystem>&> {
 private:
     //! 更新用
     std::vector<std::shared_ptr<my::GameSystem>> _update_system;
@@ -41,7 +41,7 @@ private:
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 
     template<typename T>
     void SetPtr(T ptr) {
@@ -71,7 +71,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
+    void SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

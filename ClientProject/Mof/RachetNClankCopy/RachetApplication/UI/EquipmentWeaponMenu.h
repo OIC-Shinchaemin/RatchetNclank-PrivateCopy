@@ -16,8 +16,8 @@
 
 
 namespace my {
-class EquipmentWeaponMenu : public my::UIPanel, public my::Observer<const my::Mechanical::Info&> {
-    using super = my::UIPanel;
+class EquipmentWeaponMenu : public base::ui::UIPanel, public base::core::Observer<const my::Mechanical::Info&> {
+    using super = base::ui::UIPanel;
 private:
     //! î•ñ
     my::Mechanical::Info _info;

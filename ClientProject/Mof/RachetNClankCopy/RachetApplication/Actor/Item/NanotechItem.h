@@ -23,7 +23,7 @@ private:
     //! 回転
     Mof::CVector3 _init_angle;
     //! 通知用
-    my::Observable<int> _money_subject;
+    base::core::Observable<int> _money_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -38,7 +38,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    //my::Observable<int>* GetMoneySubject(void);
+    //base::core::Observable<int>* GetMoneySubject(void);
     /// <summary>
     /// デリート
     /// </summary>

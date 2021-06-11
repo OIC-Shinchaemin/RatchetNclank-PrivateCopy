@@ -1,5 +1,5 @@
-#ifndef MY_STATE_MACHINE_H
-#define MY_STATE_MACHINE_H
+#ifndef BASE_CORE_STATE_MACHINE_H
+#define BASE_CORE_STATE_MACHINE_H
 
 
 #include <memory>
@@ -10,15 +10,16 @@
 #include "State.h"
 
 
-namespace my {
+namespace base {
+namespace core {
 class StateMachine {
 private:
     //! Œ»İ‚Ìó‘Ô
-    std::shared_ptr<my::State>_current_state;
+    std::shared_ptr<base::core::State>_current_state;
     //! Œ»İ‚Ìó‘Ô
-    //std::vector<std::shared_ptr<my::State>> _stack;
+    //std::vector<std::shared_ptr<base::core::State>> _stack;
     //! ‘JˆÚ‰Â”\‚Èó‘Ô
-    std::unordered_map<std::string, std::shared_ptr<my::State>>_status;
+    std::unordered_map<std::string, std::shared_ptr<base::core::State>>_status;
 public:
     /// <summary>
     /// ƒQƒbƒ^[
@@ -47,7 +48,7 @@ public:
     /// “o˜^
     /// </summary>
     /// <param name="ptr"></param>
-    void RegisterState(const std::shared_ptr<my::State>& ptr);
+    void RegisterState(const std::shared_ptr<base::core::State>& ptr);
     /// <summary>
     /// •ÏX
     /// </summary>
@@ -80,4 +81,5 @@ public:
     void DebugRender(void);
 };
 }
-#endif // !MY_STATE_MACHINE_H
+}
+#endif // !BASE_CORE_STATE_MACHINE_H

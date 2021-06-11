@@ -74,15 +74,15 @@ private:
     //! 構成情報
     this_type::Info _infomation;
     //! 通知用
-    //my::Observable<const std::shared_ptr<This>&> _subject;
+    //base::core::Observable<const std::shared_ptr<This>&> _subject;
     //! 通知用
-    my::Observable<const this_type::Info&> _info_subject;
+    base::core::Observable<const this_type::Info&> _info_subject;
     //! 通知用
-    my::Observable<const my::ChargeInfo&> _buy_subject;
+    base::core::Observable<const my::ChargeInfo&> _buy_subject;
     //! 通知用
-    my::Observable<const my::Mechanical::Info&> _equipment_weapon_menu_subject;
+    base::core::Observable<const my::Mechanical::Info&> _equipment_weapon_menu_subject;
     //! 通知用
-    my::Observable<int> _game_money_menu_subject;
+    base::core::Observable<int> _game_money_menu_subject;
     //! セーブデータ
     my::SaveData _save_data;
     //! 購入可能ラインナップ
@@ -145,13 +145,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const this_type::Info&>* GetInfoSubject(void);
+    base::core::Observable<const this_type::Info&>* GetInfoSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const my::ChargeInfo&>* GetChargeInfoSubject(void);
+    base::core::Observable<const my::ChargeInfo&>* GetChargeInfoSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>

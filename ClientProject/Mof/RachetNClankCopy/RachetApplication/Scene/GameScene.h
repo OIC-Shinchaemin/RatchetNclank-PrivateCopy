@@ -19,7 +19,7 @@
 #include "../Actor/Character/Player.h"
 
 namespace my {
-class GameScene : public my::Scene, public my::Observer<const my::ShopSystem::Info&> {
+class GameScene : public my::Scene, public base::core::Observer<const my::ShopSystem::Info&> {
     using super = my::Scene;
     using this_type = my::GameScene;
 private:
@@ -38,7 +38,7 @@ private:
     //! Ä‰Šú‰»
     bool _re_initialize;
     //! ƒƒjƒ…[
-    my::Observable<bool> _pause_menu_subject;
+    base::core::Observable<bool> _pause_menu_subject;
 
 
     //! ƒQ[ƒ€

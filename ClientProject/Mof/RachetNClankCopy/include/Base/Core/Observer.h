@@ -1,8 +1,9 @@
-#ifndef MY_OBSERVER_H
-#define MY_OBSERVER_H
+#ifndef BASE_CORE_OBSERVER_H
+#define BASE_CORE_OBSERVER_H
 
 
-namespace my {
+namespace base {
+namespace core {
 template<class...NotifyArgs>
 class Observer {
 public:
@@ -27,4 +28,5 @@ template<class ...NotifyArgs>
 inline Observer<NotifyArgs...>::~Observer() {
 }
 }
-#endif // !MY_OBSERVER_H
+}
+#endif // !BASE_CORE_OBSERVER_H

@@ -26,8 +26,8 @@ struct ChargeInfo {
     std::uint32_t size;
 };
 class WeaponSystem : 
-    public my::Observer<const std::string&>,
-    public my::Observer<const my::ChargeInfo&>
+    public base::core::Observer<const std::string&>,
+    public base::core::Observer<const my::ChargeInfo&>
 {
     using Pair = std::pair<std::string, std::shared_ptr<my::Mechanical>>;
 private:
@@ -36,9 +36,9 @@ private:
     //! 武器
     std::shared_ptr<my::Mechanical> _current_mechanical;
     //! 通知用
-    my::Observable<std::shared_ptr<my::Weapon>> _subject;
+    base::core::Observable<std::shared_ptr<my::Weapon>> _subject;
     //! 通知用
-    my::Observable<const my::Mechanical::Info&> _equipment_subject;
+    base::core::Observable<const my::Mechanical::Info&> _equipment_subject;
     //! マップ
     std::unordered_map<std::string, std::string> _builder_name_map;
     //! セーブデータ
@@ -46,7 +46,7 @@ private:
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -75,7 +75,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -92,7 +92,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Weapon>>>& ptr);
+    void AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<my::Weapon>>>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -109,7 +109,7 @@ public:
     /// </summary>
     /// <param name="observer"></param>
     /// <returns></returns>
-    bool Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);
+    bool Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer);
     /// <summary>
     /// 解放
     /// </summary>

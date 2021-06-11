@@ -22,11 +22,11 @@ enum class ActorState {
     Hide, // 入力する、更新する、描画しない
     End // 削除
 };
-class Actor : public std::enable_shared_from_this<my::Actor>, public my::Observable<const char*, const std::shared_ptr<my::Actor>&> {
+class Actor : public std::enable_shared_from_this<my::Actor>, public base::core::Observable<const char*, const std::shared_ptr<my::Actor>&> {
 public:
     using ComPtr = std::shared_ptr<class Component>;
     using ComArray = std::vector<ComPtr>;
-    using Observable = my::Observable<const char*, const std::shared_ptr<my::Actor>&>;
+    using Observable = base::core::Observable<const char*, const std::shared_ptr<my::Actor>&>;
 public:
     struct Param {
         //! 名前

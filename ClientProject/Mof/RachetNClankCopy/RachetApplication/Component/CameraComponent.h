@@ -11,7 +11,7 @@
 
 
 namespace my {
-class CameraComponent : public my::UpdateComponent, public my::Observer<const my::CameraController::CameraInfo&> {
+class CameraComponent : public my::UpdateComponent, public base::core::Observer<const my::CameraController::CameraInfo&> {
     using super = my::UpdateComponent;
 private:
     //! 対象
@@ -19,7 +19,7 @@ private:
     //! カメラ
     std::shared_ptr<my::Camera> _camera;
     //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _camera_controller;
+    base::core::ServiceLocator<my::CameraController> _camera_controller;
     //! モード
     my::CameraController::CameraMode _current_mode;
     //! コントローラ

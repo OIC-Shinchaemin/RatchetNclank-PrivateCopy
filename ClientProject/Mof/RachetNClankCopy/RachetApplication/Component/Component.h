@@ -26,7 +26,7 @@ protected:
     //! リソース
     static std::weak_ptr<my::ResourceMgr> _resource_manager;
     //! リソース
-    static std::weak_ptr<my::UICanvas> _ui_canvas;
+    static std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// セッター
@@ -37,7 +37,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    static void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
+    static void SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr);
     /// <summary>
     /// コンストラクタ
     /// </summary>

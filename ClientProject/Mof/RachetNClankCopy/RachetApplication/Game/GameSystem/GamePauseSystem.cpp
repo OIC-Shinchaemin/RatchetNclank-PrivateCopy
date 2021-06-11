@@ -28,7 +28,7 @@ void my::GamePauseSystem::OnNotify(bool flag) {
     } // if
 }
 
-my::Observable<const my::GamePauseSystem::Info&>* my::GamePauseSystem::GetInfoSubject(void) {
+base::core::Observable<const my::GamePauseSystem::Info&>* my::GamePauseSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 

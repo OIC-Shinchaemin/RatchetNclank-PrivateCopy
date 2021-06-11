@@ -14,7 +14,7 @@
 namespace my {
 class StageViewEvent : public my::Event {
     using super = my::Event;
-    using CameraObservable = my::Observable<const my::CameraController::CameraInfo&>;
+    using CameraObservable = base::core::Observable<const my::CameraController::CameraInfo&>;
 private:
     //! ƒJƒƒ‰
     std::shared_ptr<my::Camera> _stage_view_camera;

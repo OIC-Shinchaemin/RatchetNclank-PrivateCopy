@@ -19,7 +19,7 @@ private:
     //! サイズ
     float _volume;
     //! 攻撃開始までの猶予
-    my::Timer _wait;
+    base::core::Timer _wait;
     //! モーション
     std::weak_ptr<class MotionComponent> _motion_com;
     //! モーション

@@ -19,7 +19,7 @@ template<typename...Types>
 class ResourceManager {
 private:
     //! コンテナ
-    std::tuple<my::AbstructContainer<
+    std::tuple<base::core::AbstructContainer<
         std::unordered_map,
         std::string,
         Types,
@@ -49,7 +49,7 @@ private:
     /// <param name=""></param>
     /// <returns>アドレス</returns>
     template<class T>
-    my::AbstructContainer<std::unordered_map,
+    base::core::AbstructContainer<std::unordered_map,
         std::string,
         T,
         std::hash<std::string>,

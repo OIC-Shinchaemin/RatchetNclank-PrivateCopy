@@ -1,8 +1,9 @@
-#ifndef MY_TIMER_H
-#define MY_TIMER_H
+#ifndef BASE_CORE_TIMER_H
+#define BASE_CORE_TIMER_H
 
 
-namespace my {
+namespace base {
+namespace core {
 class Timer {
 private:
     //! ŽžŠÔ
@@ -42,4 +43,5 @@ public:
     bool Tick(float delta_time);
 };
 }
-#endif // !MY_TIMER_H
+}
+#endif // !BASE_CORE_TIMER_H

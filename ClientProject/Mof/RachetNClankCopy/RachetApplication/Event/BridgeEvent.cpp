@@ -58,11 +58,11 @@ void my::BridgeEvent::SetStage(Stage* ptr) {
     this->_stage = ptr;
 }
 
-my::Observable<const my::CameraController::CameraInfo&>* my::BridgeEvent::GetCameraSubject(void) {
+base::core::Observable<const my::CameraController::CameraInfo&>* my::BridgeEvent::GetCameraSubject(void) {
     return &this->_camera_subject;
 }
 
-my::Observable<const my::GameQuest&>* my::BridgeEvent::GetQuestSubject(void) {
+base::core::Observable<const my::GameQuest&>* my::BridgeEvent::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 

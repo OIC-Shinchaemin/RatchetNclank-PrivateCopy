@@ -20,7 +20,7 @@ std::shared_ptr<my::ResourceMgr> my::Scene::GetResource(void) const {
     return nullptr;
 }
 
-std::shared_ptr<my::UICanvas> my::Scene::GetUICanvas(void) const {
+std::shared_ptr<base::ui::UICanvas> my::Scene::GetUICanvas(void) const {
     if (auto ptr = _ui_canvas.lock()) {
         return ptr;
     } // if
@@ -107,11 +107,11 @@ void my::Scene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::Scene::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void my::Scene::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-void my::Scene::AddSceneObserver(const std::shared_ptr<my::Observer<const scene::SceneMessage&>>& ptr) {
+void my::Scene::AddSceneObserver(const std::shared_ptr<base::core::Observer<const scene::SceneMessage&>>& ptr) {
     _subject.AddObserver(ptr);
 }
 

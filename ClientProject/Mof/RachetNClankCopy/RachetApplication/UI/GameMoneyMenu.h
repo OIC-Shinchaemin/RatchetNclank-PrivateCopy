@@ -15,8 +15,8 @@
 
 
 namespace my {
-class GameMoneyMenu : public my::UIPanel, public my::Observer<int> {
-    using super = my::UIPanel;
+class GameMoneyMenu : public base::ui::UIPanel, public base::core::Observer<int> {
+    using super = base::ui::UIPanel;
 private:
     //! お金
     int _money;
@@ -25,11 +25,11 @@ private:
     //! 時間
     float _time_max;
     //! 非表示タイマー
-    my::Timer _hide_timer;
+    base::core::Timer _hide_timer;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -50,7 +50,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// 初期化
     /// </summary>

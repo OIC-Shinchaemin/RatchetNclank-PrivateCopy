@@ -4,8 +4,8 @@
 #include "Base/Core/Observable.h"
 
 
-class Bridge : public GimmickBase, public my::Observable<const char*, const std::shared_ptr<StageObject>&> {
-    using Observable = my::Observable<const char*, const std::shared_ptr<StageObject>&>;
+class Bridge : public GimmickBase, public base::core::Observable<const char*, const std::shared_ptr<StageObject>&> {
+    using Observable = base::core::Observable<const char*, const std::shared_ptr<StageObject>&>;
 protected:
 
     Vector3 _start_pos;

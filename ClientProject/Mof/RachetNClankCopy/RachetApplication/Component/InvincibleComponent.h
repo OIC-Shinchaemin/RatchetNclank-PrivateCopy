@@ -12,7 +12,7 @@ class InvincibleComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
     //! 時間
-    my::Timer _invincible;
+    base::core::Timer _invincible;
 public:
     /// <summary>
     /// コンストラクタ

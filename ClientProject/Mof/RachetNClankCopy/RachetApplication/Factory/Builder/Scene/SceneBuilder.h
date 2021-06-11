@@ -19,7 +19,7 @@ private:
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -38,7 +38,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// 解放
     /// </summary>

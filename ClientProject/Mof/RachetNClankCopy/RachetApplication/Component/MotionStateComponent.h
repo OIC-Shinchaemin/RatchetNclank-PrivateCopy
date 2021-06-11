@@ -13,7 +13,7 @@ class MotionStateComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
     //! ó‘Ô
-    my::StateMachine _state_machine;
+    base::core::StateMachine _state_machine;
     //! 
     std::weak_ptr<class MotionComponent> _motion_com;
     void RegisterState(const state::MotionState::Param& param) {

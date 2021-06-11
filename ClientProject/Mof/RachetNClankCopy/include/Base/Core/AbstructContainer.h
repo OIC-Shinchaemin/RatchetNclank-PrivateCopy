@@ -1,5 +1,5 @@
-#ifndef MY_ABSTRACT_CONTAINER_H
-#define MY_ABSTRACT_CONTAINER_H
+#ifndef BASE_CORE_ABSTRACT_CONTAINER_H
+#define BASE_CORE_ABSTRACT_CONTAINER_H
 
 
 #include <functional>
@@ -10,7 +10,8 @@
 #include "Trait.h"
 
 
-namespace my {
+namespace base {
+namespace core {
 template<template<class...> class Container, class...Args>
 class AbstructContainer {
     using Type = typename ty::ArgSeparator<Args...>::head;
@@ -495,4 +496,5 @@ public:
     }
 };
 }
-#endif // !MY_ABSTRACT_CONTAINER_H
+}
+#endif // !BASE_CORE_ABSTRACT_CONTAINER_H

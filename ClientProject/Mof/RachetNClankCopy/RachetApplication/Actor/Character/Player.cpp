@@ -55,15 +55,15 @@ void my::Player::OnNotify(const my::ShopSystem::Info& info) {
     } // if
 }
 */
-my::Observable<bool>* my::Player::GetShopSystemSubject(void) {
+base::core::Observable<bool>* my::Player::GetShopSystemSubject(void) {
     return &this->_shop_system_subject.subject;
 }
 
-my::Observable<bool>* my::Player::GetQuickChangeSubject(void) {
+base::core::Observable<bool>* my::Player::GetQuickChangeSubject(void) {
     return &this->_quick_change_subject.subject;
 }
 
-my::Observable<const my::GameQuest&>* my::Player::GetQuestSubject(void) {
+base::core::Observable<const my::GameQuest&>* my::Player::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 

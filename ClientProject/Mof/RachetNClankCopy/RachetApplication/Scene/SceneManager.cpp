@@ -64,7 +64,7 @@ void my::SceneManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>
     this->_managers.resource = ptr;
 }
 
-void my::SceneManager::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
+void my::SceneManager::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
     this->_managers.ui_canvas = ptr;
 }
 

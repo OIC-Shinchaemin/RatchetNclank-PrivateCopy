@@ -50,7 +50,7 @@ void my::WeaponSystem::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::WeaponSystem::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void my::WeaponSystem::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
@@ -62,7 +62,7 @@ const std::vector<my::WeaponSystem::Pair>& my::WeaponSystem::GetWeaponMap(void) 
     return this->_weapons;
 }
 
-void my::WeaponSystem::AddMechanicalWeaponObserver(const std::shared_ptr<my::Observer<std::shared_ptr<my::Weapon>>>& ptr) {
+void my::WeaponSystem::AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<my::Weapon>>>& ptr) {
     _subject.AddObserver(ptr);
 }
 
@@ -93,7 +93,7 @@ bool my::WeaponSystem::Load(my::SaveData& in) {
     return true;
 }
 
-bool my::WeaponSystem::Initialize(const std::shared_ptr<my::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer) {
+bool my::WeaponSystem::Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<my::Actor>&>>& observer) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if

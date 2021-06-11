@@ -11,7 +11,7 @@
 namespace my {
 class EventManager : 
     public std::enable_shared_from_this<my::EventManager>,
-    public my::Observer<const char*, const std::shared_ptr<my::Event>&> {
+    public base::core::Observer<const char*, const std::shared_ptr<my::Event>&> {
 private:
     //! ゲームイベント
     std::vector<std::shared_ptr<my::Event>> _events;

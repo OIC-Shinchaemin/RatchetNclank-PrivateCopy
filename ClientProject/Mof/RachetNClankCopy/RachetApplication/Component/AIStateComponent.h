@@ -13,14 +13,14 @@ class AIStateComponent : public my::UpdateComponent {
     using super = my::UpdateComponent;
 private:
     //! 状態
-    my::StateMachine _state_machine;
+    base::core::StateMachine _state_machine;
     //! タイマー
-    my::Timer _thinking_timer;
+    base::core::Timer _thinking_timer;
     //! 作成パス
     std::vector<std::string> _behaviour_path;
 
     template<class State>
-    void RegisterState(my::StateMachine& out, const std::string& behaviour) {
+    void RegisterState(base::core::StateMachine& out, const std::string& behaviour) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<State>();
         ptr->SetActor(shared_this);

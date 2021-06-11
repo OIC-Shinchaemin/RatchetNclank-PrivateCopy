@@ -25,14 +25,14 @@ void my::OptionSystem::OnNotify(bool flag) {
     _infomation.enter = false;
 }
 
-my::Observable<const my::OptionSystem::Info&>* my::OptionSystem::GetInfoSubject(void) {
+base::core::Observable<const my::OptionSystem::Info&>* my::OptionSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
-my::Observable<const my::scene::SceneMessage&>* my::OptionSystem::GetSceneMessageSubject(void) {
+base::core::Observable<const my::scene::SceneMessage&>* my::OptionSystem::GetSceneMessageSubject(void) {
     return &this->_scene_message_subject;
 }
-my::Observable<bool>* my::OptionSystem::GetTitleMenuSubject(void) {
+base::core::Observable<bool>* my::OptionSystem::GetTitleMenuSubject(void) {
     return &this->_title_menu_subject;
 }
 

@@ -10,7 +10,7 @@
 
 
 namespace state {
-class ActionState : public my::State {
+class ActionState : public base::core::State {
 private:
     //! ƒAƒNƒVƒ‡ƒ“
     std::weak_ptr<my::ActionComponent> _action_com;

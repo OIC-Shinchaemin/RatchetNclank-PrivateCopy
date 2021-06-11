@@ -20,7 +20,7 @@ std::string_view my::ShipLandingComponent::GetStateType(void) const {
     return state::ShipActionStateType::kShipActionLandingState;
 }
 
-void my::ShipLandingComponent::AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr) {
+void my::ShipLandingComponent::AddObserver(const std::shared_ptr<base::core::Observer<const my::CameraController::CameraInfo&>>& ptr) {
     Observable::AddObserver(ptr);
 }
 

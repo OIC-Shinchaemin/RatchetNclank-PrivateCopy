@@ -1,5 +1,5 @@
-#ifndef MY_HEADER_H
-#define MY_HEADER_H
+#ifndef BASE_CORE_HEADER_H
+#define BASE_CORE_HEADER_H
 
 
 #include <assert.h>
@@ -45,4 +45,4 @@
 #include <Mof.h>
 
 
-#endif // !MY_HEADER_H
+#endif // !BASE_CORE_HEADER_H

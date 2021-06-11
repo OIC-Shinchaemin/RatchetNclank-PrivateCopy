@@ -15,8 +15,8 @@
 
 
 namespace my {
-class LockOnCursorMenu : public my::UIPanel, public my::Observer<std::optional<Mof::CVector3>> {
-    using super = my::UIPanel;
+class LockOnCursorMenu : public base::ui::UIPanel, public base::core::Observer<std::optional<Mof::CVector3>> {
+    using super = base::ui::UIPanel;
 private:
     //! 位置
     std::optional<Mof::CVector3> _position;
@@ -42,7 +42,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    //void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// 描画
     /// </summary>

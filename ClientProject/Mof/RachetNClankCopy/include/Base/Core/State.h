@@ -5,7 +5,8 @@
 #include <memory>
 
 
-namespace my {
+namespace base {
+namespace core {
 class State {
 public:
     /// <summary>
@@ -44,5 +45,6 @@ public:
     virtual void DebugRender(void) {
     }
 };
+}
 }
 #endif // !BASE_CORE_STATE_H

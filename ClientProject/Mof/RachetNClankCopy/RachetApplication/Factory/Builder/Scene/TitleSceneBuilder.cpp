@@ -9,7 +9,7 @@ builder::TitleSceneBuilder::TitleSceneBuilder() :
 builder::TitleSceneBuilder::~TitleSceneBuilder() {
 }
 /*
-void builder::TitleSceneBuilder::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void builder::TitleSceneBuilder::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 */

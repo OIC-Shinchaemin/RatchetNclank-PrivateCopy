@@ -66,6 +66,6 @@ void my::Mechanical::AddBullet(std::uint32_t count) {
     } // if
 }
 
-void my::Mechanical::AddMechanicalInfoObserver(const std::shared_ptr<my::Observer<const my::Mechanical::Info&>>& ptr) {
+void my::Mechanical::AddMechanicalInfoObserver(const std::shared_ptr<base::core::Observer<const my::Mechanical::Info&>>& ptr) {
     _subject.AddObserver(ptr);
 }

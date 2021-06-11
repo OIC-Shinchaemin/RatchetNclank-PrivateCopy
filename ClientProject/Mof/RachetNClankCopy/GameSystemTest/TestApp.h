@@ -16,7 +16,7 @@ private:
     //! カメラ
     std::shared_ptr<my::Camera> _camera;
     //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _camera_controller;
+    base::core::ServiceLocator<my::CameraController> _camera_controller;
     //! モード
     my::CameraController::CameraMode _current_mode;
     //! コントローラ

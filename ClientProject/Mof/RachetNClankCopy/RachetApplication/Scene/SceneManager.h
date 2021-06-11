@@ -20,7 +20,7 @@
 
 
 namespace my {
-class SceneManager : public std::enable_shared_from_this<my::SceneManager>, public my::Observer<const scene::SceneMessage&> {
+class SceneManager : public std::enable_shared_from_this<my::SceneManager>, public base::core::Observer<const scene::SceneMessage&> {
     using this_type = my::SceneManager;
     struct ChangeMessage {
         std::string name;
@@ -30,7 +30,7 @@ class SceneManager : public std::enable_shared_from_this<my::SceneManager>, publ
         //! リソース
         std::weak_ptr<my::ResourceMgr> resource;
         //! UI
-        std::weak_ptr<my::UICanvas> ui_canvas;
+        std::weak_ptr<base::ui::UICanvas> ui_canvas;
         //! ゲーム
         std::weak_ptr<my::GameManager> game_manager;
         //! ゲームイベント
@@ -115,7 +115,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr);
+    void SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

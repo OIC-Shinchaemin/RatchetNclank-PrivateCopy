@@ -11,7 +11,7 @@
 
 
 namespace my {
-class RegisterGlobalCameraEvent : public my::Event, public my::Observer<const my::CameraController::CameraInfo&> {
+class RegisterGlobalCameraEvent : public my::Event, public base::core::Observer<const my::CameraController::CameraInfo&> {
     using super = my::Event;
 private:
     //! ’Ê’m—p

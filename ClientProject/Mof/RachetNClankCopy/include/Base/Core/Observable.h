@@ -1,5 +1,5 @@
-#ifndef MY_OBSERVABLE_H
-#define MY_OBSERVABLE_H
+#ifndef BASE_CORE_OBSERVABLE_H
+#define BASE_CORE_OBSERVABLE_H
 
 
 #include <memory>
@@ -9,10 +9,12 @@
 #include "Observer.h"
 
 
-namespace my {
+namespace base {
+namespace core {
 template<class...NotifyArgs>
 class Observable {
-    using Observer = my::Observer<NotifyArgs...>;
+    //using Observer = base::core::Observer<NotifyArgs...>;
+    using Observer = Observer<NotifyArgs...>;
 private:
     //! オブザーバ
     std::vector<std::weak_ptr<Observer>> _observers;
@@ -81,4 +83,5 @@ inline void Observable<NotifyArgs...>::Notify(NotifyArgs ...args) {
 }
 
 }
-#endif // !MY_OBSERVABLE_H
+}
+#endif // !BASE_CORE_OBSERVABLE_H

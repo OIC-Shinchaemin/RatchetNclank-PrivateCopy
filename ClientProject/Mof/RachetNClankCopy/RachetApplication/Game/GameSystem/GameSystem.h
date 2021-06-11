@@ -20,15 +20,15 @@
 
 namespace my {
 class GameSystem : public std::enable_shared_from_this<my::GameSystem>,
-    public my::Observer<bool> {
+    public base::core::Observer<bool> {
     using this_type = my::GameSystem;
 private:
     //! 通知用
-    my::Observable<const std::shared_ptr<this_type>&> _subject;
+    base::core::Observable<const std::shared_ptr<this_type>&> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 protected:
     /// <summary>
     /// ゲッター
@@ -41,7 +41,7 @@ protected:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::UICanvas> GetUICanvas(void) const;
+    std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -65,13 +65,13 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const std::shared_ptr<this_type>&>* GetSubject(void);
+    base::core::Observable<const std::shared_ptr<this_type>&>* GetSubject(void);
     /// <summary>
     /// 更新
     /// </summary>

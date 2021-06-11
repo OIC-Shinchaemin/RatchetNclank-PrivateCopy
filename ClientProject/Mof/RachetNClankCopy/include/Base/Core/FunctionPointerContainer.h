@@ -1,5 +1,5 @@
-#ifndef MY_FUNCTION_POINTER_CONTAINER_H
-#define MY_FUNCTION_POINTER_CONTAINER_H
+#ifndef BASE_CORE_FUNCTION_POINTER_CONTAINER_H
+#define BASE_CORE_FUNCTION_POINTER_CONTAINER_H
 
 
 #include <tuple>
@@ -9,12 +9,13 @@
 #include "Trait.h"
 
 
-namespace my {
+namespace base {
+namespace core {
 template<typename...FuncPtrs>
 class FunctionPointerContainer {
 private:
     //! コンテナ
-    std::tuple<std::unordered_map<std::string,FuncPtrs>...> _function_pointers;
+    std::tuple<std::unordered_map<std::string, FuncPtrs>...> _function_pointers;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -22,7 +23,7 @@ private:
     /// <param name=""></param>
     /// <returns>アドレス</returns>
     template<class FuncPtrType>
-    std::unordered_map<std::string, FuncPtrType>&GetContainer(void) {
+    std::unordered_map<std::string, FuncPtrType>& GetContainer(void) {
         constexpr int index = ty::tuple_index<std::tuple<FuncPtrs...>, FuncPtrType>::value;
         return std::get<index>(_function_pointers);
     }
@@ -62,4 +63,5 @@ public:
     }
 };
 }
-#endif // !MY_FUNCTION_POINTER_CONTAINER_H
+}
+#endif // !BASE_CORE_FUNCTION_POINTER_CONTAINER_H

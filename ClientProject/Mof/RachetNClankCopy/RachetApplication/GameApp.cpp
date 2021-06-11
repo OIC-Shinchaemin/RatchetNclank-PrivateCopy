@@ -17,7 +17,7 @@ MofBool CGameApp::Initialize(void) {
     _light_manager = std::make_shared<my::LightManager>();
     _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
     _event_manager = ut::MakeSharedWithRelease<my::EventManager>();
-    _ui_canvas = std::make_shared<my::UICanvas>();
+    _ui_canvas = std::make_shared<base::ui::UICanvas>();
     _scene_manager = ut::MakeSharedWithRelease<my::SceneManager>();
 
     my::FactoryManager::Singleton().SetResourceManager(_resource_manager);

@@ -17,7 +17,7 @@
 namespace my {
 class HelpDesk :
     public std::enable_shared_from_this<my::HelpDesk>,
-    public my::Observer<const my::GameQuest&> {
+    public base::core::Observer<const my::GameQuest&> {
 public:
     struct Info {
         std::string text;
@@ -30,11 +30,11 @@ private:
     //! 達成したいこと
     //my::GameQuest _current_quest;
     //! 通知用
-    my::Observable<const my::HelpDesk::Info&> _subject;
+    base::core::Observable<const my::HelpDesk::Info&> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -58,7 +58,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// 初期化
     /// </summary>

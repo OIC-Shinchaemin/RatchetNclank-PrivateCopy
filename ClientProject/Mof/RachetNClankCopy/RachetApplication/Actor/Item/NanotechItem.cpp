@@ -13,7 +13,7 @@ my::NanotechItem::NanotechItem() :
 my::NanotechItem::~NanotechItem() {
 }
 /*
-my::Observable<int>* my::NanotechItem::GetMoneySubject(void) {
+base::core::Observable<int>* my::NanotechItem::GetMoneySubject(void) {
     return &this->_money_subject;
 }
 */

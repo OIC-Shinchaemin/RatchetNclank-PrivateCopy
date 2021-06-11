@@ -14,19 +14,19 @@
 
 
 namespace my {
-class TitleInfoMenu : public my::UIPanel, public my::Observer<bool> {
-    using super = my::UIPanel;
+class TitleInfoMenu : public base::ui::UIPanel, public base::core::Observer<bool> {
+    using super = base::ui::UIPanel;
 private:
     //! 表示
     bool _show;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! フォント
     Mof::CFont _font;
     //! 表示
-    my::Timer _show_timer;
+    base::core::Timer _show_timer;
     //! 開始
     bool _start;
 public:
@@ -53,7 +53,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// 初期化
     /// </summary>

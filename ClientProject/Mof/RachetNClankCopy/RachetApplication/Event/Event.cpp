@@ -7,7 +7,7 @@ my::Event::Event() {
 my::Event::~Event() {
 }
 
-my::Observable<const char*, const std::shared_ptr<my::Event>&>* my::Event::GetSubject(void) {
+base::core::Observable<const char*, const std::shared_ptr<my::Event>&>* my::Event::GetSubject(void) {
     return &this->_subject;
 }
 

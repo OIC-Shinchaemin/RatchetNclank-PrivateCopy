@@ -39,7 +39,7 @@ void my::GamePauseSystemMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> 
     this->_resource = ptr;
 }
 
-void my::GamePauseSystemMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void my::GamePauseSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 

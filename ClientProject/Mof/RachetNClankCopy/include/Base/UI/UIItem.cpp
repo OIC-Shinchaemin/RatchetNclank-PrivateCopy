@@ -1,7 +1,7 @@
 #include "UIItem.h"
 
 
-my::UIItem::UIItem(const char* name) :
+base::ui::UIItem::UIItem(const char* name) :
     _name(name),
     _position(),
     _texture(),
@@ -9,37 +9,37 @@ my::UIItem::UIItem(const char* name) :
     _rectangle() {
 }
 
-my::UIItem::~UIItem() {
+base::ui::UIItem::~UIItem() {
     _texture.reset();
 }
 
-void my::UIItem::SetPosition(Mof::CVector2 position) {
+void base::ui::UIItem::SetPosition(Mof::CVector2 position) {
     this->_position = position;
 }
 
-void my::UIItem::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
+void base::ui::UIItem::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }
 
-void my::UIItem::SetColor(const Mof::CVector4 color) {
+void base::ui::UIItem::SetColor(const Mof::CVector4 color) {
     this->_color = color;
 }
 
-Mof::CVector2 my::UIItem::GetPosition(void) const {
+Mof::CVector2 base::ui::UIItem::GetPosition(void) const {
     return this->_position;
 }
 
-Mof::CVector2 my::UIItem::GetSize(void) const {
+Mof::CVector2 base::ui::UIItem::GetSize(void) const {
     return Mof::CVector2();
 }
 
-Mof::CRectangle my::UIItem::GetRectangle(void) const {
+Mof::CRectangle base::ui::UIItem::GetRectangle(void) const {
     auto rect = _rectangle;
     rect.Translation(_position);
     return rect;
 }
 
-bool my::UIItem::Initialize(Mof::CVector2 pos, const std::shared_ptr<Mof::CTexture>& tex, const Mof::CVector4& color) {
+bool base::ui::UIItem::Initialize(Mof::CVector2 pos, const std::shared_ptr<Mof::CTexture>& tex, const Mof::CVector4& color) {
     this->_position = pos;
     this->SetTexture(tex);
     this->SetColor(color);
@@ -47,6 +47,6 @@ bool my::UIItem::Initialize(Mof::CVector2 pos, const std::shared_ptr<Mof::CTextu
     return true;
 }
 
-bool my::UIItem::DebugRender(void) {
+bool base::ui::UIItem::DebugRender(void) {
     return true;
 }

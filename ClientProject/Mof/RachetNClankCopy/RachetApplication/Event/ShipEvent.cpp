@@ -50,7 +50,7 @@ void my::ShipEvent::OnNotify(const my::CameraController::CameraInfo& info) {
     _ship_view_camera_controller.SetInfo(_info);
 }
 
-my::Observable<const char*, const std::shared_ptr<my::Actor>&>* my::ShipEvent::GetShipEventSubject(void) {
+base::core::Observable<const char*, const std::shared_ptr<my::Actor>&>* my::ShipEvent::GetShipEventSubject(void) {
     return &this->_ship_event_subject;
 }
 

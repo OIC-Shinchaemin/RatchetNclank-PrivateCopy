@@ -38,7 +38,7 @@ protected:
     //! 対象位置
     std::optional<Mof::CVector3> _lock_on_position;
     //! 通知用
-    my::Observable<const my::Mechanical::Info&> _subject;
+    base::core::Observable<const my::Mechanical::Info&> _subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -91,7 +91,7 @@ public:
     /// <summary>
     /// 追加
     /// </summary>
-    void AddMechanicalInfoObserver(const std::shared_ptr<my::Observer<const my::Mechanical::Info&>>& ptr);
+    void AddMechanicalInfoObserver(const std::shared_ptr<base::core::Observer<const my::Mechanical::Info&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>

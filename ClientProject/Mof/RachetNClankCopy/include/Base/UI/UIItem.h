@@ -1,5 +1,5 @@
-#ifndef MY_UI_ITEM_H
-#define MY_UI_ITEM_H
+#ifndef BASE_UI_UI_ITEM_H
+#define BASE_UI_UI_ITEM_H
 
 
 #include "../Core/Observable.h"
@@ -15,8 +15,9 @@
 
 
 
-namespace my {
-class UIItem : public std::enable_shared_from_this<my::UIItem>, public my::Observable<const std::shared_ptr<my::UIItem>&, const char* > {
+namespace base {
+namespace ui {
+class UIItem : public std::enable_shared_from_this<base::ui::UIItem>, public base::core::Observable<const std::shared_ptr<base::ui::UIItem>&, const char* > {
 protected:
     //! –¼‘O
     std::string _name;
@@ -106,4 +107,5 @@ public:
     virtual bool DebugRender(void);
 };
 }
-#endif // !MY_UI_ITEM_H
+}
+#endif // !BASE_UI_UI_ITEM_H

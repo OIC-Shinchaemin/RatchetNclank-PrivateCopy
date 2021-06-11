@@ -15,7 +15,7 @@ class EnemyComponent : public my::CharacterComponent {
     using super = my::CharacterComponent;
 private:
     //! ‹x~ó‘ÔØ‚è‘Ö‚¦
-    my::Timer _velocity_timer;
+    base::core::Timer _velocity_timer;
     //! •W“I
     std::weak_ptr<my::Actor> _target;
     //! ‘¬“x

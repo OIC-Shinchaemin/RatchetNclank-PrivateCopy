@@ -19,7 +19,7 @@ void my::NanotechMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource_manager = ptr;
 }
 
-void my::NanotechMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void my::NanotechMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 

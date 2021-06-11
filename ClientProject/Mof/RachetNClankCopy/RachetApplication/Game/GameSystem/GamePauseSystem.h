@@ -75,7 +75,7 @@ private:
     //! 情報
     this_type::Info _infomation;
     //! 通知用
-    my::Observable<const this_type::Info&> _info_subject;
+    base::core::Observable<const this_type::Info&> _info_subject;
     //! 子供
     std::vector<std::shared_ptr<ElemType>> _items;
     //! 子供
@@ -103,7 +103,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const this_type::Info&>* GetInfoSubject(void);
+    base::core::Observable<const this_type::Info&>* GetInfoSubject(void);
     /// <summary>
     /// 追加
     /// </summary>

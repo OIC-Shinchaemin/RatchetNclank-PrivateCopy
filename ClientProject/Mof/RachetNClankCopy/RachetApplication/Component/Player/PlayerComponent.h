@@ -16,7 +16,7 @@ private:
     //! 標的
     std::weak_ptr<my::Actor> _target;
     //! カーソル位置
-    my::Observable<std::optional<Mof::CVector3>> _observable;
+    base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
     //! 地点

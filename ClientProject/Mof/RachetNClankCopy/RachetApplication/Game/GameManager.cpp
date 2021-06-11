@@ -32,7 +32,7 @@ void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>&
     this->_resource = ptr;
 }
 
-void my::GameManager::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
+void my::GameManager::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
     this->_ui_canvas = ptr;
 }
 

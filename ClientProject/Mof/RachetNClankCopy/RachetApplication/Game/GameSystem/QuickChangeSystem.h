@@ -42,7 +42,7 @@ class QuickChangeSystem :
     public my::GameSystem {
     using super = my::GameSystem;
     using This = my::QuickChangeSystem;
-    using Observable = my::Observable<Mof::CVector4>;
+    using Observable = base::core::Observable<Mof::CVector4>;
     enum class State {
         Enter,
         Exit
@@ -58,7 +58,7 @@ private:
     //! 色
     This::Info _infomation;
     //! 通知用
-    //my::Observable<const std::shared_ptr<This>&> _subject;
+    //base::core::Observable<const std::shared_ptr<This>&> _subject;
     //! 状態
     State _state;
     //! アルファ
@@ -70,13 +70,13 @@ private:
     //! アイテム
     std::unordered_map<int, my::QuickChangeItem> _items;
     //! 通知用
-    my::Observable<const std::string&> _current;
+    base::core::Observable<const std::string&> _current;
     //! リソース
     //std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    //std::weak_ptr<my::UICanvas> _ui_canvas;
+    //std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! 監視対象
-    my::Observable<const This::Info&> _info_subject;
+    base::core::Observable<const This::Info&> _info_subject;
     /// <summary>
     /// 開く
     /// </summary>
@@ -110,13 +110,13 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    //void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    ///my::Observable<const std::shared_ptr<This>&>* GetSubject(void);
+    ///base::core::Observable<const std::shared_ptr<This>&>* GetSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -127,12 +127,12 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddWeaponObserver(const std::shared_ptr<my::Observer<const std::string&>>& ptr);
+    void AddWeaponObserver(const std::shared_ptr<base::core::Observer<const std::string&>>& ptr);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddInfoObserver(const std::shared_ptr<my::Observer<const my::QuickChangeSystem::Info&>>& ptr);
+    void AddInfoObserver(const std::shared_ptr<base::core::Observer<const my::QuickChangeSystem::Info&>>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -1,5 +1,5 @@
-#ifndef MY_UI_PANEL_H
-#define MY_UI_PANEL_H
+#ifndef BASE_UI_UI_PANEL_H
+#define BASE_UI_UI_PANEL_H
 
 
 #include "../Core/Observer.h"
@@ -14,10 +14,11 @@
 #include "UIItem.h"
 
 
-namespace my {
-class UIPanel : public std::enable_shared_from_this<my::UIPanel>, public my::Observer<const std::shared_ptr<my::UIItem>&, const char* >, public my::Observable<const std::shared_ptr<my::UIPanel>&, const char* > {
+namespace base {
+namespace ui {
+class UIPanel : public std::enable_shared_from_this<base::ui::UIPanel>, public base::core::Observer<const std::shared_ptr<base::ui::UIItem>&, const char* >, public base::core::Observable<const std::shared_ptr<base::ui::UIPanel>&, const char* > {
 public:
-    using ElemPtr = std::shared_ptr<my::UIItem>;
+    using ElemPtr = std::shared_ptr<base::ui::UIItem>;
 protected:
     //! 名前
     std::string _name;
@@ -44,7 +45,7 @@ public:
     /// </summary>
     /// <param name="observable"></param>
     /// <param name="event"></param>
-    virtual void OnNotify(const std::shared_ptr<my::UIItem>& observable, const char* event) override;
+    virtual void OnNotify(const std::shared_ptr<base::ui::UIItem>& observable, const char* event) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -102,4 +103,5 @@ public:
     virtual bool Render(void);
 };
 }
-#endif // !MY_UI_PANEL_H
+}
+#endif // !BASE_UI_UI_PANEL_H

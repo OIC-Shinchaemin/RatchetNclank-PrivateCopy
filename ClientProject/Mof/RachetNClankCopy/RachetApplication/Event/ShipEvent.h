@@ -14,12 +14,12 @@
 
 namespace my {
 class ShipEvent : public my::Event,
-    public my::Observer<const my::CameraController::CameraInfo&>,
-    public my::Observer<const char*, const std::shared_ptr<StageObject>&> {
+    public base::core::Observer<const my::CameraController::CameraInfo&>,
+    public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
     using super = my::Event;
 private:
     //! 通知用
-    my::Observable<const char*, const std::shared_ptr<my::Actor>& > _ship_event_subject;
+    base::core::Observable<const char*, const std::shared_ptr<my::Actor>& > _ship_event_subject;
     //! カメラ
     std::shared_ptr<my::Camera> _ship_view_camera;
     //! カメラコントローラ
@@ -29,7 +29,7 @@ private:
     //! カメラ情報
     my::CameraController::CameraInfo _info;
     //! プレイヤービュー
-    std::weak_ptr<my::Observer<const my::CameraController::CameraInfo&>> _camera_com;
+    std::weak_ptr<base::core::Observer<const my::CameraController::CameraInfo&>> _camera_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -56,7 +56,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const char*, const std::shared_ptr<my::Actor>&>* GetShipEventSubject(void);
+    base::core::Observable<const char*, const std::shared_ptr<my::Actor>&>* GetShipEventSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -20,7 +20,7 @@ private:
     std::optional<std::string> _next_state;
 protected:
     //! 状態
-    my::StateMachine _state_machine;
+    base::core::StateMachine _state_machine;
     //! ステート,コンポーネント
     std::unordered_map<std::string, std::string> _action_map;
     /// <summary>
@@ -28,7 +28,7 @@ protected:
     /// </summary>
     /// <typeparam name="State"></typeparam>
     /// <param name="out"></param>
-    void RegisterState(my::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
+    void RegisterState(base::core::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::ActionState>();
         ptr->SetActionComponent(com);

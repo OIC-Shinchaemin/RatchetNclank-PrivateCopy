@@ -14,8 +14,8 @@
 
 
 namespace my {
-class NanotechMenuItem : public my::UIItem {
-    using super = my::UIItem;
+class NanotechMenuItem : public base::ui::UIItem {
+    using super = base::ui::UIItem;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,15 +29,15 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class NanotechMenu : public my::UIPanel, public my::Observer<int> {
-    using super = my::UIPanel;
+class NanotechMenu : public base::ui::UIPanel, public base::core::Observer<int> {
+    using super = base::ui::UIPanel;
 private:
     //! 最大値
     int _hp_max;
     //! Hp
     int _hp;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource_manager;
 public:
@@ -60,7 +60,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// 更新
     /// </summary>

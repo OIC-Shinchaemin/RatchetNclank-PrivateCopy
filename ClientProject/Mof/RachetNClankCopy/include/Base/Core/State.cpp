@@ -1,8 +1,8 @@
 #include "State.h"
 
 
-my::State::State() {
+base::core::State::State() {
 }
 
-my::State::~State() {
+base::core::State::~State() {
 }

@@ -2,14 +2,14 @@
 
 
 std::weak_ptr<my::ResourceMgr> my::Component::_resource_manager;
-std::weak_ptr<my::UICanvas> my::Component::_ui_canvas;
+std::weak_ptr<base::ui::UICanvas> my::Component::_ui_canvas;
 
 
 void my::Component::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
     _resource_manager = ptr;
 }
 
-void my::Component::SetUICanvas(const std::shared_ptr<my::UICanvas>& ptr) {
+void my::Component::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
     _ui_canvas = ptr;
 }
 

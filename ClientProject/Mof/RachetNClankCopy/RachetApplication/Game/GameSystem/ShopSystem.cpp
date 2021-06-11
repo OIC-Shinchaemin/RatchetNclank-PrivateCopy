@@ -116,11 +116,11 @@ void my::ShopSystem::SetGameMoney(std::weak_ptr<my::GameMoney> ptr) {
     this->_game_money = ptr;
 }
 
-my::Observable<const my::ShopSystem::Info&>* my::ShopSystem::GetInfoSubject(void) {
+base::core::Observable<const my::ShopSystem::Info&>* my::ShopSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
-my::Observable<const my::ChargeInfo&>* my::ShopSystem::GetChargeInfoSubject(void) {
+base::core::Observable<const my::ChargeInfo&>* my::ShopSystem::GetChargeInfoSubject(void) {
     return &this->_buy_subject;
 }
 
@@ -176,12 +176,12 @@ bool my::ShopSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
-            auto menu = std::dynamic_pointer_cast<my::Observer<const my::Mechanical::Info&>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<const my::Mechanical::Info&>>(temp);
             _equipment_weapon_menu_subject.AddObserver(menu);
         }
         {
             auto temp = canvas->GetElement("GameMoneyMenu");
-            auto menu = std::dynamic_pointer_cast<my::Observer<int>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<int>>(temp);
             _game_money_menu_subject.AddObserver(menu);
         }
     } // if
@@ -292,12 +292,12 @@ bool my::ShopSystem::Release(void) {
     if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
-            auto menu = std::dynamic_pointer_cast<my::Observer<const my::Mechanical::Info&>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<const my::Mechanical::Info&>>(temp);
             _equipment_weapon_menu_subject.RemoveObserver(menu);
         }
         {
             auto temp = canvas->GetElement("GameMoneyMenu");
-            auto menu = std::dynamic_pointer_cast<my::Observer<int>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<int>>(temp);
             _game_money_menu_subject.RemoveObserver(menu);
         }
 

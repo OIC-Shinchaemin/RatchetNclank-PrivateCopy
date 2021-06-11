@@ -17,7 +17,7 @@
 
 
 namespace my {
-class BridgeEvent : public my::Event, public my::Observer<const char*, const std::shared_ptr<my::Actor>&> {
+class BridgeEvent : public my::Event, public base::core::Observer<const char*, const std::shared_ptr<my::Actor>&> {
     using super = my::Event;
 private:
     //! 通知アクター
@@ -31,9 +31,9 @@ private:
     //! 位置
     Mof::CVector3 _ideal_position;
     //! 通知用
-    my::Observable<const my::CameraController::CameraInfo&> _camera_subject;
+    base::core::Observable<const my::CameraController::CameraInfo&> _camera_subject;
     //! 通知用
-    my::Observable<const my::GameQuest&> _quest_subject;
+    base::core::Observable<const my::GameQuest&> _quest_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -59,13 +59,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const my::CameraController::CameraInfo&>* GetCameraSubject(void);
+    base::core::Observable<const my::CameraController::CameraInfo&>* GetCameraSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::Observable<const my::GameQuest&>* GetQuestSubject(void);
+    base::core::Observable<const my::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// 判定
     /// </summary>

@@ -18,7 +18,7 @@ private:
     //! Hp
     int _hp;
     //! Hp
-    my::Observable<int> _observable;
+    base::core::Observable<int> _observable;
     //! UI•\Ž¦
     bool _ui_remove;
 public:

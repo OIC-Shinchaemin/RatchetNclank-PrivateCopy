@@ -41,7 +41,7 @@ private:
     //! 色
     Mof::CVector4 _color;
     //! 時間
-    my::Timer _life_time;
+    base::core::Timer _life_time;
     //! デフォルトサイズ
     float _size;
     //! 更新パラメータ

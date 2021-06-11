@@ -15,16 +15,16 @@
 
 
 namespace my {
-class GameMoney : public std::enable_shared_from_this<my::GameMoney>, public my::Observer<int> {
+class GameMoney : public std::enable_shared_from_this<my::GameMoney>, public base::core::Observer<int> {
 private:
     //! お金
     std::uint32_t _value;
     //! 通知用
-    my::Observable<int> _subject;
+    base::core::Observable<int> _subject;
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -48,7 +48,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

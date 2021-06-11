@@ -31,7 +31,7 @@ void my::TitleInfoMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::TitleInfoMenu::SetUICanvas(std::weak_ptr<my::UICanvas> ptr) {
+void my::TitleInfoMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 

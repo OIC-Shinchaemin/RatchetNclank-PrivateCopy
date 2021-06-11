@@ -14,8 +14,8 @@
 
 
 namespace my {
-class GamePauseSystemMenuItem : public my::UIItem {
-    using super = my::UIItem;
+class GamePauseSystemMenuItem : public base::ui::UIItem {
+    using super = base::ui::UIItem;
 private:
     //! 表示テキスト
     std::string _text;
@@ -61,9 +61,9 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class GamePauseSystemMenu : public my::UIPanel,
-    public my::Observer<const my::GamePauseSystem::Info&> {
-    using super = my::UIPanel;
+class GamePauseSystemMenu : public base::ui::UIPanel,
+    public base::core::Observer<const my::GamePauseSystem::Info&> {
+    using super = base::ui::UIPanel;
     using ElemType = my::GamePauseSystemMenuItem;
 private:
     //! 情報
@@ -71,7 +71,7 @@ private:
     //! リソース
     std::weak_ptr<my::ResourceMgr> _resource;
     //! UI
-    std::weak_ptr<my::UICanvas> _ui_canvas;
+    std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -92,7 +92,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetUICanvas(std::weak_ptr<my::UICanvas> ptr);
+    void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
     /// 追加
     /// </summary>

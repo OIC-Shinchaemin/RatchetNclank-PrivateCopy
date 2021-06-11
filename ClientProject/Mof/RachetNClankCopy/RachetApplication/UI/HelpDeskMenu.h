@@ -16,8 +16,8 @@
 
 
 namespace my {
-class HelpDeskMenu : public my::UIPanel, public my::Observer<const my::HelpDesk::Info&> {
-    using super = my::UIPanel;
+class HelpDeskMenu : public base::ui::UIPanel, public base::core::Observer<const my::HelpDesk::Info&> {
+    using super = base::ui::UIPanel;
 private:
     //! •\Ž¦•¶Žš
     my::HelpDesk::Info _infomation;

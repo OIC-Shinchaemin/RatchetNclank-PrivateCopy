@@ -15,14 +15,14 @@ class EnemyStateComponent : public my::ActionStateComponent {
 /*
 private:
     //! èÛë‘
-    my::StateMachine _state_machine;
+    base::core::StateMachine _state_machine;
     /// <summary>
     /// ìoò^
     /// </summary>
     /// <typeparam name="State"></typeparam>
     /// <param name="out"></param>
     template<class State>
-    void RegisterState(my::StateMachine& out) {
+    void RegisterState(base::core::StateMachine& out) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<State>();
         ptr->SetActor(shared_this);
@@ -33,7 +33,7 @@ private:
     /// </summary>
     /// <typeparam name="State"></typeparam>
     /// <param name="out"></param>
-    void RegisterState(my::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
+    void RegisterState(base::core::StateMachine& out, std::shared_ptr<my::ActionComponent> com) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::ActionState>();
         ptr->SetActionComponent(com);

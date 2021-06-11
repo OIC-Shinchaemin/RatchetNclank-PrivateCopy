@@ -10,9 +10,9 @@
 
 namespace my {
 class ShipLandingComponent : public my::ShipActionComponent,
-    public my::Observable<const my::CameraController::CameraInfo&> {
+    public base::core::Observable<const my::CameraController::CameraInfo&> {
     using super = my::ShipActionComponent;
-    using Observable = my::Observable<const my::CameraController::CameraInfo&>;
+    using Observable = base::core::Observable<const my::CameraController::CameraInfo&>;
 public:
     /// <summary>
     /// コンストラクタ
@@ -44,7 +44,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddObserver(const std::shared_ptr<my::Observer<const my::CameraController::CameraInfo&>>& ptr);
+    void AddObserver(const std::shared_ptr<base::core::Observer<const my::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>

@@ -20,7 +20,7 @@
 
 namespace my {
 class TitleScene : public my::Scene,
-    public my::Observer<const my::OptionSystem::Info&> {
+    public base::core::Observer<const my::OptionSystem::Info&> {
     using super = my::Scene;
 private:
     //! ステージ
@@ -28,13 +28,13 @@ private:
     //! カメラ
     std::shared_ptr<my::Camera> _stage_view_camera;
     //! カメラコントローラ
-    my::ServiceLocator<my::CameraController> _camera_controller;
+    base::core::ServiceLocator<my::CameraController> _camera_controller;
     //! 表示用
     std::shared_ptr<my::Player> _demo_actor;
     //! 通知用
-    my::Observable<bool> _option_system_subject;
+    base::core::Observable<bool> _option_system_subject;
     //! 通知用
-    my::Observable<bool> _title_menu_subject;
+    base::core::Observable<bool> _title_menu_subject;
     //! ゲーム
     std::weak_ptr<my::GameManager> _game;
     //! UI地蔵

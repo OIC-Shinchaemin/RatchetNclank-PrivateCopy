@@ -1,5 +1,5 @@
-#ifndef MY_UI_CANVAS_H
-#define MY_UI_CANVAS_H
+#ifndef BASE_UI_UI_CANVAS_H
+#define BASE_UI_UI_CANVAS_H
 
 
 #include <memory>
@@ -10,9 +10,10 @@
 #include "UIPanel.h"
 
 
-namespace my {
-class UICanvas : public std::enable_shared_from_this<my::UICanvas>, public my::Observer<const std::shared_ptr<my::UIPanel>&, const char* > {
-    using ElemPtr = std::shared_ptr<my::UIPanel>;
+namespace base {
+namespace ui {
+class UICanvas : public std::enable_shared_from_this<base::ui::UICanvas>, public base::core::Observer<const std::shared_ptr<base::ui::UIPanel>&, const char* > {
+    using ElemPtr = std::shared_ptr<base::ui::UIPanel>;
 private:
     //! UIパネル
     std::vector<ElemPtr> _panels;
@@ -34,7 +35,7 @@ public:
     /// </summary>
     /// <param name="observable"></param>
     /// <param name="event"></param>
-    virtual void OnNotify(const std::shared_ptr<my::UIPanel>& ptr, const char* event) override;
+    virtual void OnNotify(const std::shared_ptr<base::ui::UIPanel>& ptr, const char* event) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -76,4 +77,5 @@ public:
     bool Render(void);
 };
 }
-#endif // !MY_UI_CANVAS_H
+}
+#endif // !BASE_UI_UI_CANVAS_H

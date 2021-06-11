@@ -46,11 +46,11 @@ Mof::CVector4 my::QuickChangeSystem::GetColor(void) const {
     return this->_infomation.color;
 }
 
-void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<my::Observer<const std::string&>>& ptr) {
+void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<base::core::Observer<const std::string&>>& ptr) {
     _current.AddObserver(ptr);
 }
 
-void my::QuickChangeSystem::AddInfoObserver(const std::shared_ptr<my::Observer<const my::QuickChangeSystem::Info&>>& ptr) {
+void my::QuickChangeSystem::AddInfoObserver(const std::shared_ptr<base::core::Observer<const my::QuickChangeSystem::Info&>>& ptr) {
     _info_subject.AddObserver(ptr);
 }
 

@@ -28,11 +28,11 @@ std::string my::BulletItem::GetTypeName(my::BulletItem::Type type) const {
     return std::string();
 }
 /*
-my::Observable<int>* my::BulletItem::GetMoneySubject(void) {
+base::core::Observable<int>* my::BulletItem::GetMoneySubject(void) {
     return &this->_money_subject;
 }
 */
-my::Observable<const my::ChargeInfo&>* my::BulletItem::GetWeaponSystemSubject(void) {
+base::core::Observable<const my::ChargeInfo&>* my::BulletItem::GetWeaponSystemSubject(void) {
     return &this->_weapon_system_subject;
 }
 void my::BulletItem::End(void) {

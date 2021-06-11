@@ -1,7 +1,7 @@
 #include "UIPanel.h"
 
 
-my::UIPanel::UIPanel(const char* name) :
+base::ui::UIPanel::UIPanel(const char* name) :
     _name(name),
     _position(),
     _items(),
@@ -9,57 +9,57 @@ my::UIPanel::UIPanel(const char* name) :
     _color(){
 }
 
-my::UIPanel::~UIPanel() {
+base::ui::UIPanel::~UIPanel() {
     _texture.reset();
     _items.clear();
 }
 
-void my::UIPanel::OnNotify(const std::shared_ptr<my::UIItem>& observable, const char* event) {
-    my::Observable<const std::shared_ptr<my::UIPanel>&, const char* >::Notify(shared_from_this(), event);
+void base::ui::UIPanel::OnNotify(const std::shared_ptr<base::ui::UIItem>& observable, const char* event) {
+    base::core::Observable<const std::shared_ptr<base::ui::UIPanel>&, const char* >::Notify(shared_from_this(), event);
 }
 
-void my::UIPanel::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
+void base::ui::UIPanel::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }
 
-void my::UIPanel::SetPosition(Mof::CVector2 pos) {
+void base::ui::UIPanel::SetPosition(Mof::CVector2 pos) {
     this->_position = pos;
 }
 
-void my::UIPanel::SetColor(Mof::CVector4 color) {
+void base::ui::UIPanel::SetColor(Mof::CVector4 color) {
     this->_color= color;
 }
 
-std::string my::UIPanel::GetName(void) const {
+std::string base::ui::UIPanel::GetName(void) const {
     return this->_name;
 }
 
-Mof::CVector2 my::UIPanel::GetPosition(void) const {
+Mof::CVector2 base::ui::UIPanel::GetPosition(void) const {
     return this->_position;
 }
 
-void my::UIPanel::AddElement(const ElemPtr& elem) {
+void base::ui::UIPanel::AddElement(const ElemPtr& elem) {
     elem->AddObserver(shared_from_this());
     this->_items.push_back(elem);
 }
 
-void my::UIPanel::RemoveElement(const ElemPtr& elem) {
+void base::ui::UIPanel::RemoveElement(const ElemPtr& elem) {
     elem->RemoveObserver(shared_from_this());
     ut::SwapPopback(_items, elem);
 }
 
-bool my::UIPanel::Initialize(void) {
+bool base::ui::UIPanel::Initialize(void) {
     return true;
 }
 
-bool my::UIPanel::Update(float delta_time) {
+bool base::ui::UIPanel::Update(float delta_time) {
     for (auto& item : _items) {
         item->Update(delta_time);
     } // for
     return true;
 }
 
-bool my::UIPanel::Render(void) {
+bool base::ui::UIPanel::Render(void) {
     if (auto tex = _texture.lock()) {
         tex->Render(_position.x, _position.y, _color.ToU32Color());
     } // if
