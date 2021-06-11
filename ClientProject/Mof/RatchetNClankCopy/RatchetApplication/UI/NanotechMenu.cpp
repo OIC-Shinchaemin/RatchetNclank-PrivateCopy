@@ -1,7 +1,7 @@
 #include "NanotechMenu.h"
 
 
-ratchet::NanotechMenu::NanotechMenu(const char* name) :
+ratchet::ui::NanotechMenu::NanotechMenu(const char* name) :
     super(name),
     _hp_max(4),
     _hp(_hp_max),
@@ -10,20 +10,20 @@ ratchet::NanotechMenu::NanotechMenu(const char* name) :
     this->SetPosition(Mof::CVector2(800.0f, 24.0f));
 }
 
-void ratchet::NanotechMenu::OnNotify(int hp) {
+void ratchet::ui::NanotechMenu::OnNotify(int hp) {
     super::Notify(shared_from_this(), "Enable");
     this->_hp = hp;
 }
 
-void ratchet::NanotechMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
+void ratchet::ui::NanotechMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource_manager = ptr;
 }
 
-void ratchet::NanotechMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void ratchet::ui::NanotechMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-bool ratchet::NanotechMenu::Update(float delta_time) {
+bool ratchet::ui::NanotechMenu::Update(float delta_time) {
     if (_hp < 0) {
         return false;
     } // if
@@ -31,7 +31,7 @@ bool ratchet::NanotechMenu::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::NanotechMenu::Render(void) {
+bool ratchet::ui::NanotechMenu::Render(void) {
     auto pos = super::_position;
     std::shared_ptr<Mof::CTexture> tex;
     std::shared_ptr<Mof::CTexture> empty_tex;
@@ -51,10 +51,10 @@ bool ratchet::NanotechMenu::Render(void) {
     return true;
 }
 
-ratchet::NanotechMenuItem::NanotechMenuItem(const char* name) :
+ratchet::ui::NanotechMenuItem::NanotechMenuItem(const char* name) :
     super(name) {
 }
 
-bool ratchet::NanotechMenuItem::Render(void) {
+bool ratchet::ui::NanotechMenuItem::Render(void) {
     return false;
 }

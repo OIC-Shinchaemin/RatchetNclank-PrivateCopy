@@ -45,7 +45,7 @@ bool ratchet::OptionSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
-    auto menu = std::make_shared< ratchet::OptionSystemMenu>("OptionSystemMenu");
+    auto menu = std::make_shared< ratchet::ui::OptionSystemMenu>("OptionSystemMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(super::GetResource());

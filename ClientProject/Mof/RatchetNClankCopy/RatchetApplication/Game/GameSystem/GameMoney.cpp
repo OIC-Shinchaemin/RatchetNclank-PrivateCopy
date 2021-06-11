@@ -49,7 +49,7 @@ bool ratchet::GameMoney::Initialize(void) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("GameMoneyMenu");
     } // if
-    auto menu = std::make_shared< ratchet::GameMoneyMenu>("GameMoneyMenu");
+    auto menu = std::make_shared< ratchet::ui::GameMoneyMenu>("GameMoneyMenu");
     _subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(_resource);

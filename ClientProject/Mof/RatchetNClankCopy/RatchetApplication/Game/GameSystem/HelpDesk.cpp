@@ -52,7 +52,7 @@ bool ratchet::HelpDesk::Initialize(void) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
-    auto menu = std::make_shared< ratchet::HelpDeskMenu>("HelpDeskMenu");
+    auto menu = std::make_shared< ratchet::ui::HelpDeskMenu>("HelpDeskMenu");
     _subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(_resource);

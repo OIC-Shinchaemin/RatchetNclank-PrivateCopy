@@ -1,23 +1,23 @@
 #include "LockOnCursorMenu.h"
 
 
-ratchet::LockOnCursorMenu::LockOnCursorMenu(const char* name) :
+ratchet::ui::LockOnCursorMenu::LockOnCursorMenu(const char* name) :
     super(name),
     _position(),
     _resource_manager() {
 }
 
-void ratchet::LockOnCursorMenu::OnNotify(std::optional<Mof::CVector3> position) {
+void ratchet::ui::LockOnCursorMenu::OnNotify(std::optional<Mof::CVector3> position) {
     super::Notify(shared_from_this(), "Enable");
 
     _position = position;
 }
 
-void ratchet::LockOnCursorMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
+void ratchet::ui::LockOnCursorMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     _resource_manager = ptr;
 }
 
-bool ratchet::LockOnCursorMenu::Render(void) {
+bool ratchet::ui::LockOnCursorMenu::Render(void) {
     if (_position.has_value()) {
         if (auto r = _resource_manager.lock()) {
             auto tex = r->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/lock_on_cursor/cursor.png");

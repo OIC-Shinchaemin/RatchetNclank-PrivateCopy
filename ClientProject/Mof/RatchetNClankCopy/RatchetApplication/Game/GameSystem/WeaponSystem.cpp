@@ -97,7 +97,7 @@ bool ratchet::WeaponSystem::Initialize(const std::shared_ptr<base::core::Observe
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if
-    auto menu = std::make_shared< ratchet::EquipmentWeaponMenu>("EquipmentWeaponMenu");
+    auto menu = std::make_shared< ratchet::ui::EquipmentWeaponMenu>("EquipmentWeaponMenu");
     _equipment_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(_resource);

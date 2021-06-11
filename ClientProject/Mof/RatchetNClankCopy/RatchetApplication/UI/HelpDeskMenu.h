@@ -1,5 +1,5 @@
-#ifndef RATCHET_HELP_DESK_MENU_H
-#define RATCHET_HELP_DESK_MENU_H
+#ifndef RATCHET_UI_HELP_DESK_MENU_H
+#define RATCHET_UI_HELP_DESK_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -16,6 +16,7 @@
 
 
 namespace ratchet {
+namespace ui {
 class HelpDeskMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::HelpDesk::Info&> {
     using super = base::ui::UIPanel;
 private:
@@ -53,4 +54,5 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RATCHET_HELP_DESK_MENU_H
+}
+#endif // !RATCHET_UI_HELP_DESK_MENU_H

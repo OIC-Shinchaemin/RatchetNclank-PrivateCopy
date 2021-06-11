@@ -1,5 +1,5 @@
-#ifndef RATCHET_GAME_MONEY_MENU_H
-#define RATCHET_GAME_MONEY_MENU_H
+#ifndef RATCHET_UI_GAME_MONEY_MENU_H
+#define RATCHET_UI_GAME_MONEY_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -15,6 +15,7 @@
 
 
 namespace ratchet {
+namespace ui {
 class GameMoneyMenu : public base::ui::UIPanel, public base::core::Observer<int> {
     using super = base::ui::UIPanel;
 private:
@@ -71,4 +72,5 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RATCHET_GAME_MONEY_MENU_H
+}
+#endif // !RATCHET_UI_GAME_MONEY_MENU_H

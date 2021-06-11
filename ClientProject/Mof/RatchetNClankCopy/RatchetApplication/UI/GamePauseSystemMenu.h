@@ -1,5 +1,5 @@
-#ifndef RATCHET_GAME_PAUSE_SYSTEM_MENU_H
-#define RATCHET_GAME_PAUSE_SYSTEM_MENU_H
+#ifndef RATCHET_UI_GAME_PAUSE_SYSTEM_MENU_H
+#define RATCHET_UI_GAME_PAUSE_SYSTEM_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -14,6 +14,7 @@
 
 
 namespace ratchet {
+namespace ui {
 class GamePauseSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
@@ -64,7 +65,7 @@ public:
 class GamePauseSystemMenu : public base::ui::UIPanel,
     public base::core::Observer<const ratchet::GamePauseSystem::Info&> {
     using super = base::ui::UIPanel;
-    using ElemType = ratchet::GamePauseSystemMenuItem;
+    using ElemType = ratchet::ui::GamePauseSystemMenuItem;
 private:
     //! èÓïÒ
     ratchet::GamePauseSystem::Info _infomation;
@@ -118,4 +119,5 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RATCHET_GAME_PAUSE_SYSTEM_MENU_H
+}
+#endif // !RATCHET_UI_GAME_PAUSE_SYSTEM_MENU_H

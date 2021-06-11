@@ -1,5 +1,5 @@
-#ifndef RATCHET_EQUIPMENT_WEAPON_MENU_H
-#define RATCHET_EQUIPMENT_WEAPON_MENU_H
+#ifndef RATCHET_UI_EQUIPMENT_WEAPON_MENU_H
+#define RATCHET_UI_EQUIPMENT_WEAPON_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -16,6 +16,7 @@
 
 
 namespace ratchet {
+namespace ui {
 class EquipmentWeaponMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::Mechanical::Info&> {
     using super = base::ui::UIPanel;
 private:
@@ -49,4 +50,5 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RATCHET_EQUIPMENT_WEAPON_MENU_H
+}
+#endif // !RATCHET_UI_EQUIPMENT_WEAPON_MENU_H

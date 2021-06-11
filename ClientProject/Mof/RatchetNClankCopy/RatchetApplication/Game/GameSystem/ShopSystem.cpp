@@ -150,28 +150,12 @@ bool ratchet::ShopSystem::Load(ratchet::SaveData& in) {
 }
 
 bool ratchet::ShopSystem::Initialize(void) {
-    /*
-    if (auto canvas = super::GetUICanvas()) {
-        canvas->RemoveElement("ShopSystemMenu");
-    } // if
-    auto menu = std::make_shared< ratchet::ShopSystemMenu>("ShopSystemMenu");
-    _info_subject.AddObserver(menu);
-    menu->SetColor(def::color_rgba::kCyan);
-    menu->SetResourceManager(super::GetResource());
-    menu->Initialize();
-    if (auto canvas = super::GetUICanvas()) {
-        canvas->AddElement(menu);
-    } // if
-    */
-
     {
         auto menu = _ui_creator.Create(super::GetUICanvas());
         menu->SetResourceManager(super::GetResource());
         menu->Initialize();
         _info_subject.AddObserver(menu);
     }
-
-
 
     if (auto canvas = super::GetUICanvas()) {
         {

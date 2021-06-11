@@ -117,7 +117,7 @@ bool ratchet::PlayerComponent::Initialize(void) {
 
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
-        auto menu = std::make_shared<ratchet::LockOnCursorMenu>("LockOnCursorMenu");
+        auto menu = std::make_shared<ratchet::ui::LockOnCursorMenu>("LockOnCursorMenu");
         menu->SetResourceManager(_resource_manager);
         _observable.AddObserver(menu);
         canvas->AddElement(menu);

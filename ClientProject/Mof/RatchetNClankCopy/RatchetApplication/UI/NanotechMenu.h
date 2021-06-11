@@ -1,5 +1,5 @@
-#ifndef RATCHET_NANOTECH_MENU_H
-#define RATCHET_NANOTECH_MENU_H
+#ifndef RATCHET_UI_NANOTECH_MENU_H
+#define RATCHET_UI_NANOTECH_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -14,6 +14,7 @@
 
 
 namespace ratchet {
+namespace ui {
 class NanotechMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
@@ -75,4 +76,5 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RATCHET_NANOTECH_MENU_H
+}
+#endif // !RATCHET_UI_NANOTECH_MENU_H

@@ -10,7 +10,9 @@
 
 
 namespace ratchet {
+namespace ui {
 class GamePauseSystemMenu;
+}
 class GamePauseSystemItem : public std::enable_shared_from_this<ratchet::GamePauseSystemItem> {
     using this_type = ratchet::GamePauseSystemItem;
 private:
@@ -56,21 +58,13 @@ class GamePauseSystem : public ratchet::GameSystem {
 public:
     struct Info {
         bool enable = false;
-        //bool enter = false;
-        //bool exit = false;
-        //bool push_item = false;
         std::optional<int> index = 0;
         std::vector<std::shared_ptr<ElemType>>* items;
         void Reset(void) {
             enable = false;
-            //enter = false;
-            //exit = false;
-            //push_item = false;
             index.reset();
-            ///items = nullptr;
         }
     };
-private:
 private:
     //! 情報
     this_type::Info _infomation;
@@ -80,10 +74,8 @@ private:
     std::vector<std::shared_ptr<ElemType>> _items;
     //! 子供
     std::vector<std::shared_ptr<ElemType>> _execute_list;
-    //! インデックス
-    //std::optional<int> _item_index;
     //! UI地蔵
-    ratchet::UICreator<class GamePauseSystemMenu> _ui_creator;
+    ratchet::UICreator<ratchet::ui::GamePauseSystemMenu> _ui_creator;
 public:
     /// <summary>
     /// コンストラクタ

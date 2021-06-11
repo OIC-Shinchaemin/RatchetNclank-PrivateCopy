@@ -6,7 +6,6 @@
 ratchet::GamePauseSystem::GamePauseSystem() :
     _infomation(),
     _info_subject(),
-    //_item_index(),
     _ui_creator(typeid(decltype(_ui_creator)).name()) {
 }
 
@@ -18,13 +17,9 @@ void ratchet::GamePauseSystem::OnNotify(bool flag) {
     if (flag) {
         _infomation.Reset();
 
-
-        puts("");
         _infomation.items = &_items;
         _infomation.enable = true;
-        //_infomation.enter = true;
         _info_subject.Notify(_infomation);
-        //_infomation.enter = false;
     } // if
 }
 
@@ -34,11 +29,8 @@ base::core::Observable<const ratchet::GamePauseSystem::Info&>* ratchet::GamePaus
 
 void ratchet::GamePauseSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
     _infomation.items = &_items;
-
     _items.push_back(elem);
-    //_infomation.push_item = true;
     _info_subject.Notify(_infomation);
-    //_infomation.push_item = false;
 }
 
 bool ratchet::GamePauseSystem::IsActive(void) const {

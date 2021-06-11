@@ -49,7 +49,7 @@ bool ratchet::HpComponent::Initialize(void) {
         if (auto canvas = super::_ui_canvas.lock()) {
             canvas->RemoveElement("NanotechMenu");
             _ui_remove = true;
-            auto menu = std::make_shared<ratchet::NanotechMenu>("NanotechMenu");
+            auto menu = std::make_shared<ratchet::ui::NanotechMenu>("NanotechMenu");
             _observable.AddObserver(menu);
             menu->SetResourceManager(_resource_manager);
             menu->SetColor(Mof::CVector4(0.1f, 0.3f, 0.5f, 0.5f));

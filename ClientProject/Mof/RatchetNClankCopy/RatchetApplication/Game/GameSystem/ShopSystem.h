@@ -19,7 +19,9 @@
 
 
 namespace ratchet {
+namespace ui {
 class ShopSystemMenu;
+}
 class ShopSystem :
     public ratchet::GameSystem {
     using super = ratchet::GameSystem;
@@ -94,7 +96,8 @@ private:
     //! Ç®ã‡
     std::weak_ptr<ratchet::GameMoney> _game_money;
     //! UIä«óù
-    ratchet::UICreator<ShopSystemMenu> _ui_creator;
+    ratchet::UICreator<ratchet::ui::ShopSystemMenu> _ui_creator;
+    //ratchet::UICreator<class ShopSystemMenu> _ui_creator;
 
     /// <summary>
     /// èIóπ

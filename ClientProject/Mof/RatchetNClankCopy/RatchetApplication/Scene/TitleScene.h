@@ -38,7 +38,7 @@ private:
     //! ゲーム
     std::weak_ptr<ratchet::GameManager> _game;
     //! UI地蔵
-    ratchet::UICreator<ratchet::TitleInfoMenu> _ui_creator;
+    ratchet::UICreator<ratchet::ui::TitleInfoMenu> _ui_creator;
 protected:
     /// <summary>
     /// 更新

@@ -72,7 +72,7 @@ bool ratchet::QuickChangeSystem::Initialize(const std::shared_ptr<ratchet::Weapo
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("QuickChangeMenu");
     } // if
-    auto menu = std::make_shared< ratchet::QuickChangeMenu>("QuickChangeMenu");
+    auto menu = std::make_shared< ratchet::ui::QuickChangeMenu>("QuickChangeMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(super::GetResource());

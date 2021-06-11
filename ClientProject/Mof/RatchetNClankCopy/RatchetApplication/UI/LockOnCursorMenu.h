@@ -1,5 +1,5 @@
-#ifndef RATCHET_LOCK_ON_CURSOR_MENU_H
-#define RATCHET_LOCK_ON_CURSOR_MENU_H
+#ifndef RATCHET_UI_LOCK_ON_CURSOR_MENU_H
+#define RATCHET_UI_LOCK_ON_CURSOR_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -15,6 +15,7 @@
 
 
 namespace ratchet {
+namespace ui {
 class LockOnCursorMenu : public base::ui::UIPanel, public base::core::Observer<std::optional<Mof::CVector3>> {
     using super = base::ui::UIPanel;
 private:
@@ -51,4 +52,5 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RATCHET_NANOTECH_MENU_H
+}
+#endif // !RATCHET_UI_NANOTECH_MENU_H

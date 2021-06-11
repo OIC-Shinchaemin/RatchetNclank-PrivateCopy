@@ -1,5 +1,5 @@
-#ifndef RATCHET_TITLE_INFO_MENU_H
-#define RATCHET_TITLE_INFO_MENU_H
+#ifndef RATCHET_UI_TITLE_INFO_MENU_H
+#define RATCHET_UI_TITLE_INFO_MENU_H
 
 
 #include "Base/UI/UIPanel.h"
@@ -14,6 +14,7 @@
 
 
 namespace ratchet {
+namespace ui {
 class TitleInfoMenu : public base::ui::UIPanel, public base::core::Observer<bool> {
     using super = base::ui::UIPanel;
 private:
@@ -74,4 +75,5 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RATCHET_TITLE_INFO_MENU_H
+}
+#endif // !RATCHET_UI_TITLE_INFO_MENU_H
