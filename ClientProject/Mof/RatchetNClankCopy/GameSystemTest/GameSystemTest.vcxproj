@@ -98,13 +98,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestDebug|Win32'">
+    <OutDir>$(SolutionDir)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RachetApplication</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -122,7 +125,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RachetApplication</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,73 +163,83 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='TestDebug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_NCONSOLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>../../MofLibrary/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\My\Core\AbstructContainer.h" />
-    <ClInclude Include="..\include\My\Core\Define.h" />
-    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h" />
-    <ClInclude Include="..\include\My\Core\Header.h" />
-    <ClInclude Include="..\include\My\Core\Math.h" />
-    <ClInclude Include="..\include\My\Core\Observable.h" />
-    <ClInclude Include="..\include\My\Core\Observer.h" />
-    <ClInclude Include="..\include\My\Core\ServiceLocator.h" />
-    <ClInclude Include="..\include\My\Core\State.h" />
-    <ClInclude Include="..\include\My\Core\StateMachine.h" />
-    <ClInclude Include="..\include\My\Core\Timer.h" />
-    <ClInclude Include="..\include\My\Core\Trait.h" />
-    <ClInclude Include="..\include\My\Core\Utility.h" />
-    <ClInclude Include="..\include\My\UI\UICanvas.h" />
-    <ClInclude Include="..\include\My\UI\UIItem.h" />
-    <ClInclude Include="..\include\My\UI\UIPanel.h" />
-    <ClInclude Include="..\RachetApplication\Actor.h" />
-    <ClInclude Include="..\RachetApplication\GameApp.h" />
-    <ClInclude Include="..\RachetApplication\GameDefine.h" />
-    <ClInclude Include="..\RachetApplication\Gamepad.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameManager.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameMoney.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameQuest.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameSystem.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\HelpDesk.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveData.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\ShopSystem.h" />
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\WeaponSystem.h" />
-    <ClInclude Include="..\RachetApplication\ResourceManager.h" />
-    <ClInclude Include="..\RachetApplication\UI\EquipmentWeaponMenu.h" />
-    <ClInclude Include="..\RachetApplication\UI\GameMoneyMenu.h" />
-    <ClInclude Include="..\RachetApplication\UI\HelpDeskMenu.h" />
-    <ClInclude Include="..\RachetApplication\UI\LockOnCursorMenu.h" />
-    <ClInclude Include="..\RachetApplication\UI\NanotechMenu.h" />
-    <ClInclude Include="..\RachetApplication\UI\QuickChangeMenu.h" />
-    <ClInclude Include="..\RachetApplication\UI\ShopSystemMenu.h" />
+    <ClInclude Include="..\include\Base\Core\AbstructContainer.h" />
+    <ClInclude Include="..\include\Base\Core\Define.h" />
+    <ClInclude Include="..\include\Base\Core\FunctionPointerContainer.h" />
+    <ClInclude Include="..\include\Base\Core\Header.h" />
+    <ClInclude Include="..\include\Base\Core\Math.h" />
+    <ClInclude Include="..\include\Base\Core\Observable.h" />
+    <ClInclude Include="..\include\Base\Core\Observer.h" />
+    <ClInclude Include="..\include\Base\Core\ServiceLocator.h" />
+    <ClInclude Include="..\include\Base\Core\State.h" />
+    <ClInclude Include="..\include\Base\Core\StateMachine.h" />
+    <ClInclude Include="..\include\Base\Core\Timer.h" />
+    <ClInclude Include="..\include\Base\Core\Trait.h" />
+    <ClInclude Include="..\include\Base\Core\Utility.h" />
+    <ClInclude Include="..\include\Base\UI\UICanvas.h" />
+    <ClInclude Include="..\include\Base\UI\UIItem.h" />
+    <ClInclude Include="..\include\Base\UI\UIPanel.h" />
+    <ClInclude Include="..\RatchetApplication\Actor.h" />
+    <ClInclude Include="..\RatchetApplication\GameApp.h" />
+    <ClInclude Include="..\RatchetApplication\GameDefine.h" />
+    <ClInclude Include="..\RatchetApplication\Gamepad.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameManager.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\GameMoney.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\GameQuest.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\GameSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\HelpDesk.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\QuickChangeSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\Save\SaveData.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\Save\SaveSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\ShopSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\WeaponSystem.h" />
+    <ClInclude Include="..\RatchetApplication\ResourceManager.h" />
+    <ClInclude Include="..\RatchetApplication\UI\EquipmentWeaponMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\GameMoneyMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\HelpDeskMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\LockOnCursorMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\NanotechMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\QuickChangeMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\ShopSystemMenu.h" />
     <ClInclude Include="TestApp.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\My\Core\State.cpp" />
-    <ClCompile Include="..\include\My\Core\StateMachine.cpp" />
-    <ClCompile Include="..\include\My\Core\Timer.cpp" />
-    <ClCompile Include="..\include\My\UI\UICanvas.cpp" />
-    <ClCompile Include="..\include\My\UI\UIItem.cpp" />
-    <ClCompile Include="..\include\My\UI\UIPanel.cpp" />
-    <ClCompile Include="..\RachetApplication\Actor.cpp" />
-    <ClCompile Include="..\RachetApplication\Gamepad.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameManager.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameMoney.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameQuest.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameSystem.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\HelpDesk.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveData.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\ShopSystem.cpp" />
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\WeaponSystem.cpp" />
-    <ClCompile Include="..\RachetApplication\UI\EquipmentWeaponMenu.cpp" />
-    <ClCompile Include="..\RachetApplication\UI\GameMoneyMenu.cpp" />
-    <ClCompile Include="..\RachetApplication\UI\HelpDeskMenu.cpp" />
-    <ClCompile Include="..\RachetApplication\UI\LockOnCursorMenu.cpp" />
-    <ClCompile Include="..\RachetApplication\UI\NanotechMenu.cpp" />
-    <ClCompile Include="..\RachetApplication\UI\QuickChangeMenu.cpp" />
-    <ClCompile Include="..\RachetApplication\UI\ShopSystemMenu.cpp" />
+    <ClCompile Include="..\include\Base\Core\State.cpp" />
+    <ClCompile Include="..\include\Base\Core\StateMachine.cpp" />
+    <ClCompile Include="..\include\Base\Core\Timer.cpp" />
+    <ClCompile Include="..\include\Base\UI\UICanvas.cpp" />
+    <ClCompile Include="..\include\Base\UI\UIItem.cpp" />
+    <ClCompile Include="..\include\Base\UI\UIPanel.cpp" />
+    <ClCompile Include="..\RatchetApplication\Actor.cpp" />
+    <ClCompile Include="..\RatchetApplication\Gamepad.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameManager.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\GameMoney.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\GameQuest.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\GameSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\HelpDesk.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\QuickChangeSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\Save\SaveData.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\Save\SaveSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\ShopSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\WeaponSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\EquipmentWeaponMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\GameMoneyMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\HelpDeskMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\LockOnCursorMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\NanotechMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\QuickChangeMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\ShopSystemMenu.cpp" />
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>

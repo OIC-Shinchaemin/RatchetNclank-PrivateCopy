@@ -97,6 +97,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestDebug|Win32'">
+    <OutDir>$(SolutionDir)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -104,7 +107,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RachetApplication</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,30 +159,40 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='TestDebug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_NCONSOLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>../../MofLibrary/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\Bridge.cpp" />
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\Elevator.cpp" />
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\GimmickBase.cpp" />
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\MoveCloud.cpp" />
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\WoodBox.cpp" />
-    <ClCompile Include="..\RachetApplication\Stage\Parser\JsonStageParser.cpp" />
-    <ClCompile Include="..\RachetApplication\Stage\Stage.cpp" />
-    <ClCompile Include="..\RachetApplication\Stage\StageObject.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\Gimmick\Bridge.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\Gimmick\Elevator.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\Gimmick\GimmickBase.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\Gimmick\MoveCloud.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\Gimmick\WoodBox.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\Parser\JsonStageParser.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\Stage.cpp" />
+    <ClCompile Include="..\RatchetApplication\Stage\StageObject.cpp" />
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\Bridge.h" />
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\Elevator.h" />
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\GimmickBase.h" />
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\MoveCloud.h" />
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\WoodBox.h" />
-    <ClInclude Include="..\RachetApplication\Stage\Parser\JsonStageParser.h" />
-    <ClInclude Include="..\RachetApplication\Stage\Parser\StageParser.h" />
-    <ClInclude Include="..\RachetApplication\Stage\Stage.h" />
-    <ClInclude Include="..\RachetApplication\Stage\StageDefine.h" />
-    <ClInclude Include="..\RachetApplication\Stage\StageFileFormat.h" />
-    <ClInclude Include="..\RachetApplication\Stage\StageObject.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Gimmick\Bridge.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Gimmick\Elevator.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Gimmick\GimmickBase.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Gimmick\MoveCloud.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Gimmick\WoodBox.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Parser\JsonStageParser.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Parser\StageParser.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\Stage.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\StageDefine.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\StageFileFormat.h" />
+    <ClInclude Include="..\RatchetApplication\Stage\StageObject.h" />
     <ClInclude Include="TestApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

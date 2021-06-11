@@ -45,25 +45,25 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\My\Core\State.cpp">
+    <ClCompile Include="..\include\Base\Core\State.cpp">
       <Filter>Test\Base\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\My\Core\StateMachine.cpp">
+    <ClCompile Include="..\include\Base\Core\StateMachine.cpp">
       <Filter>Test\Base\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\My\Core\Timer.cpp">
+    <ClCompile Include="..\include\Base\Core\Timer.cpp">
       <Filter>Test\Base\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\ratchetApplication\Gamepad.cpp">
       <Filter>Test\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\My\UI\UIItem.cpp">
+    <ClCompile Include="..\include\Base\UI\UIItem.cpp">
       <Filter>Test\Base\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\My\UI\UIPanel.cpp">
+    <ClCompile Include="..\include\Base\UI\UIPanel.cpp">
       <Filter>Test\Base\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\My\UI\UICanvas.cpp">
+    <ClCompile Include="..\include\Base\UI\UICanvas.cpp">
       <Filter>Test\Base\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\ratchetApplication\Game\GameSystem\GameSystem.cpp">
@@ -125,55 +125,55 @@
     <ClInclude Include="TestApp.h">
       <Filter>Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Observable.h">
+    <ClInclude Include="..\include\Base\Core\Observable.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Observer.h">
+    <ClInclude Include="..\include\Base\Core\Observer.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\ServiceLocator.h">
+    <ClInclude Include="..\include\Base\Core\ServiceLocator.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\State.h">
+    <ClInclude Include="..\include\Base\Core\State.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\StateMachine.h">
+    <ClInclude Include="..\include\Base\Core\StateMachine.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Timer.h">
+    <ClInclude Include="..\include\Base\Core\Timer.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Trait.h">
+    <ClInclude Include="..\include\Base\Core\Trait.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Utility.h">
+    <ClInclude Include="..\include\Base\Core\Utility.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\AbstructContainer.h">
+    <ClInclude Include="..\include\Base\Core\AbstructContainer.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Define.h">
+    <ClInclude Include="..\include\Base\Core\Define.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h">
+    <ClInclude Include="..\include\Base\Core\FunctionPointerContainer.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Header.h">
+    <ClInclude Include="..\include\Base\Core\Header.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\Core\Math.h">
+    <ClInclude Include="..\include\Base\Core\Math.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\ratchetApplication\Gamepad.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\UI\UICanvas.h">
+    <ClInclude Include="..\include\Base\UI\UICanvas.h">
       <Filter>Test\Base\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\UI\UIItem.h">
+    <ClInclude Include="..\include\Base\UI\UIItem.h">
       <Filter>Test\Base\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\My\UI\UIPanel.h">
+    <ClInclude Include="..\include\Base\UI\UIPanel.h">
       <Filter>Test\Base\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\ratchetApplication\Game\GameSystem\GameSystem.h">
