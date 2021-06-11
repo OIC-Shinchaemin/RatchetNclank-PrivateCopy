@@ -1,13 +1,13 @@
-#ifndef MY_UPDATE_COMPONENT_H
-#define MY_UPDATE_COMPONENT_H
+#ifndef RACHET_UPDATE_COMPONENT_H
+#define RACHET_UPDATE_COMPONENT_H
 
 
 #include "Component.h"
 
 
-namespace my {
-class UpdateComponent : public my::Component {
-    using super = my::Component;
+namespace rachet {
+class UpdateComponent : public rachet::Component {
+    using super = rachet::Component;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,4 +54,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !MY_UPDATE_COMPONENT_H
+#endif // !RACHET_UPDATE_COMPONENT_H

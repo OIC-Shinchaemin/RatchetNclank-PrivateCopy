@@ -1,5 +1,5 @@
-#ifndef MY_NanotechItem_COLLISION_COMPONENT_H
-#define MY_NanotechItem_COLLISION_COMPONENT_H
+#ifndef RACHET_NanotechItem_COLLISION_COMPONENT_H
+#define RACHET_NanotechItem_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -10,9 +10,9 @@
 #include <Mof.h>
 
 
-namespace my {
-class NanotechItemCollisionComponent : public my::CollisionComponent {
-    using super = my::CollisionComponent;
+namespace rachet {
+class NanotechItemCollisionComponent : public rachet::CollisionComponent {
+    using super = rachet::CollisionComponent;
 private:
     //! çÇÇ≥
     float _height;
@@ -76,7 +76,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::SightObject> GetSightObject(void) override;
+    virtual std::optional<rachet::SightObject> GetSightObject(void) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -88,7 +88,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// è’ìÀ
     /// </summary>
@@ -96,4 +96,4 @@ public:
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
-#endif // !MY_NanotechItem_COLLISION_COMPONENT_H
+#endif // !RACHET_NanotechItem_COLLISION_COMPONENT_H

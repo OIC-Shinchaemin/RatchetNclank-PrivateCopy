@@ -3,22 +3,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-my::EnemyEnemyCollisionAlgolithm::EnemyEnemyCollisionAlgolithm() :
+rachet::EnemyEnemyCollisionAlgolithm::EnemyEnemyCollisionAlgolithm() :
     super() {
 }
 
-my::EnemyEnemyCollisionAlgolithm::~EnemyEnemyCollisionAlgolithm() {
+rachet::EnemyEnemyCollisionAlgolithm::~EnemyEnemyCollisionAlgolithm() {
 }
 
-const char* my::EnemyEnemyCollisionAlgolithm::GetLayerType(void) const {
-    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
+const char* rachet::EnemyEnemyCollisionAlgolithm::GetLayerType(void) const {
+    return rachet::CollisionComponentType::kEnemyCollisionComponent.c_str();
 }
 
-const char* my::EnemyEnemyCollisionAlgolithm::GetTargetType(void) const {
-    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
+const char* rachet::EnemyEnemyCollisionAlgolithm::GetTargetType(void) const {
+    return rachet::CollisionComponentType::kEnemyCollisionComponent.c_str();
 }
 
-bool my::EnemyEnemyCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
+bool rachet::EnemyEnemyCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

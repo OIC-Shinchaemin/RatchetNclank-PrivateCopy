@@ -1,5 +1,5 @@
-#ifndef MY_SHIP_COMPONENT_H
-#define MY_SHIP_COMPONENT_H
+#ifndef RACHET_SHIP_COMPONENT_H
+#define RACHET_SHIP_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class ShipComponent : public my::UpdateComponent{
-    using super = my::UpdateComponent;
+namespace rachet {
+class ShipComponent : public rachet::UpdateComponent{
+    using super = rachet::UpdateComponent;
 private:
     //! ÉÇÅ[ÉVÉáÉì
     std::weak_ptr<class MotionComponent> _motion_com;
@@ -59,7 +59,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_SHIP_COMPONENT_H
+#endif // !RACHET_SHIP_COMPONENT_H

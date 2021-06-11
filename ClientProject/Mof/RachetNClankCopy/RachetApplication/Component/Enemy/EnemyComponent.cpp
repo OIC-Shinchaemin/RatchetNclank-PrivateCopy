@@ -10,66 +10,66 @@
 #include "../../Actor/Character/Enemy.h"
 
 
-my::EnemyComponent::EnemyComponent(int priority) :
+rachet::EnemyComponent::EnemyComponent(int priority) :
     super(priority),
     _velocity_timer(),
     _target(),
     _velocity_com() {
 }
 
-my::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
+rachet::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
     super(obj),
     _velocity_timer(),
     _target(),
     _velocity_com() {
 }
 
-my::EnemyComponent::~EnemyComponent() {
+rachet::EnemyComponent::~EnemyComponent() {
 }
 
-void my::EnemyComponent::SetTarget(const std::shared_ptr<my::Actor>& ptr) {
+void rachet::EnemyComponent::SetTarget(const std::shared_ptr<rachet::Actor>& ptr) {
     this->_target = ptr;
 }
 
-std::string my::EnemyComponent::GetType(void) const {
+std::string rachet::EnemyComponent::GetType(void) const {
     return "EnemyComponent";
 }
 
-std::weak_ptr<my::Actor> my::EnemyComponent::GetTarget(void) const {
+std::weak_ptr<rachet::Actor> rachet::EnemyComponent::GetTarget(void) const {
     return this->_target;
 }
 
-std::optional<Mof::CVector3> my::EnemyComponent::GetTargetPosition(void) const {
+std::optional<Mof::CVector3> rachet::EnemyComponent::GetTargetPosition(void) const {
     if (auto target = this->GetTarget().lock()) {
         auto pos = target->GetPosition();
-        float player_height = target->GetComponent<my::CharacterComponent>()->GetHeight();
+        float player_height = target->GetComponent<rachet::CharacterComponent>()->GetHeight();
         pos.y += player_height;
         return pos;
     } // if
     return std::optional<Mof::CVector3>();
 }
 
-float my::EnemyComponent::GetHomeDistance(void) const {
+float rachet::EnemyComponent::GetHomeDistance(void) const {
     return 2.5f;
 }
 
-bool my::EnemyComponent::Initialize(void) {
+bool rachet::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
     _velocity_timer.Initialize(1.0f, true);
 
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetSleep(true);
         velocity_com->SetGravity(0.0f);
     } // if
 
 
-    auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
-                               my::CollisionComponentType::kEnemyCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<rachet::EnemyCollisionComponent>();
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
+                               rachet::CollisionComponentType::kEnemyCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         auto target = in.target.lock();
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
         auto length = (this->GetVolume() * 2.0f) - vec.Length();
@@ -82,24 +82,24 @@ bool my::EnemyComponent::Initialize(void) {
         return true;
     }));
 
-    auto sight_coll = super::GetOwner()->GetComponent<my::SightCollisionComponent>();
-    sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+    auto sight_coll = super::GetOwner()->GetComponent<rachet::SightCollisionComponent>();
+    sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
                                  "PlayerCollisionComponent",
-                                 my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+                                 rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         auto target = in.target.lock();
         this->SetTarget(target);
         return true;
     }));
-    sight_coll->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Exit,
+    sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Exit,
                                  "PlayerCollisionComponent",
-                                 my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+                                 rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         this->SetTarget(nullptr);
         return true;
     }));
     return true;
 }
 
-bool my::EnemyComponent::Update(float delta_time) {
+bool rachet::EnemyComponent::Update(float delta_time) {
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetUseGravity(false);
     } // if
@@ -108,14 +108,14 @@ bool my::EnemyComponent::Update(float delta_time) {
         if (auto velocity_com = _velocity_com.lock()) {
             bool in_camera_range = super::GetOwner()->InCameraRange();
             if (in_camera_range) {
-                auto owner = std::dynamic_pointer_cast<my::Enemy>(super::GetOwner());
-                owner->GetQuestSubject()->Notify(my::GameQuest::GameQuest(my::GameQuest::Type::EnemyDestroy));
+                auto owner = std::dynamic_pointer_cast<rachet::Enemy>(super::GetOwner());
+                owner->GetQuestSubject()->Notify(rachet::GameQuest::GameQuest(rachet::GameQuest::Type::EnemyDestroy));
                 velocity_com->SetSleep(false);
                 velocity_com->SetGravity(1.0f);
             } // if
             else {
-                auto owner = std::dynamic_pointer_cast<my::Enemy>(super::GetOwner());
-                owner->GetQuestSubject()->Notify(my::GameQuest::GameQuest(my::GameQuest::Type::ToFront));
+                auto owner = std::dynamic_pointer_cast<rachet::Enemy>(super::GetOwner());
+                owner->GetQuestSubject()->Notify(rachet::GameQuest::GameQuest(rachet::GameQuest::Type::ToFront));
                 velocity_com->SetSleep(true);
                 velocity_com->SetGravity(0.0f);
             } // else
@@ -124,11 +124,11 @@ bool my::EnemyComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::EnemyComponent::Release(void) {
+bool rachet::EnemyComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyComponent::Clone(void) {
-    return std::make_shared<my::EnemyComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyComponent>(*this);
 }

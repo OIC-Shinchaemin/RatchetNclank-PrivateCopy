@@ -8,7 +8,7 @@
 #include "WaterFlowCollisionComponent.h"
 
 
-void my::PlayerCollisionComponent::ChangeState(void) {
+void rachet::PlayerCollisionComponent::ChangeState(void) {
     if (auto state_com = _state_com.lock()) {
         for (auto& state : _next_status) {
             if (state_com->CanTransition(state)) {
@@ -19,9 +19,9 @@ void my::PlayerCollisionComponent::ChangeState(void) {
     } // if
 }
 
-std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetFrontRay(void) {
+std::optional<Mof::CRay3D> rachet::PlayerCollisionComponent::GetFrontRay(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
 
@@ -33,7 +33,7 @@ std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetFrontRay(void) {
     return Mof::CRay3D(pos, dir);
 }
 
-void my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetFrontRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
     float margin = -0.2f;
@@ -68,7 +68,7 @@ void my::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer m
     } // for    
 }
 
-void my::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
     float margin = 0.1f;
@@ -103,7 +103,7 @@ void my::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer me
     } // for
 }
 
-void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
+void rachet::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
     auto sphere = this->GetSphere().value();
 
     auto gimmick_pos = gimmick->GetPosition();
@@ -181,7 +181,7 @@ void my::PlayerCollisionComponent::CollisionStageElevator(Mof::LPMeshContainer m
     } // for
 }
 
-void my::PlayerCollisionComponent::CollisionStageBridge(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
+void rachet::PlayerCollisionComponent::CollisionStageBridge(Mof::LPMeshContainer mesh, GimmickPtr& gimmick, Mof::CRay3D ray, Mof::COLLISIONOUTGEOMETRY& info) {
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
         auto default_matrix = geometry->GetMatrix();
@@ -209,7 +209,7 @@ void my::PlayerCollisionComponent::CollisionStageBridge(Mof::LPMeshContainer mes
     } // for
 }
 
-my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
+rachet::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     super(priority),
     _player_com(),
     _velocity_com(),
@@ -217,7 +217,7 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(int priority) :
     _on_elevator(false) {
 }
 
-my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
+rachet::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
     super(obj),
     _player_com(),
     _velocity_com(),
@@ -227,16 +227,16 @@ my::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComp
     _next_status.push_back(state::PlayerActionStateType::kPlayerActionIdleState);
 }
 
-my::PlayerCollisionComponent::~PlayerCollisionComponent() {
+rachet::PlayerCollisionComponent::~PlayerCollisionComponent() {
 }
 
-std::string my::PlayerCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kPlayerCollisionComponent;
+std::string rachet::PlayerCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kPlayerCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::PlayerCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> rachet::PlayerCollisionComponent::GetSphere(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -244,13 +244,13 @@ std::optional<Mof::CSphere> my::PlayerCollisionComponent::GetSphere(void) {
     return Mof::CSphere(pos, _player_com.lock()->GetVolume());
 }
 
-std::optional<Mof::CBoxAABB> my::PlayerCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::PlayerCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> rachet::PlayerCollisionComponent::GetRay(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -258,9 +258,9 @@ std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetRay(void) {
     return Mof::CRay3D(pos, math::vec3::kNegUnitY);
 }
 
-std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetNextRay(void) {
+std::optional<Mof::CRay3D> rachet::PlayerCollisionComponent::GetNextRay(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto player_com = _player_com.lock();
@@ -272,27 +272,27 @@ std::optional<Mof::CRay3D> my::PlayerCollisionComponent::GetNextRay(void) {
     return Mof::CRay3D(pos + offset, math::vec3::kNegUnitY);
 }
 
-std::optional<Mof::LPMeshContainer> my::PlayerCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::PlayerCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::PlayerCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::PlayerCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::PlayerCollisionComponent::Initialize(void) {
+bool rachet::PlayerCollisionComponent::Initialize(void) {
     super::Initialize();
-    _player_com = super::GetOwner()->GetComponent<my::PlayerComponent>();
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    _player_com = super::GetOwner()->GetComponent<rachet::PlayerComponent>();
+    _state_com = super::GetOwner()->GetComponent<rachet::PlayerStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerCollisionComponent::Clone(void) {
-    return std::make_shared<my::PlayerCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerCollisionComponent>(*this);
 }
 
-void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetRay().has_value()) {
         return;
     } // if
@@ -313,7 +313,7 @@ void my::PlayerCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
     this->CollisionStageDownRay(mesh, obj);
 }
 
-void my::PlayerCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
+void rachet::PlayerCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
     if (!this->GetRay().has_value()) {
         return;
     } // if

@@ -6,18 +6,18 @@
 #include "Factory/Builder/IBuilder.h"
 
 
-void my::Actor::Activate(void) {
-    this->_state = my::ActorState::Active;
+void rachet::Actor::Activate(void) {
+    this->_state = rachet::ActorState::Active;
 }
-void my::Actor::Sleep(void) {
-    this->_state = my::ActorState::Sleep;
+void rachet::Actor::Sleep(void) {
+    this->_state = rachet::ActorState::Sleep;
 }
-void my::Actor::Pause(void) {
-    this->_state = my::ActorState::Pause;
+void rachet::Actor::Pause(void) {
+    this->_state = rachet::ActorState::Pause;
 }
 
-my::Actor::Actor() :
-    _state(my::ActorState::Active),
+rachet::Actor::Actor() :
+    _state(rachet::ActorState::Active),
     _name(),
     _tag(),
     _transform(),
@@ -28,80 +28,80 @@ my::Actor::Actor() :
     _render_components() {
 }
 
-my::Actor::~Actor() {
+rachet::Actor::~Actor() {
 }
 
-void my::Actor::SetName(const char* name) {
+void rachet::Actor::SetName(const char* name) {
     this->_name = name;
 }
 
-void my::Actor::SetTag(const char* tag) {
+void rachet::Actor::SetTag(const char* tag) {
     this->_tag = tag;
 }
 
-void my::Actor::SetPosition(Mof::CVector3 position) {
+void rachet::Actor::SetPosition(Mof::CVector3 position) {
     this->_transform.position = position;
 }
 
-void my::Actor::SetRotate(Mof::CVector3 rotate) {
+void rachet::Actor::SetRotate(Mof::CVector3 rotate) {
     this->_transform.rotate = rotate;
 }
 
-void my::Actor::SetScale(Mof::CVector3 scale) {
+void rachet::Actor::SetScale(Mof::CVector3 scale) {
     this->_transform.scale = scale;
 }
 
-void my::Actor::SetParentTransform(std::optional<Mof::CMatrix44> transform) {
+void rachet::Actor::SetParentTransform(std::optional<Mof::CMatrix44> transform) {
     this->_parent_transform = transform;
 }
 
-std::string my::Actor::GetName(void) const {
+std::string rachet::Actor::GetName(void) const {
     return this->_name;
 }
 
-std::string my::Actor::GetTag(void) const {
+std::string rachet::Actor::GetTag(void) const {
     return this->_tag;
 }
 
-Mof::CVector3 my::Actor::GetPosition(void) const {
+Mof::CVector3 rachet::Actor::GetPosition(void) const {
     return this->_transform.position;
 }
 
-Mof::CVector3 my::Actor::GetRotate(void) const {
+Mof::CVector3 rachet::Actor::GetRotate(void) const {
     return this->_transform.rotate;
 }
 
-Mof::CVector3 my::Actor::GetScale(void) const {
+Mof::CVector3 rachet::Actor::GetScale(void) const {
     return this->_transform.scale;
 }
 
-Mof::CVector3 my::Actor::GetInitialPosition(void) const {
+Mof::CVector3 rachet::Actor::GetInitialPosition(void) const {
     return this->_initial_transform.position;
 }
 
-std::optional<Mof::CMatrix44> my::Actor::GetParentTransform(void) const {
+std::optional<Mof::CMatrix44> rachet::Actor::GetParentTransform(void) const {
     return this->_parent_transform;
 }
 
-my::ActorState my::Actor::GetState(void) const {
+rachet::ActorState rachet::Actor::GetState(void) const {
     return this->_state;
 }
 
-bool my::Actor::InCameraRange(void) const {
+bool rachet::Actor::InCameraRange(void) const {
     const int camera_range = 30.0f;
     auto pos = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
     auto sphere = Mof::CSphere(pos, camera_range);
     return sphere.CollisionPoint(this->GetPosition());
 }
 
-bool my::Actor::InFrustum(void) const {
+bool rachet::Actor::InFrustum(void) const {
     auto box = Mof::CBoxAABB();
 
 
     return false;
 }
 
-void my::Actor::AddComponent(const ComPtr& component) {
+void rachet::Actor::AddComponent(const ComPtr& component) {
     if (component->IsInput()) {
         ut::InsertAscend(_input_components, component);
     } // if
@@ -119,13 +119,13 @@ void my::Actor::AddComponent(const ComPtr& component) {
     component->Initialize();
 }
 
-void my::Actor::CloneToComponents(const ComArray& com_array) {
-    std::transform(com_array.begin(), com_array.end(), std::back_inserter(_components), [](const std::shared_ptr<my::Component>& component) {
+void rachet::Actor::CloneToComponents(const ComArray& com_array) {
+    std::transform(com_array.begin(), com_array.end(), std::back_inserter(_components), [](const std::shared_ptr<rachet::Component>& component) {
         return component->Clone();
     });
 }
 
-void my::Actor::RemoveComponent(const ComPtr& component) {
+void rachet::Actor::RemoveComponent(const ComPtr& component) {
     if (component->IsInput()) {
         ut::EraseFind(_input_components, component);
     } // if
@@ -140,13 +140,13 @@ void my::Actor::RemoveComponent(const ComPtr& component) {
     ut::EraseFind(_components, component);
 }
 
-void my::Actor::End(void) {
-    this->_state = my::ActorState::End;
+void rachet::Actor::End(void) {
+    this->_state = rachet::ActorState::End;
     Observable::Notify("DeleteRequest", shared_from_this());
 }
 
-bool my::Actor::Initialize(void) {
-    _state = my::ActorState::Active;
+bool rachet::Actor::Initialize(void) {
+    _state = rachet::ActorState::Active;
     _transform = _initial_transform;
 
     // コンポーネントの初期化
@@ -156,8 +156,8 @@ bool my::Actor::Initialize(void) {
     return true;
 }
 
-bool my::Actor::Initialize(my::Actor::Param* param) {
-    _state = my::ActorState::Active;
+bool rachet::Actor::Initialize(rachet::Actor::Param* param) {
+    _state = rachet::ActorState::Active;
     _name = param->name;
     _transform = param->transform;
     _initial_transform = _transform;
@@ -174,7 +174,7 @@ bool my::Actor::Initialize(my::Actor::Param* param) {
     return true;
 }
 
-bool my::Actor::Input(void) {
+bool rachet::Actor::Input(void) {
     for (auto& com : _input_components) {
         if (com->IsActive()) {
             com->Input();
@@ -183,7 +183,7 @@ bool my::Actor::Input(void) {
     return true;
 }
 
-bool my::Actor::Update(float delta_time) {
+bool rachet::Actor::Update(float delta_time) {
     for (auto& com : _update_components) {
         if (com->IsActive()) {
             com->Update(delta_time);
@@ -192,7 +192,7 @@ bool my::Actor::Update(float delta_time) {
     return true;
 }
 
-bool my::Actor::Render(void) {
+bool rachet::Actor::Render(void) {
     bool re = false;
     for (auto& com : _render_components) {
         if (com->IsActive()) {
@@ -206,7 +206,7 @@ bool my::Actor::Render(void) {
     return re;
 }
 
-bool my::Actor::Release(void) {
+bool rachet::Actor::Release(void) {
     _input_components.clear();
     _update_components.clear();
     _render_components.clear();
@@ -217,7 +217,7 @@ bool my::Actor::Release(void) {
     return true;
 }
 
-void my::Actor::Construct(const std::shared_ptr<my::IBuilder>& builder) {
+void rachet::Actor::Construct(const std::shared_ptr<rachet::IBuilder>& builder) {
     builder->Construct(shared_from_this());
     auto& coms = _components;
     // 仕分け

@@ -1,8 +1,8 @@
-my::ComponentFactory::AddComponentCreator<my::EnemyComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyStateComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyIdleComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyMoveComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyGoHomeComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyMeleeAttackComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyRangedAttackComponent>();
-my::ComponentFactory::AddComponentCreator<my::EnemyDamageComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyStateComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyIdleComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyMoveComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyGoHomeComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyMeleeAttackComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyRangedAttackComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::EnemyDamageComponent>();

@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_MELEE_ATTACK_THREE_COMPONENT_H
-#define MY_PLAYER_MELEE_ATTACK_THREE_COMPONENT_H
+#ifndef RACHET_PLAYER_MELEE_ATTACK_THREE_COMPONENT_H
+#define RACHET_PLAYER_MELEE_ATTACK_THREE_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class PlayerMeleeAttackThreeComponent : public my::PlayerActionComponent {
-    using super = my::PlayerActionComponent;
+namespace rachet {
+class PlayerMeleeAttackThreeComponent : public rachet::PlayerActionComponent {
+    using super = rachet::PlayerActionComponent;
 private:
     //! ˆÚ“®
     std::weak_ptr<class PlayerMoveComponent> _move_com;
@@ -71,7 +71,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -86,4 +86,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_PLAYER_MELEE_ATTACK_THREE_COMPONENT_H
+#endif // !RACHET_PLAYER_MELEE_ATTACK_THREE_COMPONENT_H

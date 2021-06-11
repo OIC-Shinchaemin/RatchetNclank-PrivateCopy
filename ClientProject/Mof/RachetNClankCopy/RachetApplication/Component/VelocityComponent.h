@@ -1,5 +1,5 @@
-#ifndef MY_VELOCITY_COMPONENT_H
-#define MY_VELOCITY_COMPONENT_H
+#ifndef RACHET_VELOCITY_COMPONENT_H
+#define RACHET_VELOCITY_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class VelocityComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class VelocityComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     //! ‘¬“x
     Mof::CVector3 _velocity;
@@ -143,7 +143,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_VELOCITY_COMPONENT_H
+#endif // !RACHET_VELOCITY_COMPONENT_H

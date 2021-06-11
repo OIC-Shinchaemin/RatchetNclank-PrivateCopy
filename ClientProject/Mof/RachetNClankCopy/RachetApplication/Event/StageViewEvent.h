@@ -1,5 +1,5 @@
-#ifndef MY_STAGE_VIEW_EVENT_H
-#define MY_STAGE_VIEW_EVENT_H
+#ifndef RACHET_STAGE_VIEW_EVENT_H
+#define RACHET_STAGE_VIEW_EVENT_H
 
 
 #include "Event.h"
@@ -11,17 +11,17 @@
 #include "../Camera/AutoCameraController.h"
 
 
-namespace my {
-class StageViewEvent : public my::Event {
-    using super = my::Event;
-    using CameraObservable = base::core::Observable<const my::CameraController::CameraInfo&>;
+namespace rachet {
+class StageViewEvent : public rachet::Event {
+    using super = rachet::Event;
+    using CameraObservable = base::core::Observable<const rachet::CameraController::CameraInfo&>;
 private:
     //! カメラ
-    std::shared_ptr<my::Camera> _stage_view_camera;
+    std::shared_ptr<rachet::Camera> _stage_view_camera;
     //! カメラコントローラ
-    std::shared_ptr<my::AutoCameraController> _stage_view_camera_controller;
+    std::shared_ptr<rachet::AutoCameraController> _stage_view_camera_controller;
     //! 通知用
-    my::StageViewEvent::CameraObservable _camera_subject;
+    rachet::StageViewEvent::CameraObservable _camera_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -36,7 +36,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::StageViewEvent::CameraObservable* GetCameraObservable(void);
+    rachet::StageViewEvent::CameraObservable* GetCameraObservable(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -51,4 +51,4 @@ public:
     virtual bool Update(float delta_time) override;
 };
 }
-#endif // !MY_BRIDGE_EVENT_H
+#endif // !RACHET_BRIDGE_EVENT_H

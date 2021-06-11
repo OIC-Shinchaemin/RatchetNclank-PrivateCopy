@@ -1,7 +1,7 @@
 #include "VelocityComponent.h"
 
 
-my::VelocityComponent::VelocityComponent(int priority) :
+rachet::VelocityComponent::VelocityComponent(int priority) :
     super(priority),
     _velocity(),
     _angular_velocity(),
@@ -14,7 +14,7 @@ my::VelocityComponent::VelocityComponent(int priority) :
     _sleep(false) {
 }
 
-my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
+rachet::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
     super(obj),
     _velocity(obj._velocity),
     _angular_velocity(obj._angular_velocity),
@@ -27,72 +27,72 @@ my::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
     _sleep(obj._sleep) {
 }
 
-my::VelocityComponent::~VelocityComponent() {
+rachet::VelocityComponent::~VelocityComponent() {
 }
 
-void my::VelocityComponent::SetVelocity(Mof::CVector3 value) {
+void rachet::VelocityComponent::SetVelocity(Mof::CVector3 value) {
     this->_velocity = value;
 }
 
-void my::VelocityComponent::SetGravity(float value) {
+void rachet::VelocityComponent::SetGravity(float value) {
     this->_gravity = value;
 }
 
-void my::VelocityComponent::SetDrag(float value) {
+void rachet::VelocityComponent::SetDrag(float value) {
     this->_drag = value;
 }
 
-void my::VelocityComponent::SetUseGravity(bool use) {
+void rachet::VelocityComponent::SetUseGravity(bool use) {
     this->_use_gravity = use;
 }
 
-void my::VelocityComponent::SetSleep(bool b) {
+void rachet::VelocityComponent::SetSleep(bool b) {
     this->_sleep = b;
 }
 
-std::string my::VelocityComponent::GetType(void) const {
+std::string rachet::VelocityComponent::GetType(void) const {
     return "VelocityComponent";
 }
 
-Mof::CVector3 my::VelocityComponent::GetVelocity(void) const {
+Mof::CVector3 rachet::VelocityComponent::GetVelocity(void) const {
     return this->_velocity;
 }
 
-Mof::CVector3 my::VelocityComponent::GetAngularVelocity(void) const {
+Mof::CVector3 rachet::VelocityComponent::GetAngularVelocity(void) const {
     return this->_angular_velocity;
 }
 
-Mof::CVector3 my::VelocityComponent::GetVelocityForce(void) const {
+Mof::CVector3 rachet::VelocityComponent::GetVelocityForce(void) const {
     return this->_velocity_force;
 }
 
-float my::VelocityComponent::GetDrag(void) const {
+float rachet::VelocityComponent::GetDrag(void) const {
     return this->_drag;
 }
 
-float my::VelocityComponent::GetGravity(void) const {
+float rachet::VelocityComponent::GetGravity(void) const {
     return this->_gravity;
 }
 
-bool my::VelocityComponent::IsSleep(void) const {
+bool rachet::VelocityComponent::IsSleep(void) const {
     return this->_sleep;
 }
 
-void my::VelocityComponent::AddVelocityForce(Mof::CVector3 accele) {
+void rachet::VelocityComponent::AddVelocityForce(Mof::CVector3 accele) {
     this->_velocity_force += accele;
 }
 
-void my::VelocityComponent::AddAngularVelocityForce(Mof::CVector3 accele) {
+void rachet::VelocityComponent::AddAngularVelocityForce(Mof::CVector3 accele) {
     this->_angular_velocity_force += accele;
 }
 
-bool my::VelocityComponent::Initialize(void) {
+bool rachet::VelocityComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     return true;
 }
 
-bool my::VelocityComponent::Update(float delta_time) {
+bool rachet::VelocityComponent::Update(float delta_time) {
     _angular_velocity += _angular_velocity_force;
     _velocity += _velocity_force;
 
@@ -107,11 +107,11 @@ bool my::VelocityComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::VelocityComponent::Release(void) {
+bool rachet::VelocityComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::VelocityComponent::Clone(void) {
-    return std::make_shared<my::VelocityComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::VelocityComponent::Clone(void) {
+    return std::make_shared<rachet::VelocityComponent>(*this);
 }

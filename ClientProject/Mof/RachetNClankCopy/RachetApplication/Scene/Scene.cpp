@@ -3,39 +3,39 @@
 #include "Base/Core/Define.h"
 
 
-bool my::Scene::IsLoaded(void) {
+bool rachet::Scene::IsLoaded(void) {
     std::lock_guard<std::mutex> lock(_mutex);
     return this->_loaded;
 }
 
-void my::Scene::LoadComplete(void) {
+void rachet::Scene::LoadComplete(void) {
     std::lock_guard<std::mutex> lock(_mutex);
     _loaded = true;
 }
 
-std::shared_ptr<my::ResourceMgr> my::Scene::GetResource(void) const {
+std::shared_ptr<rachet::ResourceMgr> rachet::Scene::GetResource(void) const {
     if (auto ptr = _resource.lock()) {
         return ptr;
     } // if
     return nullptr;
 }
 
-std::shared_ptr<base::ui::UICanvas> my::Scene::GetUICanvas(void) const {
+std::shared_ptr<base::ui::UICanvas> rachet::Scene::GetUICanvas(void) const {
     if (auto ptr = _ui_canvas.lock()) {
         return ptr;
     } // if
     return nullptr;
 }
 
-Mof::LPRenderTarget my::Scene::GetDefaultRendarTarget(void) const {
+Mof::LPRenderTarget rachet::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
 }
 
-bool my::Scene::LoadingUpdate(float delta_time) {
+bool rachet::Scene::LoadingUpdate(float delta_time) {
     return false;
 }
 
-bool my::Scene::SceneUpdate(float delta_time) {
+bool rachet::Scene::SceneUpdate(float delta_time) {
     if (_effect.has_value()) {
         _effect.value().Update(delta_time);
 
@@ -46,22 +46,22 @@ bool my::Scene::SceneUpdate(float delta_time) {
     return true;
 }
 
-bool my::Scene::PreRender(void) {
+bool rachet::Scene::PreRender(void) {
     // start
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetRenderTarget(_rendar_target.GetRenderTarget(), ::g_pGraphics->GetDepthTarget());
     return true;
 }
 
-bool my::Scene::LoadingRender(void) {
+bool rachet::Scene::LoadingRender(void) {
     return true;
 }
 
-bool my::Scene::SceneRender(void) {
+bool rachet::Scene::SceneRender(void) {
     return false;
 }
 
-bool my::Scene::PostRender(void) {
+bool rachet::Scene::PostRender(void) {
     // end
     ::g_pGraphics->SetRenderTarget(_default, ::g_pGraphics->GetDepthTarget());
     ::g_pGraphics->SetDepthEnable(false);
@@ -84,7 +84,7 @@ bool my::Scene::PostRender(void) {
     return true;
 }
 
-my::Scene::Scene() :
+rachet::Scene::Scene() :
     _state(this_type::State::Active),
     _rendar_target(),
     _default(),
@@ -96,29 +96,29 @@ my::Scene::Scene() :
     _load_thread() {
 }
 
-my::Scene::~Scene() {
+rachet::Scene::~Scene() {
     if (_load_thread.has_value()) {
         _load_thread.value().join();
         _load_thread.reset();
     } // if
 }
 
-void my::Scene::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+void rachet::Scene::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::Scene::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void rachet::Scene::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-void my::Scene::AddSceneObserver(const std::shared_ptr<base::core::Observer<const scene::SceneMessage&>>& ptr) {
+void rachet::Scene::AddSceneObserver(const std::shared_ptr<base::core::Observer<const scene::SceneMessage&>>& ptr) {
     _subject.AddObserver(ptr);
 }
 
-bool my::Scene::Load(std::shared_ptr<my::Scene::Param> param) {
-    _effect = my::SceneEffect();
+bool rachet::Scene::Load(std::shared_ptr<rachet::Scene::Param> param) {
+    _effect = rachet::SceneEffect();
     _effect.value().Load("../Resource/shader/fadein.hlsl");
-    bool seccess = _effect.value().CreateShaderBuffer("cbSceneEffectParam", sizeof(my::cbSceneEffectParam));
+    bool seccess = _effect.value().CreateShaderBuffer("cbSceneEffectParam", sizeof(rachet::cbSceneEffectParam));
     _effect.value().time = 1.0f;
 
     _default = ::g_pGraphics->GetRenderTarget();
@@ -133,16 +133,16 @@ bool my::Scene::Load(std::shared_ptr<my::Scene::Param> param) {
     return true;
 }
 
-bool my::Scene::Initialize(void) {
+bool rachet::Scene::Initialize(void) {
     _effect.value().time = 1.0f;
     return true;
 }
 
-bool my::Scene::Input(void) {
+bool rachet::Scene::Input(void) {
     return true;
 }
 
-bool my::Scene::Update(float delta_time) {
+bool rachet::Scene::Update(float delta_time) {
     if (this->IsLoaded()) {
         if (_load_thread.has_value()) {
             _load_thread.value().join();
@@ -157,7 +157,7 @@ bool my::Scene::Update(float delta_time) {
     return true;
 }
 
-bool my::Scene::Render(void) {
+bool rachet::Scene::Render(void) {
     if (this->IsLoaded()) {
         this->PreRender();
         this->SceneRender();
@@ -169,6 +169,6 @@ bool my::Scene::Render(void) {
     return true;
 }
 
-bool my::Scene::Release(void) {
+bool rachet::Scene::Release(void) {
     return true;
 }

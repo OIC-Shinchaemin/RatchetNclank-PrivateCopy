@@ -1,26 +1,26 @@
 #include "PlayerMeleeAttackTwoEndComponent.h"
 
 
-my::PlayerMeleeAttackTwoEndComponent::PlayerMeleeAttackTwoEndComponent(int priority) :
+rachet::PlayerMeleeAttackTwoEndComponent::PlayerMeleeAttackTwoEndComponent(int priority) :
     super(priority) {
 }
 
-my::PlayerMeleeAttackTwoEndComponent::PlayerMeleeAttackTwoEndComponent(const PlayerMeleeAttackTwoEndComponent& obj) :
+rachet::PlayerMeleeAttackTwoEndComponent::PlayerMeleeAttackTwoEndComponent(const PlayerMeleeAttackTwoEndComponent& obj) :
     super(obj) {
 }
 
-my::PlayerMeleeAttackTwoEndComponent::~PlayerMeleeAttackTwoEndComponent() {
+rachet::PlayerMeleeAttackTwoEndComponent::~PlayerMeleeAttackTwoEndComponent() {
 }
 
-std::string my::PlayerMeleeAttackTwoEndComponent::GetType(void) const {
+std::string rachet::PlayerMeleeAttackTwoEndComponent::GetType(void) const {
     return "PlayerMeleeAttackTwoEndComponent";
 }
 
-std::string_view my::PlayerMeleeAttackTwoEndComponent::GetStateType(void) const {
+std::string_view rachet::PlayerMeleeAttackTwoEndComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionMeleeAttackTwoEndState;
 }
 
-bool my::PlayerMeleeAttackTwoEndComponent::Input(void) {
+bool rachet::PlayerMeleeAttackTwoEndComponent::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_N) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeState);
@@ -29,18 +29,18 @@ bool my::PlayerMeleeAttackTwoEndComponent::Input(void) {
     return true;
 }
 
-bool my::PlayerMeleeAttackTwoEndComponent::Update(float delta_time) {
+bool rachet::PlayerMeleeAttackTwoEndComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerMeleeAttackTwoEndComponent::Clone(void) {
-    return std::make_shared<my::PlayerMeleeAttackTwoEndComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerMeleeAttackTwoEndComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerMeleeAttackTwoEndComponent>(*this);
 }
 
-bool my::PlayerMeleeAttackTwoEndComponent::Start(void) {
+bool rachet::PlayerMeleeAttackTwoEndComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

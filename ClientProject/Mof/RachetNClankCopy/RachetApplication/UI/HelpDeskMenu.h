@@ -1,5 +1,5 @@
-#ifndef MY_HELP_DESK_MENU_H
-#define MY_HELP_DESK_MENU_H
+#ifndef RACHET_HELP_DESK_MENU_H
+#define RACHET_HELP_DESK_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -15,14 +15,14 @@
 #include "../Game/GameSystem/HelpDesk.h"
 
 
-namespace my {
-class HelpDeskMenu : public base::ui::UIPanel, public base::core::Observer<const my::HelpDesk::Info&> {
+namespace rachet {
+class HelpDeskMenu : public base::ui::UIPanel, public base::core::Observer<const rachet::HelpDesk::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 表示文字
-    my::HelpDesk::Info _infomation;
+    rachet::HelpDesk::Info _infomation;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,12 +33,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const my::HelpDesk::Info& info);
+    virtual void OnNotify(const rachet::HelpDesk::Info& info);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);    
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);    
     /// <summary>
     /// 描画
     /// </summary>
@@ -53,4 +53,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !MY_HELP_DESK_MENU_H
+#endif // !RACHET_HELP_DESK_MENU_H

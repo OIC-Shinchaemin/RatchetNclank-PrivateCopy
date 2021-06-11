@@ -30,21 +30,21 @@
 #include "../Component/Bullet/BombGloveBulletComponent.h"
 
 
-my::ComponentFactory::ComponentFactory() :
+rachet::ComponentFactory::ComponentFactory() :
     _component_creators() {
-    my::ComponentFactory::AddComponentCreator<my::AIStateComponent>();
-    my::ComponentFactory::AddComponentCreator<my::SightRecognitionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::ActionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::MotionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::HpComponent>();
-    my::ComponentFactory::AddComponentCreator<my::InvincibleComponent>();
-    my::ComponentFactory::AddComponentCreator<my::MotionStateComponent>();
-    my::ComponentFactory::AddComponentCreator<my::VelocityComponent>();
-    my::ComponentFactory::AddComponentCreator<my::TransformComponent>();
-    my::ComponentFactory::AddComponentCreator<my::MeshComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BillboardComponent>();
-    my::ComponentFactory::AddComponentCreator<my::AnimationMeshComponent>();
-    my::ComponentFactory::AddComponentCreator<my::CameraComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::AIStateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::SightRecognitionComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::ActionComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::MotionComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::HpComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::InvincibleComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::MotionStateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::VelocityComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::TransformComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::MeshComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BillboardComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::AnimationMeshComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::CameraComponent>();
 
 #include "ComponentRegister/PlayerComponentRegister.h"
 #include "ComponentRegister/EnemyComponentRegister.h"
@@ -52,37 +52,37 @@ my::ComponentFactory::ComponentFactory() :
 #include "ComponentRegister/OmniWrenchComponentRegister.h"
 #include "ComponentRegister/ShipComponentRegister.h"
        
-    my::ComponentFactory::AddComponentCreator<my::BoltCollisionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BoltComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BoltActionStateComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BoltDefaultComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BoltMovedComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BoltGravitateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BoltCollisionComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BoltComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BoltActionStateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BoltDefaultComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BoltMovedComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BoltGravitateComponent>();
 
-    my::ComponentFactory::AddComponentCreator<my::BulletItemCollisionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BulletItemComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BulletItemActionStateComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BulletItemDefaultComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BulletItemMovedComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BulletItemGravitateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BulletItemCollisionComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BulletItemComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BulletItemActionStateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BulletItemDefaultComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BulletItemMovedComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BulletItemGravitateComponent>();
 
-    my::ComponentFactory::AddComponentCreator<my::NanotechItemCollisionComponent>();
-    my::ComponentFactory::AddComponentCreator<my::NanotechItemComponent>();
-    my::ComponentFactory::AddComponentCreator<my::NanotechItemActionStateComponent>();
-    my::ComponentFactory::AddComponentCreator<my::NanotechItemDefaultComponent>();
-    my::ComponentFactory::AddComponentCreator<my::NanotechItemMovedComponent>();
-    my::ComponentFactory::AddComponentCreator<my::NanotechItemGravitateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::NanotechItemCollisionComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::NanotechItemComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::NanotechItemActionStateComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::NanotechItemDefaultComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::NanotechItemMovedComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::NanotechItemGravitateComponent>();
 
 
-    my::ComponentFactory::AddComponentCreator<my::BombGloveBulletComponent>();
-    my::ComponentFactory::AddComponentCreator<my::BlasterBulletComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BombGloveBulletComponent>();
+    rachet::ComponentFactory::AddComponentCreator<rachet::BlasterBulletComponent>();
 }
 
-my::ComponentFactory::~ComponentFactory() {
+rachet::ComponentFactory::~ComponentFactory() {
 }
 
 
-bool my::ComponentFactory::Release(void) {
+bool rachet::ComponentFactory::Release(void) {
     for (auto& factory : _component_creators) {
         factory.second->Release();
         factory.second.reset();
@@ -91,7 +91,7 @@ bool my::ComponentFactory::Release(void) {
     return true;
 }
 
-std::shared_ptr<my::Component> my::ComponentFactory::Create(const std::string& key, const rapidjson::Value& param) const {
+std::shared_ptr<rachet::Component> rachet::ComponentFactory::Create(const std::string& key, const rapidjson::Value& param) const {
     auto it = _component_creators.find(key);
     if (it != _component_creators.end()) {
         return it->second->Create(param);

@@ -7,7 +7,7 @@
 #include "../../State/EnemyActionStateDefine.h"
 
 
-void my::EnemyGoHomeComponent::InputMoveVelocity(float speed) {
+void rachet::EnemyGoHomeComponent::InputMoveVelocity(float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
         auto accele = Mof::CVector3(0.0f, 0.0f, -speed);
         auto rotate = super::GetOwner()->GetRotate();
@@ -17,7 +17,7 @@ void my::EnemyGoHomeComponent::InputMoveVelocity(float speed) {
     } // if
 }
 
-void my::EnemyGoHomeComponent::InputMoveAngularVelocity(float angle, float speed) {
+void rachet::EnemyGoHomeComponent::InputMoveAngularVelocity(float angle, float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
 
         float angle_y = angle;
@@ -43,7 +43,7 @@ void my::EnemyGoHomeComponent::InputMoveAngularVelocity(float angle, float speed
     } // if
 }
 
-my::EnemyGoHomeComponent::EnemyGoHomeComponent(int priority) :
+rachet::EnemyGoHomeComponent::EnemyGoHomeComponent(int priority) :
     super(priority),
     _move_speed(0.0f),
     _angular_speed(0.0f),
@@ -52,7 +52,7 @@ my::EnemyGoHomeComponent::EnemyGoHomeComponent(int priority) :
     _motion_state_com() {
 }
 
-my::EnemyGoHomeComponent::EnemyGoHomeComponent(const EnemyGoHomeComponent& obj) :
+rachet::EnemyGoHomeComponent::EnemyGoHomeComponent(const EnemyGoHomeComponent& obj) :
     super(obj),
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
@@ -61,43 +61,43 @@ my::EnemyGoHomeComponent::EnemyGoHomeComponent(const EnemyGoHomeComponent& obj) 
     _motion_state_com() {
 }
 
-my::EnemyGoHomeComponent::~EnemyGoHomeComponent() {
+rachet::EnemyGoHomeComponent::~EnemyGoHomeComponent() {
 }
 
-void my::EnemyGoHomeComponent::SetMoveSpeed(float speed) {
+void rachet::EnemyGoHomeComponent::SetMoveSpeed(float speed) {
     this->_move_speed = speed;
 }
 
-void my::EnemyGoHomeComponent::SetAngularSpeed(float speed) {
+void rachet::EnemyGoHomeComponent::SetAngularSpeed(float speed) {
     this->_angular_speed = speed;
 }
 
-void my::EnemyGoHomeComponent::SetIdealAngle(float radian) {
+void rachet::EnemyGoHomeComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
-std::string my::EnemyGoHomeComponent::GetType(void) const {
+std::string rachet::EnemyGoHomeComponent::GetType(void) const {
     return "EnemyGoHomeComponent";
 }
 
-std::string_view my::EnemyGoHomeComponent::GetStateType(void) const {
+std::string_view rachet::EnemyGoHomeComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionGoHomeState;
 }
 
-bool my::EnemyGoHomeComponent::Initialize(void) {
+bool rachet::EnemyGoHomeComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _action_state_com = super::GetOwner()->GetComponent<my::EnemyStateComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
-    _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _action_state_com = super::GetOwner()->GetComponent<rachet::EnemyStateComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<rachet::EnemyComponent>();
     return true;
 }
 
-bool my::EnemyGoHomeComponent::Update(float delta_time) {
+bool rachet::EnemyGoHomeComponent::Update(float delta_time) {
     Mof::CVector3 target_pos = super::GetOwner()->GetPosition();
-    if (auto enemy_com = _enemy_com.lock()) {
-        if (auto target = enemy_com->GetTarget().lock()) {
+    if (auto ENEMY_com = _ENEMY_com.lock()) {
+        if (auto target = ENEMY_com->GetTarget().lock()) {
             target_pos = target->GetPosition();
         } // if
         /*
@@ -132,16 +132,16 @@ bool my::EnemyGoHomeComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::EnemyGoHomeComponent::Release(void) {
+bool rachet::EnemyGoHomeComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyGoHomeComponent::Clone(void) {
-    return std::make_shared<my::EnemyGoHomeComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyGoHomeComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyGoHomeComponent>(*this);
 }
 
-bool my::EnemyGoHomeComponent::Start(void) {
+bool rachet::EnemyGoHomeComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

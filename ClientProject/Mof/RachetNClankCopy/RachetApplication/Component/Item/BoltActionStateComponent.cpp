@@ -1,22 +1,22 @@
 #include "BoltActionStateComponent.h"
 
 
-my::BoltActionStateComponent::BoltActionStateComponent(int priority) :
+rachet::BoltActionStateComponent::BoltActionStateComponent(int priority) :
     super(priority) {
 }
 
-my::BoltActionStateComponent::BoltActionStateComponent(const BoltActionStateComponent& obj) :
+rachet::BoltActionStateComponent::BoltActionStateComponent(const BoltActionStateComponent& obj) :
     super(obj) {
 }
 
-my::BoltActionStateComponent::~BoltActionStateComponent() {
+rachet::BoltActionStateComponent::~BoltActionStateComponent() {
 }
 
-std::string my::BoltActionStateComponent::GetType(void) const {
+std::string rachet::BoltActionStateComponent::GetType(void) const {
     return "BoltActionStateComponent";
 }
 
-bool my::BoltActionStateComponent::Initialize(void) {
+bool rachet::BoltActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::BoltActionType;
     //super::ChangeState(Type::kMoved);
@@ -24,11 +24,11 @@ bool my::BoltActionStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<my::Component> my::BoltActionStateComponent::Clone(void) {
-    return std::make_shared<my::BoltActionStateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BoltActionStateComponent::Clone(void) {
+    return std::make_shared<rachet::BoltActionStateComponent>(*this);
 }
 
-bool my::BoltActionStateComponent::CanTransition(const std::string& next) {
+bool rachet::BoltActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::BoltActionType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -46,7 +46,7 @@ bool my::BoltActionStateComponent::CanTransition(const std::string& next) {
 }
 
 #ifdef _DEBUG
-bool my::BoltActionStateComponent::DebugRender(void) {
+bool rachet::BoltActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 550.0f, "bolt state = %s", this->_state_machine.GetCurrentStateName());
     return true;

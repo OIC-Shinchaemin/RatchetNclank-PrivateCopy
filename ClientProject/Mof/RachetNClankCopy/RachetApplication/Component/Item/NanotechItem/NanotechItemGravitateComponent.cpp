@@ -4,38 +4,38 @@
 #include "../../CharacterComponent.h"
 
 
-my::NanotechItemGravitateComponent::NanotechItemGravitateComponent(int priority) :
+rachet::NanotechItemGravitateComponent::NanotechItemGravitateComponent(int priority) :
     super(priority),
     _type_com() {
 }
 
-my::NanotechItemGravitateComponent::NanotechItemGravitateComponent(const NanotechItemGravitateComponent& obj) :
+rachet::NanotechItemGravitateComponent::NanotechItemGravitateComponent(const NanotechItemGravitateComponent& obj) :
     super(obj),
     _type_com() {
 }
 
-my::NanotechItemGravitateComponent::~NanotechItemGravitateComponent() {
+rachet::NanotechItemGravitateComponent::~NanotechItemGravitateComponent() {
 }
 
-std::string my::NanotechItemGravitateComponent::GetType(void) const {
+std::string rachet::NanotechItemGravitateComponent::GetType(void) const {
     return "NanotechItemGravitateComponent";
 }
 
-std::string_view my::NanotechItemGravitateComponent::GetStateType(void) const {
+std::string_view rachet::NanotechItemGravitateComponent::GetStateType(void) const {
     return state::NanotechItemActionType::kGravitate;
 }
 
-bool my::NanotechItemGravitateComponent::Initialize(void) {
+bool rachet::NanotechItemGravitateComponent::Initialize(void) {
     super::Initialize();
-    _type_com = super::GetOwner()->GetComponent<my::NanotechItemComponent>();
+    _type_com = super::GetOwner()->GetComponent<rachet::NanotechItemComponent>();
     return true;
 }
 
-bool my::NanotechItemGravitateComponent::Update(float delta_time) {
+bool rachet::NanotechItemGravitateComponent::Update(float delta_time) {
     if (auto type_com = _type_com.lock()) {
         if (auto player = type_com->GetPlayer(); player) {
             auto target_pos = player->GetPosition();
-            target_pos.y += player->GetComponent<my::CharacterComponent>()->GetHeight();
+            target_pos.y += player->GetComponent<rachet::CharacterComponent>()->GetHeight();
 
             auto direction = Mof::CVector3(target_pos - super::GetOwner()->GetPosition());
             direction.Normal(direction);
@@ -45,28 +45,28 @@ bool my::NanotechItemGravitateComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::NanotechItemGravitateComponent::Release(void) {
+bool rachet::NanotechItemGravitateComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::NanotechItemGravitateComponent::Clone(void) {
-    return std::make_shared<my::NanotechItemGravitateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::NanotechItemGravitateComponent::Clone(void) {
+    return std::make_shared<rachet::NanotechItemGravitateComponent>(*this);
 }
 
-bool my::NanotechItemGravitateComponent::Start(void) {
+bool rachet::NanotechItemGravitateComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
 
-    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
     velocity_com->SetGravity(0.0f);
     velocity_com->AddVelocityForce(Mof::CVector3(0.0f, 30.0f, 0.0f));
     return true;
 }
 
-bool my::NanotechItemGravitateComponent::End(void) {
+bool rachet::NanotechItemGravitateComponent::End(void) {
     super::End();
     return true;
 }

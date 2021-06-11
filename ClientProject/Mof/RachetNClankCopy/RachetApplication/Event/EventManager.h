@@ -1,5 +1,5 @@
-#ifndef MY_EVENT_MANAGER_H
-#define MY_EVENT_MANAGER_H
+#ifndef RACHET_EVENT_MANAGER_H
+#define RACHET_EVENT_MANAGER_H
 
 
 #include <memory>
@@ -8,15 +8,15 @@
 #include "EventReferenceTable.h"
 
 
-namespace my {
+namespace rachet {
 class EventManager : 
-    public std::enable_shared_from_this<my::EventManager>,
-    public base::core::Observer<const char*, const std::shared_ptr<my::Event>&> {
+    public std::enable_shared_from_this<rachet::EventManager>,
+    public base::core::Observer<const char*, const std::shared_ptr<rachet::Event>&> {
 private:
     //! ゲームイベント
-    std::vector<std::shared_ptr<my::Event>> _events;
+    std::vector<std::shared_ptr<rachet::Event>> _events;
     //! データ
-    //my::EventReferenceTable _table;
+    //rachet::EventReferenceTable _table;
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,7 +31,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<my::Event>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<rachet::Event>& ptr) override;
     /// <summary>
     /// 作成
     /// </summary>
@@ -72,4 +72,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !MY_EVENT_MANAGER_H
+#endif // !RACHET_EVENT_MANAGER_H

@@ -64,30 +64,30 @@ bool JsonStageParser::StaticObjectListParse(rapidjson::Document& json, StageObje
 
 bool JsonStageParser::EnemySpawnListParse(rapidjson::Document& json, EnemySpawnArray* out) {
     // 簡易アクセス用
-    const auto& json_enemy_spawn_list = json["enemy_spawn_list"];
-    const int   enemy_count = json_enemy_spawn_list.Size();
+    const auto& json_ENEMY_spawn_list = json["enemy_spawn_list"];
+    const int   ENEMY_count = json_ENEMY_spawn_list.Size();
 
     // 敵の数だけメモリ確保
-    out->reserve(enemy_count);
+    out->reserve(ENEMY_count);
 
-    for (int i = 0; i < enemy_count; i++) {
+    for (int i = 0; i < ENEMY_count; i++) {
         // 簡易アクセス用
-        const auto& json_enemy_data = json_enemy_spawn_list[i];
+        const auto& json_ENEMY_data = json_ENEMY_spawn_list[i];
 
         Vector3 position;
-        std::string builder_path = json_enemy_data["builder"].GetString();
-        std::string name         = json_enemy_data["name"].GetString();
-        position.x               = json_enemy_data["pos_x"].GetDouble();
-        position.y               = json_enemy_data["pos_y"].GetDouble();
-        position.z               = json_enemy_data["pos_z"].GetDouble();
+        std::string builder_path = json_ENEMY_data["builder"].GetString();
+        std::string name         = json_ENEMY_data["name"].GetString();
+        position.x               = json_ENEMY_data["pos_x"].GetDouble();
+        position.y               = json_ENEMY_data["pos_y"].GetDouble();
+        position.z               = json_ENEMY_data["pos_z"].GetDouble();
 
         // 敵出現位置データの登録
         StageObjectPtr object_tmp = std::make_shared<StageObject>(
             true, false, StageObjectType::EnemySpawnPoint,
             name, -1, position
             );
-        EnemySpawnData enemy_tmp(builder_path, std::move(object_tmp));
-        out->push_back(std::move(enemy_tmp));
+        EnemySpawnData ENEMY_tmp(builder_path, std::move(object_tmp));
+        out->push_back(std::move(ENEMY_tmp));
     }
     return true;
 }
@@ -191,7 +191,7 @@ StageFileResult JsonStageParser::Load(const std::string& path, ParseData& out) {
     // 簡易アクセス用
     MeshArray*        mesh_array          = out.mesh_array_pointer;
     StageObjectArray* static_object_array = out.static_object_array_pointer;
-    EnemySpawnArray*  enemy_spawn_array   = out.enemy_spawn_array_pointer;
+    EnemySpawnArray*  ENEMY_spawn_array   = out.ENEMY_spawn_array_pointer;
     GimmickArray*     gimmick_array       = out.gimmick_array_pointer;
     WoodBoxArray*     box_array           = out.box_array_pointer;
     
@@ -209,7 +209,7 @@ StageFileResult JsonStageParser::Load(const std::string& path, ParseData& out) {
 
     // 敵初期位置情報リストの分解
     if (json_document.HasMember("enemy_spawn_list")) {
-        EnemySpawnListParse(json_document, enemy_spawn_array);
+        EnemySpawnListParse(json_document, ENEMY_spawn_array);
     }
 
     if (json_document.HasMember("gimmick_list")) {

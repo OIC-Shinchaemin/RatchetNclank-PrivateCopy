@@ -17,13 +17,13 @@ class LookAroundNodeExecutor : public behaviour::ActionNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<my::Actor> actor;
+        std::weak_ptr<rachet::Actor> actor;
         //! AI
-        std::weak_ptr<my::AIStateComponent> ai_com;
+        std::weak_ptr<rachet::AIStateComponent> ai_com;
         //! エネミー
-        std::weak_ptr<my::EnemyComponent> enemy_com;
+        std::weak_ptr<rachet::EnemyComponent> ENEMY_com;
         //! エネミー状態
-        std::weak_ptr<my::EnemyStateComponent> state_com;
+        std::weak_ptr<rachet::EnemyStateComponent> state_com;
     };
 private:
     //! 実行引数
@@ -49,9 +49,9 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.ai_com = actor->GetComponent<my::AIStateComponent>();
-            _node_args.enemy_com = actor->GetComponent<my::EnemyComponent>();
-            _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
+            _node_args.ai_com = actor->GetComponent<rachet::AIStateComponent>();
+            _node_args.ENEMY_com = actor->GetComponent<rachet::EnemyComponent>();
+            _node_args.state_com = actor->GetComponent<rachet::EnemyStateComponent>();
         } // if
     }
     /// <summary>

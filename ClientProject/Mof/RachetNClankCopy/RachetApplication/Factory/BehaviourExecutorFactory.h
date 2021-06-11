@@ -1,5 +1,5 @@
-#ifndef MY_BEHAVIOUR_EXECUTOR_FACTORY_H
-#define MY_BEHAVIOUR_EXECUTOR_FACTORY_H
+#ifndef RACHET_BEHAVIOUR_EXECUTOR_FACTORY_H
+#define RACHET_BEHAVIOUR_EXECUTOR_FACTORY_H
 
 
 #include <memory>
@@ -10,7 +10,7 @@
 #include "BehaviourFactory.h"
 
 
-namespace my {
+namespace rachet {
 class BehaviourExecutorFactory {
     //! マップ
     std::unordered_map<std::string, behaviour::CompositeNodePtr > _behaviour_map;
@@ -19,7 +19,7 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="behaviour_factory"></param>
-    BehaviourExecutorFactory(my::BehaviourFactory* behaviour_factory);
+    BehaviourExecutorFactory(rachet::BehaviourFactory* behaviour_factory);
     /// <summary>
     /// 作成
     /// </summary>
@@ -28,4 +28,4 @@ public:
     behaviour::NodeExecutorPtr Create(const char* key) const;
 };
 }
-#endif // !MY_BEHAVIOUR_EXECUTOR_FACTORY_H
+#endif // !RACHET_BEHAVIOUR_EXECUTOR_FACTORY_H

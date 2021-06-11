@@ -11,7 +11,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
+rachet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     super(priority),
     _range(3.0f),
     _volume(0.2f),
@@ -20,11 +20,11 @@ my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     _velocity_com(),
     _motion_com(),
     _motion_state_com(),
-    _enemy_com(),
+    _ENEMY_com(),
     _state_com() {
 }
 
-my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
+rachet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
@@ -32,48 +32,48 @@ my::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAtta
     _velocity_com(),
     _motion_com(),
     _motion_state_com(),
-    _enemy_com(),
+    _ENEMY_com(),
     _state_com() {
 }
 
-my::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
+rachet::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
 }
 
-std::string my::EnemyRangedAttackComponent::GetType(void) const {
+std::string rachet::EnemyRangedAttackComponent::GetType(void) const {
     return "EnemyRangedAttackComponent";
 }
 
-std::string_view my::EnemyRangedAttackComponent::GetStateType(void) const {
+std::string_view rachet::EnemyRangedAttackComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionRangedAttackState;
 }
 
-float my::EnemyRangedAttackComponent::GetRange(void) const {
+float rachet::EnemyRangedAttackComponent::GetRange(void) const {
     return this->_range;
 }
 
-float my::EnemyRangedAttackComponent::GetVolume(void) const {
+float rachet::EnemyRangedAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-Mof::CSphere my::EnemyRangedAttackComponent::GetCanAttackRangeSphere(void) const {
+Mof::CSphere rachet::EnemyRangedAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _range);
 }
 
-bool my::EnemyRangedAttackComponent::Initialize(void) {
+bool rachet::EnemyRangedAttackComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
-    _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();
-    _state_com = super::GetOwner()->GetComponent<my::EnemyStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _motion_com = super::GetOwner()->GetComponent<rachet::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<rachet::EnemyComponent>();
+    _state_com = super::GetOwner()->GetComponent<rachet::EnemyStateComponent>();
     return true;
 }
 
-bool my::EnemyRangedAttackComponent::Update(float delta_time) {
-    if (auto enemy_com = _enemy_com.lock()) {
-        if (auto target = enemy_com->GetTarget().lock()) {
+bool rachet::EnemyRangedAttackComponent::Update(float delta_time) {
+    if (auto ENEMY_com = _ENEMY_com.lock()) {
+        if (auto target = ENEMY_com->GetTarget().lock()) {
             auto owner = super::GetOwner();
             Mof::CVector3 direction = target->GetPosition() - owner->GetPosition();
             float ideal_y = math::ToDegree(std::atan2(-direction.z, direction.x) + math::kHalfPi + +math::kPi);
@@ -103,16 +103,16 @@ bool my::EnemyRangedAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::EnemyRangedAttackComponent::Release(void) {
+bool rachet::EnemyRangedAttackComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyRangedAttackComponent::Clone(void) {
-    return std::make_shared<my::EnemyRangedAttackComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyRangedAttackComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyRangedAttackComponent>(*this);
 }
 
-bool my::EnemyRangedAttackComponent::Start(void) {
+bool rachet::EnemyRangedAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -121,21 +121,21 @@ bool my::EnemyRangedAttackComponent::Start(void) {
         motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionRangedAttackState);
     } // if
 
-    _ASSERT_EXPR(_enemy_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
-    auto enemy_com = _enemy_com.lock();
+    _ASSERT_EXPR(_ENEMY_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
+    auto ENEMY_com = _ENEMY_com.lock();
 
-    auto param = my::Bullet::Param();
+    auto param = rachet::Bullet::Param();
     auto owner = super::GetOwner();
-    auto transform = my::Transform();
+    auto transform = rachet::Transform();
     param.transform.position = owner->GetPosition();
-    param.transform.position.y += enemy_com->GetHeight();
+    param.transform.position.y += ENEMY_com->GetHeight();
     param.transform.rotate = owner->GetRotate();
 
-    Mof::CVector3 direction = enemy_com->GetTargetPosition().value() - param.transform.position;
+    Mof::CVector3 direction = ENEMY_com->GetTargetPosition().value() - param.transform.position;
     direction.Normal(direction);
     param.speed = direction * _shot_speed;
 
-    auto add = my::FactoryManager::Singleton().CreateActor<my::EnemyBullet>("../Resource/builder/enemy_bullet.json", &param);
+    auto add = rachet::FactoryManager::Singleton().CreateActor<rachet::EnemyBullet>("../Resource/builder/ENEMY_bullet.json", &param);
     add->Start(param);
     super::GetOwner()->Notify("AddRequest", add);
     return true;

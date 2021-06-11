@@ -1,5 +1,5 @@
-#ifndef MY_BOMB_GLOVE_EFFECT_H
-#define MY_BOMB_GLOVE_EFFECT_H
+#ifndef RACHET_BOMB_GLOVE_EFFECT_H
+#define RACHET_BOMB_GLOVE_EFFECT_H
 
 
 #include "ParticleEffect.h"
@@ -7,9 +7,9 @@
 #include <Mof.h>
 
 
-namespace my {
-class BombGloveEffect : public my::ParticleEffect {
-    using super = my::ParticleEffect;
+namespace rachet {
+class BombGloveEffect : public rachet::ParticleEffect {
+    using super = rachet::ParticleEffect;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,7 +33,7 @@ public:
     /// 開始
     /// </summary>
     /// <param name="info"></param>
-    //virtual void Start(const my::ParticleEffect::Info& info);
+    //virtual void Start(const rachet::ParticleEffect::Info& info);
 };
 }
-#endif // !MY_BOMB_GLOVE_EFFECT_H
+#endif // !RACHET_BOMB_GLOVE_EFFECT_H

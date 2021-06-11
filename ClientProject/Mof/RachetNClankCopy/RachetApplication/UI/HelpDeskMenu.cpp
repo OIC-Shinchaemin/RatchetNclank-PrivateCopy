@@ -1,26 +1,26 @@
 #include "HelpDeskMenu.h"
 
 
-my::HelpDeskMenu::HelpDeskMenu(const char* name) :
+rachet::HelpDeskMenu::HelpDeskMenu(const char* name) :
     super(name) {
     super::_position = Mof::CVector2(10.0f, 10.0f);
 }
 
-void my::HelpDeskMenu::OnNotify(const my::HelpDesk::Info& info) {
+void rachet::HelpDeskMenu::OnNotify(const rachet::HelpDesk::Info& info) {
     super::Notify(shared_from_this(), "Enable");
     _infomation = info;
 }
 
-void my::HelpDeskMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+void rachet::HelpDeskMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-bool my::HelpDeskMenu::Update(float delta_time) {
+bool rachet::HelpDeskMenu::Update(float delta_time) {
     // ˆê’èŽžŠÔ•\Ž¦‚µ‚½‚çfalse‚ð•Ô‚·
     return true;
 }
 
-bool my::HelpDeskMenu::Render(void) {
+bool rachet::HelpDeskMenu::Render(void) {
     auto pos = super::_position;
     auto text = _infomation.text.c_str();
     ::CGraphicsUtilities::RenderString(pos.x + 1, pos.y + 1, def::color_rgba_u32::kBlack, "%s", text);

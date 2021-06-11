@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_COMPONENT_H
-#define MY_ENEMY_COMPONENT_H
+#ifndef RACHET_ENEMY_COMPONENT_H
+#define RACHET_ENEMY_COMPONENT_H
 
 
 #include "../CharacterComponent.h"
@@ -10,14 +10,14 @@
 #include "Base/Core/Timer.h"
 
 
-namespace my {
-class EnemyComponent : public my::CharacterComponent {
-    using super = my::CharacterComponent;
+namespace rachet {
+class EnemyComponent : public rachet::CharacterComponent {
+    using super = rachet::CharacterComponent;
 private:
     //! 休止状態切り替え
     base::core::Timer _velocity_timer;
     //! 標的
-    std::weak_ptr<my::Actor> _target;
+    std::weak_ptr<rachet::Actor> _target;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
 public:
@@ -39,7 +39,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<my::Actor>& ptr);
+    void SetTarget(const std::shared_ptr<rachet::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -51,7 +51,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<my::Actor> GetTarget(void) const;
+    std::weak_ptr<rachet::Actor> GetTarget(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -87,7 +87,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_ENEMY_COMPONENT_H
+#endif // !RACHET_ENEMY_COMPONENT_H

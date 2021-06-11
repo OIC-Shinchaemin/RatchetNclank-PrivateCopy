@@ -1,5 +1,5 @@
-#ifndef MY_MOTION_STATE_COMPONENT_H
-#define MY_MOTION_STATE_COMPONENT_H
+#ifndef RACHET_MOTION_STATE_COMPONENT_H
+#define RACHET_MOTION_STATE_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -8,9 +8,9 @@
 #include "../State/MotionState.h"
 
 
-namespace my {
-class MotionStateComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class MotionStateComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     //! èÛë‘
     base::core::StateMachine _state_machine;
@@ -72,7 +72,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// ïœçX
     /// </summary>
@@ -80,4 +80,4 @@ public:
     void ChangeState(const std::string& name);
 };
 }
-#endif // !MY_MOTION_STATE_COMPONENT_H
+#endif // !RACHET_MOTION_STATE_COMPONENT_H

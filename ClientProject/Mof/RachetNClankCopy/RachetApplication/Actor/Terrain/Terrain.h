@@ -1,5 +1,5 @@
-#ifndef MY_TERRAIN_H
-#define MY_TERRAIN_H
+#ifndef RACHET_TERRAIN_H
+#define RACHET_TERRAIN_H
 
 
 #include "../../Actor.h"
@@ -7,21 +7,21 @@
 #include "../../ResourceManager.h"
 
 
-namespace my {
-class Terrain : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class Terrain : public rachet::Actor {
+    using super = rachet::Actor;
 private:
     //! 水面
     Mof::LPGeometry _plane;
     //! スクロール
-    my::cbUVScrollParam _uv_scroll;
+    rachet::cbUVScrollParam _uv_scroll;
     //! スクロール
     Mof::CVector2 _scroll_increase;
     //シェーダー
     Mof::CShader _shader;
     Mof::CShaderBind_3DPrimitiveBase _shader_bind;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,13 +35,13 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(my::Actor::Param* param) override;
+    virtual bool Initialize(rachet::Actor::Param* param) override;
     /// <summary>
     /// 更新
     /// </summary>
@@ -62,4 +62,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !MY_TERRAIN_H
+#endif // !RACHET_TERRAIN_H

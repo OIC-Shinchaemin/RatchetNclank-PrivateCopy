@@ -1,5 +1,5 @@
-#ifndef MY_MOTION_COMPONENT_H
-#define MY_MOTION_COMPONENT_H
+#ifndef RACHET_MOTION_COMPONENT_H
+#define RACHET_MOTION_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -11,14 +11,14 @@
 #include "../MotionNames.h"
 
 
-namespace my {
-class MotionComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class MotionComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     //! モーション
     Mof::LPMeshMotionController	_motion;
     //! モーション名
-    std::weak_ptr<my::MotionNames> _motion_names;
+    std::weak_ptr<rachet::MotionNames> _motion_names;
     //! パス
     std::string _path;
     /// <summary>
@@ -61,7 +61,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::shared_ptr<my::MotionNames> GetMotionInfoMap(void) const;
+    const std::shared_ptr<rachet::MotionNames> GetMotionInfoMap(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -97,7 +97,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 変更
     /// </summary>
@@ -124,4 +124,4 @@ public:
     bool AddTimer(float time);
 };
 }
-#endif // !MY_MOTION_COMPONENT_H
+#endif // !RACHET_MOTION_COMPONENT_H

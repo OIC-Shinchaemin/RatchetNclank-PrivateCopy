@@ -1,5 +1,5 @@
-#ifndef MY_BLASTER_BULLET_COMPONENT_H
-#define MY_BLASTER_BULLET_COMPONENT_H
+#ifndef RACHET_BLASTER_BULLET_COMPONENT_H
+#define RACHET_BLASTER_BULLET_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class BlasterBulletComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class BlasterBulletComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
 public:
     /// <summary>
@@ -55,7 +55,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_BLASTER_BULLET_COMPONENT_H
+#endif // !RACHET_BLASTER_BULLET_COMPONENT_H

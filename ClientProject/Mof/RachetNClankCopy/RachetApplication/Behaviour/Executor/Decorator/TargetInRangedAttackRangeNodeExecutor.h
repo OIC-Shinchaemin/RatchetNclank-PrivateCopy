@@ -14,11 +14,11 @@ class TargetInRangedAttackRangeNodeExecutor : public behaviour::DecoratorNodeExe
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<my::Actor> actor;
+        std::weak_ptr<rachet::Actor> actor;
         //! エネミー
-        std::weak_ptr<my::EnemyComponent> enemy_com;
+        std::weak_ptr<rachet::EnemyComponent> ENEMY_com;
         //! 攻撃
-        std::weak_ptr<my::EnemyRangedAttackComponent> ranged_attack_com;
+        std::weak_ptr<rachet::EnemyRangedAttackComponent> ranged_attack_com;
     };
 private:
     //! 実行引数
@@ -44,8 +44,8 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.enemy_com = actor->GetComponent<my::EnemyComponent>();
-            _node_args.ranged_attack_com = actor->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyRangedAttackComponent>();
+            _node_args.ENEMY_com = actor->GetComponent<rachet::EnemyComponent>();
+            _node_args.ranged_attack_com = actor->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::EnemyRangedAttackComponent>();
         } // if
     }
     /// <summary>

@@ -1,13 +1,13 @@
-#ifndef MY_PYROCITOR_BULLET_H
-#define MY_PYROCITOR_BULLET_H
+#ifndef RACHET_PYROCITOR_BULLET_H
+#define RACHET_PYROCITOR_BULLET_H
 
 
 #include "Bullet.h"
 
 
-namespace my {
-class PyrocitorBullet : public my::Bullet {
-    using super = my::Bullet;
+namespace rachet {
+class PyrocitorBullet : public rachet::Bullet {
+    using super = rachet::Bullet;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,7 +33,7 @@ public:
     /// 発射
     /// </summary>
     /// <param name="in"></param>
-    void Start(const my::Bullet::Param& in);
+    void Start(const rachet::Bullet::Param& in);
 };
 }
-#endif // !MY_PYROCITOR_BULLET_H
+#endif // !RACHET_PYROCITOR_BULLET_H

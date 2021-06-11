@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_H
-#define MY_PLAYER_H
+#ifndef RACHET_PLAYER_H
+#define RACHET_PLAYER_H
 
 
 #include "Character.h"
@@ -16,11 +16,11 @@
 #include "../../Game/GameSystem/GameQuest.h"
 
 
-namespace my {
-class Player : public my::Character,
-    public base::core::Observer<std::shared_ptr<my::Weapon>>,
-    public base::core::Observer<const my::QuickChangeSystem::Info&> {
-    using super = my::Character;
+namespace rachet {
+class Player : public rachet::Character,
+    public base::core::Observer<std::shared_ptr<rachet::Weapon>>,
+    public base::core::Observer<const rachet::QuickChangeSystem::Info&> {
+    using super = rachet::Character;
     struct ObservablePair {
         std::string name;
         base::core::Observable<bool> subject;
@@ -31,15 +31,15 @@ class Player : public my::Character,
     };
 private:
     //! 武器
-    std::weak_ptr<my::Mechanical> _current_mechanical;
+    std::weak_ptr<rachet::Mechanical> _current_mechanical;
     //! 武器
-    std::shared_ptr<my::OmniWrench> _omniwrench;
+    std::shared_ptr<rachet::OmniWrench> _omniwrench;
     //! 武器
-    std::vector<std::shared_ptr<my::Actor>> _children;
+    std::vector<std::shared_ptr<rachet::Actor>> _children;
     //! 武器
-    std::shared_ptr<my::Weapon> _current_weapon;
+    std::shared_ptr<rachet::Weapon> _current_weapon;
     //! プレイヤー
-    std::weak_ptr<my::PlayerComponent> _player_com;
+    std::weak_ptr<rachet::PlayerComponent> _player_com;
     //! 腕の位置
     Mof::LPBONEMOTIONSTATE _upp_bone_state;
     //! 有効
@@ -49,7 +49,7 @@ private:
     //! 通知用
     ObservablePair _quick_change_subject;
     //! 通知用
-    base::core::Observable<const my::GameQuest&> _quest_subject;
+    base::core::Observable<const rachet::GameQuest&> _quest_subject;
     //! 通知用
     std::unordered_map<std::string, ObservablePair* >_notificationable_subject_map;
     //! 通知用
@@ -67,17 +67,17 @@ public:
     /// 通知
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(std::shared_ptr<my::Weapon> change) override;
+    virtual void OnNotify(std::shared_ptr<rachet::Weapon> change) override;
     /// <summary>
     /// 通知
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(const my::QuickChangeSystem::Info& info) override;
+    virtual void OnNotify(const rachet::QuickChangeSystem::Info& info) override;
     /// <summary>
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    //virtual void OnNotify(const my::ShopSystem::Info& info) override;
+    //virtual void OnNotify(const rachet::ShopSystem::Info& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -95,24 +95,24 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const my::GameQuest&>* GetQuestSubject(void);
+    base::core::Observable<const rachet::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name="tag"></param>
     /// <returns></returns>
-    std::shared_ptr<my::Actor> GetChild(const std::string& tag) const;
+    std::shared_ptr<rachet::Actor> GetChild(const std::string& tag) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::Mechanical> GetCurrentMechanical(void) const;
+    std::shared_ptr<rachet::Mechanical> GetCurrentMechanical(void) const;
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddChild(const std::shared_ptr<my::Actor>& ptr);
+    void AddChild(const std::shared_ptr<rachet::Actor>& ptr);
     /// <summary>
     /// プッシュ
     /// </summary>
@@ -139,7 +139,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(my::Actor::Param* param) override;
+    virtual bool Initialize(rachet::Actor::Param* param) override;
     /// <summary>
     /// 入力
     /// </summary>
@@ -166,4 +166,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !MY_PLAYER_H
+#endif // !RACHET_PLAYER_H

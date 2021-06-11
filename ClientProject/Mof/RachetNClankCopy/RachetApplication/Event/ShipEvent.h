@@ -1,5 +1,5 @@
-#ifndef MY_SHIP_EVENT_H
-#define MY_SHIP_EVENT_H
+#ifndef RACHET_SHIP_EVENT_H
+#define RACHET_SHIP_EVENT_H
 
 
 #include "Event.h"
@@ -12,24 +12,24 @@
 #include "../Camera/PointCameraController.h"
 
 
-namespace my {
-class ShipEvent : public my::Event,
-    public base::core::Observer<const my::CameraController::CameraInfo&>,
+namespace rachet {
+class ShipEvent : public rachet::Event,
+    public base::core::Observer<const rachet::CameraController::CameraInfo&>,
     public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
-    using super = my::Event;
+    using super = rachet::Event;
 private:
     //! 通知用
-    base::core::Observable<const char*, const std::shared_ptr<my::Actor>& > _ship_event_subject;
+    base::core::Observable<const char*, const std::shared_ptr<rachet::Actor>& > _ship_event_subject;
     //! カメラ
-    std::shared_ptr<my::Camera> _ship_view_camera;
+    std::shared_ptr<rachet::Camera> _ship_view_camera;
     //! カメラコントローラ
-    my::PointCameraController _ship_view_camera_controller;
+    rachet::PointCameraController _ship_view_camera_controller;
     //! 位置
     Mof::CVector3 _ideal_position;
     //! カメラ情報
-    my::CameraController::CameraInfo _info;
+    rachet::CameraController::CameraInfo _info;
     //! プレイヤービュー
-    std::weak_ptr<base::core::Observer<const my::CameraController::CameraInfo&>> _camera_com;
+    std::weak_ptr<base::core::Observer<const rachet::CameraController::CameraInfo&>> _camera_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -50,13 +50,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const my::CameraController::CameraInfo& info) override;
+    virtual void OnNotify(const rachet::CameraController::CameraInfo& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const char*, const std::shared_ptr<my::Actor>&>* GetShipEventSubject(void);
+    base::core::Observable<const char*, const std::shared_ptr<rachet::Actor>&>* GetShipEventSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -71,4 +71,4 @@ public:
     virtual bool Update(float delta_time) override;
 };
 }
-#endif // !MY_SHIP_EVENT_H
+#endif // !RACHET_SHIP_EVENT_H

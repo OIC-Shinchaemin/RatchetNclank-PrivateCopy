@@ -1,5 +1,5 @@
-#ifndef MY_GAME_WORLD_H
-#define MY_GAME_WORLD_H
+#ifndef RACHET_GAME_WORLD_H
+#define RACHET_GAME_WORLD_H
 
 
 #include <memory>
@@ -8,9 +8,9 @@
 #include "../Actor.h"
 
 
-namespace my {
+namespace rachet {
 class GameWorld {
-    using ActorPtr = std::shared_ptr<my::Actor>;
+    using ActorPtr = std::shared_ptr<rachet::Actor>;
 private:
     //! èäéù
     std::vector<ActorPtr> _actors;
@@ -28,7 +28,7 @@ public:
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    my::GameWorld::ActorPtr GetActor(uint32_t index) const;
+    rachet::GameWorld::ActorPtr GetActor(uint32_t index) const;
     /// <summary>
     /// í«â¡
     /// </summary>
@@ -63,4 +63,4 @@ public:
     void Reset(void);
 };
 }
-#endif // !MY_GAME_WORLD_H
+#endif // !RACHET_GAME_WORLD_H

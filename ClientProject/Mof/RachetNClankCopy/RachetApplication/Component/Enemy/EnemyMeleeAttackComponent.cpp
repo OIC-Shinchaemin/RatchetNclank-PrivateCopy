@@ -7,7 +7,7 @@
 #include "../Collision/Object/EnemyMeleeAttackCollisionComponent.h"
 
 
-my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
+rachet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     super(priority),
     _range(1.7f),
     _volume(0.5f),
@@ -17,7 +17,7 @@ my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     _collision_com() {
 }
 
-my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj) :
+rachet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
@@ -27,40 +27,40 @@ my::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackC
     _collision_com() {
 }
 
-my::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
+rachet::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
 }
 
-std::string my::EnemyMeleeAttackComponent::GetType(void) const {
+std::string rachet::EnemyMeleeAttackComponent::GetType(void) const {
     return "EnemyMeleeAttackComponent";
 }
 
-std::string_view my::EnemyMeleeAttackComponent::GetStateType(void) const {
+std::string_view rachet::EnemyMeleeAttackComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionMeleeAttackState;
 }
 
-float my::EnemyMeleeAttackComponent::GetRange(void) const {
+float rachet::EnemyMeleeAttackComponent::GetRange(void) const {
     return this->_range;
 }
 
-float my::EnemyMeleeAttackComponent::GetVolume(void) const {
+float rachet::EnemyMeleeAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-Mof::CSphere my::EnemyMeleeAttackComponent::GetCanAttackRangeSphere(void) const {
+Mof::CSphere rachet::EnemyMeleeAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _range);
 }
 
-bool my::EnemyMeleeAttackComponent::Initialize(void) {
+bool rachet::EnemyMeleeAttackComponent::Initialize(void) {
     super::Initialize();
 
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
-    _collision_com = super::GetOwner()->GetComponent<my::EnemyMeleeAttackCollisionComponent>();
+    _motion_com = super::GetOwner()->GetComponent<rachet::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
+    _collision_com = super::GetOwner()->GetComponent<rachet::EnemyMeleeAttackCollisionComponent>();
     return true;
 }
 
-bool my::EnemyMeleeAttackComponent::Update(float delta_time) {
+bool rachet::EnemyMeleeAttackComponent::Update(float delta_time) {
     if (_wait.Tick(delta_time)) {
         if (auto motion_state_com = _motion_state_com.lock()) {
             motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionMeleeAttackState);
@@ -75,16 +75,16 @@ bool my::EnemyMeleeAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::EnemyMeleeAttackComponent::Release(void) {
+bool rachet::EnemyMeleeAttackComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyMeleeAttackComponent::Clone(void) {
-    return std::make_shared<my::EnemyMeleeAttackComponent >(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyMeleeAttackComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyMeleeAttackComponent >(*this);
 }
 
-bool my::EnemyMeleeAttackComponent::Start(void) {
+bool rachet::EnemyMeleeAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -93,7 +93,7 @@ bool my::EnemyMeleeAttackComponent::Start(void) {
     return true;
 }
 
-bool my::EnemyMeleeAttackComponent::End(void) {
+bool rachet::EnemyMeleeAttackComponent::End(void) {
     super::End();
     _collision_com.lock()->Inactivate();
     return true;

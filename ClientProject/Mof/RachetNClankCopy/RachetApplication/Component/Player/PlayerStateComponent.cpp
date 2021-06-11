@@ -1,32 +1,32 @@
 #include "PlayerStateComponent.h"
 
 
-my::PlayerStateComponent::PlayerStateComponent(int priority) :
+rachet::PlayerStateComponent::PlayerStateComponent(int priority) :
     super(priority) {
 }
 
-my::PlayerStateComponent::PlayerStateComponent(const PlayerStateComponent& obj) :
+rachet::PlayerStateComponent::PlayerStateComponent(const PlayerStateComponent& obj) :
     super(obj) {
 }
 
-my::PlayerStateComponent::~PlayerStateComponent() {
+rachet::PlayerStateComponent::~PlayerStateComponent() {
 }
 
-std::string my::PlayerStateComponent::GetType(void) const {
+std::string rachet::PlayerStateComponent::GetType(void) const {
     return "PlayerStateComponent";
 }
 
-bool my::PlayerStateComponent::Initialize(void) {
+bool rachet::PlayerStateComponent::Initialize(void) {
     super::Initialize();
     this->ChangeState("PlayerActionIdleState");
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerStateComponent::Clone(void) {
-    return std::make_shared<my::PlayerStateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerStateComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerStateComponent>(*this);
 }
 
-bool my::PlayerStateComponent::CanTransition(std::string_view next) const {
+bool rachet::PlayerStateComponent::CanTransition(std::string_view next) const {
     using Type = state::PlayerActionStateType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -71,7 +71,7 @@ bool my::PlayerStateComponent::CanTransition(std::string_view next) const {
     return false;
 }
 #ifdef _DEBUG
-bool my::PlayerStateComponent::DebugRender(void) {
+bool rachet::PlayerStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 100.0f, "player state = %s", this->_state_machine.GetCurrentStateName());
     return true;

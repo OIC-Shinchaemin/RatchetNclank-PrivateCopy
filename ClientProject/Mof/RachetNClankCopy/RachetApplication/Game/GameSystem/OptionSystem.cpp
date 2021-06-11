@@ -3,7 +3,7 @@
 #include "../../UI/OptionSystemMenu.h"
 
 
-my::OptionSystem::OptionSystem() :
+rachet::OptionSystem::OptionSystem() :
     super(),
     _infomation(),
     _info_subject(),
@@ -13,10 +13,10 @@ my::OptionSystem::OptionSystem() :
     _infomation.items = &_item;
 }
 
-my::OptionSystem::~OptionSystem() {
+rachet::OptionSystem::~OptionSystem() {
 }
 
-void my::OptionSystem::OnNotify(bool flag) {
+void rachet::OptionSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     _item_index = 0;
     _title_menu_subject.Notify(false);
@@ -25,27 +25,27 @@ void my::OptionSystem::OnNotify(bool flag) {
     _infomation.enter = false;
 }
 
-base::core::Observable<const my::OptionSystem::Info&>* my::OptionSystem::GetInfoSubject(void) {
+base::core::Observable<const rachet::OptionSystem::Info&>* rachet::OptionSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
-base::core::Observable<const my::scene::SceneMessage&>* my::OptionSystem::GetSceneMessageSubject(void) {
+base::core::Observable<const rachet::scene::SceneMessage&>* rachet::OptionSystem::GetSceneMessageSubject(void) {
     return &this->_scene_message_subject;
 }
-base::core::Observable<bool>* my::OptionSystem::GetTitleMenuSubject(void) {
+base::core::Observable<bool>* rachet::OptionSystem::GetTitleMenuSubject(void) {
     return &this->_title_menu_subject;
 }
 
-void my::OptionSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
+void rachet::OptionSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
     _item.push_back(elem);
     _info_subject.Notify(_infomation);
 }
 
-bool my::OptionSystem::Initialize(void) {
+bool rachet::OptionSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
-    auto menu = std::make_shared< my::OptionSystemMenu>("OptionSystemMenu");
+    auto menu = std::make_shared< rachet::OptionSystemMenu>("OptionSystemMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(super::GetResource());
@@ -61,7 +61,7 @@ bool my::OptionSystem::Initialize(void) {
     return true;
 }
 
-bool my::OptionSystem::Input(void) {
+bool rachet::OptionSystem::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
         _item_index--;
         if (_item_index < 0) {
@@ -90,7 +90,7 @@ bool my::OptionSystem::Input(void) {
     } // if
     return true;
 }
-bool my::OptionSystem::Update(float delta_time) {
+bool rachet::OptionSystem::Update(float delta_time) {
     this->Input();
     if (!_execute_list.empty()) {
         for (auto ptr : _execute_list) {
@@ -119,7 +119,7 @@ bool my::OptionSystem::Update(float delta_time) {
     return true;
 }
 
-bool my::OptionSystem::Release(void) {
+bool rachet::OptionSystem::Release(void) {
     _item.clear();
     _info_subject.Clear();
     _title_menu_subject.Clear();
@@ -129,24 +129,24 @@ bool my::OptionSystem::Release(void) {
     return true;
 }
 
-my::OptionSystemItem::OptionSystemItem() {
+rachet::OptionSystemItem::OptionSystemItem() {
 }
 
-my::OptionSystemItem::OptionSystemItem(std::function<bool(void)> func) :
+rachet::OptionSystemItem::OptionSystemItem(std::function<bool(void)> func) :
     _on_enter(func) {
 }
 
-my::OptionSystemItem::~OptionSystemItem() {
+rachet::OptionSystemItem::~OptionSystemItem() {
 }
 
-void my::OptionSystemItem::SetText(const char* text) {
+void rachet::OptionSystemItem::SetText(const char* text) {
     this->_text = text;
 }
 
-std::string my::OptionSystemItem::GetText(void) const {
+std::string rachet::OptionSystemItem::GetText(void) const {
     return this->_text;
 }
 
-bool my::OptionSystemItem::Execute(void) {
+bool rachet::OptionSystemItem::Execute(void) {
     return _on_enter();
 }

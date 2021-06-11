@@ -16,7 +16,7 @@ class AIState : public base::core::State {
     using super = state::AIState;
 protected:
     //! 通知
-    std::weak_ptr<my::Actor> _actor;
+    std::weak_ptr<rachet::Actor> _actor;
     //! ビヘイビア実行
     behaviour::NodeExecutorPtr _behaviour_executor;
     /// <summary>
@@ -24,7 +24,7 @@ protected:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::Actor> GetActor(void) const;
+    std::shared_ptr<rachet::Actor> GetActor(void) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -38,7 +38,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetActor(const std::shared_ptr<my::Actor>& ptr);
+    virtual void SetActor(const std::shared_ptr<rachet::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

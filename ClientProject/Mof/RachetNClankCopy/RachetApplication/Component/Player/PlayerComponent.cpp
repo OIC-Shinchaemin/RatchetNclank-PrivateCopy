@@ -12,7 +12,7 @@
 #include "../../Game/GameSystem/GameQuest.h"
 
 
-my::PlayerComponent::PlayerComponent(int priority) :
+rachet::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
     _target(),
     _state_com(),
@@ -22,7 +22,7 @@ my::PlayerComponent::PlayerComponent(int priority) :
 {
 }
 
-my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
+rachet::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
     _target(),
     _state_com(),
@@ -32,35 +32,35 @@ my::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
 {
 }
 
-my::PlayerComponent::~PlayerComponent() {
+rachet::PlayerComponent::~PlayerComponent() {
 }
 
-void my::PlayerComponent::SetTarget(const std::shared_ptr<my::Actor>& ptr) {
+void rachet::PlayerComponent::SetTarget(const std::shared_ptr<rachet::Actor>& ptr) {
     this->_target = ptr;
 }
 
-void my::PlayerComponent::SetNextTerrain(const std::string& terrain) {
+void rachet::PlayerComponent::SetNextTerrain(const std::string& terrain) {
     this->_next_terrain = terrain;
 }
 
-std::string my::PlayerComponent::GetType(void) const {
+std::string rachet::PlayerComponent::GetType(void) const {
     return "PlayerComponent";
 }
 
-std::weak_ptr<my::Actor> my::PlayerComponent::GetTarget(void) const {
+std::weak_ptr<rachet::Actor> rachet::PlayerComponent::GetTarget(void) const {
     return this->_target;
 }
 
-std::string my::PlayerComponent::GetNextTerrain(void) const {
+std::string rachet::PlayerComponent::GetNextTerrain(void) const {
     return this->_next_terrain;
 }
 
-bool my::PlayerComponent::Initialize(void) {
+bool rachet::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    _state_com = super::GetOwner()->GetComponent<my::PlayerStateComponent>();
-    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<rachet::PlayerStateComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
     if (velocity_com) {
         velocity_com->SetGravity(9.8f);
     } // if
@@ -69,10 +69,10 @@ bool my::PlayerComponent::Initialize(void) {
     } // if
 
 
-    auto coll_com = super::GetOwner()->GetComponent<my::PlayerCollisionComponent>();
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
-                               my::CollisionComponentType::kShipCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<rachet::PlayerCollisionComponent>();
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
+                               rachet::CollisionComponentType::kShipCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         if (auto canvas = _ui_canvas.lock()) {
             canvas->RemoveElement("EquipmentWeaponMenu");
             canvas->RemoveElement("QuickChangeMenu");
@@ -81,12 +81,12 @@ bool my::PlayerComponent::Initialize(void) {
         return true;
     }));
 
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
-                               my::CollisionComponentType::kWaterFlowCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
+                               rachet::CollisionComponentType::kWaterFlowCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         if (this->GetNextTerrain() == "WaterFlow") {
             auto owner = super::GetOwner();
-            auto velocity_com = owner->GetComponent<my::VelocityComponent>();
+            auto velocity_com = owner->GetComponent<rachet::VelocityComponent>();
             auto velocity = velocity_com->GetVelocity() * def::kDeltaTime;
             velocity.y = 0.0f;
             owner->SetPosition(owner->GetPosition() - velocity);
@@ -94,20 +94,20 @@ bool my::PlayerComponent::Initialize(void) {
         return true;
     }));
 
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kShopCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        auto player = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
-        player->GetQuestSubject()->Notify(my::GameQuest::Type::ShopAccessStart);
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
+                               rachet::CollisionComponentType::kShopCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<rachet::Player>(super::GetOwner());
+        player->GetQuestSubject()->Notify(rachet::GameQuest::Type::ShopAccessStart);
         player->PushNotificationableSubject("ShopSystem");
 
         return true;
     }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Exit,
-                               my::CollisionComponentType::kShopCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        auto player = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
-        player->GetQuestSubject()->Notify(my::GameQuest::Type::ShopAccessEnd);
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Exit,
+                               rachet::CollisionComponentType::kShopCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<rachet::Player>(super::GetOwner());
+        player->GetQuestSubject()->Notify(rachet::GameQuest::Type::ShopAccessEnd);
         player->PopNotificationableSubject("ShopSystem");
         return true;
     }));
@@ -117,7 +117,7 @@ bool my::PlayerComponent::Initialize(void) {
 
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
-        auto menu = std::make_shared<my::LockOnCursorMenu>("LockOnCursorMenu");
+        auto menu = std::make_shared<rachet::LockOnCursorMenu>("LockOnCursorMenu");
         menu->SetResourceManager(_resource_manager);
         _observable.AddObserver(menu);
         canvas->AddElement(menu);
@@ -125,13 +125,13 @@ bool my::PlayerComponent::Initialize(void) {
     return true;
 }
 
-bool my::PlayerComponent::Update(float delta_time) {
+bool rachet::PlayerComponent::Update(float delta_time) {
     _next_terrain = "";
 
     if (auto target = _target.lock()) {
-        auto enemy_com = target->GetComponent<super>();
+        auto ENEMY_com = target->GetComponent<super>();
         auto pos = target->GetPosition();
-        pos.y += enemy_com->GetHeight();
+        pos.y += ENEMY_com->GetHeight();
         _observable.Notify(pos);
     } // if
     else {
@@ -140,7 +140,7 @@ bool my::PlayerComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::PlayerComponent::Release(void) {
+bool rachet::PlayerComponent::Release(void) {
     super::Release();
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
@@ -148,6 +148,6 @@ bool my::PlayerComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerComponent::Clone(void) {
-    return std::make_shared<my::PlayerComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerComponent>(*this);
 }

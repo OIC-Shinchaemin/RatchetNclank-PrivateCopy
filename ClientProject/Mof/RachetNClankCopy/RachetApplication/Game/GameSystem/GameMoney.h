@@ -1,5 +1,5 @@
-#ifndef MY_GAME_MONEY_H
-#define MY_GAME_MONEY_H
+#ifndef RACHET_GAME_MONEY_H
+#define RACHET_GAME_MONEY_H
 
 
 #include <memory>
@@ -14,15 +14,15 @@
 #include "Save/SaveData.h"
 
 
-namespace my {
-class GameMoney : public std::enable_shared_from_this<my::GameMoney>, public base::core::Observer<int> {
+namespace rachet {
+class GameMoney : public std::enable_shared_from_this<rachet::GameMoney>, public base::core::Observer<int> {
 private:
     //! お金
     std::uint32_t _value;
     //! 通知用
     base::core::Observable<int> _subject;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
@@ -43,7 +43,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -60,7 +60,7 @@ public:
     /// </summary>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool Load(my::SaveData& in);
+    bool Load(rachet::SaveData& in);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -80,4 +80,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !MY_GAME_MONEY_H
+#endif // !RACHET_GAME_MONEY_H

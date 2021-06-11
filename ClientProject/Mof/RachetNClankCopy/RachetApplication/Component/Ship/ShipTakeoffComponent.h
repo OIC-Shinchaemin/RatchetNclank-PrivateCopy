@@ -1,5 +1,5 @@
-#ifndef MY_SHIP_TAKEOFF_COMPONENT_H
-#define MY_SHIP_TAKEOFF_COMPONENT_H
+#ifndef RACHET_SHIP_TAKEOFF_COMPONENT_H
+#define RACHET_SHIP_TAKEOFF_COMPONENT_H
 
 
 #include "ShipActionComponent.h"
@@ -9,9 +9,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace my {
-class ShipTakeoffComponent : public my::ShipActionComponent {
-    using super = my::ShipActionComponent;
+namespace rachet {
+class ShipTakeoffComponent : public rachet::ShipActionComponent {
+    using super = rachet::ShipActionComponent;
 private:
     //! タイマー
     base::core::Timer _timer;
@@ -55,7 +55,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -64,4 +64,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_SHIP_TAKEOFF_COMPONENT_H
+#endif // !RACHET_SHIP_TAKEOFF_COMPONENT_H

@@ -20,7 +20,7 @@ private:
     StageObjectArray    _static_object_array;
 
     //! 敵の出現位置配列
-    EnemySpawnArray     _enemy_spawn_array;
+    EnemySpawnArray     _ENEMY_spawn_array;
 
     //! ギミックの配列
     GimmickArray        _gimmick_array;

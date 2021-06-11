@@ -1,5 +1,5 @@
-#ifndef MY_ACTOR_H
-#define MY_ACTOR_H
+#ifndef RACHET_ACTOR_H
+#define RACHET_ACTOR_H
 
 
 #include <optional>
@@ -13,7 +13,7 @@
 #include "Base/Core/Observable.h"
 
 
-namespace my {
+namespace rachet {
 enum class ActorState {
     Active, // 入力、更新、描画する
     Inactive, // 入力、更新、描画しない
@@ -22,11 +22,11 @@ enum class ActorState {
     Hide, // 入力する、更新する、描画しない
     End // 削除
 };
-class Actor : public std::enable_shared_from_this<my::Actor>, public base::core::Observable<const char*, const std::shared_ptr<my::Actor>&> {
+class Actor : public std::enable_shared_from_this<rachet::Actor>, public base::core::Observable<const char*, const std::shared_ptr<rachet::Actor>&> {
 public:
     using ComPtr = std::shared_ptr<class Component>;
     using ComArray = std::vector<ComPtr>;
-    using Observable = base::core::Observable<const char*, const std::shared_ptr<my::Actor>&>;
+    using Observable = base::core::Observable<const char*, const std::shared_ptr<rachet::Actor>&>;
 public:
     struct Param {
         //! 名前
@@ -45,7 +45,7 @@ public:
     };
 private:
     //! 状態
-    my::ActorState _state;
+    rachet::ActorState _state;
     //! 名前
     std::string _name;
     //! タグ
@@ -119,7 +119,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    my::ActorState GetState(void) const;
+    rachet::ActorState GetState(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -235,7 +235,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(my::Actor::Param* param);
+    virtual bool Initialize(rachet::Actor::Param* param);
     /// <summary>
     /// 入力
     /// </summary>
@@ -267,4 +267,4 @@ public:
     virtual void Construct(const std::shared_ptr<class IBuilder>& builder);
 };
 }
-#endif // !MY_ACTOR_H
+#endif // !RACHET_ACTOR_H

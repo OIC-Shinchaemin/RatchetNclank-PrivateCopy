@@ -4,37 +4,37 @@
 #include "Base/Core/Math.h"
 
 
-my::Camera::Camera() :
+rachet::Camera::Camera() :
     _camera(),
     _position(),
     _target(),
     _up(math::vec3::kUnitY) {
 }
 
-my::Camera::~Camera() {
+rachet::Camera::~Camera() {
 }
 
-void my::Camera::SetPosition(Mof::CVector3 position) {
+void rachet::Camera::SetPosition(Mof::CVector3 position) {
     this->_position = position;
 }
 
-void my::Camera::SetTarget(Mof::CVector3 target) {
+void rachet::Camera::SetTarget(Mof::CVector3 target) {
     this->_target = target;
 }
 
-Mof::CVector3 my::Camera::GetPosition(void) {
+Mof::CVector3 rachet::Camera::GetPosition(void) {
     return _camera.GetViewPosition();
 }
 
-Mof::CVector3 my::Camera::GetTarget(void) const {
+Mof::CVector3 rachet::Camera::GetTarget(void) const {
     return this->_target;
 }
 
-Mof::CVector3 my::Camera::GetViewFront(void) {
+Mof::CVector3 rachet::Camera::GetViewFront(void) {
     return _camera.GetViewFront();
 }
 
-bool my::Camera::Initialize(void) {
+bool rachet::Camera::Initialize(void) {
     // ÉJÉÅÉâèâä˙âª
     _camera.SetViewPort();
     _camera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 2000.0f);
@@ -42,11 +42,11 @@ bool my::Camera::Initialize(void) {
     return true;
 }
 
-bool my::Camera::Update(void) {
+bool rachet::Camera::Update(void) {
     _camera.LookAt(_position, _target, _up);
     return _camera.Update();
 }
 
-void my::Camera::RegisterGlobalCamera(void) {
+void rachet::Camera::RegisterGlobalCamera(void) {
     ::CGraphicsUtilities::SetCamera(&_camera);
 }

@@ -1,5 +1,5 @@
-#ifndef MY_SIGHT_RECOGNITION_COMPONENT_H
-#define MY_SIGHT_RECOGNITION_COMPONENT_H
+#ifndef RACHET_SIGHT_RECOGNITION_COMPONENT_H
+#define RACHET_SIGHT_RECOGNITION_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -7,18 +7,18 @@
 #include <memory>
 #include <vector>
 
-namespace my {
-class SightRecognitionComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class SightRecognitionComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     //! éãñÏ
     float _range;
     //! îFéØ
-    std::vector<std::weak_ptr<my::Actor>> _recognized;
+    std::vector<std::weak_ptr<rachet::Actor>> _recognized;
     //! ÉLÉÉÉâ
     std::weak_ptr<class PlayerComponent> _player_com;
     //! ÉLÉÉÉâ
-    std::weak_ptr<class EnemyComponent> _enemy_com;
+    std::weak_ptr<class EnemyComponent> _ENEMY_com;
     /// <summary>
     /// ï`âÊ
     /// </summary>
@@ -64,7 +64,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::vector<std::weak_ptr<my::Actor>>& GetRecognized(void) const;
+    const std::vector<std::weak_ptr<rachet::Actor>>& GetRecognized(void) const;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -82,7 +82,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_SIGHT_RECOGNITION_COMPONENT_H
+#endif // !RACHET_SIGHT_RECOGNITION_COMPONENT_H

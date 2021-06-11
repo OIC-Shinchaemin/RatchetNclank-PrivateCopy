@@ -1,7 +1,7 @@
 ﻿#include "ShopSystemMenu.h"
 
 
-my::ShopSystemMenu::ShopSystemMenu(const char* name) :
+rachet::ShopSystemMenu::ShopSystemMenu(const char* name) :
     super(name),
     _show(true),
     _infomation(),
@@ -9,20 +9,20 @@ my::ShopSystemMenu::ShopSystemMenu(const char* name) :
     _ui_canvas() {
 }
 
-void my::ShopSystemMenu::OnNotify(const my::ShopSystem::Info& info) {
+void rachet::ShopSystemMenu::OnNotify(const rachet::ShopSystem::Info& info) {
     super::Notify(shared_from_this(), "Enable");
     _infomation = info;
 }
 
-void my::ShopSystemMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+void rachet::ShopSystemMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::ShopSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void rachet::ShopSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-bool my::ShopSystemMenu::Initialize(void) {
+bool rachet::ShopSystemMenu::Initialize(void) {
     super::Initialize();
     super::_position = Mof::CVector2(500.0f, 300.0f);
     if (auto resource = _resource.lock()) {
@@ -31,12 +31,12 @@ bool my::ShopSystemMenu::Initialize(void) {
     return true;
 }
 
-bool my::ShopSystemMenu::Update(float delta_time) {
+bool rachet::ShopSystemMenu::Update(float delta_time) {
     super::Update(delta_time);
     return true;
 }
 
-bool my::ShopSystemMenu::Render(void) {
+bool rachet::ShopSystemMenu::Render(void) {
     if (!_infomation.enable) {
         return false;
     } // if

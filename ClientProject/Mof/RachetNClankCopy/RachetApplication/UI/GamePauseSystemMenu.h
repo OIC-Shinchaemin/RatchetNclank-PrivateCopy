@@ -1,5 +1,5 @@
-#ifndef MY_GAME_PAUSE_SYSTEM_MENU_H
-#define MY_GAME_PAUSE_SYSTEM_MENU_H
+#ifndef RACHET_GAME_PAUSE_SYSTEM_MENU_H
+#define RACHET_GAME_PAUSE_SYSTEM_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -13,7 +13,7 @@
 #include "../Game/GameSystem/GamePauseSystem.h"
 
 
-namespace my {
+namespace rachet {
 class GamePauseSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
@@ -62,14 +62,14 @@ public:
     virtual bool Render(void) override;
 };
 class GamePauseSystemMenu : public base::ui::UIPanel,
-    public base::core::Observer<const my::GamePauseSystem::Info&> {
+    public base::core::Observer<const rachet::GamePauseSystem::Info&> {
     using super = base::ui::UIPanel;
-    using ElemType = my::GamePauseSystemMenuItem;
+    using ElemType = rachet::GamePauseSystemMenuItem;
 private:
     //! 情報
-    my::GamePauseSystem::Info _infomation;
+    rachet::GamePauseSystem::Info _infomation;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
@@ -82,12 +82,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const my::GamePauseSystem::Info& info) override;
+    virtual void OnNotify(const rachet::GamePauseSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -97,7 +97,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="in"></param>
-    void AddItem(const my::GamePauseSystemItem& in);
+    void AddItem(const rachet::GamePauseSystemItem& in);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -118,4 +118,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !MY_GAME_PAUSE_SYSTEM_MENU_H
+#endif // !RACHET_GAME_PAUSE_SYSTEM_MENU_H

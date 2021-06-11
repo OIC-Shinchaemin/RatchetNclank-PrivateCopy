@@ -1,5 +1,5 @@
-#ifndef MY_OMNI_WRENCH_COLLISION_COMPONENT_H
-#define MY_OMNI_WRENCH_COLLISION_COMPONENT_H
+#ifndef RACHET_OMNI_WRENCH_COLLISION_COMPONENT_H
+#define RACHET_OMNI_WRENCH_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -10,9 +10,9 @@
 #include <Mof.h>
 
 
-namespace my {
-class OmniWrenchCollisionComponent : public my::CollisionComponent {
-    using super = my::CollisionComponent;
+namespace rachet {
+class OmniWrenchCollisionComponent : public rachet::CollisionComponent {
+    using super = rachet::CollisionComponent;
 private:
     //! オフセット
     float _offset;
@@ -66,7 +66,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::SightObject> GetSightObject(void) override;
+    virtual std::optional<rachet::SightObject> GetSightObject(void) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -78,7 +78,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_OMNI_WRENCH_COLLISION_COMPONENT_H
+#endif // !RACHET_OMNI_WRENCH_COLLISION_COMPONENT_H

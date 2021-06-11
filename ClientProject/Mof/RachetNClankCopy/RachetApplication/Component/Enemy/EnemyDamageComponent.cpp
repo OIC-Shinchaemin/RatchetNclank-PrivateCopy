@@ -12,7 +12,7 @@
 #include "../Collision/Object/EnemyCollisionComponent.h"
 
 
-void my::EnemyDamageComponent::CollisionAction(const my::CollisionInfo& in) {
+void rachet::EnemyDamageComponent::CollisionAction(const rachet::CollisionInfo& in) {
     if (auto state_com = _state_com.lock()) {
         if (state_com->CanTransition(state::EnemyActionStateType::kEnemyActionDamageState)) {
             state_com->ChangeState(state::EnemyActionStateType::kEnemyActionDamageState);
@@ -22,7 +22,7 @@ void my::EnemyDamageComponent::CollisionAction(const my::CollisionInfo& in) {
     } // if
 }
 
-my::EnemyDamageComponent::EnemyDamageComponent(int priority) :
+rachet::EnemyDamageComponent::EnemyDamageComponent(int priority) :
     super(priority),
     _damage_value(0),
     _damage_angle(),
@@ -31,11 +31,11 @@ my::EnemyDamageComponent::EnemyDamageComponent(int priority) :
     _motion_com(),
     _motion_state_com(),
     _hp_com(),
-    _enemy_com(),
+    _ENEMY_com(),
     _state_com() {
 }
 
-my::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) :
+rachet::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) :
     super(obj),
     _damage_value(0),
     _damage_angle(),
@@ -47,36 +47,36 @@ my::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) 
     _state_com() {
 }
 
-my::EnemyDamageComponent::~EnemyDamageComponent() {
+rachet::EnemyDamageComponent::~EnemyDamageComponent() {
 }
 
-std::string my::EnemyDamageComponent::GetType(void) const {
+std::string rachet::EnemyDamageComponent::GetType(void) const {
     return "EnemyDamageComponent";
 }
 
-std::string_view my::EnemyDamageComponent::GetStateType(void) const {
+std::string_view rachet::EnemyDamageComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionDamageState;
 }
 
-bool my::EnemyDamageComponent::Initialize(void) {
+bool rachet::EnemyDamageComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<my::MotionStateComponent>();
-    _hp_com = super::GetOwner()->GetComponent<my::HpComponent>();
-    _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();
-    _state_com = super::GetOwner()->GetComponent<my::EnemyStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _motion_com = super::GetOwner()->GetComponent<rachet::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
+    _hp_com = super::GetOwner()->GetComponent<rachet::HpComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<rachet::EnemyComponent>();
+    _state_com = super::GetOwner()->GetComponent<rachet::EnemyStateComponent>();
 
-    auto coll_com = super::GetOwner()->GetComponent<my::EnemyCollisionComponent>();
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Stay,
-                               my::CollisionComponentType::kPlayerCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
-        auto enemy_com = _enemy_com.lock();
+    auto coll_com = super::GetOwner()->GetComponent<rachet::EnemyCollisionComponent>();
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
+                               rachet::CollisionComponentType::kPlayerCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+        auto ENEMY_com = _ENEMY_com.lock();
         auto target = in.target.lock();
         
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
-        auto length = (enemy_com->GetVolume() * 2.0f) - vec.Length();
+        auto length = (ENEMY_com->GetVolume() * 2.0f) - vec.Length();
         vec.Normal(vec);
         // —£‚ê‚é
         auto diff = vec * length * 0.5f; diff.y = 0.0f;
@@ -85,30 +85,30 @@ bool my::EnemyDamageComponent::Initialize(void) {
         super::GetOwner()->SetPosition(pos + diff);
         return true;
     }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kOmniWrenchCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
+                               rachet::CollisionComponentType::kOmniWrenchCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);
         return true;
     }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kPyrocitorBulletCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
+                               rachet::CollisionComponentType::kPyrocitorBulletCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);
         return true;
     }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kBlasterBulletCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
+                               rachet::CollisionComponentType::kBlasterBulletCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);
         return true;
     }));
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
-                               my::CollisionComponentType::kBombGloveEffectCollisionComponent,
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
+                               rachet::CollisionComponentType::kBombGloveEffectCollisionComponent,
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         _damage_value = 2;
         this->CollisionAction(in);
         return true;
@@ -116,7 +116,7 @@ bool my::EnemyDamageComponent::Initialize(void) {
     return true;
 }
 
-bool my::EnemyDamageComponent::Update(float delta_time) {
+bool rachet::EnemyDamageComponent::Update(float delta_time) {
     if (auto motion_com = _motion_com.lock()) {
         auto state_com = _state_com.lock();
         if (motion_com->IsEndMotion()) {
@@ -132,16 +132,16 @@ bool my::EnemyDamageComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::EnemyDamageComponent::Release(void) {
+bool rachet::EnemyDamageComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyDamageComponent::Clone(void) {
-    return std::make_shared<my::EnemyDamageComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyDamageComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyDamageComponent>(*this);
 }
 
-bool my::EnemyDamageComponent::Start(void) {
+bool rachet::EnemyDamageComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

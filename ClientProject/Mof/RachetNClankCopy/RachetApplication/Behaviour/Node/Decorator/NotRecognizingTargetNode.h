@@ -41,7 +41,7 @@ public:
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
 
-        auto target = args.enemy_com.lock()->GetTarget();
+        auto target = args.ENEMY_com.lock()->GetTarget();
         return target.expired();
     }
 };

@@ -22,7 +22,7 @@ bool Stage::Load(const std::string& path) {
     ParseData parse_data;
     parse_data.mesh_array_pointer = &_mesh_array;
     parse_data.static_object_array_pointer = &_static_object_array;
-    parse_data.enemy_spawn_array_pointer = &_enemy_spawn_array;
+    parse_data.ENEMY_spawn_array_pointer = &_ENEMY_spawn_array;
     parse_data.gimmick_array_pointer = &_gimmick_array;
     parse_data.box_array_pointer = &_woodbox_array;
     StageParserPtr parser = nullptr;
@@ -129,7 +129,7 @@ void Stage::Release(void) {
 
     _woodbox_array.clear();
     _gimmick_array.clear();
-    _enemy_spawn_array.clear();
+    _ENEMY_spawn_array.clear();
     _static_object_array.clear();
     _box_enable_array_prev.clear();
 
@@ -155,7 +155,7 @@ StageObjectArray& Stage::GetStaticObjectArray(void) {
 /// </summary>
 /// <returns>“G‚ÌoŒ»ˆÊ’u”z—ñ</returns>
 EnemySpawnArray& Stage::GetEnemySpawnArray(void) {
-    return _enemy_spawn_array;
+    return _ENEMY_spawn_array;
 }
 
 GimmickArray& Stage::GetGimmickArray(void) {

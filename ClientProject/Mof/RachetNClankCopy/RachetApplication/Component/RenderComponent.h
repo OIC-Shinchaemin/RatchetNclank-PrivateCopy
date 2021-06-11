@@ -1,5 +1,5 @@
-#ifndef MY_RENDER_COMPONENT_H
-#define MY_RENDER_COMPONENT_H
+#ifndef RACHET_RENDER_COMPONENT_H
+#define RACHET_RENDER_COMPONENT_H
 
 
 #include "Component.h"
@@ -7,9 +7,9 @@
 #include <string>
 
 
-namespace my {
-class RenderComponent : public my::Component {
-    using super = my::Component;
+namespace rachet {
+class RenderComponent : public rachet::Component {
+    using super = rachet::Component;
 protected:
     //! ÉäÉ\Å[ÉX
     std::string _path;
@@ -65,4 +65,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !MY_RENDER_COMPONENT_H
+#endif // !RACHET_RENDER_COMPONENT_H

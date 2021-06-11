@@ -14,19 +14,19 @@
 class CGameApp : public CSingleGameApplication {
 private:
     //! リソース
-    std::shared_ptr<my::ResourceMgr> _resource_manager;
+    std::shared_ptr<rachet::ResourceMgr> _resource_manager;
     //! カメラ
-    std::shared_ptr<my::CameraManager> _camera_manager;
+    std::shared_ptr<rachet::CameraManager> _camera_manager;
     //! ライト
-    std::shared_ptr<my::LightManager> _light_manager;
+    std::shared_ptr<rachet::LightManager> _light_manager;
     //! ゲーム
-    std::shared_ptr<my::GameManager> _game_manager;
+    std::shared_ptr<rachet::GameManager> _game_manager;
     //! イベント
-    std::shared_ptr<my::EventManager> _event_manager;
+    std::shared_ptr<rachet::EventManager> _event_manager;
     //! UI
     std::shared_ptr<base::ui::UICanvas> _ui_canvas;
     //! シーン
-    std::shared_ptr<my::SceneManager> _scene_manager;
+    std::shared_ptr<rachet::SceneManager> _scene_manager;
 public:
     CGameApp() :
         _resource_manager(),

@@ -1,5 +1,5 @@
-#ifndef MY_BULLET_ITEM_H
-#define MY_BULLET_ITEM_H
+#ifndef RACHET_BULLET_ITEM_H
+#define RACHET_BULLET_ITEM_H
 
 
 #include "../../Actor.h"
@@ -8,9 +8,9 @@
 #include "../../Game/GameSystem/WeaponSystem.h"
 
 
-namespace my {
-class BulletItem : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class BulletItem : public rachet::Actor {
+    using super = rachet::Actor;
 public:
     enum class Type {
         BombGlove,
@@ -38,7 +38,7 @@ private:
     //! 数
     int _item_count;
     //! 通知用
-    base::core::Observable<const my::ChargeInfo&> _weapon_system_subject;
+    base::core::Observable<const rachet::ChargeInfo&> _weapon_system_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -53,13 +53,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::string GetTypeName(my::BulletItem::Type type) const;
+    std::string GetTypeName(rachet::BulletItem::Type type) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const my::ChargeInfo&>* GetWeaponSystemSubject(void);
+    base::core::Observable<const rachet::ChargeInfo&>* GetWeaponSystemSubject(void);
     /// <summary>
     /// デリート
     /// </summary>
@@ -70,7 +70,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(my::Actor::Param* param) override;
+    virtual bool Initialize(rachet::Actor::Param* param) override;
     /// <summary>
     /// 更新
     /// </summary>
@@ -79,4 +79,4 @@ public:
     //virtual bool Update(float delta_time) override;
 };
 }
-#endif // !MY_BULLET_ITEM_H
+#endif // !RACHET_BULLET_ITEM_H

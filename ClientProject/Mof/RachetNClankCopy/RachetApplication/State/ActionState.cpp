@@ -8,7 +8,7 @@ state::ActionState::ActionState() :
 state::ActionState::~ActionState() {
 }
 
-void state::ActionState::SetActionComponent(const std::shared_ptr<my::ActionComponent>& ptr) {
+void state::ActionState::SetActionComponent(const std::shared_ptr<rachet::ActionComponent>& ptr) {
     _action_com = ptr;
 }
 

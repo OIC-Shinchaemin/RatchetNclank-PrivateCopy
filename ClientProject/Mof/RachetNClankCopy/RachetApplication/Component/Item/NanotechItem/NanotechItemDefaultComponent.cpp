@@ -1,31 +1,31 @@
 #include "NanotechItemDefaultComponent.h"
 
 
-my::NanotechItemDefaultComponent::NanotechItemDefaultComponent(int priority) :
+rachet::NanotechItemDefaultComponent::NanotechItemDefaultComponent(int priority) :
     super(priority) {
 }
 
-my::NanotechItemDefaultComponent::NanotechItemDefaultComponent(const my::NanotechItemDefaultComponent& obj) :
+rachet::NanotechItemDefaultComponent::NanotechItemDefaultComponent(const rachet::NanotechItemDefaultComponent& obj) :
     super(obj) {
 }
 
-my::NanotechItemDefaultComponent::~NanotechItemDefaultComponent() {
+rachet::NanotechItemDefaultComponent::~NanotechItemDefaultComponent() {
 }
 
-std::string my::NanotechItemDefaultComponent::GetType(void) const {
+std::string rachet::NanotechItemDefaultComponent::GetType(void) const {
     return "NanotechItemDefaultComponent";
 }
 
-std::string_view my::NanotechItemDefaultComponent::GetStateType(void) const {
+std::string_view rachet::NanotechItemDefaultComponent::GetStateType(void) const {
     return state::NanotechItemActionType::kDefault;
 }
 
-bool my::NanotechItemDefaultComponent::Initialize(void) {
+bool rachet::NanotechItemDefaultComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool my::NanotechItemDefaultComponent::Update(float delta_time) {
+bool rachet::NanotechItemDefaultComponent::Update(float delta_time) {
     auto rotate = super::GetOwner()->GetRotate();
     if (rotate.x > math::kHalfPi) {
         rotate.x = math::kHalfPi;
@@ -39,16 +39,16 @@ bool my::NanotechItemDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::NanotechItemDefaultComponent::Release(void) {
+bool rachet::NanotechItemDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::NanotechItemDefaultComponent::Clone(void) {
-    return std::make_shared<my::NanotechItemDefaultComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::NanotechItemDefaultComponent::Clone(void) {
+    return std::make_shared<rachet::NanotechItemDefaultComponent>(*this);
 }
 
-bool my::NanotechItemDefaultComponent::Start(void) {
+bool rachet::NanotechItemDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -56,7 +56,7 @@ bool my::NanotechItemDefaultComponent::Start(void) {
     return true;
 }
 
-bool my::NanotechItemDefaultComponent::End(void) {
+bool rachet::NanotechItemDefaultComponent::End(void) {
     super::End();
     return true;
 }

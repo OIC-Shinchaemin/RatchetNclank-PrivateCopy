@@ -1,6 +1,6 @@
-my::ComponentFactory::AddComponentCreator<my::ShipComponent>();
-my::ComponentFactory::AddComponentCreator<my::ShipMeshComponent>();
-my::ComponentFactory::AddComponentCreator<my::ShipStateComponent>();
-my::ComponentFactory::AddComponentCreator<my::ShipIdleComponent>();
-my::ComponentFactory::AddComponentCreator<my::ShipLandingComponent>();
-my::ComponentFactory::AddComponentCreator<my::ShipTakeoffComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::ShipComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::ShipMeshComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::ShipStateComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::ShipIdleComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::ShipLandingComponent>();
+rachet::ComponentFactory::AddComponentCreator<rachet::ShipTakeoffComponent>();

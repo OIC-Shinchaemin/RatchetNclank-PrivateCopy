@@ -1,5 +1,5 @@
-#ifndef MY_EVENT_REFERENCE_TABLE_H
-#define MY_EVENT_REFERENCE_TABLE_H
+#ifndef RACHET_EVENT_REFERENCE_TABLE_H
+#define RACHET_EVENT_REFERENCE_TABLE_H
 
 
 #include <any>
@@ -8,8 +8,8 @@
 #include <unordered_map>
 
 
-namespace my {
-class EventReferenceTable : public std::enable_shared_from_this<my::EventReferenceTable> {
+namespace rachet {
+class EventReferenceTable : public std::enable_shared_from_this<rachet::EventReferenceTable> {
 private:
     std::unordered_map<std::string, std::any> _data_table;
     /// <summary>
@@ -26,7 +26,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    static my::EventReferenceTable& Singleton(void);
+    static rachet::EventReferenceTable& Singleton(void);
     /// <summary>
     /// Žæ“¾
     /// </summary>
@@ -61,4 +61,4 @@ public:
     void Reset(void);
 };
 }
-#endif // !MY_EVENT_REFERENCE_TABLE_H
+#endif // !RACHET_EVENT_REFERENCE_TABLE_H

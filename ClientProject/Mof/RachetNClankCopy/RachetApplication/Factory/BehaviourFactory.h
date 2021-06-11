@@ -1,5 +1,5 @@
-#ifndef MY_BEHAVIOUR_FACTORY_H
-#define MY_BEHAVIOUR_FACTORY_H
+#ifndef RACHET_BEHAVIOUR_FACTORY_H
+#define RACHET_BEHAVIOUR_FACTORY_H
 
 
 #include <memory>
@@ -13,17 +13,17 @@
 #include "../Behaviour/Node/DecoratorNode.h"
 
 
-namespace my {
+namespace rachet {
 class BehaviourFactory {
 private:
     //! コンポジット
-    my::Factory<behaviour::CompositeNode> _composite_factory;
+    rachet::Factory<behaviour::CompositeNode> _composite_factory;
     //! アクション
-    my::Factory<behaviour::ActionNodeBase> _action_factory;
+    rachet::Factory<behaviour::ActionNodeBase> _action_factory;
     //! コンディション
-    my::Factory<behaviour::ConditionalNodeBase> _condition_factory;
+    rachet::Factory<behaviour::ConditionalNodeBase> _condition_factory;
     //! デコレーター
-    my::Factory<behaviour::DecoratorNodeBase> _decorator_factory;
+    rachet::Factory<behaviour::DecoratorNodeBase> _decorator_factory;
 public:
     /// <summary>
     /// コンストラクタ
@@ -65,4 +65,4 @@ public:
     std::shared_ptr<behaviour::DecoratorNodeBase> CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index);
 };
 }
-#endif // !MY_BEHAVIOUR_FACTORY_H
+#endif // !RACHET_BEHAVIOUR_FACTORY_H

@@ -11,20 +11,20 @@
 MofBool CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("Resource");
 
-    my::Gamepad::GetInstance().Create();
-    _resource_manager = ut::MakeSharedWithRelease<my::ResourceMgr>();
-    _camera_manager = std::make_shared<my::CameraManager>();
-    _light_manager = std::make_shared<my::LightManager>();
-    _game_manager = ut::MakeSharedWithRelease<my::GameManager>();
-    _event_manager = ut::MakeSharedWithRelease<my::EventManager>();
+    rachet::Gamepad::GetInstance().Create();
+    _resource_manager = ut::MakeSharedWithRelease<rachet::ResourceMgr>();
+    _camera_manager = std::make_shared<rachet::CameraManager>();
+    _light_manager = std::make_shared<rachet::LightManager>();
+    _game_manager = ut::MakeSharedWithRelease<rachet::GameManager>();
+    _event_manager = ut::MakeSharedWithRelease<rachet::EventManager>();
     _ui_canvas = std::make_shared<base::ui::UICanvas>();
-    _scene_manager = ut::MakeSharedWithRelease<my::SceneManager>();
+    _scene_manager = ut::MakeSharedWithRelease<rachet::SceneManager>();
 
-    my::FactoryManager::Singleton().SetResourceManager(_resource_manager);
-    my::FactoryManager::Singleton().SetGameManager(_game_manager);
-    my::Component::SetResourceManager(_resource_manager);
-    my::Component::SetUICanvas(_ui_canvas);
-    my::CameraController::SetCameraManager(_camera_manager);
+    rachet::FactoryManager::Singleton().SetResourceManager(_resource_manager);
+    rachet::FactoryManager::Singleton().SetGameManager(_game_manager);
+    rachet::Component::SetResourceManager(_resource_manager);
+    rachet::Component::SetUICanvas(_ui_canvas);
+    rachet::CameraController::SetCameraManager(_camera_manager);
 
     _light_manager->Initialize();
 
@@ -89,6 +89,6 @@ MofBool CGameApp::Release(void) {
     _light_manager.reset();
     _camera_manager.reset();
     _resource_manager.reset();
-    my::Gamepad::GetInstance().Release();
+    rachet::Gamepad::GetInstance().Release();
     return TRUE;
 }

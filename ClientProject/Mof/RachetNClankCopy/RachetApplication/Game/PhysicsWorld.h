@@ -1,5 +1,5 @@
-#ifndef MY_PHYSIC_WORLD_H
-#define MY_PHYSIC_WORLD_H
+#ifndef RACHET_PHYSIC_WORLD_H
+#define RACHET_PHYSIC_WORLD_H
 
 
 #include <memory>
@@ -11,10 +11,10 @@
 #include "../Stage/Stage.h"
 
 
-namespace my {
+namespace rachet {
 class PhysicsWorld {
-    using ActorPtr = std::shared_ptr<my::Actor>;
-    using ObjectPtr = std::shared_ptr<my::CollisionComponent>;
+    using ActorPtr = std::shared_ptr<rachet::Actor>;
+    using ObjectPtr = std::shared_ptr<rachet::CollisionComponent>;
     using ObjectArray = std::vector<ObjectPtr>;
 private:
     struct CollisionLayer {
@@ -23,12 +23,12 @@ private:
         //! 衝突される側
         ObjectArray targets;
         //! どんな風に衝突するか
-        std::shared_ptr<my::CollisionAlgolithm> algo;
+        std::shared_ptr<rachet::CollisionAlgolithm> algo;
     };
     //! 衝突処理対象
     std::vector<CollisionLayer> _layers;
     //! ファクトリー
-    my::Factory<my::CollisionAlgolithm> collision_algolithm_factory;
+    rachet::Factory<rachet::CollisionAlgolithm> collision_algolithm_factory;
     //! ステージとぶつける用
     ObjectArray _list_for_stage;
 
@@ -74,4 +74,4 @@ public:
     void Reset(void);
 };
 }
-#endif // !MY_PHYSIC_WORLD_H
+#endif // !RACHET_PHYSIC_WORLD_H

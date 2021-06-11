@@ -39,7 +39,7 @@ public:
     /// <returns>false:Às‚Ì¸”s</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        auto target = args.enemy_com.lock()->GetTarget();
+        auto target = args.ENEMY_com.lock()->GetTarget();
 
         if (args.state_com.lock()->CanTransition(state::EnemyActionStateType::kEnemyActionMoveState)) {
             args.move_com.lock()->SetTargetPosition(target.lock()->GetPosition());

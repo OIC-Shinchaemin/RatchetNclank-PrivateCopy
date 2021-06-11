@@ -1,115 +1,115 @@
 #include "CameraController.h"
 
 
-std::weak_ptr<my::CameraManager> my::CameraController::_manager;
+std::weak_ptr<rachet::CameraManager> rachet::CameraController::_manager;
 
 
-void my::CameraController::SetCameraManager(const std::shared_ptr<my::CameraManager>& ptr) {
+void rachet::CameraController::SetCameraManager(const std::shared_ptr<rachet::CameraManager>& ptr) {
     _manager = ptr;
 }
 
-my::CameraController::CameraController() :
+rachet::CameraController::CameraController() :
     _camera(),
     _position(),
     _target(),
     _preview_position() {
 }
 
-my::CameraController::~CameraController() {
+rachet::CameraController::~CameraController() {
 }
 
-my::CameraController::operator bool(void) const {
+rachet::CameraController::operator bool(void) const {
     return _camera.get();
 }
 
-void my::CameraController::SetCamera(const std::shared_ptr<my::Camera>& ptr) {
+void rachet::CameraController::SetCamera(const std::shared_ptr<rachet::Camera>& ptr) {
     this->_camera = ptr;
 }
 
 /*
-void my::CameraController::SetCameraPosition(Mof::CVector3 pos) {
+void rachet::CameraController::SetCameraPosition(Mof::CVector3 pos) {
     this->_position = pos;
 }
 
-void my::CameraController::SetCameraTarget(Mof::CVector3 pos) {
+void rachet::CameraController::SetCameraTarget(Mof::CVector3 pos) {
     this->_target = pos;
 }
 */
 
-void my::CameraController::SetDistance(float value) {
+void rachet::CameraController::SetDistance(float value) {
     this->_param.distance = value;
 }
 
-void my::CameraController::SetAzimuth(float degree) {
+void rachet::CameraController::SetAzimuth(float degree) {
     this->_param.azimuth = degree;
 }
 
-void my::CameraController::SetAltitude(float degree) {
+void rachet::CameraController::SetAltitude(float degree) {
     this->_param.altitude = degree;
 }
 
-void my::CameraController::SetSpring(float value) {
+void rachet::CameraController::SetSpring(float value) {
     this->_param.spring = value;
 }
 
-void my::CameraController::SetDumping(float value) {
+void rachet::CameraController::SetDumping(float value) {
     this->_param.dumping = value;
 }
 
-void my::CameraController::SetInfo(const my::CameraController::CameraInfo& info) {
+void rachet::CameraController::SetInfo(const rachet::CameraController::CameraInfo& info) {
     _position = info.start_position;
     _target = info.target_position;
 }
 
-std::shared_ptr<my::Camera> my::CameraController::GetCamera(void) const {
+std::shared_ptr<rachet::Camera> rachet::CameraController::GetCamera(void) const {
     return this->_camera;
 }
 
-Mof::CVector3 my::CameraController::GetCameraPosition(void) const {
+Mof::CVector3 rachet::CameraController::GetCameraPosition(void) const {
     if (_camera) {
         return _camera->GetPosition();
     } // if
     return Mof::CVector3();
 }
 
-Mof::CVector3 my::CameraController::GetViewFront(void) const {
+Mof::CVector3 rachet::CameraController::GetViewFront(void) const {
     if (_camera) {
         return _camera->GetViewFront();
     } // if
     return Mof::CVector3();
 }
 
-float my::CameraController::GetAzimuth(void) const {
+float rachet::CameraController::GetAzimuth(void) const {
     return this->_param.azimuth();
 }
 
-float my::CameraController::GetAltitude(void) const {
+float rachet::CameraController::GetAltitude(void) const {
     return this->_param.altitude();
 }
 
-float my::CameraController::GetDefaultAzimuth(void) const {
+float rachet::CameraController::GetDefaultAzimuth(void) const {
     math::Radian value = 270.0f;
     return value();
 }
 
-float my::CameraController::GetDefaultAltitude(void) const {
+float rachet::CameraController::GetDefaultAltitude(void) const {
     math::Radian altitude = 25.0f;
     return altitude();
 }
 
-Mof::CVector3 my::CameraController::GetVelocity(void) const {
+Mof::CVector3 rachet::CameraController::GetVelocity(void) const {
     return this->_param.velocity;
 }
 
-Mof::CVector3 my::CameraController::GetPreviewPosition(void) const {
+Mof::CVector3 rachet::CameraController::GetPreviewPosition(void) const {
     return this->_preview_position;
 }
 
-void my::CameraController::AddAzimuth(float degree) {
+void rachet::CameraController::AddAzimuth(float degree) {
     this->_param.azimuth += degree;
 }
 
-void my::CameraController::AddAltitude(float degree) {
+void rachet::CameraController::AddAltitude(float degree) {
     _param.altitude += degree;
     if (_param.altitude <= -5.0f) {
         _param.altitude = -5.0f;
@@ -119,16 +119,16 @@ void my::CameraController::AddAltitude(float degree) {
     } // if
 }
 
-bool my::CameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {
+bool rachet::CameraController::Update(float delta_time, const rachet::CameraController::CameraInfo& info) {
     return true;
 }
 
-bool my::CameraController::Release(void) {
+bool rachet::CameraController::Release(void) {
     _camera.reset();
     return true;
 }
 
-bool my::CameraController::RegisterGlobalCamera(void) {
+bool rachet::CameraController::RegisterGlobalCamera(void) {
     _ASSERT_EXPR(!_manager.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     _manager.lock()->RegisterGlobalCamera(_camera);
     return true;

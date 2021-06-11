@@ -3,7 +3,7 @@
 #include "../../Component/VelocityComponent.h"
 
 
-my::ParticleEffect::ParticleEffect() :
+rachet::ParticleEffect::ParticleEffect() :
     super(),
     _color(),
     _life_time(),
@@ -12,15 +12,15 @@ my::ParticleEffect::ParticleEffect() :
     _environment_param() {
 }
 
-my::ParticleEffect::~ParticleEffect() {
+rachet::ParticleEffect::~ParticleEffect() {
 }
 
-bool my::ParticleEffect::Update(float delta_time) {
+bool rachet::ParticleEffect::Update(float delta_time) {
     if (_life_time.Tick(delta_time)) {
         super::End();
     } // if
 
-    auto v = super::GetComponent<my::VelocityComponent>();
+    auto v = super::GetComponent<rachet::VelocityComponent>();
 
     v ->AddVelocityForce(_update_param.velocity);
     v->AddAngularVelocityForce(_update_param.rotate);
@@ -31,17 +31,17 @@ bool my::ParticleEffect::Update(float delta_time) {
     return true;
 }
 
-bool my::ParticleEffect::Render(void) {
+bool rachet::ParticleEffect::Render(void) {
     auto pos = super::GetPosition();
     auto sphere = Mof::CSphere(super::GetPosition(), super::GetScale().Length());
     ::CGraphicsUtilities::RenderSphere(sphere, _color);
     return true;
 }
 
-void my::ParticleEffect::Start(const my::ParticleEffect::Info& info) {
+void rachet::ParticleEffect::Start(const rachet::ParticleEffect::Info& info) {
     super::Initialize((super::Param*)(&info));
     if (!info.environment_param.gravity) {
-        auto v = super::GetComponent<my::VelocityComponent>();
+        auto v = super::GetComponent<rachet::VelocityComponent>();
 
         v ->SetGravity(0.0f);
     } // if

@@ -1,5 +1,5 @@
-#ifndef MY_SHOP_SYSTEM_H
-#define MY_SHOP_SYSTEM_H
+#ifndef RACHET_SHOP_SYSTEM_H
+#define RACHET_SHOP_SYSTEM_H
 
 
 #include "GameSystem.h"
@@ -18,12 +18,12 @@
 #include "GameMoney.h"
 
 
-namespace my {
+namespace rachet {
 class ShopSystemMenu;
 class ShopSystem :
-    public my::GameSystem {
-    using super = my::GameSystem;
-    using this_type = my::ShopSystem;
+    public rachet::GameSystem {
+    using super = rachet::GameSystem;
+    using this_type = rachet::ShopSystem;
 public:
     struct Info {
         //! 表示
@@ -78,23 +78,23 @@ private:
     //! 通知用
     base::core::Observable<const this_type::Info&> _info_subject;
     //! 通知用
-    base::core::Observable<const my::ChargeInfo&> _buy_subject;
+    base::core::Observable<const rachet::ChargeInfo&> _buy_subject;
     //! 通知用
-    base::core::Observable<const my::Mechanical::Info&> _equipment_weapon_menu_subject;
+    base::core::Observable<const rachet::Mechanical::Info&> _equipment_weapon_menu_subject;
     //! 通知用
     base::core::Observable<int> _game_money_menu_subject;
     //! セーブデータ
-    my::SaveData _save_data;
+    rachet::SaveData _save_data;
     //! 購入可能ラインナップ
     std::vector<this_type::Item> _items;
     //! 武器
     std::optional<std::string>_prev_weapon;
     //! 武器
-    std::weak_ptr<my::WeaponSystem> _weapon_system;
+    std::weak_ptr<rachet::WeaponSystem> _weapon_system;
     //! お金
-    std::weak_ptr<my::GameMoney> _game_money;
+    std::weak_ptr<rachet::GameMoney> _game_money;
     //! UI管理
-    my::UICreator<ShopSystemMenu> _ui_creator;
+    rachet::UICreator<ShopSystemMenu> _ui_creator;
 
     /// <summary>
     /// 終了
@@ -134,12 +134,12 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetWeaponSystem(std::weak_ptr<my::WeaponSystem> ptr);
+    void SetWeaponSystem(std::weak_ptr<rachet::WeaponSystem> ptr);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameMoney(std::weak_ptr<my::GameMoney> ptr);
+    void SetGameMoney(std::weak_ptr<rachet::GameMoney> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -151,7 +151,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const my::ChargeInfo&>* GetChargeInfoSubject(void);
+    base::core::Observable<const rachet::ChargeInfo&>* GetChargeInfoSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -163,7 +163,7 @@ public:
     /// </summary>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool Load(my::SaveData& in);
+    bool Load(rachet::SaveData& in);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -182,4 +182,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !MY_SHOP_SYSTEM_H
+#endif // !RACHET_SHOP_SYSTEM_H

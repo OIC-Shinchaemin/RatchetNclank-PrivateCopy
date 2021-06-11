@@ -8,7 +8,7 @@ MofBool test::CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("TestResource");
     bool loaded = _gizmo.Load("gizmo.mom");
 
-    my::Gamepad::GetInstance().Create();
+    rachet::Gamepad::GetInstance().Create();
 
         // ƒJƒƒ‰‰Šú‰»
     _camera.SetViewPort();
@@ -57,6 +57,6 @@ MofBool test::CGameApp::Render(void) {
 }
 
 MofBool test::CGameApp::Release(void) {
-    my::Gamepad::GetInstance().Release();
+    rachet::Gamepad::GetInstance().Release();
     return TRUE;
 }

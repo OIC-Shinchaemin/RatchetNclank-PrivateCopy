@@ -15,9 +15,9 @@ class ChangePatrolNodeExecutor : public behaviour::ActionNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<my::Actor> actor;
+        std::weak_ptr<rachet::Actor> actor;
         //! AI
-        std::weak_ptr<my::AIStateComponent> ai_com;
+        std::weak_ptr<rachet::AIStateComponent> ai_com;
     };
 private:
     //! 実行引数
@@ -43,7 +43,7 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.ai_com = actor->GetComponent<my::AIStateComponent>();
+            _node_args.ai_com = actor->GetComponent<rachet::AIStateComponent>();
         } // if
     }
     /// <summary>

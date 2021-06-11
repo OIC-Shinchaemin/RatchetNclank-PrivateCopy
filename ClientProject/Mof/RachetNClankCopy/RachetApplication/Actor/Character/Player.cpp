@@ -6,7 +6,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-my::Player::Player() :
+rachet::Player::Player() :
     super(),
     _current_mechanical(),
     _omniwrench(),
@@ -23,11 +23,11 @@ my::Player::Player() :
     _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
 }
 
-my::Player::~Player() {
+rachet::Player::~Player() {
 }
 
-void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
-    if (auto mechanical = std::dynamic_pointer_cast<my::Mechanical>(change)) {
+void rachet::Player::OnNotify(std::shared_ptr<rachet::Weapon> change) {
+    if (auto mechanical = std::dynamic_pointer_cast<rachet::Mechanical>(change)) {
         _current_mechanical = mechanical;
     } // if
     else {
@@ -40,7 +40,7 @@ void my::Player::OnNotify(std::shared_ptr<my::Weapon> change) {
     _current_weapon = change;
 }
 
-void my::Player::OnNotify(const my::QuickChangeSystem::Info& info) {
+void rachet::Player::OnNotify(const rachet::QuickChangeSystem::Info& info) {
     if (info.color.a <= 0.0f) {
         super::Activate();
     } // if
@@ -49,26 +49,26 @@ void my::Player::OnNotify(const my::QuickChangeSystem::Info& info) {
     } // else if
 }
 /*
-void my::Player::OnNotify(const my::ShopSystem::Info& info) {
+void rachet::Player::OnNotify(const rachet::ShopSystem::Info& info) {
     if (info.close) {
         this->PopNotificationableSubject();
     } // if
 }
 */
-base::core::Observable<bool>* my::Player::GetShopSystemSubject(void) {
+base::core::Observable<bool>* rachet::Player::GetShopSystemSubject(void) {
     return &this->_shop_system_subject.subject;
 }
 
-base::core::Observable<bool>* my::Player::GetQuickChangeSubject(void) {
+base::core::Observable<bool>* rachet::Player::GetQuickChangeSubject(void) {
     return &this->_quick_change_subject.subject;
 }
 
-base::core::Observable<const my::GameQuest&>* my::Player::GetQuestSubject(void) {
+base::core::Observable<const rachet::GameQuest&>* rachet::Player::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 
-std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
-    auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<my::Actor>& ptr) {
+std::shared_ptr<rachet::Actor> rachet::Player::GetChild(const std::string& tag) const {
+    auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<rachet::Actor>& ptr) {
         return ptr->GetTag() == tag;
     });
     if (it == _children.end()) {
@@ -77,49 +77,49 @@ std::shared_ptr<my::Actor> my::Player::GetChild(const std::string& tag) const {
     return *it;
 }
 
-std::shared_ptr<my::Mechanical> my::Player::GetCurrentMechanical(void) const {
+std::shared_ptr<rachet::Mechanical> rachet::Player::GetCurrentMechanical(void) const {
     if (auto weapon = this->_current_mechanical.lock()) {
         return weapon;
     } // if
     return nullptr;
 }
 
-void my::Player::AddChild(const std::shared_ptr<my::Actor>& ptr) {
+void rachet::Player::AddChild(const std::shared_ptr<rachet::Actor>& ptr) {
     this->_children.push_back(ptr);
 }
 
-void my::Player::PushNotificationableSubject(const std::string& name) {
+void rachet::Player::PushNotificationableSubject(const std::string& name) {
     auto subject = _notificationable_subject_map.at(name);
     _notificationable_subject_stack.push(subject);
 }
 
-void my::Player::PopNotificationableSubject(void) {
+void rachet::Player::PopNotificationableSubject(void) {
     _notificationable_subject_stack.pop();
 }
-void my::Player::PopNotificationableSubject(const std::string& name) {
+void rachet::Player::PopNotificationableSubject(const std::string& name) {
     auto& subject = _notificationable_subject_stack.top();
     if (subject->name == name) {
         this->PopNotificationableSubject();
     } // if
 }
 
-bool my::Player::Initialize(void) {
+bool rachet::Player::Initialize(void) {
     this->Initialize();
     return true;
 }
 
-bool my::Player::Initialize(my::Actor::Param* param) {
+bool rachet::Player::Initialize(rachet::Actor::Param* param) {
     super::Initialize(param);
 
-    _player_com = super::GetComponent<my::PlayerComponent>();
-    if (auto motion_com = super::GetComponent<my::MotionComponent>(); motion_com) {
+    _player_com = super::GetComponent<rachet::PlayerComponent>();
+    if (auto motion_com = super::GetComponent<rachet::MotionComponent>(); motion_com) {
         auto motion = motion_com->GetMotionData();
         _upp_bone_state = motion->GetBoneState("UPP_weapon");
     } // if
     return true;
 }
 
-bool my::Player::Input(void) {
+bool rachet::Player::Input(void) {
     super::Input();
     if (!_notificationable_subject_stack.empty()) {
         auto& subject = _notificationable_subject_stack.top();
@@ -130,7 +130,7 @@ bool my::Player::Input(void) {
     return true;
 }
 
-bool my::Player::Update(float delta_time) {
+bool rachet::Player::Update(float delta_time) {
     super::Update(delta_time);
 
     // children transform
@@ -154,7 +154,7 @@ bool my::Player::Update(float delta_time) {
             Mof::CVector3 pos;
             mat.GetTranslation(pos);
 
-            if (auto target = super::GetComponent<my::PlayerComponent>()->GetTarget().lock()) {
+            if (auto target = super::GetComponent<rachet::PlayerComponent>()->GetTarget().lock()) {
                 auto target_pos = target->GetPosition();
                 auto target_height = 0.5f;
                 target_pos.y += target_height;
@@ -170,7 +170,7 @@ bool my::Player::Update(float delta_time) {
     return true;
 }
 
-bool my::Player::Render(void) {
+bool rachet::Player::Render(void) {
     super::Render();
     if (_current_weapon) {
         _current_weapon->Render();
@@ -193,7 +193,7 @@ bool my::Player::Render(void) {
     return true;
 }
 
-bool my::Player::Release(void) {
+bool rachet::Player::Release(void) {
     super::Release();
 
     _quest_subject.Clear();

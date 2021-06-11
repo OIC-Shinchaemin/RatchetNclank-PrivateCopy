@@ -3,22 +3,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-my::PlayerShipCollisionAlgolithm::PlayerShipCollisionAlgolithm() :
+rachet::PlayerShipCollisionAlgolithm::PlayerShipCollisionAlgolithm() :
     super() {
 }
 
-my::PlayerShipCollisionAlgolithm::~PlayerShipCollisionAlgolithm() {
+rachet::PlayerShipCollisionAlgolithm::~PlayerShipCollisionAlgolithm() {
 }
 
-const char* my::PlayerShipCollisionAlgolithm::GetLayerType(void) const {
-    return my::CollisionComponentType::kPlayerCollisionComponent.c_str();
+const char* rachet::PlayerShipCollisionAlgolithm::GetLayerType(void) const {
+    return rachet::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-const char* my::PlayerShipCollisionAlgolithm::GetTargetType(void) const {
-    return my::CollisionComponentType::kShipCollisionComponent.c_str();
+const char* rachet::PlayerShipCollisionAlgolithm::GetTargetType(void) const {
+    return rachet::CollisionComponentType::kShipCollisionComponent.c_str();
 }
 
-bool my::PlayerShipCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
+bool rachet::PlayerShipCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

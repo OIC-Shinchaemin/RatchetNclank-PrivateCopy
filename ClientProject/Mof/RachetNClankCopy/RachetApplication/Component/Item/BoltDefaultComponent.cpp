@@ -1,31 +1,31 @@
 #include "BoltDefaultComponent.h"
 
 
-my::BoltDefaultComponent::BoltDefaultComponent(int priority) :
+rachet::BoltDefaultComponent::BoltDefaultComponent(int priority) :
     super(priority) {
 }
 
-my::BoltDefaultComponent::BoltDefaultComponent(const BoltDefaultComponent& obj) :
+rachet::BoltDefaultComponent::BoltDefaultComponent(const BoltDefaultComponent& obj) :
     super(obj) {
 }
 
-my::BoltDefaultComponent::~BoltDefaultComponent() {
+rachet::BoltDefaultComponent::~BoltDefaultComponent() {
 }
 
-std::string my::BoltDefaultComponent::GetType(void) const {
+std::string rachet::BoltDefaultComponent::GetType(void) const {
     return "BoltDefaultComponent";
 }
 
-std::string_view my::BoltDefaultComponent::GetStateType(void) const {
+std::string_view rachet::BoltDefaultComponent::GetStateType(void) const {
     return state::BoltActionType::kDefault;
 }
 
-bool my::BoltDefaultComponent::Initialize(void) {
+bool rachet::BoltDefaultComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool my::BoltDefaultComponent::Update(float delta_time) {
+bool rachet::BoltDefaultComponent::Update(float delta_time) {
     auto rotate = super::GetOwner()->GetRotate();
     if (rotate.x > math::kHalfPi) {
         rotate.x = math::kHalfPi;
@@ -39,16 +39,16 @@ bool my::BoltDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::BoltDefaultComponent::Release(void) {
+bool rachet::BoltDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BoltDefaultComponent::Clone(void) {
-    return std::make_shared<my::BoltDefaultComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BoltDefaultComponent::Clone(void) {
+    return std::make_shared<rachet::BoltDefaultComponent>(*this);
 }
 
-bool my::BoltDefaultComponent::Start(void) {
+bool rachet::BoltDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -56,7 +56,7 @@ bool my::BoltDefaultComponent::Start(void) {
     return true;
 }
 
-bool my::BoltDefaultComponent::End(void) {
+bool rachet::BoltDefaultComponent::End(void) {
     super::End();
     return true;
 }

@@ -1,5 +1,5 @@
-#ifndef MY_SIGHT_COLLISION_COMPONENT_H
-#define MY_SIGHT_COLLISION_COMPONENT_H
+#ifndef RACHET_SIGHT_COLLISION_COMPONENT_H
+#define RACHET_SIGHT_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -10,9 +10,9 @@
 #include <Mof.h>
 
 
-namespace my {
-class SightCollisionComponent : public my::CollisionComponent {
-    using super = my::CollisionComponent;
+namespace rachet {
+class SightCollisionComponent : public rachet::CollisionComponent {
+    using super = rachet::CollisionComponent;
 private:
     //! èäóLé“
     std::weak_ptr<class SightRecognitionComponent> _sight_recognition;
@@ -66,7 +66,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::SightObject> GetSightObject(void) override;
+    virtual std::optional<rachet::SightObject> GetSightObject(void) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -78,7 +78,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_SIGHT_COLLISION_COMPONENT_H
+#endif // !RACHET_SIGHT_COLLISION_COMPONENT_H

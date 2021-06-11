@@ -1,13 +1,13 @@
-#ifndef MY_BLASTER_H
-#define MY_BLASTER_H
+#ifndef RACHET_BLASTER_H
+#define RACHET_BLASTER_H
 
 
 #include "Mechanical.h"
 
 
-namespace my {
-class Blaster : public my::Mechanical {
-    using super = my::Mechanical;
+namespace rachet {
+class Blaster : public rachet::Mechanical {
+    using super = rachet::Mechanical;
 private:
 public:
     /// <summary>
@@ -32,4 +32,4 @@ public:
     virtual bool Fire(const def::Transform& transform) override;
 };
 }
-#endif // !MY_BLASTER_H
+#endif // !RACHET_BLASTER_H

@@ -1,56 +1,56 @@
 #include "GameWorld.h"
 
 
-my::GameWorld::GameWorld() :
+rachet::GameWorld::GameWorld() :
     _actors() {
     _actors.reserve(64);
 }
 
-my::GameWorld::~GameWorld() {
+rachet::GameWorld::~GameWorld() {
 }
 
-my::GameWorld::ActorPtr my::GameWorld::GetActor(uint32_t index) const {
+rachet::GameWorld::ActorPtr rachet::GameWorld::GetActor(uint32_t index) const {
     if (_actors.size() <= index) {
         return nullptr;
     } // if
     return _actors.at(index);
 }
 
-void my::GameWorld::AddActor(const ActorPtr& actor) {
+void rachet::GameWorld::AddActor(const ActorPtr& actor) {
     _actors.emplace_back(actor);
 }
 
-void my::GameWorld::RemoveActor(const ActorPtr& actor) {
+void rachet::GameWorld::RemoveActor(const ActorPtr& actor) {
     ut::SwapPopback(_actors, actor);
 }
 
-bool my::GameWorld::Input(void) {
+bool rachet::GameWorld::Input(void) {
     // input
     for (auto& actor : _actors) {
         auto state = actor->GetState();
-        if (state == my::ActorState::Active) {
+        if (state == rachet::ActorState::Active) {
             actor->Input();
         } // if
     } // for
     return true;
 }
 
-bool my::GameWorld::Update(float delta_time) {
+bool rachet::GameWorld::Update(float delta_time) {
     // update
     for (auto& actor : _actors) {
         auto state = actor->GetState();
-        if (state == my::ActorState::Active ||
-            state == my::ActorState::Sleep ||
-            state == my::ActorState::Hide) {
+        if (state == rachet::ActorState::Active ||
+            state == rachet::ActorState::Sleep ||
+            state == rachet::ActorState::Hide) {
             actor->Update(delta_time);
         } // if
     } // for
     return true;
 }
 
-void my::GameWorld::UpdateDebug(void) {
+void rachet::GameWorld::UpdateDebug(void) {
 }
 
-void my::GameWorld::Reset(void) {
+void rachet::GameWorld::Reset(void) {
     _actors.clear();
 }

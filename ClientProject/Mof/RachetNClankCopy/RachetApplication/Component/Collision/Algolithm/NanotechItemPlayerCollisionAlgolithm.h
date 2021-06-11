@@ -1,13 +1,13 @@
-#ifndef MY_NanotechItem_PLAYER_COLLISION_ALGOLITHM_H
-#define MY_NanotechItem_PLAYER_COLLISION_ALGOLITHM_H
+#ifndef RACHET_NanotechItem_PLAYER_COLLISION_ALGOLITHM_H
+#define RACHET_NanotechItem_PLAYER_COLLISION_ALGOLITHM_H
 
 
 #include "CollisionAlgolithm.h"
 
 
-namespace my {
-class NanotechItemPlayerCollisionAlgolithm : public my::CollisionAlgolithm {
-    using super = my::CollisionAlgolithm;
+namespace rachet {
+class NanotechItemPlayerCollisionAlgolithm : public rachet::CollisionAlgolithm {
+    using super = rachet::CollisionAlgolithm;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,7 +35,7 @@ public:
     /// <param name="object"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    virtual bool IsCollision(std::shared_ptr<my::CollisionComponent >object, std::shared_ptr<my::CollisionComponent >target, my::CollisionInfo& out) override;
+    virtual bool IsCollision(std::shared_ptr<rachet::CollisionComponent >object, std::shared_ptr<rachet::CollisionComponent >target, rachet::CollisionInfo& out) override;
 };
 }
-#endif // !MY_NanotechItem_PLAYER_COLLISION_ALGOLITHM_H
+#endif // !RACHET_NanotechItem_PLAYER_COLLISION_ALGOLITHM_H

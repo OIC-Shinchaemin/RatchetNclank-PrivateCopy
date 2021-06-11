@@ -1,5 +1,5 @@
-#ifndef MY_BULLET_H
-#define MY_BULLET_H
+#ifndef RACHET_BULLET_H
+#define RACHET_BULLET_H
 
 
 #include "../../Actor.h"
@@ -7,9 +7,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace my {
-class Bullet : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class Bullet : public rachet::Actor {
+    using super = rachet::Actor;
 public:
     struct Param : public super::Param {
         using super = super::Param;
@@ -64,7 +64,7 @@ public:
     /// ”­ŽË
     /// </summary>
     /// <param name="in"></param>
-    void Start(const my::Bullet::Param& in);
+    void Start(const rachet::Bullet::Param& in);
 };
 }
-#endif // !MY_BULLET_H
+#endif // !RACHET_BULLET_H

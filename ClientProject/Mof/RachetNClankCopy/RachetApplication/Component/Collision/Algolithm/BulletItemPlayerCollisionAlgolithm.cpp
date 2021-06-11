@@ -3,22 +3,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-my::BulletItemPlayerCollisionAlgolithm::BulletItemPlayerCollisionAlgolithm() :
+rachet::BulletItemPlayerCollisionAlgolithm::BulletItemPlayerCollisionAlgolithm() :
     super() {
 }
 
-my::BulletItemPlayerCollisionAlgolithm::~BulletItemPlayerCollisionAlgolithm() {
+rachet::BulletItemPlayerCollisionAlgolithm::~BulletItemPlayerCollisionAlgolithm() {
 }
 
-const char* my::BulletItemPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return my::CollisionComponentType::kBulletItemCollisionComponent.c_str();
+const char* rachet::BulletItemPlayerCollisionAlgolithm::GetLayerType(void) const {
+    return rachet::CollisionComponentType::kBulletItemCollisionComponent.c_str();
 }
 
-const char* my::BulletItemPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return my::CollisionComponentType::kPlayerCollisionComponent.c_str();
+const char* rachet::BulletItemPlayerCollisionAlgolithm::GetTargetType(void) const {
+    return rachet::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-bool my::BulletItemPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
+bool rachet::BulletItemPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

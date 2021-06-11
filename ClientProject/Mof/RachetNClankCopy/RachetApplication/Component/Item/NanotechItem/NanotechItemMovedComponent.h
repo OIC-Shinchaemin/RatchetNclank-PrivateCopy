@@ -1,5 +1,5 @@
-#ifndef MY_NanotechItem_MOVED_COMPONENT_H
-#define MY_NanotechItem_MOVED_COMPONENT_H
+#ifndef RACHET_NanotechItem_MOVED_COMPONENT_H
+#define RACHET_NanotechItem_MOVED_COMPONENT_H
 
 
 #include "NanotechItemActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class NanotechItemMovedComponent : public my::NanotechItemActionComponent {
-    using super = my::NanotechItemActionComponent;
+namespace rachet {
+class NanotechItemMovedComponent : public rachet::NanotechItemActionComponent {
+    using super = rachet::NanotechItemActionComponent;
 private:
     //! ‘¬“x
     Mof::CVector3 _speed;
@@ -67,7 +67,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -82,4 +82,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_NanotechItem_MOVED_COMPONENT_H
+#endif // !RACHET_NanotechItem_MOVED_COMPONENT_H

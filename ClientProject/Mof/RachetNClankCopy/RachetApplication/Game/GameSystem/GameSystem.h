@@ -1,5 +1,5 @@
-#ifndef MY_GAME_SYSTEM_H
-#define MY_GAME_SYSTEM_H
+#ifndef RACHET_GAME_SYSTEM_H
+#define RACHET_GAME_SYSTEM_H
 
 
 #include "Base/Core/Observable.h"
@@ -18,15 +18,15 @@
 #include "../../GameDefine.h"
 
 
-namespace my {
-class GameSystem : public std::enable_shared_from_this<my::GameSystem>,
+namespace rachet {
+class GameSystem : public std::enable_shared_from_this<rachet::GameSystem>,
     public base::core::Observer<bool> {
-    using this_type = my::GameSystem;
+    using this_type = rachet::GameSystem;
 private:
     //! 通知用
     base::core::Observable<const std::shared_ptr<this_type>&> _subject;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 protected:
@@ -35,7 +35,7 @@ protected:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::ResourceMgr> GetResource(void) const;
+    std::shared_ptr<rachet::ResourceMgr> GetResource(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -60,7 +60,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -80,4 +80,4 @@ public:
     [[nodiscard]] virtual bool Update(float delta_time);
 };
 }
-#endif // !MY_GAME_SYSTEM_H
+#endif // !RACHET_GAME_SYSTEM_H

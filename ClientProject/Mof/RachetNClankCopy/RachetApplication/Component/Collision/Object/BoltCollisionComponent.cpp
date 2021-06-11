@@ -5,29 +5,29 @@
 #include "../../Item/BoltActionStateComponent.h"
 
 
-my::BoltCollisionComponent::BoltCollisionComponent(int priority) :
+rachet::BoltCollisionComponent::BoltCollisionComponent(int priority) :
     super(priority),
     _height(0.2f),
     _volume(_height),
     _state_com(){
 }
 
-my::BoltCollisionComponent::BoltCollisionComponent(const BoltCollisionComponent& obj) :
+rachet::BoltCollisionComponent::BoltCollisionComponent(const BoltCollisionComponent& obj) :
     super(obj),
     _height(obj._height),
     _volume(obj._volume),
     _state_com() {
 }
 
-my::BoltCollisionComponent::~BoltCollisionComponent() {
+rachet::BoltCollisionComponent::~BoltCollisionComponent() {
 }
 
-std::string my::BoltCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kBoltCollisionComponent;
+std::string rachet::BoltCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kBoltCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::BoltCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CSphere> rachet::BoltCollisionComponent::GetSphere(void) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -35,38 +35,38 @@ std::optional<Mof::CSphere> my::BoltCollisionComponent::GetSphere(void) {
     return Mof::CSphere(pos, _volume);
 }
 
-std::optional<Mof::CBoxAABB> my::BoltCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::BoltCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::BoltCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> rachet::BoltCollisionComponent::GetRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::CRay3D> my::BoltCollisionComponent::GetNextRay(void) {
+std::optional<Mof::CRay3D> rachet::BoltCollisionComponent::GetNextRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> my::BoltCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::BoltCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::BoltCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::BoltCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::BoltCollisionComponent::Initialize(void) {
+bool rachet::BoltCollisionComponent::Initialize(void) {
     super::Initialize();
 
-    _state_com = super::GetOwner()->GetComponent<my::BoltActionStateComponent>();
+    _state_com = super::GetOwner()->GetComponent<rachet::BoltActionStateComponent>();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BoltCollisionComponent::Clone(void) {
-    return std::make_shared<my::BoltCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BoltCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::BoltCollisionComponent>(*this);
 }
 
-void my::BoltCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::BoltCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetSphere().has_value()) {
         return;
     } // if

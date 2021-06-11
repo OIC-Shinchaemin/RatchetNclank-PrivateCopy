@@ -1,16 +1,16 @@
-#ifndef MY_PLAYER_OMNI_WRENCH_COMPONENT_H
-#define MY_PLAYER_OMNI_WRENCH_COMPONENT_H
+#ifndef RACHET_PLAYER_OMNI_WRENCH_COMPONENT_H
+#define RACHET_PLAYER_OMNI_WRENCH_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 
-namespace my {
-class PlayerOmniWrenchComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class PlayerOmniWrenchComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     //! ïêäÌ
-    std::weak_ptr<my::Actor> _weapon;
+    std::weak_ptr<rachet::Actor> _weapon;
     //! èÛë‘
     std::weak_ptr<class PlayerThrowAttackComponent> _throw_attack_com;
     //! èÛë‘
@@ -72,7 +72,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_PLAYER_OMNI_WRENCH_COMPONENT_H
+#endif // !RACHET_PLAYER_OMNI_WRENCH_COMPONENT_H

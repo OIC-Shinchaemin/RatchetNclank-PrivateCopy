@@ -3,22 +3,22 @@
 #include "../Gamepad.h"
 
 
-bool my::DescriptionScene::SceneUpdate(float delta_time) {
+bool rachet::DescriptionScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         //::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
         //::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
         ::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
-        _subject.Notify(scene::SceneMessage(my::SceneType::kTitleScene, ""));
+        _subject.Notify(scene::SceneMessage(rachet::SceneType::kTitleScene, ""));
     } // if
     return true;
 }
 
-bool my::DescriptionScene::LoadingUpdate(float delta_time) {
+bool rachet::DescriptionScene::LoadingUpdate(float delta_time) {
     return false;
 }
 
-bool my::DescriptionScene::SceneRender(void) {
+bool rachet::DescriptionScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
 
@@ -51,20 +51,20 @@ bool my::DescriptionScene::SceneRender(void) {
     return true;
 }
 
-my::DescriptionScene::DescriptionScene() {
+rachet::DescriptionScene::DescriptionScene() {
 }
 
-my::DescriptionScene::~DescriptionScene() {
+rachet::DescriptionScene::~DescriptionScene() {
 }
 
-void my::DescriptionScene::OnNotify(const char* type, const std::shared_ptr<my::Actor>& ptr) {
+void rachet::DescriptionScene::OnNotify(const char* type, const std::shared_ptr<rachet::Actor>& ptr) {
 }
 
-std::string my::DescriptionScene::GetName(void) {
-    return my::SceneType::kDescriptionScene;
+std::string rachet::DescriptionScene::GetName(void) {
+    return rachet::SceneType::kDescriptionScene;
 }
 
-bool my::DescriptionScene::Load(std::shared_ptr<my::Scene::Param> param) {
+bool rachet::DescriptionScene::Load(std::shared_ptr<rachet::Scene::Param> param) {
     auto re = super::Load(param);
 
     super::LoadComplete();

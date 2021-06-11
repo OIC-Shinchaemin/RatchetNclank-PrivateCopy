@@ -5,7 +5,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-my::Pyrocitor::Pyrocitor() :
+rachet::Pyrocitor::Pyrocitor() :
     super() {
     super::SetName("Pyrocitor");
     super::_shot_speed = 2.0f;
@@ -14,16 +14,16 @@ my::Pyrocitor::Pyrocitor() :
     super::_bullet_count = super::_bullet_count_max;
 }
 
-my::Pyrocitor::~Pyrocitor() {
+rachet::Pyrocitor::~Pyrocitor() {
 }
 
-bool my::Pyrocitor::IsAction(void) const {
+bool rachet::Pyrocitor::IsAction(void) const {
     return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_M);
 }
 
-bool my::Pyrocitor::Fire(const def::Transform& transform) {
+bool rachet::Pyrocitor::Fire(const def::Transform& transform) {
     super::Fire(transform);
-    auto param = my::Bullet::Param();
+    auto param = rachet::Bullet::Param();
 
     param.transform = transform;
     auto speed = Mof::CVector3(0.0f, 0.0f, -_shot_speed);
@@ -31,7 +31,7 @@ bool my::Pyrocitor::Fire(const def::Transform& transform) {
     param.speed = speed;
     param.speed.y = _shot_speed * 0.2f;
 
-    auto add = my::FactoryManager::Singleton().CreateActor<my::PyrocitorBullet>("../Resource/builder/pyrocitor_bullet.json", &param);
+    auto add = rachet::FactoryManager::Singleton().CreateActor<rachet::PyrocitorBullet>("../Resource/builder/pyrocitor_bullet.json", &param);
     add->Start(param);
     Observable::Notify("AddRequest", add);
     return true;

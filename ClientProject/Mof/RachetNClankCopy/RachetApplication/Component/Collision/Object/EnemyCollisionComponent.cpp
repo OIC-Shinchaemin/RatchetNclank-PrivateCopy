@@ -4,7 +4,7 @@
 #include "../../Enemy/EnemyComponent.h"
 
 
-void my::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
     float margin = 0.1f;
@@ -16,7 +16,7 @@ void my::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mes
         geometry->SetMatrix(mat);
 
         if (ray.CollisionGeometry(geometry, info)) {
-            float height = _enemy_com.lock()->GetHeight();
+            float height = _ENEMY_com.lock()->GetHeight();
             if (info.d <= height + margin) {
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += height + margin - info.d;
@@ -27,66 +27,66 @@ void my::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mes
     } // for
 }
 
-my::EnemyCollisionComponent::EnemyCollisionComponent(int priority) :
+rachet::EnemyCollisionComponent::EnemyCollisionComponent(int priority) :
     super(priority),
-    _enemy_com() {
+    _ENEMY_com() {
 }
 
-my::EnemyCollisionComponent::EnemyCollisionComponent(const EnemyCollisionComponent& obj) :
+rachet::EnemyCollisionComponent::EnemyCollisionComponent(const EnemyCollisionComponent& obj) :
     super(obj),
-    _enemy_com() {
+    _ENEMY_com() {
 }
 
-my::EnemyCollisionComponent::~EnemyCollisionComponent() {
+rachet::EnemyCollisionComponent::~EnemyCollisionComponent() {
 }
 
-std::string my::EnemyCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kEnemyCollisionComponent;
+std::string rachet::EnemyCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kEnemyCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::EnemyCollisionComponent::GetSphere(void) {
-    _ASSERT_EXPR(!_enemy_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CSphere> rachet::EnemyCollisionComponent::GetSphere(void) {
+    _ASSERT_EXPR(!_ENEMY_com.expired(), L"無効なポインタを保持しています");
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
-    pos.y += _enemy_com.lock()->GetHeight();
-    return Mof::CSphere(pos, _enemy_com.lock()->GetVolume());
+    pos.y += _ENEMY_com.lock()->GetHeight();
+    return Mof::CSphere(pos, _ENEMY_com.lock()->GetVolume());
 }
 
-std::optional<Mof::CBoxAABB> my::EnemyCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::EnemyCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::EnemyCollisionComponent::GetRay(void) {
-    _ASSERT_EXPR(!_enemy_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CRay3D> rachet::EnemyCollisionComponent::GetRay(void) {
+    _ASSERT_EXPR(!_ENEMY_com.expired(), L"無効なポインタを保持しています");
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
-    pos.y += _enemy_com.lock()->GetHeight();
+    pos.y += _ENEMY_com.lock()->GetHeight();
     return Mof::CRay3D(pos, math::vec3::kNegUnitY);
 }
 
-std::optional<Mof::LPMeshContainer> my::EnemyCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::EnemyCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::EnemyCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::EnemyCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::EnemyCollisionComponent::Initialize(void) {
+bool rachet::EnemyCollisionComponent::Initialize(void) {
     super::Initialize();
-    _enemy_com = super::GetOwner()->GetComponent<my::EnemyComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<rachet::EnemyComponent>();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyCollisionComponent::Clone(void) {
-    return std::make_shared<my::EnemyCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyCollisionComponent>(*this);
 }
 
-void my::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetRay().has_value()) {
         return;
     } // if

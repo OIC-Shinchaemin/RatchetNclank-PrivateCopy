@@ -1,5 +1,5 @@
-#ifndef MY_SHIP_COLLISION_COMPONENT_H
-#define MY_SHIP_COLLISION_COMPONENT_H
+#ifndef RACHET_SHIP_COLLISION_COMPONENT_H
+#define RACHET_SHIP_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -10,9 +10,9 @@
 #include <Mof.h>
 
 
-namespace my {
-class ShipCollisionComponent : public my::CollisionComponent {
-    using super = my::CollisionComponent;
+namespace rachet {
+class ShipCollisionComponent : public rachet::CollisionComponent {
+    using super = rachet::CollisionComponent;
 private:
     //! èÛë‘
     std::weak_ptr<class ShipStateComponent> _state_com;
@@ -68,7 +68,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::SightObject> GetSightObject(void) override;
+    virtual std::optional<rachet::SightObject> GetSightObject(void) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -80,7 +80,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// è’ìÀ
     /// </summary>
@@ -89,4 +89,4 @@ public:
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
-#endif // !MY_SHIP_COLLISION_COMPONENT_H
+#endif // !RACHET_SHIP_COLLISION_COMPONENT_H

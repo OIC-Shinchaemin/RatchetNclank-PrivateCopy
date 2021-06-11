@@ -16,11 +16,11 @@ class GoHomeNodeExecutor : public behaviour::ActionNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<my::Actor> actor;
+        std::weak_ptr<rachet::Actor> actor;
         //! 型
-        std::weak_ptr<my::EnemyComponent> type_com;
+        std::weak_ptr<rachet::EnemyComponent> type_com;
         //! 状態
-        std::weak_ptr<my::EnemyStateComponent> state_com;
+        std::weak_ptr<rachet::EnemyStateComponent> state_com;
     };
 private:
     //! 実行引数
@@ -46,8 +46,8 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.type_com = actor->GetComponent<my::EnemyComponent>();
-            _node_args.state_com = actor->GetComponent<my::EnemyStateComponent>();
+            _node_args.type_com = actor->GetComponent<rachet::EnemyComponent>();
+            _node_args.state_com = actor->GetComponent<rachet::EnemyStateComponent>();
         } // if
     }
     /// <summary>

@@ -1,5 +1,5 @@
-#ifndef MY_AUTO_CAMERA_CONTROLLER_H
-#define MY_AUTO_CAMERA_CONTROLLER_H
+#ifndef RACHET_AUTO_CAMERA_CONTROLLER_H
+#define RACHET_AUTO_CAMERA_CONTROLLER_H
 
 
 #include "CameraController.h"
@@ -8,9 +8,9 @@
 #include "../BezierCurveAnimation.h"
 
 
-namespace my {
-class AutoCameraController : public my::CameraController {
-    using super = my::CameraController;
+namespace rachet {
+class AutoCameraController : public rachet::CameraController {
+    using super = rachet::CameraController;
 private:
     //! 時間
     float _time_max;
@@ -19,9 +19,9 @@ private:
     //! 時間
     base::core::Timer _timer;
     //! アニメーション
-    my::BezierCurveAnimation _bezier_curve_animation_position;
+    rachet::BezierCurveAnimation _bezier_curve_animation_position;
     //! アニメーション
-    my::BezierCurveAnimation _bezier_curve_animation_target;
+    rachet::BezierCurveAnimation _bezier_curve_animation_target;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,14 +52,14 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    //void AddObserver(const std::shared_ptr<base::core::Observer<const my::CameraController::CameraInfo&>>& ptr);
+    //void AddObserver(const std::shared_ptr<base::core::Observer<const rachet::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time, const my::CameraController::CameraInfo& info) override;
+    virtual bool Update(float delta_time, const rachet::CameraController::CameraInfo& info) override;
 };
 }
-#endif // !MY_AUTO_CAMERA_CONTROLLER_H
+#endif // !RACHET_AUTO_CAMERA_CONTROLLER_H

@@ -1,5 +1,5 @@
-#ifndef MY_LOCK_ON_CURSOR_MENU_H
-#define MY_LOCK_ON_CURSOR_MENU_H
+#ifndef RACHET_LOCK_ON_CURSOR_MENU_H
+#define RACHET_LOCK_ON_CURSOR_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -14,14 +14,14 @@
 #include "../GameDefine.h"
 
 
-namespace my {
+namespace rachet {
 class LockOnCursorMenu : public base::ui::UIPanel, public base::core::Observer<std::optional<Mof::CVector3>> {
     using super = base::ui::UIPanel;
 private:
     //! 位置
     std::optional<Mof::CVector3> _position;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource_manager;
+    std::weak_ptr<rachet::ResourceMgr> _resource_manager;
 public:
     /// <summary>
     /// コンストラクタ
@@ -37,7 +37,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -51,4 +51,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !MY_NANOTECH_MENU_H
+#endif // !RACHET_NANOTECH_MENU_H

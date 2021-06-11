@@ -1,13 +1,13 @@
-#ifndef MY_SHIP_IDLE_COMPONENT_H
-#define MY_SHIP_IDLE_COMPONENT_H
+#ifndef RACHET_SHIP_IDLE_COMPONENT_H
+#define RACHET_SHIP_IDLE_COMPONENT_H
 
 
 #include "ShipActionComponent.h"
 
 
-namespace my {
-class ShipIdleComponent : public my::ShipActionComponent {
-    using super = my::ShipActionComponent;
+namespace rachet {
+class ShipIdleComponent : public rachet::ShipActionComponent {
+    using super = rachet::ShipActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,7 +52,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -61,4 +61,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_SHIP_IDLE_COMPONENT_H
+#endif // !RACHET_SHIP_IDLE_COMPONENT_H

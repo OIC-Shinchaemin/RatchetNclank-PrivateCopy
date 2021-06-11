@@ -1,7 +1,7 @@
 #include "FollowCameraController.h"
 
 
-void my::FollowCameraController::UpdateCameraPosition(float delta_time, const std::shared_ptr<my::Camera>& camera) {
+void rachet::FollowCameraController::UpdateCameraPosition(float delta_time, const std::shared_ptr<rachet::Camera>& camera) {
     camera->SetTarget(_target);
 
     auto& [azimuth, altitude, distance, spring, dumping, velocity] = _param;
@@ -18,7 +18,7 @@ void my::FollowCameraController::UpdateCameraPosition(float delta_time, const st
     camera->SetPosition(_position);
 }
 
-my::FollowCameraController::FollowCameraController() :
+rachet::FollowCameraController::FollowCameraController() :
     super() {
     _param.distance = 8.0f;
     _param.azimuth = 270.0f;
@@ -27,10 +27,10 @@ my::FollowCameraController::FollowCameraController() :
     _param.dumping = std::sqrtf(_param.spring) * 2.0f;
 }
 
-my::FollowCameraController::~FollowCameraController() {
+rachet::FollowCameraController::~FollowCameraController() {
 }
 
-bool my::FollowCameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {
+bool rachet::FollowCameraController::Update(float delta_time, const rachet::CameraController::CameraInfo& info) {
     _preview_position = _position;
     _target = info.target_position;
     this->UpdateCameraPosition(delta_time, _camera);

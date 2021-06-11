@@ -1,15 +1,15 @@
 #include "OmniWrench.h"
 
 
-my::OmniWrench::OmniWrench() :
+rachet::OmniWrench::OmniWrench() :
     super() {
     super::SetTag("OmniWrench");
 }
 
-my::OmniWrench ::~OmniWrench() {
+rachet::OmniWrench ::~OmniWrench() {
 }
 
-bool my::OmniWrench::Initialize(my::Actor::Param* param) {
+bool rachet::OmniWrench::Initialize(rachet::Actor::Param* param) {
     super::Initialize(param);
 
     super::SetScale(Mof::CVector3());

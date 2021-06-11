@@ -1,5 +1,5 @@
-#ifndef MY_SCENE_H
-#define MY_SCENE_H
+#ifndef RACHET_SCENE_H
+#define RACHET_SCENE_H
 
 
 #include <optional>
@@ -19,9 +19,9 @@
 #include "Base/UI/UICanvas.h"
 
 
-namespace my {
-class Scene : public std::enable_shared_from_this<my::Scene>, public base::core::Observer<const char*, const std::shared_ptr<my::Actor>&> {
-    using this_type = my::Scene;
+namespace rachet {
+class Scene : public std::enable_shared_from_this<rachet::Scene>, public base::core::Observer<const char*, const std::shared_ptr<rachet::Actor>&> {
+    using this_type = rachet::Scene;
 public:
    enum class State {
         Active,    
@@ -43,11 +43,11 @@ protected:
     //! デフォルトのレンダーターゲット
     Mof::LPRenderTarget _default;
     //! ポストエフェクト
-    std::optional<my::SceneEffect> _effect;
+    std::optional<rachet::SceneEffect> _effect;
     //! 遷移
     base::core::Observable<const scene::SceneMessage&> _subject;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! 読み込み済み
@@ -65,7 +65,7 @@ protected:
     bool IsLoaded(void);
     void LoadComplete(void);
 
-    std::shared_ptr<my::ResourceMgr> GetResource(void) const;
+    std::shared_ptr<rachet::ResourceMgr> GetResource(void) const;
     std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
     virtual bool LoadingUpdate(float delta_time);
@@ -87,7 +87,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -109,7 +109,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Load(std::shared_ptr<my::Scene::Param> param);
+    virtual bool Load(std::shared_ptr<rachet::Scene::Param> param);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -142,4 +142,4 @@ public:
     virtual bool Release(void);
 };
 }
-#endif // !MY_SCENE_H
+#endif // !RACHET_SCENE_H

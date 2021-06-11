@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_CARTWHEEL_JUMP_COMPONENT_H
-#define MY_PLAYER_CARTWHEEL_JUMP_COMPONENT_H
+#ifndef RACHET_PLAYER_CARTWHEEL_JUMP_COMPONENT_H
+#define RACHET_PLAYER_CARTWHEEL_JUMP_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class PlayerCartwheelJumpComponent : public my::PlayerActionComponent {
-    using super = my::PlayerActionComponent;
+namespace rachet {
+class PlayerCartwheelJumpComponent : public rachet::PlayerActionComponent {
+    using super = rachet::PlayerActionComponent;
 private:
     //! ‘¬“x
     float _jump_speed;
@@ -90,7 +90,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -99,4 +99,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_CARTWHEEL_JUMP_COMPONENT_H
+#endif // !RACHET_PLAYER_CARTWHEEL_JUMP_COMPONENT_H

@@ -5,24 +5,24 @@
 #include "../UI/NanotechMenu.h"
 
 
-my::HpComponent::HpComponent(int priority) :
+rachet::HpComponent::HpComponent(int priority) :
     super(priority),
     _hp_max(0),
     _hp(_hp_max),
     _ui_remove(false) {
 }
 
-my::HpComponent::HpComponent(const HpComponent& obj) :
+rachet::HpComponent::HpComponent(const HpComponent& obj) :
     super(obj),
     _hp_max(obj._hp_max),
     _hp(_hp_max),
     _ui_remove(obj._ui_remove) {
 }
 
-my::HpComponent::~HpComponent() {
+rachet::HpComponent::~HpComponent() {
 }
 
-void my::HpComponent::SetParam(const rapidjson::Value& param) {
+void rachet::HpComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* hp_max = "hp_max";
 
@@ -31,15 +31,15 @@ void my::HpComponent::SetParam(const rapidjson::Value& param) {
     this->_hp_max = param[hp_max].GetInt();
 }
 
-std::string my::HpComponent::GetType(void) const {
+std::string rachet::HpComponent::GetType(void) const {
     return "HpComponent";
 }
 
-int my::HpComponent::GetHp(void) const {
+int rachet::HpComponent::GetHp(void) const {
     return this->_hp;
 }
 
-bool my::HpComponent::Initialize(void) {
+bool rachet::HpComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     _hp = _hp_max;
@@ -49,7 +49,7 @@ bool my::HpComponent::Initialize(void) {
         if (auto canvas = super::_ui_canvas.lock()) {
             canvas->RemoveElement("NanotechMenu");
             _ui_remove = true;
-            auto menu = std::make_shared<my::NanotechMenu>("NanotechMenu");
+            auto menu = std::make_shared<rachet::NanotechMenu>("NanotechMenu");
             _observable.AddObserver(menu);
             menu->SetResourceManager(_resource_manager);
             menu->SetColor(Mof::CVector4(0.1f, 0.3f, 0.5f, 0.5f));
@@ -60,11 +60,11 @@ bool my::HpComponent::Initialize(void) {
     return true;
 }
 
-bool my::HpComponent::Update(float delta_time) {
+bool rachet::HpComponent::Update(float delta_time) {
     return false;
 }
 
-bool my::HpComponent::Release(void) {
+bool rachet::HpComponent::Release(void) {
     super::Release();
     if (_ui_remove) {
         if (auto canvas = super::_ui_canvas.lock()) {
@@ -74,11 +74,11 @@ bool my::HpComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<my::Component> my::HpComponent::Clone(void) {
-    return std::make_shared<my::HpComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::HpComponent::Clone(void) {
+    return std::make_shared<rachet::HpComponent>(*this);
 }
 
-void my::HpComponent::Heal(int value) {
+void rachet::HpComponent::Heal(int value) {
     _hp += value;
     if (_hp > _hp_max) {
         _hp = _hp_max;
@@ -86,7 +86,7 @@ void my::HpComponent::Heal(int value) {
     _observable.Notify(_hp);
 }
 
-void my::HpComponent::Damage(int value) {
+void rachet::HpComponent::Damage(int value) {
     _hp -= value;
     if (_hp <= 0) {
         _hp = 0;

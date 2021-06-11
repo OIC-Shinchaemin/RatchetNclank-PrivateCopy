@@ -3,51 +3,51 @@
 #include "CollisionComponentDefine.h"
 
 
-my::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(int priority) :
+rachet::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(int priority) :
     super(priority) {
 }
 
-my::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(const PyrocitorBulletCollisionComponent& obj) :
+rachet::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(const PyrocitorBulletCollisionComponent& obj) :
     super(obj) {
 }
 
-my::PyrocitorBulletCollisionComponent::~PyrocitorBulletCollisionComponent() {
+rachet::PyrocitorBulletCollisionComponent::~PyrocitorBulletCollisionComponent() {
 }
 
-std::string my::PyrocitorBulletCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kPyrocitorBulletCollisionComponent;
+std::string rachet::PyrocitorBulletCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kPyrocitorBulletCollisionComponent;
  //   return "PyrocitorBulletCollisionComponent";
 }
 
-std::optional<Mof::CSphere> my::PyrocitorBulletCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CSphere> rachet::PyrocitorBulletCollisionComponent::GetSphere(void) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, 0.2f);
 }
 
-std::optional<Mof::CBoxAABB> my::PyrocitorBulletCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::PyrocitorBulletCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::PyrocitorBulletCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> rachet::PyrocitorBulletCollisionComponent::GetRay(void) {
     return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> my::PyrocitorBulletCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::PyrocitorBulletCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::PyrocitorBulletCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::PyrocitorBulletCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::PyrocitorBulletCollisionComponent::Initialize(void) {
+bool rachet::PyrocitorBulletCollisionComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PyrocitorBulletCollisionComponent::Clone(void) {
-    return std::make_shared<my::PyrocitorBulletCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PyrocitorBulletCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::PyrocitorBulletCollisionComponent>(*this);
 }

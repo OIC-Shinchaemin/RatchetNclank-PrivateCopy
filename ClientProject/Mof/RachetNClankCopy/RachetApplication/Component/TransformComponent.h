@@ -1,5 +1,5 @@
-#ifndef MY_TRANSFORM_COMPONENT_H
-#define MY_TRANSFORM_COMPONENT_H
+#ifndef RACHET_TRANSFORM_COMPONENT_H
+#define RACHET_TRANSFORM_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class TransformComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class TransformComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     //! ‘¬“x
     std::weak_ptr<class VelocityComponent> _velocity_com;
@@ -73,7 +73,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_TRANSFORM_COMPONENT_H
+#endif // !RACHET_TRANSFORM_COMPONENT_H

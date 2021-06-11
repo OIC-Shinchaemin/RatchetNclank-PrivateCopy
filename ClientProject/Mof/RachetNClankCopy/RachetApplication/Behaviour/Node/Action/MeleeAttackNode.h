@@ -42,7 +42,7 @@ public:
         _ASSERT_EXPR(!args.actor.expired(), L"無効なポインタを保持しています");
         _ASSERT_EXPR(!args.ai_com.expired(), L"無効なポインタを保持しています");
         _ASSERT_EXPR(!args.attack_com.expired(), L"無効なポインタを保持しています");
-        _ASSERT_EXPR(!args.enemy_com.expired(), L"無効なポインタを保持しています");
+        _ASSERT_EXPR(!args.ENEMY_com.expired(), L"無効なポインタを保持しています");
         _ASSERT_EXPR(!args.motion_com.expired(), L"無効なポインタを保持しています");
         _ASSERT_EXPR(!args.state_com.expired(), L"無効なポインタを保持しています");
 

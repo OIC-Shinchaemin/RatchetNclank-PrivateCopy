@@ -1,13 +1,13 @@
-#ifndef MY_CHARACTER_H
-#define MY_CHARACTER_H
+#ifndef RACHET_CHARACTER_H
+#define RACHET_CHARACTER_H
 
 
 #include "../../Actor.h"
 
 
-namespace my {
-class Character : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class Character : public rachet::Actor {
+    using super = rachet::Actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -19,4 +19,4 @@ public:
     virtual ~Character();
 };
 }
-#endif // !MY_CHARACTER_H
+#endif // !RACHET_CHARACTER_H

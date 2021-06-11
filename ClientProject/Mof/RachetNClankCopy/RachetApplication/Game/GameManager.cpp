@@ -4,16 +4,16 @@
 #include "GameSystem/Save/SaveSystem.h"
 
 
-my::GameManager::GameManager() :
+rachet::GameManager::GameManager() :
     _update_system(),
     _disable_systems(),
-    _weapon_system(std::make_shared<my::WeaponSystem>()),
-    _quick_change(std::make_shared<my::QuickChangeSystem>()),
-    _help_desk(std::make_shared<my::HelpDesk>()),
-    _game_money(std::make_shared<my::GameMoney>()),
-    _shop_system(std::make_shared<my::ShopSystem>()),
-    _option_system(std::make_shared<my::OptionSystem>()),
-    _pause_system(std::make_shared<my::GamePauseSystem>()),
+    _weapon_system(std::make_shared<rachet::WeaponSystem>()),
+    _quick_change(std::make_shared<rachet::QuickChangeSystem>()),
+    _help_desk(std::make_shared<rachet::HelpDesk>()),
+    _game_money(std::make_shared<rachet::GameMoney>()),
+    _shop_system(std::make_shared<rachet::ShopSystem>()),
+    _option_system(std::make_shared<rachet::OptionSystem>()),
+    _pause_system(std::make_shared<rachet::GamePauseSystem>()),
     _resource(),
     _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
@@ -21,58 +21,58 @@ my::GameManager::GameManager() :
     _shop_system->SetGameMoney(_game_money);
 }
 
-my::GameManager::~GameManager() {
+rachet::GameManager::~GameManager() {
 }
 
-void my::GameManager::OnNotify(const std::shared_ptr<my::GameSystem>& ptr) {
+void rachet::GameManager::OnNotify(const std::shared_ptr<rachet::GameSystem>& ptr) {
     _update_system.push_back(ptr);
 }
 
-void my::GameManager::SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr) {
+void rachet::GameManager::SetResourceManager(const std::shared_ptr<rachet::ResourceMgr>& ptr) {
     this->_resource = ptr;
 }
 
-void my::GameManager::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
+void rachet::GameManager::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
     this->_ui_canvas = ptr;
 }
 
-std::shared_ptr<my::WeaponSystem> my::GameManager::GetWeaponSystem(void) const {
+std::shared_ptr<rachet::WeaponSystem> rachet::GameManager::GetWeaponSystem(void) const {
     return this->_weapon_system;
 }
 
-std::shared_ptr<my::QuickChangeSystem> my::GameManager::GetQuickChange(void) const {
+std::shared_ptr<rachet::QuickChangeSystem> rachet::GameManager::GetQuickChange(void) const {
     return this->_quick_change;
 }
 
-std::shared_ptr<my::HelpDesk> my::GameManager::GetHelpDesk(void) const {
+std::shared_ptr<rachet::HelpDesk> rachet::GameManager::GetHelpDesk(void) const {
     return this->_help_desk;
 }
 
-std::shared_ptr<my::GameMoney> my::GameManager::GetGameMoney(void) const {
+std::shared_ptr<rachet::GameMoney> rachet::GameManager::GetGameMoney(void) const {
     return this->_game_money;
 }
 
-std::shared_ptr<my::ShopSystem> my::GameManager::GetShopSystem(void) const {
+std::shared_ptr<rachet::ShopSystem> rachet::GameManager::GetShopSystem(void) const {
     return this->_shop_system;
 }
 
-std::shared_ptr<my::OptionSystem> my::GameManager::GetOptionSystem(void) const {
+std::shared_ptr<rachet::OptionSystem> rachet::GameManager::GetOptionSystem(void) const {
     return this->_option_system;
 }
 
-std::shared_ptr<my::GamePauseSystem> my::GameManager::GetGamePauseSystem(void) const {
+std::shared_ptr<rachet::GamePauseSystem> rachet::GameManager::GetGamePauseSystem(void) const {
     return this->_pause_system;
 }
 
-void my::GameManager::GameSystemLoad(void) {
-    auto save_data = my::SaveData();
-    my::SaveSystem().Fetch(save_data);
+void rachet::GameManager::GameSystemLoad(void) {
+    auto save_data = rachet::SaveData();
+    rachet::SaveSystem().Fetch(save_data);
     _weapon_system->Load(save_data);
     _game_money->Load(save_data);
     _shop_system->Load(save_data);
 }
 
-bool my::GameManager::Initialize(void) {
+bool rachet::GameManager::Initialize(void) {
     _quick_change->GetSubject()->AddObserver(shared_from_this());
     _shop_system->GetSubject()->AddObserver(shared_from_this());
     _option_system->GetSubject()->AddObserver(shared_from_this());
@@ -104,7 +104,7 @@ bool my::GameManager::Initialize(void) {
     return true;
 }
 
-bool my::GameManager::Release(void) {
+bool rachet::GameManager::Release(void) {
 //    _option_system->GetSubject()->RemoveObserver(shared_from_this());
 //    _pause_system->GetSubject()->RemoveObserver(shared_from_this());
 
@@ -126,7 +126,7 @@ bool my::GameManager::Release(void) {
     return true;
 }
 
-bool my::GameManager::Update(float delta_time) {
+bool rachet::GameManager::Update(float delta_time) {
     for (auto ptr : _update_system) {
         if (!ptr->Update(delta_time)) {
             _disable_systems.push_back(ptr);
@@ -140,13 +140,13 @@ bool my::GameManager::Update(float delta_time) {
     return true;
 }
 
-void my::GameManager::GameSystemRelease(void) {
+void rachet::GameManager::GameSystemRelease(void) {
    //! save
     std::vector<std::string> weapon;
     _weapon_system->CreateAvailableMechanicalWeaponNames(weapon);
 
-    auto save_param = my::SaveDataParam(_game_money->GetValue(), weapon);
-    my::SaveSystem().Save(save_param);
+    auto save_param = rachet::SaveDataParam(_game_money->GetValue(), weapon);
+    rachet::SaveSystem().Save(save_param);
     _update_system.clear();
     _disable_systems.clear();
 

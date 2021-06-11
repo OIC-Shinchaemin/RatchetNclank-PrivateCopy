@@ -1,5 +1,5 @@
-#ifndef MY_QUICK_CHANGE_MENU_H
-#define MY_QUICK_CHANGE_MENU_H
+#ifndef RACHET_QUICK_CHANGE_MENU_H
+#define RACHET_QUICK_CHANGE_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -15,7 +15,7 @@
 #include "../Game/GameSystem/QuickChangeSystem.h"
 
 
-namespace my {
+namespace rachet {
 class QuickChangeMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
@@ -48,7 +48,7 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class QuickChangeMenu : public base::ui::UIPanel, public base::core::Observer<const my::QuickChangeSystem::Info&> {
+class QuickChangeMenu : public base::ui::UIPanel, public base::core::Observer<const rachet::QuickChangeSystem::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 半径
@@ -58,7 +58,7 @@ private:
     //! パス
     std::unordered_map<std::string, std::string> _tex_names;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -69,12 +69,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const my::QuickChangeSystem::Info& info) override;
+    virtual void OnNotify(const rachet::QuickChangeSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// 追加
     /// </summary>
@@ -95,4 +95,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !MY_QUICK_CHANGE_MENU_H
+#endif // !RACHET_QUICK_CHANGE_MENU_H

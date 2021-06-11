@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_THROW_ATTACK_SET_COMPONENT_H
-#define MY_PLAYER_THROW_ATTACK_SET_COMPONENT_H
+#ifndef RACHET_PLAYER_THROW_ATTACK_SET_COMPONENT_H
+#define RACHET_PLAYER_THROW_ATTACK_SET_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class PlayerThrowAttackSetComponent : public my::PlayerActionComponent {
-    using super = my::PlayerActionComponent;
+namespace rachet {
+class PlayerThrowAttackSetComponent : public rachet::PlayerActionComponent {
+    using super = rachet::PlayerActionComponent;
 private:
     //! ïêäÌ
     std::weak_ptr<class PlayerOmniWrenchComponent> _weapon_com;
@@ -69,7 +69,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// äJén
     /// </summary>
@@ -78,4 +78,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_THROW_ATTACK_SET_COMPONENT_H
+#endif // !RACHET_PLAYER_THROW_ATTACK_SET_COMPONENT_H

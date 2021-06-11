@@ -1,5 +1,5 @@
-#ifndef MY_NANOTECH_MENU_H
-#define MY_NANOTECH_MENU_H
+#ifndef RACHET_NANOTECH_MENU_H
+#define RACHET_NANOTECH_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -13,7 +13,7 @@
 #include "../GameDefine.h"
 
 
-namespace my {
+namespace rachet {
 class NanotechMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
@@ -39,7 +39,7 @@ private:
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource_manager;
+    std::weak_ptr<rachet::ResourceMgr> _resource_manager;
 public:
     /// <summary>
     /// コンストラクタ
@@ -55,7 +55,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -75,4 +75,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !MY_NANOTECH_MENU_H
+#endif // !RACHET_NANOTECH_MENU_H

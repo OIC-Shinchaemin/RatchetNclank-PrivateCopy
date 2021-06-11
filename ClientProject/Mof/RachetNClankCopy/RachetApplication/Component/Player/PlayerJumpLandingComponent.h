@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_JUMP_LANDING_COMPONENT_H
-#define MY_PLAYER_JUMP_LANDING_COMPONENT_H
+#ifndef RACHET_PLAYER_JUMP_LANDING_COMPONENT_H
+#define RACHET_PLAYER_JUMP_LANDING_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,10 +7,10 @@
 #include <memory>
 
 
-namespace my {
-class PlayerJumpLandingComponent : public my::PlayerActionComponent {
-    using super = my::PlayerActionComponent;
-    using This = my::PlayerJumpLandingComponent;
+namespace rachet {
+class PlayerJumpLandingComponent : public rachet::PlayerActionComponent {
+    using super = rachet::PlayerActionComponent;
+    using This = rachet::PlayerJumpLandingComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -84,7 +84,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -93,4 +93,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_JUMP_LANDING_COMPONENT_H
+#endif // !RACHET_PLAYER_JUMP_LANDING_COMPONENT_H

@@ -3,36 +3,36 @@
 #include "PlayerMoveComponent.h"
 
 
-my::PlayerJumpLandingComponent::PlayerJumpLandingComponent(int priority) :
+rachet::PlayerJumpLandingComponent::PlayerJumpLandingComponent(int priority) :
     super(priority),
     _input_info(),
     _move_com() {
 }
 
-my::PlayerJumpLandingComponent::PlayerJumpLandingComponent(const PlayerJumpLandingComponent& obj) :
+rachet::PlayerJumpLandingComponent::PlayerJumpLandingComponent(const PlayerJumpLandingComponent& obj) :
     super(obj),
     _input_info(),
     _move_com() {
 }
 
-my::PlayerJumpLandingComponent::~PlayerJumpLandingComponent() {
+rachet::PlayerJumpLandingComponent::~PlayerJumpLandingComponent() {
 }
 
-std::string my::PlayerJumpLandingComponent::GetType(void) const {
+std::string rachet::PlayerJumpLandingComponent::GetType(void) const {
     return "PlayerJumpLandingComponent";
 }
 
-std::string_view my::PlayerJumpLandingComponent::GetStateType(void) const {
+std::string_view rachet::PlayerJumpLandingComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionJumpLandingState;
 }
 
-bool my::PlayerJumpLandingComponent::Initialize(void) {
+bool rachet::PlayerJumpLandingComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerMoveComponent>();
     return true;
 }
 
-bool my::PlayerJumpLandingComponent::Input(void) {
+bool rachet::PlayerJumpLandingComponent::Input(void) {
     auto move_com = _move_com.lock();
     auto& [in, move_angle, move_flag] = _input_info;
     move_flag = move_com->AquireInputData(in, move_angle);
@@ -46,7 +46,7 @@ bool my::PlayerJumpLandingComponent::Input(void) {
     return true;
 }
 
-bool my::PlayerJumpLandingComponent::Update(float delta_time) {
+bool rachet::PlayerJumpLandingComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 
     //Mof::CVector2 in;
@@ -71,17 +71,17 @@ bool my::PlayerJumpLandingComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::PlayerJumpLandingComponent::Release(void) {
+bool rachet::PlayerJumpLandingComponent::Release(void) {
     super::Release();
     _move_com.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerJumpLandingComponent::Clone(void) {
-    return std::make_shared<my::PlayerJumpLandingComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerJumpLandingComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerJumpLandingComponent>(*this);
 }
 
-bool my::PlayerJumpLandingComponent::Start(void) {
+bool rachet::PlayerJumpLandingComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

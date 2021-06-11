@@ -3,23 +3,23 @@
 #include "CollisionComponentDefine.h"
 
 
-my::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(int priority) :
+rachet::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(int priority) :
     super(priority) {
 }
 
-my::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(const BombGloveEffectCollisionComponent& obj) :
+rachet::BombGloveEffectCollisionComponent::BombGloveEffectCollisionComponent(const BombGloveEffectCollisionComponent& obj) :
     super(obj) {
 }
 
-my::BombGloveEffectCollisionComponent::~BombGloveEffectCollisionComponent() {
+rachet::BombGloveEffectCollisionComponent::~BombGloveEffectCollisionComponent() {
 }
 
-std::string my::BombGloveEffectCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kBombGloveEffectCollisionComponent;
+std::string rachet::BombGloveEffectCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kBombGloveEffectCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::BombGloveEffectCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CSphere> rachet::BombGloveEffectCollisionComponent::GetSphere(void) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -27,27 +27,27 @@ std::optional<Mof::CSphere> my::BombGloveEffectCollisionComponent::GetSphere(voi
     return Mof::CSphere(pos, 0.2f);
 }
 
-std::optional<Mof::CBoxAABB> my::BombGloveEffectCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::BombGloveEffectCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::BombGloveEffectCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> rachet::BombGloveEffectCollisionComponent::GetRay(void) {
     return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> my::BombGloveEffectCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::BombGloveEffectCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::BombGloveEffectCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::BombGloveEffectCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::BombGloveEffectCollisionComponent::Initialize(void) {
+bool rachet::BombGloveEffectCollisionComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BombGloveEffectCollisionComponent::Clone(void) {
-    return std::make_shared<my::BombGloveEffectCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BombGloveEffectCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::BombGloveEffectCollisionComponent>(*this);
 }

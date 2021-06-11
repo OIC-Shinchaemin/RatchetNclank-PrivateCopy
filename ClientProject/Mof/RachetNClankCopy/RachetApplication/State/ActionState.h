@@ -13,7 +13,7 @@ namespace state {
 class ActionState : public base::core::State {
 private:
     //! アクション
-    std::weak_ptr<my::ActionComponent> _action_com;
+    std::weak_ptr<rachet::ActionComponent> _action_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,7 +27,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetActionComponent(const std::shared_ptr<my::ActionComponent>& ptr);
+    virtual void SetActionComponent(const std::shared_ptr<rachet::ActionComponent>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

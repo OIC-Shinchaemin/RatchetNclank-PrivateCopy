@@ -1,5 +1,5 @@
-#ifndef MY_SHIP_LANDING_COMPONENT_H
-#define MY_SHIP_LANDING_COMPONENT_H
+#ifndef RACHET_SHIP_LANDING_COMPONENT_H
+#define RACHET_SHIP_LANDING_COMPONENT_H
 
 
 #include "ShipActionComponent.h"
@@ -8,11 +8,11 @@
 #include "../../Camera/CameraController.h"
 
 
-namespace my {
-class ShipLandingComponent : public my::ShipActionComponent,
-    public base::core::Observable<const my::CameraController::CameraInfo&> {
-    using super = my::ShipActionComponent;
-    using Observable = base::core::Observable<const my::CameraController::CameraInfo&>;
+namespace rachet {
+class ShipLandingComponent : public rachet::ShipActionComponent,
+    public base::core::Observable<const rachet::CameraController::CameraInfo&> {
+    using super = rachet::ShipActionComponent;
+    using Observable = base::core::Observable<const rachet::CameraController::CameraInfo&>;
 public:
     /// <summary>
     /// コンストラクタ
@@ -44,7 +44,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddObserver(const std::shared_ptr<base::core::Observer<const my::CameraController::CameraInfo&>>& ptr);
+    void AddObserver(const std::shared_ptr<base::core::Observer<const rachet::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>
@@ -56,7 +56,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -71,4 +71,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_SHIP_LANDING_COMPONENT_H
+#endif // !RACHET_SHIP_LANDING_COMPONENT_H

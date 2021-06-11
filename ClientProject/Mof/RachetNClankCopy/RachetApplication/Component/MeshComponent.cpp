@@ -1,22 +1,22 @@
 #include "MeshComponent.h"
 
 
-my::MeshComponent::MeshComponent(int priority) :
+rachet::MeshComponent::MeshComponent(int priority) :
     super(priority),
     _mesh(),
     _color() {
 }
 
-my::MeshComponent::MeshComponent(const my::MeshComponent& obj) :
+rachet::MeshComponent::MeshComponent(const rachet::MeshComponent& obj) :
     super(obj),
     _mesh(obj._mesh),
     _color(obj._color) {
 }
 
-my::MeshComponent::~MeshComponent() {
+rachet::MeshComponent::~MeshComponent() {
 }
 
-void my::MeshComponent::SetParam(const rapidjson::Value& param) {
+void rachet::MeshComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* path = "path";
 
@@ -39,23 +39,23 @@ void my::MeshComponent::SetParam(const rapidjson::Value& param) {
     } // else
 }
 
-void my::MeshComponent::SetMeshContainer(const std::shared_ptr<Mof::CMeshContainer>& ptr) {
+void rachet::MeshComponent::SetMeshContainer(const std::shared_ptr<Mof::CMeshContainer>& ptr) {
     this->_mesh = ptr;
 }
 
-std::string my::MeshComponent::GetType(void) const {
+std::string rachet::MeshComponent::GetType(void) const {
     return "MeshComponent";
 }
 
-std::shared_ptr<Mof::CMeshContainer> my::MeshComponent::GetMeshContainer(void) const {
+std::shared_ptr<Mof::CMeshContainer> rachet::MeshComponent::GetMeshContainer(void) const {
     return this->_mesh.lock();
 }
 
-Mof::CVector4 my::MeshComponent::GetColor(void) const {
+Mof::CVector4 rachet::MeshComponent::GetColor(void) const {
     return this->_color;
 }
 
-bool my::MeshComponent::Render(void) {
+bool rachet::MeshComponent::Render(void) {
     if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
@@ -76,12 +76,12 @@ bool my::MeshComponent::Render(void) {
     return true;
 }
 
-bool my::MeshComponent::Release(void) {
+bool rachet::MeshComponent::Release(void) {
     super::Release();
     _mesh.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::MeshComponent::Clone(void) {
-    return std::make_shared<my::MeshComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::MeshComponent::Clone(void) {
+    return std::make_shared<rachet::MeshComponent>(*this);
 }

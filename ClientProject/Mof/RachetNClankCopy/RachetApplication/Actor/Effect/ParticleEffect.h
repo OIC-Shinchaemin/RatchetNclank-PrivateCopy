@@ -1,5 +1,5 @@
-#ifndef MY_PARTICLE_EFFECT_H
-#define MY_PARTICLE_EFFECT_H
+#ifndef RACHET_PARTICLE_EFFECT_H
+#define RACHET_PARTICLE_EFFECT_H
 
 
 #include "../../Actor.h"
@@ -9,9 +9,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace my {
-class ParticleEffect : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class ParticleEffect : public rachet::Actor {
+    using super = rachet::Actor;
 public:
     struct Param : public super::Param {
         //! 色
@@ -45,9 +45,9 @@ private:
     //! デフォルトサイズ
     float _size;
     //! 更新パラメータ
-    my::ParticleEffect::UpdateParam _update_param;
+    rachet::ParticleEffect::UpdateParam _update_param;
     //! 環境設定
-    my::ParticleEffect::EnvironmentParam _environment_param;
+    rachet::ParticleEffect::EnvironmentParam _environment_param;
 public:
     /// <summary>
     /// コンストラクタ
@@ -71,7 +71,7 @@ public:
     /// 開始
     /// </summary>
     /// <param name="info"></param>
-    void Start(const my::ParticleEffect::Info& info);
+    void Start(const rachet::ParticleEffect::Info& info);
 };
 }
-#endif // !MY_PARTICLE_EFFECT_H
+#endif // !RACHET_PARTICLE_EFFECT_H

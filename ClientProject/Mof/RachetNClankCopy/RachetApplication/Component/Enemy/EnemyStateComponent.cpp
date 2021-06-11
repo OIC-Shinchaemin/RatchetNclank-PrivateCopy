@@ -3,43 +3,43 @@
 #include "../../State/EnemyActionStateDefine.h"
 
 
-my::EnemyStateComponent::EnemyStateComponent(int priority) :
+rachet::EnemyStateComponent::EnemyStateComponent(int priority) :
     super(priority)//
     //,
     //_state_machine() 
 {
 }
 
-my::EnemyStateComponent::EnemyStateComponent(const EnemyStateComponent& obj) :
+rachet::EnemyStateComponent::EnemyStateComponent(const EnemyStateComponent& obj) :
     super(obj)
     //,
     //_state_machine(obj._state_machine) 
 {
 }
 
-my::EnemyStateComponent::~EnemyStateComponent() {
+rachet::EnemyStateComponent::~EnemyStateComponent() {
 }
 /*
-void my::EnemyStateComponent::SetParam(const rapidjson::Value& param) {
+void rachet::EnemyStateComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
 }
 */
-std::string my::EnemyStateComponent::GetType(void) const {
+std::string rachet::EnemyStateComponent::GetType(void) const {
     return "EnemyStateComponent";
 }
 /*
-bool my::EnemyStateComponent::IsEqual(std::string_view state) const {
+bool rachet::EnemyStateComponent::IsEqual(std::string_view state) const {
     return this->_state_machine.GetCurrentStateName() == state;
 }
 */
-bool my::EnemyStateComponent::Initialize(void) {
+bool rachet::EnemyStateComponent::Initialize(void) {
     super::Initialize();
     /*
     super::Activate();
 
     // state
-    std::vector<std::weak_ptr<my::ActionComponent>> work;
-    super::GetOwner()->GetComponents<my::ActionComponent>(work);
+    std::vector<std::weak_ptr<rachet::ActionComponent>> work;
+    super::GetOwner()->GetComponents<rachet::ActionComponent>(work);
     for (auto weak : work) {
         if (auto com = weak.lock()) {
             this->RegisterState(_state_machine, com);
@@ -51,27 +51,27 @@ bool my::EnemyStateComponent::Initialize(void) {
     return true;
 }
 /*
-bool my::EnemyStateComponent::Update(float delta_time) {
+bool rachet::EnemyStateComponent::Update(float delta_time) {
     _state_machine.Update(delta_time);
     return false;
 }
 
-bool my::EnemyStateComponent::Release(void) {
+bool rachet::EnemyStateComponent::Release(void) {
     super::Release();
     _state_machine.Release();
     return true;
 }
 */
-std::shared_ptr<my::Component> my::EnemyStateComponent::Clone(void) {
-    return std::make_shared<my::EnemyStateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyStateComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyStateComponent>(*this);
 }
 /*
-void my::EnemyStateComponent::ChangeState(const std::string& name) {
+void rachet::EnemyStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
 */
 
-bool my::EnemyStateComponent::CanTransition(const std::string& next) {
+bool rachet::EnemyStateComponent::CanTransition(const std::string& next) {
     using Type = state::EnemyActionStateType;
     auto current = _state_machine.GetCurrentStateName();
 
@@ -143,7 +143,7 @@ bool my::EnemyStateComponent::CanTransition(const std::string& next) {
 }
 
 #ifdef _DEBUG
-bool my::EnemyStateComponent::DebugRender(void) {
+bool rachet::EnemyStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 600.0f, "enemy state = %s", this->_state_machine.GetCurrentStateName());
     return true;

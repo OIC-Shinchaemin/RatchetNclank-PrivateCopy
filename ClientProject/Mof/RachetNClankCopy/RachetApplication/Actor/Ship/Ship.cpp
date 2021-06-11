@@ -1,13 +1,13 @@
 #include "Ship.h"
 
 
-my::Ship::Ship() :
+rachet::Ship::Ship() :
     super() {
 }
 
-my::Ship::~Ship() {
+rachet::Ship::~Ship() {
 }
 
-void my::Ship::Construct(const std::shared_ptr<class IBuilder>& builder) {
+void rachet::Ship::Construct(const std::shared_ptr<class IBuilder>& builder) {
     super::Construct(builder);
 }

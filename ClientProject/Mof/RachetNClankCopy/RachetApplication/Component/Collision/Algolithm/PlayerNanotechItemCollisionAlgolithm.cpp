@@ -3,22 +3,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-my::PlayerNanotechItemCollisionAlgolithm::PlayerNanotechItemCollisionAlgolithm() :
+rachet::PlayerNanotechItemCollisionAlgolithm::PlayerNanotechItemCollisionAlgolithm() :
     super() {
 }
 
-my::PlayerNanotechItemCollisionAlgolithm::~PlayerNanotechItemCollisionAlgolithm() {
+rachet::PlayerNanotechItemCollisionAlgolithm::~PlayerNanotechItemCollisionAlgolithm() {
 }
 
-const char* my::PlayerNanotechItemCollisionAlgolithm::GetLayerType(void) const {
-    return my::CollisionComponentType::kPlayerCollisionComponent.c_str();
+const char* rachet::PlayerNanotechItemCollisionAlgolithm::GetLayerType(void) const {
+    return rachet::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-const char* my::PlayerNanotechItemCollisionAlgolithm::GetTargetType(void) const {
-    return my::CollisionComponentType::kNanotechItemCollisionComponent.c_str();
+const char* rachet::PlayerNanotechItemCollisionAlgolithm::GetTargetType(void) const {
+    return rachet::CollisionComponentType::kNanotechItemCollisionComponent.c_str();
 }
 
-bool my::PlayerNanotechItemCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
+bool rachet::PlayerNanotechItemCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

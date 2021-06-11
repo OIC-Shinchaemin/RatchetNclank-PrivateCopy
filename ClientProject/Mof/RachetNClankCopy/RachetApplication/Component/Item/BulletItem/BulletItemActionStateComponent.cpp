@@ -1,22 +1,22 @@
 #include "BulletItemActionStateComponent.h"
 
 
-my::BulletItemActionStateComponent::BulletItemActionStateComponent(int priority) :
+rachet::BulletItemActionStateComponent::BulletItemActionStateComponent(int priority) :
     super(priority) {
 }
 
-my::BulletItemActionStateComponent::BulletItemActionStateComponent(const BulletItemActionStateComponent& obj) :
+rachet::BulletItemActionStateComponent::BulletItemActionStateComponent(const BulletItemActionStateComponent& obj) :
     super(obj) {
 }
 
-my::BulletItemActionStateComponent::~BulletItemActionStateComponent() {
+rachet::BulletItemActionStateComponent::~BulletItemActionStateComponent() {
 }
 
-std::string my::BulletItemActionStateComponent::GetType(void) const {
+std::string rachet::BulletItemActionStateComponent::GetType(void) const {
     return "BulletItemActionStateComponent";
 }
 
-bool my::BulletItemActionStateComponent::Initialize(void) {
+bool rachet::BulletItemActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::BulletItemActionType;
     //super::ChangeState(Type::kMoved);
@@ -24,11 +24,11 @@ bool my::BulletItemActionStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<my::Component> my::BulletItemActionStateComponent::Clone(void) {
-    return std::make_shared<my::BulletItemActionStateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BulletItemActionStateComponent::Clone(void) {
+    return std::make_shared<rachet::BulletItemActionStateComponent>(*this);
 }
 
-bool my::BulletItemActionStateComponent::CanTransition(const std::string& next) {
+bool rachet::BulletItemActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::BulletItemActionType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -46,7 +46,7 @@ bool my::BulletItemActionStateComponent::CanTransition(const std::string& next) 
 }
 
 #ifdef _DEBUG
-bool my::BulletItemActionStateComponent::DebugRender(void) {
+bool rachet::BulletItemActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 550.0f, "BulletItem state = %s", this->_state_machine.GetCurrentStateName());
     return true;

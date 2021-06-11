@@ -3,7 +3,7 @@
 #include "PlayerMoveComponent.h"
 
 
-my::PlayerJumpDownComponent::PlayerJumpDownComponent(int priority) :
+rachet::PlayerJumpDownComponent::PlayerJumpDownComponent(int priority) :
     super(priority),
     _jump_speed_max(20.0f),
     _jump_speed(_jump_speed_max),
@@ -12,7 +12,7 @@ my::PlayerJumpDownComponent::PlayerJumpDownComponent(int priority) :
     _move_com() {
 }
 
-my::PlayerJumpDownComponent::PlayerJumpDownComponent(const PlayerJumpDownComponent& obj) :
+rachet::PlayerJumpDownComponent::PlayerJumpDownComponent(const PlayerJumpDownComponent& obj) :
     super(obj),
     _jump_speed_max(obj._jump_speed_max),
     _jump_speed(obj._jump_speed),
@@ -21,24 +21,24 @@ my::PlayerJumpDownComponent::PlayerJumpDownComponent(const PlayerJumpDownCompone
     _move_com() {
 }
 
-my::PlayerJumpDownComponent::~PlayerJumpDownComponent() {
+rachet::PlayerJumpDownComponent::~PlayerJumpDownComponent() {
 }
 
-std::string my::PlayerJumpDownComponent::GetType(void) const {
+std::string rachet::PlayerJumpDownComponent::GetType(void) const {
     return "PlayerJumpDownComponent";
 }
 
-std::string_view my::PlayerJumpDownComponent::GetStateType(void) const {
+std::string_view rachet::PlayerJumpDownComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionJumpDownState;
 }
 
-bool my::PlayerJumpDownComponent::Initialize(void) {
+bool rachet::PlayerJumpDownComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerMoveComponent>();
     return true;
 }
 
-bool my::PlayerJumpDownComponent::Input(void) {
+bool rachet::PlayerJumpDownComponent::Input(void) {
     auto move_com = _move_com.lock();
     auto& [in, move_angle, move_flag] = _input_info;
     move_flag = move_com->AquireInputData(in, move_angle);
@@ -50,7 +50,7 @@ bool my::PlayerJumpDownComponent::Input(void) {
     return true;
 }
 
-bool my::PlayerJumpDownComponent::Update(float delta_time) {
+bool rachet::PlayerJumpDownComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 
     //Mof::CVector2 in;
@@ -74,17 +74,17 @@ bool my::PlayerJumpDownComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::PlayerJumpDownComponent::Release(void) {
+bool rachet::PlayerJumpDownComponent::Release(void) {
     super::Release();
     _move_com.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerJumpDownComponent::Clone(void) {
-    return std::make_shared<my::PlayerJumpDownComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerJumpDownComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerJumpDownComponent>(*this);
 }
 
-bool my::PlayerJumpDownComponent::Start(void) {
+bool rachet::PlayerJumpDownComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

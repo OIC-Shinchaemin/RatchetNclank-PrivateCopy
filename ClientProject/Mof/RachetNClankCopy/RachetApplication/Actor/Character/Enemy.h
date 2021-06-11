@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_H
-#define MY_ENEMY_H
+#ifndef RACHET_ENEMY_H
+#define RACHET_ENEMY_H
 
 
 #include "Character.h"
@@ -7,9 +7,9 @@
 #include "../../Game/GameSystem/GameQuest.h"
 
 
-namespace my {
-class Enemy : public my::Character {
-    using super = my::Character;
+namespace rachet {
+class Enemy : public rachet::Character {
+    using super = rachet::Character;
 public:
     enum class MotionType {
         IdleWait,
@@ -20,7 +20,7 @@ public:
     };
 private:
     //! 通知用
-    base::core::Observable<const my::GameQuest&> _quest_subject;
+    base::core::Observable<const rachet::GameQuest&> _quest_subject;
     /// <summary>
     /// 状態変更
     /// </summary>
@@ -39,7 +39,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const my::GameQuest&>* GetQuestSubject(void);
+    base::core::Observable<const rachet::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// デリート
     /// </summary>
@@ -59,4 +59,4 @@ public:
     //virtual bool Render(void) override;
 };
 }
-#endif // !MY_ENEMY_H
+#endif // !RACHET_ENEMY_H

@@ -1,7 +1,7 @@
 ﻿#include "OptionSystemMenu.h"
 
 
-my::OptionSystemMenu::OptionSystemMenu(const char* name) :
+rachet::OptionSystemMenu::OptionSystemMenu(const char* name) :
     super(name),
     _infomation(),
     _resource(),
@@ -14,11 +14,11 @@ my::OptionSystemMenu::OptionSystemMenu(const char* name) :
     
 }
 
-my::OptionSystemMenu::~OptionSystemMenu() {
+rachet::OptionSystemMenu::~OptionSystemMenu() {
     _font.Release();
 }
 
-void my::OptionSystemMenu::OnNotify(const my::OptionSystem::Info& info) {
+void rachet::OptionSystemMenu::OnNotify(const rachet::OptionSystem::Info& info) {
     _infomation = info;
     if (info.enter) {
         super::Notify(shared_from_this(), "Enable");
@@ -32,16 +32,16 @@ void my::OptionSystemMenu::OnNotify(const my::OptionSystem::Info& info) {
     } // else if
 }
 
-void my::OptionSystemMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+void rachet::OptionSystemMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::OptionSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void rachet::OptionSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-void my::OptionSystemMenu::AddItem(const my::OptionSystemItem& in) {
-    auto elem = std::make_shared<my::OptionSystemMenuItem>(in.GetText().c_str());
+void rachet::OptionSystemMenu::AddItem(const rachet::OptionSystemItem& in) {
+    auto elem = std::make_shared<rachet::OptionSystemMenuItem>(in.GetText().c_str());
     elem->SetFont(&_font);
     elem->SetText(in.GetText());
 
@@ -54,12 +54,12 @@ void my::OptionSystemMenu::AddItem(const my::OptionSystemItem& in) {
     super::AddElement(elem);
 }
 
-bool my::OptionSystemMenu::Initialize(void) {
+bool rachet::OptionSystemMenu::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool my::OptionSystemMenu::Update(float delta_time) {
+bool rachet::OptionSystemMenu::Update(float delta_time) {
     int index = 0;
 
 
@@ -75,43 +75,43 @@ bool my::OptionSystemMenu::Update(float delta_time) {
     return true;
 }
 
-bool my::OptionSystemMenu::Render(void) {
+bool rachet::OptionSystemMenu::Render(void) {
     super::Render();
     return true;
 }
 
-my::OptionSystemMenuItem::OptionSystemMenuItem(const char* name) :
+rachet::OptionSystemMenuItem::OptionSystemMenuItem(const char* name) :
     super(name),
     _text(),
     _font() {
 }
 
-my::OptionSystemMenuItem::~OptionSystemMenuItem() {
+rachet::OptionSystemMenuItem::~OptionSystemMenuItem() {
     _font = nullptr;
 }
 
-void my::OptionSystemMenuItem::SetText(const std::string& text) {
+void rachet::OptionSystemMenuItem::SetText(const std::string& text) {
     this->_text = text;
 }
 
-void my::OptionSystemMenuItem::SetFont(Mof::CFont* ptr) {
+void rachet::OptionSystemMenuItem::SetFont(Mof::CFont* ptr) {
     this->_font = ptr;
 }
 
-Mof::CVector2 my::OptionSystemMenuItem::GetSize(void) const {
-    return Mof::CVector2(my::kTextWidth * _text.size(), my::kTextWidth);
+Mof::CVector2 rachet::OptionSystemMenuItem::GetSize(void) const {
+    return Mof::CVector2(rachet::kTextWidth * _text.size(), rachet::kTextWidth);
 }
 
-bool my::OptionSystemMenuItem::Input(void) {
+bool rachet::OptionSystemMenuItem::Input(void) {
     return false;
 }
 
-bool my::OptionSystemMenuItem::Update(float delta_time) {
+bool rachet::OptionSystemMenuItem::Update(float delta_time) {
     //super::Update(delta_time);
     return true;
 }
 
-bool my::OptionSystemMenuItem::Render(void) {
+bool rachet::OptionSystemMenuItem::Render(void) {
     auto pos = super::_position;
     auto color = super::_color.ToU32Color();
     ::CGraphicsUtilities::RenderString(

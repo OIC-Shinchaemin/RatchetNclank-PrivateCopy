@@ -4,34 +4,34 @@
 #include "../../CameraComponent.h"
 
 
-my::CameraCollisionComponent::CameraCollisionComponent(int priority) :
+rachet::CameraCollisionComponent::CameraCollisionComponent(int priority) :
     super(priority),
     _camera_com() {
 }
 
-my::CameraCollisionComponent::CameraCollisionComponent(const CameraCollisionComponent& obj) :
+rachet::CameraCollisionComponent::CameraCollisionComponent(const CameraCollisionComponent& obj) :
     super(obj),
     _camera_com() {
 }
 
-my::CameraCollisionComponent ::~CameraCollisionComponent() {
+rachet::CameraCollisionComponent ::~CameraCollisionComponent() {
 }
 
-std::string my::CameraCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kCameraCollisionComponent;
+std::string rachet::CameraCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kCameraCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::CameraCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> rachet::CameraCollisionComponent::GetSphere(void) {
     return std::optional<Mof::CSphere>();
 }
 
-std::optional<Mof::CBoxAABB> my::CameraCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::CameraCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::CameraCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> rachet::CameraCollisionComponent::GetRay(void) {
     _ASSERT_EXPR(!_camera_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = _camera_com.lock()->GetPosition();
@@ -39,25 +39,25 @@ std::optional<Mof::CRay3D> my::CameraCollisionComponent::GetRay(void) {
     return Mof::CRay3D(pos, velocity);
 }
 
-std::optional<Mof::LPMeshContainer> my::CameraCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::CameraCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::CameraCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::CameraCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::CameraCollisionComponent::Initialize(void) {
+bool rachet::CameraCollisionComponent::Initialize(void) {
     super::Initialize();
-    _camera_com = super::GetOwner()->GetComponent<my::CameraComponent>();
+    _camera_com = super::GetOwner()->GetComponent<rachet::CameraComponent>();
     return true;
 }
 
-std::shared_ptr<my::Component> my::CameraCollisionComponent::Clone(void) {
-    return std::make_shared<my::CameraCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::CameraCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::CameraCollisionComponent>(*this);
 }
 
-void my::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetRay().has_value()) {
         return;
     } // if
@@ -82,5 +82,5 @@ void my::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, con
     } // for
 }
 
-void my::CameraCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
+void rachet::CameraCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
 }

@@ -1,40 +1,40 @@
 #include "ShipIdleComponent.h"
 
 
-my::ShipIdleComponent::ShipIdleComponent(int priority) :
+rachet::ShipIdleComponent::ShipIdleComponent(int priority) :
     super(priority) {
 }
 
-my::ShipIdleComponent::ShipIdleComponent(const ShipIdleComponent& obj) :
+rachet::ShipIdleComponent::ShipIdleComponent(const ShipIdleComponent& obj) :
     super(obj) {
 }
 
-my::ShipIdleComponent::~ShipIdleComponent() {
+rachet::ShipIdleComponent::~ShipIdleComponent() {
 }
 
-std::string my::ShipIdleComponent::GetType(void) const {
+std::string rachet::ShipIdleComponent::GetType(void) const {
     return "ShipIdleComponent";
 }
 
-std::string_view my::ShipIdleComponent::GetStateType(void) const {
+std::string_view rachet::ShipIdleComponent::GetStateType(void) const {
     return state::ShipActionStateType::kShipActionIdleState;
 }
 
-bool my::ShipIdleComponent::Initialize(void) {
+bool rachet::ShipIdleComponent::Initialize(void) {
     super::Initialize();
 
     return true;
 }
 
-bool my::ShipIdleComponent::Update(float delta_time) {
+bool rachet::ShipIdleComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<my::Component> my::ShipIdleComponent::Clone(void) {
-    return std::make_shared<my::ShipIdleComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::ShipIdleComponent::Clone(void) {
+    return std::make_shared<rachet::ShipIdleComponent>(*this);
 }
 
-bool my::ShipIdleComponent::Start(void) {
+bool rachet::ShipIdleComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

@@ -1,5 +1,5 @@
-#ifndef MY_OPTION_SYSTEM_MENU_H
-#define MY_OPTION_SYSTEM_MENU_H
+#ifndef RACHET_OPTION_SYSTEM_MENU_H
+#define RACHET_OPTION_SYSTEM_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -13,7 +13,7 @@
 #include "../Game/GameSystem/OptionSystem.h"
 
 
-namespace my {
+namespace rachet {
 class OptionSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
@@ -75,13 +75,13 @@ public:
     virtual bool Render(void) override;
 };
 class OptionSystemMenu : public base::ui::UIPanel,
-    public base::core::Observer<const my::OptionSystem::Info&> {
+    public base::core::Observer<const rachet::OptionSystem::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 情報
-    my::OptionSystem::Info _infomation;
+    rachet::OptionSystem::Info _infomation;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! フォント
@@ -101,12 +101,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const my::OptionSystem::Info& info) override;
+    virtual void OnNotify(const rachet::OptionSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -116,7 +116,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="in"></param>
-    void AddItem(const my::OptionSystemItem& in);
+    void AddItem(const rachet::OptionSystemItem& in);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -137,4 +137,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !MY_OPTION_SYSTEM_MENU_H
+#endif // !RACHET_OPTION_SYSTEM_MENU_H

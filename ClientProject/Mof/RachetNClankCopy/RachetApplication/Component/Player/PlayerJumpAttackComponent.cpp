@@ -3,40 +3,40 @@
 #include "PlayerOmniWrenchComponent.h"
 
 
-my::PlayerJumpAttackComponent::PlayerJumpAttackComponent(int priority) :
+rachet::PlayerJumpAttackComponent::PlayerJumpAttackComponent(int priority) :
     super(priority),
     _down_speed(7.0f),
     _weapon_com() {
 }
 
-my::PlayerJumpAttackComponent::PlayerJumpAttackComponent(const PlayerJumpAttackComponent& obj) :
+rachet::PlayerJumpAttackComponent::PlayerJumpAttackComponent(const PlayerJumpAttackComponent& obj) :
     super(obj),
     _down_speed(obj._down_speed),
     _weapon_com() {
 }
 
-my::PlayerJumpAttackComponent::~PlayerJumpAttackComponent() {
+rachet::PlayerJumpAttackComponent::~PlayerJumpAttackComponent() {
 }
 
-std::string my::PlayerJumpAttackComponent::GetType(void) const {
+std::string rachet::PlayerJumpAttackComponent::GetType(void) const {
     return "PlayerJumpAttackComponent";
 }
 
-std::string_view my::PlayerJumpAttackComponent::GetStateType(void) const {
+std::string_view rachet::PlayerJumpAttackComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionJumpAttackState;
 }
 
-bool my::PlayerJumpAttackComponent::Initialize(void) {
+bool rachet::PlayerJumpAttackComponent::Initialize(void) {
     super::Initialize();
-    _weapon_com = super::GetOwner()->GetComponent<my::PlayerOmniWrenchComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<rachet::PlayerOmniWrenchComponent>();
     return true;
 }
 
-bool my::PlayerJumpAttackComponent::Input(void) {
+bool rachet::PlayerJumpAttackComponent::Input(void) {
     return false;
 }
 
-bool my::PlayerJumpAttackComponent::Update(float delta_time) {
+bool rachet::PlayerJumpAttackComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
@@ -47,17 +47,17 @@ bool my::PlayerJumpAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::PlayerJumpAttackComponent::Release(void) {
+bool rachet::PlayerJumpAttackComponent::Release(void) {
     super::Release();
     _weapon_com.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerJumpAttackComponent::Clone(void) {
-    return std::make_shared<my::PlayerJumpAttackComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerJumpAttackComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerJumpAttackComponent>(*this);
 }
 
-bool my::PlayerJumpAttackComponent::Start(void) {
+bool rachet::PlayerJumpAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -70,7 +70,7 @@ bool my::PlayerJumpAttackComponent::Start(void) {
     return true;
 }
 
-bool my::PlayerJumpAttackComponent::End(void) {
+bool rachet::PlayerJumpAttackComponent::End(void) {
     super::End();
     if (auto weapon_com = _weapon_com.lock()) {
         weapon_com->Inactivate();

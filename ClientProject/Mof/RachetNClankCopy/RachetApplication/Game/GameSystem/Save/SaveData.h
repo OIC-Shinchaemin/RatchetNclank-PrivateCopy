@@ -1,5 +1,5 @@
-#ifndef MY_SAVE_DATA_H
-#define MY_SAVE_DATA_H
+#ifndef RACHET_SAVE_DATA_H
+#define RACHET_SAVE_DATA_H
 
 
 #include <cstdint>
@@ -7,7 +7,7 @@
 #include <vector>
 
 
-namespace my {
+namespace rachet {
 struct SaveDataParam {
     //! 所持
     int money;
@@ -23,7 +23,7 @@ struct SaveDataParam {
 };
 class SaveData {
 private:
-    my::SaveDataParam _param;
+    rachet::SaveDataParam _param;
 public:
     /// <summary>
     /// コンストラクタ
@@ -50,4 +50,4 @@ public:
     const std::vector<std::string>& GetAvailableMechanicalWeaponsAddress(void);
 };
 }
-#endif // !MY_SAVE_DATA_H
+#endif // !RACHET_SAVE_DATA_H

@@ -4,28 +4,28 @@
 #include "../../Enemy/EnemyMeleeAttackComponent.h"
 
 
-my::EnemyMeleeAttackCollisionComponent::EnemyMeleeAttackCollisionComponent(int priority) :
+rachet::EnemyMeleeAttackCollisionComponent::EnemyMeleeAttackCollisionComponent(int priority) :
     super(priority),
     _attack_com() {
 }
 
-my::EnemyMeleeAttackCollisionComponent::EnemyMeleeAttackCollisionComponent(const EnemyMeleeAttackCollisionComponent& obj) :
+rachet::EnemyMeleeAttackCollisionComponent::EnemyMeleeAttackCollisionComponent(const EnemyMeleeAttackCollisionComponent& obj) :
     super(obj),
     _attack_com() {
 }
 
-my::EnemyMeleeAttackCollisionComponent::~EnemyMeleeAttackCollisionComponent() {
+rachet::EnemyMeleeAttackCollisionComponent::~EnemyMeleeAttackCollisionComponent() {
 }
 
-std::string my::EnemyMeleeAttackCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kEnemyMeleeAttackCollisionComponent;
+std::string rachet::EnemyMeleeAttackCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kEnemyMeleeAttackCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::EnemyMeleeAttackCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> rachet::EnemyMeleeAttackCollisionComponent::GetSphere(void) {
     if (_attack_com.expired()) {
         return std::optional<Mof::CSphere>();
     } // if
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto attack_com = _attack_com.lock();
@@ -43,29 +43,29 @@ std::optional<Mof::CSphere> my::EnemyMeleeAttackCollisionComponent::GetSphere(vo
     return Mof::CSphere(pos, attack_com->GetVolume());
 }
 
-std::optional<Mof::CBoxAABB> my::EnemyMeleeAttackCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::EnemyMeleeAttackCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::EnemyMeleeAttackCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> rachet::EnemyMeleeAttackCollisionComponent::GetRay(void) {
     return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> my::EnemyMeleeAttackCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::EnemyMeleeAttackCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::EnemyMeleeAttackCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::EnemyMeleeAttackCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::EnemyMeleeAttackCollisionComponent::Initialize(void) {
+bool rachet::EnemyMeleeAttackCollisionComponent::Initialize(void) {
     super::Initialize();
     this->Inactivate();
-    _attack_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::EnemyMeleeAttackComponent>();
+    _attack_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::EnemyMeleeAttackComponent>();
     return true;
 }
 
-std::shared_ptr<my::Component> my::EnemyMeleeAttackCollisionComponent::Clone(void) {
-    return std::make_shared<my::EnemyMeleeAttackCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::EnemyMeleeAttackCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::EnemyMeleeAttackCollisionComponent>(*this);
 }

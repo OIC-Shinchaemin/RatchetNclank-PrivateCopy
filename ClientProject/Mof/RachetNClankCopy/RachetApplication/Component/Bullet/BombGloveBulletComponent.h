@@ -1,5 +1,5 @@
-#ifndef MY_BOMB_GLOVE_BULLET_COMPONENT_H
-#define MY_BOMB_GLOVE_BULLET_COMPONENT_H
+#ifndef RACHET_BOMB_GLOVE_BULLET_COMPONENT_H
+#define RACHET_BOMB_GLOVE_BULLET_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -9,16 +9,16 @@
 #include "../Collision/Object/CollisionComponent.h"
 
 
-namespace my {
-class BombGloveBulletComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class BombGloveBulletComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     /// <summary>
     /// 衝突処理
     /// </summary>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool CollisionEnemy(const my::CollisionInfo& in);
+    bool CollisionEnemy(const rachet::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ
@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_BOMB_GLOVE_BULLET_COMPONENT_H
+#endif // !RACHET_BOMB_GLOVE_BULLET_COMPONENT_H

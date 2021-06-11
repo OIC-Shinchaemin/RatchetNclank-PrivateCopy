@@ -1,20 +1,20 @@
 #include "Event.h"
 
 
-my::Event::Event() {
+rachet::Event::Event() {
 }
 
-my::Event::~Event() {
+rachet::Event::~Event() {
 }
 
-base::core::Observable<const char*, const std::shared_ptr<my::Event>&>* my::Event::GetSubject(void) {
+base::core::Observable<const char*, const std::shared_ptr<rachet::Event>&>* rachet::Event::GetSubject(void) {
     return &this->_subject;
 }
 
-bool my::Event::Initialize(void) {
+bool rachet::Event::Initialize(void) {
     return false;
 }
 
-bool my::Event::Update(float delta_time) {
+bool rachet::Event::Update(float delta_time) {
     return true;
 }

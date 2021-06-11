@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_MOVE_COMPONENT_H
-#define MY_ENEMY_MOVE_COMPONENT_H
+#ifndef RACHET_ENEMY_MOVE_COMPONENT_H
+#define RACHET_ENEMY_MOVE_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class EnemyMoveComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+namespace rachet {
+class EnemyMoveComponent : public rachet::ActionComponent {
+    using super = rachet::ActionComponent;
 private:
     //! 移動速度
     float _move_speed;
@@ -26,7 +26,7 @@ private:
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;    
     //! 型
-    std::weak_ptr<class EnemyComponent> _enemy_com;
+    std::weak_ptr<class EnemyComponent> _ENEMY_com;
     virtual void InputMoveVelocity(float speed);
     virtual void InputMoveAngularVelocity(float angle, float speed);
 public:
@@ -105,7 +105,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -114,4 +114,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_ENEMY_MOVE_COMPONENT_H
+#endif // !RACHET_ENEMY_MOVE_COMPONENT_H

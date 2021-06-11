@@ -1,5 +1,5 @@
-#ifndef MY_GAME_PAUSE_SYSTEM_H
-#define MY_GAME_PAUSE_SYSTEM_H
+#ifndef RACHET_GAME_PAUSE_SYSTEM_H
+#define RACHET_GAME_PAUSE_SYSTEM_H
 
 
 #include "GameSystem.h"
@@ -9,10 +9,10 @@
 #include <vector>
 
 
-namespace my {
+namespace rachet {
 class GamePauseSystemMenu;
-class GamePauseSystemItem : public std::enable_shared_from_this<my::GamePauseSystemItem> {
-    using this_type = my::GamePauseSystemItem;
+class GamePauseSystemItem : public std::enable_shared_from_this<rachet::GamePauseSystemItem> {
+    using this_type = rachet::GamePauseSystemItem;
 private:
     //! テキスト
     std::string _text;
@@ -49,10 +49,10 @@ public:
     /// <returns></returns>
     [[nodiscard]] virtual bool Execute(void);
 };
-class GamePauseSystem : public my::GameSystem {
-    using super = my::GameSystem;
-    using this_type = my::GamePauseSystem;
-    using ElemType = my::GamePauseSystemItem;
+class GamePauseSystem : public rachet::GameSystem {
+    using super = rachet::GameSystem;
+    using this_type = rachet::GamePauseSystem;
+    using ElemType = rachet::GamePauseSystemItem;
 public:
     struct Info {
         bool enable = false;
@@ -83,7 +83,7 @@ private:
     //! インデックス
     //std::optional<int> _item_index;
     //! UI地蔵
-    my::UICreator<class GamePauseSystemMenu> _ui_creator;
+    rachet::UICreator<class GamePauseSystemMenu> _ui_creator;
 public:
     /// <summary>
     /// コンストラクタ
@@ -150,4 +150,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !MY_GAME_PAUSE_SYSTEM_H
+#endif // !RACHET_GAME_PAUSE_SYSTEM_H

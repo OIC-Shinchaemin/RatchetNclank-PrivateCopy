@@ -1,5 +1,5 @@
-#ifndef MY_WATER_FLOW_COLLISION_COMPONENT_H
-#define MY_WATER_FLOW_COLLISION_COMPONENT_H
+#ifndef RACHET_WATER_FLOW_COLLISION_COMPONENT_H
+#define RACHET_WATER_FLOW_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -10,9 +10,9 @@
 #include <Mof.h>
 
 
-namespace my {
-class WaterFlowCollisionComponent : public my::CollisionComponent {
-    using super = my::CollisionComponent;
+namespace rachet {
+class WaterFlowCollisionComponent : public rachet::CollisionComponent {
+    using super = rachet::CollisionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -63,13 +63,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::PlaneObject> GetPlaneObject(void) override;
+    virtual std::optional<rachet::PlaneObject> GetPlaneObject(void) override;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::SightObject> GetSightObject(void) override;
+    virtual std::optional<rachet::SightObject> GetSightObject(void) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -81,7 +81,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_WATER_FLOW_COLLISION_COMPONENT_H
+#endif // !RACHET_WATER_FLOW_COLLISION_COMPONENT_H

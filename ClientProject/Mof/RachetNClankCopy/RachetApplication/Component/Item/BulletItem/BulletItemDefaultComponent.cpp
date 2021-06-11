@@ -1,31 +1,31 @@
 #include "BulletItemDefaultComponent.h"
 
 
-my::BulletItemDefaultComponent::BulletItemDefaultComponent(int priority) :
+rachet::BulletItemDefaultComponent::BulletItemDefaultComponent(int priority) :
     super(priority) {
 }
 
-my::BulletItemDefaultComponent::BulletItemDefaultComponent(const BulletItemDefaultComponent& obj) :
+rachet::BulletItemDefaultComponent::BulletItemDefaultComponent(const BulletItemDefaultComponent& obj) :
     super(obj) {
 }
 
-my::BulletItemDefaultComponent::~BulletItemDefaultComponent() {
+rachet::BulletItemDefaultComponent::~BulletItemDefaultComponent() {
 }
 
-std::string my::BulletItemDefaultComponent::GetType(void) const {
+std::string rachet::BulletItemDefaultComponent::GetType(void) const {
     return "BulletItemDefaultComponent";
 }
 
-std::string_view my::BulletItemDefaultComponent::GetStateType(void) const {
+std::string_view rachet::BulletItemDefaultComponent::GetStateType(void) const {
     return state::BulletItemActionType::kDefault;
 }
 
-bool my::BulletItemDefaultComponent::Initialize(void) {
+bool rachet::BulletItemDefaultComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool my::BulletItemDefaultComponent::Update(float delta_time) {
+bool rachet::BulletItemDefaultComponent::Update(float delta_time) {
     auto rotate = super::GetOwner()->GetRotate();
     if (rotate.x > math::kHalfPi) {
         rotate.x = math::kHalfPi;
@@ -39,16 +39,16 @@ bool my::BulletItemDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::BulletItemDefaultComponent::Release(void) {
+bool rachet::BulletItemDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BulletItemDefaultComponent::Clone(void) {
-    return std::make_shared<my::BulletItemDefaultComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BulletItemDefaultComponent::Clone(void) {
+    return std::make_shared<rachet::BulletItemDefaultComponent>(*this);
 }
 
-bool my::BulletItemDefaultComponent::Start(void) {
+bool rachet::BulletItemDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -56,7 +56,7 @@ bool my::BulletItemDefaultComponent::Start(void) {
     return true;
 }
 
-bool my::BulletItemDefaultComponent::End(void) {
+bool rachet::BulletItemDefaultComponent::End(void) {
     super::End();
     return true;
 }

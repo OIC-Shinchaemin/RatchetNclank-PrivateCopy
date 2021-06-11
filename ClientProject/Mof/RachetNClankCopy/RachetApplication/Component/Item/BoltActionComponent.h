@@ -1,5 +1,5 @@
-#ifndef MY_BOLT_ACTION_COMPONENT_H
-#define MY_BOLT_ACTION_COMPONENT_H
+#ifndef RACHET_BOLT_ACTION_COMPONENT_H
+#define RACHET_BOLT_ACTION_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -11,21 +11,21 @@
 #include "../../State/BoltActionStateDefine.h"
 
 
-namespace my {
-class BoltActionComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+namespace rachet {
+class BoltActionComponent : public rachet::ActionComponent {
+    using super = rachet::ActionComponent;
 private:
     //! 速度
-    std::weak_ptr<my::VelocityComponent> _velocity_com;
+    std::weak_ptr<rachet::VelocityComponent> _velocity_com;
     //! 状態
-    std::weak_ptr<my::BoltActionStateComponent> _state_com;
+    std::weak_ptr<rachet::BoltActionStateComponent> _state_com;
 protected:
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::VelocityComponent> GetVelocityComponent(void) const;
+    std::shared_ptr<rachet::VelocityComponent> GetVelocityComponent(void) const;
     /// <summary>
     /// 変更
     /// </summary>
@@ -66,4 +66,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !MY_BOLT_ACTION_COMPONENT_H
+#endif // !RACHET_BOLT_ACTION_COMPONENT_H

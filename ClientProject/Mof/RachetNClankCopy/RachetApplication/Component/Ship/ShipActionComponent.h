@@ -1,5 +1,5 @@
-#ifndef MY_SHIP_ACTION_COMPONENT_H
-#define MY_SHIP_ACTION_COMPONENT_H
+#ifndef RACHET_SHIP_ACTION_COMPONENT_H
+#define RACHET_SHIP_ACTION_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -15,25 +15,25 @@
 #include "../../State/ShipMotionStateDefine.h"
 
 
-namespace my {
-class ShipActionComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+namespace rachet {
+class ShipActionComponent : public rachet::ActionComponent {
+    using super = rachet::ActionComponent;
 private:
     //! 速度
-    std::weak_ptr<my::VelocityComponent> _velocity_com;
+    std::weak_ptr<rachet::VelocityComponent> _velocity_com;
     //! 状態
-    std::weak_ptr<my::ShipStateComponent> _state_com;
+    std::weak_ptr<rachet::ShipStateComponent> _state_com;
     //! モーション
-    std::weak_ptr<my::MotionComponent> _motion_com;
+    std::weak_ptr<rachet::MotionComponent> _motion_com;
     //! モーション
-    std::weak_ptr<my::MotionStateComponent> _motion_state_com;
+    std::weak_ptr<rachet::MotionStateComponent> _motion_state_com;
 protected:
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::VelocityComponent> GetVelocityComponent(void) const;
+    std::shared_ptr<rachet::VelocityComponent> GetVelocityComponent(void) const;
     /// <summary>
     /// 判定
     /// </summary>
@@ -91,4 +91,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !MY_SHIP_ACTION_COMPONENT_H
+#endif // !RACHET_SHIP_ACTION_COMPONENT_H

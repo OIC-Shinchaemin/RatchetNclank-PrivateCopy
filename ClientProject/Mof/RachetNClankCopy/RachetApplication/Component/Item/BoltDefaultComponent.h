@@ -1,5 +1,5 @@
-#ifndef MY_BOLT_DEFAULT_COMPONENT_H
-#define MY_BOLT_DEFAULT_COMPONENT_H
+#ifndef RACHET_BOLT_DEFAULT_COMPONENT_H
+#define RACHET_BOLT_DEFAULT_COMPONENT_H
 
 
 #include "BoltActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class BoltDefaultComponent : public my::BoltActionComponent {
-    using super = my::BoltActionComponent;
+namespace rachet {
+class BoltDefaultComponent : public rachet::BoltActionComponent {
+    using super = rachet::BoltActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -60,7 +60,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -75,4 +75,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_BOLT_DEFAULT_COMPONENT_H
+#endif // !RACHET_BOLT_DEFAULT_COMPONENT_H

@@ -1,5 +1,5 @@
-#ifndef MY_BUILDER_FACTORY_H
-#define MY_BUILDER_FACTORY_H
+#ifndef RACHET_BUILDER_FACTORY_H
+#define RACHET_BUILDER_FACTORY_H
 
 
 #include <memory>
@@ -19,18 +19,18 @@
 #include "Builder/OmniWrenchBuilder.h"
 
 
-namespace my {
+namespace rachet {
 class BuilderFactory {
 private:
     //! 保持しているBulder
-    std::map<std::string, std::shared_ptr<my::IBuilder>> _builders;
+    std::map<std::string, std::shared_ptr<rachet::IBuilder>> _builders;
     //! コンポーネント
-    my::ComponentFactory* _component_factory;
+    rachet::ComponentFactory* _component_factory;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
 
 
-    void SetActorBuilderParam(std::shared_ptr<my::ActorBuilder> builder, const rapidjson::Document& document) const {
+    void SetActorBuilderParam(std::shared_ptr<rachet::ActorBuilder> builder, const rapidjson::Document& document) const {
         if (document.HasMember("components")) {
             const auto& components = document["components"];
             _ASSERT_EXPR(components.IsArray(), L"指定された型でありません");
@@ -50,10 +50,10 @@ private:
             } // for
         } // if
     }
-    void SetTerrainBuilderParam(std::shared_ptr<my::TerrainBuilder> builder) const {
+    void SetTerrainBuilderParam(std::shared_ptr<rachet::TerrainBuilder> builder) const {
         builder->SetResourceManager(_resource);
     }
-    void SetOmniWrenchBuilderParam(std::shared_ptr<my::OmniWrenchBuilder> builder) const {
+    void SetOmniWrenchBuilderParam(std::shared_ptr<rachet::OmniWrenchBuilder> builder) const {
     }
 
     template <typename Builder>
@@ -62,8 +62,8 @@ private:
         return ptr;
     }
     template <>
-    std::shared_ptr<my::ActorBuilder> CreateBuilder<my::ActorBuilder>(const char* path) const {
-        auto ptr = ut::MakeSharedWithRelease<my::ActorBuilder>();
+    std::shared_ptr<rachet::ActorBuilder> CreateBuilder<rachet::ActorBuilder>(const char* path) const {
+        auto ptr = ut::MakeSharedWithRelease<rachet::ActorBuilder>();
         rapidjson::Document document;
         if (!ut::ParseJsonDocument(path, document)) {
             return nullptr;
@@ -72,8 +72,8 @@ private:
         return ptr;
     }
     template <>
-    std::shared_ptr<my::OmniWrenchBuilder> CreateBuilder<my::OmniWrenchBuilder>(const char* path) const {
-        auto ptr = ut::MakeSharedWithRelease<my::OmniWrenchBuilder>();
+    std::shared_ptr<rachet::OmniWrenchBuilder> CreateBuilder<rachet::OmniWrenchBuilder>(const char* path) const {
+        auto ptr = ut::MakeSharedWithRelease<rachet::OmniWrenchBuilder>();
         rapidjson::Document document;
         if (!ut::ParseJsonDocument(path, document)) {
             return nullptr;
@@ -83,8 +83,8 @@ private:
         return ptr;
     }
     template <>
-    std::shared_ptr<my::TerrainBuilder> CreateBuilder<my::TerrainBuilder>(const char* path) const {
-        auto ptr = ut::MakeSharedWithRelease<my::TerrainBuilder>();
+    std::shared_ptr<rachet::TerrainBuilder> CreateBuilder<rachet::TerrainBuilder>(const char* path) const {
+        auto ptr = ut::MakeSharedWithRelease<rachet::TerrainBuilder>();
         rapidjson::Document document;
         if (!ut::ParseJsonDocument(path, document)) {
             return nullptr;
@@ -100,7 +100,7 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="component_factory"></param>
-    BuilderFactory(my::ComponentFactory* component_factory);
+    BuilderFactory(rachet::ComponentFactory* component_factory);
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -109,7 +109,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// 解放
     /// </summary>
@@ -120,7 +120,7 @@ public:
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    std::shared_ptr<my::IBuilder> Create(const char* path) const;
+    std::shared_ptr<rachet::IBuilder> Create(const char* path) const;
 };
 }
-#endif // !MY_ACTOR_FACTORY_H
+#endif // !RACHET_ACTOR_FACTORY_H

@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
-#define MY_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
+#ifndef RACHET_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
+#define RACHET_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class PlayerMeleeAttackOneEndComponent : public my::PlayerActionComponent {
-    using super = my::PlayerActionComponent;
+namespace rachet {
+class PlayerMeleeAttackOneEndComponent : public rachet::PlayerActionComponent {
+    using super = rachet::PlayerActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,7 +54,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -63,4 +63,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
+#endif // !RACHET_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H

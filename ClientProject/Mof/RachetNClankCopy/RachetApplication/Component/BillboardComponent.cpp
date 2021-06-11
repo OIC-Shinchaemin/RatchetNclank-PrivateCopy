@@ -1,22 +1,22 @@
 #include "BillboardComponent.h"
 
 
-my::BillboardComponent::BillboardComponent(int priority) :
+rachet::BillboardComponent::BillboardComponent(int priority) :
     super(priority),
     _texture(),
     _color() {
 }
 
-my::BillboardComponent::BillboardComponent(const my::BillboardComponent& obj) :
+rachet::BillboardComponent::BillboardComponent(const rachet::BillboardComponent& obj) :
     super(obj),
     _texture(obj._texture),
     _color(obj._color) {
 }
 
-my::BillboardComponent::~BillboardComponent() {
+rachet::BillboardComponent::~BillboardComponent() {
 }
 
-void my::BillboardComponent::SetParam(const rapidjson::Value& param) {
+void rachet::BillboardComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* path = "path";
 
@@ -39,23 +39,23 @@ void my::BillboardComponent::SetParam(const rapidjson::Value& param) {
     } // else
 }
 
-void my::BillboardComponent::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
+void rachet::BillboardComponent::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }
 
-std::string my::BillboardComponent::GetType(void) const {
+std::string rachet::BillboardComponent::GetType(void) const {
     return "BillboardComponent";
 }
 
-std::shared_ptr<Mof::CTexture> my::BillboardComponent::GetTexture(void) const {
+std::shared_ptr<Mof::CTexture> rachet::BillboardComponent::GetTexture(void) const {
     return this->_texture.lock();
 }
 
-Mof::CVector4 my::BillboardComponent::GetColor(void) const {
+Mof::CVector4 rachet::BillboardComponent::GetColor(void) const {
     return this->_color;
 }
 
-bool my::BillboardComponent::Render(void) {
+bool rachet::BillboardComponent::Render(void) {
     if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
@@ -80,12 +80,12 @@ bool my::BillboardComponent::Render(void) {
     return true;
 }
 
-bool my::BillboardComponent::Release(void) {
+bool rachet::BillboardComponent::Release(void) {
     super::Release();
     _texture.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BillboardComponent::Clone(void) {
-    return std::make_shared<my::BillboardComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BillboardComponent::Clone(void) {
+    return std::make_shared<rachet::BillboardComponent>(*this);
 }

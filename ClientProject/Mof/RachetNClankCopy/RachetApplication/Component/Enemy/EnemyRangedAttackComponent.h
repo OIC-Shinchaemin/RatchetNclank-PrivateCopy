@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_RANGED_ATTACK_COMPONENT_H
-#define MY_ENEMY_RANGED_ATTACK_COMPONENT_H
+#ifndef RACHET_ENEMY_RANGED_ATTACK_COMPONENT_H
+#define RACHET_ENEMY_RANGED_ATTACK_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -9,9 +9,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace my {
-class EnemyRangedAttackComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+namespace rachet {
+class EnemyRangedAttackComponent : public rachet::ActionComponent {
+    using super = rachet::ActionComponent;
 private:
 private:
     //! 攻撃範囲
@@ -29,7 +29,7 @@ private:
     //! モーション
     std::weak_ptr<class MotionStateComponent> _motion_state_com;
     //! 型
-    std::weak_ptr<class EnemyComponent> _enemy_com;
+    std::weak_ptr<class EnemyComponent> _ENEMY_com;
     //! 状態
     std::weak_ptr<class EnemyStateComponent> _state_com;
 public:
@@ -100,7 +100,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -109,4 +109,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_ENEMY_RANGED_ATTACK_COMPONENT_H
+#endif // !RACHET_ENEMY_RANGED_ATTACK_COMPONENT_H

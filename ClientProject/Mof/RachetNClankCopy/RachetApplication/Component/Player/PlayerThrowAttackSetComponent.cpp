@@ -3,55 +3,55 @@
 #include "PlayerOmniWrenchComponent.h"
 
 
-my::PlayerThrowAttackSetComponent::PlayerThrowAttackSetComponent(int priority) :
+rachet::PlayerThrowAttackSetComponent::PlayerThrowAttackSetComponent(int priority) :
     super(priority),
     _weapon_com() {
 }
 
-my::PlayerThrowAttackSetComponent::PlayerThrowAttackSetComponent(const PlayerThrowAttackSetComponent& obj) :
+rachet::PlayerThrowAttackSetComponent::PlayerThrowAttackSetComponent(const PlayerThrowAttackSetComponent& obj) :
     super(obj),
     _weapon_com() {
 }
 
-my::PlayerThrowAttackSetComponent::~PlayerThrowAttackSetComponent() {
+rachet::PlayerThrowAttackSetComponent::~PlayerThrowAttackSetComponent() {
 }
 
-std::string my::PlayerThrowAttackSetComponent::GetType(void) const {
+std::string rachet::PlayerThrowAttackSetComponent::GetType(void) const {
     return "PlayerThrowAttackSetComponent";
 }
 
-std::string_view my::PlayerThrowAttackSetComponent::GetStateType(void) const {
+std::string_view rachet::PlayerThrowAttackSetComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionThrowAttackSetState;
 }
 
-bool my::PlayerThrowAttackSetComponent::Initialize(void) {
+bool rachet::PlayerThrowAttackSetComponent::Initialize(void) {
     super::Initialize();
-    _weapon_com = super::GetOwner()->GetComponent<my::PlayerOmniWrenchComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<rachet::PlayerOmniWrenchComponent>();
     return true;
 }
 
-bool my::PlayerThrowAttackSetComponent::Input(void) {
+bool rachet::PlayerThrowAttackSetComponent::Input(void) {
     return false;
 }
 
-bool my::PlayerThrowAttackSetComponent::Update(float delta_time) {
+bool rachet::PlayerThrowAttackSetComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionThrowAttackState);
     } // if
     return true;
 }
 
-bool my::PlayerThrowAttackSetComponent::Release(void) {
+bool rachet::PlayerThrowAttackSetComponent::Release(void) {
     super::Release();
     _weapon_com.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerThrowAttackSetComponent::Clone(void) {
-    return std::make_shared<my::PlayerThrowAttackSetComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerThrowAttackSetComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerThrowAttackSetComponent>(*this);
 }
 
-bool my::PlayerThrowAttackSetComponent::Start(void) {
+bool rachet::PlayerThrowAttackSetComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

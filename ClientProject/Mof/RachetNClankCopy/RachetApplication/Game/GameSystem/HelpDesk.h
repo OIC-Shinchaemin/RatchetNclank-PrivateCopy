@@ -1,5 +1,5 @@
-#ifndef MY_HELP_DESK_H
-#define MY_HELP_DESK_H
+#ifndef RACHET_HELP_DESK_H
+#define RACHET_HELP_DESK_H
 
 
 #include "Base/Core/Observer.h"
@@ -14,10 +14,10 @@
 #include "GameQuest.h"
 
 
-namespace my {
+namespace rachet {
 class HelpDesk :
-    public std::enable_shared_from_this<my::HelpDesk>,
-    public base::core::Observer<const my::GameQuest&> {
+    public std::enable_shared_from_this<rachet::HelpDesk>,
+    public base::core::Observer<const rachet::GameQuest&> {
 public:
     struct Info {
         std::string text;
@@ -28,11 +28,11 @@ private:
     //! 情報
     Info _prev_info;
     //! 達成したいこと
-    //my::GameQuest _current_quest;
+    //rachet::GameQuest _current_quest;
     //! 通知用
-    base::core::Observable<const my::HelpDesk::Info&> _subject;
+    base::core::Observable<const rachet::HelpDesk::Info&> _subject;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
@@ -48,12 +48,12 @@ public:
     /// 通知
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const my::GameQuest& quest) override;
+    virtual void OnNotify(const rachet::GameQuest& quest) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -71,4 +71,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !MY_HELP_DESK_H
+#endif // !RACHET_HELP_DESK_H

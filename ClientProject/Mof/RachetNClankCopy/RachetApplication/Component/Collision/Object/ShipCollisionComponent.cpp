@@ -4,39 +4,39 @@
 #include "../../../Component/Ship/ShipStateComponent.h"
 
 
-my::ShipCollisionComponent::ShipCollisionComponent(int priority) :
+rachet::ShipCollisionComponent::ShipCollisionComponent(int priority) :
     super(priority),
     _state_com(),
     _height(3.0f) {
 }
 
-my::ShipCollisionComponent::ShipCollisionComponent(const ShipCollisionComponent& obj) :
+rachet::ShipCollisionComponent::ShipCollisionComponent(const ShipCollisionComponent& obj) :
     super(obj),
     _state_com(),
     _height(obj._height) {
 }
 
-my::ShipCollisionComponent::~ShipCollisionComponent() {
+rachet::ShipCollisionComponent::~ShipCollisionComponent() {
 }
 
-std::string my::ShipCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kShipCollisionComponent;
+std::string rachet::ShipCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kShipCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::ShipCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CSphere> rachet::ShipCollisionComponent::GetSphere(void) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, 2.0f);
 }
 
-std::optional<Mof::CBoxAABB> my::ShipCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::ShipCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::ShipCollisionComponent::GetRay(void) {
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CRay3D> rachet::ShipCollisionComponent::GetRay(void) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -44,25 +44,25 @@ std::optional<Mof::CRay3D> my::ShipCollisionComponent::GetRay(void) {
     return Mof::CRay3D(pos, math::vec3::kNegUnitY);
 }
 
-std::optional<Mof::LPMeshContainer> my::ShipCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::ShipCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::ShipCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::ShipCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::ShipCollisionComponent::Initialize(void) {
+bool rachet::ShipCollisionComponent::Initialize(void) {
     super::Initialize();
-    _state_com = super::GetOwner()->GetComponent<my::ShipStateComponent>();
+    _state_com = super::GetOwner()->GetComponent<rachet::ShipStateComponent>();
     return true;
 }
 
-std::shared_ptr<my::Component> my::ShipCollisionComponent::Clone(void) {
-    return std::make_shared<my::ShipCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::ShipCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::ShipCollisionComponent>(*this);
 }
 
-void my::ShipCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::ShipCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
     float margin = 0.1f;

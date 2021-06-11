@@ -3,14 +3,14 @@
 #include "PlayerMoveComponent.h"
 
 
-void my::PlayerCartwheelJumpComponent::InputJumpVelocity(float speed) {
+void rachet::PlayerCartwheelJumpComponent::InputJumpVelocity(float speed) {
     auto velocity_com = super::GetVelocityComponent();
     auto v = velocity_com->GetVelocity();
     v.y = speed;
     velocity_com->SetVelocity(v);
 }
 
-my::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(int priority) :
+rachet::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(int priority) :
     super(priority),
     _jump_speed(0.0f),
     _jump_decrase(0.4f),
@@ -18,7 +18,7 @@ my::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(int priority) :
     _move_com() {
 }
 
-my::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(const PlayerCartwheelJumpComponent& obj) :
+rachet::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(const PlayerCartwheelJumpComponent& obj) :
     super(obj),
     _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
@@ -26,36 +26,36 @@ my::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(const PlayerCartw
     _move_com() {
 }
 
-my::PlayerCartwheelJumpComponent::~PlayerCartwheelJumpComponent() {
+rachet::PlayerCartwheelJumpComponent::~PlayerCartwheelJumpComponent() {
 }
 
-std::string my::PlayerCartwheelJumpComponent::GetType(void) const {
+std::string rachet::PlayerCartwheelJumpComponent::GetType(void) const {
     return "PlayerCartwheelJumpComponent";
 }
 
-std::string_view my::PlayerCartwheelJumpComponent::GetStateType(void) const {
+std::string_view rachet::PlayerCartwheelJumpComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionCartwheelJumpState;
 }
 
-void my::PlayerCartwheelJumpComponent::SetJumpSpeed(float speed) {
+void rachet::PlayerCartwheelJumpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }
 
-void my::PlayerCartwheelJumpComponent::SetMoveAngle(float radian) {
+void rachet::PlayerCartwheelJumpComponent::SetMoveAngle(float radian) {
     this->_move_angle = radian;
 }
 
-bool my::PlayerCartwheelJumpComponent::Initialize(void) {
+bool rachet::PlayerCartwheelJumpComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<my::ActionComponent>()->GetComponent<my::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerMoveComponent>();
     return true;
 }
 
-bool my::PlayerCartwheelJumpComponent::Input(void) {
+bool rachet::PlayerCartwheelJumpComponent::Input(void) {
     return false;
 }
 
-bool my::PlayerCartwheelJumpComponent::Update(float delta_time) {
+bool rachet::PlayerCartwheelJumpComponent::Update(float delta_time) {
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
@@ -75,17 +75,17 @@ bool my::PlayerCartwheelJumpComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::PlayerCartwheelJumpComponent::Release(void) {
+bool rachet::PlayerCartwheelJumpComponent::Release(void) {
     super::Release();
     _move_com.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerCartwheelJumpComponent::Clone(void) {
-    return std::make_shared<my::PlayerCartwheelJumpComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerCartwheelJumpComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerCartwheelJumpComponent>(*this);
 }
 
-bool my::PlayerCartwheelJumpComponent::Start(void) {
+bool rachet::PlayerCartwheelJumpComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

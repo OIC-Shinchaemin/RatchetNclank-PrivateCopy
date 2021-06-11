@@ -1,5 +1,5 @@
-#ifndef MY_EVENT_H
-#define MY_EVENT_H
+#ifndef RACHET_EVENT_H
+#define RACHET_EVENT_H
 
 
 #include "Base/Core/Observable.h"
@@ -7,11 +7,11 @@
 #include <memory>
 
 
-namespace my {
-class Event : public std::enable_shared_from_this<my::Event> {
+namespace rachet {
+class Event : public std::enable_shared_from_this<rachet::Event> {
 protected:
     //! 通知用
-    base::core::Observable<const char*, const std::shared_ptr<my::Event>&> _subject;
+    base::core::Observable<const char*, const std::shared_ptr<rachet::Event>&> _subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,7 +26,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const char*, const std::shared_ptr<my::Event>&>* GetSubject(void);
+    base::core::Observable<const char*, const std::shared_ptr<rachet::Event>&>* GetSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -41,4 +41,4 @@ public:
     virtual bool Update(float delta_time);
 };
 }
-#endif // !MY_EVENT_H
+#endif // !RACHET_EVENT_H

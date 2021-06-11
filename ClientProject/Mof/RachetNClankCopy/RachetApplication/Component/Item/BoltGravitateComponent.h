@@ -1,5 +1,5 @@
-#ifndef MY_BOLT_GRAVITATE_COMPONENT_H
-#define MY_BOLT_GRAVITATE_COMPONENT_H
+#ifndef RACHET_BOLT_GRAVITATE_COMPONENT_H
+#define RACHET_BOLT_GRAVITATE_COMPONENT_H
 
 
 #include "BoltActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class BoltGravitateComponent : public my::BoltActionComponent {
-    using super = my::BoltActionComponent;
+namespace rachet {
+class BoltGravitateComponent : public rachet::BoltActionComponent {
+    using super = rachet::BoltActionComponent;
 private:
     //! Œ^
     std::weak_ptr<class BoltComponent> _type_com;
@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -78,4 +78,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_BOLT_GRAVITATE_COMPONENT_H
+#endif // !RACHET_BOLT_GRAVITATE_COMPONENT_H

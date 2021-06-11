@@ -1,11 +1,11 @@
-#ifndef MY_CAMERA_H
-#define MY_CAMERA_H
+#ifndef RACHET_CAMERA_H
+#define RACHET_CAMERA_H
 
 
 #include <Mof.h>
 
 
-namespace my {
+namespace rachet {
 class Camera {
 private:
     //! ÉJÉÅÉâ
@@ -70,4 +70,4 @@ public:
     void RegisterGlobalCamera(void);
 };
 }
-#endif // !MY_CAMERA_H
+#endif // !RACHET_CAMERA_H

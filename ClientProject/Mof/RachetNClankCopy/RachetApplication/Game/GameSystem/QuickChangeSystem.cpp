@@ -6,12 +6,12 @@
 #include "../../UI/QuickChangeMenu.h"
 
 
-void my::QuickChangeSystem::Open(void) {
+void rachet::QuickChangeSystem::Open(void) {
     _infomation.color = Mof::CVector4(1.0f, 1.0f, 1.0f, 0.0f);
     _state = State::Enter;
 }
 
-void my::QuickChangeSystem::Close(void) {
+void rachet::QuickChangeSystem::Close(void) {
     // notify target weapon name
     if (_infomation.current_index.has_value()) {
         auto& item = _items.at(_infomation.current_index.value() * 45);
@@ -22,7 +22,7 @@ void my::QuickChangeSystem::Close(void) {
     _state = State::Exit;
 }
 
-my::QuickChangeSystem::QuickChangeSystem() :
+rachet::QuickChangeSystem::QuickChangeSystem() :
     _infomation(),
     _state(State::Exit),
     _alpha(0.08f),
@@ -34,27 +34,27 @@ my::QuickChangeSystem::QuickChangeSystem() :
 {
 }
 
-my::QuickChangeSystem::~QuickChangeSystem() {
+rachet::QuickChangeSystem::~QuickChangeSystem() {
 }
 
-void my::QuickChangeSystem::OnNotify(bool flag) {
+void rachet::QuickChangeSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     this->Open();
 }
 
-Mof::CVector4 my::QuickChangeSystem::GetColor(void) const {
+Mof::CVector4 rachet::QuickChangeSystem::GetColor(void) const {
     return this->_infomation.color;
 }
 
-void my::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<base::core::Observer<const std::string&>>& ptr) {
+void rachet::QuickChangeSystem::AddWeaponObserver(const std::shared_ptr<base::core::Observer<const std::string&>>& ptr) {
     _current.AddObserver(ptr);
 }
 
-void my::QuickChangeSystem::AddInfoObserver(const std::shared_ptr<base::core::Observer<const my::QuickChangeSystem::Info&>>& ptr) {
+void rachet::QuickChangeSystem::AddInfoObserver(const std::shared_ptr<base::core::Observer<const rachet::QuickChangeSystem::Info&>>& ptr) {
     _info_subject.AddObserver(ptr);
 }
 
-bool my::QuickChangeSystem::Initialize(const std::shared_ptr<my::WeaponSystem>& weapon_system) {
+bool rachet::QuickChangeSystem::Initialize(const std::shared_ptr<rachet::WeaponSystem>& weapon_system) {
     //_ASSERT_EXPR(!_resource.expired(), L"無効なポインタを保持しています");
     _ASSERT_EXPR(super::GetResource(), L"無効なポインタを保持しています");
 
@@ -65,14 +65,14 @@ bool my::QuickChangeSystem::Initialize(const std::shared_ptr<my::WeaponSystem>& 
         return angle;
     });
     for (auto& degree : _angles) {
-        _items.emplace(degree, std::move(my::QuickChangeItem()));
+        _items.emplace(degree, std::move(rachet::QuickChangeItem()));
     } // for
 
     // ui
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("QuickChangeMenu");
     } // if
-    auto menu = std::make_shared< my::QuickChangeMenu>("QuickChangeMenu");
+    auto menu = std::make_shared< rachet::QuickChangeMenu>("QuickChangeMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(super::GetResource());
@@ -94,7 +94,7 @@ bool my::QuickChangeSystem::Initialize(const std::shared_ptr<my::WeaponSystem>& 
     return true;
 }
 
-bool my::QuickChangeSystem::Update(float delta_time) {
+bool rachet::QuickChangeSystem::Update(float delta_time) {
     // open close
     if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPull(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPull(MOFKEY_RSHIFT)) {
         this->Close();
@@ -157,7 +157,7 @@ bool my::QuickChangeSystem::Update(float delta_time) {
     return true;
 }
 
-bool my::QuickChangeSystem::Release(void) {
+bool rachet::QuickChangeSystem::Release(void) {
     _items.clear();
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("QuickChangeMenu");
@@ -165,10 +165,10 @@ bool my::QuickChangeSystem::Release(void) {
     return true;
 }
 
-void my::QuickChangeItem::SetWeapon(const char* name) {
+void rachet::QuickChangeItem::SetWeapon(const char* name) {
     this->_weapon = name;
 }
 
-const char* my::QuickChangeItem::GetWeapon(void) const {
+const char* rachet::QuickChangeItem::GetWeapon(void) const {
     return this->_weapon.c_str();
 }

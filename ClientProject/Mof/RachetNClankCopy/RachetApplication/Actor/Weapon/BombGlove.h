@@ -1,13 +1,13 @@
-#ifndef MY_BOMB_GLOVEL_H
-#define MY_BOMB_GLOVEL_H
+#ifndef RACHET_BOMB_GLOVEL_H
+#define RACHET_BOMB_GLOVEL_H
 
 
 #include "Mechanical.h"
 
 
-namespace my {
-class BombGlove  : public my::Mechanical {
-    using super = my::Mechanical;
+namespace rachet {
+class BombGlove  : public rachet::Mechanical {
+    using super = rachet::Mechanical;
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,4 +31,4 @@ public:
     virtual bool Fire(const def::Transform& transform) override;
 };
 }
-#endif // !MY_BOMB_GLOVEL_H
+#endif // !RACHET_BOMB_GLOVEL_H

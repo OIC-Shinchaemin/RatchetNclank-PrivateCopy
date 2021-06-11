@@ -4,38 +4,38 @@
 #include "../../CharacterComponent.h"
 
 
-my::BulletItemGravitateComponent::BulletItemGravitateComponent(int priority) :
+rachet::BulletItemGravitateComponent::BulletItemGravitateComponent(int priority) :
     super(priority),
     _type_com() {
 }
 
-my::BulletItemGravitateComponent::BulletItemGravitateComponent(const BulletItemGravitateComponent& obj) :
+rachet::BulletItemGravitateComponent::BulletItemGravitateComponent(const BulletItemGravitateComponent& obj) :
     super(obj),
     _type_com() {
 }
 
-my::BulletItemGravitateComponent::~BulletItemGravitateComponent() {
+rachet::BulletItemGravitateComponent::~BulletItemGravitateComponent() {
 }
 
-std::string my::BulletItemGravitateComponent::GetType(void) const {
+std::string rachet::BulletItemGravitateComponent::GetType(void) const {
     return "BulletItemGravitateComponent";
 }
 
-std::string_view my::BulletItemGravitateComponent::GetStateType(void) const {
+std::string_view rachet::BulletItemGravitateComponent::GetStateType(void) const {
     return state::BulletItemActionType::kGravitate;
 }
 
-bool my::BulletItemGravitateComponent::Initialize(void) {
+bool rachet::BulletItemGravitateComponent::Initialize(void) {
     super::Initialize();
-    _type_com = super::GetOwner()->GetComponent<my::BulletItemComponent>();
+    _type_com = super::GetOwner()->GetComponent<rachet::BulletItemComponent>();
     return true;
 }
 
-bool my::BulletItemGravitateComponent::Update(float delta_time) {
+bool rachet::BulletItemGravitateComponent::Update(float delta_time) {
     if (auto type_com = _type_com.lock()) {
         if (auto player = type_com->GetPlayer(); player) {
             auto target_pos = player->GetPosition();
-            target_pos.y += player->GetComponent<my::CharacterComponent>()->GetHeight();
+            target_pos.y += player->GetComponent<rachet::CharacterComponent>()->GetHeight();
 
             auto direction = Mof::CVector3(target_pos - super::GetOwner()->GetPosition());
             direction.Normal(direction);
@@ -45,28 +45,28 @@ bool my::BulletItemGravitateComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::BulletItemGravitateComponent::Release(void) {
+bool rachet::BulletItemGravitateComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BulletItemGravitateComponent::Clone(void) {
-    return std::make_shared<my::BulletItemGravitateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BulletItemGravitateComponent::Clone(void) {
+    return std::make_shared<rachet::BulletItemGravitateComponent>(*this);
 }
 
-bool my::BulletItemGravitateComponent::Start(void) {
+bool rachet::BulletItemGravitateComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
 
-    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
     velocity_com->SetGravity(0.0f);
     velocity_com->AddVelocityForce(Mof::CVector3(0.0f, 30.0f, 0.0f));
     return true;
 }
 
-bool my::BulletItemGravitateComponent::End(void) {
+bool rachet::BulletItemGravitateComponent::End(void) {
     super::End();
     return true;
 }

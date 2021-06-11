@@ -1,5 +1,5 @@
-#ifndef MY_BOLT_H
-#define MY_BOLT_H
+#ifndef RACHET_BOLT_H
+#define RACHET_BOLT_H
 
 
 #include "../../Actor.h"
@@ -7,9 +7,9 @@
 #include "Base/Core/Observable.h"
 
 
-namespace my {
-class Bolt : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class Bolt : public rachet::Actor {
+    using super = rachet::Actor;
 public:
     struct Param : public super::Param {
         //! à⁄ìÆ
@@ -49,7 +49,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(my::Actor::Param* param) override;
+    virtual bool Initialize(rachet::Actor::Param* param) override;
     /// <summary>
     /// çXêV
     /// </summary>
@@ -58,4 +58,4 @@ public:
     //virtual bool Update(float delta_time) override;
 };
 }
-#endif // !MY_BOLT_H
+#endif // !RACHET_BOLT_H

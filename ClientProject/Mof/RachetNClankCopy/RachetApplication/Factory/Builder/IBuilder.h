@@ -1,11 +1,11 @@
-#ifndef MY_IBUILDER_H
-#define MY_IBUILDER_H
+#ifndef RACHET_IBUILDER_H
+#define RACHET_IBUILDER_H
 
 
 #include <any>
 
 
-namespace my {
+namespace rachet {
 class IBuilder {
 public:
     /// <summary>
@@ -23,4 +23,4 @@ public:
     virtual void Construct(std::any shared_this) = 0;
 };
 }
-#endif // !MY_IBUILDER_H
+#endif // !RACHET_IBUILDER_H

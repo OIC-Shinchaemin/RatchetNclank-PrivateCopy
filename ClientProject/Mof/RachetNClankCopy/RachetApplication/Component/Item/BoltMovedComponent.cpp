@@ -3,37 +3,37 @@
 #include "BoltComponent.h"
 
 
-my::BoltMovedComponent::BoltMovedComponent(int priority) :
+rachet::BoltMovedComponent::BoltMovedComponent(int priority) :
     super(priority),
     _speed(),
     _angle(),
     _decrase(0.85f) {
 }
 
-my::BoltMovedComponent::BoltMovedComponent(const BoltMovedComponent& obj) :
+rachet::BoltMovedComponent::BoltMovedComponent(const BoltMovedComponent& obj) :
     super(obj),
     _speed(),
     _angle(),
     _decrase(obj._decrase) {
 }
 
-my::BoltMovedComponent::~BoltMovedComponent() {
+rachet::BoltMovedComponent::~BoltMovedComponent() {
 }
 
-std::string my::BoltMovedComponent::GetType(void) const {
+std::string rachet::BoltMovedComponent::GetType(void) const {
     return "BoltMovedComponent";
 }
 
-std::string_view my::BoltMovedComponent::GetStateType(void) const {
+std::string_view rachet::BoltMovedComponent::GetStateType(void) const {
     return state::BoltActionType::kMoved;
 }
 
-bool my::BoltMovedComponent::Initialize(void) {
+bool rachet::BoltMovedComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool my::BoltMovedComponent::Update(float delta_time) {
+bool rachet::BoltMovedComponent::Update(float delta_time) {
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->AddVelocityForce(_speed);
@@ -47,29 +47,29 @@ bool my::BoltMovedComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::BoltMovedComponent::Release(void) {
+bool rachet::BoltMovedComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BoltMovedComponent::Clone(void) {
-    return std::make_shared<my::BoltMovedComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BoltMovedComponent::Clone(void) {
+    return std::make_shared<rachet::BoltMovedComponent>(*this);
 }
 
-bool my::BoltMovedComponent::Start(void) {
+bool rachet::BoltMovedComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
 
-    auto type_com = super::GetOwner()->GetComponent<my::BoltComponent>();
+    auto type_com = super::GetOwner()->GetComponent<rachet::BoltComponent>();
     auto param = type_com->GetActorParam();
     _speed = param.speed;
     _angle = param.angle;
     return true;
 }
 
-bool my::BoltMovedComponent::End(void) {
+bool rachet::BoltMovedComponent::End(void) {
     super::End();
     return true;
 }

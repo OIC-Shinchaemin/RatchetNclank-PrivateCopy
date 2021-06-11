@@ -1,13 +1,13 @@
-#ifndef MY_WEAPON_H
-#define MY_WEAPON_H
+#ifndef RACHET_WEAPON_H
+#define RACHET_WEAPON_H
 
 
 #include "../../Actor.h"
 
 
-namespace my {
-class Weapon : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class Weapon : public rachet::Actor {
+    using super = rachet::Actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -19,4 +19,4 @@ public:
     virtual ~Weapon();
 };
 }
-#endif // !MY_WEAPON_H
+#endif // !RACHET_WEAPON_H

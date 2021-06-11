@@ -1,5 +1,5 @@
-#ifndef MY_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
-#define MY_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
+#ifndef RACHET_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
+#define RACHET_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
 
 
 #include "../../ActionStateComponent.h"
@@ -7,9 +7,9 @@
 #include "../../../State/OmniWrenchActionStateDefine.h"
 
 
-namespace my {
-class OmniWrenchActionStateComponent : public my::ActionStateComponent {
-    using super = my::ActionStateComponent;
+namespace rachet {
+class OmniWrenchActionStateComponent : public rachet::ActionStateComponent {
+    using super = rachet::ActionStateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -42,7 +42,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 判定
     /// </summary>
@@ -54,4 +54,4 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !MY_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
+#endif // !RACHET_OMNI_WRENCH_ACTION_STATE_COMPONENT_H

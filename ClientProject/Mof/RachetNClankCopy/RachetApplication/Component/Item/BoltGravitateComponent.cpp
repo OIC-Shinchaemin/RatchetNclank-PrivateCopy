@@ -4,38 +4,38 @@
 #include "../CharacterComponent.h"
 
 
-my::BoltGravitateComponent::BoltGravitateComponent(int priority) :
+rachet::BoltGravitateComponent::BoltGravitateComponent(int priority) :
     super(priority),
     _type_com() {
 }
 
-my::BoltGravitateComponent::BoltGravitateComponent(const BoltGravitateComponent& obj) :
+rachet::BoltGravitateComponent::BoltGravitateComponent(const BoltGravitateComponent& obj) :
     super(obj),
     _type_com() {
 }
 
-my::BoltGravitateComponent::~BoltGravitateComponent() {
+rachet::BoltGravitateComponent::~BoltGravitateComponent() {
 }
 
-std::string my::BoltGravitateComponent::GetType(void) const {
+std::string rachet::BoltGravitateComponent::GetType(void) const {
     return "BoltGravitateComponent";
 }
 
-std::string_view my::BoltGravitateComponent::GetStateType(void) const {
+std::string_view rachet::BoltGravitateComponent::GetStateType(void) const {
     return state::BoltActionType::kGravitate;
 }
 
-bool my::BoltGravitateComponent::Initialize(void) {
+bool rachet::BoltGravitateComponent::Initialize(void) {
     super::Initialize();
-    _type_com = super::GetOwner()->GetComponent<my::BoltComponent>();
+    _type_com = super::GetOwner()->GetComponent<rachet::BoltComponent>();
     return true;
 }
 
-bool my::BoltGravitateComponent::Update(float delta_time) {
+bool rachet::BoltGravitateComponent::Update(float delta_time) {
     if (auto type_com = _type_com.lock()) {
         if (auto player = type_com->GetPlayer(); player) {
             auto target_pos = player->GetPosition();
-            target_pos.y += player->GetComponent<my::CharacterComponent>()->GetHeight();
+            target_pos.y += player->GetComponent<rachet::CharacterComponent>()->GetHeight();
 
             auto direction = Mof::CVector3(target_pos - super::GetOwner()->GetPosition());
             direction.Normal(direction);
@@ -45,28 +45,28 @@ bool my::BoltGravitateComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::BoltGravitateComponent::Release(void) {
+bool rachet::BoltGravitateComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BoltGravitateComponent::Clone(void) {
-    return std::make_shared<my::BoltGravitateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BoltGravitateComponent::Clone(void) {
+    return std::make_shared<rachet::BoltGravitateComponent>(*this);
 }
 
-bool my::BoltGravitateComponent::Start(void) {
+bool rachet::BoltGravitateComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
 
-    auto velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
     velocity_com->SetGravity(0.0f);
     velocity_com->AddVelocityForce(Mof::CVector3(0.0f, 30.0f, 0.0f));
     return true;
 }
 
-bool my::BoltGravitateComponent::End(void) {
+bool rachet::BoltGravitateComponent::End(void) {
     super::End();
     return true;
 }

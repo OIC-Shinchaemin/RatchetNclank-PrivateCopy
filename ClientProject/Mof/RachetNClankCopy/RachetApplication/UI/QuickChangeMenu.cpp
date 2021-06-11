@@ -1,7 +1,7 @@
 #include "QuickChangeMenu.h"
 
 
-my::QuickChangeMenu::QuickChangeMenu(const char* name) :
+rachet::QuickChangeMenu::QuickChangeMenu(const char* name) :
     super(name),
     _distance(128.0f),
     _tex_names(),
@@ -27,7 +27,7 @@ my::QuickChangeMenu::QuickChangeMenu(const char* name) :
 
     super::_items.reserve(8);
     for (int i = 0; i < 8; i++) {
-        auto item = std::make_shared<my::QuickChangeMenuItem>("");
+        auto item = std::make_shared<rachet::QuickChangeMenuItem>("");
 
         float degree = 360.0f / 8;
         auto radian = math::Radian(degree * i);
@@ -38,18 +38,18 @@ my::QuickChangeMenu::QuickChangeMenu(const char* name) :
     } // for
 }
 
-void my::QuickChangeMenu::OnNotify(const my::QuickChangeSystem::Info& info) {
+void rachet::QuickChangeMenu::OnNotify(const rachet::QuickChangeSystem::Info& info) {
     super::Notify(shared_from_this(), "Enable");
 
     this->SetColor(info.color);
     _current_index = info.current_index;
 }
 
-void my::QuickChangeMenu::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+void rachet::QuickChangeMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void my::QuickChangeMenu::AddWeaponInfo(uint32_t index, const char* name) {
+void rachet::QuickChangeMenu::AddWeaponInfo(uint32_t index, const char* name) {
     _ASSERT_EXPR(index < super::_items.size(), L"範囲外アクセスです");
     auto item = super::_items.at(index);
 
@@ -61,11 +61,11 @@ void my::QuickChangeMenu::AddWeaponInfo(uint32_t index, const char* name) {
     } // if
 }
 
-bool my::QuickChangeMenu::Update(float delta_time) {
+bool rachet::QuickChangeMenu::Update(float delta_time) {
     return true;
 }
 
-bool my::QuickChangeMenu::Render(void) {
+bool rachet::QuickChangeMenu::Render(void) {
     auto circle = Mof::CCircle(_position, 128.0f);
         // 選択中のものをわかりやすくしたい
     if (_current_index.has_value()) {
@@ -86,23 +86,23 @@ bool my::QuickChangeMenu::Render(void) {
     return true;
 }
 
-my::QuickChangeMenuItem::QuickChangeMenuItem(const char* name) :
+rachet::QuickChangeMenuItem::QuickChangeMenuItem(const char* name) :
     super(name) {
 }
 
-void my::QuickChangeMenuItem::SetRectangle(Mof::CRectangle rect) {
+void rachet::QuickChangeMenuItem::SetRectangle(Mof::CRectangle rect) {
     super::_rectangle = rect;
 }
 
-bool my::QuickChangeMenuItem::Input(void) {
+bool rachet::QuickChangeMenuItem::Input(void) {
     return false;
 }
 
-bool my::QuickChangeMenuItem::Update(float delta_time) {
+bool rachet::QuickChangeMenuItem::Update(float delta_time) {
     return false;
 }
 
-bool my::QuickChangeMenuItem::Render(void) {
+bool rachet::QuickChangeMenuItem::Render(void) {
     auto rect = _rectangle;
     auto pos = _position - Mof::CVector2(rect.GetWidth() * 0.5f, rect.GetHeight() * 0.5f);
 

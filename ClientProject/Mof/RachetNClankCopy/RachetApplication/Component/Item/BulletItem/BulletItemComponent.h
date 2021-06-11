@@ -1,5 +1,5 @@
-#ifndef MY_BulletItem_COMPONENT_H
-#define MY_BulletItem_COMPONENT_H
+#ifndef RACHET_BulletItem_COMPONENT_H
+#define RACHET_BulletItem_COMPONENT_H
 
 
 #include "../../UpdateComponent.h"
@@ -7,14 +7,14 @@
 #include "../../../Actor/Item/BulletItem.h"
 
 
-namespace my {
-class BulletItemComponent : public my::UpdateComponent {
-    using super = my::UpdateComponent;
+namespace rachet {
+class BulletItemComponent : public rachet::UpdateComponent {
+    using super = rachet::UpdateComponent;
 private:
     //! アクターパラメータ
-    my::BulletItem::Param _param;
+    rachet::BulletItem::Param _param;
     //! 移動先
-    std::weak_ptr<my::Actor> _player;
+    std::weak_ptr<rachet::Actor> _player;
     //! 状態
     std::weak_ptr<class BulletItemActionStateComponent> _state_com;
 public:
@@ -37,7 +37,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetActorParam(const my::BulletItem::Param& param);
+    void SetActorParam(const rachet::BulletItem::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -49,13 +49,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const my::BulletItem::Param& GetActorParam(void) const;
+    const rachet::BulletItem::Param& GetActorParam(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::Actor> GetPlayer(void) const;
+    std::shared_ptr<rachet::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -79,7 +79,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_BulletItem_COMPONENT_H
+#endif // !RACHET_BulletItem_COMPONENT_H

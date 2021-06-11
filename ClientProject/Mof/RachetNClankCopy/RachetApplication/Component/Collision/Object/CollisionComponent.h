@@ -1,5 +1,5 @@
-#ifndef MY_COLLISION_COMPONENT_H
-#define MY_COLLISION_COMPONENT_H
+#ifndef RACHET_COLLISION_COMPONENT_H
+#define RACHET_COLLISION_COMPONENT_H
 
 
 #include "../../Component.h"
@@ -17,7 +17,7 @@
 #include "../../../Stage/Gimmick/GimmickBase.h"
 
 
-namespace my {
+namespace rachet {
 struct SightObject {
     //! 視点
     Mof::CVector3 position;
@@ -50,12 +50,12 @@ struct CollisionInfo {
     //! 速さ
     float speed = 0.0f;
     //! 衝突対象
-    std::weak_ptr<my::Actor> target;
+    std::weak_ptr<rachet::Actor> target;
 
     CollisionInfo() : distance(0.0f), angle(), speed(0.0f), target(){}
     CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle(), speed(0.0f), target(){}
 };
-class CollisionComponent : public my::Component {
+class CollisionComponent : public rachet::Component {
 public:
     enum class CollisionFuncType {
         Enter,
@@ -63,7 +63,7 @@ public:
         Exit,
     };
     class CollisionFunc {
-        using Func = std::function<bool(const my::CollisionInfo&)>;
+        using Func = std::function<bool(const rachet::CollisionInfo&)>;
     private:
         //! 実行関数
         Func _func;
@@ -73,16 +73,16 @@ public:
         void AddFunction(Func lambda) {
             this->_func = lambda;
         }
-        bool Execute(const my::CollisionInfo& info) const {
+        bool Execute(const rachet::CollisionInfo& info) const {
             return _func(info);
         }
     };
 
-    using super = my::Component;
+    using super = rachet::Component;
     using FuncArray = std::vector<CollisionFunc>;
 private:
     //! 衝突したオブジェクト
-    std::vector<std::weak_ptr<my::CollisionComponent>> _collisioned;
+    std::vector<std::weak_ptr<rachet::CollisionComponent>> _collisioned;
     //! 実行関数
     std::unordered_map<std::string, FuncArray> _on_enter;
     //! 実行関数
@@ -105,7 +105,7 @@ private:
     /// <param name="info"></param>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool ExecuteFunction(const std::string& key, const my::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in);
+    bool ExecuteFunction(const std::string& key, const rachet::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in);
 protected:
     /// <summary>
     /// 衝突判定
@@ -161,15 +161,15 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::PlaneObject> GetPlaneObject(void) {
-        return std::optional<my::PlaneObject>();
+    virtual std::optional<rachet::PlaneObject> GetPlaneObject(void) {
+        return std::optional<rachet::PlaneObject>();
     };
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<my::SightObject> GetSightObject(void) = 0;
+    virtual std::optional<rachet::SightObject> GetSightObject(void) = 0;
     /// <summary>
     /// 判定
     /// </summary>
@@ -180,18 +180,18 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr);
+    void AddCollisionedObject(const std::shared_ptr<rachet::CollisionComponent>& ptr);
     /// <summary>
     /// 削除
     /// </summary>
     /// <param name="ptr"></param>
-    void RemoveCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr);
+    void RemoveCollisionedObject(const std::shared_ptr<rachet::CollisionComponent>& ptr);
     /// <summary>
     /// 判定
     /// </summary>
     /// <param name="ptr"></param>
     /// <returns></returns>
-    bool ExistCollisionedObject(const std::shared_ptr<my::CollisionComponent>& ptr);
+    bool ExistCollisionedObject(const std::shared_ptr<rachet::CollisionComponent>& ptr);
     /// <summary>
     /// 追加
     /// </summary>
@@ -211,21 +211,21 @@ public:
     /// <param name="key"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    bool ExecuteEnterFunction(const std::string& key, const my::CollisionInfo& info);
+    bool ExecuteEnterFunction(const std::string& key, const rachet::CollisionInfo& info);
     /// <summary>
     /// 実行
     /// </summary>
     /// <param name="key"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    bool ExecuteStayFunction(const std::string& key, const my::CollisionInfo& info);
+    bool ExecuteStayFunction(const std::string& key, const rachet::CollisionInfo& info);
     /// <summary>
     /// 実行
     /// </summary>
     /// <param name="key"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    bool ExecuteExitFunction(const std::string& key, const my::CollisionInfo& info);
+    bool ExecuteExitFunction(const std::string& key, const rachet::CollisionInfo& info);
     /// <summary>
     /// 衝突
     /// </summary>
@@ -248,4 +248,4 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !MY_COLLISION_COMPONENT_H
+#endif // !RACHET_COLLISION_COMPONENT_H

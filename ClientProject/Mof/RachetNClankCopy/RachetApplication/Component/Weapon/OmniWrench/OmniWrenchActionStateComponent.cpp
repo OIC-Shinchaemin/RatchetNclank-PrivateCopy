@@ -1,33 +1,33 @@
 #include "OmniWrenchActionStateComponent.h"
 
 
-my::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(int priority) :
+rachet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(int priority) :
     super(priority) {
 }
 
-my::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(const OmniWrenchActionStateComponent& obj) :
+rachet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(const OmniWrenchActionStateComponent& obj) :
     super(obj) {
 }
 
-my::OmniWrenchActionStateComponent::~OmniWrenchActionStateComponent() {
+rachet::OmniWrenchActionStateComponent::~OmniWrenchActionStateComponent() {
 }
 
-std::string my::OmniWrenchActionStateComponent::GetType(void) const {
+std::string rachet::OmniWrenchActionStateComponent::GetType(void) const {
     return "OmniWrenchActionStateComponent";
 }
 
-bool my::OmniWrenchActionStateComponent::Initialize(void) {
+bool rachet::OmniWrenchActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::OmniWrenchActionStateType;
     super::ChangeState(Type::kOmniWrenchActionDefaultState);
     return true;
 }
 
-std::shared_ptr<my::Component> my::OmniWrenchActionStateComponent::Clone(void) {
-    return std::make_shared<my::OmniWrenchActionStateComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::OmniWrenchActionStateComponent::Clone(void) {
+    return std::make_shared<rachet::OmniWrenchActionStateComponent>(*this);
 }
 
-bool my::OmniWrenchActionStateComponent::CanTransition(const std::string& next) {
+bool rachet::OmniWrenchActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::OmniWrenchActionStateType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -45,7 +45,7 @@ bool my::OmniWrenchActionStateComponent::CanTransition(const std::string& next) 
 }
 
 #ifdef _DEBUG
-bool my::OmniWrenchActionStateComponent::DebugRender(void) {
+bool rachet::OmniWrenchActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 400.0f, "omniwrench state = %s", this->_state_machine.GetCurrentStateName());
     return true;

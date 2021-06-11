@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_DAMAGE_COMPONENT_H
-#define MY_ENEMY_DAMAGE_COMPONENT_H
+#ifndef RACHET_ENEMY_DAMAGE_COMPONENT_H
+#define RACHET_ENEMY_DAMAGE_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -10,9 +10,9 @@
 #include "../Collision/Object/CollisionComponent.h"
 
 
-namespace my {
-class EnemyDamageComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+namespace rachet {
+class EnemyDamageComponent : public rachet::ActionComponent {
+    using super = rachet::ActionComponent;
 private:
     //! 被弾量
     int _damage_value;
@@ -29,7 +29,7 @@ private:
     //! Hp
     std::weak_ptr<class HpComponent> _hp_com;
     //! 型
-    std::weak_ptr<class EnemyComponent> _enemy_com;
+    std::weak_ptr<class EnemyComponent> _ENEMY_com;
     //! 状態
     std::weak_ptr<class EnemyStateComponent> _state_com;
 private:
@@ -37,7 +37,7 @@ private:
     /// 衝突処理
     /// </summary>
     /// <param name=""></param>
-    void CollisionAction(const my::CollisionInfo& in);
+    void CollisionAction(const rachet::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ
@@ -88,7 +88,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -97,4 +97,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_ENEMY_DAMAGE_COMPONENT_H
+#endif // !RACHET_ENEMY_DAMAGE_COMPONENT_H

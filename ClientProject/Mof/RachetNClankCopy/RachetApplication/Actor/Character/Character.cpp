@@ -1,9 +1,9 @@
 #include "Character.h"
 
 
-my::Character::Character() :
+rachet::Character::Character() :
     super() {
 }
 
-my::Character::~Character() {
+rachet::Character::~Character() {
 }

@@ -1,5 +1,5 @@
-#ifndef MY_COMPONENT_FACTORY_H
-#define MY_COMPONENT_FACTORY_H
+#ifndef RACHET_COMPONENT_FACTORY_H
+#define RACHET_COMPONENT_FACTORY_H
 
 
 #include <memory>
@@ -10,9 +10,9 @@
 #include "ComponentCreator.h"
 
 
-namespace my {
+namespace rachet {
 class ComponentFactory {
-    using ComponentMap = std::unordered_map<std::string, std::shared_ptr<my::ComponentCreator>>;
+    using ComponentMap = std::unordered_map<std::string, std::shared_ptr<rachet::ComponentCreator>>;
 private:
     //! 所有
     ComponentMap _component_creators;
@@ -39,7 +39,7 @@ public:
     template<typename T>
     bool AddComponentCreator(void) {
         // 指定のコンポーネントを登録する
-        auto creator = std::make_shared<my::ComponentCreator>();
+        auto creator = std::make_shared<rachet::ComponentCreator>();
         creator->AddOrigin<T>();
 
         // 既にあるなら追加しない
@@ -57,7 +57,7 @@ public:
     /// <param name="key"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<my::Component> Create(const std::string& key, const rapidjson::Value& param) const;
+    std::shared_ptr<rachet::Component> Create(const std::string& key, const rapidjson::Value& param) const;
 };
 }
-#endif // !MY_COMPONENT_FACTORY_H
+#endif // !RACHET_COMPONENT_FACTORY_H

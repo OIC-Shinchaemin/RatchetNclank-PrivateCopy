@@ -1,5 +1,5 @@
-#ifndef MY_ENEMY_MELEE_ATTACK_COMPONENT_H
-#define MY_ENEMY_MELEE_ATTACK_COMPONENT_H
+#ifndef RACHET_ENEMY_MELEE_ATTACK_COMPONENT_H
+#define RACHET_ENEMY_MELEE_ATTACK_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -9,9 +9,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace my {
-class EnemyMeleeAttackComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+namespace rachet {
+class EnemyMeleeAttackComponent : public rachet::ActionComponent {
+    using super = rachet::ActionComponent;
 private:
 private:
     //! çUåÇîÕàÕ
@@ -94,7 +94,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// äJén
     /// </summary>
@@ -109,4 +109,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_ENEMY_ATTACK_COMPONENT_H
+#endif // !RACHET_ENEMY_ATTACK_COMPONENT_H

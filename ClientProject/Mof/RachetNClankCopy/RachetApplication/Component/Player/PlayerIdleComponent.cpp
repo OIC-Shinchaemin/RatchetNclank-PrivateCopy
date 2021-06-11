@@ -3,26 +3,26 @@
 #include "../../Actor/Character/Player.h"
 
 
-my::PlayerIdleComponent::PlayerIdleComponent(int priority) :
+rachet::PlayerIdleComponent::PlayerIdleComponent(int priority) :
     super(priority) {
 }
 
-my::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
+rachet::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
     super(obj) {
 }
 
-my::PlayerIdleComponent::~PlayerIdleComponent() {
+rachet::PlayerIdleComponent::~PlayerIdleComponent() {
 }
 
-std::string my::PlayerIdleComponent::GetType(void) const {
+std::string rachet::PlayerIdleComponent::GetType(void) const {
     return "PlayerIdleComponent";
 }
 
-std::string_view my::PlayerIdleComponent::GetStateType(void) const {
+std::string_view rachet::PlayerIdleComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionIdleState;
 }
 
-bool my::PlayerIdleComponent::Input(void) {
+bool rachet::PlayerIdleComponent::Input(void) {
     float horizontal = ::g_pGamepad->GetStickHorizontal();
     float vertical = ::g_pGamepad->GetStickVertical();
     float threshold = 0.5f;
@@ -40,7 +40,7 @@ bool my::PlayerIdleComponent::Input(void) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_M) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
-        auto owner = std::dynamic_pointer_cast<my::Player>(super::GetOwner());
+        auto owner = std::dynamic_pointer_cast<rachet::Player>(super::GetOwner());
         if (owner->GetCurrentMechanical()) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
         } // if
@@ -52,15 +52,15 @@ bool my::PlayerIdleComponent::Input(void) {
     return true;
 }
 
-bool my::PlayerIdleComponent::Update(float delta_time) {
+bool rachet::PlayerIdleComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<my::Component> my::PlayerIdleComponent::Clone(void) {
-    return std::make_shared<my::PlayerIdleComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::PlayerIdleComponent::Clone(void) {
+    return std::make_shared<rachet::PlayerIdleComponent>(*this);
 }
 
-bool my::PlayerIdleComponent::Start(void) {
+bool rachet::PlayerIdleComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

@@ -1,13 +1,13 @@
-#ifndef MY_PYROCITOR_H
-#define MY_PYROCITOR_H
+#ifndef RACHET_PYROCITOR_H
+#define RACHET_PYROCITOR_H
 
 
 #include "Mechanical.h"
 
 
-namespace my {
-class Pyrocitor : public my::Mechanical {
-    using super = my::Mechanical;
+namespace rachet {
+class Pyrocitor : public rachet::Mechanical {
+    using super = rachet::Mechanical;
 private:
 public:
     /// <summary>
@@ -32,4 +32,4 @@ public:
     virtual bool Fire(const def::Transform& transform) override;
 };
 }
-#endif // !MY_PYROCITOR_H
+#endif // !RACHET_PYROCITOR_H

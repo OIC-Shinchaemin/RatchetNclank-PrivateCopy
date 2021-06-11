@@ -3,11 +3,11 @@
 #include "../../UI/ShopSystemMenu.h"
 
 
-bool my::ShopSystem::Close(void) {
+bool rachet::ShopSystem::Close(void) {
     _infomation.close = true;
     _info_subject.Notify(_infomation);
     if (auto weapon_system = _weapon_system.lock()) {
-        auto info = my::Mechanical::Info();
+        auto info = rachet::Mechanical::Info();
         if (_prev_weapon.has_value()) {
             auto prev = weapon_system->GetMechanicalWeapon(_prev_weapon.value());
             info.bullet_count = prev->GetBulletCount();
@@ -22,10 +22,10 @@ bool my::ShopSystem::Close(void) {
     return false;
 }
 
-void my::ShopSystem::Buy(void) {
+void rachet::ShopSystem::Buy(void) {
     auto current = _items.at(_infomation.index);
 
-    auto charge_info = my::ChargeInfo();
+    auto charge_info = rachet::ChargeInfo();
     charge_info.size = _infomation.count;
     charge_info.type = current.name;
     _buy_subject.Notify(charge_info);
@@ -42,23 +42,23 @@ void my::ShopSystem::Buy(void) {
     _info_subject.Notify(_infomation);
 }
 
-void my::ShopSystem::NotifyEquipmentWeaponMenu(void) {
+void rachet::ShopSystem::NotifyEquipmentWeaponMenu(void) {
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
-        auto info = my::Mechanical::Info();
+        auto info = rachet::Mechanical::Info();
         info.bullet_count = weapon->GetBulletCount();
         info.name = weapon->GetName();
         _equipment_weapon_menu_subject.Notify(info);
     } // if
 }
 
-void my::ShopSystem::NotifyGameMoneyMenu(void) {
+void rachet::ShopSystem::NotifyGameMoneyMenu(void) {
     if (auto game_money = _game_money.lock()) {
         _game_money_menu_subject.Notify(game_money->GetValue());
     } // if
 }
 
-my::ShopSystem::ShopSystem() :
+rachet::ShopSystem::ShopSystem() :
     _infomation(),
     _info_subject(),
     _equipment_weapon_menu_subject(),
@@ -71,7 +71,7 @@ my::ShopSystem::ShopSystem() :
     _ui_creator("ShopSystemMenus") {
 }
 
-my::ShopSystem::~ShopSystem() {
+rachet::ShopSystem::~ShopSystem() {
     _equipment_weapon_menu_subject.Clear();
     _game_money_menu_subject.Clear();
 
@@ -79,7 +79,7 @@ my::ShopSystem::~ShopSystem() {
     _game_money.reset();
 }
 
-void my::ShopSystem::OnNotify(bool flag) {
+void rachet::ShopSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     _infomation.close = false;
 
@@ -98,7 +98,7 @@ void my::ShopSystem::OnNotify(bool flag) {
 
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
-        auto info = my::Mechanical::Info();
+        auto info = rachet::Mechanical::Info();
         info.bullet_count = weapon->GetBulletCount();
         info.name = weapon->GetName();
         _equipment_weapon_menu_subject.Notify(info);
@@ -108,27 +108,27 @@ void my::ShopSystem::OnNotify(bool flag) {
     } // if
 }
 
-void my::ShopSystem::SetWeaponSystem(std::weak_ptr<my::WeaponSystem> ptr) {
+void rachet::ShopSystem::SetWeaponSystem(std::weak_ptr<rachet::WeaponSystem> ptr) {
     this->_weapon_system = ptr;
 }
 
-void my::ShopSystem::SetGameMoney(std::weak_ptr<my::GameMoney> ptr) {
+void rachet::ShopSystem::SetGameMoney(std::weak_ptr<rachet::GameMoney> ptr) {
     this->_game_money = ptr;
 }
 
-base::core::Observable<const my::ShopSystem::Info&>* my::ShopSystem::GetInfoSubject(void) {
+base::core::Observable<const rachet::ShopSystem::Info&>* rachet::ShopSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
-base::core::Observable<const my::ChargeInfo&>* my::ShopSystem::GetChargeInfoSubject(void) {
+base::core::Observable<const rachet::ChargeInfo&>* rachet::ShopSystem::GetChargeInfoSubject(void) {
     return &this->_buy_subject;
 }
 
-bool my::ShopSystem::IsEnable(void) const {
+bool rachet::ShopSystem::IsEnable(void) const {
     return this->_infomation.enable;
 }
 
-bool my::ShopSystem::Load(my::SaveData& in) {
+bool rachet::ShopSystem::Load(rachet::SaveData& in) {
     _save_data = in;
 
     auto& work = _save_data.GetAvailableMechanicalWeaponsAddress();
@@ -144,17 +144,17 @@ bool my::ShopSystem::Load(my::SaveData& in) {
         else if (key == "Blaster") {
             price = 2;
         } // else if
-        _items.emplace_back(my::ShopSystem::Item(key.c_str(), price, true));
+        _items.emplace_back(rachet::ShopSystem::Item(key.c_str(), price, true));
     } // for
     return true;
 }
 
-bool my::ShopSystem::Initialize(void) {
+bool rachet::ShopSystem::Initialize(void) {
     /*
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("ShopSystemMenu");
     } // if
-    auto menu = std::make_shared< my::ShopSystemMenu>("ShopSystemMenu");
+    auto menu = std::make_shared< rachet::ShopSystemMenu>("ShopSystemMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(super::GetResource());
@@ -176,7 +176,7 @@ bool my::ShopSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
-            auto menu = std::dynamic_pointer_cast<base::core::Observer<const my::Mechanical::Info&>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<const rachet::Mechanical::Info&>>(temp);
             _equipment_weapon_menu_subject.AddObserver(menu);
         }
         {
@@ -188,7 +188,7 @@ bool my::ShopSystem::Initialize(void) {
     return true;
 }
 
-bool my::ShopSystem::Update(float delta_time) {
+bool rachet::ShopSystem::Update(float delta_time) {
     if (!_infomation.enable) {
         return this->Close();
     } // if
@@ -281,7 +281,7 @@ bool my::ShopSystem::Update(float delta_time) {
     return true;
 }
 
-bool my::ShopSystem::Release(void) {
+bool rachet::ShopSystem::Release(void) {
     /*
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("ShopSystemMenu");
@@ -292,7 +292,7 @@ bool my::ShopSystem::Release(void) {
     if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
-            auto menu = std::dynamic_pointer_cast<base::core::Observer<const my::Mechanical::Info&>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<const rachet::Mechanical::Info&>>(temp);
             _equipment_weapon_menu_subject.RemoveObserver(menu);
         }
         {

@@ -4,7 +4,7 @@
 #include "../../Factory/Builder/IBuilder.h"
 
 
-my::Terrain::Terrain() :
+rachet::Terrain::Terrain() :
     super(),
     _plane(),
     _uv_scroll(),
@@ -13,14 +13,14 @@ my::Terrain::Terrain() :
     _shader_bind() {
 }
 
-my::Terrain::~Terrain() {
+rachet::Terrain::~Terrain() {
 }
 
-void my::Terrain::SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr) {
+void rachet::Terrain::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
     _resource = ptr;
 }
 
-bool my::Terrain::Initialize(my::Actor::Param* param) {
+bool rachet::Terrain::Initialize(rachet::Actor::Param* param) {
     super::Initialize(param);
     _plane = Mof::CGraphicsUtilities::CreatePlaneGeometry(1.0f, 1.0f, 1.0f, 1.0f, true, math::vec3::kZero);
     if (auto resource = _resource.lock()) {
@@ -31,15 +31,15 @@ bool my::Terrain::Initialize(my::Actor::Param* param) {
     // shader
     _shader.Load("../Resource/shader/water.hlsl");
     _shader_bind.Create(&_shader);
-    _shader_bind.CreateShaderBuffer("cbUVScrollParam", sizeof(my::cbUVScrollParam));
+    _shader_bind.CreateShaderBuffer("cbUVScrollParam", sizeof(rachet::cbUVScrollParam));
     return true;
 }
 
-bool my::Terrain::Update(float delta_time) {
+bool rachet::Terrain::Update(float delta_time) {
     return false;
 }
 
-bool my::Terrain::Render(void) {
+bool rachet::Terrain::Render(void) {
     Mof::CMatrix44 scale, rotate, translate;
     scale.Scaling(super::GetScale(), scale);
     rotate.RotationZXY(math::vec3::kZero);
@@ -55,7 +55,7 @@ bool my::Terrain::Render(void) {
     return true;
 }
 
-bool my::Terrain::Release(void) {
+bool rachet::Terrain::Release(void) {
     super::Release();
 
     auto work = _plane->GetMaterial()->GetTextureArray();

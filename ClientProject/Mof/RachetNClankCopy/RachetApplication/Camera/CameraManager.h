@@ -1,15 +1,15 @@
-#ifndef MY_CAMERA_MANAGER_H
-#define MY_CAMERA_MANAGER_H
+#ifndef RACHET_CAMERA_MANAGER_H
+#define RACHET_CAMERA_MANAGER_H
 
 
 #include "Camera.h"
 
 
-namespace my {
+namespace rachet {
 class CameraManager {
 private:
     //! カメラ
-    std::shared_ptr<my::Camera> _global_camera;
+    std::shared_ptr<rachet::Camera> _global_camera;
 public:
     /// <summary>
     /// コンストラクタ
@@ -23,7 +23,7 @@ public:
     /// 登録
     /// </summary>
     /// <param name="ptr"></param>
-    void RegisterGlobalCamera(const std::shared_ptr<my::Camera>& ptr);
+    void RegisterGlobalCamera(const std::shared_ptr<rachet::Camera>& ptr);
     /// <summary>
     /// 更新
     /// </summary>
@@ -32,4 +32,4 @@ public:
     bool Update(void);
 };
 }
-#endif // !MY_CAMERA_MANAGER_H
+#endif // !RACHET_CAMERA_MANAGER_H

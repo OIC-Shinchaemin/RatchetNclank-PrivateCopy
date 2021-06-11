@@ -1,5 +1,5 @@
-#ifndef MY_CAMERA_CONTROLLER_H
-#define MY_CAMERA_CONTROLLER_H
+#ifndef RACHET_CAMERA_CONTROLLER_H
+#define RACHET_CAMERA_CONTROLLER_H
 
 
 #include <memory>
@@ -9,7 +9,7 @@
 #include "CameraManager.h"
 
 
-namespace my {
+namespace rachet {
 class CameraController {
 public:
     enum class CameraMode {
@@ -45,9 +45,9 @@ public:
     };
 protected:
     //! マネージャ
-    static std::weak_ptr<my::CameraManager> _manager;
+    static std::weak_ptr<rachet::CameraManager> _manager;
     //! カメラ
-    std::shared_ptr<my::Camera>_camera;
+    std::shared_ptr<rachet::Camera>_camera;
     //! 位置
     Mof::CVector3 _position;
     //! 対象
@@ -55,13 +55,13 @@ protected:
     //! 位置
     Mof::CVector3 _preview_position;
     //! パラメータ
-    my::CameraController::Param _param;
+    rachet::CameraController::Param _param;
 public:
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    static void SetCameraManager(const std::shared_ptr<my::CameraManager>& ptr);
+    static void SetCameraManager(const std::shared_ptr<rachet::CameraManager>& ptr);
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -79,7 +79,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetCamera(const std::shared_ptr<my::Camera>& ptr);
+    void SetCamera(const std::shared_ptr<rachet::Camera>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -109,13 +109,13 @@ public:
     /// セット
     /// </summary>
     /// <param name="info"></param>
-    virtual void SetInfo(const my::CameraController::CameraInfo& info);
+    virtual void SetInfo(const rachet::CameraController::CameraInfo& info);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::Camera> GetCamera(void) const;
+    std::shared_ptr<rachet::Camera> GetCamera(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -186,7 +186,7 @@ public:
     /// <param name="delta_time"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time, const my::CameraController::CameraInfo& info);
+    virtual bool Update(float delta_time, const rachet::CameraController::CameraInfo& info);
     /// <summary>
     /// 解放
     /// </summary>
@@ -201,4 +201,4 @@ public:
     bool RegisterGlobalCamera(void);
 };
 }
-#endif // !MY_CAMERA_CONTROLLER_H
+#endif // !RACHET_CAMERA_CONTROLLER_H

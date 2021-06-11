@@ -1,5 +1,5 @@
-#ifndef MY_COMPONENT_H
-#define MY_COMPONENT_H
+#ifndef RACHET_COMPONENT_H
+#define RACHET_COMPONENT_H
 
 
 #include <memory>
@@ -13,18 +13,18 @@
 #include "Base/UI/UICanvas.h"
 
 
-namespace my {
-class Component : public std::enable_shared_from_this<my::Component> {
+namespace rachet {
+class Component : public std::enable_shared_from_this<rachet::Component> {
 private:
     //! この機能の所有者
-    std::weak_ptr<my::Actor> _owner;
+    std::weak_ptr<rachet::Actor> _owner;
     //! 小さいほど処理される順番が早い
     int _priority;
     //! 有効
     bool _active;
 protected:
     //! リソース
-    static std::weak_ptr<my::ResourceMgr> _resource_manager;
+    static std::weak_ptr<rachet::ResourceMgr> _resource_manager;
     //! リソース
     static std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
@@ -32,7 +32,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    static void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
+    static void SetResourceManager(const std::shared_ptr<rachet::ResourceMgr>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -56,7 +56,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetOwner(const std::shared_ptr<my::Actor>& ptr);
+    virtual void SetOwner(const std::shared_ptr<rachet::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -73,7 +73,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::Actor> GetOwner(void) const;
+    std::shared_ptr<rachet::Actor> GetOwner(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -151,7 +151,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) = 0;
+    virtual std::shared_ptr<rachet::Component> Clone(void) = 0;
 #ifdef _DEBUG
     /// <summary>
     /// デバッグ
@@ -161,11 +161,11 @@ public:
     virtual bool DebugRender(void);
 #endif // _DEBUG
 };
-static bool operator<(const my::Component& a, const my::Component& b) noexcept {
+static bool operator<(const rachet::Component& a, const rachet::Component& b) noexcept {
     return a.GetPriority() < b.GetPriority();
 }
-static bool operator<(const std::shared_ptr<my::Component>& a, const std::shared_ptr < my::Component>& b) noexcept {
+static bool operator<(const std::shared_ptr<rachet::Component>& a, const std::shared_ptr < rachet::Component>& b) noexcept {
     return a->GetPriority() < b->GetPriority();
 }
 }
-#endif // !MY_COMPONENT_H
+#endif // !RACHET_COMPONENT_H

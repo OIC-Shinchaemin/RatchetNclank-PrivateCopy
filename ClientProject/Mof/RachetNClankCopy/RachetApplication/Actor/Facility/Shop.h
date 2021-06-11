@@ -1,13 +1,13 @@
-#ifndef MY_SHOP_H
-#define MY_SHOP_H
+#ifndef RACHET_SHOP_H
+#define RACHET_SHOP_H
 
 
 #include "../../Actor.h"
 
 
-namespace my {
-class Shop : public my::Actor {
-    using super = my::Actor;
+namespace rachet {
+class Shop : public rachet::Actor {
+    using super = rachet::Actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,4 +31,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !MY_SHOP_H
+#endif // !RACHET_SHOP_H

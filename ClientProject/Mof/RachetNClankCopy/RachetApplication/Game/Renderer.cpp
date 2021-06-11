@@ -4,27 +4,27 @@
 #include "../Component/MeshComponent.h"
 
 
-my::Renderer::Renderer() :
+rachet::Renderer::Renderer() :
     _actors() {
     _actors.reserve(64);
     _enable_actors.reserve(64);
 }
 
-my::Renderer::~Renderer() {
+rachet::Renderer::~Renderer() {
 }
 
-void my::Renderer::AddElement(const std::shared_ptr<my::Actor>& ptr) {
+void rachet::Renderer::AddElement(const std::shared_ptr<rachet::Actor>& ptr) {
     _actors.push_back(ptr);
     _enable_actors.push_back(ptr);
 }
 
-void my::Renderer::RemoveElement(const std::shared_ptr<my::Actor>& ptr) {
+void rachet::Renderer::RemoveElement(const std::shared_ptr<rachet::Actor>& ptr) {
     ut::SwapPopback(_actors, ptr);
     ut::SwapPopback(_enable_actors, ptr);
     ut::SwapPopback(_disable_actors, ptr);
 }
 
-bool my::Renderer::Render(void) {
+bool rachet::Renderer::Render(void) {
     for (auto ptr : _enable_actors) {
         // •`‰æ‚µ‚È‚¢”»’è
         if (!ptr->Render()) {
@@ -41,7 +41,7 @@ bool my::Renderer::Render(void) {
     return true;
 }
 
-void my::Renderer::Reset(void) {
+void rachet::Renderer::Reset(void) {
     _actors.clear();
     _enable_actors.clear();
     _disable_actors.clear();

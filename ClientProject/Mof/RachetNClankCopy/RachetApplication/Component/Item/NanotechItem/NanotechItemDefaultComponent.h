@@ -1,5 +1,5 @@
-#ifndef MY_NanotechItem_DEFAULT_COMPONENT_H
-#define MY_NanotechItem_DEFAULT_COMPONENT_H
+#ifndef RACHET_NanotechItem_DEFAULT_COMPONENT_H
+#define RACHET_NanotechItem_DEFAULT_COMPONENT_H
 
 
 #include "NanotechItemActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class NanotechItemDefaultComponent : public my::NanotechItemActionComponent {
-    using super = my::NanotechItemActionComponent;
+namespace rachet {
+class NanotechItemDefaultComponent : public rachet::NanotechItemActionComponent {
+    using super = rachet::NanotechItemActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -60,7 +60,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -75,4 +75,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_NanotechItem_DEFAULT_COMPONENT_H
+#endif // !RACHET_NanotechItem_DEFAULT_COMPONENT_H

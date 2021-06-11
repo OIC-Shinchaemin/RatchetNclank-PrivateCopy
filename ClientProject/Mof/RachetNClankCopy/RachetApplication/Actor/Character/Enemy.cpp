@@ -13,25 +13,25 @@
 #include "../../State/NanotechItemActionStateDefine.h"
 
 
-void my::Enemy::Activate(void) {
+void rachet::Enemy::Activate(void) {
     super::Activate();
 }
 
-my::Enemy::Enemy() :
+rachet::Enemy::Enemy() :
     super() {
     super::SetTag("Enemy");
 }
 
-my::Enemy::~Enemy() {
+rachet::Enemy::~Enemy() {
 }
 
-base::core::Observable<const my::GameQuest&>* my::Enemy::GetQuestSubject(void) {
+base::core::Observable<const rachet::GameQuest&>* rachet::Enemy::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 
-void my::Enemy::End(void) {
+void rachet::Enemy::End(void) {
     {
-        auto param = my::Bolt::Param();
+        auto param = rachet::Bolt::Param();
         for (int i = 0, n = ut::GenerateRandom(3, 3); i < n; i++) {
             param.transform.position = super::GetPosition();
             param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
@@ -49,14 +49,14 @@ void my::Enemy::End(void) {
             param.angle.y = param.speed.y;
             param.angle.z = param.speed.z;
 
-            auto bolt = my::FactoryManager::Singleton().CreateActor<my::Bolt>("../Resource/builder/bolt.json", &param);
-            bolt->GetComponent<my::BoltActionStateComponent>()->ChangeState(state::BoltActionType::kMoved);
+            auto bolt = rachet::FactoryManager::Singleton().CreateActor<rachet::Bolt>("../Resource/builder/bolt.json", &param);
+            bolt->GetComponent<rachet::BoltActionStateComponent>()->ChangeState(state::BoltActionType::kMoved);
             Observable::Notify("AddRequest", bolt);
         } // for
     }
 
     {
-        auto param = my::BulletItem::Param();
+        auto param = rachet::BulletItem::Param();
         param.transform.position = super::GetPosition();
         param.transform.rotate = Mof::CVector3(0.0f, 0.0f, 0.0f);
 
@@ -71,17 +71,17 @@ void my::Enemy::End(void) {
         param.angle.x = param.speed.x;
         param.angle.y = param.speed.y;
         param.angle.z = param.speed.z;
-        param.type = static_cast <my::BulletItem::Type>(ut::GenerateRandom(0, static_cast<int>(my::BulletItem::Type::CountMax) - 1));
+        param.type = static_cast <rachet::BulletItem::Type>(ut::GenerateRandom(0, static_cast<int>(rachet::BulletItem::Type::CountMax) - 1));
         param.count = ut::GenerateRandom(0.0f, 10);
 
-        auto item = my::FactoryManager::Singleton().CreateActor<my::BulletItem>("../Resource/builder/bullet_item.json", &param);
-        item->GetComponent<my::BulletItemActionStateComponent>()->ChangeState(state::BulletItemActionType::kMoved);
+        auto item = rachet::FactoryManager::Singleton().CreateActor<rachet::BulletItem>("../Resource/builder/bullet_item.json", &param);
+        item->GetComponent<rachet::BulletItemActionStateComponent>()->ChangeState(state::BulletItemActionType::kMoved);
         Observable::Notify("AddRequest", item);
     }
 
 
     {
-        auto param = my::NanotechItem::Param();
+        auto param = rachet::NanotechItem::Param();
         param.transform.position = super::GetPosition();
         param.transform.rotate = Mof::CVector3(0.0f, 0.0f, 0.0f);
 
@@ -97,8 +97,8 @@ void my::Enemy::End(void) {
         param.angle.z = param.speed.z;
 
 
-        auto item = my::FactoryManager::Singleton().CreateActor<my::NanotechItem>("../Resource/builder/nanotech.json", &param);
-        item->GetComponent<my::NanotechItemActionStateComponent>()->ChangeState(state::NanotechItemActionType::kMoved);
+        auto item = rachet::FactoryManager::Singleton().CreateActor<rachet::NanotechItem>("../Resource/builder/nanotech.json", &param);
+        item->GetComponent<rachet::NanotechItemActionStateComponent>()->ChangeState(state::NanotechItemActionType::kMoved);
         Observable::Notify("AddRequest", item);
     }
 

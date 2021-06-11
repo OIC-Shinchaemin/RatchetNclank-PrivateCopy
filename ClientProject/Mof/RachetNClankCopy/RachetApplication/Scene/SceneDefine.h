@@ -1,5 +1,5 @@
-#ifndef MY_SCENE_DEFINE_H
-#define MY_SCENE_DEFINE_H
+#ifndef RACHET_SCENE_DEFINE_H
+#define RACHET_SCENE_DEFINE_H
 
 
 #include <memory>
@@ -8,7 +8,7 @@
 
 #include <Mof.h>
 
-namespace my {
+namespace rachet {
 class Scene;
 struct SceneType {
     static std::string kTitleScene;
@@ -122,7 +122,7 @@ struct SceneEffect {
     //! テクスチャの表示位置
     Mof::CVector2 position;
     //! テクスチャに使用するシェーダ
-    my::ShaderPair shader;
+    rachet::ShaderPair shader;
 
     SceneEffect() :
         time(), position(), shader() {
@@ -202,4 +202,4 @@ struct SceneEffect {
     //virtual void DebugRender(void)
 };
 }
-#endif // !MY_SCENE_DEFINE_H
+#endif // !RACHET_SCENE_DEFINE_H

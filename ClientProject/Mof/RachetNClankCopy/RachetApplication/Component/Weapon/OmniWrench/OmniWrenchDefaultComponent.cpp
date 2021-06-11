@@ -4,56 +4,56 @@
 #include "OmniWrenchActionStateComponent.h"
 
 
-void my::OmniWrenchDefaultComponent::ChageState(const std::string& name) {
+void rachet::OmniWrenchDefaultComponent::ChageState(const std::string& name) {
     if (auto state_com = _action_state_com.lock()) {
         state_com->ChangeState(name);
     } // if
 }
 
-my::OmniWrenchDefaultComponent::OmniWrenchDefaultComponent(int priority) :
+rachet::OmniWrenchDefaultComponent::OmniWrenchDefaultComponent(int priority) :
     super(priority),
     _velocity_com(),
     _action_state_com() {
 }
 
-my::OmniWrenchDefaultComponent::OmniWrenchDefaultComponent(const OmniWrenchDefaultComponent& obj) :
+rachet::OmniWrenchDefaultComponent::OmniWrenchDefaultComponent(const OmniWrenchDefaultComponent& obj) :
     super(obj),
     _velocity_com(),
     _action_state_com() {
 }
 
-my::OmniWrenchDefaultComponent::~OmniWrenchDefaultComponent() {
+rachet::OmniWrenchDefaultComponent::~OmniWrenchDefaultComponent() {
 }
 
-std::string my::OmniWrenchDefaultComponent::GetType(void) const {
+std::string rachet::OmniWrenchDefaultComponent::GetType(void) const {
     return "OmniWrenchDefaultComponent";
 }
 
-std::string_view my::OmniWrenchDefaultComponent::GetStateType(void) const {
+std::string_view rachet::OmniWrenchDefaultComponent::GetStateType(void) const {
     return state::OmniWrenchActionStateType::kOmniWrenchActionDefaultState;
 }
 
-bool my::OmniWrenchDefaultComponent::Initialize(void) {
+bool rachet::OmniWrenchDefaultComponent::Initialize(void) {
     super::Initialize();
-    _velocity_com = super::GetOwner()->GetComponent<my::VelocityComponent>();
-    _action_state_com = super::GetOwner()->GetComponent<my::OmniWrenchActionStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _action_state_com = super::GetOwner()->GetComponent<rachet::OmniWrenchActionStateComponent>();
     return true;
 }
 
-bool my::OmniWrenchDefaultComponent::Update(float delta_time) {
+bool rachet::OmniWrenchDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::OmniWrenchDefaultComponent::Release(void) {
+bool rachet::OmniWrenchDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::OmniWrenchDefaultComponent::Clone(void) {
-    return std::make_shared<my::OmniWrenchDefaultComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::OmniWrenchDefaultComponent::Clone(void) {
+    return std::make_shared<rachet::OmniWrenchDefaultComponent>(*this);
 }
 
-bool my::OmniWrenchDefaultComponent::Start(void) {
+bool rachet::OmniWrenchDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -61,7 +61,7 @@ bool my::OmniWrenchDefaultComponent::Start(void) {
     return true;
 }
 
-bool my::OmniWrenchDefaultComponent::End(void) {
+bool rachet::OmniWrenchDefaultComponent::End(void) {
     super::End();
     return true;
 }

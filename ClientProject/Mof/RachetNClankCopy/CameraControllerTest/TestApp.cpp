@@ -8,7 +8,7 @@
 #include "Camera/DebugCameraController.h"
 
 
-void test::CGameApp::InputFollow(std::shared_ptr<my::CameraController> controller) {
+void test::CGameApp::InputFollow(std::shared_ptr<rachet::CameraController> controller) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         controller->AddAzimuth(1.0f);
     } // if
@@ -29,10 +29,10 @@ void test::CGameApp::InputFollow(std::shared_ptr<my::CameraController> controlle
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
         auto front = _controller_map.at(_current_mode)->GetViewFront();
 
-        _current_mode = my::CameraController::CameraMode::FirstPerson;
+        _current_mode = rachet::CameraController::CameraMode::FirstPerson;
         auto con = _controller_map.at(_current_mode);
 
-        auto info = my::CameraController::CameraInfo();
+        auto info = rachet::CameraController::CameraInfo();
         info.start_position = prev_pos;
         info.camera_front = front;
         info.ideal_position = eye_pos;
@@ -41,7 +41,7 @@ void test::CGameApp::InputFollow(std::shared_ptr<my::CameraController> controlle
     } // if
 }
 
-void test::CGameApp::InputFirstPerson(std::shared_ptr<my::CameraController> controller) {
+void test::CGameApp::InputFirstPerson(std::shared_ptr<rachet::CameraController> controller) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         controller->AddAzimuth(1.0f);
     } // if
@@ -74,9 +74,9 @@ void test::CGameApp::InputFirstPerson(std::shared_ptr<my::CameraController> cont
     else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
 
-        _current_mode = my::CameraController::CameraMode::Follow;
+        _current_mode = rachet::CameraController::CameraMode::Follow;
         float ideal_angle_y = _transform.rotate.y + math::kHalfPi;
-        auto info = my::CameraController::CameraInfo();
+        auto info = rachet::CameraController::CameraInfo();
         info.start_position = prev_pos;
 
         auto con = _controller_map.at(_current_mode);
@@ -86,14 +86,14 @@ void test::CGameApp::InputFirstPerson(std::shared_ptr<my::CameraController> cont
     } // else if
 }
 
-void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<my::CameraController> controller) {
-    auto info = my::CameraController::CameraInfo();
+void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<rachet::CameraController> controller) {
+    auto info = rachet::CameraController::CameraInfo();
     info.target_position = _transform.position;
     _camera_controller.GetService()->Update(delta_time, info);
 }
 
-void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<my::CameraController> controller) {
-    auto info = my::CameraController::CameraInfo();
+void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<rachet::CameraController> controller) {
+    auto info = rachet::CameraController::CameraInfo();
     auto pos = _transform.position;
     pos.y += 1.0f;
     info.ideal_position = pos;
@@ -105,17 +105,17 @@ MofBool test::CGameApp::Initialize(void) {
 //    bool loaded = _gizmo.Load("gizmo.mom");
     bool loaded = _gizmo.Load("bolt/scene02.mom");
 
-    my::Gamepad::GetInstance().Create();
-    _camera_manager = std::make_shared<my::CameraManager>();
-    my::CameraController::SetCameraManager(_camera_manager);
+    rachet::Gamepad::GetInstance().Create();
+    _camera_manager = std::make_shared<rachet::CameraManager>();
+    rachet::CameraController::SetCameraManager(_camera_manager);
 
 
-    using Mode = my::CameraController::CameraMode;
-    _camera = std::make_shared<my::Camera>();
+    using Mode = rachet::CameraController::CameraMode;
+    _camera = std::make_shared<rachet::Camera>();
     _camera->Initialize();
     _controller_map.clear();
-    auto follow = std::make_shared<my::FollowCameraController>();
-    auto first_person = std::make_shared<my::FirstPersonCameraController>();
+    auto follow = std::make_shared<rachet::FollowCameraController>();
+    auto first_person = std::make_shared<rachet::FirstPersonCameraController>();
     _controller_map.emplace(Mode::Follow, follow);
     _controller_map.emplace(Mode::FirstPerson, first_person);
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
@@ -168,7 +168,7 @@ MofBool test::CGameApp::Input(void) {
 
     // camera
     auto controller = _camera_controller.GetService();
-    using Mode = my::CameraController::CameraMode;
+    using Mode = rachet::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->InputFollow(controller);
@@ -185,7 +185,7 @@ MofBool test::CGameApp::Update(void) {
 
     float delta_time = 1.0f / 60.0f;
     auto controller = _camera_controller.GetService();
-    using Mode = my::CameraController::CameraMode;
+    using Mode = rachet::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->UpdateFollow(delta_time, controller);
@@ -214,7 +214,7 @@ MofBool test::CGameApp::Render(void) {
 
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Camera Controller Test Application ");
     ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "FPS = %d", ::CUtilities::GetFPS());
-    using Mode = my::CameraController::CameraMode;
+    using Mode = rachet::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "Mode = Follow");
@@ -240,6 +240,6 @@ MofBool test::CGameApp::Render(void) {
 
 MofBool test::CGameApp::Release(void) {
     _camera_manager.reset();
-    my::Gamepad::GetInstance().Release();
+    rachet::Gamepad::GetInstance().Release();
     return TRUE;
 }

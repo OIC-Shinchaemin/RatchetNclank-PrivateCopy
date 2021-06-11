@@ -1,5 +1,5 @@
-#ifndef MY_QUICK_CHANGE_SYSTEM_H
-#define MY_QUICK_CHANGE_SYSTEM_H
+#ifndef RACHET_QUICK_CHANGE_SYSTEM_H
+#define RACHET_QUICK_CHANGE_SYSTEM_H
 
 
 #include "GameSystem.h"
@@ -19,7 +19,7 @@
 #include "../../GameDefine.h"
 
 
-namespace my {
+namespace rachet {
 class QuickChangeItem {
 private:
     //! 所有
@@ -39,9 +39,9 @@ public:
 };
 
 class QuickChangeSystem :
-    public my::GameSystem {
-    using super = my::GameSystem;
-    using This = my::QuickChangeSystem;
+    public rachet::GameSystem {
+    using super = rachet::GameSystem;
+    using This = rachet::QuickChangeSystem;
     using Observable = base::core::Observable<Mof::CVector4>;
     enum class State {
         Enter,
@@ -68,11 +68,11 @@ private:
     //! 武器
     std::vector<int> _angles;
     //! アイテム
-    std::unordered_map<int, my::QuickChangeItem> _items;
+    std::unordered_map<int, rachet::QuickChangeItem> _items;
     //! 通知用
     base::core::Observable<const std::string&> _current;
     //! リソース
-    //std::weak_ptr<my::ResourceMgr> _resource;
+    //std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     //std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! 監視対象
@@ -105,7 +105,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    //void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -132,13 +132,13 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddInfoObserver(const std::shared_ptr<base::core::Observer<const my::QuickChangeSystem::Info&>>& ptr);
+    void AddInfoObserver(const std::shared_ptr<base::core::Observer<const rachet::QuickChangeSystem::Info&>>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="weapon_system"></param>
     /// <returns></returns>
-    bool Initialize(const std::shared_ptr<my::WeaponSystem>& weapon_system);
+    bool Initialize(const std::shared_ptr<rachet::WeaponSystem>& weapon_system);
     /// <summary>
     /// 更新
     /// </summary>
@@ -153,4 +153,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !MY_QUICK_CHANGE_SYSTEM_H
+#endif // !RACHET_QUICK_CHANGE_SYSTEM_H

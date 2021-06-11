@@ -3,21 +3,21 @@
 #include <type_traits>
 
 
-my::SaveData::SaveData() :
+rachet::SaveData::SaveData() :
     _param() {
 }
 
-my::SaveData::~SaveData() {
+rachet::SaveData::~SaveData() {
 }
 
-void my::SaveData::MoveParam(SaveDataParam& param) {
+void rachet::SaveData::MoveParam(SaveDataParam& param) {
     this->_param = std::move(param);
 }
 
-uint32_t my::SaveData::GetMoney(void) const {
+uint32_t rachet::SaveData::GetMoney(void) const {
     return this->_param.money;
 }
 
-const std::vector<std::string>& my::SaveData::GetAvailableMechanicalWeaponsAddress(void) {
+const std::vector<std::string>& rachet::SaveData::GetAvailableMechanicalWeaponsAddress(void) {
     return this->_param.available_weapons;
 }

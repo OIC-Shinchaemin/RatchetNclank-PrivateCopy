@@ -1,5 +1,5 @@
-#ifndef MY_REGISTER_GLOBAL_CAMERA_EVENT_H
-#define MY_REGISTER_GLOBAL_CAMERA_EVENT_H
+#ifndef RACHET_REGISTER_GLOBAL_CAMERA_EVENT_H
+#define RACHET_REGISTER_GLOBAL_CAMERA_EVENT_H
 
 
 #include "Event.h"
@@ -10,12 +10,12 @@
 #include "../Camera/AutoCameraController.h"
 
 
-namespace my {
-class RegisterGlobalCameraEvent : public my::Event, public base::core::Observer<const my::CameraController::CameraInfo&> {
-    using super = my::Event;
+namespace rachet {
+class RegisterGlobalCameraEvent : public rachet::Event, public base::core::Observer<const rachet::CameraController::CameraInfo&> {
+    using super = rachet::Event;
 private:
     //! 通知用
-    //my::RegisterGlobalCameraEvent::CameraObservable _camera_subject;
+    //rachet::RegisterGlobalCameraEvent::CameraObservable _camera_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,13 +29,13 @@ public:
     /// イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const my::CameraController::CameraInfo& info) override;
+    virtual void OnNotify(const rachet::CameraController::CameraInfo& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    //my::RegisterGlobalCameraEvent::CameraObservable* GetCameraObservable(void);
+    //rachet::RegisterGlobalCameraEvent::CameraObservable* GetCameraObservable(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -50,4 +50,4 @@ public:
     virtual bool Update(float delta_time) override;
 };
 }
-#endif // !MY_REGISTER_GLOBAL_CAMERA_EVENT_H
+#endif // !RACHET_REGISTER_GLOBAL_CAMERA_EVENT_H

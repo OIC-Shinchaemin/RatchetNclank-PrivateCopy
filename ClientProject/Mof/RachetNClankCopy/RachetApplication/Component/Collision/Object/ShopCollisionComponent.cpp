@@ -3,55 +3,55 @@
 #include "CollisionComponentDefine.h"
 
 
-my::ShopCollisionComponent::ShopCollisionComponent(int priority) :
+rachet::ShopCollisionComponent::ShopCollisionComponent(int priority) :
     super(priority) ,
     _volume(5.0f){
 }
 
-my::ShopCollisionComponent::ShopCollisionComponent(const ShopCollisionComponent& obj) :
+rachet::ShopCollisionComponent::ShopCollisionComponent(const ShopCollisionComponent& obj) :
     super(obj) ,
     _volume(obj._volume){
 }
 
-my::ShopCollisionComponent::~ShopCollisionComponent() {
+rachet::ShopCollisionComponent::~ShopCollisionComponent() {
 }
 
-std::string my::ShopCollisionComponent::GetType(void) const {
-    return my::CollisionComponentType::kShopCollisionComponent;
+std::string rachet::ShopCollisionComponent::GetType(void) const {
+    return rachet::CollisionComponentType::kShopCollisionComponent;
 }
 
-std::optional<Mof::CSphere> my::ShopCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == my::ActorState::End) {
+std::optional<Mof::CSphere> rachet::ShopCollisionComponent::GetSphere(void) {
+    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _volume);
 }
 
-std::optional<Mof::CBoxAABB> my::ShopCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> rachet::ShopCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> my::ShopCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> rachet::ShopCollisionComponent::GetRay(void) {
     return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> my::ShopCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> rachet::ShopCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<my::SightObject> my::ShopCollisionComponent::GetSightObject(void) {
-    return std::optional<my::SightObject>();
+std::optional<rachet::SightObject> rachet::ShopCollisionComponent::GetSightObject(void) {
+    return std::optional<rachet::SightObject>();
 }
 
-bool my::ShopCollisionComponent::Initialize(void) {
+bool rachet::ShopCollisionComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-std::shared_ptr<my::Component> my::ShopCollisionComponent::Clone(void) {
-    return std::make_shared<my::ShopCollisionComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::ShopCollisionComponent::Clone(void) {
+    return std::make_shared<rachet::ShopCollisionComponent>(*this);
 }
 
-void my::ShopCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void rachet::ShopCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
 }

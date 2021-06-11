@@ -1,5 +1,5 @@
-#ifndef MY_BILLBOARD_COMPONENT_H
-#define MY_BILLBOARD_COMPONENT_H
+#ifndef RACHET_BILLBOARD_COMPONENT_H
+#define RACHET_BILLBOARD_COMPONENT_H
 
 
 #include "RenderComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class BillboardComponent : public my::RenderComponent {
-    using super = my::RenderComponent;
+namespace rachet {
+class BillboardComponent : public rachet::RenderComponent {
+    using super = rachet::RenderComponent;
 private:
     //! ÉÅÉbÉVÉÖ
     std::weak_ptr<Mof::CTexture> _texture;
@@ -75,7 +75,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
 };
 }
-#endif // !MY_BILLBOARD_COMPONENT_H
+#endif // !RACHET_BILLBOARD_COMPONENT_H

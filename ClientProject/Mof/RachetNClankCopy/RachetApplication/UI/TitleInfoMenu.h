@@ -1,5 +1,5 @@
-#ifndef MY_TITLE_INFO_MENU_H
-#define MY_TITLE_INFO_MENU_H
+#ifndef RACHET_TITLE_INFO_MENU_H
+#define RACHET_TITLE_INFO_MENU_H
 
 
 #include "Base/UI/UIPanel.h"
@@ -13,14 +13,14 @@
 #include "Base/Core/Timer.h"
 
 
-namespace my {
+namespace rachet {
 class TitleInfoMenu : public base::ui::UIPanel, public base::core::Observer<bool> {
     using super = base::ui::UIPanel;
 private:
     //! 表示
     bool _show;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! フォント
@@ -48,7 +48,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<my::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -74,4 +74,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !MY_TITLE_INFO_MENU_H
+#endif // !RACHET_TITLE_INFO_MENU_H

@@ -1,5 +1,5 @@
-#ifndef MY_OMNI_WRENCH_DEFAULT_COMPONENT_H
-#define MY_OMNI_WRENCH_DEFAULT_COMPONENT_H
+#ifndef RACHET_OMNI_WRENCH_DEFAULT_COMPONENT_H
+#define RACHET_OMNI_WRENCH_DEFAULT_COMPONENT_H
 
 
 #include "../../ActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace my {
-class OmniWrenchDefaultComponent : public my::ActionComponent {
-    using super = my::ActionComponent;
+namespace rachet {
+class OmniWrenchDefaultComponent : public rachet::ActionComponent {
+    using super = rachet::ActionComponent;
 private:
     //! ‘¬“x
     std::weak_ptr<class VelocityComponent> _velocity_com;
@@ -70,7 +70,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -85,4 +85,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !MY_OMNI_WRENCH_DEFAULT_COMPONENT_H
+#endif // !RACHET_OMNI_WRENCH_DEFAULT_COMPONENT_H

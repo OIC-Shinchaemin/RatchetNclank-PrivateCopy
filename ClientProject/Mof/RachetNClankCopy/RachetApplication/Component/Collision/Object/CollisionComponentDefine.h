@@ -1,11 +1,11 @@
-#ifndef MY_COLLISION_COMPONENT_DEFINE_H
-#define MY_COLLISION_COMPONENT_DEFINE_H
+#ifndef RACHET_COLLISION_COMPONENT_DEFINE_H
+#define RACHET_COLLISION_COMPONENT_DEFINE_H
 
 
 #include <string>
 
 
-namespace my {
+namespace rachet {
 struct CollisionComponentType {
     static std::string kPlayerCollisionComponent;
     static std::string kPlayerMeleeAttackCollisionComponent;
@@ -27,4 +27,4 @@ struct CollisionComponentType {
     static std::string kShopCollisionComponent;
 };
 }
-#endif // !MY_COLLISION_COMPONENT_DEFINE_H
+#endif // !RACHET_COLLISION_COMPONENT_DEFINE_H

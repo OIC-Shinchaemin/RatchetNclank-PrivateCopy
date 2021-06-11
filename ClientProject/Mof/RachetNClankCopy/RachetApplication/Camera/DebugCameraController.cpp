@@ -1,14 +1,14 @@
 #include "DebugCameraController.h"
 
 
-my::DebugCameraController::DebugCameraController() :
+rachet::DebugCameraController::DebugCameraController() :
     super() {
 }
 
-my::DebugCameraController::~DebugCameraController() {
+rachet::DebugCameraController::~DebugCameraController() {
 }
 
-bool my::DebugCameraController::Update(float delta_time, const my::CameraController::CameraInfo& info) {
+bool rachet::DebugCameraController::Update(float delta_time, const rachet::CameraController::CameraInfo& info) {
     //this->SetCameraPosition(math::vec3::kOne * 10.0f);
     //this->SetCameraTarget(math::vec3::kZero);
     return true;

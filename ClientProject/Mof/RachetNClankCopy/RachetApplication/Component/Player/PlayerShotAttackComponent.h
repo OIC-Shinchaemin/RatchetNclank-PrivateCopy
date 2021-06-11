@@ -1,5 +1,5 @@
-#ifndef MY_PLAYER_SHOT_ATTACK_COMPONENT_H
-#define MY_PLAYER_SHOT_ATTACK_COMPONENT_H
+#ifndef RACHET_PLAYER_SHOT_ATTACK_COMPONENT_H
+#define RACHET_PLAYER_SHOT_ATTACK_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -9,9 +9,9 @@
 #include "../../Actor/Weapon/Mechanical.h"
 
 
-namespace my {
-class PlayerShotAttackComponent : public my::PlayerActionComponent {
-    using super = my::PlayerActionComponent;
+namespace rachet {
+class PlayerShotAttackComponent : public rachet::PlayerActionComponent {
+    using super = rachet::PlayerActionComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -25,9 +25,9 @@ class PlayerShotAttackComponent : public my::PlayerActionComponent {
     };
 private:
     //! ïêäÌ
-    std::weak_ptr<my::Mechanical> _weapon;
+    std::weak_ptr<rachet::Mechanical> _weapon;
     //! ì¸óÕèÓïÒ
-    my::PlayerShotAttackComponent::InputInfo _input_info;
+    rachet::PlayerShotAttackComponent::InputInfo _input_info;
     //! à⁄ìÆ
     std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:
@@ -86,7 +86,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<my::Component> Clone(void) override;
+    virtual std::shared_ptr<rachet::Component> Clone(void) override;
     /// <summary>
     /// äJén
     /// </summary>
@@ -95,4 +95,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !MY_PLAYER_SHOT_ATTACK_COMPONENT_H
+#endif // !RACHET_PLAYER_SHOT_ATTACK_COMPONENT_H

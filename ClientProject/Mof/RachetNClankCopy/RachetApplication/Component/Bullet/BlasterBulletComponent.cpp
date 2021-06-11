@@ -3,44 +3,44 @@
 #include "../Collision/Object/BlasterBulletCollisionComponent.h"
 
 
-my::BlasterBulletComponent::BlasterBulletComponent(int priority) :
+rachet::BlasterBulletComponent::BlasterBulletComponent(int priority) :
     super(priority) {
 }
 
-my::BlasterBulletComponent::BlasterBulletComponent(const BlasterBulletComponent& obj) :
+rachet::BlasterBulletComponent::BlasterBulletComponent(const BlasterBulletComponent& obj) :
     super(obj) {
 }
 
-my::BlasterBulletComponent::~BlasterBulletComponent() {
+rachet::BlasterBulletComponent::~BlasterBulletComponent() {
 }
 
-std::string my::BlasterBulletComponent::GetType(void) const {
+std::string rachet::BlasterBulletComponent::GetType(void) const {
     return "BlasterBulletComponent";
 }
 
-bool my::BlasterBulletComponent::Initialize(void) {
+bool rachet::BlasterBulletComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    auto coll_com = super::GetOwner()->GetComponent<my::BlasterBulletCollisionComponent>();
-    coll_com->AddCollisionFunc(my::CollisionComponent::CollisionFuncType::Enter,
+    auto coll_com = super::GetOwner()->GetComponent<rachet::BlasterBulletCollisionComponent>();
+    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
                                "EnemyCollisionComponent",
-                               my::CollisionComponent::CollisionFunc([&](const my::CollisionInfo& in) {
+                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
         super::GetOwner()->End();
         return true;
     }));
     return true;
 }
 
-bool my::BlasterBulletComponent::Update(float delta_time) {
+bool rachet::BlasterBulletComponent::Update(float delta_time) {
     return true;
 }
 
-bool my::BlasterBulletComponent::Release(void) {
+bool rachet::BlasterBulletComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<my::Component> my::BlasterBulletComponent::Clone(void) {
-    return std::make_shared<my::BlasterBulletComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::BlasterBulletComponent::Clone(void) {
+    return std::make_shared<rachet::BlasterBulletComponent>(*this);
 }

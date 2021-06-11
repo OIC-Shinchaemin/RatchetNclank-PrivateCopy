@@ -1,5 +1,5 @@
-#ifndef MY_GAME_MANAGER_H
-#define MY_GAME_MANAGER_H
+#ifndef RACHET_GAME_MANAGER_H
+#define RACHET_GAME_MANAGER_H
 
 
 #include <memory>
@@ -15,31 +15,31 @@
 #include "GameSystem/GamePauseSystem.h"
 
 
-namespace my {
+namespace rachet {
 class GameManager : 
-    public std::enable_shared_from_this<my::GameManager>,
-    public base::core::Observer<const std::shared_ptr<my::GameSystem>&> {
+    public std::enable_shared_from_this<rachet::GameManager>,
+    public base::core::Observer<const std::shared_ptr<rachet::GameSystem>&> {
 private:
     //! 更新用
-    std::vector<std::shared_ptr<my::GameSystem>> _update_system;
+    std::vector<std::shared_ptr<rachet::GameSystem>> _update_system;
     //! 更新用
-    std::vector<std::shared_ptr<my::GameSystem>> _disable_systems;
+    std::vector<std::shared_ptr<rachet::GameSystem>> _disable_systems;
     //! 武器
-    std::shared_ptr<my::WeaponSystem>  _weapon_system;
+    std::shared_ptr<rachet::WeaponSystem>  _weapon_system;
     //! クイックチェンジ
-    std::shared_ptr<my::QuickChangeSystem> _quick_change;
+    std::shared_ptr<rachet::QuickChangeSystem> _quick_change;
     //! ヘルプデスク
-    std::shared_ptr<my::HelpDesk>  _help_desk;
+    std::shared_ptr<rachet::HelpDesk>  _help_desk;
     //! お金
-    std::shared_ptr<my::GameMoney> _game_money;
+    std::shared_ptr<rachet::GameMoney> _game_money;
     //! ショップ
-    std::shared_ptr<my::ShopSystem> _shop_system;
+    std::shared_ptr<rachet::ShopSystem> _shop_system;
     //! オプション
-    std::shared_ptr<my::OptionSystem> _option_system;
+    std::shared_ptr<rachet::OptionSystem> _option_system;
     //! ポーズ
-    std::shared_ptr<my::GamePauseSystem> _pause_system;
+    std::shared_ptr<rachet::GamePauseSystem> _pause_system;
     //! リソース
-    std::weak_ptr<my::ResourceMgr> _resource;
+    std::weak_ptr<rachet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 
@@ -61,12 +61,12 @@ public:
     /// 通知
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void OnNotify(const std::shared_ptr<my::GameSystem>& ptr);
+    virtual void OnNotify(const std::shared_ptr<rachet::GameSystem>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(const std::shared_ptr<my::ResourceMgr>& ptr);
+    void SetResourceManager(const std::shared_ptr<rachet::ResourceMgr>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -77,43 +77,43 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::WeaponSystem> GetWeaponSystem(void) const;
+    std::shared_ptr<rachet::WeaponSystem> GetWeaponSystem(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::QuickChangeSystem> GetQuickChange(void) const;
+    std::shared_ptr<rachet::QuickChangeSystem> GetQuickChange(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::HelpDesk> GetHelpDesk(void) const;
+    std::shared_ptr<rachet::HelpDesk> GetHelpDesk(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::GameMoney> GetGameMoney(void) const;
+    std::shared_ptr<rachet::GameMoney> GetGameMoney(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::ShopSystem> GetShopSystem(void) const;
+    std::shared_ptr<rachet::ShopSystem> GetShopSystem(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::OptionSystem> GetOptionSystem(void) const;
+    std::shared_ptr<rachet::OptionSystem> GetOptionSystem(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<my::GamePauseSystem> GetGamePauseSystem(void) const;
+    std::shared_ptr<rachet::GamePauseSystem> GetGamePauseSystem(void) const;
     /// <summary>
     /// 読み込み
     /// </summary>
@@ -143,4 +143,4 @@ public:
     void GameSystemRelease(void);
 };
 }
-#endif // !MY_GAME_MANAGER_H
+#endif // !RACHET_GAME_MANAGER_H

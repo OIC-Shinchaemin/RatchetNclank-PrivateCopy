@@ -1,5 +1,5 @@
-#ifndef MY_COMPONENT_CREATOR_H
-#define MY_COMPONENT_CREATOR_H
+#ifndef RACHET_COMPONENT_CREATOR_H
+#define RACHET_COMPONENT_CREATOR_H
 
 
 #include <memory>
@@ -9,11 +9,11 @@
 #include "../Component/Component.h"
 
 
-namespace my {
+namespace rachet {
 class ComponentCreator {
 private:
     //! コピー元
-    std::unique_ptr<my::Component> _origin;
+    std::unique_ptr<rachet::Component> _origin;
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,7 +43,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<my::Component> Create(const rapidjson::Value& param) const;
+    std::shared_ptr<rachet::Component> Create(const rapidjson::Value& param) const;
     /// <summary>
     /// 解放
     /// </summary>
@@ -51,4 +51,4 @@ public:
     void Release(void);
 };
 }
-#endif // !MY_COMPONENT_CREATOR_H
+#endif // !RACHET_COMPONENT_CREATOR_H

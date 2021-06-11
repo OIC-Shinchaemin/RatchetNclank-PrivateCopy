@@ -12,7 +12,7 @@ class ActionNodeExecutor : public behaviour::NodeExecutor {
     using super = behaviour::NodeExecutor;
 protected:
     //! アクター
-    std::weak_ptr<my::Actor> _actor;
+    std::weak_ptr<rachet::Actor> _actor;
     /// <summary>
     /// ノード実行
     /// </summary>
@@ -51,7 +51,7 @@ public:
     /// </summary>
     /// <param actor=""></param>
     virtual void Prepare(std::any actor) override {
-        _actor = std::any_cast<std::shared_ptr<my::Actor>>(actor);
+        _actor = std::any_cast<std::shared_ptr<rachet::Actor>>(actor);
     }
     /// <summary>
     /// ノードの実行

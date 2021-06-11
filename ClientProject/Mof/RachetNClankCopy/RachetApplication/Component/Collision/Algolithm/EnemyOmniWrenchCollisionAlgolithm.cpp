@@ -3,22 +3,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-my::EnemyOmniWrenchCollisionAlgolithm::EnemyOmniWrenchCollisionAlgolithm() :
+rachet::EnemyOmniWrenchCollisionAlgolithm::EnemyOmniWrenchCollisionAlgolithm() :
     super() {
 }
 
-my::EnemyOmniWrenchCollisionAlgolithm::~EnemyOmniWrenchCollisionAlgolithm() {
+rachet::EnemyOmniWrenchCollisionAlgolithm::~EnemyOmniWrenchCollisionAlgolithm() {
 }
 
-const char* my::EnemyOmniWrenchCollisionAlgolithm::GetLayerType(void) const {
-    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
+const char* rachet::EnemyOmniWrenchCollisionAlgolithm::GetLayerType(void) const {
+    return rachet::CollisionComponentType::kEnemyCollisionComponent.c_str();
 }
 
-const char* my::EnemyOmniWrenchCollisionAlgolithm::GetTargetType(void) const {
-    return my::CollisionComponentType::kOmniWrenchCollisionComponent.c_str();
+const char* rachet::EnemyOmniWrenchCollisionAlgolithm::GetTargetType(void) const {
+    return rachet::CollisionComponentType::kOmniWrenchCollisionComponent.c_str();
 }
 
-bool my::EnemyOmniWrenchCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
+bool rachet::EnemyOmniWrenchCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

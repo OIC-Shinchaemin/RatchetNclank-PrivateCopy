@@ -3,26 +3,26 @@
 #include "MotionComponent.h"
 
 
-my::AnimationMeshComponent::AnimationMeshComponent(int priority) :
+rachet::AnimationMeshComponent::AnimationMeshComponent(int priority) :
     super(priority),
     _motion_com() {
 }
 
-my::AnimationMeshComponent::AnimationMeshComponent(const my::AnimationMeshComponent& obj) :
+rachet::AnimationMeshComponent::AnimationMeshComponent(const rachet::AnimationMeshComponent& obj) :
     super(obj),
     _motion_com() {
 }
 
-my::AnimationMeshComponent::~AnimationMeshComponent() {
+rachet::AnimationMeshComponent::~AnimationMeshComponent() {
 }
 
-std::string my::AnimationMeshComponent::GetType(void) const {
+std::string rachet::AnimationMeshComponent::GetType(void) const {
     return "AnimationMeshComponent";
 }
 
-bool my::AnimationMeshComponent::Initialize(void) {
+bool rachet::AnimationMeshComponent::Initialize(void) {
     super::Initialize();
-    _motion_com = super::GetOwner()->GetComponent<my::MotionComponent>();
+    _motion_com = super::GetOwner()->GetComponent<rachet::MotionComponent>();
 #ifdef _DEBUG
     auto mesh = super::GetMeshContainer();
     auto bone_array = mesh->GetBone();
@@ -34,7 +34,7 @@ bool my::AnimationMeshComponent::Initialize(void) {
     return true;
 }
 
-bool my::AnimationMeshComponent::Render(void) {
+bool rachet::AnimationMeshComponent::Render(void) {
     if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
@@ -59,12 +59,12 @@ bool my::AnimationMeshComponent::Render(void) {
     return true;
 }
 
-bool my::AnimationMeshComponent::Release(void) {
+bool rachet::AnimationMeshComponent::Release(void) {
     super::Release();
     _motion_com.reset();
     return true;
 }
 
-std::shared_ptr<my::Component> my::AnimationMeshComponent::Clone(void) {
-    return std::make_shared<my::AnimationMeshComponent>(*this);
+std::shared_ptr<rachet::Component> rachet::AnimationMeshComponent::Clone(void) {
+    return std::make_shared<rachet::AnimationMeshComponent>(*this);
 }

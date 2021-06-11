@@ -4,22 +4,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-my::SightEnemyCollisionAlgolithm::SightEnemyCollisionAlgolithm() :
+rachet::SightEnemyCollisionAlgolithm::SightEnemyCollisionAlgolithm() :
     super() {
 }
 
-my::SightEnemyCollisionAlgolithm::~SightEnemyCollisionAlgolithm() {
+rachet::SightEnemyCollisionAlgolithm::~SightEnemyCollisionAlgolithm() {
 }
 
-const char* my::SightEnemyCollisionAlgolithm::GetLayerType(void) const {
-    return my::CollisionComponentType::kSightCollisionComponent.c_str();
+const char* rachet::SightEnemyCollisionAlgolithm::GetLayerType(void) const {
+    return rachet::CollisionComponentType::kSightCollisionComponent.c_str();
 }
 
-const char* my::SightEnemyCollisionAlgolithm::GetTargetType(void) const {
-    return my::CollisionComponentType::kEnemyCollisionComponent.c_str();
+const char* rachet::SightEnemyCollisionAlgolithm::GetTargetType(void) const {
+    return rachet::CollisionComponentType::kEnemyCollisionComponent.c_str();
 }
 
-bool my::SightEnemyCollisionAlgolithm::IsCollision(std::shared_ptr<my::CollisionComponent> object, std::shared_ptr<my::CollisionComponent> target, my::CollisionInfo& out) {
+bool rachet::SightEnemyCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

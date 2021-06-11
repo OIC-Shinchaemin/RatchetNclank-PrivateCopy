@@ -1,5 +1,5 @@
-#ifndef MY_RESOURCE_MANAGER_H
-#define MY_RESOURCE_MANAGER_H
+#ifndef RACHET_RESOURCE_MANAGER_H
+#define RACHET_RESOURCE_MANAGER_H
 
 
 #include <tuple>
@@ -14,7 +14,7 @@
 #include "MotionNames.h"
 
 
-namespace my {
+namespace rachet {
 template<typename...Types>
 class ResourceManager {
 private:
@@ -106,7 +106,7 @@ public:
                 this->AddSharedElement<Mof::CMeshContainer>(data_path.c_str());
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".motion_names"); format) {
-                this->AddSharedElement<my::MotionNames>(data_path.c_str());
+                this->AddSharedElement<rachet::MotionNames>(data_path.c_str());
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".ttf"); format) {
                 this->AddSharedElement<sip::CResourceFont>(data_path.c_str());
@@ -147,4 +147,4 @@ public:
     }
 };
 }
-#endif // !MY_RESOURCE_MANAGER_H
+#endif // !RACHET_RESOURCE_MANAGER_H
