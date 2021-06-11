@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_NODE_EXECUTOR_H
-#define BEHAVIOUR_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_NODE_EXECUTOR_H
 
 
 #include "INodeExecutor.h"
@@ -9,24 +9,24 @@
 #include "../Node/Node.h"
 
 
-namespace behaviour {
-class NodeExecutor : public behaviour::INodeExecutor {
-    using super = behaviour::INodeExecutor;
+namespace ratchet { namespace behaviour {
+class NodeExecutor : public ratchet::behaviour::INodeExecutor {
+    using super = ratchet::behaviour::INodeExecutor;
 protected:
     //! 状態
     super::State _state;
     //! 対応ノード
-    behaviour::NodePtr _node;
+    ratchet::behaviour::NodePtr _node;
     //! 親
-    behaviour::NodeExecutorWeakPtr _parent;
+    ratchet::behaviour::NodeExecutorWeakPtr _parent;
     //! 子供
-    behaviour::NodeExecutorList _children;
+    ratchet::behaviour::NodeExecutorList _children;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    NodeExecutor(const behaviour::NodePtr& node) :
+    NodeExecutor(const ratchet::behaviour::NodePtr& node) :
         super(),
         _state(super::State::Inactive),
         _node(node),
@@ -41,7 +41,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetParent(behaviour::NodeExecutorWeakPtr ptr) override {
+    void SetParent(ratchet::behaviour::NodeExecutorWeakPtr ptr) override {
         _parent = ptr;
     }
     /// <summary>
@@ -56,8 +56,8 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
-        return behaviour::INodeExecutor::Result::Failure;
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
+        return ratchet::behaviour::INodeExecutor::Result::Failure;
     }
     /// <summary>
     /// 実行状態を全てリセット
@@ -104,4 +104,5 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !BEHAVIOUR_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_NODE_EXECUTOR_H

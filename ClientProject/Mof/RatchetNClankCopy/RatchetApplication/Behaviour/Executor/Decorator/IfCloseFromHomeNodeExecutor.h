@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_EXECUTOR_H
-#define BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_EXECUTOR_H
 
 
 #include "../DecoratorNodeExecutor.h"
@@ -7,9 +7,10 @@
 #include "../../../Component/Enemy/EnemyComponent.h"
 
 
+namespace ratchet {
 namespace behaviour {
-class IfCloseFromHomeNodeExecutor : public behaviour::DecoratorNodeExecutor {
-    using super = behaviour::DecoratorNodeExecutor;
+class IfCloseFromHomeNodeExecutor : public ratchet::behaviour::DecoratorNodeExecutor {
+    using super = ratchet::behaviour::DecoratorNodeExecutor;
 public:
     struct NodeArgs {
         //! アクター
@@ -19,13 +20,13 @@ public:
     };
 private:
     //! 実行引数
-    behaviour::IfCloseFromHomeNodeExecutor::NodeArgs _node_args;
+    ratchet::behaviour::IfCloseFromHomeNodeExecutor::NodeArgs _node_args;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    IfCloseFromHomeNodeExecutor(const behaviour::SimplexNodePtr& node) :
+    IfCloseFromHomeNodeExecutor(const ratchet::behaviour::SimplexNodePtr& node) :
         super(node),
         _node_args() {
     }
@@ -50,9 +51,10 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
         return super::DecoratorNodeExecute(_node_args);
     }
 };
 }
-#endif // !BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_IF_CLOSE_FROM_HOME_NODE_EXECUTOR_H

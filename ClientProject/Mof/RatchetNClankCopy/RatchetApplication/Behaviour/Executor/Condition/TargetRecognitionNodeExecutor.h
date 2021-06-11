@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H
-#define BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H
 
 
 #include "../ConditionalNodeExecutor.h"
@@ -7,9 +7,10 @@
 #include "../../../Component/Enemy/EnemyComponent.h"
 
 
+namespace ratchet {
 namespace behaviour {
-class TargetRecognitionNodeExecutor : public behaviour::ConditionalNodeExecutor {
-    using super = behaviour::ConditionalNodeExecutor;
+class TargetRecognitionNodeExecutor : public ratchet::behaviour::ConditionalNodeExecutor {
+    using super = ratchet::behaviour::ConditionalNodeExecutor;
 public:
     struct NodeArgs {
         //! アクター
@@ -19,13 +20,13 @@ public:
     };
 private:
     //! 実行引数
-    behaviour::TargetRecognitionNodeExecutor::NodeArgs _node_args;
+    ratchet::behaviour::TargetRecognitionNodeExecutor::NodeArgs _node_args;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    TargetRecognitionNodeExecutor(const behaviour::NodePtr& node) :
+    TargetRecognitionNodeExecutor(const ratchet::behaviour::NodePtr& node) :
         super(node),
         _node_args() {
     }
@@ -50,9 +51,10 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
         return super::ConditionalNodeExecute(_node_args);
     }
 };
 }
-#endif // !BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H

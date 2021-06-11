@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_MELLE_ATTACK_NODE_H
-#define BEHAVIOUR_MELLE_ATTACK_NODE_H
+#ifndef RATCHET_BEHAVIOUR_MELLE_ATTACK_NODE_H
+#define RATCHET_BEHAVIOUR_MELLE_ATTACK_NODE_H
 
 
 #include "../ActionNode.h"
@@ -7,9 +7,9 @@
 #include "../../Executor/Action/MeleeAttackNodeExecutor.h"
 
 
-namespace behaviour {
-class MeleeAttackNode : public behaviour::ActionNodeBase {
-    using super = behaviour::ActionNodeBase;
+namespace ratchet {  namespace behaviour {
+class MeleeAttackNode : public ratchet::behaviour::ActionNodeBase {
+    using super = ratchet::behaviour::ActionNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,9 +26,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
-        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
-        return std::make_shared<behaviour::MeleeAttackNodeExecutor>(ptr);
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<ratchet::behaviour::Node>(super::shared_from_this());
+        return std::make_shared<ratchet::behaviour::MeleeAttackNodeExecutor>(ptr);
     }
     /// <summary>
     /// ノードの実行
@@ -37,7 +37,7 @@ public:
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
     virtual bool Execute(std::any node_args) override {
-        auto args = std::any_cast<behaviour::MeleeAttackNodeExecutor::NodeArgs>(node_args);
+        auto args = std::any_cast<ratchet::behaviour::MeleeAttackNodeExecutor::NodeArgs>(node_args);
 
         _ASSERT_EXPR(!args.actor.expired(), L"無効なポインタを保持しています");
         _ASSERT_EXPR(!args.ai_com.expired(), L"無効なポインタを保持しています");
@@ -59,4 +59,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_MELLE_ATTACK_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_MELLE_ATTACK_NODE_H

@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_LOOK_AROUND_NODE_H
-#define BEHAVIOUR_LOOK_AROUND_NODE_H
+#ifndef RATCHET_BEHAVIOUR_LOOK_AROUND_NODE_H
+#define RATCHET_BEHAVIOUR_LOOK_AROUND_NODE_H
 
 
 #include "../ActionNode.h"
@@ -7,10 +7,10 @@
 #include "../../Executor/Action/LookAroundNodeExecutor.h"
 
 
-namespace behaviour {
-class LookAroundNode : public behaviour::ActionNodeBase {
-    using super = behaviour::ActionNodeBase;
-    using Executor = behaviour::LookAroundNodeExecutor;
+namespace ratchet {  namespace behaviour {
+class LookAroundNode : public ratchet::behaviour::ActionNodeBase {
+    using super = ratchet::behaviour::ActionNodeBase;
+    using Executor = ratchet::behaviour::LookAroundNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,8 +27,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
-        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<ratchet::behaviour::Node>(super::shared_from_this());
         return std::make_shared<Executor>(ptr);
     }
     /// <summary>
@@ -47,4 +47,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_LOOK_AROUND_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_LOOK_AROUND_NODE_H

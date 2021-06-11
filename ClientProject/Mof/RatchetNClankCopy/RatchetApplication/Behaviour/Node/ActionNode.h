@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_ACTION_NODE_H
-#define BEHAVIOUR_ACTION_NODE_H
+#ifndef RATCHET_BEHAVIOUR_ACTION_NODE_H
+#define RATCHET_BEHAVIOUR_ACTION_NODE_H
 
 
 #include "Node.h"
@@ -7,9 +7,9 @@
 #include "../Executor/ActionNodeExecutor.h"
 
 
-namespace behaviour {
-class ActionNodeBase : public behaviour::Node {
-    using super = behaviour::Node;
+namespace ratchet {  namespace behaviour {
+class ActionNodeBase : public ratchet::behaviour::Node {
+    using super = ratchet::behaviour::Node;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,14 +26,14 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const {
         auto ptr = std::const_pointer_cast<super>(super::shared_from_this());
         return std::make_shared<ActionNodeExecutor>(ptr);
     }
 };
 template<typename Actor>
-class FunctionNode : public behaviour::ActionNodeBase {
-    using super = behaviour::ActionNodeBase;
+class FunctionNode : public ratchet::behaviour::ActionNodeBase {
+    using super = ratchet::behaviour::ActionNodeBase;
 protected:
     //! 実行処理
     using OnExecFunction = std::function<bool(Actor&)>;
@@ -64,4 +64,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_ACTION_NODE_BASE_H
+}
+#endif // !RATCHET_BEHAVIOUR_ACTION_NODE_BASE_H

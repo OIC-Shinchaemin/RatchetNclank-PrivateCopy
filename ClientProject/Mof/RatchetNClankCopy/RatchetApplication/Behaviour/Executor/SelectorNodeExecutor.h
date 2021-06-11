@@ -1,19 +1,19 @@
-#ifndef BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
-#define BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
 
 
 #include "CompositeNodeExecutor.h"
 
 
-namespace behaviour {
-class SelectorNodeExecutor : public behaviour::CompositeNodeExecutor {
-    using super = behaviour::CompositeNodeExecutor;
+namespace ratchet { namespace behaviour {
+class SelectorNodeExecutor : public ratchet::behaviour::CompositeNodeExecutor {
+    using super = ratchet::behaviour::CompositeNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    SelectorNodeExecutor(const behaviour::CompositeNodePtr& node) :
+    SelectorNodeExecutor(const ratchet::behaviour::CompositeNodePtr& node) :
         super(node) {
     }
     /// <summary>
@@ -26,7 +26,7 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
         if (super::_current) {
             auto re = super::_current->Execute();
             if (re != super::Result::None) {
@@ -59,4 +59,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_SELECTOR_NODE_EXECUTOR_H

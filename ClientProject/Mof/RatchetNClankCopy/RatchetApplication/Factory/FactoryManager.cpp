@@ -45,6 +45,6 @@ std::shared_ptr<ratchet::Mechanical> ratchet::FactoryManager::CreateMechanicalWe
     return _actor.CreateMechanicalWeapon(type, builder_key, param);
 }
 
-behaviour::NodeExecutorPtr ratchet::FactoryManager::CreateBehaviourExecutor(const char* key) {
+ratchet::behaviour::NodeExecutorPtr ratchet::FactoryManager::CreateBehaviourExecutor(const char* key) {
     return _behaviour_executor.Create(key);
 }

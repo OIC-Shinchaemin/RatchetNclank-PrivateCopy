@@ -19,7 +19,7 @@ ratchet::BehaviourExecutorFactory::BehaviourExecutorFactory(ratchet::BehaviourFa
 
 }
 
-behaviour::NodeExecutorPtr ratchet::BehaviourExecutorFactory::Create(const char* key) const {
+ratchet::behaviour::NodeExecutorPtr ratchet::BehaviourExecutorFactory::Create(const char* key) const {
     auto it = _behaviour_map.find(key);
     if (it != _behaviour_map.end()) {
         return it->second->CreateExecutor();

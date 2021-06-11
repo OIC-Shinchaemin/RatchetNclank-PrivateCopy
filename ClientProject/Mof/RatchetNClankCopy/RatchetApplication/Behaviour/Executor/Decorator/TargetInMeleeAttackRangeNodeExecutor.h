@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_TARGET_IN_MELEE_ATTACK_RANGE_NODE_EXECUTOR_H
-#define BEHAVIOUR_TARGET_IN_MELEE_ATTACK_RANGE_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_TARGET_IN_MELEE_ATTACK_RANGE_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_TARGET_IN_MELEE_ATTACK_RANGE_NODE_EXECUTOR_H
 
 
 #include "../DecoratorNodeExecutor.h"
@@ -8,9 +8,9 @@
 #include "../../../Component/Enemy/EnemyMeleeAttackComponent.h"
 
 
-namespace behaviour {
-class TargetInMeleeAttackRangeNodeExecutor : public behaviour::DecoratorNodeExecutor {
-    using super = behaviour::DecoratorNodeExecutor;
+namespace ratchet { namespace behaviour {
+class TargetInMeleeAttackRangeNodeExecutor : public ratchet::behaviour::DecoratorNodeExecutor {
+    using super = ratchet::behaviour::DecoratorNodeExecutor;
 public:
     struct NodeArgs {
         //! アクター
@@ -22,13 +22,13 @@ public:
     };
 private:
     //! 実行引数
-    behaviour::TargetInMeleeAttackRangeNodeExecutor::NodeArgs _node_args;
+    ratchet::behaviour::TargetInMeleeAttackRangeNodeExecutor::NodeArgs _node_args;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    TargetInMeleeAttackRangeNodeExecutor(const behaviour::SimplexNodePtr& node) :
+    TargetInMeleeAttackRangeNodeExecutor(const ratchet::behaviour::SimplexNodePtr& node) :
         super(node),
         _node_args() {
     }
@@ -54,9 +54,10 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
         return super::DecoratorNodeExecute(_node_args);
     }
 };
 }
-#endif // !BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_TARGET_RECOGNITION_NODE_EXECUTOR_H

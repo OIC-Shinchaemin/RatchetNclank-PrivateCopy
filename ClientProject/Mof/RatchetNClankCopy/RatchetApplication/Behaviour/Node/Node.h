@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_NODE_H
-#define BEHAVIOUR_NODE_H
+#ifndef RATCHET_BEHAVIOUR_NODE_H
+#define RATCHET_BEHAVIOUR_NODE_H
 
 
 #include <any>
@@ -7,8 +7,9 @@
 #include "../Executor/INodeExecutor.h"
 
 
+namespace ratchet {
 namespace behaviour {
-class Node : public std::enable_shared_from_this<behaviour::Node> {
+class Node : public std::enable_shared_from_this<ratchet::behaviour::Node> {
 protected:
     //! –¼‘O
     std::string _name;
@@ -45,9 +46,10 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const = 0;
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const = 0;
 };
 using NodePtr = std::shared_ptr<Node>;
 using NodeList = std::list<NodePtr>;
 }
-#endif // !BEHAVIOUR_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_NODE_H

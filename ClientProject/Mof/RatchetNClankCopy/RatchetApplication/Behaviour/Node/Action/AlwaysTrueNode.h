@@ -1,13 +1,13 @@
-#ifndef BEHAVIOUR_ALWAYS_TRUE_NODE_H
-#define BEHAVIOUR_ALWAYS_TRUE_NODE_H
+#ifndef RATCHET_BEHAVIOUR_ALWAYS_TRUE_NODE_H
+#define RATCHET_BEHAVIOUR_ALWAYS_TRUE_NODE_H
 
 
 #include "../ActionNode.h"
 
 
-namespace behaviour {
-class AlwaysTrueNode : public behaviour::ActionNodeBase {
-    using super = behaviour::ActionNodeBase;
+namespace ratchet {  namespace behaviour {
+class AlwaysTrueNode : public ratchet::behaviour::ActionNodeBase {
+    using super = ratchet::behaviour::ActionNodeBase;
 public:
     /// <summary>
     /// コンストラクタ
@@ -30,4 +30,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_ALWAYS_TRUE_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_ALWAYS_TRUE_NODE_H

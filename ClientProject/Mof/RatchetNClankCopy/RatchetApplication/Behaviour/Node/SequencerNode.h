@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_SEQUENCER_NODE_H
-#define BEHAVIOUR_SEQUENCER_NODE_H
+#ifndef RATCHET_BEHAVIOUR_SEQUENCER_NODE_H
+#define RATCHET_BEHAVIOUR_SEQUENCER_NODE_H
 
 
 #include "CompositeNode.h"
@@ -7,14 +7,15 @@
 #include "../Executor/SequencerNodeExecutor.h"
 
 
+namespace ratchet {
 namespace behaviour {
-class SequencerNode : public behaviour ::CompositeNode {
-    using super = behaviour::CompositeNode;
+class SequencerNode : public behaviour::CompositeNode {
+    using super = ratchet::behaviour::CompositeNode;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    SequencerNode(): 
+    SequencerNode() :
         super("Sequencer") {
     }
     /// <summary>
@@ -26,11 +27,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const override {
-       auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const override {
+        auto ptr = std::const_pointer_cast<ratchet::behaviour::Node>(super::shared_from_this());
         auto temp = std::dynamic_pointer_cast<super>(ptr);
-        return std::make_shared<behaviour::SequencerNodeExecutor>(temp);
+        return std::make_shared<ratchet::behaviour::SequencerNodeExecutor>(temp);
     }
 };
 }
-#endif // !BEHAVIOUR_SEQUENCER_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_SEQUENCER_NODE_H

@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
-#define BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
 
 
 #include "NodeExecutor.h"
@@ -7,18 +7,18 @@
 #include "../Node/CompositeNode.h"
 
 
-namespace behaviour {
-class CompositeNodeExecutor : public behaviour::NodeExecutor {
-    using super = behaviour::NodeExecutor;
+namespace ratchet { namespace behaviour {
+class CompositeNodeExecutor : public ratchet::behaviour::NodeExecutor {
+    using super = ratchet::behaviour::NodeExecutor;
 protected:
     //! 実行中
-    behaviour::NodeExecutorPtr _current;
+    ratchet::behaviour::NodeExecutorPtr _current;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    CompositeNodeExecutor(const behaviour::CompositeNodePtr& node) :
+    CompositeNodeExecutor(const ratchet::behaviour::CompositeNodePtr& node) :
         super(node) {
         for (auto& ptr : node->GetChildren()) {
             auto add = ptr->CreateExecutor();
@@ -53,4 +53,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_COMPOSITE_NODE_EXECUTOR_H

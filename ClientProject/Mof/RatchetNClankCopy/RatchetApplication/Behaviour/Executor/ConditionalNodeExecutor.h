@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_CONDITIONAL_NODE_EXECUTOR_H
-#define BEHAVIOUR_CONDITIONAL_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_CONDITIONAL_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_CONDITIONAL_NODE_EXECUTOR_H
 
 
 #include "NodeExecutor.h"
@@ -7,9 +7,9 @@
 #include "../../Actor.h"
 
 
-namespace behaviour {
-class ConditionalNodeExecutor : public behaviour::NodeExecutor {
-    using super = behaviour::NodeExecutor;
+namespace ratchet { namespace behaviour {
+class ConditionalNodeExecutor : public ratchet::behaviour::NodeExecutor {
+    using super = ratchet::behaviour::NodeExecutor;
 protected:
     //! アクター
     std::weak_ptr<ratchet::Actor> _actor;
@@ -18,7 +18,7 @@ protected:
     /// </summary>
     /// <param name="args"></param>
     /// <returns></returns>
-    behaviour::INodeExecutor::Result ConditionalNodeExecute(std::any args) {
+    ratchet::behaviour::INodeExecutor::Result ConditionalNodeExecute(std::any args) {
         // 実行開始
         super::_state = super::State::Running;
         if (super::_node->Execute(args)) {
@@ -33,7 +33,7 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    ConditionalNodeExecutor(const behaviour::NodePtr& node) :
+    ConditionalNodeExecutor(const ratchet::behaviour::NodePtr& node) :
         super(node) {
     }
     /// <summary>
@@ -53,10 +53,11 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>Succeeded:実行の成功</returns>
     /// <returns>Failed:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
         auto temp = _actor.lock();
         return this->ConditionalNodeExecute(temp);
     }
 };
 }
-#endif // !BEHAVIOUR_CONDITIONAL_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_CONDITIONAL_NODE_EXECUTOR_H

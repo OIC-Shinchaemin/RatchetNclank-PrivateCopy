@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H
-#define BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H
+#ifndef RATCHET_BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H
+#define RATCHET_BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H
 
 
 #include "../DecoratorNode.h"
@@ -7,10 +7,10 @@
 #include "../../Executor/Decorator/NotRecognizingTargetNodeExecutor.h"
 
 
-namespace behaviour {
-class NotRecognizingTargetNode : public behaviour::DecoratorNodeBase {
-    using super = behaviour::DecoratorNodeBase;
-    using Executor = behaviour::NotRecognizingTargetNodeExecutor;
+namespace ratchet {  namespace behaviour {
+class NotRecognizingTargetNode : public ratchet::behaviour::DecoratorNodeBase {
+    using super = ratchet::behaviour::DecoratorNodeBase;
+    using Executor = ratchet::behaviour::NotRecognizingTargetNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,9 +27,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
-        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
-        auto temp = std::dynamic_pointer_cast<behaviour::SimplexNode>(ptr);
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<ratchet::behaviour::Node>(super::shared_from_this());
+        auto temp = std::dynamic_pointer_cast<ratchet::behaviour::SimplexNode>(ptr);
         return std::make_shared<Executor>(temp);
     }
     /// <summary>
@@ -46,4 +46,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_NOT_RECOGNIZING_TARGET_NODE_H

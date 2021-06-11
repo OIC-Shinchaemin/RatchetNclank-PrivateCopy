@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_SIMPLEX_NODE_EXECUTOR_H
-#define BEHAVIOUR_SIMPLEX_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_SIMPLEX_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_SIMPLEX_NODE_EXECUTOR_H
 
 
 #include "NodeExecutor.h"
@@ -7,15 +7,15 @@
 #include "../Node/SimplexNode.h"
 
 
-namespace behaviour {
-class SimplexNodeExecutor : public behaviour::NodeExecutor {
-    using super = behaviour::NodeExecutor;
+namespace ratchet { namespace behaviour {
+class SimplexNodeExecutor : public ratchet::behaviour::NodeExecutor {
+    using super = ratchet::behaviour::NodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    SimplexNodeExecutor(const behaviour::SimplexNodePtr& node) :
+    SimplexNodeExecutor(const ratchet::behaviour::SimplexNodePtr& node) :
         super(node) {
         auto& ptr = node->GetChild();
         auto add = ptr->CreateExecutor();
@@ -39,4 +39,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_SIMPLEX_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_SIMPLEX_NODE_EXECUTOR_H

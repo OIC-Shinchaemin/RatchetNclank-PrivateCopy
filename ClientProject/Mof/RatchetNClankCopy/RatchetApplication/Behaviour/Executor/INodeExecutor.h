@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_INODE_EXECUTOR_H
-#define BEHAVIOUR_INODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_INODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_INODE_EXECUTOR_H
 
 
 #include <any>
@@ -9,13 +9,13 @@
 #include <Mof.h>
 
 
-namespace behaviour {
+namespace ratchet { namespace behaviour {
 // 前方宣言
 class INodeExecutor;
 using NodeExecutorPtr = std::shared_ptr<INodeExecutor>;
 using NodeExecutorWeakPtr = std::weak_ptr<INodeExecutor>;
 using NodeExecutorList = std::list<NodeExecutorPtr>;
-class INodeExecutor : public std::enable_shared_from_this<behaviour::INodeExecutor> {
+class INodeExecutor : public std::enable_shared_from_this<ratchet::behaviour::INodeExecutor> {
 public:
     enum class State {
         Inactive, // 未実行
@@ -32,7 +32,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetParent(behaviour::NodeExecutorWeakPtr ptr) = 0;
+    virtual void SetParent(ratchet::behaviour::NodeExecutorWeakPtr ptr) = 0;
     /// <summary>
     /// 実行時必要なポインタをキャッシュ
     /// </summary>
@@ -61,4 +61,5 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !BEHAVIOUR_INODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_INODE_EXECUTOR_H

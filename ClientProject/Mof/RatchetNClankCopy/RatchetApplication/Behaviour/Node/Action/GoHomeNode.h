@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_GO_HOME_NODE_H
-#define BEHAVIOUR_GO_HOME_NODE_H
+#ifndef RATCHET_BEHAVIOUR_GO_HOME_NODE_H
+#define RATCHET_BEHAVIOUR_GO_HOME_NODE_H
 
 
 #include "../ActionNode.h"
@@ -8,10 +8,10 @@
 #include "../../../State/EnemyActionStateDefine.h"
 
 
-namespace behaviour {
-class GoHomeNode : public behaviour::ActionNodeBase {
-    using super = behaviour::ActionNodeBase;
-    using Executor = behaviour::GoHomeNodeExecutor;
+namespace ratchet {  namespace behaviour {
+class GoHomeNode : public ratchet::behaviour::ActionNodeBase {
+    using super = ratchet::behaviour::ActionNodeBase;
+    using Executor = ratchet::behaviour::GoHomeNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,8 +28,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
-        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<ratchet::behaviour::Node>(super::shared_from_this());
         return std::make_shared<Executor>(ptr);
     }
     /// <summary>
@@ -55,4 +55,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_GO_HOME_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_GO_HOME_NODE_H

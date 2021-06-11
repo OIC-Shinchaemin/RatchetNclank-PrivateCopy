@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_AWAY_FROM_HOME_NODE_H
-#define BEHAVIOUR_AWAY_FROM_HOME_NODE_H
+#ifndef RATCHET_BEHAVIOUR_AWAY_FROM_HOME_NODE_H
+#define RATCHET_BEHAVIOUR_AWAY_FROM_HOME_NODE_H
 
 
 #include "../ConditionalNode.h"
@@ -7,10 +7,10 @@
 #include "../../Executor/Condition/AwayFromHomeNodeExecutor.h"
 
 
-namespace behaviour {
-class AwayFromHomeNode : public behaviour::ConditionalNodeBase {
-    using super = behaviour::ConditionalNodeBase;
-    using Executor = behaviour::AwayFromHomeNodeExecutor;
+namespace ratchet {  namespace behaviour {
+class AwayFromHomeNode : public ratchet::behaviour::ConditionalNodeBase {
+    using super = ratchet::behaviour::ConditionalNodeBase;
+    using Executor = ratchet::behaviour::AwayFromHomeNodeExecutor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,9 +27,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const {
-        auto ptr = std::const_pointer_cast<behaviour::Node>(super::shared_from_this());
-        return std::make_shared<behaviour::AwayFromHomeNodeExecutor>(ptr);
+    virtual ratchet::behaviour::NodeExecutorPtr CreateExecutor(void) const {
+        auto ptr = std::const_pointer_cast<ratchet::behaviour::Node>(super::shared_from_this());
+        return std::make_shared<ratchet::behaviour::AwayFromHomeNodeExecutor>(ptr);
     }
     /// <summary>
     /// ノードの実行
@@ -45,4 +45,5 @@ public:
     }
 };
 }
-#endif // !BEHAVIOUR_AWAY_FROM_HOME_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_AWAY_FROM_HOME_NODE_H

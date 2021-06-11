@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_CHANGE_COMBAT_NODE_EXECUTOR_H
-#define BEHAVIOUR_CHANGE_COMBAT_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_CHANGE_COMBAT_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_CHANGE_COMBAT_NODE_EXECUTOR_H
 
 
 #include "../ActionNodeExecutor.h"
@@ -9,9 +9,10 @@
 #include "../../../Component/AIStateComponent.h"
 
 
+namespace ratchet {
 namespace behaviour {
-class ChangeCombatNodeExecutor : public behaviour::ActionNodeExecutor {
-    using super = behaviour::ActionNodeExecutor;
+class ChangeCombatNodeExecutor : public ratchet::behaviour::ActionNodeExecutor {
+    using super = ratchet::behaviour::ActionNodeExecutor;
 public:
     struct NodeArgs {
         //! アクター
@@ -21,13 +22,13 @@ public:
     };
 private:
     //! 実行引数
-    behaviour::ChangeCombatNodeExecutor::NodeArgs _node_args;
+    ratchet::behaviour::ChangeCombatNodeExecutor::NodeArgs _node_args;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    ChangeCombatNodeExecutor(const behaviour::NodePtr& node) :
+    ChangeCombatNodeExecutor(const ratchet::behaviour::NodePtr& node) :
         super(node),
         _node_args() {
     }
@@ -52,9 +53,10 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
         return super::ActionNodeExecute(_node_args);
     }
 };
 }
-#endif // !BEHAVIOUR_CHANGE_COMBAT_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_CHANGE_COMBAT_NODE_EXECUTOR_H

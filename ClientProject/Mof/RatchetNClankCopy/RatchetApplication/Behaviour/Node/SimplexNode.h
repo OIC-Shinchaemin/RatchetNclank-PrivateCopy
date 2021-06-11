@@ -1,16 +1,17 @@
-#ifndef BEHAVIOUR_SIMPLEX_NODE_H
-#define BEHAVIOUR_SIMPLEX_NODE_H
+#ifndef RATCHET_BEHAVIOUR_SIMPLEX_NODE_H
+#define RATCHET_BEHAVIOUR_SIMPLEX_NODE_H
 
 
 #include "ConditionalNode.h"
 
 
+namespace ratchet {
 namespace behaviour {
-class SimplexNode : public behaviour::ConditionalNodeBase {
-    using super = behaviour::ConditionalNodeBase;
+class SimplexNode : public ratchet::behaviour::ConditionalNodeBase {
+    using super = ratchet::behaviour::ConditionalNodeBase;
 protected:
     //! 子ノード
-    behaviour::NodePtr _child;
+    ratchet::behaviour::NodePtr _child;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,15 +28,15 @@ public:
     /// セッター
     /// </summary>
     /// <param name="node"></param>
-    void SetChild(const behaviour::NodePtr& action) { 
-        this->_child = action; 
+    void SetChild(const ratchet::behaviour::NodePtr& action) {
+        this->_child = action;
     }
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    behaviour::NodePtr& GetChild(void) { 
+    ratchet::behaviour::NodePtr& GetChild(void) {
         return this->_child;
     }
     /// <summary>
@@ -43,8 +44,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const behaviour::NodePtr& GetChild(void) const { return _child; }
+    const ratchet::behaviour::NodePtr& GetChild(void) const { return _child; }
 };
 using SimplexNodePtr = std::shared_ptr<SimplexNode>;
 }
-#endif // !BEHAVIOUR_SIMPLEX_NODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_SIMPLEX_NODE_H

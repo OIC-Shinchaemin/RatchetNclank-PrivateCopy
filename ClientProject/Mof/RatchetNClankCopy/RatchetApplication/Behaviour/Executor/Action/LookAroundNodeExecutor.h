@@ -1,5 +1,5 @@
-#ifndef BEHAVIOUR_LOOK_AROUND_NODE_EXECUTOR_H
-#define BEHAVIOUR_LOOK_AROUND_NODE_EXECUTOR_H
+#ifndef RATCHET_BEHAVIOUR_LOOK_AROUND_NODE_EXECUTOR_H
+#define RATCHET_BEHAVIOUR_LOOK_AROUND_NODE_EXECUTOR_H
 
 
 #include "../ActionNodeExecutor.h"
@@ -11,9 +11,10 @@
 #include "../../../Component/Enemy/EnemyStateComponent.h"
 
 
+namespace ratchet {
 namespace behaviour {
-class LookAroundNodeExecutor : public behaviour::ActionNodeExecutor {
-    using super = behaviour::ActionNodeExecutor;
+class LookAroundNodeExecutor : public ratchet::behaviour::ActionNodeExecutor {
+    using super = ratchet::behaviour::ActionNodeExecutor;
 public:
     struct NodeArgs {
         //! アクター
@@ -27,13 +28,13 @@ public:
     };
 private:
     //! 実行引数
-    behaviour::LookAroundNodeExecutor::NodeArgs _node_args;
+    ratchet::behaviour::LookAroundNodeExecutor::NodeArgs _node_args;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="node"></param>
-    LookAroundNodeExecutor(const behaviour::NodePtr& node) :
+    LookAroundNodeExecutor(const ratchet::behaviour::NodePtr& node) :
         super(node),
         _node_args() {
     }
@@ -60,9 +61,10 @@ public:
     /// <param name="actor">実行アクター</param>
     /// <returns>true:実行の成功</returns>
     /// <returns>false:実行の失敗</returns>
-    virtual behaviour::INodeExecutor::Result Execute(void) override {
+    virtual ratchet::behaviour::INodeExecutor::Result Execute(void) override {
         return super::ActionNodeExecute(_node_args);
     }
 };
 }
-#endif // !BEHAVIOUR_LOOK_AROUND_NODE_EXECUTOR_H
+}
+#endif // !RATCHET_BEHAVIOUR_LOOK_AROUND_NODE_EXECUTOR_H

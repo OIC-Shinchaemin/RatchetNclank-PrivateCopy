@@ -1,16 +1,16 @@
-#ifndef BEHAVIOUR_COMPOSITENODE_H
-#define BEHAVIOUR_COMPOSITENODE_H
+#ifndef RATCHET_BEHAVIOUR_COMPOSITENODE_H
+#define RATCHET_BEHAVIOUR_COMPOSITENODE_H
 
 
 #include "Node.h"
 
 
-namespace behaviour {
-class CompositeNode : public behaviour::Node {
-    using super = behaviour::Node;
+namespace ratchet {  namespace behaviour {
+class CompositeNode : public ratchet::behaviour::Node {
+    using super = ratchet::behaviour::Node;
 protected:
     //! 子ノード
-    behaviour::NodeList _children;
+    ratchet::behaviour::NodeList _children;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,7 +29,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const behaviour::NodeList& GetChildren(void) const { 
+    const ratchet::behaviour::NodeList& GetChildren(void) const { 
         return this->_children;
     }
     /// <summary>
@@ -37,17 +37,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    behaviour::NodeList& GetChildren(void) { 
+    ratchet::behaviour::NodeList& GetChildren(void) { 
         return this->_children; 
     }
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="node"></param>
-    void AddChild(const behaviour::NodePtr& node) { 
+    void AddChild(const ratchet::behaviour::NodePtr& node) { 
         _children.push_back(node); 
     }
 };
-using CompositeNodePtr = std::shared_ptr<behaviour::CompositeNode>;
+using CompositeNodePtr = std::shared_ptr<ratchet::behaviour::CompositeNode>;
 }
-#endif // !BEHAVIOUR_COMPOSITENODE_H
+}
+#endif // !RATCHET_BEHAVIOUR_COMPOSITENODE_H

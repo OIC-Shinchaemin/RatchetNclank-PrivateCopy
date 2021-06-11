@@ -32,34 +32,34 @@ ratchet::BehaviourFactory::BehaviourFactory() :
     _action_factory(),
     _condition_factory(),
     _decorator_factory() {
-    _composite_factory.Register<behaviour::SequencerNode>("SequencerNode");
-    _composite_factory.Register<behaviour::SelectorNode>("SelectorNode");
+    _composite_factory.Register<ratchet::behaviour::SequencerNode>("SequencerNode");
+    _composite_factory.Register<ratchet::behaviour::SelectorNode>("SelectorNode");
     
-    _action_factory.Register<behaviour::AlwaysTrueNode>("AlwaysTrueNode");
-    _action_factory.Register<behaviour::AlwaysFalseNode>("AlwaysFalseNode");
-    _action_factory.Register<behaviour::GoHomeNode>("GoHomeNode");
-    _action_factory.Register<behaviour::LookAroundNode>("LookAroundNode");
-    _action_factory.Register<behaviour::MoveToEnemyNode>("MoveToEnemyNode");
-    _action_factory.Register<behaviour::MeleeAttackNode>("MeleeAttackNode");
-    _action_factory.Register<behaviour::RangedAttackNode>("RangedAttackNode");
-    _action_factory.Register<behaviour::ChangePatrolNode>("ChangePatrolNode");
-    _action_factory.Register<behaviour::ChangeCombatNode>("ChangeCombatNode");
+    _action_factory.Register<ratchet::behaviour::AlwaysTrueNode>("AlwaysTrueNode");
+    _action_factory.Register<ratchet::behaviour::AlwaysFalseNode>("AlwaysFalseNode");
+    _action_factory.Register<ratchet::behaviour::GoHomeNode>("GoHomeNode");
+    _action_factory.Register<ratchet::behaviour::LookAroundNode>("LookAroundNode");
+    _action_factory.Register<ratchet::behaviour::MoveToEnemyNode>("MoveToEnemyNode");
+    _action_factory.Register<ratchet::behaviour::MeleeAttackNode>("MeleeAttackNode");
+    _action_factory.Register<ratchet::behaviour::RangedAttackNode>("RangedAttackNode");
+    _action_factory.Register<ratchet::behaviour::ChangePatrolNode>("ChangePatrolNode");
+    _action_factory.Register<ratchet::behaviour::ChangeCombatNode>("ChangeCombatNode");
 
-    _condition_factory.Register<behaviour::AwayFromHomeNode>("AwayFromHomeNode");
-    _condition_factory.Register<behaviour::NotAwayFromHomeNode>("NotAwayFromHomeNode");
-    _condition_factory.Register<behaviour::TargetRecognitionNode>("TargetRecognitionNode");
-    _condition_factory.Register<behaviour::NotTargetRecognitionNode>("NotTargetRecognitionNode");
+    _condition_factory.Register<ratchet::behaviour::AwayFromHomeNode>("AwayFromHomeNode");
+    _condition_factory.Register<ratchet::behaviour::NotAwayFromHomeNode>("NotAwayFromHomeNode");
+    _condition_factory.Register<ratchet::behaviour::TargetRecognitionNode>("TargetRecognitionNode");
+    _condition_factory.Register<ratchet::behaviour::NotTargetRecognitionNode>("NotTargetRecognitionNode");
     
-    _decorator_factory.Register<behaviour::TargetInMeleeAttackRangeNode>("TargetInMeleeAttackRangeNode");
-    _decorator_factory.Register<behaviour::IfTargetOutMeleeAttackRangeNode>("IfTargetOutMeleeAttackRangeNode");
-    _decorator_factory.Register<behaviour::TargetInRangedAttackRangeNode>("TargetInRangedAttackRangeNode");
-    _decorator_factory.Register<behaviour::RecognizingTargetNode>("RecognizingTargetNode");
-    _decorator_factory.Register<behaviour::NotRecognizingTargetNode>("NotRecognizingTargetNode");
-    _decorator_factory.Register<behaviour::IfAwayFromHomeNode>("IfAwayFromHomeNode");
-    _decorator_factory.Register<behaviour::IfCloseFromHomeNode>("IfCloseFromHomeNode");
+    _decorator_factory.Register<ratchet::behaviour::TargetInMeleeAttackRangeNode>("TargetInMeleeAttackRangeNode");
+    _decorator_factory.Register<ratchet::behaviour::IfTargetOutMeleeAttackRangeNode>("IfTargetOutMeleeAttackRangeNode");
+    _decorator_factory.Register<ratchet::behaviour::TargetInRangedAttackRangeNode>("TargetInRangedAttackRangeNode");
+    _decorator_factory.Register<ratchet::behaviour::RecognizingTargetNode>("RecognizingTargetNode");
+    _decorator_factory.Register<ratchet::behaviour::NotRecognizingTargetNode>("NotRecognizingTargetNode");
+    _decorator_factory.Register<ratchet::behaviour::IfAwayFromHomeNode>("IfAwayFromHomeNode");
+    _decorator_factory.Register<ratchet::behaviour::IfCloseFromHomeNode>("IfCloseFromHomeNode");
 }
 
-behaviour::CompositeNodePtr ratchet::BehaviourFactory::CreateRootNode(const char* path) {
+ratchet::behaviour::CompositeNodePtr ratchet::BehaviourFactory::CreateRootNode(const char* path) {
     rapidjson::Document document;
     if (!ut::ParseJsonDocument(path, document)) {
         return nullptr;
@@ -75,7 +75,7 @@ behaviour::CompositeNodePtr ratchet::BehaviourFactory::CreateRootNode(const char
     return this->CreateCompositeNode(behaviours, root_index);
 }
 
-std::shared_ptr<behaviour::CompositeNode> ratchet::BehaviourFactory::CreateCompositeNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::CompositeNode> ratchet::BehaviourFactory::CreateCompositeNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     auto composite_node = _composite_factory.Create(derived);
 
@@ -102,17 +102,17 @@ std::shared_ptr<behaviour::CompositeNode> ratchet::BehaviourFactory::CreateCompo
     return composite_node;
 }
 
-std::shared_ptr<behaviour::ActionNodeBase> ratchet::BehaviourFactory::CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::ActionNodeBase> ratchet::BehaviourFactory::CreateActionNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     return _action_factory.Create(derived);
 }
 
-std::shared_ptr<behaviour::ConditionalNodeBase> ratchet::BehaviourFactory::CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::ConditionalNodeBase> ratchet::BehaviourFactory::CreateConditionalNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     return _condition_factory.Create(derived);
 }
 
-std::shared_ptr<behaviour::DecoratorNodeBase> ratchet::BehaviourFactory::CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index) {
+std::shared_ptr<ratchet::behaviour::DecoratorNodeBase> ratchet::BehaviourFactory::CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index) {
     auto derived = behaviours[index]["derived"].GetString();
     auto decorator_node = _decorator_factory.Create(derived);
 
