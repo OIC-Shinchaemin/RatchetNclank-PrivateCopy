@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_COMPONENT_H
-#define RACHET_PLAYER_COMPONENT_H
+#ifndef RATCHET_PLAYER_COMPONENT_H
+#define RATCHET_PLAYER_COMPONENT_H
 
 
 #include "../CharacterComponent.h"
@@ -9,12 +9,12 @@
 #include "Base/Core/Observable.h"
 
 
-namespace rachet {
-class PlayerComponent : public rachet::CharacterComponent {
-    using super = rachet::CharacterComponent;
+namespace ratchet {
+class PlayerComponent : public ratchet::CharacterComponent {
+    using super = ratchet::CharacterComponent;
 private:
     //! 標的
-    std::weak_ptr<rachet::Actor> _target;
+    std::weak_ptr<ratchet::Actor> _target;
     //! カーソル位置
     base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
@@ -42,7 +42,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<rachet::Actor>& ptr);
+    void SetTarget(const std::shared_ptr<ratchet::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -59,7 +59,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<rachet::Actor> GetTarget(void) const;
+    std::weak_ptr<ratchet::Actor> GetTarget(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -107,7 +107,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_PLAYER_COMPONENT_H
+#endif // !RATCHET_PLAYER_COMPONENT_H

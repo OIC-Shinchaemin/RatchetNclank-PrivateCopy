@@ -1,26 +1,26 @@
 #include "TerrainBuilder.h"
 
 
-rachet::TerrainBuilder::TerrainBuilder() :
+ratchet::TerrainBuilder::TerrainBuilder() :
     super(),
     _resource() {
 }
 
-rachet::TerrainBuilder::~TerrainBuilder() {
+ratchet::TerrainBuilder::~TerrainBuilder() {
 }
 
-void rachet::TerrainBuilder::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::TerrainBuilder::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void rachet::TerrainBuilder::Release(void) {
+void ratchet::TerrainBuilder::Release(void) {
     super::Release();
     _resource.reset();
 }
 
-void rachet::TerrainBuilder::Construct(std::any shared_this) {
+void ratchet::TerrainBuilder::Construct(std::any shared_this) {
     super::Construct(shared_this);
-    auto temp = std::any_cast<std::shared_ptr<rachet::Actor>>(shared_this);
-    auto ptr = std::dynamic_pointer_cast<rachet::Terrain>(temp);
+    auto temp = std::any_cast<std::shared_ptr<ratchet::Actor>>(shared_this);
+    auto ptr = std::dynamic_pointer_cast<ratchet::Terrain>(temp);
     ptr->SetResourceManager(_resource);
 }

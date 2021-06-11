@@ -1,5 +1,5 @@
-#ifndef RACHET_NANOTECH_ITEM_H
-#define RACHET_NANOTECH_ITEM_H
+#ifndef RATCHET_NANOTECH_ITEM_H
+#define RATCHET_NANOTECH_ITEM_H
 
 
 #include "../../Actor.h"
@@ -7,9 +7,9 @@
 #include "Base/Core/Observable.h"
 
 
-namespace rachet {
-class NanotechItem : public rachet::Actor {
-    using super = rachet::Actor;
+namespace ratchet {
+class NanotechItem : public ratchet::Actor {
+    using super = ratchet::Actor;
 public:
     struct Param : public super::Param {
         //! à⁄ìÆ
@@ -49,7 +49,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(rachet::Actor::Param* param) override;
+    virtual bool Initialize(ratchet::Actor::Param* param) override;
     /// <summary>
     /// çXêV
     /// </summary>
@@ -58,4 +58,4 @@ public:
     //virtual bool Update(float delta_time) override;
 };
 }
-#endif // !RACHET_NANOTECH_ITEM_H
+#endif // !RATCHET_NANOTECH_ITEM_H

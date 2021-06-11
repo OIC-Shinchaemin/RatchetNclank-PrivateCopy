@@ -1,5 +1,5 @@
-#ifndef RACHET_TITLE_SCENE_H
-#define RACHET_TITLE_SCENE_H
+#ifndef RATCHET_TITLE_SCENE_H
+#define RATCHET_TITLE_SCENE_H
 
 
 #include "Scene.h"
@@ -18,27 +18,27 @@
 #include "../UI/TitleInfoMenu.h"
 
 
-namespace rachet {
-class TitleScene : public rachet::Scene,
-    public base::core::Observer<const rachet::OptionSystem::Info&> {
-    using super = rachet::Scene;
+namespace ratchet {
+class TitleScene : public ratchet::Scene,
+    public base::core::Observer<const ratchet::OptionSystem::Info&> {
+    using super = ratchet::Scene;
 private:
     //! ステージ
     Stage _stage;
     //! カメラ
-    std::shared_ptr<rachet::Camera> _stage_view_camera;
+    std::shared_ptr<ratchet::Camera> _stage_view_camera;
     //! カメラコントローラ
-    base::core::ServiceLocator<rachet::CameraController> _camera_controller;
+    base::core::ServiceLocator<ratchet::CameraController> _camera_controller;
     //! 表示用
-    std::shared_ptr<rachet::Player> _demo_actor;
+    std::shared_ptr<ratchet::Player> _demo_actor;
     //! 通知用
     base::core::Observable<bool> _option_system_subject;
     //! 通知用
     base::core::Observable<bool> _title_menu_subject;
     //! ゲーム
-    std::weak_ptr<rachet::GameManager> _game;
+    std::weak_ptr<ratchet::GameManager> _game;
     //! UI地蔵
-    rachet::UICreator<rachet::TitleInfoMenu> _ui_creator;
+    ratchet::UICreator<ratchet::TitleInfoMenu> _ui_creator;
 protected:
     /// <summary>
     /// 更新
@@ -78,17 +78,17 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<rachet::Actor>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) override;
     /// <summary>
     /// 通知イベント
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const rachet::OptionSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::OptionSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<rachet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -100,7 +100,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Load(std::shared_ptr<rachet::Scene::Param>  param) override;
+    virtual bool Load(std::shared_ptr<ratchet::Scene::Param>  param) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -115,4 +115,4 @@ public:
     virtual bool Release(void);
 };
 }
-#endif // !RACHET_TITLE_SCENE_H
+#endif // !RATCHET_TITLE_SCENE_H

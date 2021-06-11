@@ -1,5 +1,5 @@
-#ifndef RACHET_SCENE_MANAGER_H
-#define RACHET_SCENE_MANAGER_H
+#ifndef RATCHET_SCENE_MANAGER_H
+#define RATCHET_SCENE_MANAGER_H
 
 
 #include <memory>
@@ -19,36 +19,36 @@
 #include "../Factory/Builder/Scene/GameSceneBuilder.h"
 
 
-namespace rachet {
-class SceneManager : public std::enable_shared_from_this<rachet::SceneManager>, public base::core::Observer<const scene::SceneMessage&> {
-    using this_type = rachet::SceneManager;
+namespace ratchet {
+class SceneManager : public std::enable_shared_from_this<ratchet::SceneManager>, public base::core::Observer<const scene::SceneMessage&> {
+    using this_type = ratchet::SceneManager;
     struct ChangeMessage {
         std::string name;
-        std::shared_ptr<rachet::Scene::Param> param;
+        std::shared_ptr<ratchet::Scene::Param> param;
     };
     struct Managers {
         //! リソース
-        std::weak_ptr<rachet::ResourceMgr> resource;
+        std::weak_ptr<ratchet::ResourceMgr> resource;
         //! UI
         std::weak_ptr<base::ui::UICanvas> ui_canvas;
         //! ゲーム
-        std::weak_ptr<rachet::GameManager> game_manager;
+        std::weak_ptr<ratchet::GameManager> game_manager;
         //! ゲームイベント
-        std::weak_ptr<rachet::EventManager> event_manager;
+        std::weak_ptr<ratchet::EventManager> event_manager;
     };
     struct CreateStruct {
         //! ファクトリー
-        rachet::Factory<rachet::Scene> factory;
+        ratchet::Factory<ratchet::Scene> factory;
         //! ビルダー
-        std::unordered_map<std::string, std::shared_ptr<rachet::IBuilder>> builders;
+        std::unordered_map<std::string, std::shared_ptr<ratchet::IBuilder>> builders;
         //! タイプ,パス
         std::unordered_map<std::string, std::string> reousrce_paths;
     };
 private:
     //! 現在
-    std::shared_ptr<rachet::Scene> _scene;
+    std::shared_ptr<ratchet::Scene> _scene;
     //! 前
-    std::shared_ptr<rachet::Scene> _prev_scene;
+    std::shared_ptr<ratchet::Scene> _prev_scene;
     //! メッセージ
     std::optional<ChangeMessage> _change_message;
     //! 管理オブジェクト
@@ -90,7 +90,7 @@ private:
     /// </summary>
     /// <param name="name"></param>
     /// <param name="param"></param>
-    void ChangeScene(const std::string& name, std::shared_ptr<rachet::Scene::Param> param);
+    void ChangeScene(const std::string& name, std::shared_ptr<ratchet::Scene::Param> param);
     void RenderScene(void);
 public:
     /// <summary>
@@ -110,7 +110,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(const std::shared_ptr<rachet::ResourceMgr>& ptr);
+    void SetResourceManager(const std::shared_ptr<ratchet::ResourceMgr>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -120,12 +120,12 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<rachet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetEventManager(std::weak_ptr<rachet::EventManager> ptr);
+    void SetEventManager(std::weak_ptr<ratchet::EventManager> ptr);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -158,4 +158,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !RACHET_SCENE_MANAGER_H
+#endif // !RATCHET_SCENE_MANAGER_H

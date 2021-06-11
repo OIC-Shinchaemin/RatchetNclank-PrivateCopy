@@ -3,20 +3,20 @@
 #include "../Gamepad.h"
 
 
-bool rachet::ClearScene::SceneUpdate(float delta_time) {
+bool ratchet::ClearScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _subject.Notify(scene::SceneMessage(rachet::SceneType::kTitleScene, ""));
+        _subject.Notify(scene::SceneMessage(ratchet::SceneType::kTitleScene, ""));
     } // if
     return true;
 }
 
-bool rachet::ClearScene::LoadingUpdate(float delta_time) {
+bool ratchet::ClearScene::LoadingUpdate(float delta_time) {
     return false;
 }
 
-bool rachet::ClearScene::SceneRender(void) {
+bool ratchet::ClearScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
 
@@ -31,20 +31,20 @@ bool rachet::ClearScene::SceneRender(void) {
     return true;
 }
 
-rachet::ClearScene::ClearScene() {
+ratchet::ClearScene::ClearScene() {
 }
 
-rachet::ClearScene::~ClearScene() {
+ratchet::ClearScene::~ClearScene() {
 }
 
-void rachet::ClearScene::OnNotify(const char* type, const std::shared_ptr<rachet::Actor>& ptr) {
+void ratchet::ClearScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
 }
 
-std::string rachet::ClearScene::GetName(void) {
-    return rachet::SceneType::kClearScene;
+std::string ratchet::ClearScene::GetName(void) {
+    return ratchet::SceneType::kClearScene;
 }
 
-bool rachet::ClearScene::Load(std::shared_ptr<rachet::Scene::Param> param) {
+bool ratchet::ClearScene::Load(std::shared_ptr<ratchet::Scene::Param> param) {
     auto re = super::Load(param);
 
     super::LoadComplete();

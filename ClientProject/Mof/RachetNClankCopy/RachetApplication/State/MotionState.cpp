@@ -9,8 +9,8 @@ state::MotionState::MotionState() :
 state::MotionState::~MotionState() {
 }
 
-void state::MotionState::SetActor(const std::shared_ptr<rachet::Actor>& ptr) {
-    _motion_com = ptr->GetComponent<rachet::MotionComponent>();
+void state::MotionState::SetActor(const std::shared_ptr<ratchet::Actor>& ptr) {
+    _motion_com = ptr->GetComponent<ratchet::MotionComponent>();
 }
 
 void state::MotionState::SetParam(const state::MotionState::Param& param) {

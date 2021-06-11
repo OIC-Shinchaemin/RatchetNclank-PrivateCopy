@@ -29,32 +29,32 @@
 #include "../Component/Collision/Object/CollisionComponentDefine.h"
 
 
-void rachet::PhysicsWorld::GenerateLayer(void) {
+void ratchet::PhysicsWorld::GenerateLayer(void) {
     const char* types[] = {
-      rachet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kEnemyBombGloveEffectCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm.c_str(),
-      rachet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyBombGloveEffectCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm.c_str(),
     };
 
 
@@ -65,43 +65,43 @@ void rachet::PhysicsWorld::GenerateLayer(void) {
     } // for
 }
 
-rachet::PhysicsWorld::PhysicsWorld() :
+ratchet::PhysicsWorld::PhysicsWorld() :
     _layers() {
-    collision_algolithm_factory.Register<rachet::PlayerEnemyCollisionAlgolithm>(rachet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::PlayerEnemyMeleeAttackCollisionAlgolithm>(rachet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::PlayerEnemyBulletCollisionAlgolithm>(rachet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::PlayerShipCollisionAlgolithm>(rachet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::PlayerWaterFlowCollisionAlgolithm>(rachet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::PlayerNanotechItemCollisionAlgolithm>(rachet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyEnemyCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyPlayerCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyOmniWrenchCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::SightPlayerCollisionAlgolithm>(rachet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::SightEnemyCollisionAlgolithm>(rachet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyMeleeAttackPlayerCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyOmniWrenchCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyBombGloveBulletCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyPyrocitorBulletCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyBlasterBulletCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::EnemyBombGloveEffectCollisionAlgolithm>(rachet::CollisionAlgolithmType::kEnemyBombGloveEffectCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::BlasterBulletEnemyCollisionAlgolithm>(rachet::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::BombGloveBulletEnemyCollisionAlgolithm>(rachet::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::ShipPlayerCollisionAlgolithm>(rachet::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::BoltPlayerCollisionAlgolithm>(rachet::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::BulletItemPlayerCollisionAlgolithm>(rachet::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::NanotechItemPlayerCollisionAlgolithm>(rachet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<rachet::PlayerShopCollisionAlgolithm>(rachet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerEnemyBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerShipCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerWaterFlowCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerNanotechItemCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyOmniWrenchCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::SightPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::SightEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyMeleeAttackPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyOmniWrenchCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyBombGloveBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyPyrocitorBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyBlasterBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyBombGloveEffectCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyBombGloveEffectCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::BlasterBulletEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::BombGloveBulletEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::ShipPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::BoltPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::BulletItemPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::NanotechItemPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerShopCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm);
 
     this->GenerateLayer();
 }
 
-rachet::PhysicsWorld::~PhysicsWorld() {
+ratchet::PhysicsWorld::~PhysicsWorld() {
     _layers.clear();
 }
 
-void rachet::PhysicsWorld::AddActor(const ActorPtr& actor) {
-    std::vector<std::weak_ptr<rachet::CollisionComponent>> work;
-    actor->GetComponents<rachet::CollisionComponent>(work);
+void ratchet::PhysicsWorld::AddActor(const ActorPtr& actor) {
+    std::vector<std::weak_ptr<ratchet::CollisionComponent>> work;
+    actor->GetComponents<ratchet::CollisionComponent>(work);
 
     for (auto& ptr : work) {
         auto type = ptr.lock()->GetType();
@@ -120,9 +120,9 @@ void rachet::PhysicsWorld::AddActor(const ActorPtr& actor) {
     } // for
 }
 
-void rachet::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
-    std::vector<std::weak_ptr<rachet::CollisionComponent>> work;
-    actor->GetComponents<rachet::CollisionComponent>(work);
+void ratchet::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
+    std::vector<std::weak_ptr<ratchet::CollisionComponent>> work;
+    actor->GetComponents<ratchet::CollisionComponent>(work);
 
     for (auto& ptr : work) {
         for (auto& layer : _layers) {
@@ -135,7 +135,7 @@ void rachet::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
     } // for
 }
 
-bool rachet::PhysicsWorld::Update(void) {
+bool ratchet::PhysicsWorld::Update(void) {
     for (auto& layer : _layers) {
         for (auto& object : layer.objects) {
             if (!object->IsActive()) {
@@ -156,7 +156,7 @@ bool rachet::PhysicsWorld::Update(void) {
                 if (object == target) {
                     continue;
                 } // if
-                auto info = rachet::CollisionInfo();
+                auto info = ratchet::CollisionInfo();
                 if (!layer.algo->IsCollision(object, target, info)) {
                     // Õ“ËI—¹
                     if (object->ExistCollisionedObject(target)) {
@@ -180,7 +180,7 @@ bool rachet::PhysicsWorld::Update(void) {
     return true;
 }
 
-void rachet::PhysicsWorld::CollisionStage(Stage* stage) {
+void ratchet::PhysicsWorld::CollisionStage(Stage* stage) {
     auto meshes = stage->GetMeshArray();
 
     auto objs = stage->GetStaticObjectArray();
@@ -211,7 +211,7 @@ void rachet::PhysicsWorld::CollisionStage(Stage* stage) {
     } // for
 }
 
-void rachet::PhysicsWorld::Reset(void) {
+void ratchet::PhysicsWorld::Reset(void) {
     _layers.clear();
     _list_for_stage.clear();
     this->GenerateLayer();

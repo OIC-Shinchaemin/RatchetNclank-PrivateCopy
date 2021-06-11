@@ -1,5 +1,5 @@
-#ifndef RACHET_EQUIPMENT_WEAPON_MENU_H
-#define RACHET_EQUIPMENT_WEAPON_MENU_H
+#ifndef RATCHET_EQUIPMENT_WEAPON_MENU_H
+#define RATCHET_EQUIPMENT_WEAPON_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -15,16 +15,16 @@
 #include "../Actor/Weapon/Mechanical.h"
 
 
-namespace rachet {
-class EquipmentWeaponMenu : public base::ui::UIPanel, public base::core::Observer<const rachet::Mechanical::Info&> {
+namespace ratchet {
+class EquipmentWeaponMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::Mechanical::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 情報
-    rachet::Mechanical::Info _info;
+    ratchet::Mechanical::Info _info;
     //! パス
     std::unordered_map<std::string, std::string> _tex_names;
     //! リソース
-    std::weak_ptr<rachet::ResourceMgr> _resource;
+    std::weak_ptr<ratchet::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,12 +35,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const rachet::Mechanical::Info& info) override;
+    virtual void OnNotify(const ratchet::Mechanical::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
     /// 描画
     /// </summary>
@@ -49,4 +49,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RACHET_EQUIPMENT_WEAPON_MENU_H
+#endif // !RATCHET_EQUIPMENT_WEAPON_MENU_H

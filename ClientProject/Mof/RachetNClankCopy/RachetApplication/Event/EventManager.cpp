@@ -1,14 +1,14 @@
 #include "EventManager.h"
 
 
-rachet::EventManager::EventManager() :
+ratchet::EventManager::EventManager() :
     _events() {
 }
 
-rachet::EventManager::~EventManager() {
+ratchet::EventManager::~EventManager() {
 }
 
-void rachet::EventManager::OnNotify(const char* type, const std::shared_ptr<rachet::Event>& ptr) {
+void ratchet::EventManager::OnNotify(const char* type, const std::shared_ptr<ratchet::Event>& ptr) {
     if (type == "AddRequest") {
     } // if
     else if (type == "DeleteRequest") {
@@ -17,19 +17,19 @@ void rachet::EventManager::OnNotify(const char* type, const std::shared_ptr<rach
     } // else if
 }
 
-bool rachet::EventManager::InitializeGameEvent(void) {
+bool ratchet::EventManager::InitializeGameEvent(void) {
     _events.clear();
     return true;
 }
 
-bool rachet::EventManager::Update(float delta_time) {
+bool ratchet::EventManager::Update(float delta_time) {
     for (auto& e : _events) {
         e->Update(delta_time);
     } // for
     return true;
 }
 
-bool rachet::EventManager::Release(void) {
+bool ratchet::EventManager::Release(void) {
     _events.clear();
     return true;
 }

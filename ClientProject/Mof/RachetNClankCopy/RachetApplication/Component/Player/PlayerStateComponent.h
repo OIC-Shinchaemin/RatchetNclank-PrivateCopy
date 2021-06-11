@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_STATE_COMPONENT_H
-#define RACHET_PLAYER_STATE_COMPONENT_H
+#ifndef RATCHET_PLAYER_STATE_COMPONENT_H
+#define RATCHET_PLAYER_STATE_COMPONENT_H
 
 
 #include "../ActionStateComponent.h"
@@ -7,9 +7,9 @@
 #include "../../State/PlayerActionStateDefine.h"
 
 
-namespace rachet {
-class PlayerStateComponent : public rachet::ActionStateComponent {
-    using super = rachet::ActionStateComponent;
+namespace ratchet {
+class PlayerStateComponent : public ratchet::ActionStateComponent {
+    using super = ratchet::ActionStateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -42,7 +42,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 判定
     /// </summary>
@@ -54,4 +54,4 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RACHET_PLAYER_STATE_COMPONENT_H
+#endif // !RATCHET_PLAYER_STATE_COMPONENT_H

@@ -1,44 +1,44 @@
 #include "PlayerMeleeAttackOneEndComponent.h"
 
 
-rachet::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(int priority) :
+ratchet::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(int priority) :
     super(priority) {
 }
 
-rachet::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(const PlayerMeleeAttackOneEndComponent& obj) :
+ratchet::PlayerMeleeAttackOneEndComponent::PlayerMeleeAttackOneEndComponent(const PlayerMeleeAttackOneEndComponent& obj) :
     super(obj) {
 }
 
-rachet::PlayerMeleeAttackOneEndComponent::~PlayerMeleeAttackOneEndComponent() {
+ratchet::PlayerMeleeAttackOneEndComponent::~PlayerMeleeAttackOneEndComponent() {
 }
 
-std::string rachet::PlayerMeleeAttackOneEndComponent::GetType(void) const {
+std::string ratchet::PlayerMeleeAttackOneEndComponent::GetType(void) const {
     return "PlayerMeleeAttackOneEndComponent";
 }
 
-std::string_view rachet::PlayerMeleeAttackOneEndComponent::GetStateType(void) const {
+std::string_view ratchet::PlayerMeleeAttackOneEndComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionMeleeAttackOneEndState;
 }
 
-bool rachet::PlayerMeleeAttackOneEndComponent::Input(void) {
+bool ratchet::PlayerMeleeAttackOneEndComponent::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackTwoState);
     } // if
     return true;
 }
 
-bool rachet::PlayerMeleeAttackOneEndComponent::Update(float delta_time) {
+bool ratchet::PlayerMeleeAttackOneEndComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerMeleeAttackOneEndComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerMeleeAttackOneEndComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerMeleeAttackOneEndComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerMeleeAttackOneEndComponent>(*this);
 }
 
-bool rachet::PlayerMeleeAttackOneEndComponent::Start(void) {
+bool ratchet::PlayerMeleeAttackOneEndComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

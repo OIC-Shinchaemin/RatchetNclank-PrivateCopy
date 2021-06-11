@@ -8,25 +8,25 @@
 */
 
 
-rachet::BuilderFactory::BuilderFactory(rachet::ComponentFactory* component_factory) :
+ratchet::BuilderFactory::BuilderFactory(ratchet::ComponentFactory* component_factory) :
     _builders(),
     _component_factory(component_factory),
     _resource() {
 }
 
-rachet::BuilderFactory::~BuilderFactory() {
+ratchet::BuilderFactory::~BuilderFactory() {
     this->Release();
 }
 
-void rachet::BuilderFactory::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::BuilderFactory::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void rachet::BuilderFactory::Release(void) {
+void ratchet::BuilderFactory::Release(void) {
     _component_factory = nullptr;
 }
 
-std::shared_ptr<rachet::IBuilder> rachet::BuilderFactory::Create(const char* path) const {
+std::shared_ptr<ratchet::IBuilder> ratchet::BuilderFactory::Create(const char* path) const {
     // actor builder のみ
 
     // builderフォルダのファイル構成をきれいにする
@@ -39,18 +39,18 @@ std::shared_ptr<rachet::IBuilder> rachet::BuilderFactory::Create(const char* pat
         return nullptr;
     } // if
 
-    std::shared_ptr<rachet::ActorBuilder>  builder;
+    std::shared_ptr<ratchet::ActorBuilder>  builder;
     if (document.HasMember("type")) {
         std::string type = document["type"].GetString();
         if (type == "Terrain") {
-            return this->CreateBuilder<rachet::TerrainBuilder>(path);
+            return this->CreateBuilder<ratchet::TerrainBuilder>(path);
         } // if
         else if (type == "OmniWrench") {
-            return this->CreateBuilder<rachet::OmniWrenchBuilder>(path);
+            return this->CreateBuilder<ratchet::OmniWrenchBuilder>(path);
         } // else if
     } // if
     else {
-        return this->CreateBuilder<rachet::ActorBuilder>(path);
+        return this->CreateBuilder<ratchet::ActorBuilder>(path);
     } // else
     return builder;
 }

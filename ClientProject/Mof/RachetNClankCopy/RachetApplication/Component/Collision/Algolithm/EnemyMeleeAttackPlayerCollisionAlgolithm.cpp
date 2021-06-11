@@ -4,22 +4,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-rachet::EnemyMeleeAttackPlayerCollisionAlgolithm::EnemyMeleeAttackPlayerCollisionAlgolithm() :
+ratchet::EnemyMeleeAttackPlayerCollisionAlgolithm::EnemyMeleeAttackPlayerCollisionAlgolithm() :
     super() {
 }
 
-rachet::EnemyMeleeAttackPlayerCollisionAlgolithm::~EnemyMeleeAttackPlayerCollisionAlgolithm() {
+ratchet::EnemyMeleeAttackPlayerCollisionAlgolithm::~EnemyMeleeAttackPlayerCollisionAlgolithm() {
 }
 
-const char* rachet::EnemyMeleeAttackPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return rachet::CollisionComponentType::kEnemyMeleeAttackCollisionComponent.c_str();
+const char* ratchet::EnemyMeleeAttackPlayerCollisionAlgolithm::GetLayerType(void) const {
+    return ratchet::CollisionComponentType::kEnemyMeleeAttackCollisionComponent.c_str();
 }
 
-const char* rachet::EnemyMeleeAttackPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return rachet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+const char* ratchet::EnemyMeleeAttackPlayerCollisionAlgolithm::GetTargetType(void) const {
+    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-bool rachet::EnemyMeleeAttackPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
+bool ratchet::EnemyMeleeAttackPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

@@ -1,5 +1,5 @@
-#ifndef RACHET_SAVE_SYSTEM_H
-#define RACHET_SAVE_SYSTEM_H
+#ifndef RATCHET_SAVE_SYSTEM_H
+#define RATCHET_SAVE_SYSTEM_H
 
 
 #include <string>
@@ -7,7 +7,7 @@
 #include "SaveData.h"
 
 
-namespace rachet {
+namespace ratchet {
 class SaveSystem {
 private:
     std::string _path;
@@ -25,13 +25,13 @@ public:
     /// </summary>
     /// <param name="out"></param>
     /// <returns></returns>
-    bool Fetch(rachet::SaveData& out);
+    bool Fetch(ratchet::SaveData& out);
     /// <summary>
     /// èëÇ´çûÇ›
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    bool Save(const rachet::SaveDataParam& param);
+    bool Save(const ratchet::SaveDataParam& param);
 };
 }
-#endif // !RACHET_SAVE_SYSTEM_H
+#endif // !RATCHET_SAVE_SYSTEM_H

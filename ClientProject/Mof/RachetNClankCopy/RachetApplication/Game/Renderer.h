@@ -1,5 +1,5 @@
-#ifndef RACHET_RENDERER_H
-#define RACHET_RENDERER_H
+#ifndef RATCHET_RENDERER_H
+#define RATCHET_RENDERER_H
 
 
 #include <memory>
@@ -10,14 +10,14 @@
 #include "../ResourceManager.h"
 
 
-namespace rachet {
+namespace ratchet {
 class Renderer {
     //! キャラクタ
-    std::vector<std::shared_ptr<rachet::Actor>> _actors;
+    std::vector<std::shared_ptr<ratchet::Actor>> _actors;
     //! 表示
-    std::vector<std::shared_ptr<rachet::Actor>> _enable_actors;
+    std::vector<std::shared_ptr<ratchet::Actor>> _enable_actors;
     //! 非表示
-    std::vector<std::shared_ptr<rachet::Actor>> _disable_actors;
+    std::vector<std::shared_ptr<ratchet::Actor>> _disable_actors;
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,12 +31,12 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddElement(const std::shared_ptr<rachet::Actor>& ptr);
+    void AddElement(const std::shared_ptr<ratchet::Actor>& ptr);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void RemoveElement(const std::shared_ptr<rachet::Actor>& ptr);
+    void RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr);
     /// <summary>
     /// 描画
     /// </summary>
@@ -50,4 +50,4 @@ public:
     void Reset(void);
 };
 }
-#endif // !RACHET_RENDERER_H
+#endif // !RATCHET_RENDERER_H

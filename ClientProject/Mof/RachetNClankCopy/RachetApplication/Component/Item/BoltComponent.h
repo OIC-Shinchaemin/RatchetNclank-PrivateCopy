@@ -1,19 +1,19 @@
-#ifndef RACHET_BOLT_COMPONENT_H
-#define RACHET_BOLT_COMPONENT_H
+#ifndef RATCHET_BOLT_COMPONENT_H
+#define RATCHET_BOLT_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 #include "../../Actor/Item/Bolt.h"
 
-namespace rachet {
-class BoltComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class BoltComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! アクターパラメータ
-    rachet::Bolt::Param _param;
+    ratchet::Bolt::Param _param;
     //! 移動先
-    std::weak_ptr<rachet::Actor> _player;
+    std::weak_ptr<ratchet::Actor> _player;
     //! 状態
     std::weak_ptr<class BoltActionStateComponent> _state_com;
 public:
@@ -36,7 +36,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetActorParam(const rachet::Bolt::Param& param);
+    void SetActorParam(const ratchet::Bolt::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -48,13 +48,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const rachet::Bolt::Param& GetActorParam(void) const;
+    const ratchet::Bolt::Param& GetActorParam(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::Actor> GetPlayer(void) const;
+    std::shared_ptr<ratchet::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -78,7 +78,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_BOLT_COMPONENT_H
+#endif // !RATCHET_BOLT_COMPONENT_H

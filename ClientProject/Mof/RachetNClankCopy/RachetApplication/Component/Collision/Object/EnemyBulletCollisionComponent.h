@@ -1,5 +1,5 @@
-#ifndef RACHET_ENEMY_BULLET_COLLISION_COMPONENT_H
-#define RACHET_ENEMY_BULLET_COLLISION_COMPONENT_H
+#ifndef RATCHET_ENEMY_BULLET_COLLISION_COMPONENT_H
+#define RATCHET_ENEMY_BULLET_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -10,9 +10,9 @@
 #include <Mof.h>
 
 
-namespace rachet {
-class EnemyBulletCollisionComponent : public rachet::CollisionComponent {
-    using super = rachet::CollisionComponent;
+namespace ratchet {
+class EnemyBulletCollisionComponent : public ratchet::CollisionComponent {
+    using super = ratchet::CollisionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<rachet::SightObject> GetSightObject(void) override;
+    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -75,7 +75,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 衝突判定
     /// </summary>
@@ -83,4 +83,4 @@ public:
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
-#endif // !RACHET_ENEMY_BULLET_COLLISION_COMPONENT_H
+#endif // !RATCHET_ENEMY_BULLET_COLLISION_COMPONENT_H

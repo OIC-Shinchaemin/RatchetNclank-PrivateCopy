@@ -3,29 +3,29 @@
 #include "../MotionComponent.h"
 
 
-rachet::ShipMeshComponent::ShipMeshComponent(int priority) :
+ratchet::ShipMeshComponent::ShipMeshComponent(int priority) :
     super(priority) ,
     _ship_mesh(){
 }
 
-rachet::ShipMeshComponent::ShipMeshComponent(const rachet::ShipMeshComponent& obj) :
+ratchet::ShipMeshComponent::ShipMeshComponent(const ratchet::ShipMeshComponent& obj) :
     super(obj) ,
     _ship_mesh(obj._ship_mesh){
 }
 
-rachet::ShipMeshComponent::~ShipMeshComponent() {
+ratchet::ShipMeshComponent::~ShipMeshComponent() {
 }
 
-void rachet::ShipMeshComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::ShipMeshComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     _ship_mesh = super::GetMeshContainer()->GetMesh()->GetData(1);
 }
 
-std::string rachet::ShipMeshComponent::GetType(void) const {
+std::string ratchet::ShipMeshComponent::GetType(void) const {
     return "ShipMeshComponent";
 }
 
-bool rachet::ShipMeshComponent::Render(void) {
+bool ratchet::ShipMeshComponent::Render(void) {
     if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
@@ -45,12 +45,12 @@ bool rachet::ShipMeshComponent::Render(void) {
     return true;
 }
 
-bool rachet::ShipMeshComponent::Release(void) {
+bool ratchet::ShipMeshComponent::Release(void) {
     super::Release();
     _ship_mesh = nullptr;
     return false;
 }
 
-std::shared_ptr<rachet::Component> rachet::ShipMeshComponent::Clone(void) {
-    return std::make_shared<rachet::ShipMeshComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::ShipMeshComponent::Clone(void) {
+    return std::make_shared<ratchet::ShipMeshComponent>(*this);
 }

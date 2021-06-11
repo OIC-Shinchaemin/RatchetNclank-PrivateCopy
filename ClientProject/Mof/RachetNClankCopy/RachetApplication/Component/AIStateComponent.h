@@ -1,5 +1,5 @@
-#ifndef RACHET_AI_STATE_COMPONENT_H
-#define RACHET_AI_STATE_COMPONENT_H
+#ifndef RATCHET_AI_STATE_COMPONENT_H
+#define RATCHET_AI_STATE_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -8,9 +8,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace rachet {
-class AIStateComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class AIStateComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! èÛë‘
     base::core::StateMachine _state_machine;
@@ -76,7 +76,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ïœçX
     /// </summary>
@@ -92,4 +92,4 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RACHET_AI_STATE_COMPONENT_H
+#endif // !RATCHET_AI_STATE_COMPONENT_H

@@ -10,66 +10,66 @@
 #include "../../Actor/Character/Enemy.h"
 
 
-rachet::EnemyComponent::EnemyComponent(int priority) :
+ratchet::EnemyComponent::EnemyComponent(int priority) :
     super(priority),
     _velocity_timer(),
     _target(),
     _velocity_com() {
 }
 
-rachet::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
+ratchet::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
     super(obj),
     _velocity_timer(),
     _target(),
     _velocity_com() {
 }
 
-rachet::EnemyComponent::~EnemyComponent() {
+ratchet::EnemyComponent::~EnemyComponent() {
 }
 
-void rachet::EnemyComponent::SetTarget(const std::shared_ptr<rachet::Actor>& ptr) {
+void ratchet::EnemyComponent::SetTarget(const std::shared_ptr<ratchet::Actor>& ptr) {
     this->_target = ptr;
 }
 
-std::string rachet::EnemyComponent::GetType(void) const {
+std::string ratchet::EnemyComponent::GetType(void) const {
     return "EnemyComponent";
 }
 
-std::weak_ptr<rachet::Actor> rachet::EnemyComponent::GetTarget(void) const {
+std::weak_ptr<ratchet::Actor> ratchet::EnemyComponent::GetTarget(void) const {
     return this->_target;
 }
 
-std::optional<Mof::CVector3> rachet::EnemyComponent::GetTargetPosition(void) const {
+std::optional<Mof::CVector3> ratchet::EnemyComponent::GetTargetPosition(void) const {
     if (auto target = this->GetTarget().lock()) {
         auto pos = target->GetPosition();
-        float player_height = target->GetComponent<rachet::CharacterComponent>()->GetHeight();
+        float player_height = target->GetComponent<ratchet::CharacterComponent>()->GetHeight();
         pos.y += player_height;
         return pos;
     } // if
     return std::optional<Mof::CVector3>();
 }
 
-float rachet::EnemyComponent::GetHomeDistance(void) const {
+float ratchet::EnemyComponent::GetHomeDistance(void) const {
     return 2.5f;
 }
 
-bool rachet::EnemyComponent::Initialize(void) {
+bool ratchet::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
     _velocity_timer.Initialize(1.0f, true);
 
-    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetSleep(true);
         velocity_com->SetGravity(0.0f);
     } // if
 
 
-    auto coll_com = super::GetOwner()->GetComponent<rachet::EnemyCollisionComponent>();
-    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
-                               rachet::CollisionComponentType::kEnemyCollisionComponent,
-                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::EnemyCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::CollisionComponentType::kEnemyCollisionComponent,
+                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         auto target = in.target.lock();
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
         auto length = (this->GetVolume() * 2.0f) - vec.Length();
@@ -82,24 +82,24 @@ bool rachet::EnemyComponent::Initialize(void) {
         return true;
     }));
 
-    auto sight_coll = super::GetOwner()->GetComponent<rachet::SightCollisionComponent>();
-    sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
+    auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
+    sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
                                  "PlayerCollisionComponent",
-                                 rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+                                 ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         auto target = in.target.lock();
         this->SetTarget(target);
         return true;
     }));
-    sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Exit,
+    sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Exit,
                                  "PlayerCollisionComponent",
-                                 rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+                                 ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         this->SetTarget(nullptr);
         return true;
     }));
     return true;
 }
 
-bool rachet::EnemyComponent::Update(float delta_time) {
+bool ratchet::EnemyComponent::Update(float delta_time) {
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetUseGravity(false);
     } // if
@@ -108,14 +108,14 @@ bool rachet::EnemyComponent::Update(float delta_time) {
         if (auto velocity_com = _velocity_com.lock()) {
             bool in_camera_range = super::GetOwner()->InCameraRange();
             if (in_camera_range) {
-                auto owner = std::dynamic_pointer_cast<rachet::Enemy>(super::GetOwner());
-                owner->GetQuestSubject()->Notify(rachet::GameQuest::GameQuest(rachet::GameQuest::Type::EnemyDestroy));
+                auto owner = std::dynamic_pointer_cast<ratchet::Enemy>(super::GetOwner());
+                owner->GetQuestSubject()->Notify(ratchet::GameQuest::GameQuest(ratchet::GameQuest::Type::EnemyDestroy));
                 velocity_com->SetSleep(false);
                 velocity_com->SetGravity(1.0f);
             } // if
             else {
-                auto owner = std::dynamic_pointer_cast<rachet::Enemy>(super::GetOwner());
-                owner->GetQuestSubject()->Notify(rachet::GameQuest::GameQuest(rachet::GameQuest::Type::ToFront));
+                auto owner = std::dynamic_pointer_cast<ratchet::Enemy>(super::GetOwner());
+                owner->GetQuestSubject()->Notify(ratchet::GameQuest::GameQuest(ratchet::GameQuest::Type::ToFront));
                 velocity_com->SetSleep(true);
                 velocity_com->SetGravity(0.0f);
             } // else
@@ -124,11 +124,11 @@ bool rachet::EnemyComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::EnemyComponent::Release(void) {
+bool ratchet::EnemyComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::EnemyComponent::Clone(void) {
-    return std::make_shared<rachet::EnemyComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::EnemyComponent::Clone(void) {
+    return std::make_shared<ratchet::EnemyComponent>(*this);
 }

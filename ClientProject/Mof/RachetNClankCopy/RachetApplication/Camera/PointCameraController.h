@@ -1,13 +1,13 @@
-#ifndef RACHET_POINT_CAMERA_CONTROLLER_H
-#define RACHET_POINT_CAMERA_CONTROLLER_H
+#ifndef RATCHET_POINT_CAMERA_CONTROLLER_H
+#define RATCHET_POINT_CAMERA_CONTROLLER_H
 
 
 #include "CameraController.h"
 
 
-namespace rachet {
-class PointCameraController : public rachet::CameraController {
-    using super = rachet::CameraController;
+namespace ratchet {
+class PointCameraController : public ratchet::CameraController {
+    using super = ratchet::CameraController;
 private:
     //! 位置
     Mof::CVector3 _ideal_position;
@@ -24,14 +24,14 @@ public:
     /// セッター
     /// </summary>
     /// <param name="info"></param>
-    virtual void SetInfo(const rachet::CameraController::CameraInfo& info) override;
+    virtual void SetInfo(const ratchet::CameraController::CameraInfo& info) override;
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time, const rachet::CameraController::CameraInfo& info) override;
+    virtual bool Update(float delta_time, const ratchet::CameraController::CameraInfo& info) override;
 };
 }
-#endif // !RACHET_POINT_CAMERA_CONTROLLER_H
+#endif // !RATCHET_POINT_CAMERA_CONTROLLER_H

@@ -1,16 +1,16 @@
-#ifndef RACHET_PLAYER_MECHANICAL_WEAPON_COMPONENT_H
-#define RACHET_PLAYER_MECHANICAL_WEAPON_COMPONENT_H
+#ifndef RATCHET_PLAYER_MECHANICAL_WEAPON_COMPONENT_H
+#define RATCHET_PLAYER_MECHANICAL_WEAPON_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 
-namespace rachet {
-class PlayerMechanicalWeaponComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class PlayerMechanicalWeaponComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! 武器
-    std::weak_ptr<rachet::Actor> _weapon;
+    std::weak_ptr<ratchet::Actor> _weapon;
 public:
     /// <summary>
     /// コンストラクタ
@@ -72,7 +72,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_PLAYER_MECHANICAL_WEAPON_COMPONENT_H
+#endif // !RATCHET_PLAYER_MECHANICAL_WEAPON_COMPONENT_H

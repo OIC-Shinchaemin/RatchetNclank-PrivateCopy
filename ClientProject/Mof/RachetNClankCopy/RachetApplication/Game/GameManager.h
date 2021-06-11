@@ -1,5 +1,5 @@
-#ifndef RACHET_GAME_MANAGER_H
-#define RACHET_GAME_MANAGER_H
+#ifndef RATCHET_GAME_MANAGER_H
+#define RATCHET_GAME_MANAGER_H
 
 
 #include <memory>
@@ -15,31 +15,31 @@
 #include "GameSystem/GamePauseSystem.h"
 
 
-namespace rachet {
+namespace ratchet {
 class GameManager : 
-    public std::enable_shared_from_this<rachet::GameManager>,
-    public base::core::Observer<const std::shared_ptr<rachet::GameSystem>&> {
+    public std::enable_shared_from_this<ratchet::GameManager>,
+    public base::core::Observer<const std::shared_ptr<ratchet::GameSystem>&> {
 private:
     //! 更新用
-    std::vector<std::shared_ptr<rachet::GameSystem>> _update_system;
+    std::vector<std::shared_ptr<ratchet::GameSystem>> _update_system;
     //! 更新用
-    std::vector<std::shared_ptr<rachet::GameSystem>> _disable_systems;
+    std::vector<std::shared_ptr<ratchet::GameSystem>> _disable_systems;
     //! 武器
-    std::shared_ptr<rachet::WeaponSystem>  _weapon_system;
+    std::shared_ptr<ratchet::WeaponSystem>  _weapon_system;
     //! クイックチェンジ
-    std::shared_ptr<rachet::QuickChangeSystem> _quick_change;
+    std::shared_ptr<ratchet::QuickChangeSystem> _quick_change;
     //! ヘルプデスク
-    std::shared_ptr<rachet::HelpDesk>  _help_desk;
+    std::shared_ptr<ratchet::HelpDesk>  _help_desk;
     //! お金
-    std::shared_ptr<rachet::GameMoney> _game_money;
+    std::shared_ptr<ratchet::GameMoney> _game_money;
     //! ショップ
-    std::shared_ptr<rachet::ShopSystem> _shop_system;
+    std::shared_ptr<ratchet::ShopSystem> _shop_system;
     //! オプション
-    std::shared_ptr<rachet::OptionSystem> _option_system;
+    std::shared_ptr<ratchet::OptionSystem> _option_system;
     //! ポーズ
-    std::shared_ptr<rachet::GamePauseSystem> _pause_system;
+    std::shared_ptr<ratchet::GamePauseSystem> _pause_system;
     //! リソース
-    std::weak_ptr<rachet::ResourceMgr> _resource;
+    std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 
@@ -61,12 +61,12 @@ public:
     /// 通知
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void OnNotify(const std::shared_ptr<rachet::GameSystem>& ptr);
+    virtual void OnNotify(const std::shared_ptr<ratchet::GameSystem>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(const std::shared_ptr<rachet::ResourceMgr>& ptr);
+    void SetResourceManager(const std::shared_ptr<ratchet::ResourceMgr>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -77,43 +77,43 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::WeaponSystem> GetWeaponSystem(void) const;
+    std::shared_ptr<ratchet::WeaponSystem> GetWeaponSystem(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::QuickChangeSystem> GetQuickChange(void) const;
+    std::shared_ptr<ratchet::QuickChangeSystem> GetQuickChange(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::HelpDesk> GetHelpDesk(void) const;
+    std::shared_ptr<ratchet::HelpDesk> GetHelpDesk(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::GameMoney> GetGameMoney(void) const;
+    std::shared_ptr<ratchet::GameMoney> GetGameMoney(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::ShopSystem> GetShopSystem(void) const;
+    std::shared_ptr<ratchet::ShopSystem> GetShopSystem(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::OptionSystem> GetOptionSystem(void) const;
+    std::shared_ptr<ratchet::OptionSystem> GetOptionSystem(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::GamePauseSystem> GetGamePauseSystem(void) const;
+    std::shared_ptr<ratchet::GamePauseSystem> GetGamePauseSystem(void) const;
     /// <summary>
     /// 読み込み
     /// </summary>
@@ -143,4 +143,4 @@ public:
     void GameSystemRelease(void);
 };
 }
-#endif // !RACHET_GAME_MANAGER_H
+#endif // !RATCHET_GAME_MANAGER_H

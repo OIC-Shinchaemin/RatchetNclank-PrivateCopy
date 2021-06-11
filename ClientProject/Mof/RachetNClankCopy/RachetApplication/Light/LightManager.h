@@ -1,11 +1,11 @@
-#ifndef RACHET_LIGHT_MANAGER_H
-#define RACHET_LIGHT_MANAGER_H
+#ifndef RATCHET_LIGHT_MANAGER_H
+#define RATCHET_LIGHT_MANAGER_H
 
 
 #include <Mof.h>
 
 
-namespace rachet {
+namespace ratchet {
 class LightManager {
 private:
     // ŒõŒ¹
@@ -27,4 +27,4 @@ public:
     bool Initialize(void);
 };
 }
-#endif // !RACHET_LIGHT_MANAGER_H
+#endif // !RATCHET_LIGHT_MANAGER_H

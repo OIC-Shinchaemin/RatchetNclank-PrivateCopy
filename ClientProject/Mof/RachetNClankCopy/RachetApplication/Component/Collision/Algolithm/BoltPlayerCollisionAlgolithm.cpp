@@ -3,22 +3,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-rachet::BoltPlayerCollisionAlgolithm::BoltPlayerCollisionAlgolithm() :
+ratchet::BoltPlayerCollisionAlgolithm::BoltPlayerCollisionAlgolithm() :
     super() {
 }
 
-rachet::BoltPlayerCollisionAlgolithm::~BoltPlayerCollisionAlgolithm() {
+ratchet::BoltPlayerCollisionAlgolithm::~BoltPlayerCollisionAlgolithm() {
 }
 
-const char* rachet::BoltPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return rachet::CollisionComponentType::kBoltCollisionComponent.c_str();
+const char* ratchet::BoltPlayerCollisionAlgolithm::GetLayerType(void) const {
+    return ratchet::CollisionComponentType::kBoltCollisionComponent.c_str();
 }
 
-const char* rachet::BoltPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return rachet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+const char* ratchet::BoltPlayerCollisionAlgolithm::GetTargetType(void) const {
+    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-bool rachet::BoltPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
+bool ratchet::BoltPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

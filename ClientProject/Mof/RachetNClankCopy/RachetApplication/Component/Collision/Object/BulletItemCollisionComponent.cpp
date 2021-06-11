@@ -5,29 +5,29 @@
 #include "../../Item/BulletItem/BulletItemActionStateComponent.h"
 
 
-rachet::BulletItemCollisionComponent::BulletItemCollisionComponent(int priority) :
+ratchet::BulletItemCollisionComponent::BulletItemCollisionComponent(int priority) :
     super(priority),
     _height(0.6f),
     _volume(_height),
     _state_com(){
 }
 
-rachet::BulletItemCollisionComponent::BulletItemCollisionComponent(const BulletItemCollisionComponent& obj) :
+ratchet::BulletItemCollisionComponent::BulletItemCollisionComponent(const BulletItemCollisionComponent& obj) :
     super(obj),
     _height(obj._height),
     _volume(obj._volume),
     _state_com() {
 }
 
-rachet::BulletItemCollisionComponent::~BulletItemCollisionComponent() {
+ratchet::BulletItemCollisionComponent::~BulletItemCollisionComponent() {
 }
 
-std::string rachet::BulletItemCollisionComponent::GetType(void) const {
-    return rachet::CollisionComponentType::kBulletItemCollisionComponent;
+std::string ratchet::BulletItemCollisionComponent::GetType(void) const {
+    return ratchet::CollisionComponentType::kBulletItemCollisionComponent;
 }
 
-std::optional<Mof::CSphere> rachet::BulletItemCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
+std::optional<Mof::CSphere> ratchet::BulletItemCollisionComponent::GetSphere(void) {
+    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -35,38 +35,38 @@ std::optional<Mof::CSphere> rachet::BulletItemCollisionComponent::GetSphere(void
     return Mof::CSphere(pos, _volume);
 }
 
-std::optional<Mof::CBoxAABB> rachet::BulletItemCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::BulletItemCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> rachet::BulletItemCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::BulletItemCollisionComponent::GetRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::CRay3D> rachet::BulletItemCollisionComponent::GetNextRay(void) {
+std::optional<Mof::CRay3D> ratchet::BulletItemCollisionComponent::GetNextRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> rachet::BulletItemCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::BulletItemCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<rachet::SightObject> rachet::BulletItemCollisionComponent::GetSightObject(void) {
-    return std::optional<rachet::SightObject>();
+std::optional<ratchet::SightObject> ratchet::BulletItemCollisionComponent::GetSightObject(void) {
+    return std::optional<ratchet::SightObject>();
 }
 
-bool rachet::BulletItemCollisionComponent::Initialize(void) {
+bool ratchet::BulletItemCollisionComponent::Initialize(void) {
     super::Initialize();
 
-    _state_com = super::GetOwner()->GetComponent<rachet::BulletItemActionStateComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::BulletItemActionStateComponent>();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::BulletItemCollisionComponent::Clone(void) {
-    return std::make_shared<rachet::BulletItemCollisionComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::BulletItemCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::BulletItemCollisionComponent>(*this);
 }
 
-void rachet::BulletItemCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void ratchet::BulletItemCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetSphere().has_value()) {
         return;
     } // if

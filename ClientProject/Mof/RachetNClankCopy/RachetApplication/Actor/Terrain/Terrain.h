@@ -1,5 +1,5 @@
-#ifndef RACHET_TERRAIN_H
-#define RACHET_TERRAIN_H
+#ifndef RATCHET_TERRAIN_H
+#define RATCHET_TERRAIN_H
 
 
 #include "../../Actor.h"
@@ -7,21 +7,21 @@
 #include "../../ResourceManager.h"
 
 
-namespace rachet {
-class Terrain : public rachet::Actor {
-    using super = rachet::Actor;
+namespace ratchet {
+class Terrain : public ratchet::Actor {
+    using super = ratchet::Actor;
 private:
     //! 水面
     Mof::LPGeometry _plane;
     //! スクロール
-    rachet::cbUVScrollParam _uv_scroll;
+    ratchet::cbUVScrollParam _uv_scroll;
     //! スクロール
     Mof::CVector2 _scroll_increase;
     //シェーダー
     Mof::CShader _shader;
     Mof::CShaderBind_3DPrimitiveBase _shader_bind;
     //! リソース
-    std::weak_ptr<rachet::ResourceMgr> _resource;
+    std::weak_ptr<ratchet::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,13 +35,13 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(rachet::Actor::Param* param) override;
+    virtual bool Initialize(ratchet::Actor::Param* param) override;
     /// <summary>
     /// 更新
     /// </summary>
@@ -62,4 +62,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RACHET_TERRAIN_H
+#endif // !RATCHET_TERRAIN_H

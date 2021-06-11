@@ -1,5 +1,5 @@
-#ifndef RACHET_OPTION_SYSTEM_H
-#define RACHET_OPTION_SYSTEM_H
+#ifndef RATCHET_OPTION_SYSTEM_H
+#define RATCHET_OPTION_SYSTEM_H
 
 
 #include "GameSystem.h"
@@ -9,9 +9,9 @@
 #include "../../Scene/SceneDefine.h"
 
 
-namespace rachet {
-class OptionSystemItem : public std::enable_shared_from_this<rachet::OptionSystemItem> {
-    using this_type = rachet::OptionSystemItem;
+namespace ratchet {
+class OptionSystemItem : public std::enable_shared_from_this<ratchet::OptionSystemItem> {
+    using this_type = ratchet::OptionSystemItem;
 private:
     //! テキスト
     std::string _text;
@@ -50,10 +50,10 @@ public:
 };
 
 
-class OptionSystem : public rachet::GameSystem {
-    using super = rachet::GameSystem;
-    using this_type = rachet::OptionSystem;
-    using ElemType = rachet::OptionSystemItem;
+class OptionSystem : public ratchet::GameSystem {
+    using super = ratchet::GameSystem;
+    using this_type = ratchet::OptionSystem;
+    using ElemType = ratchet::OptionSystemItem;
 public:
     struct Info {
         bool enter = false;
@@ -107,7 +107,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const rachet::scene::SceneMessage&>* GetSceneMessageSubject(void);
+    base::core::Observable<const ratchet::scene::SceneMessage&>* GetSceneMessageSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -144,4 +144,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !RACHET_OPTION_SYSTEM_H
+#endif // !RATCHET_OPTION_SYSTEM_H

@@ -1,5 +1,5 @@
-#ifndef RACHET_MESH_COMPONENT_H
-#define RACHET_MESH_COMPONENT_H
+#ifndef RATCHET_MESH_COMPONENT_H
+#define RATCHET_MESH_COMPONENT_H
 
 
 #include "RenderComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class MeshComponent : public rachet::RenderComponent {
-    using super = rachet::RenderComponent;
+namespace ratchet {
+class MeshComponent : public ratchet::RenderComponent {
+    using super = ratchet::RenderComponent;
 private:
     //! ÉÅÉbÉVÉÖ
     std::weak_ptr<Mof::CMeshContainer> _mesh;
@@ -75,7 +75,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_MESH_COMPONENT_H
+#endif // !RATCHET_MESH_COMPONENT_H

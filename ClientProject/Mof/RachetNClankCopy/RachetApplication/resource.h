@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by RachetApplication.rc
+// Used by ratchetApplication.rc
 
 // 新しいオブジェクトの次の既定値
 // 

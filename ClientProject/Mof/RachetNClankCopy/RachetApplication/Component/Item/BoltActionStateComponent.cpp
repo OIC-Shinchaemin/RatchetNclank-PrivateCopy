@@ -1,22 +1,22 @@
 #include "BoltActionStateComponent.h"
 
 
-rachet::BoltActionStateComponent::BoltActionStateComponent(int priority) :
+ratchet::BoltActionStateComponent::BoltActionStateComponent(int priority) :
     super(priority) {
 }
 
-rachet::BoltActionStateComponent::BoltActionStateComponent(const BoltActionStateComponent& obj) :
+ratchet::BoltActionStateComponent::BoltActionStateComponent(const BoltActionStateComponent& obj) :
     super(obj) {
 }
 
-rachet::BoltActionStateComponent::~BoltActionStateComponent() {
+ratchet::BoltActionStateComponent::~BoltActionStateComponent() {
 }
 
-std::string rachet::BoltActionStateComponent::GetType(void) const {
+std::string ratchet::BoltActionStateComponent::GetType(void) const {
     return "BoltActionStateComponent";
 }
 
-bool rachet::BoltActionStateComponent::Initialize(void) {
+bool ratchet::BoltActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::BoltActionType;
     //super::ChangeState(Type::kMoved);
@@ -24,11 +24,11 @@ bool rachet::BoltActionStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::BoltActionStateComponent::Clone(void) {
-    return std::make_shared<rachet::BoltActionStateComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::BoltActionStateComponent::Clone(void) {
+    return std::make_shared<ratchet::BoltActionStateComponent>(*this);
 }
 
-bool rachet::BoltActionStateComponent::CanTransition(const std::string& next) {
+bool ratchet::BoltActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::BoltActionType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -46,7 +46,7 @@ bool rachet::BoltActionStateComponent::CanTransition(const std::string& next) {
 }
 
 #ifdef _DEBUG
-bool rachet::BoltActionStateComponent::DebugRender(void) {
+bool ratchet::BoltActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 550.0f, "bolt state = %s", this->_state_machine.GetCurrentStateName());
     return true;

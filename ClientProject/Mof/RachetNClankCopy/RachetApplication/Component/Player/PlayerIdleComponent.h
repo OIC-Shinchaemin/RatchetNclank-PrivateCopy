@@ -1,13 +1,13 @@
-#ifndef RACHET_PLAYER_IDLE_COMPONENT_H
-#define RACHET_PLAYER_IDLE_COMPONENT_H
+#ifndef RATCHET_PLAYER_IDLE_COMPONENT_H
+#define RATCHET_PLAYER_IDLE_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
 
 
-namespace rachet {
-class PlayerIdleComponent : public rachet::PlayerActionComponent {
-    using super = rachet::PlayerActionComponent;
+namespace ratchet {
+class PlayerIdleComponent : public ratchet::PlayerActionComponent {
+    using super = ratchet::PlayerActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,7 +52,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -61,4 +61,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RACHET_PLAYER_IDLE_COMPONENT_H
+#endif // !RATCHET_PLAYER_IDLE_COMPONENT_H

@@ -4,7 +4,7 @@
 #include "PlayerJumpUpComponent.h"
 
 
-rachet::PlayerJumpSetComponent::PlayerJumpSetComponent(int priority) :
+ratchet::PlayerJumpSetComponent::PlayerJumpSetComponent(int priority) :
     super(priority),
     _jump_speed(0.0f),
     _jump_speed_first(6.0f),
@@ -13,7 +13,7 @@ rachet::PlayerJumpSetComponent::PlayerJumpSetComponent(int priority) :
     _jump_com() {
 }
 
-rachet::PlayerJumpSetComponent::PlayerJumpSetComponent(const PlayerJumpSetComponent& obj) :
+ratchet::PlayerJumpSetComponent::PlayerJumpSetComponent(const PlayerJumpSetComponent& obj) :
     super(obj),
     _jump_speed(0.0f),
     _jump_speed_first(obj._jump_speed_first),
@@ -22,25 +22,25 @@ rachet::PlayerJumpSetComponent::PlayerJumpSetComponent(const PlayerJumpSetCompon
     _jump_com() {
 }
 
-rachet::PlayerJumpSetComponent::~PlayerJumpSetComponent() {
+ratchet::PlayerJumpSetComponent::~PlayerJumpSetComponent() {
 }
 
-std::string rachet::PlayerJumpSetComponent::GetType(void) const {
+std::string ratchet::PlayerJumpSetComponent::GetType(void) const {
     return "PlayerJumpSetComponent";
 }
 
-std::string_view rachet::PlayerJumpSetComponent::GetStateType(void) const {
+std::string_view ratchet::PlayerJumpSetComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionJumpSetState;
 }
 
-bool rachet::PlayerJumpSetComponent::Initialize(void) {
+bool ratchet::PlayerJumpSetComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerMoveComponent>();
-    _jump_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerJumpUpComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
+    _jump_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerJumpUpComponent>();
     return true;
 }
 
-bool rachet::PlayerJumpSetComponent::Input(void) {
+bool ratchet::PlayerJumpSetComponent::Input(void) {
     ;
 
     if (::g_pInput->IsKeyHold(MOFKEY_J) ||
@@ -61,7 +61,7 @@ bool rachet::PlayerJumpSetComponent::Input(void) {
     return false;
 }
 
-bool rachet::PlayerJumpSetComponent::Update(float delta_time) {
+bool ratchet::PlayerJumpSetComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 
 
@@ -86,11 +86,11 @@ bool rachet::PlayerJumpSetComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerJumpSetComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerJumpSetComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerJumpSetComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerJumpSetComponent>(*this);
 }
 
-bool rachet::PlayerJumpSetComponent::Start(void) {
+bool ratchet::PlayerJumpSetComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

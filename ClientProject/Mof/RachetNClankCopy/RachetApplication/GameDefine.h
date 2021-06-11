@@ -1,5 +1,5 @@
-#ifndef RACHET_GAME_DEFINE_H
-#define RACHET_GAME_DEFINE_H
+#ifndef RATCHET_GAME_DEFINE_H
+#define RATCHET_GAME_DEFINE_H
 
 
 #include <stdexcept>
@@ -30,7 +30,7 @@ DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
 #endif // defined (_DEBUG)
 
 
-namespace rachet {
+namespace ratchet {
 
 constexpr int kTextWidth= 12;
 
@@ -89,10 +89,10 @@ struct Transform {
     Mof::CVector3 rotate = math::vec3::kZero;
     Mof::CVector3 scale = math::vec3::kOne;
 };
-using ResourceMgr = rachet::ResourceManager<
+using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CTexture>,
     std::shared_ptr<Mof::CMeshContainer>,
-    std::shared_ptr<rachet::MotionNames>,
+    std::shared_ptr<ratchet::MotionNames>,
     std::shared_ptr<sip::CResourceFont>
 >;
 
@@ -105,4 +105,4 @@ struct cbUVScrollParam {
     }
 };
 }
-#endif // !RACHET_GAME_DEFINE_H
+#endif // !RATCHET_GAME_DEFINE_H

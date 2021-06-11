@@ -1,25 +1,25 @@
 #include "GamePad.h"
 
 
-rachet::Gamepad::Gamepad() :
+ratchet::Gamepad::Gamepad() :
     _initialized(false),
     _gamepad() {
 }
 
-rachet::Gamepad::~Gamepad() {
+ratchet::Gamepad::~Gamepad() {
 }
 
-rachet::Gamepad& rachet::Gamepad::GetInstance(void) {
-    static rachet::Gamepad object;
+ratchet::Gamepad& ratchet::Gamepad::GetInstance(void) {
+    static ratchet::Gamepad object;
     return object;
 }
 
-std::shared_ptr<Mof::CXGamePad> rachet::Gamepad::GetGamepad(void) const {
+std::shared_ptr<Mof::CXGamePad> ratchet::Gamepad::GetGamepad(void) const {
     _ASSERT_EXPR(_initialized, L"ゲームパッドが作成されていません");
     return this->_gamepad;
 }
 
-bool rachet::Gamepad::Create(void) {
+bool ratchet::Gamepad::Create(void) {
     _gamepad = std::make_shared<Mof::CXGamePad>();
     // ゲームパッドの作成
     XGAMEPADCREATEINFO ci; ci.No = 0;
@@ -27,7 +27,7 @@ bool rachet::Gamepad::Create(void) {
     return _initialized;
 }
 
-bool rachet::Gamepad::Release(void) {
+bool ratchet::Gamepad::Release(void) {
     if (!_gamepad->Release()) {
         return false;
     } // if
@@ -36,7 +36,7 @@ bool rachet::Gamepad::Release(void) {
     return true;
 }
 
-void rachet::Gamepad::RefreshKey(void) {
+void ratchet::Gamepad::RefreshKey(void) {
     _ASSERT_EXPR(_initialized, L"ゲームパッドが作成されていません");
     _gamepad->RefreshKey();
 }

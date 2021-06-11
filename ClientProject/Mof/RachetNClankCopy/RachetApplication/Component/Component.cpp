@@ -1,107 +1,107 @@
 #include "Component.h"
 
 
-std::weak_ptr<rachet::ResourceMgr> rachet::Component::_resource_manager;
-std::weak_ptr<base::ui::UICanvas> rachet::Component::_ui_canvas;
+std::weak_ptr<ratchet::ResourceMgr> ratchet::Component::_resource_manager;
+std::weak_ptr<base::ui::UICanvas> ratchet::Component::_ui_canvas;
 
 
-void rachet::Component::SetResourceManager(const std::shared_ptr<rachet::ResourceMgr>& ptr) {
+void ratchet::Component::SetResourceManager(const std::shared_ptr<ratchet::ResourceMgr>& ptr) {
     _resource_manager = ptr;
 }
 
-void rachet::Component::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
+void ratchet::Component::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
     _ui_canvas = ptr;
 }
 
-rachet::Component::Component(int priority) :
+ratchet::Component::Component(int priority) :
     _owner(),
     _priority(priority),
     _active(false) {
 }
 
-rachet::Component::Component(const Component& obj) :
+ratchet::Component::Component(const Component& obj) :
     _owner(),
     _priority(obj._priority),
     _active(obj._active) {
 }
 
-rachet::Component::~Component() {
+ratchet::Component::~Component() {
 }
 
-void rachet::Component::SetOwner(const std::shared_ptr<rachet::Actor>& ptr) {
+void ratchet::Component::SetOwner(const std::shared_ptr<ratchet::Actor>& ptr) {
     this->_owner = ptr;
 }
 
-void rachet::Component::SetParam(const rapidjson::Value& param) {
+void ratchet::Component::SetParam(const rapidjson::Value& param) {
     _ASSERT_EXPR(param.HasMember("priority"), L"パラメータに処理優先度がありません");
     _ASSERT_EXPR(param["priority"].IsInt(), L"パラメータの処理優先度がInt型でありません");
 
     this->_priority = param["priority"].GetInt();
 }
 
-std::shared_ptr<rachet::Actor> rachet::Component::GetOwner(void) const {
+std::shared_ptr<ratchet::Actor> ratchet::Component::GetOwner(void) const {
     if (auto owner = this->_owner.lock()) {
         return owner;
     } // if
     return nullptr;
 }
 
-int rachet::Component::GetPriority(void) const {
+int ratchet::Component::GetPriority(void) const {
     return this->_priority;
 }
 
-bool rachet::Component::IsActive(void) const {
+bool ratchet::Component::IsActive(void) const {
     return this->_active;
 }
 
-bool rachet::Component::IsInput(void) const {
+bool ratchet::Component::IsInput(void) const {
     return false;
 }
 
-bool rachet::Component::IsUpdate(void) const {
+bool ratchet::Component::IsUpdate(void) const {
     return false;
 }
 
-bool rachet::Component::IsRender(void) const {
+bool ratchet::Component::IsRender(void) const {
 #ifdef _DEBUG
     return true;
 #endif // _DEBUG
     return false;
 }
 
-bool rachet::Component::Activate(void) {
+bool ratchet::Component::Activate(void) {
     this->_active = true;
     return true;
 }
 
-bool rachet::Component::Inactivate(void) {
+bool ratchet::Component::Inactivate(void) {
     this->_active = false;
     return true;
 }
 
-bool rachet::Component::Initialize(void) {
+bool ratchet::Component::Initialize(void) {
     _ASSERT_EXPR(!_owner.expired(), L"コンポーネントのアクターが登録されていません");
     return true;
 }
 
-bool rachet::Component::Input(void) {
+bool ratchet::Component::Input(void) {
     return false;
 }
 
-bool rachet::Component::Update(float delta_time) {
+bool ratchet::Component::Update(float delta_time) {
     return false;
 }
 
-bool rachet::Component::Render(void) {
+bool ratchet::Component::Render(void) {
     return false;
 }
 
-bool rachet::Component::Release(void) {
+bool ratchet::Component::Release(void) {
     _owner.reset();
     return true;
 }
 #ifdef _DEBUG
-bool rachet::Component::DebugRender(void) {
+bool ratchet::Component::DebugRender(void) {
     return false;
 }
 #endif // _DEBUG

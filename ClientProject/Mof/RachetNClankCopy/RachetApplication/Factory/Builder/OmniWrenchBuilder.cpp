@@ -1,26 +1,26 @@
 #include "OmniWrenchBuilder.h"
 
 
-rachet::OmniWrenchBuilder::OmniWrenchBuilder() :
+ratchet::OmniWrenchBuilder::OmniWrenchBuilder() :
     super() {
 }
 
-rachet::OmniWrenchBuilder::~OmniWrenchBuilder() {
+ratchet::OmniWrenchBuilder::~OmniWrenchBuilder() {
 }
 /*
-void rachet::OmniWrenchBuilder::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::OmniWrenchBuilder::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 */
 
-void rachet::OmniWrenchBuilder::Release(void) {
+void ratchet::OmniWrenchBuilder::Release(void) {
     super::Release();
     //_resource.reset();
 }
 
-void rachet::OmniWrenchBuilder::Construct(std::any shared_this) {
+void ratchet::OmniWrenchBuilder::Construct(std::any shared_this) {
     super::Construct(shared_this);
-    auto temp = std::any_cast<std::shared_ptr<rachet::Actor>>(shared_this);
-    //auto ptr = std::dynamic_pointer_cast<rachet::OmniWrench>(temp);
+    auto temp = std::any_cast<std::shared_ptr<ratchet::Actor>>(shared_this);
+    //auto ptr = std::dynamic_pointer_cast<ratchet::OmniWrench>(temp);
     //ptr->SetResourceManager(_resource);
 }

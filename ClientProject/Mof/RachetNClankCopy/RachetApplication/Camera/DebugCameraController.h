@@ -1,13 +1,13 @@
-#ifndef RACHET_DEBUG_CAMERA_CONTROLLER_H
-#define RACHET_DEBUG_CAMERA_CONTROLLER_H
+#ifndef RATCHET_DEBUG_CAMERA_CONTROLLER_H
+#define RATCHET_DEBUG_CAMERA_CONTROLLER_H
 
 
 #include "CameraController.h"
 
 
-namespace rachet {
-class DebugCameraController: public rachet::CameraController {
-    using super = rachet::CameraController;
+namespace ratchet {
+class DebugCameraController: public ratchet::CameraController {
+    using super = ratchet::CameraController;
 private:
 public:
     /// <summary>
@@ -24,7 +24,7 @@ public:
     /// <param name="delta_time"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time,const rachet::CameraController::CameraInfo& info) override;
+    virtual bool Update(float delta_time,const ratchet::CameraController::CameraInfo& info) override;
 };
 }
-#endif // !RACHET_DEBUG_CAMERA_CONTROLLER_H
+#endif // !RATCHET_DEBUG_CAMERA_CONTROLLER_H

@@ -1,5 +1,5 @@
-#ifndef RACHET_BOLT_MOVED_COMPONENT_H
-#define RACHET_BOLT_MOVED_COMPONENT_H
+#ifndef RATCHET_BOLT_MOVED_COMPONENT_H
+#define RATCHET_BOLT_MOVED_COMPONENT_H
 
 
 #include "BoltActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class BoltMovedComponent : public rachet::BoltActionComponent {
-    using super = rachet::BoltActionComponent;
+namespace ratchet {
+class BoltMovedComponent : public ratchet::BoltActionComponent {
+    using super = ratchet::BoltActionComponent;
 private:
     //! ‘¬“x
     Mof::CVector3 _speed;
@@ -67,7 +67,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -82,4 +82,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RACHET_BOLT_MOVED_COMPONENT_H
+#endif // !RATCHET_BOLT_MOVED_COMPONENT_H

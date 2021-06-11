@@ -1,5 +1,5 @@
-#ifndef RACHET_SAVE_DATA_H
-#define RACHET_SAVE_DATA_H
+#ifndef RATCHET_SAVE_DATA_H
+#define RATCHET_SAVE_DATA_H
 
 
 #include <cstdint>
@@ -7,7 +7,7 @@
 #include <vector>
 
 
-namespace rachet {
+namespace ratchet {
 struct SaveDataParam {
     //! 所持
     int money;
@@ -23,7 +23,7 @@ struct SaveDataParam {
 };
 class SaveData {
 private:
-    rachet::SaveDataParam _param;
+    ratchet::SaveDataParam _param;
 public:
     /// <summary>
     /// コンストラクタ
@@ -50,4 +50,4 @@ public:
     const std::vector<std::string>& GetAvailableMechanicalWeaponsAddress(void);
 };
 }
-#endif // !RACHET_SAVE_DATA_H
+#endif // !RATCHET_SAVE_DATA_H

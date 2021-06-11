@@ -3,60 +3,60 @@
 #include "CollisionComponentDefine.h"
 
 
-rachet::WaterFlowCollisionComponent::WaterFlowCollisionComponent(int priority) :
+ratchet::WaterFlowCollisionComponent::WaterFlowCollisionComponent(int priority) :
     super(priority) {
 }
 
-rachet::WaterFlowCollisionComponent::WaterFlowCollisionComponent(const WaterFlowCollisionComponent& obj) :
+ratchet::WaterFlowCollisionComponent::WaterFlowCollisionComponent(const WaterFlowCollisionComponent& obj) :
     super(obj) {
 }
 
-rachet::WaterFlowCollisionComponent::~WaterFlowCollisionComponent() {
+ratchet::WaterFlowCollisionComponent::~WaterFlowCollisionComponent() {
 }
 
-std::string rachet::WaterFlowCollisionComponent::GetType(void) const {
-    return rachet::CollisionComponentType::kWaterFlowCollisionComponent;
+std::string ratchet::WaterFlowCollisionComponent::GetType(void) const {
+    return ratchet::CollisionComponentType::kWaterFlowCollisionComponent;
 }
 
-std::optional<Mof::CSphere> rachet::WaterFlowCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> ratchet::WaterFlowCollisionComponent::GetSphere(void) {
     return std::optional<Mof::CSphere>();
 }
 
-std::optional<Mof::CBoxAABB> rachet::WaterFlowCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::WaterFlowCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> rachet::WaterFlowCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::WaterFlowCollisionComponent::GetRay(void) {
     return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> rachet::WaterFlowCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::WaterFlowCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<rachet::PlaneObject> rachet::WaterFlowCollisionComponent::GetPlaneObject(void) {
+std::optional<ratchet::PlaneObject> ratchet::WaterFlowCollisionComponent::GetPlaneObject(void) {
     Mof::CMatrix44 scale, rotate, translate;
     scale.Scaling(super::GetOwner()->GetScale(), scale);
     rotate.RotationZXY(super::GetOwner()->GetRotate());
     translate.Translation(super::GetOwner()->GetPosition(), translate);
     Mof::CMatrix44 world = scale * rotate * translate;
     
-    rachet::PlaneObject plane;
+    ratchet::PlaneObject plane;
     plane.normal = math::vec3::kUnitY;
     plane.normal.TransformNormal(world);
     world.GetTranslation(plane.position);
     return plane;
 }
 
-std::optional<rachet::SightObject> rachet::WaterFlowCollisionComponent::GetSightObject(void) {
-    return std::optional<rachet::SightObject>();
+std::optional<ratchet::SightObject> ratchet::WaterFlowCollisionComponent::GetSightObject(void) {
+    return std::optional<ratchet::SightObject>();
 }
 
-bool rachet::WaterFlowCollisionComponent::Initialize(void) {
+bool ratchet::WaterFlowCollisionComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::WaterFlowCollisionComponent::Clone(void) {
-    return std::make_shared<rachet::WaterFlowCollisionComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::WaterFlowCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::WaterFlowCollisionComponent>(*this);
 }

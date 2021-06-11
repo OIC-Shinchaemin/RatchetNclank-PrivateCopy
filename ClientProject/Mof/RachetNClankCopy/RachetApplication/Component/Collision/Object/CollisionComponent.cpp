@@ -4,14 +4,14 @@
 #include "../../VelocityComponent.h"
 
 
-void rachet::CollisionComponent::AddCollisionFunc(const std::string& target, const CollisionFunc& obj, std::unordered_map<std::string, FuncArray>& out) {
+void ratchet::CollisionComponent::AddCollisionFunc(const std::string& target, const CollisionFunc& obj, std::unordered_map<std::string, FuncArray>& out) {
     if (auto it = out.find(target); it == out.end()) {
         out.emplace(target, FuncArray());
     } // if
     out.at(target).push_back(obj);
 }
 
-bool rachet::CollisionComponent::ExecuteFunction(const std::string& key, const rachet::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in) {
+bool ratchet::CollisionComponent::ExecuteFunction(const std::string& key, const ratchet::CollisionInfo& info, const std::unordered_map<std::string, FuncArray>& in) {
     auto it = in.find(key);
     if (it != in.end()) {
         for (const auto& func : it->second) {
@@ -22,7 +22,7 @@ bool rachet::CollisionComponent::ExecuteFunction(const std::string& key, const r
     return false;
 }
 
-bool rachet::CollisionComponent::CollisionShpereAABB(const Mof::CSphere& sphere, const Mof::CBoxAABB& box) {
+bool ratchet::CollisionComponent::CollisionShpereAABB(const Mof::CSphere& sphere, const Mof::CBoxAABB& box) {
     Mof::CVector3 point;
     auto pos = sphere.Position;
     // x
@@ -58,7 +58,7 @@ bool rachet::CollisionComponent::CollisionShpereAABB(const Mof::CSphere& sphere,
     return Mof::CVector3Utilities::Distance(sphere.Position, point) < sphere.r;
 }
 
-rachet::CollisionComponent::CollisionComponent(int priority) :
+ratchet::CollisionComponent::CollisionComponent(int priority) :
     super(priority),
     _collisioned(),
     _on_enter(),
@@ -67,28 +67,28 @@ rachet::CollisionComponent::CollisionComponent(int priority) :
     _velocity_com() {
 }
 
-rachet::CollisionComponent::~CollisionComponent() {
+ratchet::CollisionComponent::~CollisionComponent() {
 }
 
-bool rachet::CollisionComponent::IsSleep(void) const {
+bool ratchet::CollisionComponent::IsSleep(void) const {
     if (auto velocity_com = _velocity_com.lock())  {
         return velocity_com->IsSleep();
     } // if
     return false;
 }
 
-void rachet::CollisionComponent::AddCollisionedObject(const std::shared_ptr<rachet::CollisionComponent>& ptr) {
+void ratchet::CollisionComponent::AddCollisionedObject(const std::shared_ptr<ratchet::CollisionComponent>& ptr) {
     _collisioned.push_back(ptr);
 }
 
-void rachet::CollisionComponent::RemoveCollisionedObject(const std::shared_ptr<rachet::CollisionComponent>& ptr) {
-    ut::EraseRemove(_collisioned, [ptr](const std::weak_ptr<rachet::CollisionComponent>& weak) {
+void ratchet::CollisionComponent::RemoveCollisionedObject(const std::shared_ptr<ratchet::CollisionComponent>& ptr) {
+    ut::EraseRemove(_collisioned, [ptr](const std::weak_ptr<ratchet::CollisionComponent>& weak) {
         return weak.expired() || weak.lock() == ptr;
     });
 }
 
-bool rachet::CollisionComponent::ExistCollisionedObject(const std::shared_ptr<rachet::CollisionComponent>& ptr) {
-    auto it = std::find_if(_collisioned.begin(), _collisioned.end(), [ptr](const std::weak_ptr<rachet::CollisionComponent>& weak) {
+bool ratchet::CollisionComponent::ExistCollisionedObject(const std::shared_ptr<ratchet::CollisionComponent>& ptr) {
+    auto it = std::find_if(_collisioned.begin(), _collisioned.end(), [ptr](const std::weak_ptr<ratchet::CollisionComponent>& weak) {
         return !weak.expired() && weak.lock() == ptr;
     });
     if (it != _collisioned.end()) {
@@ -97,15 +97,15 @@ bool rachet::CollisionComponent::ExistCollisionedObject(const std::shared_ptr<ra
     return false;
 }
 
-void rachet::CollisionComponent::AddCollisionFunc(CollisionFuncType type, const std::string& target, const CollisionFunc& obj) {
+void ratchet::CollisionComponent::AddCollisionFunc(CollisionFuncType type, const std::string& target, const CollisionFunc& obj) {
     switch (type) {
-        case rachet::CollisionComponent::CollisionFuncType::Enter:
+        case ratchet::CollisionComponent::CollisionFuncType::Enter:
             this->AddCollisionFunc(target, obj, _on_enter);
             break;
-        case rachet::CollisionComponent::CollisionFuncType::Stay:
+        case ratchet::CollisionComponent::CollisionFuncType::Stay:
             this->AddCollisionFunc(target, obj, _on_stay);
             break;
-        case rachet::CollisionComponent::CollisionFuncType::Exit:
+        case ratchet::CollisionComponent::CollisionFuncType::Exit:
             this->AddCollisionFunc(target, obj, _on_exit);
             break;
         default:
@@ -113,33 +113,33 @@ void rachet::CollisionComponent::AddCollisionFunc(CollisionFuncType type, const 
     } // switch
 }
 
-bool rachet::CollisionComponent::Initialize(void) {
+bool ratchet::CollisionComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
     return true;
 }
 
-bool rachet::CollisionComponent::ExecuteEnterFunction(const std::string& key, const rachet::CollisionInfo& info) {
+bool ratchet::CollisionComponent::ExecuteEnterFunction(const std::string& key, const ratchet::CollisionInfo& info) {
     return this->ExecuteFunction(key, info, _on_enter);
 }
 
-bool rachet::CollisionComponent::ExecuteStayFunction(const std::string& key, const rachet::CollisionInfo& info) {
+bool ratchet::CollisionComponent::ExecuteStayFunction(const std::string& key, const ratchet::CollisionInfo& info) {
     return this->ExecuteFunction(key, info, _on_stay);
 }
 
-bool rachet::CollisionComponent::ExecuteExitFunction(const std::string& key, const rachet::CollisionInfo& info) {
+bool ratchet::CollisionComponent::ExecuteExitFunction(const std::string& key, const ratchet::CollisionInfo& info) {
     return this->ExecuteFunction(key, info, _on_exit);
 }
 
-void rachet::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void ratchet::CollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
 }
 
-void rachet::CollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
+void ratchet::CollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
 }
 
 #ifdef _DEBUG
-bool rachet::CollisionComponent::DebugRender(void) {
+bool ratchet::CollisionComponent::DebugRender(void) {
     if (this->GetSphere().has_value()) {
         ::CGraphicsUtilities::RenderLineSphere(this->GetSphere().value(), def::color_rgba::kRed);
     } // if

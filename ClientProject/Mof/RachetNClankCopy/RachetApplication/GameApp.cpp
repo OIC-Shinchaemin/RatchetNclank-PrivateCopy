@@ -11,20 +11,20 @@
 MofBool CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("Resource");
 
-    rachet::Gamepad::GetInstance().Create();
-    _resource_manager = ut::MakeSharedWithRelease<rachet::ResourceMgr>();
-    _camera_manager = std::make_shared<rachet::CameraManager>();
-    _light_manager = std::make_shared<rachet::LightManager>();
-    _game_manager = ut::MakeSharedWithRelease<rachet::GameManager>();
-    _event_manager = ut::MakeSharedWithRelease<rachet::EventManager>();
+    ratchet::Gamepad::GetInstance().Create();
+    _resource_manager = ut::MakeSharedWithRelease<ratchet::ResourceMgr>();
+    _camera_manager = std::make_shared<ratchet::CameraManager>();
+    _light_manager = std::make_shared<ratchet::LightManager>();
+    _game_manager = ut::MakeSharedWithRelease<ratchet::GameManager>();
+    _event_manager = ut::MakeSharedWithRelease<ratchet::EventManager>();
     _ui_canvas = std::make_shared<base::ui::UICanvas>();
-    _scene_manager = ut::MakeSharedWithRelease<rachet::SceneManager>();
+    _scene_manager = ut::MakeSharedWithRelease<ratchet::SceneManager>();
 
-    rachet::FactoryManager::Singleton().SetResourceManager(_resource_manager);
-    rachet::FactoryManager::Singleton().SetGameManager(_game_manager);
-    rachet::Component::SetResourceManager(_resource_manager);
-    rachet::Component::SetUICanvas(_ui_canvas);
-    rachet::CameraController::SetCameraManager(_camera_manager);
+    ratchet::FactoryManager::Singleton().SetResourceManager(_resource_manager);
+    ratchet::FactoryManager::Singleton().SetGameManager(_game_manager);
+    ratchet::Component::SetResourceManager(_resource_manager);
+    ratchet::Component::SetUICanvas(_ui_canvas);
+    ratchet::CameraController::SetCameraManager(_camera_manager);
 
     _light_manager->Initialize();
 
@@ -89,6 +89,6 @@ MofBool CGameApp::Release(void) {
     _light_manager.reset();
     _camera_manager.reset();
     _resource_manager.reset();
-    rachet::Gamepad::GetInstance().Release();
+    ratchet::Gamepad::GetInstance().Release();
     return TRUE;
 }

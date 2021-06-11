@@ -3,34 +3,34 @@
 #include "../Factory/FactoryManager.h"
 
 
-rachet::ActionComponent::ActionComponent(int priority) :
+ratchet::ActionComponent::ActionComponent(int priority) :
     super(priority),
     _current_action(),
     _children() {
 }
 
-rachet::ActionComponent::ActionComponent(const ActionComponent& obj) :
+ratchet::ActionComponent::ActionComponent(const ActionComponent& obj) :
     super(obj),
     _current_action(),
     _children() {
     this->_children.reserve(obj._children.size());
     for (auto& child : obj._children) {
-        auto com = std::dynamic_pointer_cast<rachet::ActionComponent>(child.second->Clone());
+        auto com = std::dynamic_pointer_cast<ratchet::ActionComponent>(child.second->Clone());
         this->_children.emplace(com->GetType().c_str(), com);
     } // for
 }
 
-rachet::ActionComponent::~ActionComponent() {
+ratchet::ActionComponent::~ActionComponent() {
 }
 
-void rachet::ActionComponent::SetOwner(const std::shared_ptr<rachet::Actor>& ptr) {
+void ratchet::ActionComponent::SetOwner(const std::shared_ptr<ratchet::Actor>& ptr) {
     super::SetOwner(ptr);
     for (auto& com : _children) {
         com.second->SetOwner(ptr);
     } // for
 }
 
-void rachet::ActionComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::ActionComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* children = "children";
     
@@ -47,29 +47,29 @@ void rachet::ActionComponent::SetParam(const rapidjson::Value& param) {
             auto& child_param = child["paramater"];
             std::string type = child["type"].GetString();
 
-            auto com = rachet::FactoryManager::Singleton().CreateComponent(type.c_str(), child_param);
-            _children.emplace(com->GetType(), std::dynamic_pointer_cast<rachet::ActionComponent>(com));
+            auto com = ratchet::FactoryManager::Singleton().CreateComponent(type.c_str(), child_param);
+            _children.emplace(com->GetType(), std::dynamic_pointer_cast<ratchet::ActionComponent>(com));
         } // for
     } // if
 }
 
-std::string rachet::ActionComponent::GetType(void) const {
+std::string ratchet::ActionComponent::GetType(void) const {
     return "ActionComponent";
 }
 
-std::string_view rachet::ActionComponent::GetStateType(void) const {
+std::string_view ratchet::ActionComponent::GetStateType(void) const {
     return std::string_view();
 }
 
-const std::unordered_map<std::string, std::shared_ptr<rachet::ActionComponent>>& rachet::ActionComponent::GetChildren(void) {
+const std::unordered_map<std::string, std::shared_ptr<ratchet::ActionComponent>>& ratchet::ActionComponent::GetChildren(void) {
     return this->_children;
 }
 
-bool rachet::ActionComponent::IsInput(void) const {
+bool ratchet::ActionComponent::IsInput(void) const {
     return true;
 }
 
-bool rachet::ActionComponent::Initialize(void) {
+bool ratchet::ActionComponent::Initialize(void) {
     super::Initialize();
     // コンポーネントの初期化
     for (auto& com : _children) {
@@ -78,21 +78,21 @@ bool rachet::ActionComponent::Initialize(void) {
     return true;
 }
 
-bool rachet::ActionComponent::Input(void) {
+bool ratchet::ActionComponent::Input(void) {
     if (_current_action) {
         _current_action->Input();
     } // if
     return false;
 }
 
-bool rachet::ActionComponent::Update(float delta_time) {
+bool ratchet::ActionComponent::Update(float delta_time) {
     if (_current_action) {
         _current_action->Update(delta_time);
     } // if
     return false;
 }
 
-bool rachet::ActionComponent::Release(void) {
+bool ratchet::ActionComponent::Release(void) {
     super::Release();
     for (auto& com : _children) {
         com.second->Release();
@@ -101,23 +101,23 @@ bool rachet::ActionComponent::Release(void) {
     return true;
 }
 
-bool rachet::ActionComponent::Start(void) {
+bool ratchet::ActionComponent::Start(void) {
     super::Activate();
     return true;
 }
 
-bool rachet::ActionComponent::End(void) {
+bool ratchet::ActionComponent::End(void) {
     super::Inactivate();
     return true;
 }
 
-void rachet::ActionComponent::ChangeAction(std::string_view name) {
+void ratchet::ActionComponent::ChangeAction(std::string_view name) {
     auto it = _children.find(name.data());
     if (it != _children.end()) {
         _current_action = it->second;
     } // if
 }
 
-std::shared_ptr<rachet::Component> rachet::ActionComponent::Clone(void) {
-    return std::make_shared<rachet::ActionComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::ActionComponent::Clone(void) {
+    return std::make_shared<ratchet::ActionComponent>(*this);
 }

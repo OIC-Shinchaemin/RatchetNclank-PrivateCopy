@@ -39,28 +39,28 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Test\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\Stage.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\Stage.cpp">
       <Filter>Test\Header\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\StageObject.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\StageObject.cpp">
       <Filter>Test\Header\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\Parser\JsonStageParser.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\Parser\JsonStageParser.cpp">
       <Filter>Test\Header\Stage\Parser</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\GimmickBase.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\GimmickBase.cpp">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\MoveCloud.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\MoveCloud.cpp">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\WoodBox.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\WoodBox.cpp">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\Bridge.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\Bridge.cpp">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Stage\Gimmick\Elevator.cpp">
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\Elevator.cpp">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,37 +68,37 @@
     <ClInclude Include="TestApp.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\StageFileFormat.h">
+    <ClInclude Include="..\ratchetApplication\Stage\StageFileFormat.h">
       <Filter>Test\Header\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\StageObject.h">
+    <ClInclude Include="..\ratchetApplication\Stage\StageObject.h">
       <Filter>Test\Header\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Stage.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Stage.h">
       <Filter>Test\Header\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\StageDefine.h">
+    <ClInclude Include="..\ratchetApplication\Stage\StageDefine.h">
       <Filter>Test\Header\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Parser\StageParser.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Parser\StageParser.h">
       <Filter>Test\Header\Stage\Parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Parser\JsonStageParser.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Parser\JsonStageParser.h">
       <Filter>Test\Header\Stage\Parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\GimmickBase.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\GimmickBase.h">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\MoveCloud.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\MoveCloud.h">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\WoodBox.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\WoodBox.h">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\Bridge.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\Bridge.h">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Stage\Gimmick\Elevator.h">
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\Elevator.h">
       <Filter>Test\Header\Stage\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>

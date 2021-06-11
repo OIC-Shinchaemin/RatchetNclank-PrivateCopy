@@ -1,13 +1,13 @@
-#ifndef RACHET_CLEAR_SCENE_H
-#define RACHET_CLEAR_SCENE_H
+#ifndef RATCHET_CLEAR_SCENE_H
+#define RATCHET_CLEAR_SCENE_H
 
 
 #include "Scene.h"
 
 
-namespace rachet {
-class ClearScene : public rachet::Scene {
-    using super = rachet::Scene;
+namespace ratchet {
+class ClearScene : public ratchet::Scene {
+    using super = ratchet::Scene;
 protected:
 /// <summary>
     /// 更新
@@ -41,7 +41,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<rachet::Actor>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -53,7 +53,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Load(std::shared_ptr<rachet::Scene::Param> param) override;
+    virtual bool Load(std::shared_ptr<ratchet::Scene::Param> param) override;
 };
 }
-#endif // !RACHET_CLEAR_SCENE_H
+#endif // !RATCHET_CLEAR_SCENE_H

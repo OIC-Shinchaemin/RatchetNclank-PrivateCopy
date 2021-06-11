@@ -93,7 +93,7 @@ struct Transform {
 };
 } // namespace
 
-namespace rachet {
+namespace ratchet {
 template <typename...FuncArgs>
 class OnEvent : public std::vector<std::pair<std::string, std::function<bool(const FuncArgs...)>>> {
     using OnEventFunc = std::function<bool(const FuncArgs...)>;

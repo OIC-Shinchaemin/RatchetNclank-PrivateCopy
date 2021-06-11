@@ -1,5 +1,5 @@
-#ifndef RACHET_BulletItem_DEFAULT_COMPONENT_H
-#define RACHET_BulletItem_DEFAULT_COMPONENT_H
+#ifndef RATCHET_BulletItem_DEFAULT_COMPONENT_H
+#define RATCHET_BulletItem_DEFAULT_COMPONENT_H
 
 
 #include "BulletItemActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class BulletItemDefaultComponent : public rachet::BulletItemActionComponent {
-    using super = rachet::BulletItemActionComponent;
+namespace ratchet {
+class BulletItemDefaultComponent : public ratchet::BulletItemActionComponent {
+    using super = ratchet::BulletItemActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -60,7 +60,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -75,4 +75,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RACHET_BulletItem_DEFAULT_COMPONENT_H
+#endif // !RATCHET_BulletItem_DEFAULT_COMPONENT_H

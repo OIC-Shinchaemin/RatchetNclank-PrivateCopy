@@ -1,5 +1,5 @@
-#ifndef RACHET_NanotechItem_GRAVITATE_COMPONENT_H
-#define RACHET_NanotechItem_GRAVITATE_COMPONENT_H
+#ifndef RATCHET_NanotechItem_GRAVITATE_COMPONENT_H
+#define RATCHET_NanotechItem_GRAVITATE_COMPONENT_H
 
 
 #include "NanotechItemActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class NanotechItemGravitateComponent : public rachet::NanotechItemActionComponent {
-    using super = rachet::NanotechItemActionComponent;
+namespace ratchet {
+class NanotechItemGravitateComponent : public ratchet::NanotechItemActionComponent {
+    using super = ratchet::NanotechItemActionComponent;
 private:
     //! Œ^
     std::weak_ptr<class NanotechItemComponent> _type_com;
@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -78,4 +78,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RACHET_NanotechItem_GRAVITATE_COMPONENT_H
+#endif // !RATCHET_NanotechItem_GRAVITATE_COMPONENT_H

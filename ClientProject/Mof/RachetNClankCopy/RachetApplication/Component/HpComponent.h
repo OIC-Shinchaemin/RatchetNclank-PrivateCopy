@@ -1,5 +1,5 @@
-#ifndef RACHET_HP_COMPONENT_H
-#define RACHET_HP_COMPONENT_H
+#ifndef RATCHET_HP_COMPONENT_H
+#define RATCHET_HP_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -9,9 +9,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace rachet {
-class HpComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class HpComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! ç≈ëÂíl
     int _hp_max;
@@ -76,7 +76,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// âÒïú
     /// </summary>
@@ -89,4 +89,4 @@ public:
     void Damage(int value);
 };
 }
-#endif // !RACHET_HP_COMPONENT_H
+#endif // !RATCHET_HP_COMPONENT_H

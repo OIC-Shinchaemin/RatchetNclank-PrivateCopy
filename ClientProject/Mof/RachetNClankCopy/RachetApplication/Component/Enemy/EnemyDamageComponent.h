@@ -1,5 +1,5 @@
-#ifndef RACHET_ENEMY_DAMAGE_COMPONENT_H
-#define RACHET_ENEMY_DAMAGE_COMPONENT_H
+#ifndef RATCHET_ENEMY_DAMAGE_COMPONENT_H
+#define RATCHET_ENEMY_DAMAGE_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -10,9 +10,9 @@
 #include "../Collision/Object/CollisionComponent.h"
 
 
-namespace rachet {
-class EnemyDamageComponent : public rachet::ActionComponent {
-    using super = rachet::ActionComponent;
+namespace ratchet {
+class EnemyDamageComponent : public ratchet::ActionComponent {
+    using super = ratchet::ActionComponent;
 private:
     //! 被弾量
     int _damage_value;
@@ -37,7 +37,7 @@ private:
     /// 衝突処理
     /// </summary>
     /// <param name=""></param>
-    void CollisionAction(const rachet::CollisionInfo& in);
+    void CollisionAction(const ratchet::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ
@@ -88,7 +88,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -97,4 +97,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RACHET_ENEMY_DAMAGE_COMPONENT_H
+#endif // !RATCHET_ENEMY_DAMAGE_COMPONENT_H

@@ -1,13 +1,13 @@
-#ifndef RACHET_BOMB_GLOVE_BULLET_ENEMY_COLLISION_ALGOLITHM_H
-#define RACHET_BOMB_GLOVE_BULLET_ENEMY_COLLISION_ALGOLITHM_H
+#ifndef RATCHET_BOMB_GLOVE_BULLET_ENEMY_COLLISION_ALGOLITHM_H
+#define RATCHET_BOMB_GLOVE_BULLET_ENEMY_COLLISION_ALGOLITHM_H
 
 
 #include "CollisionAlgolithm.h"
 
 
-namespace rachet {
-class BombGloveBulletEnemyCollisionAlgolithm : public rachet::CollisionAlgolithm {
-    using super = rachet::CollisionAlgolithm;
+namespace ratchet {
+class BombGloveBulletEnemyCollisionAlgolithm : public ratchet::CollisionAlgolithm {
+    using super = ratchet::CollisionAlgolithm;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,7 +35,7 @@ public:
     /// <param name="object"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    virtual bool IsCollision(std::shared_ptr<rachet::CollisionComponent >object, std::shared_ptr<rachet::CollisionComponent >target, rachet::CollisionInfo& out) override;
+    virtual bool IsCollision(std::shared_ptr<ratchet::CollisionComponent >object, std::shared_ptr<ratchet::CollisionComponent >target, ratchet::CollisionInfo& out) override;
 };
 }
-#endif // !RACHET_BOMB_GLOVE_BULLET_ENEMY_COLLISION_ALGOLITHM_H
+#endif // !RATCHET_BOMB_GLOVE_BULLET_ENEMY_COLLISION_ALGOLITHM_H

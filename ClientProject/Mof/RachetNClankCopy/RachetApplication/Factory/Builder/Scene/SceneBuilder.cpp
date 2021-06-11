@@ -10,7 +10,7 @@ builder::SceneBuilder::SceneBuilder() :
 builder::SceneBuilder::~SceneBuilder() {
 }
 
-void builder::SceneBuilder::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void builder::SceneBuilder::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
@@ -24,7 +24,7 @@ void builder::SceneBuilder::Release(void) {
 }
 
 void builder::SceneBuilder::Construct(std::any shared_this) {
-    auto ptr = std::any_cast<std::shared_ptr<rachet::Scene>>(shared_this);
+    auto ptr = std::any_cast<std::shared_ptr<ratchet::Scene>>(shared_this);
     ptr->SetResourceManager(_resource);
     ptr->SetUICanvas(_ui_canvas);
 }

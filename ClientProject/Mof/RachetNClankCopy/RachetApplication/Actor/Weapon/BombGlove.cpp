@@ -5,7 +5,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-rachet::BombGlove::BombGlove() :
+ratchet::BombGlove::BombGlove() :
     super() {
     super::SetName("BombGlove");
     super::_shot_speed = 10.0f;
@@ -14,19 +14,19 @@ rachet::BombGlove::BombGlove() :
     super::_bullet_count = super::_bullet_count_max;
 }
 
-rachet::BombGlove::~BombGlove() {
+ratchet::BombGlove::~BombGlove() {
 }
 
-bool rachet::BombGlove::IsAction(void) const {
+bool ratchet::BombGlove::IsAction(void) const {
     return ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyPush(MOFKEY_M);
 }
 
-bool rachet::BombGlove::Fire(const def::Transform& transform) {
+bool ratchet::BombGlove::Fire(const def::Transform& transform) {
     super::Fire(transform);
-    auto param = rachet::Bullet::Param();
+    auto param = ratchet::Bullet::Param();
     param.transform = transform;
 
-    auto add = rachet::FactoryManager::Singleton().CreateActor<rachet::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);;
+    auto add = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BombGloveBullet>("../Resource/builder/bomb_glove_bullet.json", &param);;
     if (super::_lock_on_position.has_value()) {
         Mof::CVector3 direction = super::_lock_on_position.value() - param.transform.position;
         auto v = Mof::CVector3(direction.x, 0.0f, direction.z);

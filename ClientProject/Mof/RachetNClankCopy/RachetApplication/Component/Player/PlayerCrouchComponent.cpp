@@ -5,7 +5,7 @@
 #include "PlayerCartwheelJumpComponent.h"
 
 
-rachet::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
+ratchet::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
     super(priority),
     _angular_speed(),
     _ideal_angle(),
@@ -13,7 +13,7 @@ rachet::PlayerCrouchComponent::PlayerCrouchComponent(int priority) :
     _move_com() {
 }
 
-rachet::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent& obj) :
+ratchet::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent& obj) :
     super(obj),
     _angular_speed(0.4f),
     _ideal_angle(),
@@ -21,32 +21,32 @@ rachet::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent
     _move_com() {
 }
 
-rachet::PlayerCrouchComponent::~PlayerCrouchComponent() {
+ratchet::PlayerCrouchComponent::~PlayerCrouchComponent() {
 }
 
-void rachet::PlayerCrouchComponent::SetAngularSpeed(float speed) {
+void ratchet::PlayerCrouchComponent::SetAngularSpeed(float speed) {
     this->_angular_speed = speed;
 }
 
-void rachet::PlayerCrouchComponent::SetIdealAngle(float radian) {
+void ratchet::PlayerCrouchComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
-std::string rachet::PlayerCrouchComponent::GetType(void) const {
+std::string ratchet::PlayerCrouchComponent::GetType(void) const {
     return "PlayerCrouchComponent";
 }
 
-std::string_view rachet::PlayerCrouchComponent::GetStateType(void) const {
+std::string_view ratchet::PlayerCrouchComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionCrouchState;
 }
 
-bool rachet::PlayerCrouchComponent::Initialize(void) {
+bool ratchet::PlayerCrouchComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
     return true;
 }
 
-bool rachet::PlayerCrouchComponent::Input(void) {
+bool ratchet::PlayerCrouchComponent::Input(void) {
     using Type = state::PlayerActionStateType;
     if (::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN)) {
         super::ChangeActionState(Type::kPlayerActionIdleState);
@@ -56,8 +56,8 @@ bool rachet::PlayerCrouchComponent::Input(void) {
     } // else if
 
 
-    if (auto move_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerMoveComponent>()) {
-        auto camera_com = super::GetOwner()->GetComponent<rachet::CameraComponent>();
+    if (auto move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>()) {
+        auto camera_com = super::GetOwner()->GetComponent<ratchet::CameraComponent>();
 
         Mof::CVector2 in; float move_angle;
         if (move_com->AquireInputData(in, move_angle)) {
@@ -79,7 +79,7 @@ bool rachet::PlayerCrouchComponent::Input(void) {
                     move_angle += math::kHalfPi + camera_angle_y;
 
                     MOF_NORMALIZE_RADIANANGLE(move_angle);
-                    super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerCartwheelJumpComponent>()->SetMoveAngle(move_angle);
+                    super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerCartwheelJumpComponent>()->SetMoveAngle(move_angle);
                     super::ChangeActionState(Type::kPlayerActionCartwheelJumpState);
                 } // if
             } // if
@@ -98,7 +98,7 @@ bool rachet::PlayerCrouchComponent::Input(void) {
     return true;
 }
 
-bool rachet::PlayerCrouchComponent::Update(float delta_time) {
+bool ratchet::PlayerCrouchComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
     auto& [in, move_angle, move_flag] = _input_info;
     if (move_flag) {
@@ -107,17 +107,17 @@ bool rachet::PlayerCrouchComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::PlayerCrouchComponent::Release(void) {
+bool ratchet::PlayerCrouchComponent::Release(void) {
     super::Release();
     _move_com.reset();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerCrouchComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerCrouchComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerCrouchComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerCrouchComponent>(*this);
 }
 
-bool rachet::PlayerCrouchComponent::Start(void) {
+bool ratchet::PlayerCrouchComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

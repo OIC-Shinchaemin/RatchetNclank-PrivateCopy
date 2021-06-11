@@ -1,5 +1,5 @@
-#ifndef RACHET_COMPONENT_CREATOR_H
-#define RACHET_COMPONENT_CREATOR_H
+#ifndef RATCHET_COMPONENT_CREATOR_H
+#define RATCHET_COMPONENT_CREATOR_H
 
 
 #include <memory>
@@ -9,11 +9,11 @@
 #include "../Component/Component.h"
 
 
-namespace rachet {
+namespace ratchet {
 class ComponentCreator {
 private:
     //! コピー元
-    std::unique_ptr<rachet::Component> _origin;
+    std::unique_ptr<ratchet::Component> _origin;
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,7 +43,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::Component> Create(const rapidjson::Value& param) const;
+    std::shared_ptr<ratchet::Component> Create(const rapidjson::Value& param) const;
     /// <summary>
     /// 解放
     /// </summary>
@@ -51,4 +51,4 @@ public:
     void Release(void);
 };
 }
-#endif // !RACHET_COMPONENT_CREATOR_H
+#endif // !RATCHET_COMPONENT_CREATOR_H

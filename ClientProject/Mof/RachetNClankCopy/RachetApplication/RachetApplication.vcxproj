@@ -48,6 +48,7 @@
     <ProjectGuid>{14677a1d-5224-40d4-bbd7-8639df69e703}</ProjectGuid>
     <RootNamespace>RachetApplication</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>RatchetApplication</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

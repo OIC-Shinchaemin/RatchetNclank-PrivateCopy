@@ -1,11 +1,11 @@
-#ifndef RACHET_COLLISION_ALGOLITHM_DEFINE_H
-#define RACHET_COLLISION_ALGOLITHM_DEFINE_H
+#ifndef RATCHET_COLLISION_ALGOLITHM_DEFINE_H
+#define RATCHET_COLLISION_ALGOLITHM_DEFINE_H
 
 
 #include <string>
 
 
-namespace rachet {
+namespace ratchet {
 struct CollisionAlgolithmType {
     static std::string kPlayerEnemyCollisionAlgolithm;
     static std::string kPlayerEnemyMeleeAttackCollisionAlgolithm;
@@ -33,4 +33,4 @@ struct CollisionAlgolithmType {
     static std::string kPlayerShopCollisionAlgolithm;
 };
 }
-#endif // !RACHET_COLLISION_ALGOLITHM_DEFINE_H
+#endif // !RATCHET_COLLISION_ALGOLITHM_DEFINE_H

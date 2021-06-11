@@ -19,17 +19,17 @@ class MeleeAttackNodeExecutor : public behaviour::ActionNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<rachet::Actor> actor;
+        std::weak_ptr<ratchet::Actor> actor;
         //! AI
-        std::weak_ptr<rachet::AIStateComponent> ai_com;
+        std::weak_ptr<ratchet::AIStateComponent> ai_com;
         //! モーション
-        std::weak_ptr<rachet::MotionComponent> motion_com;
+        std::weak_ptr<ratchet::MotionComponent> motion_com;
         //! エネミー
-        std::weak_ptr<rachet::EnemyComponent> ENEMY_com;
+        std::weak_ptr<ratchet::EnemyComponent> ENEMY_com;
         //! エネミー状態
-        std::weak_ptr<rachet::EnemyStateComponent> state_com;
+        std::weak_ptr<ratchet::EnemyStateComponent> state_com;
         //! 攻撃
-        std::weak_ptr<rachet::EnemyMeleeAttackComponent> attack_com;
+        std::weak_ptr<ratchet::EnemyMeleeAttackComponent> attack_com;
     };
 private:
     //! 実行引数
@@ -55,11 +55,11 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.ai_com = actor->GetComponent<rachet::AIStateComponent>();
-            _node_args.motion_com = actor->GetComponent<rachet::MotionComponent>();
-            _node_args.ENEMY_com = actor->GetComponent<rachet::EnemyComponent>();
-            _node_args.state_com = actor->GetComponent<rachet::EnemyStateComponent>();
-            _node_args.attack_com = actor->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::EnemyMeleeAttackComponent>();
+            _node_args.ai_com = actor->GetComponent<ratchet::AIStateComponent>();
+            _node_args.motion_com = actor->GetComponent<ratchet::MotionComponent>();
+            _node_args.ENEMY_com = actor->GetComponent<ratchet::EnemyComponent>();
+            _node_args.state_com = actor->GetComponent<ratchet::EnemyStateComponent>();
+            _node_args.attack_com = actor->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::EnemyMeleeAttackComponent>();
         } // if
     }
     /// <summary>

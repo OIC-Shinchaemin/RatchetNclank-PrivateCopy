@@ -15,7 +15,7 @@ class TitleSceneBuilder : public builder::SceneBuilder {
     using super = builder::SceneBuilder;
 private:
     //! ゲーム
-    std::weak_ptr<rachet::GameManager> _game;
+    std::weak_ptr<ratchet::GameManager> _game;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,7 +29,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<rachet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
     /// <summary>
     /// 解放
     /// </summary>

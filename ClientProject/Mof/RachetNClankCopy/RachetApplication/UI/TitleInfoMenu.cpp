@@ -1,7 +1,7 @@
 ﻿#include "TitleInfoMenu.h"
 
 
-rachet::TitleInfoMenu::TitleInfoMenu(const char* name) :
+ratchet::TitleInfoMenu::TitleInfoMenu(const char* name) :
     super(name),
     _show(true),
     _resource(),
@@ -14,11 +14,11 @@ rachet::TitleInfoMenu::TitleInfoMenu(const char* name) :
     _ASSERT_EXPR(loaded_font, L"フォントを作成できませんでした");
 }
 
-rachet::TitleInfoMenu::~TitleInfoMenu() {
+ratchet::TitleInfoMenu::~TitleInfoMenu() {
     _font.Release();
 }
 
-void rachet::TitleInfoMenu::OnNotify(bool show) {
+void ratchet::TitleInfoMenu::OnNotify(bool show) {
     if (show) {
         super::Notify(shared_from_this(), "Enable");
         _start = false;
@@ -27,27 +27,27 @@ void rachet::TitleInfoMenu::OnNotify(bool show) {
     _show = show;
 }
 
-void rachet::TitleInfoMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::TitleInfoMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void rachet::TitleInfoMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void ratchet::TitleInfoMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-bool rachet::TitleInfoMenu::Initialize(void) {
+bool ratchet::TitleInfoMenu::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool rachet::TitleInfoMenu::Update(float delta_time) {
+bool ratchet::TitleInfoMenu::Update(float delta_time) {
     if (_show_timer.Tick(delta_time)) {
         _start = true;
     } // if
     return true;
 }
 
-bool rachet::TitleInfoMenu::Render(void) {
+bool ratchet::TitleInfoMenu::Render(void) {
     if (!_show) {
         return false;
     } // if

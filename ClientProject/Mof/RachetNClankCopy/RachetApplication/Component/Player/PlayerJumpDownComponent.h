@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_JUMP_DOWN_COMPONENT_H
-#define RACHET_PLAYER_JUMP_DOWN_COMPONENT_H
+#ifndef RATCHET_PLAYER_JUMP_DOWN_COMPONENT_H
+#define RATCHET_PLAYER_JUMP_DOWN_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,10 +7,10 @@
 #include <memory>
 
 
-namespace rachet {
-class PlayerJumpDownComponent : public rachet::PlayerActionComponent {
-    using super = rachet::PlayerActionComponent;
-    using This = rachet::PlayerJumpDownComponent;
+namespace ratchet {
+class PlayerJumpDownComponent : public ratchet::PlayerActionComponent {
+    using super = ratchet::PlayerActionComponent;
+    using This = ratchet::PlayerJumpDownComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -90,7 +90,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -99,4 +99,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RACHET_PLAYER_JUMP_DOWN_COMPONENT_H
+#endif // !RATCHET_PLAYER_JUMP_DOWN_COMPONENT_H

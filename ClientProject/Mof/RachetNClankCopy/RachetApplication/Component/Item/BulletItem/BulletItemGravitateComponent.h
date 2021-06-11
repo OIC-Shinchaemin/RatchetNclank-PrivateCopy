@@ -1,5 +1,5 @@
-#ifndef RACHET_BulletItem_GRAVITATE_COMPONENT_H
-#define RACHET_BulletItem_GRAVITATE_COMPONENT_H
+#ifndef RATCHET_BulletItem_GRAVITATE_COMPONENT_H
+#define RATCHET_BulletItem_GRAVITATE_COMPONENT_H
 
 
 #include "BulletItemActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class BulletItemGravitateComponent : public rachet::BulletItemActionComponent {
-    using super = rachet::BulletItemActionComponent;
+namespace ratchet {
+class BulletItemGravitateComponent : public ratchet::BulletItemActionComponent {
+    using super = ratchet::BulletItemActionComponent;
 private:
     //! Œ^
     std::weak_ptr<class BulletItemComponent> _type_com;
@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -78,4 +78,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RACHET_BulletItem_GRAVITATE_COMPONENT_H
+#endif // !RATCHET_BulletItem_GRAVITATE_COMPONENT_H

@@ -1,19 +1,19 @@
-#ifndef RACHET_FOLLOW_CAMERA_CONTROLLER_H
-#define RACHET_FOLLOW_CAMERA_CONTROLLER_H
+#ifndef RATCHET_FOLLOW_CAMERA_CONTROLLER_H
+#define RATCHET_FOLLOW_CAMERA_CONTROLLER_H
 
 
 #include "CameraController.h"
 
 
-namespace rachet {
-class FollowCameraController: public rachet::CameraController {
-    using super = rachet::CameraController;
+namespace ratchet {
+class FollowCameraController: public ratchet::CameraController {
+    using super = ratchet::CameraController;
 private:
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name=""></param>
-    void UpdateCameraPosition(float delta_time, const std::shared_ptr<rachet::Camera>& camera);
+    void UpdateCameraPosition(float delta_time, const std::shared_ptr<ratchet::Camera>& camera);
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,7 +29,7 @@ public:
     /// <param name="delta_time"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time, const rachet::CameraController::CameraInfo& info) override;
+    virtual bool Update(float delta_time, const ratchet::CameraController::CameraInfo& info) override;
 };
 }
-#endif // !RACHET_FOLLOW_CAMERA_CONTROLLER_H
+#endif // !RATCHET_FOLLOW_CAMERA_CONTROLLER_H

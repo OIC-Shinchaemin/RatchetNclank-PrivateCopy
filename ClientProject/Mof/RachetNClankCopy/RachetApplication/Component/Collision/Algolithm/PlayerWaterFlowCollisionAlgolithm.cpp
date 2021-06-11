@@ -5,22 +5,22 @@
 #include "../../Player/PlayerComponent.h"
 
 
-rachet::PlayerWaterFlowCollisionAlgolithm::PlayerWaterFlowCollisionAlgolithm() :
+ratchet::PlayerWaterFlowCollisionAlgolithm::PlayerWaterFlowCollisionAlgolithm() :
     super() {
 }
 
-rachet::PlayerWaterFlowCollisionAlgolithm::~PlayerWaterFlowCollisionAlgolithm() {
+ratchet::PlayerWaterFlowCollisionAlgolithm::~PlayerWaterFlowCollisionAlgolithm() {
 }
 
-const char* rachet::PlayerWaterFlowCollisionAlgolithm::GetLayerType(void) const {
-    return rachet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+const char* ratchet::PlayerWaterFlowCollisionAlgolithm::GetLayerType(void) const {
+    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-const char* rachet::PlayerWaterFlowCollisionAlgolithm::GetTargetType(void) const {
-    return rachet::CollisionComponentType::kWaterFlowCollisionComponent.c_str();
+const char* ratchet::PlayerWaterFlowCollisionAlgolithm::GetTargetType(void) const {
+    return ratchet::CollisionComponentType::kWaterFlowCollisionComponent.c_str();
 }
 
-bool rachet::PlayerWaterFlowCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
+bool ratchet::PlayerWaterFlowCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetRay().has_value() || !target->GetPlaneObject().has_value()) {
         return false;
@@ -30,7 +30,7 @@ bool rachet::PlayerWaterFlowCollisionAlgolithm::IsCollision(std::shared_ptr<rach
     
     // 平面
     if (float distance; ray.CollisionPlane(plane.position, plane.normal, distance)) {
-        if (auto com = object->GetOwner()->GetComponent<rachet::PlayerComponent>(); com) {
+        if (auto com = object->GetOwner()->GetComponent<ratchet::PlayerComponent>(); com) {
             if (com->GetNextTerrain() != "Ground") {
                 com->SetNextTerrain("WaterFlow");
             } // if

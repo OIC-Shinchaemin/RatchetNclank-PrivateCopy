@@ -1,28 +1,28 @@
 #include "ActorBuilder.h"
 
 
-rachet::ActorBuilder::ActorBuilder() :
+ratchet::ActorBuilder::ActorBuilder() :
     _param(),
     _components() {
 }
 
-rachet::ActorBuilder::~ActorBuilder() {
+ratchet::ActorBuilder::~ActorBuilder() {
 }
 
-void rachet::ActorBuilder::SetActorParam(const rachet::Actor::Param& param) {
+void ratchet::ActorBuilder::SetActorParam(const ratchet::Actor::Param& param) {
     this->_param = param;
 }
 
-void rachet::ActorBuilder::AddComponent(const std::shared_ptr<rachet::Component>& component) {
+void ratchet::ActorBuilder::AddComponent(const std::shared_ptr<ratchet::Component>& component) {
     _components.push_back(component);
 }
 
-void rachet::ActorBuilder::Release(void) {
+void ratchet::ActorBuilder::Release(void) {
     _components.clear();
 }
 
-void rachet::ActorBuilder::Construct(std::any shared_this) {
-    auto ptr = std::any_cast<std::shared_ptr<rachet::Actor>>(shared_this);
+void ratchet::ActorBuilder::Construct(std::any shared_this) {
+    auto ptr = std::any_cast<std::shared_ptr<ratchet::Actor>>(shared_this);
    
     ptr->CloneToComponents(_components);
     ptr->SetName(_param.name.c_str());

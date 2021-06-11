@@ -1,5 +1,5 @@
-#ifndef RACHET_ACTION_STATE_COMPONENT_H
-#define RACHET_ACTION_STATE_COMPONENT_H
+#ifndef RATCHET_ACTION_STATE_COMPONENT_H
+#define RATCHET_ACTION_STATE_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -12,9 +12,9 @@
 #include "../State/ActionState.h"
 
 
-namespace rachet {
-class ActionStateComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class ActionStateComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! ó\ñÒ
     std::optional<std::string> _next_state;
@@ -28,7 +28,7 @@ protected:
     /// </summary>
     /// <typeparam name="State"></typeparam>
     /// <param name="out"></param>
-    void RegisterState(base::core::StateMachine& out, std::shared_ptr<rachet::ActionComponent> com) {
+    void RegisterState(base::core::StateMachine& out, std::shared_ptr<ratchet::ActionComponent> com) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::ActionState>();
         ptr->SetActionComponent(com);
@@ -84,7 +84,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ïœçX
     /// </summary>
@@ -92,4 +92,4 @@ public:
     void ChangeState(const std::string& name);
 };
 }
-#endif // !RACHET_ACTION_STATE_COMPONENT_H
+#endif // !RATCHET_ACTION_STATE_COMPONENT_H

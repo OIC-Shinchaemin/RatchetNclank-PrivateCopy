@@ -11,7 +11,7 @@ class NotAwayFromHomeNodeExecutor : public behaviour::ConditionalNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<rachet::Actor> actor;
+        std::weak_ptr<ratchet::Actor> actor;
     };
 private:
     //! 実行引数

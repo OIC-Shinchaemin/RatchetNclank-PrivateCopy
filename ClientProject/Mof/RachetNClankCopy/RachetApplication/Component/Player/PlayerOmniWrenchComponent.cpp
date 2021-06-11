@@ -8,7 +8,7 @@
 #include "../../State/OmniWrenchActionStateDefine.h"
 
 
-rachet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(int priority) :
+ratchet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(int priority) :
     super(priority),
     _weapon(),
     _throw_attack_com(),
@@ -16,7 +16,7 @@ rachet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(int priority) :
     _weapon_coll_com() {
 }
 
-rachet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(const PlayerOmniWrenchComponent& obj) :
+ratchet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(const PlayerOmniWrenchComponent& obj) :
     super(obj),
     _weapon(),
     _throw_attack_com(),
@@ -24,29 +24,29 @@ rachet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(const PlayerOmniWre
     _weapon_coll_com() {
 }
 
-rachet::PlayerOmniWrenchComponent::~PlayerOmniWrenchComponent() {
+ratchet::PlayerOmniWrenchComponent::~PlayerOmniWrenchComponent() {
 }
 
-void rachet::PlayerOmniWrenchComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::PlayerOmniWrenchComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
 }
 
-std::string rachet::PlayerOmniWrenchComponent::GetType(void) const {
+std::string ratchet::PlayerOmniWrenchComponent::GetType(void) const {
     return "PlayerOmniWrenchComponent";
 }
 
-bool rachet::PlayerOmniWrenchComponent::Activate(void) {
+bool ratchet::PlayerOmniWrenchComponent::Activate(void) {
     super::Activate();
 
-    auto owner = std::dynamic_pointer_cast<rachet::Player>(super::GetOwner());
+    auto owner = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
     _weapon = owner->GetChild("OmniWrench");
     if (auto weapon = _weapon.lock()) {
         // cache
-        owner->OnNotify(std::dynamic_pointer_cast<rachet::Weapon>(weapon));
-        _weapon_coll_com = weapon->GetComponent<rachet::OmniWrenchCollisionComponent>();
-        _weapon_action_state_com = weapon->GetComponent<rachet::OmniWrenchActionStateComponent>();
+        owner->OnNotify(std::dynamic_pointer_cast<ratchet::Weapon>(weapon));
+        _weapon_coll_com = weapon->GetComponent<ratchet::OmniWrenchCollisionComponent>();
+        _weapon_action_state_com = weapon->GetComponent<ratchet::OmniWrenchActionStateComponent>();
 
-        auto throw_com = weapon->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::OmniWrenchThrowedComponent>();
+        auto throw_com = weapon->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::OmniWrenchThrowedComponent>();
         throw_com->SetWeaponOwner(super::GetOwner());
     } // if
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {
@@ -63,22 +63,22 @@ bool rachet::PlayerOmniWrenchComponent::Activate(void) {
     return true;
 }
 
-bool rachet::PlayerOmniWrenchComponent::Inactivate(void) {
+bool ratchet::PlayerOmniWrenchComponent::Inactivate(void) {
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {
         weapon_coll_com->Inactivate();
     } // if
     return true;
 }
 
-bool rachet::PlayerOmniWrenchComponent::Initialize(void) {
+bool ratchet::PlayerOmniWrenchComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    _throw_attack_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerThrowAttackComponent>();
+    _throw_attack_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerThrowAttackComponent>();
     return true;
 }
 
-bool rachet::PlayerOmniWrenchComponent::Release(void) {
+bool ratchet::PlayerOmniWrenchComponent::Release(void) {
     super::Release();
     _weapon.reset();
     _throw_attack_com.reset();
@@ -87,6 +87,6 @@ bool rachet::PlayerOmniWrenchComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerOmniWrenchComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerOmniWrenchComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerOmniWrenchComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerOmniWrenchComponent>(*this);
 }

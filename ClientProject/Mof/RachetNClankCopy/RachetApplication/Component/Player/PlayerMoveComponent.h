@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_MOVE_COMPONENT_H
-#define RACHET_PLAYER_MOVE_COMPONENT_H
+#ifndef RATCHET_PLAYER_MOVE_COMPONENT_H
+#define RATCHET_PLAYER_MOVE_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class PlayerMoveComponent : public rachet::PlayerActionComponent {
-    using super = rachet::PlayerActionComponent;
+namespace ratchet {
+class PlayerMoveComponent : public ratchet::PlayerActionComponent {
+    using super = ratchet::PlayerActionComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -34,7 +34,7 @@ private:
     //! ラジアン
     float _ideal_angle;
     //! 入力情報
-    rachet::PlayerMoveComponent::InputInfo _input_info;
+    ratchet::PlayerMoveComponent::InputInfo _input_info;
     //! 状態
     std::weak_ptr<class PlayerComponent> _type_com;
     //! カメラ
@@ -134,7 +134,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -158,4 +158,4 @@ public:
     bool AquireInputData(Mof::CVector2& stick, float& move_angle);
 };
 }
-#endif // !RACHET_PLAYER_MOVE_COMPONENT_H
+#endif // !RATCHET_PLAYER_MOVE_COMPONENT_H

@@ -1,5 +1,5 @@
-#ifndef RACHET_OMNI_WRENCH_THROWED_COMPONENT_H
-#define RACHET_OMNI_WRENCH_THROWED_COMPONENT_H
+#ifndef RATCHET_OMNI_WRENCH_THROWED_COMPONENT_H
+#define RATCHET_OMNI_WRENCH_THROWED_COMPONENT_H
 
 
 #include "../../ActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class OmniWrenchThrowedComponent : public rachet::ActionComponent {
-    using super = rachet::ActionComponent;
+namespace ratchet {
+class OmniWrenchThrowedComponent : public ratchet::ActionComponent {
+    using super = ratchet::ActionComponent;
 private:
     //! 遷移
     Mof::CVector3 _local_translate;
@@ -22,7 +22,7 @@ private:
     //! 進行方向
     Mof::CVector3 _ideal_move_direction;
     //! 所有者
-    std::weak_ptr<rachet::Actor> _weapon_owner;
+    std::weak_ptr<ratchet::Actor> _weapon_owner;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! 状態
@@ -48,7 +48,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetWeaponOwner(const std::shared_ptr<rachet::Actor>& ptr);
+    void SetWeaponOwner(const std::shared_ptr<ratchet::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -84,7 +84,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -99,4 +99,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RACHET_OMNI_WRENCH_THROWED_COMPONENT_H
+#endif // !RATCHET_OMNI_WRENCH_THROWED_COMPONENT_H

@@ -1,5 +1,5 @@
-#ifndef RACHET_ANIMATION_MESH_COMPONENT_H
-#define RACHET_ANIMATION_MESH_COMPONENT_H
+#ifndef RATCHET_ANIMATION_MESH_COMPONENT_H
+#define RATCHET_ANIMATION_MESH_COMPONENT_H
 
 
 #include "MeshComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class AnimationMeshComponent : public rachet::MeshComponent {
-    using super = rachet::MeshComponent;
+namespace ratchet {
+class AnimationMeshComponent : public ratchet::MeshComponent {
+    using super = ratchet::MeshComponent;
 protected:
     //! アニメーション
     std::weak_ptr<class MotionComponent> _motion_com;
@@ -57,7 +57,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_ANIMATION_MESH_COMPONENT_H
+#endif // !RATCHET_ANIMATION_MESH_COMPONENT_H

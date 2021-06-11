@@ -8,62 +8,62 @@
 #include "NanotechItemActionStateComponent.h"
 
 
-rachet::NanotechItemComponent::NanotechItemComponent(int priority) :
+ratchet::NanotechItemComponent::NanotechItemComponent(int priority) :
     super(priority),
     _param(),
     _player(),
     _state_com() {
 }
 
-rachet::NanotechItemComponent::NanotechItemComponent(const NanotechItemComponent& obj) :
+ratchet::NanotechItemComponent::NanotechItemComponent(const NanotechItemComponent& obj) :
     super(obj),
     _param(),
     _player(),
     _state_com() {
 }
 
-rachet::NanotechItemComponent::~NanotechItemComponent() {
+ratchet::NanotechItemComponent::~NanotechItemComponent() {
 }
 
-void rachet::NanotechItemComponent::SetActorParam(const rachet::NanotechItem::Param& param) {
+void ratchet::NanotechItemComponent::SetActorParam(const ratchet::NanotechItem::Param& param) {
     this->_param = param;
 }
 
-std::string rachet::NanotechItemComponent::GetType(void) const {
+std::string ratchet::NanotechItemComponent::GetType(void) const {
     return "NanotechItemComponent";
 }
 
-const rachet::NanotechItem::Param& rachet::NanotechItemComponent::GetActorParam(void) const {
+const ratchet::NanotechItem::Param& ratchet::NanotechItemComponent::GetActorParam(void) const {
     return this->_param;
 }
 
-std::shared_ptr<rachet::Actor> rachet::NanotechItemComponent::GetPlayer(void) const {
+std::shared_ptr<ratchet::Actor> ratchet::NanotechItemComponent::GetPlayer(void) const {
     if (auto ptr = _player.lock()) {
         return ptr;
     } // if
     return nullptr;
 }
 
-bool rachet::NanotechItemComponent::Initialize(void) {
+bool ratchet::NanotechItemComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    _state_com = super::GetOwner()->GetComponent<rachet::NanotechItemActionStateComponent>();
-    auto velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::NanotechItemActionStateComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
     velocity_com->SetGravity(0.8f);
 
-    auto coll_com = super::GetOwner()->GetComponent<rachet::NanotechItemCollisionComponent>();
-    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
-                               rachet::CollisionComponentType::kPlayerCollisionComponent,
-                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::NanotechItemCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::CollisionComponentType::kPlayerCollisionComponent,
+                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         super::GetOwner()->End();
         return true;
     }));
 
-    auto sight_coll = super::GetOwner()->GetComponent<rachet::SightCollisionComponent>();
-    sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
-                                 rachet::CollisionComponentType::kPlayerCollisionComponent,
-                                 rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+    auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
+    sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
+                                 ratchet::CollisionComponentType::kPlayerCollisionComponent,
+                                 ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         if (auto state_com = _state_com.lock()) {
             if (state_com->CanTransition(state::NanotechItemActionType::kGravitate)) {
                 state_com->ChangeState(state::NanotechItemActionType::kGravitate);
@@ -75,15 +75,15 @@ bool rachet::NanotechItemComponent::Initialize(void) {
     return true;
 }
 
-bool rachet::NanotechItemComponent::Update(float delta_time) {
+bool ratchet::NanotechItemComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::NanotechItemComponent::Release(void) {
+bool ratchet::NanotechItemComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::NanotechItemComponent::Clone(void) {
-    return std::make_shared<rachet::NanotechItemComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::NanotechItemComponent::Clone(void) {
+    return std::make_shared<ratchet::NanotechItemComponent>(*this);
 }

@@ -1,5 +1,5 @@
-#ifndef RACHET_STATE_ACTION_STATE_H
-#define RACHET_STATE_ACTION_STATE_H
+#ifndef RATCHET_STATE_ACTION_STATE_H
+#define RATCHET_STATE_ACTION_STATE_H
 
 
 #include "Base/Core/State.h"
@@ -13,7 +13,7 @@ namespace state {
 class ActionState : public base::core::State {
 private:
     //! アクション
-    std::weak_ptr<rachet::ActionComponent> _action_com;
+    std::weak_ptr<ratchet::ActionComponent> _action_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,7 +27,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetActionComponent(const std::shared_ptr<rachet::ActionComponent>& ptr);
+    virtual void SetActionComponent(const std::shared_ptr<ratchet::ActionComponent>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -51,4 +51,4 @@ public:
     virtual void Exit(void) override;
 };
 }
-#endif // !RACHET_STATE_PLAYER_ACTION_STATE_H
+#endif // !RATCHET_STATE_PLAYER_ACTION_STATE_H

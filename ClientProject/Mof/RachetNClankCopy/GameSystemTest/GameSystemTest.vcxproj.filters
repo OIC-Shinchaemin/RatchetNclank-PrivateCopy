@@ -54,7 +54,7 @@
     <ClCompile Include="..\include\My\Core\Timer.cpp">
       <Filter>Test\Base\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Gamepad.cpp">
+    <ClCompile Include="..\ratchetApplication\Gamepad.cpp">
       <Filter>Test\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\include\My\UI\UIItem.cpp">
@@ -66,58 +66,58 @@
     <ClCompile Include="..\include\My\UI\UICanvas.cpp">
       <Filter>Test\Base\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameSystem.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\GameSystem.cpp">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\HelpDesk.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\HelpDesk.cpp">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\QuickChangeSystem.cpp">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\ShopSystem.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\ShopSystem.cpp">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\WeaponSystem.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\WeaponSystem.cpp">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameMoney.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\GameMoney.cpp">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\GameQuest.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\GameQuest.cpp">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\Save\SaveSystem.cpp">
       <Filter>Test\Source\Game\GameSystem\Save</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameSystem\Save\SaveData.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameSystem\Save\SaveData.cpp">
       <Filter>Test\Source\Game\GameSystem\Save</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Game\GameManager.cpp">
+    <ClCompile Include="..\ratchetApplication\Game\GameManager.cpp">
       <Filter>Test\Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\UI\HelpDeskMenu.cpp">
+    <ClCompile Include="..\ratchetApplication\UI\HelpDeskMenu.cpp">
       <Filter>Test\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\UI\LockOnCursorMenu.cpp">
+    <ClCompile Include="..\ratchetApplication\UI\LockOnCursorMenu.cpp">
       <Filter>Test\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\UI\NanotechMenu.cpp">
+    <ClCompile Include="..\ratchetApplication\UI\NanotechMenu.cpp">
       <Filter>Test\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\UI\QuickChangeMenu.cpp">
+    <ClCompile Include="..\ratchetApplication\UI\QuickChangeMenu.cpp">
       <Filter>Test\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\UI\ShopSystemMenu.cpp">
+    <ClCompile Include="..\ratchetApplication\UI\ShopSystemMenu.cpp">
       <Filter>Test\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\UI\EquipmentWeaponMenu.cpp">
+    <ClCompile Include="..\ratchetApplication\UI\EquipmentWeaponMenu.cpp">
       <Filter>Test\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\UI\GameMoneyMenu.cpp">
+    <ClCompile Include="..\ratchetApplication\UI\GameMoneyMenu.cpp">
       <Filter>Test\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Actor.cpp">
+    <ClCompile Include="..\ratchetApplication\Actor.cpp">
       <Filter>Test\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,7 +164,7 @@
     <ClInclude Include="..\include\My\Core\Math.h">
       <Filter>Test\Base\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Gamepad.h">
+    <ClInclude Include="..\ratchetApplication\Gamepad.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\include\My\UI\UICanvas.h">
@@ -176,67 +176,67 @@
     <ClInclude Include="..\include\My\UI\UIPanel.h">
       <Filter>Test\Base\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameSystem.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\GameSystem.h">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\HelpDesk.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\HelpDesk.h">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\QuickChangeSystem.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\QuickChangeSystem.h">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\ShopSystem.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\ShopSystem.h">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\WeaponSystem.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\WeaponSystem.h">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameMoney.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\GameMoney.h">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\GameQuest.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\GameQuest.h">
       <Filter>Test\Source\Game\GameSystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveData.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\Save\SaveData.h">
       <Filter>Test\Source\Game\GameSystem\Save</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameSystem\Save\SaveSystem.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameSystem\Save\SaveSystem.h">
       <Filter>Test\Source\Game\GameSystem\Save</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Game\GameManager.h">
+    <ClInclude Include="..\ratchetApplication\Game\GameManager.h">
       <Filter>Test\Source\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\GameApp.h">
+    <ClInclude Include="..\ratchetApplication\GameApp.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\GameDefine.h">
+    <ClInclude Include="..\ratchetApplication\GameDefine.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\ResourceManager.h">
+    <ClInclude Include="..\ratchetApplication\ResourceManager.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\UI\HelpDeskMenu.h">
+    <ClInclude Include="..\ratchetApplication\UI\HelpDeskMenu.h">
       <Filter>Test\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\UI\LockOnCursorMenu.h">
+    <ClInclude Include="..\ratchetApplication\UI\LockOnCursorMenu.h">
       <Filter>Test\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\UI\NanotechMenu.h">
+    <ClInclude Include="..\ratchetApplication\UI\NanotechMenu.h">
       <Filter>Test\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\UI\QuickChangeMenu.h">
+    <ClInclude Include="..\ratchetApplication\UI\QuickChangeMenu.h">
       <Filter>Test\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\UI\ShopSystemMenu.h">
+    <ClInclude Include="..\ratchetApplication\UI\ShopSystemMenu.h">
       <Filter>Test\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\UI\EquipmentWeaponMenu.h">
+    <ClInclude Include="..\ratchetApplication\UI\EquipmentWeaponMenu.h">
       <Filter>Test\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\UI\GameMoneyMenu.h">
+    <ClInclude Include="..\ratchetApplication\UI\GameMoneyMenu.h">
       <Filter>Test\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Actor.h">
+    <ClInclude Include="..\ratchetApplication\Actor.h">
       <Filter>Test\Source</Filter>
     </ClInclude>
   </ItemGroup>

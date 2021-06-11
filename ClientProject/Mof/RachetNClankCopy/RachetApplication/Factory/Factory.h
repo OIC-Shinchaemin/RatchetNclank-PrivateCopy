@@ -1,5 +1,5 @@
-#ifndef RACHET_FACTORY_H
-#define RACHET_FACTORY_H
+#ifndef RATCHET_FACTORY_H
+#define RATCHET_FACTORY_H
 
 
 #include <memory>
@@ -9,15 +9,15 @@
 #include "Creator.h"
 
 
-namespace rachet {
+namespace ratchet {
 template <typename T>
 class Factory {
 private:
-    std::unordered_map<std::string, std::unique_ptr<rachet::ICreator<T>>> _products;
+    std::unordered_map<std::string, std::unique_ptr<ratchet::ICreator<T>>> _products;
 public:
     template<typename Derived>
     void Register(const std::string& key) {
-        _products[key] = std::make_unique<rachet::Creator<T, Derived>>();
+        _products[key] = std::make_unique<ratchet::Creator<T, Derived>>();
     }
     /// <summary>
     /// çÏê¨
@@ -29,4 +29,4 @@ public:
     }
 };
 }
-#endif // !RACHET_FACTORY_H
+#endif // !RATCHET_FACTORY_H

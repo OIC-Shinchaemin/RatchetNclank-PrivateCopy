@@ -3,14 +3,14 @@
 #include "PlayerMoveComponent.h"
 
 
-void rachet::PlayerDoubleJumpComponent::InputJumpVelocity(float speed) {
+void ratchet::PlayerDoubleJumpComponent::InputJumpVelocity(float speed) {
     auto velocity_com = super::GetVelocityComponent();
     auto v = velocity_com->GetVelocity();
     v.y = speed;
     velocity_com->SetVelocity(v);
 }
 
-rachet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
+ratchet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
     super(priority),
     _jump_speed(0.0f),
     _jump_decrase(0.4f),
@@ -18,7 +18,7 @@ rachet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
     _move_com() {
 }
 
-rachet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJumpComponent& obj) :
+ratchet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJumpComponent& obj) :
     super(obj),
     _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
@@ -26,28 +26,28 @@ rachet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJ
     _move_com() {
 }
 
-rachet::PlayerDoubleJumpComponent::~PlayerDoubleJumpComponent() {
+ratchet::PlayerDoubleJumpComponent::~PlayerDoubleJumpComponent() {
 }
 
-std::string rachet::PlayerDoubleJumpComponent::GetType(void) const {
+std::string ratchet::PlayerDoubleJumpComponent::GetType(void) const {
     return "PlayerDoubleJumpComponent";
 }
 
-std::string_view rachet::PlayerDoubleJumpComponent::GetStateType(void) const {
+std::string_view ratchet::PlayerDoubleJumpComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionDoubleJumpState;
 }
 
-void rachet::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {
+void ratchet::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }
 
-bool rachet::PlayerDoubleJumpComponent::Initialize(void) {
+bool ratchet::PlayerDoubleJumpComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
     return true;
 }
 
-bool rachet::PlayerDoubleJumpComponent::Input(void) {
+bool ratchet::PlayerDoubleJumpComponent::Input(void) {
     auto move_com = _move_com.lock();
     auto& [in, move_angle, move_flag] = _input_info;
     move_flag = move_com->AquireInputData(in, move_angle);
@@ -60,7 +60,7 @@ bool rachet::PlayerDoubleJumpComponent::Input(void) {
     return true;
 }
 
-bool rachet::PlayerDoubleJumpComponent::Update(float delta_time) {      
+bool ratchet::PlayerDoubleJumpComponent::Update(float delta_time) {      
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
@@ -93,17 +93,17 @@ bool rachet::PlayerDoubleJumpComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::PlayerDoubleJumpComponent::Release(void) {
+bool ratchet::PlayerDoubleJumpComponent::Release(void) {
     super::Release();
     _move_com.reset();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerDoubleJumpComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerDoubleJumpComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerDoubleJumpComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerDoubleJumpComponent>(*this);
 }
 
-bool rachet::PlayerDoubleJumpComponent::Start(void) {
+bool ratchet::PlayerDoubleJumpComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

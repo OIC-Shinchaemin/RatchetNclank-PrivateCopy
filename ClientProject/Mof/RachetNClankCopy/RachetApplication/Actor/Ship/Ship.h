@@ -1,13 +1,13 @@
-#ifndef RACHET_SHIP_H
-#define RACHET_SHIP_H
+#ifndef RATCHET_SHIP_H
+#define RATCHET_SHIP_H
 
 
 #include "../../Actor.h"
 
 
-namespace rachet {
-class Ship : public rachet::Actor {
-    using super = rachet::Actor;
+namespace ratchet {
+class Ship : public ratchet::Actor {
+    using super = ratchet::Actor;
 public:
     enum class MotionType {
         Default,
@@ -30,4 +30,4 @@ public:
     virtual void Construct(const std::shared_ptr<class IBuilder>& builder) override;
 };
 }
-#endif // !RACHET_SHIP_H
+#endif // !RATCHET_SHIP_H

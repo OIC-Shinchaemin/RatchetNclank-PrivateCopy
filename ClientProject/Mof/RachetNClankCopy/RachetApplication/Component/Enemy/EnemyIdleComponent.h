@@ -1,5 +1,5 @@
-#ifndef RACHET_ENEMY_IDLE_COMPONENT_H
-#define RACHET_ENEMY_IDLE_COMPONENT_H
+#ifndef RATCHET_ENEMY_IDLE_COMPONENT_H
+#define RATCHET_ENEMY_IDLE_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class EnemyIdleComponent : public rachet::ActionComponent {
-    using super = rachet::ActionComponent;
+namespace ratchet {
+class EnemyIdleComponent : public ratchet::ActionComponent {
+    using super = ratchet::ActionComponent;
 private:
     //! ‰ñ“]‘¬“x
     float _angular_speed;
@@ -87,7 +87,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -96,4 +96,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RACHET_ENEMY_IDLE_COMPONENT_H
+#endif // !RATCHET_ENEMY_IDLE_COMPONENT_H

@@ -5,7 +5,7 @@
 #include "../../Collision/Object/OmniWrenchCollisionComponent.h"
 
 
-rachet::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(int priority) :
+ratchet::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(int priority) :
     super(priority),
     _move_speed(25.0f),
     _moved_distance(0.0f),
@@ -17,7 +17,7 @@ rachet::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(int priority) :
     _collision_com() {
 }
 
-rachet::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(const OmniWrenchThrowedComponent& obj) :
+ratchet::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(const OmniWrenchThrowedComponent& obj) :
     super(obj),
     _move_speed(obj._move_speed),
     _moved_distance(0.0f),
@@ -29,30 +29,30 @@ rachet::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(const OmniWrenchT
     _collision_com() {
 }
 
-rachet::OmniWrenchThrowedComponent::~OmniWrenchThrowedComponent() {
+ratchet::OmniWrenchThrowedComponent::~OmniWrenchThrowedComponent() {
 }
 
-void rachet::OmniWrenchThrowedComponent::SetWeaponOwner(const std::shared_ptr<rachet::Actor>& ptr) {
+void ratchet::OmniWrenchThrowedComponent::SetWeaponOwner(const std::shared_ptr<ratchet::Actor>& ptr) {
     this->_weapon_owner = ptr;
 }
 
-std::string rachet::OmniWrenchThrowedComponent::GetType(void) const {
+std::string ratchet::OmniWrenchThrowedComponent::GetType(void) const {
     return "OmniWrenchThrowedComponent";
 }
 
-std::string_view rachet::OmniWrenchThrowedComponent::GetStateType(void) const {
+std::string_view ratchet::OmniWrenchThrowedComponent::GetStateType(void) const {
     return state::OmniWrenchActionStateType::kOmniWrenchActionThrowedState;
 }
 
-bool rachet::OmniWrenchThrowedComponent::Initialize(void) {
+bool ratchet::OmniWrenchThrowedComponent::Initialize(void) {
     super::Initialize();
-    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
-    _action_state_com = super::GetOwner()->GetComponent<rachet::OmniWrenchActionStateComponent>();
-    _collision_com = super::GetOwner()->GetComponent<rachet::OmniWrenchCollisionComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _action_state_com = super::GetOwner()->GetComponent<ratchet::OmniWrenchActionStateComponent>();
+    _collision_com = super::GetOwner()->GetComponent<ratchet::OmniWrenchCollisionComponent>();
     return true;
 }
 
-bool rachet::OmniWrenchThrowedComponent::Update(float delta_time) {
+bool ratchet::OmniWrenchThrowedComponent::Update(float delta_time) {
     if (_moved_distance_threshold < _moved_distance) {
         if (auto state_com = _action_state_com.lock()) {
             auto state = state::OmniWrenchActionStateType::kOmniWrenchActionDefaultState;
@@ -71,16 +71,16 @@ bool rachet::OmniWrenchThrowedComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::OmniWrenchThrowedComponent::Release(void) {
+bool ratchet::OmniWrenchThrowedComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::OmniWrenchThrowedComponent::Clone(void) {
-    return std::make_shared<rachet::OmniWrenchThrowedComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::OmniWrenchThrowedComponent::Clone(void) {
+    return std::make_shared<ratchet::OmniWrenchThrowedComponent>(*this);
 }
 
-bool rachet::OmniWrenchThrowedComponent::Start(void) {
+bool ratchet::OmniWrenchThrowedComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -98,7 +98,7 @@ bool rachet::OmniWrenchThrowedComponent::Start(void) {
     return true;
 }
 
-bool rachet::OmniWrenchThrowedComponent::End(void) {
+bool ratchet::OmniWrenchThrowedComponent::End(void) {
     super::End();
     if (auto collision_com = _collision_com.lock()) {
         collision_com->Inactivate();

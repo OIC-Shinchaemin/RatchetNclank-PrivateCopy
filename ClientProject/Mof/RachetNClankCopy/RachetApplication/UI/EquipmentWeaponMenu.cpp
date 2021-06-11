@@ -1,7 +1,7 @@
 #include "EquipmentWeaponMenu.h"
 
 
-rachet::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
+ratchet::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
     super(name),
     _info(),
     _tex_names(),
@@ -25,7 +25,7 @@ rachet::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
     _tex_names.emplace("RYNO", "../Resource/texture/icon/ryno.png");
 }
 
-void rachet::EquipmentWeaponMenu::OnNotify(const rachet::Mechanical::Info& info) {
+void ratchet::EquipmentWeaponMenu::OnNotify(const ratchet::Mechanical::Info& info) {
     super::Notify(shared_from_this(), "Enable");
     //super::Notify()
     _info.name = info.name;
@@ -33,11 +33,11 @@ void rachet::EquipmentWeaponMenu::OnNotify(const rachet::Mechanical::Info& info)
     _info.bullet_count_max = info.bullet_count_max;
 }
 
-void rachet::EquipmentWeaponMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::EquipmentWeaponMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-bool rachet::EquipmentWeaponMenu::Render(void) {
+bool ratchet::EquipmentWeaponMenu::Render(void) {
     if (auto r = _resource.lock()) {
         auto it = _tex_names.find(_info.name);
         if (it != _tex_names.end()) {

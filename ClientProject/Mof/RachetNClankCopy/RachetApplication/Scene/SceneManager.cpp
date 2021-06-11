@@ -9,7 +9,7 @@
 #include "../Factory/Builder/Scene/GameSceneBuilder.h"
 
 
-void rachet::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<rachet::Scene::Param> param) {
+void ratchet::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<ratchet::Scene::Param> param) {
     auto& [factory, builders, reousrce_paths] = _create_struct;
 
     _scene.reset();
@@ -22,7 +22,7 @@ void rachet::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<
     _scene->Initialize();
 }
 
-void rachet::SceneManager::RenderScene(void) {
+void ratchet::SceneManager::RenderScene(void) {
     _scene->Render();
 
     ::g_pGraphics->SetDepthEnable(false);
@@ -32,66 +32,66 @@ void rachet::SceneManager::RenderScene(void) {
 
 }
 
-rachet::SceneManager::SceneManager() :
+ratchet::SceneManager::SceneManager() :
     _change_message(),
     _managers(),
     _create_struct(){
     auto& [factory, builders, reousrce_paths] = _create_struct;
 
-    factory.Register<rachet::TitleScene>(rachet::SceneType::kTitleScene);
-    factory.Register<rachet::GameScene>(rachet::SceneType::kGameScene);
-    factory.Register<rachet::ClearScene>(rachet::SceneType::kClearScene);
-    factory.Register<rachet::DescriptionScene>(rachet::SceneType::kDescriptionScene);
+    factory.Register<ratchet::TitleScene>(ratchet::SceneType::kTitleScene);
+    factory.Register<ratchet::GameScene>(ratchet::SceneType::kGameScene);
+    factory.Register<ratchet::ClearScene>(ratchet::SceneType::kClearScene);
+    factory.Register<ratchet::DescriptionScene>(ratchet::SceneType::kDescriptionScene);
 
-    reousrce_paths.emplace(rachet::SceneType::kTitleScene, rachet::scene::ResourcePath::kTitleScene);
-    reousrce_paths.emplace(rachet::SceneType::kGameScene, rachet::scene::ResourcePath::kGameScene);
-    reousrce_paths.emplace(rachet::SceneType::kClearScene, rachet::scene::ResourcePath::kClearScene);
-    reousrce_paths.emplace(rachet::SceneType::kDescriptionScene, rachet::scene::ResourcePath::kDescriptionScene);
+    reousrce_paths.emplace(ratchet::SceneType::kTitleScene, ratchet::scene::ResourcePath::kTitleScene);
+    reousrce_paths.emplace(ratchet::SceneType::kGameScene, ratchet::scene::ResourcePath::kGameScene);
+    reousrce_paths.emplace(ratchet::SceneType::kClearScene, ratchet::scene::ResourcePath::kClearScene);
+    reousrce_paths.emplace(ratchet::SceneType::kDescriptionScene, ratchet::scene::ResourcePath::kDescriptionScene);
 }
 
-rachet::SceneManager::~SceneManager() {
+ratchet::SceneManager::~SceneManager() {
 }
 
-void rachet::SceneManager::OnNotify(const scene::SceneMessage& mesage) {
+void ratchet::SceneManager::OnNotify(const scene::SceneMessage& mesage) {
     _change_message = ChangeMessage();
     _change_message.value().name = mesage.type_name;
     if (mesage.info_name == "") {
-        _change_message.value().param = std::make_shared <rachet::Scene::Param>();
+        _change_message.value().param = std::make_shared <ratchet::Scene::Param>();
     } // if
 }
 
-void rachet::SceneManager::SetResourceManager(const std::shared_ptr<rachet::ResourceMgr>& ptr) {
+void ratchet::SceneManager::SetResourceManager(const std::shared_ptr<ratchet::ResourceMgr>& ptr) {
     this->_managers.resource = ptr;
 }
 
-void rachet::SceneManager::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
+void ratchet::SceneManager::SetUICanvas(const std::shared_ptr<base::ui::UICanvas>& ptr) {
     this->_managers.ui_canvas = ptr;
 }
 
-void rachet::SceneManager::SetGameManager(std::weak_ptr<rachet::GameManager> ptr) {
+void ratchet::SceneManager::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
     this->_managers.game_manager = ptr;
 }
 
-void rachet::SceneManager::SetEventManager(std::weak_ptr<rachet::EventManager> ptr) {
+void ratchet::SceneManager::SetEventManager(std::weak_ptr<ratchet::EventManager> ptr) {
     this->_managers.event_manager = ptr;
 }
 
-bool rachet::SceneManager::Initialize(void) {
-    this->RegisterBuilder<builder::TitleSceneBuilder>(rachet::SceneType::kTitleScene);
-    this->RegisterBuilder<builder::SceneBuilder>(rachet::SceneType::kDescriptionScene);
-    this->RegisterBuilder<builder::SceneBuilder>(rachet::SceneType::kClearScene);
-    this->RegisterBuilder<builder::GameSceneBuilder>(rachet::SceneType::kGameScene);
+bool ratchet::SceneManager::Initialize(void) {
+    this->RegisterBuilder<builder::TitleSceneBuilder>(ratchet::SceneType::kTitleScene);
+    this->RegisterBuilder<builder::SceneBuilder>(ratchet::SceneType::kDescriptionScene);
+    this->RegisterBuilder<builder::SceneBuilder>(ratchet::SceneType::kClearScene);
+    this->RegisterBuilder<builder::GameSceneBuilder>(ratchet::SceneType::kGameScene);
 
 
-    this->ChangeScene(rachet::SceneType::kTitleScene, std::make_shared <rachet::Scene::Param>());
+    this->ChangeScene(ratchet::SceneType::kTitleScene, std::make_shared <ratchet::Scene::Param>());
     return true;
 }
 
-bool rachet::SceneManager::Input(void) {
+bool ratchet::SceneManager::Input(void) {
     return _scene->Input();
 }
 
-bool rachet::SceneManager::Update(float delta_time) {
+bool ratchet::SceneManager::Update(float delta_time) {
     if (_change_message.has_value()) {
         this->ChangeScene(_change_message.value().name, _change_message.value().param);
         _change_message.reset();
@@ -101,12 +101,12 @@ bool rachet::SceneManager::Update(float delta_time) {
     return true;
 }
 
-bool rachet::SceneManager::Render(void) {
+bool ratchet::SceneManager::Render(void) {
     this->RenderScene();
     return true;
 }
 
-bool rachet::SceneManager::Release(void) {
+bool ratchet::SceneManager::Release(void) {
     _scene.reset();
     return true;
 }

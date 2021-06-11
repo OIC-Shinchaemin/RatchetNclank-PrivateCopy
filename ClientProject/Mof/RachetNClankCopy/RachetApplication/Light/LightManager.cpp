@@ -4,14 +4,14 @@
 #include "Base/Core/Define.h"
 
 
-rachet::LightManager::LightManager() :
+ratchet::LightManager::LightManager() :
     _simple_light() {
 }
 
-rachet::LightManager::~LightManager() {
+ratchet::LightManager::~LightManager() {
 }
 
-bool rachet::LightManager::Initialize(void) {
+bool ratchet::LightManager::Initialize(void) {
     _simple_light.SetDirection(-math::vec3::kOne);
     _simple_light.SetDiffuse(def::color_rgba::kWhite);
     _simple_light.SetAmbient(def::color_rgba::kWhite * 0.8f);

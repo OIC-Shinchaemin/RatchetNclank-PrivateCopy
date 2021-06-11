@@ -1,13 +1,13 @@
-#ifndef RACHET_OMNI_WRENCH_H
-#define RACHET_OMNI_WRENCH_H
+#ifndef RATCHET_OMNI_WRENCH_H
+#define RATCHET_OMNI_WRENCH_H
 
 
 #include "Weapon.h"
 
 
-namespace rachet {
-class OmniWrench : public rachet::Weapon {
-    using super = rachet::Weapon;
+namespace ratchet {
+class OmniWrench : public ratchet::Weapon {
+    using super = ratchet::Weapon;
 public:
     /// <summary>
     /// コンストラクタ
@@ -22,7 +22,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(rachet::Actor::Param* param) override;
+    virtual bool Initialize(ratchet::Actor::Param* param) override;
 };
 }
-#endif // !RACHET_OMNI_WRENCH_H
+#endif // !RATCHET_OMNI_WRENCH_H

@@ -1,5 +1,5 @@
-#ifndef RACHET_WEAPON_SYSTEM_H
-#define RACHET_WEAPON_SYSTEM_H
+#ifndef RATCHET_WEAPON_SYSTEM_H
+#define RATCHET_WEAPON_SYSTEM_H
 
 
 #include "Base/Core/Observer.h"
@@ -18,7 +18,7 @@
 #include "../../Factory/Factory.h"
 
 
-namespace rachet {
+namespace ratchet {
 struct ChargeInfo {
     //! 武器
     std::string type;
@@ -27,24 +27,24 @@ struct ChargeInfo {
 };
 class WeaponSystem : 
     public base::core::Observer<const std::string&>,
-    public base::core::Observer<const rachet::ChargeInfo&>
+    public base::core::Observer<const ratchet::ChargeInfo&>
 {
-    using Pair = std::pair<std::string, std::shared_ptr<rachet::Mechanical>>;
+    using Pair = std::pair<std::string, std::shared_ptr<ratchet::Mechanical>>;
 private:
     //! 武器
     std::vector<Pair> _weapons;
     //! 武器
-    std::shared_ptr<rachet::Mechanical> _current_mechanical;
+    std::shared_ptr<ratchet::Mechanical> _current_mechanical;
     //! 通知用
-    base::core::Observable<std::shared_ptr<rachet::Weapon>> _subject;
+    base::core::Observable<std::shared_ptr<ratchet::Weapon>> _subject;
     //! 通知用
-    base::core::Observable<const rachet::Mechanical::Info&> _equipment_subject;
+    base::core::Observable<const ratchet::Mechanical::Info&> _equipment_subject;
     //! マップ
     std::unordered_map<std::string, std::string> _builder_name_map;
     //! セーブデータ
-    rachet::SaveData _save_data;
+    ratchet::SaveData _save_data;
     //! リソース
-    std::weak_ptr<rachet::ResourceMgr> _resource;
+    std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
@@ -65,12 +65,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(const rachet::ChargeInfo& info) override;
+    virtual void OnNotify(const ratchet::ChargeInfo& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -81,18 +81,18 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::Mechanical> GetCurrentMechanicalWeapon(void) const;
+    std::shared_ptr<ratchet::Mechanical> GetCurrentMechanicalWeapon(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::vector<rachet::WeaponSystem::Pair>& GetWeaponMap(void) const;
+    const std::vector<ratchet::WeaponSystem::Pair>& GetWeaponMap(void) const;
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<rachet::Weapon>>>& ptr);
+    void AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<ratchet::Weapon>>>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -103,13 +103,13 @@ public:
     /// </summary>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool Load(rachet::SaveData& in);
+    bool Load(ratchet::SaveData& in);
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="observer"></param>
     /// <returns></returns>
-    bool Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<rachet::Actor>&>>& observer);
+    bool Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&>>& observer);
     /// <summary>
     /// 解放
     /// </summary>
@@ -121,7 +121,7 @@ public:
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::Mechanical>GetMechanicalWeapon(const std::string& name);
+    std::shared_ptr<ratchet::Mechanical>GetMechanicalWeapon(const std::string& name);
 };
 }
-#endif // !RACHET_WEAPON_SYSTEM_H
+#endif // !RATCHET_WEAPON_SYSTEM_H

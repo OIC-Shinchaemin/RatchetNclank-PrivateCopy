@@ -1,30 +1,30 @@
 #include "ShipTakeoffComponent.h"
 
 
-rachet::ShipTakeoffComponent::ShipTakeoffComponent(int priority) :
+ratchet::ShipTakeoffComponent::ShipTakeoffComponent(int priority) :
     super(priority),
     _timer(),
     _takeoff(false) {
 }
 
-rachet::ShipTakeoffComponent::ShipTakeoffComponent(const ShipTakeoffComponent& obj) :
+ratchet::ShipTakeoffComponent::ShipTakeoffComponent(const ShipTakeoffComponent& obj) :
     super(obj),
     _timer(),
     _takeoff(false) {
 }
 
-rachet::ShipTakeoffComponent::~ShipTakeoffComponent() {
+ratchet::ShipTakeoffComponent::~ShipTakeoffComponent() {
 }
 
-std::string rachet::ShipTakeoffComponent::GetType(void) const {
+std::string ratchet::ShipTakeoffComponent::GetType(void) const {
     return "ShipTakeoffComponent";
 }
 
-std::string_view rachet::ShipTakeoffComponent::GetStateType(void) const {
+std::string_view ratchet::ShipTakeoffComponent::GetStateType(void) const {
     return state::ShipActionStateType::kShipActionTakeoffState;
 }
 
-bool rachet::ShipTakeoffComponent::Update(float delta_time) {
+bool ratchet::ShipTakeoffComponent::Update(float delta_time) {
     if (_timer.Tick(delta_time)) {
         _takeoff = true;
     } // if
@@ -36,11 +36,11 @@ bool rachet::ShipTakeoffComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::ShipTakeoffComponent::Clone(void) {
-    return std::make_shared<rachet::ShipTakeoffComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::ShipTakeoffComponent::Clone(void) {
+    return std::make_shared<ratchet::ShipTakeoffComponent>(*this);
 }
 
-bool rachet::ShipTakeoffComponent::Start(void) {
+bool ratchet::ShipTakeoffComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

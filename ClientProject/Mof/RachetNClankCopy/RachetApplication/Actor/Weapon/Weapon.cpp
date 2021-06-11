@@ -1,9 +1,9 @@
 #include "Weapon.h"
 
 
-rachet::Weapon::Weapon() :
+ratchet::Weapon::Weapon() :
     super() {
 }
 
-rachet::Weapon::~Weapon() {
+ratchet::Weapon::~Weapon() {
 }

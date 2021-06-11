@@ -1,31 +1,31 @@
 #include "BoltDefaultComponent.h"
 
 
-rachet::BoltDefaultComponent::BoltDefaultComponent(int priority) :
+ratchet::BoltDefaultComponent::BoltDefaultComponent(int priority) :
     super(priority) {
 }
 
-rachet::BoltDefaultComponent::BoltDefaultComponent(const BoltDefaultComponent& obj) :
+ratchet::BoltDefaultComponent::BoltDefaultComponent(const BoltDefaultComponent& obj) :
     super(obj) {
 }
 
-rachet::BoltDefaultComponent::~BoltDefaultComponent() {
+ratchet::BoltDefaultComponent::~BoltDefaultComponent() {
 }
 
-std::string rachet::BoltDefaultComponent::GetType(void) const {
+std::string ratchet::BoltDefaultComponent::GetType(void) const {
     return "BoltDefaultComponent";
 }
 
-std::string_view rachet::BoltDefaultComponent::GetStateType(void) const {
+std::string_view ratchet::BoltDefaultComponent::GetStateType(void) const {
     return state::BoltActionType::kDefault;
 }
 
-bool rachet::BoltDefaultComponent::Initialize(void) {
+bool ratchet::BoltDefaultComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool rachet::BoltDefaultComponent::Update(float delta_time) {
+bool ratchet::BoltDefaultComponent::Update(float delta_time) {
     auto rotate = super::GetOwner()->GetRotate();
     if (rotate.x > math::kHalfPi) {
         rotate.x = math::kHalfPi;
@@ -39,16 +39,16 @@ bool rachet::BoltDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::BoltDefaultComponent::Release(void) {
+bool ratchet::BoltDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::BoltDefaultComponent::Clone(void) {
-    return std::make_shared<rachet::BoltDefaultComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::BoltDefaultComponent::Clone(void) {
+    return std::make_shared<ratchet::BoltDefaultComponent>(*this);
 }
 
-bool rachet::BoltDefaultComponent::Start(void) {
+bool ratchet::BoltDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -56,7 +56,7 @@ bool rachet::BoltDefaultComponent::Start(void) {
     return true;
 }
 
-bool rachet::BoltDefaultComponent::End(void) {
+bool ratchet::BoltDefaultComponent::End(void) {
     super::End();
     return true;
 }

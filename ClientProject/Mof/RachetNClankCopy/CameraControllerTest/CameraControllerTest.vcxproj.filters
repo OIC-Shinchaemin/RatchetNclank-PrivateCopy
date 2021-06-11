@@ -29,7 +29,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\RachetApplication\Gamepad.cpp">
+    <ClCompile Include="..\ratchetApplication\Gamepad.cpp">
       <Filter>Test\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\include\My\Core\StateMachine.cpp">
@@ -41,25 +41,25 @@
     <ClCompile Include="..\include\My\Core\State.cpp">
       <Filter>Test\Base\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Camera\AutoCameraController.cpp">
+    <ClCompile Include="..\ratchetApplication\Camera\AutoCameraController.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Camera\Camera.cpp">
+    <ClCompile Include="..\ratchetApplication\Camera\Camera.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Camera\CameraController.cpp">
+    <ClCompile Include="..\ratchetApplication\Camera\CameraController.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Camera\CameraManager.cpp">
+    <ClCompile Include="..\ratchetApplication\Camera\CameraManager.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Camera\DebugCameraController.cpp">
+    <ClCompile Include="..\ratchetApplication\Camera\DebugCameraController.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Camera\FirstPersonCameraController.cpp">
+    <ClCompile Include="..\ratchetApplication\Camera\FirstPersonCameraController.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\RachetApplication\Camera\FollowCameraController.cpp">
+    <ClCompile Include="..\ratchetApplication\Camera\FollowCameraController.cpp">
       <Filter>Test\Header\Camera</Filter>
     </ClCompile>
     <ClCompile Include="TestApp.cpp">
@@ -70,28 +70,28 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\RachetApplication\Gamepad.h">
+    <ClInclude Include="..\ratchetApplication\Gamepad.h">
       <Filter>Test\Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Camera\Camera.h">
+    <ClInclude Include="..\ratchetApplication\Camera\Camera.h">
       <Filter>Test\Source\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Camera\CameraController.h">
+    <ClInclude Include="..\ratchetApplication\Camera\CameraController.h">
       <Filter>Test\Source\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Camera\CameraManager.h">
+    <ClInclude Include="..\ratchetApplication\Camera\CameraManager.h">
       <Filter>Test\Source\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Camera\DebugCameraController.h">
+    <ClInclude Include="..\ratchetApplication\Camera\DebugCameraController.h">
       <Filter>Test\Source\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Camera\FirstPersonCameraController.h">
+    <ClInclude Include="..\ratchetApplication\Camera\FirstPersonCameraController.h">
       <Filter>Test\Source\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Camera\FollowCameraController.h">
+    <ClInclude Include="..\ratchetApplication\Camera\FollowCameraController.h">
       <Filter>Test\Source\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\RachetApplication\Camera\AutoCameraController.h">
+    <ClInclude Include="..\ratchetApplication\Camera\AutoCameraController.h">
       <Filter>Test\Source\Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\include\My\Core\StateMachine.h">

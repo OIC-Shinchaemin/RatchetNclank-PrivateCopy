@@ -1,5 +1,5 @@
-#ifndef RACHET_CHARACTER_COMPONENT_H
-#define RACHET_CHARACTER_COMPONENT_H
+#ifndef RATCHET_CHARACTER_COMPONENT_H
+#define RATCHET_CHARACTER_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -9,9 +9,9 @@
 #include "Base/Core/Observable.h"
 
 
-namespace rachet {
-class CharacterComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class CharacterComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 protected:
     //! ‘å‚«‚³
     float _volume;
@@ -60,7 +60,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_CHARACTER_COMPONENT_H
+#endif // !RATCHET_CHARACTER_COMPONENT_H

@@ -7,7 +7,7 @@
 #include "../Collision/Object/EnemyMeleeAttackCollisionComponent.h"
 
 
-rachet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
+ratchet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     super(priority),
     _range(1.7f),
     _volume(0.5f),
@@ -17,7 +17,7 @@ rachet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     _collision_com() {
 }
 
-rachet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj) :
+ratchet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
@@ -27,40 +27,40 @@ rachet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAtt
     _collision_com() {
 }
 
-rachet::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
+ratchet::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
 }
 
-std::string rachet::EnemyMeleeAttackComponent::GetType(void) const {
+std::string ratchet::EnemyMeleeAttackComponent::GetType(void) const {
     return "EnemyMeleeAttackComponent";
 }
 
-std::string_view rachet::EnemyMeleeAttackComponent::GetStateType(void) const {
+std::string_view ratchet::EnemyMeleeAttackComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionMeleeAttackState;
 }
 
-float rachet::EnemyMeleeAttackComponent::GetRange(void) const {
+float ratchet::EnemyMeleeAttackComponent::GetRange(void) const {
     return this->_range;
 }
 
-float rachet::EnemyMeleeAttackComponent::GetVolume(void) const {
+float ratchet::EnemyMeleeAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-Mof::CSphere rachet::EnemyMeleeAttackComponent::GetCanAttackRangeSphere(void) const {
+Mof::CSphere ratchet::EnemyMeleeAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _range);
 }
 
-bool rachet::EnemyMeleeAttackComponent::Initialize(void) {
+bool ratchet::EnemyMeleeAttackComponent::Initialize(void) {
     super::Initialize();
 
-    _motion_com = super::GetOwner()->GetComponent<rachet::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
-    _collision_com = super::GetOwner()->GetComponent<rachet::EnemyMeleeAttackCollisionComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
+    _collision_com = super::GetOwner()->GetComponent<ratchet::EnemyMeleeAttackCollisionComponent>();
     return true;
 }
 
-bool rachet::EnemyMeleeAttackComponent::Update(float delta_time) {
+bool ratchet::EnemyMeleeAttackComponent::Update(float delta_time) {
     if (_wait.Tick(delta_time)) {
         if (auto motion_state_com = _motion_state_com.lock()) {
             motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionMeleeAttackState);
@@ -75,16 +75,16 @@ bool rachet::EnemyMeleeAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::EnemyMeleeAttackComponent::Release(void) {
+bool ratchet::EnemyMeleeAttackComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::EnemyMeleeAttackComponent::Clone(void) {
-    return std::make_shared<rachet::EnemyMeleeAttackComponent >(*this);
+std::shared_ptr<ratchet::Component> ratchet::EnemyMeleeAttackComponent::Clone(void) {
+    return std::make_shared<ratchet::EnemyMeleeAttackComponent >(*this);
 }
 
-bool rachet::EnemyMeleeAttackComponent::Start(void) {
+bool ratchet::EnemyMeleeAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -93,7 +93,7 @@ bool rachet::EnemyMeleeAttackComponent::Start(void) {
     return true;
 }
 
-bool rachet::EnemyMeleeAttackComponent::End(void) {
+bool ratchet::EnemyMeleeAttackComponent::End(void) {
     super::End();
     _collision_com.lock()->Inactivate();
     return true;

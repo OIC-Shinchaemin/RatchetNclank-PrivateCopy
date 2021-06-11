@@ -1,41 +1,41 @@
 #include "PlayerDeadComponent.h"
 
 
-rachet::PlayerDeadComponent::PlayerDeadComponent(int priority) :
+ratchet::PlayerDeadComponent::PlayerDeadComponent(int priority) :
     super(priority) {
 }
 
-rachet::PlayerDeadComponent::PlayerDeadComponent(const PlayerDeadComponent& obj) :
+ratchet::PlayerDeadComponent::PlayerDeadComponent(const PlayerDeadComponent& obj) :
     super(obj) {
 }
 
-rachet::PlayerDeadComponent::~PlayerDeadComponent() {
+ratchet::PlayerDeadComponent::~PlayerDeadComponent() {
 }
 
-std::string rachet::PlayerDeadComponent::GetType(void) const {
+std::string ratchet::PlayerDeadComponent::GetType(void) const {
     return "PlayerDeadComponent";
 }
 
-std::string_view rachet::PlayerDeadComponent::GetStateType(void) const {
+std::string_view ratchet::PlayerDeadComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionDeadState;
 }
 
-bool rachet::PlayerDeadComponent::Input(void) {
+bool ratchet::PlayerDeadComponent::Input(void) {
     return false;
 }
 
-bool rachet::PlayerDeadComponent::Update(float delta_time) {
+bool ratchet::PlayerDeadComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::GetOwner()->Notify("PlayerDead", super::GetOwner());
     } // if
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerDeadComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerDeadComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerDeadComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerDeadComponent>(*this);
 }
 
-bool rachet::PlayerDeadComponent::Start(void) {
+bool ratchet::PlayerDeadComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

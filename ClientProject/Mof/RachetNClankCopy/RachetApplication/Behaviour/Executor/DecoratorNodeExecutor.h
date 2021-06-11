@@ -12,7 +12,7 @@ class DecoratorNodeExecutor : public behaviour::SimplexNodeExecutor {
     using super = behaviour::SimplexNodeExecutor;
 protected:
     //! アクター
-    std::weak_ptr<rachet::Actor> _actor;
+    std::weak_ptr<ratchet::Actor> _actor;
     /// <summary>
     /// ノード実行
     /// </summary>
@@ -57,7 +57,7 @@ public:
     /// </summary>
     /// <param actor=""></param>
     virtual void Prepare(std::any actor) override {
-        _actor = std::any_cast<std::shared_ptr<rachet::Actor>>(actor);
+        _actor = std::any_cast<std::shared_ptr<ratchet::Actor>>(actor);
         for (auto& ptr : super::_children) {
             ptr->Prepare(actor);
         } // for

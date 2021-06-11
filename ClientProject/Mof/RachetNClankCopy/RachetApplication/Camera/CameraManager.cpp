@@ -3,23 +3,23 @@
 #include "Base/Core/Math.h"
 
 
-rachet::CameraManager::CameraManager() :
-    _global_camera(std::make_shared<rachet::Camera>()) {
+ratchet::CameraManager::CameraManager() :
+    _global_camera(std::make_shared<ratchet::Camera>()) {
     _global_camera->SetPosition(math::vec3::kOne * 5.0f);
     _global_camera->SetTarget(math::vec3::kZero);
     _global_camera->Initialize();
     _global_camera->RegisterGlobalCamera();
 }
 
-rachet::CameraManager::~CameraManager() {
+ratchet::CameraManager::~CameraManager() {
 }
 
-void rachet::CameraManager::RegisterGlobalCamera(const std::shared_ptr<rachet::Camera>& ptr) {
+void ratchet::CameraManager::RegisterGlobalCamera(const std::shared_ptr<ratchet::Camera>& ptr) {
     this->_global_camera = ptr;
     _global_camera->RegisterGlobalCamera();
 }
 
-bool rachet::CameraManager::Update(void) {
+bool ratchet::CameraManager::Update(void) {
     _global_camera->Update();
     return true;
 }

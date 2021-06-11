@@ -1,7 +1,7 @@
 #include "GameMoneyMenu.h"
 
 
-rachet::GameMoneyMenu::GameMoneyMenu(const char* name) :
+ratchet::GameMoneyMenu::GameMoneyMenu(const char* name) :
     super(name),
     _money(),
     _show(true),
@@ -11,7 +11,7 @@ rachet::GameMoneyMenu::GameMoneyMenu(const char* name) :
     _ui_canvas() {
 }
 
-void rachet::GameMoneyMenu::OnNotify(int money) {
+void ratchet::GameMoneyMenu::OnNotify(int money) {
     super::Notify(shared_from_this(), "Enable");
     
     this->_money = money;
@@ -19,15 +19,15 @@ void rachet::GameMoneyMenu::OnNotify(int money) {
     this->_hide_timer.Initialize(_time_max, false);
 }
 
-void rachet::GameMoneyMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::GameMoneyMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void rachet::GameMoneyMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void ratchet::GameMoneyMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-bool rachet::GameMoneyMenu::Initialize(void) {
+bool ratchet::GameMoneyMenu::Initialize(void) {
     super::Initialize();
     super::_position = Mof::CVector2(920.0f, 48.0f);
     if (auto resource = _resource.lock()) {
@@ -36,7 +36,7 @@ bool rachet::GameMoneyMenu::Initialize(void) {
     return true;
 }
 
-bool rachet::GameMoneyMenu::Update(float delta_time) {
+bool ratchet::GameMoneyMenu::Update(float delta_time) {
     super::Update(delta_time);
 
     if (_hide_timer.Tick(delta_time)) {
@@ -45,7 +45,7 @@ bool rachet::GameMoneyMenu::Update(float delta_time) {
     return true;
 }
 
-bool rachet::GameMoneyMenu::Render(void) {
+bool ratchet::GameMoneyMenu::Render(void) {
     if (!this->_show) {
         return false;
     } // if

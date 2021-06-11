@@ -6,21 +6,21 @@
 #include "../../Factory/FactoryManager.h"
 
 
-bool rachet::BombGloveBulletComponent::CollisionEnemy(const rachet::CollisionInfo& in) {
+bool ratchet::BombGloveBulletComponent::CollisionEnemy(const ratchet::CollisionInfo& in) {
     // expord start
-    auto param = rachet::ParticleEffect::Param();
-    auto update_param = rachet::ParticleEffect::UpdateParam();
+    auto param = ratchet::ParticleEffect::Param();
+    auto update_param = ratchet::ParticleEffect::UpdateParam();
     param.transform.position = super::GetOwner()->GetPosition();
     param.transform.scale = Mof::CVector3(0.2f, 0.2f, 0.2f);
     param.color = def::color_rgba::kRed;
     param.life_time = 0.7f;
     update_param.scale = Mof::CVector3(0.001f, 0.001f, 0.001f);
 
-    auto info = rachet::ParticleEffect::Info();
+    auto info = ratchet::ParticleEffect::Info();
     info.init_param = std::move(param);
     info.update_param = std::move(update_param);
 
-    auto effect = rachet::FactoryManager::Singleton().CreateActor<rachet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
+    auto effect = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
     effect->Start(std::move(info));
     super::GetOwner()->Notify("AddRequest", effect);
 
@@ -31,43 +31,43 @@ bool rachet::BombGloveBulletComponent::CollisionEnemy(const rachet::CollisionInf
     return true;
 }
 
-rachet::BombGloveBulletComponent::BombGloveBulletComponent(int priority) :
+ratchet::BombGloveBulletComponent::BombGloveBulletComponent(int priority) :
     super(priority) {
 }
 
-rachet::BombGloveBulletComponent::BombGloveBulletComponent(const BombGloveBulletComponent& obj) :
+ratchet::BombGloveBulletComponent::BombGloveBulletComponent(const BombGloveBulletComponent& obj) :
     super(obj) {
 }
 
-rachet::BombGloveBulletComponent::~BombGloveBulletComponent() {
+ratchet::BombGloveBulletComponent::~BombGloveBulletComponent() {
 }
 
-std::string rachet::BombGloveBulletComponent::GetType(void) const {
+std::string ratchet::BombGloveBulletComponent::GetType(void) const {
     return "BombGloveBulletComponent";
 }
 
-bool rachet::BombGloveBulletComponent::Initialize(void) {
+bool ratchet::BombGloveBulletComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    auto coll_com = super::GetOwner()->GetComponent<rachet::BombGloveBulletCollisionComponent>();
-    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::BombGloveBulletCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
                                "EnemyCollisionComponent",
-                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         // expord start
-        auto param = rachet::ParticleEffect::Param();
-        auto update_param = rachet::ParticleEffect::UpdateParam();
+        auto param = ratchet::ParticleEffect::Param();
+        auto update_param = ratchet::ParticleEffect::UpdateParam();
         param.transform.position = super::GetOwner()->GetPosition();
         param.transform.scale = Mof::CVector3(0.2f, 0.2f, 0.2f);
         param.color = def::color_rgba::kRed;
         param.life_time = 0.7f;
         update_param.scale = Mof::CVector3(0.001f, 0.001f, 0.001f);
 
-        auto info = rachet::ParticleEffect::Info();
+        auto info = ratchet::ParticleEffect::Info();
         info.init_param = std::move(param);
         info.update_param = std::move(update_param);
  
-        auto effect = rachet::FactoryManager::Singleton().CreateActor<rachet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
+        auto effect = ratchet::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
         effect->Start(std::move(info));
         super::GetOwner()->Notify("AddRequest", effect);
 
@@ -78,15 +78,15 @@ bool rachet::BombGloveBulletComponent::Initialize(void) {
     return true;
 }
 
-bool rachet::BombGloveBulletComponent::Update(float delta_time) {
+bool ratchet::BombGloveBulletComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::BombGloveBulletComponent::Release(void) {
+bool ratchet::BombGloveBulletComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::BombGloveBulletComponent::Clone(void) {
-    return std::make_shared<rachet::BombGloveBulletComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::BombGloveBulletComponent::Clone(void) {
+    return std::make_shared<ratchet::BombGloveBulletComponent>(*this);
 }

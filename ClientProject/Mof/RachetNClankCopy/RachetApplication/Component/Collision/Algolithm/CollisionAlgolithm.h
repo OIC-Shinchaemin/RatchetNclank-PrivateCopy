@@ -1,5 +1,5 @@
-#ifndef RACHET_COLLISION_ALGOLITHM_H
-#define RACHET_COLLISION_ALGOLITHM_H
+#ifndef RATCHET_COLLISION_ALGOLITHM_H
+#define RATCHET_COLLISION_ALGOLITHM_H
 
 
 #include <memory>
@@ -7,7 +7,7 @@
 #include "../Object/CollisionComponent.h"
 
 
-namespace rachet {
+namespace ratchet {
 class CollisionAlgolithm {
 public:
     /// <summary>
@@ -36,7 +36,7 @@ public:
     /// <param name="object"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    virtual bool IsCollision(std::shared_ptr<rachet::CollisionComponent >object, std::shared_ptr<rachet::CollisionComponent >target, rachet::CollisionInfo& out) = 0;
+    virtual bool IsCollision(std::shared_ptr<ratchet::CollisionComponent >object, std::shared_ptr<ratchet::CollisionComponent >target, ratchet::CollisionInfo& out) = 0;
 };
 }
-#endif // !RACHET_COLLISION_ALGOLITHM_H
+#endif // !RATCHET_COLLISION_ALGOLITHM_H

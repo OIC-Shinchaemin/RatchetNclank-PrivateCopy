@@ -1,38 +1,38 @@
 #include "PlayerLookComponent.h"
 
 
-rachet::PlayerLookComponent::PlayerLookComponent(int priority) :
+ratchet::PlayerLookComponent::PlayerLookComponent(int priority) :
     super(priority) {
 }
 
-rachet::PlayerLookComponent::PlayerLookComponent(const PlayerLookComponent& obj) :
+ratchet::PlayerLookComponent::PlayerLookComponent(const PlayerLookComponent& obj) :
     super(obj) {
 }
 
-rachet::PlayerLookComponent::~PlayerLookComponent() {
+ratchet::PlayerLookComponent::~PlayerLookComponent() {
 }
 
-std::string rachet::PlayerLookComponent::GetType(void) const {
+std::string ratchet::PlayerLookComponent::GetType(void) const {
     return "PlayerLookComponent";
 }
 
-std::string_view rachet::PlayerLookComponent::GetStateType(void) const {
+std::string_view ratchet::PlayerLookComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionLookState;
 }
 
-bool rachet::PlayerLookComponent::Input(void) {
+bool ratchet::PlayerLookComponent::Input(void) {
     return false;
 }
 
-bool rachet::PlayerLookComponent::Update(float delta_time) {
+bool ratchet::PlayerLookComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerLookComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerLookComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerLookComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerLookComponent>(*this);
 }
 
-bool rachet::PlayerLookComponent::Start(void) {
+bool ratchet::PlayerLookComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

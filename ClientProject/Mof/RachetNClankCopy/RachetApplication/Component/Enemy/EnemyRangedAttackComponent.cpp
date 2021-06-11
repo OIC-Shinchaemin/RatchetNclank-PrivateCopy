@@ -11,7 +11,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-rachet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
+ratchet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     super(priority),
     _range(3.0f),
     _volume(0.2f),
@@ -24,7 +24,7 @@ rachet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     _state_com() {
 }
 
-rachet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
+ratchet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
@@ -36,42 +36,42 @@ rachet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRanged
     _state_com() {
 }
 
-rachet::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
+ratchet::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
 }
 
-std::string rachet::EnemyRangedAttackComponent::GetType(void) const {
+std::string ratchet::EnemyRangedAttackComponent::GetType(void) const {
     return "EnemyRangedAttackComponent";
 }
 
-std::string_view rachet::EnemyRangedAttackComponent::GetStateType(void) const {
+std::string_view ratchet::EnemyRangedAttackComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionRangedAttackState;
 }
 
-float rachet::EnemyRangedAttackComponent::GetRange(void) const {
+float ratchet::EnemyRangedAttackComponent::GetRange(void) const {
     return this->_range;
 }
 
-float rachet::EnemyRangedAttackComponent::GetVolume(void) const {
+float ratchet::EnemyRangedAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-Mof::CSphere rachet::EnemyRangedAttackComponent::GetCanAttackRangeSphere(void) const {
+Mof::CSphere ratchet::EnemyRangedAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _range);
 }
 
-bool rachet::EnemyRangedAttackComponent::Initialize(void) {
+bool ratchet::EnemyRangedAttackComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
-    _motion_com = super::GetOwner()->GetComponent<rachet::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
-    _ENEMY_com = super::GetOwner()->GetComponent<rachet::EnemyComponent>();
-    _state_com = super::GetOwner()->GetComponent<rachet::EnemyStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::EnemyComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::EnemyStateComponent>();
     return true;
 }
 
-bool rachet::EnemyRangedAttackComponent::Update(float delta_time) {
+bool ratchet::EnemyRangedAttackComponent::Update(float delta_time) {
     if (auto ENEMY_com = _ENEMY_com.lock()) {
         if (auto target = ENEMY_com->GetTarget().lock()) {
             auto owner = super::GetOwner();
@@ -103,16 +103,16 @@ bool rachet::EnemyRangedAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::EnemyRangedAttackComponent::Release(void) {
+bool ratchet::EnemyRangedAttackComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::EnemyRangedAttackComponent::Clone(void) {
-    return std::make_shared<rachet::EnemyRangedAttackComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::EnemyRangedAttackComponent::Clone(void) {
+    return std::make_shared<ratchet::EnemyRangedAttackComponent>(*this);
 }
 
-bool rachet::EnemyRangedAttackComponent::Start(void) {
+bool ratchet::EnemyRangedAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -124,9 +124,9 @@ bool rachet::EnemyRangedAttackComponent::Start(void) {
     _ASSERT_EXPR(_ENEMY_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
     auto ENEMY_com = _ENEMY_com.lock();
 
-    auto param = rachet::Bullet::Param();
+    auto param = ratchet::Bullet::Param();
     auto owner = super::GetOwner();
-    auto transform = rachet::Transform();
+    auto transform = ratchet::Transform();
     param.transform.position = owner->GetPosition();
     param.transform.position.y += ENEMY_com->GetHeight();
     param.transform.rotate = owner->GetRotate();
@@ -135,7 +135,7 @@ bool rachet::EnemyRangedAttackComponent::Start(void) {
     direction.Normal(direction);
     param.speed = direction * _shot_speed;
 
-    auto add = rachet::FactoryManager::Singleton().CreateActor<rachet::EnemyBullet>("../Resource/builder/ENEMY_bullet.json", &param);
+    auto add = ratchet::FactoryManager::Singleton().CreateActor<ratchet::EnemyBullet>("../Resource/builder/ENEMY_bullet.json", &param);
     add->Start(param);
     super::GetOwner()->Notify("AddRequest", add);
     return true;

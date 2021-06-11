@@ -9,58 +9,58 @@
 #include "../../BillboardComponent.h"
 
 
-rachet::BulletItemComponent::BulletItemComponent(int priority) :
+ratchet::BulletItemComponent::BulletItemComponent(int priority) :
     super(priority),
     _param(),
     _player(),
     _state_com() {
 }
 
-rachet::BulletItemComponent::BulletItemComponent(const BulletItemComponent& obj) :
+ratchet::BulletItemComponent::BulletItemComponent(const BulletItemComponent& obj) :
     super(obj),
     _param(),
     _player(),
     _state_com() {
 }
 
-rachet::BulletItemComponent::~BulletItemComponent() {
+ratchet::BulletItemComponent::~BulletItemComponent() {
 }
 
-void rachet::BulletItemComponent::SetActorParam(const rachet::BulletItem::Param& param) {
+void ratchet::BulletItemComponent::SetActorParam(const ratchet::BulletItem::Param& param) {
     this->_param = param;
 }
 
-std::string rachet::BulletItemComponent::GetType(void) const {
+std::string ratchet::BulletItemComponent::GetType(void) const {
     return "BulletItemComponent";
 }
 
-const rachet::BulletItem::Param& rachet::BulletItemComponent::GetActorParam(void) const {
+const ratchet::BulletItem::Param& ratchet::BulletItemComponent::GetActorParam(void) const {
     return this->_param;
 }
 
-std::shared_ptr<rachet::Actor> rachet::BulletItemComponent::GetPlayer(void) const {
+std::shared_ptr<ratchet::Actor> ratchet::BulletItemComponent::GetPlayer(void) const {
     if (auto ptr = _player.lock()) {
         return ptr;
     } // if
     return nullptr;
 }
 
-bool rachet::BulletItemComponent::Initialize(void) {
+bool ratchet::BulletItemComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
 
 
-    _state_com = super::GetOwner()->GetComponent<rachet::BulletItemActionStateComponent>();
-    auto velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::BulletItemActionStateComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
     velocity_com->SetGravity(0.8f);
 
-    auto billboard_com = super::GetOwner()->GetComponent<rachet::BillboardComponent>();
+    auto billboard_com = super::GetOwner()->GetComponent<ratchet::BillboardComponent>();
     if (auto r = _resource_manager.lock()) {
-        std::unordered_map<rachet::BulletItem::Type, std::string> path_map = {
-            {rachet::BulletItem::Type::BombGlove, "../Resource/texture/icon/bomb_glove.png"},
-            {rachet::BulletItem::Type::Pyrocitor, "../Resource/texture/icon/pyrocitor.png"},
-            {rachet::BulletItem::Type::Blaster,   "../Resource/texture/icon/blaster.png"},
+        std::unordered_map<ratchet::BulletItem::Type, std::string> path_map = {
+            {ratchet::BulletItem::Type::BombGlove, "../Resource/texture/icon/bomb_glove.png"},
+            {ratchet::BulletItem::Type::Pyrocitor, "../Resource/texture/icon/pyrocitor.png"},
+            {ratchet::BulletItem::Type::Blaster,   "../Resource/texture/icon/blaster.png"},
         };
 
 
@@ -74,18 +74,18 @@ bool rachet::BulletItemComponent::Initialize(void) {
 
 
 
-    auto coll_com = super::GetOwner()->GetComponent<rachet::BulletItemCollisionComponent>();
-    coll_com->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Enter,
-                               rachet::CollisionComponentType::kPlayerCollisionComponent,
-                               rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::BulletItemCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::CollisionComponentType::kPlayerCollisionComponent,
+                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         super::GetOwner()->End();
         return true;
     }));
 
-    auto sight_coll = super::GetOwner()->GetComponent<rachet::SightCollisionComponent>();
-    sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
-                                 rachet::CollisionComponentType::kPlayerCollisionComponent,
-                                 rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+    auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
+    sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
+                                 ratchet::CollisionComponentType::kPlayerCollisionComponent,
+                                 ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         if (auto state_com = _state_com.lock()) {
             if (state_com->CanTransition(state::BulletItemActionType::kGravitate)) {
                 state_com->ChangeState(state::BulletItemActionType::kGravitate);
@@ -97,15 +97,15 @@ bool rachet::BulletItemComponent::Initialize(void) {
     return true;
 }
 
-bool rachet::BulletItemComponent::Update(float delta_time) {
+bool ratchet::BulletItemComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::BulletItemComponent::Release(void) {
+bool ratchet::BulletItemComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::BulletItemComponent::Clone(void) {
-    return std::make_shared<rachet::BulletItemComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::BulletItemComponent::Clone(void) {
+    return std::make_shared<ratchet::BulletItemComponent>(*this);
 }

@@ -1,13 +1,13 @@
-#ifndef RACHET_SIGHT_PLAYER_COLLISION_ALGOLITHM_H
-#define RACHET_SIGHT_PLAYER_COLLISION_ALGOLITHM_H
+#ifndef RATCHET_SIGHT_PLAYER_COLLISION_ALGOLITHM_H
+#define RATCHET_SIGHT_PLAYER_COLLISION_ALGOLITHM_H
 
 
 #include "CollisionAlgolithm.h"
 
 
-namespace rachet {
-class SightPlayerCollisionAlgolithm: public rachet::CollisionAlgolithm {
-    using super = rachet::CollisionAlgolithm;
+namespace ratchet {
+class SightPlayerCollisionAlgolithm: public ratchet::CollisionAlgolithm {
+    using super = ratchet::CollisionAlgolithm;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,7 +35,7 @@ public:
     /// <param name="object"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    virtual bool IsCollision(std::shared_ptr<rachet::CollisionComponent >object, std::shared_ptr<rachet::CollisionComponent >target, rachet::CollisionInfo& out) override;
+    virtual bool IsCollision(std::shared_ptr<ratchet::CollisionComponent >object, std::shared_ptr<ratchet::CollisionComponent >target, ratchet::CollisionInfo& out) override;
 };
 }
-#endif // !RACHET_SIGHT_PLAYER_COLLISION_ALGOLITHM_H
+#endif // !RATCHET_SIGHT_PLAYER_COLLISION_ALGOLITHM_H

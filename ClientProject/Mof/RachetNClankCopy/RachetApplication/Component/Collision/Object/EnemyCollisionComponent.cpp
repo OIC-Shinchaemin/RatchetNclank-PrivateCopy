@@ -4,7 +4,7 @@
 #include "../../Enemy/EnemyComponent.h"
 
 
-void rachet::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void ratchet::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
     float margin = 0.1f;
@@ -27,26 +27,26 @@ void rachet::EnemyCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer
     } // for
 }
 
-rachet::EnemyCollisionComponent::EnemyCollisionComponent(int priority) :
+ratchet::EnemyCollisionComponent::EnemyCollisionComponent(int priority) :
     super(priority),
     _ENEMY_com() {
 }
 
-rachet::EnemyCollisionComponent::EnemyCollisionComponent(const EnemyCollisionComponent& obj) :
+ratchet::EnemyCollisionComponent::EnemyCollisionComponent(const EnemyCollisionComponent& obj) :
     super(obj),
     _ENEMY_com() {
 }
 
-rachet::EnemyCollisionComponent::~EnemyCollisionComponent() {
+ratchet::EnemyCollisionComponent::~EnemyCollisionComponent() {
 }
 
-std::string rachet::EnemyCollisionComponent::GetType(void) const {
-    return rachet::CollisionComponentType::kEnemyCollisionComponent;
+std::string ratchet::EnemyCollisionComponent::GetType(void) const {
+    return ratchet::CollisionComponentType::kEnemyCollisionComponent;
 }
 
-std::optional<Mof::CSphere> rachet::EnemyCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> ratchet::EnemyCollisionComponent::GetSphere(void) {
     _ASSERT_EXPR(!_ENEMY_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -54,13 +54,13 @@ std::optional<Mof::CSphere> rachet::EnemyCollisionComponent::GetSphere(void) {
     return Mof::CSphere(pos, _ENEMY_com.lock()->GetVolume());
 }
 
-std::optional<Mof::CBoxAABB> rachet::EnemyCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::EnemyCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> rachet::EnemyCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::EnemyCollisionComponent::GetRay(void) {
     _ASSERT_EXPR(!_ENEMY_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -68,25 +68,25 @@ std::optional<Mof::CRay3D> rachet::EnemyCollisionComponent::GetRay(void) {
     return Mof::CRay3D(pos, math::vec3::kNegUnitY);
 }
 
-std::optional<Mof::LPMeshContainer> rachet::EnemyCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::EnemyCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<rachet::SightObject> rachet::EnemyCollisionComponent::GetSightObject(void) {
-    return std::optional<rachet::SightObject>();
+std::optional<ratchet::SightObject> ratchet::EnemyCollisionComponent::GetSightObject(void) {
+    return std::optional<ratchet::SightObject>();
 }
 
-bool rachet::EnemyCollisionComponent::Initialize(void) {
+bool ratchet::EnemyCollisionComponent::Initialize(void) {
     super::Initialize();
-    _ENEMY_com = super::GetOwner()->GetComponent<rachet::EnemyComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::EnemyComponent>();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::EnemyCollisionComponent::Clone(void) {
-    return std::make_shared<rachet::EnemyCollisionComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::EnemyCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::EnemyCollisionComponent>(*this);
 }
 
-void rachet::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void ratchet::EnemyCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetRay().has_value()) {
         return;
     } // if

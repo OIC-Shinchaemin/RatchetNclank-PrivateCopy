@@ -1,8 +1,8 @@
-#ifndef RACHET_GAME_QUEST_H
-#define RACHET_GAME_QUEST_H
+#ifndef RATCHET_GAME_QUEST_H
+#define RATCHET_GAME_QUEST_H
 
 
-namespace rachet {
+namespace ratchet {
 class GameQuest {
 public:
     enum class Type {
@@ -24,25 +24,25 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="type"></param>
-    GameQuest(rachet::GameQuest::Type type);
+    GameQuest(ratchet::GameQuest::Type type);
     /// <summary>
     /// 比較
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    bool operator==(const rachet::GameQuest& obj) const;
+    bool operator==(const ratchet::GameQuest& obj) const;
     /// <summary>
     /// 判定
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    bool IsEqual(const rachet::GameQuest& obj) const;
+    bool IsEqual(const ratchet::GameQuest& obj) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    rachet::GameQuest::Type GetType(void) const;
+    ratchet::GameQuest::Type GetType(void) const;
 };
 }
-#endif // !RACHET_GAME_QUEST_H
+#endif // !RATCHET_GAME_QUEST_H

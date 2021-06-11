@@ -6,33 +6,33 @@
 #include "../Actor/Weapon/Blaster.h"
 
 
-rachet::ActorFactory::ActorFactory(rachet::BuilderFactory* builder_factory) :
+ratchet::ActorFactory::ActorFactory(ratchet::BuilderFactory* builder_factory) :
     _builder_factory(builder_factory),
     _builders(),
     _mechanical_factory(),
     _game() {
-    _mechanical_factory.Register<rachet::BombGlove>("BombGlove");
-    _mechanical_factory.Register<rachet::Pyrocitor>("Pyrocitor");
-    _mechanical_factory.Register<rachet::Blaster>("Blaster");
+    _mechanical_factory.Register<ratchet::BombGlove>("BombGlove");
+    _mechanical_factory.Register<ratchet::Pyrocitor>("Pyrocitor");
+    _mechanical_factory.Register<ratchet::Blaster>("Blaster");
 }
 
-rachet::ActorFactory::~ActorFactory() {
+ratchet::ActorFactory::~ActorFactory() {
     this->Release();
 }
 
-void rachet::ActorFactory::SetGameManager(std::weak_ptr<rachet::GameManager> ptr) {
+void ratchet::ActorFactory::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
     this->_game = ptr;
 }
 
-std::shared_ptr<rachet::IBuilder> rachet::ActorFactory::GetBuilder(const std::string& key) {
+std::shared_ptr<ratchet::IBuilder> ratchet::ActorFactory::GetBuilder(const std::string& key) {
     return this->_builders[key];
 }
 
-void rachet::ActorFactory::AddBuilder(const std::string& key, std::shared_ptr<rachet::IBuilder> builder) {
+void ratchet::ActorFactory::AddBuilder(const std::string& key, std::shared_ptr<ratchet::IBuilder> builder) {
     this->_builders[key] = builder;
 }
 
-bool rachet::ActorFactory::Exist(const std::string& type) const {
+bool ratchet::ActorFactory::Exist(const std::string& type) const {
     auto it = _builders.find(type);
     if (it == _builders.end()) {
         return false;
@@ -40,7 +40,7 @@ bool rachet::ActorFactory::Exist(const std::string& type) const {
     return true;
 }
 
-std::shared_ptr<rachet::Mechanical> rachet::ActorFactory::CreateMechanicalWeapon(const char* type, const std::string& builder_key, rachet::Actor::Param* param) {
+std::shared_ptr<ratchet::Mechanical> ratchet::ActorFactory::CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::Actor::Param* param) {
     if (!this->Exist(builder_key)) {
         auto builder = _builder_factory->Create(builder_key.c_str());
         this->AddBuilder(builder_key, builder);
@@ -52,7 +52,7 @@ std::shared_ptr<rachet::Mechanical> rachet::ActorFactory::CreateMechanicalWeapon
     return ptr;
 }
 
-void rachet::ActorFactory::Release(void) {
+void ratchet::ActorFactory::Release(void) {
     if (!_builders.empty()) {
         _builders.clear();
     } // if

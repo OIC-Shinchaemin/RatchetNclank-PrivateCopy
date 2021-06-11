@@ -80,4 +80,4 @@ public:
     }
 };
 }
-#endif // !RACHET_MATH_H
+#endif // !RATCHET_MATH_H

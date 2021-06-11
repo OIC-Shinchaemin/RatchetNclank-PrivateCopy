@@ -1,5 +1,5 @@
-#ifndef RACHET_GAMEPAD_H
-#define RACHET_GAMEPAD_H
+#ifndef RATCHET_GAMEPAD_H
+#define RATCHET_GAMEPAD_H
 
 
 #include <memory>
@@ -7,7 +7,7 @@
 #include <Mof.h>
 
 
-namespace rachet {
+namespace ratchet {
 class Gamepad {
 private:
     //! 初期化フラグ
@@ -28,7 +28,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    static rachet::Gamepad& GetInstance(void);
+    static ratchet::Gamepad& GetInstance(void);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -54,5 +54,5 @@ public:
     void RefreshKey(void);
 };
 }
-#define g_pGamepad rachet::Gamepad::GetInstance().GetGamepad()
-#endif // !RACHET_GAMEPAD_H
+#define g_pGamepad ratchet::Gamepad::GetInstance().GetGamepad()
+#endif // !RATCHET_GAMEPAD_H

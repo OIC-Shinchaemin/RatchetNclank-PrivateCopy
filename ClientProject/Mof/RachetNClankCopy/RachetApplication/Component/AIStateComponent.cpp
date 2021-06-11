@@ -4,23 +4,23 @@
 #include "../State/AI/AICombatState.h"
 
 
-rachet::AIStateComponent::AIStateComponent(int priority) :
+ratchet::AIStateComponent::AIStateComponent(int priority) :
     super(priority),
     _state_machine(),
     _thinking_timer(),
     _behaviour_path(){
 }
 
-rachet::AIStateComponent::AIStateComponent(const AIStateComponent& obj) :
+ratchet::AIStateComponent::AIStateComponent(const AIStateComponent& obj) :
     super(obj),
     _state_machine(obj._state_machine),
     _behaviour_path(obj._behaviour_path){
 }
 
-rachet::AIStateComponent::~AIStateComponent() {
+ratchet::AIStateComponent::~AIStateComponent() {
 }
 
-void rachet::AIStateComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::AIStateComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     
     const char* behaviour = "behaviour";
@@ -35,11 +35,11 @@ void rachet::AIStateComponent::SetParam(const rapidjson::Value& param) {
     } // if
 }
 
-std::string rachet::AIStateComponent::GetType(void) const {
+std::string ratchet::AIStateComponent::GetType(void) const {
     return "AIStateComponent";
 }
 
-bool rachet::AIStateComponent::Initialize(void) {
+bool ratchet::AIStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     _thinking_timer.Initialize(0.2f, true);
@@ -51,28 +51,28 @@ bool rachet::AIStateComponent::Initialize(void) {
     return true;
 }
 
-bool rachet::AIStateComponent::Update(float delta_time) {
+bool ratchet::AIStateComponent::Update(float delta_time) {
     if (_thinking_timer.Tick(delta_time)) {
         _state_machine.Update(delta_time);
     } // if
     return true;
 }
 
-bool rachet::AIStateComponent::Release(void) {
+bool ratchet::AIStateComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::AIStateComponent::Clone(void) {
-    return std::make_shared<rachet::AIStateComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::AIStateComponent::Clone(void) {
+    return std::make_shared<ratchet::AIStateComponent>(*this);
 }
 
-void rachet::AIStateComponent::ChangeState(const std::string& name) {
+void ratchet::AIStateComponent::ChangeState(const std::string& name) {
     _state_machine.ChangeState(name);
 }
 
 #ifdef _DEBUG
-bool rachet::AIStateComponent::DebugRender(void) {
+bool ratchet::AIStateComponent::DebugRender(void) {
     _state_machine.DebugRender();
     return false;
 }

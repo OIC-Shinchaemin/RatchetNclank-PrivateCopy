@@ -1,5 +1,5 @@
-#ifndef RACHET__BEZIER_CURVE_ANIMATION_H
-#define RACHET__BEZIER_CURVE_ANIMATION_H
+#ifndef RATCHET_BEZIER_CURVE_ANIMATION_H
+#define RATCHET_BEZIER_CURVE_ANIMATION_H
 
 
 #include <cmath>
@@ -10,7 +10,7 @@
 #include <Mof.h>
 
 
-namespace rachet {
+namespace ratchet {
 enum class EaseType {
     Linear,
     EaseIn,
@@ -33,7 +33,7 @@ public:
     /// <param name="next"></param>
     /// <param name="type"></param>
     /// <returns></returns>
-    float Interpolation(float time, float prev, float next, rachet::EaseType type = rachet::EaseType::Linear) {
+    float Interpolation(float time, float prev, float next, ratchet::EaseType type = ratchet::EaseType::Linear) {
         switch (type) {
             case  EaseType::EaseInOut:
                 time = 0.5f - 0.5f * std::cosf(math::kPi * time);
@@ -51,7 +51,7 @@ public:
     /// <param name="control">コントロールポイントの位置</param>
     /// <param name="type">イージング</param>
     /// <returns></returns>
-    float InterpolationAnimData(float normalized, std::vector<float>& control, rachet::EaseType type = rachet::EaseType::Linear) {
+    float InterpolationAnimData(float normalized, std::vector<float>& control, ratchet::EaseType type = ratchet::EaseType::Linear) {
         _ASSERT_EXPR(0.0 <= normalized, L"アニメーションの時間の閾値を超えています");
         if (control.size() > 2) {
             std::vector<float> anim_data;
@@ -109,7 +109,7 @@ public:
     /// <param name="time"></param>
     /// <returns></returns>
     Mof::CVector3 CalculatePointPosition(float time) {
-        rachet::BezierCurve bezier_curve;
+        ratchet::BezierCurve bezier_curve;
         Mof::CVector3 ret;
         ret.x = bezier_curve.InterpolationAnimData(time / _rate, _anim_data_x);
         ret.y = bezier_curve.InterpolationAnimData(time / _rate, _anim_data_y);
@@ -118,4 +118,4 @@ public:
     }
 };
 }
-#endif // !RACHET__BEZIER_CURVE_ANIMATION_H
+#endif // !RATCHET_BEZIER_CURVE_ANIMATION_H

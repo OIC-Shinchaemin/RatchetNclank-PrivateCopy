@@ -3,37 +3,37 @@
 #include "BulletItemComponent.h"
 
 
-rachet::BulletItemMovedComponent::BulletItemMovedComponent(int priority) :
+ratchet::BulletItemMovedComponent::BulletItemMovedComponent(int priority) :
     super(priority),
     _speed(),
     _angle(),
     _decrase(0.85f) {
 }
 
-rachet::BulletItemMovedComponent::BulletItemMovedComponent(const BulletItemMovedComponent& obj) :
+ratchet::BulletItemMovedComponent::BulletItemMovedComponent(const BulletItemMovedComponent& obj) :
     super(obj),
     _speed(),
     _angle(),
     _decrase(obj._decrase) {
 }
 
-rachet::BulletItemMovedComponent::~BulletItemMovedComponent() {
+ratchet::BulletItemMovedComponent::~BulletItemMovedComponent() {
 }
 
-std::string rachet::BulletItemMovedComponent::GetType(void) const {
+std::string ratchet::BulletItemMovedComponent::GetType(void) const {
     return "BulletItemMovedComponent";
 }
 
-std::string_view rachet::BulletItemMovedComponent::GetStateType(void) const {
+std::string_view ratchet::BulletItemMovedComponent::GetStateType(void) const {
     return state::BulletItemActionType::kMoved;
 }
 
-bool rachet::BulletItemMovedComponent::Initialize(void) {
+bool ratchet::BulletItemMovedComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool rachet::BulletItemMovedComponent::Update(float delta_time) {
+bool ratchet::BulletItemMovedComponent::Update(float delta_time) {
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->AddVelocityForce(_speed);
@@ -47,29 +47,29 @@ bool rachet::BulletItemMovedComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::BulletItemMovedComponent::Release(void) {
+bool ratchet::BulletItemMovedComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::BulletItemMovedComponent::Clone(void) {
-    return std::make_shared<rachet::BulletItemMovedComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::BulletItemMovedComponent::Clone(void) {
+    return std::make_shared<ratchet::BulletItemMovedComponent>(*this);
 }
 
-bool rachet::BulletItemMovedComponent::Start(void) {
+bool ratchet::BulletItemMovedComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
 
-    auto type_com = super::GetOwner()->GetComponent<rachet::BulletItemComponent>();
+    auto type_com = super::GetOwner()->GetComponent<ratchet::BulletItemComponent>();
     auto param = type_com->GetActorParam();
     _speed = param.speed;
     _angle = param.angle;
     return true;
 }
 
-bool rachet::BulletItemMovedComponent::End(void) {
+bool ratchet::BulletItemMovedComponent::End(void) {
     super::End();
     return true;
 }

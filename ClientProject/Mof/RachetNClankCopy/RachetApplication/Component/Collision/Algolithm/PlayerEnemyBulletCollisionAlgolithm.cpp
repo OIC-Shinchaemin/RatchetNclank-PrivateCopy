@@ -3,22 +3,22 @@
 #include "../Object/CollisionComponentDefine.h"
 
 
-rachet::PlayerEnemyBulletCollisionAlgolithm::PlayerEnemyBulletCollisionAlgolithm() :
+ratchet::PlayerEnemyBulletCollisionAlgolithm::PlayerEnemyBulletCollisionAlgolithm() :
     super() {
 }
 
-rachet::PlayerEnemyBulletCollisionAlgolithm::~PlayerEnemyBulletCollisionAlgolithm() {
+ratchet::PlayerEnemyBulletCollisionAlgolithm::~PlayerEnemyBulletCollisionAlgolithm() {
 }
 
-const char* rachet::PlayerEnemyBulletCollisionAlgolithm::GetLayerType(void) const {
-    return rachet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+const char* ratchet::PlayerEnemyBulletCollisionAlgolithm::GetLayerType(void) const {
+    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-const char* rachet::PlayerEnemyBulletCollisionAlgolithm::GetTargetType(void) const {
-    return rachet::CollisionComponentType::kEnemyBulletCollisionComponent.c_str();
+const char* ratchet::PlayerEnemyBulletCollisionAlgolithm::GetTargetType(void) const {
+    return ratchet::CollisionComponentType::kEnemyBulletCollisionComponent.c_str();
 }
 
-bool rachet::PlayerEnemyBulletCollisionAlgolithm::IsCollision(std::shared_ptr<rachet::CollisionComponent> object, std::shared_ptr<rachet::CollisionComponent> target, rachet::CollisionInfo& out) {
+bool ratchet::PlayerEnemyBulletCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;
     } // if

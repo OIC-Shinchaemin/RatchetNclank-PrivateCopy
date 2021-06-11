@@ -1,5 +1,5 @@
-#ifndef RACHET_SIGHT_RECOGNITION_COMPONENT_H
-#define RACHET_SIGHT_RECOGNITION_COMPONENT_H
+#ifndef RATCHET_SIGHT_RECOGNITION_COMPONENT_H
+#define RATCHET_SIGHT_RECOGNITION_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -7,14 +7,14 @@
 #include <memory>
 #include <vector>
 
-namespace rachet {
-class SightRecognitionComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class SightRecognitionComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! éãñÏ
     float _range;
     //! îFéØ
-    std::vector<std::weak_ptr<rachet::Actor>> _recognized;
+    std::vector<std::weak_ptr<ratchet::Actor>> _recognized;
     //! ÉLÉÉÉâ
     std::weak_ptr<class PlayerComponent> _player_com;
     //! ÉLÉÉÉâ
@@ -64,7 +64,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::vector<std::weak_ptr<rachet::Actor>>& GetRecognized(void) const;
+    const std::vector<std::weak_ptr<ratchet::Actor>>& GetRecognized(void) const;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -82,7 +82,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_SIGHT_RECOGNITION_COMPONENT_H
+#endif // !RATCHET_SIGHT_RECOGNITION_COMPONENT_H

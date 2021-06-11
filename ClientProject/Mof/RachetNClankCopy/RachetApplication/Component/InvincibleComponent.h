@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_INVINCIBLE_COMPONENT_H
-#define RACHET_PLAYER_INVINCIBLE_COMPONENT_H
+#ifndef RATCHET_PLAYER_INVINCIBLE_COMPONENT_H
+#define RATCHET_PLAYER_INVINCIBLE_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -7,9 +7,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace rachet {
-class InvincibleComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class InvincibleComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! ŽžŠÔ
     base::core::Timer _invincible;
@@ -57,7 +57,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// —LŒø‰»
     /// </summary>
@@ -66,4 +66,4 @@ public:
     virtual bool Activate(void) override;
 };
 }
-#endif // !RACHET_PLAYER_INVINCIBLE_COMPONENT_H
+#endif // !RATCHET_PLAYER_INVINCIBLE_COMPONENT_H

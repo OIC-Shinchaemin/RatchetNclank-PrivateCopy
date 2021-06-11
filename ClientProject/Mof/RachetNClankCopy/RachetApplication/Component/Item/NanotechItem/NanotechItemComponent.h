@@ -1,5 +1,5 @@
-#ifndef RACHET_NanotechItem_COMPONENT_H
-#define RACHET_NanotechItem_COMPONENT_H
+#ifndef RATCHET_NanotechItem_COMPONENT_H
+#define RATCHET_NanotechItem_COMPONENT_H
 
 
 #include "../../UpdateComponent.h"
@@ -7,14 +7,14 @@
 #include "../../../Actor/Item/NanotechItem.h"
 
 
-namespace rachet {
-class NanotechItemComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class NanotechItemComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     //! アクターパラメータ
-    rachet::NanotechItem::Param _param;
+    ratchet::NanotechItem::Param _param;
     //! 移動先
-    std::weak_ptr<rachet::Actor> _player;
+    std::weak_ptr<ratchet::Actor> _player;
     //! 状態
     std::weak_ptr<class NanotechItemActionStateComponent> _state_com;
 public:
@@ -37,7 +37,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetActorParam(const rachet::NanotechItem::Param& param);
+    void SetActorParam(const ratchet::NanotechItem::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -49,13 +49,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const rachet::NanotechItem::Param& GetActorParam(void) const;
+    const ratchet::NanotechItem::Param& GetActorParam(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<rachet::Actor> GetPlayer(void) const;
+    std::shared_ptr<ratchet::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -79,7 +79,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_NanotechItem_COMPONENT_H
+#endif // !RATCHET_NanotechItem_COMPONENT_H

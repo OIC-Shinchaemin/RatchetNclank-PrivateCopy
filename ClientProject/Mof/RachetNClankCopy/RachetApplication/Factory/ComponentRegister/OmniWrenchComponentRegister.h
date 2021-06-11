@@ -1,3 +1,3 @@
-rachet::ComponentFactory::AddComponentCreator<rachet::OmniWrenchActionStateComponent>();
-rachet::ComponentFactory::AddComponentCreator<rachet::OmniWrenchDefaultComponent>();
-rachet::ComponentFactory::AddComponentCreator<rachet::OmniWrenchThrowedComponent>();
+ratchet::ComponentFactory::AddComponentCreator<ratchet::OmniWrenchActionStateComponent>();
+ratchet::ComponentFactory::AddComponentCreator<ratchet::OmniWrenchDefaultComponent>();
+ratchet::ComponentFactory::AddComponentCreator<ratchet::OmniWrenchThrowedComponent>();

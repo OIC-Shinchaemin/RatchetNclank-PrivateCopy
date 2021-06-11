@@ -1,5 +1,5 @@
-#ifndef RACHET_OMNI_WRENCH_BUILDER_H
-#define RACHET_OMNI_WRENCH_BUILDER_H
+#ifndef RATCHET_OMNI_WRENCH_BUILDER_H
+#define RATCHET_OMNI_WRENCH_BUILDER_H
 
 
 #include "ActorBuilder.h"
@@ -9,12 +9,12 @@
 //#include "../GameDefine.h"
 
 
-namespace rachet {
-class OmniWrenchBuilder : public rachet::ActorBuilder {
-    using super = rachet::ActorBuilder;
+namespace ratchet {
+class OmniWrenchBuilder : public ratchet::ActorBuilder {
+    using super = ratchet::ActorBuilder;
 private:
     //! リソース
-    //std::weak_ptr<rachet::ResourceMgr> _resource;
+    //std::weak_ptr<ratchet::ResourceMgr> _resource;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,7 +28,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
+    //void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
     /// 解放
     /// </summary>
@@ -41,4 +41,4 @@ public:
     virtual void Construct(std::any shared_this) override;
 };
 }
-#endif // !RACHET_OMNI_WRENCH_BUILDER_H
+#endif // !RATCHET_OMNI_WRENCH_BUILDER_H

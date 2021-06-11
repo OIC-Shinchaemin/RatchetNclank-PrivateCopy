@@ -1,41 +1,41 @@
 #include "PlayerMeleeAttackThreeEndComponent.h"
 
 
-rachet::PlayerMeleeAttackThreeEndComponent::PlayerMeleeAttackThreeEndComponent(int priority) :
+ratchet::PlayerMeleeAttackThreeEndComponent::PlayerMeleeAttackThreeEndComponent(int priority) :
     super(priority) {
 }
 
-rachet::PlayerMeleeAttackThreeEndComponent::PlayerMeleeAttackThreeEndComponent(const PlayerMeleeAttackThreeEndComponent& obj) :
+ratchet::PlayerMeleeAttackThreeEndComponent::PlayerMeleeAttackThreeEndComponent(const PlayerMeleeAttackThreeEndComponent& obj) :
     super(obj) {
 }
 
-rachet::PlayerMeleeAttackThreeEndComponent::~PlayerMeleeAttackThreeEndComponent() {
+ratchet::PlayerMeleeAttackThreeEndComponent::~PlayerMeleeAttackThreeEndComponent() {
 }
 
-std::string rachet::PlayerMeleeAttackThreeEndComponent::GetType(void) const {
+std::string ratchet::PlayerMeleeAttackThreeEndComponent::GetType(void) const {
     return "PlayerMeleeAttackThreeEndComponent";
 }
 
-std::string_view rachet::PlayerMeleeAttackThreeEndComponent::GetStateType(void) const {
+std::string_view ratchet::PlayerMeleeAttackThreeEndComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState;
 }
 
-bool rachet::PlayerMeleeAttackThreeEndComponent::Input(void) {
+bool ratchet::PlayerMeleeAttackThreeEndComponent::Input(void) {
     return false;
 }
 
-bool rachet::PlayerMeleeAttackThreeEndComponent::Update(float delta_time) {
+bool ratchet::PlayerMeleeAttackThreeEndComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::PlayerMeleeAttackThreeEndComponent::Clone(void) {
-    return std::make_shared<rachet::PlayerMeleeAttackThreeEndComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::PlayerMeleeAttackThreeEndComponent::Clone(void) {
+    return std::make_shared<ratchet::PlayerMeleeAttackThreeEndComponent>(*this);
 }
 
-bool rachet::PlayerMeleeAttackThreeEndComponent::Start(void) {
+bool ratchet::PlayerMeleeAttackThreeEndComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

@@ -6,7 +6,7 @@
 #include "../../State/EnemyMotionStateDefine.h"
 
 
-void rachet::EnemyIdleComponent::InputMoveAngularVelocity(float angle, float speed) {
+void ratchet::EnemyIdleComponent::InputMoveAngularVelocity(float angle, float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
 
         float angle_y = angle;
@@ -32,7 +32,7 @@ void rachet::EnemyIdleComponent::InputMoveAngularVelocity(float angle, float spe
     } // if
 }
 
-rachet::EnemyIdleComponent::EnemyIdleComponent(int priority) :
+ratchet::EnemyIdleComponent::EnemyIdleComponent(int priority) :
     super(priority),
     _angular_speed(0.0f),
     _ideal_angle(0.0f),
@@ -40,7 +40,7 @@ rachet::EnemyIdleComponent::EnemyIdleComponent(int priority) :
     _motion_state_com() {
 }
 
-rachet::EnemyIdleComponent::EnemyIdleComponent(const EnemyIdleComponent& obj) :
+ratchet::EnemyIdleComponent::EnemyIdleComponent(const EnemyIdleComponent& obj) :
     super(obj),
     _angular_speed(obj._angular_speed),
     _ideal_angle(obj._ideal_angle),
@@ -48,38 +48,38 @@ rachet::EnemyIdleComponent::EnemyIdleComponent(const EnemyIdleComponent& obj) :
     _motion_state_com() {
 }
 
-rachet::EnemyIdleComponent ::~EnemyIdleComponent() {
+ratchet::EnemyIdleComponent ::~EnemyIdleComponent() {
 }
 
-void rachet::EnemyIdleComponent::SetAngularSpeed(float speed) {
+void ratchet::EnemyIdleComponent::SetAngularSpeed(float speed) {
     this->_angular_speed = speed;
 }
 
-void rachet::EnemyIdleComponent::SetIdealAngle(float radian) {
+void ratchet::EnemyIdleComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
-float rachet::EnemyIdleComponent::GetIdealAngle(void) const {
+float ratchet::EnemyIdleComponent::GetIdealAngle(void) const {
     return this->_ideal_angle;
 }
 
-std::string rachet::EnemyIdleComponent::GetType(void) const {
+std::string ratchet::EnemyIdleComponent::GetType(void) const {
     return "EnemyIdleComponent";
 }
 
-std::string_view rachet::EnemyIdleComponent::GetStateType(void) const {
+std::string_view ratchet::EnemyIdleComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionIdleState;
 }
 
-bool rachet::EnemyIdleComponent::Initialize(void) {
+bool ratchet::EnemyIdleComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
     return true;
 }
 
-bool rachet::EnemyIdleComponent::Update(float delta_time) {
+bool ratchet::EnemyIdleComponent::Update(float delta_time) {
     float tilt = 1.0f;
     Mof::CVector2 in = Mof::CVector2(tilt, 0.0f);
     auto angle_y = math::ToDegree(super::GetOwner()->GetRotate().y);
@@ -99,16 +99,16 @@ bool rachet::EnemyIdleComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::EnemyIdleComponent::Release(void) {
+bool ratchet::EnemyIdleComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::EnemyIdleComponent::Clone(void) {
-    return std::make_shared<rachet::EnemyIdleComponent >(*this);
+std::shared_ptr<ratchet::Component> ratchet::EnemyIdleComponent::Clone(void) {
+    return std::make_shared<ratchet::EnemyIdleComponent >(*this);
 }
 
-bool rachet::EnemyIdleComponent::Start(void) {
+bool ratchet::EnemyIdleComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

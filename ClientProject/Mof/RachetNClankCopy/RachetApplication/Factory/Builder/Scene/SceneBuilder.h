@@ -13,11 +13,11 @@
 
 
 namespace builder {
-class SceneBuilder : public rachet::IBuilder {
-    using super = rachet::IBuilder;
+class SceneBuilder : public ratchet::IBuilder {
+    using super = ratchet::IBuilder;
 private:
     //! リソース
-    std::weak_ptr<rachet::ResourceMgr> _resource;
+    std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
@@ -33,7 +33,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>

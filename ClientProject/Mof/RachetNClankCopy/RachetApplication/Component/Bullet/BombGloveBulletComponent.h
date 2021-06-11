@@ -1,5 +1,5 @@
-#ifndef RACHET_BOMB_GLOVE_BULLET_COMPONENT_H
-#define RACHET_BOMB_GLOVE_BULLET_COMPONENT_H
+#ifndef RATCHET_BOMB_GLOVE_BULLET_COMPONENT_H
+#define RATCHET_BOMB_GLOVE_BULLET_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -9,16 +9,16 @@
 #include "../Collision/Object/CollisionComponent.h"
 
 
-namespace rachet {
-class BombGloveBulletComponent : public rachet::UpdateComponent {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class BombGloveBulletComponent : public ratchet::UpdateComponent {
+    using super = ratchet::UpdateComponent;
 private:
     /// <summary>
     /// 衝突処理
     /// </summary>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool CollisionEnemy(const rachet::CollisionInfo& in);
+    bool CollisionEnemy(const ratchet::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ
@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
 };
 }
-#endif // !RACHET_BOMB_GLOVE_BULLET_COMPONENT_H
+#endif // !RATCHET_BOMB_GLOVE_BULLET_COMPONENT_H

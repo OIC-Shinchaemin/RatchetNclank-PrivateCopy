@@ -1,41 +1,41 @@
 #include "ShipLandingComponent.h"
 
 
-rachet::ShipLandingComponent::ShipLandingComponent(int priority) :
+ratchet::ShipLandingComponent::ShipLandingComponent(int priority) :
     super(priority) {
 }
 
-rachet::ShipLandingComponent::ShipLandingComponent(const ShipLandingComponent& obj) :
+ratchet::ShipLandingComponent::ShipLandingComponent(const ShipLandingComponent& obj) :
     super(obj) {
 }
 
-rachet::ShipLandingComponent::~ShipLandingComponent() {
+ratchet::ShipLandingComponent::~ShipLandingComponent() {
 }
 
-std::string rachet::ShipLandingComponent::GetType(void) const {
+std::string ratchet::ShipLandingComponent::GetType(void) const {
     return "ShipLandingComponent";
 }
 
-std::string_view rachet::ShipLandingComponent::GetStateType(void) const {
+std::string_view ratchet::ShipLandingComponent::GetStateType(void) const {
     return state::ShipActionStateType::kShipActionLandingState;
 }
 
-void rachet::ShipLandingComponent::AddObserver(const std::shared_ptr<base::core::Observer<const rachet::CameraController::CameraInfo&>>& ptr) {
+void ratchet::ShipLandingComponent::AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::CameraController::CameraInfo&>>& ptr) {
     Observable::AddObserver(ptr);
 }
 
-bool rachet::ShipLandingComponent::Update(float delta_time) {
+bool ratchet::ShipLandingComponent::Update(float delta_time) {
     auto pos = super::GetOwner()->GetPosition();
     pos.y -= 0.1f;
     super::GetOwner()->SetPosition(pos);
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::ShipLandingComponent::Clone(void) {
-    return std::make_shared<rachet::ShipLandingComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::ShipLandingComponent::Clone(void) {
+    return std::make_shared<ratchet::ShipLandingComponent>(*this);
 }
 
-bool rachet::ShipLandingComponent::Start(void) {
+bool ratchet::ShipLandingComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -44,10 +44,10 @@ bool rachet::ShipLandingComponent::Start(void) {
     return true;
 }
 
-bool rachet::ShipLandingComponent::End(void) {
+bool ratchet::ShipLandingComponent::End(void) {
     super::End();
 
-    auto camera_info = rachet::CameraController::CameraInfo();
+    auto camera_info = ratchet::CameraController::CameraInfo();
     auto global = ::CGraphicsUtilities::GetCamera();
 
     camera_info.start_position = global->GetViewPosition();

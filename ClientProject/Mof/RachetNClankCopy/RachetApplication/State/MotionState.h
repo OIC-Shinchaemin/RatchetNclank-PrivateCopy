@@ -48,7 +48,7 @@ private:
     //! パラメータ
     Param _param;
     //! モーション
-    std::weak_ptr<rachet::MotionComponent> _motion_com;
+    std::weak_ptr<ratchet::MotionComponent> _motion_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -62,7 +62,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetActor(const std::shared_ptr<rachet::Actor>& ptr);
+    virtual void SetActor(const std::shared_ptr<ratchet::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

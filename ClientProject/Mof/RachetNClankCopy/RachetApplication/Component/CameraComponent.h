@@ -1,5 +1,5 @@
-#ifndef RACHET_CAMERA_COMPONENT_H
-#define RACHET_CAMERA_COMPONENT_H
+#ifndef RATCHET_CAMERA_COMPONENT_H
+#define RATCHET_CAMERA_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -10,20 +10,20 @@
 #include "../Camera/CameraController.h"
 
 
-namespace rachet {
-class CameraComponent : public rachet::UpdateComponent, public base::core::Observer<const rachet::CameraController::CameraInfo&> {
-    using super = rachet::UpdateComponent;
+namespace ratchet {
+class CameraComponent : public ratchet::UpdateComponent, public base::core::Observer<const ratchet::CameraController::CameraInfo&> {
+    using super = ratchet::UpdateComponent;
 private:
     //! 対象
     Mof::CVector3 _target;
     //! カメラ
-    std::shared_ptr<rachet::Camera> _camera;
+    std::shared_ptr<ratchet::Camera> _camera;
     //! カメラコントローラ
-    base::core::ServiceLocator<rachet::CameraController> _camera_controller;
+    base::core::ServiceLocator<ratchet::CameraController> _camera_controller;
     //! モード
-    rachet::CameraController::CameraMode _current_mode;
+    ratchet::CameraController::CameraMode _current_mode;
     //! コントローラ
-    std::unordered_map<rachet::CameraController::CameraMode, std::shared_ptr<rachet::CameraController>> _controller_map;
+    std::unordered_map<ratchet::CameraController::CameraMode, std::shared_ptr<ratchet::CameraController>> _controller_map;
     
     
     //! FPSカメラ方向
@@ -88,13 +88,13 @@ private:
     /// </summary>
     /// <param name="delta_time"></param>
     /// <param name="controller"></param>
-    void UpdateFollow(float delta_time, std::shared_ptr<rachet::CameraController> controller);
+    void UpdateFollow(float delta_time, std::shared_ptr<ratchet::CameraController> controller);
     /// <summary>
     /// 更新
     /// </summary>
     /// <param name="delta_time"></param>
     /// <param name="controller"></param>
-    void UpdateFirstPerson(float delta_time, std::shared_ptr<rachet::CameraController> controller);
+    void UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::CameraController> controller);
 public:
     /// <summary>
     /// コンストラクタ
@@ -114,7 +114,7 @@ public:
     /// イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const rachet::CameraController::CameraInfo& info) override;
+    virtual void OnNotify(const ratchet::CameraController::CameraInfo& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -168,7 +168,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// 衝突
     /// </summary>
@@ -179,4 +179,4 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RACHET_CAMERA_COMPONENT_H
+#endif // !RATCHET_CAMERA_COMPONENT_H

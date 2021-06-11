@@ -1,5 +1,5 @@
-#ifndef RACHET_ENEMY_STATE_COMPONENT_H
-#define RACHET_ENEMY_STATE_COMPONENT_H
+#ifndef RATCHET_ENEMY_STATE_COMPONENT_H
+#define RATCHET_ENEMY_STATE_COMPONENT_H
 
 
 #include "../ActionStateComponent.h"
@@ -9,9 +9,9 @@
 #include "../../State/ActionState.h"
 */
 
-namespace rachet {
-class EnemyStateComponent : public rachet::ActionStateComponent {
-    using super = rachet::ActionStateComponent;
+namespace ratchet {
+class EnemyStateComponent : public ratchet::ActionStateComponent {
+    using super = ratchet::ActionStateComponent;
 /*
 private:
     //! èÛë‘
@@ -33,7 +33,7 @@ private:
     /// </summary>
     /// <typeparam name="State"></typeparam>
     /// <param name="out"></param>
-    void RegisterState(base::core::StateMachine& out, std::shared_ptr<rachet::ActionComponent> com) {
+    void RegisterState(base::core::StateMachine& out, std::shared_ptr<ratchet::ActionComponent> com) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::ActionState>();
         ptr->SetActionComponent(com);
@@ -95,7 +95,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ïœçX
     /// </summary>
@@ -112,4 +112,4 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RACHET_ENEMY_STATE_COMPONENT_H
+#endif // !RATCHET_ENEMY_STATE_COMPONENT_H

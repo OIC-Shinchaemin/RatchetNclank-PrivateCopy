@@ -1,33 +1,33 @@
 #include "OmniWrenchActionStateComponent.h"
 
 
-rachet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(int priority) :
+ratchet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(int priority) :
     super(priority) {
 }
 
-rachet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(const OmniWrenchActionStateComponent& obj) :
+ratchet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(const OmniWrenchActionStateComponent& obj) :
     super(obj) {
 }
 
-rachet::OmniWrenchActionStateComponent::~OmniWrenchActionStateComponent() {
+ratchet::OmniWrenchActionStateComponent::~OmniWrenchActionStateComponent() {
 }
 
-std::string rachet::OmniWrenchActionStateComponent::GetType(void) const {
+std::string ratchet::OmniWrenchActionStateComponent::GetType(void) const {
     return "OmniWrenchActionStateComponent";
 }
 
-bool rachet::OmniWrenchActionStateComponent::Initialize(void) {
+bool ratchet::OmniWrenchActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::OmniWrenchActionStateType;
     super::ChangeState(Type::kOmniWrenchActionDefaultState);
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::OmniWrenchActionStateComponent::Clone(void) {
-    return std::make_shared<rachet::OmniWrenchActionStateComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::OmniWrenchActionStateComponent::Clone(void) {
+    return std::make_shared<ratchet::OmniWrenchActionStateComponent>(*this);
 }
 
-bool rachet::OmniWrenchActionStateComponent::CanTransition(const std::string& next) {
+bool ratchet::OmniWrenchActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::OmniWrenchActionStateType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -45,7 +45,7 @@ bool rachet::OmniWrenchActionStateComponent::CanTransition(const std::string& ne
 }
 
 #ifdef _DEBUG
-bool rachet::OmniWrenchActionStateComponent::DebugRender(void) {
+bool ratchet::OmniWrenchActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 400.0f, "omniwrench state = %s", this->_state_machine.GetCurrentStateName());
     return true;

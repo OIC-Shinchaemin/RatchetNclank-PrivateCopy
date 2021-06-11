@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_CROUCH_COMPONENT_H
-#define RACHET_PLAYER_CROUCH_COMPONENT_H
+#ifndef RATCHET_PLAYER_CROUCH_COMPONENT_H
+#define RATCHET_PLAYER_CROUCH_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -10,10 +10,10 @@
 #include <vector>
 
 
-namespace rachet {
-class PlayerCrouchComponent : public rachet::PlayerActionComponent {
-    using super = rachet::PlayerActionComponent;
-    using This = rachet::PlayerCrouchComponent;
+namespace ratchet {
+class PlayerCrouchComponent : public ratchet::PlayerActionComponent {
+    using super = ratchet::PlayerActionComponent;
+    using This = ratchet::PlayerCrouchComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -110,7 +110,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -134,4 +134,4 @@ public:
     //bool AquireInputData(Mof::CVector2& stick, float& move_angle);
 };
 }
-#endif // !RACHET_PLAYER_CROUCH_COMPONENT_H
+#endif // !RATCHET_PLAYER_CROUCH_COMPONENT_H

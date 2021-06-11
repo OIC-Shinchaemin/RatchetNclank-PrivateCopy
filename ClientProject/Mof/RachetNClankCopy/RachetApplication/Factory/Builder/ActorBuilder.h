@@ -1,5 +1,5 @@
-#ifndef RACHET_ACTOR_BUILDER_H
-#define RACHET_ACTOR_BUILDER_H
+#ifndef RATCHET_ACTOR_BUILDER_H
+#define RATCHET_ACTOR_BUILDER_H
 
 
 #include "IBuilder.h"
@@ -8,12 +8,12 @@
 #include "../../Component/Component.h"
 
 
-namespace rachet {
-class ActorBuilder : public rachet::IBuilder {
+namespace ratchet {
+class ActorBuilder : public ratchet::IBuilder {
     //! 所有するパラメータ
-    rachet::Actor::Param _param;
+    ratchet::Actor::Param _param;
     //! 機能
-    std::vector<std::shared_ptr<rachet::Component>> _components;
+    std::vector<std::shared_ptr<ratchet::Component>> _components;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,12 +27,12 @@ public:
     /// セッター
     /// </summary>
     /// <param name="param"></param>
-    void SetActorParam(const rachet::Actor::Param& param);
+    void SetActorParam(const ratchet::Actor::Param& param);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="component"></param>
-    void AddComponent(const std::shared_ptr<rachet::Component>& component);
+    void AddComponent(const std::shared_ptr<ratchet::Component>& component);
     /// <summary>
     /// 解放
     /// </summary>
@@ -45,4 +45,4 @@ public:
     virtual void Construct(std::any shared_this) override;
 };
 }
-#endif // !RACHET_ACTOR_BUILDER_H
+#endif // !RATCHET_ACTOR_BUILDER_H

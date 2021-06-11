@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_COLLISION_COMPONENT_H
-#define RACHET_PLAYER_COLLISION_COMPONENT_H
+#ifndef RATCHET_PLAYER_COLLISION_COMPONENT_H
+#define RATCHET_PLAYER_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -10,9 +10,9 @@
 #include <Mof.h>
 
 
-namespace rachet {
-class PlayerCollisionComponent : public rachet::CollisionComponent {
-    using super = rachet::CollisionComponent;
+namespace ratchet {
+class PlayerCollisionComponent : public ratchet::CollisionComponent {
+    using super = ratchet::CollisionComponent;
 private:
     //! ÉvÉåÉCÉÑÅ[
     std::weak_ptr<class PlayerComponent> _player_com;
@@ -114,7 +114,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<rachet::SightObject> GetSightObject(void) override;
+    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -126,7 +126,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// è’ìÀ
     /// </summary>
@@ -140,4 +140,4 @@ public:
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
 }
-#endif // !RACHET_PLAYER_COLLISION_COMPONENT_H
+#endif // !RATCHET_PLAYER_COLLISION_COMPONENT_H

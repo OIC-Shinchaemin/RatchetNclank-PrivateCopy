@@ -1,5 +1,5 @@
-#ifndef RACHET_MOTION_NAMES_H
-#define RACHET_MOTION_NAMES_H
+#ifndef RATCHET_MOTION_NAMES_H
+#define RATCHET_MOTION_NAMES_H
 
 
 #include <string>
@@ -8,7 +8,7 @@
 #include "Base/Core/Utility.h"
 
 
-namespace rachet {
+namespace ratchet {
 struct MotionInfo {
     std::string state;
     std::string name;
@@ -16,8 +16,8 @@ struct MotionInfo {
     bool loop = false;
     bool same = false;
 };
-struct MotionNames : public std::unordered_map<int, rachet::MotionInfo> {
-    using super = std::unordered_map<int, rachet::MotionInfo>;
+struct MotionNames : public std::unordered_map<int, ratchet::MotionInfo> {
+    using super = std::unordered_map<int, ratchet::MotionInfo>;
     MotionNames() {
     }
     bool Load(const char* path) {
@@ -28,7 +28,7 @@ struct MotionNames : public std::unordered_map<int, rachet::MotionInfo> {
 
         auto& infos = document["info"];
         for (int i = 0, n = infos.Size(); i < n; i++) {
-            auto info = rachet::MotionInfo();
+            auto info = ratchet::MotionInfo();
             info.name = infos[i]["name"].GetString();
             info.speed = infos[i]["speed"].GetFloat();
             info.loop = infos[i]["loop"].GetBool();
@@ -52,4 +52,4 @@ struct MotionNames : public std::unordered_map<int, rachet::MotionInfo> {
     } 
 };
 }
-#endif // !RACHET_MOTION_NAMES_H
+#endif // !RATCHET_MOTION_NAMES_H

@@ -1,14 +1,14 @@
 #include "BoltActionComponent.h"
 
 
-std::shared_ptr<rachet::VelocityComponent> rachet::BoltActionComponent::GetVelocityComponent(void) const {
+std::shared_ptr<ratchet::VelocityComponent> ratchet::BoltActionComponent::GetVelocityComponent(void) const {
     if (auto com = _velocity_com.lock()) {
         return com;
     } // if
     return nullptr;
 }
 
-bool rachet::BoltActionComponent::ChangeActionState(const std::string& name) {
+bool ratchet::BoltActionComponent::ChangeActionState(const std::string& name) {
     if (auto state_com = _state_com.lock()) {
         state_com->ChangeState(name);
         return true;
@@ -16,33 +16,33 @@ bool rachet::BoltActionComponent::ChangeActionState(const std::string& name) {
     return false;
 }
 
-rachet::BoltActionComponent::BoltActionComponent(int priority) :
+ratchet::BoltActionComponent::BoltActionComponent(int priority) :
     super(priority),
     _velocity_com(),
     _state_com() {
 }
 
-rachet::BoltActionComponent::BoltActionComponent(const BoltActionComponent& obj) :
+ratchet::BoltActionComponent::BoltActionComponent(const BoltActionComponent& obj) :
     super(obj),
     _velocity_com(),
     _state_com() {
 }
 
-rachet::BoltActionComponent::~BoltActionComponent() {
+ratchet::BoltActionComponent::~BoltActionComponent() {
 }
 
-std::string rachet::BoltActionComponent::GetType(void) const {
+std::string ratchet::BoltActionComponent::GetType(void) const {
     return "BoltActionComponent";
 }
 
-bool rachet::BoltActionComponent::Initialize(void) {
+bool ratchet::BoltActionComponent::Initialize(void) {
     super::Initialize();
-    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
-    _state_com = super::GetOwner()->GetComponent<rachet::BoltActionStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::BoltActionStateComponent>();
     return true;
 }
 
-bool rachet::BoltActionComponent::Release(void) {
+bool ratchet::BoltActionComponent::Release(void) {
     super::Release();
     _velocity_com.reset();
     _state_com.reset();

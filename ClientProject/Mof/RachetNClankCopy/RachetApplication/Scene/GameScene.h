@@ -1,5 +1,5 @@
-#ifndef RACHET_GAME_SCENE_H
-#define RACHET_GAME_SCENE_H
+#ifndef RATCHET_GAME_SCENE_H
+#define RATCHET_GAME_SCENE_H
 
 
 #include "Scene.h"
@@ -18,21 +18,21 @@
 
 #include "../Actor/Character/Player.h"
 
-namespace rachet {
-class GameScene : public rachet::Scene, public base::core::Observer<const rachet::ShopSystem::Info&> {
-    using super = rachet::Scene;
-    using this_type = rachet::GameScene;
+namespace ratchet {
+class GameScene : public ratchet::Scene, public base::core::Observer<const ratchet::ShopSystem::Info&> {
+    using super = ratchet::Scene;
+    using this_type = ratchet::GameScene;
 private:
     //! 追加
-    std::vector<std::shared_ptr<rachet::Actor>> _created_actors;
+    std::vector<std::shared_ptr<ratchet::Actor>> _created_actors;
     //! 削除
-    std::vector<std::shared_ptr<rachet::Actor>> _delete_actors;
+    std::vector<std::shared_ptr<ratchet::Actor>> _delete_actors;
     //! ゲーム
-    rachet::GameWorld _game_world;
+    ratchet::GameWorld _game_world;
     //! レンダラー
-    rachet::Renderer _renderer;
+    ratchet::Renderer _renderer;
     //! コリジョン
-    rachet::PhysicsWorld _physic_world;
+    ratchet::PhysicsWorld _physic_world;
     //! ステージ
     Stage _stage;
     //! 再初期化
@@ -42,19 +42,19 @@ private:
 
 
     //! ゲーム
-    std::weak_ptr<rachet::GameManager> _game;
+    std::weak_ptr<ratchet::GameManager> _game;
     //! イベント
-    std::weak_ptr<rachet::EventManager> _event;
+    std::weak_ptr<ratchet::EventManager> _event;
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddElement(const std::shared_ptr<rachet::Actor>& ptr);
+    void AddElement(const std::shared_ptr<ratchet::Actor>& ptr);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void RemoveElement(const std::shared_ptr<rachet::Actor>& ptr);
+    void RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr);
     /// <summary>
     /// 再初期化
     /// </summary>
@@ -98,22 +98,22 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<rachet::Actor>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) override;
     /// <summary>
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const rachet::ShopSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::ShopSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<rachet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetEventManager(std::weak_ptr<rachet::EventManager> ptr);
+    void SetEventManager(std::weak_ptr<ratchet::EventManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -126,7 +126,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Load(std::shared_ptr<rachet::Scene::Param>  param) override;
+    virtual bool Load(std::shared_ptr<ratchet::Scene::Param>  param) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -147,4 +147,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RACHET_GAME_SCENE_H
+#endif // !RATCHET_GAME_SCENE_H

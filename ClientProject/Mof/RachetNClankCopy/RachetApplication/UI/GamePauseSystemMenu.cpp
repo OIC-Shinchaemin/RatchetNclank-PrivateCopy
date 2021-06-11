@@ -1,13 +1,13 @@
 ﻿#include "GamePauseSystemMenu.h"
 
 
-rachet::GamePauseSystemMenu::GamePauseSystemMenu(const char* name) :
+ratchet::GamePauseSystemMenu::GamePauseSystemMenu(const char* name) :
     super(name) {
 
     super::_position = Mof::CVector2(500.0f, 400.0f);
 }
 
-void rachet::GamePauseSystemMenu::OnNotify(const rachet::GamePauseSystem::Info& info) {
+void ratchet::GamePauseSystemMenu::OnNotify(const ratchet::GamePauseSystem::Info& info) {
     this->_infomation = info;
     if (info.enable) {
         super::_position = Mof::CVector2(500.0f, 400.0f);
@@ -35,15 +35,15 @@ void rachet::GamePauseSystemMenu::OnNotify(const rachet::GamePauseSystem::Info& 
 
 }
 
-void rachet::GamePauseSystemMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::GamePauseSystemMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void rachet::GamePauseSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void ratchet::GamePauseSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-void rachet::GamePauseSystemMenu::AddItem(const rachet::GamePauseSystemItem& in) {
+void ratchet::GamePauseSystemMenu::AddItem(const ratchet::GamePauseSystemItem& in) {
     auto elem = std::make_shared<ElemType>(in.GetText().c_str());
     elem->SetText(in.GetText());
     elem->SetPosition(super::_position);
@@ -52,11 +52,11 @@ void rachet::GamePauseSystemMenu::AddItem(const rachet::GamePauseSystemItem& in)
     super::AddElement(elem);
 }
 
-bool rachet::GamePauseSystemMenu::Initialize(void) {
+bool ratchet::GamePauseSystemMenu::Initialize(void) {
     return true;
 }
 
-bool rachet::GamePauseSystemMenu::Update(float delta_time) {
+bool ratchet::GamePauseSystemMenu::Update(float delta_time) {
     if (!_infomation.enable) {
         return false;
     } // if
@@ -73,32 +73,32 @@ bool rachet::GamePauseSystemMenu::Update(float delta_time) {
     return true;
 }
 
-bool rachet::GamePauseSystemMenu::Render(void) {
+bool ratchet::GamePauseSystemMenu::Render(void) {
     super::Render();
     return true;
 }
 
-rachet::GamePauseSystemMenuItem::GamePauseSystemMenuItem(const char* name) :
+ratchet::GamePauseSystemMenuItem::GamePauseSystemMenuItem(const char* name) :
     super(name),
     _text() {
 }
 
-rachet::GamePauseSystemMenuItem::~GamePauseSystemMenuItem() {
+ratchet::GamePauseSystemMenuItem::~GamePauseSystemMenuItem() {
 }
 
-void rachet::GamePauseSystemMenuItem::SetText(const std::string& text) {
+void ratchet::GamePauseSystemMenuItem::SetText(const std::string& text) {
     this->_text = text;
 }
 
-bool rachet::GamePauseSystemMenuItem::Input(void) {
+bool ratchet::GamePauseSystemMenuItem::Input(void) {
     return true;
 }
 
-bool rachet::GamePauseSystemMenuItem::Update(float delta_time) {
+bool ratchet::GamePauseSystemMenuItem::Update(float delta_time) {
     return true;
 }
 
-bool rachet::GamePauseSystemMenuItem::Render(void) {
+bool ratchet::GamePauseSystemMenuItem::Render(void) {
     auto pos = super::_position;
     auto color = super::_color.ToU32Color();
     ::CGraphicsUtilities::RenderString(

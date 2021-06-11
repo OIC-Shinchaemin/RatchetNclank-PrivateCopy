@@ -3,37 +3,37 @@
 #include "BoltComponent.h"
 
 
-rachet::BoltMovedComponent::BoltMovedComponent(int priority) :
+ratchet::BoltMovedComponent::BoltMovedComponent(int priority) :
     super(priority),
     _speed(),
     _angle(),
     _decrase(0.85f) {
 }
 
-rachet::BoltMovedComponent::BoltMovedComponent(const BoltMovedComponent& obj) :
+ratchet::BoltMovedComponent::BoltMovedComponent(const BoltMovedComponent& obj) :
     super(obj),
     _speed(),
     _angle(),
     _decrase(obj._decrase) {
 }
 
-rachet::BoltMovedComponent::~BoltMovedComponent() {
+ratchet::BoltMovedComponent::~BoltMovedComponent() {
 }
 
-std::string rachet::BoltMovedComponent::GetType(void) const {
+std::string ratchet::BoltMovedComponent::GetType(void) const {
     return "BoltMovedComponent";
 }
 
-std::string_view rachet::BoltMovedComponent::GetStateType(void) const {
+std::string_view ratchet::BoltMovedComponent::GetStateType(void) const {
     return state::BoltActionType::kMoved;
 }
 
-bool rachet::BoltMovedComponent::Initialize(void) {
+bool ratchet::BoltMovedComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool rachet::BoltMovedComponent::Update(float delta_time) {
+bool ratchet::BoltMovedComponent::Update(float delta_time) {
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->AddVelocityForce(_speed);
@@ -47,29 +47,29 @@ bool rachet::BoltMovedComponent::Update(float delta_time) {
     return true;
 }
 
-bool rachet::BoltMovedComponent::Release(void) {
+bool ratchet::BoltMovedComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::BoltMovedComponent::Clone(void) {
-    return std::make_shared<rachet::BoltMovedComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::BoltMovedComponent::Clone(void) {
+    return std::make_shared<ratchet::BoltMovedComponent>(*this);
 }
 
-bool rachet::BoltMovedComponent::Start(void) {
+bool ratchet::BoltMovedComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
 
-    auto type_com = super::GetOwner()->GetComponent<rachet::BoltComponent>();
+    auto type_com = super::GetOwner()->GetComponent<ratchet::BoltComponent>();
     auto param = type_com->GetActorParam();
     _speed = param.speed;
     _angle = param.angle;
     return true;
 }
 
-bool rachet::BoltMovedComponent::End(void) {
+bool ratchet::BoltMovedComponent::End(void) {
     super::End();
     return true;
 }

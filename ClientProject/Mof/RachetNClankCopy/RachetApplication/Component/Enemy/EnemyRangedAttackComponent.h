@@ -1,5 +1,5 @@
-#ifndef RACHET_ENEMY_RANGED_ATTACK_COMPONENT_H
-#define RACHET_ENEMY_RANGED_ATTACK_COMPONENT_H
+#ifndef RATCHET_ENEMY_RANGED_ATTACK_COMPONENT_H
+#define RATCHET_ENEMY_RANGED_ATTACK_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -9,9 +9,9 @@
 #include "Base/Core/Timer.h"
 
 
-namespace rachet {
-class EnemyRangedAttackComponent : public rachet::ActionComponent {
-    using super = rachet::ActionComponent;
+namespace ratchet {
+class EnemyRangedAttackComponent : public ratchet::ActionComponent {
+    using super = ratchet::ActionComponent;
 private:
 private:
     //! çUåÇîÕàÕ
@@ -100,7 +100,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// äJén
     /// </summary>
@@ -109,4 +109,4 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RACHET_ENEMY_RANGED_ATTACK_COMPONENT_H
+#endif // !RATCHET_ENEMY_RANGED_ATTACK_COMPONENT_H

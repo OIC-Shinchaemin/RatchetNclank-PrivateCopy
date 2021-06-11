@@ -1,7 +1,7 @@
 #include "CollisionAlgolithm.h"
 
-rachet::CollisionAlgolithm::CollisionAlgolithm() {
+ratchet::CollisionAlgolithm::CollisionAlgolithm() {
 }
 
-rachet::CollisionAlgolithm::~CollisionAlgolithm() {
+ratchet::CollisionAlgolithm::~CollisionAlgolithm() {
 }

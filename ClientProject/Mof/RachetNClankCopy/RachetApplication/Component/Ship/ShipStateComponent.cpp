@@ -1,32 +1,32 @@
 #include "ShipStateComponent.h"
 
 
-rachet::ShipStateComponent::ShipStateComponent(int priority) :
+ratchet::ShipStateComponent::ShipStateComponent(int priority) :
     super(priority) {
 }
 
-rachet::ShipStateComponent::ShipStateComponent(const ShipStateComponent& obj) :
+ratchet::ShipStateComponent::ShipStateComponent(const ShipStateComponent& obj) :
     super(obj) {
 }
 
-rachet::ShipStateComponent::~ShipStateComponent() {
+ratchet::ShipStateComponent::~ShipStateComponent() {
 }
 
-std::string rachet::ShipStateComponent::GetType(void) const {
+std::string ratchet::ShipStateComponent::GetType(void) const {
     return "ShipStateComponent";
 }
 
-bool rachet::ShipStateComponent::Initialize(void) {
+bool ratchet::ShipStateComponent::Initialize(void) {
     super::Initialize();
     super::ChangeState(state::ShipActionStateType::kShipActionLandingState);
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::ShipStateComponent::Clone(void) {
-    return std::make_shared<rachet::ShipStateComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::ShipStateComponent::Clone(void) {
+    return std::make_shared<ratchet::ShipStateComponent>(*this);
 }
 
-bool rachet::ShipStateComponent::CanTransition(std::string_view next) const {
+bool ratchet::ShipStateComponent::CanTransition(std::string_view next) const {
     using Type = state::ShipActionStateType;
     auto current = _state_machine.GetCurrentStateName();
     if (current == Type::kShipActionIdleState) {
@@ -48,7 +48,7 @@ bool rachet::ShipStateComponent::CanTransition(std::string_view next) const {
 }
 
 #ifdef _DEBUG
-bool rachet::ShipStateComponent::DebugRender(void) {
+bool ratchet::ShipStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 100.0f, "ship state = %s", this->_state_machine.GetCurrentStateName());
     return true;

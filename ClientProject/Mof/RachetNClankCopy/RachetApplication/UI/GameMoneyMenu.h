@@ -1,5 +1,5 @@
-#ifndef RACHET_GAME_MONEY_MENU_H
-#define RACHET_GAME_MONEY_MENU_H
+#ifndef RATCHET_GAME_MONEY_MENU_H
+#define RATCHET_GAME_MONEY_MENU_H
 
 
 #include "Base/UI/UIItem.h"
@@ -14,7 +14,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace rachet {
+namespace ratchet {
 class GameMoneyMenu : public base::ui::UIPanel, public base::core::Observer<int> {
     using super = base::ui::UIPanel;
 private:
@@ -27,7 +27,7 @@ private:
     //! 非表示タイマー
     base::core::Timer _hide_timer;
     //! リソース
-    std::weak_ptr<rachet::ResourceMgr> _resource;
+    std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
@@ -45,7 +45,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr);
+    void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -71,4 +71,4 @@ public:
     virtual bool Render(void) override;
 };
 }
-#endif // !RACHET_GAME_MONEY_MENU_H
+#endif // !RATCHET_GAME_MONEY_MENU_H

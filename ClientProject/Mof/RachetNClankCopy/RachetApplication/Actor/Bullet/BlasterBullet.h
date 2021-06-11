@@ -1,13 +1,13 @@
-#ifndef RACHET_BLASTER_BULLET_H
-#define RACHET_BLASTER_BULLET_H
+#ifndef RATCHET_BLASTER_BULLET_H
+#define RATCHET_BLASTER_BULLET_H
 
 
 #include "Bullet.h"
 
 
-namespace rachet {
-class BlasterBullet : public rachet::Bullet {
-    using super = rachet::Bullet;
+namespace ratchet {
+class BlasterBullet : public ratchet::Bullet {
+    using super = ratchet::Bullet;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,7 +33,7 @@ public:
     /// 発射
     /// </summary>
     /// <param name="in"></param>
-    void Start(const rachet::Bullet::Param& in);
+    void Start(const ratchet::Bullet::Param& in);
 };
 }
-#endif // !RACHET_BLASTER_BULLET_H
+#endif // !RATCHET_BLASTER_BULLET_H

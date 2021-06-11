@@ -4,62 +4,62 @@
 #include "../../SightRecognitionComponent.h"
 
 
-rachet::SightCollisionComponent::SightCollisionComponent(int priority) :
+ratchet::SightCollisionComponent::SightCollisionComponent(int priority) :
     super(priority),
     _sight_recognition() {
 }
 
-rachet::SightCollisionComponent::SightCollisionComponent(const SightCollisionComponent& obj) :
+ratchet::SightCollisionComponent::SightCollisionComponent(const SightCollisionComponent& obj) :
     super(obj),
     _sight_recognition() {
 }
 
-rachet::SightCollisionComponent::~SightCollisionComponent() {
+ratchet::SightCollisionComponent::~SightCollisionComponent() {
 }
 
-std::string rachet::SightCollisionComponent::GetType(void) const {
-    return rachet::CollisionComponentType::kSightCollisionComponent;
+std::string ratchet::SightCollisionComponent::GetType(void) const {
+    return ratchet::CollisionComponentType::kSightCollisionComponent;
 }
 
-std::optional<Mof::CSphere> rachet::SightCollisionComponent::GetSphere(void) {    
+std::optional<Mof::CSphere> ratchet::SightCollisionComponent::GetSphere(void) {    
     if (_sight_recognition.expired()) {
         return std::optional<Mof::CSphere>();
     } // if
-    if (super::GetOwner() ->GetState() == rachet::ActorState::End) {
+    if (super::GetOwner() ->GetState() == ratchet::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto sight = _sight_recognition.lock();
     return Mof::CSphere(super::GetOwner()->GetPosition(), sight->GetRange());
 }
 
-std::optional<Mof::CBoxAABB> rachet::SightCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::SightCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> rachet::SightCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::SightCollisionComponent::GetRay(void) {
     return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> rachet::SightCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::SightCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<rachet::SightObject> rachet::SightCollisionComponent::GetSightObject(void) {
+std::optional<ratchet::SightObject> ratchet::SightCollisionComponent::GetSightObject(void) {
     if (_sight_recognition.expired()) {
-        return std::optional<rachet::SightObject>();
+        return std::optional<ratchet::SightObject>();
     } // if
-    if (super::GetOwner()->GetState() == rachet::ActorState::End) {
-        return std::optional<rachet::SightObject>();
+    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+        return std::optional<ratchet::SightObject>();
     } // if
-    return rachet::SightObject(super::GetOwner()->GetPosition(), super::GetOwner()->GetRotate());
+    return ratchet::SightObject(super::GetOwner()->GetPosition(), super::GetOwner()->GetRotate());
 }
 
-bool rachet::SightCollisionComponent::Initialize(void) {
+bool ratchet::SightCollisionComponent::Initialize(void) {
     super::Initialize();
-    _sight_recognition = super::GetOwner()->GetComponent<rachet::SightRecognitionComponent>();
+    _sight_recognition = super::GetOwner()->GetComponent<ratchet::SightRecognitionComponent>();
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::SightCollisionComponent::Clone(void) {
-    return std::make_shared<rachet::SightCollisionComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::SightCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::SightCollisionComponent>(*this);
 }

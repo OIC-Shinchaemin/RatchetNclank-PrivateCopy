@@ -4,20 +4,20 @@
 #include "Base/Core/Utility.h"
 
 
-rachet::SaveSystem::SaveSystem() :
+ratchet::SaveSystem::SaveSystem() :
     _path("../Resource/save/savedata.json") {
 }
 
-rachet::SaveSystem::~SaveSystem() {
+ratchet::SaveSystem::~SaveSystem() {
 }
 
-bool rachet::SaveSystem::Fetch(rachet::SaveData& out) {
+bool ratchet::SaveSystem::Fetch(ratchet::SaveData& out) {
     rapidjson::Document document;
     if (!ut::ParseJsonDocument(_path.c_str(), document)) {
         return false;
     } // if
 
-    auto savedata_param = rachet::SaveDataParam();
+    auto savedata_param = ratchet::SaveDataParam();
     if (document.HasMember("param")) {
         const auto& param = document["param"];
         if (param.HasMember("money")) {
@@ -45,7 +45,7 @@ bool rachet::SaveSystem::Fetch(rachet::SaveData& out) {
     return true;
 }
 
-bool rachet::SaveSystem::Save(const rachet::SaveDataParam& param) {
+bool ratchet::SaveSystem::Save(const ratchet::SaveDataParam& param) {
     rapidjson::Document document(rapidjson::Type::kObjectType);
 
     rapidjson::Value work(rapidjson::Type::kObjectType);

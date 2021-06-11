@@ -1,5 +1,5 @@
-#ifndef RACHET_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
-#define RACHET_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
+#ifndef RATCHET_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
+#define RATCHET_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace rachet {
-class PlayerMeleeAttackOneComponent : public rachet::PlayerActionComponent {
-    using super = rachet::PlayerActionComponent;
+namespace ratchet {
+class PlayerMeleeAttackOneComponent : public ratchet::PlayerActionComponent {
+    using super = ratchet::PlayerActionComponent;
 private:
     //! —\–ñ
     bool _next_reserve;    
@@ -73,7 +73,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<rachet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
     /// <summary>
     /// ŠJŽn
     /// </summary>
@@ -88,4 +88,4 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RACHET_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H
+#endif // !RATCHET_PLAYER_MELEE_ATTACK_ONE_COMPONENT_H

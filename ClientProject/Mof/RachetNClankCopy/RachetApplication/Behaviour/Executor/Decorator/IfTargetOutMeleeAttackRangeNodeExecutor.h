@@ -14,11 +14,11 @@ class IfTargetOutMeleeAttackRangeNodeExecutor : public behaviour::DecoratorNodeE
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<rachet::Actor> actor;
+        std::weak_ptr<ratchet::Actor> actor;
         //! エネミー
-        std::weak_ptr<rachet::EnemyComponent> ENEMY_com;
+        std::weak_ptr<ratchet::EnemyComponent> ENEMY_com;
         //! エネミー
-        std::weak_ptr<rachet::EnemyMeleeAttackComponent> melee_attack_com;
+        std::weak_ptr<ratchet::EnemyMeleeAttackComponent> melee_attack_com;
     };
 private:
     //! 実行引数
@@ -44,8 +44,8 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.ENEMY_com = actor->GetComponent<rachet::EnemyComponent>();
-            _node_args.melee_attack_com = actor->GetComponent<rachet::ActionComponent>()->GetComponent<rachet::EnemyMeleeAttackComponent>();
+            _node_args.ENEMY_com = actor->GetComponent<ratchet::EnemyComponent>();
+            _node_args.melee_attack_com = actor->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::EnemyMeleeAttackComponent>();
         } // if
     }
     /// <summary>

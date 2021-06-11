@@ -8,13 +8,13 @@
 #include "Collision/Object/SightCollisionComponent.h"
 
 
-void rachet::SightRecognitionComponent::RenderRay(const Mof::CRay3D& ray, float length, int color) {
+void ratchet::SightRecognitionComponent::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
                                      ray.Position + ray.Direction * length,
                                      color);
 }
 
-void rachet::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float degree_y) {
+void ratchet::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float degree_y) {
     auto ray = Mof::CRay3D(start);
     auto rotate = super::GetOwner()->GetRotate();
     rotate.y += math::ToRadian(degree_y);
@@ -26,7 +26,7 @@ void rachet::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float degr
     this->RenderRay(ray, this->GetRange(), def::color_rgba_u32::kGreen);
 }
 
-rachet::SightRecognitionComponent::SightRecognitionComponent(int priority) :
+ratchet::SightRecognitionComponent::SightRecognitionComponent(int priority) :
     super(priority),
     _range(0.0f),
     _player_com(),
@@ -34,7 +34,7 @@ rachet::SightRecognitionComponent::SightRecognitionComponent(int priority) :
     super::Activate();
 }
 
-rachet::SightRecognitionComponent::SightRecognitionComponent(const SightRecognitionComponent& obj) :
+ratchet::SightRecognitionComponent::SightRecognitionComponent(const SightRecognitionComponent& obj) :
     super(obj),
     _range(obj._range),
     _player_com(),
@@ -42,10 +42,10 @@ rachet::SightRecognitionComponent::SightRecognitionComponent(const SightRecognit
     super::Activate();
 }
 
-rachet::SightRecognitionComponent::~SightRecognitionComponent() {
+ratchet::SightRecognitionComponent::~SightRecognitionComponent() {
 }
 
-void rachet::SightRecognitionComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::SightRecognitionComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* range = "range";
 
@@ -55,40 +55,40 @@ void rachet::SightRecognitionComponent::SetParam(const rapidjson::Value& param) 
     _range = param[range].GetFloat();
 }
 
-std::string rachet::SightRecognitionComponent::GetType(void) const {
+std::string ratchet::SightRecognitionComponent::GetType(void) const {
     return "SightRecognitionComponent";
 }
 
-float rachet::SightRecognitionComponent::GetRange(void) const {
+float ratchet::SightRecognitionComponent::GetRange(void) const {
     return this->_range;
 }
 
-const std::vector<std::weak_ptr<rachet::Actor>>& rachet::SightRecognitionComponent::GetRecognized(void) const {
+const std::vector<std::weak_ptr<ratchet::Actor>>& ratchet::SightRecognitionComponent::GetRecognized(void) const {
     return this->_recognized;
 }
 
-bool rachet::SightRecognitionComponent::Initialize(void) {
+bool ratchet::SightRecognitionComponent::Initialize(void) {
     super::Initialize();
     if (auto tag = super::GetOwner()->GetTag(); tag == "Player") {
-        _player_com = super::GetOwner()->GetComponent<rachet::PlayerComponent>();
+        _player_com = super::GetOwner()->GetComponent<ratchet::PlayerComponent>();
 
 
-        auto sight_coll = super::GetOwner()->GetComponent<rachet::SightCollisionComponent>();
-        sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
+        auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
+        sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
                                      "EnemyCollisionComponent",
-                                     rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+                                     ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
             auto target = in.target.lock();
             _recognized.push_back(target);
             return true;
         }));
     } // if
     else if (tag == "Enemy") {
-        _ENEMY_com = super::GetOwner()->GetComponent<rachet::EnemyComponent>();
+        _ENEMY_com = super::GetOwner()->GetComponent<ratchet::EnemyComponent>();
 
-        auto sight_coll = super::GetOwner()->GetComponent<rachet::SightCollisionComponent>();
-        sight_coll->AddCollisionFunc(rachet::CollisionComponent::CollisionFuncType::Stay,
+        auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
+        sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
                                      "PlayerCollisionComponent",
-                                     rachet::CollisionComponent::CollisionFunc([&](const rachet::CollisionInfo& in) {
+                                     ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
             auto target = in.target.lock();
             _recognized.push_back(target);
             return true;
@@ -97,7 +97,7 @@ bool rachet::SightRecognitionComponent::Initialize(void) {
     return true;
 }
 
-bool rachet::SightRecognitionComponent::Update(float delta_time) {
+bool ratchet::SightRecognitionComponent::Update(float delta_time) {
 
     if (auto tag = super::GetOwner()->GetTag(); tag == "Player") {
         if (auto player_com = _player_com.lock()) {
@@ -105,7 +105,7 @@ bool rachet::SightRecognitionComponent::Update(float delta_time) {
             if (!_recognized.empty()) {
                 auto pos = super::GetOwner()->GetPosition();
                 auto far_pos = math::vec3::kOne * std::numeric_limits<float>::max();
-                auto it = std::min_element(_recognized.begin(), _recognized.end(), [pos, far_pos](std::weak_ptr<rachet::Actor>a, std::weak_ptr<rachet::Actor> b) {
+                auto it = std::min_element(_recognized.begin(), _recognized.end(), [pos, far_pos](std::weak_ptr<ratchet::Actor>a, std::weak_ptr<ratchet::Actor> b) {
                     auto a_pos = a.expired() ? far_pos : a.lock()->GetPosition();
                     auto b_pos = b.expired() ? far_pos : b.lock()->GetPosition();
                     return
@@ -120,6 +120,6 @@ bool rachet::SightRecognitionComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<rachet::Component> rachet::SightRecognitionComponent::Clone(void) {
-    return std::make_shared<rachet::SightRecognitionComponent>(*this);
+std::shared_ptr<ratchet::Component> ratchet::SightRecognitionComponent::Clone(void) {
+    return std::make_shared<ratchet::SightRecognitionComponent>(*this);
 }

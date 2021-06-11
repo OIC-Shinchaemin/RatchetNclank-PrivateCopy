@@ -1,7 +1,7 @@
 #include "QuickChangeMenu.h"
 
 
-rachet::QuickChangeMenu::QuickChangeMenu(const char* name) :
+ratchet::QuickChangeMenu::QuickChangeMenu(const char* name) :
     super(name),
     _distance(128.0f),
     _tex_names(),
@@ -27,7 +27,7 @@ rachet::QuickChangeMenu::QuickChangeMenu(const char* name) :
 
     super::_items.reserve(8);
     for (int i = 0; i < 8; i++) {
-        auto item = std::make_shared<rachet::QuickChangeMenuItem>("");
+        auto item = std::make_shared<ratchet::QuickChangeMenuItem>("");
 
         float degree = 360.0f / 8;
         auto radian = math::Radian(degree * i);
@@ -38,18 +38,18 @@ rachet::QuickChangeMenu::QuickChangeMenu(const char* name) :
     } // for
 }
 
-void rachet::QuickChangeMenu::OnNotify(const rachet::QuickChangeSystem::Info& info) {
+void ratchet::QuickChangeMenu::OnNotify(const ratchet::QuickChangeSystem::Info& info) {
     super::Notify(shared_from_this(), "Enable");
 
     this->SetColor(info.color);
     _current_index = info.current_index;
 }
 
-void rachet::QuickChangeMenu::SetResourceManager(std::weak_ptr<rachet::ResourceMgr> ptr) {
+void ratchet::QuickChangeMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void rachet::QuickChangeMenu::AddWeaponInfo(uint32_t index, const char* name) {
+void ratchet::QuickChangeMenu::AddWeaponInfo(uint32_t index, const char* name) {
     _ASSERT_EXPR(index < super::_items.size(), L"範囲外アクセスです");
     auto item = super::_items.at(index);
 
@@ -61,11 +61,11 @@ void rachet::QuickChangeMenu::AddWeaponInfo(uint32_t index, const char* name) {
     } // if
 }
 
-bool rachet::QuickChangeMenu::Update(float delta_time) {
+bool ratchet::QuickChangeMenu::Update(float delta_time) {
     return true;
 }
 
-bool rachet::QuickChangeMenu::Render(void) {
+bool ratchet::QuickChangeMenu::Render(void) {
     auto circle = Mof::CCircle(_position, 128.0f);
         // 選択中のものをわかりやすくしたい
     if (_current_index.has_value()) {
@@ -86,23 +86,23 @@ bool rachet::QuickChangeMenu::Render(void) {
     return true;
 }
 
-rachet::QuickChangeMenuItem::QuickChangeMenuItem(const char* name) :
+ratchet::QuickChangeMenuItem::QuickChangeMenuItem(const char* name) :
     super(name) {
 }
 
-void rachet::QuickChangeMenuItem::SetRectangle(Mof::CRectangle rect) {
+void ratchet::QuickChangeMenuItem::SetRectangle(Mof::CRectangle rect) {
     super::_rectangle = rect;
 }
 
-bool rachet::QuickChangeMenuItem::Input(void) {
+bool ratchet::QuickChangeMenuItem::Input(void) {
     return false;
 }
 
-bool rachet::QuickChangeMenuItem::Update(float delta_time) {
+bool ratchet::QuickChangeMenuItem::Update(float delta_time) {
     return false;
 }
 
-bool rachet::QuickChangeMenuItem::Render(void) {
+bool ratchet::QuickChangeMenuItem::Render(void) {
     auto rect = _rectangle;
     auto pos = _position - Mof::CVector2(rect.GetWidth() * 0.5f, rect.GetHeight() * 0.5f);
 

@@ -13,9 +13,9 @@ class IfCloseFromHomeNodeExecutor : public behaviour::DecoratorNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<rachet::Actor> actor;
+        std::weak_ptr<ratchet::Actor> actor;
         //! 型
-        std::weak_ptr<rachet::EnemyComponent> type_com;
+        std::weak_ptr<ratchet::EnemyComponent> type_com;
     };
 private:
     //! 実行引数
@@ -41,7 +41,7 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.type_com = actor->GetComponent<rachet::EnemyComponent>();
+            _node_args.type_com = actor->GetComponent<ratchet::EnemyComponent>();
         } // if
     }
     /// <summary>

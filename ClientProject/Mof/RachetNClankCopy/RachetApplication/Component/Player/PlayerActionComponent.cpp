@@ -1,26 +1,26 @@
 #include "PlayerActionComponent.h"
 
 
-std::shared_ptr<rachet::VelocityComponent> rachet::PlayerActionComponent::GetVelocityComponent(void) const {
+std::shared_ptr<ratchet::VelocityComponent> ratchet::PlayerActionComponent::GetVelocityComponent(void) const {
     if (auto com = _velocity_com.lock()) {
         return com;
     } // if
     return nullptr;
 }
 
-bool rachet::PlayerActionComponent::IsEndMotion(void) const {
+bool ratchet::PlayerActionComponent::IsEndMotion(void) const {
     _ASSERT_EXPR(!_motion_com.expired(), L"無効なポインタを保持しています");
     auto motion_com = _motion_com.lock();
     return motion_com->IsEndMotion();
 }
 
-bool rachet::PlayerActionComponent::CanTransitionActionState(const std::string& next) const {
+bool ratchet::PlayerActionComponent::CanTransitionActionState(const std::string& next) const {
     _ASSERT_EXPR(!_state_com.expired(), L"無効なポインタを保持しています");
     auto state_com = _state_com.lock();
     return state_com->CanTransition(next);
 }
 
-bool rachet::PlayerActionComponent::ChangeActionState(const std::string& name) {
+bool ratchet::PlayerActionComponent::ChangeActionState(const std::string& name) {
     if (auto state_com = _state_com.lock()) {
         state_com->ChangeState(name);
         return true;
@@ -28,7 +28,7 @@ bool rachet::PlayerActionComponent::ChangeActionState(const std::string& name) {
     return false;
 }
 
-bool rachet::PlayerActionComponent::ChangeMotionState(const std::string& name) {
+bool ratchet::PlayerActionComponent::ChangeMotionState(const std::string& name) {
     if (auto state_com = _motion_state_com.lock()) {
         state_com->ChangeState(name);
         return true;
@@ -36,7 +36,7 @@ bool rachet::PlayerActionComponent::ChangeMotionState(const std::string& name) {
     return false;
 }
 
-rachet::PlayerActionComponent::PlayerActionComponent(int priority) :
+ratchet::PlayerActionComponent::PlayerActionComponent(int priority) :
     super(priority),
     _velocity_com(),
     _state_com(),
@@ -44,7 +44,7 @@ rachet::PlayerActionComponent::PlayerActionComponent(int priority) :
     _motion_state_com() {
 }
 
-rachet::PlayerActionComponent::PlayerActionComponent(const PlayerActionComponent& obj) :
+ratchet::PlayerActionComponent::PlayerActionComponent(const PlayerActionComponent& obj) :
     super(obj),
     _velocity_com(),
     _state_com(),
@@ -52,23 +52,23 @@ rachet::PlayerActionComponent::PlayerActionComponent(const PlayerActionComponent
     _motion_state_com() {
 }
 
-rachet::PlayerActionComponent::~PlayerActionComponent() {
+ratchet::PlayerActionComponent::~PlayerActionComponent() {
 }
 
-std::string rachet::PlayerActionComponent::GetType(void) const {
+std::string ratchet::PlayerActionComponent::GetType(void) const {
     return "PlayerActionComponent";
 }
 
-bool rachet::PlayerActionComponent::Initialize(void) {
+bool ratchet::PlayerActionComponent::Initialize(void) {
     super::Initialize();
-    _velocity_com = super::GetOwner()->GetComponent<rachet::VelocityComponent>();
-    _state_com = super::GetOwner()->GetComponent<rachet::PlayerStateComponent>();
-    _motion_com = super::GetOwner()->GetComponent<rachet::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<rachet::MotionStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::PlayerStateComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
     return true;
 }
 
-bool rachet::PlayerActionComponent::Release(void) {
+bool ratchet::PlayerActionComponent::Release(void) {
     super::Release();
     _velocity_com.reset();
     _state_com.reset();
