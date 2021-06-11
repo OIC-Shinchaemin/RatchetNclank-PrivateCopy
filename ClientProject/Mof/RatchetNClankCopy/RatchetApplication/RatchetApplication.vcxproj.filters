@@ -1,0 +1,2193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource\save">
+      <UniqueIdentifier>{df540a94-66f5-4b59-a889-76236bcb6e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\behaviour">
+      <UniqueIdentifier>{3be1d213-4b2d-4d51-a4aa-2ec5d4dc7c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\builder">
+      <UniqueIdentifier>{38822f9b-b1ef-4bf7-8b94-f3483a8de732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\scene_resource">
+      <UniqueIdentifier>{e7b0a52a-a213-4e12-a354-b6e5957328f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\motion_names">
+      <UniqueIdentifier>{c22d0ffc-6276-471c-b563-0e632c109783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\stage">
+      <UniqueIdentifier>{492cf9dc-39e2-4b04-9c3a-8bc9da18b19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet">
+      <UniqueIdentifier>{ee6ebebb-e1b2-41b5-8a2e-5cbe8cd42389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ratchet\Header\Camera">
+      <UniqueIdentifier>{27b42ee6-6a36-45aa-bfcd-ed554edeb5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game">
+      <UniqueIdentifier>{9f8b624c-8281-4519-883c-3ff8a2e8a69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem">
+      <UniqueIdentifier>{d9f7a254-cd71-491d-bdb1-38ea6006de52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\Save">
+      <UniqueIdentifier>{5ca69d88-a075-4c2a-9f7e-3e195ef6a814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Factory">
+      <UniqueIdentifier>{b96171b7-57c7-4532-aba0-a5aeb2ee59f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Factory\Builder">
+      <UniqueIdentifier>{2629d229-fa22-4acb-94de-64ec4f108fcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Factory\Builder\Scene">
+      <UniqueIdentifier>{328257a5-3ba1-4c7a-9ec6-7c40e9174c92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Factory\ComponentRegister">
+      <UniqueIdentifier>{e9111719-68d3-4b4e-8894-fe7bdacd2cb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\UI">
+      <UniqueIdentifier>{c13108cd-858b-4ced-aa58-12a69c04f9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour">
+      <UniqueIdentifier>{4a4faf05-3de1-453e-b178-5e002fbd50b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Executor">
+      <UniqueIdentifier>{9b9a0cb9-7ce1-4835-a648-dac4259153c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Executor\Action">
+      <UniqueIdentifier>{92e9bdbd-de41-44ed-907e-b1a010b5b318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Executor\Condition">
+      <UniqueIdentifier>{c2d0796b-38af-44b1-a4d3-a7759be11e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Executor\Decorator">
+      <UniqueIdentifier>{ac49b993-3d5d-453e-8124-d7388469d61b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Node">
+      <UniqueIdentifier>{c5513471-6a03-479d-b8c3-ba7d84591e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Node\Action">
+      <UniqueIdentifier>{cf80d4cb-e376-4674-8eae-2a6419db1f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Node\Condition">
+      <UniqueIdentifier>{0dde5081-040c-406c-9e6f-4319c693f021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Behaviour\Node\Decorator">
+      <UniqueIdentifier>{a217c227-216b-44eb-9f38-395ef9362a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component">
+      <UniqueIdentifier>{5882736c-82d9-4cb1-82a6-2d33f365ecc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Collision">
+      <UniqueIdentifier>{e3c0bba5-0f41-479c-9221-e416c195215d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Collision\Object">
+      <UniqueIdentifier>{2a0e99e8-b4ca-451a-baa6-8a83c816dbd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Collision\Algolithm">
+      <UniqueIdentifier>{c57a99ab-0e7e-400c-b3af-7cc3faeb0b42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Player">
+      <UniqueIdentifier>{362dc1fe-5094-4381-9437-0f43f7dde7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Player\Action">
+      <UniqueIdentifier>{89820cd2-84c3-4bff-99a0-937d40541bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Enemy">
+      <UniqueIdentifier>{cfaf4eeb-e39b-43dd-95aa-c1d0807afc1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Bullet">
+      <UniqueIdentifier>{c93197d2-7fd8-45f9-8dc3-5d7fc1caa273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Ship">
+      <UniqueIdentifier>{557736b1-bc8d-4d54-9172-866e6a1ab630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Weapon">
+      <UniqueIdentifier>{3c30a394-d063-4f3d-afe5-6d70cd7d2a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Weapon\OmniWrench">
+      <UniqueIdentifier>{20c591a8-4d3e-4996-a818-959ba0fb102b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Item">
+      <UniqueIdentifier>{6f96d691-f125-4ab8-9bf6-2b36f1b2e915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Item\BulletItem">
+      <UniqueIdentifier>{b46313ee-e12b-45af-9ab2-f6b4fa866a7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Item\NanotechItem">
+      <UniqueIdentifier>{0ce58548-5fe7-40cf-b176-b35da0049d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor">
+      <UniqueIdentifier>{06c272ec-f183-4117-aed0-17d30ef8bd5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Bullet">
+      <UniqueIdentifier>{5e4f620d-85fe-44a3-9445-3f4bd2a7c1de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Character">
+      <UniqueIdentifier>{aa754e65-ad9b-4130-88c4-32258af789c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Weapon">
+      <UniqueIdentifier>{f262ee4d-4be1-4682-a1db-b5d58c348024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Effect">
+      <UniqueIdentifier>{21ca3901-c96c-413a-898a-dd5fda3e2dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Terrain">
+      <UniqueIdentifier>{4598c11b-e78f-416e-9a94-6a7471bdf392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Item">
+      <UniqueIdentifier>{8db5e219-e28c-416f-8827-ddad306d2a27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Facility">
+      <UniqueIdentifier>{08860e39-ff2e-43ac-9093-ec793bae084a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Vehicle">
+      <UniqueIdentifier>{9070b186-9b9b-4b88-8b29-d14800090bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\State">
+      <UniqueIdentifier>{498c9d96-5993-44d5-8448-1c619383a585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\State\AI">
+      <UniqueIdentifier>{6b2a6445-94b9-46e2-b620-29d11a1708fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Scene">
+      <UniqueIdentifier>{e8c366f6-97a1-4312-969f-42a1d7699999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Light">
+      <UniqueIdentifier>{0dca7068-b1c9-49e6-85d3-609b1674560e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Event">
+      <UniqueIdentifier>{4ec4b52a-e2cd-4186-90a9-4ab7466fb794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Ratchet\Source\Camera">
+      <UniqueIdentifier>{495f56d1-f6dc-42a4-8088-b13d3c2a6641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game">
+      <UniqueIdentifier>{2496ac41-fe9a-4995-b36c-2cb20993aa75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem">
+      <UniqueIdentifier>{0517efc8-f9e0-4670-ba41-b85b09bc98e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\Save">
+      <UniqueIdentifier>{ca3b5e09-611f-4b5c-8559-bbf2ec3831b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\UI">
+      <UniqueIdentifier>{1b271a1a-f8dd-44bd-b429-aeb12db7154e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Factory">
+      <UniqueIdentifier>{4df7b108-d49d-4e47-bb13-46ce4186a21b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Factory\Builder">
+      <UniqueIdentifier>{01534295-06e6-4519-a38c-12387d9b3c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Factory\Builder\Scene">
+      <UniqueIdentifier>{036ac15c-22a3-4d3d-a999-256a96c96508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component">
+      <UniqueIdentifier>{4f7a0cc8-eb0a-483a-a36c-2d03f2b326b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Collision">
+      <UniqueIdentifier>{372ebe60-f1d8-4de0-9f1b-d6a5173bcc9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Collision\Algolithm">
+      <UniqueIdentifier>{e0b68d24-3adc-431b-ae40-789de98b60f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Collision\Object">
+      <UniqueIdentifier>{798d80d2-d41c-4177-85a5-fc209edd4182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Player">
+      <UniqueIdentifier>{25d03a4d-f13e-4b4a-94fb-0f1eca9a274b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Player\Action">
+      <UniqueIdentifier>{add77942-3359-4581-b852-9dc9e0bfc3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Enemy">
+      <UniqueIdentifier>{7c2154de-d81f-421e-b5c0-5902481e5b9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Bullet">
+      <UniqueIdentifier>{b67d75ff-a189-48ce-9f34-f1732e17ad60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Ship">
+      <UniqueIdentifier>{cb69f12f-522a-4081-a964-38af85c444ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Weapon">
+      <UniqueIdentifier>{3964a09b-0c7a-47a3-9cd3-ab68c78cc300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Weapon\OmniWrench">
+      <UniqueIdentifier>{d2d7b52e-e01f-41b1-8910-3bde8bc2b663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Item">
+      <UniqueIdentifier>{d58bb449-615b-4b2f-a961-e913177a72f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Item\BulletItem">
+      <UniqueIdentifier>{fd254d98-d8ae-4250-af77-e059573795bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Item\Nanotech">
+      <UniqueIdentifier>{4e897ce6-0996-4653-910d-50004c14120d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor">
+      <UniqueIdentifier>{567c9894-7e27-4f46-a5f6-5e87db7ee5db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Bullet">
+      <UniqueIdentifier>{d606399a-7af4-4a1d-a333-692611185579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Character">
+      <UniqueIdentifier>{ca6bdf29-a178-4b7a-b1ba-64c54b3fb7a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Weapon">
+      <UniqueIdentifier>{1eeb2b3e-5be9-4091-9d4c-e56cd2ed839e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Effect">
+      <UniqueIdentifier>{774f9e04-bb18-41a1-b3f3-aa53d75d3389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Terrain">
+      <UniqueIdentifier>{2d0fb2ae-0b3b-4bba-aa6b-ae07145a7842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Item">
+      <UniqueIdentifier>{c0d27538-e0e0-4762-aa31-8dcb25c8fadf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Facility">
+      <UniqueIdentifier>{1e8d34b1-9b92-4dda-8f8d-fda374d2a763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Vehicle">
+      <UniqueIdentifier>{67696cee-7d99-4f58-b968-7c92ac796a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\State">
+      <UniqueIdentifier>{f8569c5e-5218-44b6-b3a6-d3897502d5dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\State\AI">
+      <UniqueIdentifier>{fac0ece7-4437-4700-916b-5c842b8d6b06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Scene">
+      <UniqueIdentifier>{e10fb131-c044-4268-ab70-1d544e5d595e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Stage">
+      <UniqueIdentifier>{b7ada71b-9352-4e63-bea1-d2187881b714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Stage\Gimmick">
+      <UniqueIdentifier>{89150bce-d500-4066-b762-0ced6d36635c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Stage\Parser">
+      <UniqueIdentifier>{c883a73b-c37d-4430-b2fd-a54de2e2eb66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Behaviour">
+      <UniqueIdentifier>{8bab79de-c57a-41f4-9751-c1e345576392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Behaviour\Executor">
+      <UniqueIdentifier>{cb01d6b5-23e6-49a8-b901-5d545f3586c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Behaviour\Executor\Action">
+      <UniqueIdentifier>{48d1c6ec-8e30-435c-a35c-a95bde3206d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Light">
+      <UniqueIdentifier>{7b615535-aeb0-454e-aabb-a8de24a9a716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Event">
+      <UniqueIdentifier>{af05ce0d-6a2c-4428-ac8e-32d6846c29b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Base">
+      <UniqueIdentifier>{b47891ea-b462-4797-8c77-f84ed13a44be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Base\Core">
+      <UniqueIdentifier>{7f648189-1e3e-4466-9871-1c8dca4aa67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Base\Resource">
+      <UniqueIdentifier>{dbc89fad-e624-404b-9d7b-04f9156b8567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Base\UI">
+      <UniqueIdentifier>{51ed45d7-a7e5-4b53-b45e-df9f8dca8079}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>Ratchet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Ratchet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Ratchet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\CameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\CameraManager.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\Camera.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Renderer.cpp">
+      <Filter>Ratchet\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Gamepad.cpp">
+      <Filter>Ratchet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\QuickChangeMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameWorld.cpp">
+      <Filter>Ratchet\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BehaviourExecutorFactory.cpp">
+      <Filter>Ratchet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PhysicsWorld.cpp">
+      <Filter>Ratchet\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\FactoryManager.cpp">
+      <Filter>Ratchet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BehaviourFactory.cpp">
+      <Filter>Ratchet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MeshComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MotionComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\ComponentCreator.cpp">
+      <Filter>Ratchet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\ComponentFactory.cpp">
+      <Filter>Ratchet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\BuilderFactory.cpp">
+      <Filter>Ratchet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MotionStateComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\VelocityComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\TransformComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Blaster.cpp">
+      <Filter>Ratchet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\BombGlove.cpp">
+      <Filter>Ratchet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Mechanical.cpp">
+      <Filter>Ratchet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\OmniWrench.cpp">
+      <Filter>Ratchet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Pyrocitor.cpp">
+      <Filter>Ratchet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Weapon\Weapon.cpp">
+      <Filter>Ratchet\Source\Actor\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Enemy.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Player.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Character.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\BlasterBullet.cpp">
+      <Filter>Ratchet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\BombGloveBullet.cpp">
+      <Filter>Ratchet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\Bullet.cpp">
+      <Filter>Ratchet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp">
+      <Filter>Ratchet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\ActorFactory.cpp">
+      <Filter>Ratchet\Source\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\SightRecognitionComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\AIStateComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyIdleComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyMoveComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyStateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Component.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\RenderComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\UpdateComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\NanotechMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\HpComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="State\AI\AICombatState.cpp">
+      <Filter>Ratchet\Source\State\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="State\AI\AIPatrolState.cpp">
+      <Filter>Ratchet\Source\State\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="State\AI\AIState.cpp">
+      <Filter>Ratchet\Source\State\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\CameraComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\FollowCameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\DebugCameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyMeleeAttackPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyMeleeAttackCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Save\SaveData.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Save\SaveSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Save</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GameMoney.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\WeaponSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\LockOnCursorMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\CharacterComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Bullet\BlasterBulletComponent.cpp">
+      <Filter>Ratchet\Source\Component\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BombGloveBulletCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Bullet\BombGloveBulletComponent.cpp">
+      <Filter>Ratchet\Source\Component\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Effect\BombGloveEffect.cpp">
+      <Filter>Ratchet\Source\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Effect\ParticleEffect.cpp">
+      <Filter>Ratchet\Source\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BombGloveEffectCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\EquipmentWeaponMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneImplementation.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TitleScene.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameScene.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ClearScene.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\ShipCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyRangedAttackComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Bullet\EnemyBullet.cpp">
+      <Filter>Ratchet\Source\Actor\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\GimmickBase.cpp">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\WoodBox.cpp">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Bridge.cpp">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\Elevator.cpp">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Parser\JsonStageParser.cpp">
+      <Filter>Ratchet\Source\Stage\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\StageObject.cpp">
+      <Filter>Ratchet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Stage.cpp">
+      <Filter>Ratchet\Source\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage\Gimmick\MoveCloud.cpp">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\CameraCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerStateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\InvincibleComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipMeshComponent.cpp">
+      <Filter>Ratchet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipComponent.cpp">
+      <Filter>Ratchet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Ship\Ship.cpp">
+      <Filter>Ratchet\Source\Actor\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameManager.cpp">
+      <Filter>Ratchet\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Terrain\Terrain.cpp">
+      <Filter>Ratchet\Source\Actor\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\LightManager.cpp">
+      <Filter>Ratchet\Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\AutoCameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\ActionComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\ActionStateComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ActionState.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\MotionState.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerActionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyMotionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayerMotionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\EnemyActionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\OmniWrenchBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\TerrainBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\ActorBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerOmniWrenchComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="State\OmniWrenchActionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\FirstPersonCameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerActionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerCartwheelJumpComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerCrouchComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDamageComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDeadComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerDoubleJumpComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerIdleComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpAttackComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpAttackSetComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpDownComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpLandingComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpSetComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerJumpUpComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerLookComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackOneComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackOneEndComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackThreeEndComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMeleeAttackTwoEndComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMoveComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackEndComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Weapon\OmniWrench</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp">
+      <Filter>Ratchet\Source\Component\Weapon\OmniWrench</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp">
+      <Filter>Ratchet\Source\Component\Weapon\OmniWrench</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerMechanicalWeaponComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Player\PlayerShotAttackComponent.cpp">
+      <Filter>Ratchet\Source\Component\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\StageViewEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\BridgeEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\ShipEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipActionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipStateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ShipActionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\ShipMotionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipIdleComponent.cpp">
+      <Filter>Ratchet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipTakeoffComponent.cpp">
+      <Filter>Ratchet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Ship\ShipLandingComponent.cpp">
+      <Filter>Ratchet\Source\Component\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\PointCameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\HelpDesk.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\HelpDeskMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GameQuest.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Event.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventReferenceTable.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\AnimationMeshComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BoltCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltActionStateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="State\BoltActionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltDefaultComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltActionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltGravitateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BoltMovedComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Item\Bolt.cpp">
+      <Filter>Ratchet\Source\Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GameMoneyMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Facility\Shop.cpp">
+      <Filter>Ratchet\Source\Actor\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\ShopSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ShopSystemMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GameSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\ShopCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\DescriptionScene.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\SceneBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\GameSceneBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\OptionSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\OptionSystemMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Scene\TitleSceneBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\TitleInfoMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GamePauseSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GamePauseSystemMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Item\BulletItem.cpp">
+      <Filter>Ratchet\Source\Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemActionStateComponent.cpp">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemComponent.cpp">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemDefaultComponent.cpp">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemGravitateComponent.cpp">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemMovedComponent.cpp">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemActionComponent.cpp">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="State\BulletItemActionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\NanotechItemActionStateImplementation.cpp">
+      <Filter>Ratchet\Source\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\NanotechItemCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BulletItemCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BulletItemPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Item\NanotechItem.cpp">
+      <Filter>Ratchet\Source\Actor\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemActionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemActionStateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemDefaultComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemGravitateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\NanotechItem\NanotechItemMovedComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\Nanotech</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\BillboardComponent.cpp">
+      <Filter>Ratchet\Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GimmickAccessSystemMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GimmickAccessSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\State.cpp">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\StateMachine.cpp">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\Timer.cpp">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Resource\ResourceFont.cpp">
+      <Filter>Ratchet\Base\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UIPanel.cpp">
+      <Filter>Ratchet\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UICanvas.cpp">
+      <Filter>Ratchet\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UIItem.cpp">
+      <Filter>Ratchet\Base\UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraManager.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Camera.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameManager.h">
+      <Filter>Ratchet\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Renderer.h">
+      <Filter>Ratchet\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefine.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Factory.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Creator.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Gamepad.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\QuickChangeMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameWorld.h">
+      <Filter>Ratchet\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Node.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ActionNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\INodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\NodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\ActionNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SelectorNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\CompositeNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SelectorNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\CompositeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SequencerNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SequencerNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\ConditionalNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\ConditionalNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\DecoratorNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\SimplexNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\SimplexNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\DecoratorNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BehaviourExecutorFactory.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PhysicsWorld.h">
+      <Filter>Ratchet\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionNames.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\FactoryManager.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BehaviourFactory.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MeshComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MotionComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentFactory.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentCreator.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\BuilderFactory.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MotionStateComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\VelocityComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\TransformComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\BombGloveBullet.h">
+      <Filter>Ratchet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\Bullet.h">
+      <Filter>Ratchet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\PyrocitorBullet.h">
+      <Filter>Ratchet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\BlasterBullet.h">
+      <Filter>Ratchet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Character.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Enemy.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Player.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\BombGlove.h">
+      <Filter>Ratchet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Mechanical.h">
+      <Filter>Ratchet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\OmniWrench.h">
+      <Filter>Ratchet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Pyrocitor.h">
+      <Filter>Ratchet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Weapon.h">
+      <Filter>Ratchet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Weapon\Blaster.h">
+      <Filter>Ratchet\Header\Actor\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ActorFactory.h">
+      <Filter>Ratchet\Header\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SightRecognitionComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\AIStateComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyIdleComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyMoveComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyStateComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Component.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\UpdateComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\RenderComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\LookAroundNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\GoHomeNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\ChangePatrolNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\MeleeAttackNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\NotAwayFromHomeNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\TargetRecognitionNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\MoveToEnemyNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\AlwaysTrueNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\AlwaysFalseNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\NanotechMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\HpComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="State\AI\AICombatState.h">
+      <Filter>Ratchet\Header\State\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="State\AI\AIPatrolState.h">
+      <Filter>Ratchet\Header\State\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="State\AI\AIState.h">
+      <Filter>Ratchet\Header\State\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerComponent.h">
+      <Filter>Ratchet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CameraComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\FollowCameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\DebugCameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyMeleeAttackPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyMeleeAttackCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GameMoney.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\QuickChangeSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\WeaponSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Save\SaveData.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Save\SaveSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyDamageComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\LockOnCursorMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CharacterComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Bullet\BlasterBulletComponent.h">
+      <Filter>Ratchet\Header\Component\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BombGloveBulletCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Bullet\BombGloveBulletComponent.h">
+      <Filter>Ratchet\Header\Component\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Effect\ParticleEffect.h">
+      <Filter>Ratchet\Header\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Effect\BombGloveEffect.h">
+      <Filter>Ratchet\Header\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BombGloveEffectCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyBombGloveEffectCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\EquipmentWeaponMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ComponentDefine.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneDefine.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TitleScene.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameScene.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ClearScene.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Ship\Ship.h">
+      <Filter>Ratchet\Header\Actor\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyRangedAttackComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\RangedAttackNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Bullet\EnemyBullet.h">
+      <Filter>Ratchet\Header\Actor\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Elevator.h">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\WoodBox.h">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Bridge.h">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\JsonStageParser.h">
+      <Filter>Ratchet\Source\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\StageParser.h">
+      <Filter>Ratchet\Source\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Ratchet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>Ratchet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>Ratchet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>Ratchet\Source\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\LookAroundNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\ChangePatrolNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\MeleeAttackNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\MoveToEnemyNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\RangedAttackNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\NotAwayFromHomeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
+      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CameraCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerStateComponent.h">
+      <Filter>Ratchet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InvincibleComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipMeshComponent.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipComponent.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Terrain\Terrain.h">
+      <Filter>Ratchet\Header\Actor\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\LightManager.h">
+      <Filter>Ratchet\Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInRangedAttackRange.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\TargetInMeleeAttackRange.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInMeleeAttackRangeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\TargetInRangedAttackRangeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\NotRecognizingTargetNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\NotRecognizingTargetNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Action\ChangeCombatNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Action\ChangeCombatNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\NotTargetRecognitionNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\NotTargetRecognitionNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\RecognizingTargetNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfAwayFromHomeNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfAwayFromHomeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfTargetOutMeleeAttackRangeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfTargetOutMeleeAttackRangeNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\RecognizingTargetNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Decorator\IfCloseFromHomeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Decorator\IfCloseFromHomeNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Decorator</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Node\Condition\AwayFromHomeNode.h">
+      <Filter>Ratchet\Header\Behaviour\Node\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour\Executor\Condition\AwayFromHomeNodeExecutor.h">
+      <Filter>Ratchet\Header\Behaviour\Executor\Condition</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\AutoCameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierCurveAnimation.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ActionComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ActionStateComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ActionState.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\MotionState.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerMotionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyMotionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayerActionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\EnemyActionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\IBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\OmniWrenchBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\TerrainBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\ActorBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerOmniWrenchComponent.h">
+      <Filter>Ratchet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="State\OmniWrenchActionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\FirstPersonCameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\CollisionComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h">
+      <Filter>Ratchet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\CollisionComponentRegister.h">
+      <Filter>Ratchet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\EnemyComponentRegister.h">
+      <Filter>Ratchet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerActionComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerCrouchComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerCartwheelJumpComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDamageComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDeadComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerDoubleJumpComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerIdleComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpAttackComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpAttackSetComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpDownComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpLandingComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpSetComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerJumpUpComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerLookComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackOneComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackOneEndComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackThreeEndComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMoveComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMeleeAttackTwoEndComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackEndComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.h">
+      <Filter>Ratchet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h">
+      <Filter>Ratchet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h">
+      <Filter>Ratchet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Weapon\OmniWrench</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\OmniWrenchComponentRegister.h">
+      <Filter>Ratchet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerMechanicalWeaponComponent.h">
+      <Filter>Ratchet\Header\Component\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Player\PlayerShotAttackComponent.h">
+      <Filter>Ratchet\Header\Component\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\StageViewEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\ShipEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\BridgeEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipActionComponent.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipStateComponent.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ShipActionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\ShipMotionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\ComponentRegister\ShipComponentRegister.h">
+      <Filter>Ratchet\Header\Factory\ComponentRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipIdleComponent.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipLandingComponent.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Ship\ShipTakeoffComponent.h">
+      <Filter>Ratchet\Header\Component\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\PointCameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\HelpDesk.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\HelpDeskMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GameQuest.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventManager.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Event.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\RegisterGlobalCameraEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventReferenceTable.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\AnimationMeshComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BoltCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltComponent.h">
+      <Filter>Ratchet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltActionStateComponent.h">
+      <Filter>Ratchet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="State\BoltActionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltDefaultComponent.h">
+      <Filter>Ratchet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltActionComponent.h">
+      <Filter>Ratchet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltGravitateComponent.h">
+      <Filter>Ratchet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltMovedComponent.h">
+      <Filter>Ratchet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BoltComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Item\Bolt.h">
+      <Filter>Ratchet\Header\Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GameMoneyMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Facility\Shop.h">
+      <Filter>Ratchet\Header\Actor\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\ShopSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\ShopSystemMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GameSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\ShopCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\DescriptionScene.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\SceneBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\GameSceneBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\OptionSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\OptionSystemMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Scene\TitleSceneBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\TitleInfoMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GamePauseSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GamePauseSystemMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Item\BulletItem.h">
+      <Filter>Ratchet\Header\Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemActionStateComponent.h">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemComponent.h">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemComponentInclude.h">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemDefaultComponent.h">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemGravitateComponent.h">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemMovedComponent.h">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemActionComponent.h">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="State\NanotechItemActionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\BulletItemActionStateDefine.h">
+      <Filter>Ratchet\Header\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BulletItemCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\NanotechItemCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BulletItemPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Item\NanotechItem.h">
+      <Filter>Ratchet\Header\Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemComponent.h">
+      <Filter>Ratchet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemDefaultComponent.h">
+      <Filter>Ratchet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemGravitateComponent.h">
+      <Filter>Ratchet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemMovedComponent.h">
+      <Filter>Ratchet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemActionComponent.h">
+      <Filter>Ratchet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\NanotechItem\NanotechItemActionStateComponent.h">
+      <Filter>Ratchet\Header\Component\Item\NanotechItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\BillboardComponent.h">
+      <Filter>Ratchet\Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GimmickAccessSystemMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GimmickAccessSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Math.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Observable.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Observer.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\ServiceLocator.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\State.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\StateMachine.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Timer.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Trait.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Utility.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\AbstructContainer.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Define.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\FunctionPointerContainer.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Header.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Resource\ResourceFont.h">
+      <Filter>Ratchet\Base\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UIItem.h">
+      <Filter>Ratchet\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UIPanel.h">
+      <Filter>Ratchet\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UICanvas.h">
+      <Filter>Ratchet\Base\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resource\scene_resource\general.txt">
+      <Filter>Resource\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\game_scene.txt">
+      <Filter>Resource\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\clear_scene.txt">
+      <Filter>Resource\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\title_scene.txt">
+      <Filter>Resource\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\scene_resource\description_scene.txt">
+      <Filter>Resource\scene_resource</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resource\save\savedata.json">
+      <Filter>Resource\save</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\player.motion_names">
+      <Filter>Resource\motion_names</Filter>
+    </None>
+    <None Include="..\Resource\builder\player.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\particle.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\pyrocitor_bullet.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bomb_glove_bullet.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\blaster_bullet.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\pyrocitor.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\blaster.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bomb_glove.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bomb_glove_effect.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\ship.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\strong_enemy.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\weak_enemy.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\strong_enemy_patrol.json">
+      <Filter>Resource\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\weak_enemy_combat.json">
+      <Filter>Resource\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\weak_enemy_patrol.json">
+      <Filter>Resource\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\strong_enemy_combat.json">
+      <Filter>Resource\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\builder\enemy_bullet.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\test.json">
+      <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\skeleton.motion_names">
+      <Filter>Resource\motion_names</Filter>
+    </None>
+    <None Include="..\Resource\motion_names\ship.motion_names">
+      <Filter>Resource\motion_names</Filter>
+    </None>
+    <None Include="..\Resource\builder\omni_wrench.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\water_flow.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\stage.json">
+      <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\builder\bolt.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\shop.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\demo_player.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\bullet_item.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\nanotech.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RatchetApplication.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
