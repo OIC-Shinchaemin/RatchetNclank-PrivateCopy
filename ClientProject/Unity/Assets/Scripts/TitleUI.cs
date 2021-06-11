@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 using TMPro;
+using YSNet;
 public class TitleUI : MonoBehaviour
 {
     private int hiscore = 404;
@@ -10,14 +12,25 @@ public class TitleUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreLoad();
-        HighScoreText.text = hiscore.ToString("D7");
+        Action<UserProfileModel> action = (UserProfileModel user) =>
+        {
+            ScoreLoad();
+        };
+        ApiConnection.Login(this, action);
     }
+
 
     // Update is called once per frame
     private void ScoreLoad()
     {
-        hiscore = PlayerPrefs.GetInt("HighScore", 0);
+        //hiscore = PlayerPrefs.GetInt("HighScore", 0);
+        Action<ApiRanking.ScoreResponseObject> action = (ApiRanking.ScoreResponseObject re) =>
+        {
+            hiscore = int.Parse(re.ranking.high_score);
+
+            HighScoreText.text = hiscore.ToString("D7");
+        };
+        ApiRanking.GetScore(this, action);
 
         //FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Open, FileAccess.Read);
         //BinaryReader reader = new BinaryReader(f);

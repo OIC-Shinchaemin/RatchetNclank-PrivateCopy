@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 using TMPro;
 using UnityEngine.SceneManagement;
+using YSNet;
+
 public class ScoreResult : MonoBehaviour
 {
-
+    
     private bool isScoreUpdate = false;
     private int hiscore;
     private float second;
@@ -18,13 +21,13 @@ public class ScoreResult : MonoBehaviour
 
     void Start()
     {
-        ScoreLoad();
+        Action< UserProfileModel> action = (UserProfileModel user) =>
+        {
+            ScoreLoad();
+        };
+        ApiConnection.Login(this, action);
 
-        ScoreJudge();
         
-        ScoreText.text = PermanentUI.perm.ScoreText.text;
-        HighScoreText.text = hiscore.ToString("D7");
-        PermanentUI.perm.GameEnd();
     }
     private void Update()
     {
@@ -49,9 +52,19 @@ public class ScoreResult : MonoBehaviour
 
     private void ScoreLoad()
     {
-        hiscore = PlayerPrefs.GetInt("HighScore", 0);
+        // hiscore = PlayerPrefs.GetInt("HighScore", 0);
 
+        Action<ApiRanking.ScoreResponseObject> action = (ApiRanking.ScoreResponseObject re) =>
+        {
+            hiscore = int.Parse(re.ranking.high_score);
+            ScoreJudge();
 
+            ScoreText.text = PermanentUI.perm.ScoreText.text;
+            HighScoreText.text = hiscore.ToString("D7");
+            PermanentUI.perm.GameEnd();
+        };
+        ApiRanking.GetScore(this, action);
+        
 
         //FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Open, FileAccess.Read);
         //BinaryReader reader = new BinaryReader(f);
@@ -72,7 +85,6 @@ public class ScoreResult : MonoBehaviour
     }
     private void ScoreJudge()
     {
-      
 
         if (hiscore < PermanentUI.perm.scoreValue)  //ロードしたスコアよりスコアが高かったらハイスコア書き換え
         {
@@ -85,9 +97,11 @@ public class ScoreResult : MonoBehaviour
     private void ScoreSave()
     {
 
-        PlayerPrefs.SetInt("HighScore", PermanentUI.perm.scoreValue);
-        PlayerPrefs.Save();
+        // PlayerPrefs.SetInt("HighScore", PermanentUI.perm.scoreValue);
+        // PlayerPrefs.Save();
 
+        ApiRanking.SetScore(this, (uint)PermanentUI.perm.scoreValue);
+//
         //FileStream f = new FileStream("Assets/ScoreData/Scoretest.txt", FileMode.Create, FileAccess.Write);
         //BinaryWriter writer = new BinaryWriter(f);
         //writer.Write(PermanentUI.perm.scoreValue);
