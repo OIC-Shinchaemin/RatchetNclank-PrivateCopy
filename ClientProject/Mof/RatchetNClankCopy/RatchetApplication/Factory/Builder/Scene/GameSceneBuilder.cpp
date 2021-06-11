@@ -26,7 +26,7 @@ void builder::GameSceneBuilder::Release(void) {
 
 void builder::GameSceneBuilder::Construct(std::any shared_this) {
     super::Construct(shared_this);
-    auto ptr = std::dynamic_pointer_cast<ratchet::GameScene>(std::any_cast<std::shared_ptr<ratchet::Scene>>(shared_this));
+    auto ptr = std::dynamic_pointer_cast<ratchet::scene::GameScene>(std::any_cast<std::shared_ptr<ratchet::scene::Scene>>(shared_this));
     ptr->SetGameManager(_game);
     ptr->SetEventManager(_event);
 }

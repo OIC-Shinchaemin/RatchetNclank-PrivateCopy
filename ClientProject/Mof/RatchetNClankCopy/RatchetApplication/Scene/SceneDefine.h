@@ -1,5 +1,5 @@
-#ifndef RATCHET_SCENE_DEFINE_H
-#define RATCHET_SCENE_DEFINE_H
+#ifndef RATCHET_SCENE_SCENE_DEFINE_H
+#define RATCHET_SCENE_SCENE_DEFINE_H
 
 
 #include <memory>
@@ -8,7 +8,9 @@
 
 #include <Mof.h>
 
+
 namespace ratchet {
+namespace scene {
 class Scene;
 struct SceneType {
     static std::string kTitleScene;
@@ -16,7 +18,6 @@ struct SceneType {
     static std::string kClearScene;
     static std::string kDescriptionScene;
 };
-namespace scene {
 struct ResourcePath {
     static std::string kTitleScene;
     static std::string kGameScene;
@@ -30,11 +31,6 @@ struct SceneMessage {
         type_name(type), info_name(info) {
     }
 };
-
-
-}
-
-
 struct ShaderPair {
     //! シェーダ
     std::shared_ptr<Mof::CShader> value;
@@ -122,7 +118,7 @@ struct SceneEffect {
     //! テクスチャの表示位置
     Mof::CVector2 position;
     //! テクスチャに使用するシェーダ
-    ratchet::ShaderPair shader;
+    ratchet::scene::ShaderPair shader;
 
     SceneEffect() :
         time(), position(), shader() {
@@ -202,4 +198,5 @@ struct SceneEffect {
     //virtual void DebugRender(void)
 };
 }
-#endif // !RATCHET_SCENE_DEFINE_H
+}
+#endif // !RATCHET_SCENE_SCENE_DEFINE_H

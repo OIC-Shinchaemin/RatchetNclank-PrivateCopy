@@ -14,7 +14,7 @@
 #include "../Event/EventReferenceTable.h"
 
 
-void ratchet::GameScene::AddElement(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::Actor>& ptr) {
     // add
     ptr->AddObserver(shared_from_this());
     _game_world.AddActor(ptr);
@@ -22,25 +22,25 @@ void ratchet::GameScene::AddElement(const std::shared_ptr<ratchet::Actor>& ptr) 
     _physic_world.AddActor(ptr);
 }
 
-void ratchet::GameScene::RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::GameScene::RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr) {
     // remove
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
     _physic_world.RemoveActor(ptr);
 }
 
-void ratchet::GameScene::ReInitialize(void) {
+void ratchet::scene::GameScene::ReInitialize(void) {
     _renderer.Reset();
     _game_world.Reset();
     _physic_world.Reset();
     this->Initialize();
 }
 
-bool ratchet::GameScene::SceneUpdate(float delta_time) {
+bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 #ifdef _DEBUG
     //if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-    //    _subject.Notify(scene::SceneMessage(ratchet::SceneType::kClearScene, ""));
+    //    _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kClearScene, ""));
     //} // if
 #endif // _DEBUG
 
@@ -73,11 +73,11 @@ bool ratchet::GameScene::SceneUpdate(float delta_time) {
     return true;
 }
 
-bool ratchet::GameScene::LoadingUpdate(float delta_time) {
+bool ratchet::scene::GameScene::LoadingUpdate(float delta_time) {
     return false;
 }
 
-bool ratchet::GameScene::SceneRender(void) {
+bool ratchet::scene::GameScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
 
@@ -88,14 +88,14 @@ bool ratchet::GameScene::SceneRender(void) {
     return true;
 }
 
-bool ratchet::GameScene::LoadingRender(void) {
+bool ratchet::scene::GameScene::LoadingRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Now Loading");
     return true;
 }
 
-ratchet::GameScene::GameScene() :
+ratchet::scene::GameScene::GameScene() :
     _created_actors(),
     _delete_actors(),
     _game_world(),
@@ -107,10 +107,10 @@ ratchet::GameScene::GameScene() :
     _event() {
 }
 
-ratchet::GameScene::~GameScene() {
+ratchet::scene::GameScene::~GameScene() {
 }
 
-void ratchet::GameScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
     if (type == "AddRequest") {
         ptr->AddObserver(shared_from_this());
         _created_actors.push_back(ptr);
@@ -124,11 +124,11 @@ void ratchet::GameScene::OnNotify(const char* type, const std::shared_ptr<ratche
         _re_initialize = true;
     } // if
     if (type == "GameClear") {
-        _subject.Notify(scene::SceneMessage(ratchet::SceneType::kClearScene, ""));
+        _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kClearScene, ""));
     } // if
 }
 
-void ratchet::GameScene::OnNotify(const ratchet::ShopSystem::Info& info) {
+void ratchet::scene::GameScene::OnNotify(const ratchet::ShopSystem::Info& info) {
     if (info.close) {
         this->_state = super::State::Active;
     } // if
@@ -137,19 +137,19 @@ void ratchet::GameScene::OnNotify(const ratchet::ShopSystem::Info& info) {
     } // else
 }
 
-void ratchet::GameScene::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::scene::GameScene::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
     this->_game = ptr;
 }
 
-void ratchet::GameScene::SetEventManager(std::weak_ptr<ratchet::EventManager> ptr) {
+void ratchet::scene::GameScene::SetEventManager(std::weak_ptr<ratchet::EventManager> ptr) {
     this->_event = ptr;
 }
 
-std::string ratchet::GameScene::GetName(void) {
-    return ratchet::SceneType::kGameScene;
+std::string ratchet::scene::GameScene::GetName(void) {
+    return ratchet::scene::SceneType::kGameScene;
 }
 
-bool ratchet::GameScene::Load(std::shared_ptr<ratchet::Scene::Param> param) {
+bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
     if (auto r = _resource.lock()) {
         r->Load(param->resource.c_str());
@@ -168,7 +168,7 @@ bool ratchet::GameScene::Load(std::shared_ptr<ratchet::Scene::Param> param) {
     return true;
 }
 
-bool ratchet::GameScene::Initialize(void) {
+bool ratchet::scene::GameScene::Initialize(void) {
     _stage.Initialize();
     ratchet::EventReferenceTable::Singleton().Reset();
 
@@ -261,13 +261,13 @@ bool ratchet::GameScene::Initialize(void) {
 
 
         auto item0 = std::make_shared<ratchet::GamePauseSystemItem>([&]() {
-            _subject.Notify(scene::SceneMessage(ratchet::SceneType::kTitleScene, ""));
+            _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
             return true;
         });
         item0->SetText("タイトルに戻る");
 
         auto item1 = std::make_shared<ratchet::GamePauseSystemItem>([&]() {
-            _subject.Notify(scene::SceneMessage(ratchet::SceneType::kGameScene, ""));
+            _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
             return true;
         });
         item1->SetText("リトライ");
@@ -319,7 +319,7 @@ bool ratchet::GameScene::Initialize(void) {
     return true;
 }
 
-bool ratchet::GameScene::Input(void) {
+bool ratchet::scene::GameScene::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         if (auto game = _game.lock()) {
             if (!game->GetGamePauseSystem()->IsActive()) {
@@ -335,7 +335,7 @@ bool ratchet::GameScene::Input(void) {
     return true;
 }
 
-bool ratchet::GameScene::Release(void) {
+bool ratchet::scene::GameScene::Release(void) {
     super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {

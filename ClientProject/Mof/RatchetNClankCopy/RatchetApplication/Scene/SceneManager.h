@@ -1,5 +1,5 @@
-#ifndef RATCHET_SCENE_MANAGER_H
-#define RATCHET_SCENE_MANAGER_H
+#ifndef RATCHET_SCENE_SCENE_MANAGER_H
+#define RATCHET_SCENE_SCENE_MANAGER_H
 
 
 #include <memory>
@@ -20,11 +20,12 @@
 
 
 namespace ratchet {
-class SceneManager : public std::enable_shared_from_this<ratchet::SceneManager>, public base::core::Observer<const scene::SceneMessage&> {
-    using this_type = ratchet::SceneManager;
+namespace scene {
+class SceneManager : public std::enable_shared_from_this<ratchet::scene::SceneManager>, public base::core::Observer<const scene::SceneMessage&> {
+    using this_type = ratchet::scene::SceneManager;
     struct ChangeMessage {
         std::string name;
-        std::shared_ptr<ratchet::Scene::Param> param;
+        std::shared_ptr<ratchet::scene::Scene::Param> param;
     };
     struct Managers {
         //! リソース
@@ -38,7 +39,7 @@ class SceneManager : public std::enable_shared_from_this<ratchet::SceneManager>,
     };
     struct CreateStruct {
         //! ファクトリー
-        ratchet::Factory<ratchet::Scene> factory;
+        ratchet::Factory<ratchet::scene::Scene> factory;
         //! ビルダー
         std::unordered_map<std::string, std::shared_ptr<ratchet::IBuilder>> builders;
         //! タイプ,パス
@@ -46,9 +47,9 @@ class SceneManager : public std::enable_shared_from_this<ratchet::SceneManager>,
     };
 private:
     //! 現在
-    std::shared_ptr<ratchet::Scene> _scene;
+    std::shared_ptr<ratchet::scene::Scene> _scene;
     //! 前
-    std::shared_ptr<ratchet::Scene> _prev_scene;
+    std::shared_ptr<ratchet::scene::Scene> _prev_scene;
     //! メッセージ
     std::optional<ChangeMessage> _change_message;
     //! 管理オブジェクト
@@ -90,7 +91,7 @@ private:
     /// </summary>
     /// <param name="name"></param>
     /// <param name="param"></param>
-    void ChangeScene(const std::string& name, std::shared_ptr<ratchet::Scene::Param> param);
+    void ChangeScene(const std::string& name, std::shared_ptr<ratchet::scene::Scene::Param> param);
     void RenderScene(void);
 public:
     /// <summary>
@@ -158,4 +159,5 @@ public:
     bool Release(void);
 };
 }
-#endif // !RATCHET_SCENE_MANAGER_H
+}
+#endif // !RATCHET_SCENE_SCENE_MANAGER_H

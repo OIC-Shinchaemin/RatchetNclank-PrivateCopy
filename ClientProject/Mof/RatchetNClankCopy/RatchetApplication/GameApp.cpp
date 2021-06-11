@@ -14,11 +14,11 @@ MofBool CGameApp::Initialize(void) {
     ratchet::Gamepad::GetInstance().Create();
     _resource_manager = ut::MakeSharedWithRelease<ratchet::ResourceMgr>();
     _camera_manager = std::make_shared<ratchet::CameraManager>();
-    _light_manager = std::make_shared<ratchet::LightManager>();
+    _light_manager = std::make_shared<ratchet::light::LightManager>();
     _game_manager = ut::MakeSharedWithRelease<ratchet::GameManager>();
     _event_manager = ut::MakeSharedWithRelease<ratchet::EventManager>();
     _ui_canvas = std::make_shared<base::ui::UICanvas>();
-    _scene_manager = ut::MakeSharedWithRelease<ratchet::SceneManager>();
+    _scene_manager = ut::MakeSharedWithRelease<ratchet::scene::SceneManager>();
 
     ratchet::FactoryManager::Singleton().SetResourceManager(_resource_manager);
     ratchet::FactoryManager::Singleton().SetGameManager(_game_manager);

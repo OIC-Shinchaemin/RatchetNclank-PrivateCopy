@@ -18,7 +18,7 @@ private:
     //! カメラ
     std::shared_ptr<ratchet::CameraManager> _camera_manager;
     //! ライト
-    std::shared_ptr<ratchet::LightManager> _light_manager;
+    std::shared_ptr<ratchet::light::LightManager> _light_manager;
     //! ゲーム
     std::shared_ptr<ratchet::GameManager> _game_manager;
     //! イベント
@@ -26,7 +26,7 @@ private:
     //! UI
     std::shared_ptr<base::ui::UICanvas> _ui_canvas;
     //! シーン
-    std::shared_ptr<ratchet::SceneManager> _scene_manager;
+    std::shared_ptr<ratchet::scene::SceneManager> _scene_manager;
 public:
     CGameApp() :
         _resource_manager(),

@@ -5,7 +5,7 @@
 #include "../Camera/FollowCameraController.h"
 
 
-bool ratchet::TitleScene::SceneUpdate(float delta_time) {
+bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
@@ -26,11 +26,11 @@ bool ratchet::TitleScene::SceneUpdate(float delta_time) {
     return true;
 }
 
-bool ratchet::TitleScene::LoadingUpdate(float delta_time) {
+bool ratchet::scene::TitleScene::LoadingUpdate(float delta_time) {
     return true;
 }
 
-bool ratchet::TitleScene::SceneRender(void) {
+bool ratchet::scene::TitleScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
 
@@ -40,14 +40,14 @@ bool ratchet::TitleScene::SceneRender(void) {
     return true;
 }
 
-bool ratchet::TitleScene::LoadingRender(void) {
+bool ratchet::scene::TitleScene::LoadingRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
     ::CGraphicsUtilities::RenderString(800.0f, 700.0f, def::color_rgba_u32::kWhite, "Now Loading...");
     return true;
 }
 
-ratchet::TitleScene::TitleScene() :
+ratchet::scene::TitleScene::TitleScene() :
     super(),
     _stage(),
     _stage_view_camera(),
@@ -57,14 +57,14 @@ ratchet::TitleScene::TitleScene() :
     _ui_creator("TitleInfoMenu") {
 }
 
-ratchet::TitleScene::~TitleScene() {
+ratchet::scene::TitleScene::~TitleScene() {
     _game.reset();
 }
 
-void ratchet::TitleScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::TitleScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
 }
 
-void ratchet::TitleScene::OnNotify(const ratchet::OptionSystem::Info& info) {
+void ratchet::scene::TitleScene::OnNotify(const ratchet::OptionSystem::Info& info) {
     if (info.enter) {
         this->_state = super::State::Pause;
     } // if
@@ -73,15 +73,15 @@ void ratchet::TitleScene::OnNotify(const ratchet::OptionSystem::Info& info) {
     } // if
 }
 
-void ratchet::TitleScene::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::scene::TitleScene::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
     this->_game = ptr;
 }
 
-std::string ratchet::TitleScene::GetName(void) {
-    return ratchet::SceneType::kTitleScene;
+std::string ratchet::scene::TitleScene::GetName(void) {
+    return ratchet::scene::SceneType::kTitleScene;
 }
 
-bool ratchet::TitleScene::Load(std::shared_ptr<ratchet::Scene::Param> param) {
+bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
 
     super::_load_thread = std::thread([&]() {
@@ -134,13 +134,13 @@ bool ratchet::TitleScene::Load(std::shared_ptr<ratchet::Scene::Param> param) {
             option_system->GetTitleMenuSubject()->AddObserver(menu);
 
             auto item0 = std::make_shared<ratchet::OptionSystemItem>([&]() {
-                _subject.Notify(scene::SceneMessage(ratchet::SceneType::kDescriptionScene, ""));
+                _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kDescriptionScene, ""));
                 return true;
             });
             item0->SetText("操作説明");
 
             auto item1 = std::make_shared<ratchet::OptionSystemItem>([&]() {
-                _subject.Notify(scene::SceneMessage(ratchet::SceneType::kGameScene, ""));
+                _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
                 return true;
             });
             item1->SetText("ゲームスタート");
@@ -155,12 +155,12 @@ bool ratchet::TitleScene::Load(std::shared_ptr<ratchet::Scene::Param> param) {
     return true;
 }
 
-bool ratchet::TitleScene::Initialize(void) {
+bool ratchet::scene::TitleScene::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool ratchet::TitleScene::Release(void) {
+bool ratchet::scene::TitleScene::Release(void) {
     super::Release();
     if (auto game = _game.lock()) {
         game->GetOptionSystem()->Release();

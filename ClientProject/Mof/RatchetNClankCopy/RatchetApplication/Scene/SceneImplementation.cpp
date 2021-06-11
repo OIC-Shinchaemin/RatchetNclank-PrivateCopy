@@ -1,10 +1,10 @@
 #include "SceneDefine.h"
 
 
-std::string ratchet::SceneType::kTitleScene = "TitleScene";
-std::string ratchet::SceneType::kGameScene = "GameScene";
-std::string ratchet::SceneType::kClearScene = "ClearScene";
-std::string ratchet::SceneType::kDescriptionScene = "DescriptionScene";
+std::string ratchet::scene::SceneType::kTitleScene = "TitleScene";
+std::string ratchet::scene::SceneType::kGameScene = "GameScene";
+std::string ratchet::scene::SceneType::kClearScene = "ClearScene";
+std::string ratchet::scene::SceneType::kDescriptionScene = "DescriptionScene";
 
 std::string ratchet::scene::ResourcePath::kTitleScene = "../Resource/scene_resource/title_scene.txt";
 std::string ratchet::scene::ResourcePath::kGameScene = "../Resource/scene_resource/game_scene.txt";

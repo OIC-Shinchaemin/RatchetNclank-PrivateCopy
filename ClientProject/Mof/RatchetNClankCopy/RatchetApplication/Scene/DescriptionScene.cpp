@@ -3,22 +3,22 @@
 #include "../Gamepad.h"
 
 
-bool ratchet::DescriptionScene::SceneUpdate(float delta_time) {
+bool ratchet::scene::DescriptionScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         //::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
         //::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
         ::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
-        _subject.Notify(scene::SceneMessage(ratchet::SceneType::kTitleScene, ""));
+        _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
     } // if
     return true;
 }
 
-bool ratchet::DescriptionScene::LoadingUpdate(float delta_time) {
+bool ratchet::scene::DescriptionScene::LoadingUpdate(float delta_time) {
     return false;
 }
 
-bool ratchet::DescriptionScene::SceneRender(void) {
+bool ratchet::scene::DescriptionScene::SceneRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
 
@@ -51,20 +51,20 @@ bool ratchet::DescriptionScene::SceneRender(void) {
     return true;
 }
 
-ratchet::DescriptionScene::DescriptionScene() {
+ratchet::scene::DescriptionScene::DescriptionScene() {
 }
 
-ratchet::DescriptionScene::~DescriptionScene() {
+ratchet::scene::DescriptionScene::~DescriptionScene() {
 }
 
-void ratchet::DescriptionScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::DescriptionScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
 }
 
-std::string ratchet::DescriptionScene::GetName(void) {
-    return ratchet::SceneType::kDescriptionScene;
+std::string ratchet::scene::DescriptionScene::GetName(void) {
+    return ratchet::scene::SceneType::kDescriptionScene;
 }
 
-bool ratchet::DescriptionScene::Load(std::shared_ptr<ratchet::Scene::Param> param) {
+bool ratchet::scene::DescriptionScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     auto re = super::Load(param);
 
     super::LoadComplete();

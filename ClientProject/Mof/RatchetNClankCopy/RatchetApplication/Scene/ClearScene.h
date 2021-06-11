@@ -1,13 +1,14 @@
-#ifndef RATCHET_CLEAR_SCENE_H
-#define RATCHET_CLEAR_SCENE_H
+#ifndef RATCHET_SCENE_CLEAR_SCENE_H
+#define RATCHET_SCENE_CLEAR_SCENE_H
 
 
 #include "Scene.h"
 
 
 namespace ratchet {
-class ClearScene : public ratchet::Scene {
-    using super = ratchet::Scene;
+namespace scene {
+class ClearScene : public ratchet::scene::Scene {
+    using super = ratchet::scene::Scene;
 protected:
 /// <summary>
     /// çXêV
@@ -53,7 +54,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Load(std::shared_ptr<ratchet::Scene::Param> param) override;
+    virtual bool Load(std::shared_ptr<super::Param> param) override;
 };
 }
-#endif // !RATCHET_CLEAR_SCENE_H
+}
+#endif // !RATCHET_SCENE_CLEAR_SCENE_H

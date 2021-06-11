@@ -24,7 +24,7 @@ void builder::SceneBuilder::Release(void) {
 }
 
 void builder::SceneBuilder::Construct(std::any shared_this) {
-    auto ptr = std::any_cast<std::shared_ptr<ratchet::Scene>>(shared_this);
+    auto ptr = std::any_cast<std::shared_ptr<ratchet::scene::Scene>>(shared_this);
     ptr->SetResourceManager(_resource);
     ptr->SetUICanvas(_ui_canvas);
 }

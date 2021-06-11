@@ -1,5 +1,5 @@
-#ifndef RATCHET_GAME_SCENE_H
-#define RATCHET_GAME_SCENE_H
+#ifndef RATCHET_SCENE_GAME_SCENE_H
+#define RATCHET_SCENE_GAME_SCENE_H
 
 
 #include "Scene.h"
@@ -19,9 +19,10 @@
 #include "../Actor/Character/Player.h"
 
 namespace ratchet {
-class GameScene : public ratchet::Scene, public base::core::Observer<const ratchet::ShopSystem::Info&> {
-    using super = ratchet::Scene;
-    using this_type = ratchet::GameScene;
+namespace scene {
+class GameScene : public ratchet::scene::Scene, public base::core::Observer<const ratchet::ShopSystem::Info&> {
+    using super = ratchet::scene::Scene;
+    using this_type = ratchet::scene::GameScene;
 private:
     //! í«â¡
     std::vector<std::shared_ptr<ratchet::Actor>> _created_actors;
@@ -126,7 +127,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Load(std::shared_ptr<ratchet::Scene::Param>  param) override;
+    virtual bool Load(std::shared_ptr<super::Param>  param) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -147,4 +148,5 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RATCHET_GAME_SCENE_H
+}
+#endif // !RATCHET_SCENE_GAME_SCENE_H

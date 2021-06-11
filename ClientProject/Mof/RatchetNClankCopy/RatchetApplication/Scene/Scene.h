@@ -1,5 +1,5 @@
-#ifndef RATCHET_SCENE_H
-#define RATCHET_SCENE_H
+#ifndef RATCHET_SCENE_SCENE_H
+#define RATCHET_SCENE_SCENE_H
 
 
 #include <optional>
@@ -20,8 +20,9 @@
 
 
 namespace ratchet {
-class Scene : public std::enable_shared_from_this<ratchet::Scene>, public base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&> {
-    using this_type = ratchet::Scene;
+namespace scene {
+class Scene : public std::enable_shared_from_this<ratchet::scene::Scene>, public base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&> {
+    using this_type = ratchet::scene::Scene;
 public:
    enum class State {
         Active,    
@@ -43,7 +44,7 @@ protected:
     //! デフォルトのレンダーターゲット
     Mof::LPRenderTarget _default;
     //! ポストエフェクト
-    std::optional<ratchet::SceneEffect> _effect;
+    std::optional<ratchet::scene::SceneEffect> _effect;
     //! 遷移
     base::core::Observable<const scene::SceneMessage&> _subject;
     //! リソース
@@ -109,7 +110,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Load(std::shared_ptr<ratchet::Scene::Param> param);
+    virtual bool Load(std::shared_ptr<ratchet::scene::Scene::Param> param);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -142,4 +143,5 @@ public:
     virtual bool Release(void);
 };
 }
-#endif // !RATCHET_SCENE_H
+}
+#endif // !RATCHET_SCENE_SCENE_H
