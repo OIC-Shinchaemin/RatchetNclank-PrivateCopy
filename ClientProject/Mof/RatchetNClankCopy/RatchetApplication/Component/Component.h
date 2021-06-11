@@ -1,5 +1,5 @@
-#ifndef RATCHET_COMPONENT_H
-#define RATCHET_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COMPONENT_H
+#define RATCHET_COMPONENT_COMPONENT_H
 
 
 #include <memory>
@@ -14,7 +14,8 @@
 
 
 namespace ratchet {
-class Component : public std::enable_shared_from_this<ratchet::Component> {
+namespace component {
+class Component : public std::enable_shared_from_this<ratchet::component::Component> {
 private:
     //! この機能の所有者
     std::weak_ptr<actor::Actor> _owner;
@@ -151,7 +152,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::Component> Clone(void) = 0;
+    virtual std::shared_ptr<ratchet::component::Component> Clone(void) = 0;
 #ifdef _DEBUG
     /// <summary>
     /// デバッグ
@@ -161,11 +162,12 @@ public:
     virtual bool DebugRender(void);
 #endif // _DEBUG
 };
-static bool operator<(const ratchet::Component& a, const ratchet::Component& b) noexcept {
+static bool operator<(const ratchet::component::Component& a, const ratchet::component::Component& b) noexcept {
     return a.GetPriority() < b.GetPriority();
 }
-static bool operator<(const std::shared_ptr<ratchet::Component>& a, const std::shared_ptr < ratchet::Component>& b) noexcept {
+static bool operator<(const std::shared_ptr<ratchet::component::Component>& a, const std::shared_ptr < ratchet::component::Component>& b) noexcept {
     return a->GetPriority() < b->GetPriority();
 }
 }
-#endif // !RATCHET_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_COMPONENT_H

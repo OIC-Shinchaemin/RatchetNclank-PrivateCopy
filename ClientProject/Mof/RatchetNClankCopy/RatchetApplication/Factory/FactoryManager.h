@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Component> CreateComponent(const char* name, const rapidjson::Value& param) const;
+    std::shared_ptr<ratchet::component::Component> CreateComponent(const char* name, const rapidjson::Value& param) const;
     /// <summary>
     /// ì¬
     /// </summary>

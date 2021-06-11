@@ -80,7 +80,7 @@ bool ratchet::PlayerJumpDownComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerJumpDownComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerJumpDownComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerJumpDownComponent>(*this);
 }
 

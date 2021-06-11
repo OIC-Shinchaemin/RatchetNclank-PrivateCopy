@@ -118,6 +118,6 @@ void ratchet::ActionComponent::ChangeAction(std::string_view name) {
     } // if
 }
 
-std::shared_ptr<ratchet::Component> ratchet::ActionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::ActionComponent::Clone(void) {
     return std::make_shared<ratchet::ActionComponent>(*this);
 }

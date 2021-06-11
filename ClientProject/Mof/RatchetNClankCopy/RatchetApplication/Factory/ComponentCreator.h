@@ -14,7 +14,7 @@ namespace factory {
 class ComponentCreator {
 private:
     //! コピー元
-    std::unique_ptr<ratchet::Component> _origin;
+    std::unique_ptr<ratchet::component::Component> _origin;
 public:
     /// <summary>
     /// コンストラクタ
@@ -44,7 +44,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Component> Create(const rapidjson::Value& param) const;
+    std::shared_ptr<ratchet::component::Component> Create(const rapidjson::Value& param) const;
     /// <summary>
     /// 解放
     /// </summary>

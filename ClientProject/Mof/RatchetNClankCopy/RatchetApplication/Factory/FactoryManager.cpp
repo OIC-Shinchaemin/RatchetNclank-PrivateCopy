@@ -29,7 +29,7 @@ void ratchet::factory::FactoryManager::SetGameManager(std::weak_ptr<ratchet::gam
     _actor.SetGameManager(_game);
 }
 
-std::shared_ptr<ratchet::Component> ratchet::factory::FactoryManager::CreateComponent(const char* name, const rapidjson::Value& param) const {
+std::shared_ptr<ratchet::component::Component> ratchet::factory::FactoryManager::CreateComponent(const char* name, const rapidjson::Value& param) const {
     return _component.Create(name, param);
 }
 

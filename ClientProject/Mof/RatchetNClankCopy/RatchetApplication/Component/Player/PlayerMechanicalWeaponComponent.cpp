@@ -72,6 +72,6 @@ bool ratchet::PlayerMechanicalWeaponComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerMechanicalWeaponComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerMechanicalWeaponComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerMechanicalWeaponComponent>(*this);
 }

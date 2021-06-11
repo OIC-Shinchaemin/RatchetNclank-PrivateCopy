@@ -55,7 +55,7 @@ struct CollisionInfo {
     CollisionInfo() : distance(0.0f), angle(), speed(0.0f), target(){}
     CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle(), speed(0.0f), target(){}
 };
-class CollisionComponent : public ratchet::Component {
+class CollisionComponent : public ratchet::component::Component {
 public:
     enum class CollisionFuncType {
         Enter,
@@ -78,7 +78,7 @@ public:
         }
     };
 
-    using super = ratchet::Component;
+    using super = ratchet::component::Component;
     using FuncArray = std::vector<CollisionFunc>;
 private:
     //! 衝突したオブジェクト

@@ -36,7 +36,7 @@ bool ratchet::ShipTakeoffComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::ShipTakeoffComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::ShipTakeoffComponent::Clone(void) {
     return std::make_shared<ratchet::ShipTakeoffComponent>(*this);
 }
 

@@ -82,6 +82,6 @@ bool ratchet::MeshComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::MeshComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::MeshComponent::Clone(void) {
     return std::make_shared<ratchet::MeshComponent>(*this);
 }

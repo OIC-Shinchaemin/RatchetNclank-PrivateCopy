@@ -86,6 +86,6 @@ bool ratchet::BillboardComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::BillboardComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::BillboardComponent::Clone(void) {
     return std::make_shared<ratchet::BillboardComponent>(*this);
 }

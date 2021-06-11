@@ -31,7 +31,7 @@ bool ratchet::PlayerDeadComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerDeadComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerDeadComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerDeadComponent>(*this);
 }
 

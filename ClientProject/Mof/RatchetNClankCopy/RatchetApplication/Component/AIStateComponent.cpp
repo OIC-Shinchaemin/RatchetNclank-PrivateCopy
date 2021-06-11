@@ -63,7 +63,7 @@ bool ratchet::AIStateComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::AIStateComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::AIStateComponent::Clone(void) {
     return std::make_shared<ratchet::AIStateComponent>(*this);
 }
 

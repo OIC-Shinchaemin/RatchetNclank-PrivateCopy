@@ -53,7 +53,7 @@ bool ratchet::CameraCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::CameraCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::CameraCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::CameraCollisionComponent>(*this);
 }
 

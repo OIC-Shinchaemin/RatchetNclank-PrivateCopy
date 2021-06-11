@@ -87,7 +87,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::Component> Clone(void) override;
+    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
 }
 #endif // !RATCHET_ENEMY_COMPONENT_H

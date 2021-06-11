@@ -288,7 +288,7 @@ bool ratchet::PlayerCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerCollisionComponent>(*this);
 }
 

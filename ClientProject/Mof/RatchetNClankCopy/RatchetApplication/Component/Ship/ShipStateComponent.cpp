@@ -22,7 +22,7 @@ bool ratchet::ShipStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::ShipStateComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::ShipStateComponent::Clone(void) {
     return std::make_shared<ratchet::ShipStateComponent>(*this);
 }
 

@@ -129,6 +129,6 @@ bool ratchet::EnemyComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::EnemyComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::EnemyComponent::Clone(void) {
     return std::make_shared<ratchet::EnemyComponent>(*this);
 }

@@ -49,7 +49,7 @@ bool ratchet::ShopCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::ShopCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::ShopCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::ShopCollisionComponent>(*this);
 }
 

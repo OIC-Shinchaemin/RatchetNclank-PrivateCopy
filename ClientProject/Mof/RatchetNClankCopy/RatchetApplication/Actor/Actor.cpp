@@ -120,7 +120,7 @@ void ratchet::actor::Actor::AddComponent(const ComPtr& component) {
 }
 
 void ratchet::actor::Actor::CloneToComponents(const ComArray& com_array) {
-    std::transform(com_array.begin(), com_array.end(), std::back_inserter(_components), [](const std::shared_ptr<ratchet::Component>& component) {
+    std::transform(com_array.begin(), com_array.end(), std::back_inserter(_components), [](const std::shared_ptr<ratchet::component::Component>& component) {
         return component->Clone();
     });
 }

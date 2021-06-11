@@ -35,7 +35,7 @@ bool ratchet::InvincibleComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::InvincibleComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::InvincibleComponent::Clone(void) {
     return std::make_shared<ratchet::InvincibleComponent>(*this);
 }
 

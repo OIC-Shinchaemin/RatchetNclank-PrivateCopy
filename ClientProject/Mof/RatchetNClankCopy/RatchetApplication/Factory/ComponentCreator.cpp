@@ -13,7 +13,7 @@ std::string ratchet::factory::ComponentCreator::GetComponentType(void) {
     return this->_origin->GetType();
 }
 
-std::shared_ptr<ratchet::Component> ratchet::factory::ComponentCreator::Create(const rapidjson::Value& param) const{
+std::shared_ptr<ratchet::component::Component> ratchet::factory::ComponentCreator::Create(const rapidjson::Value& param) const{
     auto ret = _origin->Clone();
     ret->SetParam(param);
     return ret;

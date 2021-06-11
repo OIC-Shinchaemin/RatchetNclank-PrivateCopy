@@ -22,8 +22,8 @@ MofBool CGameApp::Initialize(void) {
 
     ratchet::factory::FactoryManager::Singleton().SetResourceManager(_resource_manager);
     ratchet::factory::FactoryManager::Singleton().SetGameManager(_game_manager);
-    ratchet::Component::SetResourceManager(_resource_manager);
-    ratchet::Component::SetUICanvas(_ui_canvas);
+    ratchet::component::Component::SetResourceManager(_resource_manager);
+    ratchet::component::Component::SetUICanvas(_ui_canvas);
     ratchet::camera::CameraController::SetCameraManager(_camera_manager);
 
     _light_manager->Initialize();

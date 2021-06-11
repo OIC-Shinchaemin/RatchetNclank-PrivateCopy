@@ -22,7 +22,7 @@ bool ratchet::PlayerStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerStateComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerStateComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerStateComponent>(*this);
 }
 

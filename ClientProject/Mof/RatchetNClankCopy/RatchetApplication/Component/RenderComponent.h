@@ -8,8 +8,8 @@
 
 
 namespace ratchet {
-class RenderComponent : public ratchet::Component {
-    using super = ratchet::Component;
+class RenderComponent : public ratchet::component::Component {
+    using super = ratchet::component::Component;
 protected:
     //! ƒŠƒ\[ƒX
     std::string _path;

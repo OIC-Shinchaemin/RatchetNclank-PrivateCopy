@@ -44,7 +44,7 @@ bool ratchet::NanotechItemDefaultComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::NanotechItemDefaultComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::NanotechItemDefaultComponent::Clone(void) {
     return std::make_shared<ratchet::NanotechItemDefaultComponent>(*this);
 }
 

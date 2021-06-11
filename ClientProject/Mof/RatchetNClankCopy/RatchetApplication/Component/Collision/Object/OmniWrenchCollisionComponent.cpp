@@ -53,6 +53,6 @@ bool ratchet::OmniWrenchCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::OmniWrenchCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::OmniWrenchCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::OmniWrenchCollisionComponent>(*this);
 }

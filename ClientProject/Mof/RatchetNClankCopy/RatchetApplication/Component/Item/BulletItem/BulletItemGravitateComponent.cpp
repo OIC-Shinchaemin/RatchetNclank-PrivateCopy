@@ -50,7 +50,7 @@ bool ratchet::BulletItemGravitateComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::BulletItemGravitateComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::BulletItemGravitateComponent::Clone(void) {
     return std::make_shared<ratchet::BulletItemGravitateComponent>(*this);
 }
 

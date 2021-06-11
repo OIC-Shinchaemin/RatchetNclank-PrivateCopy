@@ -6,8 +6,8 @@
 
 
 namespace ratchet {
-class UpdateComponent : public ratchet::Component {
-    using super = ratchet::Component;
+class UpdateComponent : public ratchet::component::Component {
+    using super = ratchet::component::Component;
 public:
     /// <summary>
     /// コンストラクタ

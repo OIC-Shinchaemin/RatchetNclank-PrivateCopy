@@ -24,7 +24,7 @@ bool ratchet::BoltActionStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::BoltActionStateComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::BoltActionStateComponent::Clone(void) {
     return std::make_shared<ratchet::BoltActionStateComponent>(*this);
 }
 

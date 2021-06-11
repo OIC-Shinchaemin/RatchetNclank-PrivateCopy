@@ -77,7 +77,7 @@ bool ratchet::PlayerJumpLandingComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerJumpLandingComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerJumpLandingComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerJumpLandingComponent>(*this);
 }
 

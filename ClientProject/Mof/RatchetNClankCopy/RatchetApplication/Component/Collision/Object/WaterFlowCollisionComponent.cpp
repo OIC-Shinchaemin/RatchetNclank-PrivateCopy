@@ -57,6 +57,6 @@ bool ratchet::WaterFlowCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::WaterFlowCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::WaterFlowCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::WaterFlowCollisionComponent>(*this);
 }

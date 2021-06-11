@@ -13,7 +13,7 @@ void ratchet::factory::builder::actor::ActorBuilder::SetActorParam(const ratchet
     this->_param = param;
 }
 
-void ratchet::factory::builder::actor::ActorBuilder::AddComponent(const std::shared_ptr<ratchet::Component>& component) {
+void ratchet::factory::builder::actor::ActorBuilder::AddComponent(const std::shared_ptr<ratchet::component::Component>& component) {
     _components.push_back(component);
 }
 

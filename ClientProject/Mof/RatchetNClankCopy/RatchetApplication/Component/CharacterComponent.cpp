@@ -41,6 +41,6 @@ float ratchet::CharacterComponent::GetHeight(void) const {
     return this->_height;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::CharacterComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::CharacterComponent::Clone(void) {
     return std::make_shared<ratchet::CharacterComponent>(*this);
 }

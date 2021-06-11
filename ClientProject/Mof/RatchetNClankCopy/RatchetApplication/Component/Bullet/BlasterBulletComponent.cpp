@@ -41,6 +41,6 @@ bool ratchet::BlasterBulletComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::BlasterBulletComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::BlasterBulletComponent::Clone(void) {
     return std::make_shared<ratchet::BlasterBulletComponent>(*this);
 }

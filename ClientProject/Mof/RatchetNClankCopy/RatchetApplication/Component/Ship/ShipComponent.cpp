@@ -76,6 +76,6 @@ bool ratchet::ShipComponent::Activate(void) {
 }
 
 
-std::shared_ptr<ratchet::Component> ratchet::ShipComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::ShipComponent::Clone(void) {
     return std::make_shared<ratchet::ShipComponent>(*this);
 }

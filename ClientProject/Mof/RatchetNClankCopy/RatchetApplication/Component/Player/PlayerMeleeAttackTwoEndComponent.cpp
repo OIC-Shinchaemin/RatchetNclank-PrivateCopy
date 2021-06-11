@@ -36,7 +36,7 @@ bool ratchet::PlayerMeleeAttackTwoEndComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerMeleeAttackTwoEndComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerMeleeAttackTwoEndComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerMeleeAttackTwoEndComponent>(*this);
 }
 

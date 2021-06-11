@@ -28,7 +28,7 @@ bool ratchet::PlayerLookComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerLookComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerLookComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerLookComponent>(*this);
 }
 

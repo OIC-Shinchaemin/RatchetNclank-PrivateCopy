@@ -87,6 +87,6 @@ bool ratchet::PlayerOmniWrenchComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerOmniWrenchComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerOmniWrenchComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerOmniWrenchComponent>(*this);
 }

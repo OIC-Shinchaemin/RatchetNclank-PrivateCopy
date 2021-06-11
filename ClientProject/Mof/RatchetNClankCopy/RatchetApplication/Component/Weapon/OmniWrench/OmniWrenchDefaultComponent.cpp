@@ -49,7 +49,7 @@ bool ratchet::OmniWrenchDefaultComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::OmniWrenchDefaultComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::OmniWrenchDefaultComponent::Clone(void) {
     return std::make_shared<ratchet::OmniWrenchDefaultComponent>(*this);
 }
 

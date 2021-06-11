@@ -24,7 +24,7 @@ bool ratchet::EnemyStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::EnemyStateComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::EnemyStateComponent::Clone(void) {
     return std::make_shared<ratchet::EnemyStateComponent>(*this);
 }
 

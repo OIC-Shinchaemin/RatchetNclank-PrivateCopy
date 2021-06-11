@@ -86,7 +86,7 @@ bool ratchet::PlayerJumpSetComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerJumpSetComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerJumpSetComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerJumpSetComponent>(*this);
 }
 

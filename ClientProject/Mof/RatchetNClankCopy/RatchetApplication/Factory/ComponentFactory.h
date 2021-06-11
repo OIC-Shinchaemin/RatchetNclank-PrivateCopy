@@ -58,7 +58,7 @@ public:
     /// <param name="key"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Component> Create(const std::string& key, const rapidjson::Value& param) const;
+    std::shared_ptr<ratchet::component::Component> Create(const std::string& key, const rapidjson::Value& param) const;
 };
 }
 }

@@ -16,7 +16,7 @@ class ActorBuilder : public ratchet::factory::builder::IBuilder {
     //! 所有するパラメータ
     ratchet::actor::Actor::Param _param;
     //! 機能
-    std::vector<std::shared_ptr<ratchet::Component>> _components;
+    std::vector<std::shared_ptr<ratchet::component::Component>> _components;
 public:
     /// <summary>
     /// コンストラクタ
@@ -35,7 +35,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="component"></param>
-    void AddComponent(const std::shared_ptr<ratchet::Component>& component);
+    void AddComponent(const std::shared_ptr<ratchet::component::Component>& component);
     /// <summary>
     /// 解放
     /// </summary>

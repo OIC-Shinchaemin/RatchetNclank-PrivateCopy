@@ -91,7 +91,7 @@ bool ratchet::factory::ComponentFactory::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::factory::ComponentFactory::Create(const std::string& key, const rapidjson::Value& param) const {
+std::shared_ptr<ratchet::component::Component> ratchet::factory::ComponentFactory::Create(const std::string& key, const rapidjson::Value& param) const {
     auto it = _component_creators.find(key);
     if (it != _component_creators.end()) {
         return it->second->Create(param);

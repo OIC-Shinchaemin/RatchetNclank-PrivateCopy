@@ -62,7 +62,7 @@ bool ratchet::NanotechItemCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::NanotechItemCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::NanotechItemCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::NanotechItemCollisionComponent>(*this);
 }
 

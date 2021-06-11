@@ -118,7 +118,7 @@ bool ratchet::PlayerDamageComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::PlayerDamageComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::PlayerDamageComponent::Clone(void) {
     return std::make_shared<ratchet::PlayerDamageComponent>(*this);
 }
 

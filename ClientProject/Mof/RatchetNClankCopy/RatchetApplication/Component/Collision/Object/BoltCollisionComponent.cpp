@@ -62,7 +62,7 @@ bool ratchet::BoltCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::BoltCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::BoltCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::BoltCollisionComponent>(*this);
 }
 

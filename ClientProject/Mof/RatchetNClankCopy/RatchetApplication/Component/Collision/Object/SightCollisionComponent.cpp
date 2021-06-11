@@ -60,6 +60,6 @@ bool ratchet::SightCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::SightCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::SightCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::SightCollisionComponent>(*this);
 }

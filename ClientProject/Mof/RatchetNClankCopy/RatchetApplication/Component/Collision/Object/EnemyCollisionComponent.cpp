@@ -82,7 +82,7 @@ bool ratchet::EnemyCollisionComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::EnemyCollisionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::EnemyCollisionComponent::Clone(void) {
     return std::make_shared<ratchet::EnemyCollisionComponent>(*this);
 }
 

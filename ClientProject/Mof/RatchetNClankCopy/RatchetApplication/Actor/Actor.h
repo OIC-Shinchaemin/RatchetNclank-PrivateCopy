@@ -14,8 +14,8 @@
 
 
 namespace ratchet {
-class Component;
 namespace component {
+class Component;
 }
 namespace factory {
 namespace builder {
@@ -36,8 +36,8 @@ class Actor :
     public std::enable_shared_from_this<ratchet::actor::Actor>, 
     public ::base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
 public:
-    //using ComPtr = std::shared_ptr<ratchet::component::Component>;
-    using ComPtr = std::shared_ptr<ratchet::Component>;
+    //using ComPtr = std::shared_ptr<ratchet::component::Component::Component>;
+    using ComPtr = std::shared_ptr<ratchet::component::Component>;
     using ComArray = std::vector<ComPtr>;
     using Observable = base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&>;
 public:

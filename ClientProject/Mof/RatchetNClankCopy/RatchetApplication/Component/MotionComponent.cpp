@@ -74,7 +74,7 @@ bool ratchet::MotionComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::Component> ratchet::MotionComponent::Clone(void) {
+std::shared_ptr<ratchet::component::Component> ratchet::MotionComponent::Clone(void) {
     return std::make_shared<ratchet::MotionComponent>(*this);
 }
 
