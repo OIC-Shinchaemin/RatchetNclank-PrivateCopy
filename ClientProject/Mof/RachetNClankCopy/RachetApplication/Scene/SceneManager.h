@@ -7,11 +7,11 @@
 #include <vector>
 
 
-#include "My/Core/Observer.h"
+#include "Base/Core/Observer.h"
 #include "Scene.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
-#include "My/UI/UICanvas.h"
+#include "Base/UI/UICanvas.h"
 #include "../Game/GameManager.h"
 #include "../Event/EventManager.h"
 #include "../Factory/Builder/IBuilder.h"

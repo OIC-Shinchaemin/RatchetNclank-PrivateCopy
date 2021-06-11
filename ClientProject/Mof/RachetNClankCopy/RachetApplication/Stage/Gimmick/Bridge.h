@@ -1,7 +1,7 @@
 #pragma once
 #include "GimmickBase.h"
 
-#include "My/Core/Observable.h"
+#include "Base/Core/Observable.h"
 
 
 class Bridge : public GimmickBase, public my::Observable<const char*, const std::shared_ptr<StageObject>&> {

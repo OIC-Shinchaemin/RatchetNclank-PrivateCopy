@@ -2,15 +2,15 @@
 #define MY_TITLE_INFO_MENU_H
 
 
-#include "My/UI/UIPanel.h"
+#include "Base/UI/UIPanel.h"
 
 #include <memory>
 
-#include "My/Core/Observer.h"
-#include "My/UI/UICanvas.h"
+#include "Base/Core/Observer.h"
+#include "Base/UI/UICanvas.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
-#include "My/Core/Timer.h"
+#include "Base/Core/Timer.h"
 
 
 namespace my {

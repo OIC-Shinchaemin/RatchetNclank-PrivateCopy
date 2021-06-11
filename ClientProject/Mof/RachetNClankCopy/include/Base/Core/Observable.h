@@ -5,8 +5,8 @@
 #include <memory>
 #include <vector>
 
-#include "My/Core/Utility.h"
-#include "My/Core/Observer.h"
+#include "Utility.h"
+#include "Observer.h"
 
 
 namespace my {

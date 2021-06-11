@@ -1,7 +1,7 @@
 #include "LightManager.h"
 
-#include "My/Core/Math.h"
-#include "My/Core/Define.h"
+#include "Base/Core/Math.h"
+#include "Base/Core/Define.h"
 
 
 my::LightManager::LightManager() :

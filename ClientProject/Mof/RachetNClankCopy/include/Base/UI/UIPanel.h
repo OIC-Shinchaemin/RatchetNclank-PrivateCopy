@@ -2,8 +2,8 @@
 #define MY_UI_PANEL_H
 
 
-#include "My/Core/Observer.h"
-#include "My/Core/Observable.h"
+#include "../Core/Observer.h"
+#include "../Core/Observable.h"
 
 #include <memory>
 #include <string>

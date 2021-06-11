@@ -2,14 +2,14 @@
 #define MY_LOCK_ON_CURSOR_MENU_H
 
 
-#include "My/UI/UIItem.h"
-#include "My/UI/UIPanel.h"
+#include "Base/UI/UIItem.h"
+#include "Base/UI/UIPanel.h"
 
 #include <optional>
 #include <memory>
 
-#include "My/Core/Observer.h"
-#include "My/UI/UICanvas.h"
+#include "Base/Core/Observer.h"
+#include "Base/UI/UICanvas.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 

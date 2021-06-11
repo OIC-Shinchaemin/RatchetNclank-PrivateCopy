@@ -1,5 +1,5 @@
-#ifndef MY_STATE_H
-#define MY_STATE_H
+#ifndef BASE_CORE_STATE_H
+#define BASE_CORE_STATE_H
 
 
 #include <memory>
@@ -45,4 +45,4 @@ public:
     }
 };
 }
-#endif // !MY_STATE_H
+#endif // !BASE_CORE_STATE_H

@@ -1,5 +1,5 @@
-#ifndef MY_MATH_H
-#define MY_MATH_H
+#ifndef BASE_CORE_MATH_H
+#define BASE_CORE_MATH_H
 
 
 #include <Mof.h>

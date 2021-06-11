@@ -2,14 +2,14 @@
 #define MY_HELP_DESK_MENU_H
 
 
-#include "My/UI/UIItem.h"
-#include "My/UI/UIPanel.h"
+#include "Base/UI/UIItem.h"
+#include "Base/UI/UIPanel.h"
 
 #include <optional>
 #include <memory>
 #include <unordered_map>
 
-#include "My/Core/Observer.h"
+#include "Base/Core/Observer.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "../Game/GameSystem/HelpDesk.h"

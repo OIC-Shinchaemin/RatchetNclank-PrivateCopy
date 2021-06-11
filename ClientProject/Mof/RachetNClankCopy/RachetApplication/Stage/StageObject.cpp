@@ -1,6 +1,6 @@
 #include "StageObject.h"
 
-#include "My/Core/Math.h"
+#include "Base/Core/Math.h"
 
 
 /// <summary>

@@ -4,8 +4,8 @@
 
 #include "UpdateComponent.h"
 
-#include "My/Core/Observable.h"
-#include "My/Core/ServiceLocator.h"
+#include "Base/Core/Observable.h"
+#include "Base/Core/ServiceLocator.h"
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
 

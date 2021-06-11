@@ -9,8 +9,8 @@
 
 #include <Mof.h>
 
-#include "my/Core/AbstructContainer.h"
-#include "my/Resource/ResourceFont.h"
+#include "Base/Core/AbstructContainer.h"
+#include "Base/Resource/ResourceFont.h"
 #include "MotionNames.h"
 
 

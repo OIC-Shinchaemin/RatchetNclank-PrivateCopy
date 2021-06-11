@@ -9,8 +9,8 @@
 
 #include <Mof.h>
 
-#include "My/Core/Define.h"
-#include "My/Core/Observable.h"
+#include "Base/Core/Define.h"
+#include "Base/Core/Observable.h"
 
 
 namespace my {

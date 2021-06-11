@@ -1,7 +1,7 @@
 #include "QuickChangeSystem.h"
 
-#include "My/Core/Math.h"
-#include "My/Core/Utility.h"
+#include "Base/Core/Math.h"
+#include "Base/Core/Utility.h"
 #include "../../Gamepad.h"
 #include "../../UI/QuickChangeMenu.h"
 

@@ -2,7 +2,7 @@
 #define MY_UI_ITEM_H
 
 
-#include "My/Core/Observable.h"
+#include "../Core/Observable.h"
 
 #include <functional>
 #include <memory>
@@ -11,7 +11,9 @@
 
 #include <Mof.h>
 
-#include "My/Core/Define.h"
+#include "../Core/Define.h"
+
+
 
 namespace my {
 class UIItem : public std::enable_shared_from_this<my::UIItem>, public my::Observable<const std::shared_ptr<my::UIItem>&, const char* > {

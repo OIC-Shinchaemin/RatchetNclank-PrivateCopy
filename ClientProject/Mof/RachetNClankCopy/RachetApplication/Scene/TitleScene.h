@@ -6,13 +6,13 @@
 
 #include <memory>
 
-#include "My/Core/ServiceLocator.h"
+#include "Base/Core/ServiceLocator.h"
 #include "../GameDefine.h"
 #include "../Camera/Camera.h"
 #include "../Camera/CameraController.h"
 #include "../Stage/Stage.h"
 #include "../Actor/Character/Player.h"
-#include "My/Core/Observable.h"
+#include "Base/Core/Observable.h"
 #include "../Game/GameManager.h"
 #include "../Game/GameSystem/OptionSystem.h"
 #include "../UI/TitleInfoMenu.h"

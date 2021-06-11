@@ -2,12 +2,12 @@
 #define MY_GAME_PAUSE_SYSTEM_MENU_H
 
 
-#include "My/UI/UIItem.h"
-#include "My/UI/UIPanel.h"
+#include "Base/UI/UIItem.h"
+#include "Base/UI/UIPanel.h"
 
 #include <memory>
 
-#include "My/Core/Observer.h"
+#include "Base/Core/Observer.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "../Game/GameSystem/GamePauseSystem.h"

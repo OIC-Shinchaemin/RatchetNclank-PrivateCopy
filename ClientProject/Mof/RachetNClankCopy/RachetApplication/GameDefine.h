@@ -8,12 +8,12 @@
 
 #include <Mof.h>
 
-#include "My/Core/Math.h"
+#include "Base/Core/Math.h"
 #include "MotionNames.h"
 #include "ResourceManager.h"
-#include "my/Core/FunctionPointerContainer.h"
-#include "my/Resource/ResourceFont.h"
-#include "My/UI/UICanvas.h"
+#include "Base/Core/FunctionPointerContainer.h"
+#include "Base/Resource/ResourceFont.h"
+#include "Base/UI/UICanvas.h"
 
 
 #define DEBUG_PRINT(arg, ...)

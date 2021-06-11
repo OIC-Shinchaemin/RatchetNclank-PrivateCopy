@@ -1,8 +1,8 @@
-#ifndef MY_UTILITY_H
-#define MY_UTILITY_H
+#ifndef BASE_CORE_UTILITY_H
+#define BASE_CORE_UTILITY_H
 
 
-#include "My/Core/Trait.h"
+#include "Trait.h"
 
 
 #ifdef max
@@ -145,4 +145,4 @@ static bool ParseJsonDocument(const char* path, rapidjson::Document& document) {
     return true;
 }
 }
-#endif // !MY_UTILITY_H
+#endif // !BASE_CORE_UTILITY_H

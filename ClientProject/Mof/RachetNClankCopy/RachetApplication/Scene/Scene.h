@@ -15,7 +15,7 @@
 #include "../Actor.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
-#include "My/UI/UICanvas.h"
+#include "Base/UI/UICanvas.h"
 
 
 namespace my {

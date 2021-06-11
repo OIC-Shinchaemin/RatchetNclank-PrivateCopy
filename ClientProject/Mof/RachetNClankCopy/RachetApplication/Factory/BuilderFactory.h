@@ -6,7 +6,7 @@
 #include <string>
 #include <map>
 
-#include "My/Core/Define.h"
+#include "Base/Core/Define.h"
 #include "Builder/IBuilder.h"
 #include "ComponentFactory.h"
 #include "../ResourceManager.h"

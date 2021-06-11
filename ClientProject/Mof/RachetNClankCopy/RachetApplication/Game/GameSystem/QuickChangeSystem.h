@@ -3,7 +3,7 @@
 
 
 #include "GameSystem.h"
-#include "My/Core/Observable.h"
+#include "Base/Core/Observable.h"
 
 #include <optional>
 #include <memory>
@@ -14,7 +14,7 @@
 #include <Mof.h>
 
 #include "WeaponSystem.h"
-#include "MY/UI/UICanvas.h"
+#include "Base/UI/UICanvas.h"
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
 

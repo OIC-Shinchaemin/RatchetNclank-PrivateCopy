@@ -27,27 +27,6 @@
     <Filter Include="Rachet\Header\Factory">
       <UniqueIdentifier>{b96171b7-57c7-4532-aba0-a5aeb2ee59f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Base">
-      <UniqueIdentifier>{e90bc59d-2869-42a3-b9b4-eeaab95aefe5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Base\Core">
-      <UniqueIdentifier>{3e39f7d1-16ce-4f33-988b-1281ed8a9b3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Base\Core\Source">
-      <UniqueIdentifier>{b97fd4ae-f345-4301-af9e-62f0f5c29f61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Base\Core\Header">
-      <UniqueIdentifier>{7e25563b-f84d-47fd-b72e-7bccf029481c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Base\UI">
-      <UniqueIdentifier>{e94b31d8-b9c0-47a1-9ee7-a0039b177dd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Base\UI\Header">
-      <UniqueIdentifier>{42590ba1-ab9f-4376-927a-d3b233943d32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rachet\Base\UI\Source">
-      <UniqueIdentifier>{2a9fe089-d3cc-4c0a-8410-eb242e21963d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\UI">
       <UniqueIdentifier>{c13108cd-858b-4ced-aa58-12a69c04f9c2}</UniqueIdentifier>
     </Filter>
@@ -204,9 +183,6 @@
     <Filter Include="Rachet\Source\Component\Ship">
       <UniqueIdentifier>{cb69f12f-522a-4081-a964-38af85c444ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rachet\Base\Resource">
-      <UniqueIdentifier>{674211c3-a625-4d13-b643-3d27df8c1489}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rachet\Header\Actor\Terrain">
       <UniqueIdentifier>{4598c11b-e78f-416e-9a94-6a7471bdf392}</UniqueIdentifier>
     </Filter>
@@ -322,6 +298,18 @@
     <Filter Include="Rachet\Source\Component\Item\Nanotech">
       <UniqueIdentifier>{4e897ce6-0996-4653-910d-50004c14120d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rachet\Base">
+      <UniqueIdentifier>{b47891ea-b462-4797-8c77-f84ed13a44be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Base\Core">
+      <UniqueIdentifier>{7f648189-1e3e-4466-9871-1c8dca4aa67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Base\Resource">
+      <UniqueIdentifier>{dbc89fad-e624-404b-9d7b-04f9156b8567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rachet\Base\UI">
+      <UniqueIdentifier>{51ed45d7-a7e5-4b53-b45e-df9f8dca8079}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -329,21 +317,6 @@
     </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>Rachet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\My\Core\State.cpp">
-      <Filter>Rachet\Base\Core\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\My\Core\StateMachine.cpp">
-      <Filter>Rachet\Base\Core\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\My\UI\UICanvas.cpp">
-      <Filter>Rachet\Base\UI\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\My\UI\UIItem.cpp">
-      <Filter>Rachet\Base\UI\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\My\UI\UIPanel.cpp">
-      <Filter>Rachet\Base\UI\Source</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Rachet\Source</Filter>
@@ -449,9 +422,6 @@
     </ClCompile>
     <ClCompile Include="Factory\ActorFactory.cpp">
       <Filter>Rachet\Source\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\My\Core\Timer.cpp">
-      <Filter>Rachet\Base\Core\Source</Filter>
     </ClCompile>
     <ClCompile Include="Component\SightRecognitionComponent.cpp">
       <Filter>Rachet\Source\Component</Filter>
@@ -698,9 +668,6 @@
     </ClCompile>
     <ClCompile Include="Game\GameManager.cpp">
       <Filter>Rachet\Source\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="..\include\My\Resource\ResourceFont.cpp">
-      <Filter>Rachet\Base\Resource</Filter>
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
@@ -1071,47 +1038,29 @@
     <ClCompile Include="Game\GameSystem\GimmickAccessSystem.cpp">
       <Filter>Rachet\Source\Game\GameSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\include\Base\Core\State.cpp">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\StateMachine.cpp">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\Timer.cpp">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Resource\ResourceFont.cpp">
+      <Filter>Rachet\Base\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UIPanel.cpp">
+      <Filter>Rachet\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UICanvas.cpp">
+      <Filter>Rachet\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UIItem.cpp">
+      <Filter>Rachet\Base\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\My\Core\Define.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\Header.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\Math.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\Observable.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\Observer.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\ServiceLocator.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\State.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\StateMachine.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\Trait.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\Utility.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\UI\UICanvas.h">
-      <Filter>Rachet\Base\UI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\UI\UIPanel.h">
-      <Filter>Rachet\Base\UI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\UI\UIItem.h">
-      <Filter>Rachet\Base\UI\Header</Filter>
-    </ClInclude>
     <ClInclude Include="GameApp.h">
       <Filter>Rachet\Header</Filter>
     </ClInclude>
@@ -1153,9 +1102,6 @@
     </ClInclude>
     <ClInclude Include="UI\QuickChangeMenu.h">
       <Filter>Rachet\Header\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\AbstructContainer.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameWorld.h">
       <Filter>Rachet\Header\Game</Filter>
@@ -1294,12 +1240,6 @@
     </ClInclude>
     <ClInclude Include="Factory\ActorFactory.h">
       <Filter>Rachet\Header\Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\Timer.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Core\FunctionPointerContainer.h">
-      <Filter>Rachet\Base\Core\Header</Filter>
     </ClInclude>
     <ClInclude Include="Component\SightRecognitionComponent.h">
       <Filter>Rachet\Header\Component</Filter>
@@ -1609,9 +1549,6 @@
     </ClInclude>
     <ClInclude Include="Component\Ship\ShipComponent.h">
       <Filter>Rachet\Header\Component\Ship</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\My\Resource\ResourceFont.h">
-      <Filter>Rachet\Base\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
@@ -2086,6 +2023,57 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\GimmickAccessSystem.h">
       <Filter>Rachet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Math.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Observable.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Observer.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\ServiceLocator.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\State.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\StateMachine.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Timer.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Trait.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Utility.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\AbstructContainer.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Define.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\FunctionPointerContainer.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Header.h">
+      <Filter>Rachet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Resource\ResourceFont.h">
+      <Filter>Rachet\Base\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UIItem.h">
+      <Filter>Rachet\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UIPanel.h">
+      <Filter>Rachet\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UICanvas.h">
+      <Filter>Rachet\Base\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

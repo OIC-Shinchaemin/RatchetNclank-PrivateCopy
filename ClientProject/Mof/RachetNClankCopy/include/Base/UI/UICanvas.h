@@ -5,9 +5,9 @@
 #include <memory>
 #include <vector>
 
-#include "My/Core/Observer.h"
-#include "My/Core/Observable.h"
-#include "My/UI/UIPanel.h"
+#include "../Core/Observer.h"
+#include "../Core/Observable.h"
+#include "UIPanel.h"
 
 
 namespace my {

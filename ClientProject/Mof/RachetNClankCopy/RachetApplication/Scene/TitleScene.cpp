@@ -1,6 +1,6 @@
 #include "TitleScene.h"
 #include "../Gamepad.h"
-#include "My/Resource/ResourceFont.h"
+#include "Base/Resource/ResourceFont.h"
 #include "../Factory/FactoryManager.h"
 #include "../Camera/FollowCameraController.h"
 

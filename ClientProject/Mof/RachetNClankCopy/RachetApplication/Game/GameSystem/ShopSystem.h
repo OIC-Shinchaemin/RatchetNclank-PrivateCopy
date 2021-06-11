@@ -3,16 +3,16 @@
 
 
 #include "GameSystem.h"
-//#include "My/Core/Observer.h"
+//#include "Base/Core/Observer.h"
 
 #include <optional>
 #include <string>
 #include <vector>
 
-#include "My/Core/Observable.h"
+#include "Base/Core/Observable.h"
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
-#include "MY/UI/UICanvas.h"
+#include "Base/UI/UICanvas.h"
 #include "Save/SaveData.h"
 #include "WeaponSystem.h"
 #include "GameMoney.h"

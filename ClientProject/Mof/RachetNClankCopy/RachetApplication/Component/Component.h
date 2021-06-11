@@ -10,7 +10,7 @@
 
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
-#include "MY/UI/UICanvas.h"
+#include "Base/UI/UICanvas.h"
 
 
 namespace my {

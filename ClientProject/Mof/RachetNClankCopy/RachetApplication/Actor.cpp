@@ -1,7 +1,7 @@
 #include "Actor.h"
 
-#include "My/Core/Math.h"
-#include "My/Core/Utility.h"
+#include "Base/Core/Math.h"
+#include "Base/Core/Utility.h"
 #include "Component/Component.h"
 #include "Factory/Builder/IBuilder.h"
 

@@ -1,7 +1,7 @@
 #include "Camera.h"
 
-#include "My/Core/Define.h"
-#include "My/Core/Math.h"
+#include "Base/Core/Define.h"
+#include "Base/Core/Math.h"
 
 
 my::Camera::Camera() :

@@ -2,15 +2,15 @@
 #define MY_HELP_DESK_H
 
 
-#include "My/Core/Observer.h"
+#include "Base/Core/Observer.h"
 
 #include <memory>
 #include <string>
 
-#include "My/Core/Observable.h"
+#include "Base/Core/Observable.h"
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
-#include "MY/UI/UICanvas.h"
+#include "Base/UI/UICanvas.h"
 #include "GameQuest.h"
 
 

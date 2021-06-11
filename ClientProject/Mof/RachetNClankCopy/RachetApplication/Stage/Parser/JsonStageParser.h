@@ -1,7 +1,7 @@
 #pragma once
 #include "StageParser.h"
-#include "My/Core/Utility.h"
-#include "My/Core/Header.h"
+#include "Base/Core/Utility.h"
+#include "Base/Core/Header.h"
 
 /// <summary>
 /// jsonファイルからステージデータに分解するクラス

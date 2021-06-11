@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Mof.h"
-#include "My/Core/Define.h"
+#include "Base/Core/Define.h"
 #include "Camera/CameraManager.h"
-#include "My/Core/ServiceLocator.h"
+#include "Base/Core/ServiceLocator.h"
 #include "Camera/Camera.h"
 #include "Camera/CameraController.h"
 

@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "My/Core/Trait.h"
+#include "Trait.h"
 
 
 namespace my {

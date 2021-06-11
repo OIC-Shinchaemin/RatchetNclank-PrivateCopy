@@ -1,8 +1,8 @@
-#ifndef MY_DEFINE_H
-#define MY_DEFINE_H
+#ifndef BASE_CORE_DEFINE_H
+#define BASE_CORE_DEFINE_H
 
 
-#include "My/Core/Utility.h"
+#include "Utility.h"
 
 
 namespace def {
@@ -179,4 +179,4 @@ struct Message {
     }
 };
 } // namespace
-#endif // !MY_DEFINE_H
+#endif // !BASE_CORE_DEFINE_H

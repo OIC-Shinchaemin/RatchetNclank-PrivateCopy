@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-#include "My/Core/Define.h"
+#include "Base/Core/Define.h"
 
 
 bool my::Scene::IsLoaded(void) {
