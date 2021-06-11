@@ -1,5 +1,5 @@
-#ifndef BUILDER_SCENE_BUILDER_H
-#define BUILDER_SCENE_BUILDER_H
+#ifndef RATCHET_FACTORY_BUILDER_SCENE_SCENE_BUILDER_H
+#define RATCHET_FACTORY_BUILDER_SCENE_SCENE_BUILDER_H
 
 
 #include "../IBuilder.h"
@@ -12,9 +12,12 @@
 #include "Base/UI/UICanvas.h"
 
 
+namespace ratchet {
+namespace factory {
 namespace builder {
-class SceneBuilder : public ratchet::IBuilder {
-    using super = ratchet::IBuilder;
+namespace scene {
+class SceneBuilder : public ratchet::factory::builder::IBuilder {
+    using super = ratchet::factory::builder::IBuilder;
 private:
     //! ÉäÉ\Å[ÉX
     std::weak_ptr<ratchet::ResourceMgr> _resource;
@@ -51,4 +54,7 @@ public:
     virtual void Construct(std::any shared_this) override;
 };
 }
-#endif // !BUILDER_SCENE_BUILDER_H
+}
+}
+}
+#endif // !RATCHET_FACTORY_BUILDER_SCENE_SCENE_BUILDER_H

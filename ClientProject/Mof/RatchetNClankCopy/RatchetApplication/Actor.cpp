@@ -217,7 +217,7 @@ bool ratchet::Actor::Release(void) {
     return true;
 }
 
-void ratchet::Actor::Construct(const std::shared_ptr<ratchet::IBuilder>& builder) {
+void ratchet::Actor::Construct(const std::shared_ptr<ratchet::factory::builder::IBuilder>& builder) {
     builder->Construct(shared_from_this());
     auto& coms = _components;
     // Žd•ª‚¯

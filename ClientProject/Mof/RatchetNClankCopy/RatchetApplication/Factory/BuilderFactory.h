@@ -14,23 +14,23 @@
 #include "Factory.h"
 
 #include "../Component/Component.h"
-#include "Builder/ActorBuilder.h"
-#include "Builder/TerrainBuilder.h"
-#include "Builder/OmniWrenchBuilder.h"
+#include "Builder/Actor/ActorBuilder.h"
+#include "Builder/Actor/TerrainBuilder.h"
+#include "Builder/Actor/OmniWrenchBuilder.h"
 
 
 namespace ratchet {
 class BuilderFactory {
 private:
     //! 保持しているBulder
-    std::map<std::string, std::shared_ptr<ratchet::IBuilder>> _builders;
+    std::map<std::string, std::shared_ptr<ratchet::factory::builder::IBuilder>> _builders;
     //! コンポーネント
     ratchet::ComponentFactory* _component_factory;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
 
 
-    void SetActorBuilderParam(std::shared_ptr<ratchet::ActorBuilder> builder, const rapidjson::Document& document) const {
+    void SetActorBuilderParam(std::shared_ptr<ratchet::factory::builder::actor::ActorBuilder> builder, const rapidjson::Document& document) const {
         if (document.HasMember("components")) {
             const auto& components = document["components"];
             _ASSERT_EXPR(components.IsArray(), L"指定された型でありません");
@@ -50,10 +50,10 @@ private:
             } // for
         } // if
     }
-    void SetTerrainBuilderParam(std::shared_ptr<ratchet::TerrainBuilder> builder) const {
+    void SetTerrainBuilderParam(std::shared_ptr<ratchet::factory::builder::actor::TerrainBuilder> builder) const {
         builder->SetResourceManager(_resource);
     }
-    void SetOmniWrenchBuilderParam(std::shared_ptr<ratchet::OmniWrenchBuilder> builder) const {
+    void SetOmniWrenchBuilderParam(std::shared_ptr<ratchet::factory::builder::actor::OmniWrenchBuilder> builder) const {
     }
 
     template <typename Builder>
@@ -62,8 +62,8 @@ private:
         return ptr;
     }
     template <>
-    std::shared_ptr<ratchet::ActorBuilder> CreateBuilder<ratchet::ActorBuilder>(const char* path) const {
-        auto ptr = ut::MakeSharedWithRelease<ratchet::ActorBuilder>();
+    std::shared_ptr<ratchet::factory::builder::actor::ActorBuilder> CreateBuilder<ratchet::factory::builder::actor::ActorBuilder>(const char* path) const {
+        auto ptr = ut::MakeSharedWithRelease<ratchet::factory::builder::actor::ActorBuilder>();
         rapidjson::Document document;
         if (!ut::ParseJsonDocument(path, document)) {
             return nullptr;
@@ -72,8 +72,8 @@ private:
         return ptr;
     }
     template <>
-    std::shared_ptr<ratchet::OmniWrenchBuilder> CreateBuilder<ratchet::OmniWrenchBuilder>(const char* path) const {
-        auto ptr = ut::MakeSharedWithRelease<ratchet::OmniWrenchBuilder>();
+    std::shared_ptr<ratchet::factory::builder::actor::OmniWrenchBuilder> CreateBuilder<ratchet::factory::builder::actor::OmniWrenchBuilder>(const char* path) const {
+        auto ptr = ut::MakeSharedWithRelease<ratchet::factory::builder::actor::OmniWrenchBuilder>();
         rapidjson::Document document;
         if (!ut::ParseJsonDocument(path, document)) {
             return nullptr;
@@ -83,8 +83,8 @@ private:
         return ptr;
     }
     template <>
-    std::shared_ptr<ratchet::TerrainBuilder> CreateBuilder<ratchet::TerrainBuilder>(const char* path) const {
-        auto ptr = ut::MakeSharedWithRelease<ratchet::TerrainBuilder>();
+    std::shared_ptr<ratchet::factory::builder::actor::TerrainBuilder> CreateBuilder<ratchet::factory::builder::actor::TerrainBuilder>(const char* path) const {
+        auto ptr = ut::MakeSharedWithRelease<ratchet::factory::builder::actor::TerrainBuilder>();
         rapidjson::Document document;
         if (!ut::ParseJsonDocument(path, document)) {
             return nullptr;
@@ -120,7 +120,7 @@ public:
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::IBuilder> Create(const char* path) const;
+    std::shared_ptr<ratchet::factory::builder::IBuilder> Create(const char* path) const;
 };
 }
 #endif // !RATCHET_ACTOR_FACTORY_H

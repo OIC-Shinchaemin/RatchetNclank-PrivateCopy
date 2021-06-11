@@ -1,11 +1,13 @@
-#ifndef RATCHET_IBUILDER_H
-#define RATCHET_IBUILDER_H
+#ifndef RATCHET_FACTORY_BUILDER_IBUILDER_H
+#define RATCHET_FACTORY_BUILDER_IBUILDER_H
 
 
 #include <any>
 
 
 namespace ratchet {
+namespace factory {
+namespace builder {
 class IBuilder {
 public:
     /// <summary>
@@ -23,4 +25,6 @@ public:
     virtual void Construct(std::any shared_this) = 0;
 };
 }
-#endif // !RATCHET_IBUILDER_H
+}
+}
+#endif // !RATCHET_FACTORY_BUILDER_IBUILDER_H

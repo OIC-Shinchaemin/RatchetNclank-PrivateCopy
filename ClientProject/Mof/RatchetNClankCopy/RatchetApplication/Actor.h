@@ -14,6 +14,12 @@
 
 
 namespace ratchet {
+namespace factory{
+namespace builder{
+class IBuilder;
+}
+}
+
 enum class ActorState {
     Active, // 入力、更新、描画する
     Inactive, // 入力、更新、描画しない
@@ -264,7 +270,7 @@ public:
     /// 作成
     /// </summary>
     /// <param name="builder"></param>
-    virtual void Construct(const std::shared_ptr<class IBuilder>& builder);
+    virtual void Construct(const std::shared_ptr<ratchet::factory::builder::IBuilder>& builder);
 };
 }
 #endif // !RATCHET_ACTOR_H

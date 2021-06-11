@@ -68,7 +68,7 @@ public:
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::IBuilder> CreateBuilder(const char* path) const;
+    std::shared_ptr<ratchet::factory::builder::IBuilder> CreateBuilder(const char* path) const;
     /// <summary>
     /// ì¬
     /// </summary>

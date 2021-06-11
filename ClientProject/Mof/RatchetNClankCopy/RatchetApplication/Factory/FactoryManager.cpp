@@ -33,7 +33,7 @@ std::shared_ptr<ratchet::Component> ratchet::FactoryManager::CreateComponent(con
     return _component.Create(name, param);
 }
 
-std::shared_ptr<ratchet::IBuilder> ratchet::FactoryManager::CreateBuilder(const char* path) const {
+std::shared_ptr<ratchet::factory::builder::IBuilder> ratchet::FactoryManager::CreateBuilder(const char* path) const {
     return _builder.Create(path);
 }
 

@@ -24,11 +24,11 @@ void ratchet::ActorFactory::SetGameManager(std::weak_ptr<ratchet::GameManager> p
     this->_game = ptr;
 }
 
-std::shared_ptr<ratchet::IBuilder> ratchet::ActorFactory::GetBuilder(const std::string& key) {
+std::shared_ptr<ratchet::factory::builder::IBuilder> ratchet::ActorFactory::GetBuilder(const std::string& key) {
     return this->_builders[key];
 }
 
-void ratchet::ActorFactory::AddBuilder(const std::string& key, std::shared_ptr<ratchet::IBuilder> builder) {
+void ratchet::ActorFactory::AddBuilder(const std::string& key, std::shared_ptr<ratchet::factory::builder::IBuilder> builder) {
     this->_builders[key] = builder;
 }
 

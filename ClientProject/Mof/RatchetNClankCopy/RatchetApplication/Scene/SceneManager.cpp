@@ -77,10 +77,10 @@ void ratchet::scene::SceneManager::SetEventManager(std::weak_ptr<ratchet::event:
 }
 
 bool ratchet::scene::SceneManager::Initialize(void) {
-    this->RegisterBuilder<builder::TitleSceneBuilder>(ratchet::scene::SceneType::kTitleScene);
-    this->RegisterBuilder<builder::SceneBuilder>(ratchet::scene::SceneType::kDescriptionScene);
-    this->RegisterBuilder<builder::SceneBuilder>(ratchet::scene::SceneType::kClearScene);
-    this->RegisterBuilder<builder::GameSceneBuilder>(ratchet::scene::SceneType::kGameScene);
+    this->RegisterBuilder<ratchet::factory::builder::scene::TitleSceneBuilder>(ratchet::scene::SceneType::kTitleScene);
+    this->RegisterBuilder<ratchet::factory::builder::scene::SceneBuilder>(ratchet::scene::SceneType::kDescriptionScene);
+    this->RegisterBuilder<ratchet::factory::builder::scene::SceneBuilder>(ratchet::scene::SceneType::kClearScene);
+    this->RegisterBuilder<ratchet::factory::builder::scene::GameSceneBuilder>(ratchet::scene::SceneType::kGameScene);
 
 
     this->ChangeScene(ratchet::scene::SceneType::kTitleScene, std::make_shared <ratchet::scene::Scene::Param>());

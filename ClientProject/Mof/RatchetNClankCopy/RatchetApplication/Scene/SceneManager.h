@@ -41,7 +41,7 @@ class SceneManager : public std::enable_shared_from_this<ratchet::scene::SceneMa
         //! ファクトリー
         ratchet::Factory<ratchet::scene::Scene> factory;
         //! ビルダー
-        std::unordered_map<std::string, std::shared_ptr<ratchet::IBuilder>> builders;
+        std::unordered_map<std::string, std::shared_ptr<ratchet::factory::builder::IBuilder>> builders;
         //! タイプ,パス
         std::unordered_map<std::string, std::string> reousrce_paths;
     };
@@ -67,18 +67,18 @@ private:
             _create_struct.builders.emplace(name, ptr); ;
     }
     template<>
-    void RegisterBuilder<builder::TitleSceneBuilder>(const std::string& name) {
+    void RegisterBuilder<ratchet::factory::builder::scene::TitleSceneBuilder>(const std::string& name) {
         auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
-        auto ptr = ut::MakeSharedWithRelease<builder::TitleSceneBuilder>();
+        auto ptr = ut::MakeSharedWithRelease<ratchet::factory::builder::scene::TitleSceneBuilder>();
         ptr->SetResourceManager(resource);
         ptr->SetUICanvas(ui_canvas);
         ptr->SetGameManager(game_manager);
         _create_struct.builders.emplace(name, ptr); ;
     }
     template<>
-    void RegisterBuilder<builder::GameSceneBuilder>(const std::string& name) {
+    void RegisterBuilder<ratchet::factory::builder::scene::GameSceneBuilder>(const std::string& name) {
         auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
-        auto ptr = ut::MakeSharedWithRelease<builder::GameSceneBuilder>();
+        auto ptr = ut::MakeSharedWithRelease<ratchet::factory::builder::scene::GameSceneBuilder>();
         ptr->SetResourceManager(resource);
         ptr->SetUICanvas(ui_canvas);
         ptr->SetGameManager(game_manager);

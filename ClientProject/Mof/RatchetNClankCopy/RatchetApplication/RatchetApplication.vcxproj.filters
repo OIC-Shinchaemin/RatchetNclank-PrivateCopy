@@ -310,6 +310,12 @@
     <Filter Include="Ratchet\Base\UI">
       <UniqueIdentifier>{51ed45d7-a7e5-4b53-b45e-df9f8dca8079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Factory\Builder\Actor">
+      <UniqueIdentifier>{756a9752-79ee-44ed-8cd0-2479c18a1889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Factory\Builder\Actor">
+      <UniqueIdentifier>{c54b2f8a-0a21-4eaf-8c9e-35d13c3fb4ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -714,15 +720,6 @@
     <ClCompile Include="State\EnemyActionStateImplementation.cpp">
       <Filter>Ratchet\Source\State</Filter>
     </ClCompile>
-    <ClCompile Include="Factory\Builder\OmniWrenchBuilder.cpp">
-      <Filter>Ratchet\Source\Factory\Builder</Filter>
-    </ClCompile>
-    <ClCompile Include="Factory\Builder\TerrainBuilder.cpp">
-      <Filter>Ratchet\Source\Factory\Builder</Filter>
-    </ClCompile>
-    <ClCompile Include="Factory\Builder\ActorBuilder.cpp">
-      <Filter>Ratchet\Source\Factory\Builder</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp">
       <Filter>Ratchet\Source\Component\Collision\Object</Filter>
     </ClCompile>
@@ -1058,6 +1055,15 @@
     </ClCompile>
     <ClCompile Include="..\include\Base\UI\UIItem.cpp">
       <Filter>Ratchet\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Actor\ActorBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Actor\OmniWrenchBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\Builder\Actor\TerrainBuilder.cpp">
+      <Filter>Ratchet\Source\Factory\Builder\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1661,15 +1667,6 @@
     <ClInclude Include="Factory\Builder\IBuilder.h">
       <Filter>Ratchet\Header\Factory\Builder</Filter>
     </ClInclude>
-    <ClInclude Include="Factory\Builder\OmniWrenchBuilder.h">
-      <Filter>Ratchet\Header\Factory\Builder</Filter>
-    </ClInclude>
-    <ClInclude Include="Factory\Builder\TerrainBuilder.h">
-      <Filter>Ratchet\Header\Factory\Builder</Filter>
-    </ClInclude>
-    <ClInclude Include="Factory\Builder\ActorBuilder.h">
-      <Filter>Ratchet\Header\Factory\Builder</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
@@ -2074,6 +2071,15 @@
     </ClInclude>
     <ClInclude Include="..\include\Base\UI\UICanvas.h">
       <Filter>Ratchet\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Actor\ActorBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Actor\OmniWrenchBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\Builder\Actor\TerrainBuilder.h">
+      <Filter>Ratchet\Header\Factory\Builder\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

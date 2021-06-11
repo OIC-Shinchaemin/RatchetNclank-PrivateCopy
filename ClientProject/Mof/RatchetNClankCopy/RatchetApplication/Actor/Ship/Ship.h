@@ -27,7 +27,7 @@ public:
     /// ì¬
     /// </summary>
     /// <param name="builder"></param>
-    virtual void Construct(const std::shared_ptr<class IBuilder>& builder) override;
+    virtual void Construct(const std::shared_ptr<ratchet::factory::builder::IBuilder>& builder) override;
 };
 }
 #endif // !RATCHET_SHIP_H

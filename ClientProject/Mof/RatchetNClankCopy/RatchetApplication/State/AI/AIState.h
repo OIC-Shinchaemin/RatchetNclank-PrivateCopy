@@ -20,7 +20,7 @@ protected:
     //! 通知
     std::weak_ptr<ratchet::Actor> _actor;
     //! ビヘイビア実行
-    behaviour::NodeExecutorPtr _behaviour_executor;
+    ratchet::behaviour::NodeExecutorPtr _behaviour_executor;
     /// <summary>
     /// ゲッター
     /// </summary>

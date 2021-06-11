@@ -26,7 +26,7 @@ void ratchet::BuilderFactory::Release(void) {
     _component_factory = nullptr;
 }
 
-std::shared_ptr<ratchet::IBuilder> ratchet::BuilderFactory::Create(const char* path) const {
+std::shared_ptr<ratchet::factory::builder::IBuilder> ratchet::BuilderFactory::Create(const char* path) const {
     // actor builder のみ
 
     // builderフォルダのファイル構成をきれいにする
@@ -39,18 +39,18 @@ std::shared_ptr<ratchet::IBuilder> ratchet::BuilderFactory::Create(const char* p
         return nullptr;
     } // if
 
-    std::shared_ptr<ratchet::ActorBuilder>  builder;
+    std::shared_ptr<ratchet::factory::builder::actor::ActorBuilder>  builder;
     if (document.HasMember("type")) {
         std::string type = document["type"].GetString();
         if (type == "Terrain") {
-            return this->CreateBuilder<ratchet::TerrainBuilder>(path);
+            return this->CreateBuilder<ratchet::factory::builder::actor::TerrainBuilder>(path);
         } // if
         else if (type == "OmniWrench") {
-            return this->CreateBuilder<ratchet::OmniWrenchBuilder>(path);
+            return this->CreateBuilder<ratchet::factory::builder::actor::OmniWrenchBuilder>(path);
         } // else if
     } // if
     else {
-        return this->CreateBuilder<ratchet::ActorBuilder>(path);
+        return this->CreateBuilder<ratchet::factory::builder::actor::ActorBuilder>(path);
     } // else
     return builder;
 }

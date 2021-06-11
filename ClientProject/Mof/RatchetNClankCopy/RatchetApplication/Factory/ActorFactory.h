@@ -23,7 +23,7 @@ private:
     //! ファクトリー
     ratchet::BuilderFactory* _builder_factory;
     //! 保持しているBulder
-    std::map<std::string, std::shared_ptr<ratchet::IBuilder>> _builders;
+    std::map<std::string, std::shared_ptr<ratchet::factory::builder::IBuilder>> _builders;
     //! Mechanical
     ratchet::Factory<ratchet::Mechanical> _mechanical_factory;
     //! ゲーム
@@ -48,13 +48,13 @@ public:
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::IBuilder> GetBuilder(const std::string& key);
+    std::shared_ptr<ratchet::factory::builder::IBuilder> GetBuilder(const std::string& key);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="key"></param>
     /// <param name="builder"></param>
-    void AddBuilder(const std::string& key, std::shared_ptr<ratchet::IBuilder> builder);
+    void AddBuilder(const std::string& key, std::shared_ptr<ratchet::factory::builder::IBuilder> builder);
     /// <summary>
     /// 判定
     /// </summary>

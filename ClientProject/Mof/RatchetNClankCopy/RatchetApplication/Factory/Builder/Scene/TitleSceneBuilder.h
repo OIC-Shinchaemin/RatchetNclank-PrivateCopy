@@ -1,5 +1,5 @@
-#ifndef BUILDER_TITLE_SCENE_BUILDER_H
-#define BUILDER_TITLE_SCENE_BUILDER_H
+#ifndef RATCHET_FACTORY_BUILDER_SCENE_TITLE_SCENE_BUILDER_H
+#define RATCHET_FACTORY_BUILDER_SCENE_TITLE_SCENE_BUILDER_H
 
 
 #include "SceneBuilder.h"
@@ -10,9 +10,12 @@
 #include "../../../Game/GameManager.h"
 
 
+namespace ratchet {
+namespace factory {
 namespace builder {
-class TitleSceneBuilder : public builder::SceneBuilder {
-    using super = builder::SceneBuilder;
+namespace scene {
+class TitleSceneBuilder : public  ratchet ::factory::builder::scene::SceneBuilder{
+    using super = ratchet::factory::builder::scene::SceneBuilder;
 private:
     //! ÉQÅ[ÉÄ
     std::weak_ptr<ratchet::GameManager> _game;
@@ -42,4 +45,7 @@ public:
     virtual void Construct(std::any shared_this) override;
 };
 }
-#endif // !BUILDER_TITLE_SCENE_BUILDER_H
+}
+}
+}
+#endif // !RATCHET_FACTORY_BUILDER_SCENE_TITLE_SCENE_BUILDER_H

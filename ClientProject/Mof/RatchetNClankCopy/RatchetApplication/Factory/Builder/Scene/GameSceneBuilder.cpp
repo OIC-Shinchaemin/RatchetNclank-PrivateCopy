@@ -1,30 +1,30 @@
 #include "GameSceneBuilder.h"
 
 
-builder::GameSceneBuilder::GameSceneBuilder() :
+ratchet::factory::builder::scene::GameSceneBuilder::GameSceneBuilder() :
     super(),
     _game(),
     _event() {
 }
 
-builder::GameSceneBuilder::~GameSceneBuilder() {
+ratchet::factory::builder::scene::GameSceneBuilder::~GameSceneBuilder() {
 }
 
-void builder::GameSceneBuilder::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::factory::builder::scene::GameSceneBuilder::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
     this->_game = ptr;
 }
 
-void builder::GameSceneBuilder::SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr) {
+void ratchet::factory::builder::scene::GameSceneBuilder::SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr) {
     this->_event = ptr;
 }
 
-void builder::GameSceneBuilder::Release(void) {
+void ratchet::factory::builder::scene::GameSceneBuilder::Release(void) {
     super::Release();
     _game.reset();
     _event.reset();
 }
 
-void builder::GameSceneBuilder::Construct(std::any shared_this) {
+void ratchet::factory::builder::scene::GameSceneBuilder::Construct(std::any shared_this) {
     super::Construct(shared_this);
     auto ptr = std::dynamic_pointer_cast<ratchet::scene::GameScene>(std::any_cast<std::shared_ptr<ratchet::scene::Scene>>(shared_this));
     ptr->SetGameManager(_game);
