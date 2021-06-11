@@ -25,8 +25,10 @@ void my::HelpDesk::OnNotify(const my::GameQuest& quest) {
         _info.text = info.text;
     } // else if
     else if (quest.GetType() == my::GameQuest::Type::ToFront) {
-        info.text = "前に進め";
-        _info.text = info.text;
+        if (_info.text != "船に乗ってゲームクリア！") {
+            info.text = "前に進め";
+            _info.text = info.text;
+        } // if
     } // else if
     else if (quest.GetType() == my::GameQuest::Type::ShopAccessStart) {
         _prev_info.text = _info.text;

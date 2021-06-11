@@ -32,6 +32,8 @@ DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
 
 namespace my {
 
+constexpr int kTextWidth= 12;
+
 template<typename UI>
 class UICreator {
 private:

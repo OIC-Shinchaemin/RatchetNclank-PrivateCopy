@@ -1065,6 +1065,12 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp">
       <Filter>Rachet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
+    <ClCompile Include="UI\GimmickAccessSystemMenu.cpp">
+      <Filter>Rachet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GimmickAccessSystem.cpp">
+      <Filter>Rachet\Source\Game\GameSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\My\Core\Define.h">
@@ -2074,6 +2080,12 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h">
       <Filter>Rachet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GimmickAccessSystemMenu.h">
+      <Filter>Rachet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GimmickAccessSystem.h">
+      <Filter>Rachet\Header\Game\GameSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

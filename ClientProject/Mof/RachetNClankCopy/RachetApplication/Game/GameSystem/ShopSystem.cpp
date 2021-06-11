@@ -16,7 +16,7 @@ bool my::ShopSystem::Close(void) {
         _equipment_weapon_menu_subject.Notify(info);
     } // if
     if (auto game_money = _game_money.lock()) {
-        game_money_menu_subject.Notify(game_money->GetValue());
+        _game_money_menu_subject.Notify(game_money->GetValue());
     } // if
 
     return false;
@@ -54,7 +54,7 @@ void my::ShopSystem::NotifyEquipmentWeaponMenu(void) {
 
 void my::ShopSystem::NotifyGameMoneyMenu(void) {
     if (auto game_money = _game_money.lock()) {
-        game_money_menu_subject.Notify(game_money->GetValue());
+        _game_money_menu_subject.Notify(game_money->GetValue());
     } // if
 }
 
@@ -62,15 +62,19 @@ my::ShopSystem::ShopSystem() :
     _infomation(),
     _info_subject(),
     _equipment_weapon_menu_subject(),
-    game_money_menu_subject(),
+    _game_money_menu_subject(),
     _save_data(),
     _items(),
     _prev_weapon(),
     _weapon_system(),
-    _game_money(){
+    _game_money(),
+    _ui_creator("ShopSystemMenus") {
 }
 
 my::ShopSystem::~ShopSystem() {
+    _equipment_weapon_menu_subject.Clear();
+    _game_money_menu_subject.Clear();
+
     _weapon_system.reset();
     _game_money.reset();
 }
@@ -100,7 +104,7 @@ void my::ShopSystem::OnNotify(bool flag) {
         _equipment_weapon_menu_subject.Notify(info);
     } // if
     if (auto game_money = _game_money.lock()) {
-        game_money_menu_subject.Notify(game_money->GetValue());
+        _game_money_menu_subject.Notify(game_money->GetValue());
     } // if
 }
 
@@ -146,7 +150,8 @@ bool my::ShopSystem::Load(my::SaveData& in) {
 }
 
 bool my::ShopSystem::Initialize(void) {
-    if (auto canvas = super::GetUICanvas() ) {
+    /*
+    if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("ShopSystemMenu");
     } // if
     auto menu = std::make_shared< my::ShopSystemMenu>("ShopSystemMenu");
@@ -157,6 +162,16 @@ bool my::ShopSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         canvas->AddElement(menu);
     } // if
+    */
+
+    {
+        auto menu = _ui_creator.Create(super::GetUICanvas());
+        menu->SetResourceManager(super::GetResource());
+        menu->Initialize();
+        _info_subject.AddObserver(menu);
+    }
+
+
 
     if (auto canvas = super::GetUICanvas()) {
         {
@@ -167,14 +182,14 @@ bool my::ShopSystem::Initialize(void) {
         {
             auto temp = canvas->GetElement("GameMoneyMenu");
             auto menu = std::dynamic_pointer_cast<my::Observer<int>>(temp);
-            game_money_menu_subject.AddObserver(menu);
+            _game_money_menu_subject.AddObserver(menu);
         }
     } // if
     return true;
 }
 
 bool my::ShopSystem::Update(float delta_time) {
-    if (!_infomation.enable) {        
+    if (!_infomation.enable) {
         return this->Close();
     } // if
     _infomation.close = false;
@@ -267,10 +282,13 @@ bool my::ShopSystem::Update(float delta_time) {
 }
 
 bool my::ShopSystem::Release(void) {
+    /*
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("ShopSystemMenu");
     } // if
+    */
 
+    /*
     if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
@@ -280,10 +298,11 @@ bool my::ShopSystem::Release(void) {
         {
             auto temp = canvas->GetElement("GameMoneyMenu");
             auto menu = std::dynamic_pointer_cast<my::Observer<int>>(temp);
-            game_money_menu_subject.RemoveObserver(menu);
+            _game_money_menu_subject.RemoveObserver(menu);
         }
 
     } // if
+    */
 
     return true;
 }

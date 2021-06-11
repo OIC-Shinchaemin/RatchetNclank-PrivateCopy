@@ -86,10 +86,10 @@ bool my::BridgeEvent::Update(float delta_time) {
     _bridge_view_camera_controller.Update(delta_time, camera_info);
 
 #ifdef _DEBUG
-#endif // _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_B)) {
         this->AllDelete();
     } // if
+#endif // _DEBUG
     return true;
 }
 

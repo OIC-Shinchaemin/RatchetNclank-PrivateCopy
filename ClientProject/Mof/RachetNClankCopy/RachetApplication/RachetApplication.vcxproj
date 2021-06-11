@@ -445,6 +445,7 @@
     <ClCompile Include="Game\GameSystem\GamePauseSystem.cpp" />
     <ClCompile Include="Game\GameSystem\GameQuest.cpp" />
     <ClCompile Include="Game\GameSystem\GameSystem.cpp" />
+    <ClCompile Include="Game\GameSystem\GimmickAccessSystem.cpp" />
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp" />
     <ClCompile Include="Game\GameSystem\OptionSystem.cpp" />
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
@@ -488,6 +489,7 @@
     <ClCompile Include="State\ShipMotionStateImplementation.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\GamePauseSystemMenu.cpp" />
+    <ClCompile Include="UI\GimmickAccessSystemMenu.cpp" />
     <ClCompile Include="UI\HelpDeskMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\GameMoneyMenu.cpp" />
@@ -778,6 +780,7 @@
     <ClInclude Include="Game\GameSystem\GamePauseSystem.h" />
     <ClInclude Include="Game\GameSystem\GameQuest.h" />
     <ClInclude Include="Game\GameSystem\GameSystem.h" />
+    <ClInclude Include="Game\GameSystem\GimmickAccessSystem.h" />
     <ClInclude Include="Game\GameSystem\HelpDesk.h" />
     <ClInclude Include="Game\GameSystem\OptionSystem.h" />
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
@@ -827,6 +830,7 @@
     <ClInclude Include="State\ShipMotionStateDefine.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
     <ClInclude Include="UI\GamePauseSystemMenu.h" />
+    <ClInclude Include="UI\GimmickAccessSystemMenu.h" />
     <ClInclude Include="UI\HelpDeskMenu.h" />
     <ClInclude Include="UI\LockOnCursorMenu.h" />
     <ClInclude Include="UI\GameMoneyMenu.h" />

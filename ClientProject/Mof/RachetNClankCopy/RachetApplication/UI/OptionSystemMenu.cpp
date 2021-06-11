@@ -99,8 +99,7 @@ void my::OptionSystemMenuItem::SetFont(Mof::CFont* ptr) {
 }
 
 Mof::CVector2 my::OptionSystemMenuItem::GetSize(void) const {
-    float size = 12.0f;
-    return Mof::CVector2(size * _text.size(), size);
+    return Mof::CVector2(my::kTextWidth * _text.size(), my::kTextWidth);
 }
 
 bool my::OptionSystemMenuItem::Input(void) {

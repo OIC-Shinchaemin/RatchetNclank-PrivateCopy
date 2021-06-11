@@ -19,9 +19,9 @@
 
 
 namespace my {
+class ShopSystemMenu;
 class ShopSystem :
-    public my::GameSystem
-{
+    public my::GameSystem {
     using super = my::GameSystem;
     using this_type = my::ShopSystem;
 public:
@@ -82,7 +82,7 @@ private:
     //! 通知用
     my::Observable<const my::Mechanical::Info&> _equipment_weapon_menu_subject;
     //! 通知用
-    my::Observable<int> game_money_menu_subject;
+    my::Observable<int> _game_money_menu_subject;
     //! セーブデータ
     my::SaveData _save_data;
     //! 購入可能ラインナップ
@@ -93,7 +93,8 @@ private:
     std::weak_ptr<my::WeaponSystem> _weapon_system;
     //! お金
     std::weak_ptr<my::GameMoney> _game_money;
-
+    //! UI管理
+    my::UICreator<ShopSystemMenu> _ui_creator;
 
     /// <summary>
     /// 終了
