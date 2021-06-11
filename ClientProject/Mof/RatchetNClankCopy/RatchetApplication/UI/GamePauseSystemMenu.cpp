@@ -7,7 +7,7 @@ ratchet::ui::GamePauseSystemMenu::GamePauseSystemMenu(const char* name) :
     super::_position = Mof::CVector2(500.0f, 400.0f);
 }
 
-void ratchet::ui::GamePauseSystemMenu::OnNotify(const ratchet::GamePauseSystem::Info& info) {
+void ratchet::ui::GamePauseSystemMenu::OnNotify(const ratchet::game::gamesystem::GamePauseSystem::Info& info) {
     this->_infomation = info;
     if (info.enable) {
         super::_position = Mof::CVector2(500.0f, 400.0f);
@@ -43,7 +43,7 @@ void ratchet::ui::GamePauseSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICan
     this->_ui_canvas = ptr;
 }
 
-void ratchet::ui::GamePauseSystemMenu::AddItem(const ratchet::GamePauseSystemItem& in) {
+void ratchet::ui::GamePauseSystemMenu::AddItem(const ratchet::game::gamesystem::GamePauseSystemItem& in) {
     auto elem = std::make_shared<ElemType>(in.GetText().c_str());
     elem->SetText(in.GetText());
     elem->SetPosition(super::_position);

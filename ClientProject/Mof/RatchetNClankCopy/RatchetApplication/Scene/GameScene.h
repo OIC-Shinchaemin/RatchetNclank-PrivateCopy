@@ -20,7 +20,7 @@
 
 namespace ratchet {
 namespace scene {
-class GameScene : public ratchet::scene::Scene, public base::core::Observer<const ratchet::ShopSystem::Info&> {
+class GameScene : public ratchet::scene::Scene, public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&> {
     using super = ratchet::scene::Scene;
     using this_type = ratchet::scene::GameScene;
 private:
@@ -29,11 +29,11 @@ private:
     //! 削除
     std::vector<std::shared_ptr<ratchet::Actor>> _delete_actors;
     //! ゲーム
-    ratchet::GameWorld _game_world;
+    ratchet::game::GameWorld _game_world;
     //! レンダラー
-    ratchet::Renderer _renderer;
+    ratchet::game::Renderer _renderer;
     //! コリジョン
-    ratchet::PhysicsWorld _physic_world;
+    ratchet::game::PhysicsWorld _physic_world;
     //! ステージ
     Stage _stage;
     //! 再初期化
@@ -43,7 +43,7 @@ private:
 
 
     //! ゲーム
-    std::weak_ptr<ratchet::GameManager> _game;
+    std::weak_ptr<ratchet::game::GameManager> _game;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event;
     /// <summary>
@@ -104,12 +104,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::ShopSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr);
     /// <summary>
     /// セッター
     /// </summary>

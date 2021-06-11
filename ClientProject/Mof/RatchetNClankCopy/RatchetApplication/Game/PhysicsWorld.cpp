@@ -29,7 +29,7 @@
 #include "../Component/Collision/Object/CollisionComponentDefine.h"
 
 
-void ratchet::PhysicsWorld::GenerateLayer(void) {
+void ratchet::game::PhysicsWorld::GenerateLayer(void) {
     const char* types[] = {
       ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm.c_str(),
@@ -65,7 +65,7 @@ void ratchet::PhysicsWorld::GenerateLayer(void) {
     } // for
 }
 
-ratchet::PhysicsWorld::PhysicsWorld() :
+ratchet::game::PhysicsWorld::PhysicsWorld() :
     _layers() {
     collision_algolithm_factory.Register<ratchet::PlayerEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);
@@ -95,11 +95,11 @@ ratchet::PhysicsWorld::PhysicsWorld() :
     this->GenerateLayer();
 }
 
-ratchet::PhysicsWorld::~PhysicsWorld() {
+ratchet::game::PhysicsWorld::~PhysicsWorld() {
     _layers.clear();
 }
 
-void ratchet::PhysicsWorld::AddActor(const ActorPtr& actor) {
+void ratchet::game::PhysicsWorld::AddActor(const ActorPtr& actor) {
     std::vector<std::weak_ptr<ratchet::CollisionComponent>> work;
     actor->GetComponents<ratchet::CollisionComponent>(work);
 
@@ -120,7 +120,7 @@ void ratchet::PhysicsWorld::AddActor(const ActorPtr& actor) {
     } // for
 }
 
-void ratchet::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
+void ratchet::game::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
     std::vector<std::weak_ptr<ratchet::CollisionComponent>> work;
     actor->GetComponents<ratchet::CollisionComponent>(work);
 
@@ -135,7 +135,7 @@ void ratchet::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
     } // for
 }
 
-bool ratchet::PhysicsWorld::Update(void) {
+bool ratchet::game::PhysicsWorld::Update(void) {
     for (auto& layer : _layers) {
         for (auto& object : layer.objects) {
             if (!object->IsActive()) {
@@ -180,7 +180,7 @@ bool ratchet::PhysicsWorld::Update(void) {
     return true;
 }
 
-void ratchet::PhysicsWorld::CollisionStage(Stage* stage) {
+void ratchet::game::PhysicsWorld::CollisionStage(Stage* stage) {
     auto meshes = stage->GetMeshArray();
 
     auto objs = stage->GetStaticObjectArray();
@@ -211,7 +211,7 @@ void ratchet::PhysicsWorld::CollisionStage(Stage* stage) {
     } // for
 }
 
-void ratchet::PhysicsWorld::Reset(void) {
+void ratchet::game::PhysicsWorld::Reset(void) {
     _layers.clear();
     _list_for_stage.clear();
     this->GenerateLayer();

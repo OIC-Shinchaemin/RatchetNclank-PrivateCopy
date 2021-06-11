@@ -5,7 +5,7 @@
 #include "../../UI/EquipmentWeaponMenu.h"
 
 
-ratchet::WeaponSystem::WeaponSystem() :
+ratchet::game::gamesystem::WeaponSystem::WeaponSystem() :
     _weapons(),
     _current_mechanical(),
     _subject(),
@@ -20,10 +20,10 @@ ratchet::WeaponSystem::WeaponSystem() :
     _builder_name_map.emplace("Blaster", "../Resource/builder/blaster.json");
 }
 
-ratchet::WeaponSystem::~WeaponSystem() {
+ratchet::game::gamesystem::WeaponSystem::~WeaponSystem() {
 }
 
-void ratchet::WeaponSystem::OnNotify(const std::string& change) {
+void ratchet::game::gamesystem::WeaponSystem::OnNotify(const std::string& change) {
     _subject.Notify(this->GetMechanicalWeapon(change));
     auto weapon = this->GetMechanicalWeapon(change);
     if (_current_mechanical) {
@@ -38,7 +38,7 @@ void ratchet::WeaponSystem::OnNotify(const std::string& change) {
     _equipment_subject.Notify(ratchet::Mechanical::Info(bullet_count, bullet_count_max, name.data()));
 }
 
-void ratchet::WeaponSystem::OnNotify(const ratchet::ChargeInfo& info) {
+void ratchet::game::gamesystem::WeaponSystem::OnNotify(const ratchet::game::gamesystem::ChargeInfo& info) {
     auto weapon = this->GetMechanicalWeapon(info.type);
     if (info.size) {
         weapon->AddBullet(info.size);
@@ -46,34 +46,34 @@ void ratchet::WeaponSystem::OnNotify(const ratchet::ChargeInfo& info) {
     _equipment_subject.Notify(ratchet::Mechanical::Info(weapon->GetBulletCount(), weapon->GetBulletCountMax(), weapon->GetName().c_str() ));
 }
 
-void ratchet::WeaponSystem::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
+void ratchet::game::gamesystem::WeaponSystem::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     this->_resource = ptr;
 }
 
-void ratchet::WeaponSystem::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
+void ratchet::game::gamesystem::WeaponSystem::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
-std::shared_ptr<ratchet::Mechanical> ratchet::WeaponSystem::GetCurrentMechanicalWeapon(void) const {
+std::shared_ptr<ratchet::Mechanical> ratchet::game::gamesystem::WeaponSystem::GetCurrentMechanicalWeapon(void) const {
     return this->_current_mechanical;
 }
 
-const std::vector<ratchet::WeaponSystem::Pair>& ratchet::WeaponSystem::GetWeaponMap(void) const {
+const std::vector<ratchet::game::gamesystem::WeaponSystem::Pair>& ratchet::game::gamesystem::WeaponSystem::GetWeaponMap(void) const {
     return this->_weapons;
 }
 
-void ratchet::WeaponSystem::AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<ratchet::Weapon>>>& ptr) {
+void ratchet::game::gamesystem::WeaponSystem::AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<ratchet::Weapon>>>& ptr) {
     _subject.AddObserver(ptr);
 }
 
-void ratchet::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::string>& out) {
+void ratchet::game::gamesystem::WeaponSystem::CreateAvailableMechanicalWeaponNames(std::vector<std::string>& out) {
     out.reserve(_weapons.size());
     for (auto& pair : _weapons) {
         out.push_back(pair.first);
     } // for
 }
 
-bool ratchet::WeaponSystem::Load(ratchet::SaveData& in) {
+bool ratchet::game::gamesystem::WeaponSystem::Load(ratchet::game::gamesystem::save::SaveData& in) {
     _save_data = in;
 
     auto param = ratchet::Actor::Param();
@@ -82,7 +82,7 @@ bool ratchet::WeaponSystem::Load(ratchet::SaveData& in) {
 
         auto weapon = ratchet::factory::FactoryManager::Singleton().CreateMechanicalWeapon(
             key.c_str(), _builder_name_map.at(key), &param);
-        auto it = std::find_if(_weapons.begin(), _weapons.end(), [key](const ratchet::WeaponSystem::Pair& pair) {
+        auto it = std::find_if(_weapons.begin(), _weapons.end(), [key](const ratchet::game::gamesystem::WeaponSystem::Pair& pair) {
             return pair.first == key;
         });
         if (it == _weapons.end()) {
@@ -93,7 +93,7 @@ bool ratchet::WeaponSystem::Load(ratchet::SaveData& in) {
     return true;
 }
 
-bool ratchet::WeaponSystem::Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&>>& observer) {
+bool ratchet::game::gamesystem::WeaponSystem::Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&>>& observer) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if
@@ -114,14 +114,14 @@ bool ratchet::WeaponSystem::Initialize(const std::shared_ptr<base::core::Observe
     return true;
 }
 
-bool ratchet::WeaponSystem::Release(void) {
+bool ratchet::game::gamesystem::WeaponSystem::Release(void) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->RemoveElement("EquipmentWeaponMenu");
     } // if
     return true;
 }
 
-std::shared_ptr<ratchet::Mechanical> ratchet::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
+std::shared_ptr<ratchet::Mechanical> ratchet::game::gamesystem::WeaponSystem::GetMechanicalWeapon(const std::string& name) {
     _current_mechanical.reset();
     auto it = std::find_if(_weapons.begin(), _weapons.end(), [&](Pair& pair) {
         return pair.first == name;

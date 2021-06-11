@@ -1,5 +1,5 @@
-#ifndef RATCHET_GAME_SYSTEM_H
-#define RATCHET_GAME_SYSTEM_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_GAME_SYSTEM_H
+#define RATCHET_GAME_GAME_SYSTEM_GAME_SYSTEM_H
 
 
 #include "Base/Core/Observable.h"
@@ -19,9 +19,12 @@
 
 
 namespace ratchet {
-class GameSystem : public std::enable_shared_from_this<ratchet::GameSystem>,
+namespace game {
+namespace gamesystem {
+
+class GameSystem : public std::enable_shared_from_this<ratchet::game::gamesystem::GameSystem>,
     public base::core::Observer<bool> {
-    using this_type = ratchet::GameSystem;
+    using this_type = ratchet::game::gamesystem::GameSystem;
 private:
     //! ’Ê’m—p
     base::core::Observable<const std::shared_ptr<this_type>&> _subject;
@@ -80,4 +83,6 @@ public:
     [[nodiscard]] virtual bool Update(float delta_time);
 };
 }
-#endif // !RATCHET_GAME_SYSTEM_H
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_GAME_SYSTEM_H

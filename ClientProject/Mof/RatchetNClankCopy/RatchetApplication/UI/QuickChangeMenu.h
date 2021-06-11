@@ -49,7 +49,7 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class QuickChangeMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::QuickChangeSystem::Info&> {
+class QuickChangeMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 半径
@@ -70,7 +70,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::QuickChangeSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>

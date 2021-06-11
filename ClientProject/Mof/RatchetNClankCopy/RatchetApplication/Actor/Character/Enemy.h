@@ -20,7 +20,7 @@ public:
     };
 private:
     //! 通知用
-    base::core::Observable<const ratchet::GameQuest&> _quest_subject;
+    base::core::Observable<const ratchet::game::gamesystem::GameQuest&> _quest_subject;
     /// <summary>
     /// 状態変更
     /// </summary>
@@ -39,7 +39,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const ratchet::GameQuest&>* GetQuestSubject(void);
+    base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// デリート
     /// </summary>

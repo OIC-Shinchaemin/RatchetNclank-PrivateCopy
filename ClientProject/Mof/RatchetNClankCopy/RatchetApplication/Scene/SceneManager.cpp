@@ -68,7 +68,7 @@ void ratchet::scene::SceneManager::SetUICanvas(const std::shared_ptr<base::ui::U
     this->_managers.ui_canvas = ptr;
 }
 
-void ratchet::scene::SceneManager::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::scene::SceneManager::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
     this->_managers.game_manager = ptr;
 }
 

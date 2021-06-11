@@ -1,5 +1,5 @@
-#ifndef RATCHET_GAME_PAUSE_SYSTEM_H
-#define RATCHET_GAME_PAUSE_SYSTEM_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_GAME_PAUSE_SYSTEM_H
+#define RATCHET_GAME_GAME_SYSTEM_GAME_PAUSE_SYSTEM_H
 
 
 #include "GameSystem.h"
@@ -13,8 +13,11 @@ namespace ratchet {
 namespace ui {
 class GamePauseSystemMenu;
 }
-class GamePauseSystemItem : public std::enable_shared_from_this<ratchet::GamePauseSystemItem> {
-    using this_type = ratchet::GamePauseSystemItem;
+namespace game {
+namespace gamesystem {
+
+class GamePauseSystemItem : public std::enable_shared_from_this<ratchet::game::gamesystem::GamePauseSystemItem> {
+    using this_type = ratchet::game::gamesystem::GamePauseSystemItem;
 private:
     //! テキスト
     std::string _text;
@@ -51,10 +54,10 @@ public:
     /// <returns></returns>
     [[nodiscard]] virtual bool Execute(void);
 };
-class GamePauseSystem : public ratchet::GameSystem {
-    using super = ratchet::GameSystem;
-    using this_type = ratchet::GamePauseSystem;
-    using ElemType = ratchet::GamePauseSystemItem;
+class GamePauseSystem : public ratchet::game::gamesystem::GameSystem {
+    using super = ratchet::game::gamesystem::GameSystem;
+    using this_type = ratchet::game::gamesystem::GamePauseSystem;
+    using ElemType = ratchet::game::gamesystem::GamePauseSystemItem;
 public:
     struct Info {
         bool enable = false;
@@ -142,4 +145,6 @@ public:
     bool Release(void);
 };
 }
-#endif // !RATCHET_GAME_PAUSE_SYSTEM_H
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_GAME_PAUSE_SYSTEM_H

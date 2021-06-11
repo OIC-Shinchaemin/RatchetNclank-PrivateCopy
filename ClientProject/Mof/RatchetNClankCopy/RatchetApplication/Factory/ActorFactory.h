@@ -28,7 +28,7 @@ private:
     //! Mechanical
     ratchet::factory::Factory<ratchet::Mechanical> _mechanical_factory;
     //! ゲーム
-    std::weak_ptr<ratchet::GameManager> _game;
+    std::weak_ptr<ratchet::game::GameManager> _game;
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,7 +43,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

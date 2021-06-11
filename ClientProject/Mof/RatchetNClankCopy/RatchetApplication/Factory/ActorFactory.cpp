@@ -20,7 +20,7 @@ ratchet::factory::ActorFactory::~ActorFactory() {
     this->Release();
 }
 
-void ratchet::factory::ActorFactory::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::factory::ActorFactory::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
     this->_game = ptr;
 }
 

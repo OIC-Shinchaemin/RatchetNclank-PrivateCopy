@@ -3,7 +3,7 @@
 #include "../../UI/OptionSystemMenu.h"
 
 
-ratchet::OptionSystem::OptionSystem() :
+ratchet::game::gamesystem::OptionSystem::OptionSystem() :
     super(),
     _infomation(),
     _info_subject(),
@@ -13,10 +13,10 @@ ratchet::OptionSystem::OptionSystem() :
     _infomation.items = &_item;
 }
 
-ratchet::OptionSystem::~OptionSystem() {
+ratchet::game::gamesystem::OptionSystem::~OptionSystem() {
 }
 
-void ratchet::OptionSystem::OnNotify(bool flag) {
+void ratchet::game::gamesystem::OptionSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     _item_index = 0;
     _title_menu_subject.Notify(false);
@@ -25,23 +25,23 @@ void ratchet::OptionSystem::OnNotify(bool flag) {
     _infomation.enter = false;
 }
 
-base::core::Observable<const ratchet::OptionSystem::Info&>* ratchet::OptionSystem::GetInfoSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::OptionSystem::Info&>* ratchet::game::gamesystem::OptionSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
-base::core::Observable<const ratchet::scene::SceneMessage&>* ratchet::OptionSystem::GetSceneMessageSubject(void) {
+base::core::Observable<const ratchet::scene::SceneMessage&>* ratchet::game::gamesystem::OptionSystem::GetSceneMessageSubject(void) {
     return &this->_scene_message_subject;
 }
-base::core::Observable<bool>* ratchet::OptionSystem::GetTitleMenuSubject(void) {
+base::core::Observable<bool>* ratchet::game::gamesystem::OptionSystem::GetTitleMenuSubject(void) {
     return &this->_title_menu_subject;
 }
 
-void ratchet::OptionSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
+void ratchet::game::gamesystem::OptionSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
     _item.push_back(elem);
     _info_subject.Notify(_infomation);
 }
 
-bool ratchet::OptionSystem::Initialize(void) {
+bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
@@ -61,7 +61,7 @@ bool ratchet::OptionSystem::Initialize(void) {
     return true;
 }
 
-bool ratchet::OptionSystem::Input(void) {
+bool ratchet::game::gamesystem::OptionSystem::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
         _item_index--;
         if (_item_index < 0) {
@@ -90,7 +90,7 @@ bool ratchet::OptionSystem::Input(void) {
     } // if
     return true;
 }
-bool ratchet::OptionSystem::Update(float delta_time) {
+bool ratchet::game::gamesystem::OptionSystem::Update(float delta_time) {
     this->Input();
     if (!_execute_list.empty()) {
         for (auto ptr : _execute_list) {
@@ -119,7 +119,7 @@ bool ratchet::OptionSystem::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::OptionSystem::Release(void) {
+bool ratchet::game::gamesystem::OptionSystem::Release(void) {
     _item.clear();
     _info_subject.Clear();
     _title_menu_subject.Clear();
@@ -129,24 +129,24 @@ bool ratchet::OptionSystem::Release(void) {
     return true;
 }
 
-ratchet::OptionSystemItem::OptionSystemItem() {
+ratchet::game::gamesystem::OptionSystemItem::OptionSystemItem() {
 }
 
-ratchet::OptionSystemItem::OptionSystemItem(std::function<bool(void)> func) :
+ratchet::game::gamesystem::OptionSystemItem::OptionSystemItem(std::function<bool(void)> func) :
     _on_enter(func) {
 }
 
-ratchet::OptionSystemItem::~OptionSystemItem() {
+ratchet::game::gamesystem::OptionSystemItem::~OptionSystemItem() {
 }
 
-void ratchet::OptionSystemItem::SetText(const char* text) {
+void ratchet::game::gamesystem::OptionSystemItem::SetText(const char* text) {
     this->_text = text;
 }
 
-std::string ratchet::OptionSystemItem::GetText(void) const {
+std::string ratchet::game::gamesystem::OptionSystemItem::GetText(void) const {
     return this->_text;
 }
 
-bool ratchet::OptionSystemItem::Execute(void) {
+bool ratchet::game::gamesystem::OptionSystemItem::Execute(void) {
     return _on_enter();
 }

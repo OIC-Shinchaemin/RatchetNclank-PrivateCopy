@@ -98,7 +98,7 @@ bool ratchet::PlayerComponent::Initialize(void) {
                                ratchet::CollisionComponentType::kShopCollisionComponent,
                                ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         auto player = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
-        player->GetQuestSubject()->Notify(ratchet::GameQuest::Type::ShopAccessStart);
+        player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessStart);
         player->PushNotificationableSubject("ShopSystem");
 
         return true;
@@ -107,7 +107,7 @@ bool ratchet::PlayerComponent::Initialize(void) {
                                ratchet::CollisionComponentType::kShopCollisionComponent,
                                ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         auto player = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
-        player->GetQuestSubject()->Notify(ratchet::GameQuest::Type::ShopAccessEnd);
+        player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessEnd);
         player->PopNotificationableSubject("ShopSystem");
         return true;
     }));

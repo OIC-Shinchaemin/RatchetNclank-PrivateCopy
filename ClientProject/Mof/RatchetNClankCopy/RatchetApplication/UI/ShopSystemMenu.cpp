@@ -9,7 +9,7 @@ ratchet::ui::ShopSystemMenu::ShopSystemMenu(const char* name) :
     _ui_canvas() {
 }
 
-void ratchet::ui::ShopSystemMenu::OnNotify(const ratchet::ShopSystem::Info& info) {
+void ratchet::ui::ShopSystemMenu::OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) {
     super::Notify(shared_from_this(), "Enable");
     _infomation = info;
 }

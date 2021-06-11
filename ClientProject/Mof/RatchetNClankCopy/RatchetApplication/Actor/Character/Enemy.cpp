@@ -25,7 +25,7 @@ ratchet::Enemy::Enemy() :
 ratchet::Enemy::~Enemy() {
 }
 
-base::core::Observable<const ratchet::GameQuest&>* ratchet::Enemy::GetQuestSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::Enemy::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 

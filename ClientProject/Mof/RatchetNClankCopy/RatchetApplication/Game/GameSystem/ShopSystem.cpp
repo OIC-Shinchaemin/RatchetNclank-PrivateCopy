@@ -3,7 +3,7 @@
 #include "../../UI/ShopSystemMenu.h"
 
 
-bool ratchet::ShopSystem::Close(void) {
+bool ratchet::game::gamesystem::ShopSystem::Close(void) {
     _infomation.close = true;
     _info_subject.Notify(_infomation);
     if (auto weapon_system = _weapon_system.lock()) {
@@ -22,10 +22,10 @@ bool ratchet::ShopSystem::Close(void) {
     return false;
 }
 
-void ratchet::ShopSystem::Buy(void) {
+void ratchet::game::gamesystem::ShopSystem::Buy(void) {
     auto current = _items.at(_infomation.index);
 
-    auto charge_info = ratchet::ChargeInfo();
+    auto charge_info = ratchet::game::gamesystem::ChargeInfo();
     charge_info.size = _infomation.count;
     charge_info.type = current.name;
     _buy_subject.Notify(charge_info);
@@ -42,7 +42,7 @@ void ratchet::ShopSystem::Buy(void) {
     _info_subject.Notify(_infomation);
 }
 
-void ratchet::ShopSystem::NotifyEquipmentWeaponMenu(void) {
+void ratchet::game::gamesystem::ShopSystem::NotifyEquipmentWeaponMenu(void) {
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
         auto info = ratchet::Mechanical::Info();
@@ -52,13 +52,13 @@ void ratchet::ShopSystem::NotifyEquipmentWeaponMenu(void) {
     } // if
 }
 
-void ratchet::ShopSystem::NotifyGameMoneyMenu(void) {
+void ratchet::game::gamesystem::ShopSystem::NotifyGameMoneyMenu(void) {
     if (auto game_money = _game_money.lock()) {
         _game_money_menu_subject.Notify(game_money->GetValue());
     } // if
 }
 
-ratchet::ShopSystem::ShopSystem() :
+ratchet::game::gamesystem::ShopSystem::ShopSystem() :
     _infomation(),
     _info_subject(),
     _equipment_weapon_menu_subject(),
@@ -71,7 +71,7 @@ ratchet::ShopSystem::ShopSystem() :
     _ui_creator("ShopSystemMenus") {
 }
 
-ratchet::ShopSystem::~ShopSystem() {
+ratchet::game::gamesystem::ShopSystem::~ShopSystem() {
     _equipment_weapon_menu_subject.Clear();
     _game_money_menu_subject.Clear();
 
@@ -79,7 +79,7 @@ ratchet::ShopSystem::~ShopSystem() {
     _game_money.reset();
 }
 
-void ratchet::ShopSystem::OnNotify(bool flag) {
+void ratchet::game::gamesystem::ShopSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     _infomation.close = false;
 
@@ -108,27 +108,27 @@ void ratchet::ShopSystem::OnNotify(bool flag) {
     } // if
 }
 
-void ratchet::ShopSystem::SetWeaponSystem(std::weak_ptr<ratchet::WeaponSystem> ptr) {
+void ratchet::game::gamesystem::ShopSystem::SetWeaponSystem(std::weak_ptr<ratchet::game::gamesystem::WeaponSystem> ptr) {
     this->_weapon_system = ptr;
 }
 
-void ratchet::ShopSystem::SetGameMoney(std::weak_ptr<ratchet::GameMoney> ptr) {
+void ratchet::game::gamesystem::ShopSystem::SetGameMoney(std::weak_ptr<ratchet::game::gamesystem::GameMoney> ptr) {
     this->_game_money = ptr;
 }
 
-base::core::Observable<const ratchet::ShopSystem::Info&>* ratchet::ShopSystem::GetInfoSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::ShopSystem::Info&>* ratchet::game::gamesystem::ShopSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
-base::core::Observable<const ratchet::ChargeInfo&>* ratchet::ShopSystem::GetChargeInfoSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&>* ratchet::game::gamesystem::ShopSystem::GetChargeInfoSubject(void) {
     return &this->_buy_subject;
 }
 
-bool ratchet::ShopSystem::IsEnable(void) const {
+bool ratchet::game::gamesystem::ShopSystem::IsEnable(void) const {
     return this->_infomation.enable;
 }
 
-bool ratchet::ShopSystem::Load(ratchet::SaveData& in) {
+bool ratchet::game::gamesystem::ShopSystem::Load(ratchet::game::gamesystem::save::SaveData& in) {
     _save_data = in;
 
     auto& work = _save_data.GetAvailableMechanicalWeaponsAddress();
@@ -144,12 +144,12 @@ bool ratchet::ShopSystem::Load(ratchet::SaveData& in) {
         else if (key == "Blaster") {
             price = 2;
         } // else if
-        _items.emplace_back(ratchet::ShopSystem::Item(key.c_str(), price, true));
+        _items.emplace_back(ratchet::game::gamesystem::ShopSystem::Item(key.c_str(), price, true));
     } // for
     return true;
 }
 
-bool ratchet::ShopSystem::Initialize(void) {
+bool ratchet::game::gamesystem::ShopSystem::Initialize(void) {
     {
         auto menu = _ui_creator.Create(super::GetUICanvas());
         menu->SetResourceManager(super::GetResource());
@@ -172,7 +172,7 @@ bool ratchet::ShopSystem::Initialize(void) {
     return true;
 }
 
-bool ratchet::ShopSystem::Update(float delta_time) {
+bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
     if (!_infomation.enable) {
         return this->Close();
     } // if
@@ -265,7 +265,7 @@ bool ratchet::ShopSystem::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::ShopSystem::Release(void) {
+bool ratchet::game::gamesystem::ShopSystem::Release(void) {
     /*
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("ShopSystemMenu");

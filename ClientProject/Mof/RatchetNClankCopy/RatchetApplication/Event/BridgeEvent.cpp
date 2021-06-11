@@ -24,7 +24,7 @@ void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_p
         } // if
 
         if (_for_bridge_event_actors.empty()) {
-            auto quest = ratchet::GameQuest(ratchet::GameQuest::Type::GoHome);
+            auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::GoHome);
             _quest_subject.Notify(quest);
 
 
@@ -62,7 +62,7 @@ base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>* ra
     return &this->_camera_subject;
 }
 
-base::core::Observable<const ratchet::GameQuest&>* ratchet::event::BridgeEvent::GetQuestSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::event::BridgeEvent::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 

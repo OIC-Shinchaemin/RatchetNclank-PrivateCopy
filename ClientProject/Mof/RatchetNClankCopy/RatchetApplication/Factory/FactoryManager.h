@@ -32,7 +32,7 @@ private:
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! ゲーム
-    std::weak_ptr<ratchet::GameManager> _game;
+    std::weak_ptr<ratchet::game::GameManager> _game;
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -57,7 +57,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr);
     /// <summary>
     /// 作成
     /// </summary>

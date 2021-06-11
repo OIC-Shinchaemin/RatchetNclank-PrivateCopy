@@ -32,12 +32,12 @@ base::core::Observable<int>* ratchet::BulletItem::GetMoneySubject(void) {
     return &this->_money_subject;
 }
 */
-base::core::Observable<const ratchet::ChargeInfo&>* ratchet::BulletItem::GetWeaponSystemSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&>* ratchet::BulletItem::GetWeaponSystemSubject(void) {
     return &this->_weapon_system_subject;
 }
 void ratchet::BulletItem::End(void) {
     //_money_subject.Notify(1);
-    auto info = ratchet::ChargeInfo();
+    auto info = ratchet::game::gamesystem::ChargeInfo();
     info.size = _item_count;
     info.type = this->GetTypeName(_item_type);
     _weapon_system_subject.Notify(info);

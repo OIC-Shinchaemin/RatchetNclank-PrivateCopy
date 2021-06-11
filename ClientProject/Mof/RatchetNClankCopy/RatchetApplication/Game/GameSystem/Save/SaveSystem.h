@@ -1,5 +1,5 @@
-#ifndef RATCHET_SAVE_SYSTEM_H
-#define RATCHET_SAVE_SYSTEM_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_SYSTEM_H
+#define RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_SYSTEM_H
 
 
 #include <string>
@@ -8,6 +8,9 @@
 
 
 namespace ratchet {
+namespace game {
+namespace gamesystem {
+namespace save {
 class SaveSystem {
 private:
     std::string _path;
@@ -25,13 +28,16 @@ public:
     /// </summary>
     /// <param name="out"></param>
     /// <returns></returns>
-    bool Fetch(ratchet::SaveData& out);
+    bool Fetch(ratchet::game::gamesystem::save::SaveData& out);
     /// <summary>
     /// èëÇ´çûÇ›
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    bool Save(const ratchet::SaveDataParam& param);
+    bool Save(const ratchet::game::gamesystem::save::SaveDataParam& param);
 };
 }
-#endif // !RATCHET_SAVE_SYSTEM_H
+}
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_SYSTEM_H

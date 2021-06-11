@@ -18,7 +18,7 @@ ratchet::ui::OptionSystemMenu::~OptionSystemMenu() {
     _font.Release();
 }
 
-void ratchet::ui::OptionSystemMenu::OnNotify(const ratchet::OptionSystem::Info& info) {
+void ratchet::ui::OptionSystemMenu::OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) {
     _infomation = info;
     if (info.enter) {
         super::Notify(shared_from_this(), "Enable");
@@ -40,7 +40,7 @@ void ratchet::ui::OptionSystemMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas
     this->_ui_canvas = ptr;
 }
 
-void ratchet::ui::OptionSystemMenu::AddItem(const ratchet::OptionSystemItem& in) {
+void ratchet::ui::OptionSystemMenu::AddItem(const ratchet::game::gamesystem::OptionSystemItem& in) {
     auto elem = std::make_shared<ratchet::ui::OptionSystemMenuItem>(in.GetText().c_str());
     elem->SetFont(&_font);
     elem->SetText(in.GetText());

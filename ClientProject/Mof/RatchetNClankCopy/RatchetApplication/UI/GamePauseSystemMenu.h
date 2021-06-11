@@ -63,12 +63,12 @@ public:
     virtual bool Render(void) override;
 };
 class GamePauseSystemMenu : public base::ui::UIPanel,
-    public base::core::Observer<const ratchet::GamePauseSystem::Info&> {
+    public base::core::Observer<const ratchet::game::gamesystem::GamePauseSystem::Info&> {
     using super = base::ui::UIPanel;
     using ElemType = ratchet::ui::GamePauseSystemMenuItem;
 private:
     //! 情報
-    ratchet::GamePauseSystem::Info _infomation;
+    ratchet::game::gamesystem::GamePauseSystem::Info _infomation;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -83,7 +83,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::GamePauseSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::GamePauseSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -98,7 +98,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="in"></param>
-    void AddItem(const ratchet::GamePauseSystemItem& in);
+    void AddItem(const ratchet::game::gamesystem::GamePauseSystemItem& in);
     /// <summary>
     /// 初期化
     /// </summary>

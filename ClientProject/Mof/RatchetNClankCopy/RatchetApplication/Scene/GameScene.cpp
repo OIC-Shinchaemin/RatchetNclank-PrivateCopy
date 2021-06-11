@@ -128,7 +128,7 @@ void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr
     } // if
 }
 
-void ratchet::scene::GameScene::OnNotify(const ratchet::ShopSystem::Info& info) {
+void ratchet::scene::GameScene::OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) {
     if (info.close) {
         this->_state = super::State::Active;
     } // if
@@ -137,7 +137,7 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::ShopSystem::Info& info) 
     } // else
 }
 
-void ratchet::scene::GameScene::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::scene::GameScene::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
     this->_game = ptr;
 }
 
@@ -246,7 +246,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
         shop_system->Initialize();
         pause_system->Initialize();
 
-        auto quest = ratchet::GameQuest(ratchet::GameQuest::Type::ToFront);
+        auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
         help_desk->OnNotify(quest);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);
         weapon_system->AddMechanicalWeaponObserver(player);
@@ -260,19 +260,19 @@ bool ratchet::scene::GameScene::Initialize(void) {
         } // for
 
 
-        auto item0 = std::make_shared<ratchet::GamePauseSystemItem>([&]() {
+        auto item0 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
             _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
             return true;
         });
         item0->SetText("タイトルに戻る");
 
-        auto item1 = std::make_shared<ratchet::GamePauseSystemItem>([&]() {
+        auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
             _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
             return true;
         });
         item1->SetText("リトライ");
 
-        auto item2 = std::make_shared<ratchet::GamePauseSystemItem>([&]() {
+        auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
             _game.lock()->GetGamePauseSystem()->Inactive();
             this->_state = super::State::Active;
             return true;

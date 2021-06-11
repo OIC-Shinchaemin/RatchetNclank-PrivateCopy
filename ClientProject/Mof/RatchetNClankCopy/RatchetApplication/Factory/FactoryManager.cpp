@@ -24,7 +24,7 @@ void ratchet::factory::FactoryManager::SetResourceManager(std::weak_ptr<ratchet:
     _builder.SetResourceManager(_resource);
 }
 
-void ratchet::factory::FactoryManager::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::factory::FactoryManager::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
     this->_game = ptr;
     _actor.SetGameManager(_game);
 }

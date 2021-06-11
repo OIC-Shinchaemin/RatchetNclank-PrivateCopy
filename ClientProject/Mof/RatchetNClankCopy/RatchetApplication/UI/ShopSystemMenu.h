@@ -42,13 +42,13 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class ShopSystemMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::ShopSystem::Info&> {
+class ShopSystemMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 表示
     bool _show;
     //! 情報
-    ratchet::ShopSystem::Info _infomation;
+    ratchet::game::gamesystem::ShopSystem::Info _infomation;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -63,7 +63,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::ShopSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>

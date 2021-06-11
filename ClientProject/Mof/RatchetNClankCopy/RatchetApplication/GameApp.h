@@ -20,7 +20,7 @@ private:
     //! ライト
     std::shared_ptr<ratchet::light::LightManager> _light_manager;
     //! ゲーム
-    std::shared_ptr<ratchet::GameManager> _game_manager;
+    std::shared_ptr<ratchet::game::GameManager> _game_manager;
     //! イベント
     std::shared_ptr<ratchet::event::EventManager> _event_manager;
     //! UI

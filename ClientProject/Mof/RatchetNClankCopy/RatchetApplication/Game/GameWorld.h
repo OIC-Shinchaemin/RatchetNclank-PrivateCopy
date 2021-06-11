@@ -1,5 +1,5 @@
-#ifndef RATCHET_GAME_WORLD_H
-#define RATCHET_GAME_WORLD_H
+#ifndef RATCHET_GAME_GAME_WORLD_H
+#define RATCHET_GAME_GAME_WORLD_H
 
 
 #include <memory>
@@ -9,6 +9,7 @@
 
 
 namespace ratchet {
+namespace game {
 class GameWorld {
     using ActorPtr = std::shared_ptr<ratchet::Actor>;
 private:
@@ -28,7 +29,7 @@ public:
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    ratchet::GameWorld::ActorPtr GetActor(uint32_t index) const;
+    ratchet::game::GameWorld::ActorPtr GetActor(uint32_t index) const;
     /// <summary>
     /// ’Ç‰Á
     /// </summary>
@@ -63,4 +64,5 @@ public:
     void Reset(void);
 };
 }
-#endif // !RATCHET_GAME_WORLD_H
+}
+#endif // !RATCHET_GAME_GAME_WORLD_H

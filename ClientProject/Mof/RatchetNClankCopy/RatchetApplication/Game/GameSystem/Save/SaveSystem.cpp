@@ -4,20 +4,20 @@
 #include "Base/Core/Utility.h"
 
 
-ratchet::SaveSystem::SaveSystem() :
+ratchet::game::gamesystem::save::SaveSystem::SaveSystem() :
     _path("../Resource/save/savedata.json") {
 }
 
-ratchet::SaveSystem::~SaveSystem() {
+ratchet::game::gamesystem::save::SaveSystem::~SaveSystem() {
 }
 
-bool ratchet::SaveSystem::Fetch(ratchet::SaveData& out) {
+bool ratchet::game::gamesystem::save::SaveSystem::Fetch(ratchet::game::gamesystem::save::SaveData& out) {
     rapidjson::Document document;
     if (!ut::ParseJsonDocument(_path.c_str(), document)) {
         return false;
     } // if
 
-    auto savedata_param = ratchet::SaveDataParam();
+    auto savedata_param = ratchet::game::gamesystem::save::SaveDataParam();
     if (document.HasMember("param")) {
         const auto& param = document["param"];
         if (param.HasMember("money")) {
@@ -45,7 +45,7 @@ bool ratchet::SaveSystem::Fetch(ratchet::SaveData& out) {
     return true;
 }
 
-bool ratchet::SaveSystem::Save(const ratchet::SaveDataParam& param) {
+bool ratchet::game::gamesystem::save::SaveSystem::Save(const ratchet::game::gamesystem::save::SaveDataParam& param) {
     rapidjson::Document document(rapidjson::Type::kObjectType);
 
     rapidjson::Value work(rapidjson::Type::kObjectType);

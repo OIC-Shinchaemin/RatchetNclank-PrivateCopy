@@ -9,7 +9,7 @@ ratchet::factory::builder::scene::TitleSceneBuilder::TitleSceneBuilder() :
 ratchet::factory::builder::scene::TitleSceneBuilder::~TitleSceneBuilder() {
 }
 
-void ratchet::factory::builder::scene::TitleSceneBuilder::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::factory::builder::scene::TitleSceneBuilder::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
     this->_game = ptr;
 }
 

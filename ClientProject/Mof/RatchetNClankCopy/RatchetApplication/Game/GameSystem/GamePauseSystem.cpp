@@ -3,16 +3,16 @@
 #include "../../UI/GamePauseSystemMenu.h"
 
 
-ratchet::GamePauseSystem::GamePauseSystem() :
+ratchet::game::gamesystem::GamePauseSystem::GamePauseSystem() :
     _infomation(),
     _info_subject(),
     _ui_creator(typeid(decltype(_ui_creator)).name()) {
 }
 
-ratchet::GamePauseSystem::~GamePauseSystem() {
+ratchet::game::gamesystem::GamePauseSystem::~GamePauseSystem() {
 }
 
-void ratchet::GamePauseSystem::OnNotify(bool flag) {
+void ratchet::game::gamesystem::GamePauseSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     if (flag) {
         _infomation.Reset();
@@ -23,29 +23,29 @@ void ratchet::GamePauseSystem::OnNotify(bool flag) {
     } // if
 }
 
-base::core::Observable<const ratchet::GamePauseSystem::Info&>* ratchet::GamePauseSystem::GetInfoSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::GamePauseSystem::Info&>* ratchet::game::gamesystem::GamePauseSystem::GetInfoSubject(void) {
     return &this->_info_subject;
 }
 
-void ratchet::GamePauseSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
+void ratchet::game::gamesystem::GamePauseSystem::AddItem(const std::shared_ptr<ElemType>& elem) {
     _infomation.items = &_items;
     _items.push_back(elem);
     _info_subject.Notify(_infomation);
 }
 
-bool ratchet::GamePauseSystem::IsActive(void) const {
+bool ratchet::game::gamesystem::GamePauseSystem::IsActive(void) const {
     return this->_infomation.enable;
 }
 
-void ratchet::GamePauseSystem::Inactive(void) {
+void ratchet::game::gamesystem::GamePauseSystem::Inactive(void) {
     this->_infomation.enable = false;
 }
 
-void ratchet::GamePauseSystem::Clear(void) {
+void ratchet::game::gamesystem::GamePauseSystem::Clear(void) {
     _items.clear();
 }
 
-bool ratchet::GamePauseSystem::Initialize(void) {
+bool ratchet::game::gamesystem::GamePauseSystem::Initialize(void) {
     _infomation.items = &_items;
     auto menu = _ui_creator.Create(super::GetUICanvas());
     menu->SetResourceManager(super::GetResource());
@@ -54,7 +54,7 @@ bool ratchet::GamePauseSystem::Initialize(void) {
     return true;
 }
 
-bool ratchet::GamePauseSystem::Input(void) {
+bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
         if (_infomation.index.has_value()) {
             _infomation.index.value()++;
@@ -91,7 +91,7 @@ bool ratchet::GamePauseSystem::Input(void) {
     return true;
 }
 
-bool ratchet::GamePauseSystem::Update(float delta_time) {
+bool ratchet::game::gamesystem::GamePauseSystem::Update(float delta_time) {
     if (!_infomation.enable) {
         return false;
     } // if
@@ -114,30 +114,30 @@ bool ratchet::GamePauseSystem::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::GamePauseSystem::Release(void) {
+bool ratchet::game::gamesystem::GamePauseSystem::Release(void) {
     _items.clear();
     _info_subject.Clear();
     return true;
 }
 
-ratchet::GamePauseSystemItem::GamePauseSystemItem() {
+ratchet::game::gamesystem::GamePauseSystemItem::GamePauseSystemItem() {
 }
 
-ratchet::GamePauseSystemItem::GamePauseSystemItem(std::function<bool(void)> lambda) :
+ratchet::game::gamesystem::GamePauseSystemItem::GamePauseSystemItem(std::function<bool(void)> lambda) :
     _on_enter(lambda) {
 }
 
-ratchet::GamePauseSystemItem::~GamePauseSystemItem() {
+ratchet::game::gamesystem::GamePauseSystemItem::~GamePauseSystemItem() {
 }
 
-void ratchet::GamePauseSystemItem::SetText(const char* text) {
+void ratchet::game::gamesystem::GamePauseSystemItem::SetText(const char* text) {
     this->_text = text;
 }
 
-std::string ratchet::GamePauseSystemItem::GetText(void) const {
+std::string ratchet::game::gamesystem::GamePauseSystemItem::GetText(void) const {
     return this->_text;
 }
 
-bool ratchet::GamePauseSystemItem::Execute(void) {
+bool ratchet::game::gamesystem::GamePauseSystemItem::Execute(void) {
     return _on_enter();
 }

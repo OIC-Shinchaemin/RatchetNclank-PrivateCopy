@@ -64,7 +64,7 @@ ratchet::scene::TitleScene::~TitleScene() {
 void ratchet::scene::TitleScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
 }
 
-void ratchet::scene::TitleScene::OnNotify(const ratchet::OptionSystem::Info& info) {
+void ratchet::scene::TitleScene::OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) {
     if (info.enter) {
         this->_state = super::State::Pause;
     } // if
@@ -73,7 +73,7 @@ void ratchet::scene::TitleScene::OnNotify(const ratchet::OptionSystem::Info& inf
     } // if
 }
 
-void ratchet::scene::TitleScene::SetGameManager(std::weak_ptr<ratchet::GameManager> ptr) {
+void ratchet::scene::TitleScene::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
     this->_game = ptr;
 }
 
@@ -133,13 +133,13 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             _option_system_subject.AddObserver(option_system);
             option_system->GetTitleMenuSubject()->AddObserver(menu);
 
-            auto item0 = std::make_shared<ratchet::OptionSystemItem>([&]() {
+            auto item0 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
                 _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kDescriptionScene, ""));
                 return true;
             });
             item0->SetText("ëÄçÏê‡ñæ");
 
-            auto item1 = std::make_shared<ratchet::OptionSystemItem>([&]() {
+            auto item1 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
                 _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
                 return true;
             });

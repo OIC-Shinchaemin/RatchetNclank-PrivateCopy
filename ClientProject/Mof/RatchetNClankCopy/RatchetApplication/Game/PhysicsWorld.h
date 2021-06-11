@@ -1,5 +1,5 @@
-#ifndef RATCHET_PHYSIC_WORLD_H
-#define RATCHET_PHYSIC_WORLD_H
+#ifndef RATCHET_GAME_PHYSIC_WORLD_H
+#define RATCHET_GAME_PHYSIC_WORLD_H
 
 
 #include <memory>
@@ -12,6 +12,7 @@
 
 
 namespace ratchet {
+namespace game {
 class PhysicsWorld {
     using ActorPtr = std::shared_ptr<ratchet::Actor>;
     using ObjectPtr = std::shared_ptr<ratchet::CollisionComponent>;
@@ -74,4 +75,5 @@ public:
     void Reset(void);
 };
 }
-#endif // !RATCHET_PHYSIC_WORLD_H
+}
+#endif // !RATCHET_GAME_PHYSIC_WORLD_H

@@ -38,7 +38,7 @@ ratchet::ui::QuickChangeMenu::QuickChangeMenu(const char* name) :
     } // for
 }
 
-void ratchet::ui::QuickChangeMenu::OnNotify(const ratchet::QuickChangeSystem::Info& info) {
+void ratchet::ui::QuickChangeMenu::OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) {
     super::Notify(shared_from_this(), "Enable");
 
     this->SetColor(info.color);

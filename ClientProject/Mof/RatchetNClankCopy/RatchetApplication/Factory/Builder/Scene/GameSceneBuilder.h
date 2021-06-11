@@ -19,7 +19,7 @@ class GameSceneBuilder : public ratchet::factory::builder::scene::SceneBuilder {
     using super = ratchet::factory::builder::scene::SceneBuilder;
 private:
     //! ゲーム
-    std::weak_ptr<ratchet::GameManager> _game;
+    std::weak_ptr<ratchet::game::GameManager> _game;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event;
 public:
@@ -35,7 +35,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr);
     /// <summary>
     /// セッター
     /// </summary>

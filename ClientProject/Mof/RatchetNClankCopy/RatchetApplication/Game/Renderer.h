@@ -1,5 +1,5 @@
-#ifndef RATCHET_RENDERER_H
-#define RATCHET_RENDERER_H
+#ifndef RATCHET_GAME_RENDERER_H
+#define RATCHET_GAME_RENDERER_H
 
 
 #include <memory>
@@ -11,6 +11,7 @@
 
 
 namespace ratchet {
+namespace game {
 class Renderer {
     //! ƒLƒƒƒ‰ƒNƒ^
     std::vector<std::shared_ptr<ratchet::Actor>> _actors;
@@ -50,4 +51,5 @@ public:
     void Reset(void);
 };
 }
-#endif // !RATCHET_RENDERER_H
+}
+#endif // !RATCHET_GAME_RENDERER_H

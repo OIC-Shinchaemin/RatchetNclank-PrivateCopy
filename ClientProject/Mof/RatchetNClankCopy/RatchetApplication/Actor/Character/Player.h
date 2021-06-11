@@ -19,7 +19,7 @@
 namespace ratchet {
 class Player : public ratchet::Character,
     public base::core::Observer<std::shared_ptr<ratchet::Weapon>>,
-    public base::core::Observer<const ratchet::QuickChangeSystem::Info&> {
+    public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> {
     using super = ratchet::Character;
     struct ObservablePair {
         std::string name;
@@ -49,7 +49,7 @@ private:
     //! 通知用
     ObservablePair _quick_change_subject;
     //! 通知用
-    base::core::Observable<const ratchet::GameQuest&> _quest_subject;
+    base::core::Observable<const ratchet::game::gamesystem::GameQuest&> _quest_subject;
     //! 通知用
     std::unordered_map<std::string, ObservablePair* >_notificationable_subject_map;
     //! 通知用
@@ -72,12 +72,12 @@ public:
     /// 通知
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(const ratchet::QuickChangeSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) override;
     /// <summary>
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    //virtual void OnNotify(const ratchet::ShopSystem::Info& info) override;
+    //virtual void OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -95,7 +95,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const ratchet::GameQuest&>* GetQuestSubject(void);
+    base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>

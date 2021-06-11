@@ -1,5 +1,5 @@
-#ifndef RATCHET_HELP_DESK_H
-#define RATCHET_HELP_DESK_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_HELP_DESK_H
+#define RATCHET_GAME_GAME_SYSTEM_HELP_DESK_H
 
 
 #include "Base/Core/Observer.h"
@@ -15,9 +15,12 @@
 
 
 namespace ratchet {
+namespace game {
+namespace gamesystem {
+
 class HelpDesk :
-    public std::enable_shared_from_this<ratchet::HelpDesk>,
-    public base::core::Observer<const ratchet::GameQuest&> {
+    public std::enable_shared_from_this<ratchet::game::gamesystem::HelpDesk>,
+    public base::core::Observer<const ratchet::game::gamesystem::GameQuest&> {
 public:
     struct Info {
         std::string text;
@@ -28,9 +31,9 @@ private:
     //! 情報
     Info _prev_info;
     //! 達成したいこと
-    //ratchet::GameQuest _current_quest;
+    //ratchet::game::gamesystem::GameQuest _current_quest;
     //! 通知用
-    base::core::Observable<const ratchet::HelpDesk::Info&> _subject;
+    base::core::Observable<const ratchet::game::gamesystem::HelpDesk::Info&> _subject;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -48,7 +51,7 @@ public:
     /// 通知
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const ratchet::GameQuest& quest) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::GameQuest& quest) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -71,4 +74,6 @@ public:
     bool Release(void);
 };
 }
-#endif // !RATCHET_HELP_DESK_H
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_HELP_DESK_H

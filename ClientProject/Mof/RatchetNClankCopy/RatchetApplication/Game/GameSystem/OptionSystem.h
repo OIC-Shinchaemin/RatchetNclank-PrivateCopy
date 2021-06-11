@@ -1,5 +1,5 @@
-#ifndef RATCHET_OPTION_SYSTEM_H
-#define RATCHET_OPTION_SYSTEM_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_OPTION_SYSTEM_H
+#define RATCHET_GAME_GAME_SYSTEM_OPTION_SYSTEM_H
 
 
 #include "GameSystem.h"
@@ -10,8 +10,11 @@
 
 
 namespace ratchet {
-class OptionSystemItem : public std::enable_shared_from_this<ratchet::OptionSystemItem> {
-    using this_type = ratchet::OptionSystemItem;
+namespace game {
+namespace gamesystem {
+
+class OptionSystemItem : public std::enable_shared_from_this<ratchet::game::gamesystem::OptionSystemItem> {
+    using this_type = ratchet::game::gamesystem::OptionSystemItem;
 private:
     //! テキスト
     std::string _text;
@@ -50,10 +53,10 @@ public:
 };
 
 
-class OptionSystem : public ratchet::GameSystem {
-    using super = ratchet::GameSystem;
-    using this_type = ratchet::OptionSystem;
-    using ElemType = ratchet::OptionSystemItem;
+class OptionSystem : public ratchet::game::gamesystem::GameSystem {
+    using super = ratchet::game::gamesystem::GameSystem;
+    using this_type = ratchet::game::gamesystem::OptionSystem;
+    using ElemType = ratchet::game::gamesystem::OptionSystemItem;
 public:
     struct Info {
         bool enter = false;
@@ -144,4 +147,6 @@ public:
     bool Release(void);
 };
 }
-#endif // !RATCHET_OPTION_SYSTEM_H
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_OPTION_SYSTEM_H

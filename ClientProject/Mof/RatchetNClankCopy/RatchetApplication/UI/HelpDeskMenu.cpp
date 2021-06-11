@@ -6,7 +6,7 @@ ratchet::ui::HelpDeskMenu::HelpDeskMenu(const char* name) :
     super::_position = Mof::CVector2(10.0f, 10.0f);
 }
 
-void ratchet::ui::HelpDeskMenu::OnNotify(const ratchet::HelpDesk::Info& info) {
+void ratchet::ui::HelpDeskMenu::OnNotify(const ratchet::game::gamesystem::HelpDesk::Info& info) {
     super::Notify(shared_from_this(), "Enable");
     _infomation = info;
 }

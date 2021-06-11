@@ -109,13 +109,13 @@ bool ratchet::EnemyComponent::Update(float delta_time) {
             bool in_camera_range = super::GetOwner()->InCameraRange();
             if (in_camera_range) {
                 auto owner = std::dynamic_pointer_cast<ratchet::Enemy>(super::GetOwner());
-                owner->GetQuestSubject()->Notify(ratchet::GameQuest::GameQuest(ratchet::GameQuest::Type::EnemyDestroy));
+                owner->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::GameQuest(ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy));
                 velocity_com->SetSleep(false);
                 velocity_com->SetGravity(1.0f);
             } // if
             else {
                 auto owner = std::dynamic_pointer_cast<ratchet::Enemy>(super::GetOwner());
-                owner->GetQuestSubject()->Notify(ratchet::GameQuest::GameQuest(ratchet::GameQuest::Type::ToFront));
+                owner->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront));
                 velocity_com->SetSleep(true);
                 velocity_com->SetGravity(0.0f);
             } // else

@@ -40,7 +40,7 @@ void ratchet::Player::OnNotify(std::shared_ptr<ratchet::Weapon> change) {
     _current_weapon = change;
 }
 
-void ratchet::Player::OnNotify(const ratchet::QuickChangeSystem::Info& info) {
+void ratchet::Player::OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) {
     if (info.color.a <= 0.0f) {
         super::Activate();
     } // if
@@ -49,7 +49,7 @@ void ratchet::Player::OnNotify(const ratchet::QuickChangeSystem::Info& info) {
     } // else if
 }
 /*
-void ratchet::Player::OnNotify(const ratchet::ShopSystem::Info& info) {
+void ratchet::Player::OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) {
     if (info.close) {
         this->PopNotificationableSubject();
     } // if
@@ -63,7 +63,7 @@ base::core::Observable<bool>* ratchet::Player::GetQuickChangeSubject(void) {
     return &this->_quick_change_subject.subject;
 }
 
-base::core::Observable<const ratchet::GameQuest&>* ratchet::Player::GetQuestSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::Player::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 

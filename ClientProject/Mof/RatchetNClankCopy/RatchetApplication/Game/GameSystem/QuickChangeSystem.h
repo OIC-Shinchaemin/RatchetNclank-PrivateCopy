@@ -1,5 +1,5 @@
-#ifndef RATCHET_QUICK_CHANGE_SYSTEM_H
-#define RATCHET_QUICK_CHANGE_SYSTEM_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_QUICK_CHANGE_SYSTEM_H
+#define RATCHET_GAME_GAME_SYSTEM_QUICK_CHANGE_SYSTEM_H
 
 
 #include "GameSystem.h"
@@ -20,6 +20,9 @@
 
 
 namespace ratchet {
+namespace game {
+namespace gamesystem {
+
 class QuickChangeItem {
 private:
     //! 所有
@@ -39,9 +42,9 @@ public:
 };
 
 class QuickChangeSystem :
-    public ratchet::GameSystem {
-    using super = ratchet::GameSystem;
-    using This = ratchet::QuickChangeSystem;
+    public ratchet::game::gamesystem::GameSystem {
+    using super = ratchet::game::gamesystem::GameSystem;
+    using This = ratchet::game::gamesystem::QuickChangeSystem;
     using Observable = base::core::Observable<Mof::CVector4>;
     enum class State {
         Enter,
@@ -68,7 +71,7 @@ private:
     //! 武器
     std::vector<int> _angles;
     //! アイテム
-    std::unordered_map<int, ratchet::QuickChangeItem> _items;
+    std::unordered_map<int, ratchet::game::gamesystem::QuickChangeItem> _items;
     //! 通知用
     base::core::Observable<const std::string&> _current;
     //! リソース
@@ -132,13 +135,13 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddInfoObserver(const std::shared_ptr<base::core::Observer<const ratchet::QuickChangeSystem::Info&>>& ptr);
+    void AddInfoObserver(const std::shared_ptr<base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&>>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="weapon_system"></param>
     /// <returns></returns>
-    bool Initialize(const std::shared_ptr<ratchet::WeaponSystem>& weapon_system);
+    bool Initialize(const std::shared_ptr<ratchet::game::gamesystem::WeaponSystem>& weapon_system);
     /// <summary>
     /// 更新
     /// </summary>
@@ -153,4 +156,6 @@ public:
     bool Release(void);
 };
 }
-#endif // !RATCHET_QUICK_CHANGE_SYSTEM_H
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_QUICK_CHANGE_SYSTEM_H

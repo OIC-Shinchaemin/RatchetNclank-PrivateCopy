@@ -38,7 +38,7 @@ private:
     //! 数
     int _item_count;
     //! 通知用
-    base::core::Observable<const ratchet::ChargeInfo&> _weapon_system_subject;
+    base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&> _weapon_system_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -59,7 +59,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const ratchet::ChargeInfo&>* GetWeaponSystemSubject(void);
+    base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&>* GetWeaponSystemSubject(void);
     /// <summary>
     /// デリート
     /// </summary>

@@ -17,11 +17,11 @@
 
 namespace ratchet {
 namespace ui {
-class HelpDeskMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::HelpDesk::Info&> {
+class HelpDeskMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::game::gamesystem::HelpDesk::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 表示文字
-    ratchet::HelpDesk::Info _infomation;
+    ratchet::game::gamesystem::HelpDesk::Info _infomation;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
 public:
@@ -34,7 +34,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::HelpDesk::Info& info);
+    virtual void OnNotify(const ratchet::game::gamesystem::HelpDesk::Info& info);
     /// <summary>
     /// セッター
     /// </summary>

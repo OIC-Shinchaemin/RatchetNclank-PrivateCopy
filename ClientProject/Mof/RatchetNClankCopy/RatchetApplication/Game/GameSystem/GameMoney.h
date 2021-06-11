@@ -1,5 +1,5 @@
-#ifndef RATCHET_GAME_MONEY_H
-#define RATCHET_GAME_MONEY_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_GAME_MONEY_H
+#define RATCHET_GAME_GAME_SYSTEM_GAME_MONEY_H
 
 
 #include <memory>
@@ -15,7 +15,10 @@
 
 
 namespace ratchet {
-class GameMoney : public std::enable_shared_from_this<ratchet::GameMoney>, public base::core::Observer<int> {
+namespace game {
+namespace gamesystem {
+
+class GameMoney : public std::enable_shared_from_this<ratchet::game::gamesystem::GameMoney>, public base::core::Observer<int> {
 private:
     //! Ç®ã‡
     std::uint32_t _value;
@@ -60,7 +63,7 @@ public:
     /// </summary>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool Load(ratchet::SaveData& in);
+    bool Load(ratchet::game::gamesystem::save::SaveData& in);
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -80,4 +83,6 @@ public:
     bool Release(void);
 };
 }
-#endif // !RATCHET_GAME_MONEY_H
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_GAME_MONEY_H

@@ -1,5 +1,5 @@
-#ifndef RATCHET_WEAPON_SYSTEM_H
-#define RATCHET_WEAPON_SYSTEM_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_WEAPON_SYSTEM_H
+#define RATCHET_GAME_GAME_SYSTEM_WEAPON_SYSTEM_H
 
 
 #include "Base/Core/Observer.h"
@@ -19,6 +19,8 @@
 
 
 namespace ratchet {
+namespace game {
+namespace gamesystem {
 struct ChargeInfo {
     //! 武器
     std::string type;
@@ -27,7 +29,7 @@ struct ChargeInfo {
 };
 class WeaponSystem : 
     public base::core::Observer<const std::string&>,
-    public base::core::Observer<const ratchet::ChargeInfo&>
+    public base::core::Observer<const ratchet::game::gamesystem::ChargeInfo&>
 {
     using Pair = std::pair<std::string, std::shared_ptr<ratchet::Mechanical>>;
 private:
@@ -42,7 +44,7 @@ private:
     //! マップ
     std::unordered_map<std::string, std::string> _builder_name_map;
     //! セーブデータ
-    ratchet::SaveData _save_data;
+    ratchet::game::gamesystem::save::SaveData _save_data;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -65,7 +67,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(const ratchet::ChargeInfo& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::ChargeInfo& info) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -87,7 +89,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::vector<ratchet::WeaponSystem::Pair>& GetWeaponMap(void) const;
+    const std::vector<ratchet::game::gamesystem::WeaponSystem::Pair>& GetWeaponMap(void) const;
     /// <summary>
     /// 追加
     /// </summary>
@@ -103,7 +105,7 @@ public:
     /// </summary>
     /// <param name="in"></param>
     /// <returns></returns>
-    bool Load(ratchet::SaveData& in);
+    bool Load(ratchet::game::gamesystem::save::SaveData& in);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -124,4 +126,6 @@ public:
     std::shared_ptr<ratchet::Mechanical>GetMechanicalWeapon(const std::string& name);
 };
 }
-#endif // !RATCHET_WEAPON_SYSTEM_H
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_WEAPON_SYSTEM_H

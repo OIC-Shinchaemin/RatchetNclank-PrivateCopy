@@ -34,7 +34,7 @@ private:
     //! 通知用
     base::core::Observable<const ratchet::camera::CameraController::CameraInfo&> _camera_subject;
     //! 通知用
-    base::core::Observable<const ratchet::GameQuest&> _quest_subject;
+    base::core::Observable<const ratchet::game::gamesystem::GameQuest&> _quest_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -66,7 +66,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const ratchet::GameQuest&>* GetQuestSubject(void);
+    base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* GetQuestSubject(void);
     /// <summary>
     /// 判定
     /// </summary>

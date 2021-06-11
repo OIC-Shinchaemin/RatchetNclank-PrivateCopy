@@ -76,11 +76,11 @@ public:
     virtual bool Render(void) override;
 };
 class OptionSystemMenu : public base::ui::UIPanel,
-    public base::core::Observer<const ratchet::OptionSystem::Info&> {
+    public base::core::Observer<const ratchet::game::gamesystem::OptionSystem::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 情報
-    ratchet::OptionSystem::Info _infomation;
+    ratchet::game::gamesystem::OptionSystem::Info _infomation;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -102,7 +102,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::OptionSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -117,7 +117,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="in"></param>
-    void AddItem(const ratchet::OptionSystemItem& in);
+    void AddItem(const ratchet::game::gamesystem::OptionSystemItem& in);
     /// <summary>
     /// 初期化
     /// </summary>

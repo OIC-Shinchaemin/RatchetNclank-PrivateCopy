@@ -1,22 +1,22 @@
 #include "GameQuest.h"
 
 
-ratchet::GameQuest::GameQuest() :
+ratchet::game::gamesystem::GameQuest::GameQuest() :
     _type() {
 }
 
-ratchet::GameQuest::GameQuest(ratchet::GameQuest::Type type) :
+ratchet::game::gamesystem::GameQuest::GameQuest(ratchet::game::gamesystem::GameQuest::Type type) :
     _type(type) {
 }
 
-bool ratchet::GameQuest::operator==(const ratchet::GameQuest& obj) const {
+bool ratchet::game::gamesystem::GameQuest::operator==(const ratchet::game::gamesystem::GameQuest& obj) const {
     return this->_type == obj._type;
 }
 
-bool ratchet::GameQuest::IsEqual(const ratchet::GameQuest& obj) const {
+bool ratchet::game::gamesystem::GameQuest::IsEqual(const ratchet::game::gamesystem::GameQuest& obj) const {
     return *this == obj;
 }
 
-ratchet::GameQuest::Type ratchet::GameQuest::GetType(void) const {
+ratchet::game::gamesystem::GameQuest::Type ratchet::game::gamesystem::GameQuest::GetType(void) const {
     return this->_type;
 }

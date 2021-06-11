@@ -33,7 +33,7 @@ class SceneManager : public std::enable_shared_from_this<ratchet::scene::SceneMa
         //! UI
         std::weak_ptr<base::ui::UICanvas> ui_canvas;
         //! ゲーム
-        std::weak_ptr<ratchet::GameManager> game_manager;
+        std::weak_ptr<ratchet::game::GameManager> game_manager;
         //! ゲームイベント
         std::weak_ptr<ratchet::event::EventManager> event_manager;
     };
@@ -121,7 +121,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr);
     /// <summary>
     /// セッター
     /// </summary>

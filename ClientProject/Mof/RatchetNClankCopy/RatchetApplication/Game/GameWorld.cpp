@@ -1,30 +1,30 @@
 #include "GameWorld.h"
 
 
-ratchet::GameWorld::GameWorld() :
+ratchet::game::GameWorld::GameWorld() :
     _actors() {
     _actors.reserve(64);
 }
 
-ratchet::GameWorld::~GameWorld() {
+ratchet::game::GameWorld::~GameWorld() {
 }
 
-ratchet::GameWorld::ActorPtr ratchet::GameWorld::GetActor(uint32_t index) const {
+ratchet::game::GameWorld::ActorPtr ratchet::game::GameWorld::GetActor(uint32_t index) const {
     if (_actors.size() <= index) {
         return nullptr;
     } // if
     return _actors.at(index);
 }
 
-void ratchet::GameWorld::AddActor(const ActorPtr& actor) {
+void ratchet::game::GameWorld::AddActor(const ActorPtr& actor) {
     _actors.emplace_back(actor);
 }
 
-void ratchet::GameWorld::RemoveActor(const ActorPtr& actor) {
+void ratchet::game::GameWorld::RemoveActor(const ActorPtr& actor) {
     ut::SwapPopback(_actors, actor);
 }
 
-bool ratchet::GameWorld::Input(void) {
+bool ratchet::game::GameWorld::Input(void) {
     // input
     for (auto& actor : _actors) {
         auto state = actor->GetState();
@@ -35,7 +35,7 @@ bool ratchet::GameWorld::Input(void) {
     return true;
 }
 
-bool ratchet::GameWorld::Update(float delta_time) {
+bool ratchet::game::GameWorld::Update(float delta_time) {
     // update
     for (auto& actor : _actors) {
         auto state = actor->GetState();
@@ -48,9 +48,9 @@ bool ratchet::GameWorld::Update(float delta_time) {
     return true;
 }
 
-void ratchet::GameWorld::UpdateDebug(void) {
+void ratchet::game::GameWorld::UpdateDebug(void) {
 }
 
-void ratchet::GameWorld::Reset(void) {
+void ratchet::game::GameWorld::Reset(void) {
     _actors.clear();
 }

@@ -21,7 +21,7 @@
 namespace ratchet {
 namespace scene {
 class TitleScene : public ratchet::scene::Scene,
-    public base::core::Observer<const ratchet::OptionSystem::Info&> {
+    public base::core::Observer<const ratchet::game::gamesystem::OptionSystem::Info&> {
     using super = ratchet::scene::Scene;
 private:
     //! ステージ
@@ -37,7 +37,7 @@ private:
     //! 通知用
     base::core::Observable<bool> _title_menu_subject;
     //! ゲーム
-    std::weak_ptr<ratchet::GameManager> _game;
+    std::weak_ptr<ratchet::game::GameManager> _game;
     //! UI地蔵
     ratchet::UICreator<ratchet::ui::TitleInfoMenu> _ui_creator;
 protected:
@@ -84,12 +84,12 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const ratchet::OptionSystem::Info& info) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameManager(std::weak_ptr<ratchet::GameManager> ptr);
+    void SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -1,5 +1,5 @@
-#ifndef RATCHET_SAVE_DATA_H
-#define RATCHET_SAVE_DATA_H
+#ifndef RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_DATA_H
+#define RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_DATA_H
 
 
 #include <cstdint>
@@ -8,6 +8,9 @@
 
 
 namespace ratchet {
+namespace game {
+namespace gamesystem {
+namespace save{
 struct SaveDataParam {
     //! 所持
     int money;
@@ -23,7 +26,7 @@ struct SaveDataParam {
 };
 class SaveData {
 private:
-    ratchet::SaveDataParam _param;
+    ratchet::game::gamesystem::save::SaveDataParam _param;
 public:
     /// <summary>
     /// コンストラクタ
@@ -50,4 +53,7 @@ public:
     const std::vector<std::string>& GetAvailableMechanicalWeaponsAddress(void);
 };
 }
-#endif // !RATCHET_SAVE_DATA_H
+}
+}
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_DATA_H

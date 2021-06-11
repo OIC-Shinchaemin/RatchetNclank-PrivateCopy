@@ -4,27 +4,27 @@
 #include "../Component/MeshComponent.h"
 
 
-ratchet::Renderer::Renderer() :
+ratchet::game::Renderer::Renderer() :
     _actors() {
     _actors.reserve(64);
     _enable_actors.reserve(64);
 }
 
-ratchet::Renderer::~Renderer() {
+ratchet::game::Renderer::~Renderer() {
 }
 
-void ratchet::Renderer::AddElement(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::game::Renderer::AddElement(const std::shared_ptr<ratchet::Actor>& ptr) {
     _actors.push_back(ptr);
     _enable_actors.push_back(ptr);
 }
 
-void ratchet::Renderer::RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::game::Renderer::RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr) {
     ut::SwapPopback(_actors, ptr);
     ut::SwapPopback(_enable_actors, ptr);
     ut::SwapPopback(_disable_actors, ptr);
 }
 
-bool ratchet::Renderer::Render(void) {
+bool ratchet::game::Renderer::Render(void) {
     for (auto ptr : _enable_actors) {
         // •`‰æ‚µ‚È‚¢”»’è
         if (!ptr->Render()) {
@@ -41,7 +41,7 @@ bool ratchet::Renderer::Render(void) {
     return true;
 }
 
-void ratchet::Renderer::Reset(void) {
+void ratchet::game::Renderer::Reset(void) {
     _actors.clear();
     _enable_actors.clear();
     _disable_actors.clear();
