@@ -63,7 +63,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetActor(const std::shared_ptr<ratchet::Actor>& ptr);
+    virtual void SetActor(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

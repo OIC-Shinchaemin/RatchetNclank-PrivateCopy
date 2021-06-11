@@ -27,7 +27,7 @@ ratchet::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
 ratchet::EnemyComponent::~EnemyComponent() {
 }
 
-void ratchet::EnemyComponent::SetTarget(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::EnemyComponent::SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_target = ptr;
 }
 
@@ -35,7 +35,7 @@ std::string ratchet::EnemyComponent::GetType(void) const {
     return "EnemyComponent";
 }
 
-std::weak_ptr<ratchet::Actor> ratchet::EnemyComponent::GetTarget(void) const {
+std::weak_ptr<ratchet::actor::Actor> ratchet::EnemyComponent::GetTarget(void) const {
     return this->_target;
 }
 
@@ -108,13 +108,13 @@ bool ratchet::EnemyComponent::Update(float delta_time) {
         if (auto velocity_com = _velocity_com.lock()) {
             bool in_camera_range = super::GetOwner()->InCameraRange();
             if (in_camera_range) {
-                auto owner = std::dynamic_pointer_cast<ratchet::Enemy>(super::GetOwner());
+                auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Enemy>(super::GetOwner());
                 owner->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::GameQuest(ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy));
                 velocity_com->SetSleep(false);
                 velocity_com->SetGravity(1.0f);
             } // if
             else {
-                auto owner = std::dynamic_pointer_cast<ratchet::Enemy>(super::GetOwner());
+                auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Enemy>(super::GetOwner());
                 owner->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront));
                 velocity_com->SetSleep(true);
                 velocity_com->SetGravity(0.0f);

@@ -32,7 +32,7 @@ ratchet::OmniWrenchThrowedComponent::OmniWrenchThrowedComponent(const OmniWrench
 ratchet::OmniWrenchThrowedComponent::~OmniWrenchThrowedComponent() {
 }
 
-void ratchet::OmniWrenchThrowedComponent::SetWeaponOwner(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::OmniWrenchThrowedComponent::SetWeaponOwner(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_weapon_owner = ptr;
 }
 

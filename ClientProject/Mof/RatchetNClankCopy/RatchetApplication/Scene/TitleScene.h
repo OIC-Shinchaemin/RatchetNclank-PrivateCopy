@@ -31,7 +31,7 @@ private:
     //! カメラコントローラ
     base::core::ServiceLocator<ratchet::camera::CameraController> _camera_controller;
     //! 表示用
-    std::shared_ptr<ratchet::Player> _demo_actor;
+    std::shared_ptr<ratchet::actor::character::Player> _demo_actor;
     //! 通知用
     base::core::Observable<bool> _option_system_subject;
     //! 通知用
@@ -79,7 +79,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) override;
     /// <summary>
     /// 通知イベント
     /// </summary>

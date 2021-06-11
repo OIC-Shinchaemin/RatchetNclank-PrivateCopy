@@ -14,7 +14,7 @@ class IfAwayFromHomeNodeExecutor : public ratchet::behaviour::DecoratorNodeExecu
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<ratchet::Actor> actor;
+        std::weak_ptr<ratchet::actor::Actor> actor;
         //! 型
         std::weak_ptr<ratchet::EnemyComponent> type_com;
     };

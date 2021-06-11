@@ -25,7 +25,7 @@ class PlayerShotAttackComponent : public ratchet::PlayerActionComponent {
     };
 private:
     //! •Ší
-    std::weak_ptr<ratchet::Mechanical> _weapon;
+    std::weak_ptr<ratchet::actor::weapon::Mechanical> _weapon;
     //! “ü—Íî•ñ
     ratchet::PlayerShotAttackComponent::InputInfo _input_info;
     //! ˆÚ“®

@@ -25,7 +25,7 @@ std::optional<Mof::CSphere> ratchet::EnemyMeleeAttackCollisionComponent::GetSphe
     if (_attack_com.expired()) {
         return std::optional<Mof::CSphere>();
     } // if
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto attack_com = _attack_com.lock();

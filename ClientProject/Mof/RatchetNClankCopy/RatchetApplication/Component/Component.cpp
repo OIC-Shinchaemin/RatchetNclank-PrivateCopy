@@ -28,7 +28,7 @@ ratchet::Component::Component(const Component& obj) :
 ratchet::Component::~Component() {
 }
 
-void ratchet::Component::SetOwner(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::Component::SetOwner(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_owner = ptr;
 }
 
@@ -39,7 +39,7 @@ void ratchet::Component::SetParam(const rapidjson::Value& param) {
     this->_priority = param["priority"].GetInt();
 }
 
-std::shared_ptr<ratchet::Actor> ratchet::Component::GetOwner(void) const {
+std::shared_ptr<ratchet::actor::Actor> ratchet::Component::GetOwner(void) const {
     if (auto owner = this->_owner.lock()) {
         return owner;
     } // if

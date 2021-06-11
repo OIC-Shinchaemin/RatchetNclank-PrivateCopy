@@ -14,7 +14,7 @@ private:
     //! ‹–ì
     float _range;
     //! ”F¯
-    std::vector<std::weak_ptr<ratchet::Actor>> _recognized;
+    std::vector<std::weak_ptr<ratchet::actor::Actor>> _recognized;
     //! ƒLƒƒƒ‰
     std::weak_ptr<class PlayerComponent> _player_com;
     //! ƒLƒƒƒ‰
@@ -64,7 +64,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::vector<std::weak_ptr<ratchet::Actor>>& GetRecognized(void) const;
+    const std::vector<std::weak_ptr<ratchet::actor::Actor>>& GetRecognized(void) const;
     /// <summary>
     /// ‰Šú‰»
     /// </summary>

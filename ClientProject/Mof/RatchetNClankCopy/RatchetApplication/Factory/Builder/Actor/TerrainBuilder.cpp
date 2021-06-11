@@ -20,7 +20,7 @@ void ratchet::factory::builder::actor::TerrainBuilder::Release(void) {
 
 void ratchet::factory::builder::actor::TerrainBuilder::Construct(std::any shared_this) {
     super::Construct(shared_this);
-    auto temp = std::any_cast<std::shared_ptr<ratchet::Actor>>(shared_this);
-    auto ptr = std::dynamic_pointer_cast<ratchet::Terrain>(temp);
+    auto temp = std::any_cast<std::shared_ptr<ratchet::actor::Actor>>(shared_this);
+    auto ptr = std::dynamic_pointer_cast<ratchet::actor::terrain::Terrain>(temp);
     ptr->SetResourceManager(_resource);
 }

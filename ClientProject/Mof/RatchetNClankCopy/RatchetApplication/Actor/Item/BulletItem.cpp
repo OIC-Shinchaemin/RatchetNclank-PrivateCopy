@@ -3,24 +3,21 @@
 #include "../../Component/Item/BulletItem/BulletItemComponent.h"
 
 
-ratchet::BulletItem::BulletItem() :
-    super()
-    //,
-    //_money_subject(){
-{  
+ratchet::actor::item::BulletItem::BulletItem() :
+    super() {
 }
 
-ratchet::BulletItem::~BulletItem() {
+ratchet::actor::item::BulletItem::~BulletItem() {
     _weapon_system_subject.Clear();
 }
 
-std::string ratchet::BulletItem::GetTypeName(ratchet::BulletItem::Type type) const {
-    switch (_item_type) 	{
-        case ratchet::BulletItem::Type::BombGlove:
+std::string ratchet::actor::item::BulletItem::GetTypeName(ratchet::actor::item::BulletItem::Type type) const {
+    switch (_item_type) {
+        case ratchet::actor::item::BulletItem::Type::BombGlove:
             return std::string("BombGlove");
-        case ratchet::BulletItem::Type::Pyrocitor:
+        case ratchet::actor::item::BulletItem::Type::Pyrocitor:
             return std::string("Pyrocitor");
-        case ratchet::BulletItem::Type::Blaster:
+        case ratchet::actor::item::BulletItem::Type::Blaster:
             return std::string("Blaster");
         default:
             break;
@@ -28,14 +25,14 @@ std::string ratchet::BulletItem::GetTypeName(ratchet::BulletItem::Type type) con
     return std::string();
 }
 /*
-base::core::Observable<int>* ratchet::BulletItem::GetMoneySubject(void) {
+base::core::Observable<int>* ratchet::actor::item::BulletItem::GetMoneySubject(void) {
     return &this->_money_subject;
 }
 */
-base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&>* ratchet::BulletItem::GetWeaponSystemSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&>* ratchet::actor::item::BulletItem::GetWeaponSystemSubject(void) {
     return &this->_weapon_system_subject;
 }
-void ratchet::BulletItem::End(void) {
+void ratchet::actor::item::BulletItem::End(void) {
     //_money_subject.Notify(1);
     auto info = ratchet::game::gamesystem::ChargeInfo();
     info.size = _item_count;
@@ -44,16 +41,16 @@ void ratchet::BulletItem::End(void) {
     super::End();
 }
 
-bool ratchet::BulletItem::Initialize(ratchet::Actor::Param* param) {
-    auto bulletitem_param = dynamic_cast<ratchet::BulletItem::Param*>(param);
-    
+bool ratchet::actor::item::BulletItem::Initialize(ratchet::actor::Actor::Param* param) {
+    auto bulletitem_param = dynamic_cast<ratchet::actor::item::BulletItem::Param*>(param);
+
     _init_speed = bulletitem_param->speed;
     _init_angle = bulletitem_param->angle;
     _item_count = bulletitem_param->count;
     _item_type = bulletitem_param->type;
 
     super::GetComponent<ratchet::BulletItemComponent>()->SetActorParam(*bulletitem_param);
-    
+
     super::Initialize(param);
     return true;
 }

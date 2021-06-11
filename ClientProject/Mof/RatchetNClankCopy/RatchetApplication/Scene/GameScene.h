@@ -25,9 +25,9 @@ class GameScene : public ratchet::scene::Scene, public base::core::Observer<cons
     using this_type = ratchet::scene::GameScene;
 private:
     //! 追加
-    std::vector<std::shared_ptr<ratchet::Actor>> _created_actors;
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _created_actors;
     //! 削除
-    std::vector<std::shared_ptr<ratchet::Actor>> _delete_actors;
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _delete_actors;
     //! ゲーム
     ratchet::game::GameWorld _game_world;
     //! レンダラー
@@ -50,12 +50,12 @@ private:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddElement(const std::shared_ptr<ratchet::Actor>& ptr);
+    void AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr);
+    void RemoveElement(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// 再初期化
     /// </summary>
@@ -99,7 +99,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) override;
     /// <summary>
     /// 通知イベント
     /// </summary>

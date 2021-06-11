@@ -57,7 +57,7 @@ ratchet::scene::DescriptionScene::DescriptionScene() {
 ratchet::scene::DescriptionScene::~DescriptionScene() {
 }
 
-void ratchet::scene::DescriptionScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::DescriptionScene::OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) {
 }
 
 std::string ratchet::scene::DescriptionScene::GetName(void) {

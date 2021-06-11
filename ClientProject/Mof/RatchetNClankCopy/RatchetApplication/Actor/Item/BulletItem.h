@@ -1,16 +1,18 @@
-#ifndef RATCHET_BULLET_ITEM_H
-#define RATCHET_BULLET_ITEM_H
+#ifndef RATCHET_ACTOR_ITEM_BULLET_ITEM_H
+#define RATCHET_ACTOR_ITEM_BULLET_ITEM_H
 
 
-#include "../../Actor.h"
+#include "../Actor.h"
 
 #include "Base/Core/Observable.h"
 #include "../../Game/GameSystem/WeaponSystem.h"
 
 
 namespace ratchet {
-class BulletItem : public ratchet::Actor {
-    using super = ratchet::Actor;
+namespace actor {
+namespace item {
+class BulletItem : public ratchet::actor::Actor {
+    using super = ratchet::actor::Actor;
 public:
     enum class Type {
         BombGlove,
@@ -53,7 +55,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::string GetTypeName(ratchet::BulletItem::Type type) const;
+    std::string GetTypeName(ratchet::actor::item::BulletItem::Type type) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -70,13 +72,9 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(ratchet::Actor::Param* param) override;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual bool Update(float delta_time) override;
+    virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
 };
 }
-#endif // !RATCHET_BULLET_ITEM_H
+}
+}
+#endif // !RATCHET_ACTOR_ITEM_BULLET_ITEM_H

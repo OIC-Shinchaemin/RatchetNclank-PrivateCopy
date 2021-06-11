@@ -5,13 +5,13 @@
 #include <memory>
 #include <vector>
 
-#include "../Actor.h"
+#include "../Actor/Actor.h"
 
 
 namespace ratchet {
 namespace game {
 class GameWorld {
-    using ActorPtr = std::shared_ptr<ratchet::Actor>;
+    using ActorPtr = std::shared_ptr<ratchet::actor::Actor>;
 private:
     //! èäéù
     std::vector<ActorPtr> _actors;

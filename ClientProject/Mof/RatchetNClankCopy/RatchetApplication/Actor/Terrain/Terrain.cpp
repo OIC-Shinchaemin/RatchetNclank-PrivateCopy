@@ -4,7 +4,7 @@
 #include "../../Factory/Builder/IBuilder.h"
 
 
-ratchet::Terrain::Terrain() :
+ratchet::actor::terrain::Terrain::Terrain() :
     super(),
     _plane(),
     _uv_scroll(),
@@ -13,14 +13,14 @@ ratchet::Terrain::Terrain() :
     _shader_bind() {
 }
 
-ratchet::Terrain::~Terrain() {
+ratchet::actor::terrain::Terrain::~Terrain() {
 }
 
-void ratchet::Terrain::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
+void ratchet::actor::terrain::Terrain::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
     _resource = ptr;
 }
 
-bool ratchet::Terrain::Initialize(ratchet::Actor::Param* param) {
+bool ratchet::actor::terrain::Terrain::Initialize(ratchet::actor::Actor::Param* param) {
     super::Initialize(param);
     _plane = Mof::CGraphicsUtilities::CreatePlaneGeometry(1.0f, 1.0f, 1.0f, 1.0f, true, math::vec3::kZero);
     if (auto resource = _resource.lock()) {
@@ -35,11 +35,11 @@ bool ratchet::Terrain::Initialize(ratchet::Actor::Param* param) {
     return true;
 }
 
-bool ratchet::Terrain::Update(float delta_time) {
+bool ratchet::actor::terrain::Terrain::Update(float delta_time) {
     return false;
 }
 
-bool ratchet::Terrain::Render(void) {
+bool ratchet::actor::terrain::Terrain::Render(void) {
     Mof::CMatrix44 scale, rotate, translate;
     scale.Scaling(super::GetScale(), scale);
     rotate.RotationZXY(math::vec3::kZero);
@@ -55,7 +55,7 @@ bool ratchet::Terrain::Render(void) {
     return true;
 }
 
-bool ratchet::Terrain::Release(void) {
+bool ratchet::actor::terrain::Terrain::Release(void) {
     super::Release();
 
     auto work = _plane->GetMaterial()->GetTextureArray();

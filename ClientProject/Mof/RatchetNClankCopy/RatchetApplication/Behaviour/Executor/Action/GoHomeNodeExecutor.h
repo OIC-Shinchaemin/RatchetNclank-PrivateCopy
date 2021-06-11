@@ -17,7 +17,7 @@ class GoHomeNodeExecutor : public ratchet::behaviour::ActionNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<ratchet::Actor> actor;
+        std::weak_ptr<ratchet::actor::Actor> actor;
         //! 型
         std::weak_ptr<ratchet::EnemyComponent> type_com;
         //! 状態

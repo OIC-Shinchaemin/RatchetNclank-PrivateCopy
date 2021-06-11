@@ -12,9 +12,9 @@ class NanotechItemComponent : public ratchet::UpdateComponent {
     using super = ratchet::UpdateComponent;
 private:
     //! アクターパラメータ
-    ratchet::NanotechItem::Param _param;
+    ratchet::actor::item::NanotechItem::Param _param;
     //! 移動先
-    std::weak_ptr<ratchet::Actor> _player;
+    std::weak_ptr<ratchet::actor::Actor> _player;
     //! 状態
     std::weak_ptr<class NanotechItemActionStateComponent> _state_com;
 public:
@@ -37,7 +37,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetActorParam(const ratchet::NanotechItem::Param& param);
+    void SetActorParam(const ratchet::actor::item::NanotechItem::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -49,13 +49,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const ratchet::NanotechItem::Param& GetActorParam(void) const;
+    const ratchet::actor::item::NanotechItem::Param& GetActorParam(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Actor> GetPlayer(void) const;
+    std::shared_ptr<ratchet::actor::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

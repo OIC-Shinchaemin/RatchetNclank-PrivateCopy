@@ -22,7 +22,7 @@ private:
     //! 進行方向
     Mof::CVector3 _ideal_move_direction;
     //! 所有者
-    std::weak_ptr<ratchet::Actor> _weapon_owner;
+    std::weak_ptr<ratchet::actor::Actor> _weapon_owner;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
     //! 状態
@@ -48,7 +48,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetWeaponOwner(const std::shared_ptr<ratchet::Actor>& ptr);
+    void SetWeaponOwner(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -1,13 +1,15 @@
-#ifndef RATCHET_BLASTER_H
-#define RATCHET_BLASTER_H
+#ifndef RATCHET_ACTOR_WEAPON_BLASTER_H
+#define RATCHET_ACTOR_WEAPON_BLASTER_H
 
 
 #include "Mechanical.h"
 
 
 namespace ratchet {
-class Blaster : public ratchet::Mechanical {
-    using super = ratchet::Mechanical;
+namespace actor {
+namespace weapon {
+class Blaster : public ratchet::actor::weapon::Mechanical {
+    using super = ratchet::actor::weapon::Mechanical;
 private:
 public:
     /// <summary>
@@ -32,4 +34,6 @@ public:
     virtual bool Fire(const def::Transform& transform) override;
 };
 }
-#endif // !RATCHET_BLASTER_H
+}
+}
+#endif // !RATCHET_ACTOR_WEAPON_BLASTER_H

@@ -28,7 +28,7 @@ bool ratchet::game::GameWorld::Input(void) {
     // input
     for (auto& actor : _actors) {
         auto state = actor->GetState();
-        if (state == ratchet::ActorState::Active) {
+        if (state == ratchet::actor::ActorState::Active) {
             actor->Input();
         } // if
     } // for
@@ -39,9 +39,9 @@ bool ratchet::game::GameWorld::Update(float delta_time) {
     // update
     for (auto& actor : _actors) {
         auto state = actor->GetState();
-        if (state == ratchet::ActorState::Active ||
-            state == ratchet::ActorState::Sleep ||
-            state == ratchet::ActorState::Hide) {
+        if (state == ratchet::actor::ActorState::Active ||
+            state == ratchet::actor::ActorState::Sleep ||
+            state == ratchet::actor::ActorState::Hide) {
             actor->Update(delta_time);
         } // if
     } // for

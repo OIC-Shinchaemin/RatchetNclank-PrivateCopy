@@ -4,15 +4,16 @@
 
 #include "NodeExecutor.h"
 
-#include "../../Actor.h"
+#include "../../Actor/Actor.h"
 
 
-namespace ratchet { namespace behaviour {
+namespace ratchet {
+namespace behaviour {
 class ActionNodeExecutor : public ratchet::behaviour::NodeExecutor {
     using super = ratchet::behaviour::NodeExecutor;
 protected:
     //! アクター
-    std::weak_ptr<ratchet::Actor> _actor;
+    std::weak_ptr<ratchet::actor::Actor> _actor;
     /// <summary>
     /// ノード実行
     /// </summary>
@@ -51,7 +52,7 @@ public:
     /// </summary>
     /// <param actor=""></param>
     virtual void Prepare(std::any actor) override {
-        _actor = std::any_cast<std::shared_ptr<ratchet::Actor>>(actor);
+        _actor = std::any_cast<std::shared_ptr<ratchet::actor::Actor>>(actor);
     }
     /// <summary>
     /// ノードの実行

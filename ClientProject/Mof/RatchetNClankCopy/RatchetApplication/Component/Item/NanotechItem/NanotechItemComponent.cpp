@@ -25,7 +25,7 @@ ratchet::NanotechItemComponent::NanotechItemComponent(const NanotechItemComponen
 ratchet::NanotechItemComponent::~NanotechItemComponent() {
 }
 
-void ratchet::NanotechItemComponent::SetActorParam(const ratchet::NanotechItem::Param& param) {
+void ratchet::NanotechItemComponent::SetActorParam(const ratchet::actor::item::NanotechItem::Param& param) {
     this->_param = param;
 }
 
@@ -33,11 +33,11 @@ std::string ratchet::NanotechItemComponent::GetType(void) const {
     return "NanotechItemComponent";
 }
 
-const ratchet::NanotechItem::Param& ratchet::NanotechItemComponent::GetActorParam(void) const {
+const ratchet::actor::item::NanotechItem::Param& ratchet::NanotechItemComponent::GetActorParam(void) const {
     return this->_param;
 }
 
-std::shared_ptr<ratchet::Actor> ratchet::NanotechItemComponent::GetPlayer(void) const {
+std::shared_ptr<ratchet::actor::Actor> ratchet::NanotechItemComponent::GetPlayer(void) const {
     if (auto ptr = _player.lock()) {
         return ptr;
     } // if

@@ -17,8 +17,6 @@ ratchet::PlayerComponent::PlayerComponent(int priority) :
     _target(),
     _state_com(),
     _next_terrain()
-    //,
-    //_action_enable()
 {
 }
 
@@ -27,15 +25,13 @@ ratchet::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     _target(),
     _state_com(),
     _next_terrain()
-    //,
-    //_action_enable() 
 {
 }
 
 ratchet::PlayerComponent::~PlayerComponent() {
 }
 
-void ratchet::PlayerComponent::SetTarget(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::PlayerComponent::SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_target = ptr;
 }
 
@@ -47,7 +43,7 @@ std::string ratchet::PlayerComponent::GetType(void) const {
     return "PlayerComponent";
 }
 
-std::weak_ptr<ratchet::Actor> ratchet::PlayerComponent::GetTarget(void) const {
+std::weak_ptr<ratchet::actor::Actor> ratchet::PlayerComponent::GetTarget(void) const {
     return this->_target;
 }
 
@@ -97,7 +93,7 @@ bool ratchet::PlayerComponent::Initialize(void) {
     coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::CollisionComponentType::kShopCollisionComponent,
                                ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
-        auto player = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
+        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
         player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessStart);
         player->PushNotificationableSubject("ShopSystem");
 
@@ -106,7 +102,7 @@ bool ratchet::PlayerComponent::Initialize(void) {
     coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Exit,
                                ratchet::CollisionComponentType::kShopCollisionComponent,
                                ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
-        auto player = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
+        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
         player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessEnd);
         player->PopNotificationableSubject("ShopSystem");
         return true;

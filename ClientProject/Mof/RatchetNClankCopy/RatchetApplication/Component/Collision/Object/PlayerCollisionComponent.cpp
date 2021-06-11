@@ -21,7 +21,7 @@ void ratchet::PlayerCollisionComponent::ChangeState(void) {
 
 std::optional<Mof::CRay3D> ratchet::PlayerCollisionComponent::GetFrontRay(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
 
@@ -236,7 +236,7 @@ std::string ratchet::PlayerCollisionComponent::GetType(void) const {
 
 std::optional<Mof::CSphere> ratchet::PlayerCollisionComponent::GetSphere(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -250,7 +250,7 @@ std::optional<Mof::CBoxAABB> ratchet::PlayerCollisionComponent::GetBox(void) {
 
 std::optional<Mof::CRay3D> ratchet::PlayerCollisionComponent::GetRay(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -260,7 +260,7 @@ std::optional<Mof::CRay3D> ratchet::PlayerCollisionComponent::GetRay(void) {
 
 std::optional<Mof::CRay3D> ratchet::PlayerCollisionComponent::GetNextRay(void) {
     _ASSERT_EXPR(!_player_com.expired(), L"無効なポインタを保持しています");
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto player_com = _player_com.lock();

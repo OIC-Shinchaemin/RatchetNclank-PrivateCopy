@@ -16,9 +16,12 @@
 
 namespace base {
 namespace ui {
-class UIPanel : public std::enable_shared_from_this<base::ui::UIPanel>, public base::core::Observer<const std::shared_ptr<base::ui::UIItem>&, const char* >, public base::core::Observable<const std::shared_ptr<base::ui::UIPanel>&, const char* > {
+class UIPanel : 
+    public std::enable_shared_from_this<base::ui::UIPanel>, 
+    public core::Observer<const std::shared_ptr<base::ui::UIItem>&, const char* >,
+    public core::Observable<const std::shared_ptr<base::ui::UIPanel>&, const char* > {
 public:
-    using ElemPtr = std::shared_ptr<base::ui::UIItem>;
+    using ElemPtr = std::shared_ptr<ui::UIItem>;
 protected:
     //! –¼‘O
     std::string _name;

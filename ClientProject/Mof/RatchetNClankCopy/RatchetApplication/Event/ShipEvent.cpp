@@ -1,7 +1,7 @@
 #include "ShipEvent.h"
 
 #include "../Factory/FactoryManager.h"
-#include "../Actor//Ship/Ship.h"
+#include "../Actor/Vehicle/Ship.h"
 #include "../Component/Ship/ShipLandingComponent.h"
 #include "../Event/EventReferenceTable.h"
 #include "../Component/CameraComponent.h"
@@ -24,10 +24,10 @@ ratchet::event::ShipEvent::~ShipEvent() {
 void ratchet::event::ShipEvent::OnNotify(const char* type, const std::shared_ptr<StageObject>& ptr) {
     if (type == "BridgeActionEnd") {
         // ship
-        auto param = ratchet::Actor::Param();
+        auto param = ratchet::actor::Actor::Param();
         param.transform.position = Mof::CVector3(10.0f, 9.0f, -25.0f);
         param.name = "ship";
-        auto ship = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Ship>("../Resource/builder/ship.json", &param);
+        auto ship = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::vehicle::Ship>("../Resource/builder/ship.json", &param);
         auto com = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::CameraComponent>>("CameraComponent");
         //ship->GetComponent<ratchet::ShipLandingComponent>()->AddObserver(com);
         ship->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::ShipLandingComponent>()->AddObserver(com);
@@ -50,7 +50,7 @@ void ratchet::event::ShipEvent::OnNotify(const ratchet::camera::CameraController
     _ship_view_camera_controller.SetInfo(_info);
 }
 
-base::core::Observable<const char*, const std::shared_ptr<ratchet::Actor>&>* ratchet::event::ShipEvent::GetShipEventSubject(void) {
+base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&>* ratchet::event::ShipEvent::GetShipEventSubject(void) {
     return &this->_ship_event_subject;
 }
 

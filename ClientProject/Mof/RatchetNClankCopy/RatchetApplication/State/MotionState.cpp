@@ -9,7 +9,7 @@ ratchet::state::MotionState::MotionState() :
 ratchet::state::MotionState::~MotionState() {
 }
 
-void ratchet::state::MotionState::SetActor(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::state::MotionState::SetActor(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     _motion_com = ptr->GetComponent<ratchet::MotionComponent>();
 }
 

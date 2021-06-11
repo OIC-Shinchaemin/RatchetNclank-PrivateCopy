@@ -1,15 +1,17 @@
-#ifndef RATCHET_NANOTECH_ITEM_H
-#define RATCHET_NANOTECH_ITEM_H
+#ifndef RATCHET_ACTOR_ITEM_NANOTECH_ITEM_H
+#define RATCHET_ACTOR_ITEM_NANOTECH_ITEM_H
 
 
-#include "../../Actor.h"
+#include "../Actor.h"
 
 #include "Base/Core/Observable.h"
 
 
 namespace ratchet {
-class NanotechItem : public ratchet::Actor {
-    using super = ratchet::Actor;
+namespace actor {
+namespace item {
+class NanotechItem : public ratchet::actor::Actor {
+    using super = ratchet::actor::Actor;
 public:
     struct Param : public super::Param {
         //! 移動
@@ -34,12 +36,6 @@ public:
     /// </summary>
     virtual ~NanotechItem();
     /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //base::core::Observable<int>* GetMoneySubject(void);
-    /// <summary>
     /// デリート
     /// </summary>
     /// <param name=""></param>
@@ -49,13 +45,9 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(ratchet::Actor::Param* param) override;
-    /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual bool Update(float delta_time) override;
+    virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
 };
 }
-#endif // !RATCHET_NANOTECH_ITEM_H
+}
+}
+#endif // !RATCHET_ACTOR_ITEM_NANOTECH_ITEM_H

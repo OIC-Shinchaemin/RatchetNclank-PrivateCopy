@@ -324,9 +324,6 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Ratchet</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Ratchet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\CameraController.cpp">
       <Filter>Ratchet\Source\Camera</Filter>
     </ClCompile>
@@ -668,9 +665,6 @@
     </ClCompile>
     <ClCompile Include="Component\Ship\ShipComponent.cpp">
       <Filter>Ratchet\Source\Component\Ship</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor\Ship\Ship.cpp">
-      <Filter>Ratchet\Source\Actor\Vehicle</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameManager.cpp">
       <Filter>Ratchet\Source\Game</Filter>
@@ -1065,12 +1059,15 @@
     <ClCompile Include="Factory\Builder\Actor\TerrainBuilder.cpp">
       <Filter>Ratchet\Source\Factory\Builder\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\Actor.cpp">
+      <Filter>Ratchet\Source\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Vehicle\Ship.cpp">
+      <Filter>Ratchet\Source\Actor\Vehicle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
-      <Filter>Ratchet\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
       <Filter>Ratchet\Header</Filter>
     </ClInclude>
     <ClInclude Include="Camera\CameraController.h">
@@ -1450,9 +1447,6 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\ShipCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor\Ship\Ship.h">
-      <Filter>Ratchet\Header\Actor\Vehicle</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
@@ -2080,6 +2074,12 @@
     </ClInclude>
     <ClInclude Include="Factory\Builder\Actor\TerrainBuilder.h">
       <Filter>Ratchet\Header\Factory\Builder\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Actor.h">
+      <Filter>Ratchet\Header\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Vehicle\Ship.h">
+      <Filter>Ratchet\Header\Actor\Vehicle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

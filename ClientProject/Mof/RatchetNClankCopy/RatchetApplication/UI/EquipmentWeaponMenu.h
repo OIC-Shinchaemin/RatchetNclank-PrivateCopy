@@ -17,11 +17,11 @@
 
 namespace ratchet {
 namespace ui {
-class EquipmentWeaponMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::Mechanical::Info&> {
+class EquipmentWeaponMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::actor::weapon::Mechanical::Info&> {
     using super = base::ui::UIPanel;
 private:
     //! 情報
-    ratchet::Mechanical::Info _info;
+    ratchet::actor::weapon::Mechanical::Info _info;
     //! パス
     std::unordered_map<std::string, std::string> _tex_names;
     //! リソース
@@ -36,7 +36,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::Mechanical::Info& info) override;
+    virtual void OnNotify(const ratchet::actor::weapon::Mechanical::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>

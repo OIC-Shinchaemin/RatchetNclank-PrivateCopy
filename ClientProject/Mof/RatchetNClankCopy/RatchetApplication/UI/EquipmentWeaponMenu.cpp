@@ -25,7 +25,7 @@ ratchet::ui::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
     _tex_names.emplace("RYNO", "../Resource/texture/icon/ryno.png");
 }
 
-void ratchet::ui::EquipmentWeaponMenu::OnNotify(const ratchet::Mechanical::Info& info) {
+void ratchet::ui::EquipmentWeaponMenu::OnNotify(const ratchet::actor::weapon::Mechanical::Info& info) {
     super::Notify(shared_from_this(), "Enable");
     //super::Notify()
     _info.name = info.name;

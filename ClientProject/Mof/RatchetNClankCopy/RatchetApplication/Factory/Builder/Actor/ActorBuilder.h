@@ -4,7 +4,7 @@
 
 #include "../IBuilder.h"
 
-#include "../../../Actor.h"
+#include "../../../Actor/Actor.h"
 #include "../../../Component/Component.h"
 
 
@@ -14,7 +14,7 @@ namespace builder {
 namespace actor {
 class ActorBuilder : public ratchet::factory::builder::IBuilder {
     //! 所有するパラメータ
-    ratchet::Actor::Param _param;
+    ratchet::actor::Actor::Param _param;
     //! 機能
     std::vector<std::shared_ptr<ratchet::Component>> _components;
 public:
@@ -30,7 +30,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="param"></param>
-    void SetActorParam(const ratchet::Actor::Param& param);
+    void SetActorParam(const ratchet::actor::Actor::Param& param);
     /// <summary>
     /// 追加
     /// </summary>

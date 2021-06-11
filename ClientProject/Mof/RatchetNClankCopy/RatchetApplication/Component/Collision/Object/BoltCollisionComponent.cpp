@@ -27,7 +27,7 @@ std::string ratchet::BoltCollisionComponent::GetType(void) const {
 }
 
 std::optional<Mof::CSphere> ratchet::BoltCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();

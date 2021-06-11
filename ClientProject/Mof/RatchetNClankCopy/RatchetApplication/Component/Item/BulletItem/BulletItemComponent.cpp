@@ -26,7 +26,7 @@ ratchet::BulletItemComponent::BulletItemComponent(const BulletItemComponent& obj
 ratchet::BulletItemComponent::~BulletItemComponent() {
 }
 
-void ratchet::BulletItemComponent::SetActorParam(const ratchet::BulletItem::Param& param) {
+void ratchet::BulletItemComponent::SetActorParam(const ratchet::actor::item::BulletItem::Param& param) {
     this->_param = param;
 }
 
@@ -34,11 +34,11 @@ std::string ratchet::BulletItemComponent::GetType(void) const {
     return "BulletItemComponent";
 }
 
-const ratchet::BulletItem::Param& ratchet::BulletItemComponent::GetActorParam(void) const {
+const ratchet::actor::item::BulletItem::Param& ratchet::BulletItemComponent::GetActorParam(void) const {
     return this->_param;
 }
 
-std::shared_ptr<ratchet::Actor> ratchet::BulletItemComponent::GetPlayer(void) const {
+std::shared_ptr<ratchet::actor::Actor> ratchet::BulletItemComponent::GetPlayer(void) const {
     if (auto ptr = _player.lock()) {
         return ptr;
     } // if
@@ -57,10 +57,10 @@ bool ratchet::BulletItemComponent::Initialize(void) {
 
     auto billboard_com = super::GetOwner()->GetComponent<ratchet::BillboardComponent>();
     if (auto r = _resource_manager.lock()) {
-        std::unordered_map<ratchet::BulletItem::Type, std::string> path_map = {
-            {ratchet::BulletItem::Type::BombGlove, "../Resource/texture/icon/bomb_glove.png"},
-            {ratchet::BulletItem::Type::Pyrocitor, "../Resource/texture/icon/pyrocitor.png"},
-            {ratchet::BulletItem::Type::Blaster,   "../Resource/texture/icon/blaster.png"},
+        std::unordered_map<ratchet::actor::item::BulletItem::Type, std::string> path_map = {
+            {ratchet::actor::item::BulletItem::Type::BombGlove, "../Resource/texture/icon/bomb_glove.png"},
+            {ratchet::actor::item::BulletItem::Type::Pyrocitor, "../Resource/texture/icon/pyrocitor.png"},
+            {ratchet::actor::item::BulletItem::Type::Blaster,   "../Resource/texture/icon/blaster.png"},
         };
 
 

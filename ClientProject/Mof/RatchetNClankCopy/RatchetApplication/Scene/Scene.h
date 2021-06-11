@@ -12,7 +12,7 @@
 #include <Mof.h>
 
 #include "SceneDefine.h"
-#include "../Actor.h"
+#include "../Actor/Actor.h"
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "Base/Core/Observer.h"
@@ -21,7 +21,7 @@
 
 namespace ratchet {
 namespace scene {
-class Scene : public std::enable_shared_from_this<ratchet::scene::Scene>, public base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&> {
+class Scene : public std::enable_shared_from_this<ratchet::scene::Scene>, public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
     using this_type = ratchet::scene::Scene;
 public:
    enum class State {

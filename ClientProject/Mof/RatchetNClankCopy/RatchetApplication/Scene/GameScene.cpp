@@ -14,7 +14,7 @@
 #include "../Event/EventReferenceTable.h"
 
 
-void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     // add
     ptr->AddObserver(shared_from_this());
     _game_world.AddActor(ptr);
@@ -22,7 +22,7 @@ void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::Actor>
     _physic_world.AddActor(ptr);
 }
 
-void ratchet::scene::GameScene::RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::GameScene::RemoveElement(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     // remove
     _game_world.RemoveActor(ptr);
     _renderer.RemoveElement(ptr);
@@ -110,7 +110,7 @@ ratchet::scene::GameScene::GameScene() :
 ratchet::scene::GameScene::~GameScene() {
 }
 
-void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     if (type == "AddRequest") {
         ptr->AddObserver(shared_from_this());
         _created_actors.push_back(ptr);
@@ -198,25 +198,25 @@ bool ratchet::scene::GameScene::Initialize(void) {
     } // for
 
 
-    auto param = new ratchet::Actor::Param();
+    auto param = new ratchet::actor::Actor::Param();
 
     // player
     param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-    auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Player>("../Resource/builder/player.json", param);
+    auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::CameraComponent>());
 
     {
         param->transform.position = Mof::CVector3(15.0f, -5.0f, 7.0f);
         param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-        auto shop = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Shop >("../Resource/builder/shop.json", param);
+        auto shop = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Shop >("../Resource/builder/shop.json", param);
         this->AddElement(shop);
     }
     {
         param->name = "weapon";
         param->tag = "OmniWrench";
-        auto omniwrench = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::OmniWrench>("builder/omni_wrench.json", param);
+        auto omniwrench = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::weapon::OmniWrench>("builder/omni_wrench.json", param);
         player->AddChild(omniwrench);
         this->AddElement(omniwrench);
     }
@@ -293,7 +293,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
         param->transform.position = enemy_spawn.second->GetPosition();
-        auto enemy = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Enemy>(builder, param);
+        auto enemy = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Enemy>(builder, param);
         this->AddElement(enemy);
         enemy->GetQuestSubject()->AddObserver(help_desk);
 
@@ -309,7 +309,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
     for (auto& transform : terrain_transforms) {
         param->transform.scale = transform.scale;
         param->transform.position = transform.position;
-        auto terrain = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Terrain>("../Resource/builder/water_flow.json", param);
+        auto terrain = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::terrain::Terrain>("../Resource/builder/water_flow.json", param);
         this->AddElement(terrain);
     } // for
 

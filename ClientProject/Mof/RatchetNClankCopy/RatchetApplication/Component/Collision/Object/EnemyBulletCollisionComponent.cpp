@@ -19,7 +19,7 @@ std::string ratchet::EnemyBulletCollisionComponent::GetType(void) const {
 }
 
 std::optional<Mof::CSphere> ratchet::EnemyBulletCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     return Mof::CSphere(super::GetOwner()->GetPosition(), 0.2f);

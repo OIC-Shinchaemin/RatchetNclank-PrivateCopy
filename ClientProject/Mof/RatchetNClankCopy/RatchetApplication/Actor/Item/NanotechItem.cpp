@@ -3,28 +3,20 @@
 #include "../../Component/Item/NanotechItem/NanotechItemComponent.h"
 
 
-ratchet::NanotechItem::NanotechItem() :
-    super()
-    //,
-    //_money_subject(){
-{  
+ratchet::actor::item::NanotechItem::NanotechItem() :
+    super() {  
 }
 
-ratchet::NanotechItem::~NanotechItem() {
+ratchet::actor::item::NanotechItem::~NanotechItem() {
 }
-/*
-base::core::Observable<int>* ratchet::NanotechItem::GetMoneySubject(void) {
-    return &this->_money_subject;
-}
-*/
-void ratchet::NanotechItem::End(void) {
-    //_money_subject.Notify(1);
+
+void ratchet::actor::item::NanotechItem::End(void) {
     super::End();
 }
 
-bool ratchet::NanotechItem::Initialize(ratchet::Actor::Param* param) {
+bool ratchet::actor::item::NanotechItem::Initialize(ratchet::actor::Actor::Param* param) {
     super::Initialize(param);
-    auto nanotechitem_param = dynamic_cast<ratchet::NanotechItem::Param*>(param);
+    auto nanotechitem_param = dynamic_cast<ratchet::actor::item::NanotechItem::Param*>(param);
     
     _init_speed = nanotechitem_param ->speed;
     _init_angle = nanotechitem_param ->angle;

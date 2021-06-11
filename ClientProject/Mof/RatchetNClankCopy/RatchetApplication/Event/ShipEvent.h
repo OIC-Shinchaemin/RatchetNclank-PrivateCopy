@@ -20,7 +20,7 @@ class ShipEvent : public ratchet::event::Event,
     using super = ratchet::event::Event;
 private:
     //! 通知用
-    base::core::Observable<const char*, const std::shared_ptr<ratchet::Actor>& > _ship_event_subject;
+    base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>& > _ship_event_subject;
     //! カメラ
     std::shared_ptr<ratchet::camera::Camera> _ship_view_camera;
     //! カメラコントローラ
@@ -57,7 +57,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const char*, const std::shared_ptr<ratchet::Actor>&>* GetShipEventSubject(void);
+    base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&>* GetShipEventSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -40,7 +40,7 @@ bool ratchet::PlayerIdleComponent::Input(void) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_M) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
-        auto owner = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
+        auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
         if (owner->GetCurrentMechanical()) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
         } // if

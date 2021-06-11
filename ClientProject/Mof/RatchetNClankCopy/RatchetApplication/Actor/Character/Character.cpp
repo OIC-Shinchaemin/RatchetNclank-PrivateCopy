@@ -1,9 +1,9 @@
 #include "Character.h"
 
 
-ratchet::Character::Character() :
+ratchet::actor::character::Character::Character() :
     super() {
 }
 
-ratchet::Character::~Character() {
+ratchet::actor::character::Character::~Character() {
 }

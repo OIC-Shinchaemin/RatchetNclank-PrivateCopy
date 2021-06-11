@@ -6,7 +6,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-ratchet::Player::Player() :
+ratchet::actor::character::Player::Player() :
     super(),
     _current_mechanical(),
     _omniwrench(),
@@ -23,11 +23,11 @@ ratchet::Player::Player() :
     _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
 }
 
-ratchet::Player::~Player() {
+ratchet::actor::character::Player::~Player() {
 }
 
-void ratchet::Player::OnNotify(std::shared_ptr<ratchet::Weapon> change) {
-    if (auto mechanical = std::dynamic_pointer_cast<ratchet::Mechanical>(change)) {
+void ratchet::actor::character::Player::OnNotify(std::shared_ptr<ratchet::actor::weapon::Weapon> change) {
+    if (auto mechanical = std::dynamic_pointer_cast<ratchet::actor::weapon::Mechanical>(change)) {
         _current_mechanical = mechanical;
     } // if
     else {
@@ -40,7 +40,7 @@ void ratchet::Player::OnNotify(std::shared_ptr<ratchet::Weapon> change) {
     _current_weapon = change;
 }
 
-void ratchet::Player::OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) {
+void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) {
     if (info.color.a <= 0.0f) {
         super::Activate();
     } // if
@@ -49,26 +49,26 @@ void ratchet::Player::OnNotify(const ratchet::game::gamesystem::QuickChangeSyste
     } // else if
 }
 /*
-void ratchet::Player::OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) {
+void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) {
     if (info.close) {
         this->PopNotificationableSubject();
     } // if
 }
 */
-base::core::Observable<bool>* ratchet::Player::GetShopSystemSubject(void) {
+base::core::Observable<bool>* ratchet::actor::character::Player::GetShopSystemSubject(void) {
     return &this->_shop_system_subject.subject;
 }
 
-base::core::Observable<bool>* ratchet::Player::GetQuickChangeSubject(void) {
+base::core::Observable<bool>* ratchet::actor::character::Player::GetQuickChangeSubject(void) {
     return &this->_quick_change_subject.subject;
 }
 
-base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::Player::GetQuestSubject(void) {
+base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::actor::character::Player::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 
-std::shared_ptr<ratchet::Actor> ratchet::Player::GetChild(const std::string& tag) const {
-    auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<ratchet::Actor>& ptr) {
+std::shared_ptr<ratchet::actor::Actor> ratchet::actor::character::Player::GetChild(const std::string& tag) const {
+    auto it = std::find_if(_children.begin(), _children.end(), [&tag](const std::shared_ptr<ratchet::actor::Actor>& ptr) {
         return ptr->GetTag() == tag;
     });
     if (it == _children.end()) {
@@ -77,38 +77,38 @@ std::shared_ptr<ratchet::Actor> ratchet::Player::GetChild(const std::string& tag
     return *it;
 }
 
-std::shared_ptr<ratchet::Mechanical> ratchet::Player::GetCurrentMechanical(void) const {
+std::shared_ptr<ratchet::actor::weapon::Mechanical> ratchet::actor::character::Player::GetCurrentMechanical(void) const {
     if (auto weapon = this->_current_mechanical.lock()) {
         return weapon;
     } // if
     return nullptr;
 }
 
-void ratchet::Player::AddChild(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::actor::character::Player::AddChild(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_children.push_back(ptr);
 }
 
-void ratchet::Player::PushNotificationableSubject(const std::string& name) {
+void ratchet::actor::character::Player::PushNotificationableSubject(const std::string& name) {
     auto subject = _notificationable_subject_map.at(name);
     _notificationable_subject_stack.push(subject);
 }
 
-void ratchet::Player::PopNotificationableSubject(void) {
+void ratchet::actor::character::Player::PopNotificationableSubject(void) {
     _notificationable_subject_stack.pop();
 }
-void ratchet::Player::PopNotificationableSubject(const std::string& name) {
+void ratchet::actor::character::Player::PopNotificationableSubject(const std::string& name) {
     auto& subject = _notificationable_subject_stack.top();
     if (subject->name == name) {
         this->PopNotificationableSubject();
     } // if
 }
 
-bool ratchet::Player::Initialize(void) {
+bool ratchet::actor::character::Player::Initialize(void) {
     this->Initialize();
     return true;
 }
 
-bool ratchet::Player::Initialize(ratchet::Actor::Param* param) {
+bool ratchet::actor::character::Player::Initialize(ratchet::actor::Actor::Param* param) {
     super::Initialize(param);
 
     _player_com = super::GetComponent<ratchet::PlayerComponent>();
@@ -119,7 +119,7 @@ bool ratchet::Player::Initialize(ratchet::Actor::Param* param) {
     return true;
 }
 
-bool ratchet::Player::Input(void) {
+bool ratchet::actor::character::Player::Input(void) {
     super::Input();
     if (!_notificationable_subject_stack.empty()) {
         auto& subject = _notificationable_subject_stack.top();
@@ -130,7 +130,7 @@ bool ratchet::Player::Input(void) {
     return true;
 }
 
-bool ratchet::Player::Update(float delta_time) {
+bool ratchet::actor::character::Player::Update(float delta_time) {
     super::Update(delta_time);
 
     // children transform
@@ -154,7 +154,7 @@ bool ratchet::Player::Update(float delta_time) {
             Mof::CVector3 pos;
             mat.GetTranslation(pos);
 
-            if (auto target = super::GetComponent<ratchet::PlayerComponent>()->GetTarget().lock()) {
+            if (auto target = super::GetComponent<ratchet::actor::character::PlayerComponent>()->GetTarget().lock()) {
                 auto target_pos = target->GetPosition();
                 auto target_height = 0.5f;
                 target_pos.y += target_height;
@@ -170,7 +170,7 @@ bool ratchet::Player::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::Player::Render(void) {
+bool ratchet::actor::character::Player::Render(void) {
     super::Render();
     if (_current_weapon) {
         _current_weapon->Render();
@@ -193,7 +193,7 @@ bool ratchet::Player::Render(void) {
     return true;
 }
 
-bool ratchet::Player::Release(void) {
+bool ratchet::actor::character::Player::Release(void) {
     super::Release();
 
     _quest_subject.Clear();

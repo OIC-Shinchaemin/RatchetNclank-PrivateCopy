@@ -12,7 +12,8 @@
 
 namespace base {
 namespace ui {
-class UICanvas : public std::enable_shared_from_this<base::ui::UICanvas>, public base::core::Observer<const std::shared_ptr<base::ui::UIPanel>&, const char* > {
+class UICanvas : public std::enable_shared_from_this<base::ui::UICanvas>,
+    public core::Observer<const std::shared_ptr<base::ui::UIPanel>&, const char* > {
     using ElemPtr = std::shared_ptr<base::ui::UIPanel>;
 private:
     //! UIƒpƒlƒ‹

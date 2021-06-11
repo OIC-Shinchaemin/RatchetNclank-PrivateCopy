@@ -14,7 +14,7 @@ class NotTargetRecognitionNodeExecutor : public ratchet::behaviour::ConditionalN
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<ratchet::Actor> actor;
+        std::weak_ptr<ratchet::actor::Actor> actor;
         //! エネミー
         std::weak_ptr<ratchet::EnemyComponent> ENEMY_com;
     };

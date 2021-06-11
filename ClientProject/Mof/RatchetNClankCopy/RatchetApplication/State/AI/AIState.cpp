@@ -3,7 +3,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-std::shared_ptr<ratchet::Actor> ratchet::state::ai::AIState::GetActor(void) const {
+std::shared_ptr<ratchet::actor::Actor> ratchet::state::ai::AIState::GetActor(void) const {
     if (auto actor = _actor.lock()) {
         return actor;
     } // if
@@ -18,7 +18,7 @@ ratchet::state::ai::AIState::AIState() :
 ratchet::state::ai::AIState::~AIState() {
 }
 
-void ratchet::state::ai::AIState::SetActor(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::state::ai::AIState::SetActor(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_actor = ptr;
 }
 

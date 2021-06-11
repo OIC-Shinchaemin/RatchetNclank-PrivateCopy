@@ -43,7 +43,7 @@ bool ratchet::PlayerShotAttackComponent::Input(void) {
             //this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
         } // if
     } // if
-    auto owner = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
+    auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
     if (auto weapon = owner->GetCurrentMechanical()) {
         if (weapon->IsAction() && weapon->CanFire()) {
             auto pos = weapon->GetPosition();
@@ -102,7 +102,7 @@ bool ratchet::PlayerShotAttackComponent::Start(void) {
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionShotAttackState);
 
-    auto owner = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
+    auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
     if (auto weapon = owner->GetCurrentMechanical()) {
         owner->OnNotify(weapon);
         if (weapon->IsAction() && weapon->CanFire()) {

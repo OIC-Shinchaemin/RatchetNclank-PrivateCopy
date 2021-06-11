@@ -76,9 +76,9 @@ public:
     /// <param name="path"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Actor> CreateActor(const char* path, ratchet::Actor::Param* param);
+    std::shared_ptr<ratchet::actor::Actor> CreateActor(const char* path, ratchet::actor::Actor::Param* param);
     template<typename Derived>
-    std::shared_ptr<Derived> CreateActor(const char* path, ratchet::Actor::Param* param) {
+    std::shared_ptr<Derived> CreateActor(const char* path, ratchet::actor::Actor::Param* param) {
         return _actor.Create<Derived>(path, param);
     }
     /// <summary>
@@ -88,7 +88,7 @@ public:
     /// <param name="builder_key"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Mechanical> CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::Actor::Param* param);
+    std::shared_ptr<ratchet::actor::weapon::Mechanical> CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::actor::Actor::Param* param);
     /// <summary>
     /// çÏê¨
     /// </summary>

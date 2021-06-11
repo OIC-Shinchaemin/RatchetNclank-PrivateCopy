@@ -37,7 +37,7 @@ ratchet::scene::ClearScene::ClearScene() {
 ratchet::scene::ClearScene::~ClearScene() {
 }
 
-void ratchet::scene::ClearScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::ClearScene::OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) {
 }
 
 std::string ratchet::scene::ClearScene::GetName(void) {

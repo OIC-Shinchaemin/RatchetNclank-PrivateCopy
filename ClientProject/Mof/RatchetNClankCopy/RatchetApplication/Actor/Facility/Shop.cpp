@@ -1,19 +1,19 @@
 #include "Shop.h"
 
 
-ratchet::Shop::Shop() :
+ratchet::actor::facility::Shop::Shop() :
     super() {
 }
 
-ratchet::Shop::~Shop() {
+ratchet::actor::facility::Shop::~Shop() {
 }
 
-bool ratchet::Shop::Update(float delta_time) {
+bool ratchet::actor::facility::Shop::Update(float delta_time) {
     super::Update(delta_time);
     return true;
 }
 
-bool ratchet::Shop::Release(void) {
+bool ratchet::actor::facility::Shop::Release(void) {
     super::Release();
     return true;
 }

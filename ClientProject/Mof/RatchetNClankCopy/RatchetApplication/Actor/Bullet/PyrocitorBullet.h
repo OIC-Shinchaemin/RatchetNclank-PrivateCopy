@@ -1,13 +1,15 @@
-#ifndef RATCHET_PYROCITOR_BULLET_H
-#define RATCHET_PYROCITOR_BULLET_H
+#ifndef RATCHET_ACTOR_BULLET_PYROCITOR_BULLET_H
+#define RATCHET_ACTOR_BULLET_PYROCITOR_BULLET_H
 
 
 #include "Bullet.h"
 
 
 namespace ratchet {
-class PyrocitorBullet : public ratchet::Bullet {
-    using super = ratchet::Bullet;
+namespace actor {
+namespace bullet {
+class PyrocitorBullet : public ratchet::actor::bullet::Bullet {
+    using super = ratchet::actor::bullet::Bullet;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,7 +35,9 @@ public:
     /// 発射
     /// </summary>
     /// <param name="in"></param>
-    void Start(const ratchet::Bullet::Param& in);
+    void Start(const ratchet::actor::bullet::Bullet::Param& in);
 };
 }
-#endif // !RATCHET_PYROCITOR_BULLET_H
+}
+}
+#endif // !RATCHET_ACTOR_BULLET_PYROCITOR_BULLET_H

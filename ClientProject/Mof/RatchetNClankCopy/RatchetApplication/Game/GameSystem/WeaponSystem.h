@@ -31,16 +31,16 @@ class WeaponSystem :
     public base::core::Observer<const std::string&>,
     public base::core::Observer<const ratchet::game::gamesystem::ChargeInfo&>
 {
-    using Pair = std::pair<std::string, std::shared_ptr<ratchet::Mechanical>>;
+    using Pair = std::pair<std::string, std::shared_ptr<ratchet::actor::weapon::Mechanical>>;
 private:
     //! 武器
     std::vector<Pair> _weapons;
     //! 武器
-    std::shared_ptr<ratchet::Mechanical> _current_mechanical;
+    std::shared_ptr<ratchet::actor::weapon::Mechanical> _current_mechanical;
     //! 通知用
-    base::core::Observable<std::shared_ptr<ratchet::Weapon>> _subject;
+    base::core::Observable<std::shared_ptr<ratchet::actor::weapon::Weapon>> _subject;
     //! 通知用
-    base::core::Observable<const ratchet::Mechanical::Info&> _equipment_subject;
+    base::core::Observable<const ratchet::actor::weapon::Mechanical::Info&> _equipment_subject;
     //! マップ
     std::unordered_map<std::string, std::string> _builder_name_map;
     //! セーブデータ
@@ -83,7 +83,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Mechanical> GetCurrentMechanicalWeapon(void) const;
+    std::shared_ptr<ratchet::actor::weapon::Mechanical> GetCurrentMechanicalWeapon(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -94,7 +94,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<ratchet::Weapon>>>& ptr);
+    void AddMechanicalWeaponObserver(const std::shared_ptr<base::core::Observer<std::shared_ptr<ratchet::actor::weapon::Weapon>>>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -111,7 +111,7 @@ public:
     /// </summary>
     /// <param name="observer"></param>
     /// <returns></returns>
-    bool Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&>>& observer);
+    bool Initialize(const std::shared_ptr<base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&>>& observer);
     /// <summary>
     /// 解放
     /// </summary>
@@ -123,7 +123,7 @@ public:
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Mechanical>GetMechanicalWeapon(const std::string& name);
+    std::shared_ptr<ratchet::actor::weapon::Mechanical>GetMechanicalWeapon(const std::string& name);
 };
 }
 }

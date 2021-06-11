@@ -258,7 +258,7 @@
     <ClCompile Include="..\include\Base\UI\UICanvas.cpp" />
     <ClCompile Include="..\include\Base\UI\UIItem.cpp" />
     <ClCompile Include="..\include\Base\UI\UIPanel.cpp" />
-    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Actor\Actor.cpp" />
     <ClCompile Include="Actor\Bullet\BlasterBullet.cpp" />
     <ClCompile Include="Actor\Bullet\BombGloveBullet.cpp" />
     <ClCompile Include="Actor\Bullet\Bullet.cpp" />
@@ -273,8 +273,8 @@
     <ClCompile Include="Actor\Item\Bolt.cpp" />
     <ClCompile Include="Actor\Item\BulletItem.cpp" />
     <ClCompile Include="Actor\Item\NanotechItem.cpp" />
-    <ClCompile Include="Actor\Ship\Ship.cpp" />
     <ClCompile Include="Actor\Terrain\Terrain.cpp" />
+    <ClCompile Include="Actor\Vehicle\Ship.cpp" />
     <ClCompile Include="Actor\Weapon\Blaster.cpp" />
     <ClCompile Include="Actor\Weapon\BombGlove.cpp" />
     <ClCompile Include="Actor\Weapon\Mechanical.cpp" />
@@ -519,7 +519,7 @@
     <ClInclude Include="..\include\Base\UI\UICanvas.h" />
     <ClInclude Include="..\include\Base\UI\UIItem.h" />
     <ClInclude Include="..\include\Base\UI\UIPanel.h" />
-    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="Actor\Bullet\BlasterBullet.h" />
     <ClInclude Include="Actor\Bullet\BombGloveBullet.h" />
     <ClInclude Include="Actor\Bullet\Bullet.h" />
@@ -534,8 +534,8 @@
     <ClInclude Include="Actor\Item\Bolt.h" />
     <ClInclude Include="Actor\Item\BulletItem.h" />
     <ClInclude Include="Actor\Item\NanotechItem.h" />
-    <ClInclude Include="Actor\Ship\Ship.h" />
     <ClInclude Include="Actor\Terrain\Terrain.h" />
+    <ClInclude Include="Actor\Vehicle\Ship.h" />
     <ClInclude Include="Actor\Weapon\Blaster.h" />
     <ClInclude Include="Actor\Weapon\BombGlove.h" />
     <ClInclude Include="Actor\Weapon\Mechanical.h" />

@@ -37,11 +37,11 @@ std::shared_ptr<ratchet::factory::builder::IBuilder> ratchet::factory::FactoryMa
     return _builder.Create(path);
 }
 
-std::shared_ptr<ratchet::Actor> ratchet::factory::FactoryManager::CreateActor(const char* path, ratchet::Actor::Param* param) {
-    return _actor.Create<ratchet::Actor>(path, param);
+std::shared_ptr<ratchet::actor::Actor> ratchet::factory::FactoryManager::CreateActor(const char* path, ratchet::actor::Actor::Param* param) {
+    return _actor.Create<ratchet::actor::Actor>(path, param);
 }
 
-std::shared_ptr<ratchet::Mechanical> ratchet::factory::FactoryManager::CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::Actor::Param* param) {
+std::shared_ptr<ratchet::actor::weapon::Mechanical> ratchet::factory::FactoryManager::CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::actor::Actor::Param* param) {
     return _actor.CreateMechanicalWeapon(type, builder_key, param);
 }
 

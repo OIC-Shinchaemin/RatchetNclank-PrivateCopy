@@ -1,15 +1,17 @@
-#ifndef RATCHET_BOLT_H
-#define RATCHET_BOLT_H
+#ifndef RATCHET_ACTOR_ITEM_BOLT_H
+#define RATCHET_ACTOR_ITEM_BOLT_H
 
 
-#include "../../Actor.h"
+#include "../Actor.h"
 
 #include "Base/Core/Observable.h"
 
 
 namespace ratchet {
-class Bolt : public ratchet::Actor {
-    using super = ratchet::Actor;
+namespace actor {
+namespace item {
+class Bolt : public ratchet::actor::Actor {
+    using super = ratchet::actor::Actor;
 public:
     struct Param : public super::Param {
         //! à⁄ìÆ
@@ -49,13 +51,9 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(ratchet::Actor::Param* param) override;
-    /// <summary>
-    /// çXêV
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual bool Update(float delta_time) override;
+    virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
 };
 }
-#endif // !RATCHET_BOLT_H
+}
+}
+#endif // !RATCHET_ACTOR_ITEM_BOLT_H

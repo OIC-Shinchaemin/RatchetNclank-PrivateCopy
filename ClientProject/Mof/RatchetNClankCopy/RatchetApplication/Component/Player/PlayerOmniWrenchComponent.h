@@ -10,7 +10,7 @@ class PlayerOmniWrenchComponent : public ratchet::UpdateComponent {
     using super = ratchet::UpdateComponent;
 private:
     //! •Ší
-    std::weak_ptr<ratchet::Actor> _weapon;
+    std::weak_ptr<ratchet::actor::Actor> _weapon;
     //! ó‘Ô
     std::weak_ptr<class PlayerThrowAttackComponent> _throw_attack_com;
     //! ó‘Ô

@@ -6,7 +6,7 @@
 
 #include "rapidjson/document.h"
 
-#include "../Actor.h"
+#include "../Actor/Actor.h"
 
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
@@ -17,7 +17,7 @@ namespace ratchet {
 class Component : public std::enable_shared_from_this<ratchet::Component> {
 private:
     //! この機能の所有者
-    std::weak_ptr<ratchet::Actor> _owner;
+    std::weak_ptr<actor::Actor> _owner;
     //! 小さいほど処理される順番が早い
     int _priority;
     //! 有効
@@ -56,7 +56,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetOwner(const std::shared_ptr<ratchet::Actor>& ptr);
+    virtual void SetOwner(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -73,7 +73,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Actor> GetOwner(void) const;
+    std::shared_ptr<ratchet::actor::Actor> GetOwner(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

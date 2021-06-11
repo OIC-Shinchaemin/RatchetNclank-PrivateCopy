@@ -5,7 +5,8 @@
 #include "CompositeNodeExecutor.h"
 
 
-namespace ratchet { namespace behaviour {
+namespace ratchet {
+namespace behaviour {
 class SequencerNodeExecutor : public ratchet::behaviour::CompositeNodeExecutor {
     using super = ratchet::behaviour::CompositeNodeExecutor;
 public:

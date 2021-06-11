@@ -24,7 +24,7 @@ std::string ratchet::ShipCollisionComponent::GetType(void) const {
 }
 
 std::optional<Mof::CSphere> ratchet::ShipCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
@@ -36,7 +36,7 @@ std::optional<Mof::CBoxAABB> ratchet::ShipCollisionComponent::GetBox(void) {
 }
 
 std::optional<Mof::CRay3D> ratchet::ShipCollisionComponent::GetRay(void) {
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = super::GetOwner()->GetPosition();

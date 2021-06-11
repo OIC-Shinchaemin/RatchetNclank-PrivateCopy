@@ -38,11 +38,11 @@ std::string ratchet::PlayerOmniWrenchComponent::GetType(void) const {
 bool ratchet::PlayerOmniWrenchComponent::Activate(void) {
     super::Activate();
 
-    auto owner = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
+    auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
     _weapon = owner->GetChild("OmniWrench");
     if (auto weapon = _weapon.lock()) {
         // cache
-        owner->OnNotify(std::dynamic_pointer_cast<ratchet::Weapon>(weapon));
+        owner->OnNotify(std::dynamic_pointer_cast<ratchet::actor::weapon::Weapon>(weapon));
         _weapon_coll_com = weapon->GetComponent<ratchet::OmniWrenchCollisionComponent>();
         _weapon_action_state_com = weapon->GetComponent<ratchet::OmniWrenchActionStateComponent>();
 

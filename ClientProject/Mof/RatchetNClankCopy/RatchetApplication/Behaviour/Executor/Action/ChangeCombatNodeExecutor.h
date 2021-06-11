@@ -16,7 +16,7 @@ class ChangeCombatNodeExecutor : public ratchet::behaviour::ActionNodeExecutor {
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<ratchet::Actor> actor;
+        std::weak_ptr<ratchet::actor::Actor> actor;
         //! AI
         std::weak_ptr<ratchet::AIStateComponent> ai_com;
     };

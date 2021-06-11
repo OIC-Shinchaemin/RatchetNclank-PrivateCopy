@@ -25,7 +25,7 @@ ratchet::BoltComponent::BoltComponent(const BoltComponent& obj) :
 ratchet::BoltComponent::~BoltComponent() {
 }
 
-void ratchet::BoltComponent::SetActorParam(const ratchet::Bolt::Param& param) {
+void ratchet::BoltComponent::SetActorParam(const ratchet::actor::item::Bolt::Param& param) {
     this->_param = param;
 }
 
@@ -33,11 +33,11 @@ std::string ratchet::BoltComponent::GetType(void) const {
     return "BoltComponent";
 }
 
-const ratchet::Bolt::Param& ratchet::BoltComponent::GetActorParam(void) const {
+const ratchet::actor::item::Bolt::Param& ratchet::BoltComponent::GetActorParam(void) const {
     return this->_param;
 }
 
-std::shared_ptr<ratchet::Actor> ratchet::BoltComponent::GetPlayer(void) const {
+std::shared_ptr<ratchet::actor::Actor> ratchet::BoltComponent::GetPlayer(void) const {
     if (auto ptr = _player.lock()) {
         return ptr;
     } // if

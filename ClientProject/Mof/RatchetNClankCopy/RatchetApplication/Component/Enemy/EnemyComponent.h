@@ -17,7 +17,7 @@ private:
     //! 休止状態切り替え
     base::core::Timer _velocity_timer;
     //! 標的
-    std::weak_ptr<ratchet::Actor> _target;
+    std::weak_ptr<ratchet::actor::Actor> _target;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
 public:
@@ -39,7 +39,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<ratchet::Actor>& ptr);
+    void SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -51,7 +51,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<ratchet::Actor> GetTarget(void) const;
+    std::weak_ptr<ratchet::actor::Actor> GetTarget(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -72,8 +72,8 @@ bool ratchet::EnemyRangedAttackComponent::Initialize(void) {
 }
 
 bool ratchet::EnemyRangedAttackComponent::Update(float delta_time) {
-    if (auto ENEMY_com = _ENEMY_com.lock()) {
-        if (auto target = ENEMY_com->GetTarget().lock()) {
+    if (auto enemy_com = _ENEMY_com.lock()) {
+        if (auto target = enemy_com->GetTarget().lock()) {
             auto owner = super::GetOwner();
             Mof::CVector3 direction = target->GetPosition() - owner->GetPosition();
             float ideal_y = math::ToDegree(std::atan2(-direction.z, direction.x) + math::kHalfPi + +math::kPi);
@@ -124,7 +124,7 @@ bool ratchet::EnemyRangedAttackComponent::Start(void) {
     _ASSERT_EXPR(_ENEMY_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
     auto ENEMY_com = _ENEMY_com.lock();
 
-    auto param = ratchet::Bullet::Param();
+    auto param = ratchet::actor::bullet::Bullet::Param();
     auto owner = super::GetOwner();
     auto transform = ratchet::Transform();
     param.transform.position = owner->GetPosition();
@@ -135,7 +135,7 @@ bool ratchet::EnemyRangedAttackComponent::Start(void) {
     direction.Normal(direction);
     param.speed = direction * _shot_speed;
 
-    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::EnemyBullet>("../Resource/builder/ENEMY_bullet.json", &param);
+    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::bullet::EnemyBullet>("../Resource/builder/ENEMY_bullet.json", &param);
     add->Start(param);
     super::GetOwner()->Notify("AddRequest", add);
     return true;

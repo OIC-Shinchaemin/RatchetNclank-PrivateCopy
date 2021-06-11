@@ -1,15 +1,18 @@
-#ifndef RATCHET_TERRAIN_H
-#define RATCHET_TERRAIN_H
+#ifndef RATCHET_ACTOR_TERRAIN_TERRAIN_H
+#define RATCHET_ACTOR_TERRAIN_TERRAIN_H
 
 
-#include "../../Actor.h"
+#include "../Actor.h"
+
 #include "../../GameDefine.h"
 #include "../../ResourceManager.h"
 
 
 namespace ratchet {
-class Terrain : public ratchet::Actor {
-    using super = ratchet::Actor;
+namespace actor {
+namespace terrain {
+class Terrain : public ratchet::actor::Actor {
+    using super = ratchet::actor::Actor;
 private:
     //! êÖñ 
     Mof::LPGeometry _plane;
@@ -41,7 +44,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(ratchet::Actor::Param* param) override;
+    virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
     /// <summary>
     /// çXêV
     /// </summary>
@@ -62,4 +65,6 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RATCHET_TERRAIN_H
+}
+}
+#endif // !RATCHET_ACTOR_TERRAIN_TERRAIN_H

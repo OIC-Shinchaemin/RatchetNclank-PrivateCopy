@@ -50,7 +50,7 @@ struct CollisionInfo {
     //! ë¨Ç≥
     float speed = 0.0f;
     //! è’ìÀëŒè€
-    std::weak_ptr<ratchet::Actor> target;
+    std::weak_ptr<ratchet::actor::Actor> target;
 
     CollisionInfo() : distance(0.0f), angle(), speed(0.0f), target(){}
     CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle(), speed(0.0f), target(){}

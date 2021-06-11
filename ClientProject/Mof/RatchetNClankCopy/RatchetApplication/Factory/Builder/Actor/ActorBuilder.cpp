@@ -9,7 +9,7 @@ ratchet::factory::builder::actor::ActorBuilder::ActorBuilder() :
 ratchet::factory::builder::actor::ActorBuilder::~ActorBuilder() {
 }
 
-void ratchet::factory::builder::actor::ActorBuilder::SetActorParam(const ratchet::Actor::Param& param) {
+void ratchet::factory::builder::actor::ActorBuilder::SetActorParam(const ratchet::actor::Actor::Param& param) {
     this->_param = param;
 }
 
@@ -22,7 +22,7 @@ void ratchet::factory::builder::actor::ActorBuilder::Release(void) {
 }
 
 void ratchet::factory::builder::actor::ActorBuilder::Construct(std::any shared_this) {
-    auto ptr = std::any_cast<std::shared_ptr<ratchet::Actor>>(shared_this);
+    auto ptr = std::any_cast<std::shared_ptr<ratchet::actor::Actor>>(shared_this);
    
     ptr->CloneToComponents(_components);
     ptr->SetName(_param.name.c_str());

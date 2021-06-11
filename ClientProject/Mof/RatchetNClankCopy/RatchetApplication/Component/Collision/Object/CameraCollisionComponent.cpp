@@ -31,7 +31,7 @@ std::optional<Mof::CBoxAABB> ratchet::CameraCollisionComponent::GetBox(void) {
 
 std::optional<Mof::CRay3D> ratchet::CameraCollisionComponent::GetRay(void) {
     _ASSERT_EXPR(!_camera_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = _camera_com.lock()->GetPosition();

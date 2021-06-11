@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "../GameDefine.h"
-#include "../Actor.h"
+#include "../Actor/Actor.h"
 #include "../ResourceManager.h"
 
 
@@ -14,11 +14,11 @@ namespace ratchet {
 namespace game {
 class Renderer {
     //! キャラクタ
-    std::vector<std::shared_ptr<ratchet::Actor>> _actors;
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _actors;
     //! 表示
-    std::vector<std::shared_ptr<ratchet::Actor>> _enable_actors;
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _enable_actors;
     //! 非表示
-    std::vector<std::shared_ptr<ratchet::Actor>> _disable_actors;
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _disable_actors;
 public:
     /// <summary>
     /// コンストラクタ
@@ -32,12 +32,12 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddElement(const std::shared_ptr<ratchet::Actor>& ptr);
+    void AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void RemoveElement(const std::shared_ptr<ratchet::Actor>& ptr);
+    void RemoveElement(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// 描画
     /// </summary>

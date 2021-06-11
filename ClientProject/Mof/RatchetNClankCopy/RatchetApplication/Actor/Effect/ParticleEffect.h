@@ -1,8 +1,8 @@
-#ifndef RATCHET_PARTICLE_EFFECT_H
-#define RATCHET_PARTICLE_EFFECT_H
+#ifndef RATCHET_ACTOR_EFFECT_PARTICLE_EFFECT_H
+#define RATCHET_ACTOR_EFFECT_PARTICLE_EFFECT_H
 
 
-#include "../../Actor.h"
+#include "../Actor.h"
 
 #include <Mof.h>
 
@@ -10,8 +10,10 @@
 
 
 namespace ratchet {
-class ParticleEffect : public ratchet::Actor {
-    using super = ratchet::Actor;
+namespace actor {
+namespace effect {
+class ParticleEffect : public ratchet::actor::Actor {
+    using super = ratchet::actor::Actor;
 public:
     struct Param : public super::Param {
         //! 色
@@ -45,9 +47,9 @@ private:
     //! デフォルトサイズ
     float _size;
     //! 更新パラメータ
-    ratchet::ParticleEffect::UpdateParam _update_param;
+    ratchet::actor::effect::ParticleEffect::UpdateParam _update_param;
     //! 環境設定
-    ratchet::ParticleEffect::EnvironmentParam _environment_param;
+    ratchet::actor::effect::ParticleEffect::EnvironmentParam _environment_param;
 public:
     /// <summary>
     /// コンストラクタ
@@ -71,7 +73,9 @@ public:
     /// 開始
     /// </summary>
     /// <param name="info"></param>
-    void Start(const ratchet::ParticleEffect::Info& info);
+    void Start(const ratchet::actor::effect::ParticleEffect::Info& info);
 };
 }
-#endif // !RATCHET_PARTICLE_EFFECT_H
+}
+}
+#endif // !RATCHET_ACTOR_EFFECT_PARTICLE_EFFECT_H

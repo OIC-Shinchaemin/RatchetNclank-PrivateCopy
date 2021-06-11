@@ -1,13 +1,15 @@
-#ifndef RATCHET_CHARACTER_H
-#define RATCHET_CHARACTER_H
+#ifndef RATCHET_ACTOR_CHARACTER_CHARACTER_H
+#define RATCHET_ACTOR_CHARACTER_CHARACTER_H
 
 
-#include "../../Actor.h"
+#include "../Actor.h"
 
 
 namespace ratchet {
-class Character : public ratchet::Actor {
-    using super = ratchet::Actor;
+namespace actor {
+namespace character {
+class Character : public ratchet::actor::Actor {
+    using super = ratchet::actor::Actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -19,4 +21,6 @@ public:
     virtual ~Character();
 };
 }
-#endif // !RATCHET_CHARACTER_H
+}
+}
+#endif // !RATCHET_ACTOR_CHARACTER_CHARACTER_H

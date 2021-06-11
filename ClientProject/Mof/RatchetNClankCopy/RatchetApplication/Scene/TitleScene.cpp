@@ -61,7 +61,7 @@ ratchet::scene::TitleScene::~TitleScene() {
     _game.reset();
 }
 
-void ratchet::scene::TitleScene::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::scene::TitleScene::OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) {
 }
 
 void ratchet::scene::TitleScene::OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) {
@@ -96,10 +96,10 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             } // if
             _stage.Initialize();
 
-            auto actor_param = ratchet::Actor::Param();
+            auto actor_param = ratchet::actor::Actor::Param();
             actor_param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
             actor_param.transform.position = Mof::CVector3(10.0f, -5.0f, -15.0f);
-            _demo_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::Player>("builder/demo_player.json", &actor_param);
+            _demo_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("builder/demo_player.json", &actor_param);
 
             ::CoUninitialize();
             super::LoadComplete();

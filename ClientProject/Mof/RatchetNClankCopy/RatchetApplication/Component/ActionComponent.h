@@ -37,7 +37,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetOwner(const std::shared_ptr<ratchet::Actor>& ptr) override;
+    virtual void SetOwner(const std::shared_ptr<ratchet::actor::Actor>& ptr) override;
     /// <summary>
     /// セッター
     /// </summary>

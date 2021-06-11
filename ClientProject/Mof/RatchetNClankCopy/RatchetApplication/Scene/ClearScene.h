@@ -42,7 +42,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) override;
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>

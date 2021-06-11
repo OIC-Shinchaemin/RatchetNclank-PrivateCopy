@@ -7,7 +7,7 @@ bool ratchet::game::gamesystem::ShopSystem::Close(void) {
     _infomation.close = true;
     _info_subject.Notify(_infomation);
     if (auto weapon_system = _weapon_system.lock()) {
-        auto info = ratchet::Mechanical::Info();
+        auto info = ratchet::actor::weapon::Mechanical::Info();
         if (_prev_weapon.has_value()) {
             auto prev = weapon_system->GetMechanicalWeapon(_prev_weapon.value());
             info.bullet_count = prev->GetBulletCount();
@@ -45,7 +45,7 @@ void ratchet::game::gamesystem::ShopSystem::Buy(void) {
 void ratchet::game::gamesystem::ShopSystem::NotifyEquipmentWeaponMenu(void) {
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
-        auto info = ratchet::Mechanical::Info();
+        auto info = ratchet::actor::weapon::Mechanical::Info();
         info.bullet_count = weapon->GetBulletCount();
         info.name = weapon->GetName();
         _equipment_weapon_menu_subject.Notify(info);
@@ -98,7 +98,7 @@ void ratchet::game::gamesystem::ShopSystem::OnNotify(bool flag) {
 
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
-        auto info = ratchet::Mechanical::Info();
+        auto info = ratchet::actor::weapon::Mechanical::Info();
         info.bullet_count = weapon->GetBulletCount();
         info.name = weapon->GetName();
         _equipment_weapon_menu_subject.Notify(info);
@@ -160,7 +160,7 @@ bool ratchet::game::gamesystem::ShopSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
-            auto menu = std::dynamic_pointer_cast<base::core::Observer<const ratchet::Mechanical::Info&>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<const ratchet::actor::weapon::Mechanical::Info&>>(temp);
             _equipment_weapon_menu_subject.AddObserver(menu);
         }
         {
@@ -276,7 +276,7 @@ bool ratchet::game::gamesystem::ShopSystem::Release(void) {
     if (auto canvas = super::GetUICanvas()) {
         {
             auto temp = canvas->GetElement("EquipmentWeaponMenu");
-            auto menu = std::dynamic_pointer_cast<base::core::Observer<const ratchet::Mechanical::Info&>>(temp);
+            auto menu = std::dynamic_pointer_cast<base::core::Observer<const ratchet::actor::weapon::Mechanical::Info&>>(temp);
             _equipment_weapon_menu_subject.RemoveObserver(menu);
         }
         {

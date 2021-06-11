@@ -31,11 +31,11 @@ bool ratchet::PlayerMechanicalWeaponComponent::Activate(void) {
     _weapon = owner->GetChild("OmniWrench");
     if (auto weapon = _weapon.lock()) {
         // cache
-        owner->OnNotify(std::dynamic_pointer_cast<ratchet::Weapon>(weapon));
-        _weapon_coll_com = weapon->GetComponent<ratchet::OmniWrenchCollisionComponent>();
-        _weapon_action_state_com = weapon->GetComponent<ratchet::OmniWrenchActionStateComponent>();
+        owner->OnNotify(std::dynamic_pointer_cast<ratchet::actor::weapon::Weapon>(weapon));
+        _weapon_coll_com = weapon->GetComponent<ratchet::actor::weapon::OmniWrenchCollisionComponent>();
+        _weapon_action_state_com = weapon->GetComponent<ratchet::actor::weapon::OmniWrenchActionStateComponent>();
 
-        auto throw_com = weapon->GetComponent<ratchet::OmniWrenchThrowedComponent>();
+        auto throw_com = weapon->GetComponent<ratchet::actor::weapon::OmniWrenchThrowedComponent>();
         throw_com->SetWeaponOwner(super::GetOwner());
     } // if
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {

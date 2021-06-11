@@ -1,13 +1,15 @@
-#ifndef RATCHET_MECHANICAL_H
-#define RATCHET_MECHANICAL_H
+#ifndef RATCHET_ACTOR_WEAPON_MECHANICAL_H
+#define RATCHET_ACTOR_WEAPON_MECHANICAL_H
 
 
 #include "Weapon.h"
 
 
 namespace ratchet {
-class Mechanical : public ratchet::Weapon {
-    using super = ratchet::Weapon;
+namespace actor {
+namespace weapon {
+class Mechanical : public ratchet::actor::weapon::Weapon {
+    using super = ratchet::actor::weapon::Weapon;
 public:
     struct Info {
         //! 弾数
@@ -19,7 +21,7 @@ public:
 
         Info() = default;
         Info(int size, int max, const char* str) :
-            bullet_count(size), 
+            bullet_count(size),
             bullet_count_max(max),
             name(str) {
         };
@@ -38,7 +40,7 @@ protected:
     //! 対象位置
     std::optional<Mof::CVector3> _lock_on_position;
     //! 通知用
-    base::core::Observable<const ratchet::Mechanical::Info&> _subject;
+    base::core::Observable<const ratchet::actor::weapon::Mechanical::Info&> _subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -91,7 +93,7 @@ public:
     /// <summary>
     /// 追加
     /// </summary>
-    void AddMechanicalInfoObserver(const std::shared_ptr<base::core::Observer<const ratchet::Mechanical::Info&>>& ptr);
+    void AddMechanicalInfoObserver(const std::shared_ptr<base::core::Observer<const ratchet::actor::weapon::Mechanical::Info&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>
@@ -111,4 +113,6 @@ public:
     void ResetTargetPosition(void);
 };
 }
-#endif // !RATCHET_MECHANICAL_H
+}
+}
+#endif // !RATCHET_ACTOR_WEAPON_MECHANICAL_H

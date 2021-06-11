@@ -1,6 +1,6 @@
 #include "ShipComponent.h"
 
-#include "../../Actor/Ship/Ship.h"
+#include "../../Actor/Vehicle/Ship.h"
 #include "../MotionComponent.h"
 #include "../../Camera/FollowCameraController.h"
 #include "../Collision/Object/ShipCollisionComponent.h"

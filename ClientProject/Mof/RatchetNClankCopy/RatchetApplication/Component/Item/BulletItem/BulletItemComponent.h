@@ -12,9 +12,9 @@ class BulletItemComponent : public ratchet::UpdateComponent {
     using super = ratchet::UpdateComponent;
 private:
     //! アクターパラメータ
-    ratchet::BulletItem::Param _param;
+    ratchet::actor::item::BulletItem::Param _param;
     //! 移動先
-    std::weak_ptr<ratchet::Actor> _player;
+    std::weak_ptr<ratchet::actor::Actor> _player;
     //! 状態
     std::weak_ptr<class BulletItemActionStateComponent> _state_com;
 public:
@@ -37,7 +37,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetActorParam(const ratchet::BulletItem::Param& param);
+    void SetActorParam(const ratchet::actor::item::BulletItem::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -49,13 +49,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const ratchet::BulletItem::Param& GetActorParam(void) const;
+    const ratchet::actor::item::BulletItem::Param& GetActorParam(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Actor> GetPlayer(void) const;
+    std::shared_ptr<ratchet::actor::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

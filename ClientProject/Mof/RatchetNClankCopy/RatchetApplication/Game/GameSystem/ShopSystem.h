@@ -84,7 +84,7 @@ private:
     //! 通知用
     base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&> _buy_subject;
     //! 通知用
-    base::core::Observable<const ratchet::Mechanical::Info&> _equipment_weapon_menu_subject;
+    base::core::Observable<const ratchet::actor::weapon::Mechanical::Info&> _equipment_weapon_menu_subject;
     //! 通知用
     base::core::Observable<int> _game_money_menu_subject;
     //! セーブデータ

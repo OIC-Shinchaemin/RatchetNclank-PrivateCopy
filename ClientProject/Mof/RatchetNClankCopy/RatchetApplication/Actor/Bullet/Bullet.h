@@ -1,15 +1,17 @@
-#ifndef RATCHET_BULLET_H
-#define RATCHET_BULLET_H
+#ifndef RATCHET_ACTOR_BULLET_BULLET_H
+#define RATCHET_ACTOR_BULLET_BULLET_H
 
 
-#include "../../Actor.h"
+#include "../Actor.h"
 
 #include "Base/Core/Timer.h"
 
 
 namespace ratchet {
-class Bullet : public ratchet::Actor {
-    using super = ratchet::Actor;
+namespace actor {
+namespace bullet {
+class Bullet : public actor::Actor {
+    using super = actor::Actor;
 public:
     struct Param : public super::Param {
         using super = super::Param;
@@ -38,7 +40,7 @@ protected:
     //! ë¨Ç≥
     Mof::CVector3 _speed;
     //! éûä‘
-    base::core::Timer _exist_time;
+    ::base::core::Timer _exist_time;
 
     /// <summary>
     /// çXêV
@@ -64,7 +66,9 @@ public:
     /// î≠éÀ
     /// </summary>
     /// <param name="in"></param>
-    void Start(const ratchet::Bullet::Param& in);
+    void Start(const Bullet::Param& in);
 };
 }
-#endif // !RATCHET_BULLET_H
+}
+}
+#endif // !RATCHET_ACTOR_BULLET_BULLET_H

@@ -8,7 +8,7 @@
 
 #include "Base/Core/Define.h"
 #include "../Game/GameManager.h"
-#include "../Actor.h"
+#include "../Actor/Actor.h"
 #include "Builder/IBuilder.h"
 #include "BuilderFactory.h"
 #include "Factory.h"
@@ -26,7 +26,7 @@ private:
     //! ï€éùÇµÇƒÇ¢ÇÈBulder
     std::map<std::string, std::shared_ptr<ratchet::factory::builder::IBuilder>> _builders;
     //! Mechanical
-    ratchet::factory::Factory<ratchet::Mechanical> _mechanical_factory;
+    ratchet::factory::Factory<ratchet::actor::weapon::Mechanical> _mechanical_factory;
     //! ÉQÅ[ÉÄ
     std::weak_ptr<ratchet::game::GameManager> _game;
 public:
@@ -70,7 +70,7 @@ public:
     /// <param name="transform"></param>
     /// <returns></returns>
     template<typename T>
-    std::shared_ptr<T> Create(const std::string& builder_key, ratchet::Actor::Param* param) {
+    std::shared_ptr<T> Create(const std::string& builder_key, ratchet::actor::Actor::Param* param) {
         if (!this->Exist(builder_key)) {
             auto builder = _builder_factory->Create(builder_key.c_str());
             this->AddBuilder(builder_key, builder);
@@ -78,12 +78,12 @@ public:
 
         auto ptr = ut::MakeSharedWithRelease<T>();
 
-        if constexpr (std::is_same<T, ratchet::Bolt>::value) {
+        if constexpr (std::is_same<T, ratchet::actor::item::Bolt>::value) {
             if (auto game = _game.lock()) {
                 ptr->GetMoneySubject()->AddObserver(game->GetGameMoney());
             } // if
         } // if
-        else if constexpr (std::is_same<T, ratchet::BulletItem>::value) {
+        else if constexpr (std::is_same<T, ratchet::actor::item::BulletItem>::value) {
             if (auto game = _game.lock()) {
                 ptr->GetWeaponSystemSubject()->AddObserver(game->GetWeaponSystem());
             } // if
@@ -102,7 +102,7 @@ public:
     /// <param name="builder_key"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Mechanical> CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::Actor::Param* param);
+    std::shared_ptr<ratchet::actor::weapon::Mechanical> CreateMechanicalWeapon(const char* type, const std::string& builder_key, ratchet::actor::Actor::Param* param);
     /// <summary>
     /// âï˙
     /// </summary>

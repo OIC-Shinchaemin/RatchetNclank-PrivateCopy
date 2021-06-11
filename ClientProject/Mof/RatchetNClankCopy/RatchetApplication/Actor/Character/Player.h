@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_H
-#define RATCHET_PLAYER_H
+#ifndef RATCHET_ACTOR_CHARACTER_PLAYER_H
+#define RATCHET_ACTOR_CHARACTER_PLAYER_H
 
 
 #include "Character.h"
@@ -17,27 +17,29 @@
 
 
 namespace ratchet {
-class Player : public ratchet::Character,
-    public base::core::Observer<std::shared_ptr<ratchet::Weapon>>,
+namespace actor {
+namespace character {
+class Player : public ratchet::actor::character::Character,
+    public base::core::Observer<std::shared_ptr<ratchet::actor::weapon::Weapon>>,
     public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> {
-    using super = ratchet::Character;
+    using super = ratchet::actor::character::Character;
     struct ObservablePair {
         std::string name;
         base::core::Observable<bool> subject;
         ObservablePair(const char* str) :
             name(str),
-            subject (){
+            subject() {
         }
     };
 private:
     //! 武器
-    std::weak_ptr<ratchet::Mechanical> _current_mechanical;
+    std::weak_ptr<ratchet::actor::weapon::Mechanical> _current_mechanical;
     //! 武器
-    std::shared_ptr<ratchet::OmniWrench> _omniwrench;
+    std::shared_ptr<ratchet::actor::weapon::OmniWrench> _omniwrench;
     //! 武器
-    std::vector<std::shared_ptr<ratchet::Actor>> _children;
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _children;
     //! 武器
-    std::shared_ptr<ratchet::Weapon> _current_weapon;
+    std::shared_ptr<ratchet::actor::weapon::Weapon> _current_weapon;
     //! プレイヤー
     std::weak_ptr<ratchet::PlayerComponent> _player_com;
     //! 腕の位置
@@ -67,7 +69,7 @@ public:
     /// 通知
     /// </summary>
     /// <param name="change"></param>
-    virtual void OnNotify(std::shared_ptr<ratchet::Weapon> change) override;
+    virtual void OnNotify(std::shared_ptr<ratchet::actor::weapon::Weapon> change) override;
     /// <summary>
     /// 通知
     /// </summary>
@@ -101,18 +103,18 @@ public:
     /// </summary>
     /// <param name="tag"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Actor> GetChild(const std::string& tag) const;
+    std::shared_ptr<ratchet::actor::Actor> GetChild(const std::string& tag) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Mechanical> GetCurrentMechanical(void) const;
+    std::shared_ptr<ratchet::actor::weapon::Mechanical> GetCurrentMechanical(void) const;
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddChild(const std::shared_ptr<ratchet::Actor>& ptr);
+    void AddChild(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// プッシュ
     /// </summary>
@@ -139,7 +141,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(ratchet::Actor::Param* param) override;
+    virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
     /// <summary>
     /// 入力
     /// </summary>
@@ -166,4 +168,6 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_H
+}
+}
+#endif // !RATCHET_ACTOR_CHARACTER_PLAYER_H

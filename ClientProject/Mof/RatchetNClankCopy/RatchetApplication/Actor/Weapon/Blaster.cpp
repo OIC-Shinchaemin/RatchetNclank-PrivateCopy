@@ -5,7 +5,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-ratchet::Blaster::Blaster() :
+ratchet::actor::weapon::Blaster::Blaster() :
     super() {
     super::SetName("Blaster");
     super::_shot_speed = 5.0f;
@@ -14,16 +14,16 @@ ratchet::Blaster::Blaster() :
     super::_bullet_count = super::_bullet_count_max;
 }
 
-ratchet::Blaster::~Blaster() {
+ratchet::actor::weapon::Blaster::~Blaster() {
 }
 
-bool ratchet::Blaster::IsAction(void) const {
+bool ratchet::actor::weapon::Blaster::IsAction(void) const {
     return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_M);
 }
 
-bool ratchet::Blaster::Fire(const def::Transform& transform) {
+bool ratchet::actor::weapon::Blaster::Fire(const def::Transform& transform) {
     super::Fire(transform);
-    auto param = ratchet::Bullet::Param();
+    auto param = ratchet::actor::bullet::Bullet::Param();
     param.transform = transform;
 
     if (super::_lock_on_position.has_value()) {
@@ -38,7 +38,7 @@ bool ratchet::Blaster::Fire(const def::Transform& transform) {
         param.speed = speed;
     } // else
 
-    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BlasterBullet>("../Resource/builder/blaster_bullet.json", &param);
+    auto add = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::bullet::BlasterBullet>("../Resource/builder/blaster_bullet.json", &param);
     add->Start(param);
     Observable::Notify("AddRequest", add);
     return true;

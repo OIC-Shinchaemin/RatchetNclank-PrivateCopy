@@ -25,7 +25,7 @@ std::optional<Mof::CSphere> ratchet::SightCollisionComponent::GetSphere(void) {
     if (_sight_recognition.expired()) {
         return std::optional<Mof::CSphere>();
     } // if
-    if (super::GetOwner() ->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner() ->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto sight = _sight_recognition.lock();
@@ -48,7 +48,7 @@ std::optional<ratchet::SightObject> ratchet::SightCollisionComponent::GetSightOb
     if (_sight_recognition.expired()) {
         return std::optional<ratchet::SightObject>();
     } // if
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<ratchet::SightObject>();
     } // if
     return ratchet::SightObject(super::GetOwner()->GetPosition(), super::GetOwner()->GetRotate());

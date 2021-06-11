@@ -3,9 +3,9 @@
 #include "../../Component/VelocityComponent.h"
 
 
-ratchet::BombGloveEffect::BombGloveEffect() :
+ratchet::actor::effect::BombGloveEffect::BombGloveEffect() :
     super() {
 }
 
-ratchet::BombGloveEffect::~BombGloveEffect() {
+ratchet::actor::effect::BombGloveEffect::~BombGloveEffect() {
 }

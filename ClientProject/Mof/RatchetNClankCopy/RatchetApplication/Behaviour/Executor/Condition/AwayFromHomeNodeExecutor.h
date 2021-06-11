@@ -12,7 +12,7 @@ class AwayFromHomeNodeExecutor : public ratchet::behaviour::ConditionalNodeExecu
 public:
     struct NodeArgs {
         //! アクター
-        std::weak_ptr<ratchet::Actor> actor;
+        std::weak_ptr<ratchet::actor::Actor> actor;
     };
 private:
     //! 実行引数

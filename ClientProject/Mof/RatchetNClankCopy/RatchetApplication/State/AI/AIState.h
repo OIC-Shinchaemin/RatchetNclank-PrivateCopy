@@ -7,7 +7,7 @@
 #include <memory>
 #include <string>
 
-#include "../../Actor.h"
+#include "../../Actor/Actor.h"
 #include "../../Behaviour/Executor/INodeExecutor.h"
 
 
@@ -18,7 +18,7 @@ class AIState : public base::core::State {
     using super = base::core::State;
 protected:
     //! 通知
-    std::weak_ptr<ratchet::Actor> _actor;
+    std::weak_ptr<ratchet::actor::Actor> _actor;
     //! ビヘイビア実行
     ratchet::behaviour::NodeExecutorPtr _behaviour_executor;
     /// <summary>
@@ -26,7 +26,7 @@ protected:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Actor> GetActor(void) const;
+    std::shared_ptr<ratchet::actor::Actor> GetActor(void) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -40,7 +40,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetActor(const std::shared_ptr<ratchet::Actor>& ptr);
+    virtual void SetActor(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

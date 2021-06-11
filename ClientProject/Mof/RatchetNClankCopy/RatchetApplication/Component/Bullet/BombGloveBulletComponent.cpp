@@ -8,19 +8,19 @@
 
 bool ratchet::BombGloveBulletComponent::CollisionEnemy(const ratchet::CollisionInfo& in) {
     // expord start
-    auto param = ratchet::ParticleEffect::Param();
-    auto update_param = ratchet::ParticleEffect::UpdateParam();
+    auto param = ratchet::actor::effect::ParticleEffect::Param();
+    auto update_param = ratchet::actor::effect::ParticleEffect::UpdateParam();
     param.transform.position = super::GetOwner()->GetPosition();
     param.transform.scale = Mof::CVector3(0.2f, 0.2f, 0.2f);
     param.color = def::color_rgba::kRed;
     param.life_time = 0.7f;
     update_param.scale = Mof::CVector3(0.001f, 0.001f, 0.001f);
 
-    auto info = ratchet::ParticleEffect::Info();
+    auto info = ratchet::actor::effect::ParticleEffect::Info();
     info.init_param = std::move(param);
     info.update_param = std::move(update_param);
 
-    auto effect = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
+    auto effect = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::effect::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
     effect->Start(std::move(info));
     super::GetOwner()->Notify("AddRequest", effect);
 
@@ -55,19 +55,19 @@ bool ratchet::BombGloveBulletComponent::Initialize(void) {
                                "EnemyCollisionComponent",
                                ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
         // expord start
-        auto param = ratchet::ParticleEffect::Param();
-        auto update_param = ratchet::ParticleEffect::UpdateParam();
+        auto param = ratchet::actor::effect::ParticleEffect::Param();
+        auto update_param = ratchet::actor::effect::ParticleEffect::UpdateParam();
         param.transform.position = super::GetOwner()->GetPosition();
         param.transform.scale = Mof::CVector3(0.2f, 0.2f, 0.2f);
         param.color = def::color_rgba::kRed;
         param.life_time = 0.7f;
         update_param.scale = Mof::CVector3(0.001f, 0.001f, 0.001f);
 
-        auto info = ratchet::ParticleEffect::Info();
+        auto info = ratchet::actor::effect::ParticleEffect::Info();
         info.init_param = std::move(param);
         info.update_param = std::move(update_param);
  
-        auto effect = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
+        auto effect = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::effect::BombGloveEffect>("../Resource/builder/bomb_glove_effect.json", &param);
         effect->Start(std::move(info));
         super::GetOwner()->Notify("AddRequest", effect);
 

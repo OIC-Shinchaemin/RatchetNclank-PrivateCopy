@@ -3,23 +3,23 @@
 #include "../../Component/VelocityComponent.h"
 
 
-ratchet::BombGloveBullet::BombGloveBullet() :
+ratchet::actor::bullet::BombGloveBullet::BombGloveBullet() :
     super() {
     _exist_time.Initialize(5.0f, false);
 }
 
-ratchet::BombGloveBullet::~BombGloveBullet() {
+ratchet::actor::bullet::BombGloveBullet::~BombGloveBullet() {
 }
 
-float ratchet::BombGloveBullet::GetGravity(void) const {
+float ratchet::actor::bullet::BombGloveBullet::GetGravity(void) const {
     return 0.25f;
 }
 
-float ratchet::BombGloveBullet::GetDrag(void) const {
+float ratchet::actor::bullet::BombGloveBullet::GetDrag(void) const {
     return 1.0f;
 }
 
-bool ratchet::BombGloveBullet::Update(float delta_time) {
+bool ratchet::actor::bullet::BombGloveBullet::Update(float delta_time) {
     super::BulletUpdate(delta_time);
 
     auto v = super::GetComponent<ratchet::VelocityComponent>();
@@ -32,12 +32,12 @@ bool ratchet::BombGloveBullet::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::BombGloveBullet::Render(void) {
+bool ratchet::actor::bullet::BombGloveBullet::Render(void) {
     ::CGraphicsUtilities::RenderSphere(Mof::CSphere(super::GetPosition(), 0.2f), def::color_rgba::kBlue);
     return true;
 }
 
-void ratchet::BombGloveBullet::Start(const ratchet::BombGloveBullet::Param& in) {
+void ratchet::actor::bullet::BombGloveBullet::Start(const ratchet::actor::bullet::BombGloveBullet::Param& in) {
     super::Start(in);
     auto v = super::GetComponent<ratchet::VelocityComponent>();
     v->SetGravity(this->GetGravity());

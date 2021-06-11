@@ -1,5 +1,5 @@
-#ifndef RATCHET_BOMB_GLOVE_EFFECT_H
-#define RATCHET_BOMB_GLOVE_EFFECT_H
+#ifndef RATCHET_ACTOR_EFFECT_BOMB_GLOVE_EFFECT_H
+#define RATCHET_ACTOR_EFFECT_BOMB_GLOVE_EFFECT_H
 
 
 #include "ParticleEffect.h"
@@ -8,8 +8,10 @@
 
 
 namespace ratchet {
-class BombGloveEffect : public ratchet::ParticleEffect {
-    using super = ratchet::ParticleEffect;
+namespace actor {
+namespace effect {
+class BombGloveEffect : public ratchet::actor::effect::ParticleEffect {
+    using super = ratchet::actor::effect::ParticleEffect;
 public:
     /// <summary>
     /// コンストラクタ
@@ -36,4 +38,6 @@ public:
     //virtual void Start(const ratchet::ParticleEffect::Info& info);
 };
 }
-#endif // !RATCHET_BOMB_GLOVE_EFFECT_H
+}
+}
+#endif // !RATCHET_ACTOR_EFFECT_BOMB_GLOVE_EFFECT_H

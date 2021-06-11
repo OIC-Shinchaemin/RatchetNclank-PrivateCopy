@@ -14,7 +14,7 @@ class PlayerComponent : public ratchet::CharacterComponent {
     using super = ratchet::CharacterComponent;
 private:
     //! 標的
-    std::weak_ptr<ratchet::Actor> _target;
+    std::weak_ptr<ratchet::actor::Actor> _target;
     //! カーソル位置
     base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
@@ -42,7 +42,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<ratchet::Actor>& ptr);
+    void SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -59,7 +59,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<ratchet::Actor> GetTarget(void) const;
+    std::weak_ptr<ratchet::actor::Actor> GetTarget(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

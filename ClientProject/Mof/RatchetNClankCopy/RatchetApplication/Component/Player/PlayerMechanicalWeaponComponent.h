@@ -10,7 +10,7 @@ class PlayerMechanicalWeaponComponent : public ratchet::UpdateComponent {
     using super = ratchet::UpdateComponent;
 private:
     //! 武器
-    std::weak_ptr<ratchet::Actor> _weapon;
+    std::weak_ptr<ratchet::actor::Actor> _weapon;
 public:
     /// <summary>
     /// コンストラクタ

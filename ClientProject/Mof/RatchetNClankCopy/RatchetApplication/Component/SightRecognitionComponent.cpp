@@ -63,7 +63,7 @@ float ratchet::SightRecognitionComponent::GetRange(void) const {
     return this->_range;
 }
 
-const std::vector<std::weak_ptr<ratchet::Actor>>& ratchet::SightRecognitionComponent::GetRecognized(void) const {
+const std::vector<std::weak_ptr<ratchet::actor::Actor>>& ratchet::SightRecognitionComponent::GetRecognized(void) const {
     return this->_recognized;
 }
 
@@ -105,7 +105,7 @@ bool ratchet::SightRecognitionComponent::Update(float delta_time) {
             if (!_recognized.empty()) {
                 auto pos = super::GetOwner()->GetPosition();
                 auto far_pos = math::vec3::kOne * std::numeric_limits<float>::max();
-                auto it = std::min_element(_recognized.begin(), _recognized.end(), [pos, far_pos](std::weak_ptr<ratchet::Actor>a, std::weak_ptr<ratchet::Actor> b) {
+                auto it = std::min_element(_recognized.begin(), _recognized.end(), [pos, far_pos](std::weak_ptr<ratchet::actor::Actor>a, std::weak_ptr<ratchet::actor::Actor> b) {
                     auto a_pos = a.expired() ? far_pos : a.lock()->GetPosition();
                     auto b_pos = b.expired() ? far_pos : b.lock()->GetPosition();
                     return

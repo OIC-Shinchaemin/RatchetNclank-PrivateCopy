@@ -21,7 +21,7 @@ std::string ratchet::OmniWrenchCollisionComponent::GetType(void) const {
 }
 
 std::optional<Mof::CSphere> ratchet::OmniWrenchCollisionComponent::GetSphere(void) {
-    if (super::GetOwner()->GetState() == ratchet::ActorState::End) {
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();

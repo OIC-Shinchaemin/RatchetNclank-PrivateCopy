@@ -1,13 +1,15 @@
-#ifndef RATCHET_BOMB_GLOVE_BULLET_H
-#define RATCHET_BOMB_GLOVE_BULLET_H
+#ifndef RATCHET_ACTOR_BULLET_BOMB_GLOVE_BULLET_H
+#define RATCHET_ACTOR_BULLET_BOMB_GLOVE_BULLET_H
 
 
 #include "Bullet.h"
 
 
 namespace ratchet {
-class BombGloveBullet : public ratchet::Bullet {
-    using super = ratchet::Bullet;
+namespace actor {
+namespace bullet {
+class BombGloveBullet : public ratchet::actor::bullet::Bullet {
+    using super = ratchet::actor::bullet::Bullet;
 public:
     /// <summary>
     /// コンストラクタ
@@ -45,7 +47,9 @@ public:
     /// 発射
     /// </summary>
     /// <param name="in"></param>
-    void Start(const ratchet::Bullet::Param& in);
+    void Start(const Bullet::Param& in);
 };
 }
-#endif // !RATCHET_BOMB_GLOVE_BULLET_H
+}
+}
+#endif // !RATCHET_ACTOR_BULLET_BOMB_GLOVE_BULLET_H

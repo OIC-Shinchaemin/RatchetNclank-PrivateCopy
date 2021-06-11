@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include "../Actor.h"
+#include "../Actor/Actor.h"
 #include "../Component/Collision/Object/CollisionComponent.h"
 #include "../Component/Collision/Algolithm/CollisionAlgolithm.h"
 #include "../Factory/Factory.h"
@@ -14,7 +14,7 @@
 namespace ratchet {
 namespace game {
 class PhysicsWorld {
-    using ActorPtr = std::shared_ptr<ratchet::Actor>;
+    using ActorPtr = std::shared_ptr<ratchet::actor::Actor>;
     using ObjectPtr = std::shared_ptr<ratchet::CollisionComponent>;
     using ObjectArray = std::vector<ObjectPtr>;
 private:

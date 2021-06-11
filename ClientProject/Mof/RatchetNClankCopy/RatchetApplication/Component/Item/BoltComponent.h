@@ -11,9 +11,9 @@ class BoltComponent : public ratchet::UpdateComponent {
     using super = ratchet::UpdateComponent;
 private:
     //! アクターパラメータ
-    ratchet::Bolt::Param _param;
+    ratchet::actor::item::Bolt::Param _param;
     //! 移動先
-    std::weak_ptr<ratchet::Actor> _player;
+    std::weak_ptr<ratchet::actor::Actor> _player;
     //! 状態
     std::weak_ptr<class BoltActionStateComponent> _state_com;
 public:
@@ -36,7 +36,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetActorParam(const ratchet::Bolt::Param& param);
+    void SetActorParam(const ratchet::actor::item::Bolt::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -48,13 +48,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const ratchet::Bolt::Param& GetActorParam(void) const;
+    const ratchet::actor::item::Bolt::Param& GetActorParam(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Actor> GetPlayer(void) const;
+    std::shared_ptr<ratchet::actor::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

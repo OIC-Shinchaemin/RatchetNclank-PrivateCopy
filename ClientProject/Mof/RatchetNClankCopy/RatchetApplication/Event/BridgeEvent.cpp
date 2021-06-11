@@ -16,7 +16,7 @@ ratchet::event::BridgeEvent::BridgeEvent() :
 ratchet::event::BridgeEvent::~BridgeEvent() {
 }
 
-void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     if (type == "EnemyDead") {
         if (ptr) {
             ptr->RemoveObserver(std::dynamic_pointer_cast<ratchet::event::BridgeEvent>(shared_from_this()));
@@ -93,7 +93,7 @@ bool ratchet::event::BridgeEvent::Update(float delta_time) {
     return true;
 }
 
-void ratchet::event::BridgeEvent::AddTriggerActor(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::event::BridgeEvent::AddTriggerActor(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     _for_bridge_event_actors.push_back(ptr);
     ptr->AddObserver(std::dynamic_pointer_cast<ratchet::event::BridgeEvent>(shared_from_this()));
 }

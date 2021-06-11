@@ -14,10 +14,11 @@
 #include "../Core/Define.h"
 
 
-
 namespace base {
 namespace ui {
-class UIItem : public std::enable_shared_from_this<base::ui::UIItem>, public base::core::Observable<const std::shared_ptr<base::ui::UIItem>&, const char* > {
+class UIItem : 
+    public std::enable_shared_from_this<base::ui::UIItem>,
+    public core::Observable<const std::shared_ptr<base::ui::UIItem>&, const char* > {
 protected:
     //! –¼‘O
     std::string _name;

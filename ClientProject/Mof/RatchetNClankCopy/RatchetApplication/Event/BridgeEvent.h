@@ -9,7 +9,7 @@
 #include <memory>
 #include <vector>
 
-#include "../Actor.h"
+#include "../Actor/Actor.h"
 #include "../Stage/Stage.h"
 #include "../Camera/Camera.h"
 #include "../Camera/FirstPersonCameraController.h"
@@ -18,11 +18,11 @@
 
 namespace ratchet {
 namespace event {
-class BridgeEvent : public ratchet::event::Event, public base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&> {
+class BridgeEvent : public ratchet::event::Event, public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
     using super = ratchet::event::Event;
 private:
     //! 通知アクター
-    std::vector<std::shared_ptr<ratchet::Actor>> _for_bridge_event_actors;
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _for_bridge_event_actors;
     //! ステージ
     Stage* _stage;
     //! カメラ
@@ -49,7 +49,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -89,7 +89,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddTriggerActor(const std::shared_ptr<ratchet::Actor>& ptr);
+    void AddTriggerActor(const std::shared_ptr<ratchet::actor::Actor>& ptr);
     /// <summary>
     /// 削除
     /// </summary>

@@ -23,7 +23,7 @@ ratchet::ActionComponent::ActionComponent(const ActionComponent& obj) :
 ratchet::ActionComponent::~ActionComponent() {
 }
 
-void ratchet::ActionComponent::SetOwner(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::ActionComponent::SetOwner(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     super::SetOwner(ptr);
     for (auto& com : _children) {
         com.second->SetOwner(ptr);
