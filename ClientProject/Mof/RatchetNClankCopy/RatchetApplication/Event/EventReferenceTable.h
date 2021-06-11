@@ -9,7 +9,8 @@
 
 
 namespace ratchet {
-class EventReferenceTable : public std::enable_shared_from_this<ratchet::EventReferenceTable> {
+namespace event {
+class EventReferenceTable : public std::enable_shared_from_this<ratchet::event::EventReferenceTable> {
 private:
     std::unordered_map<std::string, std::any> _data_table;
     /// <summary>
@@ -26,7 +27,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    static ratchet::EventReferenceTable& Singleton(void);
+    static ratchet::event::EventReferenceTable& Singleton(void);
     /// <summary>
     /// Žæ“¾
     /// </summary>
@@ -60,5 +61,6 @@ public:
     /// <param name=""></param>
     void Reset(void);
 };
+}
 }
 #endif // !RATCHET_EVENT_REFERENCE_TABLE_H

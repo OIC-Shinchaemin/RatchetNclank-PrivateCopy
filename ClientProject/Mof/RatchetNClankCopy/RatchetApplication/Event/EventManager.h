@@ -9,12 +9,13 @@
 
 
 namespace ratchet {
-class EventManager : 
-    public std::enable_shared_from_this<ratchet::EventManager>,
-    public base::core::Observer<const char*, const std::shared_ptr<ratchet::Event>&> {
+namespace event {
+class EventManager :
+    public std::enable_shared_from_this<ratchet::event::EventManager>,
+    public base::core::Observer<const char*, const std::shared_ptr<ratchet::event::Event>&> {
 private:
     //! ゲームイベント
-    std::vector<std::shared_ptr<ratchet::Event>> _events;
+    std::vector<std::shared_ptr<ratchet::event::Event>> _events;
     //! データ
     //ratchet::EventReferenceTable _table;
 public:
@@ -31,7 +32,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::Event>& ptr) override;
+    virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::event::Event>& ptr) override;
     /// <summary>
     /// 作成
     /// </summary>
@@ -71,5 +72,6 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
+}
 }
 #endif // !RATCHET_EVENT_MANAGER_H

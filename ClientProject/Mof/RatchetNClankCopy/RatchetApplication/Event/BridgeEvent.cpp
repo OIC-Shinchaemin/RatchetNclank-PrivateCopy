@@ -1,7 +1,7 @@
 #include "BridgeEvent.h"
 
 
-ratchet::BridgeEvent::BridgeEvent() :
+ratchet::event::BridgeEvent::BridgeEvent() :
     super(),
     _for_bridge_event_actors(),
     _stage(),
@@ -13,13 +13,13 @@ ratchet::BridgeEvent::BridgeEvent() :
     _bridge_view_camera_controller.SetDumping(10.0f);
 }
 
-ratchet::BridgeEvent::~BridgeEvent() {
+ratchet::event::BridgeEvent::~BridgeEvent() {
 }
 
-void ratchet::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<ratchet::Actor>& ptr) {
     if (type == "EnemyDead") {
         if (ptr) {
-            ptr->RemoveObserver(std::dynamic_pointer_cast<ratchet::BridgeEvent>(shared_from_this()));
+            ptr->RemoveObserver(std::dynamic_pointer_cast<ratchet::event::BridgeEvent>(shared_from_this()));
             ut::SwapPopback(_for_bridge_event_actors, ptr);
         } // if
 
@@ -54,23 +54,23 @@ void ratchet::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<ratc
     } // if
 }
 
-void ratchet::BridgeEvent::SetStage(Stage* ptr) {
+void ratchet::event::BridgeEvent::SetStage(Stage* ptr) {
     this->_stage = ptr;
 }
 
-base::core::Observable<const ratchet::CameraController::CameraInfo&>* ratchet::BridgeEvent::GetCameraSubject(void) {
+base::core::Observable<const ratchet::CameraController::CameraInfo&>* ratchet::event::BridgeEvent::GetCameraSubject(void) {
     return &this->_camera_subject;
 }
 
-base::core::Observable<const ratchet::GameQuest&>* ratchet::BridgeEvent::GetQuestSubject(void) {
+base::core::Observable<const ratchet::GameQuest&>* ratchet::event::BridgeEvent::GetQuestSubject(void) {
     return &this->_quest_subject;
 }
 
-bool ratchet::BridgeEvent::EventActorsEmpty(void) const {
+bool ratchet::event::BridgeEvent::EventActorsEmpty(void) const {
     return _for_bridge_event_actors.empty();
 }
 
-bool ratchet::BridgeEvent::Initialize(void) {
+bool ratchet::event::BridgeEvent::Initialize(void) {
     _for_bridge_event_actors.clear();
 
     _bridge_view_camera = std::make_shared<ratchet::Camera>();
@@ -80,7 +80,7 @@ bool ratchet::BridgeEvent::Initialize(void) {
     return true;
 }
 
-bool ratchet::BridgeEvent::Update(float delta_time) {
+bool ratchet::event::BridgeEvent::Update(float delta_time) {
     auto camera_info = ratchet::CameraController::CameraInfo();
     camera_info.ideal_position = _ideal_position;
     _bridge_view_camera_controller.Update(delta_time, camera_info);
@@ -93,12 +93,12 @@ bool ratchet::BridgeEvent::Update(float delta_time) {
     return true;
 }
 
-void ratchet::BridgeEvent::AddTriggerActor(const std::shared_ptr<ratchet::Actor>& ptr) {
+void ratchet::event::BridgeEvent::AddTriggerActor(const std::shared_ptr<ratchet::Actor>& ptr) {
     _for_bridge_event_actors.push_back(ptr);
-    ptr->AddObserver(std::dynamic_pointer_cast<ratchet::BridgeEvent>(shared_from_this()));
+    ptr->AddObserver(std::dynamic_pointer_cast<ratchet::event::BridgeEvent>(shared_from_this()));
 }
 
-void ratchet::BridgeEvent::AllDelete(void) {
+void ratchet::event::BridgeEvent::AllDelete(void) {
     _for_bridge_event_actors.clear();
     this->OnNotify("EnemyDead", nullptr);
     for (auto actor : _for_bridge_event_actors) {

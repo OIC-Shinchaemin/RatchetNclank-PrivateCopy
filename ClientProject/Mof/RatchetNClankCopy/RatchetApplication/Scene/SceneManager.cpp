@@ -72,7 +72,7 @@ void ratchet::scene::SceneManager::SetGameManager(std::weak_ptr<ratchet::GameMan
     this->_managers.game_manager = ptr;
 }
 
-void ratchet::scene::SceneManager::SetEventManager(std::weak_ptr<ratchet::EventManager> ptr) {
+void ratchet::scene::SceneManager::SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr) {
     this->_managers.event_manager = ptr;
 }
 

@@ -1,7 +1,7 @@
 #include "StageViewEvent.h"
 
 
-ratchet::StageViewEvent::StageViewEvent() :
+ratchet::event::StageViewEvent::StageViewEvent() :
     super(),
     _stage_view_camera(std::make_shared<ratchet::Camera>()),
     _stage_view_camera_controller(std::make_shared<ratchet::AutoCameraController>()) {
@@ -10,19 +10,19 @@ ratchet::StageViewEvent::StageViewEvent() :
     _stage_view_camera->Update();
 }
 
-ratchet::StageViewEvent::~StageViewEvent() {
+ratchet::event::StageViewEvent::~StageViewEvent() {
 }
 
-ratchet::StageViewEvent::CameraObservable* ratchet::StageViewEvent::GetCameraObservable(void) {
+ratchet::event::StageViewEvent::CameraObservable* ratchet::event::StageViewEvent::GetCameraObservable(void) {
     return &this->_camera_subject;
 }
 
-bool ratchet::StageViewEvent::Initialize(void) {
+bool ratchet::event::StageViewEvent::Initialize(void) {
     _stage_view_camera_controller->RegisterGlobalCamera();
     return true;
 }
 
-bool ratchet::StageViewEvent::Update(float delta_time) {
+bool ratchet::event::StageViewEvent::Update(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
         _stage_view_camera_controller->ForceTick(_stage_view_camera_controller->GetTimeMax());
     } // if

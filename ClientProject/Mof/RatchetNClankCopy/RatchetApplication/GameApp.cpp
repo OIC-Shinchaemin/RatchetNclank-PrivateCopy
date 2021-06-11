@@ -16,7 +16,7 @@ MofBool CGameApp::Initialize(void) {
     _camera_manager = std::make_shared<ratchet::CameraManager>();
     _light_manager = std::make_shared<ratchet::light::LightManager>();
     _game_manager = ut::MakeSharedWithRelease<ratchet::GameManager>();
-    _event_manager = ut::MakeSharedWithRelease<ratchet::EventManager>();
+    _event_manager = ut::MakeSharedWithRelease<ratchet::event::EventManager>();
     _ui_canvas = std::make_shared<base::ui::UICanvas>();
     _scene_manager = ut::MakeSharedWithRelease<ratchet::scene::SceneManager>();
 

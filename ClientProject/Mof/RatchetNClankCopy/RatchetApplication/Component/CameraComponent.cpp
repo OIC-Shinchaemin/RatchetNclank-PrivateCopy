@@ -267,7 +267,7 @@ bool ratchet::CameraComponent::Initialize(void) {
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
 
-    ratchet::EventReferenceTable::Singleton().Register("CameraComponent", std::dynamic_pointer_cast<ratchet::CameraComponent>(shared_from_this()));
+    ratchet::event::EventReferenceTable::Singleton().Register("CameraComponent", std::dynamic_pointer_cast<ratchet::CameraComponent>(shared_from_this()));
     return true;
 }
 
@@ -293,7 +293,7 @@ bool ratchet::CameraComponent::Release(void) {
     _controller_map.clear();
     _state_com.reset();
 
-    ratchet::EventReferenceTable::Singleton().Dispose("CameraComponent");
+    ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
     return true;
 }
 

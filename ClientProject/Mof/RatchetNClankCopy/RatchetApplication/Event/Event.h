@@ -8,10 +8,11 @@
 
 
 namespace ratchet {
-class Event : public std::enable_shared_from_this<ratchet::Event> {
+namespace event {
+class Event : public std::enable_shared_from_this<ratchet::event::Event> {
 protected:
     //! 通知用
-    base::core::Observable<const char*, const std::shared_ptr<ratchet::Event>&> _subject;
+    base::core::Observable<const char*, const std::shared_ptr<ratchet::event::Event>&> _subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,7 +27,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const char*, const std::shared_ptr<ratchet::Event>&>* GetSubject(void);
+    base::core::Observable<const char*, const std::shared_ptr<ratchet::event::Event>&>* GetSubject(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -40,5 +41,6 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time);
 };
+}
 }
 #endif // !RATCHET_EVENT_H

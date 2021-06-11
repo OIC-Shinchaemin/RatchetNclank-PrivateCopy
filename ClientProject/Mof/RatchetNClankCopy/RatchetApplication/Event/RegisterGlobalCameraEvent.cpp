@@ -1,20 +1,20 @@
 #include "RegisterGlobalCameraEvent.h"
 
 
-ratchet::RegisterGlobalCameraEvent::RegisterGlobalCameraEvent() :
+ratchet::event::RegisterGlobalCameraEvent::RegisterGlobalCameraEvent() :
     super() {
 }
 
-ratchet::RegisterGlobalCameraEvent::~RegisterGlobalCameraEvent() {
+ratchet::event::RegisterGlobalCameraEvent::~RegisterGlobalCameraEvent() {
 }
 
-void ratchet::RegisterGlobalCameraEvent::OnNotify(const ratchet::CameraController::CameraInfo& info) {
+void ratchet::event::RegisterGlobalCameraEvent::OnNotify(const ratchet::CameraController::CameraInfo& info) {
 }
 
-bool ratchet::RegisterGlobalCameraEvent::Initialize(void) {
+bool ratchet::event::RegisterGlobalCameraEvent::Initialize(void) {
     return true;
 }
 
-bool ratchet::RegisterGlobalCameraEvent::Update(float delta_time) {
+bool ratchet::event::RegisterGlobalCameraEvent::Update(float delta_time) {
     return true;
 }

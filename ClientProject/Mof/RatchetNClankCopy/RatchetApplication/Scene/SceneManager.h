@@ -35,7 +35,7 @@ class SceneManager : public std::enable_shared_from_this<ratchet::scene::SceneMa
         //! ゲーム
         std::weak_ptr<ratchet::GameManager> game_manager;
         //! ゲームイベント
-        std::weak_ptr<ratchet::EventManager> event_manager;
+        std::weak_ptr<ratchet::event::EventManager> event_manager;
     };
     struct CreateStruct {
         //! ファクトリー
@@ -126,7 +126,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetEventManager(std::weak_ptr<ratchet::EventManager> ptr);
+    void SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr);
     /// <summary>
     /// 初期化
     /// </summary>

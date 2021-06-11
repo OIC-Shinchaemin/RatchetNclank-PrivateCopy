@@ -45,7 +45,7 @@ private:
     //! ゲーム
     std::weak_ptr<ratchet::GameManager> _game;
     //! イベント
-    std::weak_ptr<ratchet::EventManager> _event;
+    std::weak_ptr<ratchet::event::EventManager> _event;
     /// <summary>
     /// 追加
     /// </summary>
@@ -114,7 +114,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetEventManager(std::weak_ptr<ratchet::EventManager> ptr);
+    void SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -141,7 +141,7 @@ void ratchet::scene::GameScene::SetGameManager(std::weak_ptr<ratchet::GameManage
     this->_game = ptr;
 }
 
-void ratchet::scene::GameScene::SetEventManager(std::weak_ptr<ratchet::EventManager> ptr) {
+void ratchet::scene::GameScene::SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr) {
     this->_event = ptr;
 }
 
@@ -170,16 +170,16 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
 
 bool ratchet::scene::GameScene::Initialize(void) {
     _stage.Initialize();
-    ratchet::EventReferenceTable::Singleton().Reset();
+    ratchet::event::EventReferenceTable::Singleton().Reset();
 
-    std::shared_ptr<ratchet::BridgeEvent> bridge_event;
-    std::shared_ptr<ratchet::ShipEvent> ship_event;
-    std::shared_ptr<ratchet::StageViewEvent> stage_view_event;
+    std::shared_ptr<ratchet::event::BridgeEvent> bridge_event;
+    std::shared_ptr<ratchet::event::ShipEvent> ship_event;
+    std::shared_ptr<ratchet::event::StageViewEvent> stage_view_event;
     if (auto e = _event.lock()) {
         e->InitializeGameEvent();
-        bridge_event = e->CreateGameEvent<ratchet::BridgeEvent>();
-        ship_event = e->CreateGameEvent<ratchet::ShipEvent>();
-        stage_view_event = e->CreateGameEvent<ratchet::StageViewEvent>();
+        bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
+        ship_event = e->CreateGameEvent<ratchet::event::ShipEvent>();
+        stage_view_event = e->CreateGameEvent<ratchet::event::StageViewEvent>();
     } // if
 
     bridge_event->SetStage(&_stage);
@@ -323,7 +323,7 @@ bool ratchet::scene::GameScene::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         if (auto game = _game.lock()) {
             if (!game->GetGamePauseSystem()->IsActive()) {
-                if (!_event.lock()->GetEvent<ratchet::StageViewEvent>()) {
+                if (!_event.lock()->GetEvent<ratchet::event::StageViewEvent>()) {
                     if (this->_state != super::State::Pause) {
                         this->_state = super::State::Pause;
                         _pause_menu_subject.Notify(true);

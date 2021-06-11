@@ -22,7 +22,7 @@ private:
     //! ゲーム
     std::shared_ptr<ratchet::GameManager> _game_manager;
     //! イベント
-    std::shared_ptr<ratchet::EventManager> _event_manager;
+    std::shared_ptr<ratchet::event::EventManager> _event_manager;
     //! UI
     std::shared_ptr<base::ui::UICanvas> _ui_canvas;
     //! シーン

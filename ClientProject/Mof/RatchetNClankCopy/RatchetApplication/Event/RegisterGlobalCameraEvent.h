@@ -11,8 +11,9 @@
 
 
 namespace ratchet {
-class RegisterGlobalCameraEvent : public ratchet::Event, public base::core::Observer<const ratchet::CameraController::CameraInfo&> {
-    using super = ratchet::Event;
+namespace event {
+class RegisterGlobalCameraEvent : public ratchet::event::Event, public base::core::Observer<const ratchet::CameraController::CameraInfo&> {
+    using super = ratchet::event::Event;
 private:
     //! ’Ê’m—p
     //ratchet::RegisterGlobalCameraEvent::CameraObservable _camera_subject;
@@ -49,5 +50,6 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
 };
+}
 }
 #endif // !RATCHET_REGISTER_GLOBAL_CAMERA_EVENT_H

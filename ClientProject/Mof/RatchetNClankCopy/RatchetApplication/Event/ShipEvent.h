@@ -13,10 +13,11 @@
 
 
 namespace ratchet {
-class ShipEvent : public ratchet::Event,
+namespace event {
+class ShipEvent : public ratchet::event::Event,
     public base::core::Observer<const ratchet::CameraController::CameraInfo&>,
     public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
-    using super = ratchet::Event;
+    using super = ratchet::event::Event;
 private:
     //! ’Ê’m—p
     base::core::Observable<const char*, const std::shared_ptr<ratchet::Actor>& > _ship_event_subject;
@@ -70,5 +71,6 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
 };
+}
 }
 #endif // !RATCHET_SHIP_EVENT_H

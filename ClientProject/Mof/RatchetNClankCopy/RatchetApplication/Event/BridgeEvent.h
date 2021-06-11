@@ -17,8 +17,9 @@
 
 
 namespace ratchet {
-class BridgeEvent : public ratchet::Event, public base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&> {
-    using super = ratchet::Event;
+namespace event {
+class BridgeEvent : public ratchet::event::Event, public base::core::Observer<const char*, const std::shared_ptr<ratchet::Actor>&> {
+    using super = ratchet::event::Event;
 private:
     //! 通知アクター
     std::vector<std::shared_ptr<ratchet::Actor>> _for_bridge_event_actors;
@@ -95,5 +96,6 @@ public:
     /// <param name=""></param>
     void AllDelete(void);
 };
+}
 }
 #endif // !RATCHET_BRIDGE_EVENT_H

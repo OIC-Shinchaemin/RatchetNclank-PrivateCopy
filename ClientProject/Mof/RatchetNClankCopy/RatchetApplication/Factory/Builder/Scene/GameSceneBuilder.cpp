@@ -14,7 +14,7 @@ void builder::GameSceneBuilder::SetGameManager(std::weak_ptr<ratchet::GameManage
     this->_game = ptr;
 }
 
-void builder::GameSceneBuilder::SetEventManager(std::weak_ptr<ratchet::EventManager> ptr) {
+void builder::GameSceneBuilder::SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr) {
     this->_event = ptr;
 }
 

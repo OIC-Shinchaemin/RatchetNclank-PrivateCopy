@@ -1,5 +1,5 @@
-#ifndef RATCHET_STAGE_VIEW_EVENT_H
-#define RATCHET_STAGE_VIEW_EVENT_H
+#ifndef RATCHET_EVENT_STAGE_VIEW_EVENT_H
+#define RATCHET_EVENT_STAGE_VIEW_EVENT_H
 
 
 #include "Event.h"
@@ -12,8 +12,9 @@
 
 
 namespace ratchet {
-class StageViewEvent : public ratchet::Event {
-    using super = ratchet::Event;
+namespace event {
+class StageViewEvent : public ratchet::event::Event {
+    using super = ratchet::event::Event;
     using CameraObservable = base::core::Observable<const ratchet::CameraController::CameraInfo&>;
 private:
     //! カメラ
@@ -21,7 +22,7 @@ private:
     //! カメラコントローラ
     std::shared_ptr<ratchet::AutoCameraController> _stage_view_camera_controller;
     //! 通知用
-    ratchet::StageViewEvent::CameraObservable _camera_subject;
+    ratchet::event::StageViewEvent::CameraObservable _camera_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -36,7 +37,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    ratchet::StageViewEvent::CameraObservable* GetCameraObservable(void);
+    ratchet::event::StageViewEvent::CameraObservable* GetCameraObservable(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -51,4 +52,5 @@ public:
     virtual bool Update(float delta_time) override;
 };
 }
-#endif // !RATCHET_BRIDGE_EVENT_H
+}
+#endif // !RATCHET_EVENT_BRIDGE_EVENT_H
