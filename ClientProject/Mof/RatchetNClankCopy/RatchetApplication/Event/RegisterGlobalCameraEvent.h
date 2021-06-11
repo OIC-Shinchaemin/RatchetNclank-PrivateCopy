@@ -12,7 +12,7 @@
 
 namespace ratchet {
 namespace event {
-class RegisterGlobalCameraEvent : public ratchet::event::Event, public base::core::Observer<const ratchet::CameraController::CameraInfo&> {
+class RegisterGlobalCameraEvent : public ratchet::event::Event, public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&> {
     using super = ratchet::event::Event;
 private:
     //! 通知用
@@ -30,7 +30,7 @@ public:
     /// イベント
     /// </summary>
     /// <param name="info"></param>
-    virtual void OnNotify(const ratchet::CameraController::CameraInfo& info) override;
+    virtual void OnNotify(const ratchet::camera::CameraController::CameraInfo& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>

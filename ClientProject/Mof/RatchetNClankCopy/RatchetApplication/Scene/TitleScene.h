@@ -27,9 +27,9 @@ private:
     //! ステージ
     Stage _stage;
     //! カメラ
-    std::shared_ptr<ratchet::Camera> _stage_view_camera;
+    std::shared_ptr<ratchet::camera::Camera> _stage_view_camera;
     //! カメラコントローラ
-    base::core::ServiceLocator<ratchet::CameraController> _camera_controller;
+    base::core::ServiceLocator<ratchet::camera::CameraController> _camera_controller;
     //! 表示用
     std::shared_ptr<ratchet::Player> _demo_actor;
     //! 通知用

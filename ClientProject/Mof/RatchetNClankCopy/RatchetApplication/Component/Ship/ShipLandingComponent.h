@@ -10,9 +10,9 @@
 
 namespace ratchet {
 class ShipLandingComponent : public ratchet::ShipActionComponent,
-    public base::core::Observable<const ratchet::CameraController::CameraInfo&> {
+    public base::core::Observable<const ratchet::camera::CameraController::CameraInfo&> {
     using super = ratchet::ShipActionComponent;
-    using Observable = base::core::Observable<const ratchet::CameraController::CameraInfo&>;
+    using Observable = base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>;
 public:
     /// <summary>
     /// コンストラクタ
@@ -44,7 +44,7 @@ public:
     /// 追加
     /// </summary>
     /// <param name="ptr"></param>
-    void AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::CameraController::CameraInfo&>>& ptr);
+    void AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>

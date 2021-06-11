@@ -26,13 +26,13 @@ private:
     //! ステージ
     Stage* _stage;
     //! カメラ
-    std::shared_ptr<ratchet::Camera> _bridge_view_camera;
+    std::shared_ptr<ratchet::camera::Camera> _bridge_view_camera;
     //! カメラコントローラ
-    ratchet::FirstPersonCameraController _bridge_view_camera_controller;
+    ratchet::camera::FirstPersonCameraController _bridge_view_camera_controller;
     //! 位置
     Mof::CVector3 _ideal_position;
     //! 通知用
-    base::core::Observable<const ratchet::CameraController::CameraInfo&> _camera_subject;
+    base::core::Observable<const ratchet::camera::CameraController::CameraInfo&> _camera_subject;
     //! 通知用
     base::core::Observable<const ratchet::GameQuest&> _quest_subject;
 public:
@@ -60,7 +60,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const ratchet::CameraController::CameraInfo&>* GetCameraSubject(void);
+    base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>* GetCameraSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -15,12 +15,12 @@ namespace ratchet {
 namespace event {
 class StageViewEvent : public ratchet::event::Event {
     using super = ratchet::event::Event;
-    using CameraObservable = base::core::Observable<const ratchet::CameraController::CameraInfo&>;
+    using CameraObservable = base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>;
 private:
     //! カメラ
-    std::shared_ptr<ratchet::Camera> _stage_view_camera;
+    std::shared_ptr<ratchet::camera::Camera> _stage_view_camera;
     //! カメラコントローラ
-    std::shared_ptr<ratchet::AutoCameraController> _stage_view_camera_controller;
+    std::shared_ptr<ratchet::camera::AutoCameraController> _stage_view_camera_controller;
     //! 通知用
     ratchet::event::StageViewEvent::CameraObservable _camera_subject;
 public:

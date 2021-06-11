@@ -15,7 +15,7 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
 
     _demo_actor->Update(delta_time);
 
-    auto camera_info = ratchet::CameraController::CameraInfo();
+    auto camera_info = ratchet::camera::CameraController::CameraInfo();
 
     auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
     _camera_controller.GetService()->SetAzimuth(
@@ -105,14 +105,14 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             super::LoadComplete();
 
             // camera
-            _stage_view_camera = (std::make_shared<ratchet::Camera>());
+            _stage_view_camera = (std::make_shared<ratchet::camera::Camera>());
             auto pos = math::vec3::kZero;
             auto offset = math::vec3::kNegUnitZ;
             _stage_view_camera->SetPosition(pos - offset);
             _stage_view_camera->SetTarget(pos);
             _stage_view_camera->Initialize();
             _stage_view_camera->Update();
-            _camera_controller.SetService(std::make_shared<ratchet::FollowCameraController>());
+            _camera_controller.SetService(std::make_shared<ratchet::camera::FollowCameraController>());
             _camera_controller.GetService()->SetCamera(_stage_view_camera);
             _camera_controller.GetService()->RegisterGlobalCamera();
             _camera_controller.GetService()->SetAzimuth(0.0f);

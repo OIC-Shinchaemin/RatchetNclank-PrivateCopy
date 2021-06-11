@@ -20,7 +20,7 @@ std::string_view ratchet::ShipLandingComponent::GetStateType(void) const {
     return state::ShipActionStateType::kShipActionLandingState;
 }
 
-void ratchet::ShipLandingComponent::AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::CameraController::CameraInfo&>>& ptr) {
+void ratchet::ShipLandingComponent::AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>>& ptr) {
     Observable::AddObserver(ptr);
 }
 
@@ -47,7 +47,7 @@ bool ratchet::ShipLandingComponent::Start(void) {
 bool ratchet::ShipLandingComponent::End(void) {
     super::End();
 
-    auto camera_info = ratchet::CameraController::CameraInfo();
+    auto camera_info = ratchet::camera::CameraController::CameraInfo();
     auto global = ::CGraphicsUtilities::GetCamera();
 
     camera_info.start_position = global->GetViewPosition();

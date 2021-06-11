@@ -1,5 +1,5 @@
-#ifndef RATCHET_AUTO_CAMERA_CONTROLLER_H
-#define RATCHET_AUTO_CAMERA_CONTROLLER_H
+#ifndef RATCHET_CAMERA_AUTO_CAMERA_CONTROLLER_H
+#define RATCHET_CAMERA_AUTO_CAMERA_CONTROLLER_H
 
 
 #include "CameraController.h"
@@ -9,8 +9,9 @@
 
 
 namespace ratchet {
-class AutoCameraController : public ratchet::CameraController {
-    using super = ratchet::CameraController;
+namespace camera {
+class AutoCameraController : public ratchet::camera::CameraController {
+    using super = ratchet::camera::CameraController;
 private:
     //! éûä‘
     float _time_max;
@@ -49,17 +50,13 @@ public:
     /// <param name="time"></param>
     void ForceTick(float time);
     /// <summary>
-    /// í«â¡
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::CameraController::CameraInfo&>>& ptr);
-    /// <summary>
     /// çXêV
     /// </summary>
     /// <param name="delta_time"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time, const ratchet::CameraController::CameraInfo& info) override;
+    virtual bool Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) override;
 };
 }
-#endif // !RATCHET_AUTO_CAMERA_CONTROLLER_H
+}
+#endif // !RATCHET_CAMERA_AUTO_CAMERA_CONTROLLER_H

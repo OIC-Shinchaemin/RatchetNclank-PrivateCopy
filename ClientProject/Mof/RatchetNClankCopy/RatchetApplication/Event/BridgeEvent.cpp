@@ -30,7 +30,7 @@ void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_p
 
             // view
             _bridge_view_camera_controller.RegisterGlobalCamera();
-            auto info = ratchet::CameraController::CameraInfo();
+            auto info = ratchet::camera::CameraController::CameraInfo();
             auto globel = Mof::CGraphicsUtilities::GetCamera();
             info.start_position = globel->GetViewPosition();
             info.camera_front = globel->GetViewFront();
@@ -41,7 +41,7 @@ void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_p
                     info.ideal_position = _ideal_position;
                     
                     {
-                        auto send_info = ratchet::CameraController::CameraInfo();
+                        auto send_info = ratchet::camera::CameraController::CameraInfo();
                         send_info.start_position = _ideal_position;
                         _camera_subject.Notify(send_info);
                     }
@@ -58,7 +58,7 @@ void ratchet::event::BridgeEvent::SetStage(Stage* ptr) {
     this->_stage = ptr;
 }
 
-base::core::Observable<const ratchet::CameraController::CameraInfo&>* ratchet::event::BridgeEvent::GetCameraSubject(void) {
+base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>* ratchet::event::BridgeEvent::GetCameraSubject(void) {
     return &this->_camera_subject;
 }
 
@@ -73,7 +73,7 @@ bool ratchet::event::BridgeEvent::EventActorsEmpty(void) const {
 bool ratchet::event::BridgeEvent::Initialize(void) {
     _for_bridge_event_actors.clear();
 
-    _bridge_view_camera = std::make_shared<ratchet::Camera>();
+    _bridge_view_camera = std::make_shared<ratchet::camera::Camera>();
     _bridge_view_camera->Initialize();
     _bridge_view_camera->Update();
     _bridge_view_camera_controller.SetCamera(_bridge_view_camera);
@@ -81,7 +81,7 @@ bool ratchet::event::BridgeEvent::Initialize(void) {
 }
 
 bool ratchet::event::BridgeEvent::Update(float delta_time) {
-    auto camera_info = ratchet::CameraController::CameraInfo();
+    auto camera_info = ratchet::camera::CameraController::CameraInfo();
     camera_info.ideal_position = _ideal_position;
     _bridge_view_camera_controller.Update(delta_time, camera_info);
 

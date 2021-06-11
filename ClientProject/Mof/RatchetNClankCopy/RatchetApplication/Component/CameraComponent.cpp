@@ -48,11 +48,11 @@ void ratchet::CameraComponent::ControlByKeyboardFollow(void) {
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
         auto front = _controller_map.at(_current_mode)->GetViewFront();
 
-        _current_mode = ratchet::CameraController::CameraMode::FirstPerson;
+        _current_mode = ratchet::camera::CameraController::CameraMode::FirstPerson;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
         auto con = _controller_map.at(_current_mode);
 
-        auto info = ratchet::CameraController::CameraInfo();
+        auto info = ratchet::camera::CameraController::CameraInfo();
         info.start_position = prev_pos;
         info.camera_front = front;
         info.ideal_position = eye_pos;
@@ -93,10 +93,10 @@ void ratchet::CameraComponent::ControlByKeyboardFirstPerson(void) {
     else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
 
-        _current_mode = ratchet::CameraController::CameraMode::Follow;
+        _current_mode = ratchet::camera::CameraController::CameraMode::Follow;
         _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
         float ideal_angle_y = super::GetOwner()->GetRotate().y + math::kHalfPi;
-        auto info = ratchet::CameraController::CameraInfo();
+        auto info = ratchet::camera::CameraController::CameraInfo();
         info.start_position = prev_pos;
 
         auto con = _controller_map.at(_current_mode);
@@ -107,7 +107,7 @@ void ratchet::CameraComponent::ControlByKeyboardFirstPerson(void) {
 }
 
 void ratchet::CameraComponent::ControlByKeyboard(void) {
-    using Mode = ratchet::CameraController::CameraMode;
+    using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->ControlByKeyboardFollow();
@@ -155,7 +155,7 @@ void ratchet::CameraComponent::ControlByGamepad(void) {
     } // else if
 }
 
-void ratchet::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ratchet::CameraController> controller) {
+void ratchet::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (_collisioned_stage) {
         controller->SetAzimuth(math::ToDegree(_preview_angle.x));
         controller->SetAltitude(math::ToDegree(_preview_angle.y));
@@ -163,7 +163,7 @@ void ratchet::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ra
     } // if
 
     auto pos = super::GetOwner()->GetPosition();
-    auto camera_info = ratchet::CameraController::CameraInfo();
+    auto camera_info = ratchet::camera::CameraController::CameraInfo();
 
     auto state_com = _state_com.lock();
     if (state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpUpState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpDownState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionDoubleJumpState)) {
@@ -179,11 +179,11 @@ void ratchet::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ra
     controller->Update(delta_time, camera_info);
 }
 
-void ratchet::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::CameraController> controller) {
+void ratchet::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     auto eye_pos = super::GetOwner()->GetPosition();
     eye_pos.y += 1.0f;
 
-    auto camera_info = ratchet::CameraController::CameraInfo();
+    auto camera_info = ratchet::camera::CameraController::CameraInfo();
     camera_info.ideal_position = eye_pos;
     controller->Update(delta_time, camera_info);
 }
@@ -193,7 +193,7 @@ ratchet::CameraComponent::CameraComponent(int priority) :
     _target(),
     _camera(),
     _camera_controller(),
-    _current_mode(ratchet::CameraController::CameraMode::Follow),
+    _current_mode(ratchet::camera::CameraController::CameraMode::Follow),
     _ideal_fps_camera_angle(0.0f),
     _default_distance(8.0f),
     _preview_position(),
@@ -206,7 +206,7 @@ ratchet::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _target(),
     _camera(),
     _camera_controller(),
-    _current_mode(ratchet::CameraController::CameraMode::Follow),
+    _current_mode(ratchet::camera::CameraController::CameraMode::Follow),
     _ideal_fps_camera_angle(0.0f),
     _default_distance(obj._default_distance),
     _preview_position(),
@@ -217,7 +217,7 @@ ratchet::CameraComponent::CameraComponent(const CameraComponent& obj) :
 ratchet::CameraComponent::~CameraComponent() {
 }
 
-void ratchet::CameraComponent::OnNotify(const ratchet::CameraController::CameraInfo& info) {
+void ratchet::CameraComponent::OnNotify(const ratchet::camera::CameraController::CameraInfo& info) {
     _camera->SetPosition(info.start_position);
     _camera->SetTarget(info.target_position);
     _camera->Update();
@@ -254,11 +254,11 @@ bool ratchet::CameraComponent::Initialize(void) {
     _state_com = super::GetOwner()->GetComponent<ratchet::PlayerStateComponent>();
 
     // camera
-    using Mode = ratchet::CameraController::CameraMode;
-    _camera = (std::make_shared<ratchet::Camera>());
+    using Mode = ratchet::camera::CameraController::CameraMode;
+    _camera = (std::make_shared<ratchet::camera::Camera>());
     _camera->Initialize();
-    _controller_map.emplace(Mode::Follow, std::make_shared<ratchet::FollowCameraController>());
-    _controller_map.emplace(Mode::FirstPerson, std::make_shared<ratchet::FirstPersonCameraController>());
+    _controller_map.emplace(Mode::Follow, std::make_shared<ratchet::camera::FollowCameraController>());
+    _controller_map.emplace(Mode::FirstPerson, std::make_shared<ratchet::camera::FirstPersonCameraController>());
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
     _controller_map.at(Mode::FirstPerson)->SetCamera(_camera);
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
@@ -276,7 +276,7 @@ bool ratchet::CameraComponent::Update(float delta_time) {
     this->ControlByKeyboard();
 
     auto camera_controller = _camera_controller.GetService();
-    using Mode = ratchet::CameraController::CameraMode;
+    using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->UpdateFollow(delta_time, camera_controller); break;
@@ -310,7 +310,7 @@ bool ratchet::CameraComponent::DebugRender(void) {
         ::CGraphicsUtilities::RenderString(
             20.0f, 200.0f, "camera state = %s", name);
     };
-    using Mode = ratchet::CameraController::CameraMode;
+    using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             render("Mode::Follow");

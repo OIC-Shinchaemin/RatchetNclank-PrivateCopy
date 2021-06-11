@@ -16,7 +16,7 @@ private:
     //! リソース
     std::shared_ptr<ratchet::ResourceMgr> _resource_manager;
     //! カメラ
-    std::shared_ptr<ratchet::CameraManager> _camera_manager;
+    std::shared_ptr<ratchet::camera::CameraManager> _camera_manager;
     //! ライト
     std::shared_ptr<ratchet::light::LightManager> _light_manager;
     //! ゲーム

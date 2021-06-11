@@ -15,22 +15,22 @@
 namespace ratchet {
 namespace event {
 class ShipEvent : public ratchet::event::Event,
-    public base::core::Observer<const ratchet::CameraController::CameraInfo&>,
+    public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>,
     public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
     using super = ratchet::event::Event;
 private:
     //! 通知用
     base::core::Observable<const char*, const std::shared_ptr<ratchet::Actor>& > _ship_event_subject;
     //! カメラ
-    std::shared_ptr<ratchet::Camera> _ship_view_camera;
+    std::shared_ptr<ratchet::camera::Camera> _ship_view_camera;
     //! カメラコントローラ
-    ratchet::PointCameraController _ship_view_camera_controller;
+    ratchet::camera::PointCameraController _ship_view_camera_controller;
     //! 位置
     Mof::CVector3 _ideal_position;
     //! カメラ情報
-    ratchet::CameraController::CameraInfo _info;
+    ratchet::camera::CameraController::CameraInfo _info;
     //! プレイヤービュー
-    std::weak_ptr<base::core::Observer<const ratchet::CameraController::CameraInfo&>> _camera_com;
+    std::weak_ptr<base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>> _camera_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -51,7 +51,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
-    virtual void OnNotify(const ratchet::CameraController::CameraInfo& info) override;
+    virtual void OnNotify(const ratchet::camera::CameraController::CameraInfo& info) override;
     /// <summary>
     /// ゲッター
     /// </summary>

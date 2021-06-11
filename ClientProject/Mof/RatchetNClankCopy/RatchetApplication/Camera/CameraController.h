@@ -1,5 +1,5 @@
-#ifndef RATCHET_CAMERA_CONTROLLER_H
-#define RATCHET_CAMERA_CONTROLLER_H
+#ifndef RATCHET_CAMERA_CAMERA_CONTROLLER_H
+#define RATCHET_CAMERA_CAMERA_CONTROLLER_H
 
 
 #include <memory>
@@ -10,6 +10,7 @@
 
 
 namespace ratchet {
+namespace camera {
 class CameraController {
 public:
     enum class CameraMode {
@@ -45,9 +46,9 @@ public:
     };
 protected:
     //! マネージャ
-    static std::weak_ptr<ratchet::CameraManager> _manager;
+    static std::weak_ptr<ratchet::camera::CameraManager> _manager;
     //! カメラ
-    std::shared_ptr<ratchet::Camera>_camera;
+    std::shared_ptr<ratchet::camera::Camera>_camera;
     //! 位置
     Mof::CVector3 _position;
     //! 対象
@@ -55,13 +56,13 @@ protected:
     //! 位置
     Mof::CVector3 _preview_position;
     //! パラメータ
-    ratchet::CameraController::Param _param;
+    ratchet::camera::CameraController::Param _param;
 public:
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    static void SetCameraManager(const std::shared_ptr<ratchet::CameraManager>& ptr);
+    static void SetCameraManager(const std::shared_ptr<ratchet::camera::CameraManager>& ptr);
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -79,7 +80,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetCamera(const std::shared_ptr<ratchet::Camera>& ptr);
+    void SetCamera(const std::shared_ptr<ratchet::camera::Camera>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -109,13 +110,13 @@ public:
     /// セット
     /// </summary>
     /// <param name="info"></param>
-    virtual void SetInfo(const ratchet::CameraController::CameraInfo& info);
+    virtual void SetInfo(const ratchet::camera::CameraController::CameraInfo& info);
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::Camera> GetCamera(void) const;
+    std::shared_ptr<ratchet::camera::Camera> GetCamera(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -186,7 +187,7 @@ public:
     /// <param name="delta_time"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    virtual bool Update(float delta_time, const ratchet::CameraController::CameraInfo& info);
+    virtual bool Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info);
     /// <summary>
     /// 解放
     /// </summary>
@@ -201,4 +202,5 @@ public:
     bool RegisterGlobalCamera(void);
 };
 }
-#endif // !RATCHET_CAMERA_CONTROLLER_H
+}
+#endif // !RATCHET_CAMERA_CAMERA_CONTROLLER_H

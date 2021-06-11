@@ -1,7 +1,7 @@
 #include "FirstPersonCameraController.h"
 
 
-ratchet::FirstPersonCameraController::FirstPersonCameraController() :
+ratchet::camera::FirstPersonCameraController::FirstPersonCameraController() :
     super() {
     _param.azimuth = 0.0f;
     _param.altitude = 0.0f;
@@ -10,10 +10,10 @@ ratchet::FirstPersonCameraController::FirstPersonCameraController() :
     _param.dumping = std::sqrtf(_param.spring) * 1.5f;
 }
 
-ratchet::FirstPersonCameraController::~FirstPersonCameraController() {
+ratchet::camera::FirstPersonCameraController::~FirstPersonCameraController() {
 }
 
-void ratchet::FirstPersonCameraController::SetInfo(const ratchet::CameraController::CameraInfo& info) {
+void ratchet::camera::FirstPersonCameraController::SetInfo(const ratchet::camera::CameraController::CameraInfo& info) {
     puts("FirstPersonCameraController");
     _position = info.start_position;
 
@@ -25,7 +25,7 @@ void ratchet::FirstPersonCameraController::SetInfo(const ratchet::CameraControll
     _target = info.ideal_position + offset;
 }
 
-bool ratchet::FirstPersonCameraController::Update(float delta_time, const ratchet::CameraController::CameraInfo& info) {
+bool ratchet::camera::FirstPersonCameraController::Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) {
     _preview_position = _position;
 
     auto displace = _position - info.ideal_position;

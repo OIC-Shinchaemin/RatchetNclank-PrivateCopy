@@ -1,7 +1,7 @@
 #include "AutoCameraController.h"
 
 
-ratchet::AutoCameraController::AutoCameraController() :
+ratchet::camera::AutoCameraController::AutoCameraController() :
     super(),
     _time_max(6.0f),
     _time(_time_max),
@@ -33,18 +33,18 @@ ratchet::AutoCameraController::AutoCameraController() :
     } // for
 }
 
-ratchet::AutoCameraController::~AutoCameraController() {
+ratchet::camera::AutoCameraController::~AutoCameraController() {
 }
 
-float ratchet::AutoCameraController::GetTimeMax(void) const {
+float ratchet::camera::AutoCameraController::GetTimeMax(void) const {
     return this->_time_max;
 }
 
-bool ratchet::AutoCameraController::IsCompleted(void) const {
+bool ratchet::camera::AutoCameraController::IsCompleted(void) const {
     return _time_max <= _timer();
 }
 
-void ratchet::AutoCameraController::ForceTick(float time) {
+void ratchet::camera::AutoCameraController::ForceTick(float time) {
     if (_timer.Tick(time)) {
         auto info = super::CameraInfo();
         auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());
@@ -55,11 +55,11 @@ void ratchet::AutoCameraController::ForceTick(float time) {
 
 }
 /*
-void ratchet::AutoCameraController::AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::CameraController::CameraInfo&>>& ptr) {
+void ratchet::camera::AutoCameraController::AddObserver(const std::shared_ptr<base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>>& ptr) {
     Observable::AddObserver(ptr);
 }
 */
-bool ratchet::AutoCameraController::Update(float delta_time, const ratchet::CameraController::CameraInfo& info) {
+bool ratchet::camera::AutoCameraController::Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) {
     if (_timer.Tick(delta_time)) {
         auto info = super::CameraInfo();
         auto pos = _bezier_curve_animation_position.CalculatePointPosition(_timer());

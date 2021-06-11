@@ -40,7 +40,7 @@ void ratchet::event::ShipEvent::OnNotify(const char* type, const std::shared_ptr
     } // if
 }
 
-void ratchet::event::ShipEvent::OnNotify(const ratchet::CameraController::CameraInfo& info) {
+void ratchet::event::ShipEvent::OnNotify(const ratchet::camera::CameraController::CameraInfo& info) {
     puts("ShipEvent::OnNotify const ratchet::CameraController::CameraInfo& info");
     this->_info = info;
 
@@ -57,7 +57,7 @@ base::core::Observable<const char*, const std::shared_ptr<ratchet::Actor>&>* rat
 bool ratchet::event::ShipEvent::Initialize(void) {
     _ideal_position = Mof::CVector3();
 
-    _ship_view_camera = std::make_shared<ratchet::Camera>();
+    _ship_view_camera = std::make_shared<ratchet::camera::Camera>();
     _ship_view_camera->Initialize();
     _ship_view_camera->Update();
     _ship_view_camera_controller.SetCamera(_ship_view_camera);
@@ -66,7 +66,7 @@ bool ratchet::event::ShipEvent::Initialize(void) {
 }
 
 bool ratchet::event::ShipEvent::Update(float delta_time) {
-    auto info = ratchet::CameraController::CameraInfo();
+    auto info = ratchet::camera::CameraController::CameraInfo();
     info.ideal_position = Mof::CVector3();
     _ship_view_camera_controller.Update(delta_time, info);
     return true;

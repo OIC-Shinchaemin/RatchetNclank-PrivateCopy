@@ -13,7 +13,7 @@ MofBool CGameApp::Initialize(void) {
 
     ratchet::Gamepad::GetInstance().Create();
     _resource_manager = ut::MakeSharedWithRelease<ratchet::ResourceMgr>();
-    _camera_manager = std::make_shared<ratchet::CameraManager>();
+    _camera_manager = std::make_shared<ratchet::camera::CameraManager>();
     _light_manager = std::make_shared<ratchet::light::LightManager>();
     _game_manager = ut::MakeSharedWithRelease<ratchet::GameManager>();
     _event_manager = ut::MakeSharedWithRelease<ratchet::event::EventManager>();
@@ -24,7 +24,7 @@ MofBool CGameApp::Initialize(void) {
     ratchet::FactoryManager::Singleton().SetGameManager(_game_manager);
     ratchet::Component::SetResourceManager(_resource_manager);
     ratchet::Component::SetUICanvas(_ui_canvas);
-    ratchet::CameraController::SetCameraManager(_camera_manager);
+    ratchet::camera::CameraController::SetCameraManager(_camera_manager);
 
     _light_manager->Initialize();
 

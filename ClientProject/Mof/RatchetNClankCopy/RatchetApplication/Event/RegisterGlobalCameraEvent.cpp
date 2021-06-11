@@ -8,7 +8,7 @@ ratchet::event::RegisterGlobalCameraEvent::RegisterGlobalCameraEvent() :
 ratchet::event::RegisterGlobalCameraEvent::~RegisterGlobalCameraEvent() {
 }
 
-void ratchet::event::RegisterGlobalCameraEvent::OnNotify(const ratchet::CameraController::CameraInfo& info) {
+void ratchet::event::RegisterGlobalCameraEvent::OnNotify(const ratchet::camera::CameraController::CameraInfo& info) {
 }
 
 bool ratchet::event::RegisterGlobalCameraEvent::Initialize(void) {

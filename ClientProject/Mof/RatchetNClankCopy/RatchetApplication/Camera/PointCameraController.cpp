@@ -1,7 +1,7 @@
 #include "PointCameraController.h"
 
 
-ratchet::PointCameraController::PointCameraController() :
+ratchet::camera::PointCameraController::PointCameraController() :
     super(),
     _ideal_position() {
     _param.azimuth = 0.0f;
@@ -11,16 +11,16 @@ ratchet::PointCameraController::PointCameraController() :
     _param.dumping = std::sqrtf(_param.spring) * 1.5f;
 }
 
-ratchet::PointCameraController::~PointCameraController() {
+ratchet::camera::PointCameraController::~PointCameraController() {
 }
 
-void ratchet::PointCameraController::SetInfo(const ratchet::CameraController::CameraInfo& info) {
+void ratchet::camera::PointCameraController::SetInfo(const ratchet::camera::CameraController::CameraInfo& info) {
     super::_position = info.start_position;
     super::_target = info.target_position;
     _ideal_position = Mof::CVector3();
 }
 
-bool ratchet::PointCameraController::Update(float delta_time, const ratchet::CameraController::CameraInfo& info) {
+bool ratchet::camera::PointCameraController::Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) {
     auto& [azimuth, altitude, distance, spring, dumping, velocity] = _param;
     
     auto displace = _position - _ideal_position;
