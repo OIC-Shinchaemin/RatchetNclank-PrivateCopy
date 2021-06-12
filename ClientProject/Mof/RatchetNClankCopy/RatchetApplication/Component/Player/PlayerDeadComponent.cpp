@@ -1,45 +1,45 @@
 #include "PlayerDeadComponent.h"
 
 
-ratchet::PlayerDeadComponent::PlayerDeadComponent(int priority) :
+ratchet::component::player::action::PlayerDeadComponent::PlayerDeadComponent(int priority) :
     super(priority) {
 }
 
-ratchet::PlayerDeadComponent::PlayerDeadComponent(const PlayerDeadComponent& obj) :
+ratchet::component::player::action::PlayerDeadComponent::PlayerDeadComponent(const PlayerDeadComponent& obj) :
     super(obj) {
 }
 
-ratchet::PlayerDeadComponent::~PlayerDeadComponent() {
+ratchet::component::player::action::PlayerDeadComponent::~PlayerDeadComponent() {
 }
 
-std::string ratchet::PlayerDeadComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerDeadComponent::GetType(void) const {
     return "PlayerDeadComponent";
 }
 
-std::string_view ratchet::PlayerDeadComponent::GetStateType(void) const {
-    return state::PlayerActionStateType::kPlayerActionDeadState;
+std::string_view ratchet::component::player::action::PlayerDeadComponent::GetStateType(void) const {
+    return ratchet::state::PlayerActionStateType::kPlayerActionDeadState;
 }
 
-bool ratchet::PlayerDeadComponent::Input(void) {
+bool ratchet::component::player::action::PlayerDeadComponent::Input(void) {
     return false;
 }
 
-bool ratchet::PlayerDeadComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerDeadComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::GetOwner()->Notify("PlayerDead", super::GetOwner());
     } // if
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerDeadComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerDeadComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerDeadComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerDeadComponent>(*this);
 }
 
-bool ratchet::PlayerDeadComponent::Start(void) {
+bool ratchet::component::player::action::PlayerDeadComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
-    super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionDeadState);
+    super::ChangeMotionState(ratchet::state::PlayerMotionStateType::kPlayerMotionDeadState);
     return true;
 }

@@ -5,28 +5,28 @@
 #include "../../Item/NanotechItem/NanotechItemActionStateComponent.h"
 
 
-ratchet::NanotechItemCollisionComponent::NanotechItemCollisionComponent(int priority) :
+ratchet::component::collision::NanotechItemCollisionComponent::NanotechItemCollisionComponent(int priority) :
     super(priority),
     _height(0.4f),
     _volume(_height),
     _state_com(){
 }
 
-ratchet::NanotechItemCollisionComponent::NanotechItemCollisionComponent(const NanotechItemCollisionComponent& obj) :
+ratchet::component::collision::NanotechItemCollisionComponent::NanotechItemCollisionComponent(const NanotechItemCollisionComponent& obj) :
     super(obj),
     _height(obj._height),
     _volume(obj._volume),
     _state_com() {
 }
 
-ratchet::NanotechItemCollisionComponent::~NanotechItemCollisionComponent() {
+ratchet::component::collision::NanotechItemCollisionComponent::~NanotechItemCollisionComponent() {
 }
 
-std::string ratchet::NanotechItemCollisionComponent::GetType(void) const {
-    return ratchet::CollisionComponentType::kNanotechItemCollisionComponent;
+std::string ratchet::component::collision::NanotechItemCollisionComponent::GetType(void) const {
+    return ratchet::component::collision::CollisionComponentType::kNanotechItemCollisionComponent;
 }
 
-std::optional<Mof::CSphere> ratchet::NanotechItemCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> ratchet::component::collision::NanotechItemCollisionComponent::GetSphere(void) {
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
@@ -35,38 +35,38 @@ std::optional<Mof::CSphere> ratchet::NanotechItemCollisionComponent::GetSphere(v
     return Mof::CSphere(pos, _volume);
 }
 
-std::optional<Mof::CBoxAABB> ratchet::NanotechItemCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::component::collision::NanotechItemCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> ratchet::NanotechItemCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::component::collision::NanotechItemCollisionComponent::GetRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::CRay3D> ratchet::NanotechItemCollisionComponent::GetNextRay(void) {
+std::optional<Mof::CRay3D> ratchet::component::collision::NanotechItemCollisionComponent::GetNextRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> ratchet::NanotechItemCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::component::collision::NanotechItemCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<ratchet::SightObject> ratchet::NanotechItemCollisionComponent::GetSightObject(void) {
-    return std::optional<ratchet::SightObject>();
+std::optional<::ratchet::component::collision::SightObject> ratchet::component::collision::NanotechItemCollisionComponent::GetSightObject(void) {
+    return std::optional<::ratchet::component::collision::SightObject>();
 }
 
-bool ratchet::NanotechItemCollisionComponent::Initialize(void) {
+bool ratchet::component::collision::NanotechItemCollisionComponent::Initialize(void) {
     super::Initialize();
 
-    _state_com = super::GetOwner()->GetComponent<ratchet::NanotechItemActionStateComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::item::nanotechitem::NanotechItemActionStateComponent>();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::NanotechItemCollisionComponent::Clone(void) {
-    return std::make_shared<ratchet::NanotechItemCollisionComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::collision::NanotechItemCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::component::collision::NanotechItemCollisionComponent>(*this);
 }
 
-void ratchet::NanotechItemCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void ratchet::component::collision::NanotechItemCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetSphere().has_value()) {
         return;
     } // if

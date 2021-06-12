@@ -1,5 +1,5 @@
-#ifndef RATCHET_ENEMY_MELEE_ATTACK_COMPONENT_H
-#define RATCHET_ENEMY_MELEE_ATTACK_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ENEMY_ENEMY_MELEE_ATTACK_COMPONENT_H
+#define RATCHET_COMPONENT_ENEMY_ENEMY_MELEE_ATTACK_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -7,11 +7,17 @@
 #include <memory>
 
 #include "Base/Core/Timer.h"
+#include "../MotionComponent.h"
+#include "../MotionStateComponent.h"
 
 
 namespace ratchet {
-class EnemyMeleeAttackComponent : public ratchet::ActionComponent {
-    using super = ratchet::ActionComponent;
+namespace component {
+namespace collision { class EnemyMeleeAttackCollisionComponent; }
+
+namespace enemy {
+class EnemyMeleeAttackComponent : public ratchet::component::ActionComponent {
+    using super = ratchet::component::ActionComponent;
 private:
 private:
     //! 攻撃範囲
@@ -21,11 +27,11 @@ private:
     //! 攻撃開始までの猶予
     base::core::Timer _wait;
     //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
+    std::weak_ptr<ratchet::component::MotionComponent> _motion_com;
     //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
+    std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
     //! モーション
-    std::weak_ptr<class EnemyMeleeAttackCollisionComponent> _collision_com;
+    std::weak_ptr<ratchet::component::collision::EnemyMeleeAttackCollisionComponent> _collision_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -109,4 +115,6 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_ENEMY_ATTACK_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ENEMY_ENEMY_ATTACK_COMPONENT_H

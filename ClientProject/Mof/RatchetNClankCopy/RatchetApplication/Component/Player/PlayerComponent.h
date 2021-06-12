@@ -1,20 +1,23 @@
-#ifndef RATCHET_PLAYER_COMPONENT_H
-#define RATCHET_PLAYER_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_PLAYER_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_PLAYER_COMPONENT_H
 
 
 #include "../CharacterComponent.h"
 
 #include <memory>
 
+#include "../../Actor/Actor.h"
 #include "Base/Core/Observable.h"
 
 
 namespace ratchet {
-class PlayerComponent : public ratchet::CharacterComponent {
-    using super = ratchet::CharacterComponent;
+namespace component {
+namespace player {
+class PlayerComponent : public ::ratchet::component::CharacterComponent {
+    using super = ::ratchet::component::CharacterComponent;
 private:
     //! 標的
-    std::weak_ptr<ratchet::actor::Actor> _target;
+    std::weak_ptr<::ratchet::actor::Actor> _target;
     //! カーソル位置
     base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
@@ -42,7 +45,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr);
+    void SetTarget(const std::shared_ptr<::ratchet::actor::Actor>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -59,31 +62,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<ratchet::actor::Actor> GetTarget(void) const;
+    std::weak_ptr<::ratchet::actor::Actor> GetTarget(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     std::string GetNextTerrain(void) const;
-    /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //bool IsActionEnable(void);
-    /// <summary>
-    /// 有効化
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //bool EnableAction(void);
-    /// <summary>
-    /// 無効化
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //bool DisableAction(void);
     /// <summary>
     /// 初期化
     /// </summary>
@@ -107,7 +92,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_PLAYER_COMPONENT_H

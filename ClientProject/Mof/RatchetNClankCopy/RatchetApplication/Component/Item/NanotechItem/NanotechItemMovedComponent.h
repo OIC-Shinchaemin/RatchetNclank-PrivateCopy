@@ -1,5 +1,5 @@
-#ifndef RATCHET_NanotechItem_MOVED_COMPONENT_H
-#define RATCHET_NanotechItem_MOVED_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_MOVED_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_MOVED_COMPONENT_H
 
 
 #include "NanotechItemActionComponent.h"
@@ -8,8 +8,11 @@
 
 
 namespace ratchet {
-class NanotechItemMovedComponent : public ratchet::NanotechItemActionComponent {
-    using super = ratchet::NanotechItemActionComponent;
+namespace component {
+namespace item {
+namespace nanotechitem {
+class NanotechItemMovedComponent : public ratchet::component::item::nanotechitem::NanotechItemActionComponent {
+    using super = ratchet::component::item::nanotechitem::NanotechItemActionComponent;
 private:
     //! ‘¬“x
     Mof::CVector3 _speed;
@@ -82,4 +85,7 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_NanotechItem_MOVED_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_MOVED_COMPONENT_H

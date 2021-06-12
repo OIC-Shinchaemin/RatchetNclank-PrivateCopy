@@ -12,14 +12,14 @@ ratchet::SightPlayerCollisionAlgolithm::~SightPlayerCollisionAlgolithm() {
 }
 
 const char* ratchet::SightPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return ratchet::CollisionComponentType::kSightCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kSightCollisionComponent.c_str();
 }
 
 const char* ratchet::SightPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-bool ratchet::SightPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
+bool ratchet::SightPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::component::collision::CollisionComponent> object, std::shared_ptr<ratchet::component::collision::CollisionComponent> target, component::collision::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

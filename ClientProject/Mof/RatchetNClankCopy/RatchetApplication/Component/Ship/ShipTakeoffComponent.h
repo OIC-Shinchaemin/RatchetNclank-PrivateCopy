@@ -1,5 +1,5 @@
-#ifndef RATCHET_SHIP_TAKEOFF_COMPONENT_H
-#define RATCHET_SHIP_TAKEOFF_COMPONENT_H
+#ifndef RATCHET_COMPONENT_SHIP_SHIP_TAKEOFF_COMPONENT_H
+#define RATCHET_COMPONENT_SHIP_SHIP_TAKEOFF_COMPONENT_H
 
 
 #include "ShipActionComponent.h"
@@ -10,8 +10,10 @@
 
 
 namespace ratchet {
-class ShipTakeoffComponent : public ratchet::ShipActionComponent {
-    using super = ratchet::ShipActionComponent;
+namespace component {
+namespace ship {
+class ShipTakeoffComponent : public ratchet::component::ship::ShipActionComponent {
+    using super = ratchet::component::ship::ShipActionComponent;
 private:
     //! タイマー
     base::core::Timer _timer;
@@ -64,4 +66,6 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_SHIP_TAKEOFF_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_SHIP_SHIP_TAKEOFF_COMPONENT_H

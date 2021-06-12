@@ -9,63 +9,57 @@
 #include "../../BillboardComponent.h"
 
 
-ratchet::BulletItemComponent::BulletItemComponent(int priority) :
+ratchet::component::item::bulletitem::BulletItemComponent::BulletItemComponent(int priority) :
     super(priority),
     _param(),
     _player(),
     _state_com() {
 }
 
-ratchet::BulletItemComponent::BulletItemComponent(const BulletItemComponent& obj) :
+ratchet::component::item::bulletitem::BulletItemComponent::BulletItemComponent(const BulletItemComponent& obj) :
     super(obj),
     _param(),
     _player(),
     _state_com() {
 }
 
-ratchet::BulletItemComponent::~BulletItemComponent() {
+ratchet::component::item::bulletitem::BulletItemComponent::~BulletItemComponent() {
 }
 
-void ratchet::BulletItemComponent::SetActorParam(const ratchet::actor::item::BulletItem::Param& param) {
+void ratchet::component::item::bulletitem::BulletItemComponent::SetActorParam(const ratchet::actor::item::BulletItem::Param& param) {
     this->_param = param;
 }
 
-std::string ratchet::BulletItemComponent::GetType(void) const {
+std::string ratchet::component::item::bulletitem::BulletItemComponent::GetType(void) const {
     return "BulletItemComponent";
 }
 
-const ratchet::actor::item::BulletItem::Param& ratchet::BulletItemComponent::GetActorParam(void) const {
+const ratchet::actor::item::BulletItem::Param& ratchet::component::item::bulletitem::BulletItemComponent::GetActorParam(void) const {
     return this->_param;
 }
 
-std::shared_ptr<ratchet::actor::Actor> ratchet::BulletItemComponent::GetPlayer(void) const {
+std::shared_ptr<ratchet::actor::Actor> ratchet::component::item::bulletitem::BulletItemComponent::GetPlayer(void) const {
     if (auto ptr = _player.lock()) {
         return ptr;
     } // if
     return nullptr;
 }
 
-bool ratchet::BulletItemComponent::Initialize(void) {
+bool ratchet::component::item::bulletitem::BulletItemComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-
-
-    _state_com = super::GetOwner()->GetComponent<ratchet::BulletItemActionStateComponent>();
-    auto velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::item::bulletitem::BulletItemActionStateComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     velocity_com->SetGravity(0.8f);
 
-    auto billboard_com = super::GetOwner()->GetComponent<ratchet::BillboardComponent>();
+    auto billboard_com = super::GetOwner()->GetComponent<ratchet::component::BillboardComponent>();
     if (auto r = _resource_manager.lock()) {
         std::unordered_map<ratchet::actor::item::BulletItem::Type, std::string> path_map = {
             {ratchet::actor::item::BulletItem::Type::BombGlove, "../Resource/texture/icon/bomb_glove.png"},
             {ratchet::actor::item::BulletItem::Type::Pyrocitor, "../Resource/texture/icon/pyrocitor.png"},
             {ratchet::actor::item::BulletItem::Type::Blaster,   "../Resource/texture/icon/blaster.png"},
         };
-
-
-
-
 
         auto tex = r->Get<std::shared_ptr<Mof::CTexture>>(path_map.at(this->_param.type).c_str());
 
@@ -74,18 +68,18 @@ bool ratchet::BulletItemComponent::Initialize(void) {
 
 
 
-    auto coll_com = super::GetOwner()->GetComponent<ratchet::BulletItemCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::CollisionComponentType::kPlayerCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::BulletItemCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         super::GetOwner()->End();
         return true;
     }));
 
-    auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
-    sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
-                                 ratchet::CollisionComponentType::kPlayerCollisionComponent,
-                                 ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    auto sight_coll = super::GetOwner()->GetComponent<ratchet::component::collision::SightCollisionComponent>();
+    sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                                 ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent,
+                                 ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         if (auto state_com = _state_com.lock()) {
             if (state_com->CanTransition(state::BulletItemActionType::kGravitate)) {
                 state_com->ChangeState(state::BulletItemActionType::kGravitate);
@@ -97,15 +91,15 @@ bool ratchet::BulletItemComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::BulletItemComponent::Update(float delta_time) {
+bool ratchet::component::item::bulletitem::BulletItemComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::BulletItemComponent::Release(void) {
+bool ratchet::component::item::bulletitem::BulletItemComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BulletItemComponent::Clone(void) {
-    return std::make_shared<ratchet::BulletItemComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::bulletitem::BulletItemComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::bulletitem::BulletItemComponent>(*this);
 }

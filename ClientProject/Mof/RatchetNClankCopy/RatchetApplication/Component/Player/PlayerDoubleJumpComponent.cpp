@@ -3,14 +3,14 @@
 #include "PlayerMoveComponent.h"
 
 
-void ratchet::PlayerDoubleJumpComponent::InputJumpVelocity(float speed) {
+void ratchet::component::player::action::PlayerDoubleJumpComponent::InputJumpVelocity(float speed) {
     auto velocity_com = super::GetVelocityComponent();
     auto v = velocity_com->GetVelocity();
     v.y = speed;
     velocity_com->SetVelocity(v);
 }
 
-ratchet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
+ratchet::component::player::action::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
     super(priority),
     _jump_speed(0.0f),
     _jump_decrase(0.4f),
@@ -18,7 +18,7 @@ ratchet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(int priority) :
     _move_com() {
 }
 
-ratchet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJumpComponent& obj) :
+ratchet::component::player::action::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDoubleJumpComponent& obj) :
     super(obj),
     _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
@@ -26,28 +26,28 @@ ratchet::PlayerDoubleJumpComponent::PlayerDoubleJumpComponent(const PlayerDouble
     _move_com() {
 }
 
-ratchet::PlayerDoubleJumpComponent::~PlayerDoubleJumpComponent() {
+ratchet::component::player::action::PlayerDoubleJumpComponent::~PlayerDoubleJumpComponent() {
 }
 
-std::string ratchet::PlayerDoubleJumpComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerDoubleJumpComponent::GetType(void) const {
     return "PlayerDoubleJumpComponent";
 }
 
-std::string_view ratchet::PlayerDoubleJumpComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerDoubleJumpComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionDoubleJumpState;
 }
 
-void ratchet::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {
+void ratchet::component::player::action::PlayerDoubleJumpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }
 
-bool ratchet::PlayerDoubleJumpComponent::Initialize(void) {
+bool ratchet::component::player::action::PlayerDoubleJumpComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::player::action::PlayerMoveComponent>();
     return true;
 }
 
-bool ratchet::PlayerDoubleJumpComponent::Input(void) {
+bool ratchet::component::player::action::PlayerDoubleJumpComponent::Input(void) {
     auto move_com = _move_com.lock();
     auto& [in, move_angle, move_flag] = _input_info;
     move_flag = move_com->AquireInputData(in, move_angle);
@@ -60,7 +60,7 @@ bool ratchet::PlayerDoubleJumpComponent::Input(void) {
     return true;
 }
 
-bool ratchet::PlayerDoubleJumpComponent::Update(float delta_time) {      
+bool ratchet::component::player::action::PlayerDoubleJumpComponent::Update(float delta_time) {      
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
@@ -93,17 +93,17 @@ bool ratchet::PlayerDoubleJumpComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerDoubleJumpComponent::Release(void) {
+bool ratchet::component::player::action::PlayerDoubleJumpComponent::Release(void) {
     super::Release();
     _move_com.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerDoubleJumpComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerDoubleJumpComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerDoubleJumpComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerDoubleJumpComponent>(*this);
 }
 
-bool ratchet::PlayerDoubleJumpComponent::Start(void) {
+bool ratchet::component::player::action::PlayerDoubleJumpComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

@@ -6,7 +6,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-bool ratchet::BombGloveBulletComponent::CollisionEnemy(const ratchet::CollisionInfo& in) {
+bool ratchet::component::bullet::BombGloveBulletComponent::CollisionEnemy(const component::collision::CollisionInfo& in) {
     // expord start
     auto param = ratchet::actor::effect::ParticleEffect::Param();
     auto update_param = ratchet::actor::effect::ParticleEffect::UpdateParam();
@@ -31,29 +31,29 @@ bool ratchet::BombGloveBulletComponent::CollisionEnemy(const ratchet::CollisionI
     return true;
 }
 
-ratchet::BombGloveBulletComponent::BombGloveBulletComponent(int priority) :
+ratchet::component::bullet::BombGloveBulletComponent::BombGloveBulletComponent(int priority) :
     super(priority) {
 }
 
-ratchet::BombGloveBulletComponent::BombGloveBulletComponent(const BombGloveBulletComponent& obj) :
+ratchet::component::bullet::BombGloveBulletComponent::BombGloveBulletComponent(const BombGloveBulletComponent& obj) :
     super(obj) {
 }
 
-ratchet::BombGloveBulletComponent::~BombGloveBulletComponent() {
+ratchet::component::bullet::BombGloveBulletComponent::~BombGloveBulletComponent() {
 }
 
-std::string ratchet::BombGloveBulletComponent::GetType(void) const {
+std::string ratchet::component::bullet::BombGloveBulletComponent::GetType(void) const {
     return "BombGloveBulletComponent";
 }
 
-bool ratchet::BombGloveBulletComponent::Initialize(void) {
+bool ratchet::component::bullet::BombGloveBulletComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    auto coll_com = super::GetOwner()->GetComponent<ratchet::BombGloveBulletCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::BombGloveBulletCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                "EnemyCollisionComponent",
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         // expord start
         auto param = ratchet::actor::effect::ParticleEffect::Param();
         auto update_param = ratchet::actor::effect::ParticleEffect::UpdateParam();
@@ -78,15 +78,15 @@ bool ratchet::BombGloveBulletComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::BombGloveBulletComponent::Update(float delta_time) {
+bool ratchet::component::bullet::BombGloveBulletComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::BombGloveBulletComponent::Release(void) {
+bool ratchet::component::bullet::BombGloveBulletComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BombGloveBulletComponent::Clone(void) {
-    return std::make_shared<ratchet::BombGloveBulletComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::bullet::BombGloveBulletComponent::Clone(void) {
+    return std::make_shared<ratchet::component::bullet::BombGloveBulletComponent>(*this);
 }

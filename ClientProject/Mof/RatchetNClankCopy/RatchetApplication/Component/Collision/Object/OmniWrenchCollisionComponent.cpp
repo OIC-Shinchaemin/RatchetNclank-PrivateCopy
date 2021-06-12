@@ -3,24 +3,24 @@
 #include "CollisionComponentDefine.h"
 
 
-ratchet::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(int priority) :
+ratchet::component::collision::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(int priority) :
     super(priority),
     _offset(1.2f){
 }
 
-ratchet::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(const OmniWrenchCollisionComponent& obj) :
+ratchet::component::collision::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(const OmniWrenchCollisionComponent& obj) :
     super(obj) ,
     _offset(obj._offset){
 }
 
-ratchet::OmniWrenchCollisionComponent::~OmniWrenchCollisionComponent() {
+ratchet::component::collision::OmniWrenchCollisionComponent::~OmniWrenchCollisionComponent() {
 }
 
-std::string ratchet::OmniWrenchCollisionComponent::GetType(void) const {
-    return ratchet::CollisionComponentType::kOmniWrenchCollisionComponent;
+std::string ratchet::component::collision::OmniWrenchCollisionComponent::GetType(void) const {
+    return ratchet::component::collision::CollisionComponentType::kOmniWrenchCollisionComponent;
 }
 
-std::optional<Mof::CSphere> ratchet::OmniWrenchCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> ratchet::component::collision::OmniWrenchCollisionComponent::GetSphere(void) {
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
@@ -31,28 +31,28 @@ std::optional<Mof::CSphere> ratchet::OmniWrenchCollisionComponent::GetSphere(voi
     return Mof::CSphere(pos, 0.6f);
 }
 
-std::optional<Mof::CBoxAABB> ratchet::OmniWrenchCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::component::collision::OmniWrenchCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> ratchet::OmniWrenchCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::component::collision::OmniWrenchCollisionComponent::GetRay(void) {
     return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> ratchet::OmniWrenchCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::component::collision::OmniWrenchCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<ratchet::SightObject> ratchet::OmniWrenchCollisionComponent::GetSightObject(void) {
-    return std::optional<ratchet::SightObject>();
+std::optional<::ratchet::component::collision::SightObject> ratchet::component::collision::OmniWrenchCollisionComponent::GetSightObject(void) {
+    return std::optional<::ratchet::component::collision::SightObject>();
 }
 
-bool ratchet::OmniWrenchCollisionComponent::Initialize(void) {
+bool ratchet::component::collision::OmniWrenchCollisionComponent::Initialize(void) {
     super::Initialize();
     super::Inactivate();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::OmniWrenchCollisionComponent::Clone(void) {
-    return std::make_shared<ratchet::OmniWrenchCollisionComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::collision::OmniWrenchCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::component::collision::OmniWrenchCollisionComponent>(*this);
 }

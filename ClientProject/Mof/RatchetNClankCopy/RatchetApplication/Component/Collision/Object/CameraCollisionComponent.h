@@ -1,5 +1,5 @@
-#ifndef RATCHET_CAMERA_COLLISION_COMPONENT_H
-#define RATCHET_CAMERA_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -9,13 +9,17 @@
 
 #include <Mof.h>
 
+#include "../../CameraComponent.h"
+
 
 namespace ratchet {
-class CameraCollisionComponent : public ratchet::CollisionComponent {
-    using super = ratchet::CollisionComponent;
+namespace component {
+namespace collision {
+class CameraCollisionComponent : public ratchet::component::collision::CollisionComponent {
+    using super = ratchet::component::collision::CollisionComponent;
 private:
     //! プレイヤー
-    std::weak_ptr<class CameraComponent> _camera_com;
+    std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -66,7 +70,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
+    virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -92,4 +96,6 @@ public:
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
 }
-#endif // !RATCHET_CAMERA_COLLISION_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H

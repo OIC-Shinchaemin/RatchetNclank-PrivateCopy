@@ -12,51 +12,49 @@
 #include "../../Game/GameSystem/GameQuest.h"
 
 
-ratchet::PlayerComponent::PlayerComponent(int priority) :
+ratchet::component::player::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
     _target(),
     _state_com(),
-    _next_terrain()
-{
+    _next_terrain() {
 }
 
-ratchet::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
+ratchet::component::player::PlayerComponent::PlayerComponent(const PlayerComponent& obj) :
     super(obj),
     _target(),
     _state_com(),
-    _next_terrain()
-{
+    _next_terrain() {
 }
 
-ratchet::PlayerComponent::~PlayerComponent() {
+ratchet::component::player::PlayerComponent::~PlayerComponent() {
 }
 
-void ratchet::PlayerComponent::SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
+void ratchet::component::player::PlayerComponent::SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_target = ptr;
 }
 
-void ratchet::PlayerComponent::SetNextTerrain(const std::string& terrain) {
+void ratchet::component::player::PlayerComponent::SetNextTerrain(const std::string& terrain) {
     this->_next_terrain = terrain;
 }
 
-std::string ratchet::PlayerComponent::GetType(void) const {
+std::string ratchet::component::player::PlayerComponent::GetType(void) const {
     return "PlayerComponent";
 }
 
-std::weak_ptr<ratchet::actor::Actor> ratchet::PlayerComponent::GetTarget(void) const {
+std::weak_ptr<ratchet::actor::Actor> ratchet::component::player::PlayerComponent::GetTarget(void) const {
     return this->_target;
 }
 
-std::string ratchet::PlayerComponent::GetNextTerrain(void) const {
+std::string ratchet::component::player::PlayerComponent::GetNextTerrain(void) const {
     return this->_next_terrain;
 }
 
-bool ratchet::PlayerComponent::Initialize(void) {
+bool ratchet::component::player::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    _state_com = super::GetOwner()->GetComponent<ratchet::PlayerStateComponent>();
-    auto velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
+    auto velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     if (velocity_com) {
         velocity_com->SetGravity(9.8f);
     } // if
@@ -65,10 +63,10 @@ bool ratchet::PlayerComponent::Initialize(void) {
     } // if
 
 
-    auto coll_com = super::GetOwner()->GetComponent<ratchet::PlayerCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::CollisionComponentType::kShipCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kShipCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         if (auto canvas = _ui_canvas.lock()) {
             canvas->RemoveElement("EquipmentWeaponMenu");
             canvas->RemoveElement("QuickChangeMenu");
@@ -77,12 +75,12 @@ bool ratchet::PlayerComponent::Initialize(void) {
         return true;
     }));
 
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::CollisionComponentType::kWaterFlowCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kWaterFlowCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         if (this->GetNextTerrain() == "WaterFlow") {
             auto owner = super::GetOwner();
-            auto velocity_com = owner->GetComponent<ratchet::VelocityComponent>();
+            auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
             auto velocity = velocity_com->GetVelocity() * def::kDeltaTime;
             velocity.y = 0.0f;
             owner->SetPosition(owner->GetPosition() - velocity);
@@ -90,18 +88,18 @@ bool ratchet::PlayerComponent::Initialize(void) {
         return true;
     }));
 
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::CollisionComponentType::kShopCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kShopCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
         player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessStart);
         player->PushNotificationableSubject("ShopSystem");
 
         return true;
     }));
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Exit,
-                               ratchet::CollisionComponentType::kShopCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
+                               ratchet::component::collision::CollisionComponentType::kShopCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
         player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessEnd);
         player->PopNotificationableSubject("ShopSystem");
@@ -121,7 +119,7 @@ bool ratchet::PlayerComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::PlayerComponent::Update(float delta_time) {
+bool ratchet::component::player::PlayerComponent::Update(float delta_time) {
     _next_terrain = "";
 
     if (auto target = _target.lock()) {
@@ -136,7 +134,7 @@ bool ratchet::PlayerComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerComponent::Release(void) {
+bool ratchet::component::player::PlayerComponent::Release(void) {
     super::Release();
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
@@ -144,6 +142,6 @@ bool ratchet::PlayerComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::PlayerComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::PlayerComponent>(*this);
 }

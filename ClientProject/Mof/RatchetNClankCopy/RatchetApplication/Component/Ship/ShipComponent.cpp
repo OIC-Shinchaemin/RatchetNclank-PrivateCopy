@@ -9,34 +9,34 @@
 
 
 
-ratchet::ShipComponent::ShipComponent(int priority) :
+ratchet::component::ship::ShipComponent::ShipComponent(int priority) :
     super(priority),
     _motion_com(),
     _state_com() {
 }
 
-ratchet::ShipComponent::ShipComponent(const ShipComponent& obj) :
+ratchet::component::ship::ShipComponent::ShipComponent(const ShipComponent& obj) :
     super(obj),
     _motion_com(),
     _state_com() {
 }
 
-ratchet::ShipComponent::~ShipComponent() {
+ratchet::component::ship::ShipComponent::~ShipComponent() {
 }
 
-std::string ratchet::ShipComponent::GetType(void) const {
+std::string ratchet::component::ship::ShipComponent::GetType(void) const {
     return "ShipComponent";
 }
 
-bool ratchet::ShipComponent::Initialize(void) {
+bool ratchet::component::ship::ShipComponent::Initialize(void) {
     super::Initialize();
-    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
-    _state_com = super::GetOwner()->GetComponent<ratchet::ShipStateComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::ship::ShipStateComponent>();
 
-    auto coll_com = super::GetOwner()->GetComponent<ratchet::ShipCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::CollisionComponentType::kPlayerCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::ShipCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         this->Activate();
 
         if (auto state_com = _state_com.lock()) {
@@ -52,7 +52,7 @@ bool ratchet::ShipComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::ShipComponent::Update(float delta_time) {
+bool ratchet::component::ship::ShipComponent::Update(float delta_time) {
     auto pos = super::GetOwner()->GetPosition();
 
     if (pos.y > 10.0f) {
@@ -61,7 +61,7 @@ bool ratchet::ShipComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::ShipComponent::Activate(void) {
+bool ratchet::component::ship::ShipComponent::Activate(void) {
     if (super::IsActive()) {
         return false;
     } // if
@@ -76,6 +76,6 @@ bool ratchet::ShipComponent::Activate(void) {
 }
 
 
-std::shared_ptr<ratchet::component::Component> ratchet::ShipComponent::Clone(void) {
-    return std::make_shared<ratchet::ShipComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::ship::ShipComponent::Clone(void) {
+    return std::make_shared<ratchet::component::ship::ShipComponent>(*this);
 }

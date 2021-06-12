@@ -1,5 +1,5 @@
-#ifndef RATCHET_RENDER_COMPONENT_H
-#define RATCHET_RENDER_COMPONENT_H
+#ifndef RATCHET_COMPONENT_RENDER_COMPONENT_H
+#define RATCHET_COMPONENT_RENDER_COMPONENT_H
 
 
 #include "Component.h"
@@ -8,6 +8,7 @@
 
 
 namespace ratchet {
+namespace component {
 class RenderComponent : public ratchet::component::Component {
     using super = ratchet::component::Component;
 protected:
@@ -65,4 +66,5 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RATCHET_RENDER_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_RENDER_COMPONENT_H

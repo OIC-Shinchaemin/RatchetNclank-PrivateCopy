@@ -8,13 +8,13 @@
 #include "Collision/Object/SightCollisionComponent.h"
 
 
-void ratchet::SightRecognitionComponent::RenderRay(const Mof::CRay3D& ray, float length, int color) {
+void ratchet::component::SightRecognitionComponent::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
                                      ray.Position + ray.Direction * length,
                                      color);
 }
 
-void ratchet::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float degree_y) {
+void ratchet::component::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float degree_y) {
     auto ray = Mof::CRay3D(start);
     auto rotate = super::GetOwner()->GetRotate();
     rotate.y += math::ToRadian(degree_y);
@@ -26,7 +26,7 @@ void ratchet::SightRecognitionComponent::RenderRay(Mof::Vector3 start, float deg
     this->RenderRay(ray, this->GetRange(), def::color_rgba_u32::kGreen);
 }
 
-ratchet::SightRecognitionComponent::SightRecognitionComponent(int priority) :
+ratchet::component::SightRecognitionComponent::SightRecognitionComponent(int priority) :
     super(priority),
     _range(0.0f),
     _player_com(),
@@ -34,7 +34,7 @@ ratchet::SightRecognitionComponent::SightRecognitionComponent(int priority) :
     super::Activate();
 }
 
-ratchet::SightRecognitionComponent::SightRecognitionComponent(const SightRecognitionComponent& obj) :
+ratchet::component::SightRecognitionComponent::SightRecognitionComponent(const SightRecognitionComponent& obj) :
     super(obj),
     _range(obj._range),
     _player_com(),
@@ -42,10 +42,10 @@ ratchet::SightRecognitionComponent::SightRecognitionComponent(const SightRecogni
     super::Activate();
 }
 
-ratchet::SightRecognitionComponent::~SightRecognitionComponent() {
+ratchet::component::SightRecognitionComponent::~SightRecognitionComponent() {
 }
 
-void ratchet::SightRecognitionComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::SightRecognitionComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* range = "range";
 
@@ -55,40 +55,40 @@ void ratchet::SightRecognitionComponent::SetParam(const rapidjson::Value& param)
     _range = param[range].GetFloat();
 }
 
-std::string ratchet::SightRecognitionComponent::GetType(void) const {
+std::string ratchet::component::SightRecognitionComponent::GetType(void) const {
     return "SightRecognitionComponent";
 }
 
-float ratchet::SightRecognitionComponent::GetRange(void) const {
+float ratchet::component::SightRecognitionComponent::GetRange(void) const {
     return this->_range;
 }
 
-const std::vector<std::weak_ptr<ratchet::actor::Actor>>& ratchet::SightRecognitionComponent::GetRecognized(void) const {
+const std::vector<std::weak_ptr<ratchet::actor::Actor>>& ratchet::component::SightRecognitionComponent::GetRecognized(void) const {
     return this->_recognized;
 }
 
-bool ratchet::SightRecognitionComponent::Initialize(void) {
+bool ratchet::component::SightRecognitionComponent::Initialize(void) {
     super::Initialize();
     if (auto tag = super::GetOwner()->GetTag(); tag == "Player") {
-        _player_com = super::GetOwner()->GetComponent<ratchet::PlayerComponent>();
+        _player_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerComponent>();
 
 
-        auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
-        sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
+        auto sight_coll = super::GetOwner()->GetComponent<ratchet::component::collision::SightCollisionComponent>();
+        sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
                                      "EnemyCollisionComponent",
-                                     ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+                                     ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
             auto target = in.target.lock();
             _recognized.push_back(target);
             return true;
         }));
     } // if
     else if (tag == "Enemy") {
-        _ENEMY_com = super::GetOwner()->GetComponent<ratchet::EnemyComponent>();
+        _ENEMY_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
 
-        auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
-        sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
+        auto sight_coll = super::GetOwner()->GetComponent<ratchet::component::collision::SightCollisionComponent>();
+        sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
                                      "PlayerCollisionComponent",
-                                     ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+                                     ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
             auto target = in.target.lock();
             _recognized.push_back(target);
             return true;
@@ -97,7 +97,7 @@ bool ratchet::SightRecognitionComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::SightRecognitionComponent::Update(float delta_time) {
+bool ratchet::component::SightRecognitionComponent::Update(float delta_time) {
 
     if (auto tag = super::GetOwner()->GetTag(); tag == "Player") {
         if (auto player_com = _player_com.lock()) {
@@ -120,6 +120,6 @@ bool ratchet::SightRecognitionComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::SightRecognitionComponent::Clone(void) {
-    return std::make_shared<ratchet::SightRecognitionComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::SightRecognitionComponent::Clone(void) {
+    return std::make_shared<ratchet::component::SightRecognitionComponent>(*this);
 }

@@ -1,7 +1,7 @@
 #include "VelocityComponent.h"
 
 
-ratchet::VelocityComponent::VelocityComponent(int priority) :
+ratchet::component::VelocityComponent::VelocityComponent(int priority) :
     super(priority),
     _velocity(),
     _angular_velocity(),
@@ -14,7 +14,7 @@ ratchet::VelocityComponent::VelocityComponent(int priority) :
     _sleep(false) {
 }
 
-ratchet::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
+ratchet::component::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
     super(obj),
     _velocity(obj._velocity),
     _angular_velocity(obj._angular_velocity),
@@ -27,72 +27,72 @@ ratchet::VelocityComponent::VelocityComponent(const VelocityComponent& obj) :
     _sleep(obj._sleep) {
 }
 
-ratchet::VelocityComponent::~VelocityComponent() {
+ratchet::component::VelocityComponent::~VelocityComponent() {
 }
 
-void ratchet::VelocityComponent::SetVelocity(Mof::CVector3 value) {
+void ratchet::component::VelocityComponent::SetVelocity(Mof::CVector3 value) {
     this->_velocity = value;
 }
 
-void ratchet::VelocityComponent::SetGravity(float value) {
+void ratchet::component::VelocityComponent::SetGravity(float value) {
     this->_gravity = value;
 }
 
-void ratchet::VelocityComponent::SetDrag(float value) {
+void ratchet::component::VelocityComponent::SetDrag(float value) {
     this->_drag = value;
 }
 
-void ratchet::VelocityComponent::SetUseGravity(bool use) {
+void ratchet::component::VelocityComponent::SetUseGravity(bool use) {
     this->_use_gravity = use;
 }
 
-void ratchet::VelocityComponent::SetSleep(bool b) {
+void ratchet::component::VelocityComponent::SetSleep(bool b) {
     this->_sleep = b;
 }
 
-std::string ratchet::VelocityComponent::GetType(void) const {
+std::string ratchet::component::VelocityComponent::GetType(void) const {
     return "VelocityComponent";
 }
 
-Mof::CVector3 ratchet::VelocityComponent::GetVelocity(void) const {
+Mof::CVector3 ratchet::component::VelocityComponent::GetVelocity(void) const {
     return this->_velocity;
 }
 
-Mof::CVector3 ratchet::VelocityComponent::GetAngularVelocity(void) const {
+Mof::CVector3 ratchet::component::VelocityComponent::GetAngularVelocity(void) const {
     return this->_angular_velocity;
 }
 
-Mof::CVector3 ratchet::VelocityComponent::GetVelocityForce(void) const {
+Mof::CVector3 ratchet::component::VelocityComponent::GetVelocityForce(void) const {
     return this->_velocity_force;
 }
 
-float ratchet::VelocityComponent::GetDrag(void) const {
+float ratchet::component::VelocityComponent::GetDrag(void) const {
     return this->_drag;
 }
 
-float ratchet::VelocityComponent::GetGravity(void) const {
+float ratchet::component::VelocityComponent::GetGravity(void) const {
     return this->_gravity;
 }
 
-bool ratchet::VelocityComponent::IsSleep(void) const {
+bool ratchet::component::VelocityComponent::IsSleep(void) const {
     return this->_sleep;
 }
 
-void ratchet::VelocityComponent::AddVelocityForce(Mof::CVector3 accele) {
+void ratchet::component::VelocityComponent::AddVelocityForce(Mof::CVector3 accele) {
     this->_velocity_force += accele;
 }
 
-void ratchet::VelocityComponent::AddAngularVelocityForce(Mof::CVector3 accele) {
+void ratchet::component::VelocityComponent::AddAngularVelocityForce(Mof::CVector3 accele) {
     this->_angular_velocity_force += accele;
 }
 
-bool ratchet::VelocityComponent::Initialize(void) {
+bool ratchet::component::VelocityComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     return true;
 }
 
-bool ratchet::VelocityComponent::Update(float delta_time) {
+bool ratchet::component::VelocityComponent::Update(float delta_time) {
     _angular_velocity += _angular_velocity_force;
     _velocity += _velocity_force;
 
@@ -107,11 +107,11 @@ bool ratchet::VelocityComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::VelocityComponent::Release(void) {
+bool ratchet::component::VelocityComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::VelocityComponent::Clone(void) {
-    return std::make_shared<ratchet::VelocityComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::VelocityComponent::Clone(void) {
+    return std::make_shared<ratchet::component::VelocityComponent>(*this);
 }

@@ -1,22 +1,22 @@
 #include "BulletItemActionStateComponent.h"
 
 
-ratchet::BulletItemActionStateComponent::BulletItemActionStateComponent(int priority) :
+ratchet::component::item::bulletitem::BulletItemActionStateComponent::BulletItemActionStateComponent(int priority) :
     super(priority) {
 }
 
-ratchet::BulletItemActionStateComponent::BulletItemActionStateComponent(const BulletItemActionStateComponent& obj) :
+ratchet::component::item::bulletitem::BulletItemActionStateComponent::BulletItemActionStateComponent(const BulletItemActionStateComponent& obj) :
     super(obj) {
 }
 
-ratchet::BulletItemActionStateComponent::~BulletItemActionStateComponent() {
+ratchet::component::item::bulletitem::BulletItemActionStateComponent::~BulletItemActionStateComponent() {
 }
 
-std::string ratchet::BulletItemActionStateComponent::GetType(void) const {
+std::string ratchet::component::item::bulletitem::BulletItemActionStateComponent::GetType(void) const {
     return "BulletItemActionStateComponent";
 }
 
-bool ratchet::BulletItemActionStateComponent::Initialize(void) {
+bool ratchet::component::item::bulletitem::BulletItemActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::BulletItemActionType;
     //super::ChangeState(Type::kMoved);
@@ -24,11 +24,11 @@ bool ratchet::BulletItemActionStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BulletItemActionStateComponent::Clone(void) {
-    return std::make_shared<ratchet::BulletItemActionStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::bulletitem::BulletItemActionStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::bulletitem::BulletItemActionStateComponent>(*this);
 }
 
-bool ratchet::BulletItemActionStateComponent::CanTransition(const std::string& next) {
+bool ratchet::component::item::bulletitem::BulletItemActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::BulletItemActionType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -46,7 +46,7 @@ bool ratchet::BulletItemActionStateComponent::CanTransition(const std::string& n
 }
 
 #ifdef _DEBUG
-bool ratchet::BulletItemActionStateComponent::DebugRender(void) {
+bool ratchet::component::item::bulletitem::BulletItemActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 550.0f, "BulletItem state = %s", this->_state_machine.GetCurrentStateName());
     return true;

@@ -8,8 +8,8 @@
 namespace ratchet {
 namespace actor {
 namespace weapon {
-class Mechanical : public ratchet::actor::weapon::Weapon {
-    using super = ratchet::actor::weapon::Weapon;
+class Mechanical : public ::ratchet::actor::weapon::Weapon {
+    using super = ::ratchet::actor::weapon::Weapon;
 public:
     struct Info {
         //! 弾数
@@ -40,7 +40,7 @@ protected:
     //! 対象位置
     std::optional<Mof::CVector3> _lock_on_position;
     //! 通知用
-    base::core::Observable<const ratchet::actor::weapon::Mechanical::Info&> _subject;
+    base::core::Observable<const ::ratchet::actor::weapon::Mechanical::Info&> _subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -93,7 +93,7 @@ public:
     /// <summary>
     /// 追加
     /// </summary>
-    void AddMechanicalInfoObserver(const std::shared_ptr<base::core::Observer<const ratchet::actor::weapon::Mechanical::Info&>>& ptr);
+    void AddMechanicalInfoObserver(const std::shared_ptr<base::core::Observer<const ::ratchet::actor::weapon::Mechanical::Info&>>& ptr);
     /// <summary>
     /// 更新
     /// </summary>

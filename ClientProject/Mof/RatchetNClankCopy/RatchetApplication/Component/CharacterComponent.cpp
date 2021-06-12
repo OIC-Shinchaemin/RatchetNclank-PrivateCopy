@@ -1,22 +1,22 @@
 #include "CharacterComponent.h"
 
 
-ratchet::CharacterComponent::CharacterComponent(int priority) :
+ratchet::component::CharacterComponent::CharacterComponent(int priority) :
     super(priority),
     _volume(0.0f),
     _height(0.0f) {
 }
 
-ratchet::CharacterComponent::CharacterComponent(const CharacterComponent& obj) :
+ratchet::component::CharacterComponent::CharacterComponent(const CharacterComponent& obj) :
     super(obj),
     _volume(obj._volume),
     _height(obj._height) {
 }
 
-ratchet::CharacterComponent::~CharacterComponent() {
+ratchet::component::CharacterComponent::~CharacterComponent() {
 }
 
-void ratchet::CharacterComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::CharacterComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* height = "height";
     _ASSERT_EXPR(param.HasMember(height), L"指定のパラメータがありません");
@@ -29,18 +29,18 @@ void ratchet::CharacterComponent::SetParam(const rapidjson::Value& param) {
     _volume = param[volume].GetFloat();
 }
 
-std::string ratchet::CharacterComponent::GetType(void) const {
+std::string ratchet::component::CharacterComponent::GetType(void) const {
     return "CharacterComponent";
 }
 
-float ratchet::CharacterComponent::GetVolume(void) const {
+float ratchet::component::CharacterComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-float ratchet::CharacterComponent::GetHeight(void) const {
+float ratchet::component::CharacterComponent::GetHeight(void) const {
     return this->_height;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::CharacterComponent::Clone(void) {
-    return std::make_shared<ratchet::CharacterComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::CharacterComponent::Clone(void) {
+    return std::make_shared<ratchet::component::CharacterComponent>(*this);
 }

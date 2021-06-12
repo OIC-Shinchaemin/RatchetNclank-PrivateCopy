@@ -1,5 +1,5 @@
-#ifndef RATCHET_NanotechItem_COMPONENT_H
-#define RATCHET_NanotechItem_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_COMPONENT_H
 
 
 #include "../../UpdateComponent.h"
@@ -7,9 +7,9 @@
 #include "../../../Actor/Item/NanotechItem.h"
 
 
-namespace ratchet {
-class NanotechItemComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace ratchet { namespace component { namespace item { namespace nanotechitem {
+class NanotechItemComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! アクターパラメータ
     ratchet::actor::item::NanotechItem::Param _param;
@@ -80,6 +80,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
-};
+};}}}
 }
-#endif // !RATCHET_NanotechItem_COMPONENT_H
+#endif // !RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_COMPONENT_H

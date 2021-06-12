@@ -32,14 +32,14 @@ enum class ActorState {
     Hide, // 入力する、更新する、描画しない
     End // 削除
 };
-class Actor : 
-    public std::enable_shared_from_this<ratchet::actor::Actor>, 
-    public ::base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
+class Actor :
+    public std::enable_shared_from_this<actor::Actor>,
+    public ::base::core::Observable<const char*, const std::shared_ptr<actor::Actor>&> {
 public:
     //using ComPtr = std::shared_ptr<ratchet::component::Component::Component>;
-    using ComPtr = std::shared_ptr<ratchet::component::Component>;
+    using ComPtr = std::shared_ptr<component::Component>;
     using ComArray = std::vector<ComPtr>;
-    using Observable = base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&>;
+    using Observable = base::core::Observable<const char*, const std::shared_ptr<actor::Actor>&>;
 public:
     struct Param {
         //! 名前
@@ -58,7 +58,7 @@ public:
     };
 private:
     //! 状態
-    ratchet::actor::Actor::ActorState _state;
+    actor::ActorState _state;
     //! 名前
     std::string _name;
     //! タグ
@@ -132,7 +132,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    ratchet::actor::ActorState GetState(void) const;
+    actor::ActorState GetState(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -248,7 +248,7 @@ public:
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
-    virtual bool Initialize(ratchet::actor::Actor::Param* param);
+    virtual bool Initialize(actor::Actor::Param* param);
     /// <summary>
     /// 入力
     /// </summary>
@@ -277,7 +277,7 @@ public:
     /// 作成
     /// </summary>
     /// <param name="builder"></param>
-    virtual void Construct(const std::shared_ptr<ratchet::factory::builder::IBuilder>& builder);
+    virtual void Construct(const std::shared_ptr<factory::builder::IBuilder>& builder);
 };
 }
 }

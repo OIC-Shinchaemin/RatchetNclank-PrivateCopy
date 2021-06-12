@@ -8,8 +8,8 @@
 namespace ratchet {
 namespace actor {
 namespace weapon {
-class Weapon : public ratchet::actor::Actor {
-    using super = ratchet::actor::Actor;
+class Weapon : public ::ratchet::actor::Actor {
+    using super = ::ratchet::actor::Actor;
 public:
     /// <summary>
     /// コンストラクタ

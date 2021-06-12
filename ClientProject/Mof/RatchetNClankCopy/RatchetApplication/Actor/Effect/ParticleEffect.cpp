@@ -20,7 +20,7 @@ bool ratchet::actor::effect::ParticleEffect::Update(float delta_time) {
         super::End();
     } // if
 
-    auto v = super::GetComponent<ratchet::VelocityComponent>();
+    auto v = super::GetComponent<ratchet::component::VelocityComponent>();
 
     v ->AddVelocityForce(_update_param.velocity);
     v->AddAngularVelocityForce(_update_param.rotate);
@@ -41,7 +41,7 @@ bool ratchet::actor::effect::ParticleEffect::Render(void) {
 void ratchet::actor::effect::ParticleEffect::Start(const ratchet::actor::effect::ParticleEffect::Info& info) {
     super::Initialize((super::Param*)(&info));
     if (!info.environment_param.gravity) {
-        auto v = super::GetComponent<ratchet::VelocityComponent>();
+        auto v = super::GetComponent<ratchet::component::VelocityComponent>();
 
         v ->SetGravity(0.0f);
     } // if

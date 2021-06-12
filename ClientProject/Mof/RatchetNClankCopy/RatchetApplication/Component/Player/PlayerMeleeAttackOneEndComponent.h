@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
-#define RATCHET_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace ratchet {
-class PlayerMeleeAttackOneEndComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
+namespace ratchet { namespace component { namespace player { namespace action { 
+class PlayerMeleeAttackOneEndComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+    using super = ::ratchet::component::player::action::PlayerActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -61,6 +61,6 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
-};
+};}}}
 }
-#endif // !RATCHET_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_MELEE_ATTACK_ONE_END_COMPONENT_H

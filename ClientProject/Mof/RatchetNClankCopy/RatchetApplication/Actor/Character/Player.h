@@ -41,7 +41,7 @@ private:
     //! 武器
     std::shared_ptr<ratchet::actor::weapon::Weapon> _current_weapon;
     //! プレイヤー
-    std::weak_ptr<ratchet::PlayerComponent> _player_com;
+    std::weak_ptr<component::player::PlayerComponent> _player_com;
     //! 腕の位置
     Mof::LPBONEMOTIONSTATE _upp_bone_state;
     //! 有効

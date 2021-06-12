@@ -1,33 +1,33 @@
 #include "OmniWrenchActionStateComponent.h"
 
 
-ratchet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(int priority) :
+ratchet::component::weapon::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(int priority) :
     super(priority) {
 }
 
-ratchet::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(const OmniWrenchActionStateComponent& obj) :
+ratchet::component::weapon::OmniWrenchActionStateComponent::OmniWrenchActionStateComponent(const OmniWrenchActionStateComponent& obj) :
     super(obj) {
 }
 
-ratchet::OmniWrenchActionStateComponent::~OmniWrenchActionStateComponent() {
+ratchet::component::weapon::OmniWrenchActionStateComponent::~OmniWrenchActionStateComponent() {
 }
 
-std::string ratchet::OmniWrenchActionStateComponent::GetType(void) const {
+std::string ratchet::component::weapon::OmniWrenchActionStateComponent::GetType(void) const {
     return "OmniWrenchActionStateComponent";
 }
 
-bool ratchet::OmniWrenchActionStateComponent::Initialize(void) {
+bool ratchet::component::weapon::OmniWrenchActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::OmniWrenchActionStateType;
     super::ChangeState(Type::kOmniWrenchActionDefaultState);
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::OmniWrenchActionStateComponent::Clone(void) {
-    return std::make_shared<ratchet::OmniWrenchActionStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::weapon::OmniWrenchActionStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::weapon::OmniWrenchActionStateComponent>(*this);
 }
 
-bool ratchet::OmniWrenchActionStateComponent::CanTransition(const std::string& next) {
+bool ratchet::component::weapon::OmniWrenchActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::OmniWrenchActionStateType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -45,7 +45,7 @@ bool ratchet::OmniWrenchActionStateComponent::CanTransition(const std::string& n
 }
 
 #ifdef _DEBUG
-bool ratchet::OmniWrenchActionStateComponent::DebugRender(void) {
+bool ratchet::component::weapon::OmniWrenchActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 400.0f, "omniwrench state = %s", this->_state_machine.GetCurrentStateName());
     return true;

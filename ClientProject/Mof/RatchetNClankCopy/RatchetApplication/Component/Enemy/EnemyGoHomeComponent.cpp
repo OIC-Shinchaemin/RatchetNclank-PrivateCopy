@@ -7,7 +7,7 @@
 #include "../../State/EnemyActionStateDefine.h"
 
 
-void ratchet::EnemyGoHomeComponent::InputMoveVelocity(float speed) {
+void ratchet::component::enemy::EnemyGoHomeComponent::InputMoveVelocity(float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
         auto accele = Mof::CVector3(0.0f, 0.0f, -speed);
         auto rotate = super::GetOwner()->GetRotate();
@@ -17,7 +17,7 @@ void ratchet::EnemyGoHomeComponent::InputMoveVelocity(float speed) {
     } // if
 }
 
-void ratchet::EnemyGoHomeComponent::InputMoveAngularVelocity(float angle, float speed) {
+void ratchet::component::enemy::EnemyGoHomeComponent::InputMoveAngularVelocity(float angle, float speed) {
     if (auto velocity_com = _velocity_com.lock()) {
 
         float angle_y = angle;
@@ -43,7 +43,7 @@ void ratchet::EnemyGoHomeComponent::InputMoveAngularVelocity(float angle, float 
     } // if
 }
 
-ratchet::EnemyGoHomeComponent::EnemyGoHomeComponent(int priority) :
+ratchet::component::enemy::EnemyGoHomeComponent::EnemyGoHomeComponent(int priority) :
     super(priority),
     _move_speed(0.0f),
     _angular_speed(0.0f),
@@ -52,7 +52,7 @@ ratchet::EnemyGoHomeComponent::EnemyGoHomeComponent(int priority) :
     _motion_state_com() {
 }
 
-ratchet::EnemyGoHomeComponent::EnemyGoHomeComponent(const EnemyGoHomeComponent& obj) :
+ratchet::component::enemy::EnemyGoHomeComponent::EnemyGoHomeComponent(const EnemyGoHomeComponent& obj) :
     super(obj),
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
@@ -61,40 +61,40 @@ ratchet::EnemyGoHomeComponent::EnemyGoHomeComponent(const EnemyGoHomeComponent& 
     _motion_state_com() {
 }
 
-ratchet::EnemyGoHomeComponent::~EnemyGoHomeComponent() {
+ratchet::component::enemy::EnemyGoHomeComponent::~EnemyGoHomeComponent() {
 }
 
-void ratchet::EnemyGoHomeComponent::SetMoveSpeed(float speed) {
+void ratchet::component::enemy::EnemyGoHomeComponent::SetMoveSpeed(float speed) {
     this->_move_speed = speed;
 }
 
-void ratchet::EnemyGoHomeComponent::SetAngularSpeed(float speed) {
+void ratchet::component::enemy::EnemyGoHomeComponent::SetAngularSpeed(float speed) {
     this->_angular_speed = speed;
 }
 
-void ratchet::EnemyGoHomeComponent::SetIdealAngle(float radian) {
+void ratchet::component::enemy::EnemyGoHomeComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
-std::string ratchet::EnemyGoHomeComponent::GetType(void) const {
+std::string ratchet::component::enemy::EnemyGoHomeComponent::GetType(void) const {
     return "EnemyGoHomeComponent";
 }
 
-std::string_view ratchet::EnemyGoHomeComponent::GetStateType(void) const {
+std::string_view ratchet::component::enemy::EnemyGoHomeComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionGoHomeState;
 }
 
-bool ratchet::EnemyGoHomeComponent::Initialize(void) {
+bool ratchet::component::enemy::EnemyGoHomeComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
-    _action_state_com = super::GetOwner()->GetComponent<ratchet::EnemyStateComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
-    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::EnemyComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+    _action_state_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyStateComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
     return true;
 }
 
-bool ratchet::EnemyGoHomeComponent::Update(float delta_time) {
+bool ratchet::component::enemy::EnemyGoHomeComponent::Update(float delta_time) {
     Mof::CVector3 target_pos = super::GetOwner()->GetPosition();
     if (auto ENEMY_com = _ENEMY_com.lock()) {
         if (auto target = ENEMY_com->GetTarget().lock()) {
@@ -132,16 +132,16 @@ bool ratchet::EnemyGoHomeComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::EnemyGoHomeComponent::Release(void) {
+bool ratchet::component::enemy::EnemyGoHomeComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::EnemyGoHomeComponent::Clone(void) {
-    return std::make_shared<ratchet::EnemyGoHomeComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::enemy::EnemyGoHomeComponent::Clone(void) {
+    return std::make_shared<ratchet::component::enemy::EnemyGoHomeComponent>(*this);
 }
 
-bool ratchet::EnemyGoHomeComponent::Start(void) {
+bool ratchet::component::enemy::EnemyGoHomeComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

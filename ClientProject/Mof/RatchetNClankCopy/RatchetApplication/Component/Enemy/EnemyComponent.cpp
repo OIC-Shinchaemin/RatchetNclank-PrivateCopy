@@ -10,66 +10,66 @@
 #include "../../Actor/Character/Enemy.h"
 
 
-ratchet::EnemyComponent::EnemyComponent(int priority) :
+ratchet::component::enemy::EnemyComponent::EnemyComponent(int priority) :
     super(priority),
     _velocity_timer(),
     _target(),
     _velocity_com() {
 }
 
-ratchet::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
+ratchet::component::enemy::EnemyComponent::EnemyComponent(const EnemyComponent& obj) :
     super(obj),
     _velocity_timer(),
     _target(),
     _velocity_com() {
 }
 
-ratchet::EnemyComponent::~EnemyComponent() {
+ratchet::component::enemy::EnemyComponent::~EnemyComponent() {
 }
 
-void ratchet::EnemyComponent::SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
+void ratchet::component::enemy::EnemyComponent::SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     this->_target = ptr;
 }
 
-std::string ratchet::EnemyComponent::GetType(void) const {
+std::string ratchet::component::enemy::EnemyComponent::GetType(void) const {
     return "EnemyComponent";
 }
 
-std::weak_ptr<ratchet::actor::Actor> ratchet::EnemyComponent::GetTarget(void) const {
+std::weak_ptr<ratchet::actor::Actor> ratchet::component::enemy::EnemyComponent::GetTarget(void) const {
     return this->_target;
 }
 
-std::optional<Mof::CVector3> ratchet::EnemyComponent::GetTargetPosition(void) const {
+std::optional<Mof::CVector3> ratchet::component::enemy::EnemyComponent::GetTargetPosition(void) const {
     if (auto target = this->GetTarget().lock()) {
         auto pos = target->GetPosition();
-        float player_height = target->GetComponent<ratchet::CharacterComponent>()->GetHeight();
+        float player_height = target->GetComponent<ratchet::component::CharacterComponent>()->GetHeight();
         pos.y += player_height;
         return pos;
     } // if
     return std::optional<Mof::CVector3>();
 }
 
-float ratchet::EnemyComponent::GetHomeDistance(void) const {
+float ratchet::component::enemy::EnemyComponent::GetHomeDistance(void) const {
     return 2.5f;
 }
 
-bool ratchet::EnemyComponent::Initialize(void) {
+bool ratchet::component::enemy::EnemyComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
     _velocity_timer.Initialize(1.0f, true);
 
-    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetSleep(true);
         velocity_com->SetGravity(0.0f);
     } // if
 
 
-    auto coll_com = super::GetOwner()->GetComponent<ratchet::EnemyCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::CollisionComponentType::kEnemyCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::EnemyCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kEnemyCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         auto target = in.target.lock();
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
         auto length = (this->GetVolume() * 2.0f) - vec.Length();
@@ -82,24 +82,24 @@ bool ratchet::EnemyComponent::Initialize(void) {
         return true;
     }));
 
-    auto sight_coll = super::GetOwner()->GetComponent<ratchet::SightCollisionComponent>();
-    sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
+    auto sight_coll = super::GetOwner()->GetComponent<ratchet::component::collision::SightCollisionComponent>();
+    sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                  "PlayerCollisionComponent",
-                                 ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+                                 ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         auto target = in.target.lock();
         this->SetTarget(target);
         return true;
     }));
-    sight_coll->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Exit,
+    sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
                                  "PlayerCollisionComponent",
-                                 ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+                                 ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         this->SetTarget(nullptr);
         return true;
     }));
     return true;
 }
 
-bool ratchet::EnemyComponent::Update(float delta_time) {
+bool ratchet::component::enemy::EnemyComponent::Update(float delta_time) {
     if (auto velocity_com = _velocity_com.lock()) {
         velocity_com->SetUseGravity(false);
     } // if
@@ -124,11 +124,11 @@ bool ratchet::EnemyComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::EnemyComponent::Release(void) {
+bool ratchet::component::enemy::EnemyComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::EnemyComponent::Clone(void) {
-    return std::make_shared<ratchet::EnemyComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::enemy::EnemyComponent::Clone(void) {
+    return std::make_shared<ratchet::component::enemy::EnemyComponent>(*this);
 }

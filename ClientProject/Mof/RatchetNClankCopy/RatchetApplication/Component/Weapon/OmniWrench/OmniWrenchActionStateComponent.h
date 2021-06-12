@@ -1,5 +1,5 @@
-#ifndef RATCHET_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
-#define RATCHET_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_WEAPON_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_WEAPON_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
 
 
 #include "../../ActionStateComponent.h"
@@ -8,8 +8,10 @@
 
 
 namespace ratchet {
-class OmniWrenchActionStateComponent : public ratchet::ActionStateComponent {
-    using super = ratchet::ActionStateComponent;
+namespace component {
+namespace weapon {
+class OmniWrenchActionStateComponent : public ratchet::component::ActionStateComponent {
+    using super = ratchet::component::ActionStateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,4 +56,6 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RATCHET_OMNI_WRENCH_ACTION_STATE_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_WEAPON_OMNI_WRENCH_ACTION_STATE_COMPONENT_H

@@ -1,8 +1,8 @@
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyStateComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyIdleComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyMoveComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyGoHomeComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyMeleeAttackComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyRangedAttackComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::EnemyDamageComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyStateComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyIdleComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyMoveComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyGoHomeComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyMeleeAttackComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyRangedAttackComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::enemy::EnemyDamageComponent>();

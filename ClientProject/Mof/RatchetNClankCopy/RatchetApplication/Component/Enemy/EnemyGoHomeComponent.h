@@ -1,15 +1,20 @@
-#ifndef RATCHET_ENEMY_GO_HOME_COMPONENT_H
-#define RATCHET_ENEMY_GO_HOME_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ENEMY_ENEMY_GO_HOME_COMPONENT_H
+#define RATCHET_COMPONENT_ENEMY_ENEMY_GO_HOME_COMPONENT_H
 
 
 #include "../ActionComponent.h"
 
 #include <memory>
 
+#include "../VelocityComponent.h"
+#include "../MotionStateComponent.h"
+
 
 namespace ratchet {
-class EnemyGoHomeComponent : public ratchet::ActionComponent {
-    using super = ratchet::ActionComponent;
+namespace component {
+namespace enemy {
+class EnemyGoHomeComponent : public ::ratchet::component::ActionComponent {
+    using super = ::ratchet::component::ActionComponent;
 private:
     //! 移動速度
     float _move_speed;
@@ -18,11 +23,11 @@ private:
     //! ラジアン
     float _ideal_angle;
     //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
+    //! モーション
+    std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
     //! 状態
     std::weak_ptr<class EnemyStateComponent> _action_state_com;
-    //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;    
     //! 型
     std::weak_ptr<class EnemyComponent> _ENEMY_com;
     virtual void InputMoveVelocity(float speed);
@@ -92,7 +97,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -101,4 +106,6 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_ENEMY_GO_HOME_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ENEMY_ENEMY_GO_HOME_COMPONENT_H

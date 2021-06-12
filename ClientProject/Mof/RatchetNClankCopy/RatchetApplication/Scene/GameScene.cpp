@@ -205,7 +205,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
     param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", param);
     this->AddElement(player);
-    stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::CameraComponent>());
+    stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
 
     {
         param->transform.position = Mof::CVector3(15.0f, -5.0f, 7.0f);
@@ -289,7 +289,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
     // enemy
     for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
         auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
-        _ASSERT_EXPR(ENEMY_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
         param->transform.position = enemy_spawn.second->GetPosition();

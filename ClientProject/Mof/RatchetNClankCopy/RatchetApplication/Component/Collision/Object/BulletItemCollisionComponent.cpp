@@ -5,28 +5,28 @@
 #include "../../Item/BulletItem/BulletItemActionStateComponent.h"
 
 
-ratchet::BulletItemCollisionComponent::BulletItemCollisionComponent(int priority) :
+ratchet::component::collision::BulletItemCollisionComponent::BulletItemCollisionComponent(int priority) :
     super(priority),
     _height(0.6f),
     _volume(_height),
     _state_com(){
 }
 
-ratchet::BulletItemCollisionComponent::BulletItemCollisionComponent(const BulletItemCollisionComponent& obj) :
+ratchet::component::collision::BulletItemCollisionComponent::BulletItemCollisionComponent(const BulletItemCollisionComponent& obj) :
     super(obj),
     _height(obj._height),
     _volume(obj._volume),
     _state_com() {
 }
 
-ratchet::BulletItemCollisionComponent::~BulletItemCollisionComponent() {
+ratchet::component::collision::BulletItemCollisionComponent::~BulletItemCollisionComponent() {
 }
 
-std::string ratchet::BulletItemCollisionComponent::GetType(void) const {
-    return ratchet::CollisionComponentType::kBulletItemCollisionComponent;
+std::string ratchet::component::collision::BulletItemCollisionComponent::GetType(void) const {
+    return ratchet::component::collision::CollisionComponentType::kBulletItemCollisionComponent;
 }
 
-std::optional<Mof::CSphere> ratchet::BulletItemCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> ratchet::component::collision::BulletItemCollisionComponent::GetSphere(void) {
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
@@ -35,38 +35,38 @@ std::optional<Mof::CSphere> ratchet::BulletItemCollisionComponent::GetSphere(voi
     return Mof::CSphere(pos, _volume);
 }
 
-std::optional<Mof::CBoxAABB> ratchet::BulletItemCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::component::collision::BulletItemCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> ratchet::BulletItemCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::component::collision::BulletItemCollisionComponent::GetRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::CRay3D> ratchet::BulletItemCollisionComponent::GetNextRay(void) {
+std::optional<Mof::CRay3D> ratchet::component::collision::BulletItemCollisionComponent::GetNextRay(void) {
         return std::optional<Mof::CRay3D>();
 }
 
-std::optional<Mof::LPMeshContainer> ratchet::BulletItemCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::component::collision::BulletItemCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<ratchet::SightObject> ratchet::BulletItemCollisionComponent::GetSightObject(void) {
-    return std::optional<ratchet::SightObject>();
+std::optional<::ratchet::component::collision::SightObject> ratchet::component::collision::BulletItemCollisionComponent::GetSightObject(void) {
+    return std::optional<::ratchet::component::collision::SightObject>();
 }
 
-bool ratchet::BulletItemCollisionComponent::Initialize(void) {
+bool ratchet::component::collision::BulletItemCollisionComponent::Initialize(void) {
     super::Initialize();
 
-    _state_com = super::GetOwner()->GetComponent<ratchet::BulletItemActionStateComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::item::bulletitem::BulletItemActionStateComponent>();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BulletItemCollisionComponent::Clone(void) {
-    return std::make_shared<ratchet::BulletItemCollisionComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::collision::BulletItemCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::component::collision::BulletItemCollisionComponent>(*this);
 }
 
-void ratchet::BulletItemCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void ratchet::component::collision::BulletItemCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetSphere().has_value()) {
         return;
     } // if

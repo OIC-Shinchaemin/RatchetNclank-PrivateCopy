@@ -1,45 +1,45 @@
 #include "InvincibleComponent.h"
 
 
-ratchet::InvincibleComponent::InvincibleComponent(int priority) :
+ratchet::component::InvincibleComponent::InvincibleComponent(int priority) :
     super(priority),
     _invincible() {
 }
 
-ratchet::InvincibleComponent::InvincibleComponent(const InvincibleComponent& obj) :
+ratchet::component::InvincibleComponent::InvincibleComponent(const InvincibleComponent& obj) :
     super(obj),
     _invincible() {
 }
 
-ratchet::InvincibleComponent::~InvincibleComponent() {
+ratchet::component::InvincibleComponent::~InvincibleComponent() {
 }
 
-std::string ratchet::InvincibleComponent::GetType(void) const {
+std::string ratchet::component::InvincibleComponent::GetType(void) const {
     return "InvincibleComponent";
 }
 
-bool ratchet::InvincibleComponent::Initialize(void) {
+bool ratchet::component::InvincibleComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool ratchet::InvincibleComponent::Update(float delta_time) {
+bool ratchet::component::InvincibleComponent::Update(float delta_time) {
     if (_invincible.Tick(delta_time)) {
         super::Inactivate();
     } // if
     return true;
 }
 
-bool ratchet::InvincibleComponent::Release(void) {
+bool ratchet::component::InvincibleComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::InvincibleComponent::Clone(void) {
-    return std::make_shared<ratchet::InvincibleComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::InvincibleComponent::Clone(void) {
+    return std::make_shared<ratchet::component::InvincibleComponent>(*this);
 }
 
-bool ratchet::InvincibleComponent::Activate(void) {
+bool ratchet::component::InvincibleComponent::Activate(void) {
     if (this->IsActive()) {
         return false;
     } // if

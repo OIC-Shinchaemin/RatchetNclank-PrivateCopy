@@ -1,31 +1,31 @@
 #include "BulletItemDefaultComponent.h"
 
 
-ratchet::BulletItemDefaultComponent::BulletItemDefaultComponent(int priority) :
+ratchet::component::item::bulletitem::BulletItemDefaultComponent::BulletItemDefaultComponent(int priority) :
     super(priority) {
 }
 
-ratchet::BulletItemDefaultComponent::BulletItemDefaultComponent(const BulletItemDefaultComponent& obj) :
+ratchet::component::item::bulletitem::BulletItemDefaultComponent::BulletItemDefaultComponent(const BulletItemDefaultComponent& obj) :
     super(obj) {
 }
 
-ratchet::BulletItemDefaultComponent::~BulletItemDefaultComponent() {
+ratchet::component::item::bulletitem::BulletItemDefaultComponent::~BulletItemDefaultComponent() {
 }
 
-std::string ratchet::BulletItemDefaultComponent::GetType(void) const {
+std::string ratchet::component::item::bulletitem::BulletItemDefaultComponent::GetType(void) const {
     return "BulletItemDefaultComponent";
 }
 
-std::string_view ratchet::BulletItemDefaultComponent::GetStateType(void) const {
+std::string_view ratchet::component::item::bulletitem::BulletItemDefaultComponent::GetStateType(void) const {
     return state::BulletItemActionType::kDefault;
 }
 
-bool ratchet::BulletItemDefaultComponent::Initialize(void) {
+bool ratchet::component::item::bulletitem::BulletItemDefaultComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool ratchet::BulletItemDefaultComponent::Update(float delta_time) {
+bool ratchet::component::item::bulletitem::BulletItemDefaultComponent::Update(float delta_time) {
     auto rotate = super::GetOwner()->GetRotate();
     if (rotate.x > math::kHalfPi) {
         rotate.x = math::kHalfPi;
@@ -39,16 +39,16 @@ bool ratchet::BulletItemDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::BulletItemDefaultComponent::Release(void) {
+bool ratchet::component::item::bulletitem::BulletItemDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BulletItemDefaultComponent::Clone(void) {
-    return std::make_shared<ratchet::BulletItemDefaultComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::bulletitem::BulletItemDefaultComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::bulletitem::BulletItemDefaultComponent>(*this);
 }
 
-bool ratchet::BulletItemDefaultComponent::Start(void) {
+bool ratchet::component::item::bulletitem::BulletItemDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -56,7 +56,7 @@ bool ratchet::BulletItemDefaultComponent::Start(void) {
     return true;
 }
 
-bool ratchet::BulletItemDefaultComponent::End(void) {
+bool ratchet::component::item::bulletitem::BulletItemDefaultComponent::End(void) {
     super::End();
     return true;
 }

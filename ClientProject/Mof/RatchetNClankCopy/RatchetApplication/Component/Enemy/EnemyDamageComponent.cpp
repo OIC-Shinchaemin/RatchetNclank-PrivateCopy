@@ -12,7 +12,7 @@
 #include "../Collision/Object/EnemyCollisionComponent.h"
 
 
-void ratchet::EnemyDamageComponent::CollisionAction(const ratchet::CollisionInfo& in) {
+void ratchet::component::enemy::EnemyDamageComponent::CollisionAction(const component::collision::CollisionInfo& in) {
     if (auto state_com = _state_com.lock()) {
         if (state_com->CanTransition(state::EnemyActionStateType::kEnemyActionDamageState)) {
             state_com->ChangeState(state::EnemyActionStateType::kEnemyActionDamageState);
@@ -22,7 +22,7 @@ void ratchet::EnemyDamageComponent::CollisionAction(const ratchet::CollisionInfo
     } // if
 }
 
-ratchet::EnemyDamageComponent::EnemyDamageComponent(int priority) :
+ratchet::component::enemy::EnemyDamageComponent::EnemyDamageComponent(int priority) :
     super(priority),
     _damage_value(0),
     _damage_angle(),
@@ -35,7 +35,7 @@ ratchet::EnemyDamageComponent::EnemyDamageComponent(int priority) :
     _state_com() {
 }
 
-ratchet::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) :
+ratchet::component::enemy::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& obj) :
     super(obj),
     _damage_value(0),
     _damage_angle(),
@@ -47,31 +47,31 @@ ratchet::EnemyDamageComponent::EnemyDamageComponent(const EnemyDamageComponent& 
     _state_com() {
 }
 
-ratchet::EnemyDamageComponent::~EnemyDamageComponent() {
+ratchet::component::enemy::EnemyDamageComponent::~EnemyDamageComponent() {
 }
 
-std::string ratchet::EnemyDamageComponent::GetType(void) const {
+std::string ratchet::component::enemy::EnemyDamageComponent::GetType(void) const {
     return "EnemyDamageComponent";
 }
 
-std::string_view ratchet::EnemyDamageComponent::GetStateType(void) const {
+std::string_view ratchet::component::enemy::EnemyDamageComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionDamageState;
 }
 
-bool ratchet::EnemyDamageComponent::Initialize(void) {
+bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
-    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
-    _hp_com = super::GetOwner()->GetComponent<ratchet::HpComponent>();
-    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::EnemyComponent>();
-    _state_com = super::GetOwner()->GetComponent<ratchet::EnemyStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
+    _hp_com = super::GetOwner()->GetComponent<ratchet::component::HpComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyStateComponent>();
 
-    auto coll_com = super::GetOwner()->GetComponent<ratchet::EnemyCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::CollisionComponentType::kPlayerCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::EnemyCollisionComponent>();
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         auto ENEMY_com = _ENEMY_com.lock();
         auto target = in.target.lock();
         
@@ -85,30 +85,30 @@ bool ratchet::EnemyDamageComponent::Initialize(void) {
         super::GetOwner()->SetPosition(pos + diff);
         return true;
     }));
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::CollisionComponentType::kOmniWrenchCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kOmniWrenchCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);
         return true;
     }));
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::CollisionComponentType::kPyrocitorBulletCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kPyrocitorBulletCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);
         return true;
     }));
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::CollisionComponentType::kBlasterBulletCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBlasterBulletCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 1;
         this->CollisionAction(in);
         return true;
     }));
-    coll_com->AddCollisionFunc(ratchet::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::CollisionComponentType::kBombGloveEffectCollisionComponent,
-                               ratchet::CollisionComponent::CollisionFunc([&](const ratchet::CollisionInfo& in) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBombGloveEffectCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 2;
         this->CollisionAction(in);
         return true;
@@ -116,7 +116,7 @@ bool ratchet::EnemyDamageComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::EnemyDamageComponent::Update(float delta_time) {
+bool ratchet::component::enemy::EnemyDamageComponent::Update(float delta_time) {
     if (auto motion_com = _motion_com.lock()) {
         auto state_com = _state_com.lock();
         if (motion_com->IsEndMotion()) {
@@ -132,16 +132,16 @@ bool ratchet::EnemyDamageComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::EnemyDamageComponent::Release(void) {
+bool ratchet::component::enemy::EnemyDamageComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::EnemyDamageComponent::Clone(void) {
-    return std::make_shared<ratchet::EnemyDamageComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::enemy::EnemyDamageComponent::Clone(void) {
+    return std::make_shared<ratchet::component::enemy::EnemyDamageComponent>(*this);
 }
 
-bool ratchet::EnemyDamageComponent::Start(void) {
+bool ratchet::component::enemy::EnemyDamageComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

@@ -1,15 +1,20 @@
-#ifndef RATCHET_OMNI_WRENCH_THROWED_COMPONENT_H
-#define RATCHET_OMNI_WRENCH_THROWED_COMPONENT_H
+#ifndef RATCHET_COMPONENT_WEAPON_OMNI_WRENCH_THROWED_COMPONENT_H
+#define RATCHET_COMPONENT_WEAPON_OMNI_WRENCH_THROWED_COMPONENT_H
 
 
 #include "../../ActionComponent.h"
-
 #include <memory>
+
+#include "../../VelocityComponent.h"
 
 
 namespace ratchet {
-class OmniWrenchThrowedComponent : public ratchet::ActionComponent {
-    using super = ratchet::ActionComponent;
+namespace component {
+namespace collision { class OmniWrenchCollisionComponent; }
+
+namespace weapon {
+class OmniWrenchThrowedComponent : public ratchet::component::ActionComponent {
+    using super = ratchet::component::ActionComponent;
 private:
     //! 遷移
     Mof::CVector3 _local_translate;
@@ -24,11 +29,11 @@ private:
     //! 所有者
     std::weak_ptr<ratchet::actor::Actor> _weapon_owner;
     //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
+    std::weak_ptr <ratchet::component::VelocityComponent> _velocity_com;
     //! 状態
     std::weak_ptr<class OmniWrenchActionStateComponent> _action_state_com;
     //! 衝突
-    std::weak_ptr<class OmniWrenchCollisionComponent> _collision_com;
+    std::weak_ptr<ratchet::component::collision::OmniWrenchCollisionComponent> _collision_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -99,4 +104,6 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_OMNI_WRENCH_THROWED_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_WEAPON_OMNI_WRENCH_THROWED_COMPONENT_H

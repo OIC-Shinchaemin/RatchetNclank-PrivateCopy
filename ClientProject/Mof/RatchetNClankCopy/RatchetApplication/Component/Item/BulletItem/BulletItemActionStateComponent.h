@@ -1,5 +1,5 @@
-#ifndef RATCHET_BulletItem_ACTION_STATE_COMPONENT_H
-#define RATCHET_BulletItem_ACTION_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_ACTION_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_ACTION_STATE_COMPONENT_H
 
 
 #include "../../ActionStateComponent.h"
@@ -8,8 +8,11 @@
 
 
 namespace ratchet {
-class BulletItemActionStateComponent : public ratchet::ActionStateComponent {
-    using super = ratchet::ActionStateComponent;
+namespace component {
+namespace item {
+namespace bulletitem {
+class BulletItemActionStateComponent : public ratchet::component::ActionStateComponent {
+    using super = ratchet::component::ActionStateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -54,4 +57,7 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RATCHET_BulletItem_ACTION_STATE_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_ACTION_STATE_COMPONENT_H

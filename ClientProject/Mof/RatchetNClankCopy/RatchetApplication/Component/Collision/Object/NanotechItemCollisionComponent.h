@@ -1,5 +1,5 @@
-#ifndef RATCHET_NanotechItem_COLLISION_COMPONENT_H
-#define RATCHET_NanotechItem_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_NanotechItem_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_NanotechItem_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -11,15 +11,18 @@
 
 
 namespace ratchet {
-class NanotechItemCollisionComponent : public ratchet::CollisionComponent {
-    using super = ratchet::CollisionComponent;
+namespace component {
+namespace item { namespace nanotechitem { class NanotechItemActionStateComponent; } }
+namespace collision {
+class NanotechItemCollisionComponent : public ratchet::component::collision::CollisionComponent {
+    using super = ratchet::component::collision::CollisionComponent;
 private:
     //! 高さ
     float _height;
     //! 大きさ
     float _volume;
     //! 状態
-    std::weak_ptr<class NanotechItemActionStateComponent> _state_com;
+    std::weak_ptr<ratchet::component::item::nanotechitem::NanotechItemActionStateComponent> _state_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -76,7 +79,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
+    virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -96,4 +99,6 @@ public:
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
-#endif // !RATCHET_NanotechItem_COLLISION_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_COLLISION_NanotechItem_COLLISION_COMPONENT_H

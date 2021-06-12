@@ -1,5 +1,5 @@
-#ifndef RATCHET_CAMERA_COMPONENT_H
-#define RATCHET_CAMERA_COMPONENT_H
+#ifndef RATCHET_COMPONENT_CAMERA_COMPONENT_H
+#define RATCHET_COMPONENT_CAMERA_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -11,8 +11,13 @@
 
 
 namespace ratchet {
-class CameraComponent : public ratchet::UpdateComponent, public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&> {
-    using super = ratchet::UpdateComponent;
+namespace component {
+namespace player {
+class PlayerStateComponent;
+}
+class CameraComponent : public ratchet::component::UpdateComponent, 
+    public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&> {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! 対象
     Mof::CVector3 _target;
@@ -24,8 +29,8 @@ private:
     ratchet::camera::CameraController::CameraMode _current_mode;
     //! コントローラ
     std::unordered_map<ratchet::camera::CameraController::CameraMode, std::shared_ptr<ratchet::camera::CameraController>> _controller_map;
-    
-    
+
+
     //! FPSカメラ方向
     float _ideal_fps_camera_angle;
     //! 距離
@@ -37,7 +42,7 @@ private:
     //! 衝突中
     bool _collisioned_stage;
     //! 状態
-    std::weak_ptr<class PlayerStateComponent> _state_com;
+    std::weak_ptr<ratchet::component::player::PlayerStateComponent> _state_com;
     /// <summary>
     /// 角度設定
     /// </summary>
@@ -179,4 +184,5 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RATCHET_CAMERA_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_CAMERA_COMPONENT_H

@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_SHOT_ATTACK_COMPONENT_H
-#define RATCHET_PLAYER_SHOT_ATTACK_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_SHOT_ATTACK_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_SHOT_ATTACK_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -10,8 +10,11 @@
 
 
 namespace ratchet {
-class PlayerShotAttackComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
+namespace component {
+namespace player {
+namespace action {
+class PlayerShotAttackComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+    using super = ::ratchet::component::player::action::PlayerActionComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -25,9 +28,9 @@ class PlayerShotAttackComponent : public ratchet::PlayerActionComponent {
     };
 private:
     //! ïêäÌ
-    std::weak_ptr<ratchet::actor::weapon::Mechanical> _weapon;
+    std::weak_ptr<::ratchet::actor::weapon::Mechanical> _weapon;
     //! ì¸óÕèÓïÒ
-    ratchet::PlayerShotAttackComponent::InputInfo _input_info;
+    ratchet::component::player::action::PlayerShotAttackComponent::InputInfo _input_info;
     //! à⁄ìÆ
     std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:
@@ -95,4 +98,7 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_SHOT_ATTACK_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_SHOT_ATTACK_COMPONENT_H

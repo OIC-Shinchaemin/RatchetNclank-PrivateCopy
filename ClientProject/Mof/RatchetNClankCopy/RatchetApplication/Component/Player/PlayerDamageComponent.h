@@ -1,15 +1,20 @@
-#ifndef RATCHET_PLAYER_DAMAGE_COMPONENT_H
-#define RATCHET_PLAYER_DAMAGE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DAMAGE_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DAMAGE_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
 
 #include <memory>
 
+#include "../HpComponent.h"
+
 
 namespace ratchet {
-class PlayerDamageComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
+namespace component {
+namespace player {
+namespace action {
+class PlayerDamageComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+    using super = ::ratchet::component::player::action::PlayerActionComponent;
 private:
     //! îÌíeó 
     int _damage_value;
@@ -18,7 +23,7 @@ private:
     //! îÌíeäpìx
     Mof::CVector3 _damage_angle;
     //! Hp
-    std::weak_ptr<class HpComponent> _hp_com;
+    std::weak_ptr<::ratchet::component::HpComponent> _hp_com;
     /// <summary>
     /// êÅÇ¡îÚÇ‘
     /// </summary>
@@ -90,7 +95,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
     /// <summary>
     /// äJén
     /// </summary>
@@ -99,4 +104,7 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_DAMAGE_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DAMAGE_COMPONENT_H

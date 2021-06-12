@@ -1,5 +1,5 @@
-#ifndef RATCHET_CHARACTER_COMPONENT_H
-#define RATCHET_CHARACTER_COMPONENT_H
+#ifndef RATCHET_COMPONENT_CHARACTER_COMPONENT_H
+#define RATCHET_COMPONENT_CHARACTER_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -10,8 +10,9 @@
 
 
 namespace ratchet {
-class CharacterComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class CharacterComponent : public ::ratchet::component::UpdateComponent {
+    using super = ::ratchet::component::UpdateComponent;
 protected:
     //! ‘å‚«‚³
     float _volume;
@@ -60,7 +61,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_CHARACTER_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_CHARACTER_COMPONENT_H

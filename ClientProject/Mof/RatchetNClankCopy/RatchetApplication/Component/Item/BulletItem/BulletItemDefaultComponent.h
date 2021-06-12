@@ -1,5 +1,5 @@
-#ifndef RATCHET_BulletItem_DEFAULT_COMPONENT_H
-#define RATCHET_BulletItem_DEFAULT_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_DEFAULT_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_DEFAULT_COMPONENT_H
 
 
 #include "BulletItemActionComponent.h"
@@ -8,8 +8,11 @@
 
 
 namespace ratchet {
-class BulletItemDefaultComponent : public ratchet::BulletItemActionComponent {
-    using super = ratchet::BulletItemActionComponent;
+namespace component {
+namespace item {
+namespace bulletitem {
+class BulletItemDefaultComponent : public ratchet::component::item::bulletitem::BulletItemActionComponent {
+    using super = ratchet::component::item::bulletitem::BulletItemActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -75,4 +78,7 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_BulletItem_DEFAULT_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_DEFAULT_COMPONENT_H

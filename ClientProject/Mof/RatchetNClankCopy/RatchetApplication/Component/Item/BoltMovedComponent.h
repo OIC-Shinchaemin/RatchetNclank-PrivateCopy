@@ -1,5 +1,5 @@
-#ifndef RATCHET_BOLT_MOVED_COMPONENT_H
-#define RATCHET_BOLT_MOVED_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BOLT_MOVED_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BOLT_MOVED_COMPONENT_H
 
 
 #include "BoltActionComponent.h"
@@ -8,8 +8,10 @@
 
 
 namespace ratchet {
-class BoltMovedComponent : public ratchet::BoltActionComponent {
-    using super = ratchet::BoltActionComponent;
+namespace component {
+namespace item {
+class BoltMovedComponent : public ratchet::component::item::BoltActionComponent {
+    using super = ratchet::component::item::BoltActionComponent;
 private:
     //! ‘¬“x
     Mof::CVector3 _speed;
@@ -82,4 +84,6 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_BOLT_MOVED_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_BOLT_MOVED_COMPONENT_H

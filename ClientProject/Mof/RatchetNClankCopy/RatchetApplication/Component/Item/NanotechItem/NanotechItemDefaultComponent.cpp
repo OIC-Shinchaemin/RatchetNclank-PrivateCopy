@@ -1,31 +1,31 @@
 #include "NanotechItemDefaultComponent.h"
 
 
-ratchet::NanotechItemDefaultComponent::NanotechItemDefaultComponent(int priority) :
+ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::NanotechItemDefaultComponent(int priority) :
     super(priority) {
 }
 
-ratchet::NanotechItemDefaultComponent::NanotechItemDefaultComponent(const ratchet::NanotechItemDefaultComponent& obj) :
+ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::NanotechItemDefaultComponent(const ratchet::component::item::nanotechitem::NanotechItemDefaultComponent& obj) :
     super(obj) {
 }
 
-ratchet::NanotechItemDefaultComponent::~NanotechItemDefaultComponent() {
+ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::~NanotechItemDefaultComponent() {
 }
 
-std::string ratchet::NanotechItemDefaultComponent::GetType(void) const {
+std::string ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::GetType(void) const {
     return "NanotechItemDefaultComponent";
 }
 
-std::string_view ratchet::NanotechItemDefaultComponent::GetStateType(void) const {
+std::string_view ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::GetStateType(void) const {
     return state::NanotechItemActionType::kDefault;
 }
 
-bool ratchet::NanotechItemDefaultComponent::Initialize(void) {
+bool ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool ratchet::NanotechItemDefaultComponent::Update(float delta_time) {
+bool ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::Update(float delta_time) {
     auto rotate = super::GetOwner()->GetRotate();
     if (rotate.x > math::kHalfPi) {
         rotate.x = math::kHalfPi;
@@ -39,16 +39,16 @@ bool ratchet::NanotechItemDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::NanotechItemDefaultComponent::Release(void) {
+bool ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::NanotechItemDefaultComponent::Clone(void) {
-    return std::make_shared<ratchet::NanotechItemDefaultComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::nanotechitem::NanotechItemDefaultComponent>(*this);
 }
 
-bool ratchet::NanotechItemDefaultComponent::Start(void) {
+bool ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -56,7 +56,7 @@ bool ratchet::NanotechItemDefaultComponent::Start(void) {
     return true;
 }
 
-bool ratchet::NanotechItemDefaultComponent::End(void) {
+bool ratchet::component::item::nanotechitem::NanotechItemDefaultComponent::End(void) {
     super::End();
     return true;
 }

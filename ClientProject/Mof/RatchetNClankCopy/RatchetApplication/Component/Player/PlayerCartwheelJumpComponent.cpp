@@ -3,14 +3,14 @@
 #include "PlayerMoveComponent.h"
 
 
-void ratchet::PlayerCartwheelJumpComponent::InputJumpVelocity(float speed) {
+void ratchet::component::player::action::PlayerCartwheelJumpComponent::InputJumpVelocity(float speed) {
     auto velocity_com = super::GetVelocityComponent();
     auto v = velocity_com->GetVelocity();
     v.y = speed;
     velocity_com->SetVelocity(v);
 }
 
-ratchet::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(int priority) :
+ratchet::component::player::action::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(int priority) :
     super(priority),
     _jump_speed(0.0f),
     _jump_decrase(0.4f),
@@ -18,7 +18,7 @@ ratchet::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(int priority
     _move_com() {
 }
 
-ratchet::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(const PlayerCartwheelJumpComponent& obj) :
+ratchet::component::player::action::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(const PlayerCartwheelJumpComponent& obj) :
     super(obj),
     _jump_speed(0.0f),
     _jump_decrase(obj._jump_decrase),
@@ -26,36 +26,36 @@ ratchet::PlayerCartwheelJumpComponent::PlayerCartwheelJumpComponent(const Player
     _move_com() {
 }
 
-ratchet::PlayerCartwheelJumpComponent::~PlayerCartwheelJumpComponent() {
+ratchet::component::player::action::PlayerCartwheelJumpComponent::~PlayerCartwheelJumpComponent() {
 }
 
-std::string ratchet::PlayerCartwheelJumpComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerCartwheelJumpComponent::GetType(void) const {
     return "PlayerCartwheelJumpComponent";
 }
 
-std::string_view ratchet::PlayerCartwheelJumpComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerCartwheelJumpComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionCartwheelJumpState;
 }
 
-void ratchet::PlayerCartwheelJumpComponent::SetJumpSpeed(float speed) {
+void ratchet::component::player::action::PlayerCartwheelJumpComponent::SetJumpSpeed(float speed) {
     this->_jump_speed = speed;
 }
 
-void ratchet::PlayerCartwheelJumpComponent::SetMoveAngle(float radian) {
+void ratchet::component::player::action::PlayerCartwheelJumpComponent::SetMoveAngle(float radian) {
     this->_move_angle = radian;
 }
 
-bool ratchet::PlayerCartwheelJumpComponent::Initialize(void) {
+bool ratchet::component::player::action::PlayerCartwheelJumpComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::player::action::PlayerMoveComponent>();
     return true;
 }
 
-bool ratchet::PlayerCartwheelJumpComponent::Input(void) {
+bool ratchet::component::player::action::PlayerCartwheelJumpComponent::Input(void) {
     return false;
 }
 
-bool ratchet::PlayerCartwheelJumpComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerCartwheelJumpComponent::Update(float delta_time) {
     if (0.0f < std::abs(_jump_speed)) {
         this->InputJumpVelocity(_jump_speed);
     } // if
@@ -75,17 +75,17 @@ bool ratchet::PlayerCartwheelJumpComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerCartwheelJumpComponent::Release(void) {
+bool ratchet::component::player::action::PlayerCartwheelJumpComponent::Release(void) {
     super::Release();
     _move_com.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerCartwheelJumpComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerCartwheelJumpComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerCartwheelJumpComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerCartwheelJumpComponent>(*this);
 }
 
-bool ratchet::PlayerCartwheelJumpComponent::Start(void) {
+bool ratchet::component::player::action::PlayerCartwheelJumpComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

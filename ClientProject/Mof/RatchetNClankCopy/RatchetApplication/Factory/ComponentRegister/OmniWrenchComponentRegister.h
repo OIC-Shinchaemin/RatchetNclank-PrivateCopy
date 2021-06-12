@@ -1,3 +1,3 @@
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::OmniWrenchActionStateComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::OmniWrenchDefaultComponent>();
-ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::OmniWrenchThrowedComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::weapon::OmniWrenchActionStateComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::weapon::OmniWrenchDefaultComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::weapon::OmniWrenchThrowedComponent>();

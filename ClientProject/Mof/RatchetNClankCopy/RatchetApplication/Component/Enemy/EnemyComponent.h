@@ -1,5 +1,5 @@
-#ifndef RATCHET_ENEMY_COMPONENT_H
-#define RATCHET_ENEMY_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ENEMY_ENEMY_COMPONENT_H
+#define RATCHET_COMPONENT_ENEMY_ENEMY_COMPONENT_H
 
 
 #include "../CharacterComponent.h"
@@ -9,17 +9,21 @@
 
 #include "Base/Core/Timer.h"
 
+#include "../VelocityComponent.h"
+
 
 namespace ratchet {
-class EnemyComponent : public ratchet::CharacterComponent {
-    using super = ratchet::CharacterComponent;
+namespace component {
+namespace enemy {
+class EnemyComponent : public ::ratchet::component::CharacterComponent {
+    using super = ::ratchet::component::CharacterComponent;
 private:
     //! 休止状態切り替え
     base::core::Timer _velocity_timer;
     //! 標的
-    std::weak_ptr<ratchet::actor::Actor> _target;
+    std::weak_ptr<::ratchet::actor::Actor> _target;
     //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
+    std::weak_ptr<::ratchet::component::VelocityComponent> _velocity_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -39,7 +43,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetTarget(const std::shared_ptr<ratchet::actor::Actor>& ptr);
+    void SetTarget(const std::shared_ptr<::ratchet::actor::Actor>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -51,7 +55,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::weak_ptr<ratchet::actor::Actor> GetTarget(void) const;
+    std::weak_ptr<::ratchet::actor::Actor> GetTarget(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -87,7 +91,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_ENEMY_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ENEMY_ENEMY_COMPONENT_H

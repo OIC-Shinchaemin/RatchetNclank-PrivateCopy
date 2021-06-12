@@ -4,60 +4,60 @@
 #include "PlayerOmniWrenchComponent.h"
 
 
-ratchet::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priority) :
+ratchet::component::player::action::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(int priority) :
     super(priority),
     _move_com(),
     _weapon_com() {
 }
 
-ratchet::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const PlayerMeleeAttackThreeComponent& obj) :
+ratchet::component::player::action::PlayerMeleeAttackThreeComponent::PlayerMeleeAttackThreeComponent(const PlayerMeleeAttackThreeComponent& obj) :
     super(obj),
     _move_com(),
     _weapon_com() {
 }
 
-ratchet::PlayerMeleeAttackThreeComponent::~PlayerMeleeAttackThreeComponent() {
+ratchet::component::player::action::PlayerMeleeAttackThreeComponent::~PlayerMeleeAttackThreeComponent() {
 }
 
-std::string ratchet::PlayerMeleeAttackThreeComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerMeleeAttackThreeComponent::GetType(void) const {
     return "PlayerMeleeAttackThreeComponent";
 }
 
-std::string_view ratchet::PlayerMeleeAttackThreeComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerMeleeAttackThreeComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionMeleeAttackThreeState;
 }
 
-bool ratchet::PlayerMeleeAttackThreeComponent::Initialize(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackThreeComponent::Initialize(void) {
     super::Initialize();
 
-    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
-    _weapon_com = super::GetOwner()->GetComponent<ratchet::PlayerOmniWrenchComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::player::action::PlayerMoveComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerOmniWrenchComponent>();
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackThreeComponent::Input(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackThreeComponent::Input(void) {
     return false;
 }
 
-bool ratchet::PlayerMeleeAttackThreeComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerMeleeAttackThreeComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeEndState);
     } // if
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackThreeComponent::Release(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackThreeComponent::Release(void) {
     super::Release();
     _move_com.reset();
     _weapon_com.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerMeleeAttackThreeComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerMeleeAttackThreeComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerMeleeAttackThreeComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerMeleeAttackThreeComponent>(*this);
 }
 
-bool ratchet::PlayerMeleeAttackThreeComponent::Start(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackThreeComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -80,7 +80,7 @@ bool ratchet::PlayerMeleeAttackThreeComponent::Start(void) {
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackThreeComponent::End(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackThreeComponent::End(void) {
     super::End();
     if (auto weapon_com = _weapon_com.lock()) {
         weapon_com->Inactivate();

@@ -1,5 +1,5 @@
-#ifndef RATCHET_ENEMY_RANGED_ATTACK_COMPONENT_H
-#define RATCHET_ENEMY_RANGED_ATTACK_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ENEMY_ENEMY_RANGED_ATTACK_COMPONENT_H
+#define RATCHET_COMPONENT_ENEMY_ENEMY_RANGED_ATTACK_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -8,10 +8,16 @@
 
 #include "Base/Core/Timer.h"
 
+#include "../VelocityComponent.h"
+#include "../MotionComponent.h"
+#include "../MotionStateComponent.h"
+
 
 namespace ratchet {
-class EnemyRangedAttackComponent : public ratchet::ActionComponent {
-    using super = ratchet::ActionComponent;
+namespace component {
+namespace enemy {
+class EnemyRangedAttackComponent : public ratchet::component::ActionComponent {
+    using super = ratchet::component::ActionComponent;
 private:
 private:
     //! çUåÇîÕàÕ
@@ -23,11 +29,11 @@ private:
     //! ä‘äu
     base::core::Timer _interval;
     //! ë¨ìx
-    std::weak_ptr<class VelocityComponent> _velocity_com;
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! ÉÇÅ[ÉVÉáÉì
-    std::weak_ptr<class MotionComponent> _motion_com;
+    std::weak_ptr<ratchet::component::MotionComponent> _motion_com;
     //! ÉÇÅ[ÉVÉáÉì
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
+    std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
     //! å^
     std::weak_ptr<class EnemyComponent> _ENEMY_com;
     //! èÛë‘
@@ -109,4 +115,6 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_ENEMY_RANGED_ATTACK_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ENEMY_ENEMY_RANGED_ATTACK_COMPONENT_H

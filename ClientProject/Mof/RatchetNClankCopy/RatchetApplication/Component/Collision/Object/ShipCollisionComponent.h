@@ -1,5 +1,5 @@
-#ifndef RATCHET_SHIP_COLLISION_COMPONENT_H
-#define RATCHET_SHIP_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_SHIP_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_SHIP_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -11,11 +11,14 @@
 
 
 namespace ratchet {
-class ShipCollisionComponent : public ratchet::CollisionComponent {
-    using super = ratchet::CollisionComponent;
+namespace component {
+namespace ship { class ShipStateComponent; }
+namespace collision {
+class ShipCollisionComponent : public ratchet::component::collision::CollisionComponent {
+    using super = ratchet::component::collision::CollisionComponent;
 private:
     //! èÛë‘
-    std::weak_ptr<class ShipStateComponent> _state_com;
+    std::weak_ptr<ratchet::component::ship::ShipStateComponent> _state_com;
     //! çÇÇ≥
     float _height;
 public:
@@ -68,7 +71,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
+    virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -89,4 +92,6 @@ public:
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
-#endif // !RATCHET_SHIP_COLLISION_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_COLLISION_SHIP_COLLISION_COMPONENT_H

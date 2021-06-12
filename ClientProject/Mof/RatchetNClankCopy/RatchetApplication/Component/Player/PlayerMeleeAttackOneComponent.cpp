@@ -4,39 +4,39 @@
 #include "PlayerOmniWrenchComponent.h"
 
 
-ratchet::PlayerMeleeAttackOneComponent::PlayerMeleeAttackOneComponent(int priority) :
+ratchet::component::player::action::PlayerMeleeAttackOneComponent::PlayerMeleeAttackOneComponent(int priority) :
     super(priority),
     _next_reserve(false),
     _move_com(),
     _weapon_com() {
 }
 
-ratchet::PlayerMeleeAttackOneComponent::PlayerMeleeAttackOneComponent(const PlayerMeleeAttackOneComponent& obj) :
+ratchet::component::player::action::PlayerMeleeAttackOneComponent::PlayerMeleeAttackOneComponent(const PlayerMeleeAttackOneComponent& obj) :
     super(obj),
     _next_reserve(false),
     _move_com(),
     _weapon_com() {
 }
 
-ratchet::PlayerMeleeAttackOneComponent::~PlayerMeleeAttackOneComponent() {
+ratchet::component::player::action::PlayerMeleeAttackOneComponent::~PlayerMeleeAttackOneComponent() {
 }
 
-std::string ratchet::PlayerMeleeAttackOneComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerMeleeAttackOneComponent::GetType(void) const {
     return "PlayerMeleeAttackOneComponent";
 }
 
-std::string_view ratchet::PlayerMeleeAttackOneComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerMeleeAttackOneComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionMeleeAttackOneState;
 }
 
-bool ratchet::PlayerMeleeAttackOneComponent::Initialize(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackOneComponent::Initialize(void) {
     super::Initialize();
-    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
-    _weapon_com = super::GetOwner()->GetComponent<ratchet::PlayerOmniWrenchComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::player::action::PlayerMoveComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerOmniWrenchComponent>();
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackOneComponent::Input(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackOneComponent::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_N) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         _next_reserve = true;
@@ -44,7 +44,7 @@ bool ratchet::PlayerMeleeAttackOneComponent::Input(void) {
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackOneComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerMeleeAttackOneComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         if (_next_reserve) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackTwoState);
@@ -56,18 +56,18 @@ bool ratchet::PlayerMeleeAttackOneComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackOneComponent::Release(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackOneComponent::Release(void) {
     super::Release();
     _move_com.reset();
     _weapon_com.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerMeleeAttackOneComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerMeleeAttackOneComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerMeleeAttackOneComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerMeleeAttackOneComponent>(*this);
 }
 
-bool ratchet::PlayerMeleeAttackOneComponent::Start(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackOneComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -90,7 +90,7 @@ bool ratchet::PlayerMeleeAttackOneComponent::Start(void) {
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackOneComponent::End(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackOneComponent::End(void) {
     super::End();
     if (auto weapon_com = _weapon_com.lock()) {
         weapon_com->Inactivate();

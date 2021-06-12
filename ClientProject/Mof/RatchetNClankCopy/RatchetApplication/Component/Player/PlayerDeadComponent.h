@@ -1,13 +1,16 @@
-#ifndef RATCHET_PLAYER_DEAD_COMPONENT_H
-#define RATCHET_PLAYER_DEAD_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DEAD_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DEAD_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
 
 
 namespace ratchet {
-class PlayerDeadComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
+namespace component {
+namespace player {
+namespace action {
+class PlayerDeadComponent : public ratchet::component::player::action::PlayerActionComponent {
+    using super = ratchet::component::player::action::PlayerActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,7 +55,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -61,4 +64,7 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_DEAD_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DEAD_COMPONENT_H

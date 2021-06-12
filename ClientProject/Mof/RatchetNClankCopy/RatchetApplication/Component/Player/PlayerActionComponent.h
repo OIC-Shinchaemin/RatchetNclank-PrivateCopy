@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_ACTION_COMPONENT_H
-#define RATCHET_PLAYER_ACTION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_ACTION_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_ACTION_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -16,24 +16,27 @@
 
 
 namespace ratchet {
-class PlayerActionComponent : public ratchet::ActionComponent {
-    using super = ratchet::ActionComponent;
+namespace component {
+namespace player {
+namespace action {
+class PlayerActionComponent : public ratchet::component::ActionComponent {
+    using super = ratchet::component::ActionComponent;
 private:
     //! 速度
-    std::weak_ptr<ratchet::VelocityComponent> _velocity_com;
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! 状態
-    std::weak_ptr<ratchet::PlayerStateComponent> _state_com;
+    std::weak_ptr<ratchet::component::player::PlayerStateComponent> _state_com;
     //! モーション
-    std::weak_ptr<ratchet::MotionComponent> _motion_com;
+    std::weak_ptr<ratchet::component::MotionComponent> _motion_com;
     //! モーション
-    std::weak_ptr<ratchet::MotionStateComponent> _motion_state_com;
+    std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
 protected:
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::VelocityComponent> GetVelocityComponent(void) const;
+    std::shared_ptr<ratchet::component::VelocityComponent> GetVelocityComponent(void) const;
     /// <summary>
     /// 判定
     /// </summary>
@@ -91,4 +94,7 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_ACTION_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_ACTION_COMPONENT_H

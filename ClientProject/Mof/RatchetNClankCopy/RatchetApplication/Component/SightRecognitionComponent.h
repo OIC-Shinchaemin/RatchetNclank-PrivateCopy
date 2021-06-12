@@ -1,5 +1,5 @@
-#ifndef RATCHET_SIGHT_RECOGNITION_COMPONENT_H
-#define RATCHET_SIGHT_RECOGNITION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_SIGHT_RECOGNITION_COMPONENT_H
+#define RATCHET_COMPONENT_SIGHT_RECOGNITION_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -7,18 +7,22 @@
 #include <memory>
 #include <vector>
 
+
 namespace ratchet {
-class SightRecognitionComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+namespace player { class PlayerComponent; }
+namespace enemy { class EnemyComponent; }
+class SightRecognitionComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! Ž‹–ì
     float _range;
     //! ”FŽ¯
     std::vector<std::weak_ptr<ratchet::actor::Actor>> _recognized;
     //! ƒLƒƒƒ‰
-    std::weak_ptr<class PlayerComponent> _player_com;
+    std::weak_ptr<ratchet::component::player::PlayerComponent> _player_com;
     //! ƒLƒƒƒ‰
-    std::weak_ptr<class EnemyComponent> _ENEMY_com;
+    std::weak_ptr<ratchet::component::enemy::EnemyComponent> _ENEMY_com;
     /// <summary>
     /// •`‰æ
     /// </summary>
@@ -85,4 +89,5 @@ public:
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_SIGHT_RECOGNITION_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_SIGHT_RECOGNITION_COMPONENT_H

@@ -15,7 +15,7 @@ namespace ratchet {
 namespace game {
 class PhysicsWorld {
     using ActorPtr = std::shared_ptr<ratchet::actor::Actor>;
-    using ObjectPtr = std::shared_ptr<ratchet::CollisionComponent>;
+    using ObjectPtr = std::shared_ptr<ratchet::component::collision::CollisionComponent>;
     using ObjectArray = std::vector<ObjectPtr>;
 private:
     struct CollisionLayer {

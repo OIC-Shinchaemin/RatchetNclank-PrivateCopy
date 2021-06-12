@@ -100,8 +100,8 @@ ratchet::game::PhysicsWorld::~PhysicsWorld() {
 }
 
 void ratchet::game::PhysicsWorld::AddActor(const ActorPtr& actor) {
-    std::vector<std::weak_ptr<ratchet::CollisionComponent>> work;
-    actor->GetComponents<ratchet::CollisionComponent>(work);
+    std::vector<std::weak_ptr<ratchet::component::collision::CollisionComponent>> work;
+    actor->GetComponents<ratchet::component::collision::CollisionComponent>(work);
 
     for (auto& ptr : work) {
         auto type = ptr.lock()->GetType();
@@ -121,8 +121,8 @@ void ratchet::game::PhysicsWorld::AddActor(const ActorPtr& actor) {
 }
 
 void ratchet::game::PhysicsWorld::RemoveActor(const ActorPtr& actor) {
-    std::vector<std::weak_ptr<ratchet::CollisionComponent>> work;
-    actor->GetComponents<ratchet::CollisionComponent>(work);
+    std::vector<std::weak_ptr<ratchet::component::collision::CollisionComponent>> work;
+    actor->GetComponents<ratchet::component::collision::CollisionComponent>(work);
 
     for (auto& ptr : work) {
         for (auto& layer : _layers) {
@@ -156,7 +156,7 @@ bool ratchet::game::PhysicsWorld::Update(void) {
                 if (object == target) {
                     continue;
                 } // if
-                auto info = ratchet::CollisionInfo();
+                auto info = component::collision::CollisionInfo();
                 if (!layer.algo->IsCollision(object, target, info)) {
                     // Õ“ËI—¹
                     if (object->ExistCollisionedObject(target)) {

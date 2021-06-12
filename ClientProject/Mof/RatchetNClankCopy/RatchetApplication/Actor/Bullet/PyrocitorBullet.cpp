@@ -14,7 +14,7 @@ ratchet::actor::bullet::PyrocitorBullet::~PyrocitorBullet() {
 bool ratchet::actor::bullet::PyrocitorBullet::Update(float delta_time) {
     super::BulletUpdate(delta_time);
 
-    auto v = super::GetComponent<ratchet::VelocityComponent>();
+    auto v = super::GetComponent<ratchet::component::VelocityComponent>();
     v->AddVelocityForce(_speed);
     
     super::Update(delta_time);
@@ -28,6 +28,6 @@ bool ratchet::actor::bullet::PyrocitorBullet::Render(void) {
 
 void ratchet::actor::bullet::PyrocitorBullet::Start(const ratchet::actor::bullet::PyrocitorBullet::Param& in) {
     super::Start(in);
-    auto v = super::GetComponent<ratchet::VelocityComponent>();
+    auto v = super::GetComponent<ratchet::component::VelocityComponent>();
     v ->SetGravity(0.0f);
 }

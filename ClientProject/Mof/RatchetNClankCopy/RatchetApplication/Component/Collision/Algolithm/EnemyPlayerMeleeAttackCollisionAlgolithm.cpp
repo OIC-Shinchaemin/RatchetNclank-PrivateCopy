@@ -11,14 +11,14 @@ ratchet::EnemyPlayerMeleeAttackCollisionAlgolithm::~EnemyPlayerMeleeAttackCollis
 }
 
 const char* ratchet::EnemyPlayerMeleeAttackCollisionAlgolithm::GetLayerType(void) const {
-    return ratchet::CollisionComponentType::kEnemyCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kEnemyCollisionComponent.c_str();
 }
 
 const char* ratchet::EnemyPlayerMeleeAttackCollisionAlgolithm::GetTargetType(void) const {
-    return ratchet::CollisionComponentType::kPlayerMeleeAttackCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kPlayerMeleeAttackCollisionComponent.c_str();
 }
 
-bool ratchet::EnemyPlayerMeleeAttackCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
+bool ratchet::EnemyPlayerMeleeAttackCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::component::collision::CollisionComponent> object, std::shared_ptr<ratchet::component::collision::CollisionComponent> target, component::collision::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

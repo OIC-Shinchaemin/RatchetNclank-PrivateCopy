@@ -1,5 +1,5 @@
-#ifndef RATCHET_BOLT_GRAVITATE_COMPONENT_H
-#define RATCHET_BOLT_GRAVITATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BOLT_GRAVITATE_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BOLT_GRAVITATE_COMPONENT_H
 
 
 #include "BoltActionComponent.h"
@@ -8,8 +8,10 @@
 
 
 namespace ratchet {
-class BoltGravitateComponent : public ratchet::BoltActionComponent {
-    using super = ratchet::BoltActionComponent;
+namespace component {
+namespace item {
+class BoltGravitateComponent : public ratchet::component::item::BoltActionComponent {
+    using super = ratchet::component::item::BoltActionComponent;
 private:
     //! Œ^
     std::weak_ptr<class BoltComponent> _type_com;
@@ -78,4 +80,6 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_BOLT_GRAVITATE_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_BOLT_GRAVITATE_COMPONENT_H

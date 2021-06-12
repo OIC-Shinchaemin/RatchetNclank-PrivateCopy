@@ -11,14 +11,14 @@ ratchet::BulletItemPlayerCollisionAlgolithm::~BulletItemPlayerCollisionAlgolithm
 }
 
 const char* ratchet::BulletItemPlayerCollisionAlgolithm::GetLayerType(void) const {
-    return ratchet::CollisionComponentType::kBulletItemCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kBulletItemCollisionComponent.c_str();
 }
 
 const char* ratchet::BulletItemPlayerCollisionAlgolithm::GetTargetType(void) const {
-    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
-bool ratchet::BulletItemPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
+bool ratchet::BulletItemPlayerCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::component::collision::CollisionComponent> object, std::shared_ptr<ratchet::component::collision::CollisionComponent> target, component::collision::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;

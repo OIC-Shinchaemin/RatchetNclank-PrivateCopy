@@ -1,5 +1,5 @@
-#ifndef RATCHET_HP_COMPONENT_H
-#define RATCHET_HP_COMPONENT_H
+#ifndef RATCHET_COMPONENT_HP_COMPONENT_H
+#define RATCHET_COMPONENT_HP_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -10,8 +10,9 @@
 
 
 namespace ratchet {
-class HpComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class HpComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! ç≈ëÂíl
     int _hp_max;
@@ -89,4 +90,5 @@ public:
     void Damage(int value);
 };
 }
-#endif // !RATCHET_HP_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_HP_COMPONENT_H

@@ -1,5 +1,5 @@
-#ifndef RATCHET_TRANSFORM_COMPONENT_H
-#define RATCHET_TRANSFORM_COMPONENT_H
+#ifndef RATCHET_COMPONENT_TRANSFORM_COMPONENT_H
+#define RATCHET_COMPONENT_TRANSFORM_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -8,8 +8,9 @@
 
 
 namespace ratchet {
-class TransformComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class TransformComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! ‘¬“x
     std::weak_ptr<class VelocityComponent> _velocity_com;
@@ -76,4 +77,5 @@ public:
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_TRANSFORM_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_TRANSFORM_COMPONENT_H

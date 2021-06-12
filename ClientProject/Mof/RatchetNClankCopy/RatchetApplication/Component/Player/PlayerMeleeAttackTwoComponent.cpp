@@ -4,40 +4,40 @@
 #include "PlayerOmniWrenchComponent.h"
 
 
-ratchet::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(int priority) :
+ratchet::component::player::action::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(int priority) :
     super(priority),
     _next_reserve(false),
     _move_com(),
     _weapon_com() {
 }
 
-ratchet::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(const PlayerMeleeAttackTwoComponent& obj) :
+ratchet::component::player::action::PlayerMeleeAttackTwoComponent::PlayerMeleeAttackTwoComponent(const PlayerMeleeAttackTwoComponent& obj) :
     super(obj),
     _next_reserve(false),
     _move_com(),
     _weapon_com() {
 }
 
-ratchet::PlayerMeleeAttackTwoComponent::~PlayerMeleeAttackTwoComponent() {
+ratchet::component::player::action::PlayerMeleeAttackTwoComponent::~PlayerMeleeAttackTwoComponent() {
 }
 
-std::string ratchet::PlayerMeleeAttackTwoComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerMeleeAttackTwoComponent::GetType(void) const {
     return "PlayerMeleeAttackTwoComponent";
 }
 
-std::string_view ratchet::PlayerMeleeAttackTwoComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerMeleeAttackTwoComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionMeleeAttackTwoState;
 }
 
-bool ratchet::PlayerMeleeAttackTwoComponent::Initialize(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackTwoComponent::Initialize(void) {
     super::Initialize();
 
-    _move_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerMoveComponent>();
-    _weapon_com = super::GetOwner()->GetComponent<ratchet::PlayerOmniWrenchComponent>();
+    _move_com = super::GetOwner()->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::player::action::PlayerMoveComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerOmniWrenchComponent>();
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackTwoComponent::Input(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackTwoComponent::Input(void) {
     if (::g_pInput->IsKeyPush(MOFKEY_N) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         _next_reserve = true;
@@ -46,7 +46,7 @@ bool ratchet::PlayerMeleeAttackTwoComponent::Input(void) {
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackTwoComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerMeleeAttackTwoComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         if (_next_reserve) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackThreeState);
@@ -58,16 +58,16 @@ bool ratchet::PlayerMeleeAttackTwoComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackTwoComponent::Release(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackTwoComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerMeleeAttackTwoComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerMeleeAttackTwoComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerMeleeAttackTwoComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerMeleeAttackTwoComponent>(*this);
 }
 
-bool ratchet::PlayerMeleeAttackTwoComponent::Start(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackTwoComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -91,7 +91,7 @@ bool ratchet::PlayerMeleeAttackTwoComponent::Start(void) {
     return true;
 }
 
-bool ratchet::PlayerMeleeAttackTwoComponent::End(void) {
+bool ratchet::component::player::action::PlayerMeleeAttackTwoComponent::End(void) {
     super::End();
     if (auto weapon_com = _weapon_com.lock()) {
         weapon_com->Inactivate();

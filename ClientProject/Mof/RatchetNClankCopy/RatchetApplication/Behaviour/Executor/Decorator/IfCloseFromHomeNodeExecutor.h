@@ -16,7 +16,7 @@ public:
         //! アクター
         std::weak_ptr<ratchet::actor::Actor> actor;
         //! 型
-        std::weak_ptr<ratchet::EnemyComponent> type_com;
+        std::weak_ptr<ratchet::component::enemy::EnemyComponent> type_com;
     };
 private:
     //! 実行引数
@@ -42,7 +42,7 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.type_com = actor->GetComponent<ratchet::EnemyComponent>();
+            _node_args.type_com = actor->GetComponent<ratchet::component::enemy::EnemyComponent>();
         } // if
     }
     /// <summary>

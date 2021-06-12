@@ -11,7 +11,7 @@
 #include "../../Factory/FactoryManager.h"
 
 
-ratchet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
+ratchet::component::enemy::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     super(priority),
     _range(3.0f),
     _volume(0.2f),
@@ -24,7 +24,7 @@ ratchet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     _state_com() {
 }
 
-ratchet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
+ratchet::component::enemy::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
@@ -36,42 +36,42 @@ ratchet::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRange
     _state_com() {
 }
 
-ratchet::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
+ratchet::component::enemy::EnemyRangedAttackComponent ::~EnemyRangedAttackComponent() {
 }
 
-std::string ratchet::EnemyRangedAttackComponent::GetType(void) const {
+std::string ratchet::component::enemy::EnemyRangedAttackComponent::GetType(void) const {
     return "EnemyRangedAttackComponent";
 }
 
-std::string_view ratchet::EnemyRangedAttackComponent::GetStateType(void) const {
+std::string_view ratchet::component::enemy::EnemyRangedAttackComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionRangedAttackState;
 }
 
-float ratchet::EnemyRangedAttackComponent::GetRange(void) const {
+float ratchet::component::enemy::EnemyRangedAttackComponent::GetRange(void) const {
     return this->_range;
 }
 
-float ratchet::EnemyRangedAttackComponent::GetVolume(void) const {
+float ratchet::component::enemy::EnemyRangedAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-Mof::CSphere ratchet::EnemyRangedAttackComponent::GetCanAttackRangeSphere(void) const {
+Mof::CSphere ratchet::component::enemy::EnemyRangedAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _range);
 }
 
-bool ratchet::EnemyRangedAttackComponent::Initialize(void) {
+bool ratchet::component::enemy::EnemyRangedAttackComponent::Initialize(void) {
     super::Initialize();
 
-    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
-    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
-    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::EnemyComponent>();
-    _state_com = super::GetOwner()->GetComponent<ratchet::EnemyStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
+    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyStateComponent>();
     return true;
 }
 
-bool ratchet::EnemyRangedAttackComponent::Update(float delta_time) {
+bool ratchet::component::enemy::EnemyRangedAttackComponent::Update(float delta_time) {
     if (auto enemy_com = _ENEMY_com.lock()) {
         if (auto target = enemy_com->GetTarget().lock()) {
             auto owner = super::GetOwner();
@@ -103,16 +103,16 @@ bool ratchet::EnemyRangedAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::EnemyRangedAttackComponent::Release(void) {
+bool ratchet::component::enemy::EnemyRangedAttackComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::EnemyRangedAttackComponent::Clone(void) {
-    return std::make_shared<ratchet::EnemyRangedAttackComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::enemy::EnemyRangedAttackComponent::Clone(void) {
+    return std::make_shared<ratchet::component::enemy::EnemyRangedAttackComponent>(*this);
 }
 
-bool ratchet::EnemyRangedAttackComponent::Start(void) {
+bool ratchet::component::enemy::EnemyRangedAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

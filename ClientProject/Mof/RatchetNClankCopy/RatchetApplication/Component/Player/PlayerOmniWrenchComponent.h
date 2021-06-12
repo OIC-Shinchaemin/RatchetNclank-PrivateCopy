@@ -1,22 +1,28 @@
-#ifndef RATCHET_PLAYER_OMNI_WRENCH_COMPONENT_H
-#define RATCHET_PLAYER_OMNI_WRENCH_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_PLAYER_OMNI_WRENCH_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_PLAYER_OMNI_WRENCH_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 
 namespace ratchet {
-class PlayerOmniWrenchComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+namespace weapon { class OmniWrenchActionStateComponent; }
+namespace collision { class OmniWrenchCollisionComponent; }
+namespace player {
+namespace action { class PlayerThrowAttackComponent; }
+
+class PlayerOmniWrenchComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! 武器
     std::weak_ptr<ratchet::actor::Actor> _weapon;
     //! 状態
-    std::weak_ptr<class PlayerThrowAttackComponent> _throw_attack_com;
+    std::weak_ptr<ratchet::component::player::action::PlayerThrowAttackComponent> _throw_attack_com;
     //! 状態
-    std::weak_ptr<class OmniWrenchActionStateComponent> _weapon_action_state_com;
+    std::weak_ptr<ratchet::component::weapon::OmniWrenchActionStateComponent> _weapon_action_state_com;
     //! 衝突制御
-    std::weak_ptr<class OmniWrenchCollisionComponent> _weapon_coll_com;
+    std::weak_ptr<ratchet::component::collision::OmniWrenchCollisionComponent> _weapon_coll_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -75,4 +81,6 @@ public:
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_OMNI_WRENCH_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_PLAYER_OMNI_WRENCH_COMPONENT_H

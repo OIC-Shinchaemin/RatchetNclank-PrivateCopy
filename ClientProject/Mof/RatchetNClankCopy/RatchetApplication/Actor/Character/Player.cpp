@@ -111,8 +111,8 @@ bool ratchet::actor::character::Player::Initialize(void) {
 bool ratchet::actor::character::Player::Initialize(ratchet::actor::Actor::Param* param) {
     super::Initialize(param);
 
-    _player_com = super::GetComponent<ratchet::PlayerComponent>();
-    if (auto motion_com = super::GetComponent<ratchet::MotionComponent>(); motion_com) {
+    _player_com = super::GetComponent<ratchet::component::player::PlayerComponent>();
+    if (auto motion_com = super::GetComponent<ratchet::component::MotionComponent>(); motion_com) {
         auto motion = motion_com->GetMotionData();
         _upp_bone_state = motion->GetBoneState("UPP_weapon");
     } // if

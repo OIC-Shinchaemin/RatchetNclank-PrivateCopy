@@ -1,5 +1,5 @@
-#ifndef RATCHET_ENEMY_DAMAGE_COMPONENT_H
-#define RATCHET_ENEMY_DAMAGE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ENEMY_ENEMY_DAMAGE_COMPONENT_H
+#define RATCHET_COMPONENT_ENEMY_ENEMY_DAMAGE_COMPONENT_H
 
 
 #include "../ActionComponent.h"
@@ -9,10 +9,17 @@
 #include "Base/Core/Timer.h"
 #include "../Collision/Object/CollisionComponent.h"
 
+#include "../VelocityComponent.h"
+#include "../MotionComponent.h"
+#include "../MotionStateComponent.h"
+#include "../HpComponent.h"
+
 
 namespace ratchet {
-class EnemyDamageComponent : public ratchet::ActionComponent {
-    using super = ratchet::ActionComponent;
+namespace component {
+namespace enemy {
+class EnemyDamageComponent : public ratchet::component::ActionComponent {
+    using super = ratchet::component::ActionComponent;
 private:
     //! 被弾量
     int _damage_value;
@@ -21,13 +28,13 @@ private:
     //! 被弾速
     float _damage_speed;
     //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
+    std::weak_ptr<ratchet::component::MotionComponent> _motion_com;
     //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
+    std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
     //! Hp
-    std::weak_ptr<class HpComponent> _hp_com;
+    std::weak_ptr<ratchet::component::HpComponent> _hp_com;
     //! 型
     std::weak_ptr<class EnemyComponent> _ENEMY_com;
     //! 状態
@@ -37,7 +44,7 @@ private:
     /// 衝突処理
     /// </summary>
     /// <param name=""></param>
-    void CollisionAction(const ratchet::CollisionInfo& in);
+    void CollisionAction(const component::collision::CollisionInfo& in);
 public:
     /// <summary>
     /// コンストラクタ
@@ -97,4 +104,6 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_ENEMY_DAMAGE_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ENEMY_ENEMY_DAMAGE_COMPONENT_H

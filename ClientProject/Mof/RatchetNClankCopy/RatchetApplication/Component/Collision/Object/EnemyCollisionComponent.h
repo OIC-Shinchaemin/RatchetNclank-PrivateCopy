@@ -1,5 +1,5 @@
-#ifndef RATCHET_ENEMY_COLLISION_COMPONENT_H
-#define RATCHET_ENEMY_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_ENEMY_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_ENEMY_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -11,10 +11,13 @@
 
 
 namespace ratchet {
-class EnemyCollisionComponent : public ratchet::CollisionComponent {
-    using super = ratchet::CollisionComponent;
+namespace component {
+namespace enemy { class EnemyComponent; }
+namespace collision {
+class EnemyCollisionComponent : public ratchet::component::collision::CollisionComponent {
+    using super = ratchet::component::collision::CollisionComponent;
 private:
-    std::weak_ptr<class EnemyComponent> _ENEMY_com;
+    std::weak_ptr<ratchet::component::enemy::EnemyComponent> _ENEMY_com;
     /// <summary>
     /// è’ìÀ
     /// </summary>
@@ -70,7 +73,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
+    virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -91,4 +94,6 @@ public:
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
-#endif // !RATCHET_ENEMY_COLLISION_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_COLLISION_ENEMY_COLLISION_COMPONENT_H

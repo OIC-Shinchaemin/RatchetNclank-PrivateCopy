@@ -7,7 +7,7 @@
 #include "../Collision/Object/EnemyMeleeAttackCollisionComponent.h"
 
 
-ratchet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
+ratchet::component::enemy::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     super(priority),
     _range(1.7f),
     _volume(0.5f),
@@ -17,7 +17,7 @@ ratchet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(int priority) :
     _collision_com() {
 }
 
-ratchet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj) :
+ratchet::component::enemy::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAttackComponent& obj) :
     super(obj),
     _range(obj._range),
     _volume(obj._volume),
@@ -27,40 +27,40 @@ ratchet::EnemyMeleeAttackComponent::EnemyMeleeAttackComponent(const EnemyMeleeAt
     _collision_com() {
 }
 
-ratchet::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
+ratchet::component::enemy::EnemyMeleeAttackComponent ::~EnemyMeleeAttackComponent() {
 }
 
-std::string ratchet::EnemyMeleeAttackComponent::GetType(void) const {
+std::string ratchet::component::enemy::EnemyMeleeAttackComponent::GetType(void) const {
     return "EnemyMeleeAttackComponent";
 }
 
-std::string_view ratchet::EnemyMeleeAttackComponent::GetStateType(void) const {
+std::string_view ratchet::component::enemy::EnemyMeleeAttackComponent::GetStateType(void) const {
     return state::EnemyActionStateType::kEnemyActionMeleeAttackState;
 }
 
-float ratchet::EnemyMeleeAttackComponent::GetRange(void) const {
+float ratchet::component::enemy::EnemyMeleeAttackComponent::GetRange(void) const {
     return this->_range;
 }
 
-float ratchet::EnemyMeleeAttackComponent::GetVolume(void) const {
+float ratchet::component::enemy::EnemyMeleeAttackComponent::GetVolume(void) const {
     return this->_volume;
 }
 
-Mof::CSphere ratchet::EnemyMeleeAttackComponent::GetCanAttackRangeSphere(void) const {
+Mof::CSphere ratchet::component::enemy::EnemyMeleeAttackComponent::GetCanAttackRangeSphere(void) const {
     auto pos = super::GetOwner()->GetPosition();
     return Mof::CSphere(pos, _range);
 }
 
-bool ratchet::EnemyMeleeAttackComponent::Initialize(void) {
+bool ratchet::component::enemy::EnemyMeleeAttackComponent::Initialize(void) {
     super::Initialize();
 
-    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
-    _motion_state_com = super::GetOwner()->GetComponent<ratchet::MotionStateComponent>();
-    _collision_com = super::GetOwner()->GetComponent<ratchet::EnemyMeleeAttackCollisionComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
+    _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
+    _collision_com = super::GetOwner()->GetComponent<ratchet::component::collision::EnemyMeleeAttackCollisionComponent>();
     return true;
 }
 
-bool ratchet::EnemyMeleeAttackComponent::Update(float delta_time) {
+bool ratchet::component::enemy::EnemyMeleeAttackComponent::Update(float delta_time) {
     if (_wait.Tick(delta_time)) {
         if (auto motion_state_com = _motion_state_com.lock()) {
             motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionMeleeAttackState);
@@ -75,16 +75,16 @@ bool ratchet::EnemyMeleeAttackComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::EnemyMeleeAttackComponent::Release(void) {
+bool ratchet::component::enemy::EnemyMeleeAttackComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::EnemyMeleeAttackComponent::Clone(void) {
-    return std::make_shared<ratchet::EnemyMeleeAttackComponent >(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::enemy::EnemyMeleeAttackComponent::Clone(void) {
+    return std::make_shared<ratchet::component::enemy::EnemyMeleeAttackComponent >(*this);
 }
 
-bool ratchet::EnemyMeleeAttackComponent::Start(void) {
+bool ratchet::component::enemy::EnemyMeleeAttackComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -93,7 +93,7 @@ bool ratchet::EnemyMeleeAttackComponent::Start(void) {
     return true;
 }
 
-bool ratchet::EnemyMeleeAttackComponent::End(void) {
+bool ratchet::component::enemy::EnemyMeleeAttackComponent::End(void) {
     super::End();
     _collision_com.lock()->Inactivate();
     return true;

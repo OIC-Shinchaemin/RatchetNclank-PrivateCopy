@@ -1,25 +1,30 @@
-#ifndef RATCHET_ENEMY_IDLE_COMPONENT_H
-#define RATCHET_ENEMY_IDLE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ENEMY_ENEMY_IDLE_COMPONENT_H
+#define RATCHET_COMPONENT_ENEMY_ENEMY_IDLE_COMPONENT_H
 
 
 #include "../ActionComponent.h"
 
 #include <memory>
 
+#include "../VelocityComponent.h"
+#include "../MotionStateComponent.h"
+
 
 namespace ratchet {
-class EnemyIdleComponent : public ratchet::ActionComponent {
-    using super = ratchet::ActionComponent;
+namespace component {
+namespace enemy {
+class EnemyIdleComponent : public ratchet::component::ActionComponent {
+    using super = ratchet::component::ActionComponent;
 private:
     //! 回転速度
     float _angular_speed;
     //! ラジアン
     float _ideal_angle;
     //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! モーション
-    std::weak_ptr<class MotionStateComponent> _motion_state_com;
-    
+    std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
+
     virtual void InputMoveAngularVelocity(float angle, float speed);
 public:
     /// <summary>
@@ -96,4 +101,6 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_ENEMY_IDLE_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ENEMY_ENEMY_IDLE_COMPONENT_H

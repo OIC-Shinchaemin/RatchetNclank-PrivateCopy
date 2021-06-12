@@ -13,7 +13,7 @@
 namespace ratchet {
 namespace factory {
 class ComponentFactory {
-    using ComponentMap = std::unordered_map<std::string, std::shared_ptr<ratchet::factory::ComponentCreator>>;
+    using ComponentMap = std::unordered_map<std::string, std::shared_ptr<factory::ComponentCreator>>;
 private:
     //! Š—L
     ComponentMap _component_creators;
@@ -58,7 +58,7 @@ public:
     /// <param name="key"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::component::Component> Create(const std::string& key, const rapidjson::Value& param) const;
+    std::shared_ptr<component::Component> Create(const std::string& key, const rapidjson::Value& param) const;
 };
 }
 }

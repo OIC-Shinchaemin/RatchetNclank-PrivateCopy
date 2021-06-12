@@ -5,7 +5,7 @@
 #include "../CameraComponent.h"
 
 
-void ratchet::PlayerMoveComponent::InputMoveVelocity(float speed) {
+void ratchet::component::player::action::PlayerMoveComponent::InputMoveVelocity(float speed) {
     auto velocity_com = super::GetVelocityComponent();
     auto accele = Mof::CVector3(0.0f, 0.0f, -speed);
     auto rotate = super::GetOwner()->GetRotate();
@@ -13,7 +13,7 @@ void ratchet::PlayerMoveComponent::InputMoveVelocity(float speed) {
     velocity_com->AddVelocityForce(accele);
 }
 
-void ratchet::PlayerMoveComponent::InputMoveAngularVelocity(float angle, float speed) {
+void ratchet::component::player::action::PlayerMoveComponent::InputMoveAngularVelocity(float angle, float speed) {
     auto velocity_com = super::GetVelocityComponent();
 
     auto view_front = _camera_com.lock()->GetViewFront();
@@ -40,7 +40,7 @@ void ratchet::PlayerMoveComponent::InputMoveAngularVelocity(float angle, float s
     velocity_com->AddAngularVelocityForce(accele);
 }
 
-ratchet::PlayerMoveComponent::PlayerMoveComponent(int priority) :
+ratchet::component::player::action::PlayerMoveComponent::PlayerMoveComponent(int priority) :
     super(priority),
     _move_speed(2.5f),
     _angular_speed(3.5f),
@@ -48,7 +48,7 @@ ratchet::PlayerMoveComponent::PlayerMoveComponent(int priority) :
     _input_info() {
 }
 
-ratchet::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
+ratchet::component::player::action::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
     super(obj),
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
@@ -57,46 +57,46 @@ ratchet::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj
     _camera_com() {
 }
 
-ratchet::PlayerMoveComponent::~PlayerMoveComponent() {
+ratchet::component::player::action::PlayerMoveComponent::~PlayerMoveComponent() {
 }
 
-void ratchet::PlayerMoveComponent::SetMoveSpeed(float speed) {
+void ratchet::component::player::action::PlayerMoveComponent::SetMoveSpeed(float speed) {
     this->_move_speed = speed;
 }
 
-void ratchet::PlayerMoveComponent::SetAngularSpeed(float speed) {
+void ratchet::component::player::action::PlayerMoveComponent::SetAngularSpeed(float speed) {
     this->_angular_speed = speed;
 }
 
-void ratchet::PlayerMoveComponent::SetIdealAngle(float radian) {
+void ratchet::component::player::action::PlayerMoveComponent::SetIdealAngle(float radian) {
     this->_ideal_angle = radian;
 }
 
-float ratchet::PlayerMoveComponent::GetDefaultMoveSpeed(void) const {
+float ratchet::component::player::action::PlayerMoveComponent::GetDefaultMoveSpeed(void) const {
     return 1.3f;
 }
 
-float ratchet::PlayerMoveComponent::GetMoveSpeed(void) const {
+float ratchet::component::player::action::PlayerMoveComponent::GetMoveSpeed(void) const {
     return this->_move_speed;
 }
 
-std::string ratchet::PlayerMoveComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerMoveComponent::GetType(void) const {
     return "PlayerMoveComponent";
 }
 
-std::string_view ratchet::PlayerMoveComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerMoveComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionMoveState;
 }
 
-bool ratchet::PlayerMoveComponent::Initialize(void) {
+bool ratchet::component::player::action::PlayerMoveComponent::Initialize(void) {
     super::Initialize();
 
-    _camera_com = super::GetOwner()->GetComponent<ratchet::CameraComponent>();
-    _type_com = super::GetOwner()->GetComponent<ratchet::PlayerComponent>();
+    _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
+    _type_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerComponent>();
     return true;
 }
 
-bool ratchet::PlayerMoveComponent::Input(void) {
+bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
     // flag
     if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
@@ -124,7 +124,7 @@ bool ratchet::PlayerMoveComponent::Input(void) {
     return false;
 }
 
-bool ratchet::PlayerMoveComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerMoveComponent::Update(float delta_time) {
     if (_input_info.move_flag) {
         this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
     } // if
@@ -136,18 +136,18 @@ bool ratchet::PlayerMoveComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerMoveComponent::Release(void) {
+bool ratchet::component::player::action::PlayerMoveComponent::Release(void) {
     super::Release();
     _camera_com.reset();
     _type_com.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerMoveComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerMoveComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerMoveComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerMoveComponent>(*this);
 }
 
-bool ratchet::PlayerMoveComponent::Start(void) {
+bool ratchet::component::player::action::PlayerMoveComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -156,13 +156,13 @@ bool ratchet::PlayerMoveComponent::Start(void) {
     return true;
 }
 
-bool ratchet::PlayerMoveComponent::Move(float move_speed, float angular_speed, float ideal_angle) {
+bool ratchet::component::player::action::PlayerMoveComponent::Move(float move_speed, float angular_speed, float ideal_angle) {
     this->InputMoveAngularVelocity(ideal_angle, angular_speed);
     this->InputMoveVelocity(move_speed);
     return true;
 }
 
-bool ratchet::PlayerMoveComponent::AquireInputData(Mof::CVector2& stick, float& move_angle) {
+bool ratchet::component::player::action::PlayerMoveComponent::AquireInputData(Mof::CVector2& stick, float& move_angle) {
     move_angle = 0.0f;
 
     float h = ::g_pGamepad->GetStickHorizontal(); float v = ::g_pGamepad->GetStickVertical();

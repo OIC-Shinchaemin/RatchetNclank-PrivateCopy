@@ -28,9 +28,9 @@ void ratchet::event::ShipEvent::OnNotify(const char* type, const std::shared_ptr
         param.transform.position = Mof::CVector3(10.0f, 9.0f, -25.0f);
         param.name = "ship";
         auto ship = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::vehicle::Ship>("../Resource/builder/ship.json", &param);
-        auto com = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::CameraComponent>>("CameraComponent");
-        //ship->GetComponent<ratchet::ShipLandingComponent>()->AddObserver(com);
-        ship->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::ShipLandingComponent>()->AddObserver(com);
+        auto com = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::component::CameraComponent>>("CameraComponent");
+        //ship->GetComponent<ratchet::component::ship::ShipLandingComponent>()->AddObserver(com);
+        ship->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::ship::ShipLandingComponent>()->AddObserver(com);
         
 
         //! ゲームイベント

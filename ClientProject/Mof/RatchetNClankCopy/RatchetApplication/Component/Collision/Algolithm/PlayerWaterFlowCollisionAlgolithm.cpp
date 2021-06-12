@@ -13,14 +13,14 @@ ratchet::PlayerWaterFlowCollisionAlgolithm::~PlayerWaterFlowCollisionAlgolithm()
 }
 
 const char* ratchet::PlayerWaterFlowCollisionAlgolithm::GetLayerType(void) const {
-    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
 const char* ratchet::PlayerWaterFlowCollisionAlgolithm::GetTargetType(void) const {
-    return ratchet::CollisionComponentType::kWaterFlowCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kWaterFlowCollisionComponent.c_str();
 }
 
-bool ratchet::PlayerWaterFlowCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
+bool ratchet::PlayerWaterFlowCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::component::collision::CollisionComponent> object, std::shared_ptr<ratchet::component::collision::CollisionComponent> target, component::collision::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
     if (!object->GetRay().has_value() || !target->GetPlaneObject().has_value()) {
         return false;
@@ -30,7 +30,7 @@ bool ratchet::PlayerWaterFlowCollisionAlgolithm::IsCollision(std::shared_ptr<rat
     
     // 平面
     if (float distance; ray.CollisionPlane(plane.position, plane.normal, distance)) {
-        if (auto com = object->GetOwner()->GetComponent<ratchet::PlayerComponent>(); com) {
+        if (auto com = object->GetOwner()->GetComponent<ratchet::component::player::PlayerComponent>(); com) {
             if (com->GetNextTerrain() != "Ground") {
                 com->SetNextTerrain("WaterFlow");
             } // if

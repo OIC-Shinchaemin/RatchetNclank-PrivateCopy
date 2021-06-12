@@ -1,5 +1,5 @@
-#ifndef RATCHET_BulletItem_COMPONENT_H
-#define RATCHET_BulletItem_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_COMPONENT_H
 
 
 #include "../../UpdateComponent.h"
@@ -8,8 +8,11 @@
 
 
 namespace ratchet {
-class BulletItemComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+namespace item {
+namespace bulletitem {
+class BulletItemComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! アクターパラメータ
     ratchet::actor::item::BulletItem::Param _param;
@@ -82,4 +85,7 @@ public:
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_BulletItem_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_BULLET_ITEM_BulletItem_COMPONENT_H

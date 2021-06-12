@@ -5,7 +5,7 @@
 
 ratchet::actor::item::Bolt::Bolt() :
     super(),
-    _money_subject(){
+    _money_subject() {
 }
 
 ratchet::actor::item::Bolt::~Bolt() {
@@ -23,10 +23,10 @@ void ratchet::actor::item::Bolt::End(void) {
 bool ratchet::actor::item::Bolt::Initialize(ratchet::actor::Actor::Param* param) {
     super::Initialize(param);
     auto bolt_param = dynamic_cast<ratchet::actor::item::Bolt::Param*>(param);
-    
+
     _init_speed = bolt_param->speed;
     _init_angle = bolt_param->angle;
-    
-    super::GetComponent<ratchet::BoltComponent>()->SetActorParam(*bolt_param);
+
+    super::GetComponent<ratchet::component::item::BoltComponent>()->SetActorParam(*bolt_param);
     return true;
 }

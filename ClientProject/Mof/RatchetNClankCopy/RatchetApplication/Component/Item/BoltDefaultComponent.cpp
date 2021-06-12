@@ -1,31 +1,31 @@
 #include "BoltDefaultComponent.h"
 
 
-ratchet::BoltDefaultComponent::BoltDefaultComponent(int priority) :
+ratchet::component::item::BoltDefaultComponent::BoltDefaultComponent(int priority) :
     super(priority) {
 }
 
-ratchet::BoltDefaultComponent::BoltDefaultComponent(const BoltDefaultComponent& obj) :
+ratchet::component::item::BoltDefaultComponent::BoltDefaultComponent(const BoltDefaultComponent& obj) :
     super(obj) {
 }
 
-ratchet::BoltDefaultComponent::~BoltDefaultComponent() {
+ratchet::component::item::BoltDefaultComponent::~BoltDefaultComponent() {
 }
 
-std::string ratchet::BoltDefaultComponent::GetType(void) const {
+std::string ratchet::component::item::BoltDefaultComponent::GetType(void) const {
     return "BoltDefaultComponent";
 }
 
-std::string_view ratchet::BoltDefaultComponent::GetStateType(void) const {
+std::string_view ratchet::component::item::BoltDefaultComponent::GetStateType(void) const {
     return state::BoltActionType::kDefault;
 }
 
-bool ratchet::BoltDefaultComponent::Initialize(void) {
+bool ratchet::component::item::BoltDefaultComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool ratchet::BoltDefaultComponent::Update(float delta_time) {
+bool ratchet::component::item::BoltDefaultComponent::Update(float delta_time) {
     auto rotate = super::GetOwner()->GetRotate();
     if (rotate.x > math::kHalfPi) {
         rotate.x = math::kHalfPi;
@@ -39,16 +39,16 @@ bool ratchet::BoltDefaultComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::BoltDefaultComponent::Release(void) {
+bool ratchet::component::item::BoltDefaultComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BoltDefaultComponent::Clone(void) {
-    return std::make_shared<ratchet::BoltDefaultComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::BoltDefaultComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::BoltDefaultComponent>(*this);
 }
 
-bool ratchet::BoltDefaultComponent::Start(void) {
+bool ratchet::component::item::BoltDefaultComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
@@ -56,7 +56,7 @@ bool ratchet::BoltDefaultComponent::Start(void) {
     return true;
 }
 
-bool ratchet::BoltDefaultComponent::End(void) {
+bool ratchet::component::item::BoltDefaultComponent::End(void) {
     super::End();
     return true;
 }

@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_JUMP_DOWN_COMPONENT_H
-#define RATCHET_PLAYER_JUMP_DOWN_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_JUMP_DOWN_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_JUMP_DOWN_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -8,9 +8,12 @@
 
 
 namespace ratchet {
-class PlayerJumpDownComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
-    using This = ratchet::PlayerJumpDownComponent;
+namespace component {
+namespace player {
+namespace action {
+class PlayerJumpDownComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+    using super = ::ratchet::component::player::action::PlayerActionComponent;
+    using This = ratchet::component::player::action::PlayerJumpDownComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -99,4 +102,7 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_JUMP_DOWN_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_JUMP_DOWN_COMPONENT_H

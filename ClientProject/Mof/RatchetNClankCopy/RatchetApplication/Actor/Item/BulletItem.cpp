@@ -49,7 +49,7 @@ bool ratchet::actor::item::BulletItem::Initialize(ratchet::actor::Actor::Param* 
     _item_count = bulletitem_param->count;
     _item_type = bulletitem_param->type;
 
-    super::GetComponent<ratchet::BulletItemComponent>()->SetActorParam(*bulletitem_param);
+    super::GetComponent<ratchet::component::item::bulletitem::BulletItemComponent>()->SetActorParam(*bulletitem_param);
 
     super::Initialize(param);
     return true;

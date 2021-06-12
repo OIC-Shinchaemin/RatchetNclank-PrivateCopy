@@ -960,24 +960,6 @@
     <ClCompile Include="Actor\Item\BulletItem.cpp">
       <Filter>Ratchet\Source\Actor\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Item\BulletItem\BulletItemActionStateComponent.cpp">
-      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Item\BulletItem\BulletItemComponent.cpp">
-      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Item\BulletItem\BulletItemDefaultComponent.cpp">
-      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Item\BulletItem\BulletItemGravitateComponent.cpp">
-      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Item\BulletItem\BulletItemMovedComponent.cpp">
-      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Item\BulletItem\BulletItemActionComponent.cpp">
-      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
-    </ClCompile>
     <ClCompile Include="State\BulletItemActionStateImplementation.cpp">
       <Filter>Ratchet\Source\State</Filter>
     </ClCompile>
@@ -1064,6 +1046,24 @@
     </ClCompile>
     <ClCompile Include="Actor\Vehicle\Ship.cpp">
       <Filter>Ratchet\Source\Actor\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemMovedComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemGravitateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemActionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemActionStateComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Item\BulletItem\BulletItemDefaultComponent.cpp">
+      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1940,27 +1940,6 @@
     <ClInclude Include="Actor\Item\BulletItem.h">
       <Filter>Ratchet\Header\Actor\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Item\BulletItem\BulletItemActionStateComponent.h">
-      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Item\BulletItem\BulletItemComponent.h">
-      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Item\BulletItem\BulletItemComponentInclude.h">
-      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Item\BulletItem\BulletItemDefaultComponent.h">
-      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Item\BulletItem\BulletItemGravitateComponent.h">
-      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Item\BulletItem\BulletItemMovedComponent.h">
-      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Item\BulletItem\BulletItemActionComponent.h">
-      <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClInclude>
     <ClInclude Include="State\NanotechItemActionStateDefine.h">
       <Filter>Ratchet\Header\State</Filter>
     </ClInclude>
@@ -2080,6 +2059,27 @@
     </ClInclude>
     <ClInclude Include="Actor\Vehicle\Ship.h">
       <Filter>Ratchet\Header\Actor\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemActionComponent.h">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemMovedComponent.h">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemActionStateComponent.h">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemComponent.h">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemDefaultComponent.h">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Item\BulletItem\BulletItemGravitateComponent.h">
+      <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_CROUCH_COMPONENT_H
-#define RATCHET_PLAYER_CROUCH_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_CROUCH_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_CROUCH_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -11,9 +11,12 @@
 
 
 namespace ratchet {
-class PlayerCrouchComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
-    using This = ratchet::PlayerCrouchComponent;
+namespace component {
+namespace player {
+namespace action {
+class PlayerCrouchComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+    using super = ::ratchet::component::player::action::PlayerActionComponent;
+    using This = ::ratchet::component::player::action::PlayerCrouchComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -30,13 +33,14 @@ private:
     struct Transition {
         std::string_view state;
         std::function<bool(void)> condition;
-        Transition(std::string_view name, std::function<bool(void)> lambda) : 
+        Transition(std::string_view name, std::function<bool(void)> lambda) :
             state(name), condition(lambda) {
         }
     };
-    //! 遷移
-    //std::vector<Transition> _transition_pairs;
-    //! 回転速度
+
+   //! 遷移
+   //std::vector<Transition> _transition_pairs;
+   //! 回転速度
     float _angular_speed;
     //! ラジアン
     float _ideal_angle;
@@ -110,28 +114,16 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
-    /// <summary>
-    /// 加速
-    /// </summary>
-    /// <param name="move_speed"></param>
-    /// <param name="angular_speed"></param>
-    /// <param name="ideal_angle"></param>
-    /// <returns>実行</returns>
-    //bool Move(float move_speed, float angular_speed, float ideal_angle);
-    /// <summary>
-    /// 獲得
-    /// </summary>
-    /// <param name="stick">出力</param>
-    /// <param name="move_angle">出力</param>
-    /// <returns></returns>
-    //bool AquireInputData(Mof::CVector2& stick, float& move_angle);
 };
 }
-#endif // !RATCHET_PLAYER_CROUCH_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_CROUCH_COMPONENT_H

@@ -36,7 +36,7 @@ public:
     /// <param name="object"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    virtual bool IsCollision(std::shared_ptr<ratchet::CollisionComponent >object, std::shared_ptr<ratchet::CollisionComponent >target, ratchet::CollisionInfo& out) = 0;
+    virtual bool IsCollision(std::shared_ptr<ratchet::component::collision::CollisionComponent >object, std::shared_ptr<ratchet::component::collision::CollisionComponent >target, component::collision::CollisionInfo& out) = 0;
 };
 }
 #endif // !RATCHET_COLLISION_ALGOLITHM_H

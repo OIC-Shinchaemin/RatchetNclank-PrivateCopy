@@ -1,13 +1,15 @@
-#ifndef RATCHET_SHIP_IDLE_COMPONENT_H
-#define RATCHET_SHIP_IDLE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_SHIP_SHIP_IDLE_COMPONENT_H
+#define RATCHET_COMPONENT_SHIP_SHIP_IDLE_COMPONENT_H
 
 
 #include "ShipActionComponent.h"
 
 
 namespace ratchet {
-class ShipIdleComponent : public ratchet::ShipActionComponent {
-    using super = ratchet::ShipActionComponent;
+namespace component {
+namespace ship {
+class ShipIdleComponent : public ratchet::component::ship::ShipActionComponent {
+    using super = ratchet::component::ship::ShipActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -61,4 +63,6 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_SHIP_IDLE_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_SHIP_SHIP_IDLE_COMPONENT_H

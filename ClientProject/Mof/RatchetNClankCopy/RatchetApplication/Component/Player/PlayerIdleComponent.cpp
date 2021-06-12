@@ -3,26 +3,26 @@
 #include "../../Actor/Character/Player.h"
 
 
-ratchet::PlayerIdleComponent::PlayerIdleComponent(int priority) :
+ratchet::component::player::action::PlayerIdleComponent::PlayerIdleComponent(int priority) :
     super(priority) {
 }
 
-ratchet::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
+ratchet::component::player::action::PlayerIdleComponent::PlayerIdleComponent(const PlayerIdleComponent& obj) :
     super(obj) {
 }
 
-ratchet::PlayerIdleComponent::~PlayerIdleComponent() {
+ratchet::component::player::action::PlayerIdleComponent::~PlayerIdleComponent() {
 }
 
-std::string ratchet::PlayerIdleComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerIdleComponent::GetType(void) const {
     return "PlayerIdleComponent";
 }
 
-std::string_view ratchet::PlayerIdleComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerIdleComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionIdleState;
 }
 
-bool ratchet::PlayerIdleComponent::Input(void) {
+bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
     float horizontal = ::g_pGamepad->GetStickHorizontal();
     float vertical = ::g_pGamepad->GetStickVertical();
     float threshold = 0.5f;
@@ -52,15 +52,15 @@ bool ratchet::PlayerIdleComponent::Input(void) {
     return true;
 }
 
-bool ratchet::PlayerIdleComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerIdleComponent::Update(float delta_time) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerIdleComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerIdleComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerIdleComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerIdleComponent>(*this);
 }
 
-bool ratchet::PlayerIdleComponent::Start(void) {
+bool ratchet::component::player::action::PlayerIdleComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

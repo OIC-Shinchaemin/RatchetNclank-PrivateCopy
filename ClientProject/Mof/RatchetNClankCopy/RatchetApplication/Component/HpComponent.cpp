@@ -5,24 +5,24 @@
 #include "../UI/NanotechMenu.h"
 
 
-ratchet::HpComponent::HpComponent(int priority) :
+ratchet::component::HpComponent::HpComponent(int priority) :
     super(priority),
     _hp_max(0),
     _hp(_hp_max),
     _ui_remove(false) {
 }
 
-ratchet::HpComponent::HpComponent(const HpComponent& obj) :
+ratchet::component::HpComponent::HpComponent(const HpComponent& obj) :
     super(obj),
     _hp_max(obj._hp_max),
     _hp(_hp_max),
     _ui_remove(obj._ui_remove) {
 }
 
-ratchet::HpComponent::~HpComponent() {
+ratchet::component::HpComponent::~HpComponent() {
 }
 
-void ratchet::HpComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::HpComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* hp_max = "hp_max";
 
@@ -31,15 +31,15 @@ void ratchet::HpComponent::SetParam(const rapidjson::Value& param) {
     this->_hp_max = param[hp_max].GetInt();
 }
 
-std::string ratchet::HpComponent::GetType(void) const {
+std::string ratchet::component::HpComponent::GetType(void) const {
     return "HpComponent";
 }
 
-int ratchet::HpComponent::GetHp(void) const {
+int ratchet::component::HpComponent::GetHp(void) const {
     return this->_hp;
 }
 
-bool ratchet::HpComponent::Initialize(void) {
+bool ratchet::component::HpComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     _hp = _hp_max;
@@ -60,11 +60,11 @@ bool ratchet::HpComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::HpComponent::Update(float delta_time) {
+bool ratchet::component::HpComponent::Update(float delta_time) {
     return false;
 }
 
-bool ratchet::HpComponent::Release(void) {
+bool ratchet::component::HpComponent::Release(void) {
     super::Release();
     if (_ui_remove) {
         if (auto canvas = super::_ui_canvas.lock()) {
@@ -74,11 +74,11 @@ bool ratchet::HpComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::HpComponent::Clone(void) {
-    return std::make_shared<ratchet::HpComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::HpComponent::Clone(void) {
+    return std::make_shared<ratchet::component::HpComponent>(*this);
 }
 
-void ratchet::HpComponent::Heal(int value) {
+void ratchet::component::HpComponent::Heal(int value) {
     _hp += value;
     if (_hp > _hp_max) {
         _hp = _hp_max;
@@ -86,7 +86,7 @@ void ratchet::HpComponent::Heal(int value) {
     _observable.Notify(_hp);
 }
 
-void ratchet::HpComponent::Damage(int value) {
+void ratchet::component::HpComponent::Damage(int value) {
     _hp -= value;
     if (_hp <= 0) {
         _hp = 0;

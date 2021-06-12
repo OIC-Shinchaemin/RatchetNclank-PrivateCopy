@@ -1,5 +1,5 @@
-#ifndef RATCHET_MOTION_COMPONENT_H
-#define RATCHET_MOTION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_MOTION_COMPONENT_H
+#define RATCHET_COMPONENT_MOTION_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -12,8 +12,9 @@
 
 
 namespace ratchet {
-class MotionComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class MotionComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! ÉÇÅ[ÉVÉáÉì
     Mof::LPMeshMotionController	_motion;
@@ -124,4 +125,5 @@ public:
     bool AddTimer(float time);
 };
 }
-#endif // !RATCHET_MOTION_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_MOTION_COMPONENT_H

@@ -3,34 +3,34 @@
 #include "MotionComponent.h"
 
 
-ratchet::MotionStateComponent::MotionStateComponent(int priority) :
+ratchet::component::MotionStateComponent::MotionStateComponent(int priority) :
     super(priority),
     _state_machine(),
     _motion_com() {
 }
 
-ratchet::MotionStateComponent::MotionStateComponent(const MotionStateComponent& obj) :
+ratchet::component::MotionStateComponent::MotionStateComponent(const MotionStateComponent& obj) :
     super(obj),
     _state_machine(obj._state_machine),
     _motion_com() {
 }
 
-ratchet::MotionStateComponent::~MotionStateComponent() {
+ratchet::component::MotionStateComponent::~MotionStateComponent() {
 }
 
-void ratchet::MotionStateComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::MotionStateComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
 }
 
-std::string ratchet::MotionStateComponent::GetType(void) const {
+std::string ratchet::component::MotionStateComponent::GetType(void) const {
     return "MotionStateComponent";
 }
 
-bool ratchet::MotionStateComponent::Initialize(void) {
+bool ratchet::component::MotionStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    _motion_com = super::GetOwner()->GetComponent<ratchet::MotionComponent>();
+    _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
 
     using Param = state::MotionState::Param;
     if (auto motion_com = _motion_com.lock()) {
@@ -49,21 +49,21 @@ bool ratchet::MotionStateComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::MotionStateComponent::Update(float delta_time) {
+bool ratchet::component::MotionStateComponent::Update(float delta_time) {
     _state_machine.Update(delta_time);
     return false;
 }
 
-bool ratchet::MotionStateComponent::Release(void) {
+bool ratchet::component::MotionStateComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::MotionStateComponent::Clone(void) {
-    return std::make_shared<ratchet::MotionStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::MotionStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::MotionStateComponent>(*this);
 }
 
-void ratchet::MotionStateComponent::ChangeState(const std::string& name) {
+void ratchet::component::MotionStateComponent::ChangeState(const std::string& name) {
     if (super::GetOwner()->GetTag() == "Enemy") {
         ;
     } // if

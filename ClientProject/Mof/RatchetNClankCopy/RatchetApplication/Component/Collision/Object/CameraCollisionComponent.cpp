@@ -4,32 +4,32 @@
 #include "../../CameraComponent.h"
 
 
-ratchet::CameraCollisionComponent::CameraCollisionComponent(int priority) :
+ratchet::component::collision::CameraCollisionComponent::CameraCollisionComponent(int priority) :
     super(priority),
     _camera_com() {
 }
 
-ratchet::CameraCollisionComponent::CameraCollisionComponent(const CameraCollisionComponent& obj) :
+ratchet::component::collision::CameraCollisionComponent::CameraCollisionComponent(const CameraCollisionComponent& obj) :
     super(obj),
     _camera_com() {
 }
 
-ratchet::CameraCollisionComponent ::~CameraCollisionComponent() {
+ratchet::component::collision::CameraCollisionComponent ::~CameraCollisionComponent() {
 }
 
-std::string ratchet::CameraCollisionComponent::GetType(void) const {
-    return ratchet::CollisionComponentType::kCameraCollisionComponent;
+std::string ratchet::component::collision::CameraCollisionComponent::GetType(void) const {
+    return ratchet::component::collision::CollisionComponentType::kCameraCollisionComponent;
 }
 
-std::optional<Mof::CSphere> ratchet::CameraCollisionComponent::GetSphere(void) {
+std::optional<Mof::CSphere> ratchet::component::collision::CameraCollisionComponent::GetSphere(void) {
     return std::optional<Mof::CSphere>();
 }
 
-std::optional<Mof::CBoxAABB> ratchet::CameraCollisionComponent::GetBox(void) {
+std::optional<Mof::CBoxAABB> ratchet::component::collision::CameraCollisionComponent::GetBox(void) {
     return std::optional<Mof::CBoxAABB>();
 }
 
-std::optional<Mof::CRay3D> ratchet::CameraCollisionComponent::GetRay(void) {
+std::optional<Mof::CRay3D> ratchet::component::collision::CameraCollisionComponent::GetRay(void) {
     _ASSERT_EXPR(!_camera_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
@@ -39,25 +39,25 @@ std::optional<Mof::CRay3D> ratchet::CameraCollisionComponent::GetRay(void) {
     return Mof::CRay3D(pos, velocity);
 }
 
-std::optional<Mof::LPMeshContainer> ratchet::CameraCollisionComponent::GetMesh(void) {
+std::optional<Mof::LPMeshContainer> ratchet::component::collision::CameraCollisionComponent::GetMesh(void) {
     return std::optional<Mof::LPMeshContainer>();
 }
 
-std::optional<ratchet::SightObject> ratchet::CameraCollisionComponent::GetSightObject(void) {
-    return std::optional<ratchet::SightObject>();
+std::optional<::ratchet::component::collision::SightObject> ratchet::component::collision::CameraCollisionComponent::GetSightObject(void) {
+    return std::optional<::ratchet::component::collision::SightObject>();
 }
 
-bool ratchet::CameraCollisionComponent::Initialize(void) {
+bool ratchet::component::collision::CameraCollisionComponent::Initialize(void) {
     super::Initialize();
-    _camera_com = super::GetOwner()->GetComponent<ratchet::CameraComponent>();
+    _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::CameraCollisionComponent::Clone(void) {
-    return std::make_shared<ratchet::CameraCollisionComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::collision::CameraCollisionComponent::Clone(void) {
+    return std::make_shared<ratchet::component::collision::CameraCollisionComponent>(*this);
 }
 
-void ratchet::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
     if (!this->GetRay().has_value()) {
         return;
     } // if
@@ -82,5 +82,5 @@ void ratchet::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh
     } // for
 }
 
-void ratchet::CameraCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
+void ratchet::component::collision::CameraCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {
 }

@@ -3,7 +3,7 @@
 #include "VelocityComponent.h"
 
 
-Mof::CVector3 ratchet::TransformComponent::UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity) {
+Mof::CVector3 ratchet::component::TransformComponent::UpdateRotate(float delta_time, Mof::CVector3 rotate, Mof::CVector3 velocity) {
     float sleep_threshold = 0.01f;
     if (sleep_threshold < velocity.Length()) {
         rotate += velocity * delta_time;
@@ -31,7 +31,7 @@ Mof::CVector3 ratchet::TransformComponent::UpdateRotate(float delta_time, Mof::C
     return rotate;
 }
 
-Mof::CVector3 ratchet::TransformComponent::UpdatePosition(float delta_time, Mof::CVector3 position, Mof::CVector3 velocity) {
+Mof::CVector3 ratchet::component::TransformComponent::UpdatePosition(float delta_time, Mof::CVector3 position, Mof::CVector3 velocity) {
     float sleep_threshold = 0.001f;
 
     if (sleep_threshold < velocity.Length()) {
@@ -40,31 +40,31 @@ Mof::CVector3 ratchet::TransformComponent::UpdatePosition(float delta_time, Mof:
     return position;
 }
 
-ratchet::TransformComponent::TransformComponent(int priority) :
+ratchet::component::TransformComponent::TransformComponent(int priority) :
     super(priority),
     _velocity_com() {
 }
 
-ratchet::TransformComponent::TransformComponent(const TransformComponent& obj) :
+ratchet::component::TransformComponent::TransformComponent(const TransformComponent& obj) :
     super(obj),
     _velocity_com() {
 }
 
-ratchet::TransformComponent::~TransformComponent() {
+ratchet::component::TransformComponent::~TransformComponent() {
 }
 
-std::string ratchet::TransformComponent::GetType(void) const {
+std::string ratchet::component::TransformComponent::GetType(void) const {
     return "TransformComponent";
 }
 
-bool ratchet::TransformComponent::Initialize(void) {
+bool ratchet::component::TransformComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-    _velocity_com = super::GetOwner()->GetComponent<ratchet::VelocityComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     return true;
 }
 
-bool ratchet::TransformComponent::Update(float delta_time) {
+bool ratchet::component::TransformComponent::Update(float delta_time) {
     if (auto velocity_com = _velocity_com.lock()) {
         auto owner = super::GetOwner();
         // rotate
@@ -77,11 +77,11 @@ bool ratchet::TransformComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::TransformComponent::Release(void) {
+bool ratchet::component::TransformComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::TransformComponent::Clone(void) {
-    return std::make_shared<ratchet::TransformComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::TransformComponent::Clone(void) {
+    return std::make_shared<ratchet::component::TransformComponent>(*this);
 }

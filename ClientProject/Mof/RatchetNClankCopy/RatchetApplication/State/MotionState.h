@@ -49,7 +49,7 @@ private:
     //! パラメータ
     Param _param;
     //! モーション
-    std::weak_ptr<ratchet::MotionComponent> _motion_com;
+    std::weak_ptr<ratchet::component::MotionComponent> _motion_com;
 public:
     /// <summary>
     /// コンストラクタ

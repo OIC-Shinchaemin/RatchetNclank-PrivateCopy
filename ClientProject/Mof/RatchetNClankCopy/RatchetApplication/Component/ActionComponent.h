@@ -1,5 +1,5 @@
-#ifndef RATCHET_ACTION_COMPONENT_H
-#define RATCHET_ACTION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ACTION_COMPONENT_H
+#define RATCHET_COMPONENT_ACTION_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -11,13 +11,14 @@
 
 
 namespace ratchet {
-class ActionComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class ActionComponent : public ::ratchet::component::UpdateComponent {
+    using super = ::ratchet::component::UpdateComponent;
 private:
     //! 現在のアクション
-    std::shared_ptr<ratchet::ActionComponent> _current_action;
+    std::shared_ptr<::ratchet::component::ActionComponent> _current_action;
     //! アクション
-    std::unordered_map<std::string, std::shared_ptr<ratchet::ActionComponent>> _children;    
+    std::unordered_map<std::string, std::shared_ptr<::ratchet::component::ActionComponent>> _children;
 public:
     /// <summary>
     /// コンストラクタ
@@ -37,7 +38,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    virtual void SetOwner(const std::shared_ptr<ratchet::actor::Actor>& ptr) override;
+    virtual void SetOwner(const std::shared_ptr<::ratchet::actor::Actor>& ptr) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -76,7 +77,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const std::unordered_map<std::string, std::shared_ptr<ratchet::ActionComponent>>& GetChildren(void);
+    const std::unordered_map<std::string, std::shared_ptr<::ratchet::component::ActionComponent>>& GetChildren(void);
     /// <summary>
     /// 入力判定
     /// </summary>
@@ -129,7 +130,8 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_ACTION_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_ACTION_COMPONENT_H

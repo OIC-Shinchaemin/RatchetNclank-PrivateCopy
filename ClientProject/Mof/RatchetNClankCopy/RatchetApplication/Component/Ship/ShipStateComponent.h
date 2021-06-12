@@ -1,5 +1,5 @@
-#ifndef RATCHET_SHIP_STATE_COMPONENT_H
-#define RATCHET_SHIP_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_SHIP_SHIP_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_SHIP_SHIP_STATE_COMPONENT_H
 
 
 #include "../ActionStateComponent.h"
@@ -7,9 +7,9 @@
 #include "../../State/ShipActionStateDefine.h"
 
 
-namespace ratchet {
-class ShipStateComponent : public ratchet::ActionStateComponent {
-    using super = ratchet::ActionStateComponent;
+namespace ratchet { namespace component { namespace ship {
+class ShipStateComponent : public ratchet::component::ActionStateComponent {
+    using super = ratchet::component::ActionStateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,6 +52,6 @@ public:
 #ifdef _DEBUG
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
-};
+};}}
 }
-#endif // !RATCHET_SHIP_STATE_COMPONENT_H
+#endif // !RATCHET_COMPONENT_SHIP_SHIP_STATE_COMPONENT_H

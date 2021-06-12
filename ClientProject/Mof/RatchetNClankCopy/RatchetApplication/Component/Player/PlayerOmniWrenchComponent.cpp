@@ -8,7 +8,7 @@
 #include "../../State/OmniWrenchActionStateDefine.h"
 
 
-ratchet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(int priority) :
+ratchet::component::player::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(int priority) :
     super(priority),
     _weapon(),
     _throw_attack_com(),
@@ -16,7 +16,7 @@ ratchet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(int priority) :
     _weapon_coll_com() {
 }
 
-ratchet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(const PlayerOmniWrenchComponent& obj) :
+ratchet::component::player::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(const PlayerOmniWrenchComponent& obj) :
     super(obj),
     _weapon(),
     _throw_attack_com(),
@@ -24,18 +24,18 @@ ratchet::PlayerOmniWrenchComponent::PlayerOmniWrenchComponent(const PlayerOmniWr
     _weapon_coll_com() {
 }
 
-ratchet::PlayerOmniWrenchComponent::~PlayerOmniWrenchComponent() {
+ratchet::component::player::PlayerOmniWrenchComponent::~PlayerOmniWrenchComponent() {
 }
 
-void ratchet::PlayerOmniWrenchComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::player::PlayerOmniWrenchComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
 }
 
-std::string ratchet::PlayerOmniWrenchComponent::GetType(void) const {
+std::string ratchet::component::player::PlayerOmniWrenchComponent::GetType(void) const {
     return "PlayerOmniWrenchComponent";
 }
 
-bool ratchet::PlayerOmniWrenchComponent::Activate(void) {
+bool ratchet::component::player::PlayerOmniWrenchComponent::Activate(void) {
     super::Activate();
 
     auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
@@ -43,10 +43,10 @@ bool ratchet::PlayerOmniWrenchComponent::Activate(void) {
     if (auto weapon = _weapon.lock()) {
         // cache
         owner->OnNotify(std::dynamic_pointer_cast<ratchet::actor::weapon::Weapon>(weapon));
-        _weapon_coll_com = weapon->GetComponent<ratchet::OmniWrenchCollisionComponent>();
-        _weapon_action_state_com = weapon->GetComponent<ratchet::OmniWrenchActionStateComponent>();
+        _weapon_coll_com = weapon->GetComponent<ratchet::component::collision::OmniWrenchCollisionComponent>();
+        _weapon_action_state_com = weapon->GetComponent<ratchet::component::weapon::OmniWrenchActionStateComponent>();
 
-        auto throw_com = weapon->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::OmniWrenchThrowedComponent>();
+        auto throw_com = weapon->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::weapon::OmniWrenchThrowedComponent>();
         throw_com->SetWeaponOwner(super::GetOwner());
     } // if
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {
@@ -63,22 +63,22 @@ bool ratchet::PlayerOmniWrenchComponent::Activate(void) {
     return true;
 }
 
-bool ratchet::PlayerOmniWrenchComponent::Inactivate(void) {
+bool ratchet::component::player::PlayerOmniWrenchComponent::Inactivate(void) {
     if (auto weapon_coll_com = _weapon_coll_com.lock()) {
         weapon_coll_com->Inactivate();
     } // if
     return true;
 }
 
-bool ratchet::PlayerOmniWrenchComponent::Initialize(void) {
+bool ratchet::component::player::PlayerOmniWrenchComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
 
-    _throw_attack_com = super::GetOwner()->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::PlayerThrowAttackComponent>();
+    _throw_attack_com = super::GetOwner()->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::player::action::PlayerThrowAttackComponent>();
     return true;
 }
 
-bool ratchet::PlayerOmniWrenchComponent::Release(void) {
+bool ratchet::component::player::PlayerOmniWrenchComponent::Release(void) {
     super::Release();
     _weapon.reset();
     _throw_attack_com.reset();
@@ -87,6 +87,6 @@ bool ratchet::PlayerOmniWrenchComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerOmniWrenchComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerOmniWrenchComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::PlayerOmniWrenchComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::PlayerOmniWrenchComponent>(*this);
 }

@@ -32,52 +32,50 @@
 
 ratchet::factory::ComponentFactory::ComponentFactory() :
     _component_creators() {
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::AIStateComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::SightRecognitionComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::ActionComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::MotionComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::HpComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::InvincibleComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::MotionStateComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::VelocityComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::TransformComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::MeshComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BillboardComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::AnimationMeshComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::CameraComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::AIStateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::SightRecognitionComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::ActionComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::MotionComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::HpComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::InvincibleComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::MotionStateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::VelocityComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::TransformComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::MeshComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::BillboardComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::AnimationMeshComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<::ratchet::component::CameraComponent>();
 
 #include "ComponentRegister/PlayerComponentRegister.h"
 #include "ComponentRegister/EnemyComponentRegister.h"
 #include "ComponentRegister/CollisionComponentRegister.h"
 #include "ComponentRegister/OmniWrenchComponentRegister.h"
 #include "ComponentRegister/ShipComponentRegister.h"
-       
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BoltCollisionComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BoltComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BoltActionStateComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BoltDefaultComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BoltMovedComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BoltGravitateComponent>();
 
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BulletItemCollisionComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BulletItemComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BulletItemActionStateComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BulletItemDefaultComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BulletItemMovedComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BulletItemGravitateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::BoltCollisionComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltActionStateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltDefaultComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltMovedComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltGravitateComponent>();
 
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::NanotechItemCollisionComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::NanotechItemComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::NanotechItemActionStateComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::NanotechItemDefaultComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::NanotechItemMovedComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::NanotechItemGravitateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::BulletItemCollisionComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::bulletitem::BulletItemComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::bulletitem::BulletItemActionStateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::bulletitem::BulletItemDefaultComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::bulletitem::BulletItemMovedComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::bulletitem::BulletItemGravitateComponent>();
+    
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::NanotechItemCollisionComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::nanotechitem::NanotechItemComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::nanotechitem::NanotechItemActionStateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::nanotechitem::NanotechItemDefaultComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::nanotechitem::NanotechItemMovedComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::nanotechitem::NanotechItemGravitateComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::bullet::BombGloveBulletComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::bullet::BlasterBulletComponent>();
 
-
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BombGloveBulletComponent>();
-    ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::BlasterBulletComponent>();
 }
-
 ratchet::factory::ComponentFactory::~ComponentFactory() {
 }
 

@@ -1,32 +1,32 @@
 #include "ShipStateComponent.h"
 
 
-ratchet::ShipStateComponent::ShipStateComponent(int priority) :
+ratchet::component::ship::ShipStateComponent::ShipStateComponent(int priority) :
     super(priority) {
 }
 
-ratchet::ShipStateComponent::ShipStateComponent(const ShipStateComponent& obj) :
+ratchet::component::ship::ShipStateComponent::ShipStateComponent(const ShipStateComponent& obj) :
     super(obj) {
 }
 
-ratchet::ShipStateComponent::~ShipStateComponent() {
+ratchet::component::ship::ShipStateComponent::~ShipStateComponent() {
 }
 
-std::string ratchet::ShipStateComponent::GetType(void) const {
+std::string ratchet::component::ship::ShipStateComponent::GetType(void) const {
     return "ShipStateComponent";
 }
 
-bool ratchet::ShipStateComponent::Initialize(void) {
+bool ratchet::component::ship::ShipStateComponent::Initialize(void) {
     super::Initialize();
     super::ChangeState(state::ShipActionStateType::kShipActionLandingState);
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::ShipStateComponent::Clone(void) {
-    return std::make_shared<ratchet::ShipStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::ship::ShipStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::ship::ShipStateComponent>(*this);
 }
 
-bool ratchet::ShipStateComponent::CanTransition(std::string_view next) const {
+bool ratchet::component::ship::ShipStateComponent::CanTransition(std::string_view next) const {
     using Type = state::ShipActionStateType;
     auto current = _state_machine.GetCurrentStateName();
     if (current == Type::kShipActionIdleState) {
@@ -48,7 +48,7 @@ bool ratchet::ShipStateComponent::CanTransition(std::string_view next) const {
 }
 
 #ifdef _DEBUG
-bool ratchet::ShipStateComponent::DebugRender(void) {
+bool ratchet::component::ship::ShipStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 100.0f, "ship state = %s", this->_state_machine.GetCurrentStateName());
     return true;

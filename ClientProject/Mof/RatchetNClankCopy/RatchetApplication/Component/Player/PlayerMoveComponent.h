@@ -1,15 +1,21 @@
-#ifndef RATCHET_PLAYER_MOVE_COMPONENT_H
-#define RATCHET_PLAYER_MOVE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_MOVE_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_MOVE_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
 
 #include <memory>
 
+#include "../CameraComponent.h"
+
 
 namespace ratchet {
-class PlayerMoveComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
+namespace component {
+namespace player {
+class PlayerComponent;
+namespace action {
+class PlayerMoveComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+    using super = ::ratchet::component::player::action::PlayerActionComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
@@ -34,11 +40,11 @@ private:
     //! ÉâÉWÉAÉì
     float _ideal_angle;
     //! ì¸óÕèÓïÒ
-    ratchet::PlayerMoveComponent::InputInfo _input_info;
+    ratchet::component::player::action::PlayerMoveComponent::InputInfo _input_info;
     //! èÛë‘
-    std::weak_ptr<class PlayerComponent> _type_com;
+    std::weak_ptr<ratchet::component::player::PlayerComponent> _type_com;
     //! ÉJÉÅÉâ
-    std::weak_ptr<class CameraComponent> _camera_com;
+    std::weak_ptr<::ratchet::component::CameraComponent> _camera_com;
 public:
     /// <summary>
     /// â¡ë¨
@@ -157,5 +163,6 @@ public:
     /// <returns></returns>
     bool AquireInputData(Mof::CVector2& stick, float& move_angle);
 };
+}}}
 }
-#endif // !RATCHET_PLAYER_MOVE_COMPONENT_H
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_MOVE_COMPONENT_H

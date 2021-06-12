@@ -1,13 +1,13 @@
-#ifndef RATCHET_SHIP_MESH_COMPONENT_H
-#define RATCHET_SHIP_MESH_COMPONENT_H
+#ifndef RATCHET_COMPONENT_SHIP_SHIP_MESH_COMPONENT_H
+#define RATCHET_COMPONENT_SHIP_SHIP_MESH_COMPONENT_H
 
 
 #include "../AnimationMeshComponent.h"
 
 
-namespace ratchet {
-class ShipMeshComponent : public ratchet::AnimationMeshComponent {
-    using super = ratchet::AnimationMeshComponent;
+namespace ratchet { namespace component { namespace ship {
+class ShipMeshComponent : public ratchet::component::AnimationMeshComponent {
+    using super = ratchet::component::AnimationMeshComponent;
 private:
     //! ÉÅÉbÉVÉÖ
     Mof::LPMesh _ship_mesh;
@@ -55,6 +55,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
-};
+};}}
 }
-#endif // !RATCHET_SHIP_MESH_COMPONENT_H
+#endif // !RATCHET_COMPONENT_SHIP_SHIP_MESH_COMPONENT_H

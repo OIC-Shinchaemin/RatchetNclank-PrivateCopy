@@ -1,18 +1,22 @@
-#ifndef RATCHET_SHIP_COMPONENT_H
-#define RATCHET_SHIP_COMPONENT_H
+#ifndef RATCHET_COMPONENT_SHIP_SHIP_COMPONENT_H
+#define RATCHET_COMPONENT_SHIP_SHIP_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
 
 #include <memory>
 
+#include "../MotionComponent.h"
+
 
 namespace ratchet {
-class ShipComponent : public ratchet::UpdateComponent{
-    using super = ratchet::UpdateComponent;
+namespace component {
+namespace ship {
+class ShipComponent : public component::UpdateComponent {
+    using super = component::UpdateComponent;
 private:
     //! モーション
-    std::weak_ptr<class MotionComponent> _motion_com;
+    std::weak_ptr<component::MotionComponent> _motion_com;
     //! モーション
     std::weak_ptr<class ShipStateComponent> _state_com;
 public:
@@ -59,7 +63,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_SHIP_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_SHIP_SHIP_COMPONENT_H

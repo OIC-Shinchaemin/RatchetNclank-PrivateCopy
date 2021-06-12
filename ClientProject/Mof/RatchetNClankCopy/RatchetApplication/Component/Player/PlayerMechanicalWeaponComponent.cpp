@@ -3,28 +3,28 @@
 #include "../../Actor/Character/Player.h"
 
 
-ratchet::PlayerMechanicalWeaponComponent::PlayerMechanicalWeaponComponent(int priority) :
+ratchet::component::player::PlayerMechanicalWeaponComponent::PlayerMechanicalWeaponComponent(int priority) :
     super(priority),
     _weapon() {
 }
 
-ratchet::PlayerMechanicalWeaponComponent::PlayerMechanicalWeaponComponent(const PlayerMechanicalWeaponComponent& obj) :
+ratchet::component::player::PlayerMechanicalWeaponComponent::PlayerMechanicalWeaponComponent(const PlayerMechanicalWeaponComponent& obj) :
     super(obj),
     _weapon() {
 }
 
-ratchet::PlayerMechanicalWeaponComponent::~PlayerMechanicalWeaponComponent() {
+ratchet::component::player::PlayerMechanicalWeaponComponent::~PlayerMechanicalWeaponComponent() {
 }
 
-void ratchet::PlayerMechanicalWeaponComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::player::PlayerMechanicalWeaponComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
 }
 
-std::string ratchet::PlayerMechanicalWeaponComponent::GetType(void) const {
+std::string ratchet::component::player::PlayerMechanicalWeaponComponent::GetType(void) const {
     return "PlayerMechanicalWeaponComponent";
 }
 
-bool ratchet::PlayerMechanicalWeaponComponent::Activate(void) {
+bool ratchet::component::player::PlayerMechanicalWeaponComponent::Activate(void) {
     super::Activate();
     /*
     auto owner = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());
@@ -53,25 +53,25 @@ bool ratchet::PlayerMechanicalWeaponComponent::Activate(void) {
     return true;
 }
 
-bool ratchet::PlayerMechanicalWeaponComponent::Inactivate(void) {
+bool ratchet::component::player::PlayerMechanicalWeaponComponent::Inactivate(void) {
     return true;
 }
 
-bool ratchet::PlayerMechanicalWeaponComponent::Initialize(void) {
+bool ratchet::component::player::PlayerMechanicalWeaponComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     return true;
 }
 
-bool ratchet::PlayerMechanicalWeaponComponent::Update(float delta_time) {
+bool ratchet::component::player::PlayerMechanicalWeaponComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerMechanicalWeaponComponent::Release(void) {
+bool ratchet::component::player::PlayerMechanicalWeaponComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerMechanicalWeaponComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerMechanicalWeaponComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::PlayerMechanicalWeaponComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::PlayerMechanicalWeaponComponent>(*this);
 }

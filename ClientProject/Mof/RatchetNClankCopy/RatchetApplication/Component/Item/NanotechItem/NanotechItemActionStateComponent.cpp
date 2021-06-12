@@ -1,22 +1,22 @@
 #include "NanotechItemActionStateComponent.h"
 
 
-ratchet::NanotechItemActionStateComponent::NanotechItemActionStateComponent(int priority) :
+ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::NanotechItemActionStateComponent(int priority) :
     super(priority) {
 }
 
-ratchet::NanotechItemActionStateComponent::NanotechItemActionStateComponent(const NanotechItemActionStateComponent& obj) :
+ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::NanotechItemActionStateComponent(const NanotechItemActionStateComponent& obj) :
     super(obj) {
 }
 
-ratchet::NanotechItemActionStateComponent::~NanotechItemActionStateComponent() {
+ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::~NanotechItemActionStateComponent() {
 }
 
-std::string ratchet::NanotechItemActionStateComponent::GetType(void) const {
+std::string ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::GetType(void) const {
     return "NanotechItemActionStateComponent";
 }
 
-bool ratchet::NanotechItemActionStateComponent::Initialize(void) {
+bool ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::NanotechItemActionType;
     //super::ChangeState(Type::kMoved);
@@ -24,11 +24,11 @@ bool ratchet::NanotechItemActionStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::NanotechItemActionStateComponent::Clone(void) {
-    return std::make_shared<ratchet::NanotechItemActionStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::nanotechitem::NanotechItemActionStateComponent>(*this);
 }
 
-bool ratchet::NanotechItemActionStateComponent::CanTransition(const std::string& next) {
+bool ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::NanotechItemActionType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -46,7 +46,7 @@ bool ratchet::NanotechItemActionStateComponent::CanTransition(const std::string&
 }
 
 #ifdef _DEBUG
-bool ratchet::NanotechItemActionStateComponent::DebugRender(void) {
+bool ratchet::component::item::nanotechitem::NanotechItemActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 550.0f, "NanotechItem state = %s", this->_state_machine.GetCurrentStateName());
     return true;

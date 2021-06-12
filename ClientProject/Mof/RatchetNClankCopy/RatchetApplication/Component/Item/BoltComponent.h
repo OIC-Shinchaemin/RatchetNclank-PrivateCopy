@@ -1,5 +1,5 @@
-#ifndef RATCHET_BOLT_COMPONENT_H
-#define RATCHET_BOLT_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BOLT_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BOLT_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -7,13 +7,15 @@
 #include "../../Actor/Item/Bolt.h"
 
 namespace ratchet {
-class BoltComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+namespace item {
+class BoltComponent : public component::UpdateComponent {
+    using super = component::UpdateComponent;
 private:
     //! アクターパラメータ
-    ratchet::actor::item::Bolt::Param _param;
+    actor::item::Bolt::Param _param;
     //! 移動先
-    std::weak_ptr<ratchet::actor::Actor> _player;
+    std::weak_ptr<actor::Actor> _player;
     //! 状態
     std::weak_ptr<class BoltActionStateComponent> _state_com;
 public:
@@ -36,7 +38,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    void SetActorParam(const ratchet::actor::item::Bolt::Param& param);
+    void SetActorParam(const actor::item::Bolt::Param& param);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -48,13 +50,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const ratchet::actor::item::Bolt::Param& GetActorParam(void) const;
+    const actor::item::Bolt::Param& GetActorParam(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    std::shared_ptr<ratchet::actor::Actor> GetPlayer(void) const;
+    std::shared_ptr<actor::Actor> GetPlayer(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -78,7 +80,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_BOLT_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_BOLT_COMPONENT_H

@@ -1,5 +1,5 @@
-#ifndef RATCHET_BOLT_ACTION_STATE_COMPONENT_H
-#define RATCHET_BOLT_ACTION_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BOLT_ACTION_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BOLT_ACTION_STATE_COMPONENT_H
 
 
 #include "../ActionStateComponent.h"
@@ -7,9 +7,9 @@
 #include "../../State/BoltActionStateDefine.h"
 
 
-namespace ratchet {
-class BoltActionStateComponent : public ratchet::ActionStateComponent {
-    using super = ratchet::ActionStateComponent;
+namespace ratchet { namespace component { namespace item { 
+class BoltActionStateComponent : public ratchet::component::ActionStateComponent {
+    using super = ratchet::component::ActionStateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,6 +52,6 @@ public:
 #ifdef _DEBUG
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
-};
+};}}
 }
-#endif // !RATCHET_BOLT_ACTION_STATE_COMPONENT_H
+#endif // !RATCHET_COMPONENT_ITEM_BOLT_ACTION_STATE_COMPONENT_H

@@ -1,5 +1,5 @@
-#ifndef RATCHET_ACTION_STATE_COMPONENT_H
-#define RATCHET_ACTION_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ACTION_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_ACTION_STATE_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -13,8 +13,9 @@
 
 
 namespace ratchet {
-class ActionStateComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class ActionStateComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! —\–ñ
     std::optional<std::string> _next_state;
@@ -28,7 +29,7 @@ protected:
     /// </summary>
     /// <typeparam name="State"></typeparam>
     /// <param name="out"></param>
-    void RegisterState(base::core::StateMachine& out, std::shared_ptr<ratchet::ActionComponent> com) {
+    void RegisterState(base::core::StateMachine& out, std::shared_ptr<ratchet::component::ActionComponent> com) {
         auto shared_this = super::GetOwner();
         auto ptr = std::make_shared<state::ActionState>();
         ptr->SetActionComponent(com);
@@ -92,4 +93,5 @@ public:
     void ChangeState(const std::string& name);
 };
 }
-#endif // !RATCHET_ACTION_STATE_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_ACTION_STATE_COMPONENT_H

@@ -3,32 +3,32 @@
 #include "../../State/EnemyActionStateDefine.h"
 
 
-ratchet::EnemyStateComponent::EnemyStateComponent(int priority) :
+ratchet::component::enemy::EnemyStateComponent::EnemyStateComponent(int priority) :
     super(priority) {
 }
 
-ratchet::EnemyStateComponent::EnemyStateComponent(const EnemyStateComponent& obj) :
+ratchet::component::enemy::EnemyStateComponent::EnemyStateComponent(const EnemyStateComponent& obj) :
     super(obj) {
 }
 
-ratchet::EnemyStateComponent::~EnemyStateComponent() {
+ratchet::component::enemy::EnemyStateComponent::~EnemyStateComponent() {
 }
 
-std::string ratchet::EnemyStateComponent::GetType(void) const {
+std::string ratchet::component::enemy::EnemyStateComponent::GetType(void) const {
     return "EnemyStateComponent";
 }
 
-bool ratchet::EnemyStateComponent::Initialize(void) {
+bool ratchet::component::enemy::EnemyStateComponent::Initialize(void) {
     super::Initialize();
     super::ChangeState("EnemyActionIdleState");
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::EnemyStateComponent::Clone(void) {
-    return std::make_shared<ratchet::EnemyStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::enemy::EnemyStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::enemy::EnemyStateComponent>(*this);
 }
 
-bool ratchet::EnemyStateComponent::CanTransition(const std::string& next) {
+bool ratchet::component::enemy::EnemyStateComponent::CanTransition(const std::string& next) {
     using Type = state::EnemyActionStateType;
     auto current = _state_machine.GetCurrentStateName();
 
@@ -100,7 +100,7 @@ bool ratchet::EnemyStateComponent::CanTransition(const std::string& next) {
 }
 
 #ifdef _DEBUG
-bool ratchet::EnemyStateComponent::DebugRender(void) {
+bool ratchet::component::enemy::EnemyStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 600.0f, "enemy state = %s", this->_state_machine.GetCurrentStateName());
     return true;

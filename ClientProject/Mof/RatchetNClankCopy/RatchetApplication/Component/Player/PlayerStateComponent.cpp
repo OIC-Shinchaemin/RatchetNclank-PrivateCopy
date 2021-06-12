@@ -1,32 +1,32 @@
 #include "PlayerStateComponent.h"
 
 
-ratchet::PlayerStateComponent::PlayerStateComponent(int priority) :
+ratchet::component::player::PlayerStateComponent::PlayerStateComponent(int priority) :
     super(priority) {
 }
 
-ratchet::PlayerStateComponent::PlayerStateComponent(const PlayerStateComponent& obj) :
+ratchet::component::player::PlayerStateComponent::PlayerStateComponent(const PlayerStateComponent& obj) :
     super(obj) {
 }
 
-ratchet::PlayerStateComponent::~PlayerStateComponent() {
+ratchet::component::player::PlayerStateComponent::~PlayerStateComponent() {
 }
 
-std::string ratchet::PlayerStateComponent::GetType(void) const {
+std::string ratchet::component::player::PlayerStateComponent::GetType(void) const {
     return "PlayerStateComponent";
 }
 
-bool ratchet::PlayerStateComponent::Initialize(void) {
+bool ratchet::component::player::PlayerStateComponent::Initialize(void) {
     super::Initialize();
     this->ChangeState("PlayerActionIdleState");
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerStateComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::PlayerStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::PlayerStateComponent>(*this);
 }
 
-bool ratchet::PlayerStateComponent::CanTransition(std::string_view next) const {
+bool ratchet::component::player::PlayerStateComponent::CanTransition(std::string_view next) const {
     using Type = state::PlayerActionStateType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -71,7 +71,7 @@ bool ratchet::PlayerStateComponent::CanTransition(std::string_view next) const {
     return false;
 }
 #ifdef _DEBUG
-bool ratchet::PlayerStateComponent::DebugRender(void) {
+bool ratchet::component::player::PlayerStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 100.0f, "player state = %s", this->_state_machine.GetCurrentStateName());
     return true;

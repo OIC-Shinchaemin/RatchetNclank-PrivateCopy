@@ -1,45 +1,15 @@
-#ifndef RATCHET_ENEMY_STATE_COMPONENT_H
-#define RATCHET_ENEMY_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ENEMY_ENEMY_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_ENEMY_ENEMY_STATE_COMPONENT_H
 
 
 #include "../ActionStateComponent.h"
-/*
-#include "Base/Core/StateMachine.h"
-#include "Base/Core/Timer.h"
-#include "../../State/ActionState.h"
-*/
+
 
 namespace ratchet {
-class EnemyStateComponent : public ratchet::ActionStateComponent {
-    using super = ratchet::ActionStateComponent;
-/*
-private:
-    //! 状態
-    base::core::StateMachine _state_machine;
-    /// <summary>
-    /// 登録
-    /// </summary>
-    /// <typeparam name="State"></typeparam>
-    /// <param name="out"></param>
-    template<class State>
-    void RegisterState(base::core::StateMachine& out) {
-        auto shared_this = super::GetOwner();
-        auto ptr = std::make_shared<State>();
-        ptr->SetActor(shared_this);
-        out.RegisterState(ptr);
-    }
-    /// <summary>
-    /// 登録
-    /// </summary>
-    /// <typeparam name="State"></typeparam>
-    /// <param name="out"></param>
-    void RegisterState(base::core::StateMachine& out, std::shared_ptr<ratchet::ActionComponent> com) {
-        auto shared_this = super::GetOwner();
-        auto ptr = std::make_shared<state::ActionState>();
-        ptr->SetActionComponent(com);
-        out.RegisterState(ptr);
-    }
-*/
+namespace component {
+namespace enemy {
+class EnemyStateComponent : public ratchet::component::ActionStateComponent {
+    using super = ratchet::component::ActionStateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -56,22 +26,11 @@ public:
     /// </summary>
     virtual ~EnemyStateComponent();
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="param"></param>
-    //virtual void SetParam(const rapidjson::Value& param) override;
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
-    /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name="state"></param>
-    /// <returns></returns>
-    //bool IsEqual(std::string_view state) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -79,28 +38,11 @@ public:
     /// <returns></returns>
     virtual bool Initialize(void) override;
     /// <summary>
-    /// 更新
-    /// </summary>
-    /// <param name="delta_time"></param>
-    /// <returns></returns>
-    //virtual bool Update(float delta_time) override;
-    /// <summary>
-    /// 解放
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //virtual bool Release(void) override;
-    /// <summary>
     /// 複製
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
-    /// <summary>
-    /// 変更
-    /// </summary>
-    /// <param name="name"></param>
-    //void ChangeState(const std::string& name);
     /// <summary>
     /// 判定
     /// </summary>
@@ -112,4 +54,6 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RATCHET_ENEMY_STATE_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ENEMY_ENEMY_STATE_COMPONENT_H

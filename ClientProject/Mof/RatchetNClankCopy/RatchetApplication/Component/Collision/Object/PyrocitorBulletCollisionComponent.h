@@ -1,5 +1,5 @@
-#ifndef RATCHET_PYROCITOR_BULLET_COLLISION_COMPONENT_H
-#define RATCHET_PYROCITOR_BULLET_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_PYROCITOR_BULLET_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_PYROCITOR_BULLET_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -11,8 +11,10 @@
 
 
 namespace ratchet {
-class PyrocitorBulletCollisionComponent : public ratchet::CollisionComponent {
-    using super = ratchet::CollisionComponent;
+namespace component {
+namespace collision {
+class PyrocitorBulletCollisionComponent : public ratchet::component::collision::CollisionComponent {
+    using super = ratchet::component::collision::CollisionComponent;
 private:
 public:
     /// <summary>
@@ -64,7 +66,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
+    virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
     /// èâä˙âª
     /// </summary>
@@ -84,4 +86,6 @@ public:
     //virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) override;
 };
 }
-#endif // !RATCHET_PYROCITOR_BULLET_COLLISION_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_COLLISION_PYROCITOR_BULLET_COLLISION_COMPONENT_H

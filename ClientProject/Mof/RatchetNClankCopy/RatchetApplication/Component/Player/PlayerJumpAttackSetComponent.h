@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_JUMP_ATTACK_SET_COMPONENT_H
-#define RATCHET_PLAYER_JUMP_ATTACK_SET_COMPONENT_H
+#ifndef RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_JUMP_ATTACK_SET_COMPONENT_H
+#define RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_JUMP_ATTACK_SET_COMPONENT_H
 
 
 #include "PlayerActionComponent.h"
@@ -8,13 +8,17 @@
 
 
 namespace ratchet {
-class PlayerJumpAttackSetComponent : public ratchet::PlayerActionComponent {
-    using super = ratchet::PlayerActionComponent;
+namespace component {
+namespace player {
+class PlayerOmniWrenchComponent;
+namespace action {
+class PlayerJumpAttackSetComponent : public ratchet::component::player::action::PlayerActionComponent {
+    using super = ratchet::component::player::action::PlayerActionComponent;
 private:
     //! 速さ
     float _up_speed;
     //! 武器
-    std::weak_ptr<class PlayerOmniWrenchComponent> _weapon_com;
+    std::weak_ptr<ratchet::component::player::PlayerOmniWrenchComponent> _weapon_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -80,4 +84,7 @@ public:
     virtual bool Start(void) override;
 };
 }
-#endif // !RATCHET_PLAYER_JUMP_ATTACK_SET_COMPONENT_H
+}
+}
+}
+#endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_JUMP_ATTACK_SET_COMPONENT_H

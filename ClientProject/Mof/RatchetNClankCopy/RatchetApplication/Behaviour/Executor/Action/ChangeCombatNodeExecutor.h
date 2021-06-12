@@ -18,7 +18,7 @@ public:
         //! アクター
         std::weak_ptr<ratchet::actor::Actor> actor;
         //! AI
-        std::weak_ptr<ratchet::AIStateComponent> ai_com;
+        std::weak_ptr<ratchet::component::AIStateComponent> ai_com;
     };
 private:
     //! 実行引数
@@ -44,7 +44,7 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.ai_com = actor->GetComponent<ratchet::AIStateComponent>();
+            _node_args.ai_com = actor->GetComponent<ratchet::component::AIStateComponent>();
         } // if
     }
     /// <summary>

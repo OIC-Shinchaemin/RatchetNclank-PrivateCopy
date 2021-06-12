@@ -21,6 +21,6 @@ bool ratchet::actor::item::NanotechItem::Initialize(ratchet::actor::Actor::Param
     _init_speed = nanotechitem_param ->speed;
     _init_angle = nanotechitem_param ->angle;
     
-    super::GetComponent<ratchet::NanotechItemComponent>()->SetActorParam(*nanotechitem_param);
+    super::GetComponent<ratchet::component::item::nanotechitem::NanotechItemComponent>()->SetActorParam(*nanotechitem_param);
     return true;
 }

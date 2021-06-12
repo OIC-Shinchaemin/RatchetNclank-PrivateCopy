@@ -3,37 +3,37 @@
 #include "BulletItemComponent.h"
 
 
-ratchet::BulletItemMovedComponent::BulletItemMovedComponent(int priority) :
+ratchet::component::item::bulletitem::BulletItemMovedComponent::BulletItemMovedComponent(int priority) :
     super(priority),
     _speed(),
     _angle(),
     _decrase(0.85f) {
 }
 
-ratchet::BulletItemMovedComponent::BulletItemMovedComponent(const BulletItemMovedComponent& obj) :
+ratchet::component::item::bulletitem::BulletItemMovedComponent::BulletItemMovedComponent(const BulletItemMovedComponent& obj) :
     super(obj),
     _speed(),
     _angle(),
     _decrase(obj._decrase) {
 }
 
-ratchet::BulletItemMovedComponent::~BulletItemMovedComponent() {
+ratchet::component::item::bulletitem::BulletItemMovedComponent::~BulletItemMovedComponent() {
 }
 
-std::string ratchet::BulletItemMovedComponent::GetType(void) const {
+std::string ratchet::component::item::bulletitem::BulletItemMovedComponent::GetType(void) const {
     return "BulletItemMovedComponent";
 }
 
-std::string_view ratchet::BulletItemMovedComponent::GetStateType(void) const {
+std::string_view ratchet::component::item::bulletitem::BulletItemMovedComponent::GetStateType(void) const {
     return state::BulletItemActionType::kMoved;
 }
 
-bool ratchet::BulletItemMovedComponent::Initialize(void) {
+bool ratchet::component::item::bulletitem::BulletItemMovedComponent::Initialize(void) {
     super::Initialize();
     return true;
 }
 
-bool ratchet::BulletItemMovedComponent::Update(float delta_time) {
+bool ratchet::component::item::bulletitem::BulletItemMovedComponent::Update(float delta_time) {
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->AddVelocityForce(_speed);
@@ -47,29 +47,29 @@ bool ratchet::BulletItemMovedComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::BulletItemMovedComponent::Release(void) {
+bool ratchet::component::item::bulletitem::BulletItemMovedComponent::Release(void) {
     super::Release();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BulletItemMovedComponent::Clone(void) {
-    return std::make_shared<ratchet::BulletItemMovedComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::bulletitem::BulletItemMovedComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::bulletitem::BulletItemMovedComponent>(*this);
 }
 
-bool ratchet::BulletItemMovedComponent::Start(void) {
+bool ratchet::component::item::bulletitem::BulletItemMovedComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if
     super::Start();
 
-    auto type_com = super::GetOwner()->GetComponent<ratchet::BulletItemComponent>();
+    auto type_com = super::GetOwner()->GetComponent<ratchet::component::item::bulletitem::BulletItemComponent>();
     auto param = type_com->GetActorParam();
     _speed = param.speed;
     _angle = param.angle;
     return true;
 }
 
-bool ratchet::BulletItemMovedComponent::End(void) {
+bool ratchet::component::item::bulletitem::BulletItemMovedComponent::End(void) {
     super::End();
     return true;
 }

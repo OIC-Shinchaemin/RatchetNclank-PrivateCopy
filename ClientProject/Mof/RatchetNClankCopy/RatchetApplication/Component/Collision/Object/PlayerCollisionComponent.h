@@ -1,5 +1,5 @@
-#ifndef RATCHET_PLAYER_COLLISION_COMPONENT_H
-#define RATCHET_PLAYER_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_PLAYER_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_PLAYER_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -9,17 +9,22 @@
 
 #include <Mof.h>
 
+#include "../../VelocityComponent.h"
+
 
 namespace ratchet {
-class PlayerCollisionComponent : public ratchet::CollisionComponent {
-    using super = ratchet::CollisionComponent;
+namespace component {
+namespace player { class PlayerComponent; class PlayerStateComponent; }
+namespace collision {
+class PlayerCollisionComponent : public ratchet::component::collision::CollisionComponent {
+    using super = ratchet::component::collision::CollisionComponent;
 private:
     //! プレイヤー
-    std::weak_ptr<class PlayerComponent> _player_com;
+    std::weak_ptr<ratchet::component::player::PlayerComponent> _player_com;
     //! 速度
-    std::weak_ptr<class VelocityComponent> _velocity_com;
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! プレイヤー
-    std::weak_ptr<class PlayerStateComponent> _state_com;
+    std::weak_ptr<ratchet::component::player::PlayerStateComponent> _state_com;
     //! Elevatorに乗っている
     bool _on_elevator;
     //! 落下rayとStageの衝突時遷移する状態
@@ -114,7 +119,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
+    virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -140,4 +145,6 @@ public:
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
 }
-#endif // !RATCHET_PLAYER_COLLISION_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_COLLISION_PLAYER_COLLISION_COMPONENT_H

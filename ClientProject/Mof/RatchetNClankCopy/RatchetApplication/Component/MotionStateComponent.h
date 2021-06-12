@@ -1,5 +1,5 @@
-#ifndef RATCHET_MOTION_STATE_COMPONENT_H
-#define RATCHET_MOTION_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_MOTION_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_MOTION_STATE_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -9,8 +9,9 @@
 
 
 namespace ratchet {
-class MotionStateComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class MotionStateComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! èÛë‘
     base::core::StateMachine _state_machine;
@@ -80,4 +81,5 @@ public:
     void ChangeState(const std::string& name);
 };
 }
-#endif // !RATCHET_MOTION_STATE_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_MOTION_STATE_COMPONENT_H

@@ -15,7 +15,7 @@ ratchet::actor::bullet::BlasterBullet::~BlasterBullet() {
 bool ratchet::actor::bullet::BlasterBullet::Update(float delta_time) {
     super::BulletUpdate(delta_time);
 
-    auto v = super::GetComponent<ratchet::VelocityComponent>();
+    auto v = super::GetComponent<ratchet::component::VelocityComponent>();
     v->AddVelocityForce(_speed);
 
     super::Update(delta_time);
@@ -29,6 +29,6 @@ bool ratchet::actor::bullet::BlasterBullet::Render(void) {
 
 void ratchet::actor::bullet::BlasterBullet::Start(const ratchet::actor::bullet::BlasterBullet::Param& in) {
     super::Start(in);
-    auto v = super::GetComponent<ratchet::VelocityComponent>();
+    auto v = super::GetComponent<ratchet::component::VelocityComponent>();
     v ->SetGravity(0.0f);
 }

@@ -12,14 +12,14 @@ ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm::~PlayerEnemyMeleeAttackCollis
 }
 
 const char* ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm::GetLayerType(void) const {
-    return ratchet::CollisionComponentType::kPlayerCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent.c_str();
 }
 
 const char* ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm::GetTargetType(void) const {
-    return ratchet::CollisionComponentType::kEnemyMeleeAttackCollisionComponent.c_str();
+    return ratchet::component::collision::CollisionComponentType::kEnemyMeleeAttackCollisionComponent.c_str();
 }
 
-bool ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::CollisionComponent> object, std::shared_ptr<ratchet::CollisionComponent> target, ratchet::CollisionInfo& out) {
+bool ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::component::collision::CollisionComponent> object, std::shared_ptr<ratchet::component::collision::CollisionComponent> target, component::collision::CollisionInfo& out) {
     if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;
     } // if

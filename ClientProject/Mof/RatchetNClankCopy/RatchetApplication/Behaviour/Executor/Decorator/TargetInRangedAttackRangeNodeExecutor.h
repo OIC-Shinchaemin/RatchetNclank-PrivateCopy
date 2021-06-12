@@ -16,9 +16,9 @@ public:
         //! アクター
         std::weak_ptr<ratchet::actor::Actor> actor;
         //! エネミー
-        std::weak_ptr<ratchet::EnemyComponent> ENEMY_com;
+        std::weak_ptr<ratchet::component::enemy::EnemyComponent> ENEMY_com;
         //! 攻撃
-        std::weak_ptr<ratchet::EnemyRangedAttackComponent> ranged_attack_com;
+        std::weak_ptr<ratchet::component::enemy::EnemyRangedAttackComponent> ranged_attack_com;
     };
 private:
     //! 実行引数
@@ -44,8 +44,8 @@ public:
         super::Prepare(actor);
         _node_args.actor = super::_actor;
         if (auto actor = super::_actor.lock()) {
-            _node_args.ENEMY_com = actor->GetComponent<ratchet::EnemyComponent>();
-            _node_args.ranged_attack_com = actor->GetComponent<ratchet::ActionComponent>()->GetComponent<ratchet::EnemyRangedAttackComponent>();
+            _node_args.ENEMY_com = actor->GetComponent<ratchet::component::enemy::EnemyComponent>();
+            _node_args.ranged_attack_com = actor->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::enemy::EnemyRangedAttackComponent>();
         } // if
     }
     /// <summary>

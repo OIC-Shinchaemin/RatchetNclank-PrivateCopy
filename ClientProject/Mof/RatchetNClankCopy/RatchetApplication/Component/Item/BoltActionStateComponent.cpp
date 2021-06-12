@@ -1,22 +1,22 @@
 #include "BoltActionStateComponent.h"
 
 
-ratchet::BoltActionStateComponent::BoltActionStateComponent(int priority) :
+ratchet::component::item::BoltActionStateComponent::BoltActionStateComponent(int priority) :
     super(priority) {
 }
 
-ratchet::BoltActionStateComponent::BoltActionStateComponent(const BoltActionStateComponent& obj) :
+ratchet::component::item::BoltActionStateComponent::BoltActionStateComponent(const BoltActionStateComponent& obj) :
     super(obj) {
 }
 
-ratchet::BoltActionStateComponent::~BoltActionStateComponent() {
+ratchet::component::item::BoltActionStateComponent::~BoltActionStateComponent() {
 }
 
-std::string ratchet::BoltActionStateComponent::GetType(void) const {
+std::string ratchet::component::item::BoltActionStateComponent::GetType(void) const {
     return "BoltActionStateComponent";
 }
 
-bool ratchet::BoltActionStateComponent::Initialize(void) {
+bool ratchet::component::item::BoltActionStateComponent::Initialize(void) {
     super::Initialize();
     using Type = state::BoltActionType;
     //super::ChangeState(Type::kMoved);
@@ -24,11 +24,11 @@ bool ratchet::BoltActionStateComponent::Initialize(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BoltActionStateComponent::Clone(void) {
-    return std::make_shared<ratchet::BoltActionStateComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::item::BoltActionStateComponent::Clone(void) {
+    return std::make_shared<ratchet::component::item::BoltActionStateComponent>(*this);
 }
 
-bool ratchet::BoltActionStateComponent::CanTransition(const std::string& next) {
+bool ratchet::component::item::BoltActionStateComponent::CanTransition(const std::string& next) {
     using Type = state::BoltActionType;
 
     auto current = _state_machine.GetCurrentStateName();
@@ -46,7 +46,7 @@ bool ratchet::BoltActionStateComponent::CanTransition(const std::string& next) {
 }
 
 #ifdef _DEBUG
-bool ratchet::BoltActionStateComponent::DebugRender(void) {
+bool ratchet::component::item::BoltActionStateComponent::DebugRender(void) {
     ::CGraphicsUtilities::RenderString(
         20.0f, 550.0f, "bolt state = %s", this->_state_machine.GetCurrentStateName());
     return true;

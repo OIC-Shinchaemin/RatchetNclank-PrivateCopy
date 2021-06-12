@@ -1,5 +1,5 @@
-#ifndef RATCHET_BILLBOARD_COMPONENT_H
-#define RATCHET_BILLBOARD_COMPONENT_H
+#ifndef RATCHET_COMPONENT_BILLBOARD_COMPONENT_H
+#define RATCHET_COMPONENT_BILLBOARD_COMPONENT_H
 
 
 #include "RenderComponent.h"
@@ -8,8 +8,9 @@
 
 
 namespace ratchet {
-class BillboardComponent : public ratchet::RenderComponent {
-    using super = ratchet::RenderComponent;
+namespace component {
+class BillboardComponent : public ratchet::component::RenderComponent {
+    using super = ratchet::component::RenderComponent;
 private:
     //! ÉÅÉbÉVÉÖ
     std::weak_ptr<Mof::CTexture> _texture;
@@ -63,7 +64,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool Render(void) override; 
+    virtual bool Render(void) override;
     /// <summary>
     /// âï˙
     /// </summary>
@@ -78,4 +79,5 @@ public:
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_BILLBOARD_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_BILLBOARD_COMPONENT_H

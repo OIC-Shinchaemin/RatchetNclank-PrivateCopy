@@ -1,22 +1,22 @@
 #include "BillboardComponent.h"
 
 
-ratchet::BillboardComponent::BillboardComponent(int priority) :
+ratchet::component::BillboardComponent::BillboardComponent(int priority) :
     super(priority),
     _texture(),
     _color() {
 }
 
-ratchet::BillboardComponent::BillboardComponent(const ratchet::BillboardComponent& obj) :
+ratchet::component::BillboardComponent::BillboardComponent(const ratchet::component::BillboardComponent& obj) :
     super(obj),
     _texture(obj._texture),
     _color(obj._color) {
 }
 
-ratchet::BillboardComponent::~BillboardComponent() {
+ratchet::component::BillboardComponent::~BillboardComponent() {
 }
 
-void ratchet::BillboardComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::BillboardComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* path = "path";
 
@@ -39,23 +39,23 @@ void ratchet::BillboardComponent::SetParam(const rapidjson::Value& param) {
     } // else
 }
 
-void ratchet::BillboardComponent::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
+void ratchet::component::BillboardComponent::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }
 
-std::string ratchet::BillboardComponent::GetType(void) const {
+std::string ratchet::component::BillboardComponent::GetType(void) const {
     return "BillboardComponent";
 }
 
-std::shared_ptr<Mof::CTexture> ratchet::BillboardComponent::GetTexture(void) const {
+std::shared_ptr<Mof::CTexture> ratchet::component::BillboardComponent::GetTexture(void) const {
     return this->_texture.lock();
 }
 
-Mof::CVector4 ratchet::BillboardComponent::GetColor(void) const {
+Mof::CVector4 ratchet::component::BillboardComponent::GetColor(void) const {
     return this->_color;
 }
 
-bool ratchet::BillboardComponent::Render(void) {
+bool ratchet::component::BillboardComponent::Render(void) {
     if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
@@ -80,12 +80,12 @@ bool ratchet::BillboardComponent::Render(void) {
     return true;
 }
 
-bool ratchet::BillboardComponent::Release(void) {
+bool ratchet::component::BillboardComponent::Release(void) {
     super::Release();
     _texture.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::BillboardComponent::Clone(void) {
-    return std::make_shared<ratchet::BillboardComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::BillboardComponent::Clone(void) {
+    return std::make_shared<ratchet::component::BillboardComponent>(*this);
 }

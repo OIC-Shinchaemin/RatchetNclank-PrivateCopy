@@ -1,22 +1,22 @@
 #include "MeshComponent.h"
 
 
-ratchet::MeshComponent::MeshComponent(int priority) :
+ratchet::component::MeshComponent::MeshComponent(int priority) :
     super(priority),
     _mesh(),
     _color() {
 }
 
-ratchet::MeshComponent::MeshComponent(const ratchet::MeshComponent& obj) :
+ratchet::component::MeshComponent::MeshComponent(const ratchet::component::MeshComponent& obj) :
     super(obj),
     _mesh(obj._mesh),
     _color(obj._color) {
 }
 
-ratchet::MeshComponent::~MeshComponent() {
+ratchet::component::MeshComponent::~MeshComponent() {
 }
 
-void ratchet::MeshComponent::SetParam(const rapidjson::Value& param) {
+void ratchet::component::MeshComponent::SetParam(const rapidjson::Value& param) {
     super::SetParam(param);
     const char* path = "path";
 
@@ -39,23 +39,23 @@ void ratchet::MeshComponent::SetParam(const rapidjson::Value& param) {
     } // else
 }
 
-void ratchet::MeshComponent::SetMeshContainer(const std::shared_ptr<Mof::CMeshContainer>& ptr) {
+void ratchet::component::MeshComponent::SetMeshContainer(const std::shared_ptr<Mof::CMeshContainer>& ptr) {
     this->_mesh = ptr;
 }
 
-std::string ratchet::MeshComponent::GetType(void) const {
+std::string ratchet::component::MeshComponent::GetType(void) const {
     return "MeshComponent";
 }
 
-std::shared_ptr<Mof::CMeshContainer> ratchet::MeshComponent::GetMeshContainer(void) const {
+std::shared_ptr<Mof::CMeshContainer> ratchet::component::MeshComponent::GetMeshContainer(void) const {
     return this->_mesh.lock();
 }
 
-Mof::CVector4 ratchet::MeshComponent::GetColor(void) const {
+Mof::CVector4 ratchet::component::MeshComponent::GetColor(void) const {
     return this->_color;
 }
 
-bool ratchet::MeshComponent::Render(void) {
+bool ratchet::component::MeshComponent::Render(void) {
     if (!super::GetOwner()->InCameraRange()) {
         return false;
     } // if
@@ -76,12 +76,12 @@ bool ratchet::MeshComponent::Render(void) {
     return true;
 }
 
-bool ratchet::MeshComponent::Release(void) {
+bool ratchet::component::MeshComponent::Release(void) {
     super::Release();
     _mesh.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::MeshComponent::Clone(void) {
-    return std::make_shared<ratchet::MeshComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::MeshComponent::Clone(void) {
+    return std::make_shared<ratchet::component::MeshComponent>(*this);
 }

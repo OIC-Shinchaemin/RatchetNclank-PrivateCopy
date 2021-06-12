@@ -3,40 +3,40 @@
 #include "PlayerOmniWrenchComponent.h"
 
 
-ratchet::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(int priority) :
+ratchet::component::player::action::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(int priority) :
     super(priority),
     _up_speed(5.0f),
     _weapon_com() {
 }
 
-ratchet::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(const PlayerJumpAttackSetComponent& obj) :
+ratchet::component::player::action::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(const PlayerJumpAttackSetComponent& obj) :
     super(obj),
     _up_speed(obj._up_speed),
     _weapon_com() {
 }
 
-ratchet::PlayerJumpAttackSetComponent::~PlayerJumpAttackSetComponent() {
+ratchet::component::player::action::PlayerJumpAttackSetComponent::~PlayerJumpAttackSetComponent() {
 }
 
-std::string ratchet::PlayerJumpAttackSetComponent::GetType(void) const {
+std::string ratchet::component::player::action::PlayerJumpAttackSetComponent::GetType(void) const {
     return "PlayerJumpAttackSetComponent";
 }
 
-std::string_view ratchet::PlayerJumpAttackSetComponent::GetStateType(void) const {
+std::string_view ratchet::component::player::action::PlayerJumpAttackSetComponent::GetStateType(void) const {
     return state::PlayerActionStateType::kPlayerActionJumpAttackSetState;
 }
 
-bool ratchet::PlayerJumpAttackSetComponent::Initialize(void) {
+bool ratchet::component::player::action::PlayerJumpAttackSetComponent::Initialize(void) {
     super::Initialize();
-    _weapon_com = super::GetOwner()->GetComponent<ratchet::PlayerOmniWrenchComponent>();
+    _weapon_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerOmniWrenchComponent>();
     return true;
 }
 
-bool ratchet::PlayerJumpAttackSetComponent::Input(void) {
+bool ratchet::component::player::action::PlayerJumpAttackSetComponent::Input(void) {
     return false;
 }
 
-bool ratchet::PlayerJumpAttackSetComponent::Update(float delta_time) {
+bool ratchet::component::player::action::PlayerJumpAttackSetComponent::Update(float delta_time) {
     if (super::IsEndMotion()) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpAttackState);
     } // if
@@ -47,17 +47,17 @@ bool ratchet::PlayerJumpAttackSetComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::PlayerJumpAttackSetComponent::Release(void) {
+bool ratchet::component::player::action::PlayerJumpAttackSetComponent::Release(void) {
     super::Release();
     _weapon_com.reset();
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::PlayerJumpAttackSetComponent::Clone(void) {
-    return std::make_shared<ratchet::PlayerJumpAttackSetComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::player::action::PlayerJumpAttackSetComponent::Clone(void) {
+    return std::make_shared<ratchet::component::player::action::PlayerJumpAttackSetComponent>(*this);
 }
 
-bool ratchet::PlayerJumpAttackSetComponent::Start(void) {
+bool ratchet::component::player::action::PlayerJumpAttackSetComponent::Start(void) {
     if (this->IsActive()) {
         return false;
     } // if

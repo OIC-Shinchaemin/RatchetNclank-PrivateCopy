@@ -1,5 +1,5 @@
-#ifndef RATCHET_SIGHT_COLLISION_COMPONENT_H
-#define RATCHET_SIGHT_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_SIGHT_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_SIGHT_COLLISION_COMPONENT_H
 
 
 #include "CollisionComponent.h"
@@ -8,14 +8,16 @@
 #include <memory>
 
 #include <Mof.h>
-
+#include "../../SightRecognitionComponent.h"
 
 namespace ratchet {
-class SightCollisionComponent : public ratchet::CollisionComponent {
-    using super = ratchet::CollisionComponent;
+namespace component {
+namespace collision {
+class SightCollisionComponent : public ratchet::component::collision::CollisionComponent {
+    using super = ratchet::component::collision::CollisionComponent;
 private:
     //! 所有者
-    std::weak_ptr<class SightRecognitionComponent> _sight_recognition;
+    std::weak_ptr<ratchet::component::SightRecognitionComponent> _sight_recognition;
 public:
     /// <summary>
     /// コンストラクタ
@@ -66,7 +68,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::optional<ratchet::SightObject> GetSightObject(void) override;
+    virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -81,4 +83,6 @@ public:
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_SIGHT_COLLISION_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_COLLISION_SIGHT_COLLISION_COMPONENT_H

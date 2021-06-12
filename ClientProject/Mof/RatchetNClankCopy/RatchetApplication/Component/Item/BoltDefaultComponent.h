@@ -1,5 +1,5 @@
-#ifndef RATCHET_BOLT_DEFAULT_COMPONENT_H
-#define RATCHET_BOLT_DEFAULT_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_BOLT_DEFAULT_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_BOLT_DEFAULT_COMPONENT_H
 
 
 #include "BoltActionComponent.h"
@@ -8,8 +8,10 @@
 
 
 namespace ratchet {
-class BoltDefaultComponent : public ratchet::BoltActionComponent {
-    using super = ratchet::BoltActionComponent;
+namespace component {
+namespace item {
+class BoltDefaultComponent : public component::item::BoltActionComponent {
+    using super = component::item::BoltActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -60,7 +62,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<component::Component> Clone(void) override;
     /// <summary>
     /// 開始
     /// </summary>
@@ -75,4 +77,6 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_BOLT_DEFAULT_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_ITEM_BOLT_DEFAULT_COMPONENT_H

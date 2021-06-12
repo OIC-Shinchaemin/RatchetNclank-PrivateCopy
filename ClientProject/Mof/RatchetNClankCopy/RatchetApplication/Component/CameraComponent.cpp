@@ -8,26 +8,26 @@
 #include "../Event/EventReferenceTable.h"
 
 
-void ratchet::CameraComponent::TurnLeft(void) {
+void ratchet::component::CameraComponent::TurnLeft(void) {
     _camera_controller.GetService()->AddAzimuth(1.0f);
 }
 
-void ratchet::CameraComponent::TurnRight(void) {
+void ratchet::component::CameraComponent::TurnRight(void) {
     _camera_controller.GetService()->AddAzimuth(-1.0f);
 }
 
-void ratchet::CameraComponent::LookUp(void) {
+void ratchet::component::CameraComponent::LookUp(void) {
     _camera_controller.GetService()->AddAltitude(1.0f);
 }
 
-void ratchet::CameraComponent::LookDown(void) {
+void ratchet::component::CameraComponent::LookDown(void) {
     _camera_controller.GetService()->AddAltitude(-1.0f);
 }
 
-void ratchet::CameraComponent::UpdateFPSMode(void) {
+void ratchet::component::CameraComponent::UpdateFPSMode(void) {
 }
 
-void ratchet::CameraComponent::ControlByKeyboardFollow(void) {
+void ratchet::component::CameraComponent::ControlByKeyboardFollow(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         this->TurnLeft();
     } // if
@@ -61,7 +61,7 @@ void ratchet::CameraComponent::ControlByKeyboardFollow(void) {
     } // if
 }
 
-void ratchet::CameraComponent::ControlByKeyboardFirstPerson(void) {
+void ratchet::component::CameraComponent::ControlByKeyboardFirstPerson(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         this->TurnLeft();
     } // if
@@ -106,7 +106,7 @@ void ratchet::CameraComponent::ControlByKeyboardFirstPerson(void) {
     } // else if
 }
 
-void ratchet::CameraComponent::ControlByKeyboard(void) {
+void ratchet::component::CameraComponent::ControlByKeyboard(void) {
     using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
@@ -118,7 +118,7 @@ void ratchet::CameraComponent::ControlByKeyboard(void) {
     } // switch
 }
 
-void ratchet::CameraComponent::ControlByGamepad(void) {
+void ratchet::component::CameraComponent::ControlByGamepad(void) {
     float horizontal = ::g_pGamepad->GetRightStickHorizontal();
     float vertical = ::g_pGamepad->GetRightStickVertical();
     float threshold = 0.5f;
@@ -155,7 +155,7 @@ void ratchet::CameraComponent::ControlByGamepad(void) {
     } // else if
 }
 
-void ratchet::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+void ratchet::component::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (_collisioned_stage) {
         controller->SetAzimuth(math::ToDegree(_preview_angle.x));
         controller->SetAltitude(math::ToDegree(_preview_angle.y));
@@ -179,7 +179,7 @@ void ratchet::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ra
     controller->Update(delta_time, camera_info);
 }
 
-void ratchet::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+void ratchet::component::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     auto eye_pos = super::GetOwner()->GetPosition();
     eye_pos.y += 1.0f;
 
@@ -188,7 +188,7 @@ void ratchet::CameraComponent::UpdateFirstPerson(float delta_time, std::shared_p
     controller->Update(delta_time, camera_info);
 }
 
-ratchet::CameraComponent::CameraComponent(int priority) :
+ratchet::component::CameraComponent::CameraComponent(int priority) :
     super(priority),
     _target(),
     _camera(),
@@ -201,7 +201,7 @@ ratchet::CameraComponent::CameraComponent(int priority) :
     _preview_angle() {
 }
 
-ratchet::CameraComponent::CameraComponent(const CameraComponent& obj) :
+ratchet::component::CameraComponent::CameraComponent(const CameraComponent& obj) :
     super(obj),
     _target(),
     _camera(),
@@ -214,10 +214,10 @@ ratchet::CameraComponent::CameraComponent(const CameraComponent& obj) :
     _preview_angle() {
 }
 
-ratchet::CameraComponent::~CameraComponent() {
+ratchet::component::CameraComponent::~CameraComponent() {
 }
 
-void ratchet::CameraComponent::OnNotify(const ratchet::camera::CameraController::CameraInfo& info) {
+void ratchet::component::CameraComponent::OnNotify(const ratchet::camera::CameraController::CameraInfo& info) {
     _camera->SetPosition(info.start_position);
     _camera->SetTarget(info.target_position);
     _camera->Update();
@@ -228,30 +228,30 @@ void ratchet::CameraComponent::OnNotify(const ratchet::camera::CameraController:
     _camera_controller.GetService()->SetDistance(_default_distance);
 }
 
-std::string ratchet::CameraComponent::GetType(void) const {
+std::string ratchet::component::CameraComponent::GetType(void) const {
     return "CameraComponent";
 }
 
-Mof::CVector3 ratchet::CameraComponent::GetViewFront(void) const {
+Mof::CVector3 ratchet::component::CameraComponent::GetViewFront(void) const {
     return this->_camera_controller.GetService()->GetViewFront();
 }
 
-Mof::CVector3 ratchet::CameraComponent::GetPosition(void) const {
+Mof::CVector3 ratchet::component::CameraComponent::GetPosition(void) const {
     return this->_camera_controller.GetService()->GetCameraPosition();
 }
 
-Mof::CVector3 ratchet::CameraComponent::GetVelocity(void) const {
+Mof::CVector3 ratchet::component::CameraComponent::GetVelocity(void) const {
     return this->_camera_controller.GetService()->GetVelocity();
 }
 
-Mof::CVector3 ratchet::CameraComponent::GetPreviewPosition(void) const {
+Mof::CVector3 ratchet::component::CameraComponent::GetPreviewPosition(void) const {
     return this->_camera_controller.GetService()->GetPreviewPosition();
 }
 
-bool ratchet::CameraComponent::Initialize(void) {
+bool ratchet::component::CameraComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-    _state_com = super::GetOwner()->GetComponent<ratchet::PlayerStateComponent>();
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
 
     // camera
     using Mode = ratchet::camera::CameraController::CameraMode;
@@ -267,11 +267,11 @@ bool ratchet::CameraComponent::Initialize(void) {
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
 
-    ratchet::event::EventReferenceTable::Singleton().Register("CameraComponent", std::dynamic_pointer_cast<ratchet::CameraComponent>(shared_from_this()));
+    ratchet::event::EventReferenceTable::Singleton().Register("CameraComponent", std::dynamic_pointer_cast<ratchet::component::CameraComponent>(shared_from_this()));
     return true;
 }
 
-bool ratchet::CameraComponent::Update(float delta_time) {
+bool ratchet::component::CameraComponent::Update(float delta_time) {
     this->ControlByGamepad();
     this->ControlByKeyboard();
 
@@ -286,7 +286,7 @@ bool ratchet::CameraComponent::Update(float delta_time) {
     return true;
 }
 
-bool ratchet::CameraComponent::Release(void) {
+bool ratchet::component::CameraComponent::Release(void) {
     super::Release();
     _camera.reset();
     _camera_controller.GetService()->Release();
@@ -297,15 +297,15 @@ bool ratchet::CameraComponent::Release(void) {
     return true;
 }
 
-std::shared_ptr<ratchet::component::Component> ratchet::CameraComponent::Clone(void) {
-    return std::make_shared<ratchet::CameraComponent>(*this);
+std::shared_ptr<ratchet::component::Component> ratchet::component::CameraComponent::Clone(void) {
+    return std::make_shared<ratchet::component::CameraComponent>(*this);
 }
 
-void ratchet::CameraComponent::CollisionStage(void) {
+void ratchet::component::CameraComponent::CollisionStage(void) {
     _collisioned_stage = true;
 }
 #ifdef _DEBUG
-bool ratchet::CameraComponent::DebugRender(void) {
+bool ratchet::component::CameraComponent::DebugRender(void) {
     auto render = [](const char* name) {
         ::CGraphicsUtilities::RenderString(
             20.0f, 200.0f, "camera state = %s", name);

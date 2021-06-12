@@ -1,5 +1,5 @@
-#ifndef RATCHET_SHIP_LANDING_COMPONENT_H
-#define RATCHET_SHIP_LANDING_COMPONENT_H
+#ifndef RATCHET_COMPONENT_SHIP_SHIP_LANDING_COMPONENT_H
+#define RATCHET_COMPONENT_SHIP_SHIP_LANDING_COMPONENT_H
 
 
 #include "ShipActionComponent.h"
@@ -9,9 +9,11 @@
 
 
 namespace ratchet {
-class ShipLandingComponent : public ratchet::ShipActionComponent,
+namespace component {
+namespace ship {
+class ShipLandingComponent : public ratchet::component::ship::ShipActionComponent,
     public base::core::Observable<const ratchet::camera::CameraController::CameraInfo&> {
-    using super = ratchet::ShipActionComponent;
+    using super = ratchet::component::ship::ShipActionComponent;
     using Observable = base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>;
 public:
     /// <summary>
@@ -71,4 +73,6 @@ public:
     virtual bool End(void) override;
 };
 }
-#endif // !RATCHET_SHIP_LANDING_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_SHIP_SHIP_LANDING_COMPONENT_H

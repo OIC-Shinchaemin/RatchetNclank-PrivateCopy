@@ -1,5 +1,5 @@
-#ifndef RATCHET_NanotechItem_DEFAULT_COMPONENT_H
-#define RATCHET_NanotechItem_DEFAULT_COMPONENT_H
+#ifndef RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_DEFAULT_COMPONENT_H
+#define RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_DEFAULT_COMPONENT_H
 
 
 #include "NanotechItemActionComponent.h"
@@ -7,9 +7,9 @@
 #include <memory>
 
 
-namespace ratchet {
-class NanotechItemDefaultComponent : public ratchet::NanotechItemActionComponent {
-    using super = ratchet::NanotechItemActionComponent;
+namespace ratchet { namespace component { namespace item { namespace nanotechitem {
+class NanotechItemDefaultComponent : public ratchet::component::item::nanotechitem::NanotechItemActionComponent {
+    using super = ratchet::component::item::nanotechitem::NanotechItemActionComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -73,6 +73,6 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool End(void) override;
-};
+};}}}
 }
-#endif // !RATCHET_NanotechItem_DEFAULT_COMPONENT_H
+#endif // !RATCHET_COMPONENT_ITEM_NANOTECH_ITEM_NanotechItem_DEFAULT_COMPONENT_H

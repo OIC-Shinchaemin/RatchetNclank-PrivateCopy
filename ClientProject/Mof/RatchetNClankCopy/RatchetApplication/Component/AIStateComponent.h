@@ -1,5 +1,5 @@
-#ifndef RATCHET_AI_STATE_COMPONENT_H
-#define RATCHET_AI_STATE_COMPONENT_H
+#ifndef RATCHET_COMPONENT_AI_STATE_COMPONENT_H
+#define RATCHET_COMPONENT_AI_STATE_COMPONENT_H
 
 
 #include "UpdateComponent.h"
@@ -9,8 +9,9 @@
 
 
 namespace ratchet {
-class AIStateComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
+namespace component {
+class AIStateComponent : public ratchet::component::UpdateComponent {
+    using super = ratchet::component::UpdateComponent;
 private:
     //! èÛë‘
     base::core::StateMachine _state_machine;
@@ -92,4 +93,5 @@ public:
 #endif // _DEBUG
 };
 }
-#endif // !RATCHET_AI_STATE_COMPONENT_H
+}
+#endif // !RATCHET_COMPONENT_AI_STATE_COMPONENT_H

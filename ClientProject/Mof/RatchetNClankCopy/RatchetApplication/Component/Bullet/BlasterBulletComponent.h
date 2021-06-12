@@ -1,5 +1,5 @@
-#ifndef RATCHET_BLASTER_BULLET_COMPONENT_H
-#define RATCHET_BLASTER_BULLET_COMPONENT_H
+#ifndef RATCHET_COMPONENT_BULLET_BLASTER_BULLET_COMPONENT_H
+#define RATCHET_COMPONENT_BULLET_BLASTER_BULLET_COMPONENT_H
 
 
 #include "../UpdateComponent.h"
@@ -8,9 +8,10 @@
 
 
 namespace ratchet {
-class BlasterBulletComponent : public ratchet::UpdateComponent {
-    using super = ratchet::UpdateComponent;
-private:
+namespace component {
+namespace bullet {
+class BlasterBulletComponent : public ::ratchet::component::UpdateComponent {
+    using super = ::ratchet::component::UpdateComponent;
 public:
     /// <summary>
     /// コンストラクタ
@@ -55,7 +56,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
+    virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
 }
-#endif // !RATCHET_BLASTER_BULLET_COMPONENT_H
+}
+}
+#endif // !RATCHET_COMPONENT_BULLET_BLASTER_BULLET_COMPONENT_H
