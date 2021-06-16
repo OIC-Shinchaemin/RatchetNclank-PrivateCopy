@@ -13,6 +13,7 @@
 #include "GameSystem/ShopSystem.h"
 #include "GameSystem/OptionSystem.h"
 #include "GameSystem/GamePauseSystem.h"
+#include "../Namespace.h"
 
 
 namespace ratchet {

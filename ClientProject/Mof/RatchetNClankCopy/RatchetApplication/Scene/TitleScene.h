@@ -16,6 +16,7 @@
 #include "../Game/GameManager.h"
 #include "../Game/GameSystem/OptionSystem.h"
 #include "../UI/TitleInfoMenu.h"
+#include "../UI/UICreator.h"
 
 
 namespace ratchet {
@@ -39,7 +40,7 @@ private:
     //! ゲーム
     std::weak_ptr<ratchet::game::GameManager> _game;
     //! UI地蔵
-    ratchet::UICreator<ratchet::ui::TitleInfoMenu> _ui_creator;
+    ratchet::ui::UICreator<ratchet::ui::TitleInfoMenu> _ui_creator;
 protected:
     /// <summary>
     /// 更新

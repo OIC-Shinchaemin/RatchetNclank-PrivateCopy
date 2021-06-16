@@ -121,8 +121,8 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
         } // if
 
 
-        auto menu = _ui_creator.Create(super::GetUICanvas());
-        menu->SetResourceManager(super::GetResource());
+        auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
+ //       menu->SetResourceManager();
         _title_menu_subject.AddObserver(menu);
         _title_menu_subject.Notify(true);
 

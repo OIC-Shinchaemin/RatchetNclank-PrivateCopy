@@ -81,6 +81,13 @@ ratchet::game::gamesystem::ShopSystem::~ShopSystem() {
 
 void ratchet::game::gamesystem::ShopSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
+    if (flag) {
+        auto entry = std::make_shared<same_ns::shop::ShopSystemEntry>();
+        entry->SetResourceManager(super::GetResource());
+        entry->SetUICanvas(super::GetUICanvas());
+        _element_stack.push(entry);
+    } // if
+
     _infomation.close = false;
 
     if (auto weapon_system = _weapon_system.lock()) {
@@ -94,7 +101,6 @@ void ratchet::game::gamesystem::ShopSystem::OnNotify(bool flag) {
     _infomation.enable = flag;
     _infomation.weapon = _items.at(_infomation.index).name;
     _info_subject.Notify(_infomation);
-    //_subject.Notify(shared_from_this());
 
     if (auto weapon_system = _weapon_system.lock()) {
         auto weapon = weapon_system->GetMechanicalWeapon(_infomation.weapon);
@@ -106,6 +112,10 @@ void ratchet::game::gamesystem::ShopSystem::OnNotify(bool flag) {
     if (auto game_money = _game_money.lock()) {
         _game_money_menu_subject.Notify(game_money->GetValue());
     } // if
+}
+
+void ratchet::game::gamesystem::ShopSystem::OnNotify(const std::shared_ptr<same_ns::shop::ShopSystemElement>& add) {
+    _element_stack.push(add);
 }
 
 void ratchet::game::gamesystem::ShopSystem::SetWeaponSystem(std::weak_ptr<ratchet::game::gamesystem::WeaponSystem> ptr) {
@@ -151,9 +161,7 @@ bool ratchet::game::gamesystem::ShopSystem::Load(ratchet::game::gamesystem::save
 
 bool ratchet::game::gamesystem::ShopSystem::Initialize(void) {
     {
-        auto menu = _ui_creator.Create(super::GetUICanvas());
-        menu->SetResourceManager(super::GetResource());
-        menu->Initialize();
+        auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
         _info_subject.AddObserver(menu);
     }
 
@@ -173,6 +181,15 @@ bool ratchet::game::gamesystem::ShopSystem::Initialize(void) {
 }
 
 bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
+    if (!_element_stack.empty()) {
+        auto elem = _element_stack.top();
+        elem->Input();
+        if (!elem->Update()) {
+            _element_stack.pop();
+        } // if
+    } // if
+
+
     if (!_infomation.enable) {
         return this->Close();
     } // if
@@ -266,27 +283,5 @@ bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
 }
 
 bool ratchet::game::gamesystem::ShopSystem::Release(void) {
-    /*
-    if (auto canvas = super::GetUICanvas()) {
-        canvas->RemoveElement("ShopSystemMenu");
-    } // if
-    */
-
-    /*
-    if (auto canvas = super::GetUICanvas()) {
-        {
-            auto temp = canvas->GetElement("EquipmentWeaponMenu");
-            auto menu = std::dynamic_pointer_cast<base::core::Observer<const ratchet::actor::weapon::Mechanical::Info&>>(temp);
-            _equipment_weapon_menu_subject.RemoveObserver(menu);
-        }
-        {
-            auto temp = canvas->GetElement("GameMoneyMenu");
-            auto menu = std::dynamic_pointer_cast<base::core::Observer<int>>(temp);
-            _game_money_menu_subject.RemoveObserver(menu);
-        }
-
-    } // if
-    */
-
     return true;
 }

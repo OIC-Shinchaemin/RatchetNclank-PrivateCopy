@@ -8,6 +8,8 @@
 #include <memory>
 #include <vector>
 
+#include "../../UI/UICreator.h"
+
 
 namespace ratchet {
 namespace ui {
@@ -78,7 +80,7 @@ private:
     //! 子供
     std::vector<std::shared_ptr<ElemType>> _execute_list;
     //! UI地蔵
-    ratchet::UICreator<ratchet::ui::GamePauseSystemMenu> _ui_creator;
+    ratchet::ui::UICreator<ratchet::ui::GamePauseSystemMenu> _ui_creator;
 public:
     /// <summary>
     /// コンストラクタ

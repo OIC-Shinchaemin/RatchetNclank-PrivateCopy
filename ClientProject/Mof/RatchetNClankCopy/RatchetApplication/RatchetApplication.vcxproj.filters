@@ -316,6 +316,18 @@
     <Filter Include="Ratchet\Source\Factory\Builder\Actor">
       <UniqueIdentifier>{c54b2f8a-0a21-4eaf-8c9e-35d13c3fb4ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\Shop">
+      <UniqueIdentifier>{0b814326-5b8b-4c37-812f-10d102d21efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\Shop">
+      <UniqueIdentifier>{810211c1-a421-422a-a49a-7f6a8d05022a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\UI\Shop">
+      <UniqueIdentifier>{f8cedf49-3693-46d1-a794-675801281966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\UI\Shop">
+      <UniqueIdentifier>{5b2c302d-a819-4d66-8dae-2b28a117ed64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1064,6 +1076,18 @@
     </ClCompile>
     <ClCompile Include="Component\Item\BulletItem\BulletItemDefaultComponent.cpp">
       <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UICreator.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Shop\ShopSystemElement.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Shop\ShopSystemEntry.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp">
+      <Filter>Ratchet\Source\UI\Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2080,6 +2104,21 @@
     </ClInclude>
     <ClInclude Include="Component\Item\BulletItem\BulletItemGravitateComponent.h">
       <Filter>Ratchet\Header\Component\Item\BulletItem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UICreator.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Shop\ShopSystemElement.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Shop\ShopSystemEntry.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespace.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Shop\ShopSystemMainMenu.h">
+      <Filter>Ratchet\Header\UI\Shop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

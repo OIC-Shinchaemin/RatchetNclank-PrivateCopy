@@ -3,10 +3,10 @@
 
 
 #include "GameSystem.h"
-//#include "Base/Core/Observer.h"
 
 #include <optional>
 #include <string>
+#include <stack>
 #include <vector>
 
 #include "Base/Core/Observable.h"
@@ -16,6 +16,9 @@
 #include "Save/SaveData.h"
 #include "WeaponSystem.h"
 #include "GameMoney.h"
+#include "../../UI/UICreator.h"
+#include "Shop/ShopSystemElement.h"
+#include "Shop/ShopSystemEntry.h"
 
 
 namespace ratchet {
@@ -25,7 +28,8 @@ class ShopSystemMenu;
 namespace game {
 namespace gamesystem {
 class ShopSystem :
-    public ratchet::game::gamesystem::GameSystem {
+    public ratchet::game::gamesystem::GameSystem,
+    public base::core::Observer<const std::shared_ptr<same_ns::shop::ShopSystemElement>&> {
     using super = ratchet::game::gamesystem::GameSystem;
     using this_type = ratchet::game::gamesystem::ShopSystem;
 public:
@@ -47,15 +51,15 @@ public:
             index(0),
             select(false),
             count(0),
-            weapon() ,
-            close(false){
+            weapon(),
+            close(false) {
         }
         Info(bool flag) :
             enable(flag),
             index(0),
             select(false),
             count(0),
-            weapon() ,
+            weapon(),
             close(false) {
         }
     };
@@ -78,8 +82,6 @@ private:
     //! 構成情報
     this_type::Info _infomation;
     //! 通知用
-    //base::core::Observable<const std::shared_ptr<This>&> _subject;
-    //! 通知用
     base::core::Observable<const this_type::Info&> _info_subject;
     //! 通知用
     base::core::Observable<const ratchet::game::gamesystem::ChargeInfo&> _buy_subject;
@@ -98,9 +100,9 @@ private:
     //! お金
     std::weak_ptr<ratchet::game::gamesystem::GameMoney> _game_money;
     //! UI管理
-    ratchet::UICreator<ratchet::ui::ShopSystemMenu> _ui_creator;
-    //ratchet::UICreator<class ShopSystemMenu> _ui_creator;
-
+    ratchet::ui::UICreator<ratchet::ui::ShopSystemMenu> _ui_creator;
+    //! 要素
+    std::stack<std::shared_ptr<same_ns::shop::ShopSystemElement>> _element_stack;
     /// <summary>
     /// 終了
     /// </summary>
@@ -135,6 +137,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void OnNotify(bool flag) override;
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name=""></param>
+    virtual void OnNotify(const std::shared_ptr<same_ns::shop::ShopSystemElement>& add) override;
     /// <summary>
     /// セッター
     /// </summary>

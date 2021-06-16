@@ -453,6 +453,8 @@
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveSystem.cpp" />
     <ClCompile Include="Game\GameSystem\ShopSystem.cpp" />
+    <ClCompile Include="Game\GameSystem\Shop\ShopSystemElement.cpp" />
+    <ClCompile Include="Game\GameSystem\Shop\ShopSystemEntry.cpp" />
     <ClCompile Include="Game\GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
@@ -498,7 +500,9 @@
     <ClCompile Include="UI\OptionSystemMenu.cpp" />
     <ClCompile Include="UI\QuickChangeMenu.cpp" />
     <ClCompile Include="UI\ShopSystemMenu.cpp" />
+    <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp" />
     <ClCompile Include="UI\TitleInfoMenu.cpp" />
+    <ClCompile Include="UI\UICreator.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -788,12 +792,15 @@
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveSystem.h" />
     <ClInclude Include="Game\GameSystem\ShopSystem.h" />
+    <ClInclude Include="Game\GameSystem\Shop\ShopSystemElement.h" />
+    <ClInclude Include="Game\GameSystem\Shop\ShopSystemEntry.h" />
     <ClInclude Include="Game\GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
     <ClInclude Include="Light\LightManager.h" />
     <ClInclude Include="MotionNames.h" />
+    <ClInclude Include="Namespace.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene\ClearScene.h" />
@@ -839,7 +846,9 @@
     <ClInclude Include="UI\OptionSystemMenu.h" />
     <ClInclude Include="UI\QuickChangeMenu.h" />
     <ClInclude Include="UI\ShopSystemMenu.h" />
+    <ClInclude Include="UI\Shop\ShopSystemMainMenu.h" />
     <ClInclude Include="UI\TitleInfoMenu.h" />
+    <ClInclude Include="UI\UICreator.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\clear_scene.txt" />

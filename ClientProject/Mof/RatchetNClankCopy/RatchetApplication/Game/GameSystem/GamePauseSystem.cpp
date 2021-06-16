@@ -47,8 +47,8 @@ void ratchet::game::gamesystem::GamePauseSystem::Clear(void) {
 
 bool ratchet::game::gamesystem::GamePauseSystem::Initialize(void) {
     _infomation.items = &_items;
-    auto menu = _ui_creator.Create(super::GetUICanvas());
-    menu->SetResourceManager(super::GetResource());
+    auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
+//    menu->SetResourceManager();
     _info_subject.AddObserver(menu);
 
     return true;
