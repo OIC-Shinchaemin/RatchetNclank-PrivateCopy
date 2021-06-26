@@ -297,25 +297,27 @@
       "pos_y": -28.0,
       "pos_z": 132.0
     },
+
+
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 178.0,
-      "pos_y": -29.0,
+      "pos_y": -29.5,
       "pos_z": 57.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 180.0,
-      "pos_y": -29.0,
+      "pos_y": -29.5,
       "pos_z": 57.0
     },
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
       "pos_x": 182.0,
-      "pos_y": -29.0,
+      "pos_y": -29.5,
       "pos_z": 53.0
     }
   ],

@@ -38,6 +38,8 @@ private:
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
+    //! クリア
+    bool _completed;
 public:
     /// <summary>
     /// コンストラクタ

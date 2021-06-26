@@ -156,7 +156,6 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
     } // if
     // stage
     if (!_stage.Load("../Resource/stage/stage.json")) {
-    //if (!_stage.Load("../Resource/stage/test.json")) {
         return false;
     } // if
 

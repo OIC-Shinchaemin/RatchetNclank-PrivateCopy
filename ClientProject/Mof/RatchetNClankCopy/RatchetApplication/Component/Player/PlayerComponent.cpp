@@ -71,6 +71,8 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
             canvas->RemoveElement("EquipmentWeaponMenu");
             canvas->RemoveElement("QuickChangeMenu");
         } // if
+
+        
         super::GetOwner()->End();
         return true;
     }));

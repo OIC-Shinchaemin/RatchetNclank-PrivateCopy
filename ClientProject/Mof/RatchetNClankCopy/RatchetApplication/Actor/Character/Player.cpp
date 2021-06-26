@@ -48,13 +48,7 @@ void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem
         super::Sleep();
     } // else if
 }
-/*
-void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) {
-    if (info.close) {
-        this->PopNotificationableSubject();
-    } // if
-}
-*/
+
 base::core::Observable<bool>* ratchet::actor::character::Player::GetShopSystemSubject(void) {
     return &this->_shop_system_subject.subject;
 }
@@ -101,6 +95,11 @@ void ratchet::actor::character::Player::PopNotificationableSubject(const std::st
     if (subject->name == name) {
         this->PopNotificationableSubject();
     } // if
+}
+
+void ratchet::actor::character::Player::End(void) {
+    super::End();
+    _current_weapon->SetScale(math::vec3::kZero);
 }
 
 bool ratchet::actor::character::Player::Initialize(void) {

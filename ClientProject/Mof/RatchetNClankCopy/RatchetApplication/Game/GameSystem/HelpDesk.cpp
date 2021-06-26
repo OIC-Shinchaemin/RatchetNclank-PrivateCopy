@@ -8,25 +8,32 @@ ratchet::game::gamesystem::HelpDesk::HelpDesk() :
     _prev_info(),
     _subject(),
     _resource(),
-    _ui_canvas() {
+    _ui_canvas(),
+_completed(false){
 }
 
 ratchet::game::gamesystem::HelpDesk::~HelpDesk() {
 }
 
 void ratchet::game::gamesystem::HelpDesk::OnNotify(const ratchet::game::gamesystem::GameQuest& quest) {
+    if (_completed) {
+        return ;
+    } // if
     auto info = Info();
     if (quest.GetType() == ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy) {
         info.text = "敵をすべて倒せ！";
         _info.text = info.text;
     } // if
     else if (quest.GetType() == ratchet::game::gamesystem::GameQuest::Type::GoHome) {
-        info.text = "船に乗ってゲームクリア！";
-        _info.text = info.text;
+        if (quest.GetType() != ratchet::game::gamesystem::GameQuest::Type::ToFront) {
+            info.text = "船に乗ってゲームクリア！";
+            _info.text = info.text;
+            _completed = true;
+        } // if
     } // else if
     else if (quest.GetType() == ratchet::game::gamesystem::GameQuest::Type::ToFront) {
         if (_info.text != "船に乗ってゲームクリア！") {
-            info.text = "前に進め";
+            info.text = "中央の広場に向かえ！";
             _info.text = info.text;
         } // if
     } // else if
@@ -59,6 +66,7 @@ bool ratchet::game::gamesystem::HelpDesk::Initialize(void) {
     if (auto canvas = _ui_canvas.lock()) {
         canvas->AddElement(menu);
     } // if
+    _completed = false;
     return true;
 }
 
