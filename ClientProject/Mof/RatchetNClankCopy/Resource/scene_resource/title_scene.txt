@@ -2,5 +2,6 @@
 ../Resource/texture/water/water1.jpg
 ../Resource/texture/ui/black.png
 
+../Resource/texture/title_logo/image.png
 
 ../Resource/font/kkm_analogtv.ttf\KKM-アナログテレビフォント

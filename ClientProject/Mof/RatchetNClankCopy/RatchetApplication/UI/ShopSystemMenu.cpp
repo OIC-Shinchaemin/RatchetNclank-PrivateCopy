@@ -48,19 +48,23 @@ bool ratchet::ui::ShopSystemMenu::Render(void) {
     pos.y += 20.0f;
 
     if (_infomation.select) {
-        ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・△で戻る　Lキー・○✕で買う");
+        ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・Yボタンで戻る　\nLキー・Xボタンで買う");
     } // if
     else {
-        ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・△で閉じる　Lキー・○✕で買う");
+        ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Mキー・Yボタンで閉じる　\nLキー・Xボタンで買う");
     } // else
+    pos.y += 40.0f;
+
+    
+
     pos.y += 20.0f;
-    ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Shop index = %d  count = %d select = %d",
-                                       _infomation.index, _infomation.count, _infomation.select);
-    pos.y += 20.0f;
-    ::CGraphicsUtilities::RenderString(pos.x, pos.y, "Weapon = %s",
+    ::CGraphicsUtilities::RenderString(pos.x, pos.y, "選択中の武器　：　%s",
                                        _infomation.weapon.c_str());
-
-
+    pos.y += 20.0f;
+    if (_infomation.select) {
+        ::CGraphicsUtilities::RenderString(pos.x, pos.y, "いくつ買う？ ：　%d",
+                                           _infomation.count);
+    } // if
     super::Render();
     return true;
 }

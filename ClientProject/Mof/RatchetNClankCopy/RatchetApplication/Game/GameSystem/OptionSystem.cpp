@@ -1,6 +1,7 @@
 #include "OptionSystem.h"
 
 #include "../../UI/OptionSystemMenu.h"
+#include "../../Gamepad.h"
 
 
 ratchet::game::gamesystem::OptionSystem::OptionSystem() :
@@ -62,29 +63,27 @@ bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
 }
 
 bool ratchet::game::gamesystem::OptionSystem::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_UP) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_UP)) {
         _item_index--;
         if (_item_index < 0) {
             _item_index = 0;
         } // if
         _infomation.index = _item_index;
         _info_subject.Notify(_infomation);
-
-        
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN)) {
+    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN) ||
+             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_DOWN)) {
         _item_index++;
         if (_item_index > _item.size() - 1) {
             _item_index = _item.size() - 1;
         } // if
         _infomation.index = _item_index;
         _info_subject.Notify(_infomation);
-
-    
     } // else if
-
     if (!_item.empty()) {
-        if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
+            ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START)) {
             _execute_list.push_back(_item.at(_item_index));
         } // if
     } // if
@@ -99,23 +98,10 @@ bool ratchet::game::gamesystem::OptionSystem::Update(float delta_time) {
         } // for
         _infomation.Reset();
         _info_subject.Notify(_infomation);
-            
+
         _execute_list.clear();
         return false;
     } // if
-    /*
-    std::vector<std::shared_ptr<ElemType>> remove_list;
-    for (auto ptr : _execute_list) {
-        if (ptr->Execute()) {
-            remove_list.push_back(ptr);
-        } // if
-    } // for
-    
-    for (auto ptr : remove_list) {
-        ut::EraseRemove(_execute_list, ptr);
-    } // for
-    remove_list.clear();
-    */
     return true;
 }
 

@@ -43,6 +43,24 @@ private:
     bool _collisioned_stage;
     //! 状態
     std::weak_ptr<ratchet::component::player::PlayerStateComponent> _state_com;
+    //! メッシュ
+    std::weak_ptr<class AnimationMeshComponent> _mesh_com;
+
+    /// <summary>
+    /// キーを押した時のカメラ処理
+    /// </summary>
+    /// <param name=""></param>
+    void OnPush(void);
+    /// <summary>
+    /// キーを押している時のカメラ処理
+    /// </summary>
+    /// <param name=""></param>
+    void OnHold(void);
+    /// <summary>
+    /// キーを離した時のカメラ処理
+    /// </summary>
+    /// <param name=""></param>
+    void OnPull(void);
     /// <summary>
     /// 角度設定
     /// </summary>

@@ -6,7 +6,89 @@
 #include "../Camera/DebugCameraController.h"
 #include "Player/PlayerStateComponent.h"
 #include "../Event/EventReferenceTable.h"
+#include "AnimationMeshComponent.h"
 
+
+void ratchet::component::CameraComponent::OnPush(void) {
+    if (_current_mode != ratchet::camera::CameraController::CameraMode::Follow) {
+        return;
+    } // if
+
+    if (auto state_com = _state_com.lock()) {
+        auto state = state::PlayerActionStateType::kPlayerActionLookState;
+        if (!state_com->CanTransition(state)) {
+            return;
+        } // if
+        state_com->ChangeState(state);
+    } // if
+
+
+
+
+    auto eye_pos = super::GetOwner()->GetPosition();
+    eye_pos.y += 1.0f;
+
+    auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+    auto front = _controller_map.at(_current_mode)->GetViewFront();
+
+    _current_mode = ratchet::camera::CameraController::CameraMode::FirstPerson;
+    auto con = _controller_map.at(_current_mode);
+
+    auto info = ratchet::camera::CameraController::CameraInfo();
+    info.start_position = prev_pos;
+    info.camera_front = front;
+    info.ideal_position = eye_pos;
+    con->SetInfo(info);
+    _camera_controller.SetService(con);
+}
+
+void ratchet::component::CameraComponent::OnHold(void) {
+    if (_current_mode != ratchet::camera::CameraController::CameraMode::FirstPerson) {
+        return;
+    } // if
+
+    auto camera_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+    auto eye_pos = super::GetOwner()->GetPosition();
+    eye_pos.y += 1.0f;
+
+    float diff = std::fabs(camera_pos.Length() - eye_pos.Length());
+    if (diff < 0.1f) {
+        auto camera_front = _controller_map.at(_current_mode)->GetViewFront();
+
+        float angle_y = std::atan2(-camera_front.z, camera_front.x) - math::kHalfPi;
+        auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
+        super::GetOwner()->SetRotate(angle);
+
+
+        if (auto mesh = _mesh_com.lock()) {
+            mesh->Inactivate();
+        } // if
+    } // if
+}
+
+void ratchet::component::CameraComponent::OnPull(void) {
+    if (_current_mode != ratchet::camera::CameraController::CameraMode::FirstPerson) {
+        return;
+    } // if
+
+    auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
+
+    _current_mode = ratchet::camera::CameraController::CameraMode::Follow;
+    _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
+    float ideal_angle_y = super::GetOwner()->GetRotate().y + math::kHalfPi;
+    auto info = ratchet::camera::CameraController::CameraInfo();
+    info.start_position = prev_pos;
+
+    auto con = _controller_map.at(_current_mode);
+    con->SetAzimuth(math::ToDegree(ideal_angle_y));
+    con->SetInfo(info);
+    _camera_controller.SetService(con);
+
+
+    if (auto mesh = _mesh_com.lock()) {
+        mesh->Activate();
+    } // if
+}
 
 void ratchet::component::CameraComponent::TurnLeft(void) {
     _camera_controller.GetService()->AddAzimuth(1.0f);
@@ -42,22 +124,7 @@ void ratchet::component::CameraComponent::ControlByKeyboardFollow(void) {
     } // else if
     // chara front
     if (::g_pInput->IsKeyPush(MOFKEY_Q)) {
-        auto eye_pos = super::GetOwner()->GetPosition();
-        eye_pos.y += 1.0f;
-
-        auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
-        auto front = _controller_map.at(_current_mode)->GetViewFront();
-
-        _current_mode = ratchet::camera::CameraController::CameraMode::FirstPerson;
-        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionLookState);
-        auto con = _controller_map.at(_current_mode);
-
-        auto info = ratchet::camera::CameraController::CameraInfo();
-        info.start_position = prev_pos;
-        info.camera_front = front;
-        info.ideal_position = eye_pos;
-        con->SetInfo(info);
-        _camera_controller.SetService(con);
+        this->OnPush();
     } // if
 }
 
@@ -76,33 +143,10 @@ void ratchet::component::CameraComponent::ControlByKeyboardFirstPerson(void) {
     } // else if
 
     if (::g_pInput->IsKeyHold(MOFKEY_Q)) {
-        auto camera_pos = _controller_map.at(_current_mode)->GetCameraPosition();
-        auto eye_pos = super::GetOwner()->GetPosition();
-        eye_pos.y += 1.0f;
-
-        float diff = std::fabs(camera_pos.Length() - eye_pos.Length());
-        if (diff < 0.1f) {
-            auto camera_front = _controller_map.at(_current_mode)->GetViewFront();
-
-            float angle_y = std::atan2(-camera_front.z, camera_front.x) - math::kHalfPi;
-            auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
-            super::GetOwner()->SetRotate(angle);
-        } // if
+        this->OnHold();
     } // if
-
     else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
-        auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
-
-        _current_mode = ratchet::camera::CameraController::CameraMode::Follow;
-        _state_com.lock()->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
-        float ideal_angle_y = super::GetOwner()->GetRotate().y + math::kHalfPi;
-        auto info = ratchet::camera::CameraController::CameraInfo();
-        info.start_position = prev_pos;
-
-        auto con = _controller_map.at(_current_mode);
-        con->SetAzimuth(math::ToDegree(ideal_angle_y));
-        con->SetInfo(info);
-        _camera_controller.SetService(con);
+        this->OnPull();
     } // else if
 }
 
@@ -144,14 +188,14 @@ void ratchet::component::CameraComponent::ControlByGamepad(void) {
     } // if
 
     // chara front
-    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_BTN) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+    if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_BTN) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        this->OnPush();
     } // if
-    else if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) ||
-             ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+    else if (::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_BTN) || ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        this->OnHold();
     } // else if
-    else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) ||
-             ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+    else if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_BTN) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_L_TRIGGER)) {
+        this->OnPull();
     } // else if
 }
 
@@ -252,6 +296,7 @@ bool ratchet::component::CameraComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
+    _mesh_com = super::GetOwner()->GetComponent<ratchet::component::AnimationMeshComponent>();
 
     // camera
     using Mode = ratchet::camera::CameraController::CameraMode;
@@ -320,7 +365,7 @@ bool ratchet::component::CameraComponent::DebugRender(void) {
             break;
         default:
             break;
-    } // switch
+} // switch
     return true;
 }
 #endif // _DEBUG

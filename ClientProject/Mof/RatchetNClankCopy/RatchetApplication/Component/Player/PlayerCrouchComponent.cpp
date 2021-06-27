@@ -10,7 +10,9 @@ ratchet::component::player::action::PlayerCrouchComponent::PlayerCrouchComponent
     _angular_speed(),
     _ideal_angle(),
     _input_info(),
-    _move_com() {
+    _move_com(),
+    _reception_timer(),
+    _reception_time(0.6f) {
 }
 
 ratchet::component::player::action::PlayerCrouchComponent::PlayerCrouchComponent(const PlayerCrouchComponent& obj) :
@@ -18,7 +20,9 @@ ratchet::component::player::action::PlayerCrouchComponent::PlayerCrouchComponent
     _angular_speed(0.4f),
     _ideal_angle(),
     _input_info(),
-    _move_com() {
+    _move_com(),
+    _reception_timer(),
+    _reception_time(0.6f) {
 }
 
 ratchet::component::player::action::PlayerCrouchComponent::~PlayerCrouchComponent() {
@@ -59,9 +63,13 @@ bool ratchet::component::player::action::PlayerCrouchComponent::Input(void) {
     if (auto move_com = super::GetOwner()->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::player::action::PlayerMoveComponent>()) {
         auto camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
 
+        if (::g_pInput->IsKeyPush(MOFKEY_C) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+            _reception_timer.Initialize(_reception_time, false);
+        } // if
+
         Mof::CVector2 in; float move_angle;
         if (move_com->AquireInputData(in, move_angle)) {
-            if (::g_pInput->IsKeyPush(MOFKEY_C) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
+            if (_reception_timer() < _reception_time) {
                 in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
                 auto view_front = camera_com->GetViewFront();
                 float camera_angle_y = std::atan2(-view_front.z, view_front.x);
@@ -84,7 +92,6 @@ bool ratchet::component::player::action::PlayerCrouchComponent::Input(void) {
                 } // if
             } // if
         } // if
-
     } // if
 
     auto move_com = _move_com.lock();
@@ -99,6 +106,8 @@ bool ratchet::component::player::action::PlayerCrouchComponent::Input(void) {
 }
 
 bool ratchet::component::player::action::PlayerCrouchComponent::Update(float delta_time) {
+    _reception_timer.Tick(delta_time);
+
     auto move_com = _move_com.lock();
     auto& [in, move_angle, move_flag] = _input_info;
     if (move_flag) {

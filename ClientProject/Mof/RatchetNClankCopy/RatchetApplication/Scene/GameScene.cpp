@@ -38,13 +38,7 @@ void ratchet::scene::GameScene::ReInitialize(void) {
 
 bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
-#ifdef _DEBUG
-    //if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-    //    _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kClearScene, ""));
-    //} // if
-#endif // _DEBUG
-
-
+    
     if (_re_initialize) {
         this->ReInitialize();
     } // if
@@ -319,7 +313,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
 }
 
 bool ratchet::scene::GameScene::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_RETURN) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
         if (auto game = _game.lock()) {
             if (!game->GetGamePauseSystem()->IsActive()) {
                 if (!_event.lock()->GetEvent<ratchet::event::StageViewEvent>()) {

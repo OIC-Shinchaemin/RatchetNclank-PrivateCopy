@@ -44,12 +44,10 @@ MofBool CGameApp::Input(void) {
     ::g_pInput->RefreshKey();
     ::g_pGamepad->RefreshKey();
 
-//#ifdef _DEBUG
-    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
         ::PostQuitMessage(0);
         return false;
     } // if
-//#endif // _DEBUG
     return TRUE;
 }
 

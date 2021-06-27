@@ -24,6 +24,8 @@
 
 ../Resource/texture/water/water0.jpg
 ../Resource/texture/water/water1.jpg
+../Resource/texture/title_logo/image.png
+
 
 ../Resource/motion_names/player.motion_names
 ../Resource/motion_names/skeleton.motion_names

@@ -81,6 +81,11 @@ private:
     std::vector<std::shared_ptr<ElemType>> _execute_list;
     //! UI地蔵
     ratchet::ui::UICreator<ratchet::ui::GamePauseSystemMenu> _ui_creator;
+
+
+    static bool IsPushUp(void);
+    static bool IsPushDown(void);
+    static bool IsPushEnter(void);
 public:
     /// <summary>
     /// コンストラクタ
