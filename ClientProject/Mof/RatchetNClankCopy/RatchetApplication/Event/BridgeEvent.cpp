@@ -7,7 +7,8 @@ ratchet::event::BridgeEvent::BridgeEvent() :
     _stage(),
     _bridge_view_camera(),
     _bridge_view_camera_controller(),
-    _ideal_position() {
+    _ideal_position(),
+    _enable(false) {
     _ideal_position = Mof::CVector3(60.0f, 0.0f, 0.0f);
     _bridge_view_camera_controller.SetSpring(15.0f);
     _bridge_view_camera_controller.SetDumping(10.0f);
@@ -18,6 +19,8 @@ ratchet::event::BridgeEvent::~BridgeEvent() {
 
 void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) {
     if (type == "EnemyDead") {
+        _enable = true;
+
         if (ptr) {
             ptr->RemoveObserver(std::dynamic_pointer_cast<ratchet::event::BridgeEvent>(shared_from_this()));
             ut::SwapPopback(_for_bridge_event_actors, ptr);
@@ -39,7 +42,7 @@ void ratchet::event::BridgeEvent::OnNotify(const char* type, const std::shared_p
                 if (gimmick->GetType() == StageObjectType::Bridge) {
                     info.target_position = gimmick->GetPosition();
                     info.ideal_position = _ideal_position;
-                    
+
                     {
                         auto send_info = ratchet::camera::CameraController::CameraInfo();
                         send_info.start_position = _ideal_position;
@@ -71,25 +74,32 @@ bool ratchet::event::BridgeEvent::EventActorsEmpty(void) const {
 }
 
 bool ratchet::event::BridgeEvent::Initialize(void) {
+    _enable = false;
     _for_bridge_event_actors.clear();
 
     _bridge_view_camera = std::make_shared<ratchet::camera::Camera>();
     _bridge_view_camera->Initialize();
     _bridge_view_camera->Update();
     _bridge_view_camera_controller.SetCamera(_bridge_view_camera);
+
+    auto camera_info = ratchet::camera::CameraController::CameraInfo();
+    _bridge_view_camera_controller.SetInfo(camera_info);
     return true;
 }
 
 bool ratchet::event::BridgeEvent::Update(float delta_time) {
-    auto camera_info = ratchet::camera::CameraController::CameraInfo();
-    camera_info.ideal_position = _ideal_position;
-    _bridge_view_camera_controller.Update(delta_time, camera_info);
-
 #ifdef _DEBUG
     if (::g_pInput->IsKeyPush(MOFKEY_B)) {
-//        this->AllDelete();
+        this->AllDelete();
     } // if
 #endif // _DEBUG
+
+    if (_enable) {
+        auto camera_info = ratchet::camera::CameraController::CameraInfo();
+        camera_info.ideal_position = _ideal_position;
+
+        _bridge_view_camera_controller.Update(delta_time, camera_info);
+    } // if
     return true;
 }
 
