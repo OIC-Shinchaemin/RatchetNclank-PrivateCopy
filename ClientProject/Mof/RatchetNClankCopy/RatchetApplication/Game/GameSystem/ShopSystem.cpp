@@ -1,6 +1,7 @@
 #include "ShopSystem.h"
 
 #include "../../UI/ShopSystemMenu.h"
+#include "../../Gamepad.h"
 
 
 bool ratchet::game::gamesystem::ShopSystem::Close(void) {
@@ -195,7 +196,10 @@ bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
     } // if
     _infomation.close = false;
 
-    if (::g_pInput->IsKeyPush(MOFKEY_M)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_M) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y)
+
+        ) {
         if (!_infomation.select) {
             if (_infomation.enable) {
                 _infomation.enable = false;
@@ -206,15 +210,23 @@ bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
 
     if (_infomation.enable) {
         if (_infomation.select) {
-            if (::g_pInput->IsKeyPush(MOFKEY_Z)) {
+            if (::g_pInput->IsKeyPush(MOFKEY_L) ||
+                ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)
+                ) {
                 this->Buy();
             } // if
-            else if (::g_pInput->IsKeyPush(MOFKEY_M)) {
+            else if (::g_pInput->IsKeyPush(MOFKEY_M) ||
+                     ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_Y)
+
+                     ) {
                 _infomation.select = false;
                 _infomation.count = 0;
                 _info_subject.Notify(_infomation);
             } // else if
-            else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT)) {
+            else if (::g_pInput->IsKeyHold(MOFKEY_RIGHT) ||
+                     ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_DP_RIGHT)
+
+                     ) {
 
                 if (auto game_money = _game_money.lock()) {
                     int money = game_money->GetValue();
@@ -235,7 +247,11 @@ bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
 
                 _info_subject.Notify(_infomation);
             } // else if
-            else if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
+            else if (::g_pInput->IsKeyHold(MOFKEY_LEFT) ||
+                     ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_DP_LEFT)
+
+
+                     ) {
                 _infomation.count--;
                 if (_infomation.count < 0) {
                     _infomation.count = 0;
@@ -246,11 +262,17 @@ bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
 
         } // if
         else {
-            if (::g_pInput->IsKeyPush(MOFKEY_Z)) {
+            if (::g_pInput->IsKeyPush(MOFKEY_L) ||
+                ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)
+
+                ) {
                 _infomation.select = true;
                 _info_subject.Notify(_infomation);
             } // if
-            else if (::g_pInput->IsKeyPush(MOFKEY_RIGHT)) {
+            else if (::g_pInput->IsKeyPush(MOFKEY_RIGHT) ||
+                     ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_RIGHT)
+
+                     ) {
                 _infomation.index++;
 
                 if (_items.size() - 1 < _infomation.index) {
@@ -263,7 +285,8 @@ bool ratchet::game::gamesystem::ShopSystem::Update(float delta_time) {
                 this->NotifyGameMoneyMenu();
 
             } // else if
-            else if (::g_pInput->IsKeyPush(MOFKEY_LEFT)) {
+            else if (::g_pInput->IsKeyPush(MOFKEY_LEFT) ||
+                     ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_LEFT)) {
                 _infomation.index--;
 
                 if (_infomation.index < 0) {

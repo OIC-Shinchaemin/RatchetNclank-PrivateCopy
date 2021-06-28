@@ -66,15 +66,8 @@ bool ratchet::component::ship::ShipComponent::Activate(void) {
         return false;
     } // if
     super::Activate();
-    /*
-    if (auto motion_com = _motion_com.lock()) {
-        motion_com->ChangeMotion(ratchet::Ship::MotionType::Default);
-        _timer.Initialize(7.0f, false);
-    } // if
-    */
     return true;
 }
-
 
 std::shared_ptr<ratchet::component::Component> ratchet::component::ship::ShipComponent::Clone(void) {
     return std::make_shared<ratchet::component::ship::ShipComponent>(*this);

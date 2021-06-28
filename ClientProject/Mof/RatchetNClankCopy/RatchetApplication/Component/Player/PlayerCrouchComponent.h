@@ -9,6 +9,8 @@
 #include <string_view>
 #include <vector>
 
+#include "Base/Core/Timer.h"
+
 
 namespace ratchet {
 namespace component {
@@ -46,6 +48,10 @@ private:
     float _ideal_angle;
     //! “ü—Íî•ñ
     This::InputInfo _input_info;
+    //! ‘JˆÚó•tŠÔ
+    base::core::Timer _reception_timer;
+    //! ‘JˆÚó•tŠÔ
+    float _reception_time;
     //! ƒJƒƒ‰
     std::weak_ptr<class PlayerMoveComponent> _move_com;
 public:

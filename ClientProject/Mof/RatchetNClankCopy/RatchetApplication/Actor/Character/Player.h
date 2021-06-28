@@ -76,11 +76,6 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) override;
     /// <summary>
-    /// 通知イベント
-    /// </summary>
-    /// <param name="info"></param>
-    //virtual void OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) override;
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -130,6 +125,11 @@ public:
     /// </summary>
     /// <param name="name"></param>
     void PopNotificationableSubject(const std::string& name);
+    /// <summary>
+    /// デリート
+    /// </summary>
+    /// <param name=""></param>
+    virtual void End(void) override;
     /// <summary>
     /// 初期化
     /// </summary>

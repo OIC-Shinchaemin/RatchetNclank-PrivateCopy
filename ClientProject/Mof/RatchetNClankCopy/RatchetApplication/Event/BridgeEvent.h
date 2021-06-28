@@ -35,6 +35,8 @@ private:
     base::core::Observable<const ratchet::camera::CameraController::CameraInfo&> _camera_subject;
     //! 通知用
     base::core::Observable<const ratchet::game::gamesystem::GameQuest&> _quest_subject;
+    //! 有効
+    bool _enable;
 public:
     /// <summary>
     /// コンストラクタ

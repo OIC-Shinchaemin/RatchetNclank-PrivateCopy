@@ -1,5 +1,7 @@
 #include "StageViewEvent.h"
 
+#include "../Gamepad.h"
+
 
 ratchet::event::StageViewEvent::StageViewEvent() :
     super(),
@@ -23,7 +25,10 @@ bool ratchet::event::StageViewEvent::Initialize(void) {
 }
 
 bool ratchet::event::StageViewEvent::Update(float delta_time) {
-    if (::g_pInput->IsKeyPush(MOFKEY_SPACE)) {
+    // 一定時間経過で削除リクエストを通知
+    
+    if (::g_pInput->IsKeyPush(MOFKEY_SPACE) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START)) {
         _stage_view_camera_controller->ForceTick(_stage_view_camera_controller->GetTimeMax());
     } // if
 

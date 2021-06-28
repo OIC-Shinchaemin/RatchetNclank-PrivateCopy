@@ -9,9 +9,7 @@ ratchet::ui::OptionSystemMenu::OptionSystemMenu(const char* name) :
     _font() {
     bool loaded_font = _font.Create(34, "");
     _ASSERT_EXPR(loaded_font, L"フォントを作成できませんでした");
-
     this->SetPosition(Mof::CVector2(440.0f, 420.0f));
-    
 }
 
 ratchet::ui::OptionSystemMenu::~OptionSystemMenu() {
@@ -107,7 +105,6 @@ bool ratchet::ui::OptionSystemMenuItem::Input(void) {
 }
 
 bool ratchet::ui::OptionSystemMenuItem::Update(float delta_time) {
-    //super::Update(delta_time);
     return true;
 }
 

@@ -19,6 +19,7 @@ void ratchet::camera::FirstPersonCameraController::SetInfo(const ratchet::camera
 
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _param.distance);
     float angle_y = std::atan2(-info.camera_front.z, info.camera_front.x) - math::kHalfPi;
+
     auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
 
     offset.RotateAround(math::vec3::kZero, angle);

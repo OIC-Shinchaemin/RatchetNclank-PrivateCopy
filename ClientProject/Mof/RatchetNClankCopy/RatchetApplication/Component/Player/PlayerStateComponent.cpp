@@ -40,7 +40,6 @@ bool ratchet::component::player::PlayerStateComponent::CanTransition(std::string
         else if (current == Type::kPlayerActionJumpAttackState) {
             return false;
         } // else if
-
     } // if
     else if (next == Type::kPlayerActionDamageState) {
         if (current == Type::kPlayerActionDamageState) {
@@ -67,6 +66,14 @@ bool ratchet::component::player::PlayerStateComponent::CanTransition(std::string
         if (current == Type::kPlayerActionCrouchState) {
             return true;
         } // if
+    } // else if
+    else if (next == Type::kPlayerActionLookState) {
+        if (current == Type::kPlayerActionIdleState) {
+            return true;
+        } // if
+        else if (current == Type::kPlayerActionMoveState) {
+            return true;
+        } // else if
     } // else if
     return false;
 }

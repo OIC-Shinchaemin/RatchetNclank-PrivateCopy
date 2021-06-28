@@ -20,9 +20,10 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
-    //_camera_controller.GetService()->SetCameraTarget(pos);
     camera_info.target_position = pos;
     _camera_controller.GetService()->Update(delta_time, camera_info);
+    
+    _logo.Update(delta_time);
     return true;
 }
 
@@ -37,6 +38,7 @@ bool ratchet::scene::TitleScene::SceneRender(void) {
     _demo_actor->Render();
     _stage.Render();
     ::g_pGraphics->SetDepthEnable(false);
+    _logo.Render();
     return true;
 }
 
@@ -91,6 +93,8 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             if (auto r = _resource.lock()) {
                 r->Load(path);
             } // if
+            _logo.SetTexture(super::GetResource()->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/title_logo/image.png"));
+
             // stage
             if (!_stage.Load("../Resource/stage/test.json")) {
             } // if
@@ -122,7 +126,6 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
 
 
         auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
- //       menu->SetResourceManager();
         _title_menu_subject.AddObserver(menu);
         _title_menu_subject.Notify(true);
 

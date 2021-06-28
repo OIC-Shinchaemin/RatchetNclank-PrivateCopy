@@ -1,7 +1,26 @@
 #include "GamePauseSystem.h"
 
 #include "../../UI/GamePauseSystemMenu.h"
+#include "../../Gamepad.h"
 
+
+bool ratchet::game::gamesystem::GamePauseSystem::IsPushUp(void) {
+    return
+        ::g_pInput->IsKeyPush(MOFKEY_UP) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_UP);
+}
+
+bool ratchet::game::gamesystem::GamePauseSystem::IsPushDown(void) {
+    return
+        ::g_pInput->IsKeyPush(MOFKEY_DOWN) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_DOWN);
+}
+
+bool ratchet::game::gamesystem::GamePauseSystem::IsPushEnter(void) {
+    return
+        ::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
+        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X);
+}
 
 ratchet::game::gamesystem::GamePauseSystem::GamePauseSystem() :
     _infomation(),
@@ -48,14 +67,12 @@ void ratchet::game::gamesystem::GamePauseSystem::Clear(void) {
 bool ratchet::game::gamesystem::GamePauseSystem::Initialize(void) {
     _infomation.items = &_items;
     auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
-//    menu->SetResourceManager();
     _info_subject.AddObserver(menu);
-
     return true;
 }
 
 bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_UP)) {
+    if (this->IsPushUp()) {
         if (_infomation.index.has_value()) {
             _infomation.index.value()++;
             if (_infomation.index.value() > _items.size() - 1) {
@@ -68,7 +85,7 @@ bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
             _infomation.index = 0;
         } // else
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN)) {
+    else if (this->IsPushDown()) {
         if (_infomation.index.has_value()) {
             _infomation.index.value()--;
             if (_infomation.index.value() < 0) {
@@ -80,11 +97,10 @@ bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
         else {
             _infomation.index = 0;
         } // else
-
     } // else if
 
     if (!_items.empty() && _infomation.index.has_value()) {
-        if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
+        if (this->IsPushEnter()) {
             _execute_list.push_back(_items.at(_infomation.index.value()));
         } // if
     } // if
@@ -105,7 +121,7 @@ bool ratchet::game::gamesystem::GamePauseSystem::Update(float delta_time) {
         _execute_list.clear();
         _infomation.index.reset();
         this->_infomation.enable = false;
-        
+
         _infomation.Reset();
         //_infomation.exit = true;
         _info_subject.Notify(_infomation);
