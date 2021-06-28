@@ -1,0 +1,276 @@
+{
+  "components": [
+    {
+      "type": "SightRecognitionComponent",
+      "paramater": {
+        "priority": 0,
+        "range": 10.0
+      }
+    },
+    {
+      "type": "MotionComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/motion_names/player.motion_names"
+      }
+    },
+    {
+      "type": "HpComponent",
+      "paramater": {
+        "priority": 0,
+        "hp_max": 4
+      }
+    },
+    {
+      "type": "InvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+
+    {
+      "type": "PlayerComponent",
+      "paramater": {
+        "priority": 0,
+        "height": 1.0,
+        "volume": 0.5
+      }
+    },
+    {
+      "type": "PlayerStateComponent",
+      "paramater": {
+        "priority": 80
+      }
+    },
+
+    {
+      "type": "PlayerOmniWrenchComponent",
+      "paramater": {
+        "priority": 85
+      }
+    },
+
+    {
+      "type": "ActionComponent",
+      "paramater": {
+        "priority": 79,
+        "children": [
+          {
+            "type": "PlayerIdleComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerMoveComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerCrouchComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerJumpSetComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerJumpUpComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerJumpDownComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerJumpLandingComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerDoubleJumpComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerCartwheelJumpComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerMeleeAttackOneComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerMeleeAttackOneEndComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerMeleeAttackTwoComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerMeleeAttackTwoEndComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerMeleeAttackThreeComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerMeleeAttackThreeEndComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+
+
+          {
+            "type": "PlayerThrowAttackSetComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerThrowAttackComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerThrowAttackEndComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+
+          {
+            "type": "PlayerJumpAttackSetComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerJumpAttackComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+
+
+          {
+            "type": "PlayerShotAttackComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+
+
+          {
+            "type": "PlayerLookComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+
+          {
+            "type": "PlayerDamageComponent",
+            "paramater": {
+              "priority": 0
+            }
+          },
+          {
+            "type": "PlayerDeadComponent",
+            "paramater": {
+              "priority": 0
+            }
+          }
+        ]
+      }
+    },
+
+    {
+      "type": "InvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
+    {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 98
+      }
+    },
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 199
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 200
+      }
+    },
+    {
+      "type": "AnimationMeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/Chara/Chr_01_ion_mdl_01.mom",
+        "color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "CameraComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "PlayerCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "CameraCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "info": [
+    {
+      "name": "Transport_Shuttle_V4",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "ShipMotionIdleState"
+    },
+    {
+      "name": "Transport_Shuttle_V4",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": "ShipMotionLandingState"
+    },
+    {
+      "name": "Transport_Shuttle_V4",
+      "speed": 1.0,
+      "loop": false,
+      "same": true,
+      "state": "ShipMotionTakeoffState"
+    },
+
+    {
+      "name": "Transport_Shuttle_V4",
+      "speed": 1.0,
+      "loop": false,
+      "same": false,
+      "state": ""
+    }
+  ]
+}

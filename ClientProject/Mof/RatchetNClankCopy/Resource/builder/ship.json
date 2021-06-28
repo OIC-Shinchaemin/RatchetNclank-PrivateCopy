@@ -1,0 +1,68 @@
+{
+  "components": [
+    {
+      "type": "ShipComponent",
+      "paramater": {
+        "priority": 1
+      }
+    },
+    {
+      "type": "ShipStateComponent",
+      "paramater": {
+        "priority": 2
+      }
+    },
+    {
+      "type": "ActionComponent",
+      "paramater": {
+        "priority": 3,
+        "children": [
+          {
+            "type": "ShipIdleComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "ShipTakeoffComponent",
+            "paramater": {
+              "priority": 1
+            }
+          },
+          {
+            "type": "ShipLandingComponent",
+            "paramater": {
+              "priority": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "ShipMeshComponent",
+      "paramater": {
+        "priority": 1,
+        "path": "../Resource/mesh/futuristic_transport_shuttle_animated/scene.mom"
+      }
+    },
+    {
+      "type": "MotionComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/motion_names/ship.motion_names"
+      }
+    },
+    {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 10
+      }
+    },
+    {
+      "type": "ShipCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

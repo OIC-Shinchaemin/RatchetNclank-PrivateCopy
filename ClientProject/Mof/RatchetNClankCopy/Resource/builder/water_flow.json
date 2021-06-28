@@ -1,0 +1,12 @@
+{
+  "type": "Terrain",
+
+  "components": [
+    {
+      "type": "WaterFlowCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

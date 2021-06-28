@@ -1,0 +1,60 @@
+{
+  "type": "OmniWrench",
+
+  "components": [
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/omni_wrench/scene450.mom"
+      }
+    },
+    {
+      "type": "OmniWrenchActionStateComponent",
+      "paramater": {
+        "priority": 50
+      }
+    },
+    {
+      "type": "ActionComponent",
+      "paramater": {
+        "priority": 90,
+        "children": [
+          {
+            "type": "OmniWrenchThrowedComponent",
+            "paramater": {
+              "priority": 50
+            }
+          },
+          {
+            "type": "OmniWrenchDefaultComponent",
+            "paramater": {
+              "priority": 50
+            }
+          }
+        ]
+      }
+    },
+
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+
+    {
+      "type": "OmniWrenchCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+
+  ]
+}

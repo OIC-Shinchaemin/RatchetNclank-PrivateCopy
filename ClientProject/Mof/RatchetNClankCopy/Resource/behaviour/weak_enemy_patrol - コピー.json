@@ -1,0 +1,51 @@
+{
+  "root": {
+    "index": 0
+  },
+  "behaviours": [
+    {
+      "type": "CompositeNode",
+      "derived": "SequencerNode",
+      "children": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "type": "ActionNode",
+      "derived": "GoHomeNode"
+    },
+    {
+      "type": "DecoratorNode",
+      "derived": "NotRecognizingTargetNode",
+      "child": 4
+    },
+    {
+      "type": "CompositeNode",
+      "derived": "SelectorNode",
+      "children": [
+        5,
+        6
+      ]
+    },
+    {
+      "type": "ActionNode",
+      "derived": "LookAroundNode"
+    },
+    {
+      "type": "DecoratorNode",
+      "derived": "NotRecognizingTargetNode",
+      "child": 7
+    },
+    {
+      "type": "ActionNode",
+      "derived": "ChangeCombatNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "AlwaysFalseNode"
+    }
+
+  ]
+}

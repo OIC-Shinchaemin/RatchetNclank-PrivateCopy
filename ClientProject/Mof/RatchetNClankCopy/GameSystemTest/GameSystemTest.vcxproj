@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="TestDebug|Win32">
+      <Configuration>TestDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="TestDebug|x64">
+      <Configuration>TestDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{73d854f5-54a2-4446-9541-dd0870927878}</ProjectGuid>
+    <RootNamespace>GameSystemTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='TestDebug|Win32'">
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='TestDebug|x64'">
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestDebug|Win32'">
+    <OutDir>$(SolutionDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../MofLibrary/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../MofLibrary/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='TestDebug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_NCONSOLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../../MofLibrary/Include;../include;../RatchetApplication</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>../../MofLibrary/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Base\Core\AbstructContainer.h" />
+    <ClInclude Include="..\include\Base\Core\Define.h" />
+    <ClInclude Include="..\include\Base\Core\FunctionPointerContainer.h" />
+    <ClInclude Include="..\include\Base\Core\Header.h" />
+    <ClInclude Include="..\include\Base\Core\Math.h" />
+    <ClInclude Include="..\include\Base\Core\Observable.h" />
+    <ClInclude Include="..\include\Base\Core\Observer.h" />
+    <ClInclude Include="..\include\Base\Core\ServiceLocator.h" />
+    <ClInclude Include="..\include\Base\Core\State.h" />
+    <ClInclude Include="..\include\Base\Core\StateMachine.h" />
+    <ClInclude Include="..\include\Base\Core\Timer.h" />
+    <ClInclude Include="..\include\Base\Core\Trait.h" />
+    <ClInclude Include="..\include\Base\Core\Utility.h" />
+    <ClInclude Include="..\include\Base\UI\UICanvas.h" />
+    <ClInclude Include="..\include\Base\UI\UIItem.h" />
+    <ClInclude Include="..\include\Base\UI\UIPanel.h" />
+    <ClInclude Include="..\RatchetApplication\Actor.h" />
+    <ClInclude Include="..\RatchetApplication\GameApp.h" />
+    <ClInclude Include="..\RatchetApplication\GameDefine.h" />
+    <ClInclude Include="..\RatchetApplication\Gamepad.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameManager.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\GameMoney.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\GameQuest.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\GameSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\HelpDesk.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\QuickChangeSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\Save\SaveData.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\Save\SaveSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\ShopSystem.h" />
+    <ClInclude Include="..\RatchetApplication\Game\GameSystem\WeaponSystem.h" />
+    <ClInclude Include="..\RatchetApplication\ResourceManager.h" />
+    <ClInclude Include="..\RatchetApplication\UI\EquipmentWeaponMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\GameMoneyMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\HelpDeskMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\LockOnCursorMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\NanotechMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\QuickChangeMenu.h" />
+    <ClInclude Include="..\RatchetApplication\UI\ShopSystemMenu.h" />
+    <ClInclude Include="TestApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\include\Base\Core\State.cpp" />
+    <ClCompile Include="..\include\Base\Core\StateMachine.cpp" />
+    <ClCompile Include="..\include\Base\Core\Timer.cpp" />
+    <ClCompile Include="..\include\Base\UI\UICanvas.cpp" />
+    <ClCompile Include="..\include\Base\UI\UIItem.cpp" />
+    <ClCompile Include="..\include\Base\UI\UIPanel.cpp" />
+    <ClCompile Include="..\RatchetApplication\Actor.cpp" />
+    <ClCompile Include="..\RatchetApplication\Gamepad.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameManager.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\GameMoney.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\GameQuest.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\GameSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\HelpDesk.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\QuickChangeSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\Save\SaveData.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\Save\SaveSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\ShopSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\Game\GameSystem\WeaponSystem.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\EquipmentWeaponMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\GameMoneyMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\HelpDeskMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\LockOnCursorMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\NanotechMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\QuickChangeMenu.cpp" />
+    <ClCompile Include="..\RatchetApplication\UI\ShopSystemMenu.cpp" />
+    <ClCompile Include="TestApp.cpp" />
+    <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

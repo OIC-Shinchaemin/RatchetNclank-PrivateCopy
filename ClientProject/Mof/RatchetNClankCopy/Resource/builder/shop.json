@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/shop/scene.mom"
+      }
+    },
+    {
+      "type": "ShopCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}

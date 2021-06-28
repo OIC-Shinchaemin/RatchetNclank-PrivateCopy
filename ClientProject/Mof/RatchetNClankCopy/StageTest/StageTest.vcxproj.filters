@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{0a0bb584-b91c-4505-a21a-a4746c3b808b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Test\Header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Test\Base">
+      <UniqueIdentifier>{ab18d695-0b51-49fe-99d5-bd4251a7b3d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header\Stage">
+      <UniqueIdentifier>{19ab9d1d-59a9-430e-a92d-03d512396d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header\Stage\Gimmick">
+      <UniqueIdentifier>{214b4d0e-f666-44e9-ab77-2f598b287692}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header\Stage\Parser">
+      <UniqueIdentifier>{76fb3f40-ef9d-42d9-89d1-c5ac75df07d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source\Stage">
+      <UniqueIdentifier>{6b1d9e52-b2f3-44a0-816d-da0fa6f2a082}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestApp.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\Stage.cpp">
+      <Filter>Test\Header\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\StageObject.cpp">
+      <Filter>Test\Header\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\Parser\JsonStageParser.cpp">
+      <Filter>Test\Header\Stage\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\GimmickBase.cpp">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\MoveCloud.cpp">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\WoodBox.cpp">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\Bridge.cpp">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ratchetApplication\Stage\Gimmick\Elevator.cpp">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestApp.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\StageFileFormat.h">
+      <Filter>Test\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\StageObject.h">
+      <Filter>Test\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Stage.h">
+      <Filter>Test\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\StageDefine.h">
+      <Filter>Test\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Parser\StageParser.h">
+      <Filter>Test\Header\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Parser\JsonStageParser.h">
+      <Filter>Test\Header\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\GimmickBase.h">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\MoveCloud.h">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\WoodBox.h">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\Bridge.h">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ratchetApplication\Stage\Gimmick\Elevator.h">
+      <Filter>Test\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

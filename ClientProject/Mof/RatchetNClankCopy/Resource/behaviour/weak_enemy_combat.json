@@ -1,0 +1,45 @@
+{
+  "root": {
+    "index": 0
+  },
+  "behaviours": [
+    {
+      "type": "CompositeNode",
+      "derived": "SelectorNode",
+      "children": [
+        1,
+        2
+      ]
+    },
+    {
+      "type": "DecoratorNode",
+      "derived": "RecognizingTargetNode",
+      "child": 3
+    },
+    {
+      "type": "ActionNode",
+      "derived": "ChangePatrolNode"
+    },
+    {
+      "type": "CompositeNode",
+      "derived": "SequencerNode",
+      "children": [
+        4,
+        5
+        
+      ]
+    },
+    {
+      "type": "ActionNode",
+      "derived": "MoveToEnemyNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "MeleeAttackNode"
+    },
+    {
+      "type": "ActionNode",
+      "derived": "ChangePatrolNode"
+    }
+  ]
+}
