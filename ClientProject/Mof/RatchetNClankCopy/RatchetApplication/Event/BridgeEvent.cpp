@@ -88,11 +88,11 @@ bool ratchet::event::BridgeEvent::Initialize(void) {
 }
 
 bool ratchet::event::BridgeEvent::Update(float delta_time) {
-#ifdef _DEBUG
-    if (::g_pInput->IsKeyPush(MOFKEY_B)) {
-        this->AllDelete();
-    } // if
-#endif // _DEBUG
+//#ifdef _DEBUG
+//    if (::g_pInput->IsKeyPush(MOFKEY_B)) {
+//        this->AllDelete();
+//    } // if
+//#endif // _DEBUG
 
     if (_enable) {
         auto camera_info = ratchet::camera::CameraController::CameraInfo();

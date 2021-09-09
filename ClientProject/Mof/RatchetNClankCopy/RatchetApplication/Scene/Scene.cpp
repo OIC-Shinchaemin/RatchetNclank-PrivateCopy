@@ -93,7 +93,7 @@ ratchet::scene::Scene::Scene() :
     _ui_canvas(),
     _loaded(false),
     _mutex(),
-    _load_thread() {
+    _load_thread(){
 }
 
 ratchet::scene::Scene::~Scene() {

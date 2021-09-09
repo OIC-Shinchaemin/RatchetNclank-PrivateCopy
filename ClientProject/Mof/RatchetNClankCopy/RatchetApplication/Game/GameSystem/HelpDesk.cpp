@@ -9,7 +9,7 @@ ratchet::game::gamesystem::HelpDesk::HelpDesk() :
     _subject(),
     _resource(),
     _ui_canvas(),
-_completed(false){
+    _completed(false) {
 }
 
 ratchet::game::gamesystem::HelpDesk::~HelpDesk() {
@@ -17,7 +17,7 @@ ratchet::game::gamesystem::HelpDesk::~HelpDesk() {
 
 void ratchet::game::gamesystem::HelpDesk::OnNotify(const ratchet::game::gamesystem::GameQuest& quest) {
     if (_completed) {
-        return ;
+        return;
     } // if
     auto info = Info();
     if (quest.GetType() == ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy) {
@@ -75,4 +75,10 @@ bool ratchet::game::gamesystem::HelpDesk::Release(void) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
     return true;
+}
+
+void ratchet::game::gamesystem::HelpDesk::Show(void) {
+    auto info = Info();
+    info.show = true;
+    _subject.Notify(info);
 }

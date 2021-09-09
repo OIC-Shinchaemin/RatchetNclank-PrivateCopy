@@ -198,7 +198,9 @@ bool ratchet::actor::Actor::Render(void) {
         if (com->IsActive()) {
             com->Render();
 #ifdef _DEBUG
-            com->DebugRender();
+            if (debug::DebugManager::GetInstance().IsDebugMode()) {
+                com->DebugRender();
+            } // if
 #endif // _DEBUG
             re = true;
         } // if

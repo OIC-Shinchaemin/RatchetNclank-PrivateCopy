@@ -224,7 +224,6 @@ bool ratchet::scene::GameScene::Initialize(void) {
         auto game_money = game->GetGameMoney();
         auto shop_system = game->GetShopSystem();
 
-
         shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<this_type>(shared_from_this()));
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
@@ -241,6 +240,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
 
         auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
         help_desk->OnNotify(quest);
+        stage_view_event->SetHelpDesk(help_desk);
         bridge_event->GetQuestSubject()->AddObserver(help_desk);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);

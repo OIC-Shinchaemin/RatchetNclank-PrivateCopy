@@ -54,8 +54,6 @@ bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
         auto tex = resource->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/ui/black.png");
         menu->SetTexture(tex);
     } // if
-
-
     if (auto canvas = super::GetUICanvas()) {
         canvas->AddElement(menu);
     } // if
