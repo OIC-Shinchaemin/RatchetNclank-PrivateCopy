@@ -44,6 +44,10 @@ void ratchet::ui::OptionSystemMenu::OnNotify(const ratchet::game::gamesystem::Op
 	else if (info.items->empty()) {
 		_items.clear();
 	} // else if
+
+	if (info.end) {
+		super::Notify(shared_from_this(), "Disable");
+	} // if
 }
 
 void ratchet::ui::OptionSystemMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {

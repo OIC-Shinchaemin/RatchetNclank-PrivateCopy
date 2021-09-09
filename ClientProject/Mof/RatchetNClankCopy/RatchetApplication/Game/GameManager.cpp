@@ -85,29 +85,10 @@ bool ratchet::game::GameManager::Initialize(void) {
     this->SetPtr(_shop_system);
     this->SetPtr(_option_system);
     this->SetPtr(_pause_system);
-    /*
-    _weapon_system->SetResourceManager(_resource);
-    _weapon_system->SetUICanvas(_ui_canvas);
-    _quick_change->SetResourceManager(_resource);
-    _quick_change->SetUICanvas(_ui_canvas);
-    _help_desk->SetResourceManager(_resource);
-    _help_desk->SetUICanvas(_ui_canvas);
-    _game_money->SetResourceManager(_resource);
-    _game_money->SetUICanvas(_ui_canvas);
-    _shop_system->SetResourceManager(_resource);
-    _shop_system->SetUICanvas(_ui_canvas);
-    _option_system->SetResourceManager(_resource);
-    _option_system->SetUICanvas(_ui_canvas);
-    _pause_system->SetResourceManager(_resource);
-    _pause_system->SetUICanvas(_ui_canvas);
-    */
     return true;
 }
 
 bool ratchet::game::GameManager::Release(void) {
-//    _option_system->GetSubject()->RemoveObserver(shared_from_this());
-//    _pause_system->GetSubject()->RemoveObserver(shared_from_this());
-
     _option_system->Release();
     _pause_system->Release();
 

@@ -61,6 +61,7 @@ public:
     struct Info {
         bool enter = false;
         bool exit = false;
+        bool end = false;
         int index = 0;
         std::vector<std::shared_ptr<ElemType>>* items = nullptr;
         
@@ -145,6 +146,11 @@ public:
     /// </summary>
     /// <returns></returns>
     bool Release(void);
+    /// <summary>
+    /// UI‚ð‰B‚·
+    /// </summary>
+    /// <param name=""></param>
+    void Hide(void);
 };
 }
 }

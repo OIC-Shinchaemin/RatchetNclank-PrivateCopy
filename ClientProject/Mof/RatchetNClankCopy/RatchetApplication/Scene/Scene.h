@@ -31,9 +31,10 @@ namespace ratchet {
 				End
 			};
 			enum class TransitionState {
+				None,
 				In,
 				Out,
-				None,
+				End,
 			};
 			struct Param {
 				//! 名前
@@ -107,6 +108,12 @@ namespace ratchet {
 			/// <param name=""></param>
 			/// <returns></returns>
 			virtual std::string GetName(void) = 0;
+			/// <summary>
+			/// ゲッター
+			/// </summary>
+			/// <param name=""></param>
+			/// <returns></returns>
+			TransitionState GetTransitionState(void) const;
 			/// <summary>
 			/// セッター
 			/// </summary>

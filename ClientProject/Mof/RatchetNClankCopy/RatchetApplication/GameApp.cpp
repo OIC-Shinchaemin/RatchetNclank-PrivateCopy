@@ -51,12 +51,6 @@ MofBool CGameApp::Input(void) {
 	::g_pInput->RefreshKey();
 	::g_pGamepad->RefreshKey();
 
-	//if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
-	//	::PostQuitMessage(0);
-	//	return false;
-	//} // if
-
-
 	if (::g_pInput->IsKeyPush(MOFKEY_G)) {
 		_se.Play();
 	} // if

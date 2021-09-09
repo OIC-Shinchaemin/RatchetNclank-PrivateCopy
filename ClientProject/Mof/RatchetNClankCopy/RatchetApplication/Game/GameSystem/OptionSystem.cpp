@@ -43,6 +43,9 @@ void ratchet::game::gamesystem::OptionSystem::AddItem(const std::shared_ptr<Elem
 }
 
 bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
+    _infomation = Info();
+    _infomation.items = &_item;
+
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
@@ -93,10 +96,10 @@ bool ratchet::game::gamesystem::OptionSystem::Update(float delta_time) {
         for (auto ptr : _execute_list) {
             if (ptr->Execute()) {
             } // if
+            this->Hide();
         } // for
         _infomation.Reset();
         _info_subject.Notify(_infomation);
-
         _execute_list.clear();
         return false;
     } // if
@@ -111,6 +114,11 @@ bool ratchet::game::gamesystem::OptionSystem::Release(void) {
         canvas->RemoveElement("OptionSystemMenu");
     } // if
     return true;
+}
+
+void ratchet::game::gamesystem::OptionSystem::Hide(void) {
+    _infomation.end = true;
+    _info_subject.Notify(_infomation);
 }
 
 ratchet::game::gamesystem::OptionSystemItem::OptionSystemItem() {

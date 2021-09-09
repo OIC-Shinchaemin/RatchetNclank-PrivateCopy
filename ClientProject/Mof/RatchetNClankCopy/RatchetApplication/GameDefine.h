@@ -58,5 +58,12 @@ struct cbUVScrollParam {
         return *this;
     }
 };
+struct cbSceneEffectParam {
+    Mof::Vector4 value;
+    cbSceneEffectParam& operator+=(float time) {
+        value.x += time;
+        return *this;
+    }
+};
 }
 #endif // !RATCHET_GAME_DEFINE_H
