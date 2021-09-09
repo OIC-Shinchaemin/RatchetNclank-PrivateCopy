@@ -52,7 +52,7 @@ bool ratchet::component::player::action::PlayerCrouchComponent::Initialize(void)
 
 bool ratchet::component::player::action::PlayerCrouchComponent::Input(void) {
     using Type = state::PlayerActionStateType;
-    if (::g_pInput->IsKeyPull(MOFKEY_U) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN)) {
+    if (::g_pInput->IsKeyPull(MOFKEY_B) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_R_BTN)) {
         super::ChangeActionState(Type::kPlayerActionIdleState);
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {

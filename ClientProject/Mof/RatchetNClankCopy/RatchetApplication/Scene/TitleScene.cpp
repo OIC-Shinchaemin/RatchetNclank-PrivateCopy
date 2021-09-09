@@ -5,13 +5,30 @@
 #include "../Camera/FollowCameraController.h"
 
 
+void ratchet::scene::TitleScene::FadeOutStart(void) {
+    _effect = ratchet::scene::SceneEffect();
+    _effect.value().Load("../Resource/shader/fadeout.hlsl");
+    bool seccess = _effect.value().CreateShaderBuffer("cbSceneEffectParam", sizeof(ratchet::scene::cbSceneEffectParam));
+    _effect.value().time = 1.0f;
+    _transition_state = TransitionState::Out;
+}
+
 bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
-    super::SceneUpdate(delta_time);
+    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
+        ::PostQuitMessage(0);
+        return false;
+    } // if
+
     if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
         ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _option_system_subject.Notify(true);
     } // if
 
+
+    bool effect_end = super::SceneUpdate(delta_time);
+    if (effect_end && _transition_state == TransitionState::End) {
+        _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
+    } // if
 
     _demo_actor->Update(delta_time);
 
@@ -22,7 +39,7 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
         math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
     camera_info.target_position = pos;
     _camera_controller.GetService()->Update(delta_time, camera_info);
-    
+
     _logo.Update(delta_time);
     return true;
 }
@@ -38,6 +55,7 @@ bool ratchet::scene::TitleScene::SceneRender(void) {
     _demo_actor->Render();
     _stage.Render();
     ::g_pGraphics->SetDepthEnable(false);
+
     _logo.Render();
     return true;
 }
@@ -85,6 +103,13 @@ std::string ratchet::scene::TitleScene::GetName(void) {
 
 bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
+    //	_ASSERT_EXPR(loaded, L"読み込み失敗");
+
+    // shader
+    auto effect = SceneEffect();
+    effect.Load("../Resource/shader/fadein.hlsl");
+    effect.CreateShaderBuffer("cbSceneEffectParam", sizeof(ratchet::cbSceneEffectParam));
+    //super::_effect = effect;
 
     super::_load_thread = std::thread([&]() {
         if (!super::IsLoaded()) {
@@ -120,8 +145,8 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             _camera_controller.GetService()->SetCamera(_stage_view_camera);
             _camera_controller.GetService()->RegisterGlobalCamera();
             _camera_controller.GetService()->SetAzimuth(0.0f);
-            _camera_controller.GetService()->SetAltitude(-10.0f);
-            _camera_controller.GetService()->SetDistance(8.0f);
+            _camera_controller.GetService()->SetAltitude(-13.0f);
+            _camera_controller.GetService()->SetDistance(10.0f);
         } // if
 
 
@@ -143,17 +168,29 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             item0->SetText("操作説明");
 
             auto item1 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-                _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
+                _title_menu_subject.Notify(false);
+                _option_system_subject.Notify(false);
+
+                this->FadeOutStart();
                 return true;
             });
             item1->SetText("ゲームスタート");
+
+
+            auto item2 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
+                ::PostQuitMessage(0);
+                return true;
+            });
+            item2->SetText("終了");
+
+
             option_system->Initialize();
             option_system->AddItem(item1);
             option_system->AddItem(item0);
+            option_system->AddItem(item2);
         } // if
 
     });
-
 
     return true;
 }

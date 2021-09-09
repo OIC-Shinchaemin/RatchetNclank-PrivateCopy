@@ -1,6 +1,12 @@
 ../Resource/texture/water/water0.jpg
 ../Resource/texture/water/water1.jpg
-../Resource/texture/ui/black.png
+../Resource/texture/ui/ui_text_start.png
+../Resource/texture/ui/ui_text_press.png
+../Resource/texture/ui/ui_text_button.png
+../Resource/texture/ui/ui_text_or.png
+../Resource/texture/ui/ui_text_enter.png
+../Resource/texture/ui/ui_text_exclamation_mark.png
+../Resource/texture/ui/ui_text_key.png
 
 ../Resource/texture/title_logo/image.png
 

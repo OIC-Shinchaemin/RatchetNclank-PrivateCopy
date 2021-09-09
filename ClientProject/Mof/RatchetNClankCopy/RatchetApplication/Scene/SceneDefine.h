@@ -164,6 +164,7 @@ struct SceneEffect {
     /// <returns></returns>
     virtual bool Update(float delta_time) {
         time -= delta_time;
+        
         if (time <= 0.0f) {
             time = 0.0f;
         } // if

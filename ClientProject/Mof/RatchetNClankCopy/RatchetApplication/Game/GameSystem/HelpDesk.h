@@ -24,6 +24,7 @@ class HelpDesk :
 public:
     struct Info {
         std::string text;
+        bool show = false;
     };
 private:
     //! î•ñ
@@ -74,6 +75,11 @@ public:
     /// </summary>
     /// <returns></returns>
     bool Release(void);
+    /// <summary>
+    /// ‰æ–Ê‚É“ü‚é
+    /// </summary>
+    /// <param name=""></param>
+    void Show(void);
 };
 }
 }

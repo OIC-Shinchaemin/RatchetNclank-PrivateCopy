@@ -18,7 +18,7 @@ ratchet::actor::weapon::BombGlove::~BombGlove() {
 }
 
 bool ratchet::actor::weapon::BombGlove::IsAction(void) const {
-    return ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyPush(MOFKEY_M);
+    return ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyPush(MOFKEY_V);
 }
 
 bool ratchet::actor::weapon::BombGlove::Fire(const def::Transform& transform) {

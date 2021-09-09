@@ -2120,6 +2120,12 @@
     <ClInclude Include="UI\Shop\ShopSystemMainMenu.h">
       <Filter>Ratchet\Header\UI\Shop</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Tween.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugManager.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">

@@ -518,6 +518,7 @@
     <ClInclude Include="..\include\Base\Core\StateMachine.h" />
     <ClInclude Include="..\include\Base\Core\Timer.h" />
     <ClInclude Include="..\include\Base\Core\Trait.h" />
+    <ClInclude Include="..\include\Base\Core\Tween.h" />
     <ClInclude Include="..\include\Base\Core\Utility.h" />
     <ClInclude Include="..\include\Base\Resource\ResourceFont.h" />
     <ClInclude Include="..\include\Base\UI\UICanvas.h" />
@@ -749,6 +750,7 @@
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchComponentInclude.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h" />
+    <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Event\BridgeEvent.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventManager.h" />

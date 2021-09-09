@@ -9,6 +9,7 @@
 
 #include "../Camera/Camera.h"
 #include "../Camera/AutoCameraController.h"
+#include "../Game/GameSystem/HelpDesk.h"
 
 
 namespace ratchet {
@@ -23,6 +24,8 @@ private:
     std::shared_ptr<ratchet::camera::AutoCameraController> _stage_view_camera_controller;
     //! 通知用
     ratchet::event::StageViewEvent::CameraObservable _camera_subject;
+    //! カメラ
+    std::weak_ptr<ratchet::game::gamesystem::HelpDesk> _help_desk;
 public:
     /// <summary>
     /// コンストラクタ
@@ -38,6 +41,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     ratchet::event::StageViewEvent::CameraObservable* GetCameraObservable(void);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name=""></param>
+    void SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

@@ -15,6 +15,7 @@
 #include "Base/Resource/ResourceFont.h"
 #include "Base/UI/UICanvas.h"
 #include "Namespace.h"
+#include "DebugManager.h"
 
 
 #define DEBUG_PRINT(arg, ...)
@@ -32,9 +33,8 @@ DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
 
 
 namespace ratchet {
-
 constexpr int kTextWidth= 12;
-
+///static debug::DebugManager g_DebugManager;
 
 struct Transform {
     Mof::CVector3 position = math::vec3::kZero;
@@ -45,7 +45,9 @@ using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CTexture>,
     std::shared_ptr<Mof::CMeshContainer>,
     std::shared_ptr<ratchet::MotionNames>,
-    std::shared_ptr<sip::CResourceFont>
+    std::shared_ptr<sip::CResourceFont>,
+    std::shared_ptr<Mof::CStreamingSoundBuffer>,
+    std::shared_ptr<Mof::CSoundBuffer>
 >;
 
 struct cbUVScrollParam {
@@ -53,6 +55,13 @@ struct cbUVScrollParam {
     cbUVScrollParam& operator+=(Mof::CVector2 scroll) {
         value.x += scroll.x;
         value.y += scroll.y;
+        return *this;
+    }
+};
+struct cbSceneEffectParam {
+    Mof::Vector4 value;
+    cbSceneEffectParam& operator+=(float time) {
+        value.x += time;
         return *this;
     }
 };

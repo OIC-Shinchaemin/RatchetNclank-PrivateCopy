@@ -18,7 +18,7 @@ ratchet::actor::weapon::Blaster::~Blaster() {
 }
 
 bool ratchet::actor::weapon::Blaster::IsAction(void) const {
-    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_M);
+    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_V);
 }
 
 bool ratchet::actor::weapon::Blaster::Fire(const def::Transform& transform) {

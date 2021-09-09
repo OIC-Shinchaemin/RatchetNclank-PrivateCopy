@@ -6,7 +6,8 @@
 ratchet::event::StageViewEvent::StageViewEvent() :
     super(),
     _stage_view_camera(std::make_shared<ratchet::camera::Camera>()),
-    _stage_view_camera_controller(std::make_shared<ratchet::camera::AutoCameraController>()) {
+    _stage_view_camera_controller(std::make_shared<ratchet::camera::AutoCameraController>()) ,
+    _help_desk(){
     _stage_view_camera_controller->SetCamera(_stage_view_camera);
     _stage_view_camera->Initialize();
     _stage_view_camera->Update();
@@ -17,6 +18,10 @@ ratchet::event::StageViewEvent::~StageViewEvent() {
 
 ratchet::event::StageViewEvent::CameraObservable* ratchet::event::StageViewEvent::GetCameraObservable(void) {
     return &this->_camera_subject;
+}
+
+void ratchet::event::StageViewEvent::SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr) {
+    this->_help_desk = ptr;
 }
 
 bool ratchet::event::StageViewEvent::Initialize(void) {
@@ -36,6 +41,10 @@ bool ratchet::event::StageViewEvent::Update(float delta_time) {
     _stage_view_camera_controller->Update(delta_time, camera_info);
 
     if (_stage_view_camera_controller->IsCompleted()) {
+        if (auto help_desk = _help_desk.lock()) {
+            help_desk->Show();
+        } // if
+        
         auto info = ratchet::camera::CameraController::CameraInfo();
         info.start_position = _stage_view_camera_controller->GetCameraPosition();
         info.target_position = math::vec3::kZero;
