@@ -426,6 +426,7 @@
     <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp" />
     <ClCompile Include="Event\ShipEvent.cpp" />
     <ClCompile Include="Event\StageViewEvent.cpp" />
+    <ClCompile Include="Event\TextSystemStartEvent.cpp" />
     <ClCompile Include="Factory\ActorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourExecutorFactory.cpp" />
     <ClCompile Include="Factory\BehaviourFactory.cpp" />
@@ -468,6 +469,7 @@
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="Scene\DescriptionScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="Scene\GameSceneInitializer.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneImplementation.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
@@ -763,6 +765,7 @@
     <ClInclude Include="Event\RegisterGlobalCameraEvent.h" />
     <ClInclude Include="Event\ShipEvent.h" />
     <ClInclude Include="Event\StageViewEvent.h" />
+    <ClInclude Include="Event\TextSystemStartEvent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />
     <ClInclude Include="Factory\BehaviourExecutorFactory.h" />
     <ClInclude Include="Factory\BehaviourFactory.h" />
@@ -818,6 +821,7 @@
     <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="Scene\DescriptionScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="Scene\GameSceneInitializer.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\SceneManager.h" />

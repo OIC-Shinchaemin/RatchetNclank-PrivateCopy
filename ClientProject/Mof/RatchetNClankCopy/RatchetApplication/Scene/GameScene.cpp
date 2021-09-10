@@ -11,7 +11,9 @@
 #include "../Event/BridgeEvent.h"
 #include "../Event/ShipEvent.h"
 #include "../Event/StageViewEvent.h"
+#include "../Event/TextSystemStartEvent.h"
 #include "../Event/EventReferenceTable.h"
+#include "GameSceneInitializer.h"
 
 
 void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
@@ -75,7 +77,6 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
             super::SetState(State::Active);
         } // if
     } // if
-    //UpdateScript();
     return true;
 }
 
@@ -148,6 +149,16 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::game::gamesystem::ShopSy
     } // else
 }
 
+void ratchet::scene::GameScene::OnNotify(const ratchet::event::StageViewEventMessage& message) {
+    if (message.end) {
+        if (auto event = _event.lock()) {
+            auto text_system_start_event = event->CreateGameEvent<ratchet::event::TextSystemStartEvent>();
+            text_system_start_event->SetTextSystem(_text_system);
+            text_system_start_event->SetGameScene(shared_from_this());
+        } // if
+    } // if
+}
+
 void ratchet::scene::GameScene::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
     this->_game = ptr;
 }
@@ -160,36 +171,23 @@ std::string ratchet::scene::GameScene::GetName(void) {
     return ratchet::scene::SceneType::kGameScene;
 }
 
-ratchet::scene::Scene::State ratchet::scene::GameScene::GetState(void) const {
-    return super::_state;
-}
-
 bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
 
     super::_load_thread = std::thread([&]() {
-        //auto re = ::CoInitialize(NULL);
-
         if (auto r = _resource.lock()) {
             auto path = "../Resource/scene_resource/game_scene.txt";
             r->Load(path);
         } // if
-        // stage
         if (!_stage.Load("../Resource/stage/stage.json")) {
             return false;
         } // if
-
         if (auto game = _game.lock()) {
             game->GameSystemLoad();
         } // if
         super::LoadComplete();
-
-
-
         _text_system->Load();
 
-
-        super::LoadComplete();
         this->Initialize();
     });
     return true;
@@ -200,154 +198,13 @@ bool ratchet::scene::GameScene::Initialize(void) {
         return false;
     } // if
 
-    _stage.Initialize();
-    ratchet::event::EventReferenceTable::Singleton().Reset();
+    auto initializer = GameSceneInitializer();
+    auto shared_this = std::dynamic_pointer_cast<GameScene>(shared_from_this());;
 
-    std::shared_ptr<ratchet::event::BridgeEvent> bridge_event;
-    std::shared_ptr<ratchet::event::ShipEvent> ship_event;
-    std::shared_ptr<ratchet::event::StageViewEvent> stage_view_event;
-    if (auto e = _event.lock()) {
-        e->InitializeGameEvent();
-        bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
-        ship_event = e->CreateGameEvent<ratchet::event::ShipEvent>();
-        stage_view_event = e->CreateGameEvent<ratchet::event::StageViewEvent>();
-        stage_view_event->SetGameScene(std::dynamic_pointer_cast<scene::GameScene>(shared_from_this()));
-        stage_view_event->SetTextSystem(_text_system);
-    } // if
+    auto game = _game.lock();
+    auto event = _event.lock();
+    initializer.Execute(game, event, shared_this);
 
-    bridge_event->SetStage(&_stage);
-    bridge_event->Initialize();
-    ship_event->Initialize();
-    stage_view_event->Initialize();
-
-    bridge_event->GetCameraSubject()->AddObserver(ship_event);
-    ship_event->GetShipEventSubject()->AddObserver(shared_from_this());
-
-    for (auto gimmick : _stage.GetGimmickArray()) {
-        auto temp = std::dynamic_pointer_cast<Bridge>(gimmick);
-        if (temp) {
-            temp->AddObserver(ship_event);
-        } // if
-    } // for
-
-
-    auto param = new ratchet::actor::Actor::Param();
-
-    // player
-    param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-    auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", param);
-    this->AddElement(player);
-    stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
-
-    {
-        param->transform.position = Mof::CVector3(15.0f, -5.0f, 7.0f);
-        param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-        auto shop = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Shop >("../Resource/builder/shop.json", param);
-        this->AddElement(shop);
-    }
-    {
-        param->name = "weapon";
-        param->tag = "OmniWrench";
-        auto omniwrench = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::weapon::OmniWrench>("builder/omni_wrench.json", param);
-        player->AddChild(omniwrench);
-        this->AddElement(omniwrench);
-    }
-
-
-    // game system
-    if (auto game = _game.lock()) {
-        auto pause_system = game->GetGamePauseSystem();
-        auto weapon_system = game->GetWeaponSystem();
-        auto quick_change = game->GetQuickChange();
-        auto help_desk = game->GetHelpDesk();
-        auto game_money = game->GetGameMoney();
-        auto shop_system = game->GetShopSystem();
-
-        shop_system->GetInfoSubject()->AddObserver(std::dynamic_pointer_cast<this_type>(shared_from_this()));
-        player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
-        player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
-        player->PushNotificationableSubject("QuickChange");
-        player->GetQuestSubject()->AddObserver(help_desk);
-
-        // game system
-        weapon_system->Initialize(shared_from_this());
-        quick_change->Initialize(weapon_system);
-        game_money->Initialize();
-        help_desk->Initialize();
-        shop_system->Initialize();
-        pause_system->Initialize();
-
-        auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
-        help_desk->OnNotify(quest);
-        stage_view_event->SetHelpDesk(help_desk);
-        bridge_event->GetQuestSubject()->AddObserver(help_desk);
-        weapon_system->AddMechanicalWeaponObserver(player);
-        quick_change->AddWeaponObserver(weapon_system);
-        quick_change->AddInfoObserver(player);
-        _pause_menu_subject.AddObserver(pause_system);
-
-        auto weapons = weapon_system->GetWeaponMap();
-        for (auto& pair : weapons) {
-            player->AddChild(pair.second);
-        } // for
-
-
-        auto item0 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
-            return true;
-        });
-        item0->SetText("タイトルに戻る");
-
-        auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
-            return true;
-        });
-        item1->SetText("リトライ");
-
-        auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            _game.lock()->GetGamePauseSystem()->Inactive();
-            this->_state = super::State::Active;
-            return true;
-        });
-        item2->SetText("もどる");
-
-        pause_system->AddItem(item0);
-        pause_system->AddItem(item1);
-        pause_system->AddItem(item2);
-    } // if
-
-
-    auto help_desk = _game.lock()->GetHelpDesk();
-    // enemy
-    for (auto enemy_spawn : _stage.GetEnemySpawnArray()) {
-        auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
-        _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"型が一致しません");
-        auto builder = enemy_spawn.first.c_str();
-        param->name = enemy_spawn.second->GetName();
-        param->transform.position = enemy_spawn.second->GetPosition();
-        auto enemy = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Enemy>(builder, param);
-        this->AddElement(enemy);
-        enemy->GetQuestSubject()->AddObserver(help_desk);
-
-        if (event_sphere.CollisionPoint(param->transform.position)) {
-            bridge_event->AddTriggerActor(enemy);
-        } // if
-    } // for
-
-    // terrain
-    def::Transform terrain_transforms[]{
-        def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
-    };
-    for (auto& transform : terrain_transforms) {
-        param->transform.scale = transform.scale;
-        param->transform.position = transform.position;
-        auto terrain = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::terrain::Terrain>("../Resource/builder/water_flow.json", param);
-        this->AddElement(terrain);
-    } // for
-
-
-    ut::SafeDelete(param);
     _re_initialize = false;
     return true;
 }

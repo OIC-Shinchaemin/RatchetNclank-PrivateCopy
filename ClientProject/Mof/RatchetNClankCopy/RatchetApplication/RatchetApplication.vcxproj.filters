@@ -1107,6 +1107,12 @@
     <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
       <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
     </ClCompile>
+    <ClCompile Include="Event\TextSystemStartEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameSceneInitializer.cpp">
+      <Filter>Ratchet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -2158,6 +2164,12 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\Text\TextSystem.h">
       <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\TextSystemStartEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameSceneInitializer.h">
+      <Filter>Ratchet\Header\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

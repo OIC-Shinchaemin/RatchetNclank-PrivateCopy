@@ -26,7 +26,7 @@ void ratchet::event::StageViewEvent::SetHelpDesk(const std::shared_ptr<ratchet::
     this->_help_desk = ptr;
 }
 
-void ratchet::event::StageViewEvent::SetGameScene(const std::shared_ptr<ratchet::scene::GameScene>& ptr) {
+void ratchet::event::StageViewEvent::SetGameScene(const std::shared_ptr<ratchet::scene::Scene>& ptr) {
     this->_scene = ptr;
 }
 
@@ -45,7 +45,6 @@ bool ratchet::event::StageViewEvent::Update(float delta_time) {
             return true;
         } // if
     } // if
-
     // 一定時間経過で削除リクエストを通知
     if (::g_pInput->IsKeyPush(MOFKEY_SPACE) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START)) {
@@ -54,17 +53,23 @@ bool ratchet::event::StageViewEvent::Update(float delta_time) {
 
     auto camera_info = ratchet::camera::CameraController::CameraInfo();
     _stage_view_camera_controller->Update(delta_time, camera_info);
-
+    
     if (_stage_view_camera_controller->IsCompleted()) {
         if (auto help_desk = _help_desk.lock()) {
             help_desk->Show();
         } // if
-        if (auto text = _text_system.lock()) {
-            text->Activate();
-        } // if
-        if (auto scene = _scene.lock()) {
-            scene->SetState(scene::Scene::State::Pause);
-        } // if
+        auto message = StageViewEventMessage();        
+        message.end = true;
+        _stage_view_event_message_subject.Notify(message);
+
+
+        //if (auto text = _text_system.lock()) {
+        //    text->Activate();
+        //} // if
+        //if (auto scene = _scene.lock()) {
+        //    scene->SetState(scene::Scene::State::Pause);
+        //} // if
+
 
 
         auto info = ratchet::camera::CameraController::CameraInfo();
@@ -73,8 +78,6 @@ bool ratchet::event::StageViewEvent::Update(float delta_time) {
         _camera_subject.Notify(info);
         auto ptr = super::GetSubject();
         ptr->Notify("DeleteRequest", shared_from_this());
-
-
     } // if
     return true;
 }

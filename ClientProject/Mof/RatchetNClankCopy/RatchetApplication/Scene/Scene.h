@@ -118,6 +118,14 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    ratchet::scene::Scene::State GetState(void) const {
+        return this->_state;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     TransitionState GetTransitionState(void) const;
     /// <summary>
     /// セッター
