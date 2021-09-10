@@ -131,6 +131,10 @@ void ratchet::scene::Scene::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
+void ratchet::scene::Scene::SetState(const ratchet::scene::Scene::State state) {
+    this->_state = state;
+}
+
 ratchet::scene::Scene::TransitionState ratchet::scene::Scene::GetTransitionState(void) const {
     return this->_transition_state;
 }
@@ -173,7 +177,6 @@ bool ratchet::scene::Scene::Update(float delta_time) {
             _load_thread.value().join();
             _load_thread.reset();
         } // if
-
         this->SceneUpdate(delta_time);
     } // if
     else {

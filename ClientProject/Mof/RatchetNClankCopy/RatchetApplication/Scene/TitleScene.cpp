@@ -189,7 +189,7 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             option_system->AddItem(item0);
             option_system->AddItem(item2);
         } // if
-
+        //this->Initialize();
     });
 
     return true;

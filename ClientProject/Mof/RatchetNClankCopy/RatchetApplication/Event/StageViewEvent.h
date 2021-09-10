@@ -10,10 +10,11 @@
 #include "../Camera/Camera.h"
 #include "../Camera/AutoCameraController.h"
 #include "../Game/GameSystem/HelpDesk.h"
+#include "../Scene/GameScene.h"
+#include "../Game/GameSystem/Text/TextSystem.h"
 
 
-namespace ratchet {
-namespace event {
+namespace ratchet::event {
 class StageViewEvent : public ratchet::event::Event {
     using super = ratchet::event::Event;
     using CameraObservable = base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>;
@@ -26,6 +27,10 @@ private:
     ratchet::event::StageViewEvent::CameraObservable _camera_subject;
     //! カメラ
     std::weak_ptr<ratchet::game::gamesystem::HelpDesk> _help_desk;
+    //! シーン
+    std::weak_ptr<scene::GameScene> _scene;
+    //! テキスト
+    std::weak_ptr<ratchet::game::gamesystem::text::TextSystem> _text_system;
 public:
     /// <summary>
     /// コンストラクタ
@@ -47,6 +52,16 @@ public:
     /// <param name=""></param>
     void SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name=""></param>
+    void SetGameScene(const std::shared_ptr<ratchet::scene::GameScene>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name=""></param>
+    void SetTextSystem(const std::shared_ptr<ratchet::game::gamesystem::text::TextSystem>& ptr);
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
@@ -59,6 +74,5 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
 };
-}
 }
 #endif // !RATCHET_EVENT_BRIDGE_EVENT_H

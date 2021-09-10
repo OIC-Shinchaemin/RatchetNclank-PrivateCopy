@@ -38,7 +38,11 @@ void ratchet::scene::GameScene::ReInitialize(void) {
 
 bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
-    
+
+    if (::g_pInput->IsKeyPush(MOFKEY_T)) {
+        _re_initialize = true;
+    } // if
+
     if (_re_initialize) {
         this->ReInitialize();
     } // if
@@ -64,6 +68,14 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     // collision
     _physic_world.CollisionStage(&_stage);
     _physic_world.Update();
+
+
+    if (_text_system->IsActive()) {
+        if (!_text_system->Update()) {
+            super::SetState(State::Active);
+        } // if
+    } // if
+    //UpdateScript();
     return true;
 }
 
@@ -79,13 +91,17 @@ bool ratchet::scene::GameScene::SceneRender(void) {
     _stage.Render();
 
     ::g_pGraphics->SetDepthEnable(false);
+
+    if (_text_system->IsActive()) {
+        _text_system->Render();
+    } // if
     return true;
 }
 
 bool ratchet::scene::GameScene::LoadingRender(void) {
-    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
+    ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
-    ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Now Loading");
+    ::CGraphicsUtilities::RenderString(800.0f, 700.0f, def::color_rgba_u32::kWhite, "Now Loading...");
     return true;
 }
 
@@ -98,7 +114,8 @@ ratchet::scene::GameScene::GameScene() :
     _stage(),
     _re_initialize(false),
     _game(),
-    _event() {
+    _event(),
+    _text_system(std::make_shared<ratchet::game::gamesystem::text::TextSystem>()) {
 }
 
 ratchet::scene::GameScene::~GameScene() {
@@ -143,25 +160,46 @@ std::string ratchet::scene::GameScene::GetName(void) {
     return ratchet::scene::SceneType::kGameScene;
 }
 
+ratchet::scene::Scene::State ratchet::scene::GameScene::GetState(void) const {
+    return super::_state;
+}
+
 bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
-    if (auto r = _resource.lock()) {
-        r->Load(param->resource.c_str());
-    } // if
-    // stage
-    if (!_stage.Load("../Resource/stage/stage.json")) {
-        return false;
-    } // if
 
-    if (auto game = _game.lock()) {
-        game->GameSystemLoad();
-    } // if
-    super::LoadComplete();
+    super::_load_thread = std::thread([&]() {
+        //auto re = ::CoInitialize(NULL);
 
+        if (auto r = _resource.lock()) {
+            auto path = "../Resource/scene_resource/game_scene.txt";
+            r->Load(path);
+        } // if
+        // stage
+        if (!_stage.Load("../Resource/stage/stage.json")) {
+            return false;
+        } // if
+
+        if (auto game = _game.lock()) {
+            game->GameSystemLoad();
+        } // if
+        super::LoadComplete();
+
+
+
+        _text_system->Load();
+
+
+        super::LoadComplete();
+        this->Initialize();
+    });
     return true;
 }
 
 bool ratchet::scene::GameScene::Initialize(void) {
+    if (!super::IsLoaded()) {
+        return false;
+    } // if
+
     _stage.Initialize();
     ratchet::event::EventReferenceTable::Singleton().Reset();
 
@@ -173,6 +211,8 @@ bool ratchet::scene::GameScene::Initialize(void) {
         bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
         ship_event = e->CreateGameEvent<ratchet::event::ShipEvent>();
         stage_view_event = e->CreateGameEvent<ratchet::event::StageViewEvent>();
+        stage_view_event->SetGameScene(std::dynamic_pointer_cast<scene::GameScene>(shared_from_this()));
+        stage_view_event->SetTextSystem(_text_system);
     } // if
 
     bridge_event->SetStage(&_stage);
@@ -336,5 +376,9 @@ bool ratchet::scene::GameScene::Release(void) {
         _pause_menu_subject.Clear();
         game->GameSystemRelease();
     } // if
+
+
+    _text_system->Release();
+    _text_system.reset();
     return true;
 }

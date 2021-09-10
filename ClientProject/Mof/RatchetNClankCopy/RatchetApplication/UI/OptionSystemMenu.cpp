@@ -80,8 +80,6 @@ bool ratchet::ui::OptionSystemMenu::Initialize(void) {
 
 bool ratchet::ui::OptionSystemMenu::Update(float delta_time) {
 	int index = 0;
-
-
 	for (auto elem : super::_items) {
 		elem->SetColor(def::color_rgba::kGray);
 		if (index == _infomation.index) {
@@ -89,8 +87,6 @@ bool ratchet::ui::OptionSystemMenu::Update(float delta_time) {
 		} // if
 		index++;
 	} // for
-
-	std::cout << "_infomation.index = " << _infomation.index << "\n";
 	return true;
 }
 

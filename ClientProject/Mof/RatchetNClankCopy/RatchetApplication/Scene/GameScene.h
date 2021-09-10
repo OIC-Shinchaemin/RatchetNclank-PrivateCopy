@@ -14,9 +14,9 @@
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
 #include "../Game/GameSystem/ShopSystem.h"
-
-
 #include "../Actor/Character/Player.h"
+#include "../Game/GameSystem/Text/TextSystem.h"
+
 
 namespace ratchet {
 namespace scene {
@@ -40,7 +40,8 @@ private:
     bool _re_initialize;
     //! メニュー
     base::core::Observable<bool> _pause_menu_subject;
-
+     
+    std::shared_ptr<game::gamesystem::text::TextSystem> _text_system;
 
     //! ゲーム
     std::weak_ptr<ratchet::game::GameManager> _game;
@@ -121,7 +122,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetName(void) override;
-
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    ratchet::scene::Scene::State GetState(void) const;
     /// <summary>
     /// 読み込み
     /// </summary>

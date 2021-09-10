@@ -328,6 +328,9 @@
     <Filter Include="Ratchet\Source\UI\Shop">
       <UniqueIdentifier>{5b2c302d-a819-4d66-8dae-2b28a117ed64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\Text">
+      <UniqueIdentifier>{65af10b0-6cb3-4729-b42f-0207578fead1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1088,6 +1091,21 @@
     </ClCompile>
     <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp">
       <Filter>Ratchet\Source\UI\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Script.cpp">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Menu.cpp">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Save.cpp">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2125,6 +2143,21 @@
     </ClInclude>
     <ClInclude Include="DebugManager.h">
       <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\Script.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\SpriteSet.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\Menu.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\Save.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\TextSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
