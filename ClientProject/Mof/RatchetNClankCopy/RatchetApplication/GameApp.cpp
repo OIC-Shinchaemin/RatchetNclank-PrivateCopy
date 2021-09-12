@@ -7,9 +7,7 @@
 #include "Component/Component.h"
 #include "Camera/CameraController.h"
 #include "DebugManager.h"
-#include <filesystem>
-
-Mof::CSoundBuffer _se;
+#include "TutorialManager.h"
 
 
 MofBool CGameApp::Initialize(void) {
@@ -41,12 +39,6 @@ MofBool CGameApp::Initialize(void) {
 	_scene_manager->SetEventManager(_event_manager);
 	_scene_manager->SetUICanvas(_ui_canvas);
 	_scene_manager->Initialize();
-
-
-	bool s = _se.Load("GAME_SE_01.wav");
-	_se.SetLoop(true);
-	_se.SetVolume(1.0f);
-	_se.Play();
 	return TRUE;
 }
 
@@ -54,12 +46,15 @@ MofBool CGameApp::Input(void) {
 	::g_pInput->RefreshKey();
 	::g_pGamepad->RefreshKey();
 
-	if (::g_pInput->IsKeyPush(MOFKEY_G)) {
-
-		_se.Release();
-	} // if
 	if (::g_pInput->IsKeyPush(MOFKEY_F1)) {
 		debug::DebugManager::GetInstance().ChangeDebugMode();
+	} // if
+
+	if (::g_pInput->IsKeyPush(MOFKEY_F6)) {
+		tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Jump);
+	} // if
+	if (::g_pInput->IsKeyPush(MOFKEY_F7)) {
+		tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
 	} // if
 	return TRUE;
 }
@@ -87,6 +82,21 @@ MofBool CGameApp::Render(void) {
 	if (debug::DebugManager::GetInstance().IsDebugMode()) {
 		auto fps = ::CUtilities::GetFPS();
 		::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", fps);
+		
+		if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Jump)) {
+			::CGraphicsUtilities::RenderString(10.0f, 60.0f, "jump tutorial flag = true");
+		} // if
+		else {
+			::CGraphicsUtilities::RenderString(10.0f, 60.0f, "jump tutorial flag = false");
+		} // else
+
+
+		if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
+			::CGraphicsUtilities::RenderString(10.0f, 90.0f, "attack tutorial flag = true");
+		} // if
+		else {
+			::CGraphicsUtilities::RenderString(10.0f, 90.0f, "attack tutorial flag = false");
+		} // else
 	} // if
 	::g_pGraphics->RenderEnd();
 	return TRUE;

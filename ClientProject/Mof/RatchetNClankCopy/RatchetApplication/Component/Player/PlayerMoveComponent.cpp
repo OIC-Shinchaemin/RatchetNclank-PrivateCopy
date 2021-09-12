@@ -3,6 +3,7 @@
 #include "../../Actor/Character/Player.h"
 #include "PlayerComponent.h"
 #include "../CameraComponent.h"
+#include "../../TutorialManager.h"
 
 
 void ratchet::component::player::action::PlayerMoveComponent::InputMoveVelocity(float speed) {
@@ -99,10 +100,14 @@ bool ratchet::component::player::action::PlayerMoveComponent::Initialize(void) {
 bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
     // flag
     if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Jump)) {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        } // if
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+        } // if
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
         auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
