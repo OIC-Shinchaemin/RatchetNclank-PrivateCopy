@@ -2310,6 +2310,12 @@
     <None Include="..\Resource\builder\wall.json">
       <Filter>Resource\builder</Filter>
     </None>
+    <None Include="..\Resource\builder\scarecrow_enemy.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\scarecrow_enemy.json">
+      <Filter>Resource\behaviour</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RatchetApplication.rc">

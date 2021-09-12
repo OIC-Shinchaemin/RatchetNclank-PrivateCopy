@@ -881,6 +881,7 @@
     <Text Include="..\Resource\scene_resource\title_scene.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Resource\behaviour\scarecrow_enemy.json" />
     <None Include="..\Resource\behaviour\strong_enemy_combat.json" />
     <None Include="..\Resource\behaviour\strong_enemy_patrol.json" />
     <None Include="..\Resource\behaviour\weak_enemy_combat.json" />
@@ -900,6 +901,7 @@
     <None Include="..\Resource\builder\player.json" />
     <None Include="..\Resource\builder\pyrocitor.json" />
     <None Include="..\Resource\builder\pyrocitor_bullet.json" />
+    <None Include="..\Resource\builder\scarecrow_enemy.json" />
     <None Include="..\Resource\builder\ship.json" />
     <None Include="..\Resource\builder\shop.json" />
     <None Include="..\Resource\builder\strong_enemy.json" />
