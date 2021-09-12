@@ -14,15 +14,19 @@
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
 #include "../Game/GameSystem/ShopSystem.h"
-
-
 #include "../Actor/Character/Player.h"
+#include "../Game/GameSystem/Text/TextSystem.h"
+#include "../Event/StageViewEvent.h"
 
-namespace ratchet {
-namespace scene {
-class GameScene : public ratchet::scene::Scene, public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&> {
+
+namespace ratchet::scene {
+class GameScene : 
+    public ratchet::scene::Scene, 
+    public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&>,
+    public event::StageViewEventMessageListener {
     using super = ratchet::scene::Scene;
     using this_type = ratchet::scene::GameScene;
+    friend class GameSceneInitializer;
 private:
     //! 追加
     std::vector<std::shared_ptr<ratchet::actor::Actor>> _created_actors;
@@ -40,12 +44,13 @@ private:
     bool _re_initialize;
     //! メニュー
     base::core::Observable<bool> _pause_menu_subject;
-
-
+    //! テキスト 
+    std::shared_ptr<game::gamesystem::text::TextSystem> _text_system;
     //! ゲーム
     std::weak_ptr<ratchet::game::GameManager> _game;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event;
+public:
     /// <summary>
     /// 追加
     /// </summary>
@@ -106,6 +111,11 @@ public:
     /// <param name="info"></param>
     virtual void OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) override;
     /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(const ratchet::event::StageViewEventMessage& message) override;
+    /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
@@ -121,7 +131,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetName(void) override;
-
     /// <summary>
     /// 読み込み
     /// </summary>
@@ -147,6 +156,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
 }
 #endif // !RATCHET_SCENE_GAME_SCENE_H

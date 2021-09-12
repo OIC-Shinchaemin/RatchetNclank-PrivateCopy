@@ -11,11 +11,9 @@
 
 Mof::CSoundBuffer _se;
 
+
 MofBool CGameApp::Initialize(void) {
 	::CUtilities::SetCurrentDirectory("Resource");
-	//SetCurrentDirectory("Resource");
-	//auto current = std::filesystem::current_path();
-	//bool loaded = _se.Load("GAME_SE_01.wav");
 
 	ratchet::Gamepad::GetInstance().Create();
 	_resource_manager = ut::MakeSharedWithRelease<ratchet::ResourceMgr>();
@@ -44,6 +42,11 @@ MofBool CGameApp::Initialize(void) {
 	_scene_manager->SetUICanvas(_ui_canvas);
 	_scene_manager->Initialize();
 
+
+	bool s = _se.Load("GAME_SE_01.wav");
+	_se.SetLoop(true);
+	_se.SetVolume(1.0f);
+	_se.Play();
 	return TRUE;
 }
 
@@ -52,7 +55,8 @@ MofBool CGameApp::Input(void) {
 	::g_pGamepad->RefreshKey();
 
 	if (::g_pInput->IsKeyPush(MOFKEY_G)) {
-		_se.Play();
+
+		_se.Release();
 	} // if
 	if (::g_pInput->IsKeyPush(MOFKEY_F1)) {
 		debug::DebugManager::GetInstance().ChangeDebugMode();
@@ -97,7 +101,5 @@ MofBool CGameApp::Release(void) {
 	_camera_manager.reset();
 	_resource_manager.reset();
 	ratchet::Gamepad::GetInstance().Release();
-
-	_se.Release();
 	return TRUE;
 }

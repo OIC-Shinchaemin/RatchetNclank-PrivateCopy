@@ -18,10 +18,7 @@
 #include "../../GameDefine.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
+namespace ratchet ::game ::gamesystem {
 class GameSystem : public std::enable_shared_from_this<ratchet::game::gamesystem::GameSystem>,
     public base::core::Observer<bool> {
     using this_type = ratchet::game::gamesystem::GameSystem;
@@ -82,7 +79,5 @@ public:
     /// <returns></returns>
     [[nodiscard]] virtual bool Update(float delta_time);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_GAME_SYSTEM_H

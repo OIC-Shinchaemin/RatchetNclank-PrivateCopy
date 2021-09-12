@@ -35,7 +35,7 @@ void ratchet::game::gamesystem::GamePauseSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     if (flag) {
         _infomation.Reset();
-
+        _infomation.index = 0;
         _infomation.items = &_items;
         _infomation.enable = true;
         _info_subject.Notify(_infomation);
@@ -74,11 +74,15 @@ bool ratchet::game::gamesystem::GamePauseSystem::Initialize(void) {
 bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
     if (this->IsPushUp()) {
         if (_infomation.index.has_value()) {
-            _infomation.index.value()++;
-            if (_infomation.index.value() > _items.size() - 1) {
-                _infomation.index = _items.size() - 1;
-            } // if
-            _infomation.index = _infomation.index.value();
+            _infomation.index.value()--;
+            _infomation.index = std::clamp(_infomation.index.value(), 0, static_cast<int>(_items.size()) - 1);
+
+            //if (_infomation.index.value() > _items.size() - 1) {
+            //    _infomation.index = _items.size() - 1;
+            //} // if
+            //_infomation.index = _infomation.index.value();
+
+
             _info_subject.Notify(_infomation);
         } // if
         else {
@@ -87,11 +91,14 @@ bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
     } // if
     else if (this->IsPushDown()) {
         if (_infomation.index.has_value()) {
-            _infomation.index.value()--;
-            if (_infomation.index.value() < 0) {
-                _infomation.index = 0;
-            } // if
-            _infomation.index = _infomation.index.value();
+            _infomation.index.value()++;
+            _infomation.index = std::clamp(_infomation.index.value(), 0, static_cast<int>(_items.size()) - 1);
+
+            //if (_infomation.index.value() < 0) {
+            //    _infomation.index = 0;
+            //} // if
+            //_infomation.index = _infomation.index.value();
+            
             _info_subject.Notify(_infomation);
         } // if
         else {
