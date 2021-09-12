@@ -159,12 +159,21 @@
   "enemy_spawn_list": [
 
     {
+      "builder": "builder/scarecrow_enemy.json",
+      "name": "scarecrow",
+      "pos_x": -12.0,
+      "pos_y": -5.0,
+      "pos_z": -12.0
+    },
+
+    {
       "builder": "builder/strong_enemy.json",
       "name": "enemy2",
       "pos_x": 55.0,
       "pos_y": -30.0,
       "pos_z": 25.0
     },
+
     {
       "builder": "builder/weak_enemy.json",
       "name": "enemy",
