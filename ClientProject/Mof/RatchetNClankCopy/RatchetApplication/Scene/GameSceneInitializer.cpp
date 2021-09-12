@@ -6,6 +6,7 @@
 #include "../Actor/Character/Player.h"
 #include "../Actor/Facility/Shop.h"
 #include "../Actor//Terrain/Terrain.h"
+#include "../Actor/Gimmick/Wall.h"
 #include "../Component/CameraComponent.h"
 #include "../Stage/Gimmick/Bridge.h"
 #include "../Event/BridgeEvent.h"
@@ -115,30 +116,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         for (auto& pair : weapons) {
             player->AddChild(pair.second);
         } // for
-
-        
-        //auto item0 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-        //    out->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
-        //    return true;
-        //});
-        //item0->SetText("タイトルに戻る");
-
-        //auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-        //    out->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
-        //    return true;
-        //});
-        //item1->SetText("リトライ");
-
-        //auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-        //    game->GetGamePauseSystem()->Inactive();
-        //    shared_this->SetState(scene::Scene::State::Active);
-        //    return true;
-        //});
-        //item2->SetText("もどる");
-
-        //pause_system->AddItem(item0);
-        //pause_system->AddItem(item1);
-        //pause_system->AddItem(item2);
     } // if
 
 
@@ -169,6 +146,24 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         auto terrain = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::terrain::Terrain>("../Resource/builder/water_flow.json", param);
         out->AddElement(terrain);
     } // for
+
+
+    // wall
+    def::Transform wall_transforms[]{
+        def::Transform(Mof::CVector3(43.0f, -4.0f, -13.0f)),
+        def::Transform(Mof::CVector3(-3.0f, -4.0f, -51.0f)),
+    };
+    param->tag = "wall";
+    param->name = "wall_1";
+    for (auto& transform : wall_transforms) {
+        param->transform.position = transform.position;
+        param->transform.scale = transform.scale;
+        auto gimmick = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::gimmick::Wall > ("../Resource/builder/wall.json", param);
+        out->AddElement(gimmick);
+        param->name = "wall_2";
+    } // for
+
+
     ut::SafeDelete(param);
 
 

@@ -331,6 +331,12 @@
     <Filter Include="Ratchet\Header\Game\GameSystem\Text">
       <UniqueIdentifier>{65af10b0-6cb3-4729-b42f-0207578fead1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Source\Actor\Gimmick">
+      <UniqueIdentifier>{823b4c48-ace6-44dc-9158-93bc03793858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Gimmick">
+      <UniqueIdentifier>{3a88a3b1-dd27-45ff-b664-5ad77a02ce91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1112,6 +1118,15 @@
     </ClCompile>
     <ClCompile Include="Scene\GameSceneInitializer.cpp">
       <Filter>Ratchet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Gimmick\Wall.cpp">
+      <Filter>Ratchet\Source\Actor\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\WallCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2171,6 +2186,15 @@
     <ClInclude Include="Scene\GameSceneInitializer.h">
       <Filter>Ratchet\Header\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Gimmick\Wall.h">
+      <Filter>Ratchet\Header\Actor\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\WallCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -2278,6 +2302,9 @@
       <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\nanotech.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\wall.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

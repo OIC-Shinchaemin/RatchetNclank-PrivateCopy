@@ -19,3 +19,4 @@ std::string ratchet::component::collision::CollisionComponentType::kBombGloveEff
 std::string ratchet::component::collision::CollisionComponentType::kWaterFlowCollisionComponent = "WaterFlowCollisionComponent";
 std::string ratchet::component::collision::CollisionComponentType::kCameraCollisionComponent = "CameraCollisionComponent";
 std::string ratchet::component::collision::CollisionComponentType::kShopCollisionComponent = "ShopCollisionComponent";
+std::string ratchet::component::collision::CollisionComponentType::kWallCollisionComponent = "WallCollisionComponent";

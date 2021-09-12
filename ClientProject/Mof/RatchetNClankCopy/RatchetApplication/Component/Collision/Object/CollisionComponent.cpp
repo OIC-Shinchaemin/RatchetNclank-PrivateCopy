@@ -143,6 +143,10 @@ bool ratchet::component::collision::CollisionComponent::DebugRender(void) {
     if (this->GetSphere().has_value()) {
         ::CGraphicsUtilities::RenderLineSphere(this->GetSphere().value(), def::color_rgba::kRed);
     } // if
+
+    if (this->GetBox().has_value()) {
+        ::CGraphicsUtilities::RenderBox(this->GetBox().value(), def::color_rgba::kRed);
+    } // if
     return true;
 }
 #endif // _DEBUG

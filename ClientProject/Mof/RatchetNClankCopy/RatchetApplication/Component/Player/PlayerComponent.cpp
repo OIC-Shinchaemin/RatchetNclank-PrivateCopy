@@ -2,6 +2,7 @@
 
 #include "../../Gamepad.h"
 #include "../../Actor/Character/Player.h"
+#include "../../Component/TransformComponent.h"
 #include "../../Component/VelocityComponent.h"
 #include "../../Component/MeshComponent.h"
 #include "../../Component/Player/PlayerStateComponent.h"
@@ -54,6 +55,7 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
     super::Activate();
 
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
+    _transform_com = super::GetOwner()->GetComponent<ratchet::component::TransformComponent>();
     auto velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     if (velocity_com) {
         velocity_com->SetGravity(9.8f);
@@ -72,7 +74,7 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
             canvas->RemoveElement("QuickChangeMenu");
         } // if
 
-        
+
         super::GetOwner()->End();
         return true;
     }));
@@ -105,6 +107,26 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
         auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
         player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessEnd);
         player->PopNotificationableSubject("ShopSystem");
+        return true;
+    }));
+
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kWallCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
+        auto velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+
+        auto v = velocity_com->GetVelocity();
+        float d = 3.0f;
+
+        auto add = Mof::CVector3(-v.x, 0.0f, -v.z) * d;
+        velocity_com->AddVelocityForce(add);
+
+        if (auto transform = _transform_com.lock()) {
+            //player->SetPosition(transform->GetPreviousPosition());
+        } // if
+        OutputDebugString("kWallCollisionComponent‚†");
+        puts("kWallCollisionComponent‚†");
         return true;
     }));
 

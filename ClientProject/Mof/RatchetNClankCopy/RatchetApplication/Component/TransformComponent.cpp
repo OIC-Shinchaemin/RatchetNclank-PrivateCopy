@@ -8,20 +8,6 @@ Mof::CVector3 ratchet::component::TransformComponent::UpdateRotate(float delta_t
     if (sleep_threshold < velocity.Length()) {
         rotate += velocity * delta_time;
     } // if
-    /*
-    if ((a) >= MOF_MATH_2PI) {
-        a -= MOF_MATH_2PI;
-    } // if
-    else {
-        if ((a) < 0.0f) {
-            a += MOF_MATH_2PI;
-        } // if
-        else {
-            a;
-        } // else
-    } // else
-    */
-    //MOF_NORMALIZE_RADIANANGLE(rotate.y);
     if (math::kTwoPi <= rotate.y) {
         rotate.y -= math::kTwoPi;
     } // if
@@ -42,11 +28,13 @@ Mof::CVector3 ratchet::component::TransformComponent::UpdatePosition(float delta
 
 ratchet::component::TransformComponent::TransformComponent(int priority) :
     super(priority),
+    _previous_position(),
     _velocity_com() {
 }
 
 ratchet::component::TransformComponent::TransformComponent(const TransformComponent& obj) :
     super(obj),
+    _previous_position(),
     _velocity_com() {
 }
 
@@ -55,6 +43,10 @@ ratchet::component::TransformComponent::~TransformComponent() {
 
 std::string ratchet::component::TransformComponent::GetType(void) const {
     return "TransformComponent";
+}
+
+Mof::CVector3 ratchet::component::TransformComponent::GetPreviousPosition(void) const {
+    return this->_previous_position;
 }
 
 bool ratchet::component::TransformComponent::Initialize(void) {
@@ -72,6 +64,7 @@ bool ratchet::component::TransformComponent::Update(float delta_time) {
         owner->SetRotate(rotate);
         // position
         auto pos = this->UpdatePosition(delta_time, owner->GetPosition(), velocity_com->GetVelocity());
+        this->_previous_position = pos;
         owner->SetPosition(pos);
     } // if
     return true;

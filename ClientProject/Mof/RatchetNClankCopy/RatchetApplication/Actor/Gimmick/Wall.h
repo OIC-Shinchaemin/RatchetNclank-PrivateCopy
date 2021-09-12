@@ -1,22 +1,28 @@
-#ifndef RATCHET_ACTOR_FACILITY_SHOP_H
-#define RATCHET_ACTOR_FACILITY_SHOP_H
+#ifndef RATCHET_ACTOR_GIMMICK_WALL_H
+#define RATCHET_ACTOR_GIMMICK_WALL_H
 
 
 #include "../Actor.h"
 
 
-namespace ratchet::actor::facility{
-class Shop : public ratchet::actor::Actor {
+namespace ratchet::actor::gimmick {
+class Wall : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    Shop();
+    Wall();
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~Shop();
+    virtual ~Wall();
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
     /// <summary>
     /// 更新
     /// </summary>
@@ -31,4 +37,4 @@ public:
     virtual bool Release(void) override;
 };
 }
-#endif // !RATCHET_ACTOR_FACILITY_SHOP_H
+#endif // !RATCHET_ACTOR_GIMMICK_WALL_H

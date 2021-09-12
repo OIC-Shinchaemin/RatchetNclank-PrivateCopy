@@ -10,9 +10,10 @@
 #include "Base/Core/Observable.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player {
+namespace ratchet::component {
+class TransformComponent;
+}
+namespace ratchet::component::player {
 class PlayerComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;
 private:
@@ -22,10 +23,10 @@ private:
     base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! 状態
+    std::weak_ptr<ratchet::component::TransformComponent> _transform_com;
     //! 地点
     std::string _next_terrain;
-    //! アクションフラグ
-    //bool _action_enable;
 public:
     /// <summary>
     /// コンストラクタ
@@ -94,7 +95,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_PLAYER_COMPONENT_H

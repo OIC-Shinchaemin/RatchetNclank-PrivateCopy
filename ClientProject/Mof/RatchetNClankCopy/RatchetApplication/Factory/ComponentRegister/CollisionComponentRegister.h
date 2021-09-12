@@ -18,4 +18,5 @@ ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::coll
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::WaterFlowCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::CameraCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::ShopCollisionComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::WallCollisionComponent>();
 

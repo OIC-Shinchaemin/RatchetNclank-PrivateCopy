@@ -7,11 +7,12 @@
 #include <memory>
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class TransformComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
+    //! 前の位置
+    Mof::CVector3 _previous_position;
     //! 速度
     std::weak_ptr<class VelocityComponent> _velocity_com;
     /// <summary>
@@ -52,6 +53,12 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector3 GetPreviousPosition(void) const;
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
@@ -76,6 +83,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_TRANSFORM_COMPONENT_H

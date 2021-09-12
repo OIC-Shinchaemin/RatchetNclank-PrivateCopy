@@ -31,6 +31,7 @@ struct CollisionAlgolithmType {
     static std::string kBulletItemPlayerCollisionAlgolithm;
     static std::string kNanotechItemPlayerCollisionAlgolithm;
     static std::string kPlayerShopCollisionAlgolithm;
+    static std::string kPlayerWallCollisionAlgolithm;
 };
 }
 #endif // !RATCHET_COLLISION_ALGOLITHM_DEFINE_H
