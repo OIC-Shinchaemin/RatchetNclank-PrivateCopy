@@ -24,3 +24,4 @@ std::string ratchet::CollisionAlgolithmType::kBoltPlayerCollisionAlgolithm = "Bo
 std::string ratchet::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm = "kBulletItemPlayerCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm = "kNanotechItemPlayerCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm = "PlayerShopCollisionAlgolithm";
+std::string ratchet::CollisionAlgolithmType::kPlayerWallCollisionAlgolithm = "PlayerWallCollisionAlgolithm";

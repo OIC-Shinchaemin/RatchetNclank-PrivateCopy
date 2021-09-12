@@ -157,6 +157,7 @@
     }
   ],
   "enemy_spawn_list": [
+
     {
       "builder": "builder/strong_enemy.json",
       "name": "enemy2",

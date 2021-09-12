@@ -26,6 +26,7 @@
 #include "../Component/Collision/Algolithm/BulletItemPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/NanotechItemPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShopCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerWallCollisionAlgolithm.h"
 #include "../Component/Collision/Object/CollisionComponentDefine.h"
 
 
@@ -55,6 +56,7 @@ void ratchet::game::PhysicsWorld::GenerateLayer(void) {
       ratchet::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerWallCollisionAlgolithm.c_str(),
     };
 
 
@@ -91,7 +93,7 @@ ratchet::game::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<ratchet::BulletItemPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kBulletItemPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::NanotechItemPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerShopCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm);
-
+    collision_algolithm_factory.Register<ratchet::PlayerWallCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerWallCollisionAlgolithm);
     this->GenerateLayer();
 }
 

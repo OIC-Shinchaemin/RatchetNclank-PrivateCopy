@@ -12,10 +12,8 @@
 #include "../../VelocityComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player { class PlayerComponent; class PlayerStateComponent; }
-namespace collision {
+namespace ratchet::component::player { class PlayerComponent; class PlayerStateComponent; }
+namespace ratchet::component::collision {
 class PlayerCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -144,7 +142,5 @@ public:
     /// <param name="gimmick"></param>
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_PLAYER_COLLISION_COMPONENT_H

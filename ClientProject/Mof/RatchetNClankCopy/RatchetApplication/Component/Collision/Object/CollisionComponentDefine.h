@@ -5,9 +5,7 @@
 #include <string>
 
 
-namespace ratchet {
-namespace component {
-namespace collision {
+namespace ratchet::component::collision {
 struct CollisionComponentType {
     static std::string kPlayerCollisionComponent;
     static std::string kPlayerMeleeAttackCollisionComponent;
@@ -27,8 +25,7 @@ struct CollisionComponentType {
     static std::string kWaterFlowCollisionComponent;
     static std::string kCameraCollisionComponent;
     static std::string kShopCollisionComponent;
+    static std::string kWallCollisionComponent;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_COLLISION_COMPONENT_DEFINE_H

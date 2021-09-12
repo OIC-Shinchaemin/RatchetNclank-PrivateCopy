@@ -15,3 +15,4 @@
 #include "WaterFlowCollisionComponent.h"
 #include "CameraCollisionComponent.h"
 #include "ShopCollisionComponent.h"
+#include "WallCollisionComponent.h"

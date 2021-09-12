@@ -270,6 +270,7 @@
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
     <ClCompile Include="Actor\Facility\Shop.cpp" />
+    <ClCompile Include="Actor\Gimmick\Wall.cpp" />
     <ClCompile Include="Actor\Item\Bolt.cpp" />
     <ClCompile Include="Actor\Item\BulletItem.cpp" />
     <ClCompile Include="Actor\Item\NanotechItem.cpp" />
@@ -318,6 +319,7 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
@@ -342,6 +344,7 @@
     <ClCompile Include="Component\Collision\Object\ShopCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\SightCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PlayerCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\WallCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp" />
@@ -543,6 +546,7 @@
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
     <ClInclude Include="Actor\Facility\Shop.h" />
+    <ClInclude Include="Actor\Gimmick\Wall.h" />
     <ClInclude Include="Actor\Item\Bolt.h" />
     <ClInclude Include="Actor\Item\BulletItem.h" />
     <ClInclude Include="Actor\Item\NanotechItem.h" />
@@ -647,6 +651,7 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
@@ -672,6 +677,7 @@
     <ClInclude Include="Component\Collision\Object\ShopCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\SightCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PlayerCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\WallCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\WaterFlowCollisionComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentDefine.h" />
@@ -896,6 +902,7 @@
     <None Include="..\Resource\builder\ship.json" />
     <None Include="..\Resource\builder\shop.json" />
     <None Include="..\Resource\builder\strong_enemy.json" />
+    <None Include="..\Resource\builder\wall.json" />
     <None Include="..\Resource\builder\water_flow.json" />
     <None Include="..\Resource\builder\weak_enemy.json" />
     <None Include="..\Resource\motion_names\player.motion_names" />
