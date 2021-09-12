@@ -15,36 +15,28 @@ using MeshArray = std::vector<MeshPtr>;
 /// </summary>
 class StageObject : public std::enable_shared_from_this<StageObject> {
 protected:
-
     //! オブジェクトの有効フラグ
     bool             _enable;
-
     //! 当たり判定の有効フラグ
     bool             _collision_enable;
-
     //! オブジェクトの種類
     StageObjectType  _type;
-
     //! オブジェクトの名前
     std::string      _name;
-
     //! メッシュ配列の何番目を使用しているか
     int              _mesh_no;
-
     //! ワールド座標
     Vector3          _position;
-    
     //! 拡大
     Vector3          _scale;
-
     //! 回転
     Vector3          _rotate;
-
     //! 描画用ワールドマトリクス
     CMatrix44        _world_matrix;
-
     //! 衝突球
     std::vector<Mof::CSphere> _geometry_spheres;
+    //! 表示
+    bool _is_show;
 public:
     /// <summary>
     /// コンストラクタ
@@ -62,11 +54,20 @@ public:
     virtual ~StageObject(void);
 
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetShow(bool flag);
+    /// <summary>
+    /// 表示フラグの取得
+    /// </summary>
+    /// <returns>表示フラグ</returns>
+    bool IsShow(void) const;
+    /// <summary>
     /// 有効フラグの取得
     /// </summary>
     /// <returns>有効フラグ</returns>
     bool IsEnable(void) const;
-
     /// <summary>
     /// 当たり判定フラグの取得
     /// </summary>

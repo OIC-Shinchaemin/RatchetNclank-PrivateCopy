@@ -17,9 +17,9 @@ bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
         return false;
     }
     //コマンド位置を読み込み
-    fread(&m_CommandNo, sizeof(int), 1, fp);
+    fread(&_command_no, sizeof(int), 1, fp);
     //フラグ状態を読み込み
-    fread(m_Flag, sizeof(int), _flag_count, fp);
+    fread(_flags, sizeof(int), _flag_count, fp);
     //表示の状態を読み込み
     fread(&_text_command.px, sizeof(float), 1, fp);
     fread(&_text_command.py, sizeof(float), 1, fp);
@@ -41,7 +41,7 @@ bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
     //ファイルを閉じる
     fclose(fp);
     //ウェイト処理までを実行
-    m_bWait = false;
+    _wait = false;
     StepCommand();
     return true;
 }
@@ -55,10 +55,10 @@ bool ratchet::game::gamesystem::text::TextSystem::Save(const char* name) {
     //実行中のスクリプトの保存
     fwrite(_script.GetFileName(), 1, MAX_PATH, fp);
     //コマンド位置を保存、読み込み時に再度現在のコマンドを実行するために一つ前に戻す
-    int cmd = m_CommandNo - 1;
+    int cmd = _command_no - 1;
     fwrite(&cmd, sizeof(int), 1, fp);
     //フラグ状態を保存
-    fwrite(m_Flag, sizeof(int), _flag_count, fp);
+    fwrite(_flags, sizeof(int), _flag_count, fp);
     //表示の状態を保存
     fwrite(&_text_command.px, sizeof(float), 1, fp);
     fwrite(&_text_command.py, sizeof(float), 1, fp);
@@ -85,8 +85,8 @@ bool ratchet::game::gamesystem::text::TextSystem::LoadScript(const char* name) {
     //現在の情報を解放
     _script.Release();
     _sprite_list.Release();
-    m_CommandNo = 0;
-    m_bWait = false;
+    _command_no = 0;
+    _wait = false;
     //スクリプトの読み込み
     if (!_script.Load(name)) {
         return false;
@@ -140,9 +140,9 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
     if (m_SaveMenu.IsShow()) {
     }
     //スクリプトによる更新
-    else if (m_bWait) {
+    else if (_wait) {
         //コマンドのタイプによって分岐
-        switch (m_pNowCommand->Type) {
+        switch (_now_command->Type) {
             case CMD_TEXT:
                 TextCommand();
                 break;
@@ -177,39 +177,41 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
         this->_active = false;
         return false;
     } // if
+
+    return true;
 }
 
 void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
     //すべてのコマンドを実行するか待機処理に入るまでループ実行
-    while (m_CommandNo < _script.GetCommandCount() && !m_bWait) {
+    while (_command_no < _script.GetCommandCount() && !_wait) {
         //実行コマンド取り出し
-        m_pNowCommand = _script.GetCommand(m_CommandNo);
+        _now_command = _script.GetCommand(_command_no);
         //コマンドのタイプによって分岐
-        switch (m_pNowCommand->Type) {
+        switch (_now_command->Type) {
             case CMD_TEXT:
-                _text_command = *((TEXTCOMMAND*)m_pNowCommand);
+                _text_command = *((TEXTCOMMAND*)_now_command);
                 memset(_line_buffer, 0, TEXTBUFFERSIZE);
-                m_StrWait = 0;
-                m_bWait = true;
+                _str_wait = 0;
+                _wait = true;
                 break;
             case CMD_SPRITE:
-                SpriteCommand((SPRITECOMMAND*)m_pNowCommand);
+                SpriteCommand((SPRITECOMMAND*)_now_command);
                 break;
             case CMD_SETPOS:
-                SetPosCommand((SETPOSCOMMAND*)m_pNowCommand);
+                SetPosCommand((SETPOSCOMMAND*)_now_command);
                 break;
             case CMD_SETSHOW:			//スプライトの表示設定コマンド
-                SetShowCommand((SETSHOWCOMMAND*)m_pNowCommand);
+                SetShowCommand((SETSHOWCOMMAND*)_now_command);
                 break;
             case CMD_JUMP:				//ジャンプコマンド
             {
-                NAMECOMMAND* pNameCommand = (NAMECOMMAND*)m_pNowCommand;
+                NAMECOMMAND* pNameCommand = (NAMECOMMAND*)_now_command;
                 JumpCommand(pNameCommand->Name);
                 break;
             }
             case CMD_NEXT:				//ファイル変更コマンド
             {
-                NAMECOMMAND* pNameCommand = (NAMECOMMAND*)m_pNowCommand;
+                NAMECOMMAND* pNameCommand = (NAMECOMMAND*)_now_command;
                 //新しいスクリプトを開くと古い情報が消えてしまうので文字列を取り出す
                 char name[256];
                 strcpy(name, pNameCommand->Name);
@@ -220,22 +222,22 @@ void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
             }
             case CMD_SELECT:
             {
-                SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)m_pNowCommand;
+                SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)_now_command;
                 pSelCommand->Select.Show(g_pGraphics->GetTargetWidth() * 0.5f, g_pGraphics->GetTargetHeight() * 0.5f);
-                m_bWait = true;
+                _wait = true;
                 break;
             }
             case CMD_FLAG:				//フラグ操作コマンド
-                FlagCommand((FLAGCOMMAND*)m_pNowCommand);
+                FlagCommand((FLAGCOMMAND*)_now_command);
                 break;
             case CMD_IF:				//分岐コマンド
-                IfCommand((IFCOMMAND*)m_pNowCommand);
+                IfCommand((IFCOMMAND*)_now_command);
                 break;
             default:					//定義されていないコマンド
                 break;
         }
         //次のコマンドへ
-        m_CommandNo++;
+        _command_no++;
     }
 }
 
@@ -247,14 +249,14 @@ void ratchet::game::gamesystem::text::TextSystem::TextCommand(void) {
     if (nl < tl) {
         //クリックで全文を一括表示
         if (g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
-            m_bWait = false;
+            _wait = false;
             strcpy(_line_buffer, _text_command.Text);
         } // if
         else {
             //一定時間ごとに一文字ずつ入れていく
-            m_StrWait++;
-            if (m_StrWait >= 10) {
-                m_StrWait = 0;
+            _str_wait++;
+            if (_str_wait >= 10) {
+                _str_wait = 0;
                 //全角文字の判定を行う
                 if (IsDBCSLeadByte(_text_command.Text[nl])) {
                     //全角文字の場合２バイト分で一文字になる
@@ -271,7 +273,7 @@ void ratchet::game::gamesystem::text::TextSystem::TextCommand(void) {
                 }
                 //全文の表示が終了
                 if (nl >= tl) {
-                    m_bWait = false;
+                    _wait = false;
                 } // if
             }
         }
@@ -321,8 +323,8 @@ bool ratchet::game::gamesystem::text::TextSystem::JumpCommand(const char* label)
         if (pCommand->Type == CMD_LABEL) {
             NAMECOMMAND* pNameCommand = (NAMECOMMAND*)pCommand;
             if (stricmp(pNameCommand->Name, label) == 0) {
-                m_pNowCommand = pCommand;
-                m_CommandNo = cmd;
+                _now_command = pCommand;
+                _command_no = cmd;
                 return true;
             } // if
         } // if
@@ -334,13 +336,13 @@ bool ratchet::game::gamesystem::text::TextSystem::JumpCommand(const char* label)
 
 void ratchet::game::gamesystem::text::TextSystem::SelectCommand(void) {
     //コマンド取り出し
-    SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)m_pNowCommand;
+    SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)_now_command;
     //メニューの更新
     if (pSelCommand->Select.IsShow()) {
         pSelCommand->Select.Update();
         if (pSelCommand->Select.IsEnter()) {
             pSelCommand->Select.Hide();
-            m_bWait = false;
+            _wait = false;
             JumpCommand(pSelCommand->pLabel[pSelCommand->Select.GetSelect()]);
             StepCommand();
         } // if
@@ -352,11 +354,11 @@ void ratchet::game::gamesystem::text::TextSystem::FlagCommand(FLAGCOMMAND* pFlag
         return;
     } // if
     switch (pFlagCommand->Op) {
-        case OP_PLUS:		m_Flag[pFlagCommand->No] += pFlagCommand->Value;		break;
-        case OP_MINUS:		m_Flag[pFlagCommand->No] -= pFlagCommand->Value;		break;
-        case OP_MULTIPLY:	m_Flag[pFlagCommand->No] *= pFlagCommand->Value;		break;
-        case OP_DIVISION:	m_Flag[pFlagCommand->No] /= pFlagCommand->Value;		break;
-        case OP_EQUAL:		m_Flag[pFlagCommand->No] = pFlagCommand->Value;			break;
+        case OP_PLUS:		_flags[pFlagCommand->No] += pFlagCommand->Value;		break;
+        case OP_MINUS:		_flags[pFlagCommand->No] -= pFlagCommand->Value;		break;
+        case OP_MULTIPLY:	_flags[pFlagCommand->No] *= pFlagCommand->Value;		break;
+        case OP_DIVISION:	_flags[pFlagCommand->No] /= pFlagCommand->Value;		break;
+        case OP_EQUAL:		_flags[pFlagCommand->No] = pFlagCommand->Value;			break;
     }
 }
 
@@ -366,32 +368,32 @@ void ratchet::game::gamesystem::text::TextSystem::IfCommand(IFCOMMAND* pIfComman
     } // if
     switch (pIfCommand->Op) {
         case CMP_GRATER:			// >
-            if (m_Flag[pIfCommand->No] > pIfCommand->Value) {
+            if (_flags[pIfCommand->No] > pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
         case CMP_GRATEREQUAL:		// >=
-            if (m_Flag[pIfCommand->No] >= pIfCommand->Value) {
+            if (_flags[pIfCommand->No] >= pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
         case CMP_EQUAL:				// =
-            if (m_Flag[pIfCommand->No] == pIfCommand->Value) {
+            if (_flags[pIfCommand->No] == pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
         case CMP_NOTEQUAL:			// !
-            if (m_Flag[pIfCommand->No] != pIfCommand->Value) {
+            if (_flags[pIfCommand->No] != pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
         case CMP_LESSEQUAL:			// <=
-            if (m_Flag[pIfCommand->No] <= pIfCommand->Value) {
+            if (_flags[pIfCommand->No] <= pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
         case CMP_LESS:				// <
-            if (m_Flag[pIfCommand->No] < pIfCommand->Value) {
+            if (_flags[pIfCommand->No] < pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
@@ -417,7 +419,7 @@ bool ratchet::game::gamesystem::text::TextSystem::Activate(void) {
 
 bool ratchet::game::gamesystem::text::TextSystem::Load(void) {
         //フラグの初期化
-    ::memset(m_Flag, 0, sizeof(int) * _flag_count);
+    ::memset(_flags, 0, sizeof(int) * _flag_count);
     //スクリプトを読み込む
     if (!this->LoadScript("script/test.txt")) {
         return false;
@@ -439,9 +441,9 @@ bool ratchet::game::gamesystem::text::TextSystem::Render(void) {
         _sprite_list[i]->Render();
     } // if
     //メニューの場合は選択描画
-    if (m_pNowCommand->Type == CMD_SELECT) {
+    if (_now_command->Type == CMD_SELECT) {
         //コマンド取り出し
-        SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)m_pNowCommand;
+        SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)_now_command;
         //選択描画
         pSelCommand->Select.Render();
     } // if
@@ -452,7 +454,7 @@ bool ratchet::game::gamesystem::text::TextSystem::Render(void) {
     ::CGraphicsUtilities::RenderString(_text_command.px, _text_command.py, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
 
     // debug 
-    ::CGraphicsUtilities::RenderString(10, 10, MOF_ARGB(_alpha, 255, 0, 0), "コマンド実行位置 [%d]", m_CommandNo);
+    ::CGraphicsUtilities::RenderString(10, 10, MOF_ARGB(_alpha, 255, 0, 0), "コマンド実行位置 [%d]", _command_no);
     return false;
 }
 

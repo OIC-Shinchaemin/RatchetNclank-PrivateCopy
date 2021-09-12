@@ -14,19 +14,20 @@ namespace ratchet::game::gamesystem::text {
 class TextSystem {
 private:
     static const int _flag_count = 256;
-    
+    //! •\Ž¦’†
     bool _active;
+    //! •\Ž¦’†
     BYTE _alpha = 0;
     CTexture _text_window_texture;
     CScript _script;
     CDynamicArray<CSprite2D*> _sprite_list;
     TEXTCOMMAND _text_command;
     char _line_buffer[256];
-    int m_StrWait = 0;
-    int	m_CommandNo = 0;
-    COMMAND* m_pNowCommand;
-    bool m_bWait = false;
-    int	m_Flag[_flag_count];
+    int _str_wait = 0;
+    int	_command_no = 0;
+    COMMAND* _now_command;
+    bool _wait = false;
+    int	_flags[_flag_count];
     CMenu m_SaveMenu;
 
     bool Load(const char* name);

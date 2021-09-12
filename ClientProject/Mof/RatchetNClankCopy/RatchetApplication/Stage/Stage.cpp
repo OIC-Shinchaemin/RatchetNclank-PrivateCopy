@@ -60,6 +60,10 @@ void Stage::Initialize(void) {
 
 	for (const auto& gimmick : _gimmick_array) {
 		gimmick->Initialize();
+		auto type = gimmick->GetType();
+		if (type == decltype(type)::Elevator) {
+			gimmick->SetShow(false);
+		} // if
 	}
 	for (const auto& box : _woodbox_array) {
 		box->Initialize();
@@ -93,6 +97,16 @@ void Stage::Update(float delta) {
 	}
 	for (const auto& gimmick : _gimmick_array) {
 		gimmick->Update(delta);
+
+
+		if (::g_pInput->IsKeyPush(MOFKEY_R)) {
+			auto type = gimmick->GetType();
+			if (type == decltype(type)::Elevator) {
+				gimmick->SetShow(true);
+			} // if
+		} // if
+	
+	
 	}
 	for (const auto& box : _woodbox_array) {
 		box->Update(delta);
@@ -114,6 +128,9 @@ void Stage::Render(void) {
 		RenderObject(obj);
 	}
 	for (const auto& gimmick : _gimmick_array) {
+		if (!gimmick->IsShow()) {
+			continue;
+		} // if
 		if (debug::DebugManager::GetInstance().IsDebugMode()) {
 			gimmick->DebugRender();
 		} // if

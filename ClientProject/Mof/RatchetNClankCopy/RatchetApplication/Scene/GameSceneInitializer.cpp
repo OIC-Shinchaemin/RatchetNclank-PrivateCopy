@@ -17,6 +17,7 @@
 
 ratchet::scene::GameSceneInitializer::GameSceneInitializer() {
 }
+
 bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game::GameManager>& game, std::shared_ptr<ratchet::event::EventManager>& event, std::shared_ptr<ratchet::scene::GameScene>& out) {
     out->_stage.Initialize();
     ratchet::event::EventReferenceTable::Singleton().Reset();
@@ -116,28 +117,28 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         } // for
 
         
-        auto item0 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            out->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
-            return true;
-        });
-        item0->SetText("タイトルに戻る");
+        //auto item0 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
+        //    out->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
+        //    return true;
+        //});
+        //item0->SetText("タイトルに戻る");
 
-        auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            out->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
-            return true;
-        });
-        item1->SetText("リトライ");
+        //auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
+        //    out->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
+        //    return true;
+        //});
+        //item1->SetText("リトライ");
 
-        auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            game->GetGamePauseSystem()->Inactive();
-            shared_this->SetState(scene::Scene::State::Active);
-            return true;
-        });
-        item2->SetText("もどる");
+        //auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
+        //    game->GetGamePauseSystem()->Inactive();
+        //    shared_this->SetState(scene::Scene::State::Active);
+        //    return true;
+        //});
+        //item2->SetText("もどる");
 
-        pause_system->AddItem(item0);
-        pause_system->AddItem(item1);
-        pause_system->AddItem(item2);
+        //pause_system->AddItem(item0);
+        //pause_system->AddItem(item1);
+        //pause_system->AddItem(item2);
     } // if
 
 

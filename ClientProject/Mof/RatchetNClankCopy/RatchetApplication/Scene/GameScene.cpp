@@ -180,7 +180,7 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
             r->Load(path);
         } // if
         if (!_stage.Load("../Resource/stage/stage.json")) {
-            return false;
+            //return false;
         } // if
         if (auto game = _game.lock()) {
             game->GameSystemLoad();
@@ -205,12 +205,39 @@ bool ratchet::scene::GameScene::Initialize(void) {
     auto event = _event.lock();
     initializer.Execute(game, event, shared_this);
 
+    {
+        auto item0 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
+            this->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kTitleScene, ""));
+            return true;
+        });
+        item0->SetText("タイトルに戻る");
+
+        auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
+            this->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
+            return true;
+        });
+        item1->SetText("リトライ");
+
+        auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
+            _game.lock()->GetGamePauseSystem()->Inactive();
+            super::SetState(scene::Scene::State::Active);
+            return true;
+        });
+        item2->SetText("もどる");
+
+
+        game->GetGamePauseSystem()->AddItem(item2);
+        game->GetGamePauseSystem()->AddItem(item1);
+        game->GetGamePauseSystem()->AddItem(item0);
+    }
+
+
     _re_initialize = false;
     return true;
 }
 
 bool ratchet::scene::GameScene::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_BACK)) {
         if (auto game = _game.lock()) {
             if (!game->GetGamePauseSystem()->IsActive()) {
                 if (!_event.lock()->GetEvent<ratchet::event::StageViewEvent>()) {

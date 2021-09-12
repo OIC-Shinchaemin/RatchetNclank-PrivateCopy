@@ -46,22 +46,23 @@ const char* gScriptCmp[] = {
  * [in]			s				対象文字列
  */
 char* Trim(char* s) {
-    //引数の文字列がない
-    if (!s) 	{
+    // 引数の文字列がない
+    if (!s) {
         return NULL;
     }
-    //文字列の後ろから空白以外を見つけた次の位置に\0（終端）を設定する
-    int l = strlen(s);
-    while (--l >= 0) 	{
-        if (s[l] != '\t' && s[l] != '\r' && s[l] != '\n' && s[l] != ' ') 		{
+    // 文字列の後ろから空白以外を見つけた次の位置に\0（終端）を設定する
+    int length = std::strlen(s);
+    while (--length >= 0) {
+        if (s[length] != '\t' && s[length] != '\r' && 
+            s[length] != '\n' && s[length] != ' ') {
             break;
         }
     }
-    s[l + 1] = '\0';
-    //先頭から空白以外を見つけた位置のポインタを返す
+    s[length + 1] = '\0';
+    // 先頭から空白以外を見つけた位置のポインタを返す
     int p = 0;
-    while (p < l) 	{
-        if (s[p] != '\t' && s[p] != '\r' && s[p] != '\n' && s[p] != ' ') 		{
+    while (p < length) {
+        if (s[p] != '\t' && s[p] != '\r' && s[p] != '\n' && s[p] != ' ') {
             return &s[p];
         }
         p++;
@@ -69,20 +70,12 @@ char* Trim(char* s) {
     return s;
 }
 
-/**
- * コンストラクタ
- *
- */
 CScript::CScript() :
     m_FileBuffer(NULL),
     m_CommandList() {
     memset(m_FileName, 0, MAX_PATH);
 }
 
-/**
- * デストラクタ
- *
- */
 CScript::~CScript() {
 }
 
@@ -95,27 +88,30 @@ CScript::~CScript() {
  */
 bool CScript::Load(const char* name) {
     //テキストファイルを開く
-    if (!LoadTextFile(name)) 	{
+    if (!LoadTextFile(name)) {
         return false;
-    }
+    } // if
 
     //スクリプトの解析を行う
     char* fb = m_FileBuffer;
-    while (TRUE) 	{
+    while (TRUE) {
         //指定の行の最初の，までがコマンドの指定
         char* cmd = strtok(fb, ",");
         fb = NULL;
-        if (!cmd) 		{
+        if (!cmd) {
             break;
-        }
+        } // if
         //コマンドの前後に空白などがあるなら除去をする
         cmd = Trim(cmd);
+        
         //コマンドの識別
         int sCmd = 0;
-        for (sCmd = 0; sCmd < CMD_COUNT && stricmp(cmd, gScriptCommand[sCmd]) != 0; sCmd++);
+        for (sCmd = 0; 
+             sCmd < CMD_COUNT && stricmp(cmd, gScriptCommand[sCmd]) != 0; 
+             sCmd++);
         //コマンドの解析
-        ParseCommand(sCmd);
-    }
+        this->ParseCommand(sCmd);
+    } // while
     return true;
 }
 
@@ -127,7 +123,7 @@ bool CScript::Load(const char* name) {
  */
 void CScript::ParseCommand(int sCmd) {
     //コマンドに必要なパラメータの解析
-    switch (sCmd) 	{
+    switch (sCmd) {
         case CMD_TEXT:				//テキストの表示コマンド
             TextCommand();
             break;
@@ -211,13 +207,13 @@ void CScript::SetShowCommand(void) {
     SETSHOWCOMMAND* pCmd = new SETSHOWCOMMAND();
     char* pstr = strtok(NULL, ",");
     Trim(pstr);
-    if (stricmp(pstr, "true") == 0) 	{
+    if (stricmp(pstr, "true") == 0) {
         pCmd->bShow = true;
     }
-    else if (stricmp(pstr, "false") == 0) 	{
+    else if (stricmp(pstr, "false") == 0) {
         pCmd->bShow = false;
     }
-    else 	{
+    else {
         pCmd->bShow = atoi(pstr);
     }
     pstr = strtok(NULL, ";");
@@ -250,7 +246,7 @@ void CScript::SelectCommand(void) {
     pCmd->Count = atoi(pstr);
     pCmd->pItem = (char**)malloc(sizeof(char*) * pCmd->Count);
     pCmd->pLabel = (char**)malloc(sizeof(char*) * pCmd->Count);
-    for (int i = 0; i < pCmd->Count; i++) 	{
+    for (int i = 0; i < pCmd->Count; i++) {
         //選択文字列読み込み
         pstr = strtok(NULL, ",");
         pstr = Trim(pstr);
@@ -311,7 +307,7 @@ void CScript::IfCommand(void) {
 bool CScript::LoadTextFile(const char* name) {
     //テキストファイルを開く
     FILE* fp = fopen(name, "rt");
-    if (fp == NULL) 	{
+    if (fp == NULL) {
         return false;
     }
     //ファイルの全容量を調べる
@@ -340,7 +336,7 @@ bool CScript::LoadTextFile(const char* name) {
  *
  */
 void CScript::Release(void) {
-    if (m_FileBuffer) 	{
+    if (m_FileBuffer) {
         free(m_FileBuffer);
         m_FileBuffer = NULL;
     }
