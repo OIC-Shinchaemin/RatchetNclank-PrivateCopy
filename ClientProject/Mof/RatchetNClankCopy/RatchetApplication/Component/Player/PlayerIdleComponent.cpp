@@ -1,6 +1,7 @@
 #include "PlayerIdleComponent.h"
 
 #include "../../Actor/Character/Player.h"
+#include "../../TutorialManager.h"
 
 
 ratchet::component::player::action::PlayerIdleComponent::PlayerIdleComponent(int priority) :
@@ -34,10 +35,14 @@ bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMoveState);
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Jump)) {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        } // if
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
+            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+        } // if
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
         auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
@@ -48,7 +53,7 @@ bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
     else if (::g_pInput->IsKeyPush(MOFKEY_B) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_R_BTN)) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionCrouchState);
     } // else if
-    
+
     return true;
 }
 

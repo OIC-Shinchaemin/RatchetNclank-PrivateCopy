@@ -858,6 +858,7 @@
     <ClInclude Include="State\PlayerMotionStateDefine.h" />
     <ClInclude Include="State\ShipActionStateDefine.h" />
     <ClInclude Include="State\ShipMotionStateDefine.h" />
+    <ClInclude Include="TutorialManager.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
     <ClInclude Include="UI\GamePauseSystemMenu.h" />
     <ClInclude Include="UI\GimmickAccessSystemMenu.h" />
