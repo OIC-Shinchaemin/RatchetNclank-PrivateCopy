@@ -2,6 +2,9 @@
 
 #include "../CollisionComponentDefine.h"
 
+#include "../../Scarecrow/ScarecrowComponent.h"
+#include "../../VelocityComponent.h"
+
 
 ratchet::component::collision::ScarecrowCollisionComponent::ScarecrowCollisionComponent(int priority) :
     super(priority) {
@@ -19,11 +22,13 @@ std::string ratchet::component::collision::ScarecrowCollisionComponent::GetType(
 }
 
 std::optional<Mof::CSphere> ratchet::component::collision::ScarecrowCollisionComponent::GetSphere(void) {
+    _ASSERT_EXPR(!_type_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
     auto pos = super::GetOwner()->GetPosition();
-    return Mof::CSphere(pos, 2.0f);
+    pos.y += _type_com.lock()->GetHeight();
+    return Mof::CSphere(pos, _type_com.lock()->GetVolume());
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::ScarecrowCollisionComponent::GetBox(void) {
@@ -31,9 +36,6 @@ std::optional<Mof::CBoxAABB> ratchet::component::collision::ScarecrowCollisionCo
 }
 
 std::optional<Mof::CRay3D> ratchet::component::collision::ScarecrowCollisionComponent::GetRay(void) {
-    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
-        return std::optional<Mof::CRay3D>();
-    } // if
     return std::optional<Mof::CRay3D>();
 }
 
@@ -47,6 +49,9 @@ std::optional<::ratchet::component::collision::SightObject> ratchet::component::
 
 bool ratchet::component::collision::ScarecrowCollisionComponent::Initialize(void) {
     super::Initialize();
+    _type_com = super::GetOwner()->GetComponent<ratchet::component::scarecrow::ScarecrowComponent>();
+    //_state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     return true;
 }
 

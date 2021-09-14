@@ -10,9 +10,15 @@
 #include <Mof.h>
 
 
+namespace ratchet::component::scarecrow { class ScarecrowComponent; }
 namespace ratchet ::component ::collision {
 class ScarecrowCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
+private:
+    //! 型
+    std::weak_ptr<ratchet::component::scarecrow::ScarecrowComponent> _type_com;
+    //! 速度
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
 public:
     /// <summary>
     /// コンストラクタ

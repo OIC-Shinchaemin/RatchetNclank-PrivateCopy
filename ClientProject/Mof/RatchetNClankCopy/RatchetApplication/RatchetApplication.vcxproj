@@ -324,6 +324,7 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
@@ -415,6 +416,7 @@
     <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerOmniWrenchComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
+    <ClCompile Include="Component\Scarecrow\ScarecrowComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipActionComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipIdleComponent.cpp" />
@@ -527,6 +529,9 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Base\Accessor\Accessor.h" />
+    <ClInclude Include="..\include\Base\Accessor\Getter.h" />
+    <ClInclude Include="..\include\Base\Accessor\Setter.h" />
     <ClInclude Include="..\include\Base\Core\AbstructContainer.h" />
     <ClInclude Include="..\include\Base\Core\Define.h" />
     <ClInclude Include="..\include\Base\Core\FunctionPointerContainer.h" />
@@ -668,6 +673,7 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
@@ -675,6 +681,7 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\CollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\CollisionAlgolithmDefine.h" />
+    <ClInclude Include="Component\Collision\CollisionAlgolithmInclude.h" />
     <ClInclude Include="Component\Collision\CollisionComponent.h" />
     <ClInclude Include="Component\Collision\CollisionComponentDefine.h" />
     <ClInclude Include="Component\Collision\CollisionComponentInclude.h" />
@@ -766,6 +773,7 @@
     <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerOmniWrenchComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
+    <ClInclude Include="Component\Scarecrow\ScarecrowComponent.h" />
     <ClInclude Include="Component\Ship\ShipActionComponent.h" />
     <ClInclude Include="Component\Ship\ShipComponent.h" />
     <ClInclude Include="Component\Ship\ShipComponentInclude.h" />

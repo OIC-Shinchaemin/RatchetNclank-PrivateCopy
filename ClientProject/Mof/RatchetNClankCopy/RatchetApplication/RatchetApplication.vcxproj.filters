@@ -346,6 +346,15 @@
     <Filter Include="Resource\script">
       <UniqueIdentifier>{b7ca4f36-7bff-424d-b2fe-d7b59ae97c03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Base\Accessor">
+      <UniqueIdentifier>{fb991ccd-1cfa-4d93-927b-dbc882384c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Scarecrow">
+      <UniqueIdentifier>{4fab48f0-5ae5-4c95-b2a7-89b6d58b1a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Scarecrow">
+      <UniqueIdentifier>{bd67f64e-28f5-426d-ae5a-c2d6028f55f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1169,6 +1178,12 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\CollisionComponent.cpp">
       <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Scarecrow\ScarecrowComponent.cpp">
+      <Filter>Ratchet\Source\Component\Scarecrow</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2269,6 +2284,24 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\CollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Accessor\Accessor.h">
+      <Filter>Ratchet\Base\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Accessor\Getter.h">
+      <Filter>Ratchet\Base\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Accessor\Setter.h">
+      <Filter>Ratchet\Base\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionAlgolithmInclude.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Scarecrow\ScarecrowComponent.h">
+      <Filter>Ratchet\Header\Component\Scarecrow</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -15,9 +15,7 @@
 #include "../HpComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace enemy {
+namespace ratchet::component::enemy {
 class EnemyDamageComponent : public ratchet::component::ActionComponent {
     using super = ratchet::component::ActionComponent;
 private:
@@ -103,7 +101,5 @@ public:
     /// <returns>ê¨å˜</returns>
     virtual bool Start(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_ENEMY_ENEMY_DAMAGE_COMPONENT_H

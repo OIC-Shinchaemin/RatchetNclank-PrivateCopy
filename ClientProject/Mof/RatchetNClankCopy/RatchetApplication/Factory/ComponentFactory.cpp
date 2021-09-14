@@ -26,6 +26,8 @@
 #include "../Component/Item/BulletItem/BulletItemComponentInclude.h"
 #include "../Component/Item/NanotechItem/NanotechItemComponentInclude.h"
 
+
+#include "../Component/Scarecrow/ScarecrowComponent.h"
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
 
@@ -53,6 +55,7 @@ ratchet::factory::ComponentFactory::ComponentFactory() :
 #include "ComponentRegister/ShipComponentRegister.h"
 
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::BoltCollisionComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::scarecrow::ScarecrowComponent>();
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltComponent>();
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltActionStateComponent>();
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::item::BoltDefaultComponent>();
