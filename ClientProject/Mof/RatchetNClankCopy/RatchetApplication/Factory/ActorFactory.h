@@ -17,8 +17,7 @@
 #include "../Actor/Item/BulletItem.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 class ActorFactory {
 private:
     //! ファクトリー
@@ -109,6 +108,5 @@ public:
     /// <param name=""></param>
     void Release(void);
 };
-}
 }
 #endif // !RATCHET_FACTORY_ACTOR_FACTORY_H

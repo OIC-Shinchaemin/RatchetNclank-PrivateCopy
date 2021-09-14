@@ -1,6 +1,6 @@
 #include "BombGloveBulletCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::BombGloveBulletCollisionComponent::BombGloveBulletCollisionComponent(int priority) :

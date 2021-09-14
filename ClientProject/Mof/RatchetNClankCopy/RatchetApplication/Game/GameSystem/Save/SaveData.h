@@ -7,10 +7,7 @@
 #include <vector>
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-namespace save{
+namespace ratchet::game::gamesystem::save {
 struct SaveDataParam {
     //! èäéù
     int money;
@@ -52,8 +49,5 @@ public:
     /// </summary>
     const std::vector<std::string>& GetAvailableMechanicalWeaponsAddress(void);
 };
-}
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_DATA_H

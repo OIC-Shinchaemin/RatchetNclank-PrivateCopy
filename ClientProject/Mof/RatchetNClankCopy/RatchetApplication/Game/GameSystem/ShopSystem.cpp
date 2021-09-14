@@ -83,7 +83,7 @@ ratchet::game::gamesystem::ShopSystem::~ShopSystem() {
 void ratchet::game::gamesystem::ShopSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     if (flag) {
-        auto entry = std::make_shared<same_ns::shop::ShopSystemEntry>();
+        auto entry = std::make_shared<ratchet::game::gamesystem::shop::ShopSystemEntry>();
         entry->SetResourceManager(super::GetResource());
         entry->SetUICanvas(super::GetUICanvas());
         _element_stack.push(entry);
@@ -115,7 +115,7 @@ void ratchet::game::gamesystem::ShopSystem::OnNotify(bool flag) {
     } // if
 }
 
-void ratchet::game::gamesystem::ShopSystem::OnNotify(const std::shared_ptr<same_ns::shop::ShopSystemElement>& add) {
+void ratchet::game::gamesystem::ShopSystem::OnNotify(const std::shared_ptr<ratchet::game::gamesystem::shop::ShopSystemElement>& add) {
     _element_stack.push(add);
 }
 

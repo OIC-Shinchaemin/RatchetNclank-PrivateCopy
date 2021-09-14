@@ -4,9 +4,8 @@
 
 #include <string>
 
-namespace ratchet {
 
-namespace state {
+namespace ratchet::state {
 struct PlayerActionStateType {
     static std::string kPlayerActionIdleState;
     static std::string kPlayerActionMoveState;
@@ -33,6 +32,5 @@ struct PlayerActionStateType {
     static std::string kPlayerActionDamageState;
     static std::string kPlayerActionDeadState;
 };
-}
 }
 #endif // !RATCHET_STATE_PLAYER_ACTION_STATE_DEFINE_H

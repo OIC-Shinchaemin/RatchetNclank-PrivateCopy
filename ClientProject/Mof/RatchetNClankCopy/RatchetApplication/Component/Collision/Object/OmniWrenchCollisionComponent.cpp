@@ -1,6 +1,6 @@
 #include "OmniWrenchCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(int priority) :

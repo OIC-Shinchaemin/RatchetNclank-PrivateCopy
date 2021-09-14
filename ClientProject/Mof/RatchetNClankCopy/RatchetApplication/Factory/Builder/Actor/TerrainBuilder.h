@@ -9,10 +9,7 @@
 #include "../../../GameDefine.h"
 
 
-namespace ratchet {
-namespace factory {
-namespace builder {
-namespace actor {
+namespace ratchet::factory::builder::actor {
 class TerrainBuilder : public ratchet::factory::builder::actor::ActorBuilder {
     using super = ratchet::factory::builder::actor::ActorBuilder;
 private:
@@ -26,7 +23,7 @@ public:
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~TerrainBuilder();    
+    virtual ~TerrainBuilder();
     /// <summary>
     /// セッター
     /// </summary>
@@ -43,8 +40,5 @@ public:
     /// <param name=""></param>
     virtual void Construct(std::any shared_this) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_FACTORY_BUILDER_ACTOR_TERRAIN_BUILDER_H

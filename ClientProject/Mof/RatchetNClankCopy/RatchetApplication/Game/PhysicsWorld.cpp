@@ -1,7 +1,7 @@
 #include "PhysicsWorld.h"
 
 #include "Base/Core/Utility.h"
-#include "../Component/Collision/Algolithm/CollisionAlgolithmDefine.h"
+#include "../Component/Collision/CollisionAlgolithmDefine.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyMeleeAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
@@ -28,7 +28,7 @@
 #include "../Component/Collision/Algolithm/NanotechItemPlayerCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShopCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerWallCollisionAlgolithm.h"
-#include "../Component/Collision/Object/CollisionComponentDefine.h"
+#include "../Component/Collision/CollisionComponentDefine.h"
 
 
 void ratchet::game::PhysicsWorld::GenerateLayer(void) {

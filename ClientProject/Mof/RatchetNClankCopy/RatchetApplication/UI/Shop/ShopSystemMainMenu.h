@@ -13,14 +13,8 @@
 #include "../../Game/GameSystem/ShopSystem.h"
 
 
-namespace ratchet {
-namespace ui {
-namespace shop{
-class ShopSystemMainMenu : 
-    public base::ui::UIPanel
-    //, 
-    //public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&> 
-{
+namespace ratchet::ui::shop {
+class ShopSystemMainMenu : public base::ui::UIPanel {
     using super = base::ui::UIPanel;
 private:
     //! 表示
@@ -37,11 +31,6 @@ public:
     /// </summary>
     /// <param name="name"></param>
     ShopSystemMainMenu(const char* name);
-    /// <summary>
-    /// 通知イベント
-    /// </summary>
-    /// <param name="info"></param>
-    //virtual void OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -71,7 +60,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
-}
 }
 #endif // RATCHET_UI_SHOP_SHOP_SYSTEM_MAIN_MENU_H

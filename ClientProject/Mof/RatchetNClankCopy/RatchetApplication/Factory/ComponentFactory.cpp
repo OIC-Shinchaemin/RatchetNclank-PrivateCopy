@@ -19,7 +19,7 @@
 
 #include "../Component/Player/PlayerComponentInclude.h"
 #include "../Component/Enemy/EnemyComponentInclude.h"
-#include "../Component/Collision/Object/CollisionComponentInclude.h"
+#include "../Component/Collision/CollisionComponentInclude.h"
 #include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
 #include "../Component/Ship/ShipComponentInclude.h"
 #include "../Component/Item/BoltComponentInclude.h"

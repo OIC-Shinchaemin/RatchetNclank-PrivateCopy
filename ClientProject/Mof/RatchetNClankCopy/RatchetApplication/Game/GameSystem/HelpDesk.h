@@ -14,10 +14,7 @@
 #include "GameQuest.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
+namespace ratchet::game::gamesystem {
 class HelpDesk :
     public std::enable_shared_from_this<ratchet::game::gamesystem::HelpDesk>,
     public base::core::Observer<const ratchet::game::gamesystem::GameQuest&> {
@@ -81,7 +78,5 @@ public:
     /// <param name=""></param>
     void Show(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_HELP_DESK_H

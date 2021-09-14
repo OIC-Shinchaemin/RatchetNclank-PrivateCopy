@@ -1,6 +1,6 @@
 #include "EnemyBulletCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::EnemyBulletCollisionComponent::EnemyBulletCollisionComponent(int priority) :

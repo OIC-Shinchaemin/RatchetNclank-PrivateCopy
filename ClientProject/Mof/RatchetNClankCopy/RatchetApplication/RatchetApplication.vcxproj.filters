@@ -450,9 +450,6 @@
     <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp">
       <Filter>Ratchet\Source\Actor\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
     <ClCompile Include="Factory\ActorFactory.cpp">
       <Filter>Ratchet\Source\Factory</Filter>
     </ClCompile>
@@ -543,9 +540,6 @@
     <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp">
       <Filter>Ratchet\Source\Component\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp">
       <Filter>Ratchet\Source\Component\Collision\Object</Filter>
     </ClCompile>
@@ -632,12 +626,6 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp">
       <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
     </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp">
       <Filter>Ratchet\Source\Component\Enemy</Filter>
@@ -1164,6 +1152,24 @@
     <ClCompile Include="Actor\Gimmick\Fence.cpp">
       <Filter>Ratchet\Source\Actor\Gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Object\ScarecrowCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerScarecrowCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionComponentImplementation.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionAlgolithmImplementation.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -1337,9 +1343,6 @@
     <ClInclude Include="Actor\Weapon\Blaster.h">
       <Filter>Ratchet\Header\Actor\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
-      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
     <ClInclude Include="Factory\ActorFactory.h">
       <Filter>Ratchet\Header\Factory</Filter>
     </ClInclude>
@@ -1463,9 +1466,6 @@
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\CollisionComponent.h">
-      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
@@ -1549,12 +1549,6 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h">
-      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h">
-      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h">
       <Filter>Ratchet\Header\Component\Enemy</Filter>
@@ -1780,9 +1774,6 @@
     </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyComponentInclude.h">
       <Filter>Ratchet\Header\Component\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\CollisionComponentInclude.h">
-      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h">
       <Filter>Ratchet\Header\Factory\ComponentRegister</Filter>
@@ -2087,12 +2078,6 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="UI\GimmickAccessSystemMenu.h">
-      <Filter>Ratchet\Header\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameSystem\GimmickAccessSystem.h">
-      <Filter>Ratchet\Header\Game\GameSystem</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Base\Core\Math.h">
       <Filter>Ratchet\Base\Core</Filter>
     </ClInclude>
@@ -2189,9 +2174,6 @@
     <ClInclude Include="Game\GameSystem\Shop\ShopSystemEntry.h">
       <Filter>Ratchet\Header\Game\GameSystem\Shop</Filter>
     </ClInclude>
-    <ClInclude Include="Namespace.h">
-      <Filter>Ratchet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Shop\ShopSystemMainMenu.h">
       <Filter>Ratchet\Header\UI\Shop</Filter>
     </ClInclude>
@@ -2266,6 +2248,27 @@
     </ClInclude>
     <ClInclude Include="Actor\Gimmick\Fence.h">
       <Filter>Ratchet\Header\Actor\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\ScarecrowCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerScarecrowCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionAlgolithmDefine.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionComponentDefine.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

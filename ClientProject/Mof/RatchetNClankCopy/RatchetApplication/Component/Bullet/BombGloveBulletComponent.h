@@ -6,12 +6,10 @@
 
 #include <memory>
 
-#include "../Collision/Object/CollisionComponent.h"
+#include "../Collision/CollisionComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace bullet {
+namespace ratchet::component::bullet {
 class BombGloveBulletComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -67,7 +65,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_BULLET_BOMB_GLOVE_BULLET_COMPONENT_H

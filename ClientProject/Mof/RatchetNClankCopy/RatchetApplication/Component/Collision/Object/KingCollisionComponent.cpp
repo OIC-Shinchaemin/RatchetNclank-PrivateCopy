@@ -1,6 +1,6 @@
 #include "KingCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::KingCollisionComponent::KingCollisionComponent(int priority) :

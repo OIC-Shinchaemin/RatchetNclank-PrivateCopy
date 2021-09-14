@@ -14,8 +14,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet ::ui {
 class GameMoneyMenu : public base::ui::UIPanel, public base::core::Observer<int> {
     using super = base::ui::UIPanel;
 private:
@@ -71,6 +70,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_GAME_MONEY_MENU_H

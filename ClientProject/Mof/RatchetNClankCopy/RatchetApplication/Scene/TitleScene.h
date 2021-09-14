@@ -19,8 +19,7 @@
 #include "../UI/UICreator.h"
 
 
-namespace ratchet {
-namespace scene {
+namespace ratchet::scene {
 class TitleLogo {
 private:
     //! ˆÊ’u
@@ -196,6 +195,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void);
 };
-}
 }
 #endif // !RATCHET_SCENE_TITLE_SCENE_H

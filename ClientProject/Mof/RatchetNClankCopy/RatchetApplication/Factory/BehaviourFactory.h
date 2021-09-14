@@ -13,8 +13,7 @@
 #include "../Behaviour/Node/DecoratorNode.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 class BehaviourFactory {
 private:
     //! コンポジット
@@ -65,6 +64,5 @@ public:
     /// <returns></returns>
     std::shared_ptr<behaviour::DecoratorNodeBase> CreateDecoratorNode(rapidjson::Value& behaviours, uint32_t index);
 };
-}
 }
 #endif // !RATCHET_FACTORY_BEHAVIOUR_FACTORY_H

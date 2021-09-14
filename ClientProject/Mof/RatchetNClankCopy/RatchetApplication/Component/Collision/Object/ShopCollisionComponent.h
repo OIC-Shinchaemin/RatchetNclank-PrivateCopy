@@ -2,12 +2,10 @@
 #define RATCHET_COMPONENT_COLLISION_SHOP_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace collision {
+namespace ratchet::component::collision {
 class ShopCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -83,7 +81,5 @@ public:
     /// <param name="obj"></param>
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_SHOP_COLLISION_COMPONENT_H

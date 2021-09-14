@@ -7,7 +7,7 @@
 #include "../../State/ShipActionStateDefine.h"
 
 
-namespace ratchet { namespace component { namespace ship {
+namespace ratchet::component::ship {
 class ShipStateComponent : public ratchet::component::ActionStateComponent {
     using super = ratchet::component::ActionStateComponent;
 public:
@@ -52,6 +52,6 @@ public:
 #ifdef _DEBUG
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
-};}}
+};
 }
 #endif // !RATCHET_COMPONENT_SHIP_SHIP_STATE_COMPONENT_H

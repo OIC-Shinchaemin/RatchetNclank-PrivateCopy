@@ -9,7 +9,7 @@
 
 
 using namespace ratchet::camera;
-void test::CGameApp::InputFollow(std::shared_ptr<ratchet::camera::CameraController> controller) {
+void test::camera::CGameApp::InputFollow(std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         controller->AddAzimuth(1.0f);
     } // if
@@ -42,7 +42,7 @@ void test::CGameApp::InputFollow(std::shared_ptr<ratchet::camera::CameraControll
     } // if
 }
 
-void test::CGameApp::InputFirstPerson(std::shared_ptr<ratchet::camera::CameraController> controller) {
+void test::camera::CGameApp::InputFirstPerson(std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         controller->AddAzimuth(1.0f);
     } // if
@@ -87,13 +87,13 @@ void test::CGameApp::InputFirstPerson(std::shared_ptr<ratchet::camera::CameraCon
     } // else if
 }
 
-void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+void test::camera::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     auto info = CameraController::CameraInfo();
     info.target_position = _transform.position;
     _camera_controller.GetService()->Update(delta_time, info);
 }
 
-void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+void test::camera::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     auto info = CameraController::CameraInfo();
     auto pos = _transform.position;
     pos.y += 1.0f;
@@ -101,7 +101,7 @@ void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet
     _camera_controller.GetService()->Update(delta_time, info);
 }
 
-MofBool test::CGameApp::Initialize(void) {
+MofBool test::camera::CGameApp::Initialize(void) {
     ::CUtilities::SetCurrentDirectory("TestResource");
 //    bool loaded = _gizmo.Load("gizmo.mom");
     bool loaded = _gizmo.Load("bolt/scene02.mom");
@@ -134,7 +134,7 @@ MofBool test::CGameApp::Initialize(void) {
     return TRUE;
 }
 
-MofBool test::CGameApp::Input(void) {
+MofBool test::camera::CGameApp::Input(void) {
     ::g_pInput->RefreshKey();
     ::g_pGamepad->RefreshKey();
 
@@ -181,7 +181,7 @@ MofBool test::CGameApp::Input(void) {
     return TRUE;
 }
 
-MofBool test::CGameApp::Update(void) {
+MofBool test::camera::CGameApp::Update(void) {
     this->Input();
 
     float delta_time = 1.0f / 60.0f;
@@ -200,7 +200,7 @@ MofBool test::CGameApp::Update(void) {
     return TRUE;
 }
 
-MofBool test::CGameApp::Render(void) {
+MofBool test::camera::CGameApp::Render(void) {
     ::g_pGraphics->RenderStart();
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetRenderTarget(::g_pGraphics->GetRenderTarget(), ::g_pGraphics->GetDepthTarget());
@@ -239,7 +239,7 @@ MofBool test::CGameApp::Render(void) {
     return TRUE;
 }
 
-MofBool test::CGameApp::Release(void) {
+MofBool test::camera::CGameApp::Release(void) {
     _camera_manager.reset();
     ratchet::Gamepad::GetInstance().Release();
     return TRUE;

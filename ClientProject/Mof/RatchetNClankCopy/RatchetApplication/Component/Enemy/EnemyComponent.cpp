@@ -1,7 +1,7 @@
 #include "EnemyComponent.h"
 
 #include "../../Gamepad.h"
-#include "../Collision/Object/CollisionComponentDefine.h"
+#include "../Collision/CollisionComponentDefine.h"
 #include "../VelocityComponent.h"
 #include "../Enemy/EnemyDamageComponent.h"
 #include "../SightRecognitionComponent.h"

@@ -19,8 +19,7 @@
 #include "../Factory/Builder/Scene/GameSceneBuilder.h"
 
 
-namespace ratchet {
-namespace scene {
+namespace ratchet::scene {
 class SceneManager : public std::enable_shared_from_this<ratchet::scene::SceneManager>, public base::core::Observer<const scene::SceneMessage&> {
     using this_type = ratchet::scene::SceneManager;
     struct ChangeMessage {
@@ -158,6 +157,5 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
-}
 }
 #endif // !RATCHET_SCENE_SCENE_MANAGER_H

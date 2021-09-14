@@ -11,9 +11,7 @@
 #include "../../Behaviour/Executor/INodeExecutor.h"
 
 
-namespace ratchet {
-namespace state {
-namespace ai {
+namespace ratchet::state::ai {
 class AIState : public base::core::State {
     using super = base::core::State;
 protected:
@@ -69,7 +67,5 @@ public:
     virtual void DebugRender(void) override;
 #endif // _DEBUG
 };
-}
-}
 }
 #endif // !RATCHET_STATE_AI_AI_STATE_H

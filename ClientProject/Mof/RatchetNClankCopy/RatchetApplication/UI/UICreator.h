@@ -10,8 +10,7 @@
 #include "../GameDefine.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet ::ui {
 template<typename UI>
 class UICreator {
     // ファクトリを受け取ればtemplate引数が要らなくなる
@@ -86,6 +85,5 @@ public:
         return  menu;
     }
 };
-}
 }
 #endif // !RATCHET_UI_UI_CREATOR_H

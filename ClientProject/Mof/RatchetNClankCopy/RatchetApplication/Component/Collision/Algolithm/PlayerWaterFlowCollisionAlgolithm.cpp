@@ -1,6 +1,6 @@
 #include "PlayerWaterFlowCollisionAlgolithm.h"
 
-#include "../Object/CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../Object/PlayerCollisionComponent.h"
 #include "../../Player/PlayerComponent.h"
 

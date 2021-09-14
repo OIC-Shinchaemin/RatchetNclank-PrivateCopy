@@ -8,7 +8,7 @@
 #include "Camera/CameraController.h"
 
 
-namespace test {
+namespace test::camera {
 class CGameApp : public CSingleGameApplication {
 private:
     //! ƒJƒƒ‰

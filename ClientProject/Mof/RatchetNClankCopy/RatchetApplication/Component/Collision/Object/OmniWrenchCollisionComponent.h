@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_OMNI_WRENCH_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -10,9 +10,7 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace component {
-namespace collision {
+namespace ratchet::component::collision {
 class OmniWrenchCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -82,7 +80,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_OMNI_WRENCH_COLLISION_COMPONENT_H

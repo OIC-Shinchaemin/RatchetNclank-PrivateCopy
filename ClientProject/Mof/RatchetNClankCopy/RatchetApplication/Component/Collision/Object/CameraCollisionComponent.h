@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -12,9 +12,7 @@
 #include "../../CameraComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace collision {
+namespace ratchet::component::collision {
 class CameraCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -95,7 +93,5 @@ public:
     /// <param name="gimmick"></param>
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H

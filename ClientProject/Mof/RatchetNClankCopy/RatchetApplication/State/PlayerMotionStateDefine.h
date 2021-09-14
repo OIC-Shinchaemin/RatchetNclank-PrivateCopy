@@ -5,8 +5,7 @@
 #include <string>
 
 
-namespace ratchet {
-namespace state {
+namespace ratchet::state {
 struct PlayerMotionStateType {
     static std::string kPlayerMotionIdleState;
     static std::string kPlayerMotionMoveState;
@@ -33,6 +32,5 @@ struct PlayerMotionStateType {
     static std::string kPlayerMotionDamageState;
     static std::string kPlayerMotionDeadState;
 };
-}
 }
 #endif // !RATCHET_STATE_PLAYER_MOTION_STATE_DEFINE_H

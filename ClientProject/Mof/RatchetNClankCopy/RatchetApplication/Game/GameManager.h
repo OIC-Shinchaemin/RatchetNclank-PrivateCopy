@@ -13,12 +13,10 @@
 #include "GameSystem/ShopSystem.h"
 #include "GameSystem/OptionSystem.h"
 #include "GameSystem/GamePauseSystem.h"
-#include "../Namespace.h"
 
 
-namespace ratchet {
-namespace game {
-class GameManager : 
+namespace ratchet::game {
+class GameManager :
     public std::enable_shared_from_this<ratchet::game::GameManager>,
     public base::core::Observer<const std::shared_ptr<ratchet::game::gamesystem::GameSystem>&> {
 private:
@@ -144,6 +142,5 @@ public:
     /// <param name=""></param>
     void GameSystemRelease(void);
 };
-}
 }
 #endif // !RATCHET_GAME_GAME_MANAGER_H

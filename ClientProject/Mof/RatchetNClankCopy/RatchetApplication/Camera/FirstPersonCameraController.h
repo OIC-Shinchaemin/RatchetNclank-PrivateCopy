@@ -5,8 +5,7 @@
 #include "CameraController.h"
 
 
-namespace ratchet {
-namespace camera {
+namespace ratchet::camera {
 class FirstPersonCameraController: public ratchet::camera::CameraController {
     using super = ratchet::camera::CameraController;
 public:
@@ -31,6 +30,5 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) override;
 };
-}
 }
 #endif // !RATCHET_CAMERA_FIRST_PERSON_CAMERA_CONTROLLER_H

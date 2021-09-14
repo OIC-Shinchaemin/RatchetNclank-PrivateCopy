@@ -13,8 +13,7 @@
 #include "../Game/GameSystem/OptionSystem.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet ::ui {
 class OptionSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
@@ -150,6 +149,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_OPTION_SYSTEM_MENU_H

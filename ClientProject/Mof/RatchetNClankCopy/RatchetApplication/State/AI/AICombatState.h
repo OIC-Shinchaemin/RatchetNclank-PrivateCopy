@@ -5,9 +5,7 @@
 #include "AIState.h"
 
 
-namespace ratchet {
-namespace state {
-namespace ai {
+namespace ratchet::state::ai {
 class AICombatState : public ratchet::state::ai::AIState {
     using super = ratchet::state::ai::AIState;
 public:
@@ -26,7 +24,5 @@ public:
     /// <returns></returns>
     virtual const char* GetName(void) const override;
 };
-}
-}
 }
 #endif // !RATCHET_STATE_AI_AI_COMBAT_STATE_H

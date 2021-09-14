@@ -15,8 +15,7 @@
 #include "../Game/GameManager.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 class FactoryManager {
 private:
     //! コンポーネント
@@ -96,6 +95,5 @@ public:
     /// <returns></returns>
     behaviour::NodeExecutorPtr CreateBehaviourExecutor(const char* key);
 };
-}
 }
 #endif // !RATCHET_FACTORY_FACTORY_MANAGER_H

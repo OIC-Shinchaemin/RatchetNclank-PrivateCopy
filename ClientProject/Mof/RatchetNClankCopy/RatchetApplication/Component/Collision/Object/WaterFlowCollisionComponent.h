@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_WATER_FLOW_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>

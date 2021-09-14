@@ -13,8 +13,7 @@
 #include "../GameDefine.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet ::ui {
 class NanotechMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
@@ -75,6 +74,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_NANOTECH_MENU_H

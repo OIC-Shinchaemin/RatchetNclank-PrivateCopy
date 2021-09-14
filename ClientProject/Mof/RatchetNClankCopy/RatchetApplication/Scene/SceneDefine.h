@@ -9,8 +9,7 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace scene {
+namespace ratchet::scene {
 class Scene;
 struct SceneType {
     static std::string kTitleScene;
@@ -198,6 +197,5 @@ struct SceneEffect {
     /// <param name=""></param>
     //virtual void DebugRender(void)
 };
-}
 }
 #endif // !RATCHET_SCENE_SCENE_DEFINE_H

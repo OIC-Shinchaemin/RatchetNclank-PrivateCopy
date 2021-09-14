@@ -18,6 +18,12 @@
         "priority": 0,
         "path": "../Resource/mesh/scarecrow/scene0.mom"
       }
+    },
+    {
+      "type": "ScarecrowCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
     }
   ]
 }

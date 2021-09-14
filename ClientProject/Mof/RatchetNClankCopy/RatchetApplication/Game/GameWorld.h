@@ -8,8 +8,7 @@
 #include "../Actor/Actor.h"
 
 
-namespace ratchet {
-namespace game {
+namespace ratchet::game {
 class GameWorld {
     using ActorPtr = std::shared_ptr<ratchet::actor::Actor>;
 private:
@@ -63,6 +62,5 @@ public:
     /// <param name=""></param>
     void Reset(void);
 };
-}
 }
 #endif // !RATCHET_GAME_GAME_WORLD_H

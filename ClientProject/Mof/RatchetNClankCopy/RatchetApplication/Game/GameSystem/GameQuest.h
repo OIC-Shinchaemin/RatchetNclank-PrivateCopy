@@ -2,10 +2,7 @@
 #define RATCHET_GAME_GAME_SYSTEM_GAME_QUEST_H
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
+namespace ratchet::game::gamesystem {
 class GameQuest {
 public:
     enum class Type {
@@ -47,7 +44,5 @@ public:
     /// <returns></returns>
     ratchet::game::gamesystem::GameQuest::Type GetType(void) const;
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_GAME_QUEST_H

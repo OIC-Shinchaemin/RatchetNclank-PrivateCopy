@@ -18,19 +18,16 @@
 #include "../../Factory/Factory.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
+namespace ratchet::game::gamesystem {
 struct ChargeInfo {
     //! •Ší
     std::string type;
     //! ‘•“U”
     std::uint32_t size;
 };
-class WeaponSystem : 
+class WeaponSystem :
     public base::core::Observer<const std::string&>,
-    public base::core::Observer<const ratchet::game::gamesystem::ChargeInfo&>
-{
+    public base::core::Observer<const ratchet::game::gamesystem::ChargeInfo&> {
     using Pair = std::pair<std::string, std::shared_ptr<ratchet::actor::weapon::Mechanical>>;
 private:
     //! •Ší
@@ -125,7 +122,5 @@ public:
     /// <returns></returns>
     std::shared_ptr<ratchet::actor::weapon::Mechanical>GetMechanicalWeapon(const std::string& name);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_WEAPON_SYSTEM_H

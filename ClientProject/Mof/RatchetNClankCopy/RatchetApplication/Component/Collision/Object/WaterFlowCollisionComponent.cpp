@@ -1,6 +1,6 @@
 #include "WaterFlowCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::WaterFlowCollisionComponent::WaterFlowCollisionComponent(int priority) :

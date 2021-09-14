@@ -9,8 +9,7 @@
 #include "CameraManager.h"
 
 
-namespace ratchet {
-namespace camera {
+namespace ratchet::camera {
 class CameraController {
 public:
     enum class CameraMode {
@@ -201,6 +200,5 @@ public:
     /// <returns></returns>
     bool RegisterGlobalCamera(void);
 };
-}
 }
 #endif // !RATCHET_CAMERA_CAMERA_CONTROLLER_H

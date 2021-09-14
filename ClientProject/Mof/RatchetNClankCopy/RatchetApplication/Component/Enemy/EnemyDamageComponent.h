@@ -7,7 +7,7 @@
 #include <memory>
 
 #include "Base/Core/Timer.h"
-#include "../Collision/Object/CollisionComponent.h"
+#include "../Collision/CollisionComponent.h"
 
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"

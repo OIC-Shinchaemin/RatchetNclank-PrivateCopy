@@ -1,6 +1,6 @@
 #include "SightCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../SightRecognitionComponent.h"
 
 

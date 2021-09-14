@@ -7,7 +7,7 @@
 #include "../../Component/MeshComponent.h"
 #include "../../Component/Player/PlayerStateComponent.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
-#include "../Collision/Object/CollisionComponentDefine.h"
+#include "../Collision/CollisionComponentDefine.h"
 #include "../../UI/LockOnCursorMenu.h"
 #include "../../State/PlayerActionStateDefine.h"
 #include "../../Game/GameSystem/GameQuest.h"

@@ -9,10 +9,7 @@
 #include "../../Scene/SceneDefine.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
+namespace ratchet::game::gamesystem {
 class OptionSystemItem : public std::enable_shared_from_this<ratchet::game::gamesystem::OptionSystemItem> {
     using this_type = ratchet::game::gamesystem::OptionSystemItem;
 private:
@@ -152,7 +149,5 @@ public:
     /// <param name=""></param>
     void Hide(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_OPTION_SYSTEM_H

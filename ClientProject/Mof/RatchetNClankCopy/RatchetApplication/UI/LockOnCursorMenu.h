@@ -14,8 +14,7 @@
 #include "../GameDefine.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class LockOnCursorMenu : public base::ui::UIPanel, public base::core::Observer<std::optional<Mof::CVector3>> {
     using super = base::ui::UIPanel;
 private:
@@ -51,6 +50,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_NANOTECH_MENU_H

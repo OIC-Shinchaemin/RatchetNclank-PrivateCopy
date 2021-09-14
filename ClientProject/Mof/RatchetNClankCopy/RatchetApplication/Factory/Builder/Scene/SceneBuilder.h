@@ -12,10 +12,7 @@
 #include "Base/UI/UICanvas.h"
 
 
-namespace ratchet {
-namespace factory {
-namespace builder {
-namespace scene {
+namespace ratchet::factory::builder::scene {
 class SceneBuilder : public ratchet::factory::builder::IBuilder {
     using super = ratchet::factory::builder::IBuilder;
 private:
@@ -53,8 +50,5 @@ public:
     /// <param name=""></param>
     virtual void Construct(std::any shared_this) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_FACTORY_BUILDER_SCENE_SCENE_BUILDER_H

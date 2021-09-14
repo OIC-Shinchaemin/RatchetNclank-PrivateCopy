@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_KING_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 
 namespace ratchet ::component::collision {
