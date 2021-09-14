@@ -1,5 +1,6 @@
 #include "PlayerCollisionComponent.h"
 #include "EnemyCollisionComponent.h"
+#include "KingCollisionComponent.h"
 #include "SightCollisionComponent.h"
 #include "EnemyMeleeAttackCollisionComponent.h"
 #include "EnemyBulletCollisionComponent.h"

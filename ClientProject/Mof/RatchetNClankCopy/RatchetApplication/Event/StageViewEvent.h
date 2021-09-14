@@ -38,6 +38,13 @@ private:
     std::weak_ptr<ratchet::game::gamesystem::text::TextSystem> _text_system;
     //! 通知用
     ratchet::event::StageViewEventMessageSubject _stage_view_event_message_subject;
+
+    //! スキップフラグ
+    bool _skip_reserve;
+    //! タイマー時間
+    float _skip_time_set;
+    //! タイマー
+    base::core::Timer _skip_reserve_timer;
 public:
     /// <summary>
     /// コンストラクタ

@@ -7,9 +7,7 @@
 #include "../../Game/GameSystem/GameQuest.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace character {
+namespace ratchet::actor::character {
 class Enemy : public ratchet::actor::character::Character {
     using super = ratchet::actor::character::Character;
 public:
@@ -48,7 +46,5 @@ public:
     /// <param name=""></param>
     virtual void End(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_CHARACTER_ENEMY_H

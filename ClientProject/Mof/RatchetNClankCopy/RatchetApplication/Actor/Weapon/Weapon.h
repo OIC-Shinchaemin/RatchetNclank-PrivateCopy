@@ -5,9 +5,7 @@
 #include "../Actor.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace weapon {
+namespace ratchet::actor::weapon {
 class Weapon : public ::ratchet::actor::Actor {
     using super = ::ratchet::actor::Actor;
 public:
@@ -20,7 +18,5 @@ public:
     /// </summary>
     virtual ~Weapon();
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_WEAPON_WEAPON_H

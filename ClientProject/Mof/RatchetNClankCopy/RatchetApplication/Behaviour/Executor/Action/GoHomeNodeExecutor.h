@@ -10,8 +10,7 @@
 #include "../../../Component/Enemy/EnemyStateComponent.h"
 
 
-namespace ratchet {
-namespace behaviour {
+namespace ratchet::behaviour {
 class GoHomeNodeExecutor : public ratchet::behaviour::ActionNodeExecutor {
     using super = ratchet::behaviour::ActionNodeExecutor;
 public:
@@ -61,6 +60,5 @@ public:
         return super::ActionNodeExecute(_node_args);
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_GO_HOME_NODE_EXECUTOR_H

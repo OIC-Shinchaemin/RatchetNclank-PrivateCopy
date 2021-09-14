@@ -5,9 +5,7 @@
 #include "Bullet.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace bullet {
+namespace ratchet::actor::bullet {
 class PyrocitorBullet : public ratchet::actor::bullet::Bullet {
     using super = ratchet::actor::bullet::Bullet;
 public:
@@ -37,7 +35,5 @@ public:
     /// <param name="in"></param>
     void Start(const ratchet::actor::bullet::Bullet::Param& in);
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_BULLET_PYROCITOR_BULLET_H

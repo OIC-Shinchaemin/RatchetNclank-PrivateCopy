@@ -14,14 +14,14 @@
 #include "../../Game/GameSystem/ShopSystem.h"
 #include "../../Component/Player/PlayerComponent.h"
 #include "../../Game/GameSystem/GameQuest.h"
+#include "../../Game/GameSystem/Text/TextSystem.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace character {
+namespace ratchet::actor::character {
 class Player : public ratchet::actor::character::Character,
     public base::core::Observer<std::shared_ptr<ratchet::actor::weapon::Weapon>>,
-    public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> {
+    public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> ,
+    public ratchet::game::gamesystem::text::TextSystemClosedMessageListener {
     using super = ratchet::actor::character::Character;
     struct ObservablePair {
         std::string name;
@@ -75,6 +75,11 @@ public:
     /// </summary>
     /// <param name="change"></param>
     virtual void OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) override;
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const ratchet::game::gamesystem::text::TextSystemClosedMessage& message) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -167,7 +172,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_CHARACTER_PLAYER_H

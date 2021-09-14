@@ -13,8 +13,7 @@
 #include "Base/UI/UICanvas.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class Component : public std::enable_shared_from_this<ratchet::component::Component> {
 private:
     //! Ç±ÇÃã@î\ÇÃèäóLé“
@@ -167,7 +166,6 @@ static bool operator<(const ratchet::component::Component& a, const ratchet::com
 }
 static bool operator<(const std::shared_ptr<ratchet::component::Component>& a, const std::shared_ptr < ratchet::component::Component>& b) noexcept {
     return a->GetPriority() < b->GetPriority();
-}
 }
 }
 #endif // !RATCHET_COMPONENT_COMPONENT_H

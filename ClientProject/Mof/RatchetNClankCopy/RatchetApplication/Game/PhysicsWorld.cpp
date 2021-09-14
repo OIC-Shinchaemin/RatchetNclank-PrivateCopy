@@ -5,6 +5,7 @@
 #include "../Component/Collision/Algolithm/PlayerEnemyCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyMeleeAttackCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
+#include "../Component/Collision/Algolithm/PlayerKingCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerWaterFlowCollisionAlgolithm.h"
 #include "../Component/Collision/Algolithm/PlayerNanotechItemCollisionAlgolithm.h"
@@ -35,6 +36,7 @@ void ratchet::game::PhysicsWorld::GenerateLayer(void) {
       ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerKingCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm.c_str(),
@@ -72,6 +74,7 @@ ratchet::game::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<ratchet::PlayerEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerEnemyBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerKingCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerKingCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerShipCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerWaterFlowCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerNanotechItemCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm);

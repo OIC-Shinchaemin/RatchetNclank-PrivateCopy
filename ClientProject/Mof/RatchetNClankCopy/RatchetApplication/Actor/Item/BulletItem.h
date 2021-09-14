@@ -8,9 +8,7 @@
 #include "../../Game/GameSystem/WeaponSystem.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace item {
+namespace ratchet ::actor::item {
 class BulletItem : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:
@@ -74,7 +72,5 @@ public:
     /// <returns></returns>
     virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_ITEM_BULLET_ITEM_H

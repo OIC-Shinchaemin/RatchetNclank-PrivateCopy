@@ -337,6 +337,15 @@
     <Filter Include="Ratchet\Header\Actor\Gimmick">
       <UniqueIdentifier>{3a88a3b1-dd27-45ff-b664-5ad77a02ce91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Effect">
+      <UniqueIdentifier>{68431acc-6b62-4e24-8220-e12029a25d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Effect">
+      <UniqueIdentifier>{c169f1a9-dfc1-4076-970d-569396bf03a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\script">
+      <UniqueIdentifier>{b7ca4f36-7bff-424d-b2fe-d7b59ae97c03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1116,9 +1125,6 @@
     <ClCompile Include="Event\TextSystemStartEvent.cpp">
       <Filter>Ratchet\Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\GameSceneInitializer.cpp">
-      <Filter>Ratchet\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Actor\Gimmick\Wall.cpp">
       <Filter>Ratchet\Source\Actor\Gimmick</Filter>
     </ClCompile>
@@ -1127,6 +1133,36 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\WallCollisionComponent.cpp">
       <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effect.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameSceneInitializer.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectContainer.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectPool.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectEmitter.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\King.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\KingCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Scarecrow.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Gimmick\Fence.cpp">
+      <Filter>Ratchet\Source\Actor\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2198,6 +2234,39 @@
     <ClInclude Include="TutorialManager.h">
       <Filter>Ratchet\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Effect\Effect.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectDefine.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectContainer.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectPool.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectEmitter.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\King.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\KingCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Scarecrow.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\ActorDefine.h">
+      <Filter>Ratchet\Header\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Gimmick\Fence.h">
+      <Filter>Ratchet\Header\Actor\Gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -2214,6 +2283,12 @@
     </Text>
     <Text Include="..\Resource\scene_resource\description_scene.txt">
       <Filter>Resource\scene_resource</Filter>
+    </Text>
+    <Text Include="..\Resource\script\test.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\test2.txt">
+      <Filter>Resource\script</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -2310,11 +2385,17 @@
     <None Include="..\Resource\builder\wall.json">
       <Filter>Resource\builder</Filter>
     </None>
-    <None Include="..\Resource\builder\scarecrow_enemy.json">
-      <Filter>Resource\builder</Filter>
-    </None>
     <None Include="..\Resource\behaviour\scarecrow_enemy.json">
       <Filter>Resource\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\builder\king.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\fence.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\scarecrow.json">
+      <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

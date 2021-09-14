@@ -17,6 +17,7 @@
 #include "../Actor/Character/Player.h"
 #include "../Game/GameSystem/Text/TextSystem.h"
 #include "../Event/StageViewEvent.h"
+#include "../Effect/EffectContainer.h"
 
 
 namespace ratchet::scene {
@@ -50,6 +51,9 @@ private:
     std::weak_ptr<ratchet::game::GameManager> _game;
     //! ƒCƒxƒ“ƒg
     std::weak_ptr<ratchet::event::EventManager> _event;
+
+    
+    effect::EffectContainer _effect;
 public:
     /// <summary>
     /// ’Ç‰Á
