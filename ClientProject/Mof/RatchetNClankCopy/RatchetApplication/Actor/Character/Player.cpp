@@ -51,6 +51,12 @@ void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem
 	} // else if
 }
 
+void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem::text::TextSystemClosedMessage& message) {
+	if (message.close) {
+		super::Activate();
+	} // if
+}
+
 base::core::Observable<bool>* ratchet::actor::character::Player::GetShopSystemSubject(void) {
 	return &this->_shop_system_subject.subject;
 }

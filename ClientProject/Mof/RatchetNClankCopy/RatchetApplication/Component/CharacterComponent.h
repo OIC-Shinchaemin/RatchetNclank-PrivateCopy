@@ -9,8 +9,7 @@
 #include "Base/Core/Observable.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class CharacterComponent : public ::ratchet::component::UpdateComponent {
     using super = ::ratchet::component::UpdateComponent;
 protected:
@@ -63,6 +62,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_CHARACTER_COMPONENT_H

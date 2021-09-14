@@ -1,8 +1,6 @@
-
-
-
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::PlayerCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::EnemyCollisionComponent>();
+ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::KingCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::SightCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::EnemyMeleeAttackCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::EnemyBulletCollisionComponent>();
@@ -19,4 +17,3 @@ ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::coll
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::CameraCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::ShopCollisionComponent>();
 ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::WallCollisionComponent>();
-

@@ -5,8 +5,7 @@
 #include "Component.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class UpdateComponent : public ratchet::component::Component {
     using super = ratchet::component::Component;
 public:
@@ -54,6 +53,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_UPDATE_COMPONENT_H

@@ -7,12 +7,11 @@
 #include <memory>
 
 #include "../../Actor/Actor.h"
+#include "../../Actor/Character/King.h"
 #include "Base/Core/Observable.h"
 
 
-namespace ratchet::component {
-class TransformComponent;
-}
+namespace ratchet::component { class TransformComponent; }
 namespace ratchet::component::player {
 class PlayerComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;
@@ -27,6 +26,10 @@ private:
     std::weak_ptr<ratchet::component::TransformComponent> _transform_com;
     //! 地点
     std::string _next_terrain;
+    //! 接触モード 有効であれば武器ボタンがアクションボタンになる
+    bool _contact_mode;
+    //! 話し相手
+    std::weak_ptr<ratchet::actor::character::King> _talk_target;
 public:
     /// <summary>
     /// コンストラクタ
@@ -71,6 +74,18 @@ public:
     /// <returns></returns>
     std::string GetNextTerrain(void) const;
     /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsContactMode(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool HasTalkTarget(void) const;
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
@@ -94,6 +109,19 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
+#ifdef _DEBUG
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool DebugRender(void) override;
+#endif // _DEBUG
+    /// <summary>
+    /// 会話
+    /// </summary>
+    /// <param name=""></param>
+    void TalkToTarget(void);
 };
 }
 #endif // !RATCHET_COMPONENT_PLAYER_PLAYER_COMPONENT_H

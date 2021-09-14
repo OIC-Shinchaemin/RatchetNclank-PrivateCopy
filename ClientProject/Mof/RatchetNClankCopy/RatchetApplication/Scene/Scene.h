@@ -19,8 +19,7 @@
 #include "Base/UI/UICanvas.h"
 
 
-namespace ratchet {
-namespace scene {
+namespace ratchet::scene {
 class Scene : public std::enable_shared_from_this<ratchet::scene::Scene>, public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
     using this_type = ratchet::scene::Scene;
 public:
@@ -169,6 +168,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void);
 };
-}
 }
 #endif // !RATCHET_SCENE_SCENE_H

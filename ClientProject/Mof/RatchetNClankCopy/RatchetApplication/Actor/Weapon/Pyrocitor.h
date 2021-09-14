@@ -5,9 +5,7 @@
 #include "Mechanical.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace weapon {
+namespace ratchet::actor::weapon {
 class Pyrocitor : public ratchet::actor::weapon::Mechanical {
     using super = ratchet::actor::weapon::Mechanical;
 private:
@@ -33,7 +31,5 @@ public:
     /// <returns></returns>
     virtual bool Fire(const def::Transform& transform) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_WEAPON_PYROCITOR_H

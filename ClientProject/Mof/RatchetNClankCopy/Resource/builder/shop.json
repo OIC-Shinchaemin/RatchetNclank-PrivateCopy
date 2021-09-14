@@ -10,7 +10,7 @@
       "type": "MeshComponent",
       "paramater": {
         "priority": 0,
-        "path": "../Resource/mesh/shop/scene.mom"
+        "path": "../Resource/mesh/barracks/barracks.mom"
       }
     },
     {

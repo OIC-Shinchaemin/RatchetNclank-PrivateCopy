@@ -6,6 +6,7 @@ std::string ratchet::component::collision::CollisionComponentType::kPlayerMeleeA
 std::string ratchet::component::collision::CollisionComponentType::kEnemyCollisionComponent = "EnemyCollisionComponent";
 std::string ratchet::component::collision::CollisionComponentType::kEnemyMeleeAttackCollisionComponent = "EnemyMeleeAttackCollisionComponent";
 std::string ratchet::component::collision::CollisionComponentType::kEnemyBulletCollisionComponent = "EnemyBulletCollisionComponent";
+std::string ratchet::component::collision::CollisionComponentType::kKingCollisionComponent = "KingCollisionComponent";
 std::string ratchet::component::collision::CollisionComponentType::kSightCollisionComponent = "SightCollisionComponent";
 std::string ratchet::component::collision::CollisionComponentType::kShipCollisionComponent = "ShipCollisionComponent";
 std::string ratchet::component::collision::CollisionComponentType::kBoltCollisionComponent = "BoltCollisionComponent";

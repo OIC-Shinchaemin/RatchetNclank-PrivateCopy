@@ -266,10 +266,13 @@
     <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp" />
     <ClCompile Include="Actor\Character\Character.cpp" />
     <ClCompile Include="Actor\Character\Enemy.cpp" />
+    <ClCompile Include="Actor\Character\King.cpp" />
     <ClCompile Include="Actor\Character\Player.cpp" />
+    <ClCompile Include="Actor\Character\Scarecrow.cpp" />
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
     <ClCompile Include="Actor\Facility\Shop.cpp" />
+    <ClCompile Include="Actor\Gimmick\Fence.cpp" />
     <ClCompile Include="Actor\Gimmick\Wall.cpp" />
     <ClCompile Include="Actor\Item\Bolt.cpp" />
     <ClCompile Include="Actor\Item\BulletItem.cpp" />
@@ -316,6 +319,7 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp" />
@@ -337,6 +341,7 @@
     <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\KingCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\NanotechItemCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.cpp" />
@@ -422,6 +427,10 @@
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchActionStateComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.cpp" />
     <ClCompile Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="Effect\EffectContainer.cpp" />
+    <ClCompile Include="Effect\EffectEmitter.cpp" />
+    <ClCompile Include="Effect\EffectPool.cpp" />
     <ClCompile Include="Event\BridgeEvent.cpp" />
     <ClCompile Include="Event\Event.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
@@ -535,6 +544,7 @@
     <ClInclude Include="..\include\Base\UI\UIItem.h" />
     <ClInclude Include="..\include\Base\UI\UIPanel.h" />
     <ClInclude Include="Actor\Actor.h" />
+    <ClInclude Include="Actor\ActorDefine.h" />
     <ClInclude Include="Actor\Bullet\BlasterBullet.h" />
     <ClInclude Include="Actor\Bullet\BombGloveBullet.h" />
     <ClInclude Include="Actor\Bullet\Bullet.h" />
@@ -542,10 +552,13 @@
     <ClInclude Include="Actor\Bullet\PyrocitorBullet.h" />
     <ClInclude Include="Actor\Character\Character.h" />
     <ClInclude Include="Actor\Character\Enemy.h" />
+    <ClInclude Include="Actor\Character\King.h" />
     <ClInclude Include="Actor\Character\Player.h" />
+    <ClInclude Include="Actor\Character\Scarecrow.h" />
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
     <ClInclude Include="Actor\Facility\Shop.h" />
+    <ClInclude Include="Actor\Gimmick\Fence.h" />
     <ClInclude Include="Actor\Gimmick\Wall.h" />
     <ClInclude Include="Actor\Item\Bolt.h" />
     <ClInclude Include="Actor\Item\BulletItem.h" />
@@ -648,6 +661,7 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h" />
@@ -670,6 +684,7 @@
     <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\KingCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\NanotechItemCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\PyrocitorBulletCollisionComponent.h" />
@@ -764,6 +779,11 @@
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchDefaultComponent.h" />
     <ClInclude Include="Component\Weapon\OmniWrench\OmniWrenchThrowedComponent.h" />
     <ClInclude Include="DebugManager.h" />
+    <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Effect\EffectContainer.h" />
+    <ClInclude Include="Effect\EffectDefine.h" />
+    <ClInclude Include="Effect\EffectEmitter.h" />
+    <ClInclude Include="Effect\EffectPool.h" />
     <ClInclude Include="Event\BridgeEvent.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventManager.h" />
@@ -879,6 +899,8 @@
     <Text Include="..\Resource\scene_resource\game_scene.txt" />
     <Text Include="..\Resource\scene_resource\general.txt" />
     <Text Include="..\Resource\scene_resource\title_scene.txt" />
+    <Text Include="..\Resource\script\test.txt" />
+    <Text Include="..\Resource\script\test2.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\behaviour\scarecrow_enemy.json" />
@@ -895,13 +917,15 @@
     <None Include="..\Resource\builder\bomb_glove_effect.json" />
     <None Include="..\Resource\builder\demo_player.json" />
     <None Include="..\Resource\builder\enemy_bullet.json" />
+    <None Include="..\Resource\builder\fence.json" />
+    <None Include="..\Resource\builder\king.json" />
     <None Include="..\Resource\builder\nanotech.json" />
     <None Include="..\Resource\builder\omni_wrench.json" />
     <None Include="..\Resource\builder\particle.json" />
     <None Include="..\Resource\builder\player.json" />
     <None Include="..\Resource\builder\pyrocitor.json" />
     <None Include="..\Resource\builder\pyrocitor_bullet.json" />
-    <None Include="..\Resource\builder\scarecrow_enemy.json" />
+    <None Include="..\Resource\builder\scarecrow.json" />
     <None Include="..\Resource\builder\ship.json" />
     <None Include="..\Resource\builder\shop.json" />
     <None Include="..\Resource\builder\strong_enemy.json" />

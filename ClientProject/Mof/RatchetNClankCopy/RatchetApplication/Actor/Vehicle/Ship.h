@@ -5,9 +5,7 @@
 #include "../Actor.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace vehicle {
+namespace ratchet::actor::vehicle {
 class Ship : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:
@@ -31,7 +29,5 @@ public:
     /// <param name="builder"></param>
     virtual void Construct(const std::shared_ptr<ratchet::factory::builder::IBuilder>& builder) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_VEHICLE_SHIP_H

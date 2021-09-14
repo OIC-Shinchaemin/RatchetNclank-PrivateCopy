@@ -7,9 +7,7 @@
 #include "Base/Core/Observable.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace item {
+namespace ratchet::actor::item {
 class Bolt : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:
@@ -53,7 +51,5 @@ public:
     /// <returns></returns>
     virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_ITEM_BOLT_H

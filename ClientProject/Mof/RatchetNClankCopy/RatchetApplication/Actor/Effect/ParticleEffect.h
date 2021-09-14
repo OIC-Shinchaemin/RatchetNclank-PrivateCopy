@@ -9,9 +9,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace effect {
+namespace ratchet::actor::effect {
 class ParticleEffect : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:
@@ -75,7 +73,5 @@ public:
     /// <param name="info"></param>
     void Start(const ratchet::actor::effect::ParticleEffect::Info& info);
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_EFFECT_PARTICLE_EFFECT_H

@@ -5,12 +5,9 @@
 #include "Mechanical.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace weapon {
+namespace ratchet::actor::weapon {
 class Blaster : public ratchet::actor::weapon::Mechanical {
     using super = ratchet::actor::weapon::Mechanical;
-private:
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,7 +30,5 @@ public:
     /// <returns></returns>
     virtual bool Fire(const def::Transform& transform) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_WEAPON_BLASTER_H

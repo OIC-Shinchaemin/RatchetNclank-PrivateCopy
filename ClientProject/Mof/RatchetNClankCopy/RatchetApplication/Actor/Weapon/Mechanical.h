@@ -5,9 +5,7 @@
 #include "Weapon.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace weapon {
+namespace ratchet::actor::weapon {
 class Mechanical : public ::ratchet::actor::weapon::Weapon {
     using super = ::ratchet::actor::weapon::Weapon;
 public:
@@ -112,7 +110,5 @@ public:
     /// <param name=""></param>
     void ResetTargetPosition(void);
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_WEAPON_MECHANICAL_H

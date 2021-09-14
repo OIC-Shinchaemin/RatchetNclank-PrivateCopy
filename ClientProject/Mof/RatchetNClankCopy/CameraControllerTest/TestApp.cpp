@@ -8,7 +8,8 @@
 #include "Camera/DebugCameraController.h"
 
 
-void test::CGameApp::InputFollow(std::shared_ptr<ratchet::CameraController> controller) {
+using namespace ratchet::camera;
+void test::CGameApp::InputFollow(std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         controller->AddAzimuth(1.0f);
     } // if
@@ -29,10 +30,10 @@ void test::CGameApp::InputFollow(std::shared_ptr<ratchet::CameraController> cont
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
         auto front = _controller_map.at(_current_mode)->GetViewFront();
 
-        _current_mode = ratchet::CameraController::CameraMode::FirstPerson;
+        _current_mode = CameraController::CameraMode::FirstPerson;
         auto con = _controller_map.at(_current_mode);
 
-        auto info = ratchet::CameraController::CameraInfo();
+        auto info = CameraController::CameraInfo();
         info.start_position = prev_pos;
         info.camera_front = front;
         info.ideal_position = eye_pos;
@@ -41,7 +42,7 @@ void test::CGameApp::InputFollow(std::shared_ptr<ratchet::CameraController> cont
     } // if
 }
 
-void test::CGameApp::InputFirstPerson(std::shared_ptr<ratchet::CameraController> controller) {
+void test::CGameApp::InputFirstPerson(std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (::g_pInput->IsKeyHold(MOFKEY_LEFT)) {
         controller->AddAzimuth(1.0f);
     } // if
@@ -74,9 +75,9 @@ void test::CGameApp::InputFirstPerson(std::shared_ptr<ratchet::CameraController>
     else if (::g_pInput->IsKeyPull(MOFKEY_Q)) {
         auto prev_pos = _controller_map.at(_current_mode)->GetCameraPosition();
 
-        _current_mode = ratchet::CameraController::CameraMode::Follow;
+        _current_mode = CameraController::CameraMode::Follow;
         float ideal_angle_y = _transform.rotate.y + math::kHalfPi;
-        auto info = ratchet::CameraController::CameraInfo();
+        auto info = CameraController::CameraInfo();
         info.start_position = prev_pos;
 
         auto con = _controller_map.at(_current_mode);
@@ -86,14 +87,14 @@ void test::CGameApp::InputFirstPerson(std::shared_ptr<ratchet::CameraController>
     } // else if
 }
 
-void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<ratchet::CameraController> controller) {
-    auto info = ratchet::CameraController::CameraInfo();
+void test::CGameApp::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+    auto info = CameraController::CameraInfo();
     info.target_position = _transform.position;
     _camera_controller.GetService()->Update(delta_time, info);
 }
 
-void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::CameraController> controller) {
-    auto info = ratchet::CameraController::CameraInfo();
+void test::CGameApp::UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+    auto info = CameraController::CameraInfo();
     auto pos = _transform.position;
     pos.y += 1.0f;
     info.ideal_position = pos;
@@ -106,16 +107,16 @@ MofBool test::CGameApp::Initialize(void) {
     bool loaded = _gizmo.Load("bolt/scene02.mom");
 
     ratchet::Gamepad::GetInstance().Create();
-    _camera_manager = std::make_shared<ratchet::CameraManager>();
-    ratchet::CameraController::SetCameraManager(_camera_manager);
+    _camera_manager = std::make_shared<ratchet::camera::CameraManager>();
+    ratchet::camera::CameraController::SetCameraManager(_camera_manager);
 
 
-    using Mode = ratchet::CameraController::CameraMode;
-    _camera = std::make_shared<ratchet::Camera>();
+    using Mode = ratchet::camera::CameraController::CameraMode;
+    _camera = std::make_shared<ratchet::camera::Camera>();
     _camera->Initialize();
     _controller_map.clear();
-    auto follow = std::make_shared<ratchet::FollowCameraController>();
-    auto first_person = std::make_shared<ratchet::FirstPersonCameraController>();
+    auto follow = std::make_shared<ratchet::camera::FollowCameraController>();
+    auto first_person = std::make_shared<ratchet::camera::FirstPersonCameraController>();
     _controller_map.emplace(Mode::Follow, follow);
     _controller_map.emplace(Mode::FirstPerson, first_person);
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
@@ -168,7 +169,7 @@ MofBool test::CGameApp::Input(void) {
 
     // camera
     auto controller = _camera_controller.GetService();
-    using Mode = ratchet::CameraController::CameraMode;
+    using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->InputFollow(controller);
@@ -185,7 +186,7 @@ MofBool test::CGameApp::Update(void) {
 
     float delta_time = 1.0f / 60.0f;
     auto controller = _camera_controller.GetService();
-    using Mode = ratchet::CameraController::CameraMode;
+    using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             this->UpdateFollow(delta_time, controller);
@@ -214,7 +215,7 @@ MofBool test::CGameApp::Render(void) {
 
     ::CGraphicsUtilities::RenderString(10.0f, 10.0f, "Camera Controller Test Application ");
     ::CGraphicsUtilities::RenderString(10.0f, 30.0f, "FPS = %d", ::CUtilities::GetFPS());
-    using Mode = ratchet::CameraController::CameraMode;
+    using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
             ::CGraphicsUtilities::RenderString(10.0f, 50.0f, "Mode = Follow");
