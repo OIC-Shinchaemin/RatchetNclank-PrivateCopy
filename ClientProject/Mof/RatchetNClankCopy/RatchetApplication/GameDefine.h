@@ -14,7 +14,6 @@
 #include "Base/Core/FunctionPointerContainer.h"
 #include "Base/Resource/ResourceFont.h"
 #include "Base/UI/UICanvas.h"
-#include "Namespace.h"
 #include "DebugManager.h"
 
 

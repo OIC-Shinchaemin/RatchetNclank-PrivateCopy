@@ -1,6 +1,6 @@
 #include "BoltCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../VelocityComponent.h"
 #include "../../Item/BoltActionStateComponent.h"
 

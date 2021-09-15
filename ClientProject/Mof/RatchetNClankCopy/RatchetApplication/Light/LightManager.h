@@ -5,8 +5,7 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace light {
+namespace ratchet::light {
 class LightManager {
 private:
     // ŒõŒ¹
@@ -27,6 +26,5 @@ public:
     /// <returns></returns>
     bool Initialize(void);
 };
-}
 }
 #endif // !RATCHET_LIGHT_LIGHT_MANAGER_H

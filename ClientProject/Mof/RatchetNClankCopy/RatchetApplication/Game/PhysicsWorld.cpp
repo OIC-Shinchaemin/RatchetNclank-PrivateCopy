@@ -1,34 +1,9 @@
 #include "PhysicsWorld.h"
 
 #include "Base/Core/Utility.h"
-#include "../Component/Collision/Algolithm/CollisionAlgolithmDefine.h"
-#include "../Component/Collision/Algolithm/PlayerEnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerEnemyMeleeAttackCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerKingCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerShipCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerWaterFlowCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerNanotechItemCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyEnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyOmniWrenchCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/SightPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/SightEnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyMeleeAttackPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyOmniWrenchCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyBombGloveBulletCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyPyrocitorBulletCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyBlasterBulletCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/EnemyBombGloveEffectCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/BlasterBulletEnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/BombGloveBulletEnemyCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/ShipPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/BoltPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/BulletItemPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/NanotechItemPlayerCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerShopCollisionAlgolithm.h"
-#include "../Component/Collision/Algolithm/PlayerWallCollisionAlgolithm.h"
-#include "../Component/Collision/Object/CollisionComponentDefine.h"
+#include "../Component/Collision/CollisionAlgolithmDefine.h"
+#include "../Component/Collision/CollisionComponentDefine.h"
+#include "../Component/Collision/CollisionAlgolithmInclude.h"
 
 
 void ratchet::game::PhysicsWorld::GenerateLayer(void) {
@@ -37,16 +12,18 @@ void ratchet::game::PhysicsWorld::GenerateLayer(void) {
       ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerKingCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerScarecrowCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm.c_str(),
-      ratchet::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kScarecrowOmniWrenchCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kEnemyBombGloveBulletCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kEnemyPyrocitorBulletCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kEnemyBlasterBulletCollisionAlgolithm.c_str(),
@@ -75,12 +52,14 @@ ratchet::game::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerEnemyBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerKingCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerKingCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerScarecrowCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerScarecrowCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerShipCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerWaterFlowCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerNanotechItemCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::EnemyEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::EnemyPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyPlayerCollisionAlgolithm);
-    collision_algolithm_factory.Register<ratchet::EnemyOmniWrenchCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyOmniWrenchAttackCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::EnemyOmniWrenchCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyOmniWrenchCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::ScarecrowOmniWrenchCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kScarecrowOmniWrenchCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::SightPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::SightEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::EnemyMeleeAttackPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kEnemyMeleeAttackPlayerCollisionAlgolithm);

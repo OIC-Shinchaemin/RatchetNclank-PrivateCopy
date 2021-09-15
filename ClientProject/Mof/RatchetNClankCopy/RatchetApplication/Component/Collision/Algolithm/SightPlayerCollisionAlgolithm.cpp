@@ -1,7 +1,7 @@
 #include "SightPlayerCollisionAlgolithm.h"
 
 #include "Base/Core/Math.h"
-#include "../Object/CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::SightPlayerCollisionAlgolithm::SightPlayerCollisionAlgolithm() :

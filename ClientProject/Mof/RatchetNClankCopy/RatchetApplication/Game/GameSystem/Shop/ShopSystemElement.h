@@ -7,10 +7,7 @@
 #include "../../../GameDefine.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-namespace shop {
+namespace ratchet::game::gamesystem::shop {
 class ShopSystemElement {
 private:
     //! ÉäÉ\Å[ÉX
@@ -49,8 +46,5 @@ public:
     /// <returns></returns>
     virtual bool Update(void);
 };
-}
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_SHOP_SHOP_ELEMENT_H

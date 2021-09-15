@@ -1,9 +1,9 @@
 #include "BulletItemComponent.h"
 
 #include "../../VelocityComponent.h"
-#include "../../Collision/Object/CollisionComponentDefine.h"
+#include "../../Collision/CollisionComponentDefine.h"
 #include "../../Collision/Object/BulletItemCollisionComponent.h"
-#include "../../../Component/Collision/Object/CollisionComponentDefine.h"
+#include "../../../Component/Collision/CollisionComponentDefine.h"
 #include "../../../Component/Collision/Object/SightCollisionComponent.h"
 #include "BulletItemActionStateComponent.h"
 #include "../../BillboardComponent.h"

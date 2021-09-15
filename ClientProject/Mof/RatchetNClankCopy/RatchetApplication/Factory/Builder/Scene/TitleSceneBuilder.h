@@ -10,10 +10,7 @@
 #include "../../../Game/GameManager.h"
 
 
-namespace ratchet {
-namespace factory {
-namespace builder {
-namespace scene {
+namespace ratchet::factory::builder::scene {
 class TitleSceneBuilder : public  ratchet ::factory::builder::scene::SceneBuilder{
     using super = ratchet::factory::builder::scene::SceneBuilder;
 private:
@@ -44,8 +41,5 @@ public:
     /// <param name=""></param>
     virtual void Construct(std::any shared_this) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_FACTORY_BUILDER_SCENE_TITLE_SCENE_BUILDER_H

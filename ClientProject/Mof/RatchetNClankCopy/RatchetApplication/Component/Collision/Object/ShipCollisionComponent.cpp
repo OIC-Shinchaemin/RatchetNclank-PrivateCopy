@@ -1,6 +1,6 @@
 #include "ShipCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../../Component/Ship/ShipStateComponent.h"
 
 

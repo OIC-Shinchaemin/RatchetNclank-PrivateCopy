@@ -5,9 +5,7 @@
 #include <any>
 
 
-namespace ratchet {
-namespace factory {
-namespace builder {
+namespace ratchet::factory::builder {
 class IBuilder {
 public:
     /// <summary>
@@ -24,7 +22,5 @@ public:
     /// <param name=""></param>
     virtual void Construct(std::any shared_this) = 0;
 };
-}
-}
 }
 #endif // !RATCHET_FACTORY_BUILDER_IBUILDER_H

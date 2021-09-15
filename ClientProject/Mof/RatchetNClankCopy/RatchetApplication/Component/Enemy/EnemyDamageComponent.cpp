@@ -1,6 +1,6 @@
 #include "EnemyDamageComponent.h"
 
-#include "../Collision/Object/CollisionComponentDefine.h"
+#include "../Collision/CollisionComponentDefine.h"
 #include "../../State/EnemyActionStateDefine.h"
 #include "../../State/EnemyMotionStateDefine.h"
 #include "EnemyComponent.h"

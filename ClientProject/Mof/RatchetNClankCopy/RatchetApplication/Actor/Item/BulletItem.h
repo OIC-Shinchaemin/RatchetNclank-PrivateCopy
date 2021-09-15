@@ -8,7 +8,7 @@
 #include "../../Game/GameSystem/WeaponSystem.h"
 
 
-namespace ratchet ::actor::item {
+namespace ratchet::actor::item {
 class BulletItem : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:

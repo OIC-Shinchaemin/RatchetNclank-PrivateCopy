@@ -5,14 +5,13 @@
 #include <memory>
 
 #include "../Actor/Actor.h"
-#include "../Component/Collision/Object/CollisionComponent.h"
-#include "../Component/Collision/Algolithm/CollisionAlgolithm.h"
+#include "../Component/Collision/CollisionComponent.h"
+#include "../Component/Collision/CollisionAlgolithm.h"
 #include "../Factory/Factory.h"
 #include "../Stage/Stage.h"
 
 
-namespace ratchet {
-namespace game {
+namespace ratchet::game {
 class PhysicsWorld {
     using ActorPtr = std::shared_ptr<ratchet::actor::Actor>;
     using ObjectPtr = std::shared_ptr<ratchet::component::collision::CollisionComponent>;
@@ -74,6 +73,5 @@ public:
     /// <param name=""></param>
     void Reset(void);
 };
-}
 }
 #endif // !RATCHET_GAME_PHYSIC_WORLD_H

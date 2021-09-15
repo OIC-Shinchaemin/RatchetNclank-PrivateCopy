@@ -18,8 +18,9 @@
 #include "../../GameDefine.h"
 
 
-namespace ratchet ::game ::gamesystem {
-class GameSystem : public std::enable_shared_from_this<ratchet::game::gamesystem::GameSystem>,
+namespace ratchet::game::gamesystem {
+class GameSystem : 
+    public std::enable_shared_from_this<ratchet::game::gamesystem::GameSystem>,
     public base::core::Observer<bool> {
     using this_type = ratchet::game::gamesystem::GameSystem;
 private:

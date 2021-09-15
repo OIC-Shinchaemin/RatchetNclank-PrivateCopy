@@ -14,10 +14,7 @@
 #include "Save/SaveData.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
+namespace ratchet::game::gamesystem {
 class GameMoney : public std::enable_shared_from_this<ratchet::game::gamesystem::GameMoney>, public base::core::Observer<int> {
 private:
     //! ‚¨‹à
@@ -82,7 +79,5 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_GAME_MONEY_H

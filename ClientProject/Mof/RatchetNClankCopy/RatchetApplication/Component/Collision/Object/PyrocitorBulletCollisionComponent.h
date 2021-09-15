@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_PYROCITOR_BULLET_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -10,12 +10,9 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace component {
-namespace collision {
+namespace ratchet::component::collision {
 class PyrocitorBulletCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
-private:
 public:
     /// <summary>
     /// コンストラクタ
@@ -85,7 +82,5 @@ public:
     /// <param name="ptr"></param>
     //virtual void CollisionStage(Mof::LPMeshContainer mesh, const Mof::CMatrix44& world) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_PYROCITOR_BULLET_COLLISION_COMPONENT_H

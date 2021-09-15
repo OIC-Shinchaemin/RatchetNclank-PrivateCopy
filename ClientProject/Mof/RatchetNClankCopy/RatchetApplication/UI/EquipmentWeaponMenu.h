@@ -15,8 +15,7 @@
 #include "../Actor/Weapon/Mechanical.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class EquipmentWeaponMenu : public base::ui::UIPanel, public base::core::Observer<const ratchet::actor::weapon::Mechanical::Info&> {
     using super = base::ui::UIPanel;
 private:
@@ -49,6 +48,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_EQUIPMENT_WEAPON_MENU_H

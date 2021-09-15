@@ -10,8 +10,7 @@
 #include "../ResourceManager.h"
 
 
-namespace ratchet {
-namespace game {
+namespace ratchet::game {
 class Renderer {
     //! ƒLƒƒƒ‰ƒNƒ^
     std::vector<std::shared_ptr<ratchet::actor::Actor>> _actors;
@@ -50,6 +49,5 @@ public:
     /// <param name=""></param>
     void Reset(void);
 };
-}
 }
 #endif // !RATCHET_GAME_RENDERER_H

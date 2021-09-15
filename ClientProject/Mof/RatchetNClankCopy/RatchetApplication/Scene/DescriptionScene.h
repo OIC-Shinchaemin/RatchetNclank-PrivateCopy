@@ -5,8 +5,7 @@
 #include "Scene.h"
 
 
-namespace ratchet {
-namespace scene {
+namespace ratchet::scene {
 class DescriptionScene : public ratchet::scene::Scene {
     using super = ratchet::scene::Scene;
 protected:
@@ -56,6 +55,5 @@ public:
     /// <returns></returns>
     virtual bool Load(std::shared_ptr<super::Param> param) override;
 };
-}
 }
 #endif // !RATCHET_SCENE_DESCRIPTION_SCENE_H

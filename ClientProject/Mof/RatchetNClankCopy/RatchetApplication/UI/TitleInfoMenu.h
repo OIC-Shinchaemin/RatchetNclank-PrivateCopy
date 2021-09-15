@@ -13,8 +13,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet ::ui {
 class TitleInfoMenu : public base::ui::UIPanel, public base::core::Observer<bool> {
     using super = base::ui::UIPanel;
     //! 表示テキストの種類
@@ -104,6 +103,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_TITLE_INFO_MENU_H

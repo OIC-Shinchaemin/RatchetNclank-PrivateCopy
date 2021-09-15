@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_BOMB_GLOVE_BULLET_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -10,9 +10,7 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace component {
-namespace collision {
+namespace ratchet::component::collision {
 class BombGloveBulletCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -85,7 +83,5 @@ public:
     /// <param name="ptr"></param>
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_BOMB_GLOVE_BULLET_COLLISION_COMPONENT_H

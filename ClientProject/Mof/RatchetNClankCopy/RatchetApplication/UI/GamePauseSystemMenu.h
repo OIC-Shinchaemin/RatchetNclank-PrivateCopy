@@ -13,8 +13,7 @@
 #include "../Game/GameSystem/GamePauseSystem.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class GamePauseSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
@@ -128,6 +127,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_GAME_PAUSE_SYSTEM_MENU_H

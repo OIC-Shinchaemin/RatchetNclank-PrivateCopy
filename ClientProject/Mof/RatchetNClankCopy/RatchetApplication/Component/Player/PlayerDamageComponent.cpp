@@ -1,7 +1,7 @@
 #include "PlayerDamageComponent.h"
 
 #include "../HpComponent.h"
-#include "../Collision/Object/CollisionComponentDefine.h"
+#include "../Collision/CollisionComponentDefine.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
 
 

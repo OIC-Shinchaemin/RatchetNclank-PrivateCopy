@@ -1,6 +1,6 @@
 #include "PlayerCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../../State/PlayerActionStateDefine.h"
 #include "../../Player/PlayerComponent.h"
 #include "../../VelocityComponent.h"

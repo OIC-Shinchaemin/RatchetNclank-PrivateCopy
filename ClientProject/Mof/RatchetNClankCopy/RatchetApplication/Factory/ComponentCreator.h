@@ -9,8 +9,7 @@
 #include "../Component/Component.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 class ComponentCreator {
 private:
     //! ÉRÉsÅ[å≥
@@ -51,6 +50,5 @@ public:
     /// <param name=""></param>
     void Release(void);
 };
-}
 }
 #endif // !RATCHET_FACTORY_COMPONENT_CREATOR_H

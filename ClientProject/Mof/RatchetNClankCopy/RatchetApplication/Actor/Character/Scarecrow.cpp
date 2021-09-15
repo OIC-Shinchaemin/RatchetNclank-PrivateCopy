@@ -45,25 +45,5 @@ bool ratchet::actor::character::Scarecrow::Update(float delta_time) {
 
 bool ratchet::actor::character::Scarecrow::Render(void) {
 	super::Render();
-
-	//// •`‰æ
-	//auto pos = super::GetPosition();
-	//float height = 2.4f;
-	//auto transform = def::Transform(Mof::CVector3(pos.x, pos.y + height, pos.z));
-	//if (auto tex = _question_texture.lock(); tex) {
-	//	Mof::CMatrix44 scale, rotate, translate;
-	//	Mof::CQuaternion quat; quat.Rotation(transform.rotate);
-
-	//	scale.Scaling(transform.scale, scale);
-	//	quat.ConvertMatrixTranspose(rotate);
-	//	translate.Translation(transform.position, translate);
-
-	//	Mof::CMatrix44 world = scale * rotate * translate;
-	//	auto camera = ::CGraphicsUtilities::GetCamera();
-	//	tex->Render(camera->GetBillBoardMatrix() * world);
-
-	//	//CGraphicsUtilities::RenderTexture();
-	//	//tex->Render(world, _rectangle.value());
-	//} // if
 	return true;
 }

@@ -5,13 +5,11 @@
 #include <string>
 
 
-namespace ratchet {
-namespace state {
+namespace ratchet::state {
 struct NanotechItemActionType {
     static std::string kDefault;
     static std::string kMoved;
     static std::string kGravitate;
 };
-}
 }
 #endif // !RATCHET_STATE_NANOTECH_ITEM_ACTION_STATE_DEFINE_H

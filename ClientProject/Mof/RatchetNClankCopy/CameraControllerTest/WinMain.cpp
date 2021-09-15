@@ -9,7 +9,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     Mof::LPFramework pFrame = new Mof::CDX11GameFramework();
     Mof::WINDOWSGAMEFRAMEWORKINITIALIZEINFO Info;
-    Info.pApplication = new  test::CGameApp();
+    Info.pApplication = new  test::camera::CGameApp();
     Info.Flag = MOF_FRAMEWORK_GRAPHICSINITIALIZE | MOF_FRAMEWORK_INPUTINITIALIZE | MOF_FRAMEWORK_APPLICATIONINITIALIZE;
     if (pFrame->Initialize(&Info)) {
         pFrame->Run();

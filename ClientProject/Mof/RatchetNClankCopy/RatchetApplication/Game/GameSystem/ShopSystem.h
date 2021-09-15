@@ -21,15 +21,11 @@
 #include "Shop/ShopSystemEntry.h"
 
 
-namespace ratchet {
-namespace ui {
-class ShopSystemMenu;
-}
-namespace game {
-namespace gamesystem {
+namespace ratchet::ui { class ShopSystemMenu; }
+namespace ratchet::game::gamesystem {
 class ShopSystem :
     public ratchet::game::gamesystem::GameSystem,
-    public base::core::Observer<const std::shared_ptr<same_ns::shop::ShopSystemElement>&> {
+    public base::core::Observer<const std::shared_ptr<ratchet::game::gamesystem::shop::ShopSystemElement>&> {
     using super = ratchet::game::gamesystem::GameSystem;
     using this_type = ratchet::game::gamesystem::ShopSystem;
 public:
@@ -102,7 +98,7 @@ private:
     //! UI管理
     ratchet::ui::UICreator<ratchet::ui::ShopSystemMenu> _ui_creator;
     //! 要素
-    std::stack<std::shared_ptr<same_ns::shop::ShopSystemElement>> _element_stack;
+    std::stack<std::shared_ptr<ratchet::game::gamesystem::shop::ShopSystemElement>> _element_stack;
     /// <summary>
     /// 終了
     /// </summary>
@@ -141,7 +137,7 @@ public:
     /// 通知
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const std::shared_ptr<same_ns::shop::ShopSystemElement>& add) override;
+    virtual void OnNotify(const std::shared_ptr<ratchet::game::gamesystem::shop::ShopSystemElement>& add) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -193,7 +189,5 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_SHOP_SYSTEM_H

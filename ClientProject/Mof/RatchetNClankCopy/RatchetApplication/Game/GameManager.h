@@ -13,12 +13,11 @@
 #include "GameSystem/ShopSystem.h"
 #include "GameSystem/OptionSystem.h"
 #include "GameSystem/GamePauseSystem.h"
-#include "../Namespace.h"
+#include "GameSystem/Mission/MissionSystem.h"
 
 
-namespace ratchet {
-namespace game {
-class GameManager : 
+namespace ratchet::game {
+class GameManager :
     public std::enable_shared_from_this<ratchet::game::GameManager>,
     public base::core::Observer<const std::shared_ptr<ratchet::game::gamesystem::GameSystem>&> {
 private:
@@ -40,6 +39,8 @@ private:
     std::shared_ptr<ratchet::game::gamesystem::OptionSystem> _option_system;
     //! ポーズ
     std::shared_ptr<ratchet::game::gamesystem::GamePauseSystem> _pause_system;
+    //! ミッション
+    std::shared_ptr<ratchet::game::gamesystem::mission::MissionSystem> _mission_system;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -144,6 +145,5 @@ public:
     /// <param name=""></param>
     void GameSystemRelease(void);
 };
-}
 }
 #endif // !RATCHET_GAME_GAME_MANAGER_H

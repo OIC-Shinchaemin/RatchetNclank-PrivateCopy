@@ -12,9 +12,7 @@
 #include "../VelocityComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace enemy {
+namespace ratchet::component::enemy {
 class EnemyComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;
 private:
@@ -93,7 +91,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_ENEMY_ENEMY_COMPONENT_H

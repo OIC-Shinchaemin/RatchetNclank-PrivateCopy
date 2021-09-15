@@ -1,6 +1,6 @@
 #include "PlayerShipCollisionAlgolithm.h"
 
-#include "../Object/CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::PlayerShipCollisionAlgolithm::PlayerShipCollisionAlgolithm() :

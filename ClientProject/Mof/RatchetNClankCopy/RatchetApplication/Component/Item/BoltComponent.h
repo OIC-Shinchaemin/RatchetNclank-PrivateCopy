@@ -6,9 +6,8 @@
 
 #include "../../Actor/Item/Bolt.h"
 
-namespace ratchet {
-namespace component {
-namespace item {
+
+namespace ratchet::component::item {
 class BoltComponent : public component::UpdateComponent {
     using super = component::UpdateComponent;
 private:
@@ -82,7 +81,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_ITEM_BOLT_COMPONENT_H

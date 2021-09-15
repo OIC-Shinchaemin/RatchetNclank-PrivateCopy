@@ -1,6 +1,23 @@
 {
   "components": [
     {
+      "type": "ScarecrowComponent",
+      "paramater": {
+        "priority": 0,
+        "height": 1.0,
+        "volume": 0.5
+      }
+    },
+
+    {
+      "type": "HpComponent",
+      "paramater": {
+        "priority": 0,
+        "hp_max": 3
+      }
+    },
+
+    {
       "type": "VelocityComponent",
       "paramater": {
         "priority": 99
@@ -17,6 +34,12 @@
       "paramater": {
         "priority": 0,
         "path": "../Resource/mesh/scarecrow/scene0.mom"
+      }
+    },
+    {
+      "type": "ScarecrowCollisionComponent",
+      "paramater": {
+        "priority": 0
       }
     }
   ]

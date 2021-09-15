@@ -1,6 +1,6 @@
 #include "BulletItemCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../VelocityComponent.h"
 #include "../../Item/BulletItem/BulletItemActionStateComponent.h"
 

@@ -7,18 +7,8 @@
 #include "ShopSystemElement.h"
 
 
-namespace ratchet {
-namespace ui{
-namespace shop{
-class ShopSystemMainMenu;
-}
-}
-}
-
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-namespace shop {
+namespace ratchet::ui::shop { class ShopSystemMainMenu; }
+namespace ratchet::game::gamesystem::shop {
 class ShopSystemEntryItem {
 public:
     std::string name;
@@ -35,10 +25,10 @@ public:
         enable(flag) {
     }
 };
-class ShopSystemEntry : public same_ns::ShopSystemElement {
+class ShopSystemEntry : public ratchet::game::gamesystem::shop::ShopSystemElement {
 private:
     //! ÉAÉCÉeÉÄ
-    std::vector<same_ns::ShopSystemEntryItem> _items;
+    std::vector<ratchet::game::gamesystem::shop::ShopSystemEntryItem> _items;
     //! UIä«óù
     ratchet::ui::UICreator<ratchet::ui::shop::ShopSystemMainMenu> _ui_creator;
 public:
@@ -63,8 +53,5 @@ public:
     /// <returns></returns>
     virtual bool Update(void) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_SHOP_SHOP_SYSTEM_ENTRY_H

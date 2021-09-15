@@ -1,6 +1,6 @@
 #include "CameraCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../CameraComponent.h"
 
 

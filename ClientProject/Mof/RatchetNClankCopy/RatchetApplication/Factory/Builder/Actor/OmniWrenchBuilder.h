@@ -7,10 +7,7 @@
 #include "../../../Actor/Weapon/OmniWrench.h"
 
 
-namespace ratchet {
-namespace factory {
-namespace builder {
-namespace actor {
+namespace ratchet::factory::builder::actor {
 class OmniWrenchBuilder : public ratchet::factory::builder::actor::ActorBuilder {
     using super = ratchet::factory::builder::actor::ActorBuilder;
 private:
@@ -41,8 +38,5 @@ public:
     /// <param name=""></param>
     virtual void Construct(std::any shared_this) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_FACTORY_BUILDER_ACTOR_OMNI_WRENCH_BUILDER_H

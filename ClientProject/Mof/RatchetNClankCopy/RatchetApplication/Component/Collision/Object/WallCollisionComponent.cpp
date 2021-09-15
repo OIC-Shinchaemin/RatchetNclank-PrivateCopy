@@ -1,6 +1,6 @@
 #include "WallCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::WallCollisionComponent::WallCollisionComponent(int priority) :
