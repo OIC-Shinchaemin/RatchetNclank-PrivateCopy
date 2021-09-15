@@ -78,7 +78,7 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
 		} // if
 	} // if
 
-	_effect.Update(delta_time);
+	_effect->Update(delta_time);
 
 	return true;
 }
@@ -95,7 +95,7 @@ bool ratchet::scene::GameScene::SceneRender(void) {
 	_stage.Render();
 
 
-	_effect.Render();
+	_effect->Render();
 	
 	::g_pGraphics->SetDepthEnable(false);
 
@@ -209,6 +209,8 @@ bool ratchet::scene::GameScene::Initialize(void) {
 
 	auto game = _game.lock();
 	auto event = _event.lock();
+	_effect = std::make_shared<ratchet::effect::EffectContainer>();
+	_effect->SetResourceManager(super::GetResource());
 	initializer.Execute(game, event, shared_this);
 
 	{
@@ -235,8 +237,8 @@ bool ratchet::scene::GameScene::Initialize(void) {
 		game->GetGamePauseSystem()->AddItem(item2);
 		game->GetGamePauseSystem()->AddItem(item1);
 		game->GetGamePauseSystem()->AddItem(item0);
-	}	
-	_effect.SetResourceManager(super::GetResource());
+
+	}
 	_re_initialize = false;
 	return true;
 }

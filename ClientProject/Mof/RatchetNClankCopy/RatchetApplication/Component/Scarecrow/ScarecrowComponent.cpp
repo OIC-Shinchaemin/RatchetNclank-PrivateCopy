@@ -1,8 +1,10 @@
 #include "ScarecrowComponent.h"
 
+#include "Base/Core/Utility.h"
 #include "../Collision/CollisionComponentDefine.h"
 #include "../Collision/Object/ScarecrowCollisionComponent.h"
 #include "../HpComponent.h"
+#include "../../Actor/Character/Scarecrow.h"
 
 
 ratchet::component::scarecrow::ScarecrowComponent::ScarecrowComponent(int priority) :
@@ -35,40 +37,31 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
 
+
+            {
+                auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Scarecrow>(super::GetOwner());
+                auto pos = owner->GetPosition();
+                pos.y += this->GetHeight();
+                pos.x += ut::GenerateRandomF(-1.0f, 1.0f);
+                pos.z += ut::GenerateRandomF(-1.0f, 1.0f);
+
+
+                auto info = ratchet::effect::Effect::Info();
+                info.init_param.life_duration = 1.0f;
+                info.init_param.transform.position = pos;
+                info.init_param.color = Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f);
+                info.update_param.color = Mof::CVector4(0.0f, 0.0f, 0.0f, -0.02f);
+                owner->GetEffectEmitter()->Emit(info);
+            }
+
+
+
             if (hp_com->GetHp() <= 0) {
                 super::GetOwner()->End();
             } // if
         } // if
         return true;
     }));
-
-
-    //coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
-    //	ratchet::component::collision::CollisionComponentType::kShipCollisionComponent,
-    //	ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-    //		if (auto canvas = _ui_canvas.lock()) {
-    //			canvas->RemoveElement("EquipmentWeaponMenu");
-    //			canvas->RemoveElement("QuickChangeMenu");
-    //		} // if
-
-
-    //		super::GetOwner()->End();
-    //		return true;
-    //		}));
-
-    //coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
-    //	ratchet::component::collision::CollisionComponentType::kWaterFlowCollisionComponent,
-    //	ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-    //		if (this->GetNextTerrain() == "WaterFlow") {
-    //			auto owner = super::GetOwner();
-    //			auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
-    //			auto velocity = velocity_com->GetVelocity() * def::kDeltaTime;
-    //			velocity.y = 0.0f;
-    //			owner->SetPosition(owner->GetPosition() - velocity);
-    //		} // if
-    //		return true;
-    //		}));
-
     return true;
 }
 

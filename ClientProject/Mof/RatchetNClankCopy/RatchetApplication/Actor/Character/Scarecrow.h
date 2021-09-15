@@ -4,6 +4,10 @@
 
 #include "../Actor.h"
 
+#include "Base/Accessor/Accessor.h"
+
+#include "../../Effect/EffectEmitter.h"
+
 
 namespace ratchet::actor::character {
 struct ScarecrowEndMessage {
@@ -17,6 +21,8 @@ class Scarecrow : public actor::Actor {
 private:
     //! 終了時通知用
     ratchet::actor::character::ScarecrowEndMessageSubject _end_message_subject;
+    //! エフェクト
+    std::shared_ptr<ratchet::effect::EffectEmitter> _effect_emitter;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,6 +32,16 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Scarecrow();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEffectEmitter(const std::shared_ptr<ratchet::effect::EffectEmitter>& ptr);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    std::shared_ptr<ratchet::effect::EffectEmitter> GetEffectEmitter(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

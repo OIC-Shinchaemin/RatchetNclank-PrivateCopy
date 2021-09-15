@@ -197,23 +197,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 
 
-	//std::vector<ratchet::actor::character::ScarecrowEndMessageSubject*> scarecrow_end_message_subjects;
-	//{
-	//	// npc
-	//	def::Transform scarecrow_transforms[]{
-	//		def::Transform(Mof::CVector3(-12.0f, -5.0f, -4.0f)),
-	//	};
-	//	param->tag = "scarecrow";
-	//	param->name = "scarecrow_1";
-	//	for (auto& transform : scarecrow_transforms) {
-	//		param->transform.position = transform.position;
-	//		param->transform.rotate = transform.rotate;
-	//		param->transform.scale = transform.scale;
-	//		auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);
-	//		scarecrow_end_message_subjects.push_back(scarecrow->GetScarecrowEndMessageSubject());
-	//		out->AddElement(scarecrow);
-	//	} // for
-	//}
 
 	// npc
 	{
@@ -231,6 +214,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			king->SetTexture(tex);
 			king->SetGameScene(out);
 			king->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
+			king->SetEffectContainer(out->_effect);
 			auto player_camera = player->GetComponent<component::CameraComponent>();
 			king->GetPlayerCameraSubject()->AddObserver(player_camera);
 			king->SetPlayerCameraontroller(player_camera->GetCameraController());

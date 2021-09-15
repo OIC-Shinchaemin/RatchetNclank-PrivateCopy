@@ -102,6 +102,9 @@ namespace ratchet {
 				else if (auto format = std::strstr(data_path.c_str(), ".jpg"); format) {
 					this->AddSharedElement<Mof::CTexture>(data_path.c_str());
 				} // else if
+				else if (auto format = std::strstr(data_path.c_str(), ".dds"); format) {
+					this->AddSharedElement<Mof::CTexture>(data_path.c_str());
+				} // else if
 				else if (auto format = std::strstr(data_path.c_str(), ".mom"); format) {
 					this->AddSharedElement<Mof::CMeshContainer>(data_path.c_str());
 				} // else if

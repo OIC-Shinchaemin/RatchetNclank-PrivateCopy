@@ -16,7 +16,8 @@ ratchet::actor::character::King::King() :
     _player_camera_subject(),
     _scarecrow_view_camera_controller(),
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),
-    _player_view_camera_controller() {
+    _player_view_camera_controller(),
+    _effect_container() {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
     auto camera = std::make_shared<ratchet::camera::Camera>();
@@ -40,6 +41,10 @@ void ratchet::actor::character::King::SetTexture(const std::shared_ptr<Mof::CTex
 }
 void ratchet::actor::character::King::SetGameScene(const std::shared_ptr<scene::GameScene>& ptr) {
     this->_actor_container = ptr;
+}
+
+void ratchet::actor::character::King::SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr) {
+    this->_effect_container = ptr;
 }
 
 void ratchet::actor::character::King::SetPlayerCameraontroller(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
@@ -96,6 +101,7 @@ bool ratchet::actor::character::King::Render(void) {
 void ratchet::actor::character::King::Talk(void) {
     auto param = new ratchet::actor::Actor::Param();
     auto out = _actor_container.lock();
+    auto effect = _effect_container.lock();
 
     if (_quest_index < _quest_count) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
@@ -120,6 +126,8 @@ void ratchet::actor::character::King::Talk(void) {
             param->transform.scale = transform.scale;
             auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);
             scarecrow->GetScarecrowEndMessageSubject()->AddObserver(std::dynamic_pointer_cast<ratchet::actor::character::King>(shared_from_this()));
+            auto emitter = effect->CreateEmitter();
+            scarecrow->SetEffectEmitter(emitter);
             out->AddElement(scarecrow);
 
             // camera

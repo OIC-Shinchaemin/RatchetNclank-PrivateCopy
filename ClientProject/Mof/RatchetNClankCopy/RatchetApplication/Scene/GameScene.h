@@ -53,7 +53,7 @@ private:
     std::weak_ptr<ratchet::event::EventManager> _event;
 
     
-    effect::EffectContainer _effect;
+    std::shared_ptr<effect::EffectContainer> _effect;
 public:
     /// <summary>
     /// ’Ç‰Á

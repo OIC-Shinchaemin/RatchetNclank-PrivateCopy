@@ -10,6 +10,14 @@ ratchet::actor::character::Scarecrow::Scarecrow() :
 ratchet::actor::character::Scarecrow::~Scarecrow() {
 }
 
+void ratchet::actor::character::Scarecrow::SetEffectEmitter(const std::shared_ptr<ratchet::effect::EffectEmitter>& ptr) {
+	this->_effect_emitter = ptr;
+}
+
+std::shared_ptr<ratchet::effect::EffectEmitter> ratchet::actor::character::Scarecrow::GetEffectEmitter(void) const {
+	return this->_effect_emitter;
+}
+
 void ratchet::actor::character::Scarecrow::End(void) {
 	super::End();
 
@@ -29,17 +37,6 @@ bool ratchet::actor::character::Scarecrow::Initialize(ratchet::actor::Actor::Par
 
 bool ratchet::actor::character::Scarecrow::Update(float delta_time) {
 	super::Update(delta_time);
-	/*
-	if (::g_pInput->IsKeyPush(MOFKEY_O)) {
-		auto message = ratchet::game::gamesystem::text::TextSystemMessage();
-		message.type = decltype(message.type)::EventNo0;
-		_text_system_message_subject.Notify(message);
-	} // if
-	*/
-
-	if (::g_pInput->IsKeyPush(MOFKEY_U)) {
-		this->End();
-	} // if
 	return true;
 }
 

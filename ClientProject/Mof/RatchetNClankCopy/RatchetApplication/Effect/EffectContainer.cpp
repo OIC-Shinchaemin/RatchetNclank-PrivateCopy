@@ -26,48 +26,20 @@ bool ratchet::effect::EffectContainer::Update(float delta_time) {
 		});
 
 	if (::g_pInput->IsKeyPush(MOFKEY_E)) {
-
 		auto info = ratchet::effect::Effect::Info();
 		info.init_param.life_duration = 2.0f;
 		info.init_param.transform.position = Mof::CVector3(5.0f, -5.0f, -5.0f);
 		info.init_param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-
 
 		info.update_param.velocity = Mof::CVector3(0.001f, 0.0f, 0.0f);
 		info.update_param.rotate = Mof::CVector3(1.0f, 0.0f, 0.0f);
 		info.update_param.scale = Mof::CVector3(0.001f, 0.0f, 0.0f);
 
 		_emitter->Emit(info);
-		/*
-		auto effect = _pool.Fetch();
-
-		if (effect) {
-			// emit
-			effect->Start(info);
-			_effects.push_back(effect);
-		} // if
-		*/
-		/*
-		for (auto& effect : _effects) {
-			if (!effect.IsEnable()) {
-				effect.Start(info);
-				break;
-			} // if
-		} // for
-		*/
 	} // if
-
-
 
 	for (auto& effect : _effects) {
 		effect->Update(delta_time);
-		/*
-		if (!effect->IsEnable()) {
-			continue;
-		} // if
-		if (effect->Update(delta_time)) {
-		} // if
-		*/
 	} // for
 	return true;
 }
@@ -77,7 +49,6 @@ bool ratchet::effect::EffectContainer::Render(void) {
 		if (!effect->IsEnable()) {
 			continue;
 		} // if
-
 
 		if (auto resource = _resource.lock()) {
 			auto path = _pool.GetResourcePath();
@@ -94,7 +65,7 @@ bool ratchet::effect::EffectContainer::Render(void) {
 
 				Mof::CMatrix44 world = scale * rotate * translate;
 				auto camera = ::CGraphicsUtilities::GetCamera();
-				tex->Render(camera->GetBillBoardMatrix() * world);
+				tex->Render(camera->GetBillBoardMatrix() * world, param.color.ToU32Color());
 			} // if
 
 		} // if

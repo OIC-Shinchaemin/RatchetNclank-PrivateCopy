@@ -8,6 +8,7 @@
 #include "Scarecrow.h"
 #include "../../Camera/CameraController.h"
 #include "../../Component/CameraComponent.h"
+#include "../../Effect/EffectContainer.h"
 
 
 namespace ratchet::scene {
@@ -37,6 +38,8 @@ private:
     base::core::ServiceLocator<ratchet::camera::CameraController>* _player_view_camera_controller;
     //! 視点
     Mof::CVector3 _scarecrow_view_position;
+    //! エフェクト
+    std::weak_ptr<effect::EffectContainer>_effect_container;
 public:
     /// <summary>
     /// コンストラクタ
@@ -61,6 +64,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetGameScene(const std::shared_ptr<scene::GameScene>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

@@ -8,6 +8,7 @@
 
 #include "../../Actor/Actor.h"
 #include "Base/Core/Observable.h"
+#include "../../Effect/EffectEmitter.h"
 
 
 namespace ratchet::component { class  HpComponent; }
