@@ -15,16 +15,21 @@ enum class TextEventType {
     EventNo0,
     EventNo1,
     EventNo2,
-    EventNo3,
-    EventNo4,
-    EventNo5,
-    EventNo6,
-    EventNo7,
-    EventNo8,
-    EventNo9,
+
+    TutorialEventNo0,
+    TutorialEventNo1,
+    TutorialEventNo2,
+
+    TutorialEventNo0End,
+    TutorialEventNo1End,
+    TutorialEventNo2End,
+
+    KingTextEvent,
 };
 struct TextSystemMessage {
+    using CloseEvent = std::function<bool(void)>;
     TextEventType type;
+    std::optional<CloseEvent> on_close;
 };
 using TextSystemMessageSubject = base::core::Observable<const TextSystemMessage&>;
 using TextSystemMessageListener = base::core::Observer<const TextSystemMessage&>;
@@ -59,7 +64,8 @@ private:
     std::unordered_map<TextEventType, std::string> _path_map;
     //! 通知用
     TextSystemClosedMessageSubject _text_system_closed_message_subject;
-
+    //! クローズイベント
+    std::optional<TextSystemMessage::CloseEvent> _on_close;
 
     bool Load(const char* name);
     bool Save(const char* name);

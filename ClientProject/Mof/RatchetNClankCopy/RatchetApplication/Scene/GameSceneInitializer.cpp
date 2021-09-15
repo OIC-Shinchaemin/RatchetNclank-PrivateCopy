@@ -231,6 +231,9 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			king->SetTexture(tex);
 			king->SetGameScene(out);
 			king->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
+			auto player_camera = player->GetComponent<component::CameraComponent>();
+			king->GetPlayerCameraSubject()->AddObserver(player_camera);
+			king->SetPlayerCameraontroller(player_camera->GetCameraController());
 			out->AddElement(king);
 
 //			for (auto subject : scarecrow_end_message_subjects) {

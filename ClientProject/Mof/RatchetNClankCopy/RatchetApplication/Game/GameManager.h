@@ -13,6 +13,7 @@
 #include "GameSystem/ShopSystem.h"
 #include "GameSystem/OptionSystem.h"
 #include "GameSystem/GamePauseSystem.h"
+#include "GameSystem/Mission/MissionSystem.h"
 
 
 namespace ratchet::game {
@@ -38,6 +39,8 @@ private:
     std::shared_ptr<ratchet::game::gamesystem::OptionSystem> _option_system;
     //! ポーズ
     std::shared_ptr<ratchet::game::gamesystem::GamePauseSystem> _pause_system;
+    //! ミッション
+    std::shared_ptr<ratchet::game::gamesystem::mission::MissionSystem> _mission_system;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI

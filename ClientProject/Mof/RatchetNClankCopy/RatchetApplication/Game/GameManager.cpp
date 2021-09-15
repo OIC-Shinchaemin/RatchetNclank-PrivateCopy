@@ -14,6 +14,7 @@ ratchet::game::GameManager::GameManager() :
     _shop_system(std::make_shared<ratchet::game::gamesystem::ShopSystem>()),
     _option_system(std::make_shared<ratchet::game::gamesystem::OptionSystem>()),
     _pause_system(std::make_shared<ratchet::game::gamesystem::GamePauseSystem>()),
+    _mission_system(std::make_shared<ratchet::game::gamesystem::mission::MissionSystem>()),
     _resource(),
     _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);

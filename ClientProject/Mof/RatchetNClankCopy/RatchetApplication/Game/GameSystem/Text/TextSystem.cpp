@@ -131,15 +131,10 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
     //アルファ値の更新
     UpdateAlpha();
 
-    //遷移中はこれ以降の処理はしない
-    //if (m_bEnd || gScene != gChangeScene) 	{
-        //return;
-    //}
-
     //メニューの更新
     if (m_SaveMenu.IsShow()) {
     }
-    //スクリプトによる更新
+     //スクリプトによる更新
     else if (_wait) {
         //コマンドのタイプによって分岐
         switch (_now_command->Type) {
@@ -161,27 +156,16 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
     for (int i = 0; i < _sprite_list.GetArrayCount(); i++) {
         _sprite_list[i]->Update();
     } // for
-    //F2キーでタイトル画面へ
-    if (g_pInput->IsKeyPush(MOFKEY_F2)) {
-        //m_bEnd = true;
-        //gChangeScene = SCENENO_TITLE;
-    }
-    //F3キーで保存画面へ
-    else if (g_pInput->IsKeyPush(MOFKEY_F3)) {
-        //m_bEnd = true;
-        //gChangeScene = SCENENO_SAVE;
-        //gSaveScene.SetState(SCENENO_GAME, true);
-    }
-
-
     if (_sprite_list.GetArrayCount() == 0) {
         this->_active = false;
         auto message = TextSystemClosedMessage();
         message.close = true;
+        if (_on_close.has_value()) {
+            _on_close.value()();
+        } // if
         _text_system_closed_message_subject.Notify(message);
         return false;
     } // if
-
     return true;
 }
 
@@ -407,19 +391,18 @@ void ratchet::game::gamesystem::text::TextSystem::IfCommand(IFCOMMAND* pIfComman
 
 ratchet::game::gamesystem::text::TextSystem::TextSystem() :
     _active(false),
-    _text_system_closed_message_subject(){
+    _text_system_closed_message_subject() {
     ::memset(_line_buffer, 0, TEXTBUFFERSIZE);
 
-    _path_map.emplace(TextEventType::EventNo0, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo1, "script/test2.txt");
-    _path_map.emplace(TextEventType::EventNo2, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo3, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo4, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo5, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo6, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo7, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo8, "script/test.txt");
-    _path_map.emplace(TextEventType::EventNo9, "script/test.txt");
+    _path_map.emplace(TextEventType::EventNo0, "script/tutorial_event_0_start.txt");
+    _path_map.emplace(TextEventType::EventNo1, "script/tutorial_event_1_start.txt");
+    _path_map.emplace(TextEventType::EventNo2, "script/tutorial_event_2_start.txt");
+
+    _path_map.emplace(TextEventType::TutorialEventNo0End, "script/tutorial_event_0_end.txt");
+    _path_map.emplace(TextEventType::TutorialEventNo1End, "script/tutorial_event_1_end.txt");
+    _path_map.emplace(TextEventType::TutorialEventNo2End, "script/tutorial_event_2_end.txt");
+
+    _path_map.emplace(TextEventType::KingTextEvent, "script/king_text_event.txt");
 }
 
 ratchet::game::gamesystem::text::TextSystem::~TextSystem() {
@@ -430,12 +413,13 @@ void ratchet::game::gamesystem::text::TextSystem::OnNotify(const TextSystemMessa
     ::memset(_flags, 0, sizeof(int) * _flag_count);
     //スクリプトを読み込む
     //if (!this->LoadScript("script/test.txt")) {
-    
+
     auto path = _path_map.at(message.type);
     if (!this->LoadScript(path.c_str())) {
         return;
     } // if
     this->Activate();
+    _on_close = message.on_close;
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::IsActive(void) const {

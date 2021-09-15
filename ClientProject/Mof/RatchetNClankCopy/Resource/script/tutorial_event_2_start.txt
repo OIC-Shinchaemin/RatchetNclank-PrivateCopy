@@ -1,0 +1,9 @@
+sprite,Sprite1,Chara_a_01.png;
+sprite,Sprite2,Chara_a_02.png;
+setpos,40,0,Sprite1;
+setpos,540,0,Sprite2;
+
+text,26,584,チュートリアルNo2を開始します;
+Text,26,584,そこにあるかかしを倒してください;
+Text,26,584,Ｎキーで攻撃できます;
+next,test.txt;

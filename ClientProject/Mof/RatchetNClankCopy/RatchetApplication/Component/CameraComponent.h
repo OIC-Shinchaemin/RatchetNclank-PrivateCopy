@@ -10,12 +10,9 @@
 #include "../Camera/CameraController.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player {
-class PlayerStateComponent;
-}
-class CameraComponent : public ratchet::component::UpdateComponent, 
+namespace ratchet::component::player { class PlayerStateComponent; }
+namespace ratchet::component {
+class CameraComponent : public ratchet::component::UpdateComponent,
     public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&> {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -29,8 +26,6 @@ private:
     ratchet::camera::CameraController::CameraMode _current_mode;
     //! コントローラ
     std::unordered_map<ratchet::camera::CameraController::CameraMode, std::shared_ptr<ratchet::camera::CameraController>> _controller_map;
-
-
     //! FPSカメラ方向
     float _ideal_fps_camera_angle;
     //! 距離
@@ -143,6 +138,14 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    auto GetCameraController(void) {
+        return &this->_camera_controller;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
     /// ゲッター
@@ -201,6 +204,5 @@ public:
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
 };
-}
 }
 #endif // !RATCHET_COMPONENT_CAMERA_COMPONENT_H

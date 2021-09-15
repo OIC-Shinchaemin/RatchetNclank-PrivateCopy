@@ -463,9 +463,11 @@
     <ClCompile Include="Game\GameSystem\GamePauseSystem.cpp" />
     <ClCompile Include="Game\GameSystem\GameQuest.cpp" />
     <ClCompile Include="Game\GameSystem\GameSystem.cpp" />
-    <ClCompile Include="Game\GameSystem\GimmickAccessSystem.cpp" />
     <ClCompile Include="Game\GameSystem\HelpDesk.cpp" />
+    <ClCompile Include="Game\GameSystem\Mission\MissionData.cpp" />
+    <ClCompile Include="Game\GameSystem\Mission\MissionSystem.cpp" />
     <ClCompile Include="Game\GameSystem\OptionSystem.cpp" />
+    <ClCompile Include="Game\GameSystem\Quest\QuestSystem.cpp" />
     <ClCompile Include="Game\GameSystem\QuickChangeSystem.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveData.cpp" />
     <ClCompile Include="Game\GameSystem\Save\SaveSystem.cpp" />
@@ -834,7 +836,10 @@
     <ClInclude Include="Game\GameSystem\GameQuest.h" />
     <ClInclude Include="Game\GameSystem\GameSystem.h" />
     <ClInclude Include="Game\GameSystem\HelpDesk.h" />
+    <ClInclude Include="Game\GameSystem\Mission\MissionData.h" />
+    <ClInclude Include="Game\GameSystem\Mission\MissionSystem.h" />
     <ClInclude Include="Game\GameSystem\OptionSystem.h" />
+    <ClInclude Include="Game\GameSystem\Quest\QuestSystem.h" />
     <ClInclude Include="Game\GameSystem\QuickChangeSystem.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveData.h" />
     <ClInclude Include="Game\GameSystem\Save\SaveSystem.h" />
@@ -908,8 +913,15 @@
     <Text Include="..\Resource\scene_resource\game_scene.txt" />
     <Text Include="..\Resource\scene_resource\general.txt" />
     <Text Include="..\Resource\scene_resource\title_scene.txt" />
+    <Text Include="..\Resource\script\king_text_event.txt" />
     <Text Include="..\Resource\script\test.txt" />
     <Text Include="..\Resource\script\test2.txt" />
+    <Text Include="..\Resource\script\tutorial_event_0_end.txt" />
+    <Text Include="..\Resource\script\tutorial_event_0_start.txt" />
+    <Text Include="..\Resource\script\tutorial_event_1_end.txt" />
+    <Text Include="..\Resource\script\tutorial_event_1_start.txt" />
+    <Text Include="..\Resource\script\tutorial_event_2_end.txt" />
+    <Text Include="..\Resource\script\tutorial_event_2_start.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\behaviour\scarecrow_enemy.json" />
