@@ -46,6 +46,10 @@ void ratchet::camera::CameraController::SetDumping(float value) {
     this->_param.dumping = value;
 }
 
+void ratchet::camera::CameraController::SetUseSpring(bool flag) {
+    this->_use_spring = flag;
+}
+
 void ratchet::camera::CameraController::SetInfo(const ratchet::camera::CameraController::CameraInfo& info) {
     _position = info.start_position;
     _target = info.target_position;

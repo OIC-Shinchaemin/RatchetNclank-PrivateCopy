@@ -5,6 +5,7 @@
 #include "../../Component/MeshComponent.h"
 #include "../../Factory/FactoryManager.h"
 #include "../../Camera/FollowCameraController.h"
+#include "../Character/Player.h"
 
 
 ratchet::actor::character::King::King() :
@@ -17,7 +18,8 @@ ratchet::actor::character::King::King() :
     _scarecrow_view_camera_controller(),
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),
     _player_view_camera_controller(),
-    _effect_container() {
+    _effect_container(),
+    _player() {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
     auto camera = std::make_shared<ratchet::camera::Camera>();
@@ -45,6 +47,10 @@ void ratchet::actor::character::King::SetGameScene(const std::shared_ptr<scene::
 
 void ratchet::actor::character::King::SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr) {
     this->_effect_container = ptr;
+}
+
+void ratchet::actor::character::King::SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr) {
+    this->_player = ptr;
 }
 
 void ratchet::actor::character::King::SetPlayerCameraontroller(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
@@ -102,6 +108,7 @@ void ratchet::actor::character::King::Talk(void) {
     auto param = new ratchet::actor::Actor::Param();
     auto out = _actor_container.lock();
     auto effect = _effect_container.lock();
+    auto player = _player.lock();
 
     if (_quest_index < _quest_count) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
@@ -109,6 +116,11 @@ void ratchet::actor::character::King::Talk(void) {
         message.type = static_cast<decltype(message.type)>(type_temp);
         message.on_close = [&]() {
             _player_view_camera_controller->GetService()->RegisterGlobalCamera();
+
+            auto target = Mof::CVector3(-12.0f, -5.0f, -4.0f);
+            auto player_camera = _player_view_camera_controller->GetService();
+            auto dir = target - _player.lock()->GetPosition();
+            player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
             return true;
         };
         _text_system_message_subject.Notify(message);
@@ -131,23 +143,29 @@ void ratchet::actor::character::King::Talk(void) {
             out->AddElement(scarecrow);
 
             // camera
-            auto info = camera::CameraController::CameraInfo();
-            info.target_position = super::GetPosition();
-            info.ideal_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
-            info.start_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
-            info.camera_front = Mof::CVector3(0.0f, 0.0f, 0.0f);
-            auto con = _scarecrow_view_camera_controller.GetService();
+            //auto info = camera::CameraController::CameraInfo();
+            //info.target_position = super::GetPosition();
+            //info.ideal_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
+            //info.start_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
+            //info.camera_front = Mof::CVector3(0.0f, 0.0f, 0.0f);
+            //auto con = _scarecrow_view_camera_controller.GetService();
 
-            float angle_y = std::atan2(-(info.target_position.z - info.start_position.z),
-                                       (info.target_position.x - info.start_position.x)) -
-                math::kHalfPi;
-            auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
-            
-            con->SetAzimuth(angle_y);
-            con->SetAltitude(20.0f);
-            con->SetDistance(3.0f);
-            con->RegisterGlobalCamera();
-            con->SetInfo(info);
+            //float angle_y = std::atan2(-(info.target_position.z - info.start_position.z),
+            //                           (info.target_position.x - info.start_position.x)) -
+            //    math::kHalfPi;
+            //auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
+            //con->SetAzimuth(angle_y);
+            //con->SetAltitude(20.0f);
+            //con->SetDistance(3.0f);
+            //con->RegisterGlobalCamera();
+            //con->SetInfo(info);
+
+            auto player_camera = _player_view_camera_controller->GetService();
+            //player->GetPosition();
+            //auto player_pos = player->GetPosition();
+            //auto pos = super::GetPosition();
+            auto dir = super::GetPosition() - player->GetPosition();
+            player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
         } // for
 
         ut::SafeDelete(param);

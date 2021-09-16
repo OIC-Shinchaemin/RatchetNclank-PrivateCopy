@@ -5,17 +5,21 @@ void ratchet::camera::FollowCameraController::UpdateCameraPosition(float delta_t
     camera->SetTarget(_target);
 
     auto& [azimuth, altitude, distance, spring, dumping, velocity] = _param;
-
     auto offset = math::SphericalToCartesian(distance, azimuth(), altitude());
     auto ideal_pos = _target + offset;
 
     auto displace = _position - ideal_pos;
     auto accel = (displace * (-spring)) - (velocity * dumping);
-
     velocity += accel * delta_time;
     _position += velocity * delta_time;
 
-    camera->SetPosition(_position);
+    if (super::_use_spring) {
+        camera->SetPosition(_position);
+    } // if
+    else {
+        camera->SetPosition(ideal_pos);
+    } // else
+
 }
 
 ratchet::camera::FollowCameraController::FollowCameraController() :
