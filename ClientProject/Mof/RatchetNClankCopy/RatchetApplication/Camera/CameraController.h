@@ -15,6 +15,7 @@ public:
     enum class CameraMode {
         Follow,
         FirstPerson,
+        ThirdPerson,
     };
     struct Param {
         //! •ûˆÊŠpƒÆ

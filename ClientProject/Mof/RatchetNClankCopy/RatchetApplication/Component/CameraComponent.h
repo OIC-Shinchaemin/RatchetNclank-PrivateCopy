@@ -113,6 +113,12 @@ private:
     /// <param name="delta_time"></param>
     /// <param name="controller"></param>
     void UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="controller"></param>
+    void UpdateThirdPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller);
 public:
     /// <summary>
     /// コンストラクタ

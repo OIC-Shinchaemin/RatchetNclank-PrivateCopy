@@ -109,6 +109,10 @@ public:
         *this->_value = value;
         return *this;
     }
+    Accessor& operator =(const std::shared_ptr<T>& value) {
+        this->_value = value;
+        return *this;
+    }
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>

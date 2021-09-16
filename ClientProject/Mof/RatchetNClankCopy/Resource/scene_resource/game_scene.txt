@@ -19,6 +19,9 @@
 ../Resource/mesh/scarecrow/scene0.mom
 ../Resource/mesh/scarecrow/scene1.mom
 
+../Resource/texture/effect/smoke.png
+../Resource/texture/effect/flash.dds
+../Resource/texture/effect/flash.png
 
 ../Resource/texture/icon/bomb_glove.png
 ../Resource/texture/icon/pyrocitor.png
@@ -33,6 +36,8 @@
 ../Resource/texture/water/water0.jpg
 ../Resource/texture/water/water1.jpg
 ../Resource/texture/title_logo/image.png
+
+
 
 ../Resource/texture/ui/text/start.png
 ../Resource/texture/ui/text/press.png
@@ -50,8 +55,6 @@
 ../Resource/texture/ui/text/go_to_title.png
 
 ../Resource/texture/ui/icon/question.png
-
-../Resource/texture/effect/smoke.png
 
 ../Resource/motion_names/player.motion_names
 ../Resource/motion_names/skeleton.motion_names

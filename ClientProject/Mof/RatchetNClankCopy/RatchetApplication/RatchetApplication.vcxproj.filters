@@ -1203,6 +1203,9 @@
     <ClCompile Include="Game\GameSystem\Mission\MissionData.cpp">
       <Filter>Ratchet\Source\Game\GameSystem\Mission</Filter>
     </ClCompile>
+    <ClCompile Include="Camera\ThirdPersonCameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -2329,6 +2332,9 @@
     </ClInclude>
     <ClInclude Include="Game\GameSystem\Mission\MissionData.h">
       <Filter>Ratchet\Header\Game\GameSystem\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\ThirdPersonCameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

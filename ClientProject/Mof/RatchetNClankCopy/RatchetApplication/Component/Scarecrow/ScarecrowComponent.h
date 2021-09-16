@@ -8,6 +8,7 @@
 
 #include "../../Actor/Actor.h"
 #include "Base/Core/Observable.h"
+#include "../../Effect/EffectEmitter.h"
 
 
 namespace ratchet::component { class  HpComponent; }
@@ -17,6 +18,12 @@ class ScarecrowComponent : public ::ratchet::component::CharacterComponent {
 private:
     //! Hp
     std::weak_ptr<ratchet::component::HpComponent> _hp_com;
+
+    /// <summary>
+    /// エフェクト発生
+    /// </summary>
+    /// <param name=""></param>
+    void DamageEffectEmit(std::shared_ptr<ratchet::actor::Actor> actor);
 public:
     /// <summary>
     /// コンストラクタ

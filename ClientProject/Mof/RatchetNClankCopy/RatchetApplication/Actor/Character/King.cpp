@@ -16,7 +16,8 @@ ratchet::actor::character::King::King() :
     _player_camera_subject(),
     _scarecrow_view_camera_controller(),
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),
-    _player_view_camera_controller() {
+    _player_view_camera_controller(),
+    _effect_container() {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
     auto camera = std::make_shared<ratchet::camera::Camera>();
@@ -40,6 +41,10 @@ void ratchet::actor::character::King::SetTexture(const std::shared_ptr<Mof::CTex
 }
 void ratchet::actor::character::King::SetGameScene(const std::shared_ptr<scene::GameScene>& ptr) {
     this->_actor_container = ptr;
+}
+
+void ratchet::actor::character::King::SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr) {
+    this->_effect_container = ptr;
 }
 
 void ratchet::actor::character::King::SetPlayerCameraontroller(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
@@ -96,6 +101,7 @@ bool ratchet::actor::character::King::Render(void) {
 void ratchet::actor::character::King::Talk(void) {
     auto param = new ratchet::actor::Actor::Param();
     auto out = _actor_container.lock();
+    auto effect = _effect_container.lock();
 
     if (_quest_index < _quest_count) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
@@ -120,16 +126,24 @@ void ratchet::actor::character::King::Talk(void) {
             param->transform.scale = transform.scale;
             auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);
             scarecrow->GetScarecrowEndMessageSubject()->AddObserver(std::dynamic_pointer_cast<ratchet::actor::character::King>(shared_from_this()));
+            auto emitter = effect->CreateEmitter();
+            scarecrow->SetEffectEmitter(emitter);
             out->AddElement(scarecrow);
 
             // camera
             auto info = camera::CameraController::CameraInfo();
-            info.target_position = param->transform.position;
-            info.ideal_position = _scarecrow_view_position;
+            info.target_position = super::GetPosition();
+            info.ideal_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
             info.start_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
             info.camera_front = Mof::CVector3(0.0f, 0.0f, 0.0f);
             auto con = _scarecrow_view_camera_controller.GetService();
-            con->SetAzimuth(160.0f);
+
+            float angle_y = std::atan2(-(info.target_position.z - info.start_position.z),
+                                       (info.target_position.x - info.start_position.x)) -
+                math::kHalfPi;
+            auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
+            
+            con->SetAzimuth(angle_y);
             con->SetAltitude(20.0f);
             con->SetDistance(3.0f);
             con->RegisterGlobalCamera();
@@ -143,10 +157,6 @@ void ratchet::actor::character::King::Talk(void) {
     else {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
         message.type = decltype(message.type)::KingTextEvent;
-        //message.on_close = [&]() {
-        //    _player_view_camera_controller->GetService()->RegisterGlobalCamera();
-          //  return true;
-        //};
         _text_system_message_subject.Notify(message);
     } // else
     //a++;
