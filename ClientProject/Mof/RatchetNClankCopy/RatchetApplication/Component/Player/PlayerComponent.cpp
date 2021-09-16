@@ -24,6 +24,9 @@ ratchet::component::player::PlayerComponent::PlayerComponent(const PlayerCompone
     super(obj),
     _target(),
     _state_com(),
+    _transform_com(),
+    _velocity_com(),
+    _camera_com(),
     _next_terrain() {
 }
 
@@ -67,7 +70,10 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
 
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
     _transform_com = super::GetOwner()->GetComponent<ratchet::component::TransformComponent>();
-    auto velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+    _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
+
+    auto velocity_com = _velocity_com.lock();
     if (velocity_com) {
         velocity_com->SetGravity(9.8f);
     } // if
@@ -195,8 +201,21 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
 }
 
 bool ratchet::component::player::PlayerComponent::Update(float delta_time) {
-    _next_terrain = "";
+    auto velocity_com = _velocity_com.lock();
+    auto camera_com = _camera_com.lock();
 
+    if (velocity_com && camera_com) {
+        auto v = velocity_com->GetVelocity();
+        float threshold = 0.000005f;
+        if (Mof::CVector2(v.x, v.z).Length() < threshold) {
+            camera_com->GetCameraController()->GetService()->SetUseSpring(true);
+        } // if
+        else {
+            camera_com->GetCameraController()->GetService()->SetUseSpring(false);
+        } // else
+    } // if
+
+    _next_terrain = "";
     if (auto target = _target.lock()) {
         auto ENEMY_com = target->GetComponent<super>();
         auto pos = target->GetPosition();
@@ -236,6 +255,15 @@ bool ratchet::component::player::PlayerComponent::DebugRender(void) {
     else {
         ::CGraphicsUtilities::RenderString(600.0f, 600.0f, "action button disable");
     } // else
+
+
+    auto camera_com = _camera_com.lock();
+    auto v = camera_com->GetVelocity();
+    ::CGraphicsUtilities::RenderString(500.0f, 610.0f, "camera_com GetVelocity()2 v = %f",  Mof::CVector2(v.x, v.z).Length());
+    ::CGraphicsUtilities::RenderString(500.0f, 630.0f, "camera_com GetVelocity() x = %f", v.x);
+    ::CGraphicsUtilities::RenderString(500.0f, 650.0f, "camera_com GetVelocity() y = %f", v.y);
+    ::CGraphicsUtilities::RenderString(500.0f, 670.0f, "camera_com GetVelocity() z = %f", v.z);
+    ::CGraphicsUtilities::RenderString(500.0f, 690.0f, "camera_com GetVelocity() v = %f", v.Length());
     return false;
 }
 #endif // _DEBUG

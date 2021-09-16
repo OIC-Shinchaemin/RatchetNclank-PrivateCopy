@@ -224,11 +224,8 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			auto player_camera = player->GetComponent<component::CameraComponent>();
 			king->GetPlayerCameraSubject()->AddObserver(player_camera);
 			king->SetPlayerCameraontroller(player_camera->GetCameraController());
+			king->SetPlayer(player);
 			out->AddElement(king);
-
-//			for (auto subject : scarecrow_end_message_subjects) {
-//				subject->AddObserver(king);
-//			} // for
 		} // for
 	}
 

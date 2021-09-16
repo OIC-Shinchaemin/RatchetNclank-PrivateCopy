@@ -7,7 +7,6 @@
 
 
 
-
 ratchet::actor::character::Player::Player() :
 	super(),
 	_current_mechanical(),

@@ -9,6 +9,8 @@ namespace ratchet::camera {
 class FollowCameraController: public ratchet::camera::CameraController {
     using super = ratchet::camera::CameraController;
 private:
+    //! 理想の位置
+    Mof::CVector3 _prev_position;
     /// <summary>
     /// 更新
     /// </summary>

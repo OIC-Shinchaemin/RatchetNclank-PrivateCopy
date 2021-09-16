@@ -11,7 +11,12 @@
 #include "Base/Core/Observable.h"
 
 
-namespace ratchet::component { class TransformComponent; }
+namespace ratchet::component { 
+class TransformComponent; 
+class VelocityComponent; 
+class CameraComponent; 
+
+}
 namespace ratchet::component::player {
 class PlayerComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;
@@ -22,8 +27,12 @@ private:
     base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! 状態
+    //! トランスフォーム
     std::weak_ptr<ratchet::component::TransformComponent> _transform_com;
+    //! 速度
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
+    //! カメラ
+    std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
     //! 地点
     std::string _next_terrain;
     //! 接触モード 有効であれば武器ボタンがアクションボタンになる

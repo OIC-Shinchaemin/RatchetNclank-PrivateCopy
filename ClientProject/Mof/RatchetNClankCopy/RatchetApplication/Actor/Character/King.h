@@ -15,6 +15,7 @@ namespace ratchet::scene {
 class GameScene;
 }
 namespace ratchet::actor::character {
+class Player;
 class King :
     public actor::Actor,
     public ratchet::actor::character::ScarecrowEndMessageListener {
@@ -40,6 +41,8 @@ private:
     Mof::CVector3 _scarecrow_view_position;
     //! エフェクト
     std::weak_ptr<effect::EffectContainer>_effect_container;
+    //! エフェクト
+    std::weak_ptr<ratchet::actor::character::Player> _player;
 public:
     /// <summary>
     /// コンストラクタ
@@ -69,6 +72,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

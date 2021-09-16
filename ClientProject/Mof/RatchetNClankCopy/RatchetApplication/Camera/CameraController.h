@@ -57,6 +57,8 @@ protected:
     Mof::CVector3 _preview_position;
     //! パラメータ
     ratchet::camera::CameraController::Param _param;
+    //! ばね使用
+    bool _use_spring;
 public:
     /// <summary>
     /// セッター
@@ -106,6 +108,11 @@ public:
     /// </summary>
     /// <param name="value"></param>
     void SetDumping(float value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetUseSpring(bool flag);
     /// <summary>
     /// セット
     /// </summary>
