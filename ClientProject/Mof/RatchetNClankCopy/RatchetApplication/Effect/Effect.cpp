@@ -34,6 +34,10 @@ bool ratchet::effect::Effect::Update(float delta_time) {
 		return true;
 	} // if
 	
+	_update_param += _environment_param;
+
+	_basic_param += _environment_param;
+
 	_basic_param += _update_param;
 	return false;
 }
