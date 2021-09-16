@@ -175,11 +175,17 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 	{
 		// fence
 		def::Transform wall_transforms[]{
-			def::Transform(Mof::CVector3(-13.0f, -5.0f, 3.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
-			def::Transform(Mof::CVector3(-13.0f, -5.0f, -13.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
-			def::Transform(Mof::CVector3(-8.0f, -5.0f, -13.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
-			def::Transform(Mof::CVector3(-3.0f, -5.0f, -13.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
-			def::Transform(Mof::CVector3(3.0f, -5.0f, -13.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-10.0f, -5.0f, 5.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-15.0f, -5.0f, 5.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-20.0f, -5.0f, 5.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-25.0f, -5.0f, 5.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-10.0f, -5.0f, -20.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-15.0f, -5.0f, -20.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-20.0f, -5.0f, -20.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+			def::Transform(Mof::CVector3(-25.0f, -5.0f, -20.0f), Mof::CVector3(0.0f, math::ToRadian(180.0f),0.0f)),
+
+			def::Transform(Mof::CVector3(-5.0f, -5.0f, -20.0f), Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f)),
+			def::Transform(Mof::CVector3(-5.0f, -5.0f,  0.0f), Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f)),
 		};
 		param->tag = "fence";
 		param->name = "fence";

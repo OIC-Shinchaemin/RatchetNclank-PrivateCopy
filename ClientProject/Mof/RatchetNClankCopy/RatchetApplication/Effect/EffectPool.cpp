@@ -3,7 +3,7 @@
 
 ratchet::effect::EffectPool::EffectPool() :
 	//_effect_type_path("../Resource/texture/effect/smoke.png"),
-	_effect_type_path("../Resource/texture/effect/flash.dds"),
+	_effect_type_path("../Resource/texture/effect/flash.png"),
 	_effects() {
 }
 

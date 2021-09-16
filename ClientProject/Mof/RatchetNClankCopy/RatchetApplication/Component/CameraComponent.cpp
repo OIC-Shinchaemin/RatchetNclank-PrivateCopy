@@ -232,6 +232,9 @@ void ratchet::component::CameraComponent::UpdateFirstPerson(float delta_time, st
     controller->Update(delta_time, camera_info);
 }
 
+void ratchet::component::CameraComponent::UpdateThirdPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+}
+
 ratchet::component::CameraComponent::CameraComponent(int priority) :
     super(priority),
     _target(),
@@ -307,7 +310,10 @@ bool ratchet::component::CameraComponent::Initialize(void) {
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
     _controller_map.at(Mode::FirstPerson)->SetCamera(_camera);
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
-
+    {
+        //_controller_map.at(Mode::Follow)->SetSpring(200.0f);
+        //_controller_map.at(Mode::Follow)->SetDumping(20.0f);
+    }
     auto pos = super::GetOwner()->GetPosition();
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
@@ -324,9 +330,14 @@ bool ratchet::component::CameraComponent::Update(float delta_time) {
     using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
-            this->UpdateFollow(delta_time, camera_controller); break;
+            this->UpdateFollow(delta_time, camera_controller); 
+            break;
         case Mode::FirstPerson:
-            this->UpdateFirstPerson(delta_time, camera_controller); break;
+            this->UpdateFirstPerson(delta_time, camera_controller);
+            break;
+        case Mode::ThirdPerson:
+            this->UpdateThirdPerson(delta_time, camera_controller);
+            break;
     } // switch
     return true;
 }
@@ -365,7 +376,7 @@ bool ratchet::component::CameraComponent::DebugRender(void) {
             break;
         default:
             break;
-} // switch
+    } // switch
     return true;
 }
 #endif // _DEBUG

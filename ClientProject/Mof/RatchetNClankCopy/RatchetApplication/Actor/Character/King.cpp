@@ -132,12 +132,18 @@ void ratchet::actor::character::King::Talk(void) {
 
             // camera
             auto info = camera::CameraController::CameraInfo();
-            info.target_position = param->transform.position;
-            info.ideal_position = _scarecrow_view_position;
+            info.target_position = super::GetPosition();
+            info.ideal_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
             info.start_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
             info.camera_front = Mof::CVector3(0.0f, 0.0f, 0.0f);
             auto con = _scarecrow_view_camera_controller.GetService();
-            con->SetAzimuth(160.0f);
+
+            float angle_y = std::atan2(-(info.target_position.z - info.start_position.z),
+                                       (info.target_position.x - info.start_position.x)) -
+                math::kHalfPi;
+            auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
+            
+            con->SetAzimuth(angle_y);
             con->SetAltitude(20.0f);
             con->SetDistance(3.0f);
             con->RegisterGlobalCamera();
@@ -151,10 +157,6 @@ void ratchet::actor::character::King::Talk(void) {
     else {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
         message.type = decltype(message.type)::KingTextEvent;
-        //message.on_close = [&]() {
-        //    _player_view_camera_controller->GetService()->RegisterGlobalCamera();
-          //  return true;
-        //};
         _text_system_message_subject.Notify(message);
     } // else
     //a++;

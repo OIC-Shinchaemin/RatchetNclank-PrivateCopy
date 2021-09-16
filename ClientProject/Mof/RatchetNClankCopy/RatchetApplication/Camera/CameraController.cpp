@@ -26,16 +26,6 @@ void ratchet::camera::CameraController::SetCamera(const std::shared_ptr<ratchet:
     this->_camera = ptr;
 }
 
-/*
-void ratchet::camera::CameraController::SetCameraPosition(Mof::CVector3 pos) {
-    this->_position = pos;
-}
-
-void ratchet::camera::CameraController::SetCameraTarget(Mof::CVector3 pos) {
-    this->_target = pos;
-}
-*/
-
 void ratchet::camera::CameraController::SetDistance(float value) {
     this->_param.distance = value;
 }
