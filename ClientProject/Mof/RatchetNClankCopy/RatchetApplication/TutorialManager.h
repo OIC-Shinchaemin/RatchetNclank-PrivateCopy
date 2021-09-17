@@ -9,8 +9,9 @@ namespace tutorial {
 class TutorialManager {
 public:
     enum class TutorialType {
-        Jump,
         Attack,
+        Jump,
+        Weapon,
         CountMax,
     };
 private:
@@ -23,7 +24,9 @@ public:
     TutorialManager() :
         _flags() {
         _flags.fill(false);
-        this->Liberation(TutorialType::Attack);
+        //this->Liberation(TutorialType::Attack);
+        //this->Liberation(TutorialType::Jump);
+        //this->Liberation(TutorialType::Weapon);
     }
     /// <summary>
     /// ƒVƒ“ƒOƒ‹ƒgƒ“

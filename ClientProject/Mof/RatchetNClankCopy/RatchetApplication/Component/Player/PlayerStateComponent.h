@@ -7,9 +7,7 @@
 #include "../../State/PlayerActionStateDefine.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player {
+namespace ratchet::component::player {
 class PlayerStateComponent : public ratchet::component::ActionStateComponent {
     using super = ratchet::component::ActionStateComponent;
 public:
@@ -55,7 +53,5 @@ public:
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_PLAYER_STATE_COMPONENT_H

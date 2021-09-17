@@ -3,5 +3,7 @@ sprite,Sprite2,Chara_a_02.png;
 setpos,40,0,Sprite1;
 setpos,540,0,Sprite2;
 
-text,26,584,がんばれ;
+text,26,584,チュートリアル達成おめでとう;
+text,26,584,そこのエレベーターに乗って下に降りてください;
+text,26,584,敵を倒して中央の広場に向かってください;
 next,test.txt;

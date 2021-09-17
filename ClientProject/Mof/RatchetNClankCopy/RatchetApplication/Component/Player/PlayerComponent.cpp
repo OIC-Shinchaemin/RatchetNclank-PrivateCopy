@@ -206,7 +206,8 @@ bool ratchet::component::player::PlayerComponent::Update(float delta_time) {
 
     if (velocity_com && camera_com) {
         auto v = velocity_com->GetVelocity();
-        float threshold = 0.000005f;
+        //float threshold = 0.000005f;
+        float threshold = 0.001f;
         if (Mof::CVector2(v.x, v.z).Length() < threshold) {
             camera_com->GetCameraController()->GetService()->SetUseSpring(true);
         } // if

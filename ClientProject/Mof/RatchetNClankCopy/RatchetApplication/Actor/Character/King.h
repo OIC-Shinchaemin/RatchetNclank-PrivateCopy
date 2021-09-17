@@ -43,6 +43,13 @@ private:
     std::weak_ptr<effect::EffectContainer>_effect_container;
     //! エフェクト
     std::weak_ptr<ratchet::actor::character::Player> _player;
+    //! テキストイベント
+    int _free_talk_index;
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    void PlayerActionLiberate(void);
 public:
     /// <summary>
     /// コンストラクタ

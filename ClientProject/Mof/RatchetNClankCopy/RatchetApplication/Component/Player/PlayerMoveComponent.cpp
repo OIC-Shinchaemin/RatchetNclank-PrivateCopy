@@ -110,9 +110,11 @@ bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
         } // if
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
-        auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
-        if (owner->GetCurrentMechanical()) {
-            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Weapon)) {
+            auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
+            if (owner->GetCurrentMechanical()) {
+                super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+            } // if
         } // if
     } // else if
 

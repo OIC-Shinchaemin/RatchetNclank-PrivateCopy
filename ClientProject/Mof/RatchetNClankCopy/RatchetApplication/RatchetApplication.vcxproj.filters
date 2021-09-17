@@ -2380,6 +2380,9 @@
     <Text Include="..\Resource\script\tutorial_event_2_end.txt">
       <Filter>Resource\script</Filter>
     </Text>
+    <Text Include="..\Resource\script\king_free_talk_text_event.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resource\save\savedata.json">

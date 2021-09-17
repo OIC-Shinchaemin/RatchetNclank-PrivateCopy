@@ -915,6 +915,7 @@
     <Text Include="..\Resource\scene_resource\game_scene.txt" />
     <Text Include="..\Resource\scene_resource\general.txt" />
     <Text Include="..\Resource\scene_resource\title_scene.txt" />
+    <Text Include="..\Resource\script\king_free_talk_text_event.txt" />
     <Text Include="..\Resource\script\king_text_event.txt" />
     <Text Include="..\Resource\script\test.txt" />
     <Text Include="..\Resource\script\test2.txt" />

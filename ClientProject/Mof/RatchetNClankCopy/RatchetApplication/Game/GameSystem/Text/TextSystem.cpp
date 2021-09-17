@@ -97,7 +97,6 @@ bool ratchet::game::gamesystem::text::TextSystem::LoadScript(const char* name) {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::InitializeScript(void) {
-    //m_bEnd = false;
     _alpha = 0;
 }
 
@@ -120,8 +119,8 @@ void ratchet::game::gamesystem::text::TextSystem::UpdateAlpha(void) {
         }
     }
 
-    //スプライトのアルファ値をシーンのアルファ値と同じにする
-    //スプライトのアルファメンバは0.0f ～ 1.0fになるため255で割った値を設定する。
+    // スプライトのアルファ値をシーンのアルファ値と同じにする
+    // スプライトのアルファメンバは0.0f ～ 1.0fになるため255で割った値を設定する。
     for (int i = 0; i < _sprite_list.GetArrayCount(); i++) {
         _sprite_list[i]->m_Color.a = _alpha / 255.0f;
     }
@@ -147,10 +146,9 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
         }
     }
     //クリックで次のコマンドから実行を再開
-    //else if (g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
     else if (g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         StepCommand();
-    }
+    } // else if
 
     //スプライトのリストを更新する
     for (int i = 0; i < _sprite_list.GetArrayCount(); i++) {
@@ -231,15 +229,14 @@ void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
 
 void ratchet::game::gamesystem::text::TextSystem::TextCommand(void) {
         //表示中のテキストと、表示するテキストの長さを取得
-    int nl = strlen(_line_buffer);
-    int tl = strlen(_text_command.Text);
+    int nl = std::strlen(_line_buffer);
+    int tl = std::strlen(_text_command.Text);
     //まだ全部表示されてない
     if (nl < tl) {
         //クリックで全文を一括表示
-        //if (g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
         if (g_pInput->IsKeyPush(MOFKEY_RETURN)) {
             _wait = false;
-            strcpy(_line_buffer, _text_command.Text);
+            std::strcpy(_line_buffer, _text_command.Text);
         } // if
         else {
             //一定時間ごとに一文字ずつ入れていく
@@ -394,15 +391,16 @@ ratchet::game::gamesystem::text::TextSystem::TextSystem() :
     _text_system_closed_message_subject() {
     ::memset(_line_buffer, 0, TEXTBUFFERSIZE);
 
-    _path_map.emplace(TextEventType::EventNo0, "script/tutorial_event_0_start.txt");
-    _path_map.emplace(TextEventType::EventNo1, "script/tutorial_event_1_start.txt");
-    _path_map.emplace(TextEventType::EventNo2, "script/tutorial_event_2_start.txt");
+    _path_map.emplace(TextEventType::TutorialEventNo0, "script/tutorial_event_0_start.txt");
+    _path_map.emplace(TextEventType::TutorialEventNo1, "script/tutorial_event_1_start.txt");
+    _path_map.emplace(TextEventType::TutorialEventNo2, "script/tutorial_event_2_start.txt");
 
     _path_map.emplace(TextEventType::TutorialEventNo0End, "script/tutorial_event_0_end.txt");
     _path_map.emplace(TextEventType::TutorialEventNo1End, "script/tutorial_event_1_end.txt");
     _path_map.emplace(TextEventType::TutorialEventNo2End, "script/tutorial_event_2_end.txt");
 
     _path_map.emplace(TextEventType::KingTextEvent, "script/king_text_event.txt");
+    _path_map.emplace(TextEventType::KingFreeTalkTextEvent, "script/king_free_talk_text_event.txt");
 }
 
 ratchet::game::gamesystem::text::TextSystem::~TextSystem() {

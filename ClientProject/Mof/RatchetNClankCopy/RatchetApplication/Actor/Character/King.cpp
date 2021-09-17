@@ -6,7 +6,13 @@
 #include "../../Factory/FactoryManager.h"
 #include "../../Camera/FollowCameraController.h"
 #include "../Character/Player.h"
+#include "../../TutorialManager.h"
 
+
+void ratchet::actor::character::King::PlayerActionLiberate(void) {
+    auto type = static_cast<tutorial::TutorialManager::TutorialType>(_quest_index);
+    tutorial::TutorialManager::GetInstance().Liberation(type);
+}
 
 ratchet::actor::character::King::King() :
     super(),
@@ -19,7 +25,8 @@ ratchet::actor::character::King::King() :
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),
     _player_view_camera_controller(),
     _effect_container(),
-    _player() {
+    _player(),
+    _free_talk_index(0) {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
     auto camera = std::make_shared<ratchet::camera::Camera>();
@@ -97,9 +104,6 @@ bool ratchet::actor::character::King::Render(void) {
         Mof::CMatrix44 world = scale * rotate * translate;
         auto camera = ::CGraphicsUtilities::GetCamera();
         tex->Render(camera->GetBillBoardMatrix() * world);
-
-        //CGraphicsUtilities::RenderTexture();
-        //tex->Render(world, _rectangle.value());
     } // if
     return true;
 }
@@ -112,7 +116,7 @@ void ratchet::actor::character::King::Talk(void) {
 
     if (_quest_index < _quest_count) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
-        auto type_temp = static_cast<int>(decltype(message.type)::EventNo0) + _quest_index;
+        auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0) + _quest_index;
         message.type = static_cast<decltype(message.type)>(type_temp);
         message.on_close = [&]() {
             _player_view_camera_controller->GetService()->RegisterGlobalCamera();
@@ -142,42 +146,23 @@ void ratchet::actor::character::King::Talk(void) {
             scarecrow->SetEffectEmitter(emitter);
             out->AddElement(scarecrow);
 
-            // camera
-            //auto info = camera::CameraController::CameraInfo();
-            //info.target_position = super::GetPosition();
-            //info.ideal_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
-            //info.start_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
-            //info.camera_front = Mof::CVector3(0.0f, 0.0f, 0.0f);
-            //auto con = _scarecrow_view_camera_controller.GetService();
-
-            //float angle_y = std::atan2(-(info.target_position.z - info.start_position.z),
-            //                           (info.target_position.x - info.start_position.x)) -
-            //    math::kHalfPi;
-            //auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
-            //con->SetAzimuth(angle_y);
-            //con->SetAltitude(20.0f);
-            //con->SetDistance(3.0f);
-            //con->RegisterGlobalCamera();
-            //con->SetInfo(info);
-
             auto player_camera = _player_view_camera_controller->GetService();
-            //player->GetPosition();
-            //auto player_pos = player->GetPosition();
-            //auto pos = super::GetPosition();
             auto dir = super::GetPosition() - player->GetPosition();
             player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
         } // for
-
+        this->PlayerActionLiberate();
         ut::SafeDelete(param);
         _quest_index++;
-
     } // if
     else {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
-        message.type = decltype(message.type)::KingTextEvent;
+        if (_free_talk_index == 0) {
+            message.type = decltype(message.type)::KingTextEvent;
+            _free_talk_index++;
+        } // if
+        else {
+            message.type = decltype(message.type)::KingFreeTalkTextEvent;
+        } // else
         _text_system_message_subject.Notify(message);
     } // else
-    //a++;
-
-
 }
