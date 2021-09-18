@@ -56,6 +56,10 @@ void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem
 	} // if
 }
 
+void ratchet::actor::character::Player::OnNotify(const ElevatorArrivalMessage& message) {
+	super::Activate();
+}
+
 base::core::Observable<bool>* ratchet::actor::character::Player::GetShopSystemSubject(void) {
 	return &this->_shop_system_subject.subject;
 }

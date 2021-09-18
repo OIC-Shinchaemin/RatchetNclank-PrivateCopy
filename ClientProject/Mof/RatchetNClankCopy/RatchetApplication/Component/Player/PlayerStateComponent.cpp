@@ -1,5 +1,7 @@
 #include "PlayerStateComponent.h"
 
+#include "../../TutorialManager.h"
+
 
 ratchet::component::player::PlayerStateComponent::PlayerStateComponent(int priority) :
     super(priority) {

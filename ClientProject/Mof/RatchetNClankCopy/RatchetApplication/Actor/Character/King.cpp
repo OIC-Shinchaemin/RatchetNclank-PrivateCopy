@@ -3,39 +3,99 @@
 #include "../../Scene/GameScene.h"
 #include "../../Component/VelocityComponent.h"
 #include "../../Component/MeshComponent.h"
+#include "../../Component/HPComponent.h"
 #include "../../Factory/FactoryManager.h"
 #include "../../Camera/FollowCameraController.h"
 #include "../Character/Player.h"
+#include "../../TutorialManager.h"
+#include "../Gimmick/Fence.h"
 
+
+void ratchet::actor::character::King::PlayerActionLiberate(void) {
+    auto type = static_cast<tutorial::TutorialManager::TutorialType>(_quest_index);
+    tutorial::TutorialManager::GetInstance().Liberation(type);
+}
+
+void ratchet::actor::character::King::BarricadeCreate(ratchet::actor::Actor::Param* param, std::shared_ptr<ratchet::scene::GameScene> out) {
+    def::Transform transforms[]{
+
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -20.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -18.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -16.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -16.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -14.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -12.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -10.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -8.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-14.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-16.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-18.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-20.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-22.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        def::Transform(Mof::CVector3(-24.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        //def::Transform(Mof::CVector3(-10.0f, -5.2f, -12.0f),Mof::CVector3(0.0f,0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+        //def::Transform(Mof::CVector3(-15.0f, -5.2f, -10.0f),Mof::CVector3(0.0f,90.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
+    };
+    param->tag = "barricade";
+    for (auto& transform : transforms) {
+        param->transform.position = transform.position;
+        param->transform.rotate = transform.rotate;
+        param->transform.scale = transform.scale;
+        auto barricade = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::gimmick::Fence>("../Resource/builder/barricade.json", param);
+        out->AddElement(barricade);
+    } // for
+    param->transform = def::Transform();
+}
 
 ratchet::actor::character::King::King() :
     super(),
     _actor_container(),
     _quest_index(0),
-    _quest_count(3),
+    _quest_count(2),
     _text_system_message_subject(),
     _player_camera_subject(),
     _scarecrow_view_camera_controller(),
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),
     _player_view_camera_controller(),
     _effect_container(),
-    _player() {
+    _player(),
+    _free_talk_index(0),
+    _event_icon_show(true),
+
+    _scarecrow_generate_datas() {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
     auto camera = std::make_shared<ratchet::camera::Camera>();
     camera->Initialize();
     con->SetCamera(camera);
     _scarecrow_view_camera_controller.SetService(con);
+    {
+        auto data_0 = ScarecrowGenerateData();
+        data_0.position.push_back(Mof::CVector3(-12.0f, -5.0f, -4.0f));
+
+        auto data_1 = ScarecrowGenerateData();
+        data_1.position.push_back(Mof::CVector3(-17.0f, -5.0f, -15.0f));
+        data_1.position.push_back(Mof::CVector3(-20.0f, -5.0f, -9.0f));
+
+        _scarecrow_generate_datas.push_back(std::move(data_0));
+        _scarecrow_generate_datas.push_back(std::move(data_1));
+    }
 }
 
 ratchet::actor::character::King::~King() {
 }
 
-void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::ScarecrowEndMessage&) {
-    auto message = ratchet::game::gamesystem::text::TextSystemMessage();
-    auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index - 1;
-    message.type = static_cast<decltype(message.type)>(type_temp);
-    _text_system_message_subject.Notify(message);
+void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::ScarecrowEndMessage& msg) {
+    ut::EraseRemove(_created_scarecrows, msg.ptr);
+    if (_created_scarecrows.empty()) {
+        auto message = ratchet::game::gamesystem::text::TextSystemMessage();
+        auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index - 1;
+        message.type = static_cast<decltype(message.type)>(type_temp);
+        _text_system_message_subject.Notify(message);
+
+        this->_event_icon_show = true;
+        _event_active = false;
+    } // if
 }
 
 void ratchet::actor::character::King::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
@@ -55,6 +115,10 @@ void ratchet::actor::character::King::SetPlayer(const std::shared_ptr<ratchet::a
 
 void ratchet::actor::character::King::SetPlayerCameraontroller(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
     this->_player_view_camera_controller = ptr;
+}
+
+void ratchet::actor::character::King::SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr) {
+    this->_help_desk = ptr;
 }
 
 bool ratchet::actor::character::King::Initialize(ratchet::actor::Actor::Param* param) {
@@ -86,20 +150,19 @@ bool ratchet::actor::character::King::Render(void) {
     auto pos = super::GetPosition();
     float height = 2.4f;
     auto transform = def::Transform(Mof::CVector3(pos.x, pos.y + height, pos.z));
-    if (auto tex = _question_texture.lock(); tex) {
-        Mof::CMatrix44 scale, rotate, translate;
-        Mof::CQuaternion quat; quat.Rotation(transform.rotate);
+    if (_event_icon_show) {
+        if (auto tex = _question_texture.lock(); tex) {
+            Mof::CMatrix44 scale, rotate, translate;
+            Mof::CQuaternion quat; quat.Rotation(transform.rotate);
 
-        scale.Scaling(transform.scale, scale);
-        quat.ConvertMatrixTranspose(rotate);
-        translate.Translation(transform.position, translate);
+            scale.Scaling(transform.scale, scale);
+            quat.ConvertMatrixTranspose(rotate);
+            translate.Translation(transform.position, translate);
 
-        Mof::CMatrix44 world = scale * rotate * translate;
-        auto camera = ::CGraphicsUtilities::GetCamera();
-        tex->Render(camera->GetBillBoardMatrix() * world);
-
-        //CGraphicsUtilities::RenderTexture();
-        //tex->Render(world, _rectangle.value());
+            Mof::CMatrix44 world = scale * rotate * translate;
+            auto camera = ::CGraphicsUtilities::GetCamera();
+            tex->Render(camera->GetBillBoardMatrix() * world);
+        } // if
     } // if
     return true;
 }
@@ -112,72 +175,74 @@ void ratchet::actor::character::King::Talk(void) {
 
     if (_quest_index < _quest_count) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
-        auto type_temp = static_cast<int>(decltype(message.type)::EventNo0) + _quest_index;
+        auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0) + _quest_index;
         message.type = static_cast<decltype(message.type)>(type_temp);
         message.on_close = [&]() {
+            _event_icon_show = false;
             _player_view_camera_controller->GetService()->RegisterGlobalCamera();
 
             auto target = Mof::CVector3(-12.0f, -5.0f, -4.0f);
             auto player_camera = _player_view_camera_controller->GetService();
             auto dir = target - _player.lock()->GetPosition();
             player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
+
             return true;
         };
         _text_system_message_subject.Notify(message);
 
+        if (!_event_active) {
+            if (message.type == decltype(message.type)::TutorialEventNo1) {
+                this->BarricadeCreate(param, out);
+            } // if
 
-        // create
-        def::Transform scarecrow_transforms[]{
-            def::Transform(Mof::CVector3(-12.0f, -5.0f, -4.0f)),
-        };
-        param->tag = "scarecrow";
-        param->name = "scarecrow_1";
-        for (auto& transform : scarecrow_transforms) {
-            param->transform.position = transform.position;
-            param->transform.rotate = transform.rotate;
-            param->transform.scale = transform.scale;
-            auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);
-            scarecrow->GetScarecrowEndMessageSubject()->AddObserver(std::dynamic_pointer_cast<ratchet::actor::character::King>(shared_from_this()));
-            auto emitter = effect->CreateEmitter();
-            scarecrow->SetEffectEmitter(emitter);
-            out->AddElement(scarecrow);
-
-            // camera
-            //auto info = camera::CameraController::CameraInfo();
-            //info.target_position = super::GetPosition();
-            //info.ideal_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
-            //info.start_position = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
-            //info.camera_front = Mof::CVector3(0.0f, 0.0f, 0.0f);
-            //auto con = _scarecrow_view_camera_controller.GetService();
-
-            //float angle_y = std::atan2(-(info.target_position.z - info.start_position.z),
-            //                           (info.target_position.x - info.start_position.x)) -
-            //    math::kHalfPi;
-            //auto angle = Mof::CVector3(0.0f, angle_y, 0.0f);
-            //con->SetAzimuth(angle_y);
-            //con->SetAltitude(20.0f);
-            //con->SetDistance(3.0f);
-            //con->RegisterGlobalCamera();
-            //con->SetInfo(info);
+            auto& scarecrow_transforms = _scarecrow_generate_datas.at(_quest_index);
+            // create
+            param->tag = "scarecrow";
+            for (auto& position : scarecrow_transforms.position) {
+                param->transform.position = position;
+                auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);
+                auto emitter = effect->CreateEmitter();
+                scarecrow->SetEffectEmitter(emitter);
+                scarecrow->GetScarecrowEndMessageSubject()->AddObserver(std::dynamic_pointer_cast<ratchet::actor::character::King>(shared_from_this()));
+                out->AddElement(scarecrow);
+                _created_scarecrows.push_back(scarecrow);
+            } // for
 
             auto player_camera = _player_view_camera_controller->GetService();
-            //player->GetPosition();
-            //auto player_pos = player->GetPosition();
-            //auto pos = super::GetPosition();
             auto dir = super::GetPosition() - player->GetPosition();
             player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
-        } // for
-
-        ut::SafeDelete(param);
-        _quest_index++;
-
+            this->PlayerActionLiberate();
+            ut::SafeDelete(param);
+            _quest_index++;
+        } // if
+        _event_active = true;
     } // if
     else {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
-        message.type = decltype(message.type)::KingTextEvent;
+        if (_free_talk_index == 0) {
+            message.type = decltype(message.type)::KingTextEvent;
+
+            message.on_close = [&]() {
+                tutorial::TutorialManager::GetInstance().Complete();
+
+                _player_view_camera_controller->GetService()->SetAzimuth(10);
+                _player_view_camera_controller->GetService()->SetAltitude(20);
+                
+                if (auto help_desk = _help_desk.lock()) {
+                    help_desk->Show();
+                } // if
+                auto hp_com = _player.lock()->GetComponent<component::HpComponent>();
+                if(hp_com){
+                    hp_com->RegisterUI();
+                } // if
+                return true;
+            };
+
+            _free_talk_index++;
+        } // if
+        else {
+            message.type = decltype(message.type)::KingFreeTalkTextEvent;
+        } // else
         _text_system_message_subject.Notify(message);
     } // else
-    //a++;
-
-
 }

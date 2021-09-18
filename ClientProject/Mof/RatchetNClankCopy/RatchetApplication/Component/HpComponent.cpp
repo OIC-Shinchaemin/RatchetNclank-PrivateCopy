@@ -43,20 +43,6 @@ bool ratchet::component::HpComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
     _hp = _hp_max;
-
-    auto tag = super::GetOwner()->GetTag();
-    if (tag == "Player") {
-        if (auto canvas = super::_ui_canvas.lock()) {
-            canvas->RemoveElement("NanotechMenu");
-            _ui_remove = true;
-            auto menu = std::make_shared<ratchet::ui::NanotechMenu>("NanotechMenu");
-            _observable.AddObserver(menu);
-            menu->SetResourceManager(_resource_manager);
-            menu->SetColor(Mof::CVector4(0.1f, 0.3f, 0.5f, 0.5f));
-            canvas->AddElement(menu);
-            _observable.Notify(_hp);
-        } // if
-    } // if
     return true;
 }
 
@@ -92,4 +78,20 @@ void ratchet::component::HpComponent::Damage(int value) {
         _hp = 0;
     } // if
     _observable.Notify(_hp);
+}
+
+void ratchet::component::HpComponent::RegisterUI(void) {
+    auto tag = super::GetOwner()->GetTag();
+    if (tag == "Player") {
+        if (auto canvas = super::_ui_canvas.lock()) {
+            canvas->RemoveElement("NanotechMenu");
+            _ui_remove = true;
+            auto menu = std::make_shared<ratchet::ui::NanotechMenu>("NanotechMenu");
+            _observable.AddObserver(menu);
+            menu->SetResourceManager(_resource_manager);
+            menu->SetColor(Mof::CVector4(0.1f, 0.3f, 0.5f, 0.5f));
+            canvas->AddElement(menu);
+            _observable.Notify(_hp);
+        } // if
+    } // if
 }

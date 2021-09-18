@@ -9,6 +9,7 @@
 #include "../../Camera/CameraController.h"
 #include "../../Component/CameraComponent.h"
 #include "../../Effect/EffectContainer.h"
+#include "../../Game/GameSystem/HelpDesk.h"
 
 
 namespace ratchet::scene {
@@ -20,6 +21,10 @@ class King :
     public actor::Actor,
     public ratchet::actor::character::ScarecrowEndMessageListener {
     using super = actor::Actor;
+
+    struct ScarecrowGenerateData {
+        std::vector<Mof::CVector3> position;
+    };
 private:
     //! ハテナ
     std::weak_ptr<Mof::CTexture> _question_texture;
@@ -43,6 +48,29 @@ private:
     std::weak_ptr<effect::EffectContainer>_effect_container;
     //! エフェクト
     std::weak_ptr<ratchet::actor::character::Player> _player;
+    //! テキストイベント
+    int _free_talk_index;
+    //! テキストイベントアイコン
+    bool _event_icon_show;
+    //! テキストイベントアイコン
+    bool _event_active;
+    //! 生成情報
+    std::vector<ScarecrowGenerateData> _scarecrow_generate_datas;
+    //! かかし
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _created_scarecrows;
+    //! 表示
+    std::weak_ptr<ratchet::game::gamesystem::HelpDesk> _help_desk;
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    void PlayerActionLiberate(void);
+
+    /// <summary>
+    /// 生成
+    /// </summary>
+    /// <param name=""></param>
+    void BarricadeCreate(ratchet::actor::Actor::Param* param, std::shared_ptr<ratchet::scene::GameScene> out);
 public:
     /// <summary>
     /// コンストラクタ
@@ -82,6 +110,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetPlayerCameraontroller(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name=""></param>
+    void SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

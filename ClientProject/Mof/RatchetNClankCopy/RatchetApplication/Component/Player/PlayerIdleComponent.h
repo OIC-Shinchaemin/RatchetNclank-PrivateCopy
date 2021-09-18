@@ -5,11 +5,10 @@
 #include "PlayerActionComponent.h"
 
 
-namespace ratchet::component::player {
-    class PlayerComponent;
-}
-namespace ratchet ::component::player::action {
-class PlayerIdleComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+namespace ratchet::component::player { class PlayerComponent; }
+namespace ratchet::component::player::action {
+class PlayerIdleComponent : 
+    public ::ratchet::component::player::action::PlayerActionComponent {
     using super = ::ratchet::component::player::action::PlayerActionComponent;
 private:
     //! Œ^‹@”\

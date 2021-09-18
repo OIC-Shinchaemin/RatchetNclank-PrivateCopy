@@ -12,19 +12,16 @@
 
 namespace ratchet::game::gamesystem::text {
 enum class TextEventType {
-    EventNo0,
-    EventNo1,
-    EventNo2,
-
     TutorialEventNo0,
     TutorialEventNo1,
-    TutorialEventNo2,
+    //TutorialEventNo2,
 
     TutorialEventNo0End,
     TutorialEventNo1End,
-    TutorialEventNo2End,
+    //TutorialEventNo2End,
 
     KingTextEvent,
+    KingFreeTalkTextEvent,
 };
 struct TextSystemMessage {
     using CloseEvent = std::function<bool(void)>;

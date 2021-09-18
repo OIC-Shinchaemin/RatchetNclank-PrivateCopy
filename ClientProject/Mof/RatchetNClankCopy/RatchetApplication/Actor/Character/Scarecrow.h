@@ -12,6 +12,7 @@
 namespace ratchet::actor::character {
 struct ScarecrowEndMessage {
     bool end;
+    std::shared_ptr<actor::Actor> ptr;
 };
 using ScarecrowEndMessageSubject = base::core::Observable<const ScarecrowEndMessage&>;
 using ScarecrowEndMessageListener = base::core::Observer<const ScarecrowEndMessage&>;

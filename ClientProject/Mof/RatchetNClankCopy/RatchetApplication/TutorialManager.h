@@ -9,8 +9,9 @@ namespace tutorial {
 class TutorialManager {
 public:
     enum class TutorialType {
-        Jump,
+        //Jump,
         Attack,
+        Weapon,
         CountMax,
     };
 private:
@@ -23,7 +24,9 @@ public:
     TutorialManager() :
         _flags() {
         _flags.fill(false);
-        this->Liberation(TutorialType::Attack);
+        //this->Liberation(TutorialType::Attack);
+        //this->Liberation(TutorialType::Jump);
+        //this->Liberation(TutorialType::Weapon);
     }
     /// <summary>
     /// シングルトン
@@ -47,10 +50,12 @@ public:
     /// 解放
     /// </summary>
     /// <param name="type"></param>
-    void Liberation(TutorialType type) {
-        auto index = static_cast<int>(type);
-        _flags.at(index) = true;
-    }
+    void Liberation(TutorialType type);
+    /// <summary>
+    /// 達成
+    /// </summary>
+    /// <param name=""></param>
+    void Complete(void);
 };
 }
 #endif // !TUTORIAL_MANAGER_H

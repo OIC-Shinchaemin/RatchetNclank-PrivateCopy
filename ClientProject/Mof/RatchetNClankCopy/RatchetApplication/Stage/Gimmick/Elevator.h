@@ -1,5 +1,15 @@
 #pragma once
 #include "GimmickBase.h"
+#include "Base/Core/ServiceLocator.h"
+#include "../../Actor/Actor.h"
+#include "../../Camera/CameraController.h"
+
+
+struct ElevatorArrivalMessage {
+};
+using ElevatorArrivalMessageSubject = base::core::Observable<const ElevatorArrivalMessage&>;
+using ElevatorArrivalMessageListener = base::core::Observer<const ElevatorArrivalMessage&>;
+
 
 class Elevator : public GimmickBase {
 protected:
@@ -22,7 +32,10 @@ protected:
     Mof::CVector3 _initial_position;
     //! フラグ
     bool _first_initialized;
-
+    //! プレイヤーカメラ
+    base::core::ServiceLocator<ratchet::camera::CameraController>* _camera_controller;
+    //! プレイヤー通知用    
+    ElevatorArrivalMessageSubject _elevator_arrival_message_subject;
 public:
     Elevator(Vector3 end, float request, bool enable = true, bool collision = true,
         StageObjectType type = StageObjectType::None, std::string name = "",
@@ -31,7 +44,19 @@ public:
         Vector3 scale = Vector3(1, 1, 1),
         Vector3 rotate = Vector3());
     virtual ~Elevator(void);
-
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetElevatorArrivalMessageSubject(void) {
+        return &this->_elevator_arrival_message_subject;
+    };
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -24,25 +24,6 @@ bool ratchet::actor::gimmick::Fence::Initialize(ratchet::actor::Actor::Param* pa
 
 bool ratchet::actor::gimmick::Fence::Update(float delta_time) {
     super::Update(delta_time);
-    auto velocity = super::GetComponent<ratchet::component::VelocityComponent>();
-    float speed = 1.0f;
-    auto force = Mof::CVector3();
-    auto pos = super::GetPosition();
-    if (::g_pInput->IsKeyPush(MOFKEY_Y)) {
-        pos.z += speed;
-    } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_G)) {
-        pos.x += speed;
-    } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_H)) {
-        pos.z -= speed;
-    } // if
-    if (::g_pInput->IsKeyPush(MOFKEY_J)) {
-        pos.x -= speed;
-    } // if
-    velocity->AddAngularVelocityForce(force);
-
-    super::SetPosition(pos);
     return true;
 }
 

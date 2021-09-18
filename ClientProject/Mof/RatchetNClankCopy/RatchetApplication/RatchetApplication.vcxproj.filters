@@ -1206,6 +1206,27 @@
     <ClCompile Include="Camera\ThirdPersonCameraController.cpp">
       <Filter>Ratchet\Source\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowPyrocitorBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BlasterBulletScarecrowCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletScarecrowCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Ratchet\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -2336,6 +2357,27 @@
     <ClInclude Include="Camera\ThirdPersonCameraController.h">
       <Filter>Ratchet\Header\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BlasterBulletScarecrowCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowPyrocitorBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletScarecrowCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\StageEnemyViewEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -2378,6 +2420,9 @@
       <Filter>Resource\script</Filter>
     </Text>
     <Text Include="..\Resource\script\tutorial_event_2_end.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\king_free_talk_text_event.txt">
       <Filter>Resource\script</Filter>
     </Text>
   </ItemGroup>
@@ -2485,6 +2530,9 @@
       <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\scarecrow.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\barricade.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

@@ -1,5 +1,5 @@
-#ifndef RATCHET_EVENT_STAGE_VIEW_EVENT_H
-#define RATCHET_EVENT_STAGE_VIEW_EVENT_H
+#ifndef RATCHET_EVENT_STAGE_ENEMY_VIEW_EVENT_H
+#define RATCHET_EVENT_STAGE_ENEMY_VIEW_EVENT_H
 
 
 #include "Event.h"
@@ -15,6 +15,7 @@
 
 
 namespace ratchet::event {
+/*
 struct StageViewEventMessage {
     bool end;
 };
@@ -96,5 +97,7 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
 };
+*/
+
 }
-#endif // !RATCHET_EVENT_BRIDGE_EVENT_H
+#endif // !RATCHET_EVENT_STAGE_ENEMY_VIEW_EVENT_H

@@ -50,9 +50,9 @@ MofBool CGameApp::Input(void) {
 		debug::DebugManager::GetInstance().ChangeDebugMode();
 	} // if
 
-	if (::g_pInput->IsKeyPush(MOFKEY_F6)) {
-		tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Jump);
-	} // if
+	//if (::g_pInput->IsKeyPush(MOFKEY_F6)) {
+	//	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Jump);
+	//} // if
 	if (::g_pInput->IsKeyPush(MOFKEY_F7)) {
 		tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
 	} // if
@@ -83,12 +83,14 @@ MofBool CGameApp::Render(void) {
 		auto fps = ::CUtilities::GetFPS();
 		::CGraphicsUtilities::RenderString(10.0f, 10.0f, "fps = %d", fps);
 		
+		/*
 		if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Jump)) {
 			::CGraphicsUtilities::RenderString(10.0f, 60.0f, "jump tutorial flag = true");
 		} // if
 		else {
 			::CGraphicsUtilities::RenderString(10.0f, 60.0f, "jump tutorial flag = false");
 		} // else
+		*/
 
 
 		if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
