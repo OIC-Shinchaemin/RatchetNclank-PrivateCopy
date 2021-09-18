@@ -14,11 +14,11 @@ namespace ratchet::game::gamesystem::text {
 enum class TextEventType {
     TutorialEventNo0,
     TutorialEventNo1,
-    TutorialEventNo2,
+    //TutorialEventNo2,
 
     TutorialEventNo0End,
     TutorialEventNo1End,
-    TutorialEventNo2End,
+    //TutorialEventNo2End,
 
     KingTextEvent,
     KingFreeTalkTextEvent,

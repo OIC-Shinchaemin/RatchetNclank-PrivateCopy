@@ -43,9 +43,7 @@ bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
         super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMoveState);
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Jump)) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
-        } // if
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
@@ -67,9 +65,7 @@ bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
         } // else
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_B) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_R_BTN)) {
-        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Jump)) {
             super::ChangeActionState(state::PlayerActionStateType::kPlayerActionCrouchState);
-        } // if
     } // else if
 
     return true;

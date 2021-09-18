@@ -23,12 +23,20 @@ bool ratchet::component::bullet::BlasterBulletComponent::Initialize(void) {
     super::Activate();
 
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::BlasterBulletCollisionComponent>();
+
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                "EnemyCollisionComponent",
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         super::GetOwner()->End();
         return true;
     }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               "ScarecrowCollisionComponent",
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        super::GetOwner()->End();
+        return true;
+    }));
+
     return true;
 }
 

@@ -23,6 +23,7 @@ void ratchet::actor::character::Scarecrow::End(void) {
 
 	auto message = ScarecrowEndMessage();
 	message.end = true;
+	message.ptr = shared_from_this();
 	_end_message_subject.Notify(message);
 }
 

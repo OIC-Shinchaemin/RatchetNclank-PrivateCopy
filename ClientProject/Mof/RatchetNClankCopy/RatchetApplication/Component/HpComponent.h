@@ -88,6 +88,11 @@ public:
     /// </summary>
     /// <param name="value"></param>
     void Damage(int value);
+    /// <summary>
+    /// UI“o˜^
+    /// </summary>
+    /// <param name=""></param>
+    void RegisterUI(void);
 };
 }
 }

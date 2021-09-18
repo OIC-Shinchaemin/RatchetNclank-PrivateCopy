@@ -11,13 +11,18 @@
 #include "../../Effect/EffectEmitter.h"
 
 
-namespace ratchet::component { class  HpComponent; }
+namespace ratchet::component { 
+class  HpComponent; 
+class  InvincibleComponent;
+}
 namespace ratchet::component::scarecrow {
 class ScarecrowComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;
 private:
     //! Hp
     std::weak_ptr<ratchet::component::HpComponent> _hp_com;
+    //! 無敵
+    std::weak_ptr<ratchet::component::InvincibleComponent> _invincible_com;
 
     /// <summary>
     /// エフェクト発生

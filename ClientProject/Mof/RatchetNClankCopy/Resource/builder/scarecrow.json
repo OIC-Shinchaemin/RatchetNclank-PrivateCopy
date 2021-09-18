@@ -13,10 +13,15 @@
       "type": "HpComponent",
       "paramater": {
         "priority": 0,
-        "hp_max": 3
+        "hp_max": 5
       }
     },
-
+    {
+      "type": "InvincibleComponent",
+      "paramater": {
+        "priority": 93
+      }
+    },
     {
       "type": "VelocityComponent",
       "paramater": {

@@ -9,8 +9,8 @@ namespace tutorial {
 class TutorialManager {
 public:
     enum class TutorialType {
+        //Jump,
         Attack,
-        Jump,
         Weapon,
         CountMax,
     };
@@ -50,10 +50,12 @@ public:
     /// âï˙
     /// </summary>
     /// <param name="type"></param>
-    void Liberation(TutorialType type) {
-        auto index = static_cast<int>(type);
-        _flags.at(index) = true;
-    }
+    void Liberation(TutorialType type);
+    /// <summary>
+    /// íBê¨
+    /// </summary>
+    /// <param name=""></param>
+    void Complete(void);
 };
 }
 #endif // !TUTORIAL_MANAGER_H

@@ -304,8 +304,10 @@
     <ClCompile Include="Component\CameraComponent.cpp" />
     <ClCompile Include="Component\CharacterComponent.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\BlasterBulletScarecrowCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletScarecrowCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\BulletItemPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyMeleeAttackPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.cpp" />
@@ -325,7 +327,11 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowPyrocitorBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.cpp" />
@@ -516,6 +522,7 @@
     <ClCompile Include="State\PlayerMotionStateImplementation.cpp" />
     <ClCompile Include="State\ShipActionStateImplementation.cpp" />
     <ClCompile Include="State\ShipMotionStateImplementation.cpp" />
+    <ClCompile Include="TutorialManager.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\GamePauseSystemMenu.cpp" />
     <ClCompile Include="UI\GimmickAccessSystemMenu.cpp" />
@@ -656,8 +663,10 @@
     <ClInclude Include="Component\CameraComponent.h" />
     <ClInclude Include="Component\CharacterComponent.h" />
     <ClInclude Include="Component\Collision\Algolithm\BlasterBulletEnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\BlasterBulletScarecrowCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\BoltPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletEnemyCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletScarecrowCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\BulletItemPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyMeleeAttackPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyBlasterBulletCollisionAlgolithm.h" />
@@ -677,7 +686,11 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowPyrocitorBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ShipPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\SightPlayerCollisionAlgolithm.h" />
@@ -806,6 +819,7 @@
     <ClInclude Include="Event\EventReferenceTable.h" />
     <ClInclude Include="Event\RegisterGlobalCameraEvent.h" />
     <ClInclude Include="Event\ShipEvent.h" />
+    <ClInclude Include="Event\StageEnemyViewEvent.h" />
     <ClInclude Include="Event\StageViewEvent.h" />
     <ClInclude Include="Event\TextSystemStartEvent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />
@@ -932,6 +946,7 @@
     <None Include="..\Resource\behaviour\strong_enemy_patrol.json" />
     <None Include="..\Resource\behaviour\weak_enemy_combat.json" />
     <None Include="..\Resource\behaviour\weak_enemy_patrol.json" />
+    <None Include="..\Resource\builder\barricade.json" />
     <None Include="..\Resource\builder\blaster.json" />
     <None Include="..\Resource\builder\blaster_bullet.json" />
     <None Include="..\Resource\builder\bullet_item.json" />

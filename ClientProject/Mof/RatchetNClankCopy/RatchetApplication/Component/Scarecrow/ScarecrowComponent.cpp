@@ -4,6 +4,7 @@
 #include "../Collision/CollisionComponentDefine.h"
 #include "../Collision/Object/ScarecrowCollisionComponent.h"
 #include "../HpComponent.h"
+#include "../InvincibleComponent.h"
 #include "../../Actor/Character/Scarecrow.h"
 
 
@@ -60,12 +61,12 @@ void ratchet::component::scarecrow::ScarecrowComponent::DamageEffectEmit(std::sh
 
 ratchet::component::scarecrow::ScarecrowComponent::ScarecrowComponent(int priority) :
     super(priority),
-    _hp_com() {
+    _hp_com(), _invincible_com() {
 }
 
 ratchet::component::scarecrow::ScarecrowComponent::ScarecrowComponent(const ScarecrowComponent& obj) :
     super(obj),
-    _hp_com() {
+    _hp_com(), _invincible_com() {
 }
 
 ratchet::component::scarecrow::ScarecrowComponent::~ScarecrowComponent() {
@@ -80,11 +81,18 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
     super::Activate();
 
     _hp_com = super::GetOwner()->GetComponent<ratchet::component::HpComponent>();
+    _invincible_com = super::GetOwner()->GetComponent<ratchet::component::InvincibleComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::ScarecrowCollisionComponent>();
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::component::collision::CollisionComponentType::kOmniWrenchCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto invincible_com = _invincible_com.lock()) {
+            if (invincible_com->IsActive()) {
+                return false;
+            } // if
+            invincible_com->Activate();
+        } // if
 
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
@@ -97,6 +105,77 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
         } // if
         return true;
     }));
+
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kPyrocitorBulletCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto invincible_com = _invincible_com.lock()) {
+            if (invincible_com->IsActive()) {
+                return false;
+            } // if
+            invincible_com->Activate();
+        } // if
+
+
+        if (auto hp_com = _hp_com.lock()) {
+            hp_com->Damage(1);
+
+            this->DamageEffectEmit(in.target.lock());
+
+            if (hp_com->GetHp() <= 0) {
+                super::GetOwner()->End();
+            } // if
+        } // if
+
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBlasterBulletCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto invincible_com = _invincible_com.lock()) {
+            if (invincible_com->IsActive()) {
+                return false;
+            } // if
+            invincible_com->Activate();
+        } // if
+
+
+        if (auto hp_com = _hp_com.lock()) {
+            hp_com->Damage(1);
+
+            this->DamageEffectEmit(in.target.lock());
+
+            if (hp_com->GetHp() <= 0) {
+                super::GetOwner()->End();
+            } // if
+        } // if
+
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBombGloveEffectCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto invincible_com = _invincible_com.lock()) {
+            if (invincible_com->IsActive()) {
+                return false;
+            } // if
+            invincible_com->Activate();
+        } // if
+
+        if (auto hp_com = _hp_com.lock()) {
+            hp_com->Damage(1);
+
+            this->DamageEffectEmit(in.target.lock());
+
+            if (hp_com->GetHp() <= 0) {
+                super::GetOwner()->End();
+            } // if
+        } // if
+
+        return true;
+    }));
+
+
     return true;
 }
 

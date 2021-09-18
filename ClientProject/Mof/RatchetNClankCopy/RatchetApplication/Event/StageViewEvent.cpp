@@ -71,21 +71,11 @@ bool ratchet::event::StageViewEvent::Update(float delta_time) {
 
 	if (_stage_view_camera_controller->IsCompleted()) {
 		if (auto help_desk = _help_desk.lock()) {
-			help_desk->Show();
+			//help_desk->Show();
 		} // if
 		auto message = StageViewEventMessage();
 		message.end = true;
 		_stage_view_event_message_subject.Notify(message);
-
-
-		//if (auto text = _text_system.lock()) {
-		//    text->Activate();
-		//} // if
-		//if (auto scene = _scene.lock()) {
-		//    scene->SetState(scene::Scene::State::Pause);
-		//} // if
-
-
 
 		auto info = ratchet::camera::CameraController::CameraInfo();
 		info.start_position = _stage_view_camera_controller->GetCameraPosition();

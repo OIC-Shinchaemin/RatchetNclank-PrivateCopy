@@ -51,8 +51,7 @@ private:
     std::weak_ptr<ratchet::game::GameManager> _game;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event;
-
-    
+    //! エフェクト
     std::shared_ptr<effect::EffectContainer> _effect;
 public:
     /// <summary>

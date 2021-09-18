@@ -141,7 +141,7 @@ void ratchet::actor::Actor::RemoveComponent(const ComPtr& component) {
 }
 
 void ratchet::actor::Actor::End(void) {
-    this->_state = ratchet::actor::ActorState::End;
+    //this->_state = ratchet::actor::ActorState::End;
     Observable::Notify("DeleteRequest", shared_from_this());
 }
 

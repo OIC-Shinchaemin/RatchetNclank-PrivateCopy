@@ -33,10 +33,6 @@ bool ratchet::component::player::PlayerStateComponent::CanTransition(std::string
 
     auto current = _state_machine.GetCurrentStateName();
     if (next == Type::kPlayerActionJumpLandingState) {
-        if (!tutorial::TutorialManager::GetInstance().IsLiberation(
-            tutorial::TutorialManager::TutorialType::Jump)) {
-        } // if
-        
         if (current == Type::kPlayerActionJumpDownState) {
             return true;
         } // if

@@ -1,5 +1,7 @@
 #include "TextSystem.h"
 
+#include "../../../DebugManager.h"
+
 
 bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
     //セーブファイルを開く
@@ -392,12 +394,12 @@ ratchet::game::gamesystem::text::TextSystem::TextSystem() :
     ::memset(_line_buffer, 0, TEXTBUFFERSIZE);
 
     _path_map.emplace(TextEventType::TutorialEventNo0, "script/tutorial_event_0_start.txt");
-    _path_map.emplace(TextEventType::TutorialEventNo1, "script/tutorial_event_1_start.txt");
-    _path_map.emplace(TextEventType::TutorialEventNo2, "script/tutorial_event_2_start.txt");
+    _path_map.emplace(TextEventType::TutorialEventNo1, "script/tutorial_event_2_start.txt");
+    //_path_map.emplace(TextEventType::TutorialEventNo2, "script/tutorial_event_2_start.txt");
 
     _path_map.emplace(TextEventType::TutorialEventNo0End, "script/tutorial_event_0_end.txt");
-    _path_map.emplace(TextEventType::TutorialEventNo1End, "script/tutorial_event_1_end.txt");
-    _path_map.emplace(TextEventType::TutorialEventNo2End, "script/tutorial_event_2_end.txt");
+    _path_map.emplace(TextEventType::TutorialEventNo1End, "script/tutorial_event_2_end.txt");
+    //_path_map.emplace(TextEventType::TutorialEventNo2End, "script/tutorial_event_2_end.txt");
 
     _path_map.emplace(TextEventType::KingTextEvent, "script/king_text_event.txt");
     _path_map.emplace(TextEventType::KingFreeTalkTextEvent, "script/king_free_talk_text_event.txt");
@@ -465,8 +467,12 @@ bool ratchet::game::gamesystem::text::TextSystem::Render(void) {
     //表示テキストを描画する
     ::CGraphicsUtilities::RenderString(_text_command.px, _text_command.py, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
 
+
     // debug 
-    ::CGraphicsUtilities::RenderString(10, 10, MOF_ARGB(_alpha, 255, 0, 0), "コマンド実行位置 [%d]", _command_no);
+    if (debug::DebugManager::GetInstance().IsDebugMode()) {
+        ::CGraphicsUtilities::RenderString(10, 10, MOF_ARGB(_alpha, 255, 0, 0), "コマンド実行位置 [%d]", _command_no);
+    } // if
+
     return false;
 }
 

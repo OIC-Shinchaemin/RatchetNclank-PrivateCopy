@@ -163,6 +163,7 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageElev
 
                 if (!_on_elevator) {
                     gimmick->ActionStart();
+                    super::GetOwner()->Sleep();
                 } // if
                 this->ChangeState();
 

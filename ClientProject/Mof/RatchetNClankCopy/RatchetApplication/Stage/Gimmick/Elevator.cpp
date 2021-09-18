@@ -16,6 +16,10 @@ Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, Stag
 Elevator::~Elevator(void) {
 }
 
+void Elevator::SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
+    this->_camera_controller = ptr;
+}
+
 Mof::CVector3 Elevator::GetPreviewPosition(void) const {
     return this->_preview_position;
 }
@@ -77,10 +81,20 @@ void Elevator::Update(float delta) {
     if (t == 1.0f && !_end_flag) {
         _start_flag = false;
         _end_flag = true;
+        _camera_controller->GetService()->SetAltitude(30.0f);
+        _camera_controller->GetService()->SetAzimuth(270.0f);
+
+        auto message = ElevatorArrivalMessage();
+        _elevator_arrival_message_subject.Notify(message);
     }
     if (t == 0.0f && _end_flag) {
         _start_flag = false;
         _end_flag = false;
+        _camera_controller->GetService()->SetAltitude(30.0f);
+        _camera_controller->GetService()->SetAzimuth(180.0f);
+
+        auto message = ElevatorArrivalMessage();
+        _elevator_arrival_message_subject.Notify(message);
     }
     RefreshWorldMatrix();
 }

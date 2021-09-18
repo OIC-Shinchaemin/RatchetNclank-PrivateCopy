@@ -12,6 +12,7 @@
 #include "../Actor/Gimmick/Fence.h"
 #include "../Component/CameraComponent.h"
 #include "../Stage/Gimmick/Bridge.h"
+#include "../Stage/Gimmick/Elevator.h"
 #include "../Event/BridgeEvent.h"
 #include "../Event/ShipEvent.h"
 #include "../Event/StageViewEvent.h"
@@ -51,10 +52,17 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 	bridge_event->GetCameraSubject()->AddObserver(ship_event);
 	ship_event->GetShipEventSubject()->AddObserver(out);
 
+	std::vector<std::shared_ptr<Elevator>> elevators;
 	for (auto gimmick : out->_stage.GetGimmickArray()) {
 		auto temp = std::dynamic_pointer_cast<Bridge>(gimmick);
 		if (temp) {
 			temp->AddObserver(ship_event);
+		} // if
+		auto temp_elevator = std::dynamic_pointer_cast<Elevator>(gimmick);
+		if (temp_elevator) {
+			ratchet::event::EventReferenceTable::Singleton().Register(temp_elevator->GetName(), 
+																	  temp_elevator);
+			elevators.push_back(temp_elevator);
 		} // if
 	} // for
 
@@ -68,6 +76,11 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 	out->AddElement(player);
 	out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);
 	stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
+
+	for (auto elevator: elevators) {
+		elevator->SetPlayerCamera(player->GetComponent<ratchet::component::CameraComponent>()->GetCameraController());
+		elevator->GetElevatorArrivalMessageSubject()->AddObserver(player);
+	} // for
 
 	{
 		param->transform.position = Mof::CVector3(15.0f, -5.0f, 7.0f);
@@ -154,6 +167,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 
 	{
+
 		// wall
 		def::Transform wall_transforms[]{
 			def::Transform(Mof::CVector3(43.0f, -4.0f, -13.0f)),
@@ -164,8 +178,9 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		for (auto& transform : wall_transforms) {
 			param->transform.position = transform.position;
 			param->transform.scale = transform.scale;
-			auto gimmick = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::gimmick::Wall >("../Resource/builder/wall.json", param);
-			out->AddElement(gimmick);
+			auto wall = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::gimmick::Wall >("../Resource/builder/wall.json", param);
+			out->AddElement(wall);
+			ratchet::event::EventReferenceTable::Singleton().Register(param->name, wall);
 			param->name = "wall_2";
 		} // for
 	}
@@ -217,6 +232,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			param->transform.scale = transform.scale;
 			auto king = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::King >("../Resource/builder/king.json", param);
 			auto tex = out->GetResource()->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/ui/icon/question.png");
+			king->SetHelpDesk(help_desk);
 			king->SetTexture(tex);
 			king->SetGameScene(out);
 			king->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
