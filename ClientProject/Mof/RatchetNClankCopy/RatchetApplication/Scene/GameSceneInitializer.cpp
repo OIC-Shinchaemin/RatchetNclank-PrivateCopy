@@ -60,6 +60,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		} // if
 		auto temp_elevator = std::dynamic_pointer_cast<Elevator>(gimmick);
 		if (temp_elevator) {
+			temp_elevator->SetEventManager(event);
 			ratchet::event::EventReferenceTable::Singleton().Register(temp_elevator->GetName(), 
 																	  temp_elevator);
 			elevators.push_back(temp_elevator);
@@ -78,7 +79,9 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 	stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
 
 	for (auto elevator: elevators) {
-		elevator->SetPlayerCamera(player->GetComponent<ratchet::component::CameraComponent>()->GetCameraController());
+		auto camera = player->GetComponent<ratchet::component::CameraComponent>();
+		elevator->SetPlayerCameraComponent(camera);
+		elevator->SetPlayerCamera(camera->GetCameraController());
 		elevator->GetElevatorArrivalMessageSubject()->AddObserver(player);
 	} // for
 
@@ -123,7 +126,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 		auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
 		help_desk->OnNotify(quest);
-		stage_view_event->SetHelpDesk(help_desk);
 		bridge_event->GetQuestSubject()->AddObserver(help_desk);
 		weapon_system->AddMechanicalWeaponObserver(player);
 		quick_change->AddWeaponObserver(weapon_system);
@@ -153,6 +155,8 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			bridge_event->AddTriggerActor(enemy);
 		} // if
 	} // for
+
+
 
 	// terrain
 	def::Transform terrain_transforms[]{
@@ -184,7 +188,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			param->name = "wall_2";
 		} // for
 	}
-
+	
 
 
 	{

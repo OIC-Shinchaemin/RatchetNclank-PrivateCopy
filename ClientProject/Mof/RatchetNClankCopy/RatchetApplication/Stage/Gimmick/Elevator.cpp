@@ -1,16 +1,39 @@
 #include "Elevator.h"
 
-Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, StageObjectType type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate)
-    : GimmickBase(enable, collision, type, name, mesh_no, pos, scale, rotate)
-    , _start_pos(pos)
-    , _end_pos(end)
-    , _request_time(request)
-    , _now_timer(0.0f)
-    , _start_flag(false)
-    , _end_flag(false)
-    , _preview_position(_start_pos)
-    , _initial_position()
-    , _first_initialized(false) {
+#include "../../Event/EventManager.h"
+#include "../../Event/EnemyViewEvent.h"
+#include "../../Event/StageViewEvent.h"
+
+void Elevator::EnemyViewEventStart(void) {
+    //std::weak_ptr<ratchet::event::EventManager> event;
+    if (auto e = _event_manager.lock()) {
+        std::shared_ptr<ratchet::event::EnemyViewEvent> view_event;
+        view_event = e->CreateGameEvent<ratchet::event::EnemyViewEvent>();
+//        view_event->SetGameScene(shared_this);
+//        view_event->SetTextSystem(out->_text_system);
+        
+        
+        //view_event->GetStageViewEventMessageSubject()->AddObserver(shared_this);
+        view_event->Initialize();
+        view_event->GetCameraObservable()->AddObserver(_player_camera_component.lock());
+    } // if
+}
+
+Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, StageObjectType type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate) :
+    GimmickBase(enable, collision, type, name, mesh_no, pos, scale, rotate),
+    _start_pos(pos),
+    _end_pos(end),
+    _request_time(request),
+    _now_timer(0.0f),
+    _start_flag(false),
+    _end_flag(false),
+    _preview_position(_start_pos),
+    _initial_position(),
+    _first_initialized(false),
+    _camera_controller(),
+    _elevator_arrival_message_subject(),
+    _event_manager(),
+    _player_camera_component() {
 }
 
 Elevator::~Elevator(void) {
@@ -18,6 +41,14 @@ Elevator::~Elevator(void) {
 
 void Elevator::SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
     this->_camera_controller = ptr;
+}
+
+void Elevator::SetEventManager(const std::shared_ptr<ratchet::event::EventManager>& ptr) {
+    this->_event_manager = ptr;
+}
+
+void Elevator::SetPlayerCameraComponent(const std::shared_ptr<ratchet::component::CameraComponent>& ptr) {
+    this->_player_camera_component = ptr;
 }
 
 Mof::CVector3 Elevator::GetPreviewPosition(void) const {
@@ -86,6 +117,7 @@ void Elevator::Update(float delta) {
 
         auto message = ElevatorArrivalMessage();
         _elevator_arrival_message_subject.Notify(message);
+        this->EnemyViewEventStart();
     }
     if (t == 0.0f && _end_flag) {
         _start_flag = false;

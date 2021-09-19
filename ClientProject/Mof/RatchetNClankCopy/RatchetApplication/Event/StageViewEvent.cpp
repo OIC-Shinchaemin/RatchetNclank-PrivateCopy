@@ -7,7 +7,6 @@ ratchet::event::StageViewEvent::StageViewEvent() :
 	super(),
 	_stage_view_camera(std::make_shared<ratchet::camera::Camera>()),
 	_stage_view_camera_controller(std::make_shared<ratchet::camera::AutoCameraController>()),
-	_help_desk(),
 	_scene(),
 	_text_system(),
 	_skip_reserve(false),
@@ -16,8 +15,44 @@ ratchet::event::StageViewEvent::StageViewEvent() :
 	_stage_view_camera_controller->SetCamera(_stage_view_camera);
 	_stage_view_camera->Initialize();
 	_stage_view_camera->Update();
-
 	_skip_reserve_timer.Initialize(_skip_time_set, false);
+
+
+	std::vector<Mof::CVector3> control_points_position = {
+		Mof::CVector3(180.0f, 12.0f, 30.0f),
+		Mof::CVector3(155.0f, 12.0f, 80.0f),
+		Mof::CVector3(150.0f, 12.0f, 125.0f),
+		Mof::CVector3(120.0f, 12.0f, 150.0f),
+		Mof::CVector3(75.0f, 12.0f, 130.0f),
+		Mof::CVector3(55.0f, 12.0f, 85.0f),
+		Mof::CVector3(55.0f, 12.0f, 85.0f),
+		Mof::CVector3(70.0f, 12.0f, 85.0f),
+		Mof::CVector3(75.0f, 12.0f, 5.0f),
+		Mof::CVector3(80.0f, 12.0f, -5.0f),
+		Mof::CVector3(40.0f, 12.0f, -5.0f),
+		Mof::CVector3(10.0f, 12.0f, -5.0f),
+		Mof::CVector3(5.0f, 12.0f, -5.0f),
+		Mof::CVector3(5.0f, 5.0f, -5.0f),
+	};
+	std::vector<Mof::CVector3> control_points_target = {
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+		Mof::CVector3(5.0f, 0.0f, -5.0f),
+	};
+
+	_stage_view_camera_controller->RegisterCameraPositionControllPoint(control_points_position);
+	_stage_view_camera_controller->RegisterCameraTargetControllPoint(control_points_target);
 }
 
 ratchet::event::StageViewEvent::~StageViewEvent() {
@@ -25,10 +60,6 @@ ratchet::event::StageViewEvent::~StageViewEvent() {
 
 ratchet::event::StageViewEvent::CameraObservable* ratchet::event::StageViewEvent::GetCameraObservable(void) {
 	return &this->_camera_subject;
-}
-
-void ratchet::event::StageViewEvent::SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr) {
-	this->_help_desk = ptr;
 }
 
 void ratchet::event::StageViewEvent::SetGameScene(const std::shared_ptr<ratchet::scene::Scene>& ptr) {
@@ -70,9 +101,6 @@ bool ratchet::event::StageViewEvent::Update(float delta_time) {
 	_stage_view_camera_controller->Update(delta_time, camera_info);
 
 	if (_stage_view_camera_controller->IsCompleted()) {
-		if (auto help_desk = _help_desk.lock()) {
-			//help_desk->Show();
-		} // if
 		auto message = StageViewEventMessage();
 		message.end = true;
 		_stage_view_event_message_subject.Notify(message);

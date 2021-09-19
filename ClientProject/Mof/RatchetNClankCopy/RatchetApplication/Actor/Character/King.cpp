@@ -91,6 +91,15 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
         auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index - 1;
         message.type = static_cast<decltype(message.type)>(type_temp);
+        message.on_close = [&]() {
+            
+            auto target = super::GetPosition();
+            auto player_camera = _player_view_camera_controller->GetService();
+            auto dir = target - _player.lock()->GetPosition();
+            player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
+            _player_view_camera_controller->GetService()->SetAltitude(20.0f);
+            return true;
+        };
         _text_system_message_subject.Notify(message);
 
         this->_event_icon_show = true;

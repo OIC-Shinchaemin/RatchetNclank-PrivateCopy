@@ -9,7 +9,6 @@
 
 #include "../Camera/Camera.h"
 #include "../Camera/AutoCameraController.h"
-#include "../Game/GameSystem/HelpDesk.h"
 #include "../Scene/Scene.h"
 #include "../Game/GameSystem/Text/TextSystem.h"
 
@@ -30,15 +29,12 @@ private:
     std::shared_ptr<ratchet::camera::AutoCameraController> _stage_view_camera_controller;
     //! 通知用
     ratchet::event::StageViewEvent::CameraObservable _camera_subject;
-    //! 表示
-    std::weak_ptr<ratchet::game::gamesystem::HelpDesk> _help_desk;
     //! シーン
     std::weak_ptr<scene::Scene> _scene;
     //! テキスト
     std::weak_ptr<ratchet::game::gamesystem::text::TextSystem> _text_system;
     //! 通知用
     ratchet::event::StageViewEventMessageSubject _stage_view_event_message_subject;
-
     //! スキップフラグ
     bool _skip_reserve;
     //! タイマー時間
@@ -68,11 +64,6 @@ public:
     ratchet::event::StageViewEventMessageSubject* GetStageViewEventMessageSubject(void) {
         return &this->_stage_view_event_message_subject;
     }
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name=""></param>
-    void SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

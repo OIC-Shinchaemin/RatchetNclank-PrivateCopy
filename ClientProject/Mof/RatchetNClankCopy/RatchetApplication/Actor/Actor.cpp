@@ -88,7 +88,7 @@ ratchet::actor::ActorState ratchet::actor::Actor::GetState(void) const {
 }
 
 bool ratchet::actor::Actor::InCameraRange(void) const {
-    const int camera_range = 30.0f;
+    const int camera_range = 40.0f;
     auto pos = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
     auto sphere = Mof::CSphere(pos, camera_range);
     return sphere.CollisionPoint(this->GetPosition());
