@@ -5,7 +5,6 @@
 #include "../../Event/StageViewEvent.h"
 
 void Elevator::EnemyViewEventStart(void) {
-    //std::weak_ptr<ratchet::event::EventManager> event;
     if (auto e = _event_manager.lock()) {
         std::shared_ptr<ratchet::event::EnemyViewEvent> view_event;
         view_event = e->CreateGameEvent<ratchet::event::EnemyViewEvent>();

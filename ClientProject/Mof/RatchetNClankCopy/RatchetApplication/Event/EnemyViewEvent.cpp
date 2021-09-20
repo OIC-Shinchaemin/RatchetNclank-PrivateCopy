@@ -6,12 +6,11 @@
 ratchet::event::EnemyViewEvent::EnemyViewEvent() :
     super(),
     _camera(std::make_shared<ratchet::camera::Camera>()),
-    _camera_controller(std::make_shared<ratchet::camera::AutoCameraController>(9.0f)),
+    _camera_controller(std::make_shared<ratchet::camera::AutoCameraController>()),
     _player_camera_controller() {
-    _camera_controller->SetCamera(_camera);
     _camera->Initialize();
     _camera->Update();
-    //_skip_reserve_timer.Initialize(_skip_time_set, false);
+    _camera_controller->SetCamera(_camera);
 }
 
 ratchet::event::EnemyViewEvent::~EnemyViewEvent() {
@@ -30,58 +29,40 @@ void ratchet::event::EnemyViewEvent::SetPlayerCamera(base::core::ServiceLocator<
 }
 
 bool ratchet::event::EnemyViewEvent::Initialize(void) {
-    auto p = _start_position;
-    //auto p = _camera_controller->GetCameraPosition();
-    //auto p = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
-    //auto t = ::CGraphicsUtilities::GetCamera()->GetTargetPosition();
-    //Mof::CVector3 dir = t - p;
-    //dir.y = 0.0f;
-    //dir.Normal(dir);
-    //float angle = _camera_controller->GetAzimuth();
-    //auto f = Mof::CVector3(0.0f, _camera_controller->GetAzimuth(), 0.0f);
-
+    auto p = _player_camera_controller->GetService()->GetCameraPosition();
     auto player_camera = _player_camera_controller->GetService();
-    auto c = math::SphericalToCartesian(player_camera->GetDistance(), player_camera->GetAzimuth(), player_camera->GetAltitude());
+    Mof::CVector3 target = Mof::CVector3(60.0, -30.0f, 15.0f);
+    Mof::CVector3 dir = target - p;
+    dir.y = 0.0f;
+    dir.Normal(dir);
+
     std::vector<Mof::CVector3> control_points_target = {
-        p + c,
+        target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
+        
+        target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
+        target + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
+        target + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
     };
     std::vector<Mof::CVector3> control_points_position = {
-        p,
+        p ,
+        
+        p + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
+        p + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
+        p + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
     };
 
     _camera_controller->TimerReset(4.0f);
     _camera_controller->RegisterCameraPositionControllPoint(control_points_position);
     _camera_controller->RegisterCameraTargetControllPoint(control_points_target);
-
-    //_camera_controller->RegisterGlobalCamera();
+    _camera_controller->RegisterGlobalCamera();
+    _camera->SetPosition(p);
+    _camera->SetTarget(target);
+    _camera->Update();
     return true;
 }
 
 bool ratchet::event::EnemyViewEvent::Update(float delta_time) {
-    //if (auto scene = _scene.lock()) {
-    //	if (scene->GetState() == scene::Scene::State::Pause) {
-    //		return true;
-    //	} // if
-    //} // if
-    //// 一定時間経過で削除リクエストを通知
-    //if (::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
-    //	::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START)) {
-    //	if (_skip_reserve) {
-    //		_camera_controller->ForceTick(_camera_controller->GetTimeMax());
-    //	} // if
-    //	_skip_reserve = true;
-    //} // if
-
-    //if (_skip_reserve_timer.Tick(delta_time)) {
-    //	_skip_reserve = false;
-    //	_skip_reserve_timer.Initialize(_skip_time_set, false);
-    //} // if
-
     auto camera_info = ratchet::camera::CameraController::CameraInfo();
-    //auto angle= CVector3Utilities::Lerp(_camera_info, _camera_info_at, _time);
-    //_camera_controller->SetAzimuth(angle.x);
-    //_camera_controller->AddAltitude(angle.y);
-    //_camera_controller->SetDistance(angle.z);
     _camera_controller->Update(delta_time, camera_info);
 
     if (_camera_controller->IsCompleted()) {
