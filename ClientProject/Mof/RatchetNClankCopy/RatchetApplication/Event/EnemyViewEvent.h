@@ -16,11 +16,11 @@
 
 
 namespace ratchet::event {
-struct EnemyViewEventMessage {
+struct EnemyViewEventEndMessage {
     bool end;
 };
-using EnemyViewEventMessageSubject = base::core::Observable<const EnemyViewEventMessage&>;
-using EnemyViewEventMessageListener = base::core::Observer<const EnemyViewEventMessage&>;
+using EnemyViewEventEndMessageSubject = base::core::Observable<const EnemyViewEventEndMessage&>;
+using EnemyViewEventEndMessageListener = base::core::Observer<const  EnemyViewEventEndMessage&>;
 class EnemyViewEvent : public ratchet::event::Event {
     using super = ratchet::event::Event;
     using CameraObservable = base::core::Observable<const ratchet::camera::CameraController::CameraInfo&>;
@@ -32,7 +32,7 @@ private:
     //! 次のカメラへの通知用
     ratchet::event::EnemyViewEvent::CameraObservable _camera_subject;
     //! 通知用
-    ratchet::event::EnemyViewEventMessageSubject _enemy_view_event_message_subject;
+    ratchet::event::EnemyViewEventEndMessageSubject _enemy_view_event_message_subject;
     //! スキップフラグ
     //bool _skip_reserve;
     //! タイマー時間
@@ -63,7 +63,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    ratchet::event::EnemyViewEventMessageSubject* GetEnemyViewEventMessageSubject(void) {
+    ratchet::event::EnemyViewEventEndMessageSubject* GetEnemyViewEventMessageSubject(void) {
         return &this->_enemy_view_event_message_subject;
     }
     /// <summary>
@@ -76,16 +76,6 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name=""></param>
-    //void SetGameScene(const std::shared_ptr<ratchet::scene::Scene>& ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name=""></param>
-    //void SetTextSystem(const std::shared_ptr<ratchet::game::gamesystem::text::TextSystem>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

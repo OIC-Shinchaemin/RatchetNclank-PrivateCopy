@@ -1,13 +1,15 @@
 #include "Elevator.h"
 
 #include "../../Event/EventManager.h"
+#include "../../Event/PlayerActionAfterGettingOffElevatorEvent.h"
 #include "../../Event/EnemyViewEvent.h"
 #include "../../Event/StageViewEvent.h"
 
 void Elevator::EnemyViewEventStart(void) {
     if (auto e = _event_manager.lock()) {
-        std::shared_ptr<ratchet::event::EnemyViewEvent> view_event;
-        view_event = e->CreateGameEvent<ratchet::event::EnemyViewEvent>();
+        auto view_event = e->CreateGameEvent<ratchet::event::EnemyViewEvent>();
+        //auto player_event = e->CreateGameEvent<ratchet::event::PlayerActionAfterGettingOffElevatorEvent>();
+        //view_event->GetEnemyViewEventMessageSubject()->AddObserver(player_event);
         view_event->SetStartPosition(_player_camera_component.lock()->GetOwner()->GetPosition());
         view_event->SetPlayerCamera(_camera_controller);
         view_event->Initialize();

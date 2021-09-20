@@ -1230,6 +1230,9 @@
     <ClCompile Include="Event\EnemyViewEvent.cpp">
       <Filter>Ratchet\Source\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Event\PlayerActionAfterGettingOffElevatorEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -2379,6 +2382,9 @@
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
     <ClInclude Include="Event\EnemyViewEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\PlayerActionAfterGettingOffElevatorEvent.h">
       <Filter>Ratchet\Header\Event</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,12 +1,5 @@
 #include "EnemyViewEvent.h"
 
-#include "../Gamepad.h"
-#include "EventReferenceTable.h"
-#include "../Actor/Actor.h"
-#include "../Actor/Character/Player.h"
-#include "../Component/ActionStateComponent.h"
-#include "../State/PlayerActionStateDefine.h"
-
 
 ratchet::event::EnemyViewEvent::EnemyViewEvent() :
     super(),
@@ -90,17 +83,7 @@ bool ratchet::event::EnemyViewEvent::Update(float delta_time) {
 
     
     if (_camera_controller->IsCompleted()) {
-        {
-            //if (event::EventReferenceTable::Singleton().Exist("player")) {
-            //    auto player = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player>>("player");
-            //    auto action = player->GetComponent<ratchet::component::ActionStateComponent>();
-            //} // if
-        }
-
-
-
-
-        auto message = EnemyViewEventMessage();
+        auto message = EnemyViewEventEndMessage();
         message.end = true;
         _enemy_view_event_message_subject.Notify(message);
 
