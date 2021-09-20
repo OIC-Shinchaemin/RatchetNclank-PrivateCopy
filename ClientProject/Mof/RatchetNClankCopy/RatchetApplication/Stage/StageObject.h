@@ -147,7 +147,7 @@ public:
     /// デバッグ
     /// </summary>
     /// <param name=""></param>
-    void DebugRender(void);
+    virtual void DebugRender(void);
 #ifdef   STAGEEDITOR
     virtual bool* GetEnablePointer(void);
     virtual bool* GetCollisionEnablePointer(void);

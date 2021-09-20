@@ -178,6 +178,11 @@ public:
     virtual void SetStageObjectData(bool enable, bool collision, StageObjectType type, std::string name, int mesh_no,
                                     Vector3 pos, Vector3 scale, Vector3 rotate) override;
 
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    virtual void DebugRender(void) override;
 #ifdef STAGEEDITOR
     float* GetStartPosPointer(void);
     float* GetEndPosPointer(void);

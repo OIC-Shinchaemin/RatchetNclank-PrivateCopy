@@ -106,17 +106,17 @@ void Elevator::Update(float delta) {
     if (_end_flag) {
         _now_timer -= delta;
         source = Mof::CVector3(_camera_angle_start.x, 30.0f, 0.0f);
-        dest = Mof::CVector3(250.0f, 30.0f, 0.0f);
-    }
+        dest = Mof::CVector3(180.0f, 20.0f, 0.0f);
+        std::swap(source, dest);
+    } // if
     else {
         _now_timer += delta;
-        source = Mof::CVector3(_camera_angle_start.x, 30.0f, 0.0f);
-        dest = Mof::CVector3(0.0f, 30.0f, 0.0f);
-    }
+        source = Mof::CVector3(_camera_angle_start.x, _camera_angle_start.y, 0.0f);
+        dest = Mof::CVector3(250.0f, 30.0f, 0.0f);
+    } // else
     const float t = std::clamp((_now_timer / _request_time), 0.0f, 1.0f);
     _position = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
     angle = CVector3Utilities::Lerp(source, dest, t);
-
     _camera_controller->GetService()->SetAzimuth(angle.x);
     _camera_controller->GetService()->SetAltitude(angle.y);
 
@@ -139,8 +139,8 @@ void Elevator::Update(float delta) {
 void Elevator::ActionStart(void) {
     if (!_start_flag) {
         _start_flag = true;
-        _camera_angle_start.x = _camera_controller->GetService()->GetAzimuth();
-        _camera_angle_start.y = _camera_controller->GetService()->GetAltitude();
+        _camera_angle_start.x = math::ToDegree(_camera_controller->GetService()->GetAzimuth());
+        _camera_angle_start.y = 30.0f;
     }
 }
 
@@ -167,6 +167,11 @@ void Elevator::SetStageObjectData(bool enable, bool collision, StageObjectType t
 }
 
 #ifdef STAGEEDITOR
+
+void Elevator::DebugRender(void) {
+    StageObject::DebugRender();
+    ::CGraphicsUtilities::RenderString(600.0f, 340.0f, "player camera angle = %f", _camera_controller->GetService()->GetAzimuth());
+}
 
 float* Elevator::GetStartPosPointer(void) {
     return _start_pos.fv;

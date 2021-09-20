@@ -307,10 +307,6 @@ bool ratchet::component::CameraComponent::Initialize(void) {
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
     _controller_map.at(Mode::FirstPerson)->SetCamera(_camera);
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
-    {
-        //_controller_map.at(Mode::Follow)->SetSpring(200.0f);
-        //_controller_map.at(Mode::Follow)->SetDumping(20.0f);
-    }
     auto pos = super::GetOwner()->GetPosition();
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
