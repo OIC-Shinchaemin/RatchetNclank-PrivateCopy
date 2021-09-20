@@ -9,11 +9,8 @@ void Elevator::EnemyViewEventStart(void) {
     if (auto e = _event_manager.lock()) {
         std::shared_ptr<ratchet::event::EnemyViewEvent> view_event;
         view_event = e->CreateGameEvent<ratchet::event::EnemyViewEvent>();
-//        view_event->SetGameScene(shared_this);
-//        view_event->SetTextSystem(out->_text_system);
-        
-        
-        //view_event->GetStageViewEventMessageSubject()->AddObserver(shared_this);
+        view_event->SetStartPosition(_player_camera_component.lock()->GetOwner()->GetPosition());
+        view_event->SetPlayerCamera(_camera_controller);
         view_event->Initialize();
         view_event->GetCameraObservable()->AddObserver(_player_camera_component.lock());
     } // if
@@ -101,20 +98,31 @@ void Elevator::Update(float delta) {
     if (!_start_flag) {
         return;
     }
+
+    auto angle = Mof::CVector3();
+    auto source = Mof::CVector3();
+    auto dest = Mof::CVector3();
+
     if (_end_flag) {
         _now_timer -= delta;
+        source = Mof::CVector3(_camera_angle_start.x, 30.0f, 0.0f);
+        dest = Mof::CVector3(250.0f, 30.0f, 0.0f);
     }
     else {
         _now_timer += delta;
+        source = Mof::CVector3(_camera_angle_start.x, 30.0f, 0.0f);
+        dest = Mof::CVector3(0.0f, 30.0f, 0.0f);
     }
     const float t = std::clamp((_now_timer / _request_time), 0.0f, 1.0f);
     _position = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
+    angle = CVector3Utilities::Lerp(source, dest, t);
+
+    _camera_controller->GetService()->SetAzimuth(angle.x);
+    _camera_controller->GetService()->SetAltitude(angle.y);
+
     if (t == 1.0f && !_end_flag) {
         _start_flag = false;
         _end_flag = true;
-        _camera_controller->GetService()->SetAltitude(30.0f);
-        _camera_controller->GetService()->SetAzimuth(270.0f);
-
         auto message = ElevatorArrivalMessage();
         _elevator_arrival_message_subject.Notify(message);
         this->EnemyViewEventStart();
@@ -122,9 +130,6 @@ void Elevator::Update(float delta) {
     if (t == 0.0f && _end_flag) {
         _start_flag = false;
         _end_flag = false;
-        _camera_controller->GetService()->SetAltitude(30.0f);
-        _camera_controller->GetService()->SetAzimuth(180.0f);
-
         auto message = ElevatorArrivalMessage();
         _elevator_arrival_message_subject.Notify(message);
     }
@@ -134,6 +139,8 @@ void Elevator::Update(float delta) {
 void Elevator::ActionStart(void) {
     if (!_start_flag) {
         _start_flag = true;
+        _camera_angle_start.x = _camera_controller->GetService()->GetAzimuth();
+        _camera_angle_start.y = _camera_controller->GetService()->GetAltitude();
     }
 }
 

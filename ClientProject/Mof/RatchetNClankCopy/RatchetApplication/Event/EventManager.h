@@ -8,8 +8,7 @@
 #include "EventReferenceTable.h"
 
 
-namespace ratchet {
-namespace event {
+namespace ratchet ::event {
 class EventManager :
     public std::enable_shared_from_this<ratchet::event::EventManager>,
     public base::core::Observer<const char*, const std::shared_ptr<ratchet::event::Event>&> {
@@ -72,6 +71,5 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
-}
 }
 #endif // !RATCHET_EVENT_MANAGER_H

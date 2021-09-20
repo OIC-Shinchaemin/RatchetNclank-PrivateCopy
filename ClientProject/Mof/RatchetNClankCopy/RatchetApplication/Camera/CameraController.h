@@ -153,6 +153,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    float GetDistance(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     float GetDefaultAzimuth(void) const;
     /// <summary>
     /// ゲッター

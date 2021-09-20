@@ -7,6 +7,8 @@
 
 #include <memory>
 
+
+#include "Base/Core/ServiceLocator.h"
 #include "../Camera/Camera.h"
 #include "../Camera/AutoCameraController.h"
 #include "../Scene/Scene.h"
@@ -29,8 +31,6 @@ private:
     std::shared_ptr<ratchet::camera::AutoCameraController> _camera_controller;
     //! 次のカメラへの通知用
     ratchet::event::EnemyViewEvent::CameraObservable _camera_subject;
-    //! シーン
-    //std::weak_ptr<scene::Scene> _scene;
     //! 通知用
     ratchet::event::EnemyViewEventMessageSubject _enemy_view_event_message_subject;
     //! スキップフラグ
@@ -39,6 +39,10 @@ private:
     //float _skip_time_set;
     //! タイマー
     base::core::Timer _skip_reserve_timer;
+    //! 位置
+    Mof::CVector3 _start_position;
+    //! プレイヤーカメラ
+    base::core::ServiceLocator<ratchet::camera::CameraController>* _player_camera_controller;
 public:
     /// <summary>
     /// コンストラクタ
@@ -65,13 +69,23 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name=""></param>
-    void SetGameScene(const std::shared_ptr<ratchet::scene::Scene>& ptr);
+    /// <param name="pos"></param>
+    void SetStartPosition(Mof::CVector3 pos);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name=""></param>
-    void SetTextSystem(const std::shared_ptr<ratchet::game::gamesystem::text::TextSystem>& ptr);
+    //void SetGameScene(const std::shared_ptr<ratchet::scene::Scene>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name=""></param>
+    //void SetTextSystem(const std::shared_ptr<ratchet::game::gamesystem::text::TextSystem>& ptr);
     /// <summary>
     /// 初期化
     /// </summary>

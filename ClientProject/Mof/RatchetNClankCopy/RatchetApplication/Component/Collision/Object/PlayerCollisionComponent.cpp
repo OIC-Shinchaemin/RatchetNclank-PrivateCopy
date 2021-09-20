@@ -122,12 +122,9 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageElev
         Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
         geometry->SetMatrix(mat);
 
-
-
         float volume = _player_com.lock()->GetVolume();
         float height = _player_com.lock()->GetHeight();
         auto pos = super::GetOwner()->GetPosition();
-
 
         auto player_circle = Mof::CCircle(pos.x, pos.z, volume);
         auto gimmick_circle = Mof::CCircle(gimmick_pos.x, gimmick_pos.z, gimmick->GetVolume());
@@ -140,11 +137,17 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageElev
                 float direction = std::atan2(gimmick_pos.y - player_pos.y, gimmick_pos.x - player_pos.x) + math::kHalfPi;
                 auto distance = Mof::CVector2Utilities::Distance(player_pos, gimmick_pos);
                 float diff = (gimmick_circle.r + player_circle.r) - distance;
-                
                 auto add = math::Rotate(0.0f, diff, direction);
                 auto pos = super::GetOwner()->GetPosition();
                 pos.x += add.x;
                 pos.z += add.y;
+                /*
+                float gimmick_height = 3.0f;
+                if (pos.y - 0.2f < gimmick->GetPosition().y + gimmick_height ) {
+                    pos.y = gimmick->GetPosition().y + gimmick_height ;
+                } // if
+                */
+
                 super::GetOwner()->SetPosition(pos);
             } // if
         } // if
@@ -279,6 +282,10 @@ std::optional<Mof::LPMeshContainer> ratchet::component::collision::PlayerCollisi
 
 std::optional<::ratchet::component::collision::SightObject> ratchet::component::collision::PlayerCollisionComponent::GetSightObject(void) {
     return std::optional<::ratchet::component::collision::SightObject>();
+}
+
+bool ratchet::component::collision::PlayerCollisionComponent::IsOnElevator(void) const {
+    return this->_on_elevator;
 }
 
 bool ratchet::component::collision::PlayerCollisionComponent::Initialize(void) {

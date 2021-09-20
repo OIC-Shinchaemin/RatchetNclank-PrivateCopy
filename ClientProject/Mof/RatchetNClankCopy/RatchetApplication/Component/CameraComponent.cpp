@@ -22,9 +22,6 @@ void ratchet::component::CameraComponent::OnPush(void) {
         state_com->ChangeState(state);
     } // if
 
-
-
-
     auto eye_pos = super::GetOwner()->GetPosition();
     eye_pos.y += 1.0f;
 

@@ -15,7 +15,9 @@ namespace ratchet::component {
 class TransformComponent; 
 class VelocityComponent; 
 class CameraComponent; 
-
+}
+namespace ratchet::component::collision {
+class PlayerCollisionComponent;
 }
 namespace ratchet::component::player {
 class PlayerComponent : public ::ratchet::component::CharacterComponent {
@@ -33,6 +35,8 @@ private:
     std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! カメラ
     std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
+    //! カメラ
+    std::weak_ptr<ratchet::component::collision::PlayerCollisionComponent> _coll_volume_com;
     //! 地点
     std::string _next_terrain;
     //! 接触モード 有効であれば武器ボタンがアクションボタンになる

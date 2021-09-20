@@ -81,6 +81,10 @@ float ratchet::camera::CameraController::GetAltitude(void) const {
     return this->_param.altitude();
 }
 
+float ratchet::camera::CameraController::GetDistance(void) const {
+    return this->_param.distance;
+}
+
 float ratchet::camera::CameraController::GetDefaultAzimuth(void) const {
     math::Radian value = 270.0f;
     return value();
