@@ -136,10 +136,6 @@ bool ratchet::actor::character::King::Initialize(ratchet::actor::Actor::Param* p
     auto velocity = super::GetComponent<ratchet::component::VelocityComponent>();
     velocity->Inactivate();
     velocity->SetUseGravity(false);
-
-    auto mesh = super::GetComponent<ratchet::component::MeshComponent>();
-    auto motion = mesh->GetMeshContainer()->CreateMotionController();
-    auto count = motion->GetMotionCount();
     return true;
 }
 

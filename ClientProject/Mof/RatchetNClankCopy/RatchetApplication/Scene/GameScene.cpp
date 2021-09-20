@@ -265,6 +265,8 @@ bool ratchet::scene::GameScene::Input(void) {
 }
 
 bool ratchet::scene::GameScene::Release(void) {
+	ratchet::event::EventReferenceTable::Singleton().Reset();
+
 	super::Release();
 	_stage.Release();
 	if (auto game = _game.lock()) {
@@ -272,8 +274,6 @@ bool ratchet::scene::GameScene::Release(void) {
 		_pause_menu_subject.Clear();
 		game->GameSystemRelease();
 	} // if
-
-
 	_text_system->Release();
 	_text_system.reset();
 	return true;

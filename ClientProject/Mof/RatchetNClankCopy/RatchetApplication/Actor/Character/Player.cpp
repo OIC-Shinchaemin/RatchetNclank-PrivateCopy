@@ -4,7 +4,7 @@
 #include "../../Component/MotionComponent.h"
 #include "../../Component/Player/PlayerComponent.h"
 #include "../../Factory/FactoryManager.h"
-
+#include "../../Event/EventReferenceTable.h"
 
 
 ratchet::actor::character::Player::Player() :
@@ -110,7 +110,10 @@ void ratchet::actor::character::Player::PopNotificationableSubject(const std::st
 
 void ratchet::actor::character::Player::End(void) {
 	super::End();
+
 	_current_weapon->SetScale(math::vec3::kZero);
+	 ratchet::event::EventReferenceTable::Singleton().Dispose(super::GetName());
+	 ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
 }
 
 bool ratchet::actor::character::Player::Initialize(void) {

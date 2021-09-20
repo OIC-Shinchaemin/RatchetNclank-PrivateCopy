@@ -1,6 +1,11 @@
 #include "EnemyViewEvent.h"
 
 #include "../Gamepad.h"
+#include "EventReferenceTable.h"
+#include "../Actor/Actor.h"
+#include "../Actor/Character/Player.h"
+#include "../Component/ActionStateComponent.h"
+#include "../State/PlayerActionStateDefine.h"
 
 
 ratchet::event::EnemyViewEvent::EnemyViewEvent() :
@@ -31,27 +36,45 @@ void ratchet::event::EnemyViewEvent::SetPlayerCamera(base::core::ServiceLocator<
 bool ratchet::event::EnemyViewEvent::Initialize(void) {
     auto p = _player_camera_controller->GetService()->GetCameraPosition();
     auto player_camera = _player_camera_controller->GetService();
-    Mof::CVector3 target = Mof::CVector3(60.0, -30.0f, 15.0f);
+    Mof::CVector3 target = Mof::CVector3(65.0, -30.0f, 82.0f);
     Mof::CVector3 dir = target - p;
     dir.y = 0.0f;
     dir.Normal(dir);
 
     std::vector<Mof::CVector3> control_points_target = {
         target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
-        
+
         target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
-        target + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
-        target + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
+        target + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
+        target + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
+        target + Mof::CVector3(0.0f, 10.0f, 60.0f) * dir,
+
+        target + Mof::CVector3(0.0f, 10.0f, 40.0f) * dir,
+        target + Mof::CVector3(0.0f, 10.0f, 10.0f) * dir,
+        target + Mof::CVector3(0.0f, 10.0f, 10.0f) * dir,
+        target + Mof::CVector3(0.0f, 10.0f, 10.0f) * dir,
+       
+        target + Mof::CVector3(0.0f, 10.0f, 1.0f) * dir,
+        target + Mof::CVector3(0.0f, 10.0f, 1.0f) * dir,
     };
     std::vector<Mof::CVector3> control_points_position = {
         p ,
-        
+
         p + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
-        p + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
-        p + Mof::CVector3(0.0f, 0.0f, 100.0f) * dir,
+        p + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
+        p + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
+        p + Mof::CVector3(0.0f, 20.0f, 60.0f) * dir + Mof::CVector3(0.0f, 10.0f, 0.0f),
+
+        p + Mof::CVector3(0.0f, 20.0f, 40.0f) * dir + Mof::CVector3(0.0f, 10.0f, 0.0f),
+        p + Mof::CVector3(0.0f, 20.0f, 10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
+        p + Mof::CVector3(0.0f, 20.0f, 10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
+        p + Mof::CVector3(0.0f, 20.0f, 10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
+
+        p + Mof::CVector3(0.0f, 20.0f, 10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
+        p + Mof::CVector3(0.0f, 20.0f, 10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
     };
 
-    _camera_controller->TimerReset(4.0f);
+    _camera_controller->TimerReset(6.0f);
     _camera_controller->RegisterCameraPositionControllPoint(control_points_position);
     _camera_controller->RegisterCameraTargetControllPoint(control_points_target);
     _camera_controller->RegisterGlobalCamera();
@@ -65,7 +88,18 @@ bool ratchet::event::EnemyViewEvent::Update(float delta_time) {
     auto camera_info = ratchet::camera::CameraController::CameraInfo();
     _camera_controller->Update(delta_time, camera_info);
 
+    
     if (_camera_controller->IsCompleted()) {
+        {
+            //if (event::EventReferenceTable::Singleton().Exist("player")) {
+            //    auto player = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player>>("player");
+            //    auto action = player->GetComponent<ratchet::component::ActionStateComponent>();
+            //} // if
+        }
+
+
+
+
         auto message = EnemyViewEventMessage();
         message.end = true;
         _enemy_view_event_message_subject.Notify(message);

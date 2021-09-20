@@ -18,6 +18,11 @@ public:
     /// </summary>
     virtual ~Wall();
     /// <summary>
+    /// ƒfƒŠ[ƒg
+    /// </summary>
+    /// <param name=""></param>
+    virtual void End(void) override;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name="param"></param>

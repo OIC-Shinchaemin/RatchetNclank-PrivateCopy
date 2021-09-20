@@ -67,13 +67,15 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		} // if
 	} // for
 
+	//return true;
 
 	auto param = new ratchet::actor::Actor::Param();
-
 	// player
+	param->name = "player";
 	param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
 	param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
 	auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", param);
+	ratchet::event::EventReferenceTable::Singleton().Register(player->GetName(),player);
 	out->AddElement(player);
 	out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);
 	stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
@@ -98,8 +100,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		player->AddChild(omniwrench);
 		out->AddElement(omniwrench);
 	}
-
-
 	// game system
 	//if (auto game = _game.lock()) 
 	{
@@ -139,6 +139,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 	} // if
 
 
+
+
+
+
 	auto help_desk = game->GetHelpDesk();
 	// enemy
 	for (auto enemy_spawn : out->_stage.GetEnemySpawnArray()) {
@@ -169,7 +173,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		out->AddElement(terrain);
 	} // for
 
-
 	{
 
 		// wall
@@ -189,6 +192,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		} // for
 	}
 	
+
 
 
 	{
@@ -223,6 +227,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 
 
+//	ut::SafeDelete(param);
+//	return true;
+	
+	
 	// npc
 	{
 		def::Transform npc_transforms[]{
@@ -251,8 +259,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 
 
+
 	ut::SafeDelete(param);
-
-
 	return true;
 }

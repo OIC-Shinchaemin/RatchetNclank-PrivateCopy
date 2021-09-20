@@ -341,8 +341,6 @@ bool ratchet::component::CameraComponent::Release(void) {
     _camera_controller.GetService()->Release();
     _controller_map.clear();
     _state_com.reset();
-
-    ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
     return true;
 }
 
