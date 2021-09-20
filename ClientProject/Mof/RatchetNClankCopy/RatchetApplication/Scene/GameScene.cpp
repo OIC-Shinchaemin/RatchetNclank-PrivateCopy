@@ -14,6 +14,7 @@
 #include "../Event/TextSystemStartEvent.h"
 #include "../Event/EventReferenceTable.h"
 #include "GameSceneInitializer.h"
+#include "../TutorialManager.h"
 
 
 void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
@@ -40,6 +41,8 @@ void ratchet::scene::GameScene::ReInitialize(void) {
 
 bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
 	super::SceneUpdate(delta_time);
+
+	tutorial::TutorialManager::GetInstance().Complete();
 
 	if (::g_pInput->IsKeyPush(MOFKEY_T)) {
 		_re_initialize = true;
@@ -79,6 +82,8 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
 	} // if
 
 	_effect->Update(delta_time);
+
+	
 
 	return true;
 }
@@ -260,6 +265,8 @@ bool ratchet::scene::GameScene::Input(void) {
 }
 
 bool ratchet::scene::GameScene::Release(void) {
+	ratchet::event::EventReferenceTable::Singleton().Reset();
+
 	super::Release();
 	_stage.Release();
 	if (auto game = _game.lock()) {
@@ -267,8 +274,6 @@ bool ratchet::scene::GameScene::Release(void) {
 		_pause_menu_subject.Clear();
 		game->GameSystemRelease();
 	} // if
-
-
 	_text_system->Release();
 	_text_system.reset();
 	return true;

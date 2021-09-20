@@ -1,0 +1,452 @@
+﻿{
+  "element_list": [
+    {
+      "type": "Fence",
+      "builder_path": "fence.json",
+      "paramater": {
+        "type": "Fence",
+        "name": "Fence (5)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          20.968994140625,
+          12.639839172363282,
+          7.649404048919678
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Fence",
+      "builder_path": "fence.json",
+      "paramater": {
+        "type": "Fence",
+        "name": "Fence (4)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          18.773929595947267,
+          13.273908615112305,
+          7.798689365386963
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Fence",
+      "builder_path": "fence.json",
+      "paramater": {
+        "type": "Fence",
+        "name": "Fence (3)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          19.756927490234376,
+          12.797187805175782,
+          7.807795524597168
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Fence",
+      "builder_path": "fence.json",
+      "paramater": {
+        "type": "Fence",
+        "name": "Fence (2)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          18.360361099243165,
+          12.240657806396485,
+          8.954507827758789
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Fence",
+      "builder_path": "fence.json",
+      "paramater": {
+        "type": "Fence",
+        "name": "Fence (1)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          20.847517013549806,
+          12.01606559753418,
+          8.2432222366333
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Fence",
+      "builder_path": "fence.json",
+      "paramater": {
+        "type": "Fence",
+        "name": "Fence",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          18.530248641967775,
+          13.2728271484375,
+          7.9130096435546879
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (9)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          -16.799999237060548
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (8)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          -21.100000381469728,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (7)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          6.590000152587891
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (6)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (5)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (4)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (3)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (2)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (1)",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  ]
+}

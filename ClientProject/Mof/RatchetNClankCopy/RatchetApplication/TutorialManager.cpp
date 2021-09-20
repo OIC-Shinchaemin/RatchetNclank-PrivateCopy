@@ -11,15 +11,19 @@ void tutorial::TutorialManager::Liberation(TutorialType type) {
 }
 
 void tutorial::TutorialManager::Complete(void) {
-    auto wall_1 = ratchet::event::EventReferenceTable::Singleton().
-        Get<std::shared_ptr<ratchet::actor::gimmick::Wall>>("wall_1");
-    wall_1->End();
-    auto wall_2 = ratchet::event::EventReferenceTable::Singleton().
-        Get<std::shared_ptr<ratchet::actor::gimmick::Wall>>("wall_2");
-    wall_2->End();
-
-
-    auto elevator = ratchet::event::EventReferenceTable::Singleton().
-        Get<std::shared_ptr<Elevator>>("elevator");
-    elevator->SetShow(true);
+    if (ratchet::event::EventReferenceTable::Singleton().Exist("wall_1")) {
+        auto wall_1 = ratchet::event::EventReferenceTable::Singleton().
+            Get<std::shared_ptr<ratchet::actor::gimmick::Wall>>("wall_1");
+        wall_1->End();
+    } // if
+    if (ratchet::event::EventReferenceTable::Singleton().Exist("wall_2")) {
+        auto wall_2 = ratchet::event::EventReferenceTable::Singleton().
+            Get<std::shared_ptr<ratchet::actor::gimmick::Wall>>("wall_2");
+        wall_2->End();
+    } // if
+    if (ratchet::event::EventReferenceTable::Singleton().Exist("elevator")) {
+        auto elevator = ratchet::event::EventReferenceTable::Singleton().
+            Get<std::shared_ptr<Elevator>>("elevator");
+        elevator->SetShow(true);
+    } // if
 }

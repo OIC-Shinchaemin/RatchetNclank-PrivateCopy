@@ -443,9 +443,11 @@
     <ClCompile Include="Effect\EffectEmitter.cpp" />
     <ClCompile Include="Effect\EffectPool.cpp" />
     <ClCompile Include="Event\BridgeEvent.cpp" />
+    <ClCompile Include="Event\EnemyViewEvent.cpp" />
     <ClCompile Include="Event\Event.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
     <ClCompile Include="Event\EventReferenceTable.cpp" />
+    <ClCompile Include="Event\PlayerActionAfterGettingOffElevatorEvent.cpp" />
     <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp" />
     <ClCompile Include="Event\ShipEvent.cpp" />
     <ClCompile Include="Event\StageViewEvent.cpp" />
@@ -814,12 +816,13 @@
     <ClInclude Include="Effect\EffectEmitter.h" />
     <ClInclude Include="Effect\EffectPool.h" />
     <ClInclude Include="Event\BridgeEvent.h" />
+    <ClInclude Include="Event\EnemyViewEvent.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventManager.h" />
     <ClInclude Include="Event\EventReferenceTable.h" />
+    <ClInclude Include="Event\PlayerActionAfterGettingOffElevatorEvent.h" />
     <ClInclude Include="Event\RegisterGlobalCameraEvent.h" />
     <ClInclude Include="Event\ShipEvent.h" />
-    <ClInclude Include="Event\StageEnemyViewEvent.h" />
     <ClInclude Include="Event\StageViewEvent.h" />
     <ClInclude Include="Event\TextSystemStartEvent.h" />
     <ClInclude Include="Factory\ActorFactory.h" />

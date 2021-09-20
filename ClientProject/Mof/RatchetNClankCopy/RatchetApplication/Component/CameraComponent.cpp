@@ -22,9 +22,6 @@ void ratchet::component::CameraComponent::OnPush(void) {
         state_com->ChangeState(state);
     } // if
 
-
-
-
     auto eye_pos = super::GetOwner()->GetPosition();
     eye_pos.y += 1.0f;
 
@@ -310,10 +307,6 @@ bool ratchet::component::CameraComponent::Initialize(void) {
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
     _controller_map.at(Mode::FirstPerson)->SetCamera(_camera);
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
-    {
-        //_controller_map.at(Mode::Follow)->SetSpring(200.0f);
-        //_controller_map.at(Mode::Follow)->SetDumping(20.0f);
-    }
     auto pos = super::GetOwner()->GetPosition();
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
@@ -348,8 +341,6 @@ bool ratchet::component::CameraComponent::Release(void) {
     _camera_controller.GetService()->Release();
     _controller_map.clear();
     _state_com.reset();
-
-    ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
     return true;
 }
 

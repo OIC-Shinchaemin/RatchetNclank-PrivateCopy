@@ -60,25 +60,30 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		} // if
 		auto temp_elevator = std::dynamic_pointer_cast<Elevator>(gimmick);
 		if (temp_elevator) {
+			temp_elevator->SetEventManager(event);
 			ratchet::event::EventReferenceTable::Singleton().Register(temp_elevator->GetName(), 
 																	  temp_elevator);
 			elevators.push_back(temp_elevator);
 		} // if
 	} // for
 
+	//return true;
 
 	auto param = new ratchet::actor::Actor::Param();
-
 	// player
+	param->name = "player";
 	param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
 	param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
 	auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", param);
+	ratchet::event::EventReferenceTable::Singleton().Register(player->GetName(),player);
 	out->AddElement(player);
 	out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);
 	stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
 
 	for (auto elevator: elevators) {
-		elevator->SetPlayerCamera(player->GetComponent<ratchet::component::CameraComponent>()->GetCameraController());
+		auto camera = player->GetComponent<ratchet::component::CameraComponent>();
+		elevator->SetPlayerCameraComponent(camera);
+		elevator->SetPlayerCamera(camera->GetCameraController());
 		elevator->GetElevatorArrivalMessageSubject()->AddObserver(player);
 	} // for
 
@@ -95,8 +100,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		player->AddChild(omniwrench);
 		out->AddElement(omniwrench);
 	}
-
-
 	// game system
 	//if (auto game = _game.lock()) 
 	{
@@ -123,7 +126,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 		auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
 		help_desk->OnNotify(quest);
-		stage_view_event->SetHelpDesk(help_desk);
 		bridge_event->GetQuestSubject()->AddObserver(help_desk);
 		weapon_system->AddMechanicalWeaponObserver(player);
 		quick_change->AddWeaponObserver(weapon_system);
@@ -135,6 +137,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			player->AddChild(pair.second);
 		} // for
 	} // if
+
+
+
+
 
 
 	auto help_desk = game->GetHelpDesk();
@@ -154,6 +160,8 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		} // if
 	} // for
 
+
+
 	// terrain
 	def::Transform terrain_transforms[]{
 		def::Transform(Mof::CVector3(0.0f, -31.2f, 0.0f), Mof::CVector3(), Mof::CVector3(540.0f, 1.0f, 540.0f)),
@@ -164,7 +172,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		auto terrain = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::terrain::Terrain>("../Resource/builder/water_flow.json", param);
 		out->AddElement(terrain);
 	} // for
-
 
 	{
 
@@ -184,6 +191,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			param->name = "wall_2";
 		} // for
 	}
+	
 
 
 
@@ -219,6 +227,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 
 
+//	ut::SafeDelete(param);
+//	return true;
+	
+	
 	// npc
 	{
 		def::Transform npc_transforms[]{
@@ -247,8 +259,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 
 
+
 	ut::SafeDelete(param);
-
-
 	return true;
 }

@@ -30,6 +30,10 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
+    AutoCameraController(float time);
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
     ~AutoCameraController();
     /// <summary>
     /// ゲッター
@@ -43,6 +47,21 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool IsCompleted(void) const;
+    /// <summary>
+    /// 登録
+    /// </summary>
+    /// <param name="point"></param>
+    void RegisterCameraPositionControllPoint(std::vector<Mof::CVector3>& points);
+    /// <summary>
+    /// 登録
+    /// </summary>
+    /// <param name="point"></param>
+    void RegisterCameraTargetControllPoint(std::vector<Mof::CVector3>& points);
+    /// <summary>
+    /// リセット
+    /// </summary>
+    /// <param name="time_set"></param>
+    void TimerReset(float time_set);
     /// <summary>
     /// 強制的に進める
     /// </summary>

@@ -119,6 +119,12 @@ public:
     /// <returns></returns>
     virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
     /// <summary>
+    /// ”»’è
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsOnElevator(void) const;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

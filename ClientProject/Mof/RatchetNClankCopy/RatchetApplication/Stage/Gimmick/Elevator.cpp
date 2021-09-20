@@ -1,16 +1,37 @@
 #include "Elevator.h"
 
-Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, StageObjectType type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate)
-    : GimmickBase(enable, collision, type, name, mesh_no, pos, scale, rotate)
-    , _start_pos(pos)
-    , _end_pos(end)
-    , _request_time(request)
-    , _now_timer(0.0f)
-    , _start_flag(false)
-    , _end_flag(false)
-    , _preview_position(_start_pos)
-    , _initial_position()
-    , _first_initialized(false) {
+#include "../../Event/EventManager.h"
+#include "../../Event/PlayerActionAfterGettingOffElevatorEvent.h"
+#include "../../Event/EnemyViewEvent.h"
+#include "../../Event/StageViewEvent.h"
+
+void Elevator::EnemyViewEventStart(void) {
+    if (auto e = _event_manager.lock()) {
+        auto view_event = e->CreateGameEvent<ratchet::event::EnemyViewEvent>();
+        //auto player_event = e->CreateGameEvent<ratchet::event::PlayerActionAfterGettingOffElevatorEvent>();
+        //view_event->GetEnemyViewEventMessageSubject()->AddObserver(player_event);
+        view_event->SetStartPosition(_player_camera_component.lock()->GetOwner()->GetPosition());
+        view_event->SetPlayerCamera(_camera_controller);
+        view_event->Initialize();
+        view_event->GetCameraObservable()->AddObserver(_player_camera_component.lock());
+    } // if
+}
+
+Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, StageObjectType type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate) :
+    GimmickBase(enable, collision, type, name, mesh_no, pos, scale, rotate),
+    _start_pos(pos),
+    _end_pos(end),
+    _request_time(request),
+    _now_timer(0.0f),
+    _start_flag(false),
+    _end_flag(false),
+    _preview_position(_start_pos),
+    _initial_position(),
+    _first_initialized(false),
+    _camera_controller(),
+    _elevator_arrival_message_subject(),
+    _event_manager(),
+    _player_camera_component() {
 }
 
 Elevator::~Elevator(void) {
@@ -18,6 +39,14 @@ Elevator::~Elevator(void) {
 
 void Elevator::SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
     this->_camera_controller = ptr;
+}
+
+void Elevator::SetEventManager(const std::shared_ptr<ratchet::event::EventManager>& ptr) {
+    this->_event_manager = ptr;
+}
+
+void Elevator::SetPlayerCameraComponent(const std::shared_ptr<ratchet::component::CameraComponent>& ptr) {
+    this->_player_camera_component = ptr;
 }
 
 Mof::CVector3 Elevator::GetPreviewPosition(void) const {
@@ -70,29 +99,38 @@ void Elevator::Update(float delta) {
     if (!_start_flag) {
         return;
     }
+
+    auto angle = Mof::CVector3();
+    auto source = Mof::CVector3();
+    auto dest = Mof::CVector3();
+
     if (_end_flag) {
         _now_timer -= delta;
-    }
+        source = Mof::CVector3(_camera_angle_start.x, 30.0f, 0.0f);
+        dest = Mof::CVector3(180.0f, 20.0f, 0.0f);
+        std::swap(source, dest);
+    } // if
     else {
         _now_timer += delta;
-    }
+        source = Mof::CVector3(_camera_angle_start.x, _camera_angle_start.y, 0.0f);
+        dest = Mof::CVector3(250.0f, 30.0f, 0.0f);
+    } // else
     const float t = std::clamp((_now_timer / _request_time), 0.0f, 1.0f);
     _position = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
+    angle = CVector3Utilities::Lerp(source, dest, t);
+    _camera_controller->GetService()->SetAzimuth(angle.x);
+    _camera_controller->GetService()->SetAltitude(angle.y);
+
     if (t == 1.0f && !_end_flag) {
         _start_flag = false;
         _end_flag = true;
-        _camera_controller->GetService()->SetAltitude(30.0f);
-        _camera_controller->GetService()->SetAzimuth(270.0f);
-
         auto message = ElevatorArrivalMessage();
         _elevator_arrival_message_subject.Notify(message);
+        this->EnemyViewEventStart();
     }
     if (t == 0.0f && _end_flag) {
         _start_flag = false;
         _end_flag = false;
-        _camera_controller->GetService()->SetAltitude(30.0f);
-        _camera_controller->GetService()->SetAzimuth(180.0f);
-
         auto message = ElevatorArrivalMessage();
         _elevator_arrival_message_subject.Notify(message);
     }
@@ -102,6 +140,8 @@ void Elevator::Update(float delta) {
 void Elevator::ActionStart(void) {
     if (!_start_flag) {
         _start_flag = true;
+        _camera_angle_start.x = math::ToDegree(_camera_controller->GetService()->GetAzimuth());
+        _camera_angle_start.y = 30.0f;
     }
 }
 
@@ -128,6 +168,11 @@ void Elevator::SetStageObjectData(bool enable, bool collision, StageObjectType t
 }
 
 #ifdef STAGEEDITOR
+
+void Elevator::DebugRender(void) {
+    StageObject::DebugRender();
+    ::CGraphicsUtilities::RenderString(600.0f, 340.0f, "player camera angle = %f", _camera_controller->GetService()->GetAzimuth());
+}
 
 float* Elevator::GetStartPosPointer(void) {
     return _start_pos.fv;

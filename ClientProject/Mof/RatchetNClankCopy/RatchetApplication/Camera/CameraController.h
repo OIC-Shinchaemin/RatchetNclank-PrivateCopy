@@ -140,14 +140,20 @@ public:
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
+    /// <returns>角度（デグリー）</returns>
     float GetAzimuth(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
+    /// <returns>角度（デグリー）</returns>
     float GetAltitude(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetDistance(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

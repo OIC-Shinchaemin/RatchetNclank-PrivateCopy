@@ -1,0 +1,15 @@
+# exe
+*.exe
+
+
+# .vs
+.vs/
+# Library
+Library/
+# Logs
+Logs/
+# obj
+obj/
+# UserSettings
+UserSettings/
+
