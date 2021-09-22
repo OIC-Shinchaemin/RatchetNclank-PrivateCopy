@@ -15,8 +15,10 @@ class EventManager :
 private:
     //! ゲームイベント
     std::vector<std::shared_ptr<ratchet::event::Event>> _events;
-    //! データ
-    //ratchet::EventReferenceTable _table;
+    //! 追加
+    std::vector<std::shared_ptr<ratchet::event::Event>> _created_events;
+    //! 削除
+    std::vector<std::shared_ptr<ratchet::event::Event>> _delete_events;
 public:
     /// <summary>
     /// コンストラクタ
@@ -33,6 +35,16 @@ public:
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::event::Event>& ptr) override;
     /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    //void AddElement(const std::shared_ptr<ratchet::event::Event>& ptr);
+    /// <summary>
+    /// 追加
+    /// </summary>
+    /// <param name="ptr"></param>
+    //void RemoveElement(const std::shared_ptr<ratchet::event::Event>& ptr);
+    /// <summary>
     /// 作成
     /// </summary>
     template<typename Event>
@@ -40,6 +52,7 @@ public:
         auto ptr = std::make_shared<Event>();
         ptr->GetSubject()->AddObserver(shared_from_this());
         this->_events.push_back(ptr);
+        //this->OnNotify("AddRequest", ptr);
         return ptr;
     }
     template<typename T>

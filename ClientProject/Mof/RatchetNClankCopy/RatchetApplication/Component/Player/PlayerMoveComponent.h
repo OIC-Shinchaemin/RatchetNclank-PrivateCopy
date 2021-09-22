@@ -149,7 +149,7 @@ public:
     /// </summary>
     /// <param name="move_speed"></param>
     /// <param name="angular_speed"></param>
-    /// <param name="ideal_angle"></param>
+    /// <param name="ideal_angle">ƒ‰ƒWƒAƒ“</param>
     /// <returns>Às</returns>
     bool Move(float move_speed, float angular_speed, float ideal_angle);
     /// <summary>

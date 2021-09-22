@@ -40,7 +40,7 @@ protected:
     bool _first_initialized;
     //! プレイヤーカメラ
     base::core::ServiceLocator<ratchet::camera::CameraController>* _camera_controller;
-    //! プレイヤー通知用    
+    //! プレイヤー通知用
     ElevatorArrivalMessageSubject _elevator_arrival_message_subject;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event_manager;

@@ -8,6 +8,13 @@ std::shared_ptr<ratchet::component::VelocityComponent> ratchet::component::playe
     return nullptr;
 }
 
+std::shared_ptr<ratchet::component::CameraComponent> ratchet::component::player::action::PlayerActionComponent::GetCameraComponent(void) const {
+    if (auto com = _camera_com.lock()) {
+        return com;
+    } // if
+    return nullptr;
+}
+
 bool ::ratchet::component::player::action::PlayerActionComponent::IsEndMotion(void) const {
     _ASSERT_EXPR(!_motion_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
     auto motion_com = _motion_com.lock();
@@ -41,7 +48,8 @@ bool ::ratchet::component::player::action::PlayerActionComponent::ChangeMotionSt
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _camera_com() {
 }
 
 ::ratchet::component::player::action::PlayerActionComponent::PlayerActionComponent(const PlayerActionComponent& obj) :
@@ -49,7 +57,8 @@ bool ::ratchet::component::player::action::PlayerActionComponent::ChangeMotionSt
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _camera_com() {
 }
 
 ::ratchet::component::player::action::PlayerActionComponent::~PlayerActionComponent() {
@@ -65,6 +74,7 @@ bool ::ratchet::component::player::action::PlayerActionComponent::Initialize(voi
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
     _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
+    _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
     return true;
 }
 

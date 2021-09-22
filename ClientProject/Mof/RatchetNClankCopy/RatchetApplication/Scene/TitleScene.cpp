@@ -6,11 +6,15 @@
 
 
 void ratchet::scene::TitleScene::FadeOutStart(void) {
+    if (_scene_end) {
+        return;
+    } // if
     _effect = ratchet::scene::SceneEffect();
     _effect.value().Load("../Resource/shader/fadeout.hlsl");
     bool seccess = _effect.value().CreateShaderBuffer("cbSceneEffectParam", sizeof(ratchet::scene::cbSceneEffectParam));
     _effect.value().time = 1.0f;
     _transition_state = TransitionState::Out;
+    _scene_end = true;
 }
 
 bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
@@ -74,7 +78,8 @@ ratchet::scene::TitleScene::TitleScene() :
     _camera_controller(),
     _demo_actor(),
     _game(),
-    _ui_creator("TitleInfoMenu") {
+    _ui_creator("TitleInfoMenu") ,
+    _scene_end(false){
 }
 
 ratchet::scene::TitleScene::~TitleScene() {
@@ -135,7 +140,8 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
 
             // camera
             _stage_view_camera = (std::make_shared<ratchet::camera::Camera>());
-            auto pos = math::vec3::kZero;
+            //////////////auto pos = math::vec3::kZero;
+            auto pos = actor_param.transform.position;
             auto offset = math::vec3::kNegUnitZ;
             _stage_view_camera->SetPosition(pos - offset);
             _stage_view_camera->SetTarget(pos);

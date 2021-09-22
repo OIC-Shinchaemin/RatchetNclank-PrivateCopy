@@ -10,8 +10,12 @@
 #include "TutorialManager.h"
 
 
+Mof::CSoundBuffer _sound;
+
 MofBool CGameApp::Initialize(void) {
 	::CUtilities::SetCurrentDirectory("Resource");
+	_sound.Load("SHOT.wav");
+
 
 	ratchet::Gamepad::GetInstance().Create();
 	_resource_manager = ut::MakeSharedWithRelease<ratchet::ResourceMgr>();
@@ -61,6 +65,11 @@ MofBool CGameApp::Input(void) {
 
 MofBool CGameApp::Update(void) {
 	this->Input();
+
+	if (g_pInput->IsKeyPush(MOFKEY_A)) {
+		_sound.Play();
+	}
+
 
 	float delta_time = 0.01667f;
 

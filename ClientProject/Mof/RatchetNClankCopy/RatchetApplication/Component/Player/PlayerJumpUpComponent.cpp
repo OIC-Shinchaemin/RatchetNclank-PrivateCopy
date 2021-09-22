@@ -77,19 +77,12 @@ bool ratchet::component::player::action::PlayerJumpUpComponent::Update(float del
         this->InputJumpVelocity(_jump_speed);
     } // if
 
-
-
-//    Mof::CVector2 in;
-//    float move_angle;
-
     auto& [in, move_angle, move_flag] = _input_info;
     // flag
     if (move_flag) {
         float move_speed = 2.4f; float angular_speed = 3.3f;
         move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
-
-    /// 
 
     _jump_speed -= _jump_decrase;
     if (_jump_speed < 0.0f) {
@@ -118,5 +111,14 @@ bool ratchet::component::player::action::PlayerJumpUpComponent::Start(void) {
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->SetGravity(1.8f);
+    
+    super::GetCameraComponent()->SetFollowCameraPrevPositionUpdateFlag(true);
+    return true;
+}
+
+bool ratchet::component::player::action::PlayerJumpUpComponent::End(void) {
+    super::End();
+    
+    super::GetCameraComponent()->SetFollowCameraPrevPositionUpdateFlag(false);
     return true;
 }

@@ -80,6 +80,11 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageDown
         geometry->SetMatrix(mat);
 
         if (ray.CollisionGeometry(geometry, info)) {
+            float height = _player_com.lock()->GetHeight();
+
+            _collision_point_stage_down_ray = super::GetOwner()->GetPosition();
+            _collision_point_stage_down_ray.y += height + margin - info.d;
+
             Mof::CVector3 up(0.0f, 1.0f, 0.0f);
             float angle = up.DotAngle(info.Normal);
             float slope_threshold_angle = 30.0f;
@@ -87,7 +92,6 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageDown
                 continue;
             } // if
 
-            float height = _player_com.lock()->GetHeight();
             if (info.d <= height + margin) {
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += height + margin - info.d;
@@ -218,7 +222,8 @@ ratchet::component::collision::PlayerCollisionComponent::PlayerCollisionComponen
     _player_com(),
     _velocity_com(),
     _state_com(),
-    _on_elevator(false) {
+    _on_elevator(false),
+    _collision_point_stage_down_ray() {
 }
 
 ratchet::component::collision::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
@@ -226,7 +231,8 @@ ratchet::component::collision::PlayerCollisionComponent::PlayerCollisionComponen
     _player_com(),
     _velocity_com(),
     _state_com(),
-    _on_elevator(false) {
+    _on_elevator(false),
+    _collision_point_stage_down_ray() {
     _next_status.push_back(state::PlayerActionStateType::kPlayerActionJumpLandingState);
     _next_status.push_back(state::PlayerActionStateType::kPlayerActionIdleState);
 }

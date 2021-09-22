@@ -98,7 +98,7 @@ bool ratchet::scene::GameScene::SceneRender(void) {
 
 	_renderer.Render();
 	_stage.Render();
-
+	
 
 	_effect->Render();
 	

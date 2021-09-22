@@ -91,7 +91,7 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="azimuth"></param>
+    /// <param name="degree"></param>
     void SetAzimuth(float degree);
     /// <summary>
     /// セッター

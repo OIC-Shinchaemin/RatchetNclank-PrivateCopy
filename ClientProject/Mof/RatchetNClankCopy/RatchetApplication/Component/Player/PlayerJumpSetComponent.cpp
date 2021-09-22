@@ -9,6 +9,12 @@ ratchet::component::player::action::PlayerJumpSetComponent::PlayerJumpSetCompone
     _jump_speed(0.0f),
     _jump_speed_first(6.0f),
     _jump_speed_increase(0.6f),
+
+    //_default_move_speed(1.7f),
+    //_default_angular_speed(3.3f),
+    _move_speed(1.7f),
+    _angular_speed(3.3f),
+
     _move_com(),
     _jump_com() {
 }
@@ -18,11 +24,26 @@ ratchet::component::player::action::PlayerJumpSetComponent::PlayerJumpSetCompone
     _jump_speed(0.0f),
     _jump_speed_first(obj._jump_speed_first),
     _jump_speed_increase(obj._jump_speed_increase),
+
+    //_default_move_speed(obj._default_move_speed),
+    //_default_angular_speed(obj._default_angular_speed),
+    _move_speed(obj._move_speed),
+    _angular_speed(obj._angular_speed),
+
+
     _move_com(),
     _jump_com() {
 }
 
 ratchet::component::player::action::PlayerJumpSetComponent::~PlayerJumpSetComponent() {
+}
+
+void ratchet::component::player::action::PlayerJumpSetComponent::SetMoveSpeed(float scalar) {
+    this->_move_speed = scalar;
+}
+
+void ratchet::component::player::action::PlayerJumpSetComponent::SetAngularSpeed(float scalar) {
+    this->_angular_speed = scalar;
 }
 
 std::string ratchet::component::player::action::PlayerJumpSetComponent::GetType(void) const {
@@ -41,8 +62,6 @@ bool ratchet::component::player::action::PlayerJumpSetComponent::Initialize(void
 }
 
 bool ratchet::component::player::action::PlayerJumpSetComponent::Input(void) {
-    ;
-
     if (::g_pInput->IsKeyHold(MOFKEY_J) ||
         ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_A)) {
         _jump_speed += _jump_speed_increase;
@@ -54,7 +73,7 @@ bool ratchet::component::player::action::PlayerJumpSetComponent::Input(void) {
     if (auto move_com = _move_com.lock()) {
         move_flag = move_com->AquireInputData(in, move_angle);
         if (move_flag) {
-            float move_speed = 1.7f; float angular_speed = 3.3f;
+            //float move_speed = 1.7f; float angular_speed = 3.3f;
             in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         } // if
     } // if
@@ -68,8 +87,8 @@ bool ratchet::component::player::action::PlayerJumpSetComponent::Update(float de
 
     if (_input_info.move_flag) {
         auto& in = _input_info.in;
-        float move_speed = 1.7f; float angular_speed = 3.3f;
-        move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
+        //float move_speed = 1.7f; float angular_speed = 3.3f;
+        move_com->Move(_move_speed, _angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
         //in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
     } // if
 

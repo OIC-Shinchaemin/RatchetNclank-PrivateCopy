@@ -60,6 +60,11 @@ void ratchet::actor::character::Player::OnNotify(const ElevatorArrivalMessage& m
 	super::Activate();
 }
 
+void ratchet::actor::character::Player::OnNotify(const ratchet::event::PlayerActionAfterGettingOffElevatorEventEndMessage& message)
+{
+	super::Activate();
+}
+
 base::core::Observable<bool>* ratchet::actor::character::Player::GetShopSystemSubject(void) {
 	return &this->_shop_system_subject.subject;
 }
@@ -112,8 +117,8 @@ void ratchet::actor::character::Player::End(void) {
 	super::End();
 
 	_current_weapon->SetScale(math::vec3::kZero);
-	 ratchet::event::EventReferenceTable::Singleton().Dispose(super::GetName());
-	 ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
+	ratchet::event::EventReferenceTable::Singleton().Dispose(super::GetName());
+	ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
 }
 
 bool ratchet::actor::character::Player::Initialize(void) {

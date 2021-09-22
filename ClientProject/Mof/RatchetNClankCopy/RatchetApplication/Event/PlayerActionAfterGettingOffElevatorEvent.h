@@ -4,22 +4,39 @@
 
 #include "Event.h"
 
+#include <optional>
+
 #include "Base/Core/Timer.h"
 #include "EnemyViewEvent.h"
 
 
 namespace ratchet::event {
-class PlayerActionAfterGettingOffElevatorEvent : 
+struct PlayerActionAfterGettingOffElevatorEventEndMessage {
+};
+using PlayerActionAfterGettingOffElevatorEventEndSubject = base::core::Observable<const PlayerActionAfterGettingOffElevatorEventEndMessage&>;
+using PlayerActionAfterGettingOffElevatorEventEndListener = base::core::Observer<const  PlayerActionAfterGettingOffElevatorEventEndMessage&>;
+
+class PlayerActionAfterGettingOffElevatorEvent :
     public ratchet::event::Event,
     public ratchet::event::EnemyViewEventEndMessageListener {
     using super = ratchet::event::Event;
 private:
     //! アクティブ
     bool _active;
+    //! プレイヤー通知用    
+    PlayerActionAfterGettingOffElevatorEventEndSubject _player_action_after_getting_off_elevator_event_end_subject;
+    //! 時間
+    float _start_time_set;
     //! 時間
     float _time_set;
     //! タイマー
+    std::optional<base::core::Timer > _start_timer;
+    //! タイマー
     base::core::Timer _timer;
+    //! 歩く方向
+    float _front_angle;
+    //! 歩く方向
+    float _start_camera_angle;
 public:
     /// <summary>
     /// コンストラクタ
@@ -34,6 +51,14 @@ public:
     /// </summary>
     /// <param name="message"></param>
     virtual void OnNotify(const ratchet::event::EnemyViewEventEndMessage& message) override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetPlayerActionAfterGettingOffElevatorEventEndSubject(void) {
+        return &this->_player_action_after_getting_off_elevator_event_end_subject;
+    };
     /// <summary>
     /// 初期化
     /// </summary>
