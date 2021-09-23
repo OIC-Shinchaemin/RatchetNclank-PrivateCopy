@@ -9,8 +9,6 @@
 #define BASE_ACCESSOR_SETTER_H
 
 
-#include "../Structural/ServiceLocator.h"
-
 
 namespace base::accessor {
 template<typename T>
@@ -32,6 +30,7 @@ public:
         return *this;
     }
 };
+/*
 template<typename T>
 class Setter<base::structural::ServiceLocator<T>> {
     using Type = base::structural::ServiceLocator<T>;
@@ -50,5 +49,6 @@ public:
         return *this;
     }
 };
+*/
 }
 #endif // !BASE_ACCESSOR_SETTER_H

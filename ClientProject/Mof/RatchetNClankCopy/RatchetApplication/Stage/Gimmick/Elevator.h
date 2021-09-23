@@ -40,7 +40,7 @@ protected:
     bool _first_initialized;
     //! プレイヤーカメラ
     base::core::ServiceLocator<ratchet::camera::CameraController>* _camera_controller;
-    //! プレイヤー通知用    
+    //! プレイヤー通知用
     ElevatorArrivalMessageSubject _elevator_arrival_message_subject;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event_manager;
@@ -48,6 +48,8 @@ protected:
     std::weak_ptr<ratchet::component::CameraComponent> _player_camera_component;
     //! 方位角,仰角
     Mof::CVector3 _camera_angle_start;
+    //! 降りた後のイベント
+    bool _event_started;
 public:
     Elevator(Vector3 end, float request, bool enable = true, bool collision = true,
              StageObjectType type = StageObjectType::None, std::string name = "",

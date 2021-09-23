@@ -40,7 +40,11 @@ private:
     std::weak_ptr<ratchet::component::player::PlayerStateComponent> _state_com;
     //! メッシュ
     std::weak_ptr<class AnimationMeshComponent> _mesh_com;
-
+    //! 追従カメラを少しずつ前の位置で更新をかける
+    bool _follow_camera_prev_position_update;
+public:
+    //! 対象
+    base::accessor::Setter<decltype(_preview_position)> preview_position = _preview_position;
     /// <summary>
     /// キーを押した時のカメラ処理
     /// </summary>
@@ -139,6 +143,11 @@ public:
     /// </summary>
     /// <param name="info"></param>
     virtual void OnNotify(const ratchet::camera::CameraController::CameraInfo& info) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetFollowCameraPrevPositionUpdateFlag(bool flag);
     /// <summary>
     /// ゲッター
     /// </summary>

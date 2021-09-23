@@ -1,20 +1,30 @@
 #include "Elevator.h"
 
 #include "../../Event/EventManager.h"
+#include "../../Event/EventReferenceTable.h"
 #include "../../Event/PlayerActionAfterGettingOffElevatorEvent.h"
 #include "../../Event/EnemyViewEvent.h"
 #include "../../Event/StageViewEvent.h"
+#include "../../Actor/Character/Player.h"
+
 
 void Elevator::EnemyViewEventStart(void) {
+    _event_started = true;
     if (auto e = _event_manager.lock()) {
         auto view_event = e->CreateGameEvent<ratchet::event::EnemyViewEvent>();
-        //auto player_event = e->CreateGameEvent<ratchet::event::PlayerActionAfterGettingOffElevatorEvent>();
-        //view_event->GetEnemyViewEventMessageSubject()->AddObserver(player_event);
+        auto player_event = e->CreateGameEvent<ratchet::event::PlayerActionAfterGettingOffElevatorEvent>();
+        if (ratchet::event::EventReferenceTable::Singleton().Exist("player")) {
+            auto player = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player>>("player");
+            player->Sleep();
+            player_event->GetPlayerActionAfterGettingOffElevatorEventEndSubject()->AddObserver(player);
+        } // if
+        view_event->GetEnemyViewEventMessageSubject()->AddObserver(player_event);
         view_event->SetStartPosition(_player_camera_component.lock()->GetOwner()->GetPosition());
         view_event->SetPlayerCamera(_camera_controller);
         view_event->Initialize();
         view_event->GetCameraObservable()->AddObserver(_player_camera_component.lock());
     } // if
+    _event_started = true;
 }
 
 Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, StageObjectType type, std::string name, int mesh_no, Vector3 pos, Vector3 scale, Vector3 rotate) :
@@ -31,7 +41,8 @@ Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, Stag
     _camera_controller(),
     _elevator_arrival_message_subject(),
     _event_manager(),
-    _player_camera_component() {
+    _player_camera_component(),
+    _event_started(false) {
 }
 
 Elevator::~Elevator(void) {
@@ -126,7 +137,9 @@ void Elevator::Update(float delta) {
         _end_flag = true;
         auto message = ElevatorArrivalMessage();
         _elevator_arrival_message_subject.Notify(message);
-        this->EnemyViewEventStart();
+        if (!_event_started) {
+            this->EnemyViewEventStart();
+        } // if
     }
     if (t == 0.0f && _end_flag) {
         _start_flag = false;

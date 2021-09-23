@@ -33,6 +33,14 @@ private:
     float _jump_speed_first;
     //! ジャンプ
     float _jump_speed_increase;
+    //! 移動
+    //float _default_move_speed;
+    //! 移動
+    //float _default_angular_speed;
+    //! 移動
+    float _move_speed;
+    //! 移動
+    float _angular_speed;
     //! 入力情報
     This::InputInfo _input_info;
     //! 移動
@@ -54,6 +62,21 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~PlayerJumpSetComponent();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="scalar"></param>
+    void SetMoveSpeed(float scalar);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="scalar"></param>
+    void SetAngularSpeed(float scalar);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="speed"></param>
+    void SetJumpSpeedFirst(float scalar);
     /// <summary>
     /// ゲッター
     /// </summary>

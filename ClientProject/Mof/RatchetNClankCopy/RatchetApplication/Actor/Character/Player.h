@@ -16,6 +16,7 @@
 #include "../../Game/GameSystem/GameQuest.h"
 #include "../../Game/GameSystem/Text/TextSystem.h"
 #include "../../Stage/Gimmick/Elevator.h"
+#include "../../Event/PlayerActionAfterGettingOffElevatorEvent.h"
 
 
 namespace ratchet::actor::character {
@@ -23,7 +24,8 @@ class Player : public ratchet::actor::character::Character,
     public base::core::Observer<std::shared_ptr<ratchet::actor::weapon::Weapon>>,
     public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> ,
     public ratchet::game::gamesystem::text::TextSystemClosedMessageListener ,
-    public ElevatorArrivalMessageListener {
+    public ElevatorArrivalMessageListener ,
+    public ratchet::event::PlayerActionAfterGettingOffElevatorEventEndListener {
     using super = ratchet::actor::character::Character;
     struct ObservablePair {
         std::string name;
@@ -87,6 +89,11 @@ public:
     /// </summary>
     /// <param name="change"></param>
     virtual void OnNotify(const ElevatorArrivalMessage& message) override;
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const ratchet::event::PlayerActionAfterGettingOffElevatorEventEndMessage& message) override;
     /// <summary>
     /// ゲッター
     /// </summary>

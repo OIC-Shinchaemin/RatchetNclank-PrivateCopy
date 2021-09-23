@@ -113,7 +113,8 @@ private:
     ratchet::ui::UICreator<ratchet::ui::TitleInfoMenu> _ui_creator;
     //! タイトル
     TitleLogo _logo;
-
+    //! 終了
+    bool _scene_end;
 private:
     /// <summary>
     /// フェードアウト

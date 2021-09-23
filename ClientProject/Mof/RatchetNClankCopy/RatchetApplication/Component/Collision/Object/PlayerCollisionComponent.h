@@ -27,6 +27,11 @@ private:
     bool _on_elevator;
     //! 落下rayとStageの衝突時遷移する状態
     std::vector<std::string> _next_status;
+    //! ステージとの接触位置
+    Mof::CVector3 _collision_point_stage_down_ray;
+public:
+    //! ゲッター
+    base::accessor::Getter<decltype(_collision_point_stage_down_ray)> collision_point_stage_down_ray = _collision_point_stage_down_ray;
 private:
     /// <summary>
     /// 変更

@@ -211,14 +211,17 @@ bool ratchet::component::player::PlayerComponent::Update(float delta_time) {
         //float threshold = 0.000005f;
         float threshold = 0.001f;
 
-        if (!_coll_volume_com.lock()->IsOnElevator()) {
-            if (Mof::CVector2(v.x, v.z).Length() < threshold) {
-                camera_com->GetCameraController()->GetService()->SetUseSpring(true);
-            } // if
-            else {
-                camera_com->GetCameraController()->GetService()->SetUseSpring(false);
-            } // else
-        } // if
+        camera_com->GetCameraController()->GetService()->SetUseSpring(true);
+
+        //if (!_coll_volume_com.lock()->IsOnElevator()) {
+        //    if (Mof::CVector2(v.x, v.z).Length() < threshold) {
+        //        camera_com->GetCameraController()->GetService()->SetUseSpring(true);
+        //    } // if
+        //    else {
+        //        camera_com->GetCameraController()->GetService()->SetUseSpring(false);
+        //    } // else
+        //} // if
+    
     } // if
 
     _next_terrain = "";
@@ -264,7 +267,13 @@ bool ratchet::component::player::PlayerComponent::DebugRender(void) {
 
 
     auto camera_com = _camera_com.lock();
+    auto p = camera_com->GetPosition();
     auto v = camera_com->GetVelocity();
+
+    ::CGraphicsUtilities::RenderString(500.0f, 530.0f, "camera_com GetPosition() x = %f", p .x);
+    ::CGraphicsUtilities::RenderString(500.0f, 550.0f, "camera_com GetPosition() y = %f", p .y);
+    ::CGraphicsUtilities::RenderString(500.0f, 570.0f, "camera_com GetPosition() z = %f", p .z);
+
     ::CGraphicsUtilities::RenderString(500.0f, 610.0f, "camera_com GetVelocity()2 v = %f", Mof::CVector2(v.x, v.z).Length());
     ::CGraphicsUtilities::RenderString(500.0f, 630.0f, "camera_com GetVelocity() x = %f", v.x);
     ::CGraphicsUtilities::RenderString(500.0f, 650.0f, "camera_com GetVelocity() y = %f", v.y);

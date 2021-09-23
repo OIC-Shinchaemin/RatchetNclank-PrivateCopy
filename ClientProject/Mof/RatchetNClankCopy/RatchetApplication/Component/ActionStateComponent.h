@@ -12,8 +12,7 @@
 #include "../State/ActionState.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class ActionStateComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -57,6 +56,12 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    const char* GetCurrentState(void) const;
+    /// <summary>
     /// îªíË
     /// </summary>
     /// <param name="state"></param>
@@ -92,6 +97,5 @@ public:
     /// <param name="name"></param>
     void ChangeState(const std::string& name);
 };
-}
 }
 #endif // !RATCHET_COMPONENT_ACTION_STATE_COMPONENT_H

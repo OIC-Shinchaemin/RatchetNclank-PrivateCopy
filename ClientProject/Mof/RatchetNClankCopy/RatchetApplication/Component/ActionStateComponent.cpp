@@ -24,6 +24,10 @@ std::string ratchet::component::ActionStateComponent::GetType(void) const {
     return "ActionStateComponent";
 }
 
+const char* ratchet::component::ActionStateComponent::GetCurrentState(void) const {
+    return this->_state_machine.GetCurrentStateName();
+}
+
 bool ratchet::component::ActionStateComponent::IsEqual(std::string_view state) const {
     return _state_machine.GetCurrentStateName() == state;
 }

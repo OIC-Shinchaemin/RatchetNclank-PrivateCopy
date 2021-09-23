@@ -7,6 +7,7 @@
 #include "Player/PlayerStateComponent.h"
 #include "../Event/EventReferenceTable.h"
 #include "AnimationMeshComponent.h"
+#include "../Component/Collision/Object/PlayerCollisionComponent.h"
 
 
 void ratchet::component::CameraComponent::OnPush(void) {
@@ -80,7 +81,6 @@ void ratchet::component::CameraComponent::OnPull(void) {
     con->SetAzimuth(math::ToDegree(ideal_angle_y));
     con->SetInfo(info);
     _camera_controller.SetService(con);
-
 
     if (auto mesh = _mesh_com.lock()) {
         mesh->Activate();
@@ -198,25 +198,32 @@ void ratchet::component::CameraComponent::ControlByGamepad(void) {
 
 void ratchet::component::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (_collisioned_stage) {
-        controller->SetAzimuth(math::ToDegree(_preview_angle.x));
-        controller->SetAltitude(math::ToDegree(_preview_angle.y));
-        _collisioned_stage = false;
+        //controller->SetAzimuth(math::ToDegree(_preview_angle.x));
+        //controller->SetAltitude(math::ToDegree(_preview_angle.y));
+        //_collisioned_stage = false;
     } // if
 
     auto pos = super::GetOwner()->GetPosition();
     auto camera_info = ratchet::camera::CameraController::CameraInfo();
 
-    auto state_com = _state_com.lock();
-    if (state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpUpState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpDownState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionDoubleJumpState)) {
+    if (_follow_camera_prev_position_update) {
         pos.y = _preview_position.y;
         camera_info.target_position = pos;
         controller->Update(delta_time, camera_info);
         return;
     } // if
-    _preview_position = pos;
-    camera_info.target_position = pos;
+
     _preview_angle.x = controller->GetAzimuth();
     _preview_angle.y = controller->GetAltitude();
+    _preview_position = pos;
+
+    camera_info.target_position = pos;
+    if (::g_pInput->IsKeyHold(MOFKEY_SPACE)) {
+        auto p = pos;
+        p.y = 10.0f;
+        camera_info.target_position = p;
+        //super::GetOwner()->SetPosition(p);
+    } // if
     controller->Update(delta_time, camera_info);
 }
 
@@ -242,7 +249,8 @@ ratchet::component::CameraComponent::CameraComponent(int priority) :
     _default_distance(8.0f),
     _preview_position(),
     _collisioned_stage(),
-    _preview_angle() {
+    _preview_angle(),
+    _follow_camera_prev_position_update(false) {
 }
 
 ratchet::component::CameraComponent::CameraComponent(const CameraComponent& obj) :
@@ -255,7 +263,8 @@ ratchet::component::CameraComponent::CameraComponent(const CameraComponent& obj)
     _default_distance(obj._default_distance),
     _preview_position(),
     _collisioned_stage(),
-    _preview_angle() {
+    _preview_angle(),
+    _follow_camera_prev_position_update() {
 }
 
 ratchet::component::CameraComponent::~CameraComponent() {
@@ -266,10 +275,13 @@ void ratchet::component::CameraComponent::OnNotify(const ratchet::camera::Camera
     _camera->SetTarget(info.target_position);
     _camera->Update();
     _camera_controller.GetService()->RegisterGlobalCamera();
-    _camera_controller.GetService()->SetAzimuth(
-        math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
+    _camera_controller.GetService()->SetAzimuth(math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
     _camera_controller.GetService()->SetAltitude(20.0f);
     _camera_controller.GetService()->SetDistance(_default_distance);
+}
+
+void ratchet::component::CameraComponent::SetFollowCameraPrevPositionUpdateFlag(bool flag) {
+    this->_follow_camera_prev_position_update = flag;
 }
 
 std::string ratchet::component::CameraComponent::GetType(void) const {
@@ -323,7 +335,7 @@ bool ratchet::component::CameraComponent::Update(float delta_time) {
     using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
-            this->UpdateFollow(delta_time, camera_controller); 
+            this->UpdateFollow(delta_time, camera_controller);
             break;
         case Mode::FirstPerson:
             this->UpdateFirstPerson(delta_time, camera_controller);
@@ -357,6 +369,12 @@ bool ratchet::component::CameraComponent::DebugRender(void) {
         ::CGraphicsUtilities::RenderString(
             20.0f, 200.0f, "camera state = %s", name);
     };
+
+    auto coll_com = super::GetOwner()->GetComponent<component::collision::PlayerCollisionComponent>();
+    auto point = coll_com->collision_point_stage_down_ray;
+    ::CGraphicsUtilities::RenderSphere(Mof::CSphere(point, 1.0f), def::color_rgba::kBlue);
+
+
     using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
