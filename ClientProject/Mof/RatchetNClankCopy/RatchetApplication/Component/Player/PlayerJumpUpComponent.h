@@ -24,19 +24,30 @@ class PlayerJumpUpComponent : public ::ratchet::component::player::action::Playe
         }
     };
 private:
-    //! 最大
-    //float _jump_speed_max;
-    //! 速度
+    //! 力
     float _jump_speed;
     //! 減少
     float _jump_decrase;
+    //! 速さ
+    float _move_speed;
+    //! 速さ
+    float _angular_speed;
+    //!  下降
+    float _gravity_down;
+    //! 強制的向く方向
+    std::optional<float> _force_move_radian_angle;
     //! 入力情報
     This::InputInfo _input_info;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
-
+    /// <summary>
+    /// ジャンプ速度入力
+    /// </summary>
+    /// <param name="speed"></param>
     virtual void InputJumpVelocity(float speed);
 public:
+    //! アクセッサ
+    base::accessor::Accessor<decltype(_force_move_radian_angle)> force_move_radian_angle = _force_move_radian_angle;
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -66,8 +77,23 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
+    /// <param name="scalar"></param>
+    void SetMoveSpeed(float scalar);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="scalar"></param>
+    void SetAngularSpeed(float scalar);
+    /// <summary>
+    /// セッター
+    /// </summary>
     /// <param name="speed"></param>
-    void SetJumpSpeed(float speed);
+    void SetJumpSpeed(float scalar);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="speed"></param>
+    void SetGravityDown(float scalar);
     /// <summary>
     /// 初期化
     /// </summary>

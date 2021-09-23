@@ -37,6 +37,20 @@ private:
     float _front_angle;
     //! 歩く方向
     float _start_camera_angle;
+    //! フラグ
+    bool _add_jump;
+    //! 状態
+    std::string _current_state;
+    //! 状態
+    std::string _prev_state;
+    //! デフォルト値
+    float _default_jump_set_first_speed;
+    //! デフォルト値
+    float _default_jump_up_move_speed;
+    //! デフォルト値
+    float _default_jump_up_angular_speed;
+    //! デフォルト値
+    float _default_jump_up_gravity;
 public:
     /// <summary>
     /// コンストラクタ

@@ -73,6 +73,11 @@ public:
     /// <param name="scalar"></param>
     void SetAngularSpeed(float scalar);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="speed"></param>
+    void SetJumpSpeedFirst(float scalar);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>

@@ -9,12 +9,8 @@ ratchet::component::player::action::PlayerJumpSetComponent::PlayerJumpSetCompone
     _jump_speed(0.0f),
     _jump_speed_first(6.0f),
     _jump_speed_increase(0.6f),
-
-    //_default_move_speed(1.7f),
-    //_default_angular_speed(3.3f),
     _move_speed(1.7f),
     _angular_speed(3.3f),
-
     _move_com(),
     _jump_com() {
 }
@@ -24,13 +20,8 @@ ratchet::component::player::action::PlayerJumpSetComponent::PlayerJumpSetCompone
     _jump_speed(0.0f),
     _jump_speed_first(obj._jump_speed_first),
     _jump_speed_increase(obj._jump_speed_increase),
-
-    //_default_move_speed(obj._default_move_speed),
-    //_default_angular_speed(obj._default_angular_speed),
     _move_speed(obj._move_speed),
     _angular_speed(obj._angular_speed),
-
-
     _move_com(),
     _jump_com() {
 }
@@ -44,6 +35,10 @@ void ratchet::component::player::action::PlayerJumpSetComponent::SetMoveSpeed(fl
 
 void ratchet::component::player::action::PlayerJumpSetComponent::SetAngularSpeed(float scalar) {
     this->_angular_speed = scalar;
+}
+
+void ratchet::component::player::action::PlayerJumpSetComponent::SetJumpSpeedFirst(float scalar) {
+    this->_jump_speed_first = scalar;
 }
 
 std::string ratchet::component::player::action::PlayerJumpSetComponent::GetType(void) const {

@@ -48,6 +48,8 @@ protected:
     std::weak_ptr<ratchet::component::CameraComponent> _player_camera_component;
     //! •ûˆÊŠp,‹ÂŠp
     Mof::CVector3 _camera_angle_start;
+    //! ~‚è‚½Œã‚ÌƒCƒxƒ“ƒg
+    bool _event_started;
 public:
     Elevator(Vector3 end, float request, bool enable = true, bool collision = true,
              StageObjectType type = StageObjectType::None, std::string name = "",
