@@ -15,12 +15,24 @@
 
 
 namespace ratchet::game::gamesystem {
-class GameMoney : public std::enable_shared_from_this<ratchet::game::gamesystem::GameMoney>, public base::core::Observer<int> {
+struct GameMoneyMessage {
+    int money;
+    int money_max;
+};
+using GameMoneyMessageSubject = base::core::Observable<const GameMoneyMessage&>;
+using GameMoneyMessageListener = base::core::Observer<const GameMoneyMessage&>;
+
+class GameMoney :
+    public std::enable_shared_from_this<ratchet::game::gamesystem::GameMoney>,
+    public base::core::Observer<int> {
 private:
     //! お金
     std::uint32_t _value;
+    //! お金
+    std::uint32_t _value_max;
     //! 通知用
-    base::core::Observable<int> _subject;
+    //base::core::Observable<int> _subject;
+    GameMoneyMessageSubject _subject;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI

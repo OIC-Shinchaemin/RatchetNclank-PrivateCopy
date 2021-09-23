@@ -18,7 +18,7 @@
 ratchet::event::PlayerActionAfterGettingOffElevatorEvent::PlayerActionAfterGettingOffElevatorEvent() :
     super(),
     _active(),
-    _start_time_set(2.0f),
+    _start_time_set(1.6f),
     _time_set(2.0f),
     _start_timer(),
     _timer(),

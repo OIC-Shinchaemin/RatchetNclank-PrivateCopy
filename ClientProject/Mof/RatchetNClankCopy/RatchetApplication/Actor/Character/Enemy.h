@@ -45,6 +45,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void End(void) override;
+    /// <summary>
+    /// ƒAƒCƒeƒ€
+    /// </summary>
+    /// <param name=""></param>
+    void GenerateDropItem(void);
 };
 }
 #endif // !RATCHET_ACTOR_CHARACTER_ENEMY_H
