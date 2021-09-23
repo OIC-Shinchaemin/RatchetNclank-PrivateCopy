@@ -11,10 +11,20 @@ ratchet::ui::GameMoneyMenu::GameMoneyMenu(const char* name) :
     _ui_canvas() {
 }
 
-void ratchet::ui::GameMoneyMenu::OnNotify(int money) {
+//void ratchet::ui::GameMoneyMenu::OnNotify(int money) {
+//    super::Notify(shared_from_this(), "Enable");
+//    
+//    this->_money = money;
+//    this->_show = true;
+//    this->_hide_timer.Initialize(_time_max, false);
+//}
+
+void ratchet::ui::GameMoneyMenu::OnNotify(const ratchet::game::gamesystem::GameMoneyMessage& message) {
     super::Notify(shared_from_this(), "Enable");
-    
-    this->_money = money;
+
+    //this->_money = money;
+    this->_money = message.money;
+    this->_money_max = message.money_max;
     this->_show = true;
     this->_hide_timer.Initialize(_time_max, false);
 }
@@ -29,7 +39,7 @@ void ratchet::ui::GameMoneyMenu::SetUICanvas(std::weak_ptr<base::ui::UICanvas> p
 
 bool ratchet::ui::GameMoneyMenu::Initialize(void) {
     super::Initialize();
-    super::_position = Mof::CVector2(920.0f, 48.0f);
+    super::_position = Mof::CVector2(880.0f, 48.0f);
     if (auto resource = _resource.lock()) {
         super::_texture = resource->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/money/money.png");
     } // if
@@ -54,8 +64,13 @@ bool ratchet::ui::GameMoneyMenu::Render(void) {
         auto pos = super::_position;
         tex->RenderScale(pos.x, pos.y, 0.5f);
         pos.x += tex->GetWidth() * 0.5f;
-        ::CGraphicsUtilities::RenderString(pos.x + 1, pos.y + 1  , def::color_rgba_u32::kBlack, " %d", _money);
-        ::CGraphicsUtilities::RenderString(pos.x, pos.y , def::color_rgba_u32::kWhite, " %d", _money);
+
+        auto text = std::to_string(_money);
+        text += " / ";
+        text += std::to_string(_money_max);
+
+        ::CGraphicsUtilities::RenderString(pos.x + 1, pos.y + 1  , def::color_rgba_u32::kBlack, text.c_str());
+        ::CGraphicsUtilities::RenderString(pos.x, pos.y , def::color_rgba_u32::kWhite, text.c_str());
     } // if
 
     //super::Render();

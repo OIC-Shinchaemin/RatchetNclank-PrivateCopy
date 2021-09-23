@@ -6,6 +6,7 @@
 
 ratchet::game::gamesystem::GameMoney::GameMoney() :
     _value(),
+    _value_max(40),
     _subject(),
     _resource(),
     _ui_canvas() {
@@ -22,7 +23,10 @@ void ratchet::game::gamesystem::GameMoney::OnNotify(int add_money) {
         this->_value = 0;
     } // if
     
-    _subject.Notify(_value);
+    auto message = game::gamesystem::GameMoneyMessage();
+    message.money = _value;
+    message.money_max = _value_max;
+    _subject.Notify(message);
 }
 
 void ratchet::game::gamesystem::GameMoney::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
