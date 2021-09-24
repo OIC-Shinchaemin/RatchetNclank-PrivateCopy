@@ -7,7 +7,7 @@
 #include "../Executor/ActionNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class ActionNodeBase : public ratchet::behaviour::Node {
     using super = ratchet::behaviour::Node;
 public:
@@ -63,6 +63,5 @@ public:
         return OnExec(actor);
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_ACTION_NODE_BASE_H

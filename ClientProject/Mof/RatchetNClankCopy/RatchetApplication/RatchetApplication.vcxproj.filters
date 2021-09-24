@@ -1233,6 +1233,15 @@
     <ClCompile Include="Event\PlayerActionAfterGettingOffElevatorEvent.cpp">
       <Filter>Ratchet\Source\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\Character\Queen.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\QueenCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -2387,6 +2396,15 @@
     <ClInclude Include="Event\PlayerActionAfterGettingOffElevatorEvent.h">
       <Filter>Ratchet\Header\Event</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Character\Queen.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\QueenCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -2432,6 +2450,12 @@
       <Filter>Resource\script</Filter>
     </Text>
     <Text Include="..\Resource\script\king_free_talk_text_event.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\queen_free_talk_text_event.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\queen_text_event.txt">
       <Filter>Resource\script</Filter>
     </Text>
   </ItemGroup>
@@ -2542,6 +2566,9 @@
       <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\barricade.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\queen.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

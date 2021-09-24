@@ -24,7 +24,6 @@ ratchet::component::player::PlayerComponent::PlayerComponent(const PlayerCompone
     super(obj),
     _target(),
     _state_com(),
-    _transform_com(),
     _velocity_com(),
     _camera_com(),
     _coll_volume_com(),
@@ -70,7 +69,6 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
     super::Activate();
 
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
-    _transform_com = super::GetOwner()->GetComponent<ratchet::component::TransformComponent>();
     _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
     _coll_volume_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
@@ -155,7 +153,7 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::component::collision::CollisionComponentType::kKingCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::King>(in.target.lock());
+        _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
         _contact_mode = true;
         return true;
     }));
@@ -166,7 +164,20 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
         _contact_mode = false;
         return true;
     }));
-
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
+        _contact_mode = true;
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
+                               ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        _talk_target.reset();
+        _contact_mode = false;
+        return true;
+    }));
 
 
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
@@ -181,9 +192,6 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
         auto add = Mof::CVector3(-v.x, 0.0f, -v.z) * d;
         velocity_com->AddVelocityForce(add);
 
-        if (auto transform = _transform_com.lock()) {
-            //player->SetPosition(transform->GetPreviousPosition());
-        } // if
         OutputDebugString("kWallCollisionComponent‚†");
         puts("kWallCollisionComponent‚†");
         return true;

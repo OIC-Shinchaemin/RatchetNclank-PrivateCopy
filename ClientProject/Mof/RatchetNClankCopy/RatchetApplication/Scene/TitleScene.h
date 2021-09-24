@@ -113,6 +113,12 @@ private:
     ratchet::ui::UICreator<ratchet::ui::TitleInfoMenu> _ui_creator;
     //! タイトル
     TitleLogo _logo;
+    //! カウンター
+    base::core::Timer _loading_counter;
+    //! カウンター
+    int _loading_dot_count;
+    //! 経過時間 / 所要時間
+    float _loading_progress;
     //! 終了
     bool _scene_end;
 private:

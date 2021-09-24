@@ -52,7 +52,6 @@ ratchet::actor::character::King::King() :
     _actor_container(),
     _quest_index(0),
     _quest_count(2),
-    _text_system_message_subject(),
     _player_camera_subject(),
     _scarecrow_view_camera_controller(),
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),

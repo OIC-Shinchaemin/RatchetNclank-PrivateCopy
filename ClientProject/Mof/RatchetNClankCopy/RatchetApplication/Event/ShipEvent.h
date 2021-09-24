@@ -19,6 +19,8 @@ class ShipEvent : public ratchet::event::Event,
     public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
     using super = ratchet::event::Event;
 private:
+    //! 開始
+    bool _start;
     //! 通知用
     base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>& > _ship_event_subject;
     //! カメラ
@@ -31,6 +33,10 @@ private:
     ratchet::camera::CameraController::CameraInfo _info;
     //! プレイヤービュー
     std::weak_ptr<base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>> _camera_com;
+    //! 実行時間
+    base::core::Timer _timer;
+    //! 実行時間
+    const float _time;
 public:
     /// <summary>
     /// コンストラクタ

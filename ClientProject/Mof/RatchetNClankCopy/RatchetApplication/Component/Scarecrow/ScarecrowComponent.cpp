@@ -56,7 +56,6 @@ void ratchet::component::scarecrow::ScarecrowComponent::DamageEffectEmit(std::sh
         info.environment_param.use_gravity = true;
         info.environment_param.gravity_scale = 0.01f;
     } // for
-
 }
 
 ratchet::component::scarecrow::ScarecrowComponent::ScarecrowComponent(int priority) :

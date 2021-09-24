@@ -90,6 +90,11 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
+    /// <summary>
+    /// エフェクト発生
+    /// </summary>
+    /// <param name=""></param>
+    void DamageEffectEmit(std::shared_ptr<ratchet::actor::Actor> actor);
 };
 }
 #endif // !RATCHET_COMPONENT_ENEMY_ENEMY_COMPONENT_H

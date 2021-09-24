@@ -1,6 +1,7 @@
 #include "Object/PlayerCollisionComponent.h"
 #include "Object/EnemyCollisionComponent.h"
 #include "Object/KingCollisionComponent.h"
+#include "Object/QueenCollisionComponent.h"
 #include "Object/ScarecrowCollisionComponent.h"
 #include "Object/SightCollisionComponent.h"
 #include "Object/EnemyMeleeAttackCollisionComponent.h"

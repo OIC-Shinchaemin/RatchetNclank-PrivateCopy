@@ -29,7 +29,9 @@ std::string ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolit
 std::string ratchet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm = "PlayerShopCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kPlayerWallCollisionAlgolithm = "PlayerWallCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kPlayerKingCollisionAlgolithm = "PlayerKingCollisionAlgolithm";
+std::string ratchet::CollisionAlgolithmType::kPlayerQueenCollisionAlgolithm = "PlayerQueenCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kPlayerScarecrowCollisionAlgolithm = "kPlayerScarecrowCollisionAlgolithm";
+
 
 std::string ratchet::CollisionAlgolithmType::kScarecrowBlasterBulletCollisionAlgolithm = "ScarecrowBlasterBulletCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kScarecrowBombGloveBulletCollisionAlgolithm = "ScarecrowBombGloveBulletCollisionAlgolithm";

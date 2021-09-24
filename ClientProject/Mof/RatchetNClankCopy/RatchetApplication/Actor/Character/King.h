@@ -2,9 +2,9 @@
 #define RATCHET_ACTOR_CHARACTER_KING_H
 
 
-#include "../Actor.h"
+#include "Character.h"
+//#include "../Actor.h"
 
-#include "../../Game/GameSystem/Text/TextSystem.h"
 #include "Scarecrow.h"
 #include "../../Camera/CameraController.h"
 #include "../../Component/CameraComponent.h"
@@ -18,9 +18,9 @@ class GameScene;
 namespace ratchet::actor::character {
 class Player;
 class King :
-    public actor::Actor,
+    public ratchet::actor::character::Character,
     public ratchet::actor::character::ScarecrowEndMessageListener {
-    using super = actor::Actor;
+    using super = ratchet::actor::character::Character;
 
     struct ScarecrowGenerateData {
         std::vector<Mof::CVector3> position;
@@ -28,8 +28,6 @@ class King :
 private:
     //! ハテナ
     std::weak_ptr<Mof::CTexture> _question_texture;
-    //! 通知用
-    ratchet::game::gamesystem::text::TextSystemMessageSubject _text_system_message_subject;
     //! 通知用
     base::core::Observable<const ratchet::camera::CameraController::CameraInfo&> _player_camera_subject;
     //! カカシ追加先ゲームシーン
@@ -120,14 +118,6 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    auto GetTextSystemMessageSubject(void) {
-        return &this->_text_system_message_subject;
-    }
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
     auto GetPlayerCameraSubject(void) {
         return &this->_player_camera_subject;
     }
@@ -152,7 +142,7 @@ public:
     /// <summary>
     /// 会話
     /// </summary>
-    void Talk(void);
+    virtual void Talk(void) override;
 };
 }
 #endif // !RATCHET_ACTOR_CHARACTER_KING_H

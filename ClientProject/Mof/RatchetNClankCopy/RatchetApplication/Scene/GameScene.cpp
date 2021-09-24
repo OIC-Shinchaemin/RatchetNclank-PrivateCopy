@@ -84,14 +84,19 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
 	} // if
 
 	_effect->Update(delta_time);
-
-	
-
 	return true;
 }
 
 bool ratchet::scene::GameScene::LoadingUpdate(float delta_time) {
-	return false;
+	if (_loading_counter.Tick(delta_time)) {
+		_loading_dot_count++;
+		int count_max = 4;
+		_loading_dot_count = std::clamp(_loading_dot_count, 0, count_max);
+		if (_loading_dot_count == count_max) {
+			_loading_dot_count = 0;
+		} // if
+	} // if
+	return true;
 }
 
 bool ratchet::scene::GameScene::SceneRender(void) {
@@ -100,10 +105,10 @@ bool ratchet::scene::GameScene::SceneRender(void) {
 
 	_renderer.Render();
 	_stage.Render();
-	
+
 
 	_effect->Render();
-	
+
 	::g_pGraphics->SetDepthEnable(false);
 
 	if (_text_system->IsActive()) {
@@ -115,7 +120,11 @@ bool ratchet::scene::GameScene::SceneRender(void) {
 bool ratchet::scene::GameScene::LoadingRender(void) {
 	::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
 	::g_pGraphics->SetDepthEnable(false);
-	::CGraphicsUtilities::RenderString(800.0f, 700.0f, def::color_rgba_u32::kWhite, "Now Loading...");
+	auto text = std::string("Now Loading");
+	for (int i = 0; i < _loading_dot_count; i++) {
+		text += ".";
+	} // for
+	::CGraphicsUtilities::RenderString(800.0f, 700.0f, def::color_rgba_u32::kWhite, text.c_str());
 	return true;
 }
 
@@ -129,7 +138,10 @@ ratchet::scene::GameScene::GameScene() :
 	_re_initialize(false),
 	_game(),
 	_event(),
-	_text_system(std::make_shared<ratchet::game::gamesystem::text::TextSystem>()) {
+	_text_system(std::make_shared<ratchet::game::gamesystem::text::TextSystem>()),
+	_loading_counter(),
+	_loading_dot_count(0) {
+	_loading_counter.Initialize(1.0f, true);
 }
 
 ratchet::scene::GameScene::~GameScene() {
@@ -198,8 +210,10 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
 		if (auto game = _game.lock()) {
 			game->GameSystemLoad();
 		} // if
+
 		super::LoadComplete();
 		_text_system->Load();
+
 
 		this->Initialize();
 		});
@@ -267,6 +281,7 @@ bool ratchet::scene::GameScene::Input(void) {
 }
 
 bool ratchet::scene::GameScene::Release(void) {
+	ratchet::event::EventReferenceTable::Singleton().Dispose("GameManager");
 	ratchet::event::EventReferenceTable::Singleton().Reset();
 
 	super::Release();

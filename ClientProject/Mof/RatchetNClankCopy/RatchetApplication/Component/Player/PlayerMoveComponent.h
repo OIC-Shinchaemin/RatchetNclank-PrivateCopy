@@ -42,6 +42,8 @@ private:
     std::weak_ptr<ratchet::component::player::PlayerComponent> _type_com;
     //! カメラ
     std::weak_ptr<::ratchet::component::CameraComponent> _camera_com;
+    //! 回転しない
+    bool _angular_freeze;
 public:
     /// <summary>
     /// 加速
@@ -85,6 +87,11 @@ public:
     /// <param name="radian"></param>
     void SetIdealAngle(float radian);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetAngularFreezeFlag(bool flag);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -96,6 +103,10 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     float GetMoveSpeed(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    bool IsAngularFreeze(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -7,3 +7,6 @@ ratchet::actor::character::Character::Character() :
 
 ratchet::actor::character::Character::~Character() {
 }
+
+void ratchet::actor::character::Character::Talk() {
+}

@@ -31,7 +31,7 @@ ratchet::component::enemy::EnemyDamageComponent::EnemyDamageComponent(int priori
     _motion_com(),
     _motion_state_com(),
     _hp_com(),
-    _ENEMY_com(),
+    _enemy_com(),
     _state_com() {
 }
 
@@ -65,14 +65,14 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
     _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
     _hp_com = super::GetOwner()->GetComponent<ratchet::component::HpComponent>();
-    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
+    _enemy_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
     _state_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyStateComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::EnemyCollisionComponent>();
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
                                ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        auto ENEMY_com = _ENEMY_com.lock();
+        auto ENEMY_com = _enemy_com.lock();
         auto target = in.target.lock();
         
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
@@ -89,6 +89,9 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
                                ratchet::component::collision::CollisionComponentType::kOmniWrenchCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 1;
+        if (auto type_com = _enemy_com.lock()) {
+            type_com->DamageEffectEmit(in.target.lock());
+        } // if
         this->CollisionAction(in);
         return true;
     }));

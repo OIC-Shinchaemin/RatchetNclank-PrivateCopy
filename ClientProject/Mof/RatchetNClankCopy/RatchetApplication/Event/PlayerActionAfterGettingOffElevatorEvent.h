@@ -11,11 +11,12 @@
 
 
 namespace ratchet::event {
+/*
 struct PlayerActionAfterGettingOffElevatorEventEndMessage {
 };
 using PlayerActionAfterGettingOffElevatorEventEndSubject = base::core::Observable<const PlayerActionAfterGettingOffElevatorEventEndMessage&>;
 using PlayerActionAfterGettingOffElevatorEventEndListener = base::core::Observer<const  PlayerActionAfterGettingOffElevatorEventEndMessage&>;
-
+*/
 class PlayerActionAfterGettingOffElevatorEvent :
     public ratchet::event::Event,
     public ratchet::event::EnemyViewEventEndMessageListener {
@@ -23,26 +24,11 @@ class PlayerActionAfterGettingOffElevatorEvent :
 private:
     //! アクティブ
     bool _active;
-    //! プレイヤー通知用    
-    PlayerActionAfterGettingOffElevatorEventEndSubject _player_action_after_getting_off_elevator_event_end_subject;
-    //! 時間
-    float _start_time_set;
     //! 時間
     float _time_set;
     //! タイマー
-    std::optional<base::core::Timer > _start_timer;
     //! タイマー
     base::core::Timer _timer;
-    //! 歩く方向
-    float _front_angle;
-    //! 歩く方向
-    float _start_camera_angle;
-    //! フラグ
-    bool _add_jump;
-    //! 状態
-    std::string _current_state;
-    //! 状態
-    std::string _prev_state;
     //! デフォルト値
     float _default_jump_set_first_speed;
     //! デフォルト値
@@ -66,13 +52,10 @@ public:
     /// <param name="message"></param>
     virtual void OnNotify(const ratchet::event::EnemyViewEventEndMessage& message) override;
     /// <summary>
-    /// ゲッター
+    /// 開始
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
-    auto GetPlayerActionAfterGettingOffElevatorEventEndSubject(void) {
-        return &this->_player_action_after_getting_off_elevator_event_end_subject;
-    };
+    void Start(void);
     /// <summary>
     /// 初期化
     /// </summary>

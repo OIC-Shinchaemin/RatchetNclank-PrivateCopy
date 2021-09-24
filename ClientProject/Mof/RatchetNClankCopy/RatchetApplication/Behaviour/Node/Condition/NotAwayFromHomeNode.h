@@ -7,8 +7,8 @@
 #include "../../Executor/Condition/NotAwayFromHomeNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
-class NotAwayFromHomeNode: public ratchet::behaviour::ConditionalNodeBase {
+namespace ratchet::behaviour {
+class NotAwayFromHomeNode : public ratchet::behaviour::ConditionalNodeBase {
     using super = ratchet::behaviour::ConditionalNodeBase;
 public:
     /// <summary>
@@ -43,6 +43,5 @@ public:
         return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) < 2.0f;
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_NOT_AWAY_FROM_HOME_NODE_H

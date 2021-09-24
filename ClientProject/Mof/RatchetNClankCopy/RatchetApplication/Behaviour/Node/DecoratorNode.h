@@ -7,7 +7,7 @@
 #include "../Executor/DecoratorNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class DecoratorNodeBase : public ratchet::behaviour::SimplexNode {
     using super = ratchet::behaviour::SimplexNode;
 public:
@@ -35,6 +35,5 @@ public:
         return std::make_shared<ratchet::behaviour::DecoratorNodeExecutor>(temp);
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_DECORATOR_NODE_H

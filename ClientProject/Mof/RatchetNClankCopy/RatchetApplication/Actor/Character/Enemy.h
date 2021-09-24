@@ -5,6 +5,8 @@
 #include "Character.h"
 
 #include "../../Game/GameSystem/GameQuest.h"
+#include "../../Effect/EffectEmitter.h"
+#include "../../Effect/EffectContainer.h"
 
 
 namespace ratchet::actor::character {
@@ -21,6 +23,10 @@ public:
 private:
     //! 通知用
     base::core::Observable<const ratchet::game::gamesystem::GameQuest&> _quest_subject;
+    //! エフェクト
+    std::weak_ptr<effect::EffectContainer>_effect_container;
+    //! エフェクト
+    std::shared_ptr<ratchet::effect::EffectEmitter> _effect_emitter;
     /// <summary>
     /// 状態変更
     /// </summary>
@@ -34,6 +40,16 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Enemy();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    std::shared_ptr<ratchet::effect::EffectEmitter> GetEffectEmitter(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

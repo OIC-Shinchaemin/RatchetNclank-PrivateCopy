@@ -7,8 +7,7 @@
 #include "../Executor/INodeExecutor.h"
 
 
-namespace ratchet {
-namespace behaviour {
+namespace ratchet::behaviour {
 class Node : public std::enable_shared_from_this<ratchet::behaviour::Node> {
 protected:
     //! –¼‘O
@@ -50,6 +49,5 @@ public:
 };
 using NodePtr = std::shared_ptr<Node>;
 using NodeList = std::list<NodePtr>;
-}
 }
 #endif // !RATCHET_BEHAVIOUR_NODE_H

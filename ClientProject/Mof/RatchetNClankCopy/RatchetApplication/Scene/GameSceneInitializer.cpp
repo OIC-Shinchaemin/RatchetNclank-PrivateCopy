@@ -5,6 +5,7 @@
 #include "../Actor/Character/Enemy.h"
 #include "../Actor/Character/Player.h"
 #include "../Actor/Character/King.h"
+#include "../Actor/Character/Queen.h"
 #include "../Actor/Character/Scarecrow.h"
 #include "../Actor/Facility/Shop.h"
 #include "../Actor//Terrain/Terrain.h"
@@ -26,17 +27,30 @@ ratchet::scene::GameSceneInitializer::GameSceneInitializer() {
 bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game::GameManager>& game, std::shared_ptr<ratchet::event::EventManager>& event, std::shared_ptr<ratchet::scene::GameScene>& out) {
 	out->_stage.Initialize();
 	ratchet::event::EventReferenceTable::Singleton().Reset();
+	if (auto game = out->_game.lock()) {
+		ratchet::event::EventReferenceTable::Singleton().Register("GameManager", game);
+	} // if
+	if (auto e = out->_event.lock()) {
+		ratchet::event::EventReferenceTable::Singleton().Register("EventManager", e);
+	} // if
 
-	std::shared_ptr<ratchet::event::BridgeEvent> bridge_event;
+	ratchet::event::EventReferenceTable::Singleton().Register("Stage", &out->_stage);
+	//ratchet::event::EventReferenceTable::Singleton().Register("GameScene", out);
+
+
+	//std::shared_ptr<ratchet::event::BridgeEvent> bridge_event;
 	std::shared_ptr<ratchet::event::ShipEvent> ship_event;
 	std::shared_ptr<ratchet::event::StageViewEvent> stage_view_event;
 	auto shared_this = out;
 
 	out->_text_system->GetTextSystemClosedMessageSubject()->Clear();
+	out->_text_system->SetScene(out);
+
+
 
 	if (auto e = event) {
 		e->InitializeGameEvent();
-		bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
+		//bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
 		ship_event = e->CreateGameEvent<ratchet::event::ShipEvent>();
 		stage_view_event = e->CreateGameEvent<ratchet::event::StageViewEvent>();
 		stage_view_event->SetGameScene(shared_this);
@@ -44,12 +58,13 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		stage_view_event->GetStageViewEventMessageSubject()->AddObserver(shared_this);
 	} // if
 
-	bridge_event->SetStage(&out->_stage);
-	bridge_event->Initialize();
+	//bridge_event->SetStage(&out->_stage);
+	//bridge_event->Initialize();
 	ship_event->Initialize();
+	
 	stage_view_event->Initialize();
 
-	bridge_event->GetCameraSubject()->AddObserver(ship_event);
+	//bridge_event->GetCameraSubject()->AddObserver(ship_event);
 	ship_event->GetShipEventSubject()->AddObserver(out);
 
 	std::vector<std::shared_ptr<Elevator>> elevators;
@@ -82,6 +97,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 	for (auto elevator: elevators) {
 		auto camera = player->GetComponent<ratchet::component::CameraComponent>();
+		elevator->SetPlayer(player);
 		elevator->SetPlayerCameraComponent(camera);
 		elevator->SetPlayerCamera(camera->GetCameraController());
 		elevator->GetElevatorArrivalMessageSubject()->AddObserver(player);
@@ -115,7 +131,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
 		player->PushNotificationableSubject("QuickChange");
 		player->GetQuestSubject()->AddObserver(help_desk);
-
+		out->_text_system->SetPlayer(player);
+		game_money->SetEventManager(out->_event.lock());
+		game_money->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
+		game_money->SetTextSystem(out->_text_system);
 		// game system
 		weapon_system->Initialize(shared_this);
 		quick_change->Initialize(weapon_system);
@@ -126,7 +145,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 		auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
 		help_desk->OnNotify(quest);
-		bridge_event->GetQuestSubject()->AddObserver(help_desk);
+		//bridge_event->GetQuestSubject()->AddObserver(help_desk);
 		weapon_system->AddMechanicalWeaponObserver(player);
 		quick_change->AddWeaponObserver(weapon_system);
 		quick_change->AddInfoObserver(player);
@@ -138,11 +157,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		} // for
 	} // if
 
-
-
-
-
-
 	auto help_desk = game->GetHelpDesk();
 	// enemy
 	for (auto enemy_spawn : out->_stage.GetEnemySpawnArray()) {
@@ -153,10 +167,13 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		param->transform.position = enemy_spawn.second->GetPosition();
 		auto enemy = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Enemy>(builder, param);
 		out->AddElement(enemy);
+		//auto effect = out->_effect;
+		enemy->SetEffectContainer(out->_effect);
+		//enemy->SetEffectEmitter(effect);
 		enemy->GetQuestSubject()->AddObserver(help_desk);
 
 		if (event_sphere.CollisionPoint(param->transform.position)) {
-			bridge_event->AddTriggerActor(enemy);
+			//bridge_event->AddTriggerActor(enemy);
 		} // if
 	} // for
 
@@ -254,6 +271,25 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 			king->SetPlayerCameraontroller(player_camera->GetCameraController());
 			king->SetPlayer(player);
 			out->AddElement(king);
+		} // for
+	}
+
+	// npc
+	{
+		def::Transform npc_transforms[]{
+			def::Transform(Mof::CVector3(182.0f, -30.0f, 33.0f), Mof::CVector3(0.0f, 45.0f , 0.0f)),
+			def::Transform(Mof::CVector3(5.0f, -5.0f, -5.0f), Mof::CVector3(0.0f, 45.0f , 0.0f)),
+		};
+		param->tag = "queen";
+		param->name = "queen";
+		for (auto& transform : npc_transforms) {
+			param->transform.position = transform.position;
+			param->transform.rotate = transform.rotate;
+			param->transform.scale = transform.scale;
+			//auto queen = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::Actor>("../Resource/builder/queen.json", param);
+			auto queen = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Queen>("../Resource/builder/queen.json", param);
+			out->AddElement(queen);
+			queen->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
 		} // for
 	}
 

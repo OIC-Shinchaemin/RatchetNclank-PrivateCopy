@@ -8,20 +8,23 @@
 #include "Save.h"
 #include "Script.h"
 #include "SpriteSet.h"
+#include "../../../Actor/Actor.h"
+#include "../../../Scene/Scene.h"
 
 
 namespace ratchet::game::gamesystem::text {
 enum class TextEventType {
     TutorialEventNo0,
     TutorialEventNo1,
-    //TutorialEventNo2,
-
     TutorialEventNo0End,
     TutorialEventNo1End,
-    //TutorialEventNo2End,
-
     KingTextEvent,
     KingFreeTalkTextEvent,
+    QueenTextEvent,
+    QueenFreeTalkTextEvent,
+
+    TeachPlazaEvent,
+    ItemCollectionCompleteEvent,
 };
 struct TextSystemMessage {
     using CloseEvent = std::function<bool(void)>;
@@ -63,7 +66,10 @@ private:
     TextSystemClosedMessageSubject _text_system_closed_message_subject;
     //! クローズイベント
     std::optional<TextSystemMessage::CloseEvent> _on_close;
-
+    //! プレイヤー
+    std::weak_ptr<ratchet::actor::Actor> _player;
+    //! プレイヤー
+    std::weak_ptr<ratchet::scene::Scene> _scene;
     bool Load(const char* name);
     bool Save(const char* name);
     bool LoadScript(const char* name);
@@ -93,6 +99,13 @@ public:
     /// </summary>
     /// <param name="message"></param>
     virtual void OnNotify(const TextSystemMessage& message) override;
+    void SetPlayer(const std::shared_ptr<ratchet::actor::Actor> ptr) {
+        this->_player = ptr;
+    }
+    void SetScene(const std::shared_ptr<ratchet::scene::Scene> ptr) {
+        this->_scene = ptr;
+    }
+
     auto GetTextSystemClosedMessageSubject(void) {
         return &this->_text_system_closed_message_subject;
     }

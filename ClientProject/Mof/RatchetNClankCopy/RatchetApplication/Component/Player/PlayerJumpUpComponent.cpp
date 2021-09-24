@@ -17,7 +17,7 @@ ratchet::component::player::action::PlayerJumpUpComponent::PlayerJumpUpComponent
     _jump_decrase(0.4f),
     _move_speed(2.4f),
     _angular_speed(3.3f),
-    _gravity_down(1.8),
+    _gravity_down(1.8f),
     _move_com(),
     _force_move_radian_angle() {
 }

@@ -6,7 +6,7 @@
 #include "../Executor/ConditionalNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class ConditionalNodeBase : public ratchet::behaviour::Node {
     using super = ratchet::behaviour::Node;
 public:
@@ -40,11 +40,10 @@ public:
     /// çÏê¨
     /// </summary>
     /// <returns></returns>
-    virtual behaviour ::NodeExecutorPtr CreateExecutor(void) const override {
+    virtual behaviour::NodeExecutorPtr CreateExecutor(void) const override {
         auto ptr = std::const_pointer_cast<super>(super::shared_from_this());
         return std::make_shared<ratchet::behaviour::ConditionalNodeExecutor>(ptr);
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_CONDITIONAL_NODE_H
