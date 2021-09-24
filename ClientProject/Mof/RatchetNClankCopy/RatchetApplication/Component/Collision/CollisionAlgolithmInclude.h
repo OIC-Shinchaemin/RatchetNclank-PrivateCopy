@@ -21,6 +21,7 @@
 #include "Algolithm/PlayerEnemyMeleeAttackCollisionAlgolithm.h"
 #include "Algolithm/PlayerKingCollisionAlgolithm.h"
 #include "Algolithm/PlayerNanotechItemCollisionAlgolithm.h"
+#include "Algolithm/PlayerQueenCollisionAlgolithm.h"
 #include "Algolithm/PlayerScarecrowCollisionAlgolithm.h"
 #include "Algolithm/PlayerShipCollisionAlgolithm.h"
 #include "Algolithm/PlayerShopCollisionAlgolithm.h"

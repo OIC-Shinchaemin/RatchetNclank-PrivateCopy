@@ -274,10 +274,10 @@ void ratchet::component::CameraComponent::OnNotify(const ratchet::camera::Camera
     _camera->SetPosition(info.start_position);
     _camera->SetTarget(info.target_position);
     _camera->Update();
-    _camera_controller.GetService()->RegisterGlobalCamera();
     _camera_controller.GetService()->SetAzimuth(math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
     _camera_controller.GetService()->SetAltitude(20.0f);
     _camera_controller.GetService()->SetDistance(_default_distance);
+    _camera_controller.GetService()->RegisterGlobalCamera();
 }
 
 void ratchet::component::CameraComponent::SetFollowCameraPrevPositionUpdateFlag(bool flag) {

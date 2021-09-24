@@ -4,6 +4,7 @@
 #include "../../Actor/Actor.h"
 #include "../../Camera/CameraController.h"
 #include "../../Component/CameraComponent.h"
+#include "../../Component/VelocityComponent.h"
 #include "../../Event/EventManager.h"
 
 
@@ -12,6 +13,9 @@ struct ElevatorArrivalMessage {
 using ElevatorArrivalMessageSubject = base::core::Observable<const ElevatorArrivalMessage&>;
 using ElevatorArrivalMessageListener = base::core::Observer<const ElevatorArrivalMessage&>;
 
+namespace ratchet::actor::character {
+    class Player;
+}
 class Elevator : public GimmickBase {
 private:
     /// <summary>
@@ -46,10 +50,14 @@ protected:
     std::weak_ptr<ratchet::event::EventManager> _event_manager;
     //! プレイヤーカメラ
     std::weak_ptr<ratchet::component::CameraComponent> _player_camera_component;
+    //! プレイヤー速度
+    std::weak_ptr<ratchet::component::VelocityComponent> _player_velocity_component;
     //! 方位角,仰角
     Mof::CVector3 _camera_angle_start;
     //! 降りた後のイベント
     bool _event_started;
+    //! プレイヤーカメラ
+    std::weak_ptr<ratchet::actor::character::Player> _player;
 public:
     Elevator(Vector3 end, float request, bool enable = true, bool collision = true,
              StageObjectType type = StageObjectType::None, std::string name = "",
@@ -73,6 +81,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetPlayerCameraComponent(const std::shared_ptr<ratchet::component::CameraComponent>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -7,15 +7,15 @@
 #include <memory>
 
 #include "../../Actor/Actor.h"
-#include "../../Actor/Character/King.h"
+//#include "../../Actor/Character/King.h"
+#include "../../Actor/Character/Character.h"
 #include "Base/Core/Observable.h"
 
+#include "../TransformComponent.h"
+#include "../VelocityComponent.h"
+#include "../CameraComponent.h"
 
-namespace ratchet::component { 
-class TransformComponent; 
-class VelocityComponent; 
-class CameraComponent; 
-}
+
 namespace ratchet::component::collision {
 class PlayerCollisionComponent;
 }
@@ -29,8 +29,6 @@ private:
     base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
-    //! トランスフォーム
-    std::weak_ptr<ratchet::component::TransformComponent> _transform_com;
     //! 速度
     std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! カメラ
@@ -42,7 +40,7 @@ private:
     //! 接触モード 有効であれば武器ボタンがアクションボタンになる
     bool _contact_mode;
     //! 話し相手
-    std::weak_ptr<ratchet::actor::character::King> _talk_target;
+    std::weak_ptr<ratchet::actor::character::Character> _talk_target;
 public:
     /// <summary>
     /// コンストラクタ

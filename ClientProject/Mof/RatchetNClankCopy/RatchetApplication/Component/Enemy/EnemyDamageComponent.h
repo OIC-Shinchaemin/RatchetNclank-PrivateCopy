@@ -34,7 +34,7 @@ private:
     //! Hp
     std::weak_ptr<ratchet::component::HpComponent> _hp_com;
     //! Œ^
-    std::weak_ptr<class EnemyComponent> _ENEMY_com;
+    std::weak_ptr<class EnemyComponent> _enemy_com;
     //! ó‘Ô
     std::weak_ptr<class EnemyStateComponent> _state_com;
 private:

@@ -19,6 +19,8 @@ class ShipEvent : public ratchet::event::Event,
     public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
     using super = ratchet::event::Event;
 private:
+    //! 開始
+    bool _start;
     //! 通知用
     base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>& > _ship_event_subject;
     //! カメラ

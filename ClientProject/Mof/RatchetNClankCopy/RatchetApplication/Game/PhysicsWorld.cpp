@@ -8,6 +8,7 @@
 
 void ratchet::game::PhysicsWorld::GenerateLayer(void) {
     const char* types[] = {
+
         ratchet::CollisionAlgolithmType::kBlasterBulletEnemyCollisionAlgolithm.c_str(),
         ratchet::CollisionAlgolithmType::kBombGloveBulletEnemyCollisionAlgolithm.c_str(),
 
@@ -43,6 +44,7 @@ void ratchet::game::PhysicsWorld::GenerateLayer(void) {
       ratchet::CollisionAlgolithmType::kPlayerNanotechItemCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerShopCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerWallCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerQueenCollisionAlgolithm.c_str(),
 
       ratchet::CollisionAlgolithmType::kScarecrowBlasterBulletCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kScarecrowBombGloveBulletCollisionAlgolithm.c_str(),
@@ -100,6 +102,7 @@ ratchet::game::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerEnemyBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerKingCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerKingCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerQueenCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerQueenCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerScarecrowCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerScarecrowCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerShipCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerWaterFlowCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerWaterFlowCollisionAlgolithm);

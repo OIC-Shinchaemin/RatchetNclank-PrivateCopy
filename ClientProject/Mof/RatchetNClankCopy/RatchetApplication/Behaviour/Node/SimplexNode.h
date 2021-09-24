@@ -5,8 +5,7 @@
 #include "ConditionalNode.h"
 
 
-namespace ratchet {
-namespace behaviour {
+namespace ratchet::behaviour {
 class SimplexNode : public ratchet::behaviour::ConditionalNodeBase {
     using super = ratchet::behaviour::ConditionalNodeBase;
 protected:
@@ -47,6 +46,5 @@ public:
     const ratchet::behaviour::NodePtr& GetChild(void) const { return _child; }
 };
 using SimplexNodePtr = std::shared_ptr<SimplexNode>;
-}
 }
 #endif // !RATCHET_BEHAVIOUR_SIMPLEX_NODE_H

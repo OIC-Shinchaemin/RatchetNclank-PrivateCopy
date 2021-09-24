@@ -53,6 +53,12 @@ private:
     std::weak_ptr<ratchet::event::EventManager> _event;
     //! エフェクト
     std::shared_ptr<effect::EffectContainer> _effect;
+    //! カウンター
+    base::core::Timer _loading_counter;
+    //! カウンター
+    int _loading_dot_count;
+    //! 経過時間 / 所要時間
+    float _loading_progress;
 public:
     /// <summary>
     /// 追加

@@ -7,7 +7,7 @@
 #include "../../Executor/Condition/AwayFromHomeNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class AwayFromHomeNode : public ratchet::behaviour::ConditionalNodeBase {
     using super = ratchet::behaviour::ConditionalNodeBase;
     using Executor = ratchet::behaviour::AwayFromHomeNodeExecutor;
@@ -44,6 +44,5 @@ public:
         return Mof::CVector3Utilities::Distance(actor->GetInitialPosition(), actor->GetPosition()) > 2.0f;
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_AWAY_FROM_HOME_NODE_H

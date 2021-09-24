@@ -9,6 +9,7 @@
 
 ratchet::event::ShipEvent::ShipEvent() :
     super(),
+    _start(false),
     _ship_event_subject(),
     _ship_view_camera(),
     _ship_view_camera_controller(),
@@ -25,13 +26,13 @@ ratchet::event::ShipEvent::~ShipEvent() {
 
 void ratchet::event::ShipEvent::OnNotify(const char* type, const std::shared_ptr<StageObject>& ptr) {
     if (type == "BridgeActionEnd") {
+        _start = true;
         // ship
         auto param = ratchet::actor::Actor::Param();
         param.transform.position = Mof::CVector3(10.0f, 9.0f, -25.0f);
         param.name = "ship";
         auto ship = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::vehicle::Ship>("../Resource/builder/ship.json", &param);
         auto com = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::component::CameraComponent>>("CameraComponent");
-        //ship->GetComponent<ratchet::component::ship::ShipLandingComponent>()->AddObserver(com);
         ship->GetComponent<ratchet::component::ActionComponent>()->GetComponent<ratchet::component::ship::ShipLandingComponent>()->AddObserver(com);
 
         //! ゲームイベント
@@ -46,6 +47,8 @@ void ratchet::event::ShipEvent::OnNotify(const char* type, const std::shared_ptr
         _info.camera_front = ::CGraphicsUtilities::GetCamera()->GetViewFront();
         _ship_view_camera_controller.SetInfo(_info);
         _ship_view_camera->Update();
+
+        _timer.Initialize(_time, false);
     } // if
 }
 
@@ -76,6 +79,13 @@ bool ratchet::event::ShipEvent::Initialize(void) {
 }
 
 bool ratchet::event::ShipEvent::Update(float delta_time) {
+    if (!_start) {
+        return false;
+    } // if
+    if (_timer.Tick(delta_time)) {
+        auto ptr = super::GetSubject();
+        ptr->Notify("DeleteRequest", shared_from_this());
+    } // if
     auto info = ratchet::camera::CameraController::CameraInfo();
     info.ideal_position = Mof::CVector3();
     _ship_view_camera_controller.Update(delta_time, info);
