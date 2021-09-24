@@ -100,9 +100,6 @@ bool ratchet::event::PlayerActionAfterGettingOffElevatorEvent::Update(float delt
         auto jump_set_com = std::dynamic_pointer_cast<component::player::action::PlayerJumpSetComponent> (action->GetChildren().at("PlayerJumpSetComponent"));
         auto jump_up_com = std::dynamic_pointer_cast<component::player::action::PlayerJumpUpComponent> (action->GetChildren().at("PlayerJumpUpComponent"));
 
-        //auto move_com = std::dynamic_pointer_cast<component::player::action::PlayerMoveComponent> (action->GetChildren().at("PlayerMoveComponent"));
-        //move_com->InputMoveAngularVelocity(math::ToRadian(235), 2.0f);
-
         jump_set_com->SetJumpSpeedFirst(_default_jump_set_first_speed);
         jump_up_com->SetMoveSpeed(_default_jump_up_move_speed);
         jump_up_com->SetAngularSpeed(_default_jump_up_angular_speed);

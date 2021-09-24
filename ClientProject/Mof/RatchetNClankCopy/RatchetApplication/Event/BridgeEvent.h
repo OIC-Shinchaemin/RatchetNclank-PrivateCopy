@@ -13,11 +13,11 @@
 #include "../Stage/Stage.h"
 #include "../Camera/Camera.h"
 #include "../Camera/FirstPersonCameraController.h"
+#include "../Camera/AutoCameraController.h"
 #include "../Game/GameSystem/GameQuest.h"
 
 
-namespace ratchet {
-namespace event {
+namespace ratchet::event {
 class BridgeEvent : public ratchet::event::Event, public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
     using super = ratchet::event::Event;
 private:
@@ -28,7 +28,8 @@ private:
     //! カメラ
     std::shared_ptr<ratchet::camera::Camera> _bridge_view_camera;
     //! カメラコントローラ
-    ratchet::camera::FirstPersonCameraController _bridge_view_camera_controller;
+    //ratchet::camera::FirstPersonCameraController _bridge_view_camera_controller;
+    ratchet::camera::AutoCameraController _bridge_view_camera_controller;
     //! 位置
     Mof::CVector3 _ideal_position;
     //! 通知用
@@ -37,6 +38,10 @@ private:
     base::core::Observable<const ratchet::game::gamesystem::GameQuest&> _quest_subject;
     //! 有効
     bool _enable;
+    //! 実行時間
+    base::core::Timer _timer;
+    //! 実行時間
+    const float _time;
 public:
     /// <summary>
     /// コンストラクタ
@@ -98,6 +103,5 @@ public:
     /// <param name=""></param>
     void AllDelete(void);
 };
-}
 }
 #endif // !RATCHET_BRIDGE_EVENT_H

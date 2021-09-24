@@ -26,17 +26,30 @@ ratchet::scene::GameSceneInitializer::GameSceneInitializer() {
 bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game::GameManager>& game, std::shared_ptr<ratchet::event::EventManager>& event, std::shared_ptr<ratchet::scene::GameScene>& out) {
 	out->_stage.Initialize();
 	ratchet::event::EventReferenceTable::Singleton().Reset();
+	if (auto game = out->_game.lock()) {
+		ratchet::event::EventReferenceTable::Singleton().Register("GameManager", game);
+	} // if
+	if (auto e = out->_event.lock()) {
+		ratchet::event::EventReferenceTable::Singleton().Register("EventManager", e);
+	} // if
 
-	std::shared_ptr<ratchet::event::BridgeEvent> bridge_event;
+	ratchet::event::EventReferenceTable::Singleton().Register("Stage", &out->_stage);
+	//ratchet::event::EventReferenceTable::Singleton().Register("GameScene", out);
+
+
+	//std::shared_ptr<ratchet::event::BridgeEvent> bridge_event;
 	std::shared_ptr<ratchet::event::ShipEvent> ship_event;
 	std::shared_ptr<ratchet::event::StageViewEvent> stage_view_event;
 	auto shared_this = out;
 
 	out->_text_system->GetTextSystemClosedMessageSubject()->Clear();
 
+
+
+
 	if (auto e = event) {
 		e->InitializeGameEvent();
-		bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
+		//bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
 		ship_event = e->CreateGameEvent<ratchet::event::ShipEvent>();
 		stage_view_event = e->CreateGameEvent<ratchet::event::StageViewEvent>();
 		stage_view_event->SetGameScene(shared_this);
@@ -44,12 +57,13 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		stage_view_event->GetStageViewEventMessageSubject()->AddObserver(shared_this);
 	} // if
 
-	bridge_event->SetStage(&out->_stage);
-	bridge_event->Initialize();
+	//bridge_event->SetStage(&out->_stage);
+	//bridge_event->Initialize();
 	ship_event->Initialize();
+	
 	stage_view_event->Initialize();
 
-	bridge_event->GetCameraSubject()->AddObserver(ship_event);
+	//bridge_event->GetCameraSubject()->AddObserver(ship_event);
 	ship_event->GetShipEventSubject()->AddObserver(out);
 
 	std::vector<std::shared_ptr<Elevator>> elevators;
@@ -115,6 +129,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
 		player->PushNotificationableSubject("QuickChange");
 		player->GetQuestSubject()->AddObserver(help_desk);
+		game_money->SetEventManager(out->_event.lock());
 
 		// game system
 		weapon_system->Initialize(shared_this);
@@ -126,7 +141,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
 		auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
 		help_desk->OnNotify(quest);
-		bridge_event->GetQuestSubject()->AddObserver(help_desk);
+		//bridge_event->GetQuestSubject()->AddObserver(help_desk);
 		weapon_system->AddMechanicalWeaponObserver(player);
 		quick_change->AddWeaponObserver(weapon_system);
 		quick_change->AddInfoObserver(player);
@@ -156,7 +171,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		enemy->GetQuestSubject()->AddObserver(help_desk);
 
 		if (event_sphere.CollisionPoint(param->transform.position)) {
-			bridge_event->AddTriggerActor(enemy);
+			//bridge_event->AddTriggerActor(enemy);
 		} // if
 	} // for
 

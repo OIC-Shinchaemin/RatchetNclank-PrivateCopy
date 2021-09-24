@@ -11,6 +11,7 @@
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
 #include "Base/UI/UICanvas.h"
+#include "../../Event/EventManager.h"
 #include "Save/SaveData.h"
 
 
@@ -37,6 +38,8 @@ private:
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
+    //! イベント
+    std::weak_ptr<ratchet::event::EventManager> _event_manager;
 public:
     /// <summary>
     /// コンストラクタ
@@ -61,6 +64,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

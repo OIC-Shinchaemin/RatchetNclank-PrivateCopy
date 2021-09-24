@@ -42,13 +42,6 @@ bool ratchet::event::EnemyViewEvent::Initialize(void) {
         target + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
         target + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
         target + Mof::CVector3(0.0f, 10.0f, 60.0f) * dir,
-
-        //target + Mof::CVector3(0.0f, 10.0f, 40.0f) * dir,
-        //target + Mof::CVector3(0.0f, 10.0f, 10.0f) * dir,
-        //target + Mof::CVector3(0.0f, 10.0f, 10.0f) * dir,
-       
-        //target + Mof::CVector3(0.0f, 1.0f, 1.0f) * dir,
-        //target + Mof::CVector3(0.0f, 1.0f, 1.0f) * dir,
     };
     std::vector<Mof::CVector3> control_points_position = {
         p ,
@@ -58,13 +51,6 @@ bool ratchet::event::EnemyViewEvent::Initialize(void) {
         p + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
         p + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
         p + Mof::CVector3(0.0f, 20.0f, 60.0f) * dir + Mof::CVector3(0.0f, 10.0f, 0.0f),
-
-        //p + Mof::CVector3(0.0f, 20.0f, 40.0f) * dir + Mof::CVector3(0.0f, 10.0f, 0.0f),
-        //p + Mof::CVector3(0.0f, 20.0f, -10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
-        //p + Mof::CVector3(0.0f, 20.0f, -10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
-
-        //p + Mof::CVector3(0.0f, 20.0f, -10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
-        //p + Mof::CVector3(0.0f, 20.0f, -10.0f) * dir + Mof::CVector3(0.0f, 20.0f, 0.0f),
     };
 
     _camera_controller->TimerReset(6.0f);

@@ -3,18 +3,22 @@
 #include "Base/Core/Utility.h"
 #include "../../UI/GameMoneyMenu.h"
 
+#include "../../Event/BridgeEvent.h"
+
 
 ratchet::game::gamesystem::GameMoney::GameMoney() :
     _value(),
     _value_max(40),
     _subject(),
     _resource(),
-    _ui_canvas() {
+    _ui_canvas(),
+    _event_manager() {
 }
 
 ratchet::game::gamesystem::GameMoney::~GameMoney() {
     _resource.reset();
     _ui_canvas.reset();
+    _event_manager.reset();
 }
 
 void ratchet::game::gamesystem::GameMoney::OnNotify(int add_money) {
@@ -22,10 +26,17 @@ void ratchet::game::gamesystem::GameMoney::OnNotify(int add_money) {
     if (this->_value < 0) {
         this->_value = 0;
     } // if
-    
+
     auto message = game::gamesystem::GameMoneyMessage();
     message.money = _value;
     message.money_max = _value_max;
+
+    if (message.money > message.money_max) {
+        if (auto e = _event_manager.lock()) {
+            auto bridge_event = e->CreateGameEvent<ratchet::event::BridgeEvent>();
+            bridge_event->Initialize();
+        } // if
+    } // if
     _subject.Notify(message);
 }
 
@@ -35,6 +46,10 @@ void ratchet::game::gamesystem::GameMoney::SetResourceManager(std::weak_ptr<ratc
 
 void ratchet::game::gamesystem::GameMoney::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
+}
+
+void ratchet::game::gamesystem::GameMoney::SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr) {
+    this->_event_manager = ptr;
 }
 
 std::uint32_t ratchet::game::gamesystem::GameMoney::GetValue(void) const {

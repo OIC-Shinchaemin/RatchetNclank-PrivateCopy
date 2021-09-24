@@ -31,6 +31,10 @@ private:
     ratchet::camera::CameraController::CameraInfo _info;
     //! プレイヤービュー
     std::weak_ptr<base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>> _camera_com;
+    //! 実行時間
+    base::core::Timer _timer;
+    //! 実行時間
+    const float _time;
 public:
     /// <summary>
     /// コンストラクタ

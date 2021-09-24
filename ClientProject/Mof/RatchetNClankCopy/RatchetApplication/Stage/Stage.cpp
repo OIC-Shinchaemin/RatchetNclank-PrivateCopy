@@ -1,6 +1,7 @@
 #include "Stage.h"
 #include "Parser/JsonStageParser.h"
 #include "../DebugManager.h"
+#include "../Event/EventReferenceTable.h"
 
 
 void Stage::RenderObject(const StageObjectPtr& obj) {
@@ -145,7 +146,6 @@ void Stage::Render(void) {
 /// ‰ð•ú
 /// </summary>
 void Stage::Release(void) {
-
 	_woodbox_array.clear();
 	_gimmick_array.clear();
 	_ENEMY_spawn_array.clear();
