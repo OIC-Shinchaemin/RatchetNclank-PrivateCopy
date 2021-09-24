@@ -38,20 +38,20 @@ bool ratchet::event::EnemyViewEvent::Initialize(void) {
 
 	std::vector<Mof::CVector3> control_points_target = {
 		target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
-
-		target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
-		target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
+		//target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
+		//target + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
 		target + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
-		target + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
-		target + Mof::CVector3(0.0f, 10.0f, 60.0f) * dir,
+		//target + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
+		target + Mof::CVector3(190.0f, -30.0f, -70.0f) ,
+		target + Mof::CVector3(190.0f, 20.0f, -70.0f) ,
 	};
 	std::vector<Mof::CVector3> control_points_position = {
 		p ,
-
 		p + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
 		p + Mof::CVector3(0.0f, 0.0f, 1.0f) * dir,
 		p + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
 		p + Mof::CVector3(0.0f, 0.0f,  60.0f) * dir,
+		p + Mof::CVector3(0.0f, 20.0f, 60.0f) * dir + Mof::CVector3(0.0f, 10.0f, 0.0f),
 		p + Mof::CVector3(0.0f, 20.0f, 60.0f) * dir + Mof::CVector3(0.0f, 10.0f, 0.0f),
 	};
 
