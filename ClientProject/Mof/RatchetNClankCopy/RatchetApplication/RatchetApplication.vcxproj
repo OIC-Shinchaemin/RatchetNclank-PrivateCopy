@@ -319,6 +319,7 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.cpp" />
@@ -329,6 +330,7 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.cpp" />
@@ -393,6 +395,7 @@
     <ClCompile Include="Component\Item\NanotechItem\NanotechItemDefaultComponent.cpp" />
     <ClCompile Include="Component\Item\NanotechItem\NanotechItemGravitateComponent.cpp" />
     <ClCompile Include="Component\Item\NanotechItem\NanotechItemMovedComponent.cpp" />
+    <ClCompile Include="Component\King\KingComponent.cpp" />
     <ClCompile Include="Component\MeshComponent.cpp" />
     <ClCompile Include="Component\MotionComponent.cpp" />
     <ClCompile Include="Component\MotionStateComponent.cpp" />
@@ -425,6 +428,7 @@
     <ClCompile Include="Component\Player\PlayerThrowAttackEndComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerThrowAttackSetComponent.cpp" />
     <ClCompile Include="Component\Player\PlayerOmniWrenchComponent.cpp" />
+    <ClCompile Include="Component\Queen\QueenComponent.cpp" />
     <ClCompile Include="Component\RenderComponent.cpp" />
     <ClCompile Include="Component\Scarecrow\ScarecrowComponent.cpp" />
     <ClCompile Include="Component\Ship\ShipActionComponent.cpp" />
@@ -683,6 +687,7 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.h" />
@@ -693,6 +698,7 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerShopCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerWaterFlowCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.h" />
@@ -764,6 +770,7 @@
     <ClInclude Include="Component\Item\NanotechItem\NanotechItemDefaultComponent.h" />
     <ClInclude Include="Component\Item\NanotechItem\NanotechItemGravitateComponent.h" />
     <ClInclude Include="Component\Item\NanotechItem\NanotechItemMovedComponent.h" />
+    <ClInclude Include="Component\King\KingComponent.h" />
     <ClInclude Include="Component\MeshComponent.h" />
     <ClInclude Include="Component\MotionComponent.h" />
     <ClInclude Include="Component\MotionStateComponent.h" />
@@ -797,6 +804,7 @@
     <ClInclude Include="Component\Player\PlayerThrowAttackEndComponent.h" />
     <ClInclude Include="Component\Player\PlayerThrowAttackSetComponent.h" />
     <ClInclude Include="Component\Player\PlayerOmniWrenchComponent.h" />
+    <ClInclude Include="Component\Queen\QueenComponent.h" />
     <ClInclude Include="Component\RenderComponent.h" />
     <ClInclude Include="Component\Scarecrow\ScarecrowComponent.h" />
     <ClInclude Include="Component\Ship\ShipActionComponent.h" />

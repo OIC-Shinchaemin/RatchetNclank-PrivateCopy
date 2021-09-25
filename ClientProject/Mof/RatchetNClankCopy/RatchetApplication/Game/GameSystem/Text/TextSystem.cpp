@@ -395,29 +395,22 @@ ratchet::game::gamesystem::text::TextSystem::TextSystem() :
 
 	_path_map.emplace(TextEventType::TutorialEventNo0, "script/tutorial_event_0_start.txt");
 	_path_map.emplace(TextEventType::TutorialEventNo1, "script/tutorial_event_2_start.txt");
-	//_path_map.emplace(TextEventType::TutorialEventNo2, "script/tutorial_event_2_start.txt");
-
 	_path_map.emplace(TextEventType::TutorialEventNo0End, "script/tutorial_event_0_end.txt");
 	_path_map.emplace(TextEventType::TutorialEventNo1End, "script/tutorial_event_2_end.txt");
-	//_path_map.emplace(TextEventType::TutorialEventNo2End, "script/tutorial_event_2_end.txt");
-
 	_path_map.emplace(TextEventType::KingTextEvent, "script/king_text_event.txt");
 	_path_map.emplace(TextEventType::KingFreeTalkTextEvent, "script/king_free_talk_text_event.txt");
-
 	_path_map.emplace(TextEventType::ItemCollectionCompleteEvent, "script/item_collection_complete_event.txt");
 	_path_map.emplace(TextEventType::TeachPlazaEvent, "script/teach_plaza_event.txt");
+	_path_map.emplace(TextEventType::QueenTextEvent, "script/queen_text_event.txt");
+	_path_map.emplace(TextEventType::QueenFreeTalkTextEvent, "script/queen_free_talk_text_event.txt");
 }
 
 ratchet::game::gamesystem::text::TextSystem::~TextSystem() {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::OnNotify(const TextSystemMessage& message) {
-	//if (auto scene = _scene.lock()) {
-	//	scene->SetState(scene::Scene::State::Sleep);
-	//} // if
 	if (auto player = _player.lock()) {
 		player->Sleep();
-		//->SetState(scene::Scene::State::Sleep);
 	} // if
 
 
@@ -425,8 +418,6 @@ void ratchet::game::gamesystem::text::TextSystem::OnNotify(const TextSystemMessa
 	//フラグの初期化
 	::memset(_flags, 0, sizeof(int) * _flag_count);
 	//スクリプトを読み込む
-	//if (!this->LoadScript("script/test.txt")) {
-
 	auto path = _path_map.at(message.type);
 	if (!this->LoadScript(path.c_str())) {
 		return;

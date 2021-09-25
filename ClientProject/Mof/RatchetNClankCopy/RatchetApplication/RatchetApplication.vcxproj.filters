@@ -367,6 +367,18 @@
     <Filter Include="Ratchet\Source\Game\GameSystem\Mission">
       <UniqueIdentifier>{0f41290c-cb9d-4880-a9d4-c093572da3a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Source\Component\King">
+      <UniqueIdentifier>{9b607c54-5ef5-4f91-82dc-b3d3a2aec797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\King">
+      <UniqueIdentifier>{db212138-31f9-491e-afc2-6e955d552a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Queen">
+      <UniqueIdentifier>{0288ef50-2ee0-4e82-b0e7-c0711ba3559c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Queen">
+      <UniqueIdentifier>{ef3eb371-e96b-4e14-b718-3f0372dc41b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1241,6 +1253,18 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.cpp">
       <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\King\KingComponent.cpp">
+      <Filter>Ratchet\Source\Component\King</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Queen\QueenComponent.cpp">
+      <Filter>Ratchet\Source\Component\Queen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2404,6 +2428,18 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\King\KingComponent.h">
+      <Filter>Ratchet\Header\Component\King</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Queen\QueenComponent.h">
+      <Filter>Ratchet\Header\Component\Queen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

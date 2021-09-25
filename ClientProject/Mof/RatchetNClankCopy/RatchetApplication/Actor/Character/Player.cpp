@@ -115,9 +115,10 @@ void ratchet::actor::character::Player::PopNotificationableSubject(const std::st
 }
 
 void ratchet::actor::character::Player::End(void) {
+    if (_current_weapon) {
+        _current_weapon->SetScale(math::vec3::kZero);
+    } // if
     super::End();
-
-    _current_weapon->SetScale(math::vec3::kZero);
     ratchet::event::EventReferenceTable::Singleton().Dispose(super::GetName());
     ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
 }
@@ -189,9 +190,12 @@ bool ratchet::actor::character::Player::Render(void) {
 //#endif // _DEBUG
     return true;
 }
-
+#include "../../Event/EventReferenceTable.h"
 bool ratchet::actor::character::Player::Release(void) {
     super::Release();
+
+    if (event::EventReferenceTable::Singleton().Exist("")) {
+    } // if
 
     _quest_subject.Clear();
     _shop_system_subject.subject.Clear();

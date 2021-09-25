@@ -22,6 +22,10 @@
 #include "../Component/Collision/CollisionComponentInclude.h"
 #include "../Component/Weapon/OmniWrench/OmniWrenchComponentInclude.h"
 #include "../Component/Ship/ShipComponentInclude.h"
+
+#include "../Component/King/KingComponent.h"
+#include "../Component/Queen/QueenComponent.h"
+
 #include "../Component/Item/BoltComponentInclude.h"
 #include "../Component/Item/BulletItem/BulletItemComponentInclude.h"
 #include "../Component/Item/NanotechItem/NanotechItemComponentInclude.h"
@@ -53,6 +57,10 @@ ratchet::factory::ComponentFactory::ComponentFactory() :
 #include "ComponentRegister/CollisionComponentRegister.h"
 #include "ComponentRegister/OmniWrenchComponentRegister.h"
 #include "ComponentRegister/ShipComponentRegister.h"
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::king::KingComponent>();
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::queen::QueenComponent>();
+
+
 
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::collision::BoltCollisionComponent>();
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::scarecrow::ScarecrowComponent>();

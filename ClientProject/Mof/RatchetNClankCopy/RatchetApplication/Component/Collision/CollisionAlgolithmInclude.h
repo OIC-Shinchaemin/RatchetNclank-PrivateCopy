@@ -15,6 +15,9 @@
 #include "Algolithm/EnemyPyrocitorBulletCollisionAlgolithm.h"
 
 #include "Algolithm/NanotechItemPlayerCollisionAlgolithm.h"
+#include "Algolithm/KingPlayerCollisionAlgolithm.h"
+#include "Algolithm/QueenPlayerCollisionAlgolithm.h"
+
 
 #include "Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
 #include "Algolithm/PlayerEnemyCollisionAlgolithm.h"

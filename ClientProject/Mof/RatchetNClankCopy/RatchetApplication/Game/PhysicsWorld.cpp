@@ -31,6 +31,9 @@ void ratchet::game::PhysicsWorld::GenerateLayer(void) {
 
 
       ratchet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm.c_str(),
+      
+      ratchet::CollisionAlgolithmType::kKingPlayerCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kQueenPlayerCollisionAlgolithm.c_str(),
 
 
 
@@ -88,6 +91,8 @@ ratchet::game::PhysicsWorld::PhysicsWorld() :
 
     collision_algolithm_factory.Register<ratchet::NanotechItemPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kNanotechItemPlayerCollisionAlgolithm);
 
+    collision_algolithm_factory.Register<ratchet::KingPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kKingPlayerCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::QueenPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kQueenPlayerCollisionAlgolithm);
 
     collision_algolithm_factory.Register<ratchet::ScarecrowBlasterBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kScarecrowBlasterBulletCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::ScarecrowBombGloveBulletCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kScarecrowBombGloveBulletCollisionAlgolithm);

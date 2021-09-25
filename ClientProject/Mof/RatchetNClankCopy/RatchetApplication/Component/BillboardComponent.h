@@ -16,6 +16,10 @@ private:
     std::weak_ptr<Mof::CTexture> _texture;
     //! 表示色
     Mof::CVector4 _color;
+    //! オフセット
+    Mof::CVector3 _offset_position;
+    //! オフセット
+    Mof::CVector3 _offset_rotation;
 public:
     /// <summary>
     /// コンストラクタ
@@ -41,6 +45,16 @@ public:
     /// </summary>
     /// <param name="mesh"></param>
     void SetTexture(const std::shared_ptr<Mof::CTexture>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetOffsetPosition(const Mof::CVector3& value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetOffsetRotation(const Mof::CVector3& value);
     /// <summary>
     /// ゲッター
     /// </summary>

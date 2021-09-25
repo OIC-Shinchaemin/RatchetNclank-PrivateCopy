@@ -4,6 +4,7 @@
 #include "../../Component/VelocityComponent.h"
 #include "../../Component/MeshComponent.h"
 #include "../../Component/HPComponent.h"
+#include "../../Component/BillboardComponent.h"
 #include "../../Factory/FactoryManager.h"
 #include "../../Camera/FollowCameraController.h"
 #include "../Character/Player.h"
@@ -18,7 +19,6 @@ void ratchet::actor::character::King::PlayerActionLiberate(void) {
 
 void ratchet::actor::character::King::BarricadeCreate(ratchet::actor::Actor::Param* param, std::shared_ptr<ratchet::scene::GameScene> out) {
     def::Transform transforms[]{
-
         def::Transform(Mof::CVector3(-14.0f, -5.2f, -20.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
         def::Transform(Mof::CVector3(-14.0f, -5.2f, -18.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
         def::Transform(Mof::CVector3(-14.0f, -5.2f, -16.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
@@ -33,8 +33,6 @@ void ratchet::actor::character::King::BarricadeCreate(ratchet::actor::Actor::Par
         def::Transform(Mof::CVector3(-20.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
         def::Transform(Mof::CVector3(-22.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
         def::Transform(Mof::CVector3(-24.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
-        //def::Transform(Mof::CVector3(-10.0f, -5.2f, -12.0f),Mof::CVector3(0.0f,0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
-        //def::Transform(Mof::CVector3(-15.0f, -5.2f, -10.0f),Mof::CVector3(0.0f,90.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
     };
     param->tag = "barricade";
     for (auto& transform : transforms) {
@@ -91,7 +89,7 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
         auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index - 1;
         message.type = static_cast<decltype(message.type)>(type_temp);
         message.on_close = [&]() {
-            
+
             auto target = super::GetPosition();
             auto player_camera = _player_view_camera_controller->GetService();
             auto dir = target - _player.lock()->GetPosition();
@@ -99,7 +97,7 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
             _player_view_camera_controller->GetService()->SetAltitude(20.0f);
             return true;
         };
-        _text_system_message_subject.Notify(message);
+        super::GetTextSystemMessageSubject()->Notify(message);
 
         this->_event_icon_show = true;
         _event_active = false;
@@ -131,10 +129,6 @@ void ratchet::actor::character::King::SetHelpDesk(const std::shared_ptr<ratchet:
 
 bool ratchet::actor::character::King::Initialize(ratchet::actor::Actor::Param* param) {
     super::Initialize(param);
-
-    auto velocity = super::GetComponent<ratchet::component::VelocityComponent>();
-    velocity->Inactivate();
-    velocity->SetUseGravity(false);
     return true;
 }
 
@@ -149,25 +143,6 @@ bool ratchet::actor::character::King::Update(float delta_time) {
 
 bool ratchet::actor::character::King::Render(void) {
     super::Render();
-
-    // •`‰æ
-    auto pos = super::GetPosition();
-    float height = 2.4f;
-    auto transform = def::Transform(Mof::CVector3(pos.x, pos.y + height, pos.z));
-    if (_event_icon_show) {
-        if (auto tex = _question_texture.lock(); tex) {
-            Mof::CMatrix44 scale, rotate, translate;
-            Mof::CQuaternion quat; quat.Rotation(transform.rotate);
-
-            scale.Scaling(transform.scale, scale);
-            quat.ConvertMatrixTranspose(rotate);
-            translate.Translation(transform.position, translate);
-
-            Mof::CMatrix44 world = scale * rotate * translate;
-            auto camera = ::CGraphicsUtilities::GetCamera();
-            tex->Render(camera->GetBillBoardMatrix() * world);
-        } // if
-    } // if
     return true;
 }
 
@@ -192,7 +167,7 @@ void ratchet::actor::character::King::Talk(void) {
 
             return true;
         };
-        _text_system_message_subject.Notify(message);
+        super::GetTextSystemMessageSubject()->Notify(message);
 
         if (!_event_active) {
             if (message.type == decltype(message.type)::TutorialEventNo1) {
@@ -231,22 +206,21 @@ void ratchet::actor::character::King::Talk(void) {
 
                 _player_view_camera_controller->GetService()->SetAzimuth(10);
                 _player_view_camera_controller->GetService()->SetAltitude(20);
-                
+
                 if (auto help_desk = _help_desk.lock()) {
                     help_desk->Show();
                 } // if
                 auto hp_com = _player.lock()->GetComponent<component::HpComponent>();
-                if(hp_com){
+                if (hp_com) {
                     hp_com->RegisterUI();
                 } // if
                 return true;
             };
-
             _free_talk_index++;
         } // if
         else {
             message.type = decltype(message.type)::KingFreeTalkTextEvent;
         } // else
-        _text_system_message_subject.Notify(message);
+        super::GetTextSystemMessageSubject()->Notify(message);
     } // else
 }

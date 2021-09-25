@@ -8,5 +8,11 @@ ratchet::actor::character::Character::Character() :
 ratchet::actor::character::Character::~Character() {
 }
 
+bool ratchet::actor::character::Character::Release() {
+    super::Release();
+    _text_system_message_subject.Clear();
+    return true;
+}
+
 void ratchet::actor::character::Character::Talk() {
 }

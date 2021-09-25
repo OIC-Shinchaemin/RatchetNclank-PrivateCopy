@@ -9,6 +9,9 @@ namespace ratchet::actor::character {
 class Queen:
     public actor::character::Character {
     using super = actor::character::Character;
+private:
+    //! イベント発火済み
+    bool _event_activated;
 public:
     /// <summary>
     /// コンストラクタ
