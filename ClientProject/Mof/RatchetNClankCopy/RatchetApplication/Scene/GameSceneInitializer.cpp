@@ -177,16 +177,16 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         } // if
 
         auto& elem_list = document["element_list"];
-
+        std::string file_path = std::string("../Resource/builder/");
         for (int i = 0, n = elem_list.Size(); i < n; i++) {
             auto& elem_data = elem_list[i];
-            std::string type =  elem_data["type"].GetString();
+            std::string type = elem_data["type"].GetString();
             std::string builder_path = elem_data["builder_path"].GetString();
             auto& paramater = elem_data["paramater"];
             std::string name = paramater["name"].GetString();
             std::string tag = paramater["tag"].GetString();
             auto& transform = elem_data["transform"];
-            auto pos = transform["position"].GetArray(); 
+            auto pos = transform["position"].GetArray();
             auto rot = transform["rotation"].GetArray();
             auto sca = transform["scale"].GetArray();
 
@@ -202,15 +202,15 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
                 param->transform.scale[j] = sca[j].GetFloat();
             } // for
             if (type == "Barrack") {
-                auto elem = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Barrack>(builder_path.c_str(), param);
+                auto elem = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Barrack>((file_path + builder_path).c_str(), param);
                 out->AddElement(elem);
             } // if
         } // for
         {
-            //param->transform.position = Mof::CVector3(0.0f, -5.0f, 0.0f);
-            //param->transform.rotate = Mof::CVector3(0.0f, 0.0f, 0.0f);
-            //auto elem = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Barrack>("../Resource/builder/barrack.json", param);
-            //out->AddElement(elem);
+            param->transform.position = Mof::CVector3(0.0f, -5.0f, 0.0f);
+            param->transform.rotate = Mof::CVector3(0.0f, 0.0f, 0.0f);
+            auto elem = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Barrack>("../Resource/builder/barrack.json", param);
+            out->AddElement(elem);
         }
     }
 
