@@ -19,7 +19,6 @@ void ratchet::camera::FollowCameraController::UpdateCameraPosition(float delta_t
     else {
         camera->SetPosition(ideal_pos);
     } // else
-
 }
 
 void ratchet::camera::FollowCameraController::UpdateTargetPosition(float delta_time, const std::shared_ptr<ratchet::camera::Camera>& camera, Mof::CVector3 ideal_position) {
@@ -68,7 +67,7 @@ ratchet::camera::FollowCameraController::FollowCameraController() :
     _param.azimuth = 270.0f;
     _param.altitude = this->GetDefaultAltitude();
     _param.spring = 30.0f;
-    _param.dumping = std::sqrtf(_param.spring) * 2.0f;
+    _param.dumping = std::sqrtf(_param.spring) * 2.0f;    
 }
 
 ratchet::camera::FollowCameraController::~FollowCameraController() {
@@ -79,10 +78,14 @@ void ratchet::camera::FollowCameraController::SetInterpolateTargetPositionFlag(b
 }
 
 bool ratchet::camera::FollowCameraController::Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) {
-
+    _previous_position = _camera->GetPosition();
+     
     _target = info.target_position;
     _camera->SetTarget(_target);
     //this->UpdateTargetPosition(delta_time, _camera, info.target_position);
-    this->UpdateCameraPosition(delta_time, _camera);
+    
+    if (this->IsUpdatePositionFlag()) {
+        this->UpdateCameraPosition(delta_time, _camera);
+    } // if
     return true;
 }

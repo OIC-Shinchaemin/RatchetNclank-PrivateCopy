@@ -7,6 +7,7 @@
 #include <stack>
 
 #include "../../Scene/SceneDefine.h"
+#include "Base/Core/Timer.h"
 
 
 namespace ratchet::game::gamesystem {
@@ -83,6 +84,8 @@ private:
     base::core::Observable<const scene::SceneMessage&> _scene_message_subject;
     //! 通知用
     base::core::Observable<bool> _title_menu_subject;
+    //! 実行済み
+    bool _excuted;
 public:
     /// <summary>
     /// コンストラクタ

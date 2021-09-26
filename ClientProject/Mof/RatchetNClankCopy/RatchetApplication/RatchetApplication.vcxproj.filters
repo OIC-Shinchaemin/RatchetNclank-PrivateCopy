@@ -367,6 +367,27 @@
     <Filter Include="Ratchet\Source\Game\GameSystem\Mission">
       <UniqueIdentifier>{0f41290c-cb9d-4880-a9d4-c093572da3a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Source\Component\King">
+      <UniqueIdentifier>{9b607c54-5ef5-4f91-82dc-b3d3a2aec797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\King">
+      <UniqueIdentifier>{db212138-31f9-491e-afc2-6e955d552a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Queen">
+      <UniqueIdentifier>{0288ef50-2ee0-4e82-b0e7-c0711ba3559c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Queen">
+      <UniqueIdentifier>{ef3eb371-e96b-4e14-b718-3f0372dc41b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Stage">
+      <UniqueIdentifier>{c5c134f5-9967-42df-9b5d-485365a07c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Stage\Gimmick">
+      <UniqueIdentifier>{0f42b3a4-7a80-4cbc-93a4-c3b5e882ba9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Stage\Parser">
+      <UniqueIdentifier>{d86210b2-fc23-439c-a348-cfab09f40f68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1242,6 +1263,21 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.cpp">
       <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\King\KingComponent.cpp">
+      <Filter>Ratchet\Source\Component\King</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Queen\QueenComponent.cpp">
+      <Filter>Ratchet\Source\Component\Queen</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\LightPillar.cpp">
+      <Filter>Ratchet\Source\Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -1640,36 +1676,6 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\Gimmick\Elevator.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\WoodBox.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\Bridge.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Parser\JsonStageParser.h">
-      <Filter>Ratchet\Source\Stage\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Parser\StageParser.h">
-      <Filter>Ratchet\Source\Stage\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Ratchet\Source\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageDefine.h">
-      <Filter>Ratchet\Source\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageFileFormat.h">
-      <Filter>Ratchet\Source\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageObject.h">
-      <Filter>Ratchet\Source\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h">
       <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
     </ClInclude>
@@ -1693,9 +1699,6 @@
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h">
       <Filter>Ratchet\Header\Behaviour\Executor\Condition</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="Component\Collision\Object\CameraCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
@@ -2404,6 +2407,54 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\King\KingComponent.h">
+      <Filter>Ratchet\Header\Component\King</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Queen\QueenComponent.h">
+      <Filter>Ratchet\Header\Component\Queen</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\LightPillar.h">
+      <Filter>Ratchet\Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\StageParser.h">
+      <Filter>Ratchet\Header\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\JsonStageParser.h">
+      <Filter>Ratchet\Header\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Bridge.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Elevator.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\WoodBox.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

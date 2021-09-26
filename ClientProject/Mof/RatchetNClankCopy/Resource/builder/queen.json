@@ -1,5 +1,13 @@
 {
   "components": [
+    {
+      "type": "QueenComponent",
+      "paramater": {
+        "priority": 0,
+        "height": 1.5,
+        "volume": 0.5
+      }
+    },
 
     {
       "type": "VelocityComponent",
@@ -18,6 +26,13 @@
       "paramater": {
         "priority": 0,
         "path": "../Resource/mesh/queen/queen.mom"
+      }
+    },
+    {
+      "type": "BillboardComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/texture/ui/icon/question.png"
       }
     },
     {

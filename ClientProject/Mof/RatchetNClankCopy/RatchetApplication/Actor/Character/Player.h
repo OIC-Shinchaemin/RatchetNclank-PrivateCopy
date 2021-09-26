@@ -49,8 +49,6 @@ private:
     std::weak_ptr<component::player::PlayerComponent> _player_com;
     //! 腕の位置
     Mof::LPBONEMOTIONSTATE _upp_bone_state;
-    //! 有効
-    //bool _enable;
     //! 通知用
     ObservablePair _shop_system_subject;
     //! 通知用

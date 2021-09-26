@@ -13,7 +13,7 @@ ratchet::camera::ThirdPersonCameraController::~ThirdPersonCameraController() {
 }
 
 bool ratchet::camera::ThirdPersonCameraController::Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) {
-    _preview_position = _position;
+    super::_previous_position= _position;
     _position = info.ideal_position;
     _target = info.target_position;
     this->UpdateCameraPosition(delta_time, _camera);

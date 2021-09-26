@@ -7,7 +7,7 @@
 #include "../../Executor/Decorator/IfTargetOutMeleeAttackRangeNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class IfTargetOutMeleeAttackRangeNode : public ratchet::behaviour::DecoratorNodeBase {
     using super = ratchet::behaviour::DecoratorNodeBase;
     using Executor = ratchet::behaviour::IfTargetOutMeleeAttackRangeNodeExecutor;
@@ -40,7 +40,7 @@ public:
     /// <returns>false:é¿çsÇÃé∏îs</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        
+
         auto target = args.ENEMY_com.lock()->GetTarget();
         if (target.expired()) {
             return false;
@@ -51,6 +51,5 @@ public:
         return !range_sphere.CollisionPoint(pos);
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_IF_TARGET_OUT_MELEE_ATTACK_NODE_H

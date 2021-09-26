@@ -48,6 +48,7 @@ private:
     bool _active;
     //! 表示中
     BYTE _alpha = 0;
+    //! テクスチャ
     CTexture _text_window_texture;
     CScript _script;
     CDynamicArray<CSprite2D*> _sprite_list;

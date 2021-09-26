@@ -17,6 +17,7 @@
 #include "../GameDefine.h"
 #include "Base/Core/Observer.h"
 #include "Base/UI/UICanvas.h"
+#include "../Light/LightManager.h"
 
 
 namespace ratchet::scene {
@@ -58,6 +59,8 @@ protected:
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
+    //! ライト
+    std::weak_ptr<ratchet::light::LightManager> _light_manager;
     //! 読み込み済み
     bool _loaded;
     //! 同期
@@ -75,6 +78,8 @@ protected:
 
     std::shared_ptr<ratchet::ResourceMgr> GetResource(void) const;
     std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
+    std::shared_ptr<ratchet::light::LightManager> GetLightManager(void) const;
+
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
     virtual bool LoadingUpdate(float delta_time);
     virtual bool SceneUpdate(float delta_time);
@@ -101,6 +106,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr);
     /// <summary>
     /// セッター
     /// </summary>

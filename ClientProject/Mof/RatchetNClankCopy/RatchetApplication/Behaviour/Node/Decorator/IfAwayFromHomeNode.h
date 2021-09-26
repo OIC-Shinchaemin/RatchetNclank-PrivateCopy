@@ -7,7 +7,7 @@
 #include "../../Executor/Decorator/IfAwayFromHomeNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet ::behaviour {
 class IfAwayFromHomeNode : public ratchet::behaviour::DecoratorNodeBase {
     using super = ratchet::behaviour::DecoratorNodeBase;
     using Executor = ratchet::behaviour::IfAwayFromHomeNodeExecutor;
@@ -45,6 +45,5 @@ public:
         return distance > args.type_com.lock()->GetHomeDistance();
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_IF_AWAY_FROM_HOME_NODE_H

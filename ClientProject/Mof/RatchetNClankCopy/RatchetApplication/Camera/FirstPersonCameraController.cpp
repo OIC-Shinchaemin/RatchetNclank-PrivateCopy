@@ -27,7 +27,7 @@ void ratchet::camera::FirstPersonCameraController::SetInfo(const ratchet::camera
 }
 
 bool ratchet::camera::FirstPersonCameraController::Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) {
-    _preview_position = _position;
+    super::_previous_position= _position;
 
     auto displace = _position - info.ideal_position;
     auto accel = (displace * (-_param.spring)) - (_param.velocity * _param.dumping);

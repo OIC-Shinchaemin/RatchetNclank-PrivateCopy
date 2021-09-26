@@ -7,7 +7,7 @@
 #include "../../Executor/Decorator/RecognizingTargetNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class RecognizingTargetNode : public ratchet::behaviour::DecoratorNodeBase {
     using super = ratchet::behaviour::DecoratorNodeBase;
     using Executor = ratchet::behaviour::RecognizingTargetNodeExecutor;
@@ -44,6 +44,5 @@ public:
         return !target.expired();
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_RECOGNIZING_TARGET_NODE_H

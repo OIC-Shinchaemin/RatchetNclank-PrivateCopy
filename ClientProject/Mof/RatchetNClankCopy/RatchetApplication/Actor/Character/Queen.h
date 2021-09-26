@@ -3,12 +3,18 @@
 
 
 #include "Character.h"
+#include "../../Light/LightPillar.h"
 
 
 namespace ratchet::actor::character {
 class Queen:
     public actor::character::Character {
     using super = actor::character::Character;
+private:
+    //! イベント発火済み
+    bool _event_activated;
+    //! 光
+    std::weak_ptr<ratchet::light::LightPillar> _light_pillar;
 public:
     /// <summary>
     /// コンストラクタ

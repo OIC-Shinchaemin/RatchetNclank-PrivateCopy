@@ -185,7 +185,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    Mof::CVector3 GetPreviewPosition(void) const;
+    Mof::CVector3 GetPreviousPosition(void) const;
     /// <summary>
     /// ‰Šú‰»
     /// </summary>

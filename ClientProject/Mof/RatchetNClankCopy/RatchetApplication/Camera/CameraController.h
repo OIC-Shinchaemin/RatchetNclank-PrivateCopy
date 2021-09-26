@@ -54,11 +54,13 @@ protected:
     //! 対象
     Mof::CVector3 _target;
     //! 位置
-    Mof::CVector3 _preview_position;
+    Mof::CVector3 _previous_position;
     //! パラメータ
     ratchet::camera::CameraController::Param _param;
     //! ばね使用
     bool _use_spring;
+    //! ばね使用
+    bool _update_position_flag;
 public:
     /// <summary>
     /// セッター
@@ -113,6 +115,11 @@ public:
     /// </summary>
     /// <param name="flag"></param>
     void SetUseSpring(bool flag);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetUpdatePositionFlag(bool flag);
     /// <summary>
     /// セット
     /// </summary>
@@ -177,7 +184,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    Mof::CVector3 GetPreviewPosition(void) const;
+    Mof::CVector3 GetPreviousPosition(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsUpdatePositionFlag(void) const;
     /// <summary>
     /// 回転
     /// </summary>

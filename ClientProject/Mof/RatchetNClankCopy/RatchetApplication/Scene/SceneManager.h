@@ -14,6 +14,7 @@
 #include "Base/UI/UICanvas.h"
 #include "../Game/GameManager.h"
 #include "../Event/EventManager.h"
+#include "../Light/LightManager.h"
 #include "../Factory/Builder/IBuilder.h"
 #include "../Factory/Builder/Scene/TitleSceneBuilder.h"
 #include "../Factory/Builder/Scene/GameSceneBuilder.h"
@@ -35,6 +36,8 @@ class SceneManager : public std::enable_shared_from_this<ratchet::scene::SceneMa
         std::weak_ptr<ratchet::game::GameManager> game_manager;
         //! ゲームイベント
         std::weak_ptr<ratchet::event::EventManager> event_manager;
+        //! ライト
+        std::weak_ptr<ratchet::light::LightManager> light_manager;
     };
     struct CreateStruct {
         //! ファクトリー
@@ -59,15 +62,15 @@ private:
 
     template<typename Builder>
     void RegisterBuilder(const std::string& name) {
-            auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
-            auto ptr = ut::MakeSharedWithRelease<Builder>();
-            ptr->SetResourceManager(resource);
-            ptr->SetUICanvas(ui_canvas);
-            _create_struct.builders.emplace(name, ptr); ;
+        auto& [resource, ui_canvas, game_manager, event_manager, light] = _managers;
+        auto ptr = ut::MakeSharedWithRelease<Builder>();
+        ptr->SetResourceManager(resource);
+        ptr->SetUICanvas(ui_canvas);
+        _create_struct.builders.emplace(name, ptr); ;
     }
     template<>
     void RegisterBuilder<ratchet::factory::builder::scene::TitleSceneBuilder>(const std::string& name) {
-        auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
+        auto& [resource, ui_canvas, game_manager, event_manager, light] = _managers;
         auto ptr = ut::MakeSharedWithRelease<ratchet::factory::builder::scene::TitleSceneBuilder>();
         ptr->SetResourceManager(resource);
         ptr->SetUICanvas(ui_canvas);
@@ -76,12 +79,13 @@ private:
     }
     template<>
     void RegisterBuilder<ratchet::factory::builder::scene::GameSceneBuilder>(const std::string& name) {
-        auto& [resource, ui_canvas, game_manager, event_manager] = _managers;
+        auto& [resource, ui_canvas, game_manager, event_manager, light_manager] = _managers;
         auto ptr = ut::MakeSharedWithRelease<ratchet::factory::builder::scene::GameSceneBuilder>();
         ptr->SetResourceManager(resource);
         ptr->SetUICanvas(ui_canvas);
         ptr->SetGameManager(game_manager);
         ptr->SetEventManager(event_manager);
+        ptr->SetLightManager(light_manager);
         _create_struct.builders.emplace(name, ptr); ;
     }
 
@@ -126,6 +130,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr);
     /// <summary>
     /// 初期化
     /// </summary>

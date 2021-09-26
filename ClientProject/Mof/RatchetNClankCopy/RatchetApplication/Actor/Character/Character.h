@@ -11,9 +11,10 @@
 namespace ratchet::actor::character {
 class Character : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
-protected:
+private:
     //! 通知用
     ratchet::game::gamesystem::text::TextSystemMessageSubject _text_system_message_subject;
+protected:
 public:
     /// <summary>
     /// コンストラクタ
@@ -31,6 +32,12 @@ public:
     auto GetTextSystemMessageSubject(void) {
         return &this->_text_system_message_subject;
     }
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Release(void);
     /// <summary>
     /// 会話
     /// </summary>

@@ -1,6 +1,14 @@
 {
   "components": [
     {
+      "type": "KingComponent",
+      "paramater": {
+        "priority": 0,
+        "height": 1.5,
+        "volume": 0.5
+      }
+    },
+    {
       "type": "VelocityComponent",
       "paramater": {
         "priority": 99
@@ -17,6 +25,13 @@
       "paramater": {
         "priority": 0,
         "path": "../Resource/mesh/king/king.mom"
+      }
+    },
+    {
+      "type": "BillboardComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/texture/ui/icon/question.png"
       }
     },
     {

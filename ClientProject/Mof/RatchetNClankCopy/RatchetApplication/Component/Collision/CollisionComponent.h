@@ -13,6 +13,7 @@
 
 #include <Mof.h>
 
+#include "CollisionComponentDefine.h"
 #include "../../Stage/StageObject.h"
 #include "../../Stage/Gimmick/GimmickBase.h"
 #include "../VelocityComponent.h"
