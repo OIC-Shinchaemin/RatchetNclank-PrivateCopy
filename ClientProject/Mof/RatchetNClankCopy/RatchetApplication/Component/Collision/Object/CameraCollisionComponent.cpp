@@ -22,7 +22,12 @@ std::string ratchet::component::collision::CameraCollisionComponent::GetType(voi
 }
 
 std::optional<Mof::CSphere> ratchet::component::collision::CameraCollisionComponent::GetSphere(void) {
-    return std::optional<Mof::CSphere>();
+    _ASSERT_EXPR(!_camera_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
+        return std::optional<Mof::CSphere>();
+    } // if
+    auto pos = _camera_com.lock()->GetPosition();
+    return Mof::CSphere(pos, 0.5f);
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::CameraCollisionComponent::GetBox(void) {
@@ -58,26 +63,39 @@ std::shared_ptr<ratchet::component::Component> ratchet::component::collision::Ca
 }
 
 void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
-    if (!this->GetRay().has_value()) {
+    if (!this->GetSphere().has_value()) {
         return;
     } // if
     auto camera_com = _camera_com.lock();
+    auto controller = camera_com->GetCameraController()->GetService();
+
     auto pos = _camera_com.lock()->GetPosition();
-    auto ray = this->GetRay().value();
+    auto sphere = this->GetSphere().value();
     Mof::COLLISIONOUTGEOMETRY info;
     float matgin = 0.1f;
-    float volume = 2.0f;
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
         auto default_matrix = geometry->GetMatrix();
         Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
 
-        if (ray.CollisionGeometry(geometry, info)) {
-            if (info.d <= volume) {
-                camera_com->CollisionStage();
+        if (sphere.CollisionGeometry(geometry, info)) {
+            if (info.d <= sphere.r + matgin) {
+                
+                //auto camera = controller->GetCamera();
+                //camera->SetPosition(_non_collision_position);
+                //camera->Update();
+                
+                controller->SetAzimuth(_non_collision_angle.x);
+                //controller->SetAltitude(_non_collision_angle.y);
+                this->CollisionStage(mesh, obj);
             } // if
         } // if
+        else {
+            _non_collision_angle.x = controller->GetAzimuth();
+            _non_collision_angle.y = controller->GetAltitude();
+            //_non_collision_position = controller->GetCameraPosition();
+        } // else
         geometry->SetMatrix(default_matrix);
     } // for
 }

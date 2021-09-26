@@ -106,8 +106,8 @@ bool ratchet::scene::GameScene::SceneRender(void) {
 	_renderer.Render();
 	_stage.Render();
 
-
 	_effect->Render();
+	super::GetLightManager()->Render();
 
 	::g_pGraphics->SetDepthEnable(false);
 
@@ -291,6 +291,10 @@ bool ratchet::scene::GameScene::Release(void) {
 		_pause_menu_subject.Clear();
 		game->GameSystemRelease();
 	} // if
+	//if (auto light= _light_manager.lock()) {
+	//	light->Release();
+	//} // if
+
 	_text_system->Release();
 	_text_system.reset();
 	return true;

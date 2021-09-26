@@ -121,6 +121,10 @@ private:
     float _loading_progress;
     //! 終了
     bool _scene_end;
+    //! 入力タイマー
+    base::core::Timer _input_timer;
+    //! 入力フラグ
+    bool _input_flag;
 private:
     /// <summary>
     /// フェードアウト

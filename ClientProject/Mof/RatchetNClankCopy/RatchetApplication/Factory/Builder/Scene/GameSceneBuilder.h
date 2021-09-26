@@ -9,6 +9,7 @@
 #include "../../../Scene/GameScene.h"
 #include "../../../Game/GameManager.h"
 #include "../../../Event/EventManager.h"
+#include "../../../Light/LightManager.h"
 
 
 namespace ratchet::factory::builder::scene {
@@ -19,6 +20,8 @@ private:
     std::weak_ptr<ratchet::game::GameManager> _game;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event;
+    //! イベント
+    std::weak_ptr<ratchet::light::LightManager> _light;
 public:
     /// <summary>
     /// コンストラクタ
@@ -38,6 +41,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr);
     /// <summary>
     /// 解放
     /// </summary>

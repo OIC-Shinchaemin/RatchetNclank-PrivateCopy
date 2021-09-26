@@ -76,6 +76,10 @@ void ratchet::scene::SceneManager::SetEventManager(std::weak_ptr<ratchet::event:
 	this->_managers.event_manager = ptr;
 }
 
+void ratchet::scene::SceneManager::SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr) {
+	this->_managers.light_manager  = ptr;
+}
+
 bool ratchet::scene::SceneManager::Initialize(void) {
 	this->RegisterBuilder<ratchet::factory::builder::scene::TitleSceneBuilder>(ratchet::scene::SceneType::kTitleScene);
 	this->RegisterBuilder<ratchet::factory::builder::scene::SceneBuilder>(ratchet::scene::SceneType::kDescriptionScene);

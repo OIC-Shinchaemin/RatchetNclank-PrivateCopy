@@ -42,6 +42,7 @@ MofBool CGameApp::Initialize(void) {
 	_scene_manager->SetGameManager(_game_manager);
 	_scene_manager->SetEventManager(_event_manager);
 	_scene_manager->SetUICanvas(_ui_canvas);
+	_scene_manager->SetLightManager(_light_manager);
 	_scene_manager->Initialize();
 	return TRUE;
 }

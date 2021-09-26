@@ -27,6 +27,13 @@ std::shared_ptr<base::ui::UICanvas> ratchet::scene::Scene::GetUICanvas(void) con
     return nullptr;
 }
 
+std::shared_ptr<ratchet::light::LightManager> ratchet::scene::Scene::GetLightManager(void) const {
+    if (auto ptr = _light_manager.lock()) {
+        return ptr;
+    } // if
+    return nullptr;
+}
+
 Mof::LPRenderTarget ratchet::scene::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
 }
@@ -111,6 +118,7 @@ ratchet::scene::Scene::Scene() :
     _effect(),
     _resource(),
     _ui_canvas(),
+    _light_manager(),
     _loaded(false),
     _mutex(),
     _load_thread() {
@@ -129,6 +137,10 @@ void ratchet::scene::Scene::SetResourceManager(std::weak_ptr<ratchet::ResourceMg
 
 void ratchet::scene::Scene::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
+}
+
+void ratchet::scene::Scene::SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr) {
+    this->_light_manager = ptr;
 }
 
 void ratchet::scene::Scene::SetState(const ratchet::scene::Scene::State state) {

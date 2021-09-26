@@ -27,14 +27,20 @@ ratchet::scene::GameSceneInitializer::GameSceneInitializer() {
 bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game::GameManager>& game, std::shared_ptr<ratchet::event::EventManager>& event, std::shared_ptr<ratchet::scene::GameScene>& out) {
 	out->_stage.Initialize();
 	ratchet::event::EventReferenceTable::Singleton().Reset();
+
 	if (auto game = out->_game.lock()) {
 		ratchet::event::EventReferenceTable::Singleton().Register("GameManager", game);
 	} // if
 	if (auto e = out->_event.lock()) {
 		ratchet::event::EventReferenceTable::Singleton().Register("EventManager", e);
 	} // if
+	if (auto light = out->_light_manager.lock()) {
+		ratchet::event::EventReferenceTable::Singleton().Register("LightManager", light);
+	} // if
+
 
 	ratchet::event::EventReferenceTable::Singleton().Register("Stage", &out->_stage);
+	ratchet::event::EventReferenceTable::Singleton().Register("TextSystem", out->_text_system);
 
 	std::shared_ptr<ratchet::event::ShipEvent> ship_event;
 	std::shared_ptr<ratchet::event::StageViewEvent> stage_view_event;
@@ -123,6 +129,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		game_money->SetEventManager(out->_event.lock());
 		game_money->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
 		game_money->SetTextSystem(out->_text_system);
+		game_money->SetGameScene(out);
 		// game system
 		weapon_system->Initialize(shared_this);
 		quick_change->Initialize(weapon_system);
@@ -250,24 +257,23 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 		} // for
 	}
 
-	// npc
-	{
-		def::Transform npc_transforms[]{
-			def::Transform(Mof::CVector3(182.0f, -30.0f, 33.0f), Mof::CVector3(0.0f, 45.0f , 0.0f)),
-			def::Transform(Mof::CVector3(5.0f, -5.0f, -5.0f), Mof::CVector3(0.0f, 45.0f , 0.0f)),
-		};
-		param->tag = "queen";
-		param->name = "queen";
-		for (auto& transform : npc_transforms) {
-			param->transform.position = transform.position;
-			param->transform.rotate = transform.rotate;
-			param->transform.scale = transform.scale;
-			//auto queen = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::Actor>("../Resource/builder/queen.json", param);
-			auto queen = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Queen>("../Resource/builder/queen.json", param);
-			out->AddElement(queen);
-			queen->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
-		} // for
-	}
+	//// npc
+	//{
+	//	def::Transform npc_transforms[]{
+	//		//def::Transform(Mof::CVector3(182.0f, -30.0f, 33.0f), Mof::CVector3(0.0f, 45.0f , 0.0f)),
+	//		def::Transform(Mof::CVector3(5.0f, -5.0f, -5.0f), Mof::CVector3(0.0f, 0.0f , 0.0f)),
+	//	};
+	//	param->tag = "queen";
+	//	param->name = "queen";
+	//	for (auto& transform : npc_transforms) {
+	//		param->transform.position = transform.position;
+	//		param->transform.rotate = transform.rotate;
+	//		param->transform.scale = transform.scale;
+	//		auto queen = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Queen>("../Resource/builder/queen.json", param);
+	//		out->AddElement(queen);
+	//		queen->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
+	//	} // for
+	//}
 	ut::SafeDelete(param);
 	return true;
 }

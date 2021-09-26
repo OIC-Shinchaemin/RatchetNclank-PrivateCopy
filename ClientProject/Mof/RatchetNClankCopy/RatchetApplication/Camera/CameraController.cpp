@@ -12,7 +12,8 @@ ratchet::camera::CameraController::CameraController() :
     _camera(),
     _position(),
     _target(),
-    _preview_position() {
+    _previous_position(),
+    _update_position_flag(true){
 }
 
 ratchet::camera::CameraController::~CameraController() {
@@ -48,6 +49,10 @@ void ratchet::camera::CameraController::SetDumping(float value) {
 
 void ratchet::camera::CameraController::SetUseSpring(bool flag) {
     this->_use_spring = flag;
+}
+
+void ratchet::camera::CameraController::SetUpdatePositionFlag(bool flag) {
+    this->_update_position_flag = flag;
 }
 
 void ratchet::camera::CameraController::SetInfo(const ratchet::camera::CameraController::CameraInfo& info) {
@@ -99,8 +104,12 @@ Mof::CVector3 ratchet::camera::CameraController::GetVelocity(void) const {
     return this->_param.velocity;
 }
 
-Mof::CVector3 ratchet::camera::CameraController::GetPreviewPosition(void) const {
-    return this->_preview_position;
+Mof::CVector3 ratchet::camera::CameraController::GetPreviousPosition(void) const {
+    return this->_previous_position;
+}
+
+bool ratchet::camera::CameraController::IsUpdatePositionFlag(void) const {
+    return this->_update_position_flag;
 }
 
 void ratchet::camera::CameraController::AddAzimuth(float degree) {
