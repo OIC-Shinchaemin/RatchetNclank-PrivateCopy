@@ -89,8 +89,11 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
                                ratchet::component::collision::CollisionComponentType::kOmniWrenchCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 1;
+
         if (auto type_com = _enemy_com.lock()) {
             type_com->DamageEffectEmit(in.target.lock());
+
+            type_com->GetOwnerCastd()->GetCharacterDamageApplyMessageSubject()->Notify({});
         } // if
         this->CollisionAction(in);
         return true;

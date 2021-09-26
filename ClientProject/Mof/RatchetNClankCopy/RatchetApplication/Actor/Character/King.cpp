@@ -86,7 +86,7 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
     ut::EraseRemove(_created_scarecrows, msg.ptr);
     if (_created_scarecrows.empty()) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
-        auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index - 1;
+        auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index;
         message.type = static_cast<decltype(message.type)>(type_temp);
         message.on_close = [&]() {
 
@@ -101,6 +101,7 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
 
         this->_event_icon_show = true;
         _event_active = false;
+        _quest_index++;
     } // if
 }
 
@@ -183,6 +184,7 @@ void ratchet::actor::character::King::Talk(void) {
                 auto emitter = effect->CreateEmitter();
                 scarecrow->SetEffectEmitter(emitter);
                 scarecrow->GetScarecrowEndMessageSubject()->AddObserver(std::dynamic_pointer_cast<ratchet::actor::character::King>(shared_from_this()));
+                scarecrow->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
                 out->AddElement(scarecrow);
                 _created_scarecrows.push_back(scarecrow);
             } // for
@@ -192,7 +194,7 @@ void ratchet::actor::character::King::Talk(void) {
             player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
             this->PlayerActionLiberate();
             ut::SafeDelete(param);
-            _quest_index++;
+        //    _quest_index++;
         } // if
         _event_active = true;
     } // if

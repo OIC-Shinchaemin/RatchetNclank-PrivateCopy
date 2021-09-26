@@ -2,7 +2,8 @@
 #define RATCHET_ACTOR_CHARACTER_SCARECROW_H
 
 
-#include "../Actor.h"
+//#include "../Actor.h"
+#include "Character.h"
 
 #include "Base/Accessor/Accessor.h"
 
@@ -17,8 +18,8 @@ struct ScarecrowEndMessage {
 using ScarecrowEndMessageSubject = base::core::Observable<const ScarecrowEndMessage&>;
 using ScarecrowEndMessageListener = base::core::Observer<const ScarecrowEndMessage&>;
 
-class Scarecrow : public actor::Actor {
-    using super = actor::Actor;
+class Scarecrow : public actor::character::Character{
+    using super = actor::character::Character;
 private:
     //! èIóπéûí ímóp
     ratchet::actor::character::ScarecrowEndMessageSubject _end_message_subject;

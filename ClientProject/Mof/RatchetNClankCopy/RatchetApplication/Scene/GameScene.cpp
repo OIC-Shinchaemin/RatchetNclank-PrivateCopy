@@ -1,17 +1,18 @@
 #include "GameScene.h"
 
 #include "../Gamepad.h"
-#include "../Factory/FactoryManager.h"
-#include "../Actor/Character/Enemy.h"
-#include "../Actor/Character/Player.h"
-#include "../Actor/Facility/Shop.h"
-#include "../Actor//Terrain/Terrain.h"
-#include "../Component/CameraComponent.h"
-#include "../Stage/Gimmick/Bridge.h"
-#include "../Event/BridgeEvent.h"
-#include "../Event/ShipEvent.h"
-#include "../Event/StageViewEvent.h"
+//#include "../Factory/FactoryManager.h"
+//#include "../Actor/Character/Enemy.h"
+//#include "../Actor/Character/Player.h"
+//#include "../Actor/Facility/Shop.h"
+//#include "../Actor//Terrain/Terrain.h"
+//#include "../Component/CameraComponent.h"
+//#include "../Stage/Gimmick/Bridge.h"
+//#include "../Event/BridgeEvent.h"
+//#include "../Event/ShipEvent.h"
 #include "../Event/TextSystemStartEvent.h"
+#include "../Event/HitStopEvent.h"
+
 #include "../Event/EventReferenceTable.h"
 #include "GameSceneInitializer.h"
 #include "../TutorialManager.h"
@@ -82,7 +83,6 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
 			super::SetState(State::Active);
 		} // if
 	} // if
-
 	_effect->Update(delta_time);
 	return true;
 }
@@ -181,6 +181,14 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::event::StageViewEventMes
 			text_system_start_event->SetTextSystem(_text_system);
 			text_system_start_event->SetGameScene(shared_from_this());
 		} // if
+	} // if
+}
+
+void ratchet::scene::GameScene::OnNotify(const ratchet::actor::character::CharacterDamageApplyMessage& message) {
+	if (auto e = _event.lock()) {
+		auto event = e->CreateGameEvent<event::HitStopEvent>();
+		event->SetGameScene(std::dynamic_pointer_cast<scene::GameScene>(shared_from_this()));
+		event->Initialize();
 	} // if
 }
 

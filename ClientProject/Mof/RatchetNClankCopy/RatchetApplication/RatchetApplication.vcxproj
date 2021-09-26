@@ -455,6 +455,7 @@
     <ClCompile Include="Event\Event.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
     <ClCompile Include="Event\EventReferenceTable.cpp" />
+    <ClCompile Include="Event\HitStopEvent.cpp" />
     <ClCompile Include="Event\PlayerActionAfterGettingOffElevatorEvent.cpp" />
     <ClCompile Include="Event\RegisterGlobalCameraEvent.cpp" />
     <ClCompile Include="Event\ShipEvent.cpp" />
@@ -837,6 +838,7 @@
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="Event\EventManager.h" />
     <ClInclude Include="Event\EventReferenceTable.h" />
+    <ClInclude Include="Event\HitStopEvent.h" />
     <ClInclude Include="Event\PlayerActionAfterGettingOffElevatorEvent.h" />
     <ClInclude Include="Event\RegisterGlobalCameraEvent.h" />
     <ClInclude Include="Event\ShipEvent.h" />

@@ -10,6 +10,7 @@
 #include "Base/Core/Timer.h"
 
 #include "../VelocityComponent.h"
+#include "../../Actor/Character/Enemy.h"
 
 
 namespace ratchet::component::enemy {
@@ -48,6 +49,10 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    std::shared_ptr<ratchet::actor::character::Enemy> GetOwnerCastd(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

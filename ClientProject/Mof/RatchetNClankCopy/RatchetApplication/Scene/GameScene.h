@@ -15,6 +15,7 @@
 #include "../Stage/Stage.h"
 #include "../Game/GameSystem/ShopSystem.h"
 #include "../Actor/Character/Player.h"
+#include "../Actor/Character/Character.h"
 #include "../Game/GameSystem/Text/TextSystem.h"
 #include "../Event/StageViewEvent.h"
 #include "../Effect/EffectContainer.h"
@@ -24,7 +25,8 @@ namespace ratchet::scene {
 class GameScene : 
     public ratchet::scene::Scene, 
     public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&>,
-    public event::StageViewEventMessageListener {
+    public event::StageViewEventMessageListener,
+    public ratchet::actor::character::CharacterDamageApplyMessageListener {
     using super = ratchet::scene::Scene;
     using this_type = ratchet::scene::GameScene;
     friend class GameSceneInitializer;
@@ -124,6 +126,11 @@ public:
     /// </summary>
     /// <param name="message"></param>
     virtual void OnNotify(const ratchet::event::StageViewEventMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(const ratchet::actor::character::CharacterDamageApplyMessage& message) override;
     /// <summary>
     /// セッター
     /// </summary>
