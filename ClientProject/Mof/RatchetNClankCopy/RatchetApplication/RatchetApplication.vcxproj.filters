@@ -1278,6 +1278,9 @@
     <ClCompile Include="Light\LightPillar.cpp">
       <Filter>Ratchet\Source\Light</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\Facility\Barrack.cpp">
+      <Filter>Ratchet\Source\Actor\Facility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -2456,6 +2459,9 @@
     <ClInclude Include="Stage\Gimmick\WoodBox.h">
       <Filter>Ratchet\Header\Stage\Gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Facility\Barrack.h">
+      <Filter>Ratchet\Header\Actor\Facility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -2621,6 +2627,18 @@
     </None>
     <None Include="..\Resource\builder\queen.json">
       <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\barrack.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\_barrack.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\placement_data.json">
+      <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\stage\_placement_data.json">
+      <Filter>Resource\stage</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

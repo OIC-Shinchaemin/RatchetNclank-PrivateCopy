@@ -272,6 +272,7 @@
     <ClCompile Include="Actor\Character\Scarecrow.cpp" />
     <ClCompile Include="Actor\Effect\BombGloveEffect.cpp" />
     <ClCompile Include="Actor\Effect\ParticleEffect.cpp" />
+    <ClCompile Include="Actor\Facility\Barrack.cpp" />
     <ClCompile Include="Actor\Facility\Shop.cpp" />
     <ClCompile Include="Actor\Gimmick\Fence.cpp" />
     <ClCompile Include="Actor\Gimmick\Wall.cpp" />
@@ -585,6 +586,7 @@
     <ClInclude Include="Actor\Character\Scarecrow.h" />
     <ClInclude Include="Actor\Effect\BombGloveEffect.h" />
     <ClInclude Include="Actor\Effect\ParticleEffect.h" />
+    <ClInclude Include="Actor\Facility\Barrack.h" />
     <ClInclude Include="Actor\Facility\Shop.h" />
     <ClInclude Include="Actor\Gimmick\Fence.h" />
     <ClInclude Include="Actor\Gimmick\Wall.h" />
@@ -967,6 +969,7 @@
     <None Include="..\Resource\behaviour\strong_enemy_patrol.json" />
     <None Include="..\Resource\behaviour\weak_enemy_combat.json" />
     <None Include="..\Resource\behaviour\weak_enemy_patrol.json" />
+    <None Include="..\Resource\builder\barrack.json" />
     <None Include="..\Resource\builder\barricade.json" />
     <None Include="..\Resource\builder\blaster.json" />
     <None Include="..\Resource\builder\blaster_bullet.json" />
@@ -993,12 +996,15 @@
     <None Include="..\Resource\builder\wall.json" />
     <None Include="..\Resource\builder\water_flow.json" />
     <None Include="..\Resource\builder\weak_enemy.json" />
+    <None Include="..\Resource\builder\_barrack.json" />
     <None Include="..\Resource\motion_names\player.motion_names" />
     <None Include="..\Resource\motion_names\ship.motion_names" />
     <None Include="..\Resource\motion_names\skeleton.motion_names" />
     <None Include="..\Resource\save\savedata.json" />
+    <None Include="..\Resource\stage\placement_data.json" />
     <None Include="..\Resource\stage\stage.json" />
     <None Include="..\Resource\stage\test.json" />
+    <None Include="..\Resource\stage\_placement_data.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RatchetApplication.rc" />

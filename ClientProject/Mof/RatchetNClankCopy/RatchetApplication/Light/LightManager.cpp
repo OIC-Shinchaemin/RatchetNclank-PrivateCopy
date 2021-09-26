@@ -56,12 +56,12 @@ bool ratchet::light::LightManager::Render(void) {
 }
 
 bool ratchet::light::LightManager::Release(void) {
-    if (_pillar_shader) {
-        _pillar_shader->Release();
-    } // if
+    _light_pillars.clear();
     if (_pillar_bind) {
         _pillar_bind->Release();
     } // if
-    _light_pillars.clear();
+    if (_pillar_shader) {
+        _pillar_shader->Release();
+    } // if
     return true;
 }

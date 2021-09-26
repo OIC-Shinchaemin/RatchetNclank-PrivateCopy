@@ -1,0 +1,139 @@
+{
+  "element_list": [
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (8)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 24.0, -30.0, 40.0 ],
+        "rotation": [ 0.0, 0.7211194038391113, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (7)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 150.0, -30.0, 40.0 ],
+        "rotation": [ 0.0, -0.6941483020782471, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (6)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 193.0, -29.0, -2.0 ],
+        "rotation": [ 0.0, -0.6655005812644959, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (5)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 208.0, -30.0, 31.0 ],
+        "rotation": [ 0.0, -0.7656455039978027, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (4)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 90.0, -28.0, 183.0 ],
+        "rotation": [ 0.0, 0.0, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (3)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ -10.0, -30.0, 45.0 ],
+        "rotation": [ 0.0, 0.0, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (2)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 20.0, -30.0, 95.0 ],
+        "rotation": [ 0.0, 0.0, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack (1)",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 92.0, -30.0, 60.0 ],
+        "rotation": [ 0.0, -0.41065481305122378, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    },
+    {
+      "type": "Barrack",
+      "builder_path": "barrack.json",
+      "paramater": {
+        "type": "Barrack",
+        "name": "Barrack",
+        "tag": "Untagged",
+        "tags": []
+      },
+      "transform": {
+        "position": [ 105.0, -30.0, -20.0 ],
+        "rotation": [ 0.0, 0.6369832158088684, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      }
+    }
+  ]
+}

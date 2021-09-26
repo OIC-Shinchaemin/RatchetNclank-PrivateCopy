@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Test">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Test\Base">
+      <UniqueIdentifier>{c711073c-0fc4-4054-a7ee-2a7811be6466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header">
+      <UniqueIdentifier>{19f4af1a-fe02-49d9-8f58-35b0edc155cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source">
+      <UniqueIdentifier>{026d0243-8c24-4b41-8b4e-1b2681f5d2e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source\Light">
+      <UniqueIdentifier>{d077ef8a-f00b-4e87-aa7d-a7f0800e3660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header\Light">
+      <UniqueIdentifier>{d714465f-7c8f-4cfe-ae4d-19096ff75db4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestApp.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RatchetApplication\Light\LightManager.cpp">
+      <Filter>Test\Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RatchetApplication\Light\LightPillar.cpp">
+      <Filter>Test\Source\Light</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestApp.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Light\LightManager.h">
+      <Filter>Test\Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Light\LightPillar.h">
+      <Filter>Test\Header\Light</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

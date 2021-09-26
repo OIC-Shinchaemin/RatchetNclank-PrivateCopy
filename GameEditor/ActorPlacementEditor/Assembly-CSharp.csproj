@@ -48,32 +48,32 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Component\Component.cs" />
+     <Compile Include="Assets\Scripts\Component\SightRecognitionComponent.cs" />
+     <Compile Include="Assets\Scripts\Actor\Barrack.cs" />
+     <Compile Include="Assets\Scripts\Component\CameraComponent.cs" />
      <Compile Include="Assets\Scripts\Actor\Actor.cs" />
      <Compile Include="Assets\Scripts\Component\MeshComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\VelocityComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\RenderComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\ActionStateComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\Collision\BarrackCollisionComponent.cs" />
      <Compile Include="Assets\Scripts\Json\JsonFileWriter.cs" />
+     <Compile Include="Assets\Scripts\Component\MotionStateComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\ActionComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\AIStateComponent.cs" />
      <Compile Include="Assets\Scripts\Json\JsonEditElement.cs" />
      <Compile Include="Assets\Scripts\FileWriter\FileWriter.cs" />
+     <Compile Include="Assets\Scripts\Component\CharacterComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\AnimationMeshComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\BillboardComponent.cs" />
      <Compile Include="Assets\Scripts\Json\JsonDefine.cs" />
      <Compile Include="Assets\Scripts\Actor\Fence.cs" />
      <Compile Include="Assets\Scripts\Json\JsonMetaActorsComponentBuilder.cs" />
      <Compile Include="Assets\Scripts\Component\TransformComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\MotionComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\SightRecognitionComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\ActionComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\RenderComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\VelocityComponent.cs" />
      <Compile Include="Assets\Scripts\Component\HpComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\ActionStateComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\CameraComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\InvincibleComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\BillboardComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\AnimationMeshComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\CharacterComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\AIStateComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\MotionComponent.cs" />
      <Compile Include="Assets\Scripts\Component\Collision\CollisionComponent.cs" />
-     <Compile Include="Assets\Scripts\Component\MotionStateComponent.cs" />
-     <Compile Include="Assets\Scripts\Actor\Barrack.cs" />
-     <Compile Include="Assets\Scripts\Component\Collision\BarrackCollisionComponent.cs" />
+     <Compile Include="Assets\Scripts\Component\InvincibleComponent.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

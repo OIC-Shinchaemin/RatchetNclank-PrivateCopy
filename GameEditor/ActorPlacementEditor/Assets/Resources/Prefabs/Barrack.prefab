@@ -134,14 +134,59 @@ MonoBehaviour:
   _edit_element: {fileID: 0}
   meta:
     actor:
-      type: undefined
-      name: nameless
+      type: Barrack
+      name: barrack
       tag: none
       tags: []
-    compoennts: []
+    compoennts:
+    - type: TransformComponent
+      paramater:
+        priority: 0
+        path: 
+        color:
+        - 0
+        - 0
+        - 0
+        - 0
+        hp_max: 0
+        height: 0
+        volume: 0
+        range: 0
+        children: []
+        behaviour: []
+    - type: MeshComponent
+      paramater:
+        priority: 0
+        path: 
+        color:
+        - 0
+        - 0
+        - 0
+        - 0
+        hp_max: 0
+        height: 0
+        volume: 0
+        range: 0
+        children: []
+        behaviour: []
+    - type: BarrackCollisionComponent
+      paramater:
+        priority: 0
+        path: 
+        color:
+        - 0
+        - 0
+        - 0
+        - 0
+        hp_max: 0
+        height: 0
+        volume: 0
+        range: 0
+        children: []
+        behaviour: []
     parent: 
     children: []
-  builder: 
+  builder: ../Resource/builder/barrack.json
 --- !u!114 &4054570057435605449
 MonoBehaviour:
   m_ObjectHideFlags: 0

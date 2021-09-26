@@ -1,0 +1,32 @@
+﻿{
+  "element_list": [
+    {
+      "type": "Fence",
+      "builder_path": "fence.json",
+      "paramater": {
+        "type": "Fence",
+        "name": "Fence",
+        "tag": "Untagged",
+        "tags": [
+        ]
+      },
+      "transform": {
+        "position": [
+          0.0,
+          -5.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  ]
+}
