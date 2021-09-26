@@ -164,6 +164,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         auto enemy = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Enemy>(builder, param);
         out->AddElement(enemy);
         enemy->SetEffectContainer(out->_effect);
+        enemy->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
         enemy->GetQuestSubject()->AddObserver(help_desk);
         if (event_sphere.CollisionPoint(param->transform.position)) {
             //bridge_event->AddTriggerActor(enemy);
@@ -205,13 +206,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
                 auto elem = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Barrack>((file_path + builder_path).c_str(), param);
                 out->AddElement(elem);
             } // if
+            // other actor create...
+            else if (type == "OtherBarrack") {
+            } // else if
         } // for
-        {
-            param->transform.position = Mof::CVector3(0.0f, -5.0f, 0.0f);
-            param->transform.rotate = Mof::CVector3(0.0f, 0.0f, 0.0f);
-            auto elem = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::facility::Barrack>("../Resource/builder/barrack.json", param);
-            out->AddElement(elem);
-        }
     }
 
 
@@ -246,8 +244,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
             param->name = "wall_2";
         } // for
     }
-
-
 
 
     {

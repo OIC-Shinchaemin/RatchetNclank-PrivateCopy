@@ -1281,6 +1281,9 @@
     <ClCompile Include="Actor\Facility\Barrack.cpp">
       <Filter>Ratchet\Source\Actor\Facility</Filter>
     </ClCompile>
+    <ClCompile Include="Event\HitStopEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h">
@@ -2461,6 +2464,9 @@
     </ClInclude>
     <ClInclude Include="Actor\Facility\Barrack.h">
       <Filter>Ratchet\Header\Actor\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\HitStopEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
