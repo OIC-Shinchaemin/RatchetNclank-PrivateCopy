@@ -88,8 +88,9 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", param);
     ratchet::event::EventReferenceTable::Singleton().Register(player->GetName(), player);
     out->AddElement(player);
-    out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);
+    out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);    
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
+    player->SetEffectContainer(out->_effect);
 
     for (auto elevator : elevators) {
         auto camera = player->GetComponent<ratchet::component::CameraComponent>();

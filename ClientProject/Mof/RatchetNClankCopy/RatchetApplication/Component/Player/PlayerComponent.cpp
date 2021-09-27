@@ -45,6 +45,10 @@ std::string ratchet::component::player::PlayerComponent::GetType(void) const {
     return "PlayerComponent";
 }
 
+std::shared_ptr<ratchet::actor::character::Player> ratchet::component::player::PlayerComponent::GetOwnerCastd(void) const {
+    return std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
+}
+
 std::weak_ptr<ratchet::actor::Actor> ratchet::component::player::PlayerComponent::GetTarget(void) const {
     return this->_target;
 }

@@ -3,8 +3,9 @@
 
 
 namespace ratchet::effect {
-	enum EffectType {
-		Smoke
-	};
+enum class EffectType {
+    BasicDamage,
+    PlayerSense,
+};
 }
 #endif // !RATCHET_EFFECT_EFFECT_DEFINE_H

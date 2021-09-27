@@ -51,6 +51,10 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     _camera_controller.GetService()->Update(delta_time, camera_info);
 
     _logo.Update(delta_time);
+    _bgm.Update();
+    if (_scene_end) {
+        _bgm.SetVolume(_bgm.GetVolume() * 0.9f);
+    } // if
     return true;
 }
 
@@ -101,7 +105,8 @@ ratchet::scene::TitleScene::TitleScene() :
     _loading_counter(),
     _loading_dot_count(0),
     _input_flag(false),
-    _input_timer() {
+    _input_timer(),
+    _bgm(){
     _loading_counter.Initialize(1.0f, true);
     _input_timer.Initialize(2.0f, false);
 }
@@ -147,6 +152,10 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             if (auto r = _resource.lock()) {
                 r->Load(path);
             } // if
+            _bgm.Load("bgm/title.mp3");
+            _bgm.SetLoop(true);
+            _bgm.SetVolume(0.5f);
+
             _logo.SetTexture(super::GetResource()->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/title_logo/image.png"));
 
             // stage
@@ -222,6 +231,8 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             option_system->AddItem(item2);
         } // if
         //this->Initialize();
+
+        _bgm.Play();
     });
 
     return true;
@@ -240,6 +251,7 @@ bool ratchet::scene::TitleScene::Release(void) {
         _title_menu_subject.Clear();
     } // if
 
+    _bgm.Release();
     _stage.Release();
     return true;
 }

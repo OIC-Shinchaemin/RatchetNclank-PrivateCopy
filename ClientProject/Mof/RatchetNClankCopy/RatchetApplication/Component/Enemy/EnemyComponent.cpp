@@ -168,7 +168,6 @@ bool ratchet::component::enemy::EnemyComponent::Update(float delta_time) {
             } // if
             else {
                 auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Enemy>(super::GetOwner());
-//                owner->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront));
                 velocity_com->SetSleep(true);
                 velocity_com->SetGravity(0.0f);
             } // else

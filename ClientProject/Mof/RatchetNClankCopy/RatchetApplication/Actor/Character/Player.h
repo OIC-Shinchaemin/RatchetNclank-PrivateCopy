@@ -16,7 +16,7 @@
 #include "../../Game/GameSystem/GameQuest.h"
 #include "../../Game/GameSystem/Text/TextSystem.h"
 #include "../../Stage/Gimmick/Elevator.h"
-//#include "../../Event/PlayerActionAfterGettingOffElevatorEvent.h"
+#include "../../Effect/EffectContainer.h"
 
 
 namespace ratchet::actor::character {
@@ -24,9 +24,7 @@ class Player : public ratchet::actor::character::Character,
     public base::core::Observer<std::shared_ptr<ratchet::actor::weapon::Weapon>>,
     public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> ,
     public ratchet::game::gamesystem::text::TextSystemClosedMessageListener ,
-    public ElevatorArrivalMessageListener
-//    public ratchet::event::PlayerActionAfterGettingOffElevatorEventEndListener 
-{
+    public ElevatorArrivalMessageListener {
     using super = ratchet::actor::character::Character;
     struct ObservablePair {
         std::string name;
@@ -59,6 +57,8 @@ private:
     std::unordered_map<std::string, ObservablePair* >_notificationable_subject_map;
     //! 通知用
     std::stack<ObservablePair*>_notificationable_subject_stack;
+    //! エフェクト
+    std::weak_ptr<effect::EffectContainer>_effect_container;
 public:
     /// <summary>
     /// コンストラクタ
@@ -94,6 +94,11 @@ public:
     /// <param name="change"></param>
     //virtual void OnNotify(const ratchet::event::PlayerActionAfterGettingOffElevatorEventEndMessage& message) override;
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -123,6 +128,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<ratchet::actor::weapon::Mechanical> GetCurrentMechanical(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::effect::EffectContainer> GetEffectContainer(void) const;
     /// <summary>
     /// 追加
     /// </summary>

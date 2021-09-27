@@ -9,6 +9,7 @@
 #include "../../Actor/Actor.h"
 //#include "../../Actor/Character/King.h"
 #include "../../Actor/Character/Character.h"
+//#include "../../Actor/Character/Player.h"
 #include "Base/Core/Observable.h"
 
 #include "../TransformComponent.h"
@@ -16,6 +17,9 @@
 #include "../CameraComponent.h"
 
 
+namespace ratchet::actor::character {
+class Player;
+}
 namespace ratchet::component::collision {
 class PlayerCollisionComponent;
 }
@@ -72,6 +76,10 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    std::shared_ptr<ratchet::actor::character::Player> GetOwnerCastd(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

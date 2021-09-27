@@ -181,7 +181,7 @@ void ratchet::actor::character::King::Talk(void) {
             for (auto& position : scarecrow_transforms.position) {
                 param->transform.position = position;
                 auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);
-                auto emitter = effect->CreateEmitter();
+                auto emitter = effect->CreateEmitter(effect::EffectType::BasicDamage);
                 scarecrow->SetEffectEmitter(emitter);
                 scarecrow->GetScarecrowEndMessageSubject()->AddObserver(std::dynamic_pointer_cast<ratchet::actor::character::King>(shared_from_this()));
                 scarecrow->GetCharacterDamageApplyMessageSubject()->AddObserver(out);

@@ -29,7 +29,7 @@ ratchet::actor::character::Enemy::~Enemy() {
 
 void ratchet::actor::character::Enemy::SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr) {
 	this->_effect_container = ptr;
-	_effect_emitter = ptr->CreateEmitter();
+	_effect_emitter = ptr->CreateEmitter(effect::EffectType::BasicDamage);
 }
 /*
 void ratchet::actor::character::Enemy::SetEffectEmitter(std::shared_ptr<ratchet::effect::EffectEmitter> ptr) {

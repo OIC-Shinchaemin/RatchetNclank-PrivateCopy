@@ -6,7 +6,72 @@
 #include "Enemy/EnemyComponent.h"
 #include "Player/PlayerComponent.h"
 #include "Collision/Object/SightCollisionComponent.h"
+#include "../Actor/Character/Player.h"
 
+
+void ratchet::component::SightRecognitionComponent::SenseEffectEmit(void) {
+    if (!_effect_emitter) {
+        _effect_emitter = _player_com.lock()->GetOwnerCastd()->GetEffectContainer()->CreateEmitter(effect::EffectType::PlayerSense);
+    } // if
+
+
+    auto info = ratchet::effect::Effect::Info();
+    info.init_param.transform.position = super::GetOwner()->GetPosition();
+    info.init_param.transform.position.y += _player_com.lock()->GetHeight() * 1.5f;
+    info.init_param.color = def::color_rgba::kWhite;
+    info.init_param.life_duration = 1.0f;
+    _effect_emitter->Emit(info);
+
+    /*
+    auto camera_pos = CGraphicsUtilities::GetCamera()->GetViewPosition();
+    auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Enemy>(super::GetOwner());
+    auto target_pos = actor->GetPosition();
+    auto pos = (owner->GetPosition() + target_pos) * 0.5f;
+    auto diff = Mof::CVector3(camera_pos - pos);
+    diff.Normal(diff);
+    pos += diff * _player_com.lock()->GetVolume() * 2.0f;
+    pos.y += _player_com.lock()->GetHeight();
+
+    auto info = ratchet::effect::Effect::Info();
+    auto init_pos_offset = Mof::CVector3();
+    auto init_scale = Mof::CVector3(1.0f, 1.0f, 1.0f);
+    info.init_param.life_duration = 1.0f;
+    info.init_param.color = Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f);
+    info.update_param.color = Mof::CVector4(0.0f, 0.0f, 0.0f, -0.02f);
+    info.environment_param.use_gravity = false;
+    info.environment_param.use_velocity_drag = true;
+    info.environment_param.velocity_drag = 0.5f;
+
+    for (int i = 0, n = 5; i < n; i++) {
+        info.init_param.transform.position = pos + init_pos_offset;
+        info.init_param.transform.scale = init_scale;
+        info.update_param.rotate = Mof::CVector3(0.0f, 1.0f, 0.0f);
+        owner->GetEffectEmitter()->Emit(info);
+
+        init_pos_offset = Mof::CVector3(
+            ut::GenerateRandomF(-1.0f, 1.0f),
+            ut::GenerateRandomF(-1.0f, 1.0f),
+            ut::GenerateRandomF(-1.0f, 1.0f)
+        );
+        init_scale = Mof::CVector3(
+            ut::GenerateRandomF(0.4f, 0.7f),
+            ut::GenerateRandomF(0.4f, 0.7f),
+            ut::GenerateRandomF(0.4f, 0.7f)
+        );
+        info.update_param.velocity = Mof::CVector3(
+            ut::GenerateRandomF(-0.3f, 0.3f),
+            0.4f,
+            ut::GenerateRandomF(-0.3f, 0.3f)
+        );
+        info.update_param.rotate = Mof::CVector3(
+            0.0f, ut::GenerateRandomF(-1.0f, 1.0f), 0.0f
+        );
+        info.update_param.scale = Mof::CVector3(-0.05f, -0.05f, -0.05f);
+        info.environment_param.use_gravity = true;
+        info.environment_param.gravity_scale = 0.01f;
+    } // for
+    */
+}
 
 void ratchet::component::SightRecognitionComponent::RenderRay(const Mof::CRay3D& ray, float length, int color) {
     ::CGraphicsUtilities::RenderLine(ray.Position,
@@ -30,7 +95,9 @@ ratchet::component::SightRecognitionComponent::SightRecognitionComponent(int pri
     super(priority),
     _range(0.0f),
     _player_com(),
-    _ENEMY_com() {
+    _ENEMY_com(),
+    _effect_emitter(),
+    _recognizing_count(0) {
     super::Activate();
 }
 
@@ -38,7 +105,8 @@ ratchet::component::SightRecognitionComponent::SightRecognitionComponent(const S
     super(obj),
     _range(obj._range),
     _player_com(),
-    _ENEMY_com() {
+    _ENEMY_com(),
+    _recognizing_count(0) {
     super::Activate();
 }
 
@@ -72,21 +140,43 @@ bool ratchet::component::SightRecognitionComponent::Initialize(void) {
     if (auto tag = super::GetOwner()->GetTag(); tag == "Player") {
         _player_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerComponent>();
 
-
         auto sight_coll = super::GetOwner()->GetComponent<ratchet::component::collision::SightCollisionComponent>();
         sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
                                      "EnemyCollisionComponent",
                                      ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+            //auto target = in.target.lock();
+            //_recognized.push_back(target);
+            return true;
+        }));
+        sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                                     "EnemyCollisionComponent",
+                                     ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+            if (_recognizing_count == 0) {
+                this->SenseEffectEmit();
+            } // if
+
+            _recognizing_count++;
             auto target = in.target.lock();
             _recognized.push_back(target);
             return true;
         }));
+        sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
+                                     "EnemyCollisionComponent",
+                                     ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+
+            _recognizing_count--;
+            _recognizing_count = std::clamp(_recognizing_count, 0, _recognizing_count);
+            return true;
+        }));
+
     } // if
+
+
     else if (tag == "Enemy") {
         _ENEMY_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
 
         auto sight_coll = super::GetOwner()->GetComponent<ratchet::component::collision::SightCollisionComponent>();
-        sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+        sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                      "PlayerCollisionComponent",
                                      ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
             auto target = in.target.lock();

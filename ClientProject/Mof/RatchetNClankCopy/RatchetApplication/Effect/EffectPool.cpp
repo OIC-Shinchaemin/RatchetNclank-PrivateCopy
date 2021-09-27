@@ -10,6 +10,10 @@ ratchet::effect::EffectPool::EffectPool() :
 ratchet::effect::EffectPool::~EffectPool() {
 }
 
+void ratchet::effect::EffectPool::SetResourcePath(const std::string& path) {
+	this->_effect_type_path = path;
+}
+
 std::string_view ratchet::effect::EffectPool::GetResourcePath(void) const {
 	return this->_effect_type_path;
 }
