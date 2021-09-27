@@ -92,7 +92,6 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
 
         if (auto type_com = _enemy_com.lock()) {
             type_com->DamageEffectEmit(in.target.lock());
-
             type_com->GetOwnerCastd()->GetCharacterDamageApplyMessageSubject()->Notify({});
         } // if
         this->CollisionAction(in);
@@ -102,6 +101,10 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
                                ratchet::component::collision::CollisionComponentType::kPyrocitorBulletCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 1;
+        if (auto type_com = _enemy_com.lock()) {
+            type_com->StarEffectEmit(in.target.lock());
+        } // if
+
         this->CollisionAction(in);
         return true;
     }));
@@ -109,6 +112,10 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
                                ratchet::component::collision::CollisionComponentType::kBlasterBulletCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 1;
+        if (auto type_com = _enemy_com.lock()) {
+            type_com->StarEffectEmit(in.target.lock());
+        } // if
+
         this->CollisionAction(in);
         return true;
     }));
@@ -116,6 +123,10 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
                                ratchet::component::collision::CollisionComponentType::kBombGloveEffectCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _damage_value = 2;
+        if (auto type_com = _enemy_com.lock()) {
+            type_com->StarEffectEmit(in.target.lock());
+        } // if
+
         this->CollisionAction(in);
         return true;
     }));

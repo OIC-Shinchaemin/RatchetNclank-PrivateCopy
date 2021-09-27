@@ -20,7 +20,8 @@ void ratchet::actor::character::Enemy::Activate(void) {
 ratchet::actor::character::Enemy::Enemy() :
 	super(),
 	_effect_container(),
-	_effect_emitter() {
+//	_effect_emitter(),
+	_effect_emitter_holder() {
 	super::SetTag("Enemy");
 }
 
@@ -29,16 +30,23 @@ ratchet::actor::character::Enemy::~Enemy() {
 
 void ratchet::actor::character::Enemy::SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr) {
 	this->_effect_container = ptr;
-	_effect_emitter = ptr->CreateEmitter(effect::EffectType::BasicDamage);
+	_effect_emitter_holder.Emplace(effect::EffectType::BasicDamage, ptr->CreateEmitter(effect::EffectType::BasicDamage));
+	_effect_emitter_holder.Emplace(effect::EffectType::PopStar, ptr->CreateEmitter(effect::EffectType::PopStar));
+	//_effect_emitter = ptr->CreateEmitter(effect::EffectType::BasicDamage);
+	//_star_effect_emitter = ptr->CreateEmitter(effect::EffectType::PopStar);
 }
 /*
 void ratchet::actor::character::Enemy::SetEffectEmitter(std::shared_ptr<ratchet::effect::EffectEmitter> ptr) {
 	this->_effect_emitter = ptr;
 }
-*/
 std::shared_ptr<ratchet::effect::EffectEmitter> ratchet::actor::character::Enemy::GetEffectEmitter(void) const {
 	return this->_effect_emitter;
 }
+
+std::shared_ptr<ratchet::effect::EffectEmitter> ratchet::actor::character::Enemy::GetStarEffectEmitter(void) const {
+	return this->_star_effect_emitter;
+}
+*/
 
 base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::actor::character::Enemy::GetQuestSubject(void) {
 	return &this->_quest_subject;

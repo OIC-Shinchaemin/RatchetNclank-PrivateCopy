@@ -1,5 +1,6 @@
 #include "EffectEmitter.h"
 
+
 ratchet::effect::EffectEmitter::EffectEmitter() :
 	_pool(),
 	_out_target() {

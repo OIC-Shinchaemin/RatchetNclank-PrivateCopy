@@ -10,8 +10,10 @@ ratchet::game::gamesystem::OptionSystem::OptionSystem() :
     _info_subject(),
     _item(),
     _item_index(),
-    _title_menu_subject(),
-    _excuted(false){
+    _title_menu_subject()
+//    ,
+//    _excuted(false)
+{
     _infomation.items = &_item;
 }
 
@@ -92,16 +94,16 @@ bool ratchet::game::gamesystem::OptionSystem::Input(void) {
     return true;
 }
 bool ratchet::game::gamesystem::OptionSystem::Update(float delta_time) {
-    if (_excuted) {
-        return true;
-    } // if
+//    if (_excuted) {
+//        return true;
+//    } // if
 
     this->Input();
 
     if (!_execute_list.empty()) {
         for (auto ptr : _execute_list) {
             if (ptr->Execute()) {
-                _excuted = true;
+//                _excuted = true;
             } // if
             this->Hide();
         } // for

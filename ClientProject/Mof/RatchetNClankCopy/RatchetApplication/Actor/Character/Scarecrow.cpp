@@ -14,8 +14,16 @@ void ratchet::actor::character::Scarecrow::SetEffectEmitter(const std::shared_pt
 	this->_effect_emitter = ptr;
 }
 
+void ratchet::actor::character::Scarecrow::SetStarEffectEmitter(const std::shared_ptr<ratchet::effect::EffectEmitter>& ptr) {
+	this->_star_effect_emitter = ptr;
+}
+
 std::shared_ptr<ratchet::effect::EffectEmitter> ratchet::actor::character::Scarecrow::GetEffectEmitter(void) const {
 	return this->_effect_emitter;
+}
+
+std::shared_ptr<ratchet::effect::EffectEmitter> ratchet::actor::character::Scarecrow::GetStarEffectEmitter(void) const {
+	return this->_star_effect_emitter;
 }
 
 void ratchet::actor::character::Scarecrow::End(void) {

@@ -1,15 +1,6 @@
 #include "GameScene.h"
 
 #include "../Gamepad.h"
-//#include "../Factory/FactoryManager.h"
-//#include "../Actor/Character/Enemy.h"
-//#include "../Actor/Character/Player.h"
-//#include "../Actor/Facility/Shop.h"
-//#include "../Actor//Terrain/Terrain.h"
-//#include "../Component/CameraComponent.h"
-//#include "../Stage/Gimmick/Bridge.h"
-//#include "../Event/BridgeEvent.h"
-//#include "../Event/ShipEvent.h"
 #include "../Event/TextSystemStartEvent.h"
 #include "../Event/HitStopEvent.h"
 
@@ -100,14 +91,15 @@ bool ratchet::scene::GameScene::LoadingUpdate(float delta_time) {
 }
 
 bool ratchet::scene::GameScene::SceneRender(void) {
-	::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
+	//::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
+	::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
 	::g_pGraphics->SetDepthEnable(true);
 
-	_renderer.Render();
 	_stage.Render();
-
-	_effect->Render();
 	super::GetLightManager()->Render();
+
+	_renderer.Render();
+	_effect->Render();
 
 	::g_pGraphics->SetDepthEnable(false);
 

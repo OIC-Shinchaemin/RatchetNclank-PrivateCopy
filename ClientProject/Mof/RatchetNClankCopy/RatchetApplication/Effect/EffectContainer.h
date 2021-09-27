@@ -3,6 +3,8 @@
 
 
 #include <array>
+#include <vector>
+#include <unordered_map>
 
 #include <Mof.h>
 
@@ -12,18 +14,49 @@
 
 
 namespace ratchet::effect {
+class EffectEmitterHolder {
+    using EmitterPtr = std::shared_ptr<ratchet::effect::EffectEmitter>;
+private:
+    std::unordered_map<ratchet::effect::EffectType, EmitterPtr> _emitters;
+
+public:
+    bool Emplace(ratchet::effect::EffectType type, const EmitterPtr& elem) {
+        auto it = _emitters.find(type);
+        if (it != _emitters.end()) {
+            return false;
+        } // if
+        
+        _emitters.emplace(type, elem);
+        return true;
+    }
+    EmitterPtr& At(ratchet::effect::EffectType type) {
+        return this->_emitters.at(type);
+    }
+};
 class EffectContainer {
     struct PoolAndEmitTarget {
         //! プール
         ratchet::effect::EffectPool pool;
         //! エフェクト
         std::vector<effect::Effect*> effects;
+
+        PoolAndEmitTarget(const ratchet::effect::EffectPoolCreateInfo& pool_info) :
+            pool(pool_info), effects() {
+        }
     };
 private:
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! ペアデータ
     std::unordered_map<effect::EffectType, PoolAndEmitTarget > _effect_pair;
+
+
+    /// <summary>
+    /// 作成
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    ratchet::effect::EffectPoolCreateInfo CreateEffectPoolCreateInfo(ratchet::effect::EffectType type) const;
 public:
     /// <summary>
     /// コンストラクタ

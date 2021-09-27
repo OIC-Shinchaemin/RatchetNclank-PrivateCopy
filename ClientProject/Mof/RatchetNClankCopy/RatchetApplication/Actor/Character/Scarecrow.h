@@ -25,6 +25,8 @@ private:
     ratchet::actor::character::ScarecrowEndMessageSubject _end_message_subject;
     //! エフェクト
     std::shared_ptr<ratchet::effect::EffectEmitter> _effect_emitter;
+    //! エフェクト
+    std::shared_ptr<ratchet::effect::EffectEmitter> _star_effect_emitter;
 public:
     /// <summary>
     /// コンストラクタ
@@ -40,10 +42,20 @@ public:
     /// <param name="ptr"></param>
     void SetEffectEmitter(const std::shared_ptr<ratchet::effect::EffectEmitter>& ptr);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetStarEffectEmitter(const std::shared_ptr<ratchet::effect::EffectEmitter>& ptr);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name="ptr"></param>
     std::shared_ptr<ratchet::effect::EffectEmitter> GetEffectEmitter(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    std::shared_ptr<ratchet::effect::EffectEmitter> GetStarEffectEmitter(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

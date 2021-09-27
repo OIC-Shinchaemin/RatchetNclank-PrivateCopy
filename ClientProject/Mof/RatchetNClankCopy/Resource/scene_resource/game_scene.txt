@@ -21,7 +21,7 @@
 
 ../Resource/texture/effect/smoke.png
 ../Resource/texture/effect/sense.png
-../Resource/texture/effect/flash.dds
+../Resource/texture/effect/star.png
 ../Resource/texture/effect/flash.png
 
 ../Resource/texture/icon/bomb_glove.png
