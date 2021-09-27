@@ -37,6 +37,6 @@ bool ratchet::Gamepad::Release(void) {
 }
 
 void ratchet::Gamepad::RefreshKey(void) {
-    _ASSERT_EXPR(_initialized, L"ゲームパッドが作成されていません");
+    _ASSERT_EXPR(_initialized, L"ゲームパッドが作成されていません　Gamepad::Create関数を呼び出してください");
     _gamepad->RefreshKey();
 }
