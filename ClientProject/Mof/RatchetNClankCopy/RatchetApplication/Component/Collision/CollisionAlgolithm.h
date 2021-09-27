@@ -23,6 +23,14 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    virtual const char* GetType(void) {
+        return typeid(*this).name();
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual const char* GetLayerType(void) const = 0;
     /// <summary>
     /// ゲッター

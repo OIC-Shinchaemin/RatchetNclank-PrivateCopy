@@ -19,9 +19,12 @@
 #include "Algolithm/QueenPlayerCollisionAlgolithm.h"
 
 
+#include "Algolithm/PlayerBarricadeCollisionAlgolithm.h"
+#include "Algolithm/PlayerBarrackCollisionAlgolithm.h"
 #include "Algolithm/PlayerEnemyBulletCollisionAlgolithm.h"
 #include "Algolithm/PlayerEnemyCollisionAlgolithm.h"
 #include "Algolithm/PlayerEnemyMeleeAttackCollisionAlgolithm.h"
+#include "Algolithm/PlayerFenceCollisionAlgolithm.h"
 #include "Algolithm/PlayerKingCollisionAlgolithm.h"
 #include "Algolithm/PlayerNanotechItemCollisionAlgolithm.h"
 #include "Algolithm/PlayerQueenCollisionAlgolithm.h"

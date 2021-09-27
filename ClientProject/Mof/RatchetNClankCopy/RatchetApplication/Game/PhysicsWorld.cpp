@@ -37,6 +37,9 @@ void ratchet::game::PhysicsWorld::GenerateLayer(void) {
 
 
 
+      ratchet::CollisionAlgolithmType::kPlayerBarricadeCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerBarrackCollisionAlgolithm.c_str(),
+      ratchet::CollisionAlgolithmType::kPlayerFenceCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm.c_str(),
@@ -58,7 +61,6 @@ void ratchet::game::PhysicsWorld::GenerateLayer(void) {
       ratchet::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm.c_str(),
       ratchet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm.c_str(),
-
     };
 
 
@@ -102,6 +104,10 @@ ratchet::game::PhysicsWorld::PhysicsWorld() :
     collision_algolithm_factory.Register<ratchet::SightPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kSightPlayerCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::SightEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kSightEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::ShipPlayerCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kShipPlayerCollisionAlgolithm);
+
+    collision_algolithm_factory.Register<ratchet::PlayerFenceCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerFenceCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerBarrackCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerBarrackCollisionAlgolithm);
+    collision_algolithm_factory.Register<ratchet::PlayerBarricadeCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerBarricadeCollisionAlgolithm);
 
     collision_algolithm_factory.Register<ratchet::PlayerEnemyCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm);
     collision_algolithm_factory.Register<ratchet::PlayerEnemyMeleeAttackCollisionAlgolithm>(ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm);

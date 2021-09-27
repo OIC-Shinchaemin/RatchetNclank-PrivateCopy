@@ -25,8 +25,12 @@ std::string ratchet::CollisionAlgolithmType::kKingPlayerCollisionAlgolithm = "Ki
 std::string ratchet::CollisionAlgolithmType::kQueenPlayerCollisionAlgolithm = "QueenPlayerCollisionAlgolithm";
 
 
-
 std::string ratchet::CollisionAlgolithmType::kPlayerEnemyCollisionAlgolithm = "PlayerEnemyCollisionAlgolithm";
+
+std::string ratchet::CollisionAlgolithmType::kPlayerFenceCollisionAlgolithm = "PlayerFenceCollisionAlgolithm";
+std::string ratchet::CollisionAlgolithmType::kPlayerBarrackCollisionAlgolithm = "PlayerBarrackCollisionAlgolithm";
+std::string ratchet::CollisionAlgolithmType::kPlayerBarricadeCollisionAlgolithm = "PlayerBarricadeCollisionAlgolithm";
+
 std::string ratchet::CollisionAlgolithmType::kPlayerEnemyMeleeAttackCollisionAlgolithm = "PlayerEnemyMeleeAttackCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kPlayerEnemyBulletCollisionAlgolithm = "PlayerEnemyBulletCollisionAlgolithm";
 std::string ratchet::CollisionAlgolithmType::kPlayerShipCollisionAlgolithm = "PlayerShipCollisionAlgolithm";
