@@ -5,6 +5,7 @@
 #include "../Scene/GameScene.h"
 #include "ShipEvent.h"
 #include "../Stage/Gimmick/Bridge.h"
+#include "../Game/GameSystem/GameQuest.h"
 
 
 ratchet::event::BridgeEvent::BridgeEvent() :
@@ -85,7 +86,8 @@ bool ratchet::event::BridgeEvent::Initialize(void) {
     if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
         auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
         auto help_desk = game->GetHelpDesk();
-        this->GetQuestSubject()->AddObserver(help_desk);
+        help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::GoHome));
+        //this->GetQuestSubject()->AddObserver(help_desk);
     } // if
     return true;
 }

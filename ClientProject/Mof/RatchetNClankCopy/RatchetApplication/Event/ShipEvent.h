@@ -12,8 +12,11 @@
 #include "../Camera/PointCameraController.h"
 
 
-namespace ratchet {
-namespace event {
+namespace ratchet ::event {
+struct ShipEventEndMessage {
+};
+using ShipEventEndMessageSubject = base::core::Observable<const ShipEventEndMessage&>;
+using ShipEventEndMessageListener = base::core::Observer<const  ShipEventEndMessage&>;
 class ShipEvent : public ratchet::event::Event,
     public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>,
     public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
@@ -37,6 +40,8 @@ private:
     base::core::Timer _timer;
     //! 実行時間
     const float _time;
+    //! 通知
+    ShipEventEndMessageSubject _ship_event_end_message_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -65,6 +70,14 @@ public:
     /// <returns></returns>
     base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&>* GetShipEventSubject(void);
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto ShipEventEndMessageSubject(void) {
+        return &this->_ship_event_end_message_subject;
+    }
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
@@ -77,6 +90,5 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
 };
-}
 }
 #endif // !RATCHET_SHIP_EVENT_H

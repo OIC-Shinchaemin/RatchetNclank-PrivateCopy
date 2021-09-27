@@ -19,6 +19,8 @@
 #include "../Game/GameSystem/Text/TextSystem.h"
 #include "../Event/StageViewEvent.h"
 #include "../Effect/EffectContainer.h"
+#include "../Component/SightRecognitionComponent.h"
+#include "../Event/ShipEvent.h"
 
 
 namespace ratchet::scene {
@@ -26,7 +28,9 @@ class GameScene :
     public ratchet::scene::Scene, 
     public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&>,
     public event::StageViewEventMessageListener,
-    public ratchet::actor::character::CharacterDamageApplyMessageListener {
+    public ratchet::actor::character::CharacterDamageApplyMessageListener ,
+    public ContactEnemyMessageListener ,
+    public event::ShipEventEndMessageListener {
     using super = ratchet::scene::Scene;
     using this_type = ratchet::scene::GameScene;
     friend class GameSceneInitializer;
@@ -61,6 +65,21 @@ private:
     int _loading_dot_count;
     //! 経過時間 / 所要時間
     float _loading_progress;
+
+////////////////////
+//    audio system
+
+    //! BGM
+    //Mof::CStreamingSoundBuffer _field_bgm;
+    Mof::CSoundBuffer _field_bgm;
+    //! BGM
+    Mof::CSoundBuffer _battle_bgm;
+    //! ボリューム
+    float _bgm_init_volume = 0.3f;
+    //! イベント
+    std::vector<std::function<void(void)>> _bmg_volume_events;
+    //! クリア
+    bool _bmg_volume_event_excuted;
 public:
     /// <summary>
     /// 追加
@@ -130,7 +149,17 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="message"></param>
+    virtual void OnNotify(const ratchet::event::ShipEventEndMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
     virtual void OnNotify(const ratchet::actor::character::CharacterDamageApplyMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(const ContactEnemyMessage & message) override;
     /// <summary>
     /// セッター
     /// </summary>

@@ -131,3 +131,9 @@ std::shared_ptr<ratchet::actor::weapon::Mechanical> ratchet::game::gamesystem::W
     } // if
     return nullptr;
 }
+
+void ratchet::game::gamesystem::WeaponSystem::FullCharge(void) {
+    for (auto& pair : _weapons) {
+        pair.second->AddBullet(200);
+    } // for
+}

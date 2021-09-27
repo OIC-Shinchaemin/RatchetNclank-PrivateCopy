@@ -6,6 +6,7 @@ namespace ratchet::game::gamesystem {
 class GameQuest {
 public:
     enum class Type {
+        None,
         ToFront,
         EnemyDestroy,
         GoHome,

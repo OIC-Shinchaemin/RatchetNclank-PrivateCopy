@@ -208,6 +208,13 @@ void ratchet::actor::character::King::Talk(void) {
             message.on_close = [&]() {
                 tutorial::TutorialManager::GetInstance().Complete();
 
+                if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
+                    auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
+                    auto help_desk = game->GetHelpDesk();
+                    help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy));
+                } // if
+
+
                 _player_view_camera_controller->GetService()->SetAzimuth(10);
                 _player_view_camera_controller->GetService()->SetAltitude(20);
 

@@ -83,6 +83,8 @@ bool ratchet::event::ShipEvent::Update(float delta_time) {
         return false;
     } // if
     if (_timer.Tick(delta_time)) {
+        _ship_event_end_message_subject.Notify({});
+
         auto ptr = super::GetSubject();
         ptr->Notify("DeleteRequest", shared_from_this());
     } // if

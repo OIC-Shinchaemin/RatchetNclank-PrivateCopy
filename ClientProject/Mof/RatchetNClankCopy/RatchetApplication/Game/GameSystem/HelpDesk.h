@@ -16,8 +16,10 @@
 
 namespace ratchet::game::gamesystem {
 class HelpDesk :
-    public std::enable_shared_from_this<ratchet::game::gamesystem::HelpDesk>,
-    public base::core::Observer<const ratchet::game::gamesystem::GameQuest&> {
+    public std::enable_shared_from_this<ratchet::game::gamesystem::HelpDesk>
+//    ,
+//    public base::core::Observer<const ratchet::game::gamesystem::GameQuest&> 
+{
 public:
     struct Info {
         std::string text;
@@ -29,7 +31,7 @@ private:
     //! 情報
     Info _prev_info;
     //! 達成したいこと
-    //ratchet::game::gamesystem::GameQuest _current_quest;
+    ratchet::game::gamesystem::GameQuest _current_quest;
     //! 通知用
     base::core::Observable<const ratchet::game::gamesystem::HelpDesk::Info&> _subject;
     //! リソース
@@ -51,7 +53,7 @@ public:
     /// 通知
     /// </summary>
     /// <param name=""></param>
-    virtual void OnNotify(const ratchet::game::gamesystem::GameQuest& quest) override;
+//    virtual void OnNotify(const ratchet::game::gamesystem::GameQuest& quest) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -62,6 +64,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void RegisterQuest(ratchet::game::gamesystem::GameQuest value);
     /// <summary>
     /// 初期化
     /// </summary>

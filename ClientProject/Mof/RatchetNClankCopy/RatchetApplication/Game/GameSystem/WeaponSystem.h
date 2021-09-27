@@ -121,6 +121,11 @@ public:
     /// <param name="name"></param>
     /// <returns></returns>
     std::shared_ptr<ratchet::actor::weapon::Mechanical>GetMechanicalWeapon(const std::string& name);
+    /// <summary>
+    /// ’e–ò–žƒ^ƒ“
+    /// </summary>
+    /// <param name=""></param>
+    void FullCharge(void);
 };
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_WEAPON_SYSTEM_H
