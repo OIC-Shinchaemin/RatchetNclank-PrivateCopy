@@ -3,72 +3,72 @@
 #include "EffectEmitter.h"
 
 
-ratchet::effect::EffectContainer::EffectContainer() :
-	_pool(),
-	_effects(),
-	_emitter(){
-	_emitter = this->CreateEmitter();
+ratchet::effect::EffectContainer::EffectContainer():
+    _resource(),
+_effect_pair() {
+    _effect_pair.emplace(effect::EffectType::BasicDamage, PoolAndEmitTarget());
+    _effect_pair.at(effect::EffectType::BasicDamage).pool.SetResourcePath("../Resource/texture/effect/flash.png");
+
+    _effect_pair.emplace(effect::EffectType::PlayerSense, PoolAndEmitTarget());
+    _effect_pair.at(effect::EffectType::PlayerSense).pool.SetResourcePath("../Resource/texture/effect/sense.png");
 }
 
 ratchet::effect::EffectContainer::~EffectContainer() {
 }
 
-std::shared_ptr<ratchet::effect::EffectEmitter> ratchet::effect::EffectContainer::CreateEmitter(void) {
-	auto re = std::make_shared<ratchet::effect::EffectEmitter>();
-	re->SetPool(&_pool);
-	re->SetOutputTarget(&_effects);
-	return re;
+std::shared_ptr<ratchet::effect::EffectEmitter> ratchet::effect::EffectContainer::CreateEmitter(effect::EffectType type) {
+    auto re = std::make_shared<ratchet::effect::EffectEmitter>();
+    auto& pair = _effect_pair.at(type);
+
+    re->SetPool(&pair.pool);
+    re->SetOutputTarget(&pair.effects);
+    return re;
 }
 
 bool ratchet::effect::EffectContainer::Update(float delta_time) {
-	ut::EraseRemove(_effects, [](auto effect) {
-		return !effect->IsEnable();
-		});
+    for (auto& pair : _effect_pair) {
+        ut::EraseRemove(pair.second.effects, [](auto effect) {
+            return !effect->IsEnable();
+        });
+    } // for
 
-	if (::g_pInput->IsKeyPush(MOFKEY_E)) {
-		auto info = ratchet::effect::Effect::Info();
-		info.init_param.life_duration = 2.0f;
-		info.init_param.transform.position = Mof::CVector3(5.0f, -5.0f, -5.0f);
-		info.init_param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-
-		info.update_param.velocity = Mof::CVector3(0.001f, 0.0f, 0.0f);
-		info.update_param.rotate = Mof::CVector3(1.0f, 0.0f, 0.0f);
-		info.update_param.scale = Mof::CVector3(0.001f, 0.0f, 0.0f);
-
-		_emitter->Emit(info);
-	} // if
-
-	for (auto& effect : _effects) {
-		effect->Update(delta_time);
-	} // for
-	return true;
+    for (auto& pair : _effect_pair) {
+        for (auto& effect : pair.second.effects) {
+            effect->Update(delta_time);
+        } // for
+    } // for
+    return true;
 }
 
 bool ratchet::effect::EffectContainer::Render(void) {
-	for (auto& effect : _effects) {
-		if (!effect->IsEnable()) {
-			continue;
-		} // if
+    for (auto& pair : _effect_pair) {
+        for (auto& effect : pair.second.effects) {
+            if (!effect->IsEnable()) {
+                continue;
+            } // if
 
-		if (auto resource = _resource.lock()) {
-			auto path = _pool.GetResourcePath();
-			auto tex = resource->Get<std::shared_ptr<Mof::CTexture>>(path.data());
-			auto& param = effect->GetBasicParam();
-			if (tex) {
-				Mof::CMatrix44 scale, rotate, translate;
-				//Mof::CQuaternion quat; quat.Rotation(param.transform.rotate);
-				Mof::CQuaternion quat; quat.Rotation(Mof::CVector3());
 
-				scale.Scaling(param.transform.scale, scale);
-				quat.ConvertMatrixTranspose(rotate);
-				translate.Translation(param.transform.position, translate);
+            if (auto resource = _resource.lock()) {
+                auto path = pair.second.pool.GetResourcePath();
+                auto tex = resource->Get<std::shared_ptr<Mof::CTexture>>(path.data());
+                auto& param = effect->GetBasicParam();
+                if (tex) {
+                    Mof::CMatrix44 scale, rotate, translate;
+                    //Mof::CQuaternion quat; quat.Rotation(param.transform.rotate);
+                    Mof::CQuaternion quat; quat.Rotation(Mof::CVector3());
 
-				Mof::CMatrix44 world = scale * rotate * translate;
-				auto camera = ::CGraphicsUtilities::GetCamera();
-				tex->Render(camera->GetBillBoardMatrix() * world, param.color.ToU32Color());
-			} // if
+                    scale.Scaling(param.transform.scale, scale);
+                    quat.ConvertMatrixTranspose(rotate);
+                    translate.Translation(param.transform.position, translate);
 
-		} // if
-	} // for
-	return true;
+                    Mof::CMatrix44 world = scale * rotate * translate;
+                    auto camera = ::CGraphicsUtilities::GetCamera();
+                    tex->Render(camera->GetBillBoardMatrix() * world, param.color.ToU32Color());
+                } // if
+
+            } // if
+
+        } // for
+    } // for
+    return true;
 }

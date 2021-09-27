@@ -28,6 +28,11 @@ public:
     /// </summary>
     ~EffectPool();
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="path"></param>
+    void SetResourcePath(const std::string& path);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>

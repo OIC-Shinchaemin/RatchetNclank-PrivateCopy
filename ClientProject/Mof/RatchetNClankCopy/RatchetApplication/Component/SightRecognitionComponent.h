@@ -7,11 +7,12 @@
 #include <memory>
 #include <vector>
 
+#include "../Effect/EffectEmitter.h"
 
-namespace ratchet {
-namespace component {
-namespace player { class PlayerComponent; }
-namespace enemy { class EnemyComponent; }
+
+namespace ratchet::component::player { class PlayerComponent; }
+namespace ratchet::component::enemy { class EnemyComponent; }
+namespace ratchet::component {
 class SightRecognitionComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -19,10 +20,21 @@ private:
     float _range;
     //! 認識
     std::vector<std::weak_ptr<ratchet::actor::Actor>> _recognized;
+    //! 認識中
+    int _recognizing_count;
+    //std::vector<std::string> _recognizing;
     //! キャラ
     std::weak_ptr<ratchet::component::player::PlayerComponent> _player_com;
     //! キャラ
     std::weak_ptr<ratchet::component::enemy::EnemyComponent> _ENEMY_com;
+    //! エフェクト
+    std::shared_ptr<effect::EffectEmitter> _effect_emitter;
+
+    /// <summary>
+    /// 発生
+    /// </summary>
+    /// <param name=""></param>
+    void SenseEffectEmit(void);
     /// <summary>
     /// 描画
     /// </summary>
@@ -88,6 +100,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_SIGHT_RECOGNITION_COMPONENT_H

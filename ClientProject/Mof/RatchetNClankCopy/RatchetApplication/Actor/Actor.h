@@ -120,13 +120,13 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns>名前</returns>
-    std::string GetName(void) const;
+    const std::string& GetName(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns>タグ</returns>
-    std::string GetTag(void) const;
+    const std::string& GetTag(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

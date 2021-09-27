@@ -66,6 +66,10 @@ void ratchet::actor::character::Player::OnNotify(const ratchet::event::PlayerAct
 }
 */
 
+void ratchet::actor::character::Player::SetEffectContainer(const std::shared_ptr<ratchet::effect::EffectContainer > & ptr) {
+    this->_effect_container = ptr;
+}
+
 base::core::Observable<bool>* ratchet::actor::character::Player::GetShopSystemSubject(void) {
     return &this->_shop_system_subject.subject;
 }
@@ -91,6 +95,13 @@ std::shared_ptr<ratchet::actor::Actor> ratchet::actor::character::Player::GetChi
 std::shared_ptr<ratchet::actor::weapon::Mechanical> ratchet::actor::character::Player::GetCurrentMechanical(void) const {
     if (auto weapon = this->_current_mechanical.lock()) {
         return weapon;
+    } // if
+    return nullptr;
+}
+
+std::shared_ptr<ratchet::effect::EffectContainer> ratchet::actor::character::Player::GetEffectContainer(void) const {
+    if (auto ptr = _effect_container.lock()) {
+        return ptr;
     } // if
     return nullptr;
 }

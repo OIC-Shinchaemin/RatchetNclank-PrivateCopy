@@ -20,6 +20,7 @@
 ../Resource/mesh/scarecrow/scene1.mom
 
 ../Resource/texture/effect/smoke.png
+../Resource/texture/effect/sense.png
 ../Resource/texture/effect/flash.dds
 ../Resource/texture/effect/flash.png
 

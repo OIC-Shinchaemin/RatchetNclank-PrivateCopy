@@ -72,11 +72,11 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
                                ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        auto ENEMY_com = _enemy_com.lock();
+        auto enemy_com = _enemy_com.lock();
         auto target = in.target.lock();
         
         Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
-        auto length = (ENEMY_com->GetVolume() * 2.0f) - vec.Length();
+        auto length = (enemy_com->GetVolume() * 2.0f) - vec.Length();
         vec.Normal(vec);
         // —£‚ê‚é
         auto diff = vec * length * 0.5f; diff.y = 0.0f;

@@ -55,11 +55,11 @@ void ratchet::actor::Actor::SetParentTransform(std::optional<Mof::CMatrix44> tra
     this->_parent_transform = transform;
 }
 
-std::string ratchet::actor::Actor::GetName(void) const {
+const std::string& ratchet::actor::Actor::GetName(void) const {
     return this->_name;
 }
 
-std::string ratchet::actor::Actor::GetTag(void) const {
+const std::string& ratchet::actor::Actor::GetTag(void) const {
     return this->_tag;
 }
 
