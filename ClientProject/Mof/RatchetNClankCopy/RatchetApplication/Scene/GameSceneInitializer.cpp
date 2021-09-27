@@ -127,7 +127,8 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
         player->PushNotificationableSubject("QuickChange");
-        player->GetQuestSubject()->AddObserver(help_desk);
+        //player->GetQuestSubject()->AddObserver(help_desk);
+        help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy));
         out->_text_system->SetPlayer(player);
         game_money->SetEventManager(out->_event.lock());
         game_money->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
@@ -142,7 +143,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         pause_system->Initialize();
 
         auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
-        help_desk->OnNotify(quest);
+        //help_desk->OnNotify(quest);
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
         quick_change->AddInfoObserver(player);
@@ -166,7 +167,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         out->AddElement(enemy);
         enemy->SetEffectContainer(out->_effect);
         enemy->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
-        enemy->GetQuestSubject()->AddObserver(help_desk);
+        //enemy->GetQuestSubject()->AddObserver(help_desk);
         if (event_sphere.CollisionPoint(param->transform.position)) {
             //bridge_event->AddTriggerActor(enemy);
         } // if

@@ -94,6 +94,14 @@ bool ratchet::event::EnemyViewEvent::Initialize(void) {
     _camera->Update();
 
     this->GenerateQueen();
+
+
+
+    if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
+        auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
+        auto help_desk = game->GetHelpDesk();
+        help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront));
+    } // if
     return true;
 }
 
