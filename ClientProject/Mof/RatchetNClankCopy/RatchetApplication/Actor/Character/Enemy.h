@@ -26,7 +26,11 @@ private:
     //! エフェクト
     std::weak_ptr<effect::EffectContainer>_effect_container;
     //! エフェクト
-    std::shared_ptr<ratchet::effect::EffectEmitter> _effect_emitter;
+    //std::shared_ptr<ratchet::effect::EffectEmitter> _effect_emitter;
+    //! エフェクト
+    //std::shared_ptr<ratchet::effect::EffectEmitter> _star_effect_emitter;
+    //! エフェクト
+    ratchet::effect::EffectEmitterHolder _effect_emitter_holder;
     /// <summary>
     /// 状態変更
     /// </summary>
@@ -49,7 +53,19 @@ public:
     /// ゲッター
     /// </summary>
     /// <param name="ptr"></param>
-    std::shared_ptr<ratchet::effect::EffectEmitter> GetEffectEmitter(void) const;
+    //std::shared_ptr<ratchet::effect::EffectEmitter> GetEffectEmitter(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    //std::shared_ptr<ratchet::effect::EffectEmitter> GetStarEffectEmitter(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    auto GetEffectEmitterHolder(void) {
+        return &this->_effect_emitter_holder;
+    };
     /// <summary>
     /// ゲッター
     /// </summary>

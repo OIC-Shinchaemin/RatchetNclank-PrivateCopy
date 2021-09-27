@@ -29,6 +29,11 @@ private:
     /// </summary>
     /// <param name=""></param>
     void DamageEffectEmit(std::shared_ptr<ratchet::actor::Actor> actor);
+    /// <summary>
+    /// エフェクト発生
+    /// </summary>
+    /// <param name=""></param>
+    void DamageStarEffectEmit(std::shared_ptr<ratchet::actor::Actor> actor);
 public:
     /// <summary>
     /// コンストラクタ

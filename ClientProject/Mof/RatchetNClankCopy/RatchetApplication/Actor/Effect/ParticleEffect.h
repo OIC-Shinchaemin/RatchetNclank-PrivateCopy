@@ -15,7 +15,7 @@ class ParticleEffect : public ratchet::actor::Actor {
 public:
     struct Param : public super::Param {
         //! êF
-        Mof::CVector4 color;
+        Mof::CVector4 color = Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f);
         //! éûä‘
         float life_time;
     };

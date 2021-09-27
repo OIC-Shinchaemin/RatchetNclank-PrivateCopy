@@ -3,14 +3,34 @@
 #include "EffectEmitter.h"
 
 
-ratchet::effect::EffectContainer::EffectContainer():
-    _resource(),
-_effect_pair() {
-    _effect_pair.emplace(effect::EffectType::BasicDamage, PoolAndEmitTarget());
-    _effect_pair.at(effect::EffectType::BasicDamage).pool.SetResourcePath("../Resource/texture/effect/flash.png");
+ratchet::effect::EffectPoolCreateInfo ratchet::effect::EffectContainer::CreateEffectPoolCreateInfo(ratchet::effect::EffectType type) const {
+    auto pool_create_info = ratchet::effect::EffectPoolCreateInfo();
+    switch (type) {
+        case ratchet::effect::EffectType::BasicDamage:
+            pool_create_info.pool_count = 10;
+            pool_create_info.path = "../Resource/texture/effect/flash.png";
+            break;
+        case ratchet::effect::EffectType::PlayerSense:
+            pool_create_info.pool_count = 10;
+            pool_create_info.path = "../Resource/texture/effect/sense.png";
+            break;
+        case ratchet::effect::EffectType::PopStar:
+            pool_create_info.pool_count = 10;
+            pool_create_info.path = "../Resource/texture/effect/star.png";
+            break;
+        default:
+            break;
+    } // switch
+    return pool_create_info;
+}
 
-    _effect_pair.emplace(effect::EffectType::PlayerSense, PoolAndEmitTarget());
-    _effect_pair.at(effect::EffectType::PlayerSense).pool.SetResourcePath("../Resource/texture/effect/sense.png");
+ratchet::effect::EffectContainer::EffectContainer() :
+    _resource(),
+    _effect_pair() {
+    using Type = effect::EffectType;
+    _effect_pair.emplace(Type::BasicDamage, PoolAndEmitTarget(this->CreateEffectPoolCreateInfo(Type::BasicDamage)));
+    _effect_pair.emplace(Type::PlayerSense, PoolAndEmitTarget(this->CreateEffectPoolCreateInfo(Type::PlayerSense)));
+    _effect_pair.emplace(Type::PopStar, PoolAndEmitTarget(this->CreateEffectPoolCreateInfo(Type::PopStar)));
 }
 
 ratchet::effect::EffectContainer::~EffectContainer() {

@@ -32,7 +32,14 @@ void ratchet::component::scarecrow::ScarecrowComponent::DamageEffectEmit(std::sh
         info.init_param.transform.position = pos + init_pos_offset;
         info.init_param.transform.scale = init_scale;
         info.update_param.rotate = Mof::CVector3(0.0f, 1.0f, 0.0f);
-        owner->GetEffectEmitter()->Emit(info);
+        {
+            auto i = ratchet::effect::Effect::Info();
+            i.init_param.transform.position = pos;
+            i.init_param.life_duration = 2.0f;
+            i.init_param.transform.scale = Mof::CVector3(1.0f, 1.0f, 1.0f);
+            i.init_param.color = def::color_rgba::kWhite;
+            owner->GetEffectEmitter()->Emit(info);
+        }
 
         init_pos_offset = Mof::CVector3(
             ut::GenerateRandomF(-1.0f, 1.0f),
@@ -48,6 +55,63 @@ void ratchet::component::scarecrow::ScarecrowComponent::DamageEffectEmit(std::sh
             ut::GenerateRandomF(-0.3f, 0.3f),
             0.4f,
             ut::GenerateRandomF(-0.3f, 0.3f)
+        );
+        info.update_param.rotate = Mof::CVector3(
+            0.0f, ut::GenerateRandomF(-1.0f, 1.0f), 0.0f
+        );
+        info.update_param.scale = Mof::CVector3(-0.05f, -0.05f, -0.05f);
+        info.environment_param.use_gravity = true;
+        info.environment_param.gravity_scale = 0.01f;
+    } // for
+}
+
+void ratchet::component::scarecrow::ScarecrowComponent::DamageStarEffectEmit(std::shared_ptr<ratchet::actor::Actor> actor) {
+    auto camera_pos = CGraphicsUtilities::GetCamera()->GetViewPosition();
+    auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Scarecrow>(super::GetOwner());
+    auto target_pos = actor->GetPosition();
+    auto pos = (owner->GetPosition() + target_pos) * 0.5f;
+    auto diff = Mof::CVector3(camera_pos - pos);
+    diff.Normal(diff);
+    pos += diff * super::GetVolume() * 2.0f;
+    pos.y += this->GetHeight();
+
+    auto info = ratchet::effect::Effect::Info();
+    auto init_pos_offset = Mof::CVector3();
+    auto init_scale = Mof::CVector3(1.0f, 1.0f, 1.0f);
+    info.init_param.life_duration = 1.0f;
+    info.init_param.color = Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f);
+    info.update_param.color = Mof::CVector4(0.0f, 0.0f, 0.0f, -0.02f);
+    info.environment_param.use_gravity = false;
+    info.environment_param.use_velocity_drag = true;
+    info.environment_param.velocity_drag = 0.7f;
+
+    for (int i = 0, n = 5; i < n; i++) {
+        info.init_param.transform.position = pos + init_pos_offset;
+        info.init_param.transform.scale = init_scale;
+        info.update_param.rotate = Mof::CVector3(0.0f, 1.0f, 0.0f);
+        {
+            auto i = ratchet::effect::Effect::Info();
+            i.init_param.transform.position = pos;
+            i.init_param.life_duration = 2.0f;
+            i.init_param.transform.scale = Mof::CVector3(1.0f, 1.0f, 1.0f);
+            i.init_param.color = def::color_rgba::kWhite;
+            owner->GetStarEffectEmitter()->Emit(info);
+        }
+
+        init_pos_offset = Mof::CVector3(
+            ut::GenerateRandomF(-1.0f, 1.0f),
+            ut::GenerateRandomF(-1.0f, 1.0f),
+            ut::GenerateRandomF(-1.0f, 1.0f)
+        );
+        init_scale = Mof::CVector3(
+            ut::GenerateRandomF(0.5f, 0.8f),
+            ut::GenerateRandomF(0.5f, 0.8f),
+            ut::GenerateRandomF(0.5f, 0.8f)
+        );
+        info.update_param.velocity = Mof::CVector3(
+            ut::GenerateRandomF(-0.5f, 0.5f),
+            0.4f,
+            ut::GenerateRandomF(-0.5f, 0.5f)
         );
         info.update_param.rotate = Mof::CVector3(
             0.0f, ut::GenerateRandomF(-1.0f, 1.0f), 0.0f
@@ -108,6 +172,8 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::component::collision::CollisionComponentType::kPyrocitorBulletCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        this->DamageStarEffectEmit(in.target.lock());
+
         if (auto invincible_com = _invincible_com.lock()) {
             if (invincible_com->IsActive()) {
                 return false;
@@ -119,7 +185,6 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
 
-            this->DamageEffectEmit(in.target.lock());
 
             if (hp_com->GetHp() <= 0) {
                 super::GetOwner()->End();
@@ -131,6 +196,9 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::component::collision::CollisionComponentType::kBlasterBulletCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        this->DamageStarEffectEmit(in.target.lock());
+
+
         if (auto invincible_com = _invincible_com.lock()) {
             if (invincible_com->IsActive()) {
                 return false;
@@ -141,8 +209,6 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
 
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
-
-            this->DamageEffectEmit(in.target.lock());
 
             if (hp_com->GetHp() <= 0) {
                 super::GetOwner()->End();
@@ -164,7 +230,7 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
 
-            this->DamageEffectEmit(in.target.lock());
+            this->DamageStarEffectEmit(in.target.lock());
 
             if (hp_com->GetHp() <= 0) {
                 super::GetOwner()->End();
