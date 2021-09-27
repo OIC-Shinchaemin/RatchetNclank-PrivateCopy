@@ -355,7 +355,6 @@ MigrationBackup/
 # tlog
 *.tlog
 
-
 # TestDebug
 TestDebug/
 
@@ -365,10 +364,8 @@ Debug/
 # Release
 Release/
 
-
 # ConsoleDebug
 ConsoleDebug/
 
 # ConsoleRelease
 ConsoleRelease/
-
