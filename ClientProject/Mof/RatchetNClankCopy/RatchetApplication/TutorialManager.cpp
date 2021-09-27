@@ -3,6 +3,8 @@
 #include "Event/EventReferenceTable.h"
 #include "Actor/Gimmick/Wall.h"
 #include "Stage/Gimmick/Elevator.h"
+#include "Game/GameManager.h"
+#include "Game/GameSystem/WeaponSystem.h"
 
 
 void tutorial::TutorialManager::Liberation(TutorialType type) {
@@ -26,4 +28,12 @@ void tutorial::TutorialManager::Complete(void) {
             Get<std::shared_ptr<Elevator>>("elevator");
         elevator->SetShow(true);
     } // if
+
+    
+    if (ratchet::event::EventReferenceTable::Singleton().Exist("GameManager")) {
+        auto game = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
+        auto weapon = game->GetWeaponSystem();
+        weapon->FullCharge();
+    } // if
+
 }

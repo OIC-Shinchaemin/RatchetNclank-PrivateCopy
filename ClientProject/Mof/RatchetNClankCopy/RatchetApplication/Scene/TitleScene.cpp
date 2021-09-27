@@ -154,8 +154,8 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             } // if
             _bgm.Load("bgm/title.mp3");
             _bgm.SetLoop(true);
-            //_bgm.SetVolume(0.5f);
-            _bgm.SetVolume(0.0f);
+            _bgm.SetVolume(0.5f);
+            //_bgm.SetVolume(0.0f);
 
             _logo.SetTexture(super::GetResource()->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/title_logo/image.png"));
 

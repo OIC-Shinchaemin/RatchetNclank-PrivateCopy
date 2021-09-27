@@ -13,6 +13,7 @@
 #include "../Actor/Gimmick/Wall.h"
 #include "../Actor/Gimmick/Fence.h"
 #include "../Component/CameraComponent.h"
+#include "../Component/SightRecognitionComponent.h"
 #include "../Stage/Gimmick/Bridge.h"
 #include "../Stage/Gimmick/Elevator.h"
 #include "../Event/BridgeEvent.h"
@@ -53,6 +54,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     if (auto e = event) {
         e->InitializeGameEvent();
         ship_event = e->CreateGameEvent<ratchet::event::ShipEvent>();
+        ship_event->ShipEventEndMessageSubject()->AddObserver(out);
         stage_view_event = e->CreateGameEvent<ratchet::event::StageViewEvent>();
         stage_view_event->SetGameScene(shared_this);
         stage_view_event->SetTextSystem(out->_text_system);
@@ -91,7 +93,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);    
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
     player->SetEffectContainer(out->_effect);
-
+    player->GetComponent<component:: SightRecognitionComponent>()->GetContactEnemyMessageSubject()->AddObserver(out);
     for (auto elevator : elevators) {
         auto camera = player->GetComponent<ratchet::component::CameraComponent>();
         elevator->SetPlayer(player);

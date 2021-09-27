@@ -97,7 +97,8 @@ ratchet::component::SightRecognitionComponent::SightRecognitionComponent(int pri
     _player_com(),
     _ENEMY_com(),
     _effect_emitter(),
-    _recognizing_count(0) {
+    _recognizing_count(0),
+    _contact_enemy(false){
     super::Activate();
 }
 
@@ -106,7 +107,8 @@ ratchet::component::SightRecognitionComponent::SightRecognitionComponent(const S
     _range(obj._range),
     _player_com(),
     _ENEMY_com(),
-    _recognizing_count(0) {
+    _recognizing_count(0),
+    _contact_enemy(false) {
     super::Activate();
 }
 
@@ -151,6 +153,11 @@ bool ratchet::component::SightRecognitionComponent::Initialize(void) {
         sight_coll->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                      "EnemyCollisionComponent",
                                      ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+            if (!_contact_enemy) {
+                _contact_enemy = true;
+                _contact_enemy_message_subject.Notify({});
+            } // if
+
             if (_recognizing_count == 0) {
                 this->SenseEffectEmit();
             } // if

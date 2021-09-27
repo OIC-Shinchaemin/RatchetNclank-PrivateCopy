@@ -9,6 +9,11 @@
 
 #include "../Effect/EffectEmitter.h"
 
+struct ContactEnemyMessage {
+};
+using ContactEnemyMessageSubject = base::core::Observable<const ContactEnemyMessage&>;
+using ContactEnemyMessageListener = base::core::Observer<const  ContactEnemyMessage&>;
+
 
 namespace ratchet::component::player { class PlayerComponent; }
 namespace ratchet::component::enemy { class EnemyComponent; }
@@ -29,7 +34,10 @@ private:
     std::weak_ptr<ratchet::component::enemy::EnemyComponent> _ENEMY_com;
     //! エフェクト
     std::shared_ptr<effect::EffectEmitter> _effect_emitter;
-
+    //! 会敵
+    bool _contact_enemy;
+    //! 通知
+    ContactEnemyMessageSubject _contact_enemy_message_subject;
     /// <summary>
     /// 発生
     /// </summary>
@@ -75,6 +83,14 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     float GetRange(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto  GetContactEnemyMessageSubject(void) {
+        return &this->_contact_enemy_message_subject;
+    }
     /// <summary>
     /// ゲッター
     /// </summary>

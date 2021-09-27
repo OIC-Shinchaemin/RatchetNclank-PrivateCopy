@@ -11,6 +11,7 @@
 #include "../../UI/LockOnCursorMenu.h"
 #include "../../State/PlayerActionStateDefine.h"
 #include "../../Game/GameSystem/GameQuest.h"
+#include "../../Game/GameManager.h"
 
 
 ratchet::component::player::PlayerComponent::PlayerComponent(int priority) :
@@ -93,6 +94,12 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
         if (auto canvas = _ui_canvas.lock()) {
             canvas->RemoveElement("EquipmentWeaponMenu");
             canvas->RemoveElement("QuickChangeMenu");
+        } // if
+
+        if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
+            auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
+            auto help_desk = game->GetHelpDesk();
+            help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::None));
         } // if
 
 
