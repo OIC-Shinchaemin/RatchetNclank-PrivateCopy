@@ -2501,6 +2501,9 @@
     <ClInclude Include="Component\Collision\Object\BarricadeCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionDefine.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">

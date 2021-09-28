@@ -62,6 +62,11 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
+    /// <param name="value"></param>
+    void SetAngularDrag(float value);
+    /// <summary>
+    /// セッター
+    /// </summary>
     /// <param name="use"></param>
     void SetUseGravity(bool use);
     /// <summary>

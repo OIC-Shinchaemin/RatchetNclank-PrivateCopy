@@ -81,6 +81,7 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
     auto velocity_com = _velocity_com.lock();
     if (velocity_com) {
         velocity_com->SetGravity(9.8f);
+        velocity_com->SetAngularDrag(0.80f);
     } // if
     if (auto state_com = _state_com.lock()) {
         state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
@@ -136,10 +137,55 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
 
             auto pos = super::GetOwner()->GetPosition();
             super::GetOwner()->SetPosition(pos + diff);
+
+            //pos.x = in.point.x;
+            //pos.z = in.point.z;
+            //super::GetOwner()->SetPosition(pos);
             return true;
         }));
 
     }
+
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kBarricadeCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto target = in.target.lock();
+        Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
+        auto length = (this->GetVolume() ) - vec.Length();
+        vec.Normal(vec);
+        // —£‚ê‚é
+        auto diff = vec * length * 0.5f; 
+        diff.y = 0.0f;
+
+        auto pos = super::GetOwner()->GetPosition();
+        super::GetOwner()->SetPosition(pos - diff);
+
+
+        //pos.x = in.point.x;
+        //pos.z = in.point.z;
+        //super::GetOwner()->SetPosition(pos);
+
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBarricadeCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto target = in.target.lock();
+        Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
+        auto length = (this->GetVolume()) - vec.Length();
+        vec.Normal(vec);
+        // —£‚ê‚é
+        auto diff = vec * length * 0.5f;
+        diff.y = 0.0f;
+
+        auto pos = super::GetOwner()->GetPosition();
+        super::GetOwner()->SetPosition(pos - diff);
+
+
+        return true;
+    }));
+
+
 
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::component::collision::CollisionComponentType::kShopCollisionComponent,
@@ -240,7 +286,7 @@ bool ratchet::component::player::PlayerComponent::Update(float delta_time) {
         //        camera_com->GetCameraController()->GetService()->SetUseSpring(false);
         //    } // else
         //} // if
-    
+
     } // if
 
     _next_terrain = "";
@@ -289,9 +335,9 @@ bool ratchet::component::player::PlayerComponent::DebugRender(void) {
     auto p = camera_com->GetPosition();
     auto v = camera_com->GetVelocity();
 
-    ::CGraphicsUtilities::RenderString(500.0f, 530.0f, "camera_com GetPosition() x = %f", p .x);
-    ::CGraphicsUtilities::RenderString(500.0f, 550.0f, "camera_com GetPosition() y = %f", p .y);
-    ::CGraphicsUtilities::RenderString(500.0f, 570.0f, "camera_com GetPosition() z = %f", p .z);
+    ::CGraphicsUtilities::RenderString(500.0f, 530.0f, "camera_com GetPosition() x = %f", p.x);
+    ::CGraphicsUtilities::RenderString(500.0f, 550.0f, "camera_com GetPosition() y = %f", p.y);
+    ::CGraphicsUtilities::RenderString(500.0f, 570.0f, "camera_com GetPosition() z = %f", p.z);
 
     ::CGraphicsUtilities::RenderString(500.0f, 610.0f, "camera_com GetVelocity()2 v = %f", Mof::CVector2(v.x, v.z).Length());
     ::CGraphicsUtilities::RenderString(500.0f, 630.0f, "camera_com GetVelocity() x = %f", v.x);

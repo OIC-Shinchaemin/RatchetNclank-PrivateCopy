@@ -12,11 +12,11 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	//_CrtMemCheckpoint(&state);
 	//_CrtMemDumpStatistics(&state);
 
-
 	Mof::LPFramework pFrame = new Mof::CDX11GameFramework();
 	Mof::WINDOWSGAMEFRAMEWORKINITIALIZEINFO Info;
 	Info.WindowCreateInfo.px = 400.0f;
 	Info.WindowCreateInfo.py = 20.0f;
+	Info.Flag = MOF_FRAMEWORK_GRAPHICSINITIALIZE | MOF_FRAMEWORK_INPUTINITIALIZE | MOF_FRAMEWORK_APPLICATIONINITIALIZE;
 	Info.pApplication = new CGameApp();
 	if (pFrame->Initialize(&Info)) {
 		pFrame->Run();

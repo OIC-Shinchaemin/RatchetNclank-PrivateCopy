@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "../../Gamepad.h"
+#include "../TransformComponent.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionComponent.h"
@@ -20,6 +21,8 @@ namespace ratchet::component ::player::action {
 class PlayerActionComponent : public ratchet::component::ActionComponent {
     using super = ratchet::component::ActionComponent;
 private:
+    //! トランスフォーム
+    std::weak_ptr<ratchet::component::TransformComponent> _transform_com;
     //! 速度
     std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! 状態
@@ -31,6 +34,12 @@ private:
     //! カメラ
     std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
 protected:
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::component::TransformComponent> GetTransformComponent(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -145,7 +145,7 @@ bool ratchet::component::collision::CollisionComponent::DebugRender(void) {
     } // if
 
     if (this->GetBox().has_value()) {
-        ::CGraphicsUtilities::RenderBox(this->GetBox().value(), def::color_rgba::kRed);
+        ::CGraphicsUtilities::RenderLineBox(this->GetBox().value());
     } // if
     return true;
 }

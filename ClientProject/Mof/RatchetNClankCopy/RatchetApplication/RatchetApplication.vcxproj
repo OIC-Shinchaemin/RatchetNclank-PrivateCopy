@@ -673,6 +673,7 @@
     <ClInclude Include="Camera\FollowCameraController.h" />
     <ClInclude Include="Camera\PointCameraController.h" />
     <ClInclude Include="Camera\ThirdPersonCameraController.h" />
+    <ClInclude Include="CollisionDefine.h" />
     <ClInclude Include="Component\ActionComponent.h" />
     <ClInclude Include="Component\ActionStateComponent.h" />
     <ClInclude Include="Component\AIStateComponent.h" />
