@@ -39,12 +39,6 @@ private:
     /// <param name=""></param>
     void ChangeState(void);
     /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual std::optional<Mof::CRay3D> GetFrontRay(void);
-    /// <summary>
     /// 衝突
     /// </summary>
     /// <param name="ptr"></param>
@@ -105,6 +99,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::optional<Mof::CRay3D> GetRay(void) override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetFrontRay(void) override;
     /// <summary>
     /// ゲッター
     /// </summary>

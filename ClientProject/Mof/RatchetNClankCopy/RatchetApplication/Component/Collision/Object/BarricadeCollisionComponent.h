@@ -9,11 +9,15 @@
 
 #include <Mof.h>
 
+#include "../../MeshComponent.h"
+
 
 namespace ratchet::component::collision {
 class BarricadeCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
+    //! メッシュ
+    std::weak_ptr<ratchet::component::MeshComponent> _mesh;
 public:
     /// <summary>
     /// コンストラクタ

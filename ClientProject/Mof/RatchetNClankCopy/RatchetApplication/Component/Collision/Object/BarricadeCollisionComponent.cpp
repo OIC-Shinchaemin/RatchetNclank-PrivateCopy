@@ -47,7 +47,10 @@ std::optional<Mof::CRay3D> ratchet::component::collision::BarricadeCollisionComp
 }
 
 std::optional<Mof::LPMeshContainer> ratchet::component::collision::BarricadeCollisionComponent::GetMesh(void) {
-    return std::optional<Mof::LPMeshContainer>();
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
+        return std::optional<Mof::LPMeshContainer>();
+    } // if
+    return _mesh.lock()->GetMeshContainer().get();
 }
 
 std::optional<::ratchet::component::collision::SightObject> ratchet::component::collision::BarricadeCollisionComponent::GetSightObject(void) {
@@ -56,6 +59,7 @@ std::optional<::ratchet::component::collision::SightObject> ratchet::component::
 
 bool ratchet::component::collision::BarricadeCollisionComponent::Initialize(void) {
     super::Initialize();
+    _mesh = super::GetOwner()->GetComponent<ratchet::component::MeshComponent>();
     return true;
 }
 

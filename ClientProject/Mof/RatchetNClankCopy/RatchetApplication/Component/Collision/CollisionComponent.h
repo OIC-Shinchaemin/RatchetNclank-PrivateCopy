@@ -151,6 +151,14 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetFrontRay(void) {
+        return std::optional<Mof::CRay3D>();
+    }
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual std::optional<Mof::CRay3D> GetNextRay(void) {
         return std::optional<Mof::CRay3D>();
     };

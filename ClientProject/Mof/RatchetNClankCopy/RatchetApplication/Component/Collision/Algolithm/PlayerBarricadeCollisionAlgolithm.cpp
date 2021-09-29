@@ -21,19 +21,22 @@ const char* ratchet::PlayerBarricadeCollisionAlgolithm::GetTargetType(void) cons
 
 bool ratchet::PlayerBarricadeCollisionAlgolithm::IsCollision(std::shared_ptr<ratchet::component::collision::CollisionComponent> object, std::shared_ptr<ratchet::component::collision::CollisionComponent> target, component::collision::CollisionInfo& out) {
     // 衝突オブジェクトを持っていないなら処理しない
-    //if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
-    if (!object->GetSphere().has_value() || !target->GetBox().has_value()) {
+    if (!object->GetSphere().has_value() || !target->GetSphere().has_value()) {
         return false;
     } // if
-    //auto object_sphere = object->GetSphere().value();
-    //auto target_box = target->GetBox().value();
-    auto box = target->GetBox().value();
-    auto sphere_pos = Mof::CVector3(object->GetSphere().value().Position.x, object->GetSphere().value().Position.y, object->GetSphere().value().Position.z);
-    if (object->GetSphere().value().CollisionSphere(target->GetSphere().value())) {
-    //if (box.CollisionPoint(sphere_pos)) {
+    
+    auto object_sphere = object->GetSphere().value();
+    auto object_ray = object->GetFrontRay().value();
+    auto object_box = object->GetBox().value();
+    auto target_box = target->GetBox().value();
+    float distance = 0.0f;
+    Mof::CVector3 pos = Mof::CVector3(object_sphere.x, object_sphere.y, object_sphere.z);
+   
+    if (object_box.CollisionAABB(target_box) &&
+        object_ray.CollisionAABB(target_box, distance)) {
         out.target = target->GetOwner();
+        out.distance = distance;
         return true;
     } // if
-
     return false;
 }

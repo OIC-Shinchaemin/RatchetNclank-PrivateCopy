@@ -255,7 +255,14 @@ std::optional<Mof::CSphere> ratchet::component::collision::PlayerCollisionCompon
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::PlayerCollisionComponent::GetBox(void) {
-    return std::optional<Mof::CBoxAABB>();
+    _ASSERT_EXPR(!_player_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
+        return std::optional<Mof::CBoxAABB>();
+    } // if
+    auto pos = super::GetOwner()->GetPosition();
+    float volume = _player_com.lock()->GetVolume();
+    pos.y += _player_com.lock()->GetHeight();
+    return Mof::CBoxAABB(pos, Mof::CVector3(volume, volume, volume));
 }
 
 std::optional<Mof::CRay3D> ratchet::component::collision::PlayerCollisionComponent::GetRay(void) {

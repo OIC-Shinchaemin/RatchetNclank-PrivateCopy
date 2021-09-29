@@ -14,6 +14,195 @@
 #include "../../Game/GameManager.h"
 
 
+void ratchet::component::player::PlayerComponent::CacheComponent(void) {
+    _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
+    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+    _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
+    _coll_volume_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionBarrack(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kBarrackCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto owner = super::GetOwner();
+        auto pos = owner->GetPosition();
+        auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
+        Mof::CVector3 velocity = (velocity_com->GetVelocity()) * def::kDeltaTime;
+
+        pos.x += -velocity.x;
+        pos.z += -velocity.z;
+        super::GetOwner()->SetPosition(pos);
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBarrackCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto owner = super::GetOwner();
+        auto pos = owner->GetPosition();
+        auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
+        Mof::CVector3 velocity = (velocity_com->GetVelocity()) * def::kDeltaTime;
+
+        pos.x += -velocity.x;
+        pos.z += -velocity.z;
+        super::GetOwner()->SetPosition(pos);
+        return true;
+    }));
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionBarricade(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kBarricadeCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto owner = super::GetOwner();
+        auto pos = owner->GetPosition();
+        auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
+        Mof::CVector3 velocity = (velocity_com->GetVelocity()) * def::kDeltaTime;
+
+        pos.x += -velocity.x;
+        pos.z += -velocity.z;
+        super::GetOwner()->SetPosition(pos);
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBarricadeCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto owner = super::GetOwner();
+        auto pos = owner->GetPosition();
+        auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
+        Mof::CVector3 velocity = (velocity_com->GetVelocity()) * def::kDeltaTime;
+
+        pos.x += -velocity.x;
+        pos.z += -velocity.z;
+        super::GetOwner()->SetPosition(pos);
+        return true;
+    }));
+
+
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionKing(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kKingCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
+        _contact_mode = true;
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
+                               ratchet::component::collision::CollisionComponentType::kKingCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        _talk_target.reset();
+        _contact_mode = false;
+        return true;
+    }));
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionQueen(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
+        _contact_mode = true;
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
+                               ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        _talk_target.reset();
+        _contact_mode = false;
+        return true;
+    }));
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionScarecrow(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kScarecrowCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto target = in.target.lock();
+        Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
+        auto length = (this->GetVolume() * 2.0f) - vec.Length();
+        vec.Normal(vec);
+        // —£‚ê‚é
+        auto diff = vec * length * 0.5f; diff.y = 0.0f;
+
+        auto pos = super::GetOwner()->GetPosition();
+        super::GetOwner()->SetPosition(pos + diff);
+        return true;
+    }));
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionShop(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kShopCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
+        player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessStart);
+        player->PushNotificationableSubject("ShopSystem");
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
+                               ratchet::component::collision::CollisionComponentType::kShopCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
+        player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessEnd);
+        player->PopNotificationableSubject("ShopSystem");
+        return true;
+    }));
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionShip(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kShipCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto canvas = _ui_canvas.lock()) {
+            canvas->RemoveElement("EquipmentWeaponMenu");
+            canvas->RemoveElement("QuickChangeMenu");
+        } // if
+
+        if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
+            auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
+            auto help_desk = game->GetHelpDesk();
+            help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::None));
+        } // if
+
+        super::GetOwner()->End();
+        return true;
+    }));
+
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionWall(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kWallCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
+        auto velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
+
+        auto v = velocity_com->GetVelocity();
+        float d = 3.0f;
+
+        auto add = Mof::CVector3(-v.x, 0.0f, -v.z) * d;
+        velocity_com->AddVelocityForce(add);
+        return true;
+    }));
+}
+
+void ratchet::component::player::PlayerComponent::CollisionFunctionWaterFlow(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kWaterFlowCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (this->GetNextTerrain() == "WaterFlow") {
+            auto owner = super::GetOwner();
+            auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
+            auto velocity = velocity_com->GetVelocity() * def::kDeltaTime;
+            velocity.y = 0.0f;
+            owner->SetPosition(owner->GetPosition() - velocity);
+        } // if
+        return true;
+    }));
+}
+
 ratchet::component::player::PlayerComponent::PlayerComponent(int priority) :
     super(priority),
     _target(),
@@ -72,11 +261,7 @@ bool ratchet::component::player::PlayerComponent::HasTalkTarget(void) const {
 bool ratchet::component::player::PlayerComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-
-    _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
-    _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
-    _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
-    _coll_volume_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
+    this->CacheComponent();
 
     auto velocity_com = _velocity_com.lock();
     if (velocity_com) {
@@ -89,173 +274,15 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
 
 
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::component::collision::CollisionComponentType::kShipCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        if (auto canvas = _ui_canvas.lock()) {
-            canvas->RemoveElement("EquipmentWeaponMenu");
-            canvas->RemoveElement("QuickChangeMenu");
-        } // if
-
-        if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
-            auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
-            auto help_desk = game->GetHelpDesk();
-            help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::None));
-        } // if
-
-
-        super::GetOwner()->End();
-        return true;
-    }));
-
-
-
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::component::collision::CollisionComponentType::kWaterFlowCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        if (this->GetNextTerrain() == "WaterFlow") {
-            auto owner = super::GetOwner();
-            auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
-            auto velocity = velocity_com->GetVelocity() * def::kDeltaTime;
-            velocity.y = 0.0f;
-            owner->SetPosition(owner->GetPosition() - velocity);
-        } // if
-        return true;
-    }));
-
-
-    {
-        coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
-                                   ratchet::component::collision::CollisionComponentType::kScarecrowCollisionComponent,
-                                   ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-            auto target = in.target.lock();
-            Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
-            auto length = (this->GetVolume() * 2.0f) - vec.Length();
-            vec.Normal(vec);
-            // —£‚ê‚é
-            auto diff = vec * length * 0.5f; diff.y = 0.0f;
-
-            auto pos = super::GetOwner()->GetPosition();
-            super::GetOwner()->SetPosition(pos + diff);
-
-            //pos.x = in.point.x;
-            //pos.z = in.point.z;
-            //super::GetOwner()->SetPosition(pos);
-            return true;
-        }));
-
-    }
-
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::component::collision::CollisionComponentType::kBarricadeCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        auto target = in.target.lock();
-        Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
-        auto length = (this->GetVolume() ) - vec.Length();
-        vec.Normal(vec);
-        // —£‚ê‚é
-        auto diff = vec * length * 0.5f; 
-        diff.y = 0.0f;
-
-        auto pos = super::GetOwner()->GetPosition();
-        super::GetOwner()->SetPosition(pos - diff);
-
-
-        //pos.x = in.point.x;
-        //pos.z = in.point.z;
-        //super::GetOwner()->SetPosition(pos);
-
-        return true;
-    }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kBarricadeCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        auto target = in.target.lock();
-        Mof::CVector3 vec = super::GetOwner()->GetPosition() - target->GetPosition();
-        auto length = (this->GetVolume()) - vec.Length();
-        vec.Normal(vec);
-        // —£‚ê‚é
-        auto diff = vec * length * 0.5f;
-        diff.y = 0.0f;
-
-        auto pos = super::GetOwner()->GetPosition();
-        super::GetOwner()->SetPosition(pos - diff);
-
-
-        return true;
-    }));
-
-
-
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kShopCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
-        player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessStart);
-        player->PushNotificationableSubject("ShopSystem");
-
-        return true;
-    }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
-                               ratchet::component::collision::CollisionComponentType::kShopCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
-        player->GetQuestSubject()->Notify(ratchet::game::gamesystem::GameQuest::Type::ShopAccessEnd);
-        player->PopNotificationableSubject("ShopSystem");
-        return true;
-    }));
-
-
-
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kKingCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
-        _contact_mode = true;
-        return true;
-    }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
-                               ratchet::component::collision::CollisionComponentType::kKingCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        _talk_target.reset();
-        _contact_mode = false;
-        return true;
-    }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
-        _contact_mode = true;
-        return true;
-    }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
-                               ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        _talk_target.reset();
-        _contact_mode = false;
-        return true;
-    }));
-
-
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
-                               ratchet::component::collision::CollisionComponentType::kWallCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
-        auto velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
-
-        auto v = velocity_com->GetVelocity();
-        float d = 3.0f;
-
-        auto add = Mof::CVector3(-v.x, 0.0f, -v.z) * d;
-        velocity_com->AddVelocityForce(add);
-
-        OutputDebugString("kWallCollisionComponent‚†");
-        puts("kWallCollisionComponent‚†");
-        return true;
-    }));
-
-
-
+    this->CollisionFunctionBarrack(coll_com);
+    this->CollisionFunctionBarricade(coll_com);
+    this->CollisionFunctionKing(coll_com);
+    this->CollisionFunctionQueen(coll_com);
+    this->CollisionFunctionScarecrow(coll_com);
+    this->CollisionFunctionShop(coll_com);
+    this->CollisionFunctionShip(coll_com);
+    this->CollisionFunctionWall(coll_com);
+    this->CollisionFunctionWaterFlow(coll_com);
 
     if (auto canvas = super::_ui_canvas.lock()) {
         canvas->RemoveElement("LockOnCursorMenu");
@@ -331,9 +358,18 @@ bool ratchet::component::player::PlayerComponent::DebugRender(void) {
     } // else
 
 
+    auto velocity = _velocity_com.lock()->GetVelocity();
+    
+    ::CGraphicsUtilities::RenderString(500.0f, 430.0f, "velocity.x = %f", velocity.x);
+    ::CGraphicsUtilities::RenderString(500.0f, 450.0f, "velocity y = %f", velocity.y);
+    ::CGraphicsUtilities::RenderString(500.0f, 470.0f, "velocity z = %f", velocity.z);
+
+
     auto camera_com = _camera_com.lock();
     auto p = camera_com->GetPosition();
     auto v = camera_com->GetVelocity();
+
+
 
     ::CGraphicsUtilities::RenderString(500.0f, 530.0f, "camera_com GetPosition() x = %f", p.x);
     ::CGraphicsUtilities::RenderString(500.0f, 550.0f, "camera_com GetPosition() y = %f", p.y);

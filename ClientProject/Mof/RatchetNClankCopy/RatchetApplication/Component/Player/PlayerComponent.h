@@ -7,9 +7,7 @@
 #include <memory>
 
 #include "../../Actor/Actor.h"
-//#include "../../Actor/Character/King.h"
 #include "../../Actor/Character/Character.h"
-//#include "../../Actor/Character/Player.h"
 #include "Base/Core/Observable.h"
 
 #include "../TransformComponent.h"
@@ -45,6 +43,17 @@ private:
     bool _contact_mode;
     //! 話し相手
     std::weak_ptr<ratchet::actor::character::Character> _talk_target;
+
+    void CacheComponent(void);
+    void CollisionFunctionBarrack(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionBarricade(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionKing(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionQueen(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionScarecrow(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionShop(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionShip(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionWall(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionWaterFlow(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
 public:
     /// <summary>
     /// コンストラクタ
