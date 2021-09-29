@@ -61,6 +61,8 @@ protected:
     bool _use_spring;
     //! ばね使用
     bool _update_position_flag;
+    //! ぶつかっている
+    bool _collision_stage;
 public:
     /// <summary>
     /// セッター
@@ -121,6 +123,11 @@ public:
     /// <param name="flag"></param>
     void SetUpdatePositionFlag(bool flag);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetCollisionStage(bool flag);
+    /// <summary>
     /// セット
     /// </summary>
     /// <param name="info"></param>
@@ -178,6 +185,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    float GetDefaultDistance(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     Mof::CVector3 GetVelocity(void) const;
     /// <summary>
     /// ゲッター
@@ -191,6 +204,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     bool IsUpdatePositionFlag(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsCollisionStage(void) const;
     /// <summary>
     /// 回転
     /// </summary>

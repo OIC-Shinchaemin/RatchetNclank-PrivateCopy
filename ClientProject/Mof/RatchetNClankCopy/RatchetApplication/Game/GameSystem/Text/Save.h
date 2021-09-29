@@ -1,19 +1,22 @@
-#pragma once
+#ifndef RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SAVE_H
+#define RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SAVE_H
 
-#define		SAVECOUNT				20
 
 #include <Mof.h>
 
-//標準のアルファ変化速度
-#define		ALPHA_SPEED				15
 
+#define	SAVECOUNT 20
+//標準のアルファ変化速度
+#define	ALPHA_SPEED	15
+
+
+namespace ratchet::game::gamesystem::text {
 //存在するシーンの列挙
 enum tag_SCENENO {
     SCENENO_TITLE,
     SCENENO_GAME,
     SCENENO_SAVE,
 };
-
 class CSave {
 private:
     CTexture				m_BackImage;
@@ -22,6 +25,9 @@ private:
     bool					m_bEnd;
     bool					m_bSave;
     int						m_PrevScene;
+    //当たり判定用の矩形定義
+    CRectangle gReturnRec;
+    
 
     typedef struct tag_FILETAG {
         bool				bFile;
@@ -45,3 +51,5 @@ public:
     void Release(void);
     void SetState(int ps, bool s) { m_PrevScene = ps; m_bSave = s; }
 };
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SAVE_H

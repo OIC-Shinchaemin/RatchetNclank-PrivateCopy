@@ -21,6 +21,7 @@ private:
     //! x,y　方向角 仰角
     Mof::CVector3 _non_collision_angle;
     Mof::CVector3 _non_collision_position;
+    float _non_collision_distance;
 public:
     /// <summary>
     /// コンストラクタ

@@ -1,46 +1,21 @@
 #include	"Save.h"
 
 
-
-
-//現在のシーン(外部参照、実体はGameApp.cpp)
-//extern int						gScene;
-//変更するシーン(外部参照、実体はGameApp.cpp)
-//extern int						gChangeScene;
-//変更フラグ(外部参照、実体はGameApp.cpp)
-//extern bool						gbChange;
-
-
-//当たり判定用の矩形定義
-CRectangle						gReturnRec(704, 664, 960, 704);			//もどる
-
-
-/**
- * コンストラクタ
- *
- */
-CSave::CSave() :
+ratchet::game::gamesystem::text::CSave::CSave() :
     m_BackImage(),
     m_ReturnImage(),
     m_Alpha(0),
     m_bEnd(false),
     m_bSave(false),
     m_PrevScene(SCENENO_TITLE) {
-    memset(m_Tag, 0, sizeof(FILETAG) * SAVECOUNT);
+    std::memset(m_Tag, 0, sizeof(FILETAG) * SAVECOUNT);
+    gReturnRec = CRectangle(704, 664, 960, 704);			
 }
 
-/**
- * デストラクタ
- *
- */
-CSave::~CSave() {
+ratchet::game::gamesystem::text::CSave::~CSave() {
 }
 
-/**
- * 読み込み
- * 利用するテクスチャを読み込む。
- */
-bool CSave::Load(void) {
+bool ratchet::game::gamesystem::text::CSave::Load(void) {
     //テクスチャの読み込み
     if (!m_BackImage.Load("Save.png")) {
         return false;
@@ -51,14 +26,7 @@ bool CSave::Load(void) {
     return true;
 }
 
-/**
- * ファイルタグの読み込み
- *
- * 引数
- * [in]			name			読み込みファイル名
- * [in]			i				読み込み番号
- */
-bool CSave::LoadTag(const char* name, int i) {
+bool ratchet::game::gamesystem::text::CSave::LoadTag(const char* name, int i) {
     HANDLE hFile = CreateFile(name, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile == INVALID_HANDLE_VALUE) {
         m_Tag[i].bFile = false;
@@ -83,21 +51,12 @@ bool CSave::LoadTag(const char* name, int i) {
     return true;
 }
 
-/**
- * 初期化
- * パラメーターや座標を初期化する。
- * 状態を初期化したいときに実行する。
- */
-void CSave::Initialize(void) {
+void ratchet::game::gamesystem::text::CSave::Initialize(void) {
     m_bEnd = false;
     m_Alpha = 0;
 }
 
-/**
- * アルファ値の更新
- *
- */
-void CSave::UpdateAlpha(void) {
+void ratchet::game::gamesystem::text::CSave::UpdateAlpha(void) {
     //終了状態ならフェードアウト
     if (m_bEnd) {
         if (m_Alpha - ALPHA_SPEED <= 0) {
@@ -119,11 +78,7 @@ void CSave::UpdateAlpha(void) {
     }
 }
 
-/**
- * 更新
- *
- */
-void CSave::Update(void) {
+void ratchet::game::gamesystem::text::CSave::Update(void) {
     //アルファ値の更新
     UpdateAlpha();
 
@@ -146,11 +101,7 @@ void CSave::Update(void) {
     }
 }
 
-/**
- * 描画
- *
- */
-void CSave::Render(void) {
+void ratchet::game::gamesystem::text::CSave::Render(void) {
     m_BackImage.Render(0, 0, MOF_ARGB(m_Alpha, 255, 255, 255));
     CGraphicsUtilities::RenderString(10, 10, MOF_ARGB(m_Alpha, 255, 255, 255), ((m_bSave) ? "保存" : "読み込み"));
 
@@ -164,18 +115,10 @@ void CSave::Render(void) {
     }
 }
 
-/**
- * デバッグ描画
- *
- */
-void CSave::RenderDebug(void) {
+void ratchet::game::gamesystem::text::CSave::RenderDebug(void) {
 }
 
-/**
- * 解放
- *
- */
-void CSave::Release(void) {
+void ratchet::game::gamesystem::text::CSave::Release(void) {
     m_BackImage.Release();
     m_ReturnImage.Release();
 }

@@ -1,38 +1,41 @@
-#pragma once
+#ifndef RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_MENU_H
+#define RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_MENU_H
 
-#include	"Mof.h"
 
+#include <Mof.h>
+
+
+namespace ratchet::game::gamesystem::text {
 class CMenu {
 private:
-    float					m_cx;
-    float					m_cy;
+    Mof::CVector2 _position;
+    Mof::CVector2 _space;
+    int _count;
+    char* _title;
+    char** _item;
+    int	_select;
+    bool _drag;
+    bool _show;
+    bool _enter;
 
-    int						m_HSpace;
-    int						m_VSpace;
-
-    int						m_Count;
-    char* m_pTitle;
-    char** m_pItem;
-    int						m_Select;
-
-    bool					m_bShow;
-    bool					m_bEnter;
-
-    CRectangle				m_Rect;
-    CRectangle				m_HeaderRect;
-
-    bool					m_bDrag;
+    CRectangle _rectangle;
+    CRectangle _header_rectangle;
 public:
     CMenu();
     ~CMenu();
+    int GetSelect(void) { return _select; }
+    int GetCount(void) { return _count; }
+    bool IsShow(void) { return _show; }
+    bool IsEnter(void) { return _enter; }
+
     void Create(char* pTitle, char** pItem, int cnt);
-    void Release(void);
-    void Show(float cx, float cy);
-    void Hide(void) { m_bShow = false; }
     void Update(void);
     void Render(void);
-    bool IsShow(void) { return m_bShow; }
-    bool IsEnter(void) { return m_bEnter; }
-    int GetSelect(void) { return m_Select; }
-    int GetCount(void) { return m_Count; }
+    void Release(void);
+    void Show(float cx, float cy);
+    void Hide(void) {
+        _show = false;
+    }
 };
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_MENU_H

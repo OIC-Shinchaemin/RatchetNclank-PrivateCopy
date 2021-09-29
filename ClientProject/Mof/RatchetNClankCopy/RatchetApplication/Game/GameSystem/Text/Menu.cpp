@@ -1,154 +1,154 @@
 #include	"Menu.h"
 
 
-CMenu::CMenu() :
-    m_cx(0.0f),
-    m_cy(0.0f),
-    m_HSpace(12),
-    m_VSpace(8),
-    m_Count(0),
-    m_pTitle(NULL),
-    m_pItem(NULL),
-    m_Select(0),
-    m_bShow(false),
-    m_bEnter(false),
-    m_Rect(),
-    m_HeaderRect(),
-    m_bDrag(false) {
+ratchet::game::gamesystem::text::CMenu::CMenu() :
+    _position(),
+    _space(),
+    _count(0),
+    _title(NULL),
+    _item(NULL),
+    _select(0),
+    _show(false),
+    _enter(false),
+    _rectangle(),
+    _header_rectangle(),
+    _drag(false) {
+    _space.x = 12.0f;
+    _space.y = 8.0f;
+
 }
 
-CMenu::~CMenu() {
+ratchet::game::gamesystem::text::CMenu::~CMenu() {
     Release();
 }
 
-void CMenu::Create(char* pTitle, char** pItem, int cnt) {
-    //古いデータの解放
-    Release();
+void ratchet::game::gamesystem::text::CMenu::Create(char* pTitle, char** pItem, int cnt) {
+    this->Release();
     //引数の文字列を保存
-    m_Count = cnt;
-    m_pTitle = (char*)malloc(strlen(pTitle) + 1);
-    strcpy(m_pTitle, pTitle);
-    m_pItem = (char**)malloc(sizeof(char*) * cnt);
-    for (int i = 0; i < m_Count; i++) 	{
-        m_pItem[i] = (char*)malloc(strlen(pItem[i]) + 1);
-        strcpy(m_pItem[i], pItem[i]);
+    _count = cnt;
+    _title = (char*)malloc(strlen(pTitle) + 1);
+    strcpy(_title, pTitle);
+    _item = (char**)malloc(sizeof(char*) * cnt);
+    for (int i = 0; i < _count; i++) {
+        _item[i] = (char*)malloc(strlen(pItem[i]) + 1);
+        strcpy(_item[i], pItem[i]);
     }
     //メニューの文字列の最大、最少矩形を求める
     CRectangle trec;
-    CGraphicsUtilities::CalculateStringRect(0, 0, m_pTitle, trec);
-    m_Rect.Right = MOF_MAX(m_Rect.Right, trec.Right + m_HSpace * 2);
-    m_Rect.Bottom += trec.Bottom + m_VSpace * 2;
-    m_HeaderRect = m_Rect;
-    for (int i = 0; i < m_Count; i++) 	{
-        CGraphicsUtilities::CalculateStringRect(0, 0, m_pItem[i], trec);
-        m_HeaderRect.Right = m_Rect.Right = MOF_MAX(m_Rect.Right, trec.Right + m_HSpace * 2);
-        m_Rect.Bottom += trec.Bottom + m_VSpace;
+    CGraphicsUtilities::CalculateStringRect(0, 0, _title, trec);
+    _rectangle.Right = MOF_MAX(_rectangle.Right, trec.Right + _space.x * 2);
+    _rectangle.Bottom += trec.Bottom + _space.y * 2;
+    _header_rectangle = _rectangle;
+    for (int i = 0; i < _count; i++) {
+        CGraphicsUtilities::CalculateStringRect(0, 0, _item[i], trec);
+        _header_rectangle.Right = _rectangle.Right = MOF_MAX(_rectangle.Right, trec.Right + _space.x * 2);
+        _rectangle.Bottom += trec.Bottom + _space.y;
     }
-    m_Rect.Bottom += m_VSpace;
+    _rectangle.Bottom += _space.y;
 }
 
-void CMenu::Release(void) {
-    if (m_pTitle) 	{
-        free(m_pTitle);
-        m_pTitle = NULL;
+void ratchet::game::gamesystem::text::CMenu::Release(void) {
+    if (_title) {
+        free(_title);
+        _title = NULL;
     }
-    if (m_pItem) 	{
-        for (int i = 0; i < m_Count; i++) 		{
-            free(m_pItem[i]);
+    if (_item) {
+        for (int i = 0; i < _count; i++) {
+            free(_item[i]);
         }
-        free(m_pItem);
-        m_pItem = NULL;
-        m_Count = 0;
+        free(_item);
+        _item = NULL;
+        _count = 0;
     }
-    m_Rect = CRectangle(0, 0, 0, 0);
+    _rectangle = CRectangle(0, 0, 0, 0);
 }
 
-void CMenu::Show(float cx, float cy) {
-    m_cx = cx;
-    m_cy = cy;
-    m_bShow = true;
-    m_bEnter = false;
-    m_bDrag = false;
-    m_Select = 0;
-    float w = m_Rect.GetWidth();
-    float h = m_Rect.GetHeight();
-    m_Rect.Top = m_cy - h * 0.5f;
-    m_Rect.Bottom = m_Rect.Top + h;
-    m_Rect.Left = m_cx - w * 0.5f;
-    m_Rect.Right = m_Rect.Left + w;
-    m_HeaderRect.Bottom = m_Rect.Top + m_HeaderRect.GetHeight();
-    m_HeaderRect.Top = m_Rect.Top;
-    m_HeaderRect.Right = m_Rect.Left + m_HeaderRect.GetWidth();
-    m_HeaderRect.Left = m_Rect.Left;
+void ratchet::game::gamesystem::text::CMenu::Show(float cx, float cy) {
+    _position.x = cx;
+    _position.y = cy;
+    _show = true;
+    _enter = false;
+    _drag = false;
+    _select = 0;
+    float w = _rectangle.GetWidth();
+    float h = _rectangle.GetHeight();
+    _rectangle.Top = _position.y - h * 0.5f;
+    _rectangle.Bottom = _rectangle.Top + h;
+    _rectangle.Left = _position.x - w * 0.5f;
+    _rectangle.Right = _rectangle.Left + w;
+    _header_rectangle.Bottom = _rectangle.Top + _header_rectangle.GetHeight();
+    _header_rectangle.Top = _rectangle.Top;
+    _header_rectangle.Right = _rectangle.Left + _header_rectangle.GetWidth();
+    _header_rectangle.Left = _rectangle.Left;
 }
 
-void CMenu::Update(void) {
-    if (!m_bShow) 	{
+void ratchet::game::gamesystem::text::CMenu::Update(void) {
+    if (!_show) {
         return;
     }
     //マウス位置で選択
     float px, py;
     g_pInput->GetMousePos(px, py);
     CRectangle trec;
-    CRectangle hrec = m_HeaderRect;
-    m_Select = -1;
-    for (int i = 0; i < m_Count; i++) 	{
-        CGraphicsUtilities::CalculateStringRect(0, 0, m_pItem[i], trec);
+    CRectangle hrec = _header_rectangle;
+    _select = -1;
+    for (int i = 0; i < _count; i++) {
+        CGraphicsUtilities::CalculateStringRect(0, 0, _item[i], trec);
         hrec.Top = hrec.Bottom;
-        hrec.Bottom += trec.Bottom + m_VSpace * 2;
-        if (hrec.CollisionPoint(px, py)) 		{
-            m_Select = i;
+        hrec.Bottom += trec.Bottom + _space.y * 2;
+        if (hrec.CollisionPoint(px, py)) {
+            _select = i;
         }
     }
     //左クリックで決定
-    if (g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) 	{
+    if (g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON)) {
         //ヘッダーのドラッグで移動させる
-        if (m_HeaderRect.CollisionPoint(px, py)) 		{
-            m_bDrag = true;
+        if (_header_rectangle.CollisionPoint(px, py)) {
+            _drag = true;
         }
-        else if (m_Select >= 0 && m_Select < m_Count) 		{
-            m_bEnter = true;
+        else if (_select >= 0 && _select < _count) {
+            _enter = true;
         }
     }
     //ドラッグ移動
-    if (m_bDrag && g_pInput->IsMouseKeyHold(MOFMOUSE_LBUTTON)) 	{
+    if (_drag && g_pInput->IsMouseKeyHold(MOFMOUSE_LBUTTON)) {
         float mx, my;
         g_pInput->GetMouseMove(mx, my);
         char str[128];
         sprintf(str, "%f / %f\n", mx, my);
         OutputDebugString(str);
-        m_cx += mx;
-        m_cy += my;
-        m_Rect.Left += mx;
-        m_Rect.Right += mx;
-        m_Rect.Top += my;
-        m_Rect.Bottom += my;
-        m_HeaderRect.Left += mx;
-        m_HeaderRect.Right += mx;
-        m_HeaderRect.Top += my;
-        m_HeaderRect.Bottom += my;
+        _position.x += mx;
+        _position.y += my;
+        _rectangle.Left += mx;
+        _rectangle.Right += mx;
+        _rectangle.Top += my;
+        _rectangle.Bottom += my;
+        _header_rectangle.Left += mx;
+        _header_rectangle.Right += mx;
+        _header_rectangle.Top += my;
+        _header_rectangle.Bottom += my;
     }
-    else 	{
-        m_bDrag = false;
+    else {
+        _drag = false;
     }
 }
 
-void CMenu::Render(void) {
-    if (!m_bShow) 	{
+void ratchet::game::gamesystem::text::CMenu::Render(void) {
+    if (!_show) {
         return;
     }
     //メニューの背景描画
-    CGraphicsUtilities::RenderFillRect(m_Rect, MOF_ARGB(200, 0, 0, 0));
-    CGraphicsUtilities::RenderFillRect(m_HeaderRect, MOF_ARGB(200, 64, 64, 64));
+    CGraphicsUtilities::RenderFillRect(_rectangle, MOF_ARGB(200, 0, 0, 0));
+    CGraphicsUtilities::RenderFillRect(_header_rectangle, MOF_ARGB(200, 64, 64, 64));
     //項目の文字を描画する
     CRectangle trec;
-    float py = m_Rect.Top + m_VSpace;
-    CGraphicsUtilities::CalculateStringRect(0, 0, m_pTitle, trec);
-    CGraphicsUtilities::RenderString(m_cx - trec.GetWidth() * 0.5f, py, MOF_COLOR_WHITE, m_pTitle);
-    py += trec.Bottom + m_VSpace;
-    for (int i = 0; i < m_Count; i++) 	{
-        CGraphicsUtilities::CalculateStringRect(0, 0, m_pItem[i], trec);
-        CGraphicsUtilities::RenderString(m_cx - trec.GetWidth() * 0.5f, py + m_VSpace, ((m_Select == i) ? MOF_XRGB(255, 255, 255) : MOF_XRGB(128, 128, 128)), m_pItem[i]);
-        py += trec.Bottom + m_VSpace;
+    float py = _rectangle.Top + _space.y;
+    CGraphicsUtilities::CalculateStringRect(0, 0, _title, trec);
+    CGraphicsUtilities::RenderString(_position.x - trec.GetWidth() * 0.5f, py, MOF_COLOR_WHITE, _title);
+    py += trec.Bottom + _space.y;
+    for (int i = 0; i < _count; i++) {
+        CGraphicsUtilities::CalculateStringRect(0, 0, _item[i], trec);
+        CGraphicsUtilities::RenderString(_position.x - trec.GetWidth() * 0.5f, py + _space.y, ((_select == i) ? MOF_XRGB(255, 255, 255) : MOF_XRGB(128, 128, 128)), _item[i]);
+        py += trec.Bottom + _space.y;
     }
 }

@@ -272,7 +272,6 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
         state_com->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
 
-
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
     this->CollisionFunctionBarrack(coll_com);
     this->CollisionFunctionBarricade(coll_com);
@@ -298,12 +297,13 @@ bool ratchet::component::player::PlayerComponent::Update(float delta_time) {
     auto velocity_com = _velocity_com.lock();
     auto camera_com = _camera_com.lock();
 
+    camera_com->GetCameraController()->GetService()->SetUseSpring(true);
+
     if (velocity_com && camera_com) {
         auto v = velocity_com->GetVelocity();
         //float threshold = 0.000005f;
         float threshold = 0.001f;
 
-        camera_com->GetCameraController()->GetService()->SetUseSpring(true);
 
         //if (!_coll_volume_com.lock()->IsOnElevator()) {
         //    if (Mof::CVector2(v.x, v.z).Length() < threshold) {
@@ -366,6 +366,8 @@ bool ratchet::component::player::PlayerComponent::DebugRender(void) {
 
 
     auto camera_com = _camera_com.lock();
+    camera_com->GetCameraController()->GetService()->SetUseSpring(false);
+
     auto p = camera_com->GetPosition();
     auto v = camera_com->GetVelocity();
 

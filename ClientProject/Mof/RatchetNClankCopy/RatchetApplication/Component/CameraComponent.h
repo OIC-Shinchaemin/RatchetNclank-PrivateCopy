@@ -11,6 +11,7 @@
 
 
 namespace ratchet::component::player { class PlayerStateComponent; }
+namespace ratchet::component::player { class PlayerComponent; }
 namespace ratchet::component {
 class CameraComponent : public ratchet::component::UpdateComponent,
     public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&> {
@@ -36,6 +37,8 @@ private:
     Mof::CVector2 _preview_angle;
     //! Õ“Ë’†
     bool _collisioned_stage;
+    //! ó‘Ô
+    std::weak_ptr<ratchet::component::player::PlayerComponent> _player_com;
     //! ó‘Ô
     std::weak_ptr<ratchet::component::player::PlayerStateComponent> _state_com;
     //! ƒƒbƒVƒ…

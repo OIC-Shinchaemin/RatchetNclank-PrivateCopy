@@ -388,6 +388,9 @@
     <Filter Include="Ratchet\Header\Stage\Parser">
       <UniqueIdentifier>{d86210b2-fc23-439c-a348-cfab09f40f68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\Text">
+      <UniqueIdentifier>{019df226-0b6b-4f8f-a60b-bcf46f18a44f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1131,21 +1134,6 @@
     <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp">
       <Filter>Ratchet\Source\UI\Shop</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\Script.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\Menu.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\Save.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
     <ClCompile Include="Event\TextSystemStartEvent.cpp">
       <Filter>Ratchet\Source\Event</Filter>
     </ClCompile>
@@ -1301,6 +1289,21 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Object\BarricadeCollisionComponent.cpp">
       <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Menu.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Save.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Script.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

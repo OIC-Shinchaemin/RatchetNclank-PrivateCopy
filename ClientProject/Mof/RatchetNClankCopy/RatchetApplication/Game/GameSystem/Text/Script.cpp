@@ -39,12 +39,6 @@ const char* gScriptCmp[] = {
     "",
 };
 
-/**
- * 文字列の先頭と後ろから空白や改行文字を無くす
- *
- * 引数
- * [in]			s				対象文字列
- */
 char* Trim(char* s) {
     // 引数の文字列がない
     if (!s) {
@@ -70,23 +64,16 @@ char* Trim(char* s) {
     return s;
 }
 
-CScript::CScript() :
+ratchet::game::gamesystem::text::CScript::CScript() :
     m_FileBuffer(NULL),
     m_CommandList() {
     memset(m_FileName, 0, MAX_PATH);
 }
 
-CScript::~CScript() {
+ratchet::game::gamesystem::text::CScript::~CScript() {
 }
 
-/**
- * 読み込み
- * スクリプトファイルを読み込んで解析をおこなう
- *
- * 引数
- * [in]			name			読み込みファイル名
- */
-bool CScript::Load(const char* name) {
+bool ratchet::game::gamesystem::text::CScript::Load(const char* name) {
     //テキストファイルを開く
     if (!LoadTextFile(name)) {
         return false;
@@ -115,13 +102,7 @@ bool CScript::Load(const char* name) {
     return true;
 }
 
-/**
- * コマンドの解析
- *
- * 引数
- * [in]			sCmd			コマンドのタイプ
- */
-void CScript::ParseCommand(int sCmd) {
+void ratchet::game::gamesystem::text::CScript::ParseCommand(int sCmd) {
     //コマンドに必要なパラメータの解析
     switch (sCmd) {
         case CMD_TEXT:				//テキストの表示コマンド
@@ -156,11 +137,7 @@ void CScript::ParseCommand(int sCmd) {
     }
 }
 
-/**
- * テキストコマンドの解析
- *
- */
-void CScript::TextCommand(void) {
+void ratchet::game::gamesystem::text::CScript::TextCommand(void) {
     TEXTCOMMAND* pCmd = new TEXTCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->px = atof(pstr);
@@ -171,11 +148,7 @@ void CScript::TextCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * スプライトコマンドの解析
- *
- */
-void CScript::SpriteCommand(void) {
+void ratchet::game::gamesystem::text::CScript::SpriteCommand(void) {
     SPRITECOMMAND* pCmd = new SPRITECOMMAND();
     char* pstr = strtok(NULL, ",");
     strcpy(pCmd->Name, Trim(pstr));
@@ -184,11 +157,7 @@ void CScript::SpriteCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * 座標設定コマンドの解析
- *
- */
-void CScript::SetPosCommand(void) {
+void ratchet::game::gamesystem::text::CScript::SetPosCommand(void) {
     SETPOSCOMMAND* pCmd = new SETPOSCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->px = atof(pstr);
@@ -199,11 +168,7 @@ void CScript::SetPosCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * 表示変更コマンドの解析
- *
- */
-void CScript::SetShowCommand(void) {
+void ratchet::game::gamesystem::text::CScript::SetShowCommand(void) {
     SETSHOWCOMMAND* pCmd = new SETSHOWCOMMAND();
     char* pstr = strtok(NULL, ",");
     Trim(pstr);
@@ -221,24 +186,14 @@ void CScript::SetShowCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * 名前指定系コマンドの解析
- *
- * 引数
- * [in]			sCmd			コマンドのタイプ
- */
-void CScript::NameCommand(int sCmd) {
+void ratchet::game::gamesystem::text::CScript::NameCommand(int sCmd) {
     NAMECOMMAND* pCmd = new NAMECOMMAND(sCmd);
     char* pstr = strtok(NULL, ";");
     strcpy(pCmd->Name, Trim(pstr));
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * 選択コマンドの解析
- *
- */
-void CScript::SelectCommand(void) {
+void ratchet::game::gamesystem::text::CScript::SelectCommand(void) {
     SELECTCOMMAND* pCmd = new SELECTCOMMAND();
     char* pstr = strtok(NULL, ",");
     strcpy(pCmd->Name, Trim(pstr));
@@ -263,11 +218,7 @@ void CScript::SelectCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * フラグコマンドの解析
- *
- */
-void CScript::FlagCommand(void) {
+void ratchet::game::gamesystem::text::CScript::FlagCommand(void) {
     FLAGCOMMAND* pCmd = new FLAGCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->No = atoi(pstr);
@@ -279,11 +230,7 @@ void CScript::FlagCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * IFコマンドの解析
- *
- */
-void CScript::IfCommand(void) {
+void ratchet::game::gamesystem::text::CScript::IfCommand(void) {
     IFCOMMAND* pCmd = new IFCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->No = atoi(pstr);
@@ -297,14 +244,7 @@ void CScript::IfCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-/**
- * 読み込み
- * テキストファイルを読み込む
- *
- * 引数
- * [in]			name			読み込みファイル名
- */
-bool CScript::LoadTextFile(const char* name) {
+bool ratchet::game::gamesystem::text::CScript::LoadTextFile(const char* name) {
     //テキストファイルを開く
     FILE* fp = fopen(name, "rt");
     if (fp == NULL) {
@@ -331,11 +271,7 @@ bool CScript::LoadTextFile(const char* name) {
     return true;
 }
 
-/**
- * 解放
- *
- */
-void CScript::Release(void) {
+void ratchet::game::gamesystem::text::CScript::Release(void) {
     if (m_FileBuffer) {
         free(m_FileBuffer);
         m_FileBuffer = NULL;

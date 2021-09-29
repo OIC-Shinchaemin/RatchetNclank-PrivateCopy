@@ -61,6 +61,8 @@ private:
     int	_flags[_flag_count];
     CMenu m_SaveMenu;
 
+    int _wait_count_max = 3;
+
     //! マップ
     std::unordered_map<TextEventType, std::string> _path_map;
     //! 通知用
@@ -72,7 +74,7 @@ private:
     //! プレイヤー
     std::weak_ptr<ratchet::scene::Scene> _scene;
     bool Load(const char* name);
-    bool Save(const char* name);
+    //bool Save(const char* name);
     bool LoadScript(const char* name);
     void InitializeScript(void);
     void UpdateAlpha(void);
@@ -120,4 +122,4 @@ public:
     bool Release(void);
 };
 }
-#endif // !RATCHET_GAME_GAME_SYSTEM_SHOP_SHOP_ELEMENT_H
+#endif // !RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SYSTEM_H
