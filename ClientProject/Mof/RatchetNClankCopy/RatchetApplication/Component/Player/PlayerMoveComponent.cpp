@@ -154,8 +154,6 @@ bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
 }
 
 bool ratchet::component::player::action::PlayerMoveComponent::Update(float delta_time) {
-//    _move_speed -= _move_speed_decrease;
-//    _move_speed = std::clamp(_move_speed, 0.0f, _move_speed_max);
     if (_input_info.move_flag) {
         _move_speed += _move_speed_increase;
         _move_speed = std::clamp(_move_speed, 0.0f, _move_speed_max);
@@ -165,35 +163,6 @@ bool ratchet::component::player::action::PlayerMoveComponent::Update(float delta
 
         float angular_speed = _angular_speed;
         float ideal_angle = std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi;
-
-        /*
-        float current_angle_y = super::GetOwner()->GetRotate().y;
-        auto ideal_angle_vec = math::vec3::kUnitZ;
-        ideal_angle_vec.RotationY(ideal_angle);
-        auto current_angle_vec = math::vec3::kUnitZ;
-        current_angle_vec.RotationY(current_angle_y);
-
-        float distance = Mof::CVector3Utilities::Distance(ideal_angle_vec, current_angle_vec);
-
-        if (distance > 1.8f) {
-            //std::cout << "distance > 0.5f" << distance << "\n";
-            //auto rot_clamp = ClampMinMaxRotation();
-            //rot_clamp.min = super::GetOwner()->GetRotate();
-            //rot_clamp.max = Mof::CVector3(0.0f, ideal_angle, 0.0f);
-
-            //if (ideal_angle < current_angle_y) {
-            //    std::swap(rot_clamp.min, rot_clamp.max);
-            //} // if
-            //super::GetTransformComponent()->SetOnceRotateClamp(rot_clamp);
-        } // if
-        //_angular_speed *= 0.9f;
-        */
-
-        auto v = super::GetVelocityComponent()->GetVelocity();
-        v.y = 0.0f;
-        ;
-
-        std::cout << "v.Length() = " << v.Length() << "\n";
 
         this->Move(_move_speed, angular_speed, ideal_angle);
     } // if

@@ -86,7 +86,7 @@ void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof
                 //camera->SetPosition(_non_collision_position);
                 //camera->Update();
                 
-                controller->SetAzimuth(_non_collision_angle.x);
+                //controller->SetAzimuth(_non_collision_angle.x);
                 //controller->SetAltitude(_non_collision_angle.y);
                 this->CollisionStage(mesh, obj);
             } // if

@@ -24,19 +24,20 @@ std::optional<Mof::CRay3D> ratchet::component::collision::PlayerCollisionCompone
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
+    auto velocity = _velocity_com.lock()->GetVelocity() * def::kDeltaTime;
 
     auto pos = super::GetOwner()->GetPosition();
-    pos.y += _player_com.lock()->GetHeight();
-    auto velocity = _velocity_com.lock()->GetVelocity() * def::kDeltaTime;
-    auto dir = Mof::CVector3(velocity.x, 0.0f, velocity.z);
-    pos -= dir;
+    float height = _player_com.lock()->GetHeight();
+    pos.y += height;
+    auto dir = Mof::CVector3(velocity.x, 0.0f, velocity.z) ;
     return Mof::CRay3D(pos, dir);
 }
 
 void ratchet::component::collision::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetFrontRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
-    float margin = -0.2f;
+    //float margin = 0.5f;
+    float margin = 0.25f;
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
@@ -48,18 +49,15 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageFron
         velocity *= def::kDeltaTime;
 
         if (ray.CollisionGeometry(geometry, info)) {
-            Mof::CVector3 up(0.0f, 1.0f, 0.0f);
-            float angle = up.DotAngle(info.Normal);
-            float slope_threshold_angle = 40.0f;
-            if (angle > slope_threshold_angle) {
-                continue;
-            } // if
-
             if (info.d <= velocity.Length() + margin) {
                 float dot = Mof::CVector3Utilities::Dot(velocity, info.Normal);
                 dot = std::abs(dot);
                 auto pos = super::GetOwner()->GetPosition();
-                pos += ray.Direction * (info.d - dot + margin);
+                float offset = 0.0f;
+
+                //offset = -0.01f;
+                offset = -0.025f;
+                pos += ray.Direction * (info.d - dot + offset);
                 pos += info.Normal * dot;
                 super::GetOwner()->SetPosition(pos);
             } // if
@@ -71,7 +69,9 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageFron
 void ratchet::component::collision::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
-    float margin = 0.1f;
+    float margin = 0.0f;
+    //margin = 0.25f;
+    //margin = -0.25f;
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
