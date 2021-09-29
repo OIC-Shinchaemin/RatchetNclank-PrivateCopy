@@ -1,8 +1,12 @@
-#pragma once
+#ifndef RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SCRIPT_H
+#define RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SCRIPT_H
 
-#include	"Mof.h"
-#include	"Menu.h"
 
+#include <Mof.h>
+#include "Menu.h"
+
+
+namespace ratchet::game::gamesystem::text {
 //コマンドの定義
 enum tag_SCRIPTCOMMAND {
     CMD_TEXT,
@@ -19,8 +23,6 @@ enum tag_SCRIPTCOMMAND {
     CMD_COUNT,
 };
 
-//コマンドを格納する構造体の基礎
-//タイプのみを持ち、継承先の各構造体でコマンドごとのパラメーターを追加する
 typedef struct tag_COMMAND {
     int					Type;
     //delete時に派生先のデストラクタを呼び出すために仮想定義をしておく
@@ -33,10 +35,6 @@ typedef struct tag_TEXTCOMMAND : public COMMAND {
     float				py;
     char				Text[TEXTBUFFERSIZE];
 
-    /**
-     * コンストラクタ
-     *
-     */
     tag_TEXTCOMMAND() {
         Type = CMD_TEXT;
         px = 0;
@@ -49,10 +47,6 @@ typedef struct tag_SPRITECOMMAND : public COMMAND {
     char				FName[256];
     char				Name[256];
 
-    /**
-     * コンストラクタ
-     *
-     */
     tag_SPRITECOMMAND() {
         Type = CMD_SPRITE;
         memset(FName, 0, 256);
@@ -65,10 +59,6 @@ typedef struct tag_SETPOSCOMMAND : public COMMAND {
     float				py;
     char				Name[256];
 
-    /**
-     * コンストラクタ
-     *
-     */
     tag_SETPOSCOMMAND() {
         Type = CMD_SETPOS;
         px = 0;
@@ -78,13 +68,9 @@ typedef struct tag_SETPOSCOMMAND : public COMMAND {
 }SETPOSCOMMAND;
 //スプライト表示設定コマンドのための構造体
 typedef struct tag_SETSHOWCOMMAND : public COMMAND {
-    BOOL				bShow;
-    char				Name[256];
+    BOOL bShow;
+    char Name[256];
 
-    /**
-     * コンストラクタ
-     *
-     */
     tag_SETSHOWCOMMAND() {
         Type = CMD_SETSHOW;
         bShow = false;
@@ -95,10 +81,6 @@ typedef struct tag_SETSHOWCOMMAND : public COMMAND {
 typedef struct tag_NAMECOMMAND : public COMMAND {
     char				Name[256];
 
-    /**
-     * コンストラクタ
-     *
-     */
     tag_NAMECOMMAND(int cmd) {
         Type = cmd;
         memset(Name, 0, 256);
@@ -224,3 +206,5 @@ public:
     int GetCommandCount(void) { return m_CommandList.GetArrayCount(); }
     char* GetFileName(void) { return m_FileName; }
 };
+}
+#endif // !RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SCRIPT_H

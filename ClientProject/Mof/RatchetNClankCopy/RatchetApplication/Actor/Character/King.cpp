@@ -77,6 +77,18 @@ ratchet::actor::character::King::King() :
         _scarecrow_generate_datas.push_back(std::move(data_0));
         _scarecrow_generate_datas.push_back(std::move(data_1));
     }
+
+
+
+
+
+
+
+
+
+    ///
+
+    _quest_index = 1;
 }
 
 ratchet::actor::character::King::~King() {

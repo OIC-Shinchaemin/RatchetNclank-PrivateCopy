@@ -42,6 +42,10 @@ void ratchet::component::VelocityComponent::SetDrag(float value) {
     this->_drag = value;
 }
 
+void ratchet::component::VelocityComponent::SetAngularDrag(float value) {
+    this->_angular_drag = value;
+}
+
 void ratchet::component::VelocityComponent::SetUseGravity(bool use) {
     this->_use_gravity = use;
 }

@@ -8,6 +8,7 @@ Mof::CVector3 ratchet::component::TransformComponent::UpdateRotate(float delta_t
     if (sleep_threshold < velocity.Length()) {
         rotate += velocity * delta_time;
     } // if
+
     if (math::kTwoPi <= rotate.y) {
         rotate.y -= math::kTwoPi;
     } // if

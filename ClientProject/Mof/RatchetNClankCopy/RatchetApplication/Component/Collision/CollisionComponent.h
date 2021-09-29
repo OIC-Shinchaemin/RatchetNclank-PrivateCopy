@@ -49,12 +49,14 @@ struct CollisionInfo {
     float distance = 0.0f;
     //! 角度
     Mof::CVector3 angle;
+    //! 角度
+    Mof::CVector3 point;
     //! 速さ
     float speed = 0.0f;
     //! 衝突対象
     std::weak_ptr<actor::Actor> target;
 
-    CollisionInfo() : distance(0.0f), angle(), speed(0.0f), target() {}
+    CollisionInfo() : distance(0.0f), angle(), point(), speed(0.0f), target() {}
     CollisionInfo(const Mof::COLLISIONOUTGEOMETRY& c) : distance(c.d), angle(), speed(0.0f), target() {}
 };
 class CollisionComponent : public component::Component {
@@ -144,6 +146,14 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::optional<Mof::CRay3D> GetRay(void) = 0;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetFrontRay(void) {
+        return std::optional<Mof::CRay3D>();
+    }
     /// <summary>
     /// ゲッター
     /// </summary>

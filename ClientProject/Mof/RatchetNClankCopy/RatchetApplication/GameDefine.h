@@ -43,6 +43,8 @@ struct Transform {
     Mof::CVector3 rotate = math::vec3::kZero;
     Mof::CVector3 scale = math::vec3::kOne;
 };
+
+
 using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CTexture>,
     std::shared_ptr<Mof::CMeshContainer>,

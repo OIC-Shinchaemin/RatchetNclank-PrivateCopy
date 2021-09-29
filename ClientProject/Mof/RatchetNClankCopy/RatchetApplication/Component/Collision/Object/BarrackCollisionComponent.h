@@ -1,5 +1,5 @@
-#ifndef RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H
-#define RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H
+#ifndef RATCHET_COMPONENT_COLLISION_BARRACK_COLLISION_COMPONENT_H
+#define RATCHET_COMPONENT_COLLISION_BARRACK_COLLISION_COMPONENT_H
 
 
 #include "../CollisionComponent.h"
@@ -9,34 +9,26 @@
 
 #include <Mof.h>
 
-#include "../../CameraComponent.h"
-
 
 namespace ratchet::component::collision {
-class CameraCollisionComponent : public ratchet::component::collision::CollisionComponent {
+class BarrackCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
-    //! プレイヤー
-    std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
-    //! x,y　方向角 仰角
-    Mof::CVector3 _non_collision_angle;
-    Mof::CVector3 _non_collision_position;
-    float _non_collision_distance;
 public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="priority"></param>
-    CameraCollisionComponent(int priority);
+    BarrackCollisionComponent(int priority);
     /// <summary>
     /// コピーコンストラクタ
     /// </summary>
     /// <param name="obj"></param>
-    CameraCollisionComponent(const CameraCollisionComponent& obj);
+    BarrackCollisionComponent(const BarrackCollisionComponent& obj);
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~CameraCollisionComponent();
+    virtual ~BarrackCollisionComponent();
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -86,22 +78,11 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
     /// <summary>
-    /// 判定
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-//    bool IsCollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj);
-    /// <summary>
-    /// 衝突
-    /// </summary>
-    /// <param name="ptr"></param>
-    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
-    /// <summary>
     /// 衝突
     /// </summary>
     /// <param name="mesh"></param>
-    /// <param name="gimmick"></param>
-    virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
+    /// <param name="obj"></param>
+    virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
 }
-#endif // !RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H
+#endif // !RATCHET_COMPONENT_COLLISION_BARRACK_COLLISION_COMPONENT_H

@@ -55,6 +55,10 @@ void ratchet::camera::CameraController::SetUpdatePositionFlag(bool flag) {
     this->_update_position_flag = flag;
 }
 
+void ratchet::camera::CameraController::SetCollisionStage(bool flag) {
+    this->_collision_stage = flag;
+}
+
 void ratchet::camera::CameraController::SetInfo(const ratchet::camera::CameraController::CameraInfo& info) {
     _position = info.start_position;
     _target = info.target_position;
@@ -100,6 +104,10 @@ float ratchet::camera::CameraController::GetDefaultAltitude(void) const {
     return altitude();
 }
 
+float ratchet::camera::CameraController::GetDefaultDistance(void) const {
+    return 8.0f;
+}
+
 Mof::CVector3 ratchet::camera::CameraController::GetVelocity(void) const {
     return this->_param.velocity;
 }
@@ -110,6 +118,10 @@ Mof::CVector3 ratchet::camera::CameraController::GetPreviousPosition(void) const
 
 bool ratchet::camera::CameraController::IsUpdatePositionFlag(void) const {
     return this->_update_position_flag;
+}
+
+bool ratchet::camera::CameraController::IsCollisionStage(void) const {
+    return this->_collision_stage;
 }
 
 void ratchet::camera::CameraController::AddAzimuth(float degree) {

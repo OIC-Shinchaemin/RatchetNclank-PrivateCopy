@@ -134,6 +134,8 @@ std::shared_ptr<ratchet::actor::weapon::Mechanical> ratchet::game::gamesystem::W
 
 void ratchet::game::gamesystem::WeaponSystem::FullCharge(void) {
     for (auto& pair : _weapons) {
-        pair.second->AddBullet(200);
+        auto weapon = pair.second;
+        weapon->AddBullet(200);
+        _equipment_subject.Notify(ratchet::actor::weapon::Mechanical::Info(weapon->GetBulletCount(), weapon->GetBulletCountMax(), weapon->GetName().c_str()));
     } // for
 }

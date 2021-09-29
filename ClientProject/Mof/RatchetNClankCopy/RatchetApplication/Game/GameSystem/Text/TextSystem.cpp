@@ -7,7 +7,7 @@
 
 bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
     //セーブファイルを開く
-    FILE* fp = fopen(name, "rb");
+    std::FILE* fp = std::fopen(name, "rb");
     if (fp == NULL) {
         return false;
     }
@@ -16,75 +16,75 @@ bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
     _sprite_list.Release();
     //実行中のスクリプトの変更
     char sname[MAX_PATH];
-    fread(sname, 1, MAX_PATH, fp);
+    std::fread(sname, 1, MAX_PATH, fp);
     if (!_script.Load(sname)) {
         return false;
-    }
+    } // if
     //コマンド位置を読み込み
-    fread(&_command_no, sizeof(int), 1, fp);
+    std::fread(&_command_no, sizeof(int), 1, fp);
     //フラグ状態を読み込み
-    fread(_flags, sizeof(int), _flag_count, fp);
+    std::fread(_flags, sizeof(int), _flag_count, fp);
     //表示の状態を読み込み
-    fread(&_text_command.px, sizeof(float), 1, fp);
-    fread(&_text_command.py, sizeof(float), 1, fp);
-    fread(_text_command.Text, 1, 256, fp);
-    fread(_line_buffer, 1, 256, fp);
+    std::fread(&_text_command.px, sizeof(float), 1, fp);
+    std::fread(&_text_command.py, sizeof(float), 1, fp);
+    std::fread(_text_command.Text, 1, 256, fp);
+    std::fread(_line_buffer, 1, 256, fp);
     int cnt;
-    fread(&cnt, sizeof(int), 1, fp);
+    std::fread(&cnt, sizeof(int), 1, fp);
     for (int i = 0; i < cnt; i++) {
         char tname[MAX_PATH];
-        fread(tname, 1, MAX_PATH, fp);
+        std::fread(tname, 1, MAX_PATH, fp);
         CSprite2D* pAdd = new CSprite2D(tname);
-        fread(tname, 1, MAX_PATH, fp);
+        std::fread(tname, 1, MAX_PATH, fp);
         pAdd->SetName(tname);
-        fread(&pAdd->m_Position.x, sizeof(float), 1, fp);
-        fread(&pAdd->m_Position.y, sizeof(float), 1, fp);
-        fread(&pAdd->m_bShow, sizeof(int), 1, fp);
+        std::fread(&pAdd->m_Position.x, sizeof(float), 1, fp);
+        std::fread(&pAdd->m_Position.y, sizeof(float), 1, fp);
+        std::fread(&pAdd->m_bShow, sizeof(int), 1, fp);
         _sprite_list.Add(&pAdd);
     }
     //ファイルを閉じる
-    fclose(fp);
+    std::fclose(fp);
     //ウェイト処理までを実行
     _wait = false;
-    StepCommand();
+    this->StepCommand();
     return true;
 }
-
+/*
 bool ratchet::game::gamesystem::text::TextSystem::Save(const char* name) {
     //セーブファイルを開く
-    FILE* fp = fopen(name, "wb");
+    std::FILE* fp = std::fopen(name, "wb");
     if (fp == NULL) {
         return false;
     }
     //実行中のスクリプトの保存
-    fwrite(_script.GetFileName(), 1, MAX_PATH, fp);
+    std::fwrite(_script.GetFileName(), 1, MAX_PATH, fp);
     //コマンド位置を保存、読み込み時に再度現在のコマンドを実行するために一つ前に戻す
     int cmd = _command_no - 1;
-    fwrite(&cmd, sizeof(int), 1, fp);
+    std::fwrite(&cmd, sizeof(int), 1, fp);
     //フラグ状態を保存
-    fwrite(_flags, sizeof(int), _flag_count, fp);
+    std::fwrite(_flags, sizeof(int), _flag_count, fp);
     //表示の状態を保存
-    fwrite(&_text_command.px, sizeof(float), 1, fp);
-    fwrite(&_text_command.py, sizeof(float), 1, fp);
-    fwrite(_text_command.Text, 1, 256, fp);
-    fwrite(_line_buffer, 1, 256, fp);
+    std::fwrite(&_text_command.px, sizeof(float), 1, fp);
+    std::fwrite(&_text_command.py, sizeof(float), 1, fp);
+    std::fwrite(_text_command.Text, 1, 256, fp);
+    std::fwrite(_line_buffer, 1, 256, fp);
     int cnt = _sprite_list.GetArrayCount();
-    fwrite(&cnt, sizeof(int), 1, fp);
+    std::fwrite(&cnt, sizeof(int), 1, fp);
     for (int i = 0; i < cnt; i++) {
         char tname[MAX_PATH];
-        strcpy(tname, _sprite_list[i]->GetTexture()->GetName()->GetString());
-        fwrite(tname, 1, MAX_PATH, fp);
-        strcpy(tname, _sprite_list[i]->GetName()->GetString());
-        fwrite(tname, 1, MAX_PATH, fp);
-        fwrite(&_sprite_list[i]->m_Position.x, sizeof(float), 1, fp);
-        fwrite(&_sprite_list[i]->m_Position.y, sizeof(float), 1, fp);
-        fwrite(&_sprite_list[i]->m_bShow, sizeof(int), 1, fp);
-    }
+        std::strcpy(tname, _sprite_list[i]->GetTexture()->GetName()->GetString());
+        std::fwrite(tname, 1, MAX_PATH, fp);
+        std::strcpy(tname, _sprite_list[i]->GetName()->GetString());
+        std::fwrite(tname, 1, MAX_PATH, fp);
+        std::fwrite(&_sprite_list[i]->m_Position.x, sizeof(float), 1, fp);
+        std::fwrite(&_sprite_list[i]->m_Position.y, sizeof(float), 1, fp);
+        std::fwrite(&_sprite_list[i]->m_bShow, sizeof(int), 1, fp);
+    } // for
     //ファイルを閉じる
-    fclose(fp);
+    std::fclose(fp);
     return true;
 }
-
+*/
 bool ratchet::game::gamesystem::text::TextSystem::LoadScript(const char* name) {
     //現在の情報を解放
     _script.Release();
@@ -96,7 +96,7 @@ bool ratchet::game::gamesystem::text::TextSystem::LoadScript(const char* name) {
         return false;
     }
     //ウェイト処理までを実行
-    StepCommand();
+    this->StepCommand();
     return true;
 }
 
@@ -109,25 +109,25 @@ void ratchet::game::gamesystem::text::TextSystem::UpdateAlpha(void) {
     if (false) {
         if (_alpha - ALPHA_SPEED <= 0) {
             _alpha = 0;
-        }
+        } // if
         else {
             _alpha -= ALPHA_SPEED;
-        }
-    }
+        } // else
+    } // if
     else {
         if (_alpha + ALPHA_SPEED >= 255) {
             _alpha = 255;
-        }
+        } // if
         else {
             _alpha += ALPHA_SPEED;
-        }
-    }
+        } // else
+    } // else
 
     // スプライトのアルファ値をシーンのアルファ値と同じにする
     // スプライトのアルファメンバは0.0f ～ 1.0fになるため255で割った値を設定する。
     for (int i = 0; i < _sprite_list.GetArrayCount(); i++) {
         _sprite_list[i]->m_Color.a = _alpha / 255.0f;
-    }
+    } // for
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
@@ -135,7 +135,8 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
     this->UpdateAlpha();
 
     //メニューの更新
-    if (m_SaveMenu.IsShow()) {
+    //if (m_SaveMenu.IsShow()) {
+    if (false) {
     }
     //スクリプトによる更新
     else if (_wait) {
@@ -147,8 +148,8 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
             case CMD_SELECT:
                 SelectCommand();
                 break;
-        }
-    }
+        } // switch
+    } // else if
     //クリックで次のコマンドから実行を再開
     else if (g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         StepCommand();
@@ -172,11 +173,9 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
-    //すべてのコマンドを実行するか待機処理に入るまでループ実行
+    // すべてのコマンドを実行するか待機処理に入るまでループ実行
     while (_command_no < _script.GetCommandCount() && !_wait) {
-        //実行コマンド取り出し
         _now_command = _script.GetCommand(_command_no);
-        //コマンドのタイプによって分岐
         switch (_now_command->Type) {
             case CMD_TEXT:
                 _text_command = *((TEXTCOMMAND*)_now_command);
@@ -190,16 +189,16 @@ void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
             case CMD_SETPOS:
                 SetPosCommand((SETPOSCOMMAND*)_now_command);
                 break;
-            case CMD_SETSHOW:			//スプライトの表示設定コマンド
+            case CMD_SETSHOW:
                 SetShowCommand((SETSHOWCOMMAND*)_now_command);
                 break;
-            case CMD_JUMP:				//ジャンプコマンド
+            case CMD_JUMP:
             {
                 NAMECOMMAND* pNameCommand = (NAMECOMMAND*)_now_command;
                 JumpCommand(pNameCommand->Name);
                 break;
             }
-            case CMD_NEXT:				//ファイル変更コマンド
+            case CMD_NEXT:
             {
                 NAMECOMMAND* pNameCommand = (NAMECOMMAND*)_now_command;
                 //新しいスクリプトを開くと古い情報が消えてしまうので文字列を取り出す
@@ -217,16 +216,15 @@ void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
                 _wait = true;
                 break;
             }
-            case CMD_FLAG:				//フラグ操作コマンド
+            case CMD_FLAG:
                 FlagCommand((FLAGCOMMAND*)_now_command);
                 break;
-            case CMD_IF:				//分岐コマンド
+            case CMD_IF:
                 IfCommand((IFCOMMAND*)_now_command);
                 break;
-            default:					//定義されていないコマンド
+            default:
                 break;
         }
-        //次のコマンドへ
         _command_no++;
     }
 }
@@ -245,7 +243,7 @@ void ratchet::game::gamesystem::text::TextSystem::TextCommand(void) {
         else {
             //一定時間ごとに一文字ずつ入れていく
             _str_wait++;
-            if (_str_wait >= 10) {
+            if (_str_wait >= _wait_count_max) {
                 _str_wait = 0;
                 //全角文字の判定を行う
                 if (IsDBCSLeadByte(_text_command.Text[nl])) {

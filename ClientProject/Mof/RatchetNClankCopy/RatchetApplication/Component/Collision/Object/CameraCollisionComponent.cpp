@@ -55,6 +55,9 @@ std::optional<::ratchet::component::collision::SightObject> ratchet::component::
 bool ratchet::component::collision::CameraCollisionComponent::Initialize(void) {
     super::Initialize();
     _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
+
+    _non_collision_angle.y = 30.0f;
+    _non_collision_angle.x = 0.0f;
     return true;
 }
 
@@ -72,29 +75,32 @@ void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof
     auto pos = _camera_com.lock()->GetPosition();
     auto sphere = this->GetSphere().value();
     Mof::COLLISIONOUTGEOMETRY info;
-    float matgin = 0.1f;
+    float margin = 0.0f;
+
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
         auto default_matrix = geometry->GetMatrix();
         Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
 
+        auto box = Mof::CBoxAABB();
         if (sphere.CollisionGeometry(geometry, info)) {
-            if (info.d <= sphere.r + matgin) {
+            if (info.d <= sphere.r + margin) {
+                auto info = camera::CameraController::CameraInfo();
                 
-                //auto camera = controller->GetCamera();
-                //camera->SetPosition(_non_collision_position);
-                //camera->Update();
-                
-                controller->SetAzimuth(_non_collision_angle.x);
-                //controller->SetAltitude(_non_collision_angle.y);
+                /*
+                // ­‚µ‹ß‚Ã‚­
+                float distance = _non_collision_distance - (sphere.r);
+                distance = std::clamp(distance, sphere.r, _non_collision_distance);
+                info.target_position = controller->GetCamera()->GetTarget();
+                controller->SetDistance(distance);
+                controller->Update(def::kDeltaTime, info);
                 this->CollisionStage(mesh, obj);
+                */
             } // if
         } // if
         else {
-            _non_collision_angle.x = controller->GetAzimuth();
-            _non_collision_angle.y = controller->GetAltitude();
-            //_non_collision_position = controller->GetCameraPosition();
+            _non_collision_distance = controller->GetDistance();
         } // else
         geometry->SetMatrix(default_matrix);
     } // for

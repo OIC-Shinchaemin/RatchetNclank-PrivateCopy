@@ -4,6 +4,7 @@
 #include "../Camera/FollowCameraController.h"
 #include "../Camera/FirstPersonCameraController.h"
 #include "../Camera/DebugCameraController.h"
+#include "Player/PlayerComponent.h"
 #include "Player/PlayerStateComponent.h"
 #include "../Event/EventReferenceTable.h"
 #include "AnimationMeshComponent.h"
@@ -217,12 +218,13 @@ void ratchet::component::CameraComponent::UpdateFollow(float delta_time, std::sh
     if (_follow_camera_prev_position_update) {
         pos.y = _preview_position.y;
         camera_info.target_position = pos;
+        pos.y += _player_com.lock()->GetHeight() * 0.5f;
         controller->Update(delta_time, camera_info);
         return;
     } // if
-
     _preview_position = pos;
     camera_info.target_position = pos;
+    pos.y += _player_com.lock()->GetHeight() * 0.5f;
     controller->Update(delta_time, camera_info);
 }
 
@@ -270,6 +272,7 @@ ratchet::component::CameraComponent::~CameraComponent() {
 }
 
 void ratchet::component::CameraComponent::OnNotify(const ratchet::camera::CameraController::CameraInfo& info) {
+    
     _camera->SetPosition(info.start_position);
     _camera->SetTarget(info.target_position);
     _camera->Update();
@@ -277,6 +280,8 @@ void ratchet::component::CameraComponent::OnNotify(const ratchet::camera::Camera
     _camera_controller.GetService()->SetAltitude(20.0f);
     _camera_controller.GetService()->SetDistance(_default_distance);
     _camera_controller.GetService()->RegisterGlobalCamera();
+
+    _camera_controller.GetService()->SetUseSpring(false);
 }
 
 void ratchet::component::CameraComponent::SetFollowCameraPrevPositionUpdateFlag(bool flag) {
@@ -306,6 +311,7 @@ Mof::CVector3 ratchet::component::CameraComponent::GetPreviousPosition(void) con
 bool ratchet::component::CameraComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
+    _player_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerComponent>();
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
     _mesh_com = super::GetOwner()->GetComponent<ratchet::component::AnimationMeshComponent>();
 

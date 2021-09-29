@@ -1,31 +1,16 @@
 #include	"SpriteSet.h"
 
-/**
- * コンストラクタ
- *
- */
-CSpriteSet::CSpriteSet() :
+ratchet::game::gamesystem::text::CSpriteSet::CSpriteSet() :
     m_Motion(),
     CSprite2D() {
     memset(m_FileName, 0, MAX_PATH);
 }
 
-/**
- * デストラクタ
- *
- */
-CSpriteSet::~CSpriteSet() {
+ratchet::game::gamesystem::text::CSpriteSet::~CSpriteSet() {
     Release();
 }
 
-/**
- * 読み込み
- * 利用するスプライトファイルを読み込む。
- *
- * 引数
- * [in]			pName				スプライトファイルの名前
- */
-bool CSpriteSet::Load(const char* pName) {
+bool ratchet::game::gamesystem::text::CSpriteSet::Load(const char* pName) {
     //テキストファイルを開く
     FILE* fp = fopen(pName, "rt");
     if (fp == NULL) 	{
@@ -98,11 +83,7 @@ bool CSpriteSet::Load(const char* pName) {
     return true;
 }
 
-/**
- * 更新処理
- *
- */
-MofBool CSpriteSet::Update(void) {
+MofBool ratchet::game::gamesystem::text::CSpriteSet::Update(void) {
     //親の処理を実行する
     CSprite2D::Update();
     //アニメーションの更新
@@ -111,13 +92,7 @@ MofBool CSpriteSet::Update(void) {
     return TRUE;
 }
 
-/**
- * 解放処理
- *
- * 引数
- * [in]			pData				解放時指定データ
- */
-MofBool CSpriteSet::Release(LPMofVoid pData) {
+MofBool ratchet::game::gamesystem::text::CSpriteSet::Release(LPMofVoid pData) {
     //自分で追加したデータの解放
     m_Motion.Release();
     //親の処理を実行する

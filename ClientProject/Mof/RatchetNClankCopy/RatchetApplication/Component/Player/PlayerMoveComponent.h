@@ -32,10 +32,21 @@ class PlayerMoveComponent :
 private:
     //! 移動速度
     float _move_speed;
+    //! 最大値
+    float _move_speed_max;
+    //! 増加分
+    float _move_speed_increase;
     //! 回転速度
     float _angular_speed;
+    //! 最大値
+    float _angular_speed_max;
+    //! 増加分
+    float _angular_speed_increase;
     //! ラジアン
     float _ideal_angle;
+    
+    //! 移動速度
+    //float _velocity_force_xz_max;
     //! 入力情報
     ratchet::component::player::action::PlayerMoveComponent::InputInfo _input_info;
     //! 状態
@@ -55,7 +66,7 @@ public:
     /// </summary>
     /// <param name="angle"></param>
     /// <param name="speed"></param>
-    virtual void InputMoveAngularVelocity(float angle, float speed);
+    virtual void InputMoveAngularVelocity(float ideal_angle, float speed);
 public:
     /// <summary>
     /// コンストラクタ

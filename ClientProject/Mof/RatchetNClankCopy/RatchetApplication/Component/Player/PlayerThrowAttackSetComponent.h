@@ -7,11 +7,10 @@
 #include <memory>
 
 
-namespace ratchet {
-namespace component {
-namespace player {
+namespace ratchet::component::player {
 class PlayerOmniWrenchComponent;
-namespace action {
+}
+namespace ratchet::component::player::action {
 class PlayerThrowAttackSetComponent : public ::ratchet::component::player::action::PlayerActionComponent {
     using super = ::ratchet::component::player::action::PlayerActionComponent;
 private:
@@ -81,8 +80,5 @@ public:
     /// <returns>ê¨å˜</returns>
     virtual bool Start(void) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_THROW_ATTACK_SET_COMPONENT_H

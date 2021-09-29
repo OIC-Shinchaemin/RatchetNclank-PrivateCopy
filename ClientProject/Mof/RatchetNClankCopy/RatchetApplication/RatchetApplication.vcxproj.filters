@@ -388,6 +388,9 @@
     <Filter Include="Ratchet\Header\Stage\Parser">
       <UniqueIdentifier>{d86210b2-fc23-439c-a348-cfab09f40f68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\Text">
+      <UniqueIdentifier>{019df226-0b6b-4f8f-a60b-bcf46f18a44f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1131,21 +1134,6 @@
     <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp">
       <Filter>Ratchet\Source\UI\Shop</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\Script.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\Menu.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\Save.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClCompile>
     <ClCompile Include="Event\TextSystemStartEvent.cpp">
       <Filter>Ratchet\Source\Event</Filter>
     </ClCompile>
@@ -1283,6 +1271,39 @@
     </ClCompile>
     <ClCompile Include="Event\HitStopEvent.cpp">
       <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\FenceCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BarrackCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerFenceCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerBarrackCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerBarricadeCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BarricadeCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Menu.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Save.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Script.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1711,9 +1732,6 @@
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerStateComponent.h">
       <Filter>Ratchet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h">
-      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
     <ClInclude Include="Component\InvincibleComponent.h">
       <Filter>Ratchet\Header\Component</Filter>
@@ -2467,6 +2485,27 @@
     </ClInclude>
     <ClInclude Include="Event\HitStopEvent.h">
       <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BarrackCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\FenceCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerBarrackCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerFenceCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerBarricadeCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BarricadeCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDefine.h">
+      <Filter>Ratchet\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

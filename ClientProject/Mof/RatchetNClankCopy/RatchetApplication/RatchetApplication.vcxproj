@@ -322,7 +322,10 @@
     <ClCompile Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerBarrackCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerBarricadeCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.cpp" />
+    <ClCompile Include="Component\Collision\Algolithm\PlayerFenceCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp" />
     <ClCompile Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.cpp" />
@@ -346,6 +349,8 @@
     <ClCompile Include="Component\Collision\CollisionAlgolithmImplementation.cpp" />
     <ClCompile Include="Component\Collision\CollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\CollisionComponentImplementation.cpp" />
+    <ClCompile Include="Component\Collision\Object\BarrackCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\BarricadeCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\BoltCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\BombGloveBulletCollisionComponent.cpp" />
@@ -355,6 +360,7 @@
     <ClCompile Include="Component\Collision\Object\EnemyBulletCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.cpp" />
+    <ClCompile Include="Component\Collision\Object\FenceCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\KingCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\NanotechItemCollisionComponent.cpp" />
     <ClCompile Include="Component\Collision\Object\OmniWrenchCollisionComponent.cpp" />
@@ -667,6 +673,7 @@
     <ClInclude Include="Camera\FollowCameraController.h" />
     <ClInclude Include="Camera\PointCameraController.h" />
     <ClInclude Include="Camera\ThirdPersonCameraController.h" />
+    <ClInclude Include="CollisionDefine.h" />
     <ClInclude Include="Component\ActionComponent.h" />
     <ClInclude Include="Component\ActionStateComponent.h" />
     <ClInclude Include="Component\AIStateComponent.h" />
@@ -689,11 +696,13 @@
     <ClInclude Include="Component\Collision\Algolithm\EnemyEnemyCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyOmniWrenchCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerCollisionAlgolithm.h" />
-    <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\EnemyPyrocitorBulletCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\NanotechItemPlayerCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerBarrackCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerBarricadeCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h" />
+    <ClInclude Include="Component\Collision\Algolithm\PlayerFenceCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h" />
     <ClInclude Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.h" />
@@ -719,6 +728,8 @@
     <ClInclude Include="Component\Collision\CollisionComponent.h" />
     <ClInclude Include="Component\Collision\CollisionComponentDefine.h" />
     <ClInclude Include="Component\Collision\CollisionComponentInclude.h" />
+    <ClInclude Include="Component\Collision\Object\BarrackCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\BarricadeCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\BoltCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\BombGloveBulletCollisionComponent.h" />
@@ -728,6 +739,7 @@
     <ClInclude Include="Component\Collision\Object\EnemyBulletCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\EnemyMeleeAttackCollisionComponent.h" />
+    <ClInclude Include="Component\Collision\Object\FenceCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\KingCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\NanotechItemCollisionComponent.h" />
     <ClInclude Include="Component\Collision\Object\OmniWrenchCollisionComponent.h" />
