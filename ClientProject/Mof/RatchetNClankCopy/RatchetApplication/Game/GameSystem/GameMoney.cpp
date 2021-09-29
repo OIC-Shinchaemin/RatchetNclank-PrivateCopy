@@ -11,7 +11,7 @@
 
 ratchet::game::gamesystem::GameMoney::GameMoney() :
     _value(),
-    _value_max(40),
+    _value_max(10),
     _subject(),
     _resource(),
     _ui_canvas(),

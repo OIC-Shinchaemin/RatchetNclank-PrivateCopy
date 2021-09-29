@@ -87,8 +87,7 @@ ratchet::actor::character::King::King() :
 
 
     ///
-
-    _quest_index = 1;
+    //_quest_index = 1;
 }
 
 ratchet::actor::character::King::~King() {

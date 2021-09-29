@@ -34,9 +34,9 @@ void ratchet::scene::GameScene::ReInitialize(void) {
 bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
-//	tutorial::TutorialManager::GetInstance().Complete();
-//	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
-//	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
+	tutorial::TutorialManager::GetInstance().Complete();
+	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
+	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
 
     if (::g_pInput->IsKeyPush(MOFKEY_T)) {
         _re_initialize = true;
