@@ -44,16 +44,13 @@ bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
     if (::g_pInput->IsKeyHold(MOFKEY_W) || ::g_pInput->IsKeyHold(MOFKEY_A) ||
         ::g_pInput->IsKeyHold(MOFKEY_S) || ::g_pInput->IsKeyHold(MOFKEY_D) ||
         stick.Length() > threshold) {
-        //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMoveState);
         _next_state = state::PlayerActionStateType::kPlayerActionMoveState;
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
         _next_state = state::PlayerActionStateType::kPlayerActionJumpSetState;
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
-            //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
             _next_state = state::PlayerActionStateType::kPlayerActionMeleeAttackOneState;
         } // if
     } // else if
@@ -66,14 +63,12 @@ bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
             if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Weapon)) {
                 auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
                 if (owner->GetCurrentMechanical()) {
-                    //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
                     _next_state = state::PlayerActionStateType::kPlayerActionShotAttackState;
                 } // if
             } // if
         } // else
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_B) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_R_BTN)) {
-        //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionCrouchState);
         _next_state = state::PlayerActionStateType::kPlayerActionCrouchState;
     } // else if
 

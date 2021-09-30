@@ -71,15 +71,11 @@ private:
 
     //! BGM
     //Mof::CStreamingSoundBuffer _field_bgm;
-    Mof::CSoundBuffer _field_bgm;
+//    Mof::CSoundBuffer _field_bgm;
     //! BGM
-    Mof::CSoundBuffer _battle_bgm;
+//    Mof::CSoundBuffer _battle_bgm;
     //! ボリューム
     float _bgm_init_volume = 0.3f;
-    //! イベント
-    std::vector<std::function<void(void)>> _bmg_volume_events;
-    //! クリア
-    bool _bmg_volume_event_excuted;
 public:
     /// <summary>
     /// 追加

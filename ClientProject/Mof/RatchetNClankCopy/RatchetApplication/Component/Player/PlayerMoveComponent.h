@@ -55,6 +55,8 @@ private:
     std::weak_ptr<::ratchet::component::CameraComponent> _camera_com;
     //! ‰ñ“]‚µ‚È‚¢
     bool _angular_freeze;
+    //! Ÿ‚Ìó‘Ô
+    std::string _next_state;
 public:
     /// <summary>
     /// ‰Á‘¬

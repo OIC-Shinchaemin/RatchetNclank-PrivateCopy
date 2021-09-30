@@ -66,9 +66,11 @@ std::shared_ptr<ratchet::component::Component> ratchet::component::collision::Ca
 }
 
 void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
+    /*
     if (!this->GetSphere().has_value()) {
         return;
     } // if
+
     auto camera_com = _camera_com.lock();
     auto controller = camera_com->GetCameraController()->GetService();
 
@@ -84,11 +86,11 @@ void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof
         geometry->SetMatrix(mat);
 
         auto box = Mof::CBoxAABB();
+
         if (sphere.CollisionGeometry(geometry, info)) {
             if (info.d <= sphere.r + margin) {
                 auto info = camera::CameraController::CameraInfo();
                 
-                /*
                 // ­‚µ‹ß‚Ã‚­
                 float distance = _non_collision_distance - (sphere.r);
                 distance = std::clamp(distance, sphere.r, _non_collision_distance);
@@ -96,7 +98,6 @@ void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof
                 controller->SetDistance(distance);
                 controller->Update(def::kDeltaTime, info);
                 this->CollisionStage(mesh, obj);
-                */
             } // if
         } // if
         else {
@@ -104,6 +105,7 @@ void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof
         } // else
         geometry->SetMatrix(default_matrix);
     } // for
+    */
 }
 
 void ratchet::component::collision::CameraCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {

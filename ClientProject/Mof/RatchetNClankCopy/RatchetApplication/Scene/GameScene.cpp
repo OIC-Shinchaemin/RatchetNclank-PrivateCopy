@@ -34,9 +34,9 @@ void ratchet::scene::GameScene::ReInitialize(void) {
 bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
-	tutorial::TutorialManager::GetInstance().Complete();
-	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
-	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
+    tutorial::TutorialManager::GetInstance().Complete();
+    tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
+    tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
 
     if (::g_pInput->IsKeyPush(MOFKEY_T)) {
         _re_initialize = true;
@@ -75,6 +75,9 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
         } // if
     } // if
     _effect->Update(delta_time);
+
+    auto bgm_player = super::GetBGMPlayer();
+    bgm_player->Update();
     return true;
 }
 
@@ -177,8 +180,24 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::event::StageViewEventMes
 }
 
 void ratchet::scene::GameScene::OnNotify(const ratchet::event::ShipEventEndMessage& message) {
-    _battle_bgm.Stop();
-    _field_bgm.Play();
+    auto bgm_player = super::GetBGMPlayer();
+    //_battle_bgm.Stop();
+    //_field_bgm.Play();
+    {
+
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Battle;
+        e.command = decltype(e.command)::Stop();
+        super::GetBGMPlayer()->Recieve(e);
+    }
+    {
+
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Field;
+        e.command = decltype(e.command)::Play();
+        super::GetBGMPlayer()->Recieve(e);
+    }
+
 }
 
 void ratchet::scene::GameScene::OnNotify(const ratchet::actor::character::CharacterDamageApplyMessage& message) {
@@ -190,8 +209,24 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::actor::character::Charac
 }
 
 void ratchet::scene::GameScene::OnNotify(const ContactEnemyMessage& message) {
-    _field_bgm.Stop();
-    _battle_bgm.Play();
+//    _field_bgm.Stop();
+//    _battle_bgm.Play();
+
+    auto bgm_player = super::GetBGMPlayer();
+    {
+
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Battle;
+        e.command = decltype(e.command)::Play();
+        super::GetBGMPlayer()->Recieve(e);
+    }
+    {
+
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Field;
+        e.command = decltype(e.command)::Stop();
+        super::GetBGMPlayer()->Recieve(e);
+    }
 }
 
 void ratchet::scene::GameScene::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
@@ -213,12 +248,29 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
         if (auto r = _resource.lock()) {
             auto path = "../Resource/scene_resource/game_scene.txt";
             r->Load(path);
+
+            //_field_bgm.Load("bgm/field.mp3");
+            //_battle_bgm.Load("bgm/battle.mp3");
+
+            auto bgm_player = super::GetBGMPlayer();
+            {
+                auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/battle.mp3");
+                bgm_player->AddSound(ratchet::game::audio::BGMType::Battle, bgm);
+                bgm->SetLoop(true);
+                bgm->SetVolume(_bgm_init_volume);
+            }
+            {
+                auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/field.mp3");
+                bgm_player->AddSound(ratchet::game::audio::BGMType::Field, bgm);
+                bgm->SetLoop(true);
+                bgm->SetVolume(_bgm_init_volume);
+            }
+
+
         } // if
         if (!_stage.Load("../Resource/stage/stage.json")) {
             //return false;
         } // if
-        _field_bgm.Load("bgm/field.mp3");
-        _battle_bgm.Load("bgm/battle.mp3");
 
         if (auto game = _game.lock()) {
             game->GameSystemLoad();
@@ -229,9 +281,18 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
 
 
         this->Initialize();
-        _field_bgm.SetVolume(_bgm_init_volume);
-        _battle_bgm.SetVolume(_bgm_init_volume);
-        _field_bgm.Play();
+        //_field_bgm.SetVolume(_bgm_init_volume);
+        //_battle_bgm.SetVolume(_bgm_init_volume);
+        //_field_bgm.Play();
+
+        auto bgm_player = super::GetBGMPlayer();
+        {
+
+            auto e = ratchet::game::audio::BGMEvent();
+            e.type = decltype(e.type)::Field;
+            e.command = decltype(e.command)::Play();
+            super::GetBGMPlayer()->Recieve(e);
+        }
     });
     return true;
 }
@@ -308,8 +369,8 @@ bool ratchet::scene::GameScene::Release(void) {
         game->GameSystemRelease();
     } // if
 
-    _field_bgm.Release();
-    _battle_bgm.Release();
+    //_field_bgm.Release();
+    //_battle_bgm.Release();
 
     //if (auto light= _light_manager.lock()) {
     //	light->Release();

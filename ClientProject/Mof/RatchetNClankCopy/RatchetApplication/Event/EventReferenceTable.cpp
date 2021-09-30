@@ -26,6 +26,10 @@ bool ratchet::event::EventReferenceTable::Exist(const std::string& key) {
 }
 
 void ratchet::event::EventReferenceTable::Register(const std::string& key, std::any value) {
+    auto it = this->_data_table.find(key);
+    if (it != _data_table.end()) {
+        _data_table.erase(key);
+    } // if
     this->_data_table.emplace(key, value);
 }
 

@@ -67,3 +67,5 @@
 ../Resource/bgm/battle.mp3
 ../Resource/bgm/field.mp3
 ../Resource/bgm/title.mp3
+
+../Resource/se/.mp3

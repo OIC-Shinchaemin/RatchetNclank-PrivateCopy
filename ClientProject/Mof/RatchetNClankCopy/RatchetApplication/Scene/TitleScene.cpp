@@ -33,7 +33,7 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     if (_input_timer.Tick(delta_time)) {
         _input_flag = true;
     } // if
-    
+
 
     bool effect_end = super::SceneUpdate(delta_time);
     if (effect_end && _transition_state == TransitionState::End) {
@@ -51,10 +51,18 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     _camera_controller.GetService()->Update(delta_time, camera_info);
 
     _logo.Update(delta_time);
-    _bgm.Update();
+
+
+    //_bgm.Update();
+    auto bgm_player = super::GetBGMPlayer();
     if (_scene_end) {
-        _bgm.SetVolume(_bgm.GetVolume() * 0.9f);
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Title;
+        e.command = decltype(e.command)::SetVolume(bgm_player->GetVolume(e.type) * 0.9f);
+        //_bgm.SetVolume(_bgm.GetVolume() * 0.9f);
+        super::GetBGMPlayer()->Recieve(e);
     } // if
+    bgm_player->Update();
     return true;
 }
 
@@ -105,8 +113,7 @@ ratchet::scene::TitleScene::TitleScene() :
     _loading_counter(),
     _loading_dot_count(0),
     _input_flag(false),
-    _input_timer(),
-    _bgm(){
+    _input_timer() {
     _loading_counter.Initialize(1.0f, true);
     _input_timer.Initialize(2.0f, false);
 }
@@ -151,11 +158,16 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             auto path = "../Resource/scene_resource/game_scene.txt";
             if (auto r = _resource.lock()) {
                 r->Load(path);
+
+                auto bgm_player = super::GetBGMPlayer();
+                //_bgm.Load("bgm/title.mp3");
+                auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/title.mp3");
+                bgm_player->AddSound(ratchet::game::audio::BGMType::Title, bgm);
+                bgm->SetLoop(true);
+                bgm->SetVolume(0.5f);
+                //_bgm.SetVolume(0.0f);
+
             } // if
-            _bgm.Load("bgm/title.mp3");
-            _bgm.SetLoop(true);
-            _bgm.SetVolume(0.5f);
-            //_bgm.SetVolume(0.0f);
 
             _logo.SetTexture(super::GetResource()->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/title_logo/image.png"));
 
@@ -233,7 +245,12 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
         } // if
         //this->Initialize();
 
-        _bgm.Play();
+        //_bgm.Play();
+        auto bgm_player = super::GetBGMPlayer();
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Title;
+        e.command = decltype(e.command)::Play();
+        super::GetBGMPlayer()->Recieve(e);
     });
 
     return true;
@@ -252,7 +269,7 @@ bool ratchet::scene::TitleScene::Release(void) {
         _title_menu_subject.Clear();
     } // if
 
-    _bgm.Release();
+    //_bgm.Release();
     _stage.Release();
     return true;
 }

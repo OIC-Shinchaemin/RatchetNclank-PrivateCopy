@@ -482,6 +482,8 @@
     <ClCompile Include="Factory\FactoryManager.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
+    <ClCompile Include="Game\Audio\BGMPlayer.cpp" />
+    <ClCompile Include="Game\Audio\SEPlayer.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameSystem\GameMoney.cpp" />
     <ClCompile Include="Game\GameSystem\GamePauseSystem.cpp" />
@@ -880,6 +882,9 @@
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Gamepad.h" />
+    <ClInclude Include="Game\Audio\BGMDefine.h" />
+    <ClInclude Include="Game\Audio\BGMPlayer.h" />
+    <ClInclude Include="Game\Audio\SEPlayer.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameSystem\GameMoney.h" />
     <ClInclude Include="Game\GameSystem\GamePauseSystem.h" />

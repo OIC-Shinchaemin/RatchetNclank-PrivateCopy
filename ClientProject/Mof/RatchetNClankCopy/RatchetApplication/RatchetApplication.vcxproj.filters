@@ -391,6 +391,12 @@
     <Filter Include="Ratchet\Source\Game\GameSystem\Text">
       <UniqueIdentifier>{019df226-0b6b-4f8f-a60b-bcf46f18a44f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Game\Audio">
+      <UniqueIdentifier>{fee524df-1071-4758-9116-59ac023972f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\Audio">
+      <UniqueIdentifier>{1a41875d-5dee-4f72-8c07-bfa7dd2b978a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1304,6 +1310,12 @@
     </ClCompile>
     <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
       <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Audio\SEPlayer.cpp">
+      <Filter>Ratchet\Source\Game\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Audio\BGMPlayer.cpp">
+      <Filter>Ratchet\Source\Game\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2506,6 +2518,15 @@
     </ClInclude>
     <ClInclude Include="CollisionDefine.h">
       <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\BGMPlayer.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\SEPlayer.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\BGMDefine.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

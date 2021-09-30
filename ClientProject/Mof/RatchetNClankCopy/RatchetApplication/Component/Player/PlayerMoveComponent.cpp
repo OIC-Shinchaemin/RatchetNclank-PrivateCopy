@@ -54,7 +54,8 @@ ratchet::component::player::action::PlayerMoveComponent::PlayerMoveComponent(int
     _input_info(),
     _type_com(),
     _camera_com(),
-    _angular_freeze() {
+    _angular_freeze(),
+    _next_state(){
 }
 
 ratchet::component::player::action::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
@@ -71,7 +72,8 @@ ratchet::component::player::action::PlayerMoveComponent::PlayerMoveComponent(con
     _input_info(),
     _type_com(),
     _camera_com(),
-    _angular_freeze() {
+    _angular_freeze(),
+    _next_state() {
 }
 
 ratchet::component::player::action::PlayerMoveComponent::~PlayerMoveComponent() {
@@ -124,18 +126,21 @@ bool ratchet::component::player::action::PlayerMoveComponent::Initialize(void) {
 bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
     // flag
     if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        _next_state = state::PlayerActionStateType::kPlayerActionJumpSetState;
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
         if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
-            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+            //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+            _next_state = state::PlayerActionStateType::kPlayerActionMeleeAttackOneState;
         } // if
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
         if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Weapon)) {
             auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
             if (owner->GetCurrentMechanical()) {
-                super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+                //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+                _next_state = state::PlayerActionStateType::kPlayerActionShotAttackState;
             } // if
         } // if
     } // else if
@@ -147,7 +152,7 @@ bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
         in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
     } // if
     else {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
+        _next_state = state::PlayerActionStateType::kPlayerActionIdleState;
     } // else
 
     return false;
@@ -166,7 +171,11 @@ bool ratchet::component::player::action::PlayerMoveComponent::Update(float delta
 
         this->Move(_move_speed, angular_speed, ideal_angle);
     } // if
-    _input_info.Reset();
+
+    if (!_next_state.empty()) {
+        super::ChangeActionState(_next_state);
+    } // if
+     _input_info.Reset();
     return true;
 }
 
