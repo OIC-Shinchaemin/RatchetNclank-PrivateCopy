@@ -6,6 +6,11 @@
 
 
 namespace ratchet::game::graphics {
+enum class RenderLayer {
+    Opacity3D,
+    Transparent3D,
+    CountMax
+};
 class RenderCommandTask {
 protected:
     //! コマンドキュー
@@ -15,14 +20,14 @@ public:
     /// コンストラクタ
     /// </summary>
     /// <param name="layerCount"></param>
-    RenderCommandTask(std::size_t layer);
+    RenderCommandTask(std::size_t layer = static_cast<std::size_t>(ratchet::game::graphics::RenderLayer::CountMax));
     /// <summary>
     /// 追加
     /// </summary>
     /// <param name="command"></param>
     /// <param name="layer"></param>
     /// <returns></returns>
-    bool Push(const std::shared_ptr<ratchet::game::graphics::RenderCommand>& command, int layer);
+    bool Push(const std::shared_ptr<ratchet::game::graphics::RenderCommand>& command, std::uint32_t layer);
     /// <summary>
     /// 実行
     /// </summary>

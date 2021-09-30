@@ -4,32 +4,27 @@
 
 #include "RenderCommand.h"
 
+#include <memory>
+
 #include <Mof.h>
 
 
 namespace ratchet::game::graphics {
-class RenderRectangleCommand : public ratchet::game::graphics::RenderCommand {
+class RenderBillboardCommand : public ratchet::game::graphics::RenderCommand {
 private:
-    //! 矩形
-    Mof::CRectangle	_rectangle;
+    //! テクスチャ
+    std::weak_ptr<Mof::CTexture> _texture;
+    //! ビルボード
+    Mof::CMatrix44 _matrix;
     //! 色
-    unsigned int _color;
+    Mof::CVector4 _color;
 public:
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    /// <param name="l"></param>
-    /// <param name="t"></param>
-    /// <param name="r"></param>
-    /// <param name="b"></param>
-    /// <param name="col"></param>
-    RenderRectangleCommand(float l, float t, float r, float b, unsigned int col);    
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="rect"></param>
     /// <param name="col"></param>
-    RenderRectangleCommand(const Mof::CRectangle& rect, unsigned int col);
+    RenderBillboardCommand(const std::shared_ptr<Mof::CTexture> ptr, const Mof::CMatrix44& matrix, const Mof::CVector4 color);
     /// <summary>
     /// 実行
     /// </summary>

@@ -48,7 +48,8 @@ struct BGMEventCommand {
 };
 
 struct BGMEvent {
-    BGMType type;
+    using Type = BGMType;
+    Type type;
     BGMEventCommand command;
 };
 }

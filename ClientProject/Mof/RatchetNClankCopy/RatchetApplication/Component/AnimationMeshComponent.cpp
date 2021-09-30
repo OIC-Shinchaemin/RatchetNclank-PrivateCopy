@@ -1,6 +1,7 @@
 #include "AnimationMeshComponent.h"
 
 #include "MotionComponent.h"
+#include "../Game/Graphics/RenderAnimationMeshCommand.h"
 
 
 ratchet::component::AnimationMeshComponent::AnimationMeshComponent(int priority) :
@@ -60,7 +61,30 @@ bool ratchet::component::AnimationMeshComponent::Render(void) {
 }
 
 bool ratchet::component::AnimationMeshComponent::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
-    return false;
+    if (!super::GetOwner()->InCameraRange()) {
+        return false;
+    } // if
+
+    auto owner = super::GetOwner();
+    // •`‰æ
+    if (auto mesh = super::GetMeshContainer()) {
+        Mof::CMatrix44 scale, rotate, translate;
+        Mof::CQuaternion quat; quat.Rotation(owner->GetRotate());
+
+        scale.Scaling(owner->GetScale(), scale);
+        quat.ConvertMatrixTranspose(rotate);
+        translate.Translation(owner->GetPosition(), translate);
+        Mof::CMatrix44 world = scale * rotate * translate;
+
+        if (auto motion_com = _motion_com.lock()) {
+            auto motion = motion_com->GetMotionData();
+            motion->RefreshBoneMatrix(world);
+//            mesh->Render(motion, super::GetColor());
+            auto command = std::make_shared<ratchet::game::graphics::RenderAnimationMeshCommand>(mesh, motion, super::GetColor());
+            out->Push(command, _target_layer);
+        } // if
+    } // if
+    return true;
 }
 
 bool ratchet::component::AnimationMeshComponent::Release(void) {

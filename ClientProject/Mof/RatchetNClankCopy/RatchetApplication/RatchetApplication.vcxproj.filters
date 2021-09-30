@@ -2570,6 +2570,12 @@
     <ClInclude Include="Game\Graphics\RenderMeshCommand.h">
       <Filter>Ratchet\Header\Game\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Audio\SEDefine.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\SoundPlayer.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">

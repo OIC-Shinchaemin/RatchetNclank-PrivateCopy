@@ -174,6 +174,7 @@ bool ratchet::component::player::action::PlayerMoveComponent::Update(float delta
 
     if (!_next_state.empty()) {
         super::ChangeActionState(_next_state);
+        _next_state.clear();
     } // if
      _input_info.Reset();
     return true;

@@ -38,6 +38,10 @@ std::shared_ptr<ratchet::game::audio::BGMPlayer> ratchet::scene::Scene::GetBGMPl
     return this->_bgm_player;
 }
 
+std::shared_ptr<ratchet::game::audio::SEPlayer> ratchet::scene::Scene::GetSEPlayer(void) const {
+    return this->_se_player;
+}
+
 Mof::LPRenderTarget ratchet::scene::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
 }
@@ -124,6 +128,7 @@ ratchet::scene::Scene::Scene() :
     _ui_canvas(),
     _light_manager(),
     _bgm_player(std::make_shared<ratchet::game::audio::BGMPlayer>()),
+    _se_player(std::make_shared<ratchet::game::audio::SEPlayer>()),
     _loaded(false),
     _mutex(),
     _load_thread() {

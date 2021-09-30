@@ -890,7 +890,9 @@
     <ClInclude Include="Gamepad.h" />
     <ClInclude Include="Game\Audio\BGMDefine.h" />
     <ClInclude Include="Game\Audio\BGMPlayer.h" />
+    <ClInclude Include="Game\Audio\SEDefine.h" />
     <ClInclude Include="Game\Audio\SEPlayer.h" />
+    <ClInclude Include="Game\Audio\SoundPlayer.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameSystem\GameMoney.h" />
     <ClInclude Include="Game\GameSystem\GamePauseSystem.h" />

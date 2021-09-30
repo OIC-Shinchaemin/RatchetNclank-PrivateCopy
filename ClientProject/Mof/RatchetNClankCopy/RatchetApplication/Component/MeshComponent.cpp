@@ -1,5 +1,7 @@
 #include "MeshComponent.h"
 
+#include "../Game/Graphics/RenderMeshCommand.h"
+
 
 ratchet::component::MeshComponent::MeshComponent(int priority) :
     super(priority),
@@ -77,7 +79,27 @@ bool ratchet::component::MeshComponent::Render(void) {
 }
 
 bool ratchet::component::MeshComponent::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
-    return false;
+    if (!super::GetOwner()->InCameraRange()) {
+        return false;
+    } // if
+
+    auto owner = super::GetOwner();
+    // •`‰æ
+    if (auto mesh = this->GetMeshContainer(); mesh) {
+        Mof::CMatrix44 scale, rotate, translate;
+        Mof::CQuaternion quat; quat.Rotation(owner->GetRotate());
+
+        scale.Scaling(owner->GetScale(), scale);
+        quat.ConvertMatrixTranspose(rotate);
+        translate.Translation(owner->GetPosition(), translate);
+
+        Mof::CMatrix44 world = scale * rotate * translate;
+        //mesh->Render(world);
+
+        auto command = std::make_shared<ratchet::game::graphics::RenderMeshCommand>(mesh, world, Mof::CVector4());
+        out->Push(command, _target_layer);
+    } // if
+    return true;
 }
 
 bool ratchet::component::MeshComponent::Release(void) {

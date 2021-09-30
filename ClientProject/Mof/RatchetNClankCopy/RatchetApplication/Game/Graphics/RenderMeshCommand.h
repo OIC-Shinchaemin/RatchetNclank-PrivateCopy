@@ -4,12 +4,20 @@
 
 #include "RenderCommand.h"
 
+#include <memory>
+
 #include <Mof.h>
+
+#include "../../GameDefine.h"
 
 
 namespace ratchet::game::graphics {
 class RenderMeshCommand : public ratchet::game::graphics::RenderCommand {
 private:
+    //! トランスフォーム
+    //def::Transform _transform;
+    //! トランスフォーム
+    Mof::CMatrix44 _world;
     //! メッシュ
     std::weak_ptr<Mof::CMeshContainer> _mesh;
     //! 表示色
@@ -20,7 +28,7 @@ public:
     /// </summary>
     /// <param name="rect"></param>
     /// <param name="col"></param>
-    RenderMeshCommand(const std::shared_ptr<Mof::CMeshContainer> ptr, const Mof::CVector4& color);
+    RenderMeshCommand(const std::shared_ptr<Mof::CMeshContainer> ptr, const Mof::CMatrix44& world, const Mof::CVector4& color);
     /// <summary>
     /// 実行
     /// </summary>

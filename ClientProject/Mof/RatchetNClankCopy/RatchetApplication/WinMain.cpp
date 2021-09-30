@@ -14,6 +14,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 
 	Mof::LPFramework pFrame = new Mof::CDX11GameFramework();
 	Mof::WINDOWSGAMEFRAMEWORKINITIALIZEINFO Info;
+//	Info.WindowCreateInfo.
+
 	Info.WindowCreateInfo.px = 400.0f;
 	Info.WindowCreateInfo.py = 20.0f;
 	//Info.Flag = MOF_FRAMEWORK_GRAPHICSINITIALIZE | MOF_FRAMEWORK_INPUTINITIALIZE | MOF_FRAMEWORK_APPLICATIONINITIALIZE;

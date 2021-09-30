@@ -1,7 +1,8 @@
 #include "Renderer.h"
 
 #include "Base/Core/Utility.h"
-#include "../Component/MeshComponent.h"
+
+#include "../Game/Graphics/RenderCommandTask.h"
 
 
 ratchet::game::Renderer::Renderer() :
@@ -25,12 +26,14 @@ void ratchet::game::Renderer::RemoveElement(const std::shared_ptr<ratchet::actor
 }
 
 bool ratchet::game::Renderer::Render(void) {
+    auto command_queue = std::make_shared<game::graphics::RenderCommandTask>();
     for (auto ptr : _enable_actors) {
         // •`‰æ‚µ‚È‚¢”»’è
-        if (!ptr->Render()) {
+        if (!ptr->Render(command_queue)) {
             _disable_actors.push_back((ptr));
         } // if
     } // for
+    command_queue->Execute();
 
     for (auto ptr : _disable_actors) {
         ut::SwapPopback(_enable_actors, ptr);
