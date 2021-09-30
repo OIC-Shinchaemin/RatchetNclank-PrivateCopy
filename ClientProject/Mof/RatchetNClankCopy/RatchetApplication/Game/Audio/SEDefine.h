@@ -43,7 +43,7 @@ struct SEEventCommand {
     }
     static SEEventCommand SetVolume(float volume) {
         auto instance = SEEventCommand();
-        instance.set_volume= true;
+        instance.set_volume = true;
         instance.volume = volume;
         return instance;
     }
@@ -54,6 +54,15 @@ struct SEEvent {
     using Type = SEType;
     Type type;
     SEEventCommand command;
+
+    SEEvent() :
+        type(),
+        command()     {
+    }
+    SEEvent(Type se_type, SEEventCommand se_command)  :
+        type(se_type),
+        command(se_command) {
+    }
 };
 }
 #endif // !RATCHET_GAME_AUDIO_SE_DEFINE_H

@@ -525,6 +525,7 @@
     <ClCompile Include="Scene\SceneImplementation.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="Scene\TitleSceneInitializer.cpp" />
     <ClCompile Include="Stage\Gimmick\Bridge.cpp" />
     <ClCompile Include="Stage\Gimmick\Elevator.cpp" />
     <ClCompile Include="Stage\Gimmick\GimmickBase.cpp" />
@@ -938,6 +939,7 @@
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Scene\TitleSceneInitializer.h" />
     <ClInclude Include="Stage\Gimmick\Bridge.h" />
     <ClInclude Include="Stage\Gimmick\Elevator.h" />
     <ClInclude Include="Stage\Gimmick\GimmickBase.h" />

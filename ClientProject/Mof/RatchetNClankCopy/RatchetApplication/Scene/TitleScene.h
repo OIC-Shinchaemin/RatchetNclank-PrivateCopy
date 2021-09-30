@@ -94,6 +94,7 @@ public:
 class TitleScene : public ratchet::scene::Scene,
     public base::core::Observer<const ratchet::game::gamesystem::OptionSystem::Info&> {
     using super = ratchet::scene::Scene;
+    friend class TitleSceneInitializer;
 private:
     //! bgm
     //Mof::CStreamingSoundBuffer _bgm;

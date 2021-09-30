@@ -16,6 +16,7 @@
 #include "Base/UI/UICanvas.h"
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
+#include "../Audio/SoundPlayer.h"
 
 
 namespace ratchet::game::gamesystem {
@@ -30,6 +31,8 @@ private:
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
+    //! SE
+    std::weak_ptr<ratchet::game::audio::SEPlayer> _se_player;
 protected:
     /// <summary>
     /// ゲッター
@@ -43,6 +46,12 @@ protected:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::game::audio::SEPlayer> GetSEPlayer(void) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -67,6 +76,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetSEPlayer(std::weak_ptr<ratchet::game::audio::SEPlayer> ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

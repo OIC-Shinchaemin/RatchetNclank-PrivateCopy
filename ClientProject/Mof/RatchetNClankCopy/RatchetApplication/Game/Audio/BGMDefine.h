@@ -51,6 +51,14 @@ struct BGMEvent {
     using Type = BGMType;
     Type type;
     BGMEventCommand command;
+    BGMEvent() :
+        type(),
+        command() {
+    }
+    BGMEvent(Type bgm_type, BGMEventCommand bgm_command) :
+        type(bgm_type),
+        command(bgm_command) {
+    }
 };
 }
 #endif // !RATCHET_GAME_AUDIO_BGM_DEFINE_H

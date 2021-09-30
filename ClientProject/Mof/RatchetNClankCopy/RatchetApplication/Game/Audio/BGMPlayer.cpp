@@ -32,7 +32,7 @@ bool ratchet::game::audio::BGMPlayer::Update(void) {
     for (auto& event : _recieved_event) {
         auto& sound = _sounds.at(event.type);
         if (event.command.play) {
-            //sound->Play();
+            sound->Play();
         } // if
         else if (event.command.stop) {
             sound->Stop();
@@ -59,6 +59,6 @@ bool ratchet::game::audio::BGMPlayer::Clear(void) {
 }
 
 bool ratchet::game::audio::BGMPlayer::Recieve(const ratchet::game::audio::BGMEvent& event) {
-    _recieved_event.push_back(event);
+//    _recieved_event.push_back(event);
     return true;
 }
