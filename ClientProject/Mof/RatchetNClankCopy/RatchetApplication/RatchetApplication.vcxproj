@@ -888,6 +888,7 @@
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Gamepad.h" />
+    <ClInclude Include="Game\Audio\AudioUtility.h" />
     <ClInclude Include="Game\Audio\BGMDefine.h" />
     <ClInclude Include="Game\Audio\BGMPlayer.h" />
     <ClInclude Include="Game\Audio\SEDefine.h" />

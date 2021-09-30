@@ -29,7 +29,8 @@ bool ratchet::game::Renderer::Render(void) {
     auto command_queue = std::make_shared<game::graphics::RenderCommandTask>();
     for (auto ptr : _enable_actors) {
         // •`‰æ‚µ‚È‚¢”»’è
-        if (!ptr->Render(command_queue)) {
+        //if (!ptr->Render(command_queue)) {
+        if (!ptr->Render()) {
             _disable_actors.push_back((ptr));
         } // if
     } // for

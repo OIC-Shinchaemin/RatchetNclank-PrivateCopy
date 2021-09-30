@@ -9,6 +9,12 @@
 
 namespace ratchet::game::audio {
 enum class SEType {
+    PlayerDamage,
+    EnemyDamage,
+    EnemyDead,
+    SystemMenuOpen,
+    SystemEner,
+    SystemSelect,
 };
 struct SEEventCommand {
     // ビットフラグやoptionalでもいいかも

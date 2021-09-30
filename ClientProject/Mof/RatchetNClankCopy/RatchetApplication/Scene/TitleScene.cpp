@@ -3,6 +3,7 @@
 #include "Base/Resource/ResourceFont.h"
 #include "../Factory/FactoryManager.h"
 #include "../Camera/FollowCameraController.h"
+#include "../Game/Audio/AudioUtility.h"
 
 
 void ratchet::scene::TitleScene::FadeOutStart(void) {
@@ -21,6 +22,14 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
         ::PostQuitMessage(0);
         return false;
+    } // if
+
+    if (::g_pInput->IsKeyPush(MOFKEY_E)) {
+        auto e = game::audio::SEEvent();
+        e.command = decltype(e.command)::Play();
+        e.type = game::audio::SEType::SystemEner;
+        super::GetSEPlayer()->Recieve(e);
+
     } // if
 
     if (_input_flag) {
@@ -55,6 +64,7 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
 
     //_bgm.Update();
     auto bgm_player = super::GetBGMPlayer();
+    auto se_player = super::GetSEPlayer();
     if (_scene_end) {
         auto e = ratchet::game::audio::BGMEvent();
         e.type = decltype(e.type)::Title;
@@ -63,6 +73,7 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
         super::GetBGMPlayer()->Recieve(e);
     } // if
     bgm_player->Update();
+    se_player->Update();
     return true;
 }
 
@@ -144,8 +155,6 @@ std::string ratchet::scene::TitleScene::GetName(void) {
 
 bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
-    //	_ASSERT_EXPR(loaded, L"ì«Ç›çûÇ›é∏îs");
-
     // shader
     auto effect = SceneEffect();
     effect.Load("../Resource/shader/fadein.hlsl");
@@ -160,12 +169,25 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
                 r->Load(path);
 
                 auto bgm_player = super::GetBGMPlayer();
-                //_bgm.Load("bgm/title.mp3");
                 auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/title.mp3");
                 bgm_player->AddSound(ratchet::game::audio::BGMType::Title, bgm);
                 bgm->SetLoop(true);
                 bgm->SetVolume(0.5f);
-                //_bgm.SetVolume(0.0f);
+
+                auto se_player = super::GetSEPlayer();
+
+                auto add_cound = game::audio::SEAddSound(se_player, r);
+                add_cound.Add(ratchet::game::audio::SEType::SystemSelect, "../Resource/se/system_select.mp3");
+                add_cound.Add(ratchet::game::audio::SEType::SystemEner, "../Resource/se/system_enter.mp3");
+                add_cound.Add(ratchet::game::audio::SEType::SystemMenuOpen, "../Resource/se/system_menu_open.mp3");
+                /*
+                {
+                    auto se = r->Get<std::shared_ptr<Mof::CSoundBuffer>>("../Resource/se/system_select.mp3");
+                    se_player->AddSound(ratchet::game::audio::SEType::SystemSelect, se);
+                    se->SetLoop(false);
+                    se->SetVolume(0.5f);
+                }
+                */
 
             } // if
 
