@@ -208,6 +208,22 @@ bool ratchet::actor::Actor::Render(void) {
     return re;
 }
 
+bool ratchet::actor::Actor::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
+    bool re = false;
+    for (auto& com : _render_components) {
+        if (com->IsActive()) {
+            com->Render(out);
+#ifdef _DEBUG
+            if (debug::DebugManager::GetInstance().IsDebugMode()) {
+                com->DebugRender();
+            } // if
+#endif // _DEBUG
+            re = true;
+        } // if
+    } // for
+    return re;
+}
+
 bool ratchet::actor::Actor::Release(void) {
     _input_components.clear();
     _update_components.clear();

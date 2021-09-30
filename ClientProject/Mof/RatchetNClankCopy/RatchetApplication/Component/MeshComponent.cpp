@@ -76,6 +76,10 @@ bool ratchet::component::MeshComponent::Render(void) {
     return true;
 }
 
+bool ratchet::component::MeshComponent::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
+    return false;
+}
+
 bool ratchet::component::MeshComponent::Release(void) {
     super::Release();
     _mesh.reset();

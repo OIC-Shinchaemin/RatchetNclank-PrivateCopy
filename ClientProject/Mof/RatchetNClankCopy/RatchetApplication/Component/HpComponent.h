@@ -9,8 +9,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class HpComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -94,6 +93,5 @@ public:
     /// <param name=""></param>
     void RegisterUI(void);
 };
-}
 }
 #endif // !RATCHET_COMPONENT_HP_COMPONENT_H

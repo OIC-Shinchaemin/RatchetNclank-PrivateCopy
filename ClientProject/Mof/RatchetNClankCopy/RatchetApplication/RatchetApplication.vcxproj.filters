@@ -397,6 +397,12 @@
     <Filter Include="Ratchet\Source\Game\Audio">
       <UniqueIdentifier>{1a41875d-5dee-4f72-8c07-bfa7dd2b978a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Game\Graphics">
+      <UniqueIdentifier>{22357301-893d-43b5-9809-f4dfbee485dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\Graphics">
+      <UniqueIdentifier>{667456ca-f0f2-4ce3-9587-d15da9e9b276}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1316,6 +1322,24 @@
     </ClCompile>
     <ClCompile Include="Game\Audio\BGMPlayer.cpp">
       <Filter>Ratchet\Source\Game\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderCommandTask.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderRectangleCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderBillboardCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderAnimationMeshCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderMeshCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2527,6 +2551,24 @@
     </ClInclude>
     <ClInclude Include="Game\Audio\BGMDefine.h">
       <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderCommandTask.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderRectangleCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderBillboardCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderAnimationMeshCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderMeshCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

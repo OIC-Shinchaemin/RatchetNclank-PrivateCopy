@@ -8,8 +8,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class AIStateComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -92,6 +91,5 @@ public:
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
 };
-}
 }
 #endif // !RATCHET_COMPONENT_AI_STATE_COMPONENT_H

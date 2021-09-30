@@ -68,4 +68,7 @@
 ../Resource/bgm/field.mp3
 ../Resource/bgm/title.mp3
 
-../Resource/se/.mp3
+../Resource/se/system_select.mp3
+../Resource/se/system_enter.mp3
+../Resource/se/dead.mp3
+../Resource/se/damage.mp3

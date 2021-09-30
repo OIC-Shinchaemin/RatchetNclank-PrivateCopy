@@ -507,6 +507,12 @@
     <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp" />
     <ClCompile Include="Game\GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
+    <ClCompile Include="Game\Graphics\RenderAnimationMeshCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderBillboardCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderCommandTask.cpp" />
+    <ClCompile Include="Game\Graphics\RenderMeshCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderRectangleCommand.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="Light\LightManager.cpp" />
@@ -908,6 +914,12 @@
     <ClInclude Include="Game\GameSystem\Text\TextSystem.h" />
     <ClInclude Include="Game\GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameWorld.h" />
+    <ClInclude Include="Game\Graphics\RenderAnimationMeshCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderBillboardCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderCommandTask.h" />
+    <ClInclude Include="Game\Graphics\RenderMeshCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderRectangleCommand.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
     <ClInclude Include="Light\LightManager.h" />

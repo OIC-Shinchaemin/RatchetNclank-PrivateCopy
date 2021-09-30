@@ -12,6 +12,7 @@
 #include "Base/Core/Define.h"
 #include "Base/Core/Observable.h"
 #include "ActorDefine.h"
+#include "../Game/Graphics/RenderCommandTask.h"
 
 
 namespace ratchet::component { class Component; }
@@ -249,6 +250,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void);
+    /// <summary>
+    /// •`‰æ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out);
     /// <summary>
     /// ‰ð•ú
     /// </summary>

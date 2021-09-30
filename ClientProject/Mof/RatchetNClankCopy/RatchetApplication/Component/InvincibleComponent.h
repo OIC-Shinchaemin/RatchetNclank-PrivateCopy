@@ -7,8 +7,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class InvincibleComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -66,6 +65,5 @@ public:
     /// <returns>ê¨å˜</returns>
     virtual bool Activate(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_INVINCIBLE_COMPONENT_H

@@ -59,6 +59,10 @@ bool ratchet::component::AnimationMeshComponent::Render(void) {
     return true;
 }
 
+bool ratchet::component::AnimationMeshComponent::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
+    return false;
+}
+
 bool ratchet::component::AnimationMeshComponent::Release(void) {
     super::Release();
     _motion_com.reset();

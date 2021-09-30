@@ -92,6 +92,10 @@ bool ratchet::component::BillboardComponent::Render(void) {
     return true;
 }
 
+bool ratchet::component::BillboardComponent::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
+    return false;
+}
+
 bool ratchet::component::BillboardComponent::Release(void) {
     super::Release();
     _texture.reset();
