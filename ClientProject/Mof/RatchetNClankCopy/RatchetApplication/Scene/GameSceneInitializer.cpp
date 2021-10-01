@@ -21,6 +21,7 @@
 #include "../Event/StageViewEvent.h"
 #include "../Event/TextSystemStartEvent.h"
 #include "../Stage/Gimmick/Bridge.h"
+#include "../Game/Audio/AudioUtility.h"
 
 
 ratchet::scene::GameSceneInitializer::GameSceneInitializer() {
@@ -43,6 +44,18 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
 
     ratchet::event::EventReferenceTable::Singleton().Register("Stage", &out->_stage);
     ratchet::event::EventReferenceTable::Singleton().Register("TextSystem", out->_text_system);
+
+
+    if (auto r = out->_resource.lock()) {
+        auto se_player = out->GetSEPlayer();
+        auto add_cound = game::audio::SEAddSound(se_player, r);
+        add_cound.Add(ratchet::game::audio::SEType::SystemSelect, "../Resource/se/system_select.mp3");
+        add_cound.Add(ratchet::game::audio::SEType::SystemEner, "../Resource/se/system_enter.mp3");
+        add_cound.Add(ratchet::game::audio::SEType::SystemMenuOpen, "../Resource/se/system_menu_open.mp3");
+        add_cound.Add(ratchet::game::audio::SEType::EnemyDamage, "../Resource/se/enemy_damage.mp3");
+        add_cound.Add(ratchet::game::audio::SEType::EnemyDead, "../Resource/se/enemy_dead.mp3");
+
+    } // if
 
     std::shared_ptr<ratchet::event::ShipEvent> ship_event;
     std::shared_ptr<ratchet::event::StageViewEvent> stage_view_event;
@@ -93,6 +106,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);    
     stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
     player->SetEffectContainer(out->_effect);
+    player->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
     player->GetComponent<component:: SightRecognitionComponent>()->GetContactEnemyMessageSubject()->AddObserver(out);
     for (auto elevator : elevators) {
         auto camera = player->GetComponent<ratchet::component::CameraComponent>();

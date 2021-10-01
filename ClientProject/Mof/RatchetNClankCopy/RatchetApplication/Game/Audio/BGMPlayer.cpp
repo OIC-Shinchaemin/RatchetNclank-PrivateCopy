@@ -3,10 +3,15 @@
 
 ratchet::game::audio::BGMPlayer::BGMPlayer() :
     _sounds(),
-    _recieved_event() {
+    _recieved_event(),
+    _default_volume(0.4f) {
 }
 
 ratchet::game::audio::BGMPlayer::~BGMPlayer() {
+}
+
+void ratchet::game::audio::BGMPlayer::SetDefaultVolume(float volume) {
+    this->_default_volume = volume;
 }
 
 float ratchet::game::audio::BGMPlayer::GetVolume(ratchet::game::audio::BGMType type) const {
@@ -24,6 +29,9 @@ bool ratchet::game::audio::BGMPlayer::AddSound(ratchet::game::audio::BGMType key
     if (it != _sounds.end()) {
         return false;
     } // if
+    {
+        ptr->SetVolume(_default_volume);
+    }
     _sounds.emplace(key, ptr);
     return true;
 }

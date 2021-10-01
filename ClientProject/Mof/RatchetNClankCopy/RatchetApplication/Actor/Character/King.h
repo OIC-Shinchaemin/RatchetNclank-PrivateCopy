@@ -56,6 +56,8 @@ private:
     std::vector<ScarecrowGenerateData> _scarecrow_generate_datas;
     //! かかし
     std::vector<std::shared_ptr<ratchet::actor::Actor>> _created_scarecrows;
+    //! バリケード
+    std::vector<std::shared_ptr<ratchet::actor::Actor>> _created_barricade;
     //! 表示
     std::weak_ptr<ratchet::game::gamesystem::HelpDesk> _help_desk;
     /// <summary>
@@ -63,7 +65,6 @@ private:
     /// </summary>
     /// <param name=""></param>
     void PlayerActionLiberate(void);
-
     /// <summary>
     /// 生成
     /// </summary>

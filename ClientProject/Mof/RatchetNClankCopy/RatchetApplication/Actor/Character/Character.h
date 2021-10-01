@@ -7,14 +7,29 @@
 #include "Base/Core/Observer.h"
 #include "Base/Core/Observable.h"
 #include "../../Game/GameSystem/Text/TextSystem.h"
-
+#include "../../Game/Audio/AudioUtility.h"
 
 
 namespace ratchet::actor::character {
 struct CharacterDamageApplyMessage {
+    std::string damaged_character_tag;
 };
-using CharacterDamageApplyMessageSubject = base::core::Observable<const CharacterDamageApplyMessage&>;
-using CharacterDamageApplyMessageListener = base::core::Observer<const CharacterDamageApplyMessage&>;
+//using CharacterDamageApplyMessageSubject = base::core::Observable<const CharacterDamageApplyMessage&>;
+//using CharacterDamageApplyMessageListener = base::core::Observer<const CharacterDamageApplyMessage&>;
+
+struct CharacterDamageApplyMessageSubject : public base::core::Observable<const CharacterDamageApplyMessage&> {
+};
+struct CharacterDamageApplyMessageListener : public base::core::Observer<const CharacterDamageApplyMessage&> {
+};
+struct CharacterDamageApplyMessageFactory {
+    CharacterDamageApplyMessageFactory() {
+    }
+    CharacterDamageApplyMessage Create(const std::shared_ptr<ratchet::actor::Actor>& actor) {
+        auto ret = CharacterDamageApplyMessage();
+        ret.damaged_character_tag = actor->GetTag();
+        return ret;
+    }
+};
 
 
 class Character : public ratchet::actor::Actor {

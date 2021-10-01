@@ -17,6 +17,8 @@ private:
     std::unordered_map<ratchet::game::audio::SEType, std::shared_ptr<Mof::CSoundBuffer>> _sounds;
     //! メッセージ
     std::vector<ratchet::game::audio::SEEvent> _recieved_event;
+    //! ボリューム
+    float _default_volume;
 public:
     /// <summary>
     /// コンストラクタ
@@ -26,6 +28,11 @@ public:
     /// デストラクタ
     /// </summary>
     ~SEPlayer();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="volume"></param>
+    void SetDefaultVolume(float volume);
     /// <summary>
     /// ゲッター
     /// </summary>

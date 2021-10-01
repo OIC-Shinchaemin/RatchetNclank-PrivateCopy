@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <Mof.h>
 
@@ -46,7 +47,12 @@ struct Transform {
     Mof::CVector3 rotate = math::vec3::kZero;
     Mof::CVector3 scale = math::vec3::kOne;
 };
-
+struct Tag {
+    std::string tag;
+};
+struct TagHolder {
+    std::vector<Tag> tags;
+};
 
 using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CTexture>,

@@ -96,8 +96,6 @@ class TitleScene : public ratchet::scene::Scene,
     using super = ratchet::scene::Scene;
     friend class TitleSceneInitializer;
 private:
-    //! bgm
-    //Mof::CStreamingSoundBuffer _bgm;
     //! ステージ
     Stage _stage;
     //! カメラ

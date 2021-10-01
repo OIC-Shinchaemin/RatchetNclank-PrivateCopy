@@ -159,7 +159,11 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
 
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
-            std::dynamic_pointer_cast<ratchet::actor::character::Scarecrow> (super::GetOwner())->GetCharacterDamageApplyMessageSubject()->Notify({});
+
+            //auto message = actor::character::CharacterDamageApplyMessage();
+            //message.damaged_character_tag = super::GetOwner()->GetTag();
+            auto message = actor::character::CharacterDamageApplyMessageFactory().Create(super::GetOwner());
+            std::dynamic_pointer_cast<ratchet::actor::character::Scarecrow> (super::GetOwner())->GetCharacterDamageApplyMessageSubject()->Notify(message);
             this->DamageEffectEmit(in.target.lock());
 
             if (hp_com->GetHp() <= 0) {

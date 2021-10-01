@@ -3,10 +3,15 @@
 
 ratchet::game::audio::SEPlayer::SEPlayer() :
 	_sounds(),
-	_recieved_event() {
+	_recieved_event(),
+	_default_volume(0.2f){
 }
 
 ratchet::game::audio::SEPlayer::~SEPlayer() {
+}
+
+void ratchet::game::audio::SEPlayer::SetDefaultVolume(float volume) {
+	this->_default_volume = volume;
 }
 
 float ratchet::game::audio::SEPlayer::GetVolume(ratchet::game::audio::SEType type) const {
@@ -24,6 +29,10 @@ bool ratchet::game::audio::SEPlayer::AddSound(ratchet::game::audio::SEType key, 
 	if (it != _sounds.end()) {
 		return false;
 	} // if
+
+	{
+		ptr->SetVolume(_default_volume);
+	}
 	_sounds.emplace(key, ptr);
 	return true;
 }

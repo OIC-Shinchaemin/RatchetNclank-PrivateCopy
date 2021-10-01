@@ -18,6 +18,8 @@ private:
     std::unordered_map<ratchet::game::audio::BGMType, std::shared_ptr<Mof::CStreamingSoundBuffer>> _sounds;
     //! メッセージ
     std::vector<ratchet::game::audio::BGMEvent> _recieved_event;
+    //! ボリューム
+    float _default_volume;
 public:
     /// <summary>
     /// コンストラクタ
@@ -27,6 +29,11 @@ public:
     /// デストラクタ
     /// </summary>
     ~BGMPlayer();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="volume"></param>
+    void SetDefaultVolume(float volume);
     /// <summary>
     /// ゲッター
     /// </summary>

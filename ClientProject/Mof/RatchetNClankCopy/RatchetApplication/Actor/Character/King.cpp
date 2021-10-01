@@ -41,6 +41,7 @@ void ratchet::actor::character::King::BarricadeCreate(ratchet::actor::Actor::Par
         param->transform.scale = transform.scale;
         auto barricade = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::gimmick::Fence>("../Resource/builder/barricade.json", param);
         out->AddElement(barricade);
+        _created_barricade.push_back(barricade);
     } // for
     param->transform = def::Transform();
 }
@@ -58,7 +59,7 @@ ratchet::actor::character::King::King() :
     _player(),
     _free_talk_index(0),
     _event_icon_show(true),
-
+    _created_barricade(),
     _scarecrow_generate_datas() {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
@@ -77,17 +78,6 @@ ratchet::actor::character::King::King() :
         _scarecrow_generate_datas.push_back(std::move(data_0));
         _scarecrow_generate_datas.push_back(std::move(data_1));
     }
-
-
-
-
-
-
-
-
-
-    ///
-    //_quest_index = 1;
 }
 
 ratchet::actor::character::King::~King() {
@@ -96,6 +86,11 @@ ratchet::actor::character::King::~King() {
 void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::ScarecrowEndMessage& msg) {
     ut::EraseRemove(_created_scarecrows, msg.ptr);
     if (_created_scarecrows.empty()) {
+        for (auto actor : _created_barricade) {
+            actor->End();
+        } // for
+        _created_barricade.clear();
+
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
         auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index;
         message.type = static_cast<decltype(message.type)>(type_temp);
@@ -176,7 +171,6 @@ void ratchet::actor::character::King::Talk(void) {
             auto player_camera = _player_view_camera_controller->GetService();
             auto dir = target - _player.lock()->GetPosition();
             player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
-
             return true;
         };
         super::GetTextSystemMessageSubject()->Notify(message);
@@ -188,7 +182,7 @@ void ratchet::actor::character::King::Talk(void) {
 
             auto& scarecrow_transforms = _scarecrow_generate_datas.at(_quest_index);
             // create
-            param->tag = "scarecrow";
+            param->tag = "Scarecrow";
             for (auto& position : scarecrow_transforms.position) {
                 param->transform.position = position;
                 auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);

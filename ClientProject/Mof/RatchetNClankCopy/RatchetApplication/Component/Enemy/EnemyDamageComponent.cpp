@@ -92,7 +92,9 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
 
         if (auto type_com = _enemy_com.lock()) {
             type_com->DamageEffectEmit(in.target.lock());
-            type_com->GetOwnerCastd()->GetCharacterDamageApplyMessageSubject()->Notify({});
+            auto message = actor::character::CharacterDamageApplyMessage();
+            message.damaged_character_tag = super::GetOwner()->GetTag();
+            type_com->GetOwnerCastd()->GetCharacterDamageApplyMessageSubject()->Notify(message);
         } // if
         this->CollisionAction(in);
         return true;
