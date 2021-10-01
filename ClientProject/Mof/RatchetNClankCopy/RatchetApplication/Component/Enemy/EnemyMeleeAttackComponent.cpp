@@ -69,6 +69,7 @@ bool ratchet::component::enemy::EnemyMeleeAttackComponent::Update(float delta_ti
     } // if
     if (auto motion_com = _motion_com.lock()) {
         if (motion_com->IsEndMotion()) {
+            _collision_com.lock()->Inactivate();
             super::End();
         } // if
     } // if

@@ -270,14 +270,10 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
             {
                 auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/battle.mp3");
                 bgm_player->AddSound(ratchet::game::audio::BGMType::Battle, bgm);
-                bgm->SetLoop(true);
-                bgm->SetVolume(_bgm_init_volume);
             }
             {
                 auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/field.mp3");
                 bgm_player->AddSound(ratchet::game::audio::BGMType::Field, bgm);
-                bgm->SetLoop(true);
-                bgm->SetVolume(_bgm_init_volume);
             }
 
 

@@ -13,6 +13,8 @@ class InvincibleComponent : public ratchet::component::UpdateComponent {
 private:
     //! 時間
     base::core::Timer _invincible;
+    //! 時間
+    float _time;
 public:
     /// <summary>
     /// コンストラクタ
@@ -28,6 +30,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~InvincibleComponent();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>

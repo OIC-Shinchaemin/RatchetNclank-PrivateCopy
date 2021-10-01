@@ -65,17 +65,6 @@ private:
     int _loading_dot_count;
     //! 経過時間 / 所要時間
     float _loading_progress;
-
-////////////////////
-//    audio system
-
-    //! BGM
-    //Mof::CStreamingSoundBuffer _field_bgm;
-//    Mof::CSoundBuffer _field_bgm;
-    //! BGM
-//    Mof::CSoundBuffer _battle_bgm;
-    //! ボリューム
-    float _bgm_init_volume = 0.3f;
 public:
     /// <summary>
     /// 追加

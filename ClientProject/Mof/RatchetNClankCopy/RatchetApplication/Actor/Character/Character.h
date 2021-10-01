@@ -39,7 +39,15 @@ private:
     ratchet::game::gamesystem::text::TextSystemMessageSubject _text_system_message_subject;
     //! 通知用
     ratchet::actor::character::CharacterDamageApplyMessageSubject _character_damage_apply_message_subject;
+    //! 話かけられた
+    std::weak_ptr<ratchet::actor::character::Character> _talked_target;
 protected:
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::actor::character::Character> GetTalkedTarget(void) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -49,6 +57,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~Character();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetTalkedTarget(const std::shared_ptr<ratchet::actor::character::Character>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>

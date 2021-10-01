@@ -159,6 +159,13 @@ void ratchet::actor::character::King::Talk(void) {
     auto effect = _effect_container.lock();
     auto player = _player.lock();
 
+
+    auto billboard = super::GetComponent<component::BillboardComponent>();
+    auto dir = Mof::CVector3(super::GetPosition() - player->GetPosition());
+    float angle_y = std::atan2f(-dir.z, dir.x) + math::kHalfPi;
+    super::SetRotate(Mof::CVector3(0.0f, angle_y, 0.0f));
+    billboard->SetOffsetRotation(-super::GetRotate());
+
     if (_quest_index < _quest_count) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
         auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0) + _quest_index;

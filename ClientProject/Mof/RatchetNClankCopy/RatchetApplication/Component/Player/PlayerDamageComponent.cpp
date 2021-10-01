@@ -66,7 +66,8 @@ bool ratchet::component::player::action::PlayerDamageComponent::Initialize(void)
     _hp_com = super::GetOwner()->GetComponent<ratchet::component::HpComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+//    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
                                ratchet::component::collision::CollisionComponentType::kEnemyMeleeAttackCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         if (super::CanTransitionActionState(state::PlayerActionStateType::kPlayerActionDamageState)) {

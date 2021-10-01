@@ -4,7 +4,7 @@
 ratchet::game::audio::BGMPlayer::BGMPlayer() :
     _sounds(),
     _recieved_event(),
-    _default_volume(0.4f) {
+    _default_volume(0.05f) {
 }
 
 ratchet::game::audio::BGMPlayer::~BGMPlayer() {
@@ -31,6 +31,7 @@ bool ratchet::game::audio::BGMPlayer::AddSound(ratchet::game::audio::BGMType key
     } // if
     {
         ptr->SetVolume(_default_volume);
+        ptr->SetLoop(true);
     }
     _sounds.emplace(key, ptr);
     return true;
@@ -67,6 +68,6 @@ bool ratchet::game::audio::BGMPlayer::Clear(void) {
 }
 
 bool ratchet::game::audio::BGMPlayer::Recieve(const ratchet::game::audio::BGMEvent& event) {
-//    _recieved_event.push_back(event);
+    _recieved_event.push_back(event);
     return true;
 }

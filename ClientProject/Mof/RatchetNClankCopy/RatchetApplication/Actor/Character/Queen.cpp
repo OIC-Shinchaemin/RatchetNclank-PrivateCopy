@@ -5,6 +5,7 @@
 #include "../../Event/EventReferenceTable.h"
 #include "../../Event/BridgeEvent.h"
 #include "../../Light/LightManager.h"
+#include "../../Component/BillboardComponent.h"
 
 
 ratchet::actor::character::Queen::Queen() :
@@ -44,6 +45,15 @@ bool ratchet::actor::character::Queen::Update(float delta_time) {
 }
 
 void ratchet::actor::character::Queen::Talk(void) {
+//    auto player = _player.lock();
+
+    auto billboard = super::GetComponent<component::BillboardComponent>();
+    auto dir = Mof::CVector3(super::GetPosition() - super::GetTalkedTarget()->GetPosition());
+    float angle_y = std::atan2f(-dir.z, dir.x) + math::kHalfPi;
+    super::SetRotate(Mof::CVector3(0.0f, angle_y, 0.0f));
+    billboard->SetOffsetRotation(-super::GetRotate());
+
+
     auto message = ratchet::game::gamesystem::text::TextSystemMessage();
 
     if (_event_activated) {
