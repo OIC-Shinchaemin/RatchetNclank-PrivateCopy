@@ -24,13 +24,15 @@
 
 
 namespace ratchet::scene {
-class GameScene : 
-    public ratchet::scene::Scene, 
+class GameScene :
+    public ratchet::scene::Scene,
     public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&>,
     public event::StageViewEventMessageListener,
-    public ratchet::actor::character::CharacterDamageApplyMessageListener ,
-    public ContactEnemyMessageListener ,
-    public event::ShipEventEndMessageListener {
+    public ratchet::actor::character::CharacterDamageApplyMessageListener,
+    public ContactEnemyMessageListener,
+    public event::ShipEventEndMessageListener,
+    public ratchet::game::gamesystem::text::TextSystemOpenMessageListener,
+    public ratchet::game::gamesystem::text::TextSystemClosedMessageListener {
     using super = ratchet::scene::Scene;
     using this_type = ratchet::scene::GameScene;
     friend class GameSceneInitializer;
@@ -144,7 +146,17 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="message"></param>
-    virtual void OnNotify(const ContactEnemyMessage & message) override;
+    virtual void OnNotify(const ContactEnemyMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(game::gamesystem::text::TextSystemOpenMessageListener::Message message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(game::gamesystem::text::TextSystemClosedMessageListener::Message message) override;
     /// <summary>
     /// セッター
     /// </summary>

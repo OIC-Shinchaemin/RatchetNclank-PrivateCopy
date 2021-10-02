@@ -39,7 +39,12 @@ Elevator::Elevator(Vector3 end, float request, bool enable, bool collision, Stag
 	_player_camera_component(),
 	_player_velocity_component(),
 	_event_started(false),
-	_player() {
+	_player(),
+	_cursor_active_timer(),
+	_cursor_blinking_timer(),
+	_cursor_texture(),
+	_cursor_show(false) {
+	bool success = _cursor_texture.Load("../Resource/texture/lock_on_cursor/cursor.png");
 }
 
 Elevator::~Elevator(void) {
@@ -62,6 +67,16 @@ void Elevator::SetPlayer(const std::shared_ptr<ratchet::actor::character::Player
 	if (auto player = _player.lock()) {
 		this->_player_velocity_component = player->GetComponent<ratchet::component::VelocityComponent>();
 	} // if
+}
+
+void Elevator::SetShow(bool flag) {
+	StageObject::SetShow(flag);
+	if (flag) {
+		_cursor_blinking_timer.Initialize(0.4f, false);
+		_cursor_active_timer.Initialize(5.0f, false);
+		_cursor_show = true;
+		_cursor_active = true;
+	} // of
 }
 
 Mof::CVector3 Elevator::GetPreviewPosition(void) const {
@@ -107,6 +122,8 @@ void Elevator::Initialize(void) {
 	_preview_position = _start_pos;
 	RefreshWorldMatrix();
 	_first_initialized = true;
+	_cursor_show = false;
+	_cursor_active = false;
 }
 
 void Elevator::Update(float delta) {
@@ -114,6 +131,19 @@ void Elevator::Update(float delta) {
 	if (!_start_flag) {
 		return;
 	}
+
+
+	if (_cursor_active_timer.Tick(delta)) {
+		_cursor_active = false;
+		_cursor_show = false;
+	} // if
+	if (_cursor_active) {
+		if (_cursor_blinking_timer.Tick(delta)) {
+			_cursor_show = !_cursor_show;
+		} // if
+	} // if
+
+
 
 	auto angle = Mof::CVector3();
 	auto source = Mof::CVector3();
@@ -165,6 +195,18 @@ void Elevator::Update(float delta) {
 		_elevator_arrival_message_subject.Notify(message);
 	}
 	RefreshWorldMatrix();
+}
+
+void Elevator::Render(void)
+{
+	//	auto tex = r->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/lock_on_cursor/cursor.png");
+
+	if (_cursor_show) {
+		auto trans = Mof::CMatrix44();
+		auto pos = GetPosition();
+		trans.Translation(pos);
+		_cursor_texture.Render(::CGraphicsUtilities::GetCamera()->GetBillBoardMatrix() * trans);
+	} // if
 }
 
 void Elevator::ActionStart(void) {

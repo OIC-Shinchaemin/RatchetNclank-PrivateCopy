@@ -107,6 +107,9 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
 
         this->_event_icon_show = true;
         _event_active = false;
+
+        auto billboard = super::GetComponent<component::BillboardComponent>();
+        billboard->Activate();
         _quest_index++;
     } // if
 }
@@ -178,6 +181,9 @@ void ratchet::actor::character::King::Talk(void) {
             auto player_camera = _player_view_camera_controller->GetService();
             auto dir = target - _player.lock()->GetPosition();
             player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
+
+            auto billboard = super::GetComponent<component::BillboardComponent>();
+            billboard->Inactivate();
             return true;
         };
         super::GetTextSystemMessageSubject()->Notify(message);
@@ -219,6 +225,9 @@ void ratchet::actor::character::King::Talk(void) {
 
             message.on_close = [&]() {
                 tutorial::TutorialManager::GetInstance().Complete();
+
+                auto billboard = super::GetComponent<component::BillboardComponent>();
+                billboard->Inactivate();
 
                 if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
                     auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");

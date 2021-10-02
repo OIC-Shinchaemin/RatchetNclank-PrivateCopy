@@ -7,7 +7,7 @@ int main(int argc, char* argv[]) {
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
 #endif // CONSOLE
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	_CrtSetBreakAlloc(61493783);
+	//_CrtSetBreakAlloc(xxxxxx);
 	//_CrtMemState state;
 	//_CrtMemCheckpoint(&state);
 	//_CrtMemDumpStatistics(&state);

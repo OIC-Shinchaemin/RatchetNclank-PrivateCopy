@@ -38,8 +38,6 @@ bool ratchet::scene::TitleSceneInitializer::Execute(std::shared_ptr<ratchet::sce
             auto bgm_player = out->GetBGMPlayer();
             auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/title.mp3");
             bgm_player->AddSound(ratchet::game::audio::BGMType::Title, bgm);
-            bgm->SetLoop(true);
-            //bgm->SetVolume(0.5f);
 
             auto se_player = out->GetSEPlayer();
             auto add_cound = game::audio::SEAddSound(se_player, r);

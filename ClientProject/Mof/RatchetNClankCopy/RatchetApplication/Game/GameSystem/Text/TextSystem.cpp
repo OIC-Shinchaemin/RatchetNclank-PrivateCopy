@@ -49,42 +49,7 @@ bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
     this->StepCommand();
     return true;
 }
-/*
-bool ratchet::game::gamesystem::text::TextSystem::Save(const char* name) {
-    //セーブファイルを開く
-    std::FILE* fp = std::fopen(name, "wb");
-    if (fp == NULL) {
-        return false;
-    }
-    //実行中のスクリプトの保存
-    std::fwrite(_script.GetFileName(), 1, MAX_PATH, fp);
-    //コマンド位置を保存、読み込み時に再度現在のコマンドを実行するために一つ前に戻す
-    int cmd = _command_no - 1;
-    std::fwrite(&cmd, sizeof(int), 1, fp);
-    //フラグ状態を保存
-    std::fwrite(_flags, sizeof(int), _flag_count, fp);
-    //表示の状態を保存
-    std::fwrite(&_text_command.px, sizeof(float), 1, fp);
-    std::fwrite(&_text_command.py, sizeof(float), 1, fp);
-    std::fwrite(_text_command.Text, 1, 256, fp);
-    std::fwrite(_line_buffer, 1, 256, fp);
-    int cnt = _sprite_list.GetArrayCount();
-    std::fwrite(&cnt, sizeof(int), 1, fp);
-    for (int i = 0; i < cnt; i++) {
-        char tname[MAX_PATH];
-        std::strcpy(tname, _sprite_list[i]->GetTexture()->GetName()->GetString());
-        std::fwrite(tname, 1, MAX_PATH, fp);
-        std::strcpy(tname, _sprite_list[i]->GetName()->GetString());
-        std::fwrite(tname, 1, MAX_PATH, fp);
-        std::fwrite(&_sprite_list[i]->m_Position.x, sizeof(float), 1, fp);
-        std::fwrite(&_sprite_list[i]->m_Position.y, sizeof(float), 1, fp);
-        std::fwrite(&_sprite_list[i]->m_bShow, sizeof(int), 1, fp);
-    } // for
-    //ファイルを閉じる
-    std::fclose(fp);
-    return true;
-}
-*/
+
 bool ratchet::game::gamesystem::text::TextSystem::LoadScript(const char* name) {
     //現在の情報を解放
     _script.Release();
@@ -135,7 +100,6 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
     this->UpdateAlpha();
 
     //メニューの更新
-    //if (m_SaveMenu.IsShow()) {
     if (false) {
     }
     //スクリプトによる更新
@@ -411,8 +375,6 @@ ratchet::game::gamesystem::text::TextSystem::~TextSystem() {
 void ratchet::game::gamesystem::text::TextSystem::OnNotify(const TextSystemMessage& message) {
     if (auto player = _player.lock()) {
         player->Sleep();
-        //auto state = player->GetComponent<component::ActionStateComponent>();
-        //state->ChangeState(state::PlayerActionStateType::kPlayerActionIdleState);
     } // if
 
 
@@ -434,6 +396,7 @@ bool ratchet::game::gamesystem::text::TextSystem::IsActive(void) const {
 
 bool ratchet::game::gamesystem::text::TextSystem::Activate(void) {
     _active = true;
+    _text_system_open_message_subject.Notify({});
     return true;
 }
 

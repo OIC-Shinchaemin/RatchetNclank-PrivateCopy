@@ -29,7 +29,7 @@ public:
     /// <param name="param"></param>
     virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
-    /// •`‰æ”»’è
+    /// XV”»’è
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>

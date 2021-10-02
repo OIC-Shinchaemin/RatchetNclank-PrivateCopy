@@ -47,7 +47,8 @@ bool Stage::Load(const std::string& path) {
 	if (parser->Load(path, parse_data) != StageFileResult::Success) {
 		return false;
 	}
-
+	
+	_cursor_texture.Load("../Resource/texture/lock_on_cursor/cursor.png");
 	return true;
 }
 
@@ -136,6 +137,7 @@ void Stage::Render(void) {
 			gimmick->DebugRender();
 		} // if
 		RenderObject(gimmick);
+		gimmick->Render();
 	}
 	for (const auto& box : _woodbox_array) {
 		RenderObject(box);

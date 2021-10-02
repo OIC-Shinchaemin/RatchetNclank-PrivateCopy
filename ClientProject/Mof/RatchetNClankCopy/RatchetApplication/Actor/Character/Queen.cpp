@@ -72,6 +72,9 @@ void ratchet::actor::character::Queen::Talk(void) {
             } // if
             return true;
         };
+        auto billboard = super::GetComponent<component::BillboardComponent>();
+        billboard->Inactivate();
+
         super::GetTextSystemMessageSubject()->Notify(message);
         _event_activated = true;
     } // else

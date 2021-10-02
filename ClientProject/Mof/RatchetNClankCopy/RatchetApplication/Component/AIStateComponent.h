@@ -54,11 +54,23 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// “ü—Í”»’è
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool IsInput(void) const override;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
+    /// <summary>
+    /// “ü—Í
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void) override;
     /// <summary>
     /// XV
     /// </summary>

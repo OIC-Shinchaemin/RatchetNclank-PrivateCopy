@@ -4,7 +4,7 @@
 ratchet::game::audio::SEPlayer::SEPlayer() :
 	_sounds(),
 	_recieved_event(),
-	_default_volume(0.05f){
+	_default_volume(0.0f){
 }
 
 ratchet::game::audio::SEPlayer::~SEPlayer() {
@@ -30,9 +30,6 @@ bool ratchet::game::audio::SEPlayer::AddSound(ratchet::game::audio::SEType key, 
 		return false;
 	} // if
 
-	{
-		ptr->SetVolume(_default_volume);
-	}
 	_sounds.emplace(key, ptr);
 	return true;
 }
@@ -43,13 +40,13 @@ bool ratchet::game::audio::SEPlayer::Update(void) {
 		if (event.command.play) {
 			sound->Play();
 		} // if
-		else if (event.command.stop) {
+		if (event.command.stop) {
 			sound->Stop();
 		} // else if
-		else if (event.command.set_volume) {
+		if (event.command.set_volume) {
 			sound->SetVolume(event.command.volume);
 		} // else if
-		else if (event.command.set_loop) {
+		if (event.command.set_loop) {
 			sound->SetLoop(event.command.loop);
 		} // else if
 	} // for
@@ -68,6 +65,12 @@ bool ratchet::game::audio::SEPlayer::Clear(void) {
 }
 
 bool ratchet::game::audio::SEPlayer::Recieve(const ratchet::game::audio::SEEvent& event) {
+	{
+		auto e = const_cast<ratchet::game::audio::SEEvent*>(&event);
+		e->command.set_volume = true;;
+		e->command.volume= _default_volume;
+	}
+
 	_recieved_event.push_back(event);
 	return true;
 }

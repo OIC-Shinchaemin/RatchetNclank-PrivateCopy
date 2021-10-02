@@ -57,7 +57,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="flag"></param>
-    void SetShow(bool flag);
+    virtual void SetShow(bool flag);
     /// <summary>
     /// 表示フラグの取得
     /// </summary>

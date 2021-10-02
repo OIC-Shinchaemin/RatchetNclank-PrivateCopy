@@ -62,7 +62,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     auto shared_this = out;
 
     out->_text_system->GetTextSystemClosedMessageSubject()->Clear();
+    out->_text_system->GetTextSystemOpenMessageSubject()->Clear();
     out->_text_system->SetScene(out);
+    out->_text_system->GetTextSystemOpenMessageSubject()->AddObserver(out); 
+    out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(out); 
 
     if (auto e = event) {
         e->InitializeGameEvent();

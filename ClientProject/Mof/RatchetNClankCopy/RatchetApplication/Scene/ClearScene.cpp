@@ -23,9 +23,13 @@ bool ratchet::scene::ClearScene::SceneRender(void) {
     if (auto resource = _resource.lock()) {
         auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
         auto text = "Game Clear !\n";
-        font->RenderString(400.0, 350.0f, text);
-        text = "Please Press   Start Button or \n                          Enter Key !";
+        font->RenderString(400.0, 200.0f, text);
+        
+        text = "Press Enter Key";
         font->RenderString(260.0, 400.0f, text);
+        text = "To Title";
+        font->RenderString(260.0, 450.0f, text);
+
     } // if
 
     return true;
