@@ -10,10 +10,8 @@ ratchet::game::gamesystem::OptionSystem::OptionSystem() :
     _info_subject(),
     _item(),
     _item_index(),
-    _title_menu_subject()
-//    ,
-//    _excuted(false)
-{
+    _title_menu_subject(),
+    _excuted(false) {
     _infomation.items = &_item;
 }
 
@@ -22,6 +20,19 @@ ratchet::game::gamesystem::OptionSystem::~OptionSystem() {
 
 void ratchet::game::gamesystem::OptionSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
+
+    if (flag && !_excuted) {
+        //super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemMenuOpen, audio::SEEventCommand::Play()));
+    } // if
+    if (flag) {
+        _excuted = false;
+    } // if
+
+    if (flag) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemMenuOpen, audio::SEEventCommand::Play()));
+    } // if
+
+
     _item_index = 0;
     _title_menu_subject.Notify(false);
     _infomation.enter = true;
@@ -67,8 +78,8 @@ bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
 }
 
 bool ratchet::game::gamesystem::OptionSystem::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_UP) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_UP)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_UP) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_UP)) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemSelect, audio::SEEventCommand::Play()));
         _item_index--;
         if (_item_index < 0) {
             _item_index = 0;
@@ -76,8 +87,8 @@ bool ratchet::game::gamesystem::OptionSystem::Input(void) {
         _infomation.index = _item_index;
         _info_subject.Notify(_infomation);
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN) ||
-             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_DOWN)) {
+    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_DOWN)) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemSelect, audio::SEEventCommand::Play()));
         _item_index++;
         if (_item_index > _item.size() - 1) {
             _item_index = _item.size() - 1;
@@ -88,22 +99,21 @@ bool ratchet::game::gamesystem::OptionSystem::Input(void) {
     if (!_item.empty()) {
         if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START)) {
+            if (_item.at(_item_index)->GetText() == "ゲームスタート") {
+                super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemEner, audio::SEEventCommand::Play()));
+            } // if
             _execute_list.push_back(_item.at(_item_index));
         } // if
     } // if
     return true;
 }
 bool ratchet::game::gamesystem::OptionSystem::Update(float delta_time) {
-//    if (_excuted) {
-//        return true;
-//    } // if
-
     this->Input();
 
     if (!_execute_list.empty()) {
         for (auto ptr : _execute_list) {
             if (ptr->Execute()) {
-//                _excuted = true;
+                _excuted = true;
             } // if
             this->Hide();
         } // for

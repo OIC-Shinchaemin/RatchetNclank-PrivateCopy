@@ -9,21 +9,21 @@
 #include "../../Actor/Weapon/Mechanical.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player {
-namespace action {
-class PlayerShotAttackComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+namespace ratchet::component::player::action {
+class PlayerShotAttackComponent :
+    public ::ratchet::component::player::action::PlayerActionComponent {
     using super = ::ratchet::component::player::action::PlayerActionComponent;
     struct InputInfo {
         Mof::CVector2 in;
         float move_angle = 0.0f;
         bool move_flag = false;
+        bool shot_flag = false;
         void Reset(void) {
             in.x = 0.0f;
             in.y = 0.0f;
             move_angle = 0.0f;
             move_flag = false;
+            shot_flag = false;
         }
     };
 private:
@@ -97,8 +97,5 @@ public:
     /// <returns>ê¨å˜</returns>
     virtual bool Start(void) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_SHOT_ATTACK_COMPONENT_H

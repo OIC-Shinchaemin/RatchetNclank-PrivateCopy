@@ -1,8 +1,8 @@
 #include "TitleScene.h"
 #include "../Gamepad.h"
 #include "Base/Resource/ResourceFont.h"
-#include "../Factory/FactoryManager.h"
-#include "../Camera/FollowCameraController.h"
+#include "../Game/Audio/AudioUtility.h"
+#include "TitleSceneInitializer.h"
 
 
 void ratchet::scene::TitleScene::FadeOutStart(void) {
@@ -23,17 +23,27 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
         return false;
     } // if
 
+    if (::g_pInput->IsKeyPush(MOFKEY_E)) {
+        auto e = game::audio::SEEvent();
+        e.command = decltype(e.command)::Play();
+        e.type = game::audio::SEType::SystemEner;
+        super::GetSEPlayer()->Recieve(e);
+
+    } // if
+
     if (_input_flag) {
         if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
             ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-            _option_system_subject.Notify(true);
+            if (!_scene_end) {
+                _option_system_subject.Notify(true);
+            } // if
         } // if
     } // if
 
     if (_input_timer.Tick(delta_time)) {
         _input_flag = true;
     } // if
-    
+
 
     bool effect_end = super::SceneUpdate(delta_time);
     if (effect_end && _transition_state == TransitionState::End) {
@@ -51,10 +61,18 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     _camera_controller.GetService()->Update(delta_time, camera_info);
 
     _logo.Update(delta_time);
-    _bgm.Update();
+
+
+    //_bgm.Update();
+    auto bgm_player = super::GetBGMPlayer();
+    auto se_player = super::GetSEPlayer();
     if (_scene_end) {
-        _bgm.SetVolume(_bgm.GetVolume() * 0.9f);
+        super::GetBGMPlayer()->Recieve(ratchet::game::audio::BGMEvent(
+            game::audio::BGMType::Title, game::audio::BGMEventCommand::SetVolume(bgm_player->GetVolume(game::audio::BGMType::Title) * 0.9f)
+        ));
     } // if
+    bgm_player->Update();
+    se_player->Update();
     return true;
 }
 
@@ -105,8 +123,7 @@ ratchet::scene::TitleScene::TitleScene() :
     _loading_counter(),
     _loading_dot_count(0),
     _input_flag(false),
-    _input_timer(),
-    _bgm(){
+    _input_timer() {
     _loading_counter.Initialize(1.0f, true);
     _input_timer.Initialize(2.0f, false);
 }
@@ -137,13 +154,10 @@ std::string ratchet::scene::TitleScene::GetName(void) {
 
 bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
-    //	_ASSERT_EXPR(loaded, L"読み込み失敗");
-
     // shader
     auto effect = SceneEffect();
     effect.Load("../Resource/shader/fadein.hlsl");
     effect.CreateShaderBuffer("cbSceneEffectParam", sizeof(ratchet::cbSceneEffectParam));
-    //super::_effect = effect;
 
     super::_load_thread = std::thread([&]() {
         if (!super::IsLoaded()) {
@@ -152,95 +166,76 @@ bool ratchet::scene::TitleScene::Load(std::shared_ptr<ratchet::scene::Scene::Par
             if (auto r = _resource.lock()) {
                 r->Load(path);
             } // if
-            _bgm.Load("bgm/title.mp3");
-            _bgm.SetLoop(true);
-            _bgm.SetVolume(0.5f);
-            //_bgm.SetVolume(0.0f);
-
-            _logo.SetTexture(super::GetResource()->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/title_logo/image.png"));
-
             // stage
             if (!_stage.Load("../Resource/stage/test.json")) {
             } // if
-            _stage.Initialize();
-
-            auto actor_param = ratchet::actor::Actor::Param();
-            actor_param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-            actor_param.transform.position = Mof::CVector3(10.0f, -5.0f, -15.0f);
-            _demo_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("builder/demo_player.json", &actor_param);
 
             ::CoUninitialize();
             super::LoadComplete();
 
-            // camera
-            _stage_view_camera = (std::make_shared<ratchet::camera::Camera>());
-            //////////////auto pos = math::vec3::kZero;
-            auto pos = actor_param.transform.position;
-            auto offset = math::vec3::kNegUnitZ;
-            _stage_view_camera->SetPosition(pos - offset);
-            _stage_view_camera->SetTarget(pos);
-            _stage_view_camera->Initialize();
-            _stage_view_camera->Update();
-            _camera_controller.SetService(std::make_shared<ratchet::camera::FollowCameraController>());
-            _camera_controller.GetService()->SetCamera(_stage_view_camera);
-            _camera_controller.GetService()->RegisterGlobalCamera();
-            _camera_controller.GetService()->SetAzimuth(0.0f);
-            _camera_controller.GetService()->SetAltitude(-13.0f);
-            _camera_controller.GetService()->SetDistance(10.0f);
+            this->Initialize();
         } // if
-
-
-        auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
-        _title_menu_subject.AddObserver(menu);
-        _title_menu_subject.Notify(true);
-
-
-        if (auto game = _game.lock()) {
-            auto option_system = game->GetOptionSystem();
-
-            _option_system_subject.AddObserver(option_system);
-            option_system->GetTitleMenuSubject()->AddObserver(menu);
-
-            auto item0 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-                _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kDescriptionScene, ""));
-                return true;
-            });
-            item0->SetText("操作説明");
-
-            auto item1 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-                if (!_scene_end) {
-                    _title_menu_subject.Notify(false);
-                    _option_system_subject.Notify(false);
-                    this->FadeOutStart();
-                    _scene_end = true;
-                } // if
-                return true;
-            });
-            item1->SetText("ゲームスタート");
-
-
-            auto item2 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-                ::PostQuitMessage(0);
-                return true;
-            });
-            item2->SetText("終了");
-
-
-            option_system->Initialize();
-            option_system->AddItem(item1);
-            option_system->AddItem(item0);
-            option_system->AddItem(item2);
-        } // if
-        //this->Initialize();
-
-        _bgm.Play();
     });
-
     return true;
 }
 
 bool ratchet::scene::TitleScene::Initialize(void) {
+    if (!super::IsLoaded()) {
+        return false;
+    } // if
     super::Initialize();
+
+    auto initializer = TitleSceneInitializer();
+    auto shared_this = std::dynamic_pointer_cast<TitleScene>(shared_from_this());;
+    initializer.Execute(shared_this);
+
+
+    auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
+    _title_menu_subject.AddObserver(menu);
+    _title_menu_subject.Notify(true);
+
+    if (auto game = _game.lock()) {
+        auto option_system = game->GetOptionSystem();
+        auto se_player = super::GetSEPlayer();
+        option_system->SetSEPlayer(se_player);
+
+        _option_system_subject.AddObserver(option_system);
+        option_system->GetTitleMenuSubject()->AddObserver(menu);
+
+        auto item0 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
+            _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kDescriptionScene, ""));
+            _option_system_subject.Notify(false);
+            _scene_end = true;
+            return true;
+        });
+        item0->SetText("操作説明");
+
+        auto item1 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
+            if (!_scene_end) {
+                _title_menu_subject.Notify(false);
+                _option_system_subject.Notify(false);
+                this->FadeOutStart();
+                _scene_end = true;
+            } // if
+            return true;
+        });
+        item1->SetText("ゲームスタート");
+
+
+        auto item2 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
+            _option_system_subject.Notify(false);
+            _scene_end = true;
+            ::PostQuitMessage(0);
+            return true;
+        });
+        item2->SetText("終了");
+
+
+        option_system->Initialize();
+        option_system->AddItem(item1);
+        option_system->AddItem(item0);
+        option_system->AddItem(item2);
+    } // if
     return true;
 }
 
@@ -252,7 +247,6 @@ bool ratchet::scene::TitleScene::Release(void) {
         _title_menu_subject.Clear();
     } // if
 
-    _bgm.Release();
     _stage.Release();
     return true;
 }

@@ -50,6 +50,8 @@ private:
     std::weak_ptr<ratchet::game::gamesystem::text::TextSystem> _text_system;
     //! ê∂ê¨êÊ
     std::weak_ptr<ratchet::scene::GameScene> _game_scene;
+    //! à íu
+    Mof::CVector3 _queem_generate_position;
     /// <summary>
     /// ê∂ê¨
     /// </summary>

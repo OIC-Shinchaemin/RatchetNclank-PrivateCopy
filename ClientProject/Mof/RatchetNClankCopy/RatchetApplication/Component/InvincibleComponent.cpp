@@ -3,15 +3,27 @@
 
 ratchet::component::InvincibleComponent::InvincibleComponent(int priority) :
     super(priority),
-    _invincible() {
+    _invincible() ,
+    _time(1.0f){
 }
 
 ratchet::component::InvincibleComponent::InvincibleComponent(const InvincibleComponent& obj) :
     super(obj),
-    _invincible() {
+    _invincible(),
+    _time(obj._time){
 }
 
 ratchet::component::InvincibleComponent::~InvincibleComponent() {
+}
+
+void ratchet::component::InvincibleComponent::SetParam(const rapidjson::Value& param) {
+    super::SetParam(param);
+
+    const char* time = "time";
+    if (param.HasMember(time)) {
+        _ASSERT_EXPR(param[time].IsFloat(), L"パラメータの指定された型でありません");
+        _time = param[time].IsFloat();
+    } // if
 }
 
 std::string ratchet::component::InvincibleComponent::GetType(void) const {
@@ -45,6 +57,6 @@ bool ratchet::component::InvincibleComponent::Activate(void) {
     } // if
 
     super::Activate();
-    _invincible.Initialize(1.0f, false);
+    _invincible.Initialize(_time, false);
     return true;
 }

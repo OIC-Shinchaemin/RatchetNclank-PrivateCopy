@@ -18,6 +18,8 @@
 #include "Base/Core/Observer.h"
 #include "Base/UI/UICanvas.h"
 #include "../Light/LightManager.h"
+#include "../Game/Audio/BGMPlayer.h"
+#include "../Game/Audio/SEPlayer.h"
 
 
 namespace ratchet::scene {
@@ -61,6 +63,10 @@ protected:
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! ライト
     std::weak_ptr<ratchet::light::LightManager> _light_manager;
+    //! サウンド
+    std::shared_ptr<ratchet::game::audio::BGMPlayer> _bgm_player;
+    //! サウンド
+    std::shared_ptr<ratchet::game::audio::SEPlayer> _se_player;
     //! 読み込み済み
     bool _loaded;
     //! 同期
@@ -79,6 +85,8 @@ protected:
     std::shared_ptr<ratchet::ResourceMgr> GetResource(void) const;
     std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
     std::shared_ptr<ratchet::light::LightManager> GetLightManager(void) const;
+    std::shared_ptr<ratchet::game::audio::BGMPlayer> GetBGMPlayer(void) const;
+    std::shared_ptr<ratchet::game::audio::SEPlayer> GetSEPlayer(void) const;
 
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
     virtual bool LoadingUpdate(float delta_time);

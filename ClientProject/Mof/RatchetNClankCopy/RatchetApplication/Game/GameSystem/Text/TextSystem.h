@@ -26,6 +26,8 @@ enum class TextEventType {
     TeachPlazaEvent,
     ItemCollectionCompleteEvent,
 };
+
+// リクエスト
 struct TextSystemMessage {
     using CloseEvent = std::function<bool(void)>;
     TextEventType type;
@@ -37,9 +39,27 @@ using TextSystemMessageListener = base::core::Observer<const TextSystemMessage&>
 struct TextSystemClosedMessage {
     bool close = false;
 };
-using TextSystemClosedMessageSubject = base::core::Observable<const TextSystemClosedMessage&>;
-using TextSystemClosedMessageListener = base::core::Observer<const TextSystemClosedMessage&>;
+//using TextSystemClosedMessageSubject = base::core::Observable<const TextSystemClosedMessage&>;
+//using TextSystemClosedMessageListener = base::core::Observer<const TextSystemClosedMessage&>;
+struct TextSystemClosedMessageSubject : public base::core::Observable<const TextSystemClosedMessage&> {
+    using Message = const TextSystemClosedMessage&;
+};
+struct TextSystemClosedMessageListener : public base::core::Observer<const TextSystemClosedMessage&> {
+    using Message = const TextSystemClosedMessage&;
+};
 
+
+
+
+
+struct TextSystemOpenMessage {
+};
+struct TextSystemOpenMessageSubject : public base::core::Observable<const TextSystemOpenMessage&> {
+    using Message = const TextSystemOpenMessage&;
+};
+struct TextSystemOpenMessageListener : public base::core::Observer<const TextSystemOpenMessage&> {
+    using Message = const TextSystemOpenMessage&;
+};
 
 class TextSystem : public TextSystemMessageListener {
 private:
@@ -49,32 +69,42 @@ private:
     //! 表示中
     BYTE _alpha = 0;
     //! テクスチャ
-    CTexture _text_window_texture;
+    Mof::CTexture _text_window_texture;
+    //! 
     CScript _script;
-    CDynamicArray<CSprite2D*> _sprite_list;
+    //! 
+    Mof::CDynamicArray<CSprite2D*> _sprite_list;
+    //! 
     TEXTCOMMAND _text_command;
+    //! バッファ
     char _line_buffer[256];
+    //! 待機
     int _str_wait = 0;
+    //! コマンド
     int	_command_no = 0;
+    //! コマンド
     COMMAND* _now_command;
+    //! 待機フラグ
     bool _wait = false;
+    //! 
     int	_flags[_flag_count];
-    CMenu m_SaveMenu;
-
+    //! 文字表示速
     int _wait_count_max = 3;
-
     //! マップ
     std::unordered_map<TextEventType, std::string> _path_map;
     //! 通知用
     TextSystemClosedMessageSubject _text_system_closed_message_subject;
+    //! 通知用
+    TextSystemOpenMessageSubject _text_system_open_message_subject;
     //! クローズイベント
     std::optional<TextSystemMessage::CloseEvent> _on_close;
     //! プレイヤー
     std::weak_ptr<ratchet::actor::Actor> _player;
     //! プレイヤー
     std::weak_ptr<ratchet::scene::Scene> _scene;
+
+
     bool Load(const char* name);
-    //bool Save(const char* name);
     bool LoadScript(const char* name);
     void InitializeScript(void);
     void UpdateAlpha(void);
@@ -102,23 +132,71 @@ public:
     /// </summary>
     /// <param name="message"></param>
     virtual void OnNotify(const TextSystemMessage& message) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
     void SetPlayer(const std::shared_ptr<ratchet::actor::Actor> ptr) {
         this->_player = ptr;
     }
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
     void SetScene(const std::shared_ptr<ratchet::scene::Scene> ptr) {
         this->_scene = ptr;
     }
-
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     auto GetTextSystemClosedMessageSubject(void) {
         return &this->_text_system_closed_message_subject;
     }
-
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetTextSystemOpenMessageSubject(void) {
+        return &this->_text_system_open_message_subject;
+    }
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     bool IsActive(void) const;
+    /// <summary>
+    /// 有効化
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     bool Activate(void);
-
+    /// <summary>
+    /// 読み込み
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     bool Load(void);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     bool Update(void);
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     bool Render(void);
+    /// <summary>
+    /// 解放
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     bool Release(void);
 };
 }

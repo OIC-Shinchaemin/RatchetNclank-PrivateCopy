@@ -91,7 +91,11 @@ bool ratchet::scene::SceneManager::Initialize(void) {
 }
 
 bool ratchet::scene::SceneManager::Input(void) {
-	return _scene->Input();
+	auto state = _scene->GetState();
+	if (state != decltype(state)::Sleep) {
+		return _scene->Input();
+	} // if
+	return false;
 }
 
 bool ratchet::scene::SceneManager::Update(float delta_time) {

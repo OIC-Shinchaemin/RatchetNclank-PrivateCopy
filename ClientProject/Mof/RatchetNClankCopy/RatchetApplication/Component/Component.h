@@ -11,6 +11,7 @@
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "Base/UI/UICanvas.h"
+#include "../Game/Graphics/RenderCommandTask.h"
 
 
 namespace ratchet::component {
@@ -140,6 +141,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void);
+    /// <summary>
+    /// •`‰æ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out);
     /// <summary>
     /// ‰ð•ú
     /// </summary>

@@ -10,8 +10,7 @@
 #include <unordered_map>
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class ActionComponent : public ::ratchet::component::UpdateComponent {
     using super = ::ratchet::component::UpdateComponent;
 private:
@@ -132,6 +131,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_ACTION_COMPONENT_H

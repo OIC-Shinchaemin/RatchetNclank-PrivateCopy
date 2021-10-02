@@ -67,3 +67,10 @@
 ../Resource/bgm/battle.mp3
 ../Resource/bgm/field.mp3
 ../Resource/bgm/title.mp3
+
+../Resource/se/system_select.mp3
+../Resource/se/system_enter.mp3
+../Resource/se/system_menu_open.mp3
+../Resource/se/player_dead.mp3
+../Resource/se/enemy_dead.mp3
+../Resource/se/enemy_damage.mp3

@@ -1,6 +1,7 @@
 #pragma once
 #include "GimmickBase.h"
 #include "Base/Core/ServiceLocator.h"
+#include "Base/Core/Timer.h"
 #include "../../Actor/Actor.h"
 #include "../../Camera/CameraController.h"
 #include "../../Component/CameraComponent.h"
@@ -58,6 +59,16 @@ protected:
     bool _event_started;
     //! プレイヤーカメラ
     std::weak_ptr<ratchet::actor::character::Player> _player;
+    //! 
+    base::core::Timer _cursor_active_timer;
+    //! 
+    base::core::Timer _cursor_blinking_timer;
+    //! カーソルテクスチャ
+    Mof::CTexture _cursor_texture;
+    //! 
+    bool _cursor_active;
+    //! 
+    bool _cursor_show;
 public:
     Elevator(Vector3 end, float request, bool enable = true, bool collision = true,
              StageObjectType type = StageObjectType::None, std::string name = "",
@@ -86,6 +97,11 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    virtual void SetShow(bool flag) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -146,6 +162,11 @@ public:
     /// </summary>
     /// <param name="delta"></param>
     virtual void Update(float delta) override;
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    virtual void Render(void) override;
     /// <summary>
     /// 開始
     /// </summary>

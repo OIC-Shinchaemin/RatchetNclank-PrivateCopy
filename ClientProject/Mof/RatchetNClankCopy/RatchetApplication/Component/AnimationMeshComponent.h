@@ -7,8 +7,7 @@
 #include <memory>
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class AnimationMeshComponent : public ratchet::component::MeshComponent {
     using super = ratchet::component::MeshComponent;
 protected:
@@ -48,6 +47,12 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
+    /// •`‰æ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out);
+    /// <summary>
     /// ‰ð•ú
     /// </summary>
     /// <param name=""></param>
@@ -60,6 +65,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_ANIMATION_MESH_COMPONENT_H

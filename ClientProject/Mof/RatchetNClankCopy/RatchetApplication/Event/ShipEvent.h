@@ -42,6 +42,8 @@ private:
     const float _time;
     //! 通知
     ShipEventEndMessageSubject _ship_event_end_message_subject;
+    //! 位置
+    Mof::CVector3 _ship_generate_position;
 public:
     /// <summary>
     /// コンストラクタ

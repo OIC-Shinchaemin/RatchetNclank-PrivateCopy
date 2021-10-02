@@ -5,7 +5,7 @@
 
 ratchet::component::collision::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(int priority) :
     super(priority),
-    _offset(0.7f){
+    _offset(0.4f){
 }
 
 ratchet::component::collision::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(const OmniWrenchCollisionComponent& obj) :
@@ -28,7 +28,7 @@ std::optional<Mof::CSphere> ratchet::component::collision::OmniWrenchCollisionCo
     Mof::CVector3 offset = math::vec3::kNegUnitZ * _offset;
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
     pos += offset;
-    return Mof::CSphere(pos, 0.8f);
+    return Mof::CSphere(pos, 0.7f);
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::OmniWrenchCollisionComponent::GetBox(void) {

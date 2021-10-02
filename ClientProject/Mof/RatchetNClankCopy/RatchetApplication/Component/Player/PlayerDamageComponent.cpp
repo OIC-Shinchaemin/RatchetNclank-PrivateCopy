@@ -3,6 +3,8 @@
 #include "../HpComponent.h"
 #include "../Collision/CollisionComponentDefine.h"
 #include "../Collision/Object/PlayerCollisionComponent.h"
+#include "PlayerComponent.h"
+#include "../../Actor/Character/Player.h"
 
 
 void ratchet::component::player::action::PlayerDamageComponent::DamegeAccele(void) {
@@ -64,7 +66,8 @@ bool ratchet::component::player::action::PlayerDamageComponent::Initialize(void)
     _hp_com = super::GetOwner()->GetComponent<ratchet::component::HpComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+//    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
                                ratchet::component::collision::CollisionComponentType::kEnemyMeleeAttackCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         if (super::CanTransitionActionState(state::PlayerActionStateType::kPlayerActionDamageState)) {
@@ -73,6 +76,11 @@ bool ratchet::component::player::action::PlayerDamageComponent::Initialize(void)
             this->_damage_angle = in.angle;
             this->DamegeAccele();
             this->Damege();
+            
+            auto type_com = super::GetOwner()->GetComponent<player::PlayerComponent>();
+            auto message = actor::character::CharacterDamageApplyMessageFactory().Create(super::GetOwner());
+            type_com->GetOwnerCastd()->GetCharacterDamageApplyMessageSubject()->Notify(message);
+            //std::dynamic_pointer_cast<ratchet::actor::character::> (super::GetOwner())->GetCharacterDamageApplyMessageSubject()->Notify(message);
         } // if
         return true;
     }));
@@ -95,6 +103,10 @@ bool ratchet::component::player::action::PlayerDamageComponent::Initialize(void)
             this->DamegeAccele();
             this->Damege();
             //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionDamageState);
+            auto type_com = super::GetOwner()->GetComponent<player::PlayerComponent>();
+            auto message = actor::character::CharacterDamageApplyMessageFactory().Create(super::GetOwner());
+            type_com->GetOwnerCastd()->GetCharacterDamageApplyMessageSubject()->Notify(message);
+
         } // if
         return true;
     }));

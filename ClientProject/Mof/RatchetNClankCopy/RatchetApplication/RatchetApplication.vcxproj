@@ -482,6 +482,8 @@
     <ClCompile Include="Factory\FactoryManager.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Gamepad.cpp" />
+    <ClCompile Include="Game\Audio\BGMPlayer.cpp" />
+    <ClCompile Include="Game\Audio\SEPlayer.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\GameSystem\GameMoney.cpp" />
     <ClCompile Include="Game\GameSystem\GamePauseSystem.cpp" />
@@ -505,6 +507,12 @@
     <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp" />
     <ClCompile Include="Game\GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
+    <ClCompile Include="Game\Graphics\RenderAnimationMeshCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderBillboardCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderCommandTask.cpp" />
+    <ClCompile Include="Game\Graphics\RenderMeshCommand.cpp" />
+    <ClCompile Include="Game\Graphics\RenderRectangleCommand.cpp" />
     <ClCompile Include="Game\PhysicsWorld.cpp" />
     <ClCompile Include="Game\Renderer.cpp" />
     <ClCompile Include="Light\LightManager.cpp" />
@@ -517,6 +525,7 @@
     <ClCompile Include="Scene\SceneImplementation.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="Scene\TitleSceneInitializer.cpp" />
     <ClCompile Include="Stage\Gimmick\Bridge.cpp" />
     <ClCompile Include="Stage\Gimmick\Elevator.cpp" />
     <ClCompile Include="Stage\Gimmick\GimmickBase.cpp" />
@@ -880,6 +889,12 @@
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Gamepad.h" />
+    <ClInclude Include="Game\Audio\AudioUtility.h" />
+    <ClInclude Include="Game\Audio\BGMDefine.h" />
+    <ClInclude Include="Game\Audio\BGMPlayer.h" />
+    <ClInclude Include="Game\Audio\SEDefine.h" />
+    <ClInclude Include="Game\Audio\SEPlayer.h" />
+    <ClInclude Include="Game\Audio\SoundPlayer.h" />
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\GameSystem\GameMoney.h" />
     <ClInclude Include="Game\GameSystem\GamePauseSystem.h" />
@@ -903,6 +918,12 @@
     <ClInclude Include="Game\GameSystem\Text\TextSystem.h" />
     <ClInclude Include="Game\GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameWorld.h" />
+    <ClInclude Include="Game\Graphics\RenderAnimationMeshCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderBillboardCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderCommandTask.h" />
+    <ClInclude Include="Game\Graphics\RenderMeshCommand.h" />
+    <ClInclude Include="Game\Graphics\RenderRectangleCommand.h" />
     <ClInclude Include="Game\PhysicsWorld.h" />
     <ClInclude Include="Game\Renderer.h" />
     <ClInclude Include="Light\LightManager.h" />
@@ -918,6 +939,7 @@
     <ClInclude Include="Scene\SceneDefine.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Scene\TitleSceneInitializer.h" />
     <ClInclude Include="Stage\Gimmick\Bridge.h" />
     <ClInclude Include="Stage\Gimmick\Elevator.h" />
     <ClInclude Include="Stage\Gimmick\GimmickBase.h" />

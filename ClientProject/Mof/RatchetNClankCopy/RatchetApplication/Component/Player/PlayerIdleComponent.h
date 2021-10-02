@@ -13,6 +13,8 @@ class PlayerIdleComponent :
 private:
     //! 型機能
     std::weak_ptr<ratchet::component::player::PlayerComponent> _type_com;
+    //! 次の状態
+    std::string _next_state;
 public:
     /// <summary>
     /// コンストラクタ

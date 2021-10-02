@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <Mof.h>
 
@@ -18,6 +19,9 @@
 #include "Base/Resource/ResourceFont.h"
 #include "Base/UI/UICanvas.h"
 #include "DebugManager.h"
+#include "Game/Audio/SoundPlayer.h"
+#include "Game/Audio/BGMPlayer.h"
+#include "Game/Audio/SEPlayer.h"
 
 
 #define DEBUG_PRINT(arg, ...)
@@ -43,7 +47,12 @@ struct Transform {
     Mof::CVector3 rotate = math::vec3::kZero;
     Mof::CVector3 scale = math::vec3::kOne;
 };
-
+struct Tag {
+    std::string tag;
+};
+struct TagHolder {
+    std::vector<Tag> tags;
+};
 
 using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CTexture>,
@@ -53,6 +62,11 @@ using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CStreamingSoundBuffer>,
     std::shared_ptr<Mof::CSoundBuffer>
 >;
+using GameBGMPlayer = ratchet::game::audio::BGMPlayer;
+using GameSEPlayer = ratchet::game::audio::SEPlayer;
+//using GameBGMPlayer = ratchet::game::audio::SoundPlayer<ratchet::game::audio::BGMEvent, Mof::CStreamingSoundBuffer>;
+//using GameSEPlayer = ratchet::game::audio::SoundPlayer<ratchet::game::audio::SEEvent, Mof::CSoundBuffer>;
+
 
 struct cbUVScrollParam {
     Mof::Vector4 value;

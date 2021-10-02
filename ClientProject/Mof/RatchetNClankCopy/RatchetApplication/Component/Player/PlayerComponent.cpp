@@ -343,6 +343,7 @@ std::shared_ptr<ratchet::component::Component> ratchet::component::player::Playe
 
 void ratchet::component::player::PlayerComponent::TalkToTarget(void) {
     if (auto target = _talk_target.lock()) {
+        target->SetTalkedTarget(this->GetOwnerCastd());
         target->Talk();
         super::GetOwner()->Sleep();
     } // if

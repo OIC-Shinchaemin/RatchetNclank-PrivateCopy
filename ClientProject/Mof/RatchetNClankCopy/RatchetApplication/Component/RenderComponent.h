@@ -7,13 +7,14 @@
 #include <string>
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class RenderComponent : public ratchet::component::Component {
     using super = ratchet::component::Component;
 protected:
     //! リソース
     std::string _path;
+    //! 
+    std::uint32_t _target_layer;
 public:
     /// <summary>
     /// コンストラクタ
@@ -34,6 +35,11 @@ public:
     /// </summary>
     /// <param name="param"></param>
     virtual void SetParam(const rapidjson::Value& param) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="layer"></param>
+    void SetTargetLayer(std::uint32_t layer);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -65,6 +71,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_RENDER_COMPONENT_H

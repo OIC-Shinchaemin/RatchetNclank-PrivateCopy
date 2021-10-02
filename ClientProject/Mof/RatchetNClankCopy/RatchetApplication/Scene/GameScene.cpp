@@ -7,6 +7,7 @@
 #include "../Event/EventReferenceTable.h"
 #include "GameSceneInitializer.h"
 #include "../TutorialManager.h"
+#include "../Game/Audio/SEPlayer.h"
 
 
 void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
@@ -34,13 +35,11 @@ void ratchet::scene::GameScene::ReInitialize(void) {
 bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
-//	tutorial::TutorialManager::GetInstance().Complete();
-//	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
-//	tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
-
-    if (::g_pInput->IsKeyPush(MOFKEY_T)) {
-        _re_initialize = true;
-    } // if
+    {
+        tutorial::TutorialManager::GetInstance().Complete();
+        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
+        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
+    }
 
     if (_re_initialize) {
         this->ReInitialize();
@@ -58,7 +57,9 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
 
     if (_state != super::State::Pause) {
         // input
-        _game_world.Input();
+        if (_state != super::State::Sleep) {
+            _game_world.Input();
+        } // if
 
         // update
         _stage.Update(delta_time);
@@ -75,6 +76,11 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
         } // if
     } // if
     _effect->Update(delta_time);
+
+    auto bgm_player = super::GetBGMPlayer();
+    auto se_player = super::GetSEPlayer();
+    bgm_player->Update();
+    se_player->Update();
     return true;
 }
 
@@ -91,7 +97,6 @@ bool ratchet::scene::GameScene::LoadingUpdate(float delta_time) {
 }
 
 bool ratchet::scene::GameScene::SceneRender(void) {
-    //::g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(true);
 
@@ -145,6 +150,15 @@ void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr
         _created_actors.push_back(ptr);
     } // if
     if (type == "DeleteRequest") {
+        auto tag = ptr->GetTag();
+        if (tag == "Enemy" ||
+            tag == "Scarecrow") {
+            auto se = ratchet::game::audio::SEEvent();
+            se.type = decltype(se.type)::EnemyDead;
+            se.command = decltype(se.command)::Play();
+            super::GetSEPlayer()->Recieve(se);
+        } // if
+
         ptr->RemoveObserver(shared_from_this());
         _delete_actors.push_back(ptr);
     } // if
@@ -177,8 +191,17 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::event::StageViewEventMes
 }
 
 void ratchet::scene::GameScene::OnNotify(const ratchet::event::ShipEventEndMessage& message) {
-    _battle_bgm.Stop();
-    _field_bgm.Play();
+    auto bgm_player = super::GetBGMPlayer();
+
+    using namespace game::audio;
+    {
+        auto e = BGMEvent(BGMType::Battle, BGMEventCommand::Stop());
+        super::GetBGMPlayer()->Recieve(e);
+    }
+    {
+        auto e = ratchet::game::audio::BGMEvent(BGMType::Field, BGMEventCommand::Play());
+        super::GetBGMPlayer()->Recieve(e);
+    }
 }
 
 void ratchet::scene::GameScene::OnNotify(const ratchet::actor::character::CharacterDamageApplyMessage& message) {
@@ -186,12 +209,37 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::actor::character::Charac
         auto event = e->CreateGameEvent<event::HitStopEvent>();
         event->SetGameScene(std::dynamic_pointer_cast<scene::GameScene>(shared_from_this()));
         event->Initialize();
+
+        auto se = ratchet::game::audio::SEEvent();
+        se.type = decltype(se.type)::EnemyDamage;
+        se.command = decltype(se.command)::Play();
+        super::GetSEPlayer()->Recieve(se);
     } // if
 }
 
 void ratchet::scene::GameScene::OnNotify(const ContactEnemyMessage& message) {
-    _field_bgm.Stop();
-    _battle_bgm.Play();
+    auto bgm_player = super::GetBGMPlayer();
+    using namespace game::audio;
+    {
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Battle;
+        e.command = decltype(e.command)::Play();
+        super::GetBGMPlayer()->Recieve(e);
+    }
+    {
+        auto e = ratchet::game::audio::BGMEvent();
+        e.type = decltype(e.type)::Field;
+        e.command = decltype(e.command)::Stop();
+        super::GetBGMPlayer()->Recieve(e);
+    }
+}
+
+void ratchet::scene::GameScene::OnNotify(game::gamesystem::text::TextSystemOpenMessageListener::Message message) {
+    super::SetState(State::Sleep);
+}
+
+void ratchet::scene::GameScene::OnNotify(game::gamesystem::text::TextSystemClosedMessageListener::Message message) {
+    super::SetState(State::Active);
 }
 
 void ratchet::scene::GameScene::SetGameManager(std::weak_ptr<ratchet::game::GameManager> ptr) {
@@ -213,12 +261,20 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
         if (auto r = _resource.lock()) {
             auto path = "../Resource/scene_resource/game_scene.txt";
             r->Load(path);
+
+            auto bgm_player = super::GetBGMPlayer();
+            {
+                auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/battle.mp3");
+                bgm_player->AddSound(ratchet::game::audio::BGMType::Battle, bgm);
+            }
+            {
+                auto bgm = r->Get<std::shared_ptr<Mof::CStreamingSoundBuffer>>("../Resource/bgm/field.mp3");
+                bgm_player->AddSound(ratchet::game::audio::BGMType::Field, bgm);
+            }
         } // if
         if (!_stage.Load("../Resource/stage/stage.json")) {
             //return false;
         } // if
-        _field_bgm.Load("bgm/field.mp3");
-        _battle_bgm.Load("bgm/battle.mp3");
 
         if (auto game = _game.lock()) {
             game->GameSystemLoad();
@@ -227,11 +283,15 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
         super::LoadComplete();
         _text_system->Load();
 
-
         this->Initialize();
-        _field_bgm.SetVolume(_bgm_init_volume);
-        _battle_bgm.SetVolume(_bgm_init_volume);
-        _field_bgm.Play();
+
+        auto bgm_player = super::GetBGMPlayer();
+        {
+            auto e = ratchet::game::audio::BGMEvent();
+            e.type = decltype(e.type)::Field;
+            e.command = decltype(e.command)::Play();
+            super::GetBGMPlayer()->Recieve(e);
+        }
     });
     return true;
 }
@@ -274,7 +334,7 @@ bool ratchet::scene::GameScene::Initialize(void) {
         game->GetGamePauseSystem()->AddItem(item2);
         game->GetGamePauseSystem()->AddItem(item1);
         game->GetGamePauseSystem()->AddItem(item0);
-
+        game->GetGamePauseSystem()->SetSEPlayer(super::GetSEPlayer());
     }
     _re_initialize = false;
     return true;
@@ -307,13 +367,6 @@ bool ratchet::scene::GameScene::Release(void) {
         _pause_menu_subject.Clear();
         game->GameSystemRelease();
     } // if
-
-    _field_bgm.Release();
-    _battle_bgm.Release();
-
-    //if (auto light= _light_manager.lock()) {
-    //	light->Release();
-    //} // if
 
     _text_system->Release();
     _text_system.reset();

@@ -85,7 +85,7 @@ private:
     //! 通知用
     base::core::Observable<bool> _title_menu_subject;
     //! 実行済み
-    //bool _excuted;
+    bool _excuted;
 public:
     /// <summary>
     /// コンストラクタ

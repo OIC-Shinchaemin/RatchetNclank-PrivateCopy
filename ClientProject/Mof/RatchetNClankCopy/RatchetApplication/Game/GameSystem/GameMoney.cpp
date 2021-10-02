@@ -11,7 +11,7 @@
 
 ratchet::game::gamesystem::GameMoney::GameMoney() :
     _value(),
-    _value_max(40),
+    _value_max(10),
     _subject(),
     _resource(),
     _ui_canvas(),
@@ -38,9 +38,9 @@ void ratchet::game::gamesystem::GameMoney::OnNotify(int add_money) {
     message.money = _value;
     message.money_max = _value_max;
 
-    if (!_event_activated) {
-        _event_activated = true;
-        if (message.money > message.money_max) {
+    if (message.money >= message.money_max) {
+        if (!_event_activated) {
+            _event_activated = true;
             auto message = ratchet::game::gamesystem::text::TextSystemMessage();
             message.type = decltype(message.type)::ItemCollectionCompleteEvent;
             message.on_close = [&]() {

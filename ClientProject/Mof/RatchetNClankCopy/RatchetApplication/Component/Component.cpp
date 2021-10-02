@@ -96,6 +96,10 @@ bool ratchet::component::Component::Component::Render(void) {
     return false;
 }
 
+bool ratchet::component::Component::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
+    return false;
+}
+
 bool ratchet::component::Component::Component::Release(void) {
     _owner.reset();
     return true;
