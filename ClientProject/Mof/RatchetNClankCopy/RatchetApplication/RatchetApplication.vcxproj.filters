@@ -2582,6 +2582,12 @@
     <ClInclude Include="Game\GameSystem\Text\TextSystemDefine.h">
       <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
     </ClInclude>
+    <ClInclude Include="MessageObservation.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageObservationManager.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">

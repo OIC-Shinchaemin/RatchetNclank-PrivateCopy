@@ -21,7 +21,16 @@
 #include "../Effect/EffectContainer.h"
 #include "../Component/SightRecognitionComponent.h"
 #include "../Event/ShipEvent.h"
+#include "../MessageObservationManager.h"
 
+
+namespace ratchet {
+//using ObservationMgr =
+//ratchet::ObservationManager<
+//    ratchet::game::gamesystem::text::TextSystemOpenObservation,
+//    ratchet::game::gamesystem::text::TextSystemClosedObservation
+//>;
+}
 
 namespace ratchet::scene {
 class GameScene :

@@ -82,20 +82,6 @@ public:
     /// <param name="message"></param>
     virtual void OnNotify(const TextSystemMessage& message) override;
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void SetPlayer(const std::shared_ptr<ratchet::actor::Actor> ptr) {
-    //    this->_player = ptr;
-    //}
-    ///// <summary>
-    ///// セッター
-    ///// </summary>
-    ///// <param name="ptr"></param>
-    //void SetScene(const std::shared_ptr<ratchet::scene::Scene> ptr) {
-    //    this->_scene = ptr;
-    //}
-    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -103,14 +89,6 @@ public:
     auto GetTextSystemClosedMessageSubject(void) {
         return &this->_text_system_closed_message_subject;
     }
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    //auto GetTextSystemOpenMessageSubject(void) {
-        //return &this->_text_system_open_message_subject;
-    //}
     /// <summary>
     /// 判定
     /// </summary>

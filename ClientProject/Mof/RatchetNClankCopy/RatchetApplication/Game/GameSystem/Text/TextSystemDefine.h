@@ -4,6 +4,7 @@
 
 #include "Base/Core/Observable.h"
 #include "Base/Core/Observer.h"
+#include "../../../MessageObservation.h"
 
 
 namespace ratchet::game::gamesystem::text {
@@ -40,10 +41,7 @@ struct TextSystemClosedMessageSubject : public base::core::Observable<const Text
 struct TextSystemClosedMessageListener : public base::core::Observer<const TextSystemClosedMessage&> {
     using Message = const TextSystemClosedMessage&;
 };
-
-
-
-
+using TextSystemClosedMessageObservation = MessageObservation<TextSystemClosedMessageSubject, TextSystemClosedMessageListener>;
 
 struct TextSystemOpenMessage {
 };
@@ -54,51 +52,8 @@ struct TextSystemOpenMessageListener : public base::core::Observer<const TextSys
     using Message = const TextSystemOpenMessage&;
 };
 
-class TextSystemOpenMessageObservation {
-private:
-    //! ŠÄŽ‹‘ÎÛ
-    std::vector<std::shared_ptr<TextSystemOpenMessageSubject>> _subjects;
-    //! ŠÄŽ‹ŽÒ
-    std::vector<std::shared_ptr<TextSystemOpenMessageListener>> _listeners;
-public:
-    /// <summary>
-    /// ƒVƒ“ƒOƒ‹ƒgƒ“
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    static TextSystemOpenMessageObservation& Singleton(void) {
-        static TextSystemOpenMessageObservation instance;
-        return instance;
-    }
-    TextSystemOpenMessage CreateMessage(void) {
-        return TextSystemOpenMessage();
-    }
-    std::shared_ptr<TextSystemOpenMessageSubject> CreateSubject(void) {
-        auto ret = std::make_shared<TextSystemOpenMessageSubject>();
-        _subjects.push_back(ret);
-        for (auto& listener : _listeners) {
-            ret->AddObserver(listener);
-        } // for
-        return ret;
-    }
-    void LinkObservation(const std::shared_ptr<TextSystemOpenMessageListener>& observer) {
-        _listeners.push_back(observer);
-        for (auto& subject : _subjects) {
-            subject->AddObserver(observer);
-        } // for
-    }
-    void Clear(void) {
-        for (auto& subject : _subjects) {
-            subject->Clear();
-        } // for
-        for (auto& listener : _listeners) {
-            //listener;
-        } // for
+using TextSystemOpenMessageObservation = MessageObservation<TextSystemOpenMessageSubject, TextSystemOpenMessageListener>;
 
 
-        _subjects.clear();
-        _listeners.clear();
-    }
-};
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SYSTEM_DEFINE_H

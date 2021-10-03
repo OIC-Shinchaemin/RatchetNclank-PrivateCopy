@@ -927,6 +927,8 @@
     <ClInclude Include="Game\Renderer.h" />
     <ClInclude Include="Light\LightManager.h" />
     <ClInclude Include="Light\LightPillar.h" />
+    <ClInclude Include="MessageObservation.h" />
+    <ClInclude Include="MessageObservationManager.h" />
     <ClInclude Include="MotionNames.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />

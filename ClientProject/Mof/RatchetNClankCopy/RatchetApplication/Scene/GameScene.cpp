@@ -8,6 +8,7 @@
 #include "GameSceneInitializer.h"
 #include "../TutorialManager.h"
 #include "../Game/Audio/SEPlayer.h"
+#include "../MessageObservation.h"
 
 
 void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
@@ -365,7 +366,14 @@ bool ratchet::scene::GameScene::Release(void) {
     ratchet::event::EventReferenceTable::Singleton().Dispose("GameManager");
     ratchet::event::EventReferenceTable::Singleton().Reset();
 
-    game::gamesystem::text::TextSystemOpenMessageObservation::Singleton().Clear();
+
+    using o = ratchet::ObservationManager();
+//    o::Singleton().Clear();
+
+//    ratchet::game::gamesystem::text::TextSystemClosedObservation::Subject
+
+    //auto& o = ratchet::ObservationMgr::Singleton().GetElement<game::gamesystem::text::TextSystemOpenMessageObservation>();
+    //o.
 
     super::Release();
     _stage.Release();
