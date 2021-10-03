@@ -6,7 +6,7 @@
 
 
 namespace ratchet::game::gamesystem::text {
-class CSpriteSet : public CSprite2D {
+class SpriteSet : public CSprite2D {
 public:
     char* Trim(char* s) {
             //ˆø”‚Ì•¶š—ñ‚ª‚È‚¢
@@ -35,8 +35,8 @@ public:
 
     char m_FileName[MAX_PATH];
     CSpriteMotionController	m_Motion;
-    CSpriteSet();
-    virtual ~CSpriteSet();
+    SpriteSet();
+    virtual ~SpriteSet();
     //e‚©‚ç‚ÌŒp³ŠÖ”
     virtual MofBool Update();
     virtual MofBool Release(LPMofVoid pData = NULL);

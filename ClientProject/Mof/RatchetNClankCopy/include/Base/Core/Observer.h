@@ -2,8 +2,7 @@
 #define BASE_CORE_OBSERVER_H
 
 
-namespace base {
-namespace core {
+namespace base::core {
 template<class...NotifyArgs>
 class Observer {
 public:
@@ -26,7 +25,6 @@ inline Observer<NotifyArgs...>::Observer() {
 }
 template<class ...NotifyArgs>
 inline Observer<NotifyArgs...>::~Observer() {
-}
 }
 }
 #endif // !BASE_CORE_OBSERVER_H

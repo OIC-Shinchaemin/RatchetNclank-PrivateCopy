@@ -1305,9 +1305,6 @@
     <ClCompile Include="Game\GameSystem\Text\Menu.cpp">
       <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameSystem\Text\Save.cpp">
-      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
-    </ClCompile>
     <ClCompile Include="Game\GameSystem\Text\Script.cpp">
       <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
     </ClCompile>
@@ -2327,9 +2324,6 @@
     <ClInclude Include="Game\GameSystem\Text\Menu.h">
       <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameSystem\Text\Save.h">
-      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
-    </ClInclude>
     <ClInclude Include="Game\GameSystem\Text\TextSystem.h">
       <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
     </ClInclude>
@@ -2584,6 +2578,9 @@
     </ClInclude>
     <ClInclude Include="Scene\TitleSceneInitializer.h">
       <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\TextSystemDefine.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

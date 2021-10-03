@@ -3,18 +3,18 @@
 
 
 #include "Character.h"
-//#include "../Actor.h"
 
 #include "Scarecrow.h"
 #include "../../Camera/CameraController.h"
 #include "../../Component/CameraComponent.h"
 #include "../../Effect/EffectContainer.h"
 #include "../../Game/GameSystem/HelpDesk.h"
+#include "../../Scene/Scene.h"
 
 
-namespace ratchet::scene {
-class GameScene;
-}
+//namespace ratchet::scene {
+//class GameScene;
+//}
 namespace ratchet::actor::character {
 class Player;
 class King :
@@ -28,24 +28,19 @@ class King :
 private:
     //! ハテナ
     std::weak_ptr<Mof::CTexture> _question_texture;
-    //! 通知用
-    base::core::Observable<const ratchet::camera::CameraController::CameraInfo&> _player_camera_subject;
     //! カカシ追加先ゲームシーン
-    std::weak_ptr<ratchet::scene::GameScene> _actor_container;
+    //std::weak_ptr<ratchet::scene::GameScene> _actor_container;
+    std::weak_ptr<ratchet::scene::Scene> _actor_container;
     //! 回数
     int _quest_index;
     //! 回数
     int _quest_count;
     //! カメラコントローラ
     base::core::ServiceLocator<ratchet::camera::CameraController> _scarecrow_view_camera_controller;
-    //! カメラコントローラ
-    base::core::ServiceLocator<ratchet::camera::CameraController>* _player_view_camera_controller;
     //! 視点
     Mof::CVector3 _scarecrow_view_position;
     //! エフェクト
     std::weak_ptr<effect::EffectContainer>_effect_container;
-    //! エフェクト
-    std::weak_ptr<ratchet::actor::character::Player> _player;
     //! テキストイベント
     int _free_talk_index;
     //! テキストイベントアイコン
@@ -69,7 +64,7 @@ private:
     /// 生成
     /// </summary>
     /// <param name=""></param>
-    void BarricadeCreate(ratchet::actor::Actor::Param* param, std::shared_ptr<ratchet::scene::GameScene> out);
+    void BarricadeCreate(ratchet::actor::Actor::Param* param, std::shared_ptr<ratchet::scene::Scene> out);
 public:
     /// <summary>
     /// コンストラクタ
@@ -93,7 +88,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetGameScene(const std::shared_ptr<scene::GameScene>& ptr);
+    void SetGameScene(const std::shared_ptr<scene::Scene>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -102,26 +97,8 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="ptr"></param>
-    void SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetPlayerCameraontroller(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
     /// <param name=""></param>
     void SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr);
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    auto GetPlayerCameraSubject(void) {
-        return &this->_player_camera_subject;
-    }
     /// <summary>
     /// 初期化
     /// </summary>

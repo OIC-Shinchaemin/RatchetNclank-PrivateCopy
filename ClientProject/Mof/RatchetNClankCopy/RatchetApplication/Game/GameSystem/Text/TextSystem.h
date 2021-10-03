@@ -2,67 +2,20 @@
 #define RATCHET_GAME_GAME_SYSTEM_TEXT_TEXT_SYSTEM_H
 
 
+#include <memory>
+#include <vector>
+
 #include "Base/UI/UICanvas.h"
 #include "../../../ResourceManager.h"
-#include "Menu.h"
-#include "Save.h"
 #include "Script.h"
-#include "SpriteSet.h"
-#include "../../../Actor/Actor.h"
-#include "../../../Scene/Scene.h"
+#include "TextSystemDefine.h"
 
 
 namespace ratchet::game::gamesystem::text {
-enum class TextEventType {
-    TutorialEventNo0,
-    TutorialEventNo1,
-    TutorialEventNo0End,
-    TutorialEventNo1End,
-    KingTextEvent,
-    KingFreeTalkTextEvent,
-    QueenTextEvent,
-    QueenFreeTalkTextEvent,
-
-    TeachPlazaEvent,
-    ItemCollectionCompleteEvent,
-};
-
-// リクエスト
-struct TextSystemMessage {
-    using CloseEvent = std::function<bool(void)>;
-    TextEventType type;
-    std::optional<CloseEvent> on_close;
-};
-using TextSystemMessageSubject = base::core::Observable<const TextSystemMessage&>;
-using TextSystemMessageListener = base::core::Observer<const TextSystemMessage&>;
-
-struct TextSystemClosedMessage {
-    bool close = false;
-};
-//using TextSystemClosedMessageSubject = base::core::Observable<const TextSystemClosedMessage&>;
-//using TextSystemClosedMessageListener = base::core::Observer<const TextSystemClosedMessage&>;
-struct TextSystemClosedMessageSubject : public base::core::Observable<const TextSystemClosedMessage&> {
-    using Message = const TextSystemClosedMessage&;
-};
-struct TextSystemClosedMessageListener : public base::core::Observer<const TextSystemClosedMessage&> {
-    using Message = const TextSystemClosedMessage&;
-};
-
-
-
-
-
-struct TextSystemOpenMessage {
-};
-struct TextSystemOpenMessageSubject : public base::core::Observable<const TextSystemOpenMessage&> {
-    using Message = const TextSystemOpenMessage&;
-};
-struct TextSystemOpenMessageListener : public base::core::Observer<const TextSystemOpenMessage&> {
-    using Message = const TextSystemOpenMessage&;
-};
-
 class TextSystem : public TextSystemMessageListener {
 private:
+    int ALPHA_SPEED = 15;
+
     static const int _flag_count = 256;
     //! 表示中
     bool _active;
@@ -71,7 +24,7 @@ private:
     //! テクスチャ
     Mof::CTexture _text_window_texture;
     //! 
-    CScript _script;
+    Script _script;
     //! 
     Mof::CDynamicArray<CSprite2D*> _sprite_list;
     //! 
@@ -95,13 +48,9 @@ private:
     //! 通知用
     TextSystemClosedMessageSubject _text_system_closed_message_subject;
     //! 通知用
-    TextSystemOpenMessageSubject _text_system_open_message_subject;
+    std::shared_ptr<TextSystemOpenMessageSubject> _text_system_open_message_subject;
     //! クローズイベント
     std::optional<TextSystemMessage::CloseEvent> _on_close;
-    //! プレイヤー
-    std::weak_ptr<ratchet::actor::Actor> _player;
-    //! プレイヤー
-    std::weak_ptr<ratchet::scene::Scene> _scene;
 
 
     bool Load(const char* name);
@@ -136,16 +85,16 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetPlayer(const std::shared_ptr<ratchet::actor::Actor> ptr) {
-        this->_player = ptr;
-    }
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    void SetScene(const std::shared_ptr<ratchet::scene::Scene> ptr) {
-        this->_scene = ptr;
-    }
+    //void SetPlayer(const std::shared_ptr<ratchet::actor::Actor> ptr) {
+    //    this->_player = ptr;
+    //}
+    ///// <summary>
+    ///// セッター
+    ///// </summary>
+    ///// <param name="ptr"></param>
+    //void SetScene(const std::shared_ptr<ratchet::scene::Scene> ptr) {
+    //    this->_scene = ptr;
+    //}
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -159,9 +108,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    auto GetTextSystemOpenMessageSubject(void) {
-        return &this->_text_system_open_message_subject;
-    }
+    //auto GetTextSystemOpenMessageSubject(void) {
+        //return &this->_text_system_open_message_subject;
+    //}
     /// <summary>
     /// 判定
     /// </summary>

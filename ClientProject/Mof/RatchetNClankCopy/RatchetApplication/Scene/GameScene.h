@@ -34,7 +34,6 @@ class GameScene :
     public ratchet::game::gamesystem::text::TextSystemOpenMessageListener,
     public ratchet::game::gamesystem::text::TextSystemClosedMessageListener {
     using super = ratchet::scene::Scene;
-    using this_type = ratchet::scene::GameScene;
     friend class GameSceneInitializer;
 private:
     //! ’Ç‰Á

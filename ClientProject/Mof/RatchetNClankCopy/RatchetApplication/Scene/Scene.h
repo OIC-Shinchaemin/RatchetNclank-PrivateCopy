@@ -23,8 +23,9 @@
 
 
 namespace ratchet::scene {
-class Scene : public std::enable_shared_from_this<ratchet::scene::Scene>, public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
-    using this_type = ratchet::scene::Scene;
+class Scene : 
+    public std::enable_shared_from_this<ratchet::scene::Scene>, 
+    public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
 public:
     enum class State {
         Active,
@@ -46,9 +47,9 @@ public:
     };
 protected:
     //! 状態
-    this_type::State _state;
+    scene::Scene::State _state;
     //! 状態
-    this_type::TransitionState _transition_state;
+    scene::Scene::TransitionState _transition_state;
     //! カラーリソース
     Mof::CTexture _rendar_target;
     //! デフォルトのレンダーターゲット

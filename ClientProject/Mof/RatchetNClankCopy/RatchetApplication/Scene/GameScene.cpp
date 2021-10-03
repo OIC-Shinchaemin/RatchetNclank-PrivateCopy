@@ -257,6 +257,11 @@ std::string ratchet::scene::GameScene::GetName(void) {
 bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
 
+    game::gamesystem::text::TextSystemOpenMessageObservation::Singleton().LinkObservation(
+        std::dynamic_pointer_cast <ratchet::game::gamesystem::text::TextSystemOpenMessageListener
+        >(shared_from_this())
+    );
+
     super::_load_thread = std::thread([&]() {
         if (auto r = _resource.lock()) {
             auto path = "../Resource/scene_resource/game_scene.txt";
@@ -359,6 +364,8 @@ bool ratchet::scene::GameScene::Input(void) {
 bool ratchet::scene::GameScene::Release(void) {
     ratchet::event::EventReferenceTable::Singleton().Dispose("GameManager");
     ratchet::event::EventReferenceTable::Singleton().Reset();
+
+    game::gamesystem::text::TextSystemOpenMessageObservation::Singleton().Clear();
 
     super::Release();
     _stage.Release();

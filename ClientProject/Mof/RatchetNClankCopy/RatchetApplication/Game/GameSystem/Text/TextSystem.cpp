@@ -1,8 +1,8 @@
 #include "TextSystem.h"
 
 #include "../../../DebugManager.h"
-#include "../../../Component/Player/PlayerStateComponent.h"
-#include "../../../State/PlayerActionStateDefine.h"
+//#include "../../../Component/Player/PlayerStateComponent.h"
+//#include "../../../State/PlayerActionStateDefine.h"
 
 
 bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
@@ -354,7 +354,9 @@ void ratchet::game::gamesystem::text::TextSystem::IfCommand(IFCOMMAND* pIfComman
 
 ratchet::game::gamesystem::text::TextSystem::TextSystem() :
     _active(false),
-    _text_system_closed_message_subject() {
+    _text_system_closed_message_subject() ,
+    _text_system_open_message_subject(text::TextSystemOpenMessageObservation::Singleton().CreateSubject()) {
+
     ::memset(_line_buffer, 0, TEXTBUFFERSIZE);
 
     _path_map.emplace(TextEventType::TutorialEventNo0, "script/tutorial_event_0_start.txt");
@@ -373,10 +375,9 @@ ratchet::game::gamesystem::text::TextSystem::~TextSystem() {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::OnNotify(const TextSystemMessage& message) {
-    if (auto player = _player.lock()) {
-        player->Sleep();
-    } // if
-
+    //if (auto player = _player.lock()) {
+    //    player->Sleep();
+    //} // if
 
 
     //ƒtƒ‰ƒO‚Ì‰Šú‰»
@@ -396,7 +397,7 @@ bool ratchet::game::gamesystem::text::TextSystem::IsActive(void) const {
 
 bool ratchet::game::gamesystem::text::TextSystem::Activate(void) {
     _active = true;
-    _text_system_open_message_subject.Notify({});
+    _text_system_open_message_subject->Notify({});
     return true;
 }
 
@@ -446,6 +447,9 @@ bool ratchet::game::gamesystem::text::TextSystem::Render(void) {
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::Release(void) {
+    _text_system_open_message_subject->Clear();
+    _text_system_open_message_subject.reset();
+    _text_system_closed_message_subject.Clear();
     _text_window_texture.Release();
     _script.Release();
     _sprite_list.Release();

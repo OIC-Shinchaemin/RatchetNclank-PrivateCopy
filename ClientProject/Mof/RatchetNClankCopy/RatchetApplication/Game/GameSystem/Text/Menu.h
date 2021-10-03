@@ -6,7 +6,7 @@
 
 
 namespace ratchet::game::gamesystem::text {
-class CMenu {
+class TextMenu {
 private:
     Mof::CVector2 _position;
     Mof::CVector2 _space;
@@ -18,11 +18,11 @@ private:
     bool _show;
     bool _enter;
 
-    CRectangle _rectangle;
-    CRectangle _header_rectangle;
+    Mof::CRectangle _rectangle;
+    Mof::CRectangle _header_rectangle;
 public:
-    CMenu();
-    ~CMenu();
+    TextMenu();
+    ~TextMenu();
     int GetSelect(void) { return _select; }
     int GetCount(void) { return _count; }
     bool IsShow(void) { return _show; }

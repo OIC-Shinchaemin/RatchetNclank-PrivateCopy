@@ -501,7 +501,6 @@
     <ClCompile Include="Game\GameSystem\Shop\ShopSystemElement.cpp" />
     <ClCompile Include="Game\GameSystem\Shop\ShopSystemEntry.cpp" />
     <ClCompile Include="Game\GameSystem\Text\Menu.cpp" />
-    <ClCompile Include="Game\GameSystem\Text\Save.cpp" />
     <ClCompile Include="Game\GameSystem\Text\Script.cpp" />
     <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp" />
     <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp" />
@@ -912,10 +911,10 @@
     <ClInclude Include="Game\GameSystem\Shop\ShopSystemElement.h" />
     <ClInclude Include="Game\GameSystem\Shop\ShopSystemEntry.h" />
     <ClInclude Include="Game\GameSystem\Text\Menu.h" />
-    <ClInclude Include="Game\GameSystem\Text\Save.h" />
     <ClInclude Include="Game\GameSystem\Text\Script.h" />
     <ClInclude Include="Game\GameSystem\Text\SpriteSet.h" />
     <ClInclude Include="Game\GameSystem\Text\TextSystem.h" />
+    <ClInclude Include="Game\GameSystem\Text\TextSystemDefine.h" />
     <ClInclude Include="Game\GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\Graphics\RenderAnimationMeshCommand.h" />

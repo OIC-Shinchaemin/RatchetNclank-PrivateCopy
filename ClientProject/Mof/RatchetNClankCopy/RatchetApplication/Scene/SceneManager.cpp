@@ -12,6 +12,7 @@
 void ratchet::scene::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<ratchet::scene::Scene::Param> param) {
 	auto& [factory, builders, reousrce_paths] = _create_struct;
 
+	_scene->Release();
 	_scene.reset();
 	_scene = factory.Create(name);
 	builders.at(name)->Construct(_scene);
@@ -114,6 +115,7 @@ bool ratchet::scene::SceneManager::Render(void) {
 }
 
 bool ratchet::scene::SceneManager::Release(void) {
+	_scene->Release();
 	_scene.reset();
 	return true;
 }

@@ -1,7 +1,7 @@
 #include	"Menu.h"
 
 
-ratchet::game::gamesystem::text::CMenu::CMenu() :
+ratchet::game::gamesystem::text::TextMenu::TextMenu() :
     _position(),
     _space(),
     _count(0),
@@ -18,11 +18,11 @@ ratchet::game::gamesystem::text::CMenu::CMenu() :
 
 }
 
-ratchet::game::gamesystem::text::CMenu::~CMenu() {
+ratchet::game::gamesystem::text::TextMenu::~TextMenu() {
     Release();
 }
 
-void ratchet::game::gamesystem::text::CMenu::Create(char* pTitle, char** pItem, int cnt) {
+void ratchet::game::gamesystem::text::TextMenu::Create(char* pTitle, char** pItem, int cnt) {
     this->Release();
     //à¯êîÇÃï∂éöóÒÇï€ë∂
     _count = cnt;
@@ -47,7 +47,7 @@ void ratchet::game::gamesystem::text::CMenu::Create(char* pTitle, char** pItem, 
     _rectangle.Bottom += _space.y;
 }
 
-void ratchet::game::gamesystem::text::CMenu::Release(void) {
+void ratchet::game::gamesystem::text::TextMenu::Release(void) {
     if (_title) {
         free(_title);
         _title = NULL;
@@ -63,7 +63,7 @@ void ratchet::game::gamesystem::text::CMenu::Release(void) {
     _rectangle = CRectangle(0, 0, 0, 0);
 }
 
-void ratchet::game::gamesystem::text::CMenu::Show(float cx, float cy) {
+void ratchet::game::gamesystem::text::TextMenu::Show(float cx, float cy) {
     _position.x = cx;
     _position.y = cy;
     _show = true;
@@ -82,7 +82,7 @@ void ratchet::game::gamesystem::text::CMenu::Show(float cx, float cy) {
     _header_rectangle.Left = _rectangle.Left;
 }
 
-void ratchet::game::gamesystem::text::CMenu::Update(void) {
+void ratchet::game::gamesystem::text::TextMenu::Update(void) {
     if (!_show) {
         return;
     }
@@ -133,7 +133,7 @@ void ratchet::game::gamesystem::text::CMenu::Update(void) {
     }
 }
 
-void ratchet::game::gamesystem::text::CMenu::Render(void) {
+void ratchet::game::gamesystem::text::TextMenu::Render(void) {
     if (!_show) {
         return;
     }
