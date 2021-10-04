@@ -13,6 +13,7 @@ bool ratchet::scene::TitleSceneInitializer::Execute(std::shared_ptr<ratchet::sce
     out->_stage.Initialize();
 
     auto actor_param = ratchet::actor::Actor::Param();
+    actor_param.tags.tags.push_back(ratchet::Tag("TitleElement"));
     actor_param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     actor_param.transform.position = Mof::CVector3(10.0f, -5.0f, -15.0f);
     out->_demo_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("builder/demo_player.json", &actor_param);

@@ -25,13 +25,9 @@ ratchet::actor::character::Player::Player() :
     _notificationable_subject_map.emplace("QuickChange", &_quick_change_subject);
     _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
 
-    auto param = Actor::Param();
-    param.name = "sense_effecr";
-    param.tag = "sense";
 
 
-    auto sense_effect_child_actor = factory::FactoryManager::Singleton().CreateActor<actor::effect::SenseEffect>("builder/sense_effect.json", &param);
-    _sense_effect_child_actor = sense_effect_child_actor;
+
     //
     //_sense_effect_child_actor->GetComponent<component::BillboardComponent>()->Activate();
 }
@@ -154,9 +150,23 @@ bool ratchet::actor::character::Player::Initialize(ratchet::actor::Actor::Param*
         _upp_bone_state = motion->GetBoneState("UPP_weapon");
     } // if
 
+    auto tag = ratchet::Tag();
+    tag = "TitleElement";
+    auto& holder = super::GetTagHolder();
+    auto it = std::find_if(holder.tags.begin(), holder.tags.end(), [&tag](auto t) {
+        return t == tag;
+    });
+    if (it == holder.tags.end()) {
+        auto sense_effect_param = Actor::Param();
+        sense_effect_param.name = "sense_effecr";
+        sense_effect_param.tag = "sense";
 
-    this->GetComponent<component::SightRecognitionComponent>()->GetFindEnemyMessageSubject()->AddObserver(        
-        std::dynamic_pointer_cast<effect::SenseEffect>(_sense_effect_child_actor));
+        auto sense_effect_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<actor::effect::SenseEffect>("builder/sense_effect.json", &sense_effect_param);
+        _sense_effect_child_actor = sense_effect_child_actor;
+
+        this->GetComponent<component::SightRecognitionComponent>()->GetFindEnemyMessageSubject()->AddObserver(
+            std::dynamic_pointer_cast<effect::SenseEffect>(_sense_effect_child_actor));
+    }
 
     return true;
 }

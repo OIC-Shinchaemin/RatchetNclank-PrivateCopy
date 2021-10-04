@@ -13,6 +13,7 @@
 #include "Base/Core/Observable.h"
 #include "ActorDefine.h"
 #include "../Game/Graphics/RenderCommandTask.h"
+#include "../GameDefine.h"
 
 
 namespace ratchet::component { class Component; }
@@ -30,6 +31,8 @@ public:
         std::string name;
         //! タグ
         std::string tag;
+        //! タグ
+        ratchet::TagHolder tags;
         //! トランスフォーム
         def::Transform transform;
         Param() :
@@ -47,6 +50,8 @@ private:
     std::string _name;
     //! タグ
     std::string _tag;
+    //! タグ
+    ratchet::TagHolder _tags;
     //! トランスフォーム
     def::Transform _transform;
     //! トランスフォーム
@@ -132,6 +137,12 @@ public:
     /// <param name=""></param>
     /// <returns>タグ</returns>
     const std::string& GetTag(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>タグ</returns>
+    const ratchet::TagHolder& GetTagHolder(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>

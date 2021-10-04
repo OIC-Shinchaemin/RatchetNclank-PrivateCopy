@@ -7,6 +7,7 @@
 #include "../../Event/StageViewEvent.h"
 #include "../../Actor/Character/Player.h"
 #include "../../Component/Player/PlayerMoveComponent.h"
+#include "../../Component/Collision/Object/PlayerCollisionComponent.h"
 
 
 void Elevator::EnemyViewEventStart(void) {
@@ -160,8 +161,12 @@ void Elevator::Update(float delta) {
     const float t = std::clamp((_now_timer / _request_time), 0.0f, 1.0f);
     _position = CVector3Utilities::Lerp(_start_pos, _end_pos, t);
     angle = CVector3Utilities::Lerp(source, dest, t);
-    _camera_controller->GetService()->SetAzimuth(angle.x);
-    _camera_controller->GetService()->SetAltitude(angle.y);
+    if (auto com = _player_collision_component.lock()) {
+        if (com->IsOnElevator()) {
+            _camera_controller->GetService()->SetAzimuth(angle.x);
+            _camera_controller->GetService()->SetAltitude(angle.y);
+        } // if
+    } // if
 
     if (t == 1.0f && !_end_flag) {
         _start_flag = false;
@@ -196,9 +201,10 @@ void Elevator::ActionStart(void) {
     auto player = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
     if (player) {
         this->_player = player;
-        this->_player_camera_component= player->GetComponent<ratchet::component::CameraComponent>();
+        this->_player_camera_component = player->GetComponent<ratchet::component::CameraComponent>();
         this->_camera_controller = _player_camera_component.lock()->GetCameraController();
         this->_player_velocity_component = player->GetComponent<ratchet::component::VelocityComponent>();
+        this->_player_collision_component = player->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
     } // if
 
     if (!_start_flag) {

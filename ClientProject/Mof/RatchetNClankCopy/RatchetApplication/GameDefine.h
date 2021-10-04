@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include <Mof.h>
 
@@ -40,7 +41,7 @@ DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
 
 
 namespace ratchet {
-constexpr int kTextWidth= 12;
+constexpr int kTextWidth = 12;
 ///static debug::DebugManager g_DebugManager;
 
 struct Transform {
@@ -48,11 +49,25 @@ struct Transform {
     Mof::CVector3 rotate = math::vec3::kZero;
     Mof::CVector3 scale = math::vec3::kOne;
 };
+/*
 struct Tag {
     std::string tag;
 };
+*/
+using Tag = std::string;
 struct TagHolder {
     std::vector<Tag> tags;
+    /*
+    bool Contain(Tag& tag) const {
+        auto it = std::find_if(tags.begin(), tags.end(), [&](Tag& elem) {
+            return elem.tag == tag.tag;
+        });
+        if (it != tags.end()) {
+            return true;
+        } // if
+        return false;
+    }
+    */
 };
 
 using ResourceMgr = ratchet::ResourceManager<

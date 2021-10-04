@@ -306,7 +306,7 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
     this->CollisionFunctionKing(coll_com);
     this->CollisionFunctionQueen(coll_com);
     this->CollisionFunctionScarecrow(coll_com);
-    this->CollisionFunctionShop(coll_com);
+    //this->CollisionFunctionShop(coll_com);
     this->CollisionFunctionShip(coll_com);
     this->CollisionFunctionWall(coll_com);
     this->CollisionFunctionWaterFlow(coll_com);
