@@ -131,7 +131,6 @@ bool ratchet::event::EnemyViewEvent::Update(float delta_time) {
 		
 		auto info = ratchet::camera::CameraController::CameraInfo();
 		info.start_position = _camera_controller->GetCameraPosition();
-		//info.target_position = math::vec3::kZero;
 		info.target_position = Mof::CVector3(
 			_queem_generate_position.x,
 			::CGraphicsUtilities::GetCamera()->GetTargetPosition().y,

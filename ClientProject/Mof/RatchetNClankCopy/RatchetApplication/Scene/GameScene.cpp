@@ -37,14 +37,10 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
     {
-        tutorial::TutorialManager::GetInstance().Complete();
-        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
-        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
+        //tutorial::TutorialManager::GetInstance().Complete();
+        //tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
+        //tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
     }
-
-    if (_re_initialize) {
-        this->ReInitialize();
-    } // if
 
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
@@ -54,6 +50,14 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
         this->RemoveElement(ptr);
     } // for
     _delete_actors.clear();
+
+
+    if (_player_dead) {
+        auto init = GameSceneInitializer();
+        init.AddPlayer(_game.lock(), _event.lock(), std::dynamic_pointer_cast<GameScene>(shared_from_this()));
+        _player_dead = false;
+//        this->ReInitialize();
+    } // if
 
 
     if (::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
@@ -177,7 +181,12 @@ void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr
     } // if
     if (type == "PlayerDead") {
         // retry
+        _player_dead = true;
         _re_initialize = true;
+
+        ptr->RemoveObserver(shared_from_this());
+        _delete_actors.push_back(ptr);
+
     } // if
     if (type == "GameClear") {
         _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kClearScene, ""));
@@ -379,14 +388,7 @@ bool ratchet::scene::GameScene::Release(void) {
     ratchet::event::EventReferenceTable::Singleton().Dispose("GameManager");
     ratchet::event::EventReferenceTable::Singleton().Reset();
 
-
     using o = ratchet::ObservationManager();
-//    o::Singleton().Clear();
-
-//    ratchet::game::gamesystem::text::TextSystemClosedObservation::Subject
-
-    //auto& o = ratchet::ObservationMgr::Singleton().GetElement<game::gamesystem::text::TextSystemOpenMessageObservation>();
-    //o.
 
     super::Release();
     _stage.Release();

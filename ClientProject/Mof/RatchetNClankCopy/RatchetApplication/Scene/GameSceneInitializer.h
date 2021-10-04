@@ -15,6 +15,14 @@ public:
     /// </summary>
     GameSceneInitializer();
     /// <summary>
+    /// ƒvƒŒƒCƒ„[ì¬
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="event"></param>
+    /// <param name="out"></param>
+    /// <returns></returns>
+    bool AddPlayer(std::shared_ptr<ratchet::game::GameManager> game, std::shared_ptr<ratchet::event::EventManager> event, std::shared_ptr<ratchet::scene::GameScene> out);
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name="out">‘ÎÛ</param>

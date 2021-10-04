@@ -52,6 +52,8 @@ private:
     Stage _stage;
     //! 再初期化
     bool _re_initialize;
+    //! 再初期化
+    bool _player_dead;
     //! メニュー
     base::core::Observable<bool> _pause_menu_subject;
     //! テキスト 
