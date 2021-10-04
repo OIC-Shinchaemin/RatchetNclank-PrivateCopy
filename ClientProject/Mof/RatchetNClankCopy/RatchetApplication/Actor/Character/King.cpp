@@ -53,16 +53,13 @@ ratchet::actor::character::King::King() :
     _actor_container(),
     _quest_index(0),
     _quest_count(2),
-    //_player_camera_subject(),
     _scarecrow_view_camera_controller(),
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),
-//    _player_view_camera_controller(),
-_effect_container(),
-//    _player(),
-_free_talk_index(0),
-_event_icon_show(true),
-_created_barricade(),
-_scarecrow_generate_datas() {
+    _effect_container(),
+    _free_talk_index(0),
+    _event_icon_show(true),
+    _created_barricade(),
+    _scarecrow_generate_datas() {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
     auto camera = std::make_shared<ratchet::camera::Camera>();
@@ -153,7 +150,7 @@ bool ratchet::actor::character::King::Render(void) {
 }
 
 void ratchet::actor::character::King::Talk(void) {
-    auto param = new ratchet::actor::Actor::Param();
+    auto param = ratchet::actor::Actor::Param();
     //auto out = _actor_container.lock();
     auto effect = _effect_container.lock();
     //auto player = _player.lock();
@@ -191,15 +188,15 @@ void ratchet::actor::character::King::Talk(void) {
 
         if (!_event_active) {
             if (message.type == decltype(message.type)::TutorialEventNo1) {
-                this->BarricadeCreate(param, game_scene);
+                this->BarricadeCreate(&param, game_scene);
             } // if
 
             auto& scarecrow_transforms = _scarecrow_generate_datas.at(_quest_index);
             // create
-            param->tag = "Scarecrow";
+            param.tag = "Scarecrow";
             for (auto& position : scarecrow_transforms.position) {
-                param->transform.position = position;
-                auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", param);
+                param.transform.position = position;
+                auto scarecrow = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::character::Scarecrow>("../Resource/builder/scarecrow.json", &param);
                 auto emitter = effect->CreateEmitter(effect::EffectType::BasicDamage);
                 auto star_emitter = effect->CreateEmitter(effect::EffectType::PopStar);
                 scarecrow->SetEffectEmitter(emitter);
@@ -216,7 +213,7 @@ void ratchet::actor::character::King::Talk(void) {
             auto dir = super::GetPosition() - player->GetPosition();
             camera_camera_controller->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
             this->PlayerActionLiberate();
-            ut::SafeDelete(param);
+  //          ut::SafeDelete(&param);
         //    _quest_index++;
         } // if
         _event_active = true;

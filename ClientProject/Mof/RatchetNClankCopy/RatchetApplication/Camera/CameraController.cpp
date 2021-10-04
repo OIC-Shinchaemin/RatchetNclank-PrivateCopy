@@ -130,8 +130,8 @@ void ratchet::camera::CameraController::AddAzimuth(float degree) {
 
 void ratchet::camera::CameraController::AddAltitude(float degree) {
     _param.altitude += degree;
-    if (_param.altitude <= -5.0f) {
-        _param.altitude = -5.0f;
+    if (_param.altitude <= 2.0f) {
+        _param.altitude = 2.0f;
     } // if
     if (_param.altitude >= 45.0f) {
         _param.altitude = 45.0f;

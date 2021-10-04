@@ -95,14 +95,7 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
 }
 
 bool ratchet::scene::GameScene::LoadingUpdate(float delta_time) {
-    if (_loading_counter.Tick(delta_time)) {
-        _loading_dot_count++;
-        int count_max = 4;
-        _loading_dot_count = std::clamp(_loading_dot_count, 0, count_max);
-        if (_loading_dot_count == count_max) {
-            _loading_dot_count = 0;
-        } // if
-    } // if
+    _loading_dot_animation.Update(delta_time);
     return true;
 }
 
@@ -133,11 +126,8 @@ bool ratchet::scene::GameScene::SceneRender(void) {
 bool ratchet::scene::GameScene::LoadingRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
-    auto text = std::string("Now Loading");
-    for (int i = 0; i < _loading_dot_count; i++) {
-        text += ".";
-    } // for
-    ::CGraphicsUtilities::RenderString(800.0f, 700.0f, def::color_rgba_u32::kWhite, text.c_str());
+
+    _loading_dot_animation.Render();
     return true;
 }
 
@@ -345,7 +335,6 @@ bool ratchet::scene::GameScene::Initialize(void) {
         item0->SetText("ƒ^ƒCƒgƒ‹‚É–ß‚é");
 
         auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            //this->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""))
             _show_how_to_play = true;
             return true;
         });

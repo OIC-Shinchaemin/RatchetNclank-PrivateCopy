@@ -34,6 +34,7 @@
 #include "../Component/Scarecrow/ScarecrowComponent.h"
 #include "../Component/Bullet/BlasterBulletComponent.h"
 #include "../Component/Bullet/BombGloveBulletComponent.h"
+#include "../Component/SenseEffect/SenseEffectComponent.h"
 
 
 ratchet::factory::ComponentFactory::ComponentFactory() :
@@ -86,6 +87,7 @@ ratchet::factory::ComponentFactory::ComponentFactory() :
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::bullet::BombGloveBulletComponent>();
     ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::bullet::BlasterBulletComponent>();
 
+    ::ratchet::factory::ComponentFactory::AddComponentCreator<ratchet::component::effect::SenseEffectComponent>();
 }
 ratchet::factory::ComponentFactory::~ComponentFactory() {
 }

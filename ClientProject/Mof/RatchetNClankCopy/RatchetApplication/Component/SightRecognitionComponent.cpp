@@ -10,10 +10,10 @@
 
 
 void ratchet::component::SightRecognitionComponent::SenseEffectEmit(void) {
+    /*
     if (!_effect_emitter) {
         _effect_emitter = _player_com.lock()->GetOwnerCastd()->GetEffectContainer()->CreateEmitter(effect::EffectType::PlayerSense);
     } // if
-
 
     auto info = ratchet::effect::Effect::Info();
     info.init_param.transform.position = super::GetOwner()->GetPosition();
@@ -21,55 +21,6 @@ void ratchet::component::SightRecognitionComponent::SenseEffectEmit(void) {
     info.init_param.color = def::color_rgba::kWhite;
     info.init_param.life_duration = 1.0f;
     _effect_emitter->Emit(info);
-
-    /*
-    auto camera_pos = CGraphicsUtilities::GetCamera()->GetViewPosition();
-    auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Enemy>(super::GetOwner());
-    auto target_pos = actor->GetPosition();
-    auto pos = (owner->GetPosition() + target_pos) * 0.5f;
-    auto diff = Mof::CVector3(camera_pos - pos);
-    diff.Normal(diff);
-    pos += diff * _player_com.lock()->GetVolume() * 2.0f;
-    pos.y += _player_com.lock()->GetHeight();
-
-    auto info = ratchet::effect::Effect::Info();
-    auto init_pos_offset = Mof::CVector3();
-    auto init_scale = Mof::CVector3(1.0f, 1.0f, 1.0f);
-    info.init_param.life_duration = 1.0f;
-    info.init_param.color = Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f);
-    info.update_param.color = Mof::CVector4(0.0f, 0.0f, 0.0f, -0.02f);
-    info.environment_param.use_gravity = false;
-    info.environment_param.use_velocity_drag = true;
-    info.environment_param.velocity_drag = 0.5f;
-
-    for (int i = 0, n = 5; i < n; i++) {
-        info.init_param.transform.position = pos + init_pos_offset;
-        info.init_param.transform.scale = init_scale;
-        info.update_param.rotate = Mof::CVector3(0.0f, 1.0f, 0.0f);
-        owner->GetEffectEmitter()->Emit(info);
-
-        init_pos_offset = Mof::CVector3(
-            ut::GenerateRandomF(-1.0f, 1.0f),
-            ut::GenerateRandomF(-1.0f, 1.0f),
-            ut::GenerateRandomF(-1.0f, 1.0f)
-        );
-        init_scale = Mof::CVector3(
-            ut::GenerateRandomF(0.4f, 0.7f),
-            ut::GenerateRandomF(0.4f, 0.7f),
-            ut::GenerateRandomF(0.4f, 0.7f)
-        );
-        info.update_param.velocity = Mof::CVector3(
-            ut::GenerateRandomF(-0.3f, 0.3f),
-            0.4f,
-            ut::GenerateRandomF(-0.3f, 0.3f)
-        );
-        info.update_param.rotate = Mof::CVector3(
-            0.0f, ut::GenerateRandomF(-1.0f, 1.0f), 0.0f
-        );
-        info.update_param.scale = Mof::CVector3(-0.05f, -0.05f, -0.05f);
-        info.environment_param.use_gravity = true;
-        info.environment_param.gravity_scale = 0.01f;
-    } // for
     */
 }
 
@@ -96,7 +47,7 @@ ratchet::component::SightRecognitionComponent::SightRecognitionComponent(int pri
     _range(0.0f),
     _player_com(),
     _ENEMY_com(),
-    _effect_emitter(),
+//    _effect_emitter(),
     _recognizing_count(0),
     _contact_enemy(false){
     super::Activate();
@@ -160,6 +111,7 @@ bool ratchet::component::SightRecognitionComponent::Initialize(void) {
 
             if (_recognizing_count == 0) {
                 this->SenseEffectEmit();
+                _find_enemy_message_subject.Notify({});
             } // if
 
             _recognizing_count++;

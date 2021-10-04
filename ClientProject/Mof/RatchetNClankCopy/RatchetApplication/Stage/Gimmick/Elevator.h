@@ -17,6 +17,10 @@ using ElevatorArrivalMessageListener = base::core::Observer<const ElevatorArriva
 namespace ratchet::actor::character {
     class Player;
 }
+namespace ratchet::component::collision {
+class PlayerCollisionComponent;
+}
+
 class Elevator : public GimmickBase {
 private:
     /// <summary>
@@ -53,6 +57,8 @@ protected:
     std::weak_ptr<ratchet::component::CameraComponent> _player_camera_component;
     //! プレイヤー速度
     std::weak_ptr<ratchet::component::VelocityComponent> _player_velocity_component;
+    //! プレイヤー速度
+    std::weak_ptr<ratchet::component::collision::PlayerCollisionComponent> _player_collision_component;
     //! 方位角,仰角
     Mof::CVector3 _camera_angle_start;
     //! 降りた後のイベント
@@ -81,22 +87,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    //void SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
     void SetEventManager(const std::shared_ptr<ratchet::event::EventManager>& ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void SetPlayerCameraComponent(const std::shared_ptr<ratchet::component::CameraComponent>& ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

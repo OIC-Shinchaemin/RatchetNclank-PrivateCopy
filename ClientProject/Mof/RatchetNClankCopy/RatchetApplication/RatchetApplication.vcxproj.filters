@@ -403,6 +403,18 @@
     <Filter Include="Ratchet\Source\Game\Graphics">
       <UniqueIdentifier>{667456ca-f0f2-4ce3-9587-d15da9e9b276}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Scene\Loading">
+      <UniqueIdentifier>{37669806-7c44-45da-bc76-b87660ab5f37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Scene\Title">
+      <UniqueIdentifier>{0666c416-779d-4809-8c35-b93e78d4d820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\SenseEffect">
+      <UniqueIdentifier>{15cff8ac-711d-48a4-b8c3-8c2e8e009532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\SenseEffect">
+      <UniqueIdentifier>{851f7587-141d-43e8-82a7-cd5efce47d35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1340,6 +1352,12 @@
     </ClCompile>
     <ClCompile Include="Scene\TitleSceneInitializer.cpp">
       <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Effect\SenseEffect.cpp">
+      <Filter>Ratchet\Source\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\SenseEffect\SenseEffectComponent.cpp">
+      <Filter>Ratchet\Source\Component\SenseEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2588,6 +2606,18 @@
     <ClInclude Include="MessageObservationManager.h">
       <Filter>Ratchet\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\Loading\LoadingAnimation.h">
+      <Filter>Ratchet\Header\Scene\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Title\TitleLogo.h">
+      <Filter>Ratchet\Header\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Effect\SenseEffect.h">
+      <Filter>Ratchet\Header\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SenseEffect\SenseEffectComponent.h">
+      <Filter>Ratchet\Header\Component\SenseEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\general.txt">
@@ -2765,6 +2795,9 @@
     </None>
     <None Include="..\Resource\stage\_placement_data.json">
       <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\builder\sense_effect.json">
+      <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

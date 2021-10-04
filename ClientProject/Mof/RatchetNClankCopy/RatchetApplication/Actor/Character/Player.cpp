@@ -5,7 +5,9 @@
 #include "../../Component/Player/PlayerComponent.h"
 #include "../../Factory/FactoryManager.h"
 #include "../../Event/EventReferenceTable.h"
-
+#include "../../Factory/ActorFactory.h"
+#include "../../Component/BillboardComponent.h"
+#include "../Effect/SenseEffect.h"
 
 ratchet::actor::character::Player::Player() :
     super(),
@@ -22,6 +24,12 @@ ratchet::actor::character::Player::Player() :
     super::SetTag("Player");
     _notificationable_subject_map.emplace("QuickChange", &_quick_change_subject);
     _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
+
+
+
+
+    //
+    //_sense_effect_child_actor->GetComponent<component::BillboardComponent>()->Activate();
 }
 
 ratchet::actor::character::Player::~Player() {
@@ -59,14 +67,8 @@ void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem
 void ratchet::actor::character::Player::OnNotify(const ElevatorArrivalMessage& message) {
     super::Activate();
 }
-/*
-void ratchet::actor::character::Player::OnNotify(const ratchet::event::PlayerActionAfterGettingOffElevatorEventEndMessage& message)
-{
-    super::Activate();
-}
-*/
 
-void ratchet::actor::character::Player::SetEffectContainer(const std::shared_ptr<ratchet::effect::EffectContainer > & ptr) {
+void ratchet::actor::character::Player::SetEffectContainer(const std::shared_ptr<ratchet::effect::EffectContainer >& ptr) {
     this->_effect_container = ptr;
 }
 
@@ -147,6 +149,25 @@ bool ratchet::actor::character::Player::Initialize(ratchet::actor::Actor::Param*
         auto motion = motion_com->GetMotionData();
         _upp_bone_state = motion->GetBoneState("UPP_weapon");
     } // if
+
+    auto tag = ratchet::Tag();
+    tag = "TitleElement";
+    auto& holder = super::GetTagHolder();
+    auto it = std::find_if(holder.tags.begin(), holder.tags.end(), [&tag](auto t) {
+        return t == tag;
+    });
+    if (it == holder.tags.end()) {
+        auto sense_effect_param = Actor::Param();
+        sense_effect_param.name = "sense_effecr";
+        sense_effect_param.tag = "sense";
+
+        auto sense_effect_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<actor::effect::SenseEffect>("builder/sense_effect.json", &sense_effect_param);
+        _sense_effect_child_actor = sense_effect_child_actor;
+
+        this->GetComponent<component::SightRecognitionComponent>()->GetFindEnemyMessageSubject()->AddObserver(
+            std::dynamic_pointer_cast<effect::SenseEffect>(_sense_effect_child_actor));
+    }
+
     return true;
 }
 
@@ -175,6 +196,15 @@ bool ratchet::actor::character::Player::Update(float delta_time) {
         _current_weapon->SetRotate(rotate);
         _current_weapon->Update(delta_time);
     } // if
+
+    if (_sense_effect_child_actor) {
+        _sense_effect_child_actor->SetScale(math::vec3::kOne);
+        auto pos = super::GetPosition();
+//        pos.y += 2.0f;
+        _sense_effect_child_actor->SetPosition(pos);
+        _sense_effect_child_actor->SetRotate(math::vec3::kZero);
+        _sense_effect_child_actor->Update(delta_time);
+    } // if
     return true;
 }
 
@@ -183,6 +213,14 @@ bool ratchet::actor::character::Player::Render(void) {
     if (_current_weapon) {
         _current_weapon->Render();
     } // if
+
+    if (_sense_effect_child_actor) {
+        auto state = _sense_effect_child_actor->GetState();
+        if (state != decltype(state)::Hide) {
+            _sense_effect_child_actor->Render();
+        } // if
+    } // if
+
 
 //#ifdef _DEBUG
     if (debug::DebugManager::GetInstance().IsDebugMode()) {
@@ -214,6 +252,7 @@ bool ratchet::actor::character::Player::Release(void) {
     _current_mechanical.reset();
     _omniwrench.reset();
     _children.clear();
+    _sense_effect_child_actor.reset();
     _current_weapon.reset();
     _player_com.reset();;
     _upp_bone_state = nullptr;

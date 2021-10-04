@@ -9,11 +9,17 @@
 void ratchet::actor::Actor::Activate(void) {
     this->_state = ratchet::actor::ActorState::Active;
 }
+
 void ratchet::actor::Actor::Sleep(void) {
     this->_state = ratchet::actor::ActorState::Sleep;
 }
+
 void ratchet::actor::Actor::Pause(void) {
     this->_state = ratchet::actor::ActorState::Pause;
+}
+
+void ratchet::actor::Actor::Hide(void) {
+    this->_state = ratchet::actor::ActorState::Hide;
 }
 
 ratchet::actor::Actor::Actor() :
@@ -61,6 +67,10 @@ const std::string& ratchet::actor::Actor::GetName(void) const {
 
 const std::string& ratchet::actor::Actor::GetTag(void) const {
     return this->_tag;
+}
+
+const ratchet::TagHolder& ratchet::actor::Actor::GetTagHolder(void) const {
+    return this->_tags;
 }
 
 Mof::CVector3 ratchet::actor::Actor::GetPosition(void) const {
@@ -159,6 +169,8 @@ bool ratchet::actor::Actor::Initialize(void) {
 bool ratchet::actor::Actor::Initialize(ratchet::actor::Actor::Param* param) {
     _state = ratchet::actor::ActorState::Active;
     _name = param->name;
+    _tag = param->tag;
+    _tags = param->tags;
     _transform = param->transform;
     _initial_transform = _transform;
 

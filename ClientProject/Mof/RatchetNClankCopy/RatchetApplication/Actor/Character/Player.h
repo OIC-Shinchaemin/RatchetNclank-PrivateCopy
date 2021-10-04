@@ -59,6 +59,8 @@ private:
     std::stack<ObservablePair*>_notificationable_subject_stack;
     //! エフェクト
     std::weak_ptr<effect::EffectContainer>_effect_container;
+    //! エフェクト
+    std::shared_ptr<actor::Actor> _sense_effect_child_actor;
 public:
     /// <summary>
     /// コンストラクタ
