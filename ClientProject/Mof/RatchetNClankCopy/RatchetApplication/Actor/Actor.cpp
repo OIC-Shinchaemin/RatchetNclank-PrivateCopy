@@ -9,11 +9,17 @@
 void ratchet::actor::Actor::Activate(void) {
     this->_state = ratchet::actor::ActorState::Active;
 }
+
 void ratchet::actor::Actor::Sleep(void) {
     this->_state = ratchet::actor::ActorState::Sleep;
 }
+
 void ratchet::actor::Actor::Pause(void) {
     this->_state = ratchet::actor::ActorState::Pause;
+}
+
+void ratchet::actor::Actor::Hide(void) {
+    this->_state = ratchet::actor::ActorState::Hide;
 }
 
 ratchet::actor::Actor::Actor() :

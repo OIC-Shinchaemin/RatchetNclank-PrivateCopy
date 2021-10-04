@@ -49,6 +49,10 @@ void ratchet::component::BillboardComponent::SetTexture(const std::shared_ptr<Mo
     this->_texture = ptr;
 }
 
+void ratchet::component::BillboardComponent::SetColor(const Mof::CVector4& value) {
+    this->_color = value;
+}
+
 void ratchet::component::BillboardComponent::SetOffsetPosition(const Mof::CVector3& value) {
     this->_offset_position = value;
 }
@@ -86,7 +90,7 @@ bool ratchet::component::BillboardComponent::Render(void) {
 
         Mof::CMatrix44 world = scale * rotate * translate;
         auto camera = ::CGraphicsUtilities::GetCamera();
-        tex->Render(camera->GetBillBoardMatrix() * world);
+        tex->Render(camera->GetBillBoardMatrix() * world, _color.ToU32Color());
 
         //CGraphicsUtilities::RenderTexture();
         //tex->Render(world, _rectangle.value());
@@ -112,7 +116,7 @@ bool ratchet::component::BillboardComponent::Render(std::shared_ptr<ratchet::gam
         Mof::CMatrix44 world = scale * rotate * translate;
         auto camera = ::CGraphicsUtilities::GetCamera();
         //tex->Render(camera->GetBillBoardMatrix() * world);
-        auto command = std::make_shared<ratchet::game::graphics::RenderBillboardCommand>(tex, camera->GetBillBoardMatrix() * world, Mof::CVector4());
+        auto command = std::make_shared<ratchet::game::graphics::RenderBillboardCommand>(tex, camera->GetBillBoardMatrix() * world, _color);
         out->Push(command, _target_layer);
         //CGraphicsUtilities::RenderTexture();
         //tex->Render(world, _rectangle.value());

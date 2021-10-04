@@ -14,6 +14,11 @@ struct ContactEnemyMessage {
 using ContactEnemyMessageSubject = base::core::Observable<const ContactEnemyMessage&>;
 using ContactEnemyMessageListener = base::core::Observer<const  ContactEnemyMessage&>;
 
+struct FindEnemyMessage {
+};
+using FindEnemyMessageSubject = base::core::Observable<const FindEnemyMessage&>;
+using FindEnemyMessageListener = base::core::Observer<const  FindEnemyMessage&>;
+
 
 namespace ratchet::component::player { class PlayerComponent; }
 namespace ratchet::component::enemy { class EnemyComponent; }
@@ -33,11 +38,13 @@ private:
     //! キャラ
     std::weak_ptr<ratchet::component::enemy::EnemyComponent> _ENEMY_com;
     //! エフェクト
-    std::shared_ptr<effect::EffectEmitter> _effect_emitter;
+    //std::shared_ptr<effect::EffectEmitter> _effect_emitter;
     //! 会敵
     bool _contact_enemy;
     //! 通知
     ContactEnemyMessageSubject _contact_enemy_message_subject;
+    //! 通知
+    FindEnemyMessageSubject _find_enemy_message_subject;
     /// <summary>
     /// 発生
     /// </summary>
@@ -90,6 +97,14 @@ public:
     /// <returns></returns>
     auto  GetContactEnemyMessageSubject(void) {
         return &this->_contact_enemy_message_subject;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetFindEnemyMessageSubject(void) {
+        return &this->_find_enemy_message_subject;
     }
     /// <summary>
     /// ゲッター

@@ -48,6 +48,11 @@ public:
     /// セッター
     /// </summary>
     /// <param name="value"></param>
+    void SetColor(const Mof::CVector4& value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
     void SetOffsetPosition(const Mof::CVector3& value);
     /// <summary>
     /// セッター

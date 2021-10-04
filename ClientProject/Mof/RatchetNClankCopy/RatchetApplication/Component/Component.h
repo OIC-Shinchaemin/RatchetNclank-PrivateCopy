@@ -68,7 +68,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::string GetType(void) const = 0;
+    virtual std::string GetType(void) const;
     /// <summary>
     /// ÉQÉbÉ^Å[
     /// </summary>

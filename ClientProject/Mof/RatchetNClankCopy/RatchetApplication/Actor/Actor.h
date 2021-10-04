@@ -71,6 +71,10 @@ public:
     /// 状態変更
     /// </summary>
     virtual void Pause(void);
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Hide(void);
 public:
     /// <summary>
     /// コンストラクタ

@@ -39,6 +39,15 @@ void ratchet::component::Component::Component::SetParam(const rapidjson::Value& 
     this->_priority = param["priority"].GetInt();
 }
 
+std::string ratchet::component::Component::GetType(void) const {
+    static std::string name = typeid(*this).name();
+    static std::string colon = "::";
+    auto it = name.find_last_of(colon, name.size());
+    auto substr = name.substr(it + colon.size() - 1);
+    return substr;
+    //return std::string();
+}
+
 std::shared_ptr<ratchet::actor::Actor> ratchet::component::Component::Component::GetOwner(void) const {
     if (auto owner = this->_owner.lock()) {
         return owner;

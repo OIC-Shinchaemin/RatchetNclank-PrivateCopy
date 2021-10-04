@@ -23,6 +23,7 @@
 #include "../Event/ShipEvent.h"
 #include "../MessageObservationManager.h"
 #include "DescriptionScene.h"
+#include "Loading/LoadingAnimation.h"
 
 
 namespace ratchet::scene {
@@ -72,6 +73,8 @@ private:
     float _loading_progress;
     //! 表示
     bool _show_how_to_play;
+    //! ローディング
+    scene::loading::LoadingDotAnimation _loading_dot_animation;
 public:
     /// <summary>
     /// 追加
