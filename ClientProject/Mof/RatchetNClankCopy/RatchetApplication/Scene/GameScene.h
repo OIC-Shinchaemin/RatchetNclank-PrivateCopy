@@ -22,15 +22,8 @@
 #include "../Component/SightRecognitionComponent.h"
 #include "../Event/ShipEvent.h"
 #include "../MessageObservationManager.h"
+#include "DescriptionScene.h"
 
-
-namespace ratchet {
-//using ObservationMgr =
-//ratchet::ObservationManager<
-//    ratchet::game::gamesystem::text::TextSystemOpenObservation,
-//    ratchet::game::gamesystem::text::TextSystemClosedObservation
-//>;
-}
 
 namespace ratchet::scene {
 class GameScene :
@@ -75,6 +68,8 @@ private:
     int _loading_dot_count;
     //! Œo‰ßŠÔ / Š—vŠÔ
     float _loading_progress;
+    //! •\¦
+    bool _show_how_to_play;
 public:
     /// <summary>
     /// ’Ç‰Á

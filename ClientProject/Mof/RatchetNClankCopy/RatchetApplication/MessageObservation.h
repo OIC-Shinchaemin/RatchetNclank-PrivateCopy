@@ -17,9 +17,10 @@ public:
     using Listener = ListenerType;
 private:
     //! ŠÄ‹‘ÎÛ
-    std::vector<std::shared_ptr<Subject>> _subjects;
+    //std::vector<std::shared_ptr<Subject>> _subjects;
+    std::vector<std::weak_ptr<Subject>> _subjects;
     //! ŠÄ‹Ò
-    std::vector<std::shared_ptr<Listener>> _listeners;
+    std::vector<std::weak_ptr<Listener>> _listeners;
 public:
     /// <summary>
     /// ƒVƒ“ƒOƒ‹ƒgƒ“
@@ -40,18 +41,21 @@ public:
     }
     void LinkObservation(const std::shared_ptr<Listener>& observer) {
         _listeners.push_back(observer);
-        for (auto& subject : _subjects) {
-            subject->AddObserver(observer);
+        for (auto& weak : _subjects) {
+            if (auto subject = weak.lock()) {
+                subject->AddObserver(observer);
+            } // if
         } // for
     }
     void Clear(void) {
-        for (auto& subject : _subjects) {
-            subject->Clear();
+        for (auto& weak : _subjects) {
+            if (auto subject = weak.lock()) {
+                subject->Clear();
+            } // if
         } // for
         for (auto& listener : _listeners) {
             //listener;
         } // for
-
 
         _subjects.clear();
         _listeners.clear();

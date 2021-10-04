@@ -56,6 +56,11 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     _delete_actors.clear();
 
 
+    if (::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
+        _show_how_to_play = false;
+        super::SetState(State::Active);
+    } // if
+
     if (_state != super::State::Pause) {
         // input
         if (_state != super::State::Sleep) {
@@ -112,6 +117,12 @@ bool ratchet::scene::GameScene::SceneRender(void) {
     if (_text_system->IsActive()) {
         _text_system->Render();
     } // if
+
+    if (_show_how_to_play) {
+        auto desc = GameDescription();
+        desc.Render(super::GetResource());
+    } // if
+
     return true;
 }
 
@@ -138,7 +149,8 @@ ratchet::scene::GameScene::GameScene() :
     _event(),
     _text_system(std::make_shared<ratchet::game::gamesystem::text::TextSystem>()),
     _loading_counter(),
-    _loading_dot_count(0) {
+    _loading_dot_count(0),
+    _show_how_to_play(false) {
     _loading_counter.Initialize(1.0f, true);
 }
 
@@ -324,10 +336,11 @@ bool ratchet::scene::GameScene::Initialize(void) {
         item0->SetText("タイトルに戻る");
 
         auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            this->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
+            //this->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""))
+            _show_how_to_play = true;
             return true;
         });
-        item1->SetText("リトライ");
+        item1->SetText("操作説明");
 
         auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
             _game.lock()->GetGamePauseSystem()->Inactive();
@@ -383,7 +396,9 @@ bool ratchet::scene::GameScene::Release(void) {
         game->GameSystemRelease();
     } // if
 
-    _text_system->Release();
+    if (_text_system) {
+        _text_system->Release();
+    } // if
     _text_system.reset();
     return true;
 }

@@ -21,6 +21,10 @@ bool ratchet::scene::DescriptionScene::SceneRender(void) {
     ::g_pGraphics->SetDepthEnable(false);
 
     if (auto resource = _resource.lock()) {
+        auto desc = GameDescription();
+        desc.Render(resource);
+
+        /*
         auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
 
         const char* text;
@@ -41,6 +45,7 @@ bool ratchet::scene::DescriptionScene::SceneRender(void) {
 
         text = "Startボタン・Shiftキーでタイトルに戻る";
         ::CGraphicsUtilities::RenderString(460.0, 700.0f, text);
+        */
     } // if
 
     return true;
