@@ -92,16 +92,6 @@ public:
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
-    /// <summary>
-    /// í«â¡
-    /// </summary>
-    /// <param name="ptr"></param>
-    void AddTriggerActor(const std::shared_ptr<ratchet::actor::Actor>& ptr);
-    /// <summary>
-    /// çÌèú
-    /// </summary>
-    /// <param name=""></param>
-    void AllDelete(void);
 };
 }
 #endif // !RATCHET_BRIDGE_EVENT_H

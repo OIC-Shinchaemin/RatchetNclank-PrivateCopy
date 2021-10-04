@@ -106,6 +106,7 @@ MofBool CGameApp::Render(void) {
 }
 
 MofBool CGameApp::Release(void) {
+	_scene_manager->Release();
 	_scene_manager.reset();
 	_ui_canvas.reset();
 	_event_manager.reset();

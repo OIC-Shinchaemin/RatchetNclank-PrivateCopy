@@ -10,6 +10,7 @@
 #include "../Character/Player.h"
 #include "../../TutorialManager.h"
 #include "../Gimmick/Fence.h"
+#include "../../Scene/GameScene.h"
 
 
 void ratchet::actor::character::King::PlayerActionLiberate(void) {
@@ -17,7 +18,7 @@ void ratchet::actor::character::King::PlayerActionLiberate(void) {
     tutorial::TutorialManager::GetInstance().Liberation(type);
 }
 
-void ratchet::actor::character::King::BarricadeCreate(ratchet::actor::Actor::Param* param, std::shared_ptr<ratchet::scene::GameScene> out) {
+void ratchet::actor::character::King::BarricadeCreate(ratchet::actor::Actor::Param* param, std::shared_ptr<ratchet::scene::Scene> out) {
     def::Transform transforms[]{
         def::Transform(Mof::CVector3(-14.0f, -5.2f, -20.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
         def::Transform(Mof::CVector3(-14.0f, -5.2f, -18.0f),Mof::CVector3(0.0f, math::ToRadian(90.0f),0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
@@ -35,12 +36,13 @@ void ratchet::actor::character::King::BarricadeCreate(ratchet::actor::Actor::Par
         def::Transform(Mof::CVector3(-24.0f, -5.2f, -6.0f),Mof::CVector3(0.0f, 0.0f,0.0f),Mof::CVector3(0.5f,0.15f,0.5f)),
     };
     param->tag = "barricade";
+    auto game_scene = std::dynamic_pointer_cast<ratchet::scene::GameScene>(out);
     for (auto& transform : transforms) {
         param->transform.position = transform.position;
         param->transform.rotate = transform.rotate;
         param->transform.scale = transform.scale;
         auto barricade = ratchet::factory::FactoryManager::Singleton().CreateActor < ratchet::actor::gimmick::Fence>("../Resource/builder/barricade.json", param);
-        out->AddElement(barricade);
+        game_scene->AddElement(barricade);
         _created_barricade.push_back(barricade);
     } // for
     param->transform = def::Transform();
@@ -51,16 +53,16 @@ ratchet::actor::character::King::King() :
     _actor_container(),
     _quest_index(0),
     _quest_count(2),
-    _player_camera_subject(),
+    //_player_camera_subject(),
     _scarecrow_view_camera_controller(),
     _scarecrow_view_position(3.0f, -3.0f, 0.0f),
-    _player_view_camera_controller(),
-    _effect_container(),
-    _player(),
-    _free_talk_index(0),
-    _event_icon_show(true),
-    _created_barricade(),
-    _scarecrow_generate_datas() {
+//    _player_view_camera_controller(),
+_effect_container(),
+//    _player(),
+_free_talk_index(0),
+_event_icon_show(true),
+_created_barricade(),
+_scarecrow_generate_datas() {
 
     auto con = std::make_shared<ratchet::camera::FollowCameraController>();
     auto camera = std::make_shared<ratchet::camera::Camera>();
@@ -95,12 +97,14 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
         auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0End) + _quest_index;
         message.type = static_cast<decltype(message.type)>(type_temp);
         message.on_close = [&]() {
+            auto player_actor = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
+            auto camera_controller = player_actor->GetComponent<component::CameraComponent>()->GetCameraController()->GetService();
 
             auto target = super::GetPosition();
-            auto player_camera = _player_view_camera_controller->GetService();
-            auto dir = target - _player.lock()->GetPosition();
-            player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
-            _player_view_camera_controller->GetService()->SetAltitude(20.0f);
+//            auto player_camera = camera_controller;
+            auto dir = target - player_actor->GetPosition();
+            camera_controller->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
+            camera_controller->SetAltitude(20.0f);
             return true;
         };
         super::GetTextSystemMessageSubject()->Notify(message);
@@ -117,20 +121,12 @@ void ratchet::actor::character::King::OnNotify(const ratchet::actor::character::
 void ratchet::actor::character::King::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_question_texture = ptr;
 }
-void ratchet::actor::character::King::SetGameScene(const std::shared_ptr<scene::GameScene>& ptr) {
+void ratchet::actor::character::King::SetGameScene(const std::shared_ptr<scene::Scene>& ptr) {
     this->_actor_container = ptr;
 }
 
 void ratchet::actor::character::King::SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr) {
     this->_effect_container = ptr;
-}
-
-void ratchet::actor::character::King::SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr) {
-    this->_player = ptr;
-}
-
-void ratchet::actor::character::King::SetPlayerCameraontroller(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr) {
-    this->_player_view_camera_controller = ptr;
 }
 
 void ratchet::actor::character::King::SetHelpDesk(const std::shared_ptr<ratchet::game::gamesystem::HelpDesk>& ptr) {
@@ -158,9 +154,10 @@ bool ratchet::actor::character::King::Render(void) {
 
 void ratchet::actor::character::King::Talk(void) {
     auto param = new ratchet::actor::Actor::Param();
-    auto out = _actor_container.lock();
+    //auto out = _actor_container.lock();
     auto effect = _effect_container.lock();
-    auto player = _player.lock();
+    //auto player = _player.lock();
+    auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetTalkedTarget());
 
 
     auto billboard = super::GetComponent<component::BillboardComponent>();
@@ -174,23 +171,27 @@ void ratchet::actor::character::King::Talk(void) {
         auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0) + _quest_index;
         message.type = static_cast<decltype(message.type)>(type_temp);
         message.on_close = [&]() {
+            auto player_actor = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
+            auto camera_controller = player_actor->GetComponent<component::CameraComponent>()->GetCameraController()->GetService();
+
             _event_icon_show = false;
-            _player_view_camera_controller->GetService()->RegisterGlobalCamera();
+            camera_controller->RegisterGlobalCamera();
 
             auto target = Mof::CVector3(-12.0f, -5.0f, -4.0f);
-            auto player_camera = _player_view_camera_controller->GetService();
-            auto dir = target - _player.lock()->GetPosition();
-            player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
+//            auto player_camera = _player_view_camera_controller->GetService();
+            auto dir = target - player_actor->GetPosition();
+            camera_controller->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
 
             auto billboard = super::GetComponent<component::BillboardComponent>();
             billboard->Inactivate();
             return true;
         };
         super::GetTextSystemMessageSubject()->Notify(message);
+        auto game_scene = std::dynamic_pointer_cast<ratchet::scene::GameScene>(_actor_container.lock());
 
         if (!_event_active) {
             if (message.type == decltype(message.type)::TutorialEventNo1) {
-                this->BarricadeCreate(param, out);
+                this->BarricadeCreate(param, game_scene);
             } // if
 
             auto& scarecrow_transforms = _scarecrow_generate_datas.at(_quest_index);
@@ -204,14 +205,16 @@ void ratchet::actor::character::King::Talk(void) {
                 scarecrow->SetEffectEmitter(emitter);
                 scarecrow->SetStarEffectEmitter(star_emitter);
                 scarecrow->GetScarecrowEndMessageSubject()->AddObserver(std::dynamic_pointer_cast<ratchet::actor::character::King>(shared_from_this()));
-                scarecrow->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
-                out->AddElement(scarecrow);
+                scarecrow->GetCharacterDamageApplyMessageSubject()->AddObserver(game_scene);
+                game_scene->AddElement(scarecrow);
                 _created_scarecrows.push_back(scarecrow);
             } // for
 
-            auto player_camera = _player_view_camera_controller->GetService();
+            auto player_actor = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
+            auto camera_camera_controller = player_actor->GetComponent<component::CameraComponent>()->GetCameraController()->GetService();
+            //auto player_camera = _player_view_camera_controller->GetService();
             auto dir = super::GetPosition() - player->GetPosition();
-            player_camera->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
+            camera_camera_controller->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
             this->PlayerActionLiberate();
             ut::SafeDelete(param);
         //    _quest_index++;
@@ -235,14 +238,16 @@ void ratchet::actor::character::King::Talk(void) {
                     help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy));
                 } // if
 
+                auto player_actor = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
+                auto camera_controller = player_actor->GetComponent<component::CameraComponent>()->GetCameraController()->GetService();
 
-                _player_view_camera_controller->GetService()->SetAzimuth(10);
-                _player_view_camera_controller->GetService()->SetAltitude(20);
+                camera_controller->SetAzimuth(10);
+                camera_controller->SetAltitude(20);
 
                 if (auto help_desk = _help_desk.lock()) {
                     help_desk->Show();
                 } // if
-                auto hp_com = _player.lock()->GetComponent<component::HpComponent>();
+                auto hp_com = player_actor->GetComponent<component::HpComponent>();
                 if (hp_com) {
                     hp_com->RegisterUI();
                 } // if

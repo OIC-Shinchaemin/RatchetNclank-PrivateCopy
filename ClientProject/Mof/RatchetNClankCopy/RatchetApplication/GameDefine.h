@@ -12,6 +12,7 @@
 #include "Base/Core/Math.h"
 #include "MotionNames.h"
 #include "ResourceManager.h"
+//#include "MessageObservationManager.h"
 #include "Base/Accessor/Setter.h"
 #include "Base/Accessor/Getter.h"
 #include "Base/Accessor/Accessor.h"
@@ -62,6 +63,12 @@ using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CStreamingSoundBuffer>,
     std::shared_ptr<Mof::CSoundBuffer>
 >;
+//using ObservationMgr = ratchet::ObservationManager<
+//    ratchet::game::gamesystem::text::TextSystemOpenObservation,
+//    ratchet::game::gamesystem::text::TextSystemClosedObservation
+//>;
+
+
 using GameBGMPlayer = ratchet::game::audio::BGMPlayer;
 using GameSEPlayer = ratchet::game::audio::SEPlayer;
 //using GameBGMPlayer = ratchet::game::audio::SoundPlayer<ratchet::game::audio::BGMEvent, Mof::CStreamingSoundBuffer>;

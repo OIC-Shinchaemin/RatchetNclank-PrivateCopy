@@ -87,7 +87,6 @@ bool ratchet::event::BridgeEvent::Initialize(void) {
         auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");
         auto help_desk = game->GetHelpDesk();
         help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::GoHome));
-        //this->GetQuestSubject()->AddObserver(help_desk);
     } // if
     return true;
 }
@@ -95,7 +94,6 @@ bool ratchet::event::BridgeEvent::Initialize(void) {
 bool ratchet::event::BridgeEvent::Update(float delta_time) {
     if (_enable) {
         auto camera_info = ratchet::camera::CameraController::CameraInfo();
-        //camera_info.ideal_position = _ideal_position;
         _bridge_view_camera_controller.Update(delta_time, camera_info);
     } // if
 
@@ -104,21 +102,4 @@ bool ratchet::event::BridgeEvent::Update(float delta_time) {
         ptr->Notify("DeleteRequest", shared_from_this());
     } // if
     return true;
-}
-
-void ratchet::event::BridgeEvent::AddTriggerActor(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
-    /*
-    _for_bridge_event_actors.push_back(ptr);
-    ptr->AddObserver(std::dynamic_pointer_cast<ratchet::event::BridgeEvent>(shared_from_this()));
-    */
-}
-
-void ratchet::event::BridgeEvent::AllDelete(void) {
-    /*
-    _for_bridge_event_actors.clear();
-    this->OnNotify("EnemyDead", nullptr);
-    for (auto actor : _for_bridge_event_actors) {
-        actor->End();
-    } // for
-    */
 }

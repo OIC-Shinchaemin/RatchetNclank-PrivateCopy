@@ -1,4 +1,4 @@
-#include	"Script.h"
+#include "Script.h"
 
 //コマンド解析文字列定義
 const char* gScriptCommand[] = {
@@ -64,16 +64,16 @@ char* Trim(char* s) {
     return s;
 }
 
-ratchet::game::gamesystem::text::CScript::CScript() :
+ratchet::game::gamesystem::text::Script::Script() :
     m_FileBuffer(NULL),
     m_CommandList() {
     memset(m_FileName, 0, MAX_PATH);
 }
 
-ratchet::game::gamesystem::text::CScript::~CScript() {
+ratchet::game::gamesystem::text::Script::~Script() {
 }
 
-bool ratchet::game::gamesystem::text::CScript::Load(const char* name) {
+bool ratchet::game::gamesystem::text::Script::Load(const char* name) {
     //テキストファイルを開く
     if (!LoadTextFile(name)) {
         return false;
@@ -102,7 +102,7 @@ bool ratchet::game::gamesystem::text::CScript::Load(const char* name) {
     return true;
 }
 
-void ratchet::game::gamesystem::text::CScript::ParseCommand(int sCmd) {
+void ratchet::game::gamesystem::text::Script::ParseCommand(int sCmd) {
     //コマンドに必要なパラメータの解析
     switch (sCmd) {
         case CMD_TEXT:				//テキストの表示コマンド
@@ -137,7 +137,7 @@ void ratchet::game::gamesystem::text::CScript::ParseCommand(int sCmd) {
     }
 }
 
-void ratchet::game::gamesystem::text::CScript::TextCommand(void) {
+void ratchet::game::gamesystem::text::Script::TextCommand(void) {
     TEXTCOMMAND* pCmd = new TEXTCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->px = atof(pstr);
@@ -148,7 +148,7 @@ void ratchet::game::gamesystem::text::CScript::TextCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-void ratchet::game::gamesystem::text::CScript::SpriteCommand(void) {
+void ratchet::game::gamesystem::text::Script::SpriteCommand(void) {
     SPRITECOMMAND* pCmd = new SPRITECOMMAND();
     char* pstr = strtok(NULL, ",");
     strcpy(pCmd->Name, Trim(pstr));
@@ -157,7 +157,7 @@ void ratchet::game::gamesystem::text::CScript::SpriteCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-void ratchet::game::gamesystem::text::CScript::SetPosCommand(void) {
+void ratchet::game::gamesystem::text::Script::SetPosCommand(void) {
     SETPOSCOMMAND* pCmd = new SETPOSCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->px = atof(pstr);
@@ -168,7 +168,7 @@ void ratchet::game::gamesystem::text::CScript::SetPosCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-void ratchet::game::gamesystem::text::CScript::SetShowCommand(void) {
+void ratchet::game::gamesystem::text::Script::SetShowCommand(void) {
     SETSHOWCOMMAND* pCmd = new SETSHOWCOMMAND();
     char* pstr = strtok(NULL, ",");
     Trim(pstr);
@@ -186,14 +186,14 @@ void ratchet::game::gamesystem::text::CScript::SetShowCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-void ratchet::game::gamesystem::text::CScript::NameCommand(int sCmd) {
+void ratchet::game::gamesystem::text::Script::NameCommand(int sCmd) {
     NAMECOMMAND* pCmd = new NAMECOMMAND(sCmd);
     char* pstr = strtok(NULL, ";");
     strcpy(pCmd->Name, Trim(pstr));
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-void ratchet::game::gamesystem::text::CScript::SelectCommand(void) {
+void ratchet::game::gamesystem::text::Script::SelectCommand(void) {
     SELECTCOMMAND* pCmd = new SELECTCOMMAND();
     char* pstr = strtok(NULL, ",");
     strcpy(pCmd->Name, Trim(pstr));
@@ -218,7 +218,7 @@ void ratchet::game::gamesystem::text::CScript::SelectCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-void ratchet::game::gamesystem::text::CScript::FlagCommand(void) {
+void ratchet::game::gamesystem::text::Script::FlagCommand(void) {
     FLAGCOMMAND* pCmd = new FLAGCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->No = atoi(pstr);
@@ -230,7 +230,7 @@ void ratchet::game::gamesystem::text::CScript::FlagCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-void ratchet::game::gamesystem::text::CScript::IfCommand(void) {
+void ratchet::game::gamesystem::text::Script::IfCommand(void) {
     IFCOMMAND* pCmd = new IFCOMMAND();
     char* pstr = strtok(NULL, ",");
     pCmd->No = atoi(pstr);
@@ -244,7 +244,7 @@ void ratchet::game::gamesystem::text::CScript::IfCommand(void) {
     m_CommandList.Add((COMMAND**)&pCmd);
 }
 
-bool ratchet::game::gamesystem::text::CScript::LoadTextFile(const char* name) {
+bool ratchet::game::gamesystem::text::Script::LoadTextFile(const char* name) {
     //テキストファイルを開く
     FILE* fp = fopen(name, "rt");
     if (fp == NULL) {
@@ -271,7 +271,7 @@ bool ratchet::game::gamesystem::text::CScript::LoadTextFile(const char* name) {
     return true;
 }
 
-void ratchet::game::gamesystem::text::CScript::Release(void) {
+void ratchet::game::gamesystem::text::Script::Release(void) {
     if (m_FileBuffer) {
         free(m_FileBuffer);
         m_FileBuffer = NULL;

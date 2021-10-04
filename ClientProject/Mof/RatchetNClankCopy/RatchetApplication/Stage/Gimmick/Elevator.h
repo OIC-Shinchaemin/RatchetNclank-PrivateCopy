@@ -81,7 +81,7 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
+    //void SetPlayerCamera(base::core::ServiceLocator<ratchet::camera::CameraController>* ptr);
     /// <summary>
     /// セッター
     /// </summary>
@@ -91,12 +91,12 @@ public:
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetPlayerCameraComponent(const std::shared_ptr<ratchet::component::CameraComponent>& ptr);
+    //void SetPlayerCameraComponent(const std::shared_ptr<ratchet::component::CameraComponent>& ptr);
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr);
+    //void SetPlayer(const std::shared_ptr<ratchet::actor::character::Player>& ptr);
     /// <summary>
     /// セッター
     /// </summary>

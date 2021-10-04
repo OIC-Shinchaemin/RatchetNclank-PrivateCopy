@@ -21,6 +21,8 @@
 #include "../Effect/EffectContainer.h"
 #include "../Component/SightRecognitionComponent.h"
 #include "../Event/ShipEvent.h"
+#include "../MessageObservationManager.h"
+#include "DescriptionScene.h"
 
 
 namespace ratchet::scene {
@@ -34,7 +36,6 @@ class GameScene :
     public ratchet::game::gamesystem::text::TextSystemOpenMessageListener,
     public ratchet::game::gamesystem::text::TextSystemClosedMessageListener {
     using super = ratchet::scene::Scene;
-    using this_type = ratchet::scene::GameScene;
     friend class GameSceneInitializer;
 private:
     //! 追加
@@ -51,6 +52,8 @@ private:
     Stage _stage;
     //! 再初期化
     bool _re_initialize;
+    //! 再初期化
+    bool _player_dead;
     //! メニュー
     base::core::Observable<bool> _pause_menu_subject;
     //! テキスト 
@@ -67,6 +70,8 @@ private:
     int _loading_dot_count;
     //! 経過時間 / 所要時間
     float _loading_progress;
+    //! 表示
+    bool _show_how_to_play;
 public:
     /// <summary>
     /// 追加

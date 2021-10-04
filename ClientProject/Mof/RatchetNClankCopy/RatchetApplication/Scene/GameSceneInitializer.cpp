@@ -13,6 +13,7 @@
 #include "../Actor/Gimmick/Wall.h"
 #include "../Actor/Gimmick/Fence.h"
 #include "../Component/CameraComponent.h"
+#include "../Component/HPComponent.h"
 #include "../Component/SightRecognitionComponent.h"
 #include "../Stage/Gimmick/Bridge.h"
 #include "../Stage/Gimmick/Elevator.h"
@@ -25,6 +26,77 @@
 
 
 ratchet::scene::GameSceneInitializer::GameSceneInitializer() {
+}
+
+bool ratchet::scene::GameSceneInitializer::AddPlayer(std::shared_ptr<ratchet::game::GameManager> game, std::shared_ptr<ratchet::event::EventManager> event, std::shared_ptr<ratchet::scene::GameScene> out) {
+    std::vector<std::shared_ptr<Elevator>> elevators;
+    for (auto gimmick : out->_stage.GetGimmickArray()) {
+        auto temp_elevator = std::dynamic_pointer_cast<Elevator>(gimmick);
+        if (temp_elevator) {
+            elevators.push_back(temp_elevator);
+        } // if
+    } // for
+    std::shared_ptr<ratchet::event::StageViewEvent> stage_view_event = event->GetEvent<ratchet::event::StageViewEvent>();
+
+
+    auto param = ratchet::actor::Actor::Param();
+
+    // player
+    param.name = "player";
+    param.transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
+    param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
+    auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", &param);
+    ratchet::event::EventReferenceTable::Singleton().Register(player->GetName(), player);
+    out->AddElement(player);
+    out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);
+
+    if (stage_view_event) {
+        stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
+    } // if
+    else {
+        auto hp = player->GetComponent<ratchet::component::HpComponent>();
+        hp->RegisterUI();
+        auto camera = player->GetComponent<ratchet::component::CameraComponent>()->GetCameraController()->GetService();
+        camera->RegisterGlobalCamera();
+        camera->SetAzimuth(camera->GetDefaultAzimuth());
+        camera->SetAltitude(camera->GetDefaultAltitude());
+    } // else
+
+
+    player->SetEffectContainer(out->_effect);
+    player->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
+    player->GetComponent<component::SightRecognitionComponent>()->GetContactEnemyMessageSubject()->AddObserver(out);
+    for (auto elevator : elevators) {
+        elevator->GetElevatorArrivalMessageSubject()->AddObserver(player);
+    } // for
+    {
+        param.name = "weapon";
+        param.tag = "OmniWrench";
+        auto omniwrench = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::weapon::OmniWrench>("builder/omni_wrench.json", &param);
+        player->AddChild(omniwrench);
+        out->AddElement(omniwrench);
+    }
+
+
+        // game system
+    {
+        auto weapon_system = game->GetWeaponSystem();
+        auto quick_change = game->GetQuickChange();
+        auto help_desk = game->GetHelpDesk();
+
+        player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
+        player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
+        player->PushNotificationableSubject("QuickChange");
+        out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);
+
+        weapon_system->AddMechanicalWeaponObserver(player);
+        quick_change->AddInfoObserver(player);
+        auto weapons = weapon_system->GetWeaponMap();
+        for (auto& pair : weapons) {
+            player->AddChild(pair.second);
+        } // for
+    } // if
+    return true;
 }
 
 bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game::GameManager>& game, std::shared_ptr<ratchet::event::EventManager>& event, std::shared_ptr<ratchet::scene::GameScene>& out) {
@@ -45,7 +117,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     ratchet::event::EventReferenceTable::Singleton().Register("Stage", &out->_stage);
     ratchet::event::EventReferenceTable::Singleton().Register("TextSystem", out->_text_system);
 
-
     if (auto r = out->_resource.lock()) {
         auto se_player = out->GetSEPlayer();
         auto add_cound = game::audio::SEAddSound(se_player, r);
@@ -62,10 +133,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     auto shared_this = out;
 
     out->_text_system->GetTextSystemClosedMessageSubject()->Clear();
-    out->_text_system->GetTextSystemOpenMessageSubject()->Clear();
-    out->_text_system->SetScene(out);
-    out->_text_system->GetTextSystemOpenMessageSubject()->AddObserver(out); 
-    out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(out); 
+    //out->_text_system->GetTextSystemOpenMessageSubject()->Clear();
+    //out->_text_system->SetScene(out);
+    //out->_text_system->GetTextSystemOpenMessageSubject()->AddObserver(out); 
+    out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(out);
 
     if (auto e = event) {
         e->InitializeGameEvent();
@@ -99,25 +170,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     //return true;
 
     auto param = new ratchet::actor::Actor::Param();
-    // player
-    param->name = "player";
-    param->transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
-    param->transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
-    auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", param);
-    ratchet::event::EventReferenceTable::Singleton().Register(player->GetName(), player);
-    out->AddElement(player);
-    out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);    
-    stage_view_event->GetCameraObservable()->AddObserver(player->GetComponent<ratchet::component::CameraComponent>());
-    player->SetEffectContainer(out->_effect);
-    player->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
-    player->GetComponent<component:: SightRecognitionComponent>()->GetContactEnemyMessageSubject()->AddObserver(out);
-    for (auto elevator : elevators) {
-        auto camera = player->GetComponent<ratchet::component::CameraComponent>();
-        elevator->SetPlayer(player);
-        elevator->SetPlayerCameraComponent(camera);
-        elevator->SetPlayerCamera(camera->GetCameraController());
-        elevator->GetElevatorArrivalMessageSubject()->AddObserver(player);
-    } // for
+
+    this->AddPlayer(game, event, out);
+
+
 
     {
         param->transform.position = Mof::CVector3(15.0f, -5.0f, 7.0f);
@@ -126,13 +182,9 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         out->AddElement(shop);
     }
 
-    {
-        param->name = "weapon";
-        param->tag = "OmniWrench";
-        auto omniwrench = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::weapon::OmniWrench>("builder/omni_wrench.json", param);
-        player->AddChild(omniwrench);
-        out->AddElement(omniwrench);
-    }
+
+
+
     // game system
     {
         auto pause_system = game->GetGamePauseSystem();
@@ -143,12 +195,8 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         auto shop_system = game->GetShopSystem();
 
         shop_system->GetInfoSubject()->AddObserver(shared_this);
-        player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
-        player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
-        player->PushNotificationableSubject("QuickChange");
-        //player->GetQuestSubject()->AddObserver(help_desk);
         help_desk->RegisterQuest(ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::EnemyDestroy));
-        out->_text_system->SetPlayer(player);
+
         game_money->SetEventManager(out->_event.lock());
         game_money->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
         game_money->SetTextSystem(out->_text_system);
@@ -162,17 +210,10 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         pause_system->Initialize();
 
         auto quest = ratchet::game::gamesystem::GameQuest(ratchet::game::gamesystem::GameQuest::Type::ToFront);
-        //help_desk->OnNotify(quest);
-        weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddWeaponObserver(weapon_system);
-        quick_change->AddInfoObserver(player);
         out->_pause_menu_subject.AddObserver(pause_system);
-
-        auto weapons = weapon_system->GetWeaponMap();
-        for (auto& pair : weapons) {
-            player->AddChild(pair.second);
-        } // for
     } // if
+
 
     auto help_desk = game->GetHelpDesk();
     // enemy
@@ -186,10 +227,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         out->AddElement(enemy);
         enemy->SetEffectContainer(out->_effect);
         enemy->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
-        //enemy->GetQuestSubject()->AddObserver(help_desk);
-        if (event_sphere.CollisionPoint(param->transform.position)) {
-            //bridge_event->AddTriggerActor(enemy);
-        } // if
     } // for
 
     {
@@ -313,10 +350,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
             king->SetGameScene(out);
             king->GetTextSystemMessageSubject()->AddObserver(out->_text_system);
             king->SetEffectContainer(out->_effect);
-            auto player_camera = player->GetComponent<component::CameraComponent>();
-            king->GetPlayerCameraSubject()->AddObserver(player_camera);
-            king->SetPlayerCameraontroller(player_camera->GetCameraController());
-            king->SetPlayer(player);
             out->AddElement(king);
         } // for
     }

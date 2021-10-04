@@ -88,13 +88,13 @@ typedef struct tag_NAMECOMMAND : public COMMAND {
 }NAMECOMMAND;
 //選択肢コマンドのための構造体
 typedef struct tag_SELECTCOMMAND : public COMMAND {
-    char				Name[256];
-    int					Count;
+    char Name[256];
+    int	 Count;
 
     char** pItem;
     char** pLabel;
 
-    CMenu				Select;
+    TextMenu Select;
 
     /**
      * コンストラクタ
@@ -135,9 +135,9 @@ enum tag_FLAGOP {
 };
 //フラグ操作コマンドのための構造体
 typedef struct tag_FLAGCOMMAND : public COMMAND {
-    int					No;
-    int					Op;
-    int					Value;
+    int No;
+    int Op;
+    int Value;
 
     /**
      * コンストラクタ
@@ -163,10 +163,10 @@ enum tag_IFOP {
 };
 //条件分岐コマンドのための構造体
 typedef struct tag_IFCOMMAND : public COMMAND {
-    int					No;
-    int					Op;
-    int					Value;
-    char				Name[256];
+    int No;
+    int Op;
+    int Value;
+    char Name[256];
 
     /**
      * コンストラクタ
@@ -181,14 +181,14 @@ typedef struct tag_IFCOMMAND : public COMMAND {
     }
 }IFCOMMAND;
 
-class CScript {
+class Script {
 private:
-    char							m_FileName[MAX_PATH];
+    char m_FileName[MAX_PATH];
     char* m_FileBuffer;
-    CDynamicArray< COMMAND* >		m_CommandList;
+    CDynamicArray< COMMAND*> m_CommandList;
 public:
-    CScript();
-    ~CScript();
+    Script();
+    ~Script();
     bool Load(const char* name);
     void ParseCommand(int sCmd);
     void TextCommand(void);

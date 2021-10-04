@@ -119,8 +119,8 @@ bool ratchet::scene::Scene::PostRender(void) {
 }
 
 ratchet::scene::Scene::Scene() :
-    _state(this_type::State::Active),
-    _transition_state(this_type::TransitionState::None),
+    _state(ratchet::scene::Scene::State::Active),
+    _transition_state(ratchet::scene::Scene::TransitionState::None),
     _rendar_target(),
     _default(),
     _effect(),

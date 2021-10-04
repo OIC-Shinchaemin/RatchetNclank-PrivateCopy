@@ -8,6 +8,7 @@
 #include "GameSceneInitializer.h"
 #include "../TutorialManager.h"
 #include "../Game/Audio/SEPlayer.h"
+#include "../MessageObservation.h"
 
 
 void ratchet::scene::GameScene::AddElement(const std::shared_ptr<ratchet::actor::Actor>& ptr) {
@@ -36,14 +37,10 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
     {
-        tutorial::TutorialManager::GetInstance().Complete();
-        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
-        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
+        //tutorial::TutorialManager::GetInstance().Complete();
+        //tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
+        //tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
     }
-
-    if (_re_initialize) {
-        this->ReInitialize();
-    } // if
 
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
@@ -54,6 +51,19 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     } // for
     _delete_actors.clear();
 
+
+    if (_player_dead) {
+        auto init = GameSceneInitializer();
+        init.AddPlayer(_game.lock(), _event.lock(), std::dynamic_pointer_cast<GameScene>(shared_from_this()));
+        _player_dead = false;
+//        this->ReInitialize();
+    } // if
+
+
+    if (::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
+        _show_how_to_play = false;
+        super::SetState(State::Active);
+    } // if
 
     if (_state != super::State::Pause) {
         // input
@@ -111,6 +121,12 @@ bool ratchet::scene::GameScene::SceneRender(void) {
     if (_text_system->IsActive()) {
         _text_system->Render();
     } // if
+
+    if (_show_how_to_play) {
+        auto desc = GameDescription();
+        desc.Render(super::GetResource());
+    } // if
+
     return true;
 }
 
@@ -137,7 +153,8 @@ ratchet::scene::GameScene::GameScene() :
     _event(),
     _text_system(std::make_shared<ratchet::game::gamesystem::text::TextSystem>()),
     _loading_counter(),
-    _loading_dot_count(0) {
+    _loading_dot_count(0),
+    _show_how_to_play(false) {
     _loading_counter.Initialize(1.0f, true);
 }
 
@@ -164,7 +181,12 @@ void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr
     } // if
     if (type == "PlayerDead") {
         // retry
+        _player_dead = true;
         _re_initialize = true;
+
+        ptr->RemoveObserver(shared_from_this());
+        _delete_actors.push_back(ptr);
+
     } // if
     if (type == "GameClear") {
         _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kClearScene, ""));
@@ -257,6 +279,11 @@ std::string ratchet::scene::GameScene::GetName(void) {
 bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
     super::Load(param);
 
+    game::gamesystem::text::TextSystemOpenMessageObservation::Singleton().LinkObservation(
+        std::dynamic_pointer_cast <ratchet::game::gamesystem::text::TextSystemOpenMessageListener
+        >(shared_from_this())
+    );
+
     super::_load_thread = std::thread([&]() {
         if (auto r = _resource.lock()) {
             auto path = "../Resource/scene_resource/game_scene.txt";
@@ -318,10 +345,11 @@ bool ratchet::scene::GameScene::Initialize(void) {
         item0->SetText("タイトルに戻る");
 
         auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            this->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
+            //this->_subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""))
+            _show_how_to_play = true;
             return true;
         });
-        item1->SetText("リトライ");
+        item1->SetText("操作説明");
 
         auto item2 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
             _game.lock()->GetGamePauseSystem()->Inactive();
@@ -360,6 +388,8 @@ bool ratchet::scene::GameScene::Release(void) {
     ratchet::event::EventReferenceTable::Singleton().Dispose("GameManager");
     ratchet::event::EventReferenceTable::Singleton().Reset();
 
+    using o = ratchet::ObservationManager();
+
     super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {
@@ -368,7 +398,9 @@ bool ratchet::scene::GameScene::Release(void) {
         game->GameSystemRelease();
     } // if
 
-    _text_system->Release();
+    if (_text_system) {
+        _text_system->Release();
+    } // if
     _text_system.reset();
     return true;
 }
