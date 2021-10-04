@@ -8,6 +8,7 @@
 #include "../Actor/Character/Player.h"
 #include "../Event/EventReferenceTable.h"
 #include "../Component/CameraComponent.h"
+#include "../Camera/FollowCameraController.h"
 
 
 ratchet::event::ShipEvent::ShipEvent() :
@@ -91,13 +92,17 @@ bool ratchet::event::ShipEvent::Update(float delta_time) {
 
         auto player = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
         if (player) {
-            auto dir = _ship_generate_position - player->GetPosition();
+            //auto dir = _ship_generate_position - player->GetPosition();
+            auto dir = player->GetPosition() - _ship_generate_position;
             float angle_y = std::atan2f(-dir.z, dir.x) + math::kHalfPi;
+
+            player->SetRotate(Mof::CVector3(0.0f, angle_y, 0.0f));
 
             auto camera_com = player->GetComponent<component::CameraComponent>();
             auto camera_controller = camera_com->GetCameraController()->GetService();
             camera_controller->RegisterGlobalCamera();
             camera_controller->SetAzimuth(math::ToDegree(angle_y));
+            camera_com->OnPull();
         } // if
 
 

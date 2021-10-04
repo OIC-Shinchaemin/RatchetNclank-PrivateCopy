@@ -51,7 +51,7 @@ bool ratchet::scene::GameSceneInitializer::AddPlayer(std::shared_ptr<ratchet::ga
         param.transform.position = init_position;
     } // if
     else {
-        Mof::CVector3 revival_position = Mof::CVector3(55.0, -25.0f, 25.0f);
+        Mof::CVector3 revival_position = Mof::CVector3(75.0, -25.0f, 17.0f);
         param.transform.position = revival_position;
     } // else
 
