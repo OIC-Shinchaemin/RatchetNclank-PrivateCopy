@@ -415,6 +415,12 @@
     <Filter Include="Ratchet\Source\Component\SenseEffect">
       <UniqueIdentifier>{851f7587-141d-43e8-82a7-cd5efce47d35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\User">
+      <UniqueIdentifier>{14653347-d284-4c4a-8e04-55d363222b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\User">
+      <UniqueIdentifier>{bb4ba47d-e8da-46e5-a196-fe6bb28d7a2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -1358,6 +1364,12 @@
     </ClCompile>
     <ClCompile Include="Component\SenseEffect\SenseEffectComponent.cpp">
       <Filter>Ratchet\Source\Component\SenseEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\User\UserActionHelper.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\User</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UserActionHelperMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2617,6 +2629,15 @@
     </ClInclude>
     <ClInclude Include="Component\SenseEffect\SenseEffectComponent.h">
       <Filter>Ratchet\Header\Component\SenseEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\CharacterDefine.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\User\UserActionHelper.h">
+      <Filter>Ratchet\Header\Game\GameSystem\User</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UserActionHelperMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

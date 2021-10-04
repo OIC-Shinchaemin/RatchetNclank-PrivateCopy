@@ -66,7 +66,3 @@ bool ratchet::component::queen::QueenComponent::Release(void) {
 std::shared_ptr<ratchet::component::Component> ratchet::component::queen::QueenComponent::Clone(void) {
     return std::make_shared<ratchet::component::queen::QueenComponent>(*this);
 }
-
-bool ratchet::component::queen::QueenComponent::DebugRender(void) {
-    return true;
-}

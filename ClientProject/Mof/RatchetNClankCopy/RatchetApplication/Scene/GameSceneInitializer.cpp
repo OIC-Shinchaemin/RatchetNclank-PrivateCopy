@@ -44,7 +44,18 @@ bool ratchet::scene::GameSceneInitializer::AddPlayer(std::shared_ptr<ratchet::ga
     // player
     param.name = "player";
     param.tag = "Player";
-    param.transform.position = Mof::CVector3(5.0f, 5.0f, -5.0f);
+
+
+    if (!out->_player_dead) {
+        Mof::CVector3 init_position = Mof::CVector3(5.0f, 5.0f, -5.0f);
+        param.transform.position = init_position;
+    } // if
+    else {
+        Mof::CVector3 revival_position = Mof::CVector3(55.0, -25.0f, 25.0f);
+        param.transform.position = revival_position;
+    } // else
+
+
     param.transform.rotate = Mof::CVector3(0.0f, -math::kHalfPi, 0.0f);
     auto player = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::character::Player>("../Resource/builder/player.json", &param);
     ratchet::event::EventReferenceTable::Singleton().Register(player->GetName(), player);
@@ -84,6 +95,12 @@ bool ratchet::scene::GameSceneInitializer::AddPlayer(std::shared_ptr<ratchet::ga
         auto weapon_system = game->GetWeaponSystem();
         auto quick_change = game->GetQuickChange();
         auto help_desk = game->GetHelpDesk();
+        auto user_action_helper = game->GetUserActionHelper();
+
+        user_action_helper->SetResourceManager(out->_resource);
+        user_action_helper->SetUICanvas(out->_ui_canvas);
+        user_action_helper->RegisterUI();
+        player->GetCharacterTalkableMessageSubject()->AddObserver(user_action_helper);
 
         player->GetShopSystemSubject()->AddObserver(game->GetShopSystem());
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());

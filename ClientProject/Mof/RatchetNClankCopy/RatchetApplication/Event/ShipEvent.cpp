@@ -87,6 +87,8 @@ bool ratchet::event::ShipEvent::Update(float delta_time) {
         return false;
     } // if
     if (_timer.Tick(delta_time)) {
+        _ship_view_camera_controller.Release();
+
         auto player = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
         if (player) {
             auto dir = _ship_generate_position - player->GetPosition();

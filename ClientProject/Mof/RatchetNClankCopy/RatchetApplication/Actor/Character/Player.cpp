@@ -20,16 +20,12 @@ ratchet::actor::character::Player::Player() :
     _shop_system_subject("ShopSystem"),
     _quick_change_subject("QuickChange"),
     _notificationable_subject_map(),
-    _notificationable_subject_stack() {
+    _notificationable_subject_stack(),
+    //_character_talkable_message_subject(std::make_shared<actor::character::CharacterTalkableMessageSubject>()){
+    _character_talkable_message_subject(){
     super::SetTag("Player");
     _notificationable_subject_map.emplace("QuickChange", &_quick_change_subject);
     _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
-
-
-
-
-    //
-    //_sense_effect_child_actor->GetComponent<component::BillboardComponent>()->Activate();
 }
 
 ratchet::actor::character::Player::~Player() {

@@ -42,6 +42,10 @@ DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
 
 namespace ratchet {
 constexpr int kTextWidth = 12;
+constexpr int kWindowWidth = 1920;
+//constexpr int kWindowWidth = 1024;
+constexpr int kWindowHiehgt = 1080;
+//constexpr int kWindowHiehgt = 768;
 ///static debug::DebugManager g_DebugManager;
 
 struct Transform {
