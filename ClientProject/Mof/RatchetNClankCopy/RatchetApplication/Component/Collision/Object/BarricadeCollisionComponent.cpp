@@ -68,30 +68,4 @@ std::shared_ptr<ratchet::component::Component> ratchet::component::collision::Ba
 }
 
 void ratchet::component::collision::BarricadeCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
-    /*
-    auto ray = this->GetRay().value();
-    Mof::COLLISIONOUTGEOMETRY info;
-    float margin = 0.1f;
-
-    for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
-        auto geometry = mesh->GetGeometry(i);
-        auto default_matrix = geometry->GetMatrix();
-        Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
-        geometry->SetMatrix(mat);
-
-        if (ray.CollisionGeometry(geometry, info)) {
-            if (info.d <= _height + margin) {
-                auto pos = super::GetOwner()->GetPosition();
-                pos.y += _height + margin - info.d;
-                super::GetOwner()->SetPosition(pos);
-                if (auto state_com = _state_com.lock()) {
-                    if (state_com->CanTransition(state::BarricadeActionStateType::kBarricadeActionIdleState)) {
-                        state_com->ChangeState(state::BarricadeActionStateType::kBarricadeActionIdleState);
-                    } // if
-                } // if
-            } // if
-        } // if
-        geometry->SetMatrix(default_matrix);
-    } // for
-    */
 }

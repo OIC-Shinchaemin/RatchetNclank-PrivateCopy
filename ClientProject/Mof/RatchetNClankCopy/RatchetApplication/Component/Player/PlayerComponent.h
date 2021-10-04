@@ -47,6 +47,7 @@ private:
     void CacheComponent(void);
     void CollisionFunctionBarrack(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
     void CollisionFunctionBarricade(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionFence(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
     void CollisionFunctionKing(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
     void CollisionFunctionQueen(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
     void CollisionFunctionScarecrow(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);

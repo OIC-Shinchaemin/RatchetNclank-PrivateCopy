@@ -34,21 +34,23 @@ public:
     std::shared_ptr<Subject> CreateSubject(void) {
         auto ret = std::make_shared<Subject>();
         _subjects.push_back(ret);
-        for (auto& listener : _listeners) {
-            ret->AddObserver(listener);
+        for (auto weak : _listeners) {
+            if (auto listener = weak.lock()) {
+                ret->AddObserver(listener);
+            } // if
         } // for
         return ret;
     }
     void LinkObservation(const std::shared_ptr<Listener>& observer) {
         _listeners.push_back(observer);
-        for (auto& weak : _subjects) {
+        for (auto weak : _subjects) {
             if (auto subject = weak.lock()) {
                 subject->AddObserver(observer);
             } // if
         } // for
     }
     void Clear(void) {
-        for (auto& weak : _subjects) {
+        for (auto weak : _subjects) {
             if (auto subject = weak.lock()) {
                 subject->Clear();
             } // if

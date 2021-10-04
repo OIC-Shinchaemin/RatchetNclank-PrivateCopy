@@ -9,6 +9,8 @@
 
 #include <Mof.h>
 
+#include "../../MeshComponent.h"
+
 
 namespace ratchet::component::collision {
 class FenceCollisionComponent : public ratchet::component::collision::CollisionComponent {
@@ -18,6 +20,8 @@ private:
     //std::weak_ptr<ratchet::component::ship::FenceStateComponent> _state_com;
     //! 高さ
     float _height;
+    //! メッシュ
+    std::weak_ptr<ratchet::component::MeshComponent> _mesh;
 public:
     /// <summary>
     /// コンストラクタ

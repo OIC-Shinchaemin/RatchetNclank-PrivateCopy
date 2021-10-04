@@ -77,8 +77,35 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionBarricade(std
         super::GetOwner()->SetPosition(pos);
         return true;
     }));
+}
 
+void ratchet::component::player::PlayerComponent::CollisionFunctionFence(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
+                               ratchet::component::collision::CollisionComponentType::kFenceCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto owner = super::GetOwner();
+        auto pos = owner->GetPosition();
+        auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
+        Mof::CVector3 velocity = (velocity_com->GetVelocity()) * def::kDeltaTime;
 
+        pos.x += -velocity.x;
+        pos.z += -velocity.z;
+        super::GetOwner()->SetPosition(pos);
+        return true;
+    }));
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kFenceCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        auto owner = super::GetOwner();
+        auto pos = owner->GetPosition();
+        auto velocity_com = owner->GetComponent<ratchet::component::VelocityComponent>();
+        Mof::CVector3 velocity = (velocity_com->GetVelocity()) * def::kDeltaTime;
+
+        pos.x += -velocity.x;
+        pos.z += -velocity.z;
+        super::GetOwner()->SetPosition(pos);
+        return true;
+    }));
 }
 
 void ratchet::component::player::PlayerComponent::CollisionFunctionKing(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& coll_com) {
@@ -275,6 +302,7 @@ bool ratchet::component::player::PlayerComponent::Initialize(void) {
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::PlayerCollisionComponent>();
     this->CollisionFunctionBarrack(coll_com);
     this->CollisionFunctionBarricade(coll_com);
+    this->CollisionFunctionFence(coll_com);
     this->CollisionFunctionKing(coll_com);
     this->CollisionFunctionQueen(coll_com);
     this->CollisionFunctionScarecrow(coll_com);

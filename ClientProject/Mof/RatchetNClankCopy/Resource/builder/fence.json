@@ -21,6 +21,13 @@
         "priority": 0,
         "path": "../Resource/mesh/fence/fence.mom"
       }
+    },
+
+    {
+      "type": "FenceCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
     }
   ]
 }
