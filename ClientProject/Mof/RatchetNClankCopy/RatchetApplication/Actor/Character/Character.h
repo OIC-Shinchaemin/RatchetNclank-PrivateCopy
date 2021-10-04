@@ -14,13 +14,11 @@ namespace ratchet::actor::character {
 struct CharacterDamageApplyMessage {
     std::string damaged_character_tag;
 };
-//using CharacterDamageApplyMessageSubject = base::core::Observable<const CharacterDamageApplyMessage&>;
-//using CharacterDamageApplyMessageListener = base::core::Observer<const CharacterDamageApplyMessage&>;
-
 struct CharacterDamageApplyMessageSubject : public base::core::Observable<const CharacterDamageApplyMessage&> {
 };
 struct CharacterDamageApplyMessageListener : public base::core::Observer<const CharacterDamageApplyMessage&> {
 };
+
 struct CharacterDamageApplyMessageFactory {
     CharacterDamageApplyMessageFactory() {
     }
