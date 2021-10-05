@@ -12,9 +12,6 @@
 #include "../../Scene/Scene.h"
 
 
-//namespace ratchet::scene {
-//class GameScene;
-//}
 namespace ratchet::actor::character {
 class Player;
 class King :
@@ -29,7 +26,6 @@ private:
     //! ハテナ
     std::weak_ptr<Mof::CTexture> _question_texture;
     //! カカシ追加先ゲームシーン
-    //std::weak_ptr<ratchet::scene::GameScene> _actor_container;
     std::weak_ptr<ratchet::scene::Scene> _actor_container;
     //! 回数
     int _quest_index;

@@ -14,6 +14,7 @@
 #include "GameSystem/OptionSystem.h"
 #include "GameSystem/GamePauseSystem.h"
 #include "GameSystem/Mission/MissionSystem.h"
+#include "GameSystem/User/UserActionHelper.h"
 
 
 namespace ratchet::game {
@@ -41,6 +42,9 @@ private:
     std::shared_ptr<ratchet::game::gamesystem::GamePauseSystem> _pause_system;
     //! ミッション
     std::shared_ptr<ratchet::game::gamesystem::mission::MissionSystem> _mission_system;
+    //! ヘルパー
+    std::shared_ptr<ratchet::game::gamesystem::user::UserActionHelper> _user_action_helper;
+
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -117,6 +121,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<ratchet::game::gamesystem::GamePauseSystem> GetGamePauseSystem(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::game::gamesystem::user::UserActionHelper> GetUserActionHelper(void) const;
     /// <summary>
     /// 読み込み
     /// </summary>

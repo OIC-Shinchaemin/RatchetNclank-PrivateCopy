@@ -3,6 +3,7 @@
 
 
 #include "Scene.h"
+#include "../GameDefine.h"
 
 
 namespace ratchet::scene {
@@ -11,13 +12,26 @@ private:
 public:
     void Render(std::shared_ptr<ratchet::ResourceMgr> r) {
         auto font = r->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
-
         const char* text;
+        
+        {
+            auto pos = Mof::CVector2(400.0, 100.0f);
+            if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
+                pos *= ratchet::kWindowPerXGA;
+            } // if
 
-        text = "ゲームの操作説明";
-        ::CGraphicsUtilities::RenderString(400.0, 100.0f, text);
+            text = "ゲームの操作説明";
+            ::CGraphicsUtilities::RenderString(pos.x, pos.y, text);
+            //font->RenderString(pos.x, pos.y, text);
+        }
+        {
+            auto pos = Mof::CVector2(130.0, 240.0f);
+            if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
+                pos *= ratchet::kWindowPerXGA;
+            } // if
 
-        text = " ◆ ESCAPEキーでゲーム終了\n\n \
+
+            text = " ◆ ESCAPEキーでゲーム終了\n\n \
 ◆ Nキーで攻撃\n\n \
 ◆ Jキーでジャンプ\n\n \
 ◆ Shiftキーで変更 武器選択はShift長押しで0~8キー\n\n \
@@ -25,11 +39,23 @@ public:
 ◆ WASDキーで移動\n\n \
 ◆ 十字キーでカメラ移動\n\n \
 ◆ Qキーでカメラ補正\n";
-        ::CGraphicsUtilities::RenderString(130.0 + 1, 240.0f + 1, def::color_rgba_u32::kBlue, text);
-        ::CGraphicsUtilities::RenderString(130.0, 240.0f, text);
+            ::CGraphicsUtilities::RenderString(pos.x + 1, pos.y + 1, def::color_rgba_u32::kBlue, text);
+            //font->RenderString(pos.x + 1, pos.y + 1, def::color_rgba_u32::kBlue, text);
+            ::CGraphicsUtilities::RenderString(pos.x, pos.y, text);
+            //font->RenderString(pos.x, pos.y, text);
+        }
 
-        text = "Startボタン・Shiftキーで戻る";
-        ::CGraphicsUtilities::RenderString(460.0, 700.0f, text);
+        {
+            auto pos = Mof::CVector2(460.0, 700.0f);
+            if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
+                pos *= ratchet::kWindowPerXGA;
+            } // if
+
+
+            text = "Startボタン・Shiftキーで戻る";
+            ::CGraphicsUtilities::RenderString(pos.x, pos.y, text);
+            //font->RenderString(pos.x, pos.y, text);
+        }
     }
 };
 class DescriptionScene : public ratchet::scene::Scene {

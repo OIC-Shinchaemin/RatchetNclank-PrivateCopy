@@ -72,7 +72,9 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual bool DebugRender(void) override;
+    virtual bool DebugRender(void) override {
+        return true;
+    }
 #endif // _DEBUG
     void TimerStart(void);
 };

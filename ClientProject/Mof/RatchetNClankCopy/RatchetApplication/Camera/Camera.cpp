@@ -37,7 +37,10 @@ Mof::CVector3 ratchet::camera::Camera::GetViewFront(void) {
 bool ratchet::camera::Camera::Initialize(void) {
     // ƒJƒƒ‰‰Šú‰»
     _camera.SetViewPort();
-    _camera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 2000.0f);
+    //_camera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 2000.0f);
+    float width = ::g_pFramework->GetWindow()->GetWidth();
+    float height= ::g_pFramework->GetWindow()->GetHeight();
+    _camera.PerspectiveFov(MOF_ToRadian(60.0f), width / height, 0.01f, 2000.0f);
     this->Update();
     return true;
 }

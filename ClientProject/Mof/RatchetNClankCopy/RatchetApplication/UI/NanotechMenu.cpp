@@ -6,8 +6,9 @@ ratchet::ui::NanotechMenu::NanotechMenu(const char* name) :
     _hp_max(4),
     _hp(_hp_max),
     _resource_manager(),
-    _ui_canvas() {
-    this->SetPosition(Mof::CVector2(800.0f, 24.0f));
+    _ui_canvas(),
+    _scale(ratchet::kWindowPerXGA) {
+    this->SetPosition(Mof::CVector2(1600.0f, 60.0f));
 }
 
 void ratchet::ui::NanotechMenu::OnNotify(int hp) {
@@ -41,12 +42,13 @@ bool ratchet::ui::NanotechMenu::Render(void) {
     } // if
 
     auto size = Mof::CVector2(tex->GetWidth(), tex->GetHeight());
-    auto half_size = size * 0.5f;
+    auto half_size = size * 0.5f * _scale;
     for (int i = 0; i < _hp_max; i++) {
         if (i < _hp) {
-            tex->Render(      pos.x - half_size.x, pos.y - half_size.y);
+            //tex->Render(      pos.x - half_size.x, pos.y - half_size.y);
+            tex->RenderScale(pos.x - half_size.x, pos.y - half_size.y, _scale);
         } // if
-        pos.x += 32.0f * 2.0f;
+        pos.x += 48.0f * 2.0f;
     } // for
     return true;
 }

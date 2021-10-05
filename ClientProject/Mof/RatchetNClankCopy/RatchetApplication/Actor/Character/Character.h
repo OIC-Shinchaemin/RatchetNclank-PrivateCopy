@@ -8,6 +8,7 @@
 #include "Base/Core/Observable.h"
 #include "../../Game/GameSystem/Text/TextSystem.h"
 #include "../../Game/Audio/AudioUtility.h"
+#include "CharacterDefine.h"
 
 
 namespace ratchet::actor::character {

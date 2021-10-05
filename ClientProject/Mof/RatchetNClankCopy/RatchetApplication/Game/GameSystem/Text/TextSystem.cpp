@@ -1,8 +1,7 @@
 #include "TextSystem.h"
 
 #include "../../../DebugManager.h"
-//#include "../../../Component/Player/PlayerStateComponent.h"
-//#include "../../../State/PlayerActionStateDefine.h"
+#include "../../../GameDefine.h"
 
 
 bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
@@ -107,16 +106,16 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
         //コマンドのタイプによって分岐
         switch (_now_command->Type) {
             case CMD_TEXT:
-                TextCommand();
+                this->TextCommand();
                 break;
             case CMD_SELECT:
-                SelectCommand();
+                this->SelectCommand();
                 break;
         } // switch
     } // else if
     //クリックで次のコマンドから実行を再開
     else if (g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        StepCommand();
+        this->StepCommand();
     } // else if
 
     //スプライトのリストを更新する
@@ -143,34 +142,31 @@ void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
         switch (_now_command->Type) {
             case CMD_TEXT:
                 _text_command = *((TEXTCOMMAND*)_now_command);
-                memset(_line_buffer, 0, TEXTBUFFERSIZE);
+                std::memset(_line_buffer, 0, TEXTBUFFERSIZE);
                 _str_wait = 0;
                 _wait = true;
                 break;
             case CMD_SPRITE:
-                SpriteCommand((SPRITECOMMAND*)_now_command);
+                this->SpriteCommand((SPRITECOMMAND*)_now_command);
                 break;
             case CMD_SETPOS:
-                SetPosCommand((SETPOSCOMMAND*)_now_command);
+                this->SetPosCommand((SETPOSCOMMAND*)_now_command);
                 break;
             case CMD_SETSHOW:
-                SetShowCommand((SETSHOWCOMMAND*)_now_command);
+                this->SetShowCommand((SETSHOWCOMMAND*)_now_command);
                 break;
             case CMD_JUMP:
             {
                 NAMECOMMAND* pNameCommand = (NAMECOMMAND*)_now_command;
-                JumpCommand(pNameCommand->Name);
+                this->JumpCommand(pNameCommand->Name);
                 break;
             }
             case CMD_NEXT:
             {
                 NAMECOMMAND* pNameCommand = (NAMECOMMAND*)_now_command;
-                //新しいスクリプトを開くと古い情報が消えてしまうので文字列を取り出す
                 char name[256];
-                strcpy(name, pNameCommand->Name);
-                //スクリプトを読み込む
-                LoadScript(name);
-                //処理を終了させる
+                std::strcpy(name, pNameCommand->Name);
+                this->LoadScript(name);
                 return;
             }
             case CMD_SELECT:
@@ -319,43 +315,45 @@ void ratchet::game::gamesystem::text::TextSystem::IfCommand(IFCOMMAND* pIfComman
         return;
     } // if
     switch (pIfCommand->Op) {
-        case CMP_GRATER:			// >
+        case CMP_GRATER:
             if (_flags[pIfCommand->No] > pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
-        case CMP_GRATEREQUAL:		// >=
+        case CMP_GRATEREQUAL:
             if (_flags[pIfCommand->No] >= pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
-        case CMP_EQUAL:				// =
+        case CMP_EQUAL:
             if (_flags[pIfCommand->No] == pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
-        case CMP_NOTEQUAL:			// !
+        case CMP_NOTEQUAL:
             if (_flags[pIfCommand->No] != pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
-        case CMP_LESSEQUAL:			// <=
+        case CMP_LESSEQUAL:
             if (_flags[pIfCommand->No] <= pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
-        case CMP_LESS:				// <
+        case CMP_LESS:
             if (_flags[pIfCommand->No] < pIfCommand->Value) {
                 JumpCommand(pIfCommand->Name);
             } // if
             break;
-    }
+    } // switch
 }
 
 ratchet::game::gamesystem::text::TextSystem::TextSystem() :
     _active(false),
-    _text_system_closed_message_subject() ,
+    _text_system_closed_message_subject(),
     _text_system_open_message_subject(text::TextSystemOpenMessageObservation::Singleton().CreateSubject()) {
+
+    _text_font.Create(32, "");
 
     ::memset(_line_buffer, 0, TEXTBUFFERSIZE);
 
@@ -375,11 +373,6 @@ ratchet::game::gamesystem::text::TextSystem::~TextSystem() {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::OnNotify(const TextSystemMessage& message) {
-    //if (auto player = _player.lock()) {
-    //    player->Sleep();
-    //} // if
-
-
     //フラグの初期化
     ::memset(_flags, 0, sizeof(int) * _flag_count);
     //スクリプトを読み込む
@@ -433,9 +426,21 @@ bool ratchet::game::gamesystem::text::TextSystem::Render(void) {
     } // if
 
     //表示テキストの下に枠を表示する
-    _text_window_texture.Render(16, 568);
+    auto window_pos = Mof::CVector2(16, 600);
+    if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
+        window_pos.y += 100.0f;
+    } // if
+    _text_window_texture.RenderScale(window_pos.x, window_pos.y, ratchet::kWindowPerXGA, ratchet::kWindowPerXGA * 0.8, MOF_ARGB(255, 255, 255, 255));
+    
     //表示テキストを描画する
-    ::CGraphicsUtilities::RenderString(_text_command.px, _text_command.py, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
+    auto command_pos = Mof::CVector2(_text_command.px, _text_command.py) ;
+    if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
+        command_pos.x += 20.0f;
+        command_pos.y += 140.0f;
+    } // if
+    //    command_pos *= ratchet::kWindowPerXGA;
+    //::CGraphicsUtilities::RenderString(command_pos.x, command_pos.y, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
+    _text_font.RenderString(command_pos.x, command_pos.y, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
 
 
     // debug 

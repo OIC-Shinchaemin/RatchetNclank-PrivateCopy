@@ -64,10 +64,6 @@ std::shared_ptr<ratchet::component::Component> ratchet::component::effect::Sense
     return std::make_shared<ratchet::component::effect::SenseEffectComponent>(*this);
 }
 
-bool ratchet::component::effect::SenseEffectComponent::DebugRender(void) {
-    return true;
-}
-
 void ratchet::component::effect::SenseEffectComponent::TimerStart(void) {
     _timer.Initialize(1.0f, false);
 }

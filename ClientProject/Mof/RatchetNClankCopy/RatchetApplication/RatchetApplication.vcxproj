@@ -506,6 +506,7 @@
     <ClCompile Include="Game\GameSystem\Text\Script.cpp" />
     <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp" />
     <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp" />
+    <ClCompile Include="Game\GameSystem\User\UserActionHelper.cpp" />
     <ClCompile Include="Game\GameSystem\WeaponSystem.cpp" />
     <ClCompile Include="Game\GameWorld.cpp" />
     <ClCompile Include="Game\Graphics\RenderAnimationMeshCommand.cpp" />
@@ -564,6 +565,7 @@
     <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp" />
     <ClCompile Include="UI\TitleInfoMenu.cpp" />
     <ClCompile Include="UI\UICreator.cpp" />
+    <ClCompile Include="UI\UserActionHelperMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -596,6 +598,7 @@
     <ClInclude Include="Actor\Bullet\EnemyBullet.h" />
     <ClInclude Include="Actor\Bullet\PyrocitorBullet.h" />
     <ClInclude Include="Actor\Character\Character.h" />
+    <ClInclude Include="Actor\Character\CharacterDefine.h" />
     <ClInclude Include="Actor\Character\Enemy.h" />
     <ClInclude Include="Actor\Character\King.h" />
     <ClInclude Include="Actor\Character\Player.h" />
@@ -919,6 +922,7 @@
     <ClInclude Include="Game\GameSystem\Text\SpriteSet.h" />
     <ClInclude Include="Game\GameSystem\Text\TextSystem.h" />
     <ClInclude Include="Game\GameSystem\Text\TextSystemDefine.h" />
+    <ClInclude Include="Game\GameSystem\User\UserActionHelper.h" />
     <ClInclude Include="Game\GameSystem\WeaponSystem.h" />
     <ClInclude Include="Game\GameWorld.h" />
     <ClInclude Include="Game\Graphics\RenderAnimationMeshCommand.h" />
@@ -986,6 +990,7 @@
     <ClInclude Include="UI\Shop\ShopSystemMainMenu.h" />
     <ClInclude Include="UI\TitleInfoMenu.h" />
     <ClInclude Include="UI\UICreator.h" />
+    <ClInclude Include="UI\UserActionHelperMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resource\scene_resource\clear_scene.txt" />
