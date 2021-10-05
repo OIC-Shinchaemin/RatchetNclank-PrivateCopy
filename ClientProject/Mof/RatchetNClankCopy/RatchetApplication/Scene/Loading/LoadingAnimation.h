@@ -29,6 +29,8 @@ private:
     int _loading_dot_count;
     //! åoâﬂéûä‘ / èäóvéûä‘
     float _loading_progress;
+    //! à íu
+    Mof::CVector2 _position;
 public:
     LoadingDotAnimation() :
         super(),
@@ -36,6 +38,8 @@ public:
         _loading_dot_count(0),
         _loading_progress() {
         _loading_counter.Initialize(1.0f, true);
+
+        _position = Mof::CVector2(1700.0f, 900.0f);
     }
     virtual ~LoadingDotAnimation() {
     }
@@ -55,7 +59,9 @@ public:
         for (int i = 0; i < _loading_dot_count; i++) {
             text += ".";
         } // for
-        ::CGraphicsUtilities::RenderString(800.0f, 700.0f, def::color_rgba_u32::kWhite, text.c_str());
+        ::CGraphicsUtilities::RenderString(
+            _position.x, _position.y, 
+            def::color_rgba_u32::kWhite, text.c_str());
         return true;
     }
 };

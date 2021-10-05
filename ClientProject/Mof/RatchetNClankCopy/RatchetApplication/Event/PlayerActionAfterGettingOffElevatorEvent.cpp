@@ -50,7 +50,7 @@ void ratchet::event::PlayerActionAfterGettingOffElevatorEvent::Start(void) {
         jump_up_com->SetMoveSpeed(6.5f);
         jump_up_com->SetGravityDown(0.5f);
         jump_set_com->Start();
-        state->ChangeState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        player->GetComponent<ratchet::component::ActionStateComponent>()->ChangeState(state::PlayerActionStateType::kPlayerActionJumpSetState);
     } // if
 }
 

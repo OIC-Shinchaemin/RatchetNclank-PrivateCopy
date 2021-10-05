@@ -53,11 +53,20 @@ public:
     /// </summary>
     virtual ~StageObject(void);
 
+    virtual void SetPosition(const Vector3& pos);
+
     /// <summary>
     /// セッター
     /// </summary>
     /// <param name="flag"></param>
     virtual void SetShow(bool flag);
+    void SetEnable(bool b);
+
+    void SetName(const std::string& name);
+
+    void SetType(StageObjectType type);
+
+    void SetMeshNo(int no);
     /// <summary>
     /// 表示フラグの取得
     /// </summary>
@@ -73,75 +82,56 @@ public:
     /// </summary>
     /// <returns>当たり判定フラグ</returns>
     bool IsCollisionEnable(void) const;
-
     /// <summary>
     /// 種類の取得
     /// </summary>
     /// <returns>種類</returns>
     StageObjectType GetType(void) const;
-
     /// <summary>
     /// 名前の取得
     /// </summary>
     /// <returns>名前</returns>
     std::string GetName(void) const;
-
     /// <summary>
     /// メッシュ番号の取得
     /// </summary>
     /// <returns>メッシュ番号</returns>
     int GetMeshNo(void) const;
-
     /// <summary>
     /// 座標の取得
     /// </summary>
     /// <returns>座標</returns>
     Vector3 GetPosition(void) const;
-
     /// <summary>
     /// 拡大の取得
     /// </summary>
     /// <returns>拡大</returns>
     Vector3 GetScale(void) const;
-
     /// <summary>
     /// 回転の取得
     /// </summary>
     /// <returns>回転</returns>
     Vector3 GetRotate(void) const;
-
     /// <summary>
     /// ワールドマトリクスの取得
     /// </summary>
     /// <returns>ワールドマトリクス</returns>
     CMatrix44 GetWorldMatrix(void) const;
-
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CSphere GetGeometrySphere(int index) const;
-
     /// <summary>
     /// 描画用マトリクスの再計算
     /// </summary>
     void RefreshWorldMatrix(void);
-
     /// <summary>
     /// 生成
     /// </summary>
     void GenerateCollisionVolume(const MeshArray& meshes);
-    
-    void SetEnable(bool b);
 
-    void SetName(const std::string& name);
-
-    void SetType(StageObjectType type);
-
-    void SetMeshNo(int no);
-
-    virtual void SetPosition(const Vector3& pos);
 
     /// <summary>
     /// デバッグ

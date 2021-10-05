@@ -54,6 +54,12 @@ public:
     /// <returns></returns>
     int GetHp(void) const;
     /// <summary>
+    /// ƒQƒbƒ^[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetHpMax(void) const;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>

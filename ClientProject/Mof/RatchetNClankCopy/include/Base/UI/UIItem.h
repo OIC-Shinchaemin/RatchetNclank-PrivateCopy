@@ -14,8 +14,7 @@
 #include "../Core/Define.h"
 
 
-namespace base {
-namespace ui {
+namespace base::ui {
 class UIItem : 
     public std::enable_shared_from_this<base::ui::UIItem>,
     public core::Observable<const std::shared_ptr<base::ui::UIItem>&, const char* > {
@@ -24,6 +23,8 @@ protected:
     std::string _name;
     //! 位置
     Mof::CVector2 _position;
+    //! 位置
+    Mof::CVector2 _scale;
     //! テクスチャ
     std::weak_ptr<Mof::CTexture> _texture;
     //! 色
@@ -48,6 +49,11 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
+    /// <param name="scale"></param>
+    void SetScale(Mof::CVector2 scale);
+    /// <summary>
+    /// セッター
+    /// </summary>
     /// <param name="ptr"></param>
     void SetTexture(const std::shared_ptr<Mof::CTexture>& ptr);
     /// <summary>
@@ -62,6 +68,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     Mof::CVector2 GetPosition(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    Mof::CVector2 GetScale(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -107,6 +119,5 @@ public:
     /// <returns></returns>
     virtual bool DebugRender(void);
 };
-}
 }
 #endif // !BASE_UI_UI_ITEM_H

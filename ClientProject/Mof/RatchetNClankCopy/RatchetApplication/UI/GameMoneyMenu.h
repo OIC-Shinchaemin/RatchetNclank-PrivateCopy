@@ -16,7 +16,6 @@
 
 namespace ratchet ::ui {
 class GameMoneyMenu : public base::ui::UIPanel,
-    //public base::core::Observer<int> {
     public ratchet::game::gamesystem::GameMoneyMessageListener {
     using super = base::ui::UIPanel;
 private:
@@ -44,7 +43,6 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="money"></param>
-    //virtual void OnNotify(int money) override;
     virtual void OnNotify(const ratchet::game::gamesystem::GameMoneyMessage& message) override;
     /// <summary>
     /// セッター

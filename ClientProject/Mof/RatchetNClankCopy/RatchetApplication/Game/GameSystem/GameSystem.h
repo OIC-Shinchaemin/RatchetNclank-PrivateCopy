@@ -23,10 +23,9 @@ namespace ratchet::game::gamesystem {
 class GameSystem : 
     public std::enable_shared_from_this<ratchet::game::gamesystem::GameSystem>,
     public base::core::Observer<bool> {
-    using this_type = ratchet::game::gamesystem::GameSystem;
 private:
     //! 通知用
-    base::core::Observable<const std::shared_ptr<this_type>&> _subject;
+    base::core::Observable<const std::shared_ptr<GameSystem>&> _subject;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
@@ -86,7 +85,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const std::shared_ptr<this_type>&>* GetSubject(void);
+    base::core::Observable<const std::shared_ptr<GameSystem>&>* GetSubject(void);
     /// <summary>
     /// 更新
     /// </summary>

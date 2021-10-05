@@ -13,7 +13,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet ::ui {
+namespace ratchet::ui {
 class TitleInfoMenu : public base::ui::UIPanel, public base::core::Observer<bool> {
     using super = base::ui::UIPanel;
     //! 表示テキストの種類
@@ -55,8 +55,6 @@ private:
     base::core::Timer _blinking_off_timer;
     //! 点滅表示中
     bool _blinking_on;
-    //! 表示テキスト
-    //std::vector<TextElem> _text_elements;
     //! パス
     std::string _texture_path;
 public:

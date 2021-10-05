@@ -10,6 +10,14 @@
 
 
 namespace ratchet {
+template<typename MessageType>
+struct AbstructMessageSubject : public base::core::Observable<const MessageType&> {
+    using Message = const MessageType&;
+};
+template<typename MessageType>
+struct AbstructMessageListener : public base::core::Observer<const MessageType&> {
+    using Message = const MessageType&;
+};
 template<typename SubjectType, typename ListenerType>
 class MessageObservation {
 public:
@@ -17,7 +25,6 @@ public:
     using Listener = ListenerType;
 private:
     //! ŠÄ‹‘ÎÛ
-    //std::vector<std::shared_ptr<Subject>> _subjects;
     std::vector<std::weak_ptr<Subject>> _subjects;
     //! ŠÄ‹Ò
     std::vector<std::weak_ptr<Listener>> _listeners;

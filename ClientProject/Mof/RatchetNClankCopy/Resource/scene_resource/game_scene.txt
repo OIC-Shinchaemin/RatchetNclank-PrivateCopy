@@ -30,6 +30,9 @@
 ../Resource/texture/icon/nanotech.png
 ../Resource/texture/nanotech/nanotech.png
 ../Resource/texture/nanotech/nanotech_empty.png
+../Resource/texture/nanotech/guage_base.png
+../Resource/texture/nanotech/guage_red.png
+
 
 ../Resource/texture/money/money.png
 ../Resource/texture/lock_on_cursor/cursor.png

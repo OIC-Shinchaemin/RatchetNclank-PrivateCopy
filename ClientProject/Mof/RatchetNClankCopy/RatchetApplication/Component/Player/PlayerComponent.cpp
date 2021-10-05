@@ -114,6 +114,10 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionKing(std::sha
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
         _contact_mode = true;
+
+        actor::character::CharacterTalkableMessage message;
+        message.can = true;
+        this->GetOwnerCastd()->GetCharacterTalkableMessageSubject()->Notify(message);
         return true;
     }));
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
@@ -121,6 +125,9 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionKing(std::sha
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target.reset();
         _contact_mode = false;
+        actor::character::CharacterTalkableMessage message;
+        message.can = false;
+        this->GetOwnerCastd()->GetCharacterTalkableMessageSubject()->Notify(message);
         return true;
     }));
 }
@@ -131,6 +138,9 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionQueen(std::sh
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
         _contact_mode = true;
+        actor::character::CharacterTalkableMessage message;
+        message.can = true;
+        this->GetOwnerCastd()->GetCharacterTalkableMessageSubject()->Notify(message);
         return true;
     }));
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
@@ -138,6 +148,9 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionQueen(std::sh
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target.reset();
         _contact_mode = false;
+        actor::character::CharacterTalkableMessage message;
+        message.can = false;
+        this->GetOwnerCastd()->GetCharacterTalkableMessageSubject()->Notify(message);
         return true;
     }));
 }

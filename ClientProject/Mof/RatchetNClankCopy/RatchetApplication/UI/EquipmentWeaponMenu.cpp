@@ -6,7 +6,9 @@ ratchet::ui::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
     _info(),
     _tex_names(),
     _resource() {
-    this->SetPosition(Mof::CVector2(10.0f, 700.0f));
+    auto window_height = ::g_pFramework->GetWindow()->GetHeight();
+
+    this->SetPosition(Mof::CVector2(16.0f, window_height - 96.0f));
     _tex_names.emplace("", "");
     _tex_names.emplace("BombGlove", "../Resource/texture/icon/bomb_glove.png");
     _tex_names.emplace("Pyrocitor", "../Resource/texture/icon/pyrocitor.png");
@@ -42,7 +44,9 @@ bool ratchet::ui::EquipmentWeaponMenu::Render(void) {
         auto it = _tex_names.find(_info.name);
         if (it != _tex_names.end()) {
             if (auto tex = r->Get<std::shared_ptr<Mof::CTexture>>(it->second.c_str())) {
-                tex->RenderScale(super::_position.x, super::_position.y, 0.7f);
+                float scale = 0.7f;
+
+                tex->RenderScale(super::_position.x, super::_position.y, scale);
 
                 if (auto resource = _resource.lock()) {
                     auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");

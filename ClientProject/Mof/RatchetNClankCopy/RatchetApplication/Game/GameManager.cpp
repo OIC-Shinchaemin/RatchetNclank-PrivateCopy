@@ -15,6 +15,7 @@ ratchet::game::GameManager::GameManager() :
     _option_system(std::make_shared<ratchet::game::gamesystem::OptionSystem>()),
     _pause_system(std::make_shared<ratchet::game::gamesystem::GamePauseSystem>()),
     _mission_system(std::make_shared<ratchet::game::gamesystem::mission::MissionSystem>()),
+    _user_action_helper(std::make_shared<ratchet::game::gamesystem::user::UserActionHelper>()),
     _resource(),
     _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
@@ -65,6 +66,10 @@ std::shared_ptr<ratchet::game::gamesystem::GamePauseSystem> ratchet::game::GameM
     return this->_pause_system;
 }
 
+std::shared_ptr<ratchet::game::gamesystem::user::UserActionHelper> ratchet::game::GameManager::GetUserActionHelper(void) const {
+    return this->_user_action_helper;
+}
+
 void ratchet::game::GameManager::GameSystemLoad(void) {
     auto save_data = ratchet::game::gamesystem::save::SaveData();
     ratchet::game::gamesystem::save::SaveSystem().Fetch(save_data);
@@ -86,6 +91,7 @@ bool ratchet::game::GameManager::Initialize(void) {
     this->SetPtr(_shop_system);
     this->SetPtr(_option_system);
     this->SetPtr(_pause_system);
+    this->SetPtr(_user_action_helper);
     return true;
 }
 
@@ -133,6 +139,7 @@ void ratchet::game::GameManager::GameSystemRelease(void) {
     _disable_systems.clear();
 
 
+    //_user_action_helper->Release();
     _shop_system->Release();
     _quick_change->Release();
     _weapon_system->Release();

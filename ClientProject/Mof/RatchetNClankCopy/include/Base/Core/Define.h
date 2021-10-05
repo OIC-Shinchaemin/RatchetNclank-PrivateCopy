@@ -8,8 +8,10 @@
 namespace def {
 constexpr float kFPS = 60.0f;
 constexpr float kDeltaTime = 1.0f / kFPS;
-constexpr uint32_t kWindowWidth = 1024;
-constexpr uint32_t kWindowHeight = 768;
+//constexpr uint32_t kWindowWidth = 1024;
+constexpr uint32_t kWindowWidth = 1920;
+//constexpr uint32_t kWindowHeight = 768;
+constexpr uint32_t kWindowHeight = 1080;
 constexpr float kWindowWidthF = static_cast<float>(def::kWindowWidth);
 constexpr float kWindowHeightF = static_cast<float>(def::kWindowHeight);
 namespace color_rgba {

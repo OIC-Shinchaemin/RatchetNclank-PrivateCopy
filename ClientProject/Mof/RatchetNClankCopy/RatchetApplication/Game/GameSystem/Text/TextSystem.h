@@ -51,7 +51,8 @@ private:
     std::shared_ptr<TextSystemOpenMessageSubject> _text_system_open_message_subject;
     //! クローズイベント
     std::optional<TextSystemMessage::CloseEvent> _on_close;
-
+    //! フォント
+    Mof::CFont _text_font;
 
     bool Load(const char* name);
     bool LoadScript(const char* name);

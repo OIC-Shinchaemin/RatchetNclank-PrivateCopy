@@ -58,9 +58,12 @@ private:
     //! 通知用
     std::stack<ObservablePair*>_notificationable_subject_stack;
     //! エフェクト
-    std::weak_ptr<effect::EffectContainer>_effect_container;
+    std::weak_ptr<ratchet::effect::EffectContainer>_effect_container;
     //! エフェクト
     std::shared_ptr<actor::Actor> _sense_effect_child_actor;
+    //! 通知用
+    //std::shared_ptr<actor::character::CharacterTalkableMessageSubject>_character_talkable_message_subject;
+    actor::character::CharacterTalkableMessageSubject _character_talkable_message_subject;
 public:
     /// <summary>
     /// コンストラクタ
@@ -91,15 +94,10 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(const ElevatorArrivalMessage& message) override;
     /// <summary>
-    /// 通知
-    /// </summary>
-    /// <param name="change"></param>
-    //virtual void OnNotify(const ratchet::event::PlayerActionAfterGettingOffElevatorEventEndMessage& message) override;
-    /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
-    void SetEffectContainer(const std::shared_ptr<effect::EffectContainer>& ptr);
+    void SetEffectContainer(const std::shared_ptr<ratchet::effect::EffectContainer>& ptr);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -118,6 +116,14 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* GetQuestSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetCharacterTalkableMessageSubject(void) {
+        return &this->_character_talkable_message_subject;
+    }
     /// <summary>
     /// ゲッター
     /// </summary>
