@@ -209,11 +209,9 @@ void ratchet::actor::character::King::Talk(void) {
 
             auto player_actor = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
             auto camera_camera_controller = player_actor->GetComponent<component::CameraComponent>()->GetCameraController()->GetService();
-            //auto player_camera = _player_view_camera_controller->GetService();
             auto dir = super::GetPosition() - player->GetPosition();
             camera_camera_controller->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
             this->PlayerActionLiberate();
-  //          ut::SafeDelete(&param);
         //    _quest_index++;
         } // if
         _event_active = true;

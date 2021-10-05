@@ -1,1 +1,4 @@
-{"param":{"money":189},"weapons":["BombGlove","Pyrocitor","Blaster"]}
+{
+  "param": { "money": 0 },
+  "weapons": [ "BombGlove", "Pyrocitor", "Blaster" ]
+}

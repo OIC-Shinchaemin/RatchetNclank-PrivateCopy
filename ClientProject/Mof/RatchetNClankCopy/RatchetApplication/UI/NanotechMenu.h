@@ -13,7 +13,7 @@
 #include "../GameDefine.h"
 
 
-namespace ratchet ::ui {
+namespace ratchet::ui {
 class NanotechMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
@@ -40,6 +40,8 @@ private:
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource_manager;
+    //! 拡大率
+    float _scale;
 public:
     /// <summary>
     /// コンストラクタ

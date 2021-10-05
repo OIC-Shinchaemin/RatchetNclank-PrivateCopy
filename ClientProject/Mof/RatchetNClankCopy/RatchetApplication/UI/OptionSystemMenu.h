@@ -23,6 +23,8 @@ private:
     Mof::CFont* _font;
     //! 選択中
     bool _selected;
+    //! 拡大率
+    float _scale;
 public:
     /// <summary>
     /// コンストラクタ
@@ -93,6 +95,8 @@ private:
     Mof::CFont _font;
     //! 余白
     float _element_margin_y;
+    //! 拡大率
+    float _scale;
     /// <summary>
     /// ゲッター
     /// </summary>

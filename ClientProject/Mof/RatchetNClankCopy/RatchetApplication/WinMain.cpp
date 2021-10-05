@@ -20,8 +20,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	//Info.WindowCreateInfo.py = 20.0f;
 	Info.WindowCreateInfo.Width = 1920;
 	Info.WindowCreateInfo.Height = 1080;
-	//Info.GraphicsCreateInfo.bWindowed = FALSE;
-	Info.GraphicsCreateInfo.bWindowed = TRUE;
+	Info.GraphicsCreateInfo.bWindowed = FALSE;
+	//Info.GraphicsCreateInfo.bWindowed = TRUE;
 
 	//Info.Flag = MOF_FRAMEWORK_GRAPHICSINITIALIZE | MOF_FRAMEWORK_INPUTINITIALIZE | MOF_FRAMEWORK_APPLICATIONINITIALIZE;
 	Info.pApplication = new CGameApp();

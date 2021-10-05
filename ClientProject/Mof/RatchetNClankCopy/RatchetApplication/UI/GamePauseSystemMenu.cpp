@@ -57,9 +57,13 @@ void ratchet::ui::GamePauseSystemMenu::AddItem(const ratchet::game::gamesystem::
     auto elem = std::make_shared<ElemType>(in.GetText().c_str());
     elem->SetText(in.GetText());
     elem->SetTexture(this->GetTexture(in.GetText()));
+
+    float s = ratchet::kWindowPerXGA * 0.8f;
+    elem->SetScale(Mof::CVector2(s, s));
+
     elem->SetPosition(super::_position);
     
-    super::_position.y += elem->GetSize().y;
+    super::_position.y += elem->GetSize().y * s;
     super::AddElement(elem);
 }
 
@@ -124,9 +128,11 @@ bool ratchet::ui::GamePauseSystemMenuItem::Update(float delta_time) {
 bool ratchet::ui::GamePauseSystemMenuItem::Render(void) {
     auto pos = super::_position;
     auto color = super::_color.ToU32Color();
+    auto s = super::GetScale();
 
     if (auto tex = super::_texture.lock()) {
-        tex->Render(pos.x, pos.y, color);
+        tex->RenderScale(pos.x, pos.y, s.x, s.y, color);
+//        tex->Render(pos.x, pos.y, color);
     } // if
 
     if (debug::DebugManager::GetInstance().IsDebugMode()) {

@@ -42,7 +42,9 @@ bool ratchet::ui::EquipmentWeaponMenu::Render(void) {
         auto it = _tex_names.find(_info.name);
         if (it != _tex_names.end()) {
             if (auto tex = r->Get<std::shared_ptr<Mof::CTexture>>(it->second.c_str())) {
-                tex->RenderScale(super::_position.x, super::_position.y, 0.7f);
+                float scale = 0.7f;
+
+                tex->RenderScale(super::_position.x, super::_position.y, scale);
 
                 if (auto resource = _resource.lock()) {
                     auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
