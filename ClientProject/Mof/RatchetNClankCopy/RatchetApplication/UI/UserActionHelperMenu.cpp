@@ -22,7 +22,7 @@ bool ratchet::ui::UserActionHelperMenu::Update(float delta_time) {
 
 bool ratchet::ui::UserActionHelperMenu::Render(void) {
     auto pos = super::_position;
-    _text = "asfSADvbSd";
-    ::CGraphicsUtilities::RenderString(pos.x, pos.y, _text.c_str());
+    //_text = "asfSADvbSd";
+    //::CGraphicsUtilities::RenderString(pos.x, pos.y, _text.c_str());
     return true;
 }
