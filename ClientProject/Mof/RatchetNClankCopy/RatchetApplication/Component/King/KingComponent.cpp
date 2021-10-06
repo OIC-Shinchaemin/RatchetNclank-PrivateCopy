@@ -40,7 +40,6 @@ bool ratchet::component::king::KingComponent::Initialize(void) {
                                ratchet::component::collision::CollisionComponentType::kPlayerCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         auto billboard = super::GetOwner()->GetComponent<component::BillboardComponent>();
-        //billboard->Activate();
         return true;
     }));
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Exit,
