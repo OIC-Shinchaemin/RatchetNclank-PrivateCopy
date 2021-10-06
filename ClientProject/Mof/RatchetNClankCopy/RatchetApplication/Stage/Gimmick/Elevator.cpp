@@ -244,7 +244,7 @@ void Elevator::SetStageObjectData(bool enable, bool collision, StageObjectType t
 
 void Elevator::DebugRender(void) {
     StageObject::DebugRender();
-    ::CGraphicsUtilities::RenderString(600.0f, 340.0f, "player camera angle = %f", _camera_controller->GetService()->GetAzimuth());
+    //::CGraphicsUtilities::RenderString(600.0f, 340.0f, "player camera angle = %f", _camera_controller->GetService()->GetAzimuth());
 }
 
 float* Elevator::GetStartPosPointer(void) {

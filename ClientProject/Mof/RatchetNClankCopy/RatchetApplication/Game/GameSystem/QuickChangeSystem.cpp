@@ -27,11 +27,10 @@ ratchet::game::gamesystem::QuickChangeSystem::QuickChangeSystem() :
     _state(State::Exit),
     _alpha(0.08f),
     _distance(128.0f),
-    _angles(8)
-//    ,
-//    _resource(),
-//    _ui_canvas() 
-{
+    _angles(8),
+    _blaster_index(2),
+    _empty_index(_angles.size() - 1),
+    _work_index(_empty_index){
 }
 
 ratchet::game::gamesystem::QuickChangeSystem::~QuickChangeSystem() {
@@ -55,7 +54,6 @@ void ratchet::game::gamesystem::QuickChangeSystem::AddInfoObserver(const std::sh
 }
 
 bool ratchet::game::gamesystem::QuickChangeSystem::Initialize(const std::shared_ptr<ratchet::game::gamesystem::WeaponSystem>& weapon_system) {
-    //_ASSERT_EXPR(!_resource.expired(), L"無効なポインタを保持しています");
     _ASSERT_EXPR(super::GetResource(), L"無効なポインタを保持しています");
 
     int n = 0;
@@ -77,7 +75,7 @@ bool ratchet::game::gamesystem::QuickChangeSystem::Initialize(const std::shared_
     menu->SetColor(def::color_rgba::kCyan);
     menu->SetResourceManager(super::GetResource());
     if (auto canvas = super::GetUICanvas()) {
-        canvas->AddElement(menu);
+        //canvas->AddElement(menu);
     } // if
 
     // generate
@@ -95,10 +93,22 @@ bool ratchet::game::gamesystem::QuickChangeSystem::Initialize(const std::shared_
 }
 
 bool ratchet::game::gamesystem::QuickChangeSystem::Update(float delta_time) {
+    if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPull(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPull(MOFKEY_RSHIFT)) {
+        
+        if (_work_index == _empty_index) {
+            _work_index = _blaster_index;
+        } // if
+        else {
+            _work_index = _empty_index;
+        } // else
+        _infomation.current_index = _work_index;
+        this->Close();
+    } // if
+    /*
     // open close
     if (::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_Y) || ::g_pInput->IsKeyPull(MOFKEY_LSHIFT) || ::g_pInput->IsKeyPull(MOFKEY_RSHIFT)) {
         this->Close();
-    } // else if
+    } // if
 
     // index
     float x = g_pGamepad->GetStickHorizontal();
@@ -154,6 +164,7 @@ bool ratchet::game::gamesystem::QuickChangeSystem::Update(float delta_time) {
             return false;
         } // if
     } // else if
+    */
     return true;
 }
 

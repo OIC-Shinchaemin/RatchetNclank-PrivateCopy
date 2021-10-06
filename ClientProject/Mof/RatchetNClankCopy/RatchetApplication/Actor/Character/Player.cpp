@@ -200,7 +200,6 @@ bool ratchet::actor::character::Player::Update(float delta_time) {
     if (_sense_effect_child_actor) {
         _sense_effect_child_actor->SetScale(math::vec3::kOne);
         auto pos = super::GetPosition();
-//        pos.y += 2.0f;
         _sense_effect_child_actor->SetPosition(pos);
         _sense_effect_child_actor->SetRotate(math::vec3::kZero);
         _sense_effect_child_actor->Update(delta_time);
@@ -222,7 +221,6 @@ bool ratchet::actor::character::Player::Render(void) {
     } // if
 
 
-//#ifdef _DEBUG
     if (debug::DebugManager::GetInstance().IsDebugMode()) {
         auto pos = super::GetPosition();
         ::CGraphicsUtilities::RenderString(50.0f, 300.0f, "pos x = %f", pos.x);
@@ -236,15 +234,11 @@ bool ratchet::actor::character::Player::Render(void) {
             } // if
         } // if
     } // if
-//#endif // _DEBUG
     return true;
 }
-#include "../../Event/EventReferenceTable.h"
+
 bool ratchet::actor::character::Player::Release(void) {
     super::Release();
-
-    if (event::EventReferenceTable::Singleton().Exist("")) {
-    } // if
 
     _quest_subject.Clear();
     _shop_system_subject.subject.Clear();

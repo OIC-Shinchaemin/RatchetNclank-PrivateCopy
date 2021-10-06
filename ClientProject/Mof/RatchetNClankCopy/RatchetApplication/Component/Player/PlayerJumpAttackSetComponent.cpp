@@ -5,7 +5,7 @@
 
 ratchet::component::player::action::PlayerJumpAttackSetComponent::PlayerJumpAttackSetComponent(int priority) :
     super(priority),
-    _up_speed(5.0f),
+    _up_speed(4.0f),
     _weapon_com() {
 }
 
