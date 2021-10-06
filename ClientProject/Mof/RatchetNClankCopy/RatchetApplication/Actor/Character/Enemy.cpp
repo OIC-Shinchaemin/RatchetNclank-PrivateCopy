@@ -22,11 +22,6 @@ ratchet::actor::character::Enemy::Enemy() :
     _effect_container(),
     _effect_emitter_holder() {
     super::SetTag("Enemy");
-
-    auto shadow_param = Actor::Param();
-    shadow_param.name = "shadow";
-    _shadow_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::Actor>("builder/shadow.json", &shadow_param);
-
 }
 
 ratchet::actor::character::Enemy::~Enemy() {
@@ -43,7 +38,7 @@ base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::ac
 }
 
 bool ratchet::actor::character::Enemy::Initialize(ratchet::actor::Actor::Param* param) {
-    super::Initialize();
+    super::Initialize(param);
 
     auto shadow_param = Actor::Param();
     shadow_param.name = "shadow";
