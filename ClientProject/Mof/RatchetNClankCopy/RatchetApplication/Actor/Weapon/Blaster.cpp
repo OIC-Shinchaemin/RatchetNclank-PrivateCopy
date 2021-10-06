@@ -6,7 +6,8 @@
 
 
 ratchet::actor::weapon::Blaster::Blaster() :
-    super() {
+    super(),
+    _bullet_scale(0.3f){
     super::SetName("Blaster");
     super::_shot_speed = 5.0f;
     super::_interval_max = 0.06f;
@@ -25,7 +26,10 @@ bool ratchet::actor::weapon::Blaster::Fire(const def::Transform& transform) {
     super::Fire(transform);
     auto param = ratchet::actor::bullet::Bullet::Param();
     param.transform = transform;
-
+    param.transform.scale.x = _bullet_scale;
+    param.transform.scale.y = _bullet_scale;
+    param.transform.scale.z = _bullet_scale;
+    
     if (super::_lock_on_position.has_value()) {
         Mof::CVector3 direction = super::_lock_on_position.value() - param.transform.position;
         direction.Normal(direction);

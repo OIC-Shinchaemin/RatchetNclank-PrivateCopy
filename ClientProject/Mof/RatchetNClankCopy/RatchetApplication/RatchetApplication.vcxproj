@@ -376,6 +376,7 @@
     <ClCompile Include="Component\Collision\Object\WaterFlowCollisionComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Enemy\EnemyGoHomeComponent.cpp" />
+    <ClCompile Include="Component\Enemy\EnemyHpBillboardComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyComponent.cpp" />
     <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp" />
@@ -554,7 +555,6 @@
     <ClCompile Include="TutorialManager.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\GamePauseSystemMenu.cpp" />
-    <ClCompile Include="UI\GimmickAccessSystemMenu.cpp" />
     <ClCompile Include="UI\HelpDeskMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\GameMoneyMenu.cpp" />
@@ -564,7 +564,6 @@
     <ClCompile Include="UI\ShopSystemMenu.cpp" />
     <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp" />
     <ClCompile Include="UI\TitleInfoMenu.cpp" />
-    <ClCompile Include="UI\UICreator.cpp" />
     <ClCompile Include="UI\UserActionHelperMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -770,6 +769,7 @@
     <ClInclude Include="Component\ComponentDefine.h" />
     <ClInclude Include="Component\Enemy\EnemyComponentInclude.h" />
     <ClInclude Include="Component\Enemy\EnemyGoHomeComponent.h" />
+    <ClInclude Include="Component\Enemy\EnemyHpBillboardComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyComponent.h" />
     <ClInclude Include="Component\Enemy\EnemyDamageComponent.h" />
@@ -978,6 +978,7 @@
     <ClInclude Include="State\ShipActionStateDefine.h" />
     <ClInclude Include="State\ShipMotionStateDefine.h" />
     <ClInclude Include="TutorialManager.h" />
+    <ClInclude Include="UI\EnemyHpMenu.h" />
     <ClInclude Include="UI\EquipmentWeaponMenu.h" />
     <ClInclude Include="UI\GamePauseSystemMenu.h" />
     <ClInclude Include="UI\HelpDeskMenu.h" />

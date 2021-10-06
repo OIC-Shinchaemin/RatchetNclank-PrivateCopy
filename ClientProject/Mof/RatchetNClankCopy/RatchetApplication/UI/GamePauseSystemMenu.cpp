@@ -62,8 +62,12 @@ void ratchet::ui::GamePauseSystemMenu::AddItem(const ratchet::game::gamesystem::
     elem->SetScale(Mof::CVector2(s, s));
 
     elem->SetPosition(super::_position);
-    
-    super::_position.y += elem->GetSize().y * s;
+//<<<<<<< Ex185_BulletActionFix
+
+    super::_position.y += elem->GetSize().y;
+//=======    
+    //super::_position.y += elem->GetSize().y * s;
+//>>>>>>> MofLib
     super::AddElement(elem);
 }
 
@@ -128,17 +132,23 @@ bool ratchet::ui::GamePauseSystemMenuItem::Update(float delta_time) {
 bool ratchet::ui::GamePauseSystemMenuItem::Render(void) {
     auto pos = super::_position;
     auto color = super::_color.ToU32Color();
-    auto s = super::GetScale();
+//<<<<<<< Ex185_BulletActionFix
+    auto sca = super::GetScale();
 
     if (auto tex = super::_texture.lock()) {
-        tex->RenderScale(pos.x, pos.y, s.x, s.y, color);
+        tex->RenderScale(pos.x, pos.y, sca.x, sca.y, color);
+//=======
+//    auto s = super::GetScale();
+
+  //  if (auto tex = super::_texture.lock()) {
+    //    tex->RenderScale(pos.x, pos.y, s.x, s.y, color);
+//>>>>>>> MofLib
 //        tex->Render(pos.x, pos.y, color);
     } // if
 
     if (debug::DebugManager::GetInstance().IsDebugMode()) {
         ::CGraphicsUtilities::RenderString(
             pos.x, pos.y, color, _text.c_str());
-
         ::CGraphicsUtilities::RenderString(
             pos.x + 1, pos.y + 1, def::color_rgba_u32::kBlack, _text.c_str());
         ::CGraphicsUtilities::RenderString(

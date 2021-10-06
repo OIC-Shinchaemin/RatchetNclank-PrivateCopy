@@ -41,6 +41,8 @@ bool ratchet::component::bullet::BlasterBulletComponent::Initialize(void) {
 }
 
 bool ratchet::component::bullet::BlasterBulletComponent::Update(float delta_time) {
+    super::Update(delta_time);
+
     return true;
 }
 

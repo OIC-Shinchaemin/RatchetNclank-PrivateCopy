@@ -13,21 +13,35 @@ ratchet::game::gamesystem::user::UserActionHelper::~UserActionHelper() {
 
 void ratchet::game::gamesystem::user::UserActionHelper::OnNotify(const actor::character::CharacterTalkableMessage& message) {
     if (message.can) {
-        _ui.lock()->SetText("asfafas");
+//<<<<<<< Ex185_BulletActionFix
+        _ui.lock()->SetText("Vã‚­ãƒ¼ã§è©±ã—ã‹ã‘ã‚‰ã‚Œã¾ã™");
     } // if
     else {
-        _ui.lock()->SetText("‚ ‚¢‚¤‚¦‚¨");
+        //_ui.lock()->SetText("Nã‚­ãƒ¼ã§æ”»æ’ƒã§ãã¾ã™");
+        _ui.lock()->SetText("");
     } // else
 }
+
+//=======
+      //  _ui.lock()->SetText("asfafas");
+    //} // if
+    //else {
+    //    _ui.lock()->SetText("ã‚ã„ã†ãˆãŠ");
+  //  } // else
+//}
 
 //void ratchet::game::gamesystem::user::UserActionHelper::OnNotify(actor::character::CharacterTalkableMessageListener::Message message) {
 //}
 
+//>>>>>>> MofLib
 bool ratchet::game::gamesystem::user::UserActionHelper::RegisterUI(void) {
-    _ASSERT_EXPR(super::GetUICanvas(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ğ•Û‚µ‚Ä‚¢‚Ü‚·");
-    _ASSERT_EXPR(super::GetResource(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ğ•Û‚µ‚Ä‚¢‚Ü‚·");
+    _ASSERT_EXPR(super::GetUICanvas(), L"ç„¡åŠ¹ãªãƒã‚¤ãƒ³ã‚¿ã‚’ä¿æŒã—ã¦ã„ã¾ã™");
+    _ASSERT_EXPR(super::GetResource(), L"ç„¡åŠ¹ãªãƒã‚¤ãƒ³ã‚¿ã‚’ä¿æŒã—ã¦ã„ã¾ã™");
 
     _ui = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
+//<<<<<<< Ex185_BulletActionFix
+    _ui.lock()->Notify(_ui.lock(), "Enable");
+//=======
     //super::Notify(shared_from_this(), "Enable");
     _ui.lock()->Notify(_ui.lock(), "Enable");
     //_info_subject.AddObserver(_ui.lock());
@@ -45,5 +59,6 @@ bool ratchet::game::gamesystem::user::UserActionHelper::RegisterUI(void) {
         canvas->AddElement(menu);
     } // if
     */
+//>>>>>>> MofLib
     return true;
 }

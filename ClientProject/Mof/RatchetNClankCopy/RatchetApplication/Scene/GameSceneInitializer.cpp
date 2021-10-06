@@ -151,9 +151,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     auto shared_this = out;
 
     out->_text_system->GetTextSystemClosedMessageSubject()->Clear();
-    //out->_text_system->GetTextSystemOpenMessageSubject()->Clear();
-    //out->_text_system->SetScene(out);
-    //out->_text_system->GetTextSystemOpenMessageSubject()->AddObserver(out); 
     out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(out);
 
     if (auto e = event) {
@@ -245,6 +242,13 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         out->AddElement(enemy);
         enemy->SetEffectContainer(out->_effect);
         enemy->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
+
+
+        static int i = 0;
+        if (i == 2) {
+            break;
+        } // if
+        i++;
     } // for
 
     {
@@ -353,7 +357,7 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     // npc
     {
         def::Transform npc_transforms[]{
-            def::Transform(Mof::CVector3(8.0f, -5.0f, -2.0f), Mof::CVector3(0.0f, 45.0f , 0.0f)),
+            def::Transform(Mof::CVector3(10.0f, -5.0f, 0.0f), Mof::CVector3(0.0f, 45.0f , 0.0f)),
         };
         param->tag = "king";
         param->name = "king";

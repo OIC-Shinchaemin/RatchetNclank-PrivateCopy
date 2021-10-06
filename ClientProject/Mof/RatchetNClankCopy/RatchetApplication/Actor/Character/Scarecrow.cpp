@@ -5,7 +5,7 @@
 
 ratchet::actor::character::Scarecrow::Scarecrow() :
 	super() {
-	super::SetTag("Enemy");
+	super::SetTag("Scarecrow");
 }
 
 ratchet::actor::character::Scarecrow::~Scarecrow() {

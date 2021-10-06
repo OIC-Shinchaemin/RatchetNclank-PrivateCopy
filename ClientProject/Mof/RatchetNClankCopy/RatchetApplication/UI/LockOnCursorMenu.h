@@ -39,11 +39,6 @@ public:
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
-    /// <summary>
     /// 描画
     /// </summary>
     /// <param name=""></param>

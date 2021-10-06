@@ -18,7 +18,7 @@ private:
     //! Hp
     int _hp;
     //! Hp
-    base::core::Observable<int> _observable;
+    base::core::Observable<int, int> _observable;
     //! UI表示
     bool _ui_remove;
 public:
@@ -53,6 +53,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     int GetHp(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetHpMax(void) const;
     /// <summary>
     /// 初期化
     /// </summary>

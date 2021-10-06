@@ -8,6 +8,7 @@
 namespace ratchet::actor::bullet {
 class BlasterBullet : public ratchet::actor::bullet::Bullet {
     using super = ratchet::actor::bullet::Bullet;
+private:
 public:
     /// <summary>
     /// コンストラクタ

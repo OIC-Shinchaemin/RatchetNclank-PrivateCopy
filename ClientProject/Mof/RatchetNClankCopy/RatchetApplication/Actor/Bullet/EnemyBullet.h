@@ -8,6 +8,11 @@
 namespace ratchet::actor::bullet {
 class EnemyBullet : public bullet::Bullet {
     using super = bullet::Bullet;
+private:
+    //! 拡大率
+    float _scale_multiply;
+    //! 拡大率
+    float _scale_threshold;
 public:
     /// <summary>
     /// コンストラクタ

@@ -22,7 +22,12 @@ ratchet::ui::OptionSystemMenu::OptionSystemMenu(const char* name) :
     _resource(),
     _ui_canvas(),
     _font(),
-    _element_margin_y(4.0f) {
+//<<<<<<< Ex185_BulletActionFix
+    _element_margin_y(4.0f),
+    _enable(false) {
+//=======
+//    _element_margin_y(4.0f) {
+//>>>>>>> MofLib
     bool loaded_font = _font.Create(34, "");
     _ASSERT_EXPR(loaded_font, L"フォントを作成できませんでした");
     this->SetPosition(Mof::CVector2(440.0f, 305.0f));
@@ -35,7 +40,14 @@ ratchet::ui::OptionSystemMenu::~OptionSystemMenu() {
 void ratchet::ui::OptionSystemMenu::OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) {
     _infomation = info;
     if (info.enter) {
-        super::Notify(shared_from_this(), "Enable");
+//<<<<<<< Ex185_BulletActionFix
+        if (!_enable) {
+            super::Notify(shared_from_this(), "Enable");
+            _enable = true;
+        } // if
+//=======
+//        super::Notify(shared_from_this(), "Enable");
+//>>>>>>> MofLib
     } // if
 
     if (info.items->size() != super::_items.size()) {
@@ -46,7 +58,14 @@ void ratchet::ui::OptionSystemMenu::OnNotify(const ratchet::game::gamesystem::Op
     } // else if
 
     if (info.end) {
-        super::Notify(shared_from_this(), "Disable");
+//<<<<<<< Ex185_BulletActionFix
+        if (_enable) {
+            super::Notify(shared_from_this(), "Disable");
+            _enable = false;
+        } // if
+//=======
+//        super::Notify(shared_from_this(), "Disable");
+//>>>>>>> MofLib
     } // if
 }
 
@@ -63,6 +82,15 @@ void ratchet::ui::OptionSystemMenu::AddItem(const ratchet::game::gamesystem::Opt
     elem->SetFont(&_font);
     elem->SetText(in.GetText());
     elem->SetTexture(this->GetTexture(in.GetText()));
+//<<<<<<< Ex185_BulletActionFix
+
+    auto screen_center = Mof::CVector2(ratchet::kWindowWidthF, ratchet::kWindowHeightF) * 0.5f;
+    auto half_size = elem->GetSize() * 0.5f;
+    auto pos = Mof::CVector2(screen_center.x - half_size.x, super::_position.y);
+    elem->SetPosition(pos);
+    super::_position.y += elem->GetSize().y + _element_margin_y;
+//=======
+  /*
     float s = ratchet::kWindowPerXGA * 0.8f;
     elem->SetScale(Mof::CVector2(s, s));
     
@@ -71,6 +99,8 @@ void ratchet::ui::OptionSystemMenu::AddItem(const ratchet::game::gamesystem::Opt
     auto pos = Mof::CVector2(screen_center.x - half_size.x, super::_position.y);
     elem->SetPosition(pos);
     super::_position.y += elem->GetSize().y * s + _element_margin_y;
+*/
+//>>>>>>> MofLib
 
     super::AddElement(elem);
 }

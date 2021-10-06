@@ -25,6 +25,8 @@ private:
     std::unordered_map<std::string, std::string> _tex_names;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
+    //!
+    Mof::CVector2 _position_margin;
 public:
     /// <summary>
     /// コンストラクタ

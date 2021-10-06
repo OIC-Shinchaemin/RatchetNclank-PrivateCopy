@@ -125,7 +125,14 @@
         ]
       }
     },
-
+    {
+      "type": "EnemyHpBillboardComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/texture/nanotech/guage_base.png",
+        "path2": "../Resource/texture/nanotech/guage_red.png"
+      }
+    },
     {
       "type": "EnemyCollisionComponent",
       "paramater": {

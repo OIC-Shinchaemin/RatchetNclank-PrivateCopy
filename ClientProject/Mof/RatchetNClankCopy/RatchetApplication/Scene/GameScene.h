@@ -75,6 +75,8 @@ private:
     bool _show_how_to_play;
     //! ローディング
     scene::loading::LoadingDotAnimation _loading_dot_animation;
+    //! EnemyBulletEndEffect 
+    std::shared_ptr<effect::EffectEmitter> _enemy_bullet_end_effect_emitter;
 public:
     /// <summary>
     /// 追加

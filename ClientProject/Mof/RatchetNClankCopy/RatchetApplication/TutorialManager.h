@@ -24,9 +24,6 @@ public:
     TutorialManager() :
         _flags() {
         _flags.fill(false);
-        //this->Liberation(TutorialType::Attack);
-        //this->Liberation(TutorialType::Jump);
-        //this->Liberation(TutorialType::Weapon);
     }
     /// <summary>
     /// ƒVƒ“ƒOƒ‹ƒgƒ“

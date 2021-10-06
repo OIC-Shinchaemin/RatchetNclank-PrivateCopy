@@ -3,8 +3,6 @@
 #include "Base/Core/Utility.h"
 #include "../Collision/CollisionComponentDefine.h"
 #include "../Collision/Object/ScarecrowCollisionComponent.h"
-#include "../HpComponent.h"
-#include "../InvincibleComponent.h"
 #include "../../Actor/Character/Scarecrow.h"
 
 

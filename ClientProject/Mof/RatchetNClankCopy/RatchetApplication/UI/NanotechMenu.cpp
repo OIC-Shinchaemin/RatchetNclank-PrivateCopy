@@ -7,13 +7,19 @@ ratchet::ui::NanotechMenu::NanotechMenu(const char* name) :
     _hp(_hp_max),
     _resource_manager(),
     _ui_canvas(),
-    _scale(ratchet::kWindowPerXGA) {
-    this->SetPosition(Mof::CVector2(1600.0f, 60.0f));
+//<<<<<<< Ex185_BulletActionFix
+    _margin_x(12.0f){
+    this->SetPosition(Mof::CVector2(800.0f, 24.0f));
+//=======
+//    _scale(ratchet::kWindowPerXGA) {
+ //   this->SetPosition(Mof::CVector2(1600.0f, 60.0f));
+//>>>>>>> MofLib
 }
 
-void ratchet::ui::NanotechMenu::OnNotify(int hp) {
+void ratchet::ui::NanotechMenu::OnNotify(int hp, int max) {
     super::Notify(shared_from_this(), "Enable");
     this->_hp = hp;
+    this->_hp_max = max;
 }
 
 void ratchet::ui::NanotechMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
@@ -45,11 +51,18 @@ bool ratchet::ui::NanotechMenu::Render(void) {
     auto half_size = size * 0.5f * _scale;
     for (int i = 0; i < _hp_max; i++) {
         if (i < _hp) {
-            //tex->Render(      pos.x - half_size.x, pos.y - half_size.y);
-            tex->RenderScale(pos.x - half_size.x, pos.y - half_size.y, _scale);
+//<<<<<<< Ex185_BulletActionFix
+            tex->Render(pos.x - half_size.x, pos.y - half_size.y);
         } // if
-        pos.x += 48.0f * 2.0f;
-    } // for
+        pos.x += (tex->GetWidth() + _margin_x);
+//=======
+            //tex->Render(      pos.x - half_size.x, pos.y - half_size.y);
+  //          tex->RenderScale(pos.x - half_size.x, pos.y - half_size.y, _scale);
+    //    } // if
+      //  pos.x += 48.0f * 2.0f;
+//>>>>>>> MofLib
+
+  } // for
     return true;
 }
 

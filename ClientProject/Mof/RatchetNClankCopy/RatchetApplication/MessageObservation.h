@@ -25,7 +25,6 @@ public:
     using Listener = ListenerType;
 private:
     //! ŠÄ‹‘ÎÛ
-    //std::vector<std::shared_ptr<Subject>> _subjects;
     std::vector<std::weak_ptr<Subject>> _subjects;
     //! ŠÄ‹Ò
     std::vector<std::weak_ptr<Listener>> _listeners;

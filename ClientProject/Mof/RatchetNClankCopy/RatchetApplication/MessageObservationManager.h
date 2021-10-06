@@ -24,12 +24,6 @@ public:
         static ObservationManager instance;
         return instance;
     }
-
-    //auto* GetTextSystemClosedMessageObservation(void) {
-        //return _text_system_closed;
-    //}
-
-
     void Clear(void) {
     }
 };

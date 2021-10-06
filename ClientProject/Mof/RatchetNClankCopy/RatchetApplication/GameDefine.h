@@ -13,7 +13,6 @@
 #include "Base/Core/Math.h"
 #include "MotionNames.h"
 #include "ResourceManager.h"
-//#include "MessageObservationManager.h"
 #include "Base/Accessor/Setter.h"
 #include "Base/Accessor/Getter.h"
 #include "Base/Accessor/Accessor.h"
@@ -42,40 +41,37 @@ DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
 
 namespace ratchet {
 constexpr int kTextWidth = 12;
-constexpr int kWindowWidth = 1920;
-constexpr int kWindowWidthXGA = 1024;
-constexpr int kWindowHiehgt = 1080;
-constexpr int kWindowHiehgtXGA = 768;
+//<<<<<<< Ex185_BulletActionFix
+constexpr int kWindowWidth = 1024;
+//constexpr int kWindowWidthXGA = 1024;
+constexpr int kWindowHeihgt = 768;
+constexpr float kWindowWidthF = static_cast<float>(kWindowWidth);
+constexpr float kWindowHeightF = static_cast<float>(kWindowHeihgt);
 
-constexpr float kWindowPerXGA = static_cast<float>(kWindowWidth) / static_cast<float>(kWindowWidthXGA);
+//constexpr int kWindowHeihgtXGA = 768;
+
+//constexpr float kWindowPerXGA = static_cast<float>(kWindowWidth) / static_cast<float>(kWindowWidthXGA);
+
+//=======
+//constexpr int kWindowWidth = 1920;
+//constexpr int kWindowWidthXGA = 1024;
+//constexpr int kWindowHiehgt = 1080;
+//constexpr int kWindowHiehgtXGA = 768;
+
+//constexpr float kWindowPerXGA = static_cast<float>(kWindowWidth) / static_cast<float>(kWindowWidthXGA);
 
 
 ///static debug::DebugManager g_DebugManager;
+//>>>>>>> MofLib
 
 struct Transform {
     Mof::CVector3 position = math::vec3::kZero;
     Mof::CVector3 rotate = math::vec3::kZero;
     Mof::CVector3 scale = math::vec3::kOne;
 };
-/*
-struct Tag {
-    std::string tag;
-};
-*/
 using Tag = std::string;
 struct TagHolder {
     std::vector<Tag> tags;
-    /*
-    bool Contain(Tag& tag) const {
-        auto it = std::find_if(tags.begin(), tags.end(), [&](Tag& elem) {
-            return elem.tag == tag.tag;
-        });
-        if (it != tags.end()) {
-            return true;
-        } // if
-        return false;
-    }
-    */
 };
 
 using ResourceMgr = ratchet::ResourceManager<
@@ -86,17 +82,8 @@ using ResourceMgr = ratchet::ResourceManager<
     std::shared_ptr<Mof::CStreamingSoundBuffer>,
     std::shared_ptr<Mof::CSoundBuffer>
 >;
-//using ObservationMgr = ratchet::ObservationManager<
-//    ratchet::game::gamesystem::text::TextSystemOpenObservation,
-//    ratchet::game::gamesystem::text::TextSystemClosedObservation
-//>;
-
-
 using GameBGMPlayer = ratchet::game::audio::BGMPlayer;
 using GameSEPlayer = ratchet::game::audio::SEPlayer;
-//using GameBGMPlayer = ratchet::game::audio::SoundPlayer<ratchet::game::audio::BGMEvent, Mof::CStreamingSoundBuffer>;
-//using GameSEPlayer = ratchet::game::audio::SoundPlayer<ratchet::game::audio::SEEvent, Mof::CSoundBuffer>;
-
 
 struct cbUVScrollParam {
     Mof::Vector4 value;

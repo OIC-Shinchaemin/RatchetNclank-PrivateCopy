@@ -9,6 +9,8 @@
 
 #include <Mof.h>
 
+#include "../../VelocityComponent.h"
+
 
 namespace ratchet::component::item { class BoltActionStateComponent; }
 namespace ratchet::component::collision {
@@ -21,6 +23,8 @@ private:
     float _volume;
     //! 状態
     std::weak_ptr<ratchet::component::item::BoltActionStateComponent> _state_com;
+    //! 状態
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
 public:
     /// <summary>
     /// コンストラクタ

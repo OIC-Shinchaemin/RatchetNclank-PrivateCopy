@@ -21,9 +21,6 @@ ratchet::game::gamesystem::OptionSystem::~OptionSystem() {
 void ratchet::game::gamesystem::OptionSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
 
-    if (flag && !_excuted) {
-        //super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemMenuOpen, audio::SEEventCommand::Play()));
-    } // if
     if (flag) {
         _excuted = false;
     } // if
@@ -63,6 +60,11 @@ bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
+    if (auto canvas = super::GetUICanvas()) {
+        canvas->RemoveElement("OptionSystemMenu");
+    } // if
+
+
     auto menu = std::make_shared< ratchet::ui::OptionSystemMenu>("OptionSystemMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
@@ -138,6 +140,22 @@ bool ratchet::game::gamesystem::OptionSystem::Release(void) {
 void ratchet::game::gamesystem::OptionSystem::Hide(void) {
     _infomation.end = true;
     _info_subject.Notify(_infomation);
+}
+
+void ratchet::game::gamesystem::OptionSystem::Clear(void) {
+    _item.clear();
+    _info_subject.Clear();
+    _title_menu_subject.Clear();
+    if (auto canvas = super::GetUICanvas()) {
+        canvas->RemoveElement("OptionSystemMenu");
+    } // if
+
+    //_infomation = decltype(_infomation)();
+    _infomation.enter = true;
+    _infomation.exit = false;
+    _item_index = 0;
+    _excuted = false;
+    _infomation.items = &_item;
 }
 
 ratchet::game::gamesystem::OptionSystemItem::OptionSystemItem() {

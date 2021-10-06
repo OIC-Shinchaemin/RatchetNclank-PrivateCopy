@@ -17,65 +17,65 @@ namespace ratchet ::ui {
 class OptionSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
-    //! •\¦ƒeƒLƒXƒg
+    //! è¡¨ç¤ºãƒ†ã‚­ã‚¹ãƒˆ
     std::string _text;
-    //! ƒtƒHƒ“ƒg
+    //! ãƒ•ã‚©ãƒ³ãƒˆ
     Mof::CFont* _font;
-    //! ‘I‘ğ’†
+    //! é¸æŠä¸­
     bool _selected;
-    //! Šg‘å—¦
+    //! æ‹¡å¤§ç‡
     float _scale;
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="name"></param>
     OptionSystemMenuItem(const char* name);
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     ~OptionSystemMenuItem();
     /// <summary>
-    /// ƒZƒbƒ^[
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="text"></param>
     void SetText(const std::string& text);
     /// <summary>
-    /// ƒZƒbƒ^[
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="ptr"></param>
     void SetFont(Mof::CFont* ptr);
     /// <summary>
-    /// ƒZƒbƒ^[
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="flag"></param>
     void SetSelect(const bool flag);
     /// <summary>
-    /// ƒQƒbƒ^[
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual Mof::CVector2 GetSize(void) const override;
     /// <summary>
-    /// ƒQƒbƒ^[
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<Mof::CTexture> GetTexture(void) const;
     /// <summary>
-    /// “ü—Í
+    /// å…¥åŠ›
     /// </summary>
     /// <param name=""></param>s
     /// <returns></returns>
     virtual bool Input(void) override;
     /// <summary>
-    /// XV
+    /// æ›´æ–°
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
-    /// •`‰æ
+    /// æç”»
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -85,69 +85,74 @@ class OptionSystemMenu : public base::ui::UIPanel,
     public base::core::Observer<const ratchet::game::gamesystem::OptionSystem::Info&> {
     using super = base::ui::UIPanel;
 private:
-    //! î•ñ
+    //! æƒ…å ±
     ratchet::game::gamesystem::OptionSystem::Info _infomation;
-    //! ƒŠƒ\[ƒX
+    //! ãƒªã‚½ãƒ¼ã‚¹
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
-    //! ƒtƒHƒ“ƒg
+    //! ãƒ•ã‚©ãƒ³ãƒˆ
     Mof::CFont _font;
-    //! —]”’
+    //! ä½™ç™½
     float _element_margin_y;
-    //! Šg‘å—¦
+    //! æ‹¡å¤§ç‡
     float _scale;
+//<<<<<<< Ex185_BulletActionFix
+    //! æœ‰åŠ¹åŒ–
+    bool _enable;
+//=======
+//>>>>>>> MofLib
     /// <summary>
-    /// ƒQƒbƒ^[
+    /// ã‚²ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
     std::shared_ptr<Mof::CTexture> GetTexture(const std::string& type);
 public:
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="name"></param>
     OptionSystemMenu(const char* name);
     /// <summary>
-    /// ƒfƒXƒgƒ‰ƒNƒ^
+    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="name"></param>
     ~OptionSystemMenu();
     /// <summary>
-    /// ’Ê’mƒCƒxƒ“ƒg
+    /// é€šçŸ¥ã‚¤ãƒ™ãƒ³ãƒˆ
     /// </summary>
     /// <param name="info"></param>
     virtual void OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) override;
     /// <summary>
-    /// ƒZƒbƒ^[
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
-    /// ƒZƒbƒ^[
+    /// ã‚»ãƒƒã‚¿ãƒ¼
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
-    /// ’Ç‰Á
+    /// è¿½åŠ 
     /// </summary>
     /// <param name="in"></param>
     void AddItem(const ratchet::game::gamesystem::OptionSystemItem& in);
     /// <summary>
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
     /// <summary>
-    /// XV
+    /// æ›´æ–°
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Update(float delta_time);
     /// <summary>
-    /// •`‰æ
+    /// æç”»
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>

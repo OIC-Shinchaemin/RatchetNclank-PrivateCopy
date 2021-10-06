@@ -23,29 +23,6 @@ bool ratchet::scene::DescriptionScene::SceneRender(void) {
     if (auto resource = _resource.lock()) {
         auto desc = GameDescription();
         desc.Render(resource);
-
-        /*
-        auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
-
-        const char* text;
-        
-        text = "ゲームの操作説明";
-        ::CGraphicsUtilities::RenderString(400.0, 100.0f, text);
-
-        text = " ◆ ESCAPEキーでゲーム終了\n\n \
-◆ Nキーで攻撃\n\n \
-◆ Jキーでジャンプ\n\n \
-◆ Shiftキーで変更 武器選択はShift長押しで0~8キー\n\n \
-◆ Mキーで武器が選択されていれば武器使用\n\n \
-◆ WASDキーで移動\n\n \
-◆ 十字キーでカメラ移動\n\n \
-◆ Qキーでカメラ補正\n";
-        ::CGraphicsUtilities::RenderString(130.0 + 1, 240.0f + 1, def::color_rgba_u32::kBlue, text);
-        ::CGraphicsUtilities::RenderString(130.0, 240.0f, text);
-
-        text = "Startボタン・Shiftキーでタイトルに戻る";
-        ::CGraphicsUtilities::RenderString(460.0, 700.0f, text);
-        */
     } // if
 
     return true;

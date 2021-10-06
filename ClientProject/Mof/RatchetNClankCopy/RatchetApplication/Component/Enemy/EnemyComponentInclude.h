@@ -6,3 +6,4 @@
 #include "EnemyMeleeAttackComponent.h"
 #include "EnemyRangedAttackComponent.h"
 #include "EnemyDamageComponent.h"
+#include "EnemyHpBillboardComponent.h"

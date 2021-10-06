@@ -86,49 +86,57 @@
         ]
       }
     },
-          {
-            "type": "MotionStateComponent",
-            "paramater": {
-              "priority": 98
-            }
-          },
-          {
-            "type": "VelocityComponent",
-            "paramater": {
-              "priority": 99
-            }
-          },
-          {
-            "type": "TransformComponent",
-            "paramater": {
-              "priority": 100
-            }
-          },
-          {
-            "type": "AnimationMeshComponent",
-            "paramater": {
-              "priority": 0,
-              "path": "../Resource/mesh/skeleton/skeleton.mom",
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ]
-            }
-          },
-
-          {
-            "type": "EnemyCollisionComponent",
-            "paramater": {
-              "priority": 0
-            }
-          },
-          {
-            "type": "SightCollisionComponent",
-            "paramater": {
-              "priority": 0
-            }
-          }
+    {
+      "type": "MotionStateComponent",
+      "paramater": {
+        "priority": 98
+      }
+    },
+    {
+      "type": "VelocityComponent",
+      "paramater": {
+        "priority": 99
+      }
+    },
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "AnimationMeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/skeleton/skeleton.mom",
+        "color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
         ]
       }
+    },
+    {
+      "type": "EnemyHpBillboardComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/texture/nanotech/guage_base.png",
+        "path2": "../Resource/texture/nanotech/guage_red.png"
+      }
+    },
+
+    {
+      "type": "EnemyCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "SightCollisionComponent",
+      "paramater": {
+        "priority": 0
+      }
+    }
+  ]
+}
