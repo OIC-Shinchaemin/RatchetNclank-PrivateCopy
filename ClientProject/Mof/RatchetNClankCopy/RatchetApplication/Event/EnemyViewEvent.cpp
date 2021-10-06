@@ -36,7 +36,8 @@ ratchet::event::EnemyViewEvent::EnemyViewEvent() :
 	_player_camera_controller(),
 	_text_system_message_subject(),
 	_text_system(),
-	_queem_generate_position(Mof::CVector3(182.0f, -29.5f, 33.0f)) {
+	_queem_generate_position(Mof::CVector3(182.0f, -29.5f, 33.0f)),
+	_skip_time_set(0.6f) {
 	_camera->Initialize();
 	_camera->Update();
 	_camera_controller->SetCamera(_camera);
@@ -58,6 +59,8 @@ void ratchet::event::EnemyViewEvent::SetPlayerCamera(base::core::ServiceLocator<
 }
 
 bool ratchet::event::EnemyViewEvent::Initialize(void) {
+	_skip_reserve_timer.Initialize(_skip_time_set, false);
+
 	auto p = _player_camera_controller->GetService()->GetCameraPosition();
 	auto player_camera = _player_camera_controller->GetService();
 	Mof::CVector3 target = Mof::CVector3(65.0, -30.0f, 82.0f);
@@ -102,6 +105,21 @@ bool ratchet::event::EnemyViewEvent::Initialize(void) {
 }
 
 bool ratchet::event::EnemyViewEvent::Update(float delta_time) {
+
+	if (::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
+		::g_pInput->IsKeyPush(MOFKEY_SPACE) ) {
+		if (_skip_reserve) {
+			_camera_controller->ForceTick(_camera_controller->GetTimeMax());
+		} // if
+		_skip_reserve = true;
+	} // if
+
+	if (_skip_reserve_timer.Tick(delta_time)) {
+		_skip_reserve = false;
+		_skip_reserve_timer.Initialize(_skip_time_set, false);
+	} // if
+
+
 	auto camera_info = ratchet::camera::CameraController::CameraInfo();
 	_camera_controller->Update(delta_time, camera_info);
 

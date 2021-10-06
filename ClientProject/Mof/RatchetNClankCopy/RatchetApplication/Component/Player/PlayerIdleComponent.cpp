@@ -56,7 +56,7 @@ bool ratchet::component::player::action::PlayerIdleComponent::Input(void) {
     } // else if
     else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
         auto type_com = _type_com.lock();
-        if (type_com->IsContactMode()) {
+        if (type_com->HasTalkTarget()) {
             type_com->TalkToTarget();
         } // if
         else {

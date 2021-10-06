@@ -13,7 +13,7 @@
       "type": "HpComponent",
       "paramater": {
         "priority": 0,
-        "hp_max": 5
+        "hp_max": 1
       }
     },
     {
