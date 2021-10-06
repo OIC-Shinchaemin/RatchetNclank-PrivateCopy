@@ -5,7 +5,11 @@ ratchet::ui::UserActionHelperMenu::UserActionHelperMenu(const char* name) :
     super(name),
     _text(),
     _resource() {
+//<<<<<<< Ex185_BulletActionFix
     super::_position = Mof::CVector2(10.0f, 60.0f);
+=======
+//    super::_position = Mof::CVector2(506.0f, 336.0f);
+//>>>>>>> MofLib
 }
 
 void ratchet::ui::UserActionHelperMenu::SetText(const std::string& text) {
@@ -22,6 +26,11 @@ bool ratchet::ui::UserActionHelperMenu::Update(float delta_time) {
 
 bool ratchet::ui::UserActionHelperMenu::Render(void) {
     auto pos = super::_position;
+//<<<<<<< Ex185_BulletActionFix
     ::CGraphicsUtilities::RenderString(pos.x, pos.y, _text.c_str());
+//=======
+    //_text = "asfSADvbSd";
+    //::CGraphicsUtilities::RenderString(pos.x, pos.y, _text.c_str());
+//>>>>>>> MofLib
     return true;
 }

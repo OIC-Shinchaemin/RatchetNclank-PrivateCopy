@@ -8,7 +8,12 @@
 namespace def {
 constexpr float kFPS = 60.0f;
 constexpr float kDeltaTime = 1.0f / kFPS;
-
+//constexpr uint32_t kWindowWidth = 1024;
+//constexpr uint32_t kWindowWidth = 1920;
+//constexpr uint32_t kWindowHeight = 768;
+//constexpr uint32_t kWindowHeight = 1080;
+//constexpr float kWindowWidthF = static_cast<float>(def::kWindowWidth);
+//constexpr float kWindowHeightF = static_cast<float>(def::kWindowHeight);
 namespace color_rgba {
 static const Mof::CVector4 kBlack = Mof::CVector4(0.0f, 0.0f, 0.0f, 1.0f);
 static const Mof::CVector4 kRed = Mof::CVector4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -33,14 +38,14 @@ static const MofU32 kGray = def::color_rgba::kGray.ToU32Color();
 }
 
 struct Transform {
-    //! ˆÊ’u
+    //! ä½ç½®
     Mof::CVector3 position;
-    //! ‰ñ“]
+    //! å›è»¢
     Mof::CVector3 rotate;
-    //! Šg‘å
+    //! æ‹¡å¤§
     Mof::CVector3 scale;
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     Transform() :
         position(),
@@ -48,19 +53,19 @@ struct Transform {
         scale(1.0f, 1.0f, 1.0f) {
     }
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
-    /// <param name="pos">ˆÊ’u</param>
+    /// <param name="pos">ä½ç½®</param>
     Transform(Mof::CVector3 pos) :
         position(pos),
         rotate(),
         scale(1.0f, 1.0f, 1.0f) {
     }
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
-    /// <param name="pos">ˆÊ’u</param>
-    /// <param name="rot">‰ñ“]</param>
+    /// <param name="pos">ä½ç½®</param>
+    /// <param name="rot">å›è»¢</param>
     Transform(Mof::CVector3 pos, Mof::CVector3 rot) :
         position(pos),
         rotate(rot),
@@ -72,7 +77,7 @@ struct Transform {
         scale(sca) {
     }
     /// <summary>
-    /// ƒ}ƒgƒŠƒNƒX
+    /// ãƒãƒˆãƒªã‚¯ã‚¹
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -98,7 +103,7 @@ class OnEvent : public std::vector<std::pair<std::string, std::function<bool(con
     using super = std::vector<OnEventPair>;
 public:
     void Register(const char* key, OnEventFunc func) {
-        // “¯–¼ƒL[‚Å‚Ì“o˜^‚µ‚È‚¢
+        // åŒåã‚­ãƒ¼ã§ã®ç™»éŒ²ã—ãªã„
         auto it = std::find_if(super::begin(), super::end(), [&](const OnEventPair& pair) {
             return key == pair.first;
         });
@@ -108,14 +113,14 @@ public:
         this->push_back(std::make_pair(key, func));
     }
     /// <summary>
-    /// “o˜^
+    /// ç™»éŒ²
     /// </summary>
     /// <param name="val"></param>
     void operator += (OnEventPair val) {
         this->Register(val.first.c_str(), val.second);
     }
     /// <summary>
-    /// íœ
+    /// å‰Šé™¤
     /// </summary>
     /// <param name="key"></param>
     void operator -= (const char* key) {
@@ -124,7 +129,7 @@ public:
         });
     }
     /// <summary>
-    /// ƒpƒ^[ƒ“ƒ}ƒbƒ`‚ğ‘Síœ
+    /// ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒãƒƒãƒã‚’å…¨å‰Šé™¤
     /// </summary>
     /// <param name="key"></param>
     void RemoveMatch(const char* key) {
@@ -133,10 +138,10 @@ public:
         });
     }
     /// <summary>
-    /// Às
+    /// å®Ÿè¡Œ
     /// </summary>
     /// <param name=""></param>
-    /// <returns>ƒCƒxƒ“ƒg“à‚Åˆ—I—¹‚È‚çtrue‚ğ•Ô‚·</returns>
+    /// <returns>ã‚¤ãƒ™ãƒ³ãƒˆå†…ã§å‡¦ç†çµ‚äº†ãªã‚‰trueã‚’è¿”ã™</returns>
     bool operator ()(const FuncArgs... args) {
         for (auto& func : *this) {
             if (func.second(args...)) {
@@ -148,21 +153,21 @@ public:
 };
 template<class Sender, class Receiver = Sender>
 struct Message {
-    //! ƒ^ƒCƒv
+    //! ã‚¿ã‚¤ãƒ—
     std::string type;
-    //! ‘—MÒ
+    //! é€ä¿¡è€…
     std::shared_ptr<Sender> sender;
-    //! óMÒ
+    //! å—ä¿¡è€…
     std::shared_ptr<Receiver> receiver;
-    //! •t—^î•ñ
+    //! ä»˜ä¸æƒ…å ±
     //std::optional<std::any>extra;
     std::any extra;
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     Message() = default;
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     /// </summary>
     /// <param name="type"></param>
     /// <param name="sender"></param>
