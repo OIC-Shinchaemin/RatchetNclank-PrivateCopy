@@ -16,6 +16,8 @@ class EnemyCollisionComponent : public ratchet::component::collision::CollisionC
     using super = ratchet::component::collision::CollisionComponent;
 private:
     std::weak_ptr<ratchet::component::enemy::EnemyComponent> _ENEMY_com;
+    //! ステージとの接触位置
+    Mof::CVector3 _collision_point_stage_down_ray;
     /// <summary>
     /// 衝突
     /// </summary>

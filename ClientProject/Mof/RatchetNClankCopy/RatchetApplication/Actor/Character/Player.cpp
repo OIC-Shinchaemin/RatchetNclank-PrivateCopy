@@ -9,6 +9,7 @@
 #include "../../Component/BillboardComponent.h"
 #include "../Effect/SenseEffect.h"
 
+
 ratchet::actor::character::Player::Player() :
     super(),
     _current_mechanical(),
@@ -22,7 +23,7 @@ ratchet::actor::character::Player::Player() :
     _notificationable_subject_map(),
     _notificationable_subject_stack(),
     //_character_talkable_message_subject(std::make_shared<actor::character::CharacterTalkableMessageSubject>()){
-    _character_talkable_message_subject(){
+    _character_talkable_message_subject() {
     super::SetTag("Player");
     _notificationable_subject_map.emplace("QuickChange", &_quick_change_subject);
     _notificationable_subject_map.emplace("ShopSystem", &_shop_system_subject);
@@ -158,7 +159,7 @@ bool ratchet::actor::character::Player::Initialize(ratchet::actor::Actor::Param*
     });
     if (it == holder.tags.end()) {
         auto sense_effect_param = Actor::Param();
-        sense_effect_param.name = "sense_effecr";
+        sense_effect_param.name = "sense_effect";
         sense_effect_param.tag = "sense";
 
         auto sense_effect_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<actor::effect::SenseEffect>("builder/sense_effect.json", &sense_effect_param);
@@ -167,6 +168,9 @@ bool ratchet::actor::character::Player::Initialize(ratchet::actor::Actor::Param*
         this->GetComponent<component::SightRecognitionComponent>()->GetFindEnemyMessageSubject()->AddObserver(
             std::dynamic_pointer_cast<effect::SenseEffect>(_sense_effect_child_actor));
     }
+    auto shadow_param = Actor::Param();
+    shadow_param.name = "shadow";
+    _shadow_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::Actor>("builder/shadow.json", &shadow_param);
 
     return true;
 }
@@ -220,6 +224,10 @@ bool ratchet::actor::character::Player::Render(void) {
         } // if
     } // if
 
+    if (_shadow_child_actor) {
+        _shadow_child_actor->Render();
+    } // if
+
 
     if (debug::DebugManager::GetInstance().IsDebugMode()) {
         auto pos = super::GetPosition();
@@ -234,6 +242,8 @@ bool ratchet::actor::character::Player::Render(void) {
             } // if
         } // if
     } // if
+
+
     return true;
 }
 

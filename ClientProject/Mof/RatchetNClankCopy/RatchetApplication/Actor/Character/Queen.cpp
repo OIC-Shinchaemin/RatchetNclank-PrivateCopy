@@ -1,5 +1,6 @@
 #include "Queen.h"
 
+#include "../../Factory/FactoryManager.h"
 #include "../../Component/VelocityComponent.h"
 #include "../../Event/EventManager.h"
 #include "../../Event/EventReferenceTable.h"
@@ -19,6 +20,10 @@ ratchet::actor::character::Queen::~Queen() {
 
 bool ratchet::actor::character::Queen::Initialize(ratchet::actor::Actor::Param* param) {
     super::Initialize(param);
+
+    auto shadow_param = Actor::Param();
+    shadow_param.name = "shadow";
+    _shadow_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::Actor>("builder/shadow.json", &shadow_param);
 
 
     if (auto light = event::EventReferenceTable::Singleton().Get < std::shared_ptr <  ratchet::light::LightManager> >("LightManager")) {
@@ -42,6 +47,16 @@ bool ratchet::actor::character::Queen::Initialize(ratchet::actor::Actor::Param* 
 bool ratchet::actor::character::Queen::Update(float delta_time) {
     super::Update(delta_time);
     return true;
+}
+
+bool ratchet::actor::character::Queen::Render(void) {
+    super::Render();
+
+    if (_shadow_child_actor) {
+        _shadow_child_actor->SetPosition(super::GetPosition());
+        _shadow_child_actor->Render();
+    } // if
+    return false;
 }
 
 void ratchet::actor::character::Queen::Talk(void) {

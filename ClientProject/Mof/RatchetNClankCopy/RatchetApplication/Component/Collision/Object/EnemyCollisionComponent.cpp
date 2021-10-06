@@ -17,6 +17,10 @@ void ratchet::component::collision::EnemyCollisionComponent::CollisionStageDownR
 
         if (ray.CollisionGeometry(geometry, info)) {
             float height = _ENEMY_com.lock()->GetHeight();
+
+            _collision_point_stage_down_ray = super::GetOwner()->GetPosition();
+            _collision_point_stage_down_ray.y += height + margin - info.d;
+
             if (info.d <= height + margin) {
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += height + margin - info.d;
@@ -104,4 +108,5 @@ void ratchet::component::collision::EnemyCollisionComponent::CollisionStage(Mof:
         return;
     } // if
     this->CollisionStageDownRay(mesh, obj);
+    //_ENEMY_com.lock()->GetOwnerCastd()->GetShadowChildActor()->SetPosition(_collision_point_stage_down_ray);
 }

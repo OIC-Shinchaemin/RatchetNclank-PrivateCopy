@@ -2823,6 +2823,9 @@
     <None Include="..\Resource\save\savedata.json">
       <Filter>Resource\save</Filter>
     </None>
+    <None Include="..\Resource\builder\shadow.json">
+      <Filter>Resource\builder</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RatchetApplication.rc">

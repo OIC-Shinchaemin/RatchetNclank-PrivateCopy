@@ -18,6 +18,7 @@
 
 ../Resource/mesh/scarecrow/scene0.mom
 ../Resource/mesh/scarecrow/scene1.mom
+../Resource/mesh/shadow/Shadow.mom
 
 ../Resource/texture/effect/smoke.png
 ../Resource/texture/effect/sense.png
