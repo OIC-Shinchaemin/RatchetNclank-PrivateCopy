@@ -24,7 +24,8 @@
     {
       "type": "InvincibleComponent",
       "paramater": {
-        "priority": 93
+        "priority": 93,
+        "time": 2.0
       }
     },
 

@@ -154,15 +154,13 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
             } // if
             invincible_com->Activate();
         } // if
+        this->DamageEffectEmit(in.target.lock());
 
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
 
-            //auto message = actor::character::CharacterDamageApplyMessage();
-            //message.damaged_character_tag = super::GetOwner()->GetTag();
             auto message = actor::character::CharacterDamageApplyMessageFactory().Create(super::GetOwner());
             std::dynamic_pointer_cast<ratchet::actor::character::Scarecrow> (super::GetOwner())->GetCharacterDamageApplyMessageSubject()->Notify(message);
-            this->DamageEffectEmit(in.target.lock());
 
             if (hp_com->GetHp() <= 0) {
                 super::GetOwner()->End();
@@ -171,47 +169,44 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
         return true;
     }));
 
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kPyrocitorBulletCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        this->DamageStarEffectEmit(in.target.lock());
+    //coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+    //                           ratchet::component::collision::CollisionComponentType::kPyrocitorBulletCollisionComponent,
+    //                           ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+    //    this->DamageStarEffectEmit(in.target.lock());
 
-        if (auto invincible_com = _invincible_com.lock()) {
-            if (invincible_com->IsActive()) {
-                return false;
-            } // if
-            invincible_com->Activate();
-        } // if
-
-
-        if (auto hp_com = _hp_com.lock()) {
-            hp_com->Damage(1);
+    //    if (auto invincible_com = _invincible_com.lock()) {
+    //        if (invincible_com->IsActive()) {
+    //            return false;
+    //        } // if
+    //        invincible_com->Activate();
+    //    } // if
 
 
-            if (hp_com->GetHp() <= 0) {
-                super::GetOwner()->End();
-            } // if
-        } // if
+    //    if (auto hp_com = _hp_com.lock()) {
+    //        hp_com->Damage(1);
 
-        return true;
-    }));
+
+    //        if (hp_com->GetHp() <= 0) {
+    //            super::GetOwner()->End();
+    //        } // if
+    //    } // if
+
+    //    return true;
+    //}));
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::component::collision::CollisionComponentType::kBlasterBulletCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto invincible_com = _invincible_com.lock()) {
+            if (invincible_com->IsActive()) {
+                return false;
+            } // if
+            invincible_com->Activate();
+        } // if
         this->DamageStarEffectEmit(in.target.lock());
 
-
-        if (auto invincible_com = _invincible_com.lock()) {
-            if (invincible_com->IsActive()) {
-                return false;
-            } // if
-            invincible_com->Activate();
-        } // if
-
-
         if (auto hp_com = _hp_com.lock()) {
             hp_com->Damage(1);
-
+            
             if (hp_com->GetHp() <= 0) {
                 super::GetOwner()->End();
             } // if
@@ -219,28 +214,28 @@ bool ratchet::component::scarecrow::ScarecrowComponent::Initialize(void) {
 
         return true;
     }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kBombGloveEffectCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        if (auto invincible_com = _invincible_com.lock()) {
-            if (invincible_com->IsActive()) {
-                return false;
-            } // if
-            invincible_com->Activate();
-        } // if
+    //coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+    //                           ratchet::component::collision::CollisionComponentType::kBombGloveEffectCollisionComponent,
+    //                           ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+    //    if (auto invincible_com = _invincible_com.lock()) {
+    //        if (invincible_com->IsActive()) {
+    //            return false;
+    //        } // if
+    //        invincible_com->Activate();
+    //    } // if
 
-        if (auto hp_com = _hp_com.lock()) {
-            hp_com->Damage(1);
+    //    if (auto hp_com = _hp_com.lock()) {
+    //        hp_com->Damage(1);
 
-            this->DamageStarEffectEmit(in.target.lock());
+    //        this->DamageStarEffectEmit(in.target.lock());
 
-            if (hp_com->GetHp() <= 0) {
-                super::GetOwner()->End();
-            } // if
-        } // if
+    //        if (hp_com->GetHp() <= 0) {
+    //            super::GetOwner()->End();
+    //        } // if
+    //    } // if
 
-        return true;
-    }));
+    //    return true;
+    //}));
 
 
     return true;

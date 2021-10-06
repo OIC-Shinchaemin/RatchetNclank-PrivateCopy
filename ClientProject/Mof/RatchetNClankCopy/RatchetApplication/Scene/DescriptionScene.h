@@ -20,7 +20,7 @@ private:
     //! テキスト
     std::string _title_text = "ゲームの操作説明";
     //! テキスト
-    std::string _desc_text = " ◆ ESCAPEキーでゲーム終了\n\n \
+    std::string _desc_text = " ◆ Escape(Esc)キーでゲーム終了\n\n \
 ◆ Nキーで攻撃\n\n \
 ◆ Jキーでジャンプ\n\n \
 ◆ Shiftキーで変更 武器選択はShift長押しで0~8キー\n\n \
@@ -29,7 +29,7 @@ private:
 ◆ 十字キーでカメラ移動\n\n \
 ◆ Qキーでカメラ補正\n";
     //! テキスト
-    std::string _back_text = "Enterキーで戻る";
+    std::string _back_text = "Escape(Esc)キーで戻る";
 public:
     /// <summary>
     /// 判定

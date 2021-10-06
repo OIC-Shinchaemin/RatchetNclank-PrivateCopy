@@ -4,7 +4,7 @@
 ratchet::component::InvincibleComponent::InvincibleComponent(int priority) :
     super(priority),
     _invincible() ,
-    _time(1.0f){
+    _time(0.0f){
 }
 
 ratchet::component::InvincibleComponent::InvincibleComponent(const InvincibleComponent& obj) :
@@ -22,7 +22,7 @@ void ratchet::component::InvincibleComponent::SetParam(const rapidjson::Value& p
     const char* time = "time";
     if (param.HasMember(time)) {
         _ASSERT_EXPR(param[time].IsFloat(), L"パラメータの指定された型でありません");
-        _time = param[time].IsFloat();
+        _time = param[time].GetFloat();
     } // if
 }
 
