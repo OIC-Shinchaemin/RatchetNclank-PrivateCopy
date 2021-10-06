@@ -27,7 +27,10 @@ ratchet::game::GameManager::~GameManager() {
 }
 
 void ratchet::game::GameManager::OnNotify(const std::shared_ptr<ratchet::game::gamesystem::GameSystem>& ptr) {
-    _update_system.push_back(ptr);
+    auto it = std::find(_update_system.begin(), _update_system.end(), ptr);
+    if (it == _update_system.end()) {
+        _update_system.push_back(ptr);
+    } // if
 }
 
 void ratchet::game::GameManager::SetResourceManager(const std::shared_ptr<ratchet::ResourceMgr>& ptr) {

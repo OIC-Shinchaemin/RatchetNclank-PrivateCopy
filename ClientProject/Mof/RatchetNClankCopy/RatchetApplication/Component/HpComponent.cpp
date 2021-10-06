@@ -74,7 +74,7 @@ void ratchet::component::HpComponent::Heal(int value) {
 	if (_hp > _hp_max) {
 		_hp = _hp_max;
 	} // if
-	_observable.Notify(_hp);
+	_observable.Notify(_hp, _hp_max);
 }
 
 void ratchet::component::HpComponent::Damage(int value) {
@@ -82,7 +82,7 @@ void ratchet::component::HpComponent::Damage(int value) {
 	if (_hp <= 0) {
 		_hp = 0;
 	} // if
-	_observable.Notify(_hp);
+	_observable.Notify(_hp, _hp_max);
 }
 
 void ratchet::component::HpComponent::RegisterUI(void) {
@@ -96,7 +96,7 @@ void ratchet::component::HpComponent::RegisterUI(void) {
 			menu->SetResourceManager(_resource_manager);
 			menu->SetColor(Mof::CVector4(0.1f, 0.3f, 0.5f, 0.5f));
 			canvas->AddElement(menu);
-			_observable.Notify(_hp);
+			_observable.Notify(_hp, _hp_max);
 		} // if
 	} // if
 }

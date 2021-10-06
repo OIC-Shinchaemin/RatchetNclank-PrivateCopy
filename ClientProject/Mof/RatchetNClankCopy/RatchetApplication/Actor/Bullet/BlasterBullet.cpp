@@ -4,9 +4,10 @@
 
 
 ratchet::actor::bullet::BlasterBullet::BlasterBullet() :
-    super() {
+    super(),
+    _scale_multiply(0.99f){
     super::SetTag("BlasterBullet");
-    _exist_time.Initialize(1.2f,false);
+    _exist_time.Initialize(2.0f,false);
 }
 
 ratchet::actor::bullet::BlasterBullet::~BlasterBullet() {
@@ -18,12 +19,16 @@ bool ratchet::actor::bullet::BlasterBullet::Update(float delta_time) {
     auto v = super::GetComponent<ratchet::component::VelocityComponent>();
     v->AddVelocityForce(_speed);
 
+    auto scale = super::GetScale();
+    scale *= _scale_multiply;
+    super::SetScale(scale);
+
     super::Update(delta_time);
     return true;
 }
 
 bool ratchet::actor::bullet::BlasterBullet::Render(void) {
-    ::CGraphicsUtilities::RenderSphere(Mof::CSphere(super::GetPosition(), 0.2f), def::color_rgba::kBlack);
+    ::CGraphicsUtilities::RenderSphere(Mof::CSphere(super::GetPosition(), super::GetScale().x), def::color_rgba::kBlack);
     return true;
 }
 

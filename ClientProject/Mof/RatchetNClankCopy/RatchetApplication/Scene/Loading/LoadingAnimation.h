@@ -38,8 +38,7 @@ public:
         _loading_dot_count(0),
         _loading_progress() {
         _loading_counter.Initialize(1.0f, true);
-
-        _position = Mof::CVector2(1700.0f, 900.0f);
+        _position = Mof::CVector2(800.0f, 700.0f);
     }
     virtual ~LoadingDotAnimation() {
     }

@@ -7,9 +7,7 @@
 #include <memory>
 
 
-namespace ratchet {
-namespace component {
-namespace bullet {
+namespace ratchet::component::bullet {
 class BlasterBulletComponent : public ::ratchet::component::UpdateComponent {
     using super = ::ratchet::component::UpdateComponent;
 public:
@@ -58,7 +56,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_BULLET_BLASTER_BULLET_COMPONENT_H

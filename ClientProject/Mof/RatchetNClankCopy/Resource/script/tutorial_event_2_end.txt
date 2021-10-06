@@ -3,7 +3,7 @@ sprite,Sprite2,Chara_a_02.png;
 setpos,5000,0,Sprite1;
 setpos,5000,0,Sprite2;
 
-text,26,600,チュートリアルNo1を達成しました;
-Text,26,600,全てのチュートリアルを達成しました;
-Text,26,600,王様に話しかけてください;
+text,26,584,チュートリアルNo1を達成しました;
+Text,26,584,全てのチュートリアルを達成しました;
+Text,26,584,王様に話しかけてください;
 next,test.txt;

@@ -18,8 +18,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 
 	//Info.WindowCreateInfo.px = 400.0f;
 	//Info.WindowCreateInfo.py = 20.0f;
-	Info.WindowCreateInfo.Width = 1920;
-	Info.WindowCreateInfo.Height = 1080;
+	Info.WindowCreateInfo.Width = ratchet::kWindowWidth;
+	Info.WindowCreateInfo.Height = ratchet::kWindowHeihgt;
 	//Info.GraphicsCreateInfo.bWindowed = FALSE;
 	Info.GraphicsCreateInfo.bWindowed = TRUE;
 

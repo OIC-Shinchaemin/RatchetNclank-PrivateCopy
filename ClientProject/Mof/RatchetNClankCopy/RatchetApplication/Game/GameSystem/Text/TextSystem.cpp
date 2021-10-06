@@ -351,9 +351,10 @@ void ratchet::game::gamesystem::text::TextSystem::IfCommand(IFCOMMAND* pIfComman
 ratchet::game::gamesystem::text::TextSystem::TextSystem() :
     _active(false),
     _text_system_closed_message_subject(),
-    _text_system_open_message_subject(text::TextSystemOpenMessageObservation::Singleton().CreateSubject()) {
+    _text_system_open_message_subject(text::TextSystemOpenMessageObservation::Singleton().CreateSubject()),
+    _window_position(16, 570){
 
-    _text_font.Create(32, "");
+    _text_font.Create(24, "");
 
     ::memset(_line_buffer, 0, TEXTBUFFERSIZE);
 
@@ -397,11 +398,9 @@ bool ratchet::game::gamesystem::text::TextSystem::Activate(void) {
 bool ratchet::game::gamesystem::text::TextSystem::Load(void) {
     //フラグの初期化
     ::memset(_flags, 0, sizeof(int) * _flag_count);
-    //スクリプトを読み込む
     if (!this->LoadScript("script/test.txt")) {
         return false;
     } // if
-    //テキスト表示用のウインドウを読み込む
     if (!_text_window_texture.Load("TexWin.png")) {
         //return false;
     } // if
@@ -419,27 +418,13 @@ bool ratchet::game::gamesystem::text::TextSystem::Render(void) {
     } // if
     //メニューの場合は選択描画
     if (_now_command->Type == CMD_SELECT) {
-        //コマンド取り出し
         SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)_now_command;
-        //選択描画
         pSelCommand->Select.Render();
     } // if
 
-    //表示テキストの下に枠を表示する
-    auto window_pos = Mof::CVector2(16, 600);
-    if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
-        window_pos.y += 100.0f;
-    } // if
-    _text_window_texture.RenderScale(window_pos.x, window_pos.y, ratchet::kWindowPerXGA, ratchet::kWindowPerXGA * 0.8, MOF_ARGB(255, 255, 255, 255));
-    
-    //表示テキストを描画する
+    auto window_pos = _window_position;
+    _text_window_texture.Render(window_pos.x, window_pos.y, MOF_ARGB(255, 255, 255, 255));
     auto command_pos = Mof::CVector2(_text_command.px, _text_command.py) ;
-    if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
-        command_pos.x += 20.0f;
-        command_pos.y += 140.0f;
-    } // if
-    //    command_pos *= ratchet::kWindowPerXGA;
-    //::CGraphicsUtilities::RenderString(command_pos.x, command_pos.y, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
     _text_font.RenderString(command_pos.x, command_pos.y, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
 
 

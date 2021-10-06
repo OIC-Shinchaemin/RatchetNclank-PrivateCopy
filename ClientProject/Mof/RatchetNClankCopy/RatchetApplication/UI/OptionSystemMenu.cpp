@@ -22,7 +22,8 @@ ratchet::ui::OptionSystemMenu::OptionSystemMenu(const char* name) :
     _resource(),
     _ui_canvas(),
     _font(),
-    _element_margin_y(4.0f) {
+    _element_margin_y(4.0f),
+    _enable(false) {
     bool loaded_font = _font.Create(34, "");
     _ASSERT_EXPR(loaded_font, L"フォントを作成できませんでした");
     this->SetPosition(Mof::CVector2(440.0f, 305.0f));
@@ -35,7 +36,10 @@ ratchet::ui::OptionSystemMenu::~OptionSystemMenu() {
 void ratchet::ui::OptionSystemMenu::OnNotify(const ratchet::game::gamesystem::OptionSystem::Info& info) {
     _infomation = info;
     if (info.enter) {
-        super::Notify(shared_from_this(), "Enable");
+        if (!_enable) {
+            super::Notify(shared_from_this(), "Enable");
+            _enable = true;
+        } // if
     } // if
 
     if (info.items->size() != super::_items.size()) {
@@ -46,7 +50,10 @@ void ratchet::ui::OptionSystemMenu::OnNotify(const ratchet::game::gamesystem::Op
     } // else if
 
     if (info.end) {
-        super::Notify(shared_from_this(), "Disable");
+        if (_enable) {
+            super::Notify(shared_from_this(), "Disable");
+            _enable = false;
+        } // if
     } // if
 }
 
@@ -63,14 +70,12 @@ void ratchet::ui::OptionSystemMenu::AddItem(const ratchet::game::gamesystem::Opt
     elem->SetFont(&_font);
     elem->SetText(in.GetText());
     elem->SetTexture(this->GetTexture(in.GetText()));
-    float s = ratchet::kWindowPerXGA * 0.8f;
-    elem->SetScale(Mof::CVector2(s, s));
-    
-    auto screen_center = Mof::CVector2(def::kWindowWidthF, def::kWindowHeightF) * 0.5f;
-    auto half_size = elem->GetSize() * 0.5f * s;
+
+    auto screen_center = Mof::CVector2(ratchet::kWindowWidthF, ratchet::kWindowHeightF) * 0.5f;
+    auto half_size = elem->GetSize() * 0.5f;
     auto pos = Mof::CVector2(screen_center.x - half_size.x, super::_position.y);
     elem->SetPosition(pos);
-    super::_position.y += elem->GetSize().y * s + _element_margin_y;
+    super::_position.y += elem->GetSize().y + _element_margin_y;
 
     super::AddElement(elem);
 }

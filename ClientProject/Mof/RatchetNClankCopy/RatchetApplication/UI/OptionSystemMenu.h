@@ -97,6 +97,8 @@ private:
     float _element_margin_y;
     //! 拡大率
     float _scale;
+    //! 有効化
+    bool _enable;
     /// <summary>
     /// ゲッター
     /// </summary>

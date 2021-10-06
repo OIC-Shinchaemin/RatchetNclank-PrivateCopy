@@ -4,7 +4,7 @@
 ratchet::game::audio::SEPlayer::SEPlayer() :
 	_sounds(),
 	_recieved_event(),
-	_default_volume(0.0f){
+	_default_volume(0.2f){
 }
 
 ratchet::game::audio::SEPlayer::~SEPlayer() {

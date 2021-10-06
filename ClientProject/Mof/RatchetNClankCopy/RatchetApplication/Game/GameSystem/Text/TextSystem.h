@@ -14,9 +14,10 @@
 namespace ratchet::game::gamesystem::text {
 class TextSystem : public TextSystemMessageListener {
 private:
-    int ALPHA_SPEED = 15;
-
+    //! 状態フラグ
     static const int _flag_count = 256;
+    //! 位置
+    Mof::CVector2 _window_position;
     //! 表示中
     bool _active;
     //! 表示中
@@ -53,6 +54,7 @@ private:
     std::optional<TextSystemMessage::CloseEvent> _on_close;
     //! フォント
     Mof::CFont _text_font;
+    int ALPHA_SPEED = 15;
 
     bool Load(const char* name);
     bool LoadScript(const char* name);

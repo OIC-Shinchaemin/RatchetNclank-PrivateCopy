@@ -8,6 +8,9 @@
 namespace ratchet::actor::weapon {
 class Blaster : public ratchet::actor::weapon::Mechanical {
     using super = ratchet::actor::weapon::Mechanical;
+private:
+    //! 弾の大きさ
+    float _bullet_scale;
 public:
     /// <summary>
     /// コンストラクタ

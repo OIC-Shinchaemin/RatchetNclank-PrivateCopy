@@ -3,6 +3,7 @@
 #include "Base/Resource/ResourceFont.h"
 #include "../Game/Audio/AudioUtility.h"
 #include "TitleSceneInitializer.h"
+#include "DescriptionScene.h"
 
 
 void ratchet::scene::TitleScene::FadeOutStart(void) {
@@ -17,20 +18,77 @@ void ratchet::scene::TitleScene::FadeOutStart(void) {
     _scene_end = true;
 }
 
+void ratchet::scene::TitleScene::InitializeOption(void) {
+    auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
+    _title_menu_subject.AddObserver(menu);
+    _title_menu_subject.Notify(true);
+
+    if (auto game = _game.lock()) {
+
+        auto option_system = game->GetOptionSystem();
+        auto se_player = super::GetSEPlayer();
+        option_system->SetSEPlayer(se_player);
+
+        _option_system_subject.AddObserver(option_system);
+        option_system->GetTitleMenuSubject()->AddObserver(menu);
+
+        auto item0 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
+            _how_to_play.Show();
+            return true;
+        });
+        item0->SetText("操作説明");
+
+        auto item1 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
+            if (!_scene_end) {
+                _title_menu_subject.Notify(false);
+                _option_system_subject.Notify(false);
+                this->FadeOutStart();
+                _scene_end = true;
+            } // if
+            return true;
+        });
+        item1->SetText("ゲームスタート");
+
+
+        auto item2 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
+            _option_system_subject.Notify(false);
+            _scene_end = true;
+            ::PostQuitMessage(0);
+            return true;
+        });
+        item2->SetText("終了");
+
+
+        option_system->Initialize();
+        option_system->AddItem(item1);
+        option_system->AddItem(item0);
+        option_system->AddItem(item2);
+    } // if
+
+}
+
 bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
-        ::PostQuitMessage(0);
+        if (_how_to_play.IsShow()) {
+            _how_to_play.Hide();
+
+
+            if (auto game = _game.lock()) {
+                auto option_system = game->GetOptionSystem();
+                option_system->Clear();
+                this->InitializeOption();
+                option_system->OnNotify(true);
+                //option_system->OnNotify(true);
+            } // if
+
+        } // if
+        else {
+            ::PostQuitMessage(0);
+        } // else
         return false;
     } // if
 
-    if (::g_pInput->IsKeyPush(MOFKEY_E)) {
-        auto e = game::audio::SEEvent();
-        e.command = decltype(e.command)::Play();
-        e.type = game::audio::SEType::SystemEner;
-        super::GetSEPlayer()->Recieve(e);
-
-    } // if
-
+    // 一定時間入力を受け付けない
     if (_input_flag) {
         if (::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START) ||
             ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
@@ -39,31 +97,29 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
             } // if
         } // if
     } // if
-
     if (_input_timer.Tick(delta_time)) {
         _input_flag = true;
     } // if
 
 
+    // フェード
     bool effect_end = super::SceneUpdate(delta_time);
     if (effect_end && _transition_state == TransitionState::End) {
         _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kGameScene, ""));
     } // if
 
+    // title
     _demo_actor->Update(delta_time);
-
     auto camera_info = ratchet::camera::CameraController::CameraInfo();
-
     auto pos = Mof::CVector3(10.0f, -2.0f, -15.0f);
     _camera_controller.GetService()->SetAzimuth(
         math::ToDegree(_camera_controller.GetService()->GetAzimuth()) + 0.2f);
     camera_info.target_position = pos;
     _camera_controller.GetService()->Update(delta_time, camera_info);
-
     _logo.Update(delta_time);
 
 
-    //_bgm.Update();
+    // sound
     auto bgm_player = super::GetBGMPlayer();
     auto se_player = super::GetSEPlayer();
     if (_scene_end) {
@@ -90,13 +146,18 @@ bool ratchet::scene::TitleScene::SceneRender(void) {
     ::g_pGraphics->SetDepthEnable(false);
 
     _logo.Render();
+
+
+    if (_how_to_play.IsShow()) {
+        _how_to_play.Render(super::GetResource());
+    } // if
     return true;
 }
 
 bool ratchet::scene::TitleScene::LoadingRender(void) {
     ::g_pGraphics->ClearTarget(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0);
     ::g_pGraphics->SetDepthEnable(false);
-    
+
     _load_animation.Render();
     return true;
 }
@@ -111,7 +172,8 @@ ratchet::scene::TitleScene::TitleScene() :
     _ui_creator("TitleInfoMenu"),
     _scene_end(false),
     _input_flag(false),
-    _input_timer() {
+    _input_timer(),
+    _show_how_to_play(false) {
     _input_timer.Initialize(2.0f, false);
 }
 
@@ -176,53 +238,8 @@ bool ratchet::scene::TitleScene::Initialize(void) {
     auto shared_this = std::dynamic_pointer_cast<TitleScene>(shared_from_this());;
     initializer.Execute(shared_this);
 
+    this->InitializeOption();
 
-    auto menu = _ui_creator.Create(super::GetUICanvas(), super::GetResource());
-    _title_menu_subject.AddObserver(menu);
-    _title_menu_subject.Notify(true);
-
-    if (auto game = _game.lock()) {
-        auto option_system = game->GetOptionSystem();
-        auto se_player = super::GetSEPlayer();
-        option_system->SetSEPlayer(se_player);
-
-        _option_system_subject.AddObserver(option_system);
-        option_system->GetTitleMenuSubject()->AddObserver(menu);
-
-        auto item0 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-            _subject.Notify(scene::SceneMessage(ratchet::scene::SceneType::kDescriptionScene, ""));
-            _option_system_subject.Notify(false);
-            _scene_end = true;
-            return true;
-        });
-        item0->SetText("操作説明");
-
-        auto item1 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-            if (!_scene_end) {
-                _title_menu_subject.Notify(false);
-                _option_system_subject.Notify(false);
-                this->FadeOutStart();
-                _scene_end = true;
-            } // if
-            return true;
-        });
-        item1->SetText("ゲームスタート");
-
-
-        auto item2 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-            _option_system_subject.Notify(false);
-            _scene_end = true;
-            ::PostQuitMessage(0);
-            return true;
-        });
-        item2->SetText("終了");
-
-
-        option_system->Initialize();
-        option_system->AddItem(item1);
-        option_system->AddItem(item0);
-        option_system->AddItem(item2);
-    } // if
     return true;
 }
 

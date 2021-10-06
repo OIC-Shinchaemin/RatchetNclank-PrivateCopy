@@ -553,10 +553,8 @@
     <ClCompile Include="State\ShipActionStateImplementation.cpp" />
     <ClCompile Include="State\ShipMotionStateImplementation.cpp" />
     <ClCompile Include="TutorialManager.cpp" />
-    <ClCompile Include="UI\EnemyHpMenu.cpp" />
     <ClCompile Include="UI\EquipmentWeaponMenu.cpp" />
     <ClCompile Include="UI\GamePauseSystemMenu.cpp" />
-    <ClCompile Include="UI\GimmickAccessSystemMenu.cpp" />
     <ClCompile Include="UI\HelpDeskMenu.cpp" />
     <ClCompile Include="UI\LockOnCursorMenu.cpp" />
     <ClCompile Include="UI\GameMoneyMenu.cpp" />
@@ -566,7 +564,6 @@
     <ClCompile Include="UI\ShopSystemMenu.cpp" />
     <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp" />
     <ClCompile Include="UI\TitleInfoMenu.cpp" />
-    <ClCompile Include="UI\UICreator.cpp" />
     <ClCompile Include="UI\UserActionHelperMenu.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>

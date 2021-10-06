@@ -5,7 +5,8 @@ ratchet::ui::EquipmentWeaponMenu::EquipmentWeaponMenu(const char* name) :
     super(name),
     _info(),
     _tex_names(),
-    _resource() {
+    _resource(),
+    _position_margin(48.0f, 12.0f){
     auto window_height = ::g_pFramework->GetWindow()->GetHeight();
 
     this->SetPosition(Mof::CVector2(16.0f, window_height - 96.0f));
@@ -50,7 +51,6 @@ bool ratchet::ui::EquipmentWeaponMenu::Render(void) {
 
                 if (auto resource = _resource.lock()) {
                     auto font = resource->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-アナログテレビフォント");
-                    //std::string text = "bullet count = ";
                     std::string text = std::to_string(_info.bullet_count);
 
                     auto color = def::color_rgba_u32::kBlack;

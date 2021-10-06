@@ -1095,9 +1095,6 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp">
       <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="UI\GimmickAccessSystemMenu.cpp">
-      <Filter>Ratchet\Source\UI</Filter>
-    </ClCompile>
     <ClCompile Include="..\include\Base\Core\State.cpp">
       <Filter>Ratchet\Base\Core</Filter>
     </ClCompile>
@@ -1151,9 +1148,6 @@
     </ClCompile>
     <ClCompile Include="Component\Item\BulletItem\BulletItemDefaultComponent.cpp">
       <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\UICreator.cpp">
-      <Filter>Ratchet\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameSystem\Shop\ShopSystemElement.cpp">
       <Filter>Ratchet\Source\Game\GameSystem\Shop</Filter>
@@ -1369,9 +1363,6 @@
       <Filter>Ratchet\Source\Game\GameSystem\User</Filter>
     </ClCompile>
     <ClCompile Include="UI\UserActionHelperMenu.cpp">
-      <Filter>Ratchet\Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\EnemyHpMenu.cpp">
       <Filter>Ratchet\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyHpBillboardComponent.cpp">

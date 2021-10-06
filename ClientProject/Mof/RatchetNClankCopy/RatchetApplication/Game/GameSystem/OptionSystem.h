@@ -151,6 +151,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     void Hide(void);
+    /// <summary>
+    /// ÉNÉäÉA
+    /// </summary>
+    /// <param name=""></param>
+    void Clear(void);
 };
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_OPTION_SYSTEM_H

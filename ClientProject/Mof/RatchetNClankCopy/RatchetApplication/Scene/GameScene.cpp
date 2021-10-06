@@ -60,7 +60,7 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     } // if
 
 
-    if (::g_pInput->IsKeyPush(MOFKEY_LSHIFT)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         _show_how_to_play = false;
         super::SetState(State::Active);
     } // if

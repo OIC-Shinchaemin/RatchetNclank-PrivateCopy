@@ -29,7 +29,8 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class NanotechMenu : public base::ui::UIPanel, public base::core::Observer<int> {
+class NanotechMenu : public base::ui::UIPanel, 
+    public base::core::Observer<int, int> {
     using super = base::ui::UIPanel;
 private:
     //! 最大値
@@ -41,7 +42,7 @@ private:
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource_manager;
     //! 拡大率
-    float _scale;
+    float _margin_x;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,7 +53,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="hp"></param>
-    virtual void OnNotify(int hp) override;
+    virtual void OnNotify(int hp, int max) override;
     /// <summary>
     /// セッター
     /// </summary>

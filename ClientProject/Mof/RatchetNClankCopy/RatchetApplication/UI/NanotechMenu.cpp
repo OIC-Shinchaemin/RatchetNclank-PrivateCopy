@@ -7,13 +7,14 @@ ratchet::ui::NanotechMenu::NanotechMenu(const char* name) :
     _hp(_hp_max),
     _resource_manager(),
     _ui_canvas(),
-    _scale(ratchet::kWindowPerXGA) {
-    this->SetPosition(Mof::CVector2(1580.0f, 60.0f));
+    _margin_x(12.0f){
+    this->SetPosition(Mof::CVector2(800.0f, 24.0f));
 }
 
-void ratchet::ui::NanotechMenu::OnNotify(int hp) {
+void ratchet::ui::NanotechMenu::OnNotify(int hp, int max) {
     super::Notify(shared_from_this(), "Enable");
     this->_hp = hp;
+    this->_hp_max = max;
 }
 
 void ratchet::ui::NanotechMenu::SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr) {
@@ -42,13 +43,12 @@ bool ratchet::ui::NanotechMenu::Render(void) {
     } // if
 
     auto size = Mof::CVector2(tex->GetWidth(), tex->GetHeight());
-    auto half_size = size * 0.5f * _scale;
+    auto half_size = size * 0.5f;
     for (int i = 0; i < _hp_max; i++) {
         if (i < _hp) {
-            //tex->Render(      pos.x - half_size.x, pos.y - half_size.y);
-            tex->RenderScale(pos.x - half_size.x, pos.y - half_size.y, _scale);
+            tex->Render(pos.x - half_size.x, pos.y - half_size.y);
         } // if
-        pos.x += 48.0f * 2.0f;
+        pos.x += (tex->GetWidth() + _margin_x);
     } // for
     return true;
 }

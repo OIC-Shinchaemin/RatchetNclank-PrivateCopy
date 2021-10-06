@@ -19,6 +19,7 @@
 #include "../UI/UICreator.h"
 #include "Loading/LoadingAnimation.h"
 #include "Title/TitleLogo.h"
+#include "DescriptionScene.h"
 
 
 namespace ratchet::scene {
@@ -53,12 +54,21 @@ private:
     bool _input_flag;
     //! ローディングアニメーション
     scene::loading::LoadingDotAnimation _load_animation;
+    //! 表示
+    bool _show_how_to_play;
+    //! 説明
+    scene::GameDescription _how_to_play;
 private:
     /// <summary>
     /// フェードアウト
     /// </summary>
     /// <param name=""></param>
     void FadeOutStart(void);
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name=""></param>
+    void InitializeOption(void);
 protected:
     /// <summary>
     /// 更新
