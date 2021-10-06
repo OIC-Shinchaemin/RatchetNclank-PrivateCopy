@@ -71,6 +71,12 @@ private:
     base::core::Observable<const std::string&> _current;
     //! 監視対象
     base::core::Observable<const This::Info&> _info_subject;
+    //! 指定の武器のインデックス
+    int _blaster_index;
+    //! 指定の武器のインデックス
+    int _empty_index;
+    //! 切り替えのワーク変数
+    int _work_index;
     /// <summary>
     /// 開く
     /// </summary>
