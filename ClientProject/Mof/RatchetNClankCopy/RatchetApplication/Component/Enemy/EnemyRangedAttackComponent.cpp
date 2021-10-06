@@ -13,6 +13,7 @@
 
 ratchet::component::enemy::EnemyRangedAttackComponent::EnemyRangedAttackComponent(int priority) :
     super(priority),
+    _shot_bullet_scale(0.2f),
     _range(3.0f),
     _volume(0.2f),
     _shot_speed(3.0f),
@@ -20,19 +21,20 @@ ratchet::component::enemy::EnemyRangedAttackComponent::EnemyRangedAttackComponen
     _velocity_com(),
     _motion_com(),
     _motion_state_com(),
-    _ENEMY_com(),
+    _enemy_com(),
     _state_com() {
 }
 
 ratchet::component::enemy::EnemyRangedAttackComponent::EnemyRangedAttackComponent(const EnemyRangedAttackComponent& obj) :
     super(obj),
+    _shot_bullet_scale(obj._shot_bullet_scale),
     _range(obj._range),
     _volume(obj._volume),
     _shot_speed(obj._shot_speed),
     _velocity_com(),
     _motion_com(),
     _motion_state_com(),
-    _ENEMY_com(),
+    _enemy_com(),
     _state_com() {
 }
 
@@ -66,13 +68,13 @@ bool ratchet::component::enemy::EnemyRangedAttackComponent::Initialize(void) {
     _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
-    _ENEMY_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
+    _enemy_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
     _state_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyStateComponent>();
     return true;
 }
 
 bool ratchet::component::enemy::EnemyRangedAttackComponent::Update(float delta_time) {
-    if (auto enemy_com = _ENEMY_com.lock()) {
+    if (auto enemy_com = _enemy_com.lock()) {
         if (auto target = enemy_com->GetTarget().lock()) {
             auto owner = super::GetOwner();
             Mof::CVector3 direction = target->GetPosition() - owner->GetPosition();
@@ -121,17 +123,19 @@ bool ratchet::component::enemy::EnemyRangedAttackComponent::Start(void) {
         motion_state_com->ChangeState(state::EnemyMotionStateType::kEnemyMotionRangedAttackState);
     } // if
 
-    _ASSERT_EXPR(_ENEMY_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
-    auto ENEMY_com = _ENEMY_com.lock();
+    _ASSERT_EXPR(_enemy_com.lock()->GetTargetPosition().has_value(), L"“G‚ð”FŽ¯‚µ‚Ä‚¢‚Ü‚¹‚ñ");
+    auto enemy_com = _enemy_com.lock();
 
     auto param = ratchet::actor::bullet::Bullet::Param();
+    param.tag = "EnemyBullet";
     auto owner = super::GetOwner();
     auto transform = ratchet::Transform();
     param.transform.position = owner->GetPosition();
-    param.transform.position.y += ENEMY_com->GetHeight();
+    param.transform.position.y += enemy_com->GetHeight();
     param.transform.rotate = owner->GetRotate();
+    param.transform.scale = Mof::CVector3(_shot_bullet_scale, _shot_bullet_scale, _shot_bullet_scale);
 
-    Mof::CVector3 direction = ENEMY_com->GetTargetPosition().value() - param.transform.position;
+    Mof::CVector3 direction = enemy_com->GetTargetPosition().value() - param.transform.position;
     direction.Normal(direction);
     param.speed = direction * _shot_speed;
 

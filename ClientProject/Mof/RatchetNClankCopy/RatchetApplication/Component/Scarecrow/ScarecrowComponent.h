@@ -9,12 +9,10 @@
 #include "../../Actor/Actor.h"
 #include "Base/Core/Observable.h"
 #include "../../Effect/EffectEmitter.h"
+#include "../HpComponent.h"
+#include "../InvincibleComponent.h"
 
 
-namespace ratchet::component { 
-class  HpComponent; 
-class  InvincibleComponent;
-}
 namespace ratchet::component::scarecrow {
 class ScarecrowComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;

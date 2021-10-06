@@ -4,8 +4,7 @@
 
 
 ratchet::actor::bullet::BlasterBullet::BlasterBullet() :
-    super(),
-    _scale_multiply(0.99f){
+    super() {
     super::SetTag("BlasterBullet");
     _exist_time.Initialize(2.0f,false);
 }
@@ -18,10 +17,6 @@ bool ratchet::actor::bullet::BlasterBullet::Update(float delta_time) {
 
     auto v = super::GetComponent<ratchet::component::VelocityComponent>();
     v->AddVelocityForce(_speed);
-
-    auto scale = super::GetScale();
-    scale *= _scale_multiply;
-    super::SetScale(scale);
 
     super::Update(delta_time);
     return true;

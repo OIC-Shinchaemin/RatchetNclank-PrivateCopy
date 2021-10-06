@@ -17,8 +17,8 @@ namespace ratchet::effect {
 class EffectEmitterHolder {
     using EmitterPtr = std::shared_ptr<ratchet::effect::EffectEmitter>;
 private:
+    //! 保有エミッタ
     std::unordered_map<ratchet::effect::EffectType, EmitterPtr> _emitters;
-
 public:
     bool Emplace(ratchet::effect::EffectType type, const EmitterPtr& elem) {
         auto it = _emitters.find(type);
@@ -49,8 +49,6 @@ private:
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! ペアデータ
     std::unordered_map<effect::EffectType, PoolAndEmitTarget > _effect_pair;
-
-
     /// <summary>
     /// 作成
     /// </summary>

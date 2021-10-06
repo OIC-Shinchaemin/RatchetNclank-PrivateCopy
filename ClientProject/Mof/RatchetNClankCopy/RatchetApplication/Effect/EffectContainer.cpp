@@ -18,6 +18,10 @@ ratchet::effect::EffectPoolCreateInfo ratchet::effect::EffectContainer::CreateEf
             pool_create_info.pool_count = 10;
             pool_create_info.path = "../Resource/texture/effect/star.png";
             break;
+        case ratchet::effect::EffectType::EnemyBulletEnd:
+            pool_create_info.pool_count = 20;
+            pool_create_info.path = "../Resource/texture/effect/enemy_bullet_end_effect.png";
+            break;
         default:
             break;
     } // switch
@@ -31,6 +35,7 @@ ratchet::effect::EffectContainer::EffectContainer() :
     _effect_pair.emplace(Type::BasicDamage, PoolAndEmitTarget(this->CreateEffectPoolCreateInfo(Type::BasicDamage)));
     _effect_pair.emplace(Type::PlayerSense, PoolAndEmitTarget(this->CreateEffectPoolCreateInfo(Type::PlayerSense)));
     _effect_pair.emplace(Type::PopStar, PoolAndEmitTarget(this->CreateEffectPoolCreateInfo(Type::PopStar)));
+    _effect_pair.emplace(Type::EnemyBulletEnd, PoolAndEmitTarget(this->CreateEffectPoolCreateInfo(Type::EnemyBulletEnd)));
 }
 
 ratchet::effect::EffectContainer::~EffectContainer() {

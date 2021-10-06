@@ -37,9 +37,9 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
     {
-        //tutorial::TutorialManager::GetInstance().Complete();
-        //tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
-        //tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
+        tutorial::TutorialManager::GetInstance().Complete();
+        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
+        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
     }
 
     for (auto& ptr : _created_actors) {
@@ -165,6 +165,19 @@ void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr
             se.command = decltype(se.command)::Play();
             super::GetSEPlayer()->Recieve(se);
         } // if
+        else if (tag == "EnemyBullet") {
+            auto info = effect::Effect::Info();
+            info.init_param.type = effect::EffectType::EnemyBulletEnd;
+            info.init_param.life_duration = 1.0f;
+            info.init_param.color = def::color_rgba::kWhite;
+            info.init_param.transform.position = ptr->GetPosition();
+            
+            info.update_param.color = Mof::CVector4(0.0f, 0.0f, 0.0f, -0.05f);
+            info.update_param.scale = Mof::CVector3(0.05f, 0.0f, 0.05f);
+            _enemy_bullet_end_effect_emitter->Emit(info);
+        } // else if
+
+
 
         ptr->RemoveObserver(shared_from_this());
         _delete_actors.push_back(ptr);
@@ -301,6 +314,9 @@ bool ratchet::scene::GameScene::Load(std::shared_ptr<ratchet::scene::Scene::Para
         _text_system->Load();
 
         this->Initialize();
+
+        // effect
+        _enemy_bullet_end_effect_emitter = _effect->CreateEmitter(effect::EffectType::EnemyBulletEnd);
 
         auto bgm_player = super::GetBGMPlayer();
         {

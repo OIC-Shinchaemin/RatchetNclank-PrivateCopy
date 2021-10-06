@@ -244,7 +244,11 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         enemy->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
 
 
-        break;
+        static int i = 0;
+        if (i == 2) {
+            break;
+        } // if
+        i++;
     } // for
 
     {

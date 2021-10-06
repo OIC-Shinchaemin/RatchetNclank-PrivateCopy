@@ -11,15 +11,19 @@
 
 
 void Elevator::EnemyViewEventStart(void) {
+    // ˆê‰ñ‚«‚è
     _event_started = true;
-    if (auto e = _event_manager.lock()) {
-        auto player_event = e->CreateGameEvent<ratchet::event::PlayerActionAfterGettingOffElevatorEvent>();
-        if (ratchet::event::EventReferenceTable::Singleton().Exist("player")) {
-            auto player = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player>>("player");
-            player->Sleep();
-            player_event->Start();
+    if (_player_collision_component.lock()->IsOnElevator()) {
+        if (auto e = _event_manager.lock()) {
+            auto player_event = e->CreateGameEvent<ratchet::event::PlayerActionAfterGettingOffElevatorEvent>();
+            if (ratchet::event::EventReferenceTable::Singleton().Exist("player")) {
+                auto player = ratchet::event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player>>("player");
+                player->Sleep();
+                player_event->Start();
+            } // if
         } // if
     } // if
+
     _event_started = true;
 }
 

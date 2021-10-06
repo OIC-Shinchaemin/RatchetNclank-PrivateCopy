@@ -13,13 +13,12 @@
 #include "../MotionStateComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace enemy {
+namespace ratchet::component::enemy {
 class EnemyRangedAttackComponent : public ratchet::component::ActionComponent {
     using super = ratchet::component::ActionComponent;
 private:
-private:
+    //! 弾の大きさ
+    float _shot_bullet_scale;
     //! 攻撃範囲
     float _range;
     //! サイズ
@@ -35,7 +34,7 @@ private:
     //! モーション
     std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
     //! 型
-    std::weak_ptr<class EnemyComponent> _ENEMY_com;
+    std::weak_ptr<class EnemyComponent> _enemy_com;
     //! 状態
     std::weak_ptr<class EnemyStateComponent> _state_com;
 public:
@@ -114,7 +113,5 @@ public:
     /// <returns>成功</returns>
     virtual bool Start(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_ENEMY_ENEMY_RANGED_ATTACK_COMPONENT_H

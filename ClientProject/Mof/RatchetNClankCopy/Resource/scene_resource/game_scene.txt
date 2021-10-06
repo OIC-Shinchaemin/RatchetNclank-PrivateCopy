@@ -23,6 +23,7 @@
 ../Resource/texture/effect/sense.png
 ../Resource/texture/effect/star.png
 ../Resource/texture/effect/flash.png
+../Resource/texture/effect/enemy_bullet_end_effect.png
 
 ../Resource/texture/icon/bomb_glove.png
 ../Resource/texture/icon/pyrocitor.png

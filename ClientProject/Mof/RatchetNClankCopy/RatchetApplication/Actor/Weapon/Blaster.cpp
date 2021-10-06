@@ -7,7 +7,7 @@
 
 ratchet::actor::weapon::Blaster::Blaster() :
     super(),
-    _bullet_scale(2.0f){
+    _bullet_scale(0.3f){
     super::SetName("Blaster");
     super::_shot_speed = 5.0f;
     super::_interval_max = 0.06f;
