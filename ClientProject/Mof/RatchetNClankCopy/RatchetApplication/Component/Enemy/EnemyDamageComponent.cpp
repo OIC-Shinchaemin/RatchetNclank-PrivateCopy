@@ -67,6 +67,7 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
     _hp_com = super::GetOwner()->GetComponent<ratchet::component::HpComponent>();
     _enemy_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyComponent>();
     _state_com = super::GetOwner()->GetComponent<ratchet::component::enemy::EnemyStateComponent>();
+    _invincible_com = super::GetOwner()->GetComponent<ratchet::component::InvincibleComponent>();
 
     auto coll_com = super::GetOwner()->GetComponent<ratchet::component::collision::EnemyCollisionComponent>();
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Stay,
@@ -85,9 +86,21 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
         super::GetOwner()->SetPosition(pos + diff);
         return true;
     }));
+
     coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
                                ratchet::component::collision::CollisionComponentType::kOmniWrenchCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto invincible_com = _invincible_com.lock()) {
+            if (invincible_com->IsActive()) {
+                return false;
+            } // if
+            invincible_com->Activate();
+        } // if
+        if (_state_com.lock()->IsEqual(state::EnemyActionStateType::kEnemyActionDamageState)) {
+            return false;
+        } // if
+
+
         _damage_value = 1;
 
         if (auto type_com = _enemy_com.lock()) {
@@ -96,6 +109,39 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
             message.damaged_character_tag = super::GetOwner()->GetTag();
             type_com->GetOwnerCastd()->GetCharacterDamageApplyMessageSubject()->Notify(message);
         } // if
+        this->CollisionAction(in);
+        return true;
+    }));
+
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBlasterBulletCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        if (auto invincible_com = _invincible_com.lock()) {
+            if (invincible_com->IsActive()) {
+                return false;
+            } // if
+            invincible_com->Activate();
+        } // if
+        if (_state_com.lock()->IsEqual(state::EnemyActionStateType::kEnemyActionDamageState)) {
+            return false;
+        } // if
+
+        _damage_value = 1;
+        if (auto type_com = _enemy_com.lock()) {
+            type_com->StarEffectEmit(in.target.lock());
+        } // if
+        this->CollisionAction(in);
+        return true;
+    }));
+    /*
+    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
+                               ratchet::component::collision::CollisionComponentType::kBombGloveEffectCollisionComponent,
+                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
+        _damage_value = 2;
+        if (auto type_com = _enemy_com.lock()) {
+            type_com->StarEffectEmit(in.target.lock());
+        } // if
+
         this->CollisionAction(in);
         return true;
     }));
@@ -110,28 +156,8 @@ bool ratchet::component::enemy::EnemyDamageComponent::Initialize(void) {
         this->CollisionAction(in);
         return true;
     }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kBlasterBulletCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        _damage_value = 1;
-        if (auto type_com = _enemy_com.lock()) {
-            type_com->StarEffectEmit(in.target.lock());
-        } // if
+    */
 
-        this->CollisionAction(in);
-        return true;
-    }));
-    coll_com->AddCollisionFunc(ratchet::component::collision::CollisionComponent::CollisionFuncType::Enter,
-                               ratchet::component::collision::CollisionComponentType::kBombGloveEffectCollisionComponent,
-                               ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
-        _damage_value = 2;
-        if (auto type_com = _enemy_com.lock()) {
-            type_com->StarEffectEmit(in.target.lock());
-        } // if
-
-        this->CollisionAction(in);
-        return true;
-    }));
     return true;
 }
 

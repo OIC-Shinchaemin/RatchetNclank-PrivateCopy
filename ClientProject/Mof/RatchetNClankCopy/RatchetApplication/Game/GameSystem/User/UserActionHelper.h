@@ -11,20 +11,16 @@
 
 namespace ratchet::ui { class UserActionHelperMenu; }
 namespace ratchet::game::gamesystem::user {
-class UserActionHelper : 
+class UserActionHelper :
     //public std::enable_shared_from_this<UserActionHelper>,
     public game::gamesystem::GameSystem,
     public actor::character::CharacterTalkableMessageListener {
     using super = game::gamesystem::GameSystem;
 private:
     //! UI地蔵
-    ratchet::ui::UICreator<ratchet::ui::UserActionHelperMenu> _ui_creator;
+    std::unique_ptr<ratchet::ui::UICreator<ratchet::ui::UserActionHelperMenu> >_ui_creator;
     //! リソース
     std::weak_ptr<ratchet::ui::UserActionHelperMenu> _ui;
-    //! リソース
-    //std::weak_ptr<ratchet::ResourceMgr> _resource;
-    //! UI
-    //std::weak_ptr<base::ui::UICanvas> _ui_canvas;
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,6 +39,11 @@ public:
     /// </summary>
     /// <param name=""></param>
     bool RegisterUI(void);
+    /// <summary>
+    /// 削除
+    /// </summary>
+    /// <param name=""></param>
+    bool DisposeUI(void);
 };
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_USER_USER_ACTION_HELPER_H

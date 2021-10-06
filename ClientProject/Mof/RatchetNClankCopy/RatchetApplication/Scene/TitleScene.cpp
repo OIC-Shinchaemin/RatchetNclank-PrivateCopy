@@ -39,11 +39,13 @@ void ratchet::scene::TitleScene::InitializeOption(void) {
         item0->SetText("‘€ìà–¾");
 
         auto item1 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-            if (!_scene_end) {
-                _title_menu_subject.Notify(false);
-                _option_system_subject.Notify(false);
-                this->FadeOutStart();
-                _scene_end = true;
+            if (!_how_to_play.IsShow()) {
+                if (!_scene_end) {
+                    _title_menu_subject.Notify(false);
+                    _option_system_subject.Notify(false);
+                    this->FadeOutStart();
+                    _scene_end = true;
+                } // if
             } // if
             return true;
         });
@@ -51,9 +53,12 @@ void ratchet::scene::TitleScene::InitializeOption(void) {
 
 
         auto item2 = std::make_shared<ratchet::game::gamesystem::OptionSystemItem>([&]() {
-            _option_system_subject.Notify(false);
-            _scene_end = true;
-            ::PostQuitMessage(0);
+            if (!_how_to_play.IsShow()) {
+
+                _option_system_subject.Notify(false);
+                _scene_end = true;
+                ::PostQuitMessage(0);
+            } // if
             return true;
         });
         item2->SetText("I—¹");

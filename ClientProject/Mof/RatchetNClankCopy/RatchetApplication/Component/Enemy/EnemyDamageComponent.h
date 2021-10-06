@@ -13,6 +13,7 @@
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
 #include "../HpComponent.h"
+#include "../InvincibleComponent.h"
 
 
 namespace ratchet::component::enemy {
@@ -37,6 +38,8 @@ private:
     std::weak_ptr<class EnemyComponent> _enemy_com;
     //! ó‘Ô
     std::weak_ptr<class EnemyStateComponent> _state_com;
+    //! –³“G
+    std::weak_ptr<ratchet::component::InvincibleComponent> _invincible_com;
 private:
     /// <summary>
     /// Õ“Ëˆ—

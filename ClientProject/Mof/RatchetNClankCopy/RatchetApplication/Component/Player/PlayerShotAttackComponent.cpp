@@ -62,7 +62,7 @@ bool ratchet::component::player::action::PlayerShotAttackComponent::Input(void) 
         _input_info.shot_flag = false;
     } // if
 
-    OutputDebugString("_input_info.shot_flag ");
+//    OutputDebugString("_input_info.shot_flag ");
 
     return true;
 }

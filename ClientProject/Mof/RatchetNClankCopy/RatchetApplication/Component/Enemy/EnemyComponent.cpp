@@ -9,6 +9,7 @@
 #include "../Collision/Object/SightCollisionComponent.h"
 #include "../../Actor/Character/Enemy.h"
 
+
 ratchet::component::enemy::EnemyComponent::EnemyComponent(int priority) :
     super(priority),
     _velocity_timer(),

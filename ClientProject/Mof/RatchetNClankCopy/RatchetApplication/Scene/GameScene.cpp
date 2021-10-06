@@ -60,10 +60,13 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     } // if
 
 
-    if (::g_pInput->IsKeyPush(MOFKEY_RETURN)) {
-        _show_how_to_play = false;
-        super::SetState(State::Active);
+    if (::g_pInput->IsKeyPush(MOFKEY_ESCAPE)) {
+        if (_how_to_play.IsShow()) {
+            _how_to_play.Hide();
+            super::SetState(State::Active);
+        } // if
     } // if
+
 
     if (_state != super::State::Pause) {
         // input
@@ -115,9 +118,9 @@ bool ratchet::scene::GameScene::SceneRender(void) {
         _text_system->Render();
     } // if
 
-    if (_show_how_to_play) {
-        auto desc = GameDescription();
-        desc.Render(super::GetResource());
+
+    if (_how_to_play.IsShow()) {
+        _how_to_play.Render(super::GetResource());
     } // if
 
     return true;
@@ -144,7 +147,7 @@ ratchet::scene::GameScene::GameScene() :
     _text_system(std::make_shared<ratchet::game::gamesystem::text::TextSystem>()),
     _loading_counter(),
     _loading_dot_count(0),
-    _show_how_to_play(false) {
+    _how_to_play() {
     _loading_counter.Initialize(1.0f, true);
 }
 
@@ -171,7 +174,7 @@ void ratchet::scene::GameScene::OnNotify(const char* type, const std::shared_ptr
             info.init_param.life_duration = 1.0f;
             info.init_param.color = def::color_rgba::kWhite;
             info.init_param.transform.position = ptr->GetPosition();
-            
+
             info.update_param.color = Mof::CVector4(0.0f, 0.0f, 0.0f, -0.05f);
             info.update_param.scale = Mof::CVector3(0.05f, 0.0f, 0.05f);
             _enemy_bullet_end_effect_emitter->Emit(info);
@@ -230,6 +233,7 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::event::ShipEventEndMessa
 }
 
 void ratchet::scene::GameScene::OnNotify(const ratchet::actor::character::CharacterDamageApplyMessage& message) {
+//    OutputDebugString("GameScene \n");
     if (auto e = _event.lock()) {
         auto event = e->CreateGameEvent<event::HitStopEvent>();
         event->SetGameScene(std::dynamic_pointer_cast<scene::GameScene>(shared_from_this()));
@@ -351,7 +355,9 @@ bool ratchet::scene::GameScene::Initialize(void) {
         item0->SetText("ƒ^ƒCƒgƒ‹‚É–ß‚é");
 
         auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
-            _show_how_to_play = true;
+            this->SetState(State::Pause);
+            _how_to_play.Show();
+//            _show_how_to_play = true;
             return true;
         });
         item1->SetText("‘€ìà–¾");
@@ -398,6 +404,7 @@ bool ratchet::scene::GameScene::Release(void) {
     super::Release();
     _stage.Release();
     if (auto game = _game.lock()) {
+        game->GetUserActionHelper()->DisposeUI();
         game->GetGamePauseSystem()->Clear();
         _pause_menu_subject.Clear();
         game->GameSystemRelease();

@@ -72,11 +72,13 @@ private:
     //! 経過時間 / 所要時間
     float _loading_progress;
     //! 表示
-    bool _show_how_to_play;
+//    bool _show_how_to_play;
     //! ローディング
     scene::loading::LoadingDotAnimation _loading_dot_animation;
     //! EnemyBulletEndEffect 
     std::shared_ptr<effect::EffectEmitter> _enemy_bullet_end_effect_emitter;
+    //! 説明
+    scene::GameDescription _how_to_play;
 public:
     /// <summary>
     /// 追加
