@@ -18,12 +18,12 @@ class NanotechMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="name"></param>
     NanotechMenuItem(const char* name);
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -33,49 +33,45 @@ class NanotechMenu : public base::ui::UIPanel,
     public base::core::Observer<int, int> {
     using super = base::ui::UIPanel;
 private:
-    //! æœ€å¤§å€¤
+    //! Å‘å’l
     int _hp_max;
     //! Hp
     int _hp;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
-    //! ãƒªã‚½ãƒ¼ã‚¹
+    //! ƒŠƒ\[ƒX
     std::weak_ptr<ratchet::ResourceMgr> _resource_manager;
-    //! æ‹¡å¤§ç‡
-//<<<<<<< Ex185_BulletActionFix
+    //! Šg‘å—¦
     float _margin_x;
-//=======
-    float _scale;
-//>>>>>>> MofLib
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     /// <param name="name"></param>
     NanotechMenu(const char* name);
     /// <summary>
-    /// é€šçŸ¥ã‚¤ãƒ™ãƒ³ãƒˆ
+    /// ’Ê’mƒCƒxƒ“ƒg
     /// </summary>
     /// <param name="hp"></param>
     virtual void OnNotify(int hp, int max) override;
     /// <summary>
-    /// ã‚»ãƒƒã‚¿ãƒ¼
+    /// ƒZƒbƒ^[
     /// </summary>
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
-    /// ã‚»ãƒƒã‚¿ãƒ¼
+    /// ƒZƒbƒ^[
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>

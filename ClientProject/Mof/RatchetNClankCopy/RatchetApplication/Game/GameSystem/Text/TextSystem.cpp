@@ -5,25 +5,25 @@
 
 
 bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
-    //ã‚»ãƒ¼ãƒ–ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
+    //ƒZ[ƒuƒtƒ@ƒCƒ‹‚ğŠJ‚­
     std::FILE* fp = std::fopen(name, "rb");
     if (fp == NULL) {
         return false;
     }
-    //ç¾åœ¨ã®æƒ…å ±ã‚’è§£æ”¾
+    //Œ»İ‚Ìî•ñ‚ğ‰ğ•ú
     _script.Release();
     _sprite_list.Release();
-    //å®Ÿè¡Œä¸­ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®å¤‰æ›´
+    //Às’†‚ÌƒXƒNƒŠƒvƒg‚Ì•ÏX
     char sname[MAX_PATH];
     std::fread(sname, 1, MAX_PATH, fp);
     if (!_script.Load(sname)) {
         return false;
     } // if
-    //ã‚³ãƒãƒ³ãƒ‰ä½ç½®ã‚’èª­ã¿è¾¼ã¿
+    //ƒRƒ}ƒ“ƒhˆÊ’u‚ğ“Ç‚İ‚İ
     std::fread(&_command_no, sizeof(int), 1, fp);
-    //ãƒ•ãƒ©ã‚°çŠ¶æ…‹ã‚’èª­ã¿è¾¼ã¿
+    //ƒtƒ‰ƒOó‘Ô‚ğ“Ç‚İ‚İ
     std::fread(_flags, sizeof(int), _flag_count, fp);
-    //è¡¨ç¤ºã®çŠ¶æ…‹ã‚’èª­ã¿è¾¼ã¿
+    //•\¦‚Ìó‘Ô‚ğ“Ç‚İ‚İ
     std::fread(&_text_command.px, sizeof(float), 1, fp);
     std::fread(&_text_command.py, sizeof(float), 1, fp);
     std::fread(_text_command.Text, 1, 256, fp);
@@ -41,25 +41,25 @@ bool ratchet::game::gamesystem::text::TextSystem::Load(const char* name) {
         std::fread(&pAdd->m_bShow, sizeof(int), 1, fp);
         _sprite_list.Add(&pAdd);
     }
-    //ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
+    //ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
     std::fclose(fp);
-    //ã‚¦ã‚§ã‚¤ãƒˆå‡¦ç†ã¾ã§ã‚’å®Ÿè¡Œ
+    //ƒEƒFƒCƒgˆ—‚Ü‚Å‚ğÀs
     _wait = false;
     this->StepCommand();
     return true;
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::LoadScript(const char* name) {
-    //ç¾åœ¨ã®æƒ…å ±ã‚’è§£æ”¾
+    //Œ»İ‚Ìî•ñ‚ğ‰ğ•ú
     _script.Release();
     _sprite_list.Release();
     _command_no = 0;
     _wait = false;
-    //ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®èª­ã¿è¾¼ã¿
+    //ƒXƒNƒŠƒvƒg‚Ì“Ç‚İ‚İ
     if (!_script.Load(name)) {
         return false;
     }
-    //ã‚¦ã‚§ã‚¤ãƒˆå‡¦ç†ã¾ã§ã‚’å®Ÿè¡Œ
+    //ƒEƒFƒCƒgˆ—‚Ü‚Å‚ğÀs
     this->StepCommand();
     return true;
 }
@@ -69,7 +69,7 @@ void ratchet::game::gamesystem::text::TextSystem::InitializeScript(void) {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::UpdateAlpha(void) {
-    //çµ‚äº†çŠ¶æ…‹ãªã‚‰ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ
+    //I—¹ó‘Ô‚È‚çƒtƒF[ƒhƒAƒEƒg
     if (false) {
         if (_alpha - ALPHA_SPEED <= 0) {
             _alpha = 0;
@@ -87,23 +87,23 @@ void ratchet::game::gamesystem::text::TextSystem::UpdateAlpha(void) {
         } // else
     } // else
 
-    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’ã‚·ãƒ¼ãƒ³ã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã¨åŒã˜ã«ã™ã‚‹
-    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ«ãƒ•ã‚¡ãƒ¡ãƒ³ãƒã¯0.0f ï½ 1.0fã«ãªã‚‹ãŸã‚255ã§å‰²ã£ãŸå€¤ã‚’è¨­å®šã™ã‚‹ã€‚
+    // ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ‹ƒtƒ@’l‚ğƒV[ƒ“‚ÌƒAƒ‹ƒtƒ@’l‚Æ“¯‚¶‚É‚·‚é
+    // ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ‹ƒtƒ@ƒƒ“ƒo‚Í0.0f ` 1.0f‚É‚È‚é‚½‚ß255‚ÅŠ„‚Á‚½’l‚ğİ’è‚·‚éB
     for (int i = 0; i < _sprite_list.GetArrayCount(); i++) {
         _sprite_list[i]->m_Color.a = _alpha / 255.0f;
     } // for
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
-    //ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æ›´æ–°
+    //ƒAƒ‹ƒtƒ@’l‚ÌXV
     this->UpdateAlpha();
 
-    //ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®æ›´æ–°
+    //ƒƒjƒ…[‚ÌXV
     if (false) {
     }
-    //ã‚¹ã‚¯ãƒªãƒ—ãƒˆã«ã‚ˆã‚‹æ›´æ–°
+    //ƒXƒNƒŠƒvƒg‚É‚æ‚éXV
     else if (_wait) {
-        //ã‚³ãƒãƒ³ãƒ‰ã®ã‚¿ã‚¤ãƒ—ã«ã‚ˆã£ã¦åˆ†å²
+        //ƒRƒ}ƒ“ƒh‚Ìƒ^ƒCƒv‚É‚æ‚Á‚Ä•ªŠò
         switch (_now_command->Type) {
             case CMD_TEXT:
                 this->TextCommand();
@@ -113,12 +113,12 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
                 break;
         } // switch
     } // else if
-    //ã‚¯ãƒªãƒƒã‚¯ã§æ¬¡ã®ã‚³ãƒãƒ³ãƒ‰ã‹ã‚‰å®Ÿè¡Œã‚’å†é–‹
+    //ƒNƒŠƒbƒN‚ÅŸ‚ÌƒRƒ}ƒ“ƒh‚©‚çÀs‚ğÄŠJ
     else if (g_pInput->IsKeyPush(MOFKEY_RETURN)) {
         this->StepCommand();
     } // else if
 
-    //ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ãƒªã‚¹ãƒˆã‚’æ›´æ–°ã™ã‚‹
+    //ƒXƒvƒ‰ƒCƒg‚ÌƒŠƒXƒg‚ğXV‚·‚é
     for (int i = 0; i < _sprite_list.GetArrayCount(); i++) {
         _sprite_list[i]->Update();
     } // for
@@ -136,7 +136,7 @@ bool ratchet::game::gamesystem::text::TextSystem::UpdateScript(void) {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
-    // ã™ã¹ã¦ã®ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹ã‹å¾…æ©Ÿå‡¦ç†ã«å…¥ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—å®Ÿè¡Œ
+    // ‚·‚×‚Ä‚ÌƒRƒ}ƒ“ƒh‚ğÀs‚·‚é‚©‘Ò‹@ˆ—‚É“ü‚é‚Ü‚Åƒ‹[ƒvÀs
     while (_command_no < _script.GetCommandCount() && !_wait) {
         _now_command = _script.GetCommand(_command_no);
         switch (_now_command->Type) {
@@ -190,24 +190,24 @@ void ratchet::game::gamesystem::text::TextSystem::StepCommand(void) {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::TextCommand(void) {
-    //è¡¨ç¤ºä¸­ã®ãƒ†ã‚­ã‚¹ãƒˆã¨ã€è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆã®é•·ã•ã‚’å–å¾—
+    //•\¦’†‚ÌƒeƒLƒXƒg‚ÆA•\¦‚·‚éƒeƒLƒXƒg‚Ì’·‚³‚ğæ“¾
     int nl = std::strlen(_line_buffer);
     int tl = std::strlen(_text_command.Text);
-    //ã¾ã å…¨éƒ¨è¡¨ç¤ºã•ã‚Œã¦ãªã„
+    //‚Ü‚¾‘S•”•\¦‚³‚ê‚Ä‚È‚¢
     if (nl < tl) {
-        //ã‚¯ãƒªãƒƒã‚¯ã§å…¨æ–‡ã‚’ä¸€æ‹¬è¡¨ç¤º
+        //ƒNƒŠƒbƒN‚Å‘S•¶‚ğˆêŠ‡•\¦
         if (g_pInput->IsKeyPush(MOFKEY_RETURN)) {
             _wait = false;
             std::strcpy(_line_buffer, _text_command.Text);
         } // if
         else {
-            //ä¸€å®šæ™‚é–“ã”ã¨ã«ä¸€æ–‡å­—ãšã¤å…¥ã‚Œã¦ã„ã
+            //ˆê’èŠÔ‚²‚Æ‚Éˆê•¶š‚¸‚Â“ü‚ê‚Ä‚¢‚­
             _str_wait++;
             if (_str_wait >= _wait_count_max) {
                 _str_wait = 0;
-                //å…¨è§’æ–‡å­—ã®åˆ¤å®šã‚’è¡Œã†
+                //‘SŠp•¶š‚Ì”»’è‚ğs‚¤
                 if (IsDBCSLeadByte(_text_command.Text[nl])) {
-                    //å…¨è§’æ–‡å­—ã®å ´åˆï¼’ãƒã‚¤ãƒˆåˆ†ã§ä¸€æ–‡å­—ã«ãªã‚‹
+                    //‘SŠp•¶š‚Ìê‡‚QƒoƒCƒg•ª‚Åˆê•¶š‚É‚È‚é
                     _line_buffer[nl] = _text_command.Text[nl];
                     nl++;
                     _line_buffer[nl] = _text_command.Text[nl];
@@ -219,7 +219,7 @@ void ratchet::game::gamesystem::text::TextSystem::TextCommand(void) {
                     nl++;
                     _line_buffer[nl] = '\0';
                 }
-                //å…¨æ–‡ã®è¡¨ç¤ºãŒçµ‚äº†
+                //‘S•¶‚Ì•\¦‚ªI—¹
                 if (nl >= tl) {
                     _wait = false;
                 } // if
@@ -230,13 +230,13 @@ void ratchet::game::gamesystem::text::TextSystem::TextCommand(void) {
 
 void ratchet::game::gamesystem::text::TextSystem::SpriteCommand(SPRITECOMMAND* pSpriteCommand) {
     LPSprite2D* pSprite = _sprite_list.Find(pSpriteCommand->Name);
-    //ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒãªã„å ´åˆã¯æ–°è¦ä½œæˆã—ã¦ãƒªã‚¹ãƒˆã«ç™»éŒ²
+    //ƒXƒvƒ‰ƒCƒg‚ª‚È‚¢ê‡‚ÍV‹Kì¬‚µ‚ÄƒŠƒXƒg‚É“o˜^
     if (!pSprite) {
         CSprite2D* pAdd = new CSprite2D(pSpriteCommand->FName);
         pAdd->SetName(pSpriteCommand->Name);
         _sprite_list.Add(&pAdd);
     } // if
-    //ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒã‚ã‚‹å ´åˆå¤ã„æƒ…å ±ã‚’ç ´æ£„ã—ã¦æ–°ã—ã„ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ã«å·®ã—æ›¿ãˆ
+    //ƒXƒvƒ‰ƒCƒg‚ª‚ ‚éê‡ŒÃ‚¢î•ñ‚ğ”jŠü‚µ‚ÄV‚µ‚¢ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹‚É·‚µ‘Ö‚¦
     else {
         (*pSprite)->Release();
         (*pSprite)->CreateSprite(pSpriteCommand->FName);
@@ -263,10 +263,10 @@ void ratchet::game::gamesystem::text::TextSystem::SetShowCommand(SETSHOWCOMMAND*
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::JumpCommand(const char* label) {
-    //ã™ã¹ã¦ã®ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹ã‹å¾…æ©Ÿå‡¦ç†ã«å…¥ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—å®Ÿè¡Œ
+    //‚·‚×‚Ä‚ÌƒRƒ}ƒ“ƒh‚ğÀs‚·‚é‚©‘Ò‹@ˆ—‚É“ü‚é‚Ü‚Åƒ‹[ƒvÀs
     int cmd = 0;
     while (cmd < _script.GetCommandCount()) {
-        //å®Ÿè¡Œã‚³ãƒãƒ³ãƒ‰å–ã‚Šå‡ºã—
+        //ÀsƒRƒ}ƒ“ƒhæ‚èo‚µ
         COMMAND* pCommand = _script.GetCommand(cmd);
         if (pCommand->Type == CMD_LABEL) {
             NAMECOMMAND* pNameCommand = (NAMECOMMAND*)pCommand;
@@ -276,16 +276,16 @@ bool ratchet::game::gamesystem::text::TextSystem::JumpCommand(const char* label)
                 return true;
             } // if
         } // if
-        //æ¬¡ã®ã‚³ãƒãƒ³ãƒ‰ã¸
+        //Ÿ‚ÌƒRƒ}ƒ“ƒh‚Ö
         cmd++;
     }
     return false;
 }
 
 void ratchet::game::gamesystem::text::TextSystem::SelectCommand(void) {
-    //ã‚³ãƒãƒ³ãƒ‰å–ã‚Šå‡ºã—
+    //ƒRƒ}ƒ“ƒhæ‚èo‚µ
     SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)_now_command;
-    //ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®æ›´æ–°
+    //ƒƒjƒ…[‚ÌXV
     if (pSelCommand->Select.IsShow()) {
         pSelCommand->Select.Update();
         if (pSelCommand->Select.IsEnter()) {
@@ -351,16 +351,10 @@ void ratchet::game::gamesystem::text::TextSystem::IfCommand(IFCOMMAND* pIfComman
 ratchet::game::gamesystem::text::TextSystem::TextSystem() :
     _active(false),
     _text_system_closed_message_subject(),
-//<<<<<<< Ex185_BulletActionFix
     _text_system_open_message_subject(text::TextSystemOpenMessageObservation::Singleton().CreateSubject()),
     _window_position(16, 570){
 
     _text_font.Create(24, "");
-//=======
-  //  _text_system_open_message_subject(text::TextSystemOpenMessageObservation::Singleton().CreateSubject()) {
-//>>>>>>> MofLib
-
-    _text_font.Create(32, "");
 
     ::memset(_line_buffer, 0, TEXTBUFFERSIZE);
 
@@ -380,9 +374,9 @@ ratchet::game::gamesystem::text::TextSystem::~TextSystem() {
 }
 
 void ratchet::game::gamesystem::text::TextSystem::OnNotify(const TextSystemMessage& message) {
-    //ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
+    //ƒtƒ‰ƒO‚Ì‰Šú‰»
     ::memset(_flags, 0, sizeof(int) * _flag_count);
-    //ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’èª­ã¿è¾¼ã‚€
+    //ƒXƒNƒŠƒvƒg‚ğ“Ç‚İ‚Ş
     auto path = _path_map.at(message.type);
     if (!this->LoadScript(path.c_str())) {
         return;
@@ -402,7 +396,7 @@ bool ratchet::game::gamesystem::text::TextSystem::Activate(void) {
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::Load(void) {
-    //ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
+    //ƒtƒ‰ƒO‚Ì‰Šú‰»
     ::memset(_flags, 0, sizeof(int) * _flag_count);
     if (!this->LoadScript("script/test.txt")) {
         return false;
@@ -418,43 +412,25 @@ bool ratchet::game::gamesystem::text::TextSystem::Update(void) {
 }
 
 bool ratchet::game::gamesystem::text::TextSystem::Render(void) {
-    //ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ãƒªã‚¹ãƒˆã‚’æç”»ã™ã‚‹
+    //ƒXƒvƒ‰ƒCƒg‚ÌƒŠƒXƒg‚ğ•`‰æ‚·‚é
     for (int i = 0; i < _sprite_list.GetArrayCount(); i++) {
         _sprite_list[i]->Render();
     } // if
-    //ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å ´åˆã¯é¸æŠæç”»
+    //ƒƒjƒ…[‚Ìê‡‚Í‘I‘ğ•`‰æ
     if (_now_command->Type == CMD_SELECT) {
         SELECTCOMMAND* pSelCommand = (SELECTCOMMAND*)_now_command;
         pSelCommand->Select.Render();
     } // if
 
-//<<<<<<< Ex185_BulletActionFix
     auto window_pos = _window_position;
     _text_window_texture.Render(window_pos.x, window_pos.y, MOF_ARGB(255, 255, 255, 255));
     auto command_pos = Mof::CVector2(_text_command.px, _text_command.py) ;
-//=======
-    //è¡¨ç¤ºãƒ†ã‚­ã‚¹ãƒˆã®ä¸‹ã«æ ã‚’è¡¨ç¤ºã™ã‚‹
-    //auto window_pos = Mof::CVector2(16, 600);
-    //if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
-    //    window_pos.y += 100.0f;
-  //  } // if
-//    _text_window_texture.RenderScale(window_pos.x, window_pos.y, ratchet::kWindowPerXGA, ratchet::kWindowPerXGA * 0.8, MOF_ARGB(255, 255, 255, 255));
-    
-    //è¡¨ç¤ºãƒ†ã‚­ã‚¹ãƒˆã‚’æç”»ã™ã‚‹
-    //auto command_pos = Mof::CVector2(_text_command.px, _text_command.py) ;
-    //if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
-    //    command_pos.x += 20.0f;
-  //      command_pos.y += 140.0f;
-//    } // if
-    //    command_pos *= ratchet::kWindowPerXGA;
-    //::CGraphicsUtilities::RenderString(command_pos.x, command_pos.y, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
-//>>>>>>> MofLib
     _text_font.RenderString(command_pos.x, command_pos.y, MOF_ARGB(_alpha, 255, 255, 255), _line_buffer);
 
 
     // debug 
     if (debug::DebugManager::GetInstance().IsDebugMode()) {
-        ::CGraphicsUtilities::RenderString(10, 10, MOF_ARGB(_alpha, 255, 0, 0), "ã‚³ãƒãƒ³ãƒ‰å®Ÿè¡Œä½ç½® [%d]", _command_no);
+        ::CGraphicsUtilities::RenderString(10, 10, MOF_ARGB(_alpha, 255, 0, 0), "ƒRƒ}ƒ“ƒhÀsˆÊ’u [%d]", _command_no);
     } // if
 
     return false;

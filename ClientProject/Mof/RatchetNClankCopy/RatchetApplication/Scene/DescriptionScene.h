@@ -9,57 +9,30 @@
 namespace ratchet::scene {
 class GameDescription {
 private:
-//<<<<<<< Ex185_BulletActionFix
-    //! è¡¨ç¤º
+    //! •\¦
     bool _show = false;
-    //! ä½ç½®
+    //! ˆÊ’u
     Mof::CVector2 _title_position = Mof::CVector2(400.0, 100.0f);
-    //! ä½ç½®
+    //! ˆÊ’u
     Mof::CVector2 _desc_position = Mof::CVector2(130.0, 240.0f);
-    //! ä½ç½®
+    //! ˆÊ’u
     Mof::CVector2 _back_position = Mof::CVector2(460.0, 700.0f);
-    //! ãƒ†ã‚­ã‚¹ãƒˆ
-    std::string _title_text = "ã‚²ãƒ¼ãƒ ã®æ“ä½œèª¬æ˜";
-    //! ãƒ†ã‚­ã‚¹ãƒˆ
-    std::string _desc_text = " â—† ESCAPEã‚­ãƒ¼ã§ã‚²ãƒ¼ãƒ çµ‚äº†\n\n \
-//=======
-//public:
-    //void Render(std::shared_ptr<ratchet::ResourceMgr> r) {
-    //    auto font = r->Get<std::shared_ptr<sip::CResourceFont>>("../Resource/font/kkm_analogtv.ttf\\KKM-ã‚¢ãƒŠãƒ­ã‚°ãƒ†ãƒ¬ãƒ“ãƒ•ã‚©ãƒ³ãƒˆ");
-  //      const char* text;
-//        
-        //{
-            //auto pos = Mof::CVector2(400.0, 100.0f);
-            //if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
-              //  pos *= ratchet::kWindowPerXGA;
-            //} // if
-
-           // text = "ã‚²ãƒ¼ãƒ ã®æ“ä½œèª¬æ˜";
-          //  ::CGraphicsUtilities::RenderString(pos.x, pos.y, text);
-            //font->RenderString(pos.x, pos.y, text);
-        //}
-        //{
-        //    auto pos = Mof::CVector2(130.0, 240.0f);
-      //      if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
-    //            pos *= ratchet::kWindowPerXGA;
-  //          } // if
-//
-//
-  //          text = " â—† ESCAPEã‚­ãƒ¼ã§ã‚²ãƒ¼ãƒ çµ‚äº†\n\n \
-//>>>>>>> MofLib
-â—† Nã‚­ãƒ¼ã§æ”»æ’ƒ\n\n \
-â—† Jã‚­ãƒ¼ã§ã‚¸ãƒ£ãƒ³ãƒ—\n\n \
-â—† Shiftã‚­ãƒ¼ã§å¤‰æ›´ æ­¦å™¨é¸æŠã¯Shifté•·æŠ¼ã—ã§0~8ã‚­ãƒ¼\n\n \
-â—† Vã‚­ãƒ¼ã§æ­¦å™¨ãŒé¸æŠã•ã‚Œã¦ã„ã‚Œã°æ­¦å™¨ä½¿ç”¨\n\n \
-â—† WASDã‚­ãƒ¼ã§ç§»å‹•\n\n \
-â—† åå­—ã‚­ãƒ¼ã§ã‚«ãƒ¡ãƒ©ç§»å‹•\n\n \
-â—† Qã‚­ãƒ¼ã§ã‚«ãƒ¡ãƒ©è£œæ­£\n";
-//<<<<<<< Ex185_BulletActionFix
-    //! ãƒ†ã‚­ã‚¹ãƒˆ
-    std::string _back_text = "Enterã‚­ãƒ¼ã§æˆ»ã‚‹";
+    //! ƒeƒLƒXƒg
+    std::string _title_text = "ƒQ[ƒ€‚Ì‘€ìà–¾";
+    //! ƒeƒLƒXƒg
+    std::string _desc_text = " Ÿ ESCAPEƒL[‚ÅƒQ[ƒ€I—¹\n\n \
+Ÿ NƒL[‚ÅUŒ‚\n\n \
+Ÿ JƒL[‚ÅƒWƒƒƒ“ƒv\n\n \
+Ÿ ShiftƒL[‚Å•ÏX •Ší‘I‘ğ‚ÍShift’·‰Ÿ‚µ‚Å0~8ƒL[\n\n \
+Ÿ VƒL[‚Å•Ší‚ª‘I‘ğ‚³‚ê‚Ä‚¢‚ê‚Î•Šíg—p\n\n \
+Ÿ WASDƒL[‚ÅˆÚ“®\n\n \
+Ÿ \šƒL[‚ÅƒJƒƒ‰ˆÚ“®\n\n \
+Ÿ QƒL[‚ÅƒJƒƒ‰•â³\n";
+    //! ƒeƒLƒXƒg
+    std::string _back_text = "EnterƒL[‚Å–ß‚é";
 public:
     /// <summary>
-    /// åˆ¤å®š
+    /// ”»’è
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -79,71 +52,52 @@ public:
         this->Render(_title_position, _title_text);
         this->Render(_desc_position, _desc_text);
         this->Render(_back_position, _back_text);
-//=======
-  //          ::CGraphicsUtilities::RenderString(pos.x + 1, pos.y + 1, def::color_rgba_u32::kBlue, text);
-            //font->RenderString(pos.x + 1, pos.y + 1, def::color_rgba_u32::kBlue, text);
-    //        ::CGraphicsUtilities::RenderString(pos.x, pos.y, text);
-            //font->RenderString(pos.x, pos.y, text);
-      //  }
-
-        //{
-          //  auto pos = Mof::CVector2(460.0, 700.0f);
-           // if (::g_pFramework->GetWindow()->GetWidth() == def::kWindowWidth) {
-             //   pos *= ratchet::kWindowPerXGA;
-            //} // if
-
-
-//            text = "Startãƒœã‚¿ãƒ³ãƒ»Shiftã‚­ãƒ¼ã§æˆ»ã‚‹";
-  //          ::CGraphicsUtilities::RenderString(pos.x, pos.y, text);
-            //font->RenderString(pos.x, pos.y, text);
-    //    }
-//>>>>>>> MofLib
     }
 };
 class DescriptionScene : public ratchet::scene::Scene {
     using super = ratchet::scene::Scene;
 protected:
 /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool SceneUpdate(float delta_time) override;
     /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name="delta_time"></param>
     /// <returns></returns>
     virtual bool LoadingUpdate(float delta_time) override;
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool SceneRender(void) override;
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     DescriptionScene();
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     virtual ~DescriptionScene();
     /// <summary>
-    /// é€šçŸ¥ã‚¤ãƒ™ãƒ³ãƒˆ
+    /// ’Ê’mƒCƒxƒ“ƒg
     /// </summary>
     /// <param name=""></param>
     /// <param name=""></param>
     virtual void OnNotify(const char* type, const std::shared_ptr<ratchet::actor::Actor>& ptr) override;
     /// <summary>
-    /// ã‚²ãƒƒã‚¿ãƒ¼
+    /// ƒQƒbƒ^[
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetName(void) override;
     /// <summary>
-    /// èª­ã¿è¾¼ã¿
+    /// “Ç‚İ‚İ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>

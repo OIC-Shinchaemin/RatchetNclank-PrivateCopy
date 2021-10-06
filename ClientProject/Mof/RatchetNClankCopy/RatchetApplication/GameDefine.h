@@ -41,7 +41,6 @@ DEBUG_PRINT("%s %s %d \n", __FILE__, __func__, __LINE__);
 
 namespace ratchet {
 constexpr int kTextWidth = 12;
-//<<<<<<< Ex185_BulletActionFix
 constexpr int kWindowWidth = 1024;
 //constexpr int kWindowWidthXGA = 1024;
 constexpr int kWindowHeihgt = 768;
@@ -52,17 +51,6 @@ constexpr float kWindowHeightF = static_cast<float>(kWindowHeihgt);
 
 //constexpr float kWindowPerXGA = static_cast<float>(kWindowWidth) / static_cast<float>(kWindowWidthXGA);
 
-//=======
-//constexpr int kWindowWidth = 1920;
-//constexpr int kWindowWidthXGA = 1024;
-//constexpr int kWindowHiehgt = 1080;
-//constexpr int kWindowHiehgtXGA = 768;
-
-//constexpr float kWindowPerXGA = static_cast<float>(kWindowWidth) / static_cast<float>(kWindowWidthXGA);
-
-
-///static debug::DebugManager g_DebugManager;
-//>>>>>>> MofLib
 
 struct Transform {
     Mof::CVector3 position = math::vec3::kZero;

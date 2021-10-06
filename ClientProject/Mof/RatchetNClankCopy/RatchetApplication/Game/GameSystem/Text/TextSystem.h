@@ -14,15 +14,15 @@
 namespace ratchet::game::gamesystem::text {
 class TextSystem : public TextSystemMessageListener {
 private:
-    //! çŠ¶æ…‹ãƒ•ãƒ©ã‚°
+    //! ó‘Ôƒtƒ‰ƒO
     static const int _flag_count = 256;
-    //! ä½ç½®
+    //! ˆÊ’u
     Mof::CVector2 _window_position;
-    //! è¡¨ç¤ºä¸­
+    //! •\¦’†
     bool _active;
-    //! è¡¨ç¤ºä¸­
+    //! •\¦’†
     BYTE _alpha = 0;
-    //! ãƒ†ã‚¯ã‚¹ãƒãƒ£
+    //! ƒeƒNƒXƒ`ƒƒ
     Mof::CTexture _text_window_texture;
     //! 
     Script _script;
@@ -30,34 +30,31 @@ private:
     Mof::CDynamicArray<CSprite2D*> _sprite_list;
     //! 
     TEXTCOMMAND _text_command;
-    //! ãƒãƒƒãƒ•ã‚¡
+    //! ƒoƒbƒtƒ@
     char _line_buffer[256];
-    //! å¾…æ©Ÿ
+    //! ‘Ò‹@
     int _str_wait = 0;
-    //! ã‚³ãƒãƒ³ãƒ‰
+    //! ƒRƒ}ƒ“ƒh
     int	_command_no = 0;
-    //! ã‚³ãƒãƒ³ãƒ‰
+    //! ƒRƒ}ƒ“ƒh
     COMMAND* _now_command;
-    //! å¾…æ©Ÿãƒ•ãƒ©ã‚°
+    //! ‘Ò‹@ƒtƒ‰ƒO
     bool _wait = false;
     //! 
     int	_flags[_flag_count];
-    //! æ–‡å­—è¡¨ç¤ºé€Ÿ
+    //! •¶š•\¦‘¬
     int _wait_count_max = 3;
-    //! ãƒãƒƒãƒ—
+    //! ƒ}ƒbƒv
     std::unordered_map<TextEventType, std::string> _path_map;
-    //! é€šçŸ¥ç”¨
+    //! ’Ê’m—p
     TextSystemClosedMessageSubject _text_system_closed_message_subject;
-    //! é€šçŸ¥ç”¨
+    //! ’Ê’m—p
     std::shared_ptr<TextSystemOpenMessageSubject> _text_system_open_message_subject;
-    //! ã‚¯ãƒ­ãƒ¼ã‚ºã‚¤ãƒ™ãƒ³ãƒˆ
+    //! ƒNƒ[ƒYƒCƒxƒ“ƒg
     std::optional<TextSystemMessage::CloseEvent> _on_close;
-    //! ãƒ•ã‚©ãƒ³ãƒˆ
+    //! ƒtƒHƒ“ƒg
     Mof::CFont _text_font;
-//<<<<<<< Ex185_BulletActionFix
     int ALPHA_SPEED = 15;
-//=======
-//>>>>>>> MofLib
 
     bool Load(const char* name);
     bool LoadScript(const char* name);
@@ -75,20 +72,20 @@ private:
     void IfCommand(IFCOMMAND* pIfCommand);
 public:
     /// <summary>
-    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
     TextSystem();
     /// <summary>
-    /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// ƒfƒXƒgƒ‰ƒNƒ^
     /// </summary>
     ~TextSystem();
     /// <summary>
-    /// é€šçŸ¥
+    /// ’Ê’m
     /// </summary>
     /// <param name="message"></param>
     virtual void OnNotify(const TextSystemMessage& message) override;
     /// <summary>
-    /// ã‚²ãƒƒã‚¿ãƒ¼
+    /// ƒQƒbƒ^[
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -96,37 +93,37 @@ public:
         return &this->_text_system_closed_message_subject;
     }
     /// <summary>
-    /// åˆ¤å®š
+    /// ”»’è
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool IsActive(void) const;
     /// <summary>
-    /// æœ‰åŠ¹åŒ–
+    /// —LŒø‰»
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool Activate(void);
     /// <summary>
-    /// èª­ã¿è¾¼ã¿
+    /// “Ç‚İ‚İ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool Load(void);
     /// <summary>
-    /// æ›´æ–°
+    /// XV
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool Update(void);
     /// <summary>
-    /// æç”»
+    /// •`‰æ
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     bool Render(void);
     /// <summary>
-    /// è§£æ”¾
+    /// ‰ğ•ú
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>

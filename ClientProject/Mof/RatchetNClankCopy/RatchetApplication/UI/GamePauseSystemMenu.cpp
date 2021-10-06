@@ -57,17 +57,9 @@ void ratchet::ui::GamePauseSystemMenu::AddItem(const ratchet::game::gamesystem::
     auto elem = std::make_shared<ElemType>(in.GetText().c_str());
     elem->SetText(in.GetText());
     elem->SetTexture(this->GetTexture(in.GetText()));
-
-    float s = ratchet::kWindowPerXGA * 0.8f;
-    elem->SetScale(Mof::CVector2(s, s));
-
     elem->SetPosition(super::_position);
-//<<<<<<< Ex185_BulletActionFix
 
     super::_position.y += elem->GetSize().y;
-//=======    
-    //super::_position.y += elem->GetSize().y * s;
-//>>>>>>> MofLib
     super::AddElement(elem);
 }
 
@@ -132,17 +124,10 @@ bool ratchet::ui::GamePauseSystemMenuItem::Update(float delta_time) {
 bool ratchet::ui::GamePauseSystemMenuItem::Render(void) {
     auto pos = super::_position;
     auto color = super::_color.ToU32Color();
-//<<<<<<< Ex185_BulletActionFix
     auto sca = super::GetScale();
 
     if (auto tex = super::_texture.lock()) {
         tex->RenderScale(pos.x, pos.y, sca.x, sca.y, color);
-//=======
-//    auto s = super::GetScale();
-
-  //  if (auto tex = super::_texture.lock()) {
-    //    tex->RenderScale(pos.x, pos.y, s.x, s.y, color);
-//>>>>>>> MofLib
 //        tex->Render(pos.x, pos.y, color);
     } // if
 

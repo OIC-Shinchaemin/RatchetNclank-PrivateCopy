@@ -3,6 +3,6 @@ sprite,Sprite2,Chara_a_02.png;
 setpos,40,0,Sprite1;
 setpos,540,0,Sprite2;
 
-text,26,600,ありがとうございます。;
-text,26,600,そこの船に乗ってください;
+text,26,584,ありがとうございます。;
+text,26,584,そこの船に乗ってください;
 next,test.txt;
