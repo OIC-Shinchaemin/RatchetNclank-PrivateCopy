@@ -22,6 +22,11 @@ ratchet::actor::character::Enemy::Enemy() :
     _effect_container(),
     _effect_emitter_holder() {
     super::SetTag("Enemy");
+
+    auto shadow_param = Actor::Param();
+    shadow_param.name = "shadow";
+    _shadow_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::Actor>("builder/shadow.json", &shadow_param);
+
 }
 
 ratchet::actor::character::Enemy::~Enemy() {
@@ -35,6 +40,26 @@ void ratchet::actor::character::Enemy::SetEffectContainer(const std::shared_ptr<
 
 base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::actor::character::Enemy::GetQuestSubject(void) {
     return &this->_quest_subject;
+}
+
+bool ratchet::actor::character::Enemy::Initialize(ratchet::actor::Actor::Param* param) {
+    super::Initialize();
+
+    auto shadow_param = Actor::Param();
+    shadow_param.name = "shadow";
+    _shadow_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::Actor>("builder/shadow.json", &shadow_param);
+
+
+    return true;
+}
+
+bool ratchet::actor::character::Enemy::Render(void) {
+    super::Render();
+    if (_shadow_child_actor) {
+        _shadow_child_actor->SetPosition(super::GetPosition());
+        _shadow_child_actor->Render();
+    } // if
+    return true;
 }
 
 void ratchet::actor::character::Enemy::End(void) {
