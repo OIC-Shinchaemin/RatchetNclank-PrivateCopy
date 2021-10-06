@@ -37,6 +37,26 @@ base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* ratchet::ac
     return &this->_quest_subject;
 }
 
+bool ratchet::actor::character::Enemy::Initialize(ratchet::actor::Actor::Param* param) {
+    super::Initialize(param);
+
+    auto shadow_param = Actor::Param();
+    shadow_param.name = "shadow";
+    _shadow_child_actor = ratchet::factory::FactoryManager::Singleton().CreateActor<ratchet::actor::Actor>("builder/shadow.json", &shadow_param);
+
+
+    return true;
+}
+
+bool ratchet::actor::character::Enemy::Render(void) {
+    super::Render();
+    if (_shadow_child_actor) {
+        _shadow_child_actor->SetPosition(super::GetPosition());
+        _shadow_child_actor->Render();
+    } // if
+    return true;
+}
+
 void ratchet::actor::character::Enemy::End(void) {
     this->GenerateDropItem();
     _quest_subject.Clear();

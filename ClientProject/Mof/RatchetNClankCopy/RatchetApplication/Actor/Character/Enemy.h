@@ -31,6 +31,9 @@ private:
     //std::shared_ptr<ratchet::effect::EffectEmitter> _star_effect_emitter;
     //! エフェクト
     ratchet::effect::EffectEmitterHolder _effect_emitter_holder;
+    //! 簡易影
+    std::shared_ptr<actor::Actor> _shadow_child_actor;
+
     /// <summary>
     /// 状態変更
     /// </summary>
@@ -72,6 +75,18 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* GetQuestSubject(void);
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(void) override;
     /// <summary>
     /// デリート
     /// </summary>

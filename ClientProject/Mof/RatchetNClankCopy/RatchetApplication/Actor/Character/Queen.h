@@ -15,6 +15,8 @@ private:
     bool _event_activated;
     //! 光
     std::weak_ptr<ratchet::light::LightPillar> _light_pillar;
+    //! 簡易影
+    std::shared_ptr<actor::Actor> _shadow_child_actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -36,6 +38,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
+    /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(void) override;
     /// <summary>
     /// 会話
     /// </summary>

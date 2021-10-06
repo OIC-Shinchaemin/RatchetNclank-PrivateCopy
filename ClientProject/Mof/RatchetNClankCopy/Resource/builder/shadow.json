@@ -1,0 +1,17 @@
+{
+  "components": [
+    {
+      "type": "TransformComponent",
+      "paramater": {
+        "priority": 100
+      }
+    },
+    {
+      "type": "MeshComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/mesh/shadow/Shadow.mom"
+      }
+    }
+  ]
+}

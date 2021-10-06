@@ -1040,6 +1040,7 @@
     <None Include="..\Resource\builder\queen.json" />
     <None Include="..\Resource\builder\scarecrow.json" />
     <None Include="..\Resource\builder\sense_effect.json" />
+    <None Include="..\Resource\builder\shadow.json" />
     <None Include="..\Resource\builder\ship.json" />
     <None Include="..\Resource\builder\shop.json" />
     <None Include="..\Resource\builder\strong_enemy.json" />

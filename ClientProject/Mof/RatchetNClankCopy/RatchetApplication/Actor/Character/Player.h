@@ -63,8 +63,9 @@ private:
     //! エフェクト
     std::shared_ptr<actor::Actor> _sense_effect_child_actor;
     //! 通知用
-    //std::shared_ptr<actor::character::CharacterTalkableMessageSubject>_character_talkable_message_subject;
     actor::character::CharacterTalkableMessageSubject _character_talkable_message_subject;
+    //! 簡易影
+    std::shared_ptr<actor::Actor> _shadow_child_actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -116,6 +117,14 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     base::core::Observable<bool>* GetQuickChangeSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<actor::Actor> GetShadowChildActor(void) const {
+        return this->_shadow_child_actor;
+    }
     /// <summary>
     /// ゲッター
     /// </summary>

@@ -51,6 +51,8 @@ private:
     std::vector<std::shared_ptr<ratchet::actor::Actor>> _created_barricade;
     //! •\Ž¦
     std::weak_ptr<ratchet::game::gamesystem::HelpDesk> _help_desk;
+    //! ŠÈˆÕ‰e
+    std::shared_ptr<actor::Actor> _shadow_child_actor;
     /// <summary>
     /// ‰ð•ú
     /// </summary>

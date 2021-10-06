@@ -36,7 +36,7 @@ ratchet::event::EnemyViewEvent::EnemyViewEvent() :
 	_player_camera_controller(),
 	_text_system_message_subject(),
 	_text_system(),
-	_queem_generate_position(Mof::CVector3(182.0f, -29.5f, 33.0f)),
+	_queem_generate_position(Mof::CVector3(182.0f, -29.25f, 33.0f)),
 	_skip_time_set(0.6f) {
 	_camera->Initialize();
 	_camera->Update();

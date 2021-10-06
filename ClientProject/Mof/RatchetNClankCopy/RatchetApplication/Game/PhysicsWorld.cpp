@@ -237,6 +237,7 @@ void ratchet::game::PhysicsWorld::CollisionStage(Stage* stage) {
             com->CollisionStageGimmick(&*mesh, gimmick);
         } // for
     } // for
+
 }
 
 void ratchet::game::PhysicsWorld::Reset(void) {
