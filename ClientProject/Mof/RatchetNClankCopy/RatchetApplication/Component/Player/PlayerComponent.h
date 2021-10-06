@@ -40,7 +40,7 @@ private:
     //! 地点
     std::string _next_terrain;
     //! 接触モード 有効であれば武器ボタンがアクションボタンになる
-    bool _contact_mode;
+    //bool _contact_mode;
     //! 話し相手
     std::weak_ptr<ratchet::actor::character::Character> _talk_target;
 
@@ -107,7 +107,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    bool IsContactMode(void) const;
+    //bool IsContactMode(void) const;
     /// <summary>
     /// 判定
     /// </summary>

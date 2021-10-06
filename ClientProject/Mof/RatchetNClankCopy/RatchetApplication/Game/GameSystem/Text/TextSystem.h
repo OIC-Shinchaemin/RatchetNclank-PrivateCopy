@@ -89,6 +89,14 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    auto GetTextSystemOpenMessageSubject(void) {
+        return this->_text_system_open_message_subject;
+    }
+    /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     auto GetTextSystemClosedMessageSubject(void) {
         return &this->_text_system_closed_message_subject;
     }

@@ -113,7 +113,7 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionKing(std::sha
                                ratchet::component::collision::CollisionComponentType::kKingCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
-        _contact_mode = true;
+        //_contact_mode = true;
 
         actor::character::CharacterTalkableMessage message;
         message.can = true;
@@ -124,7 +124,7 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionKing(std::sha
                                ratchet::component::collision::CollisionComponentType::kKingCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target.reset();
-        _contact_mode = false;
+        //_contact_mode = false;
         actor::character::CharacterTalkableMessage message;
         message.can = false;
         this->GetOwnerCastd()->GetCharacterTalkableMessageSubject()->Notify(message);
@@ -137,7 +137,7 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionQueen(std::sh
                                ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target = std::dynamic_pointer_cast<ratchet::actor::character::Character>(in.target.lock());
-        _contact_mode = true;
+        //_contact_mode = true;
         actor::character::CharacterTalkableMessage message;
         message.can = true;
         this->GetOwnerCastd()->GetCharacterTalkableMessageSubject()->Notify(message);
@@ -147,7 +147,7 @@ void ratchet::component::player::PlayerComponent::CollisionFunctionQueen(std::sh
                                ratchet::component::collision::CollisionComponentType::kQueenCollisionComponent,
                                ratchet::component::collision::CollisionComponent::CollisionFunc([&](const component::collision::CollisionInfo& in) {
         _talk_target.reset();
-        _contact_mode = false;
+        //_contact_mode = false;
         actor::character::CharacterTalkableMessage message;
         message.can = false;
         this->GetOwnerCastd()->GetCharacterTalkableMessageSubject()->Notify(message);
@@ -286,10 +286,18 @@ std::weak_ptr<ratchet::actor::Actor> ratchet::component::player::PlayerComponent
 std::string ratchet::component::player::PlayerComponent::GetNextTerrain(void) const {
     return this->_next_terrain;
 }
-
+/*
 bool ratchet::component::player::PlayerComponent::IsContactMode(void) const {
     return this->_contact_mode;
 }
+
+std::shared_ptr<ratchet::actor::character::Character> ratchet::component::player::PlayerComponent::GetContactCharacter(void) const {
+    if () {
+
+    } //
+    return std::shared_ptr<ratchet::actor::character::Character>();
+}
+*/
 
 bool ratchet::component::player::PlayerComponent::HasTalkTarget(void) const {
     if (!_talk_target.expired()) {
@@ -392,7 +400,7 @@ void ratchet::component::player::PlayerComponent::TalkToTarget(void) {
 
 #ifdef _DEBUG
 bool ratchet::component::player::PlayerComponent::DebugRender(void) {
-    if (this->IsContactMode()) {
+    if (this->HasTalkTarget()) {
         ::CGraphicsUtilities::RenderString(600.0f, 600.0f, "action button enable");
     } // if
     else {

@@ -54,6 +54,10 @@ void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem
     } // else if
 }
 
+void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem::text::TextSystemOpenMessage& message) {
+    super::Sleep();
+}
+
 void ratchet::actor::character::Player::OnNotify(const ratchet::game::gamesystem::text::TextSystemClosedMessage& message) {
     if (message.close) {
         super::Activate();

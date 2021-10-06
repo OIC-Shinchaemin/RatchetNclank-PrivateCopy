@@ -2697,9 +2697,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resource\save\savedata.json">
-      <Filter>Resource\save</Filter>
-    </None>
     <None Include="..\Resource\motion_names\player.motion_names">
       <Filter>Resource\motion_names</Filter>
     </None>
@@ -2822,6 +2819,9 @@
     </None>
     <None Include="..\Resource\builder\sense_effect.json">
       <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\save\savedata.json">
+      <Filter>Resource\save</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

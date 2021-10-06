@@ -74,7 +74,7 @@ bool ratchet::scene::GameSceneInitializer::AddPlayer(std::shared_ptr<ratchet::ga
         camera->SetAltitude(camera->GetDefaultAltitude());
     } // else
 
-
+    
     player->SetEffectContainer(out->_effect);
     player->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
     player->GetComponent<component::SightRecognitionComponent>()->GetContactEnemyMessageSubject()->AddObserver(out);
@@ -106,6 +106,7 @@ bool ratchet::scene::GameSceneInitializer::AddPlayer(std::shared_ptr<ratchet::ga
         player->GetQuickChangeSubject()->AddObserver(game->GetQuickChange());
         player->PushNotificationableSubject("QuickChange");
         out->_text_system->GetTextSystemClosedMessageSubject()->AddObserver(player);
+        out->_text_system->GetTextSystemOpenMessageSubject()->AddObserver(player);
 
         weapon_system->AddMechanicalWeaponObserver(player);
         quick_change->AddInfoObserver(player);

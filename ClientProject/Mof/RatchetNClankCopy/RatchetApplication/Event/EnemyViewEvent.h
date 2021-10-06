@@ -9,6 +9,7 @@
 
 
 #include "Base/Core/ServiceLocator.h"
+#include "Base/Core/Timer.h"
 #include "../Camera/Camera.h"
 #include "../Camera/AutoCameraController.h"
 #include "../Scene/Scene.h"
@@ -35,9 +36,9 @@ private:
     //! 通知用
     ratchet::event::EnemyViewEventEndMessageSubject _enemy_view_event_message_subject;
     //! スキップフラグ
-    //bool _skip_reserve;
+    bool _skip_reserve;
     //! タイマー時間
-    //float _skip_time_set;
+    float _skip_time_set;
     //! タイマー
     base::core::Timer _skip_reserve_timer;
     //! 位置
@@ -52,6 +53,12 @@ private:
     std::weak_ptr<ratchet::scene::GameScene> _game_scene;
     //! 位置
     Mof::CVector3 _queem_generate_position;
+    //! スキップフラグ
+    //bool _skip_reserve;
+    //! タイマー時間
+    //float _skip_time_set;
+    //! タイマー
+    //base::core::Timer _skip_reserve_timer;
     /// <summary>
     /// 生成
     /// </summary>
