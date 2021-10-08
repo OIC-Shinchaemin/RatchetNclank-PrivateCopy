@@ -92,6 +92,8 @@ bool ratchet::event::ShipEvent::Update(float delta_time) {
 
         auto player = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
         if (player) {
+            _ship_view_camera_controller.Release();
+
             //auto dir = _ship_generate_position - player->GetPosition();
             auto dir = player->GetPosition() - _ship_generate_position;
             float angle_y = std::atan2f(-dir.z, dir.x) + math::kHalfPi;

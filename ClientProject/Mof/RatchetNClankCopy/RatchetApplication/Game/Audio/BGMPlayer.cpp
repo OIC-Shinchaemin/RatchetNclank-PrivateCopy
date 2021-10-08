@@ -30,6 +30,11 @@ bool ratchet::game::audio::BGMPlayer::AddSound(ratchet::game::audio::BGMType key
         return false;
     } // if
 
+    if (ptr) {
+        ptr->SetVolume(_default_volume);
+        ptr->SetLoop(true);
+    } // if
+
     _sounds.emplace(key, ptr);
     return true;
 }
@@ -65,14 +70,15 @@ bool ratchet::game::audio::BGMPlayer::Clear(void) {
 }
 
 bool ratchet::game::audio::BGMPlayer::Recieve(const ratchet::game::audio::BGMEvent& event) {
+    /*
     {
         auto e = const_cast<ratchet::game::audio::BGMEvent*>(&event);
         e->command.set_volume = true;;
         e->command.volume = _default_volume;
         e->command.set_loop = true;
         e->command.loop = true;
-
     }
+    */
 
     _recieved_event.push_back(event);
     return true;

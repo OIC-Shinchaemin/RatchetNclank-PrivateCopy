@@ -44,7 +44,6 @@ void ratchet::scene::TitleScene::InitializeOption(void) {
                     _title_menu_subject.Notify(false);
                     _option_system_subject.Notify(false);
                     this->FadeOutStart();
-                    _scene_end = true;
                 } // if
             } // if
             return true;
@@ -129,7 +128,7 @@ bool ratchet::scene::TitleScene::SceneUpdate(float delta_time) {
     auto se_player = super::GetSEPlayer();
     if (_scene_end) {
         super::GetBGMPlayer()->Recieve(ratchet::game::audio::BGMEvent(
-            game::audio::BGMType::Title, game::audio::BGMEventCommand::SetVolume(bgm_player->GetVolume(game::audio::BGMType::Title) * 0.9f)
+            game::audio::BGMType::Title, game::audio::BGMEventCommand::SetVolume(bgm_player->GetVolume(game::audio::BGMType::Title) * 0.95f)
         ));
     } // if
     bgm_player->Update();

@@ -67,6 +67,7 @@ void ratchet::actor::character::Queen::Talk(void) {
     float angle_y = std::atan2f(-dir.z, dir.x) + math::kHalfPi;
     super::SetRotate(Mof::CVector3(0.0f, angle_y, 0.0f));
     billboard->SetOffsetRotation(-super::GetRotate());
+    billboard->Inactivate();
 
 
     auto message = ratchet::game::gamesystem::text::TextSystemMessage();
@@ -87,8 +88,6 @@ void ratchet::actor::character::Queen::Talk(void) {
             } // if
             return true;
         };
-        auto billboard = super::GetComponent<component::BillboardComponent>();
-        billboard->Inactivate();
 
         super::GetTextSystemMessageSubject()->Notify(message);
         _event_activated = true;
