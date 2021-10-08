@@ -8,6 +8,14 @@
 namespace ratchet::scene {
 class ClearScene : public ratchet::scene::Scene {
     using super = ratchet::scene::Scene;
+    //! テキスト
+    std::string _clear_text;
+    //! 位置
+    Mof::CVector2 _clear_text_position;
+    //! テキスト
+    std::string _next_text;
+    //! 位置
+    Mof::CVector2 _next_text_position;
 protected:
     /// <summary>
     /// 更新

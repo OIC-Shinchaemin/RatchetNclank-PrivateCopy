@@ -20,7 +20,7 @@ bool ratchet::scene::TitleSceneInitializer::Execute(std::shared_ptr<ratchet::sce
 
     // camera
     out->_stage_view_camera = (std::make_shared<ratchet::camera::Camera>());
-    //////////////auto pos = math::vec3::kZero;
+
     auto pos = actor_param.transform.position;
     auto offset = math::vec3::kNegUnitZ;
     out->_stage_view_camera->SetPosition(pos - offset);
@@ -48,10 +48,7 @@ bool ratchet::scene::TitleSceneInitializer::Execute(std::shared_ptr<ratchet::sce
 
             out->_logo.SetTexture(out->GetResource()->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/title_logo/image.png"));
         } // if
-
     }
-
-
     auto bgm_player = out->GetBGMPlayer();
     auto e = ratchet::game::audio::BGMEvent();
     e.type = decltype(e.type)::Title;

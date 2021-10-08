@@ -23,7 +23,7 @@ private:
     std::string _desc_text = " ◆ Escape(Esc)キーでゲーム終了\n\n \
 ◆ Nキーで攻撃\n\n \
 ◆ Jキーでジャンプ\n\n \
-◆ Shiftキーで変更 武器選択はShift長押しで0~8キー\n\n \
+◆ Shiftキーで変更\n\n \
 ◆ Vキーで武器が選択されていれば武器使用\n\n \
 ◆ WASDキーで移動\n\n \
 ◆ 十字キーでカメラ移動\n\n \

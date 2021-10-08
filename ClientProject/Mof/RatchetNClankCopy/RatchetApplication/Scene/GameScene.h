@@ -71,8 +71,6 @@ private:
     int _loading_dot_count;
     //! 経過時間 / 所要時間
     float _loading_progress;
-    //! 表示
-//    bool _show_how_to_play;
     //! ローディング
     scene::loading::LoadingDotAnimation _loading_dot_animation;
     //! EnemyBulletEndEffect 

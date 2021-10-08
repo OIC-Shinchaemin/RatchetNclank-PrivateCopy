@@ -192,13 +192,14 @@ void Elevator::Update(float delta) {
 
 void Elevator::Render(void) {
     //	auto tex = r->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/lock_on_cursor/cursor.png");
-
+    /*
     if (_cursor_show) {
         auto trans = Mof::CMatrix44();
         auto pos = GetPosition();
         trans.Translation(pos);
         _cursor_texture.Render(::CGraphicsUtilities::GetCamera()->GetBillBoardMatrix() * trans);
     } // if
+    */
 }
 
 void Elevator::ActionStart(void) {
