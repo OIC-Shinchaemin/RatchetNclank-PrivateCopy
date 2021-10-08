@@ -1,6 +1,6 @@
 #include "NanotechItemPlayerCollisionAlgolithm.h"
 
-#include "../Object/CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::NanotechItemPlayerCollisionAlgolithm::NanotechItemPlayerCollisionAlgolithm() :

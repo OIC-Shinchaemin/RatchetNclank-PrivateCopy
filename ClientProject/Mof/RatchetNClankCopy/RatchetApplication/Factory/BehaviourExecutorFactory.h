@@ -10,8 +10,7 @@
 #include "BehaviourFactory.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 class BehaviourExecutorFactory {
     //! ƒ}ƒbƒv
     std::unordered_map<std::string, behaviour::CompositeNodePtr > _behaviour_map;
@@ -28,6 +27,5 @@ public:
     /// <returns></returns>
     behaviour::NodeExecutorPtr Create(const char* key) const;
 };
-}
 }
 #endif // !RATCHET_FACTORY_BEHAVIOUR_EXECUTOR_FACTORY_H

@@ -7,11 +7,16 @@
 #include "DescriptionScene.h"
 #include "../Factory/Builder/Scene/SceneBuilder.h"
 #include "../Factory/Builder/Scene/GameSceneBuilder.h"
+#include "../MessageObservationManager.h"
+#include "../Game/GameSystem/Text/TextSystemDefine.h"
 
 
 void ratchet::scene::SceneManager::ChangeScene(const std::string& name, std::shared_ptr<ratchet::scene::Scene::Param> param) {
     auto& [factory, builders, reousrce_paths] = _create_struct;
 
+    if (_scene) {
+        _scene->Release();
+    } // if
     _scene.reset();
     _scene = factory.Create(name);
     builders.at(name)->Construct(_scene);
@@ -35,7 +40,7 @@ void ratchet::scene::SceneManager::RenderScene(void) {
 ratchet::scene::SceneManager::SceneManager() :
     _change_message(),
     _managers(),
-    _create_struct(){
+    _create_struct() {
     auto& [factory, builders, reousrce_paths] = _create_struct;
 
     factory.Register<ratchet::scene::TitleScene>(ratchet::scene::SceneType::kTitleScene);
@@ -76,12 +81,15 @@ void ratchet::scene::SceneManager::SetEventManager(std::weak_ptr<ratchet::event:
     this->_managers.event_manager = ptr;
 }
 
+void ratchet::scene::SceneManager::SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr) {
+    this->_managers.light_manager = ptr;
+}
+
 bool ratchet::scene::SceneManager::Initialize(void) {
     this->RegisterBuilder<ratchet::factory::builder::scene::TitleSceneBuilder>(ratchet::scene::SceneType::kTitleScene);
     this->RegisterBuilder<ratchet::factory::builder::scene::SceneBuilder>(ratchet::scene::SceneType::kDescriptionScene);
     this->RegisterBuilder<ratchet::factory::builder::scene::SceneBuilder>(ratchet::scene::SceneType::kClearScene);
     this->RegisterBuilder<ratchet::factory::builder::scene::GameSceneBuilder>(ratchet::scene::SceneType::kGameScene);
-
 
     this->ChangeScene(ratchet::scene::SceneType::kTitleScene, std::make_shared <ratchet::scene::Scene::Param>());
     return true;
@@ -107,6 +115,9 @@ bool ratchet::scene::SceneManager::Render(void) {
 }
 
 bool ratchet::scene::SceneManager::Release(void) {
+    if (_scene) {
+        _scene->Release();
+    } // if
     _scene.reset();
     return true;
 }

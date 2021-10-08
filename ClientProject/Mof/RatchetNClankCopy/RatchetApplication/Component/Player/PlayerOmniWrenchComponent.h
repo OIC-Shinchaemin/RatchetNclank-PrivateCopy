@@ -5,13 +5,10 @@
 #include "../UpdateComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace weapon { class OmniWrenchActionStateComponent; }
-namespace collision { class OmniWrenchCollisionComponent; }
-namespace player {
-namespace action { class PlayerThrowAttackComponent; }
-
+namespace ratchet::component::weapon { class OmniWrenchActionStateComponent; }
+namespace ratchet::component::collision { class OmniWrenchCollisionComponent; }
+namespace ratchet::component::player::action { class PlayerThrowAttackComponent; }
+namespace ratchet::component::player {
 class PlayerOmniWrenchComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -80,7 +77,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_PLAYER_OMNI_WRENCH_COMPONENT_H

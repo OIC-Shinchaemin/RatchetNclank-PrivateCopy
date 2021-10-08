@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{77700cea-5f52-4155-9daf-2c990ed957af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Test\Base">
+      <UniqueIdentifier>{f84040f1-3cb0-4bd8-87ec-465582fa80a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Test\Base\Core">
+      <UniqueIdentifier>{a7c38372-1ead-4901-b6a3-0fdfac475ce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Base\UI">
+      <UniqueIdentifier>{709403a2-c2df-4f1e-9420-5054610f9dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header\Effect">
+      <UniqueIdentifier>{51f7f1d4-d5dd-4736-a543-4ebe7532effe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Source\Effect">
+      <UniqueIdentifier>{5136ab15-aa04-4d39-a165-e01388773137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Base\Resource">
+      <UniqueIdentifier>{5739759f-1307-4f75-a8ce-c77e43008227}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TestApp.cpp">
+      <Filter>Test\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UIItem.cpp">
+      <Filter>Test\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UIPanel.cpp">
+      <Filter>Test\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\UI\UICanvas.cpp">
+      <Filter>Test\Base\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\State.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\StateMachine.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Core\Timer.cpp">
+      <Filter>Test\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RatchetApplication\Effect\EffectEmitter.cpp">
+      <Filter>Test\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RatchetApplication\Effect\EffectPool.cpp">
+      <Filter>Test\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RatchetApplication\Effect\Effect.cpp">
+      <Filter>Test\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RatchetApplication\Effect\EffectContainer.cpp">
+      <Filter>Test\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Base\Resource\ResourceFont.cpp">
+      <Filter>Test\Base\Resource</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestApp.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UIItem.h">
+      <Filter>Test\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UIPanel.h">
+      <Filter>Test\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\UI\UICanvas.h">
+      <Filter>Test\Base\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Observable.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Observer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\ServiceLocator.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\State.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\StateMachine.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Timer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Trait.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Tween.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Utility.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\AbstructContainer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Define.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\FunctionPointerContainer.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Header.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Math.h">
+      <Filter>Test\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Effect\EffectContainer.h">
+      <Filter>Test\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Effect\EffectDefine.h">
+      <Filter>Test\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Effect\EffectEmitter.h">
+      <Filter>Test\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Effect\EffectPool.h">
+      <Filter>Test\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Effect\Effect.h">
+      <Filter>Test\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\Effect\EffectAggregate.h">
+      <Filter>Test\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Resource\ResourceFont.h">
+      <Filter>Test\Base\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\ResourceManager.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RatchetApplication\GameDefine.h">
+      <Filter>Test\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

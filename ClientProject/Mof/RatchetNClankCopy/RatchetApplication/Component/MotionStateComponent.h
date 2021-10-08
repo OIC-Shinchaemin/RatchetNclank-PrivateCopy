@@ -8,8 +8,7 @@
 #include "../State/MotionState.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class MotionStateComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -80,6 +79,5 @@ public:
     /// <param name="name"></param>
     void ChangeState(const std::string& name);
 };
-}
 }
 #endif // !RATCHET_COMPONENT_MOTION_STATE_COMPONENT_H

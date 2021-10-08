@@ -9,8 +9,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class HpComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -19,7 +18,7 @@ private:
     //! Hp
     int _hp;
     //! Hp
-    base::core::Observable<int> _observable;
+    base::core::Observable<int, int> _observable;
     //! UIï\é¶
     bool _ui_remove;
 public:
@@ -55,6 +54,12 @@ public:
     /// <returns></returns>
     int GetHp(void) const;
     /// <summary>
+    /// ÉQÉbÉ^Å[
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    int GetHpMax(void) const;
+    /// <summary>
     /// èâä˙âª
     /// </summary>
     /// <param name=""></param>
@@ -88,7 +93,11 @@ public:
     /// </summary>
     /// <param name="value"></param>
     void Damage(int value);
+    /// <summary>
+    /// UIìoò^
+    /// </summary>
+    /// <param name=""></param>
+    void RegisterUI(void);
 };
-}
 }
 #endif // !RATCHET_COMPONENT_HP_COMPONENT_H

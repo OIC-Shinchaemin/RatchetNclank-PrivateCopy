@@ -10,12 +10,10 @@
 #include "../Camera/CameraController.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player {
-class PlayerStateComponent;
-}
-class CameraComponent : public ratchet::component::UpdateComponent, 
+namespace ratchet::component::player { class PlayerStateComponent; }
+namespace ratchet::component::player { class PlayerComponent; }
+namespace ratchet::component {
+class CameraComponent : public ratchet::component::UpdateComponent,
     public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&> {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -29,8 +27,6 @@ private:
     ratchet::camera::CameraController::CameraMode _current_mode;
     //! コントローラ
     std::unordered_map<ratchet::camera::CameraController::CameraMode, std::shared_ptr<ratchet::camera::CameraController>> _controller_map;
-
-
     //! FPSカメラ方向
     float _ideal_fps_camera_angle;
     //! 距離
@@ -42,10 +38,16 @@ private:
     //! 衝突中
     bool _collisioned_stage;
     //! 状態
+    std::weak_ptr<ratchet::component::player::PlayerComponent> _player_com;
+    //! 状態
     std::weak_ptr<ratchet::component::player::PlayerStateComponent> _state_com;
     //! メッシュ
     std::weak_ptr<class AnimationMeshComponent> _mesh_com;
-
+    //! 追従カメラを少しずつ前の位置で更新をかける
+    bool _follow_camera_prev_position_update;
+public:
+    //! 対象
+    base::accessor::Setter<decltype(_preview_position)> preview_position = _preview_position;
     /// <summary>
     /// キーを押した時のカメラ処理
     /// </summary>
@@ -118,6 +120,12 @@ private:
     /// <param name="delta_time"></param>
     /// <param name="controller"></param>
     void UpdateFirstPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller);
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="delta_time"></param>
+    /// <param name="controller"></param>
+    void UpdateThirdPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller);
 public:
     /// <summary>
     /// コンストラクタ
@@ -138,6 +146,19 @@ public:
     /// </summary>
     /// <param name="info"></param>
     virtual void OnNotify(const ratchet::camera::CameraController::CameraInfo& info) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetFollowCameraPrevPositionUpdateFlag(bool flag);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetCameraController(void) {
+        return &this->_camera_controller;
+    }
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -167,7 +188,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    Mof::CVector3 GetPreviewPosition(void) const;
+    Mof::CVector3 GetPreviousPosition(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -201,6 +222,5 @@ public:
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
 };
-}
 }
 #endif // !RATCHET_COMPONENT_CAMERA_COMPONENT_H

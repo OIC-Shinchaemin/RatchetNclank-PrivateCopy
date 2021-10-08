@@ -10,8 +10,7 @@
 #include "ComponentCreator.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 class ComponentFactory {
     using ComponentMap = std::unordered_map<std::string, std::shared_ptr<factory::ComponentCreator>>;
 private:
@@ -60,6 +59,5 @@ public:
     /// <returns></returns>
     std::shared_ptr<component::Component> Create(const std::string& key, const rapidjson::Value& param) const;
 };
-}
 }
 #endif // !RATCHET_FACTORY_COMPONENT_FACTORY_H

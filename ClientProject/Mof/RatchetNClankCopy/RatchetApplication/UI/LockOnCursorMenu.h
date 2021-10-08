@@ -14,8 +14,7 @@
 #include "../GameDefine.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class LockOnCursorMenu : public base::ui::UIPanel, public base::core::Observer<std::optional<Mof::CVector3>> {
     using super = base::ui::UIPanel;
 private:
@@ -40,17 +39,11 @@ public:
     /// <param name="ptr"></param>
     void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
     /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
-    /// <summary>
     /// 描画
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_NANOTECH_MENU_H

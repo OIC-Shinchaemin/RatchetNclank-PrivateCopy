@@ -1,0 +1,8 @@
+sprite,Sprite1,Chara_a_01.png;
+sprite,Sprite2,Chara_a_02.png;
+setpos,40,0,Sprite1;
+setpos,540,0,Sprite2;
+
+text,26,584,‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B;
+text,26,584,‚»‚±‚Ì‘D‚Éæ‚Á‚Ä‚­‚¾‚³‚¢;
+next,test.txt;

@@ -10,8 +10,7 @@
 #include "../Component/MotionComponent.h"
 
 
-namespace ratchet {
-namespace state {
+namespace ratchet::state {
 class MotionState : public base::core::State {
 public:
     struct Param {
@@ -91,6 +90,5 @@ public:
     /// <param name=""></param>
     virtual void Exit(void) override;
 };
-}
 }
 #endif // !RATCHET_STATE_PLAYER_MOTION_STATE_H

@@ -1,9 +1,9 @@
 #include "NanotechItemComponent.h"
 
 #include "../../VelocityComponent.h"
-#include "../../Collision/Object/CollisionComponentDefine.h"
+#include "../../Collision/CollisionComponentDefine.h"
 #include "../../Collision/Object/NanotechItemCollisionComponent.h"
-#include "../../../Component/Collision/Object/CollisionComponentDefine.h"
+#include "../../../Component/Collision/CollisionComponentDefine.h"
 #include "../../../Component/Collision/Object/SightCollisionComponent.h"
 #include "NanotechItemActionStateComponent.h"
 

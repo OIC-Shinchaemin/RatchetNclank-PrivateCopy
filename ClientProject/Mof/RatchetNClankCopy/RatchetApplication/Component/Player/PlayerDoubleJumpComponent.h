@@ -7,10 +7,7 @@
 #include <memory>
 
 
-namespace ratchet {
-namespace component {
-namespace player {
-namespace action {
+namespace ratchet::component ::player::action {
 class PlayerDoubleJumpComponent : public ::ratchet::component::player::action::PlayerActionComponent {
     using super = ::ratchet::component::player::action::PlayerActionComponent;
     using This = ::ratchet::component::player::action::PlayerDoubleJumpComponent;
@@ -109,9 +106,12 @@ public:
     /// <param name=""></param>
     /// <returns>ê¨å˜</returns>
     virtual bool Start(void) override;
+    /// <summary>
+    /// èIóπ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool End(void) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DOUBLE_JUMP_COMPONENT_H

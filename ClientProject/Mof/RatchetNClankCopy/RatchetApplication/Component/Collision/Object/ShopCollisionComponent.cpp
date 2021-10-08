@@ -1,6 +1,6 @@
 #include "ShopCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::ShopCollisionComponent::ShopCollisionComponent(int priority) :

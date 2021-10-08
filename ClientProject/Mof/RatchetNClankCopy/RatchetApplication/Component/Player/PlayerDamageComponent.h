@@ -9,10 +9,7 @@
 #include "../HpComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player {
-namespace action {
+namespace ratchet ::component ::player ::action {
 class PlayerDamageComponent : public ::ratchet::component::player::action::PlayerActionComponent {
     using super = ::ratchet::component::player::action::PlayerActionComponent;
 private:
@@ -24,6 +21,7 @@ private:
     Mof::CVector3 _damage_angle;
     //! Hp
     std::weak_ptr<::ratchet::component::HpComponent> _hp_com;
+
     /// <summary>
     /// êÅÇ¡îÚÇ‘
     /// </summary>
@@ -103,8 +101,5 @@ public:
     /// <returns>ê¨å˜</returns>
     virtual bool Start(void) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_DAMAGE_COMPONENT_H

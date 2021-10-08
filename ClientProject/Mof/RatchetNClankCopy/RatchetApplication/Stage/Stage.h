@@ -2,6 +2,8 @@
 #include "StageObject.h"
 #include "Gimmick/GimmickBase.h"
 #include "Gimmick/WoodBox.h"
+#include "Base/Core/Timer.h"
+
 
 // pair<builder_path, pos_data>
 using EnemySpawnData  = std::pair<std::string, StageObjectPtr>;
@@ -31,6 +33,13 @@ private:
     std::vector<bool>   _box_enable_array_prev;
 
     bool                _init_flag;
+
+    //! 
+    base::core::Timer _cursor_active_timer;
+    //! 
+    base::core::Timer _cursor_blinking_timer;
+    //! カーソルテクスチャ
+    Mof::CTexture _cursor_texture;
 
     void RenderObject(const StageObjectPtr& obj);
 

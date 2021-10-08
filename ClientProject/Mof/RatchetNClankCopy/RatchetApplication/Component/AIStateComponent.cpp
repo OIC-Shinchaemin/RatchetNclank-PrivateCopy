@@ -39,11 +39,15 @@ std::string ratchet::component::AIStateComponent::GetType(void) const {
     return "AIStateComponent";
 }
 
+bool ratchet::component::AIStateComponent::IsInput(void) const {
+    return true;
+}
+
 bool ratchet::component::AIStateComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
-    _thinking_timer.Initialize(0.2f, true);
-
+    _thinking_timer.Initialize(0.4f, true);
+    
     // state
     this->RegisterState<ratchet::state::ai::AIPatrolState>(_state_machine, _behaviour_path.at(0));
     this->RegisterState<ratchet::state::ai::AICombatState>(_state_machine, _behaviour_path.at(1));
@@ -51,10 +55,20 @@ bool ratchet::component::AIStateComponent::Initialize(void) {
     return true;
 }
 
-bool ratchet::component::AIStateComponent::Update(float delta_time) {
+bool ratchet::component::AIStateComponent::Input(void) {
+    float delta_time = def::kDeltaTime;
     if (_thinking_timer.Tick(delta_time)) {
         _state_machine.Update(delta_time);
     } // if
+    return true;
+}
+
+bool ratchet::component::AIStateComponent::Update(float delta_time) {
+    /*
+    if (_thinking_timer.Tick(delta_time)) {
+        _state_machine.Update(delta_time);
+    } // if
+    */
     return true;
 }
 

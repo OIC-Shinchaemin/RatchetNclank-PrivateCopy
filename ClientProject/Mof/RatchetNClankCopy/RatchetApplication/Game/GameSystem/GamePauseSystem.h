@@ -11,13 +11,8 @@
 #include "../../UI/UICreator.h"
 
 
-namespace ratchet {
-namespace ui {
-class GamePauseSystemMenu;
-}
-namespace game {
-namespace gamesystem {
-
+namespace ratchet::ui { class GamePauseSystemMenu; }
+namespace ratchet::game::gamesystem {
 class GamePauseSystemItem : public std::enable_shared_from_this<ratchet::game::gamesystem::GamePauseSystemItem> {
     using this_type = ratchet::game::gamesystem::GamePauseSystemItem;
 private:
@@ -151,7 +146,5 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_GAME_PAUSE_SYSTEM_H

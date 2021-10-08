@@ -57,16 +57,10 @@ float4 RenderPS(OutputVS inPixel) : SV_TARGET{
     // 1ïbÇ≈ëJà⁄
     float blend = clamp(1.0f - cbTime, 0.0f, 1.0f);
     // êFÇãÅÇﬂÇÈ
-//    color = lerp(color, alpha, blend);
     color.x = (color.x - blend * (alpha.x));
     color.y = (color.y - blend * (alpha.y));
     color.z = (color.z - blend * (alpha.z));
     color.w = color.w - blend * (alpha.w - color.w);
-    /*
-    color.x = 1.0f - color.x;
-    color.y = 1.0f - color.y;
-    color.z = 1.0f - color.z;
-    */
     return color;
 }
 

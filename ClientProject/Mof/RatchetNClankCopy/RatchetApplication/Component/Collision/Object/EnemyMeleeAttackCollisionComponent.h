@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_ENEMY_MELEE_ATTACK_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -10,10 +10,8 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace component {
-namespace enemy { class EnemyMeleeAttackComponent; }
-namespace collision {
+namespace ratchet::component::enemy { class EnemyMeleeAttackComponent; }
+namespace ratchet::component::collision {
 class EnemyMeleeAttackCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -83,7 +81,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_ENEMY_MELEE_ATTACK_COLLISION_COMPONENT_H

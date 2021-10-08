@@ -9,8 +9,7 @@
 #include "Creator.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 template <typename T>
 class Factory {
 private:
@@ -29,6 +28,5 @@ public:
         return _products.at(key)->Create();
     }
 };
-}
 }
 #endif // !RATCHET_FACTORY_FACTORY_H

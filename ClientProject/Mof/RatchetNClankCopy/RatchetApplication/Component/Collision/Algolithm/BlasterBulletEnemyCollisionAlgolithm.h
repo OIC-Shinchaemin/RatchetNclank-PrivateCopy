@@ -2,7 +2,7 @@
 #define RATCHET_BLASTER_BULLET_ENEMY_COLLISION_ALGOLITHM_H
 
 
-#include "CollisionAlgolithm.h"
+#include "../CollisionAlgolithm.h"
 
 
 namespace ratchet {

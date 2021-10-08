@@ -7,8 +7,7 @@
 #include "Base/Core/Utility.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 template <typename T>
 class ICreator {
 public:
@@ -34,6 +33,5 @@ public:
         return std::make_shared<Derived>();
     }
 };
-}
 }
 #endif // !RATCHET_FACTORY_CREATOR_H

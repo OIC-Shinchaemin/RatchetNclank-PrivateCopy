@@ -13,8 +13,7 @@
 #include "../Game/GameSystem/GamePauseSystem.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class GamePauseSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
@@ -36,13 +35,17 @@ public:
     /// <param name="text"></param>
     void SetText(const std::string& text);
     /// <summary>
-    /// 初期化
+    /// ゲッター
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="tex"></param>
-    /// <param name="color"></param>
+    /// <param name=""></param>
     /// <returns></returns>
-    //bool Initialize(Mof::CVector2 pos, const std::shared_ptr<Mof::CTexture>& tex, const Mof::CVector4& color);
+    virtual Mof::CVector2 GetSize(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<Mof::CTexture> GetTexture(void) const;
     /// <summary>
     /// 入力
     /// </summary>
@@ -95,6 +98,12 @@ public:
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    std::shared_ptr<Mof::CTexture> GetTexture(const std::string& type);
+    /// <summary>
     /// 追加
     /// </summary>
     /// <param name="in"></param>
@@ -118,6 +127,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_GAME_PAUSE_SYSTEM_MENU_H

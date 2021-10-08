@@ -5,8 +5,7 @@
 #include "Camera.h"
 
 
-namespace ratchet {
-namespace camera {
+namespace ratchet::camera {
 class CameraManager {
 private:
     //! ÉJÉÅÉâ
@@ -32,6 +31,5 @@ public:
     /// <returns></returns>
     bool Update(void);
 };
-}
 }
 #endif // !RATCHET_CAMERA_CAMERA_MANAGER_H

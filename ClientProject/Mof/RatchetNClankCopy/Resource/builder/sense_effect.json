@@ -1,0 +1,18 @@
+{
+  "components": [
+    {
+      "type": "SenseEffectComponent",
+      "paramater": {
+        "priority": 0
+      }
+    },
+    {
+      "type": "BillboardComponent",
+      "paramater": {
+        "priority": 0,
+        "path": "../Resource/texture/effect/sense.png"
+      }
+    }
+
+  ]
+}

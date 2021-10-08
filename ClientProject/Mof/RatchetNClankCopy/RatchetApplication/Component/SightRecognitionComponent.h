@@ -7,11 +7,22 @@
 #include <memory>
 #include <vector>
 
+#include "../Effect/EffectEmitter.h"
 
-namespace ratchet {
-namespace component {
-namespace player { class PlayerComponent; }
-namespace enemy { class EnemyComponent; }
+struct ContactEnemyMessage {
+};
+using ContactEnemyMessageSubject = base::core::Observable<const ContactEnemyMessage&>;
+using ContactEnemyMessageListener = base::core::Observer<const  ContactEnemyMessage&>;
+
+struct FindEnemyMessage {
+};
+using FindEnemyMessageSubject = base::core::Observable<const FindEnemyMessage&>;
+using FindEnemyMessageListener = base::core::Observer<const  FindEnemyMessage&>;
+
+
+namespace ratchet::component::player { class PlayerComponent; }
+namespace ratchet::component::enemy { class EnemyComponent; }
+namespace ratchet::component {
 class SightRecognitionComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -19,10 +30,26 @@ private:
     float _range;
     //! 認識
     std::vector<std::weak_ptr<ratchet::actor::Actor>> _recognized;
+    //! 認識中
+    int _recognizing_count;
+    //std::vector<std::string> _recognizing;
     //! キャラ
     std::weak_ptr<ratchet::component::player::PlayerComponent> _player_com;
     //! キャラ
     std::weak_ptr<ratchet::component::enemy::EnemyComponent> _ENEMY_com;
+    //! エフェクト
+    //std::shared_ptr<effect::EffectEmitter> _effect_emitter;
+    //! 会敵
+    bool _contact_enemy;
+    //! 通知
+    ContactEnemyMessageSubject _contact_enemy_message_subject;
+    //! 通知
+    FindEnemyMessageSubject _find_enemy_message_subject;
+    /// <summary>
+    /// 発生
+    /// </summary>
+    /// <param name=""></param>
+    void SenseEffectEmit(void);
     /// <summary>
     /// 描画
     /// </summary>
@@ -68,6 +95,22 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    auto  GetContactEnemyMessageSubject(void) {
+        return &this->_contact_enemy_message_subject;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetFindEnemyMessageSubject(void) {
+        return &this->_find_enemy_message_subject;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     const std::vector<std::weak_ptr<ratchet::actor::Actor>>& GetRecognized(void) const;
     /// <summary>
     /// 初期化
@@ -88,6 +131,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_SIGHT_RECOGNITION_COMPONENT_H

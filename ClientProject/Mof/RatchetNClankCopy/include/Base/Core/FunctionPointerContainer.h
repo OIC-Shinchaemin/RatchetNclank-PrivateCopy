@@ -9,8 +9,7 @@
 #include "Trait.h"
 
 
-namespace base {
-namespace core {
+namespace base::core {
 template<typename...FuncPtrs>
 class FunctionPointerContainer {
 private:
@@ -62,6 +61,5 @@ public:
         return container.at(key);
     }
 };
-}
 }
 #endif // !BASE_CORE_FUNCTION_POINTER_CONTAINER_H

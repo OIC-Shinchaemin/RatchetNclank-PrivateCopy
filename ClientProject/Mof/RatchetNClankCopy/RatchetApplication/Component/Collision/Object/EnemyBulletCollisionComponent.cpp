@@ -1,6 +1,6 @@
 #include "EnemyBulletCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::EnemyBulletCollisionComponent::EnemyBulletCollisionComponent(int priority) :
@@ -22,7 +22,7 @@ std::optional<Mof::CSphere> ratchet::component::collision::EnemyBulletCollisionC
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CSphere>();
     } // if
-    return Mof::CSphere(super::GetOwner()->GetPosition(), 0.2f);
+    return Mof::CSphere(super::GetOwner()->GetPosition(), super::GetOwner()->GetScale().x);
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::EnemyBulletCollisionComponent::GetBox(void) {

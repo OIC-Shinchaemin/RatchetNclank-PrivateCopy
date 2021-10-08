@@ -1,11 +1,12 @@
 #include "PlayerCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../../State/PlayerActionStateDefine.h"
 #include "../../Player/PlayerComponent.h"
 #include "../../VelocityComponent.h"
 #include "../../Player/PlayerStateComponent.h"
 #include "WaterFlowCollisionComponent.h"
+#include "../../../Actor/Character/Player.h"
 
 
 void ratchet::component::collision::PlayerCollisionComponent::ChangeState(void) {
@@ -24,19 +25,20 @@ std::optional<Mof::CRay3D> ratchet::component::collision::PlayerCollisionCompone
     if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
         return std::optional<Mof::CRay3D>();
     } // if
+    auto velocity = _velocity_com.lock()->GetVelocity() * def::kDeltaTime;
 
     auto pos = super::GetOwner()->GetPosition();
-    pos.y += _player_com.lock()->GetHeight();
-    auto velocity = _velocity_com.lock()->GetVelocity() * def::kDeltaTime;
-    auto dir = Mof::CVector3(velocity.x, 0.0f, velocity.z);
-    pos -= dir;
+    float height = _player_com.lock()->GetHeight();
+    pos.y += height;
+    auto dir = Mof::CVector3(velocity.x, 0.0f, velocity.z) ;
     return Mof::CRay3D(pos, dir);
 }
 
 void ratchet::component::collision::PlayerCollisionComponent::CollisionStageFrontRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetFrontRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
-    float margin = -0.2f;
+    //float margin = 0.5f;
+    float margin = 0.25f;
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
@@ -48,18 +50,15 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageFron
         velocity *= def::kDeltaTime;
 
         if (ray.CollisionGeometry(geometry, info)) {
-            Mof::CVector3 up(0.0f, 1.0f, 0.0f);
-            float angle = up.DotAngle(info.Normal);
-            float slope_threshold_angle = 40.0f;
-            if (angle > slope_threshold_angle) {
-                continue;
-            } // if
-
             if (info.d <= velocity.Length() + margin) {
                 float dot = Mof::CVector3Utilities::Dot(velocity, info.Normal);
                 dot = std::abs(dot);
                 auto pos = super::GetOwner()->GetPosition();
-                pos += ray.Direction * (info.d - dot + margin);
+                float offset = 0.0f;
+
+                //offset = -0.01f;
+                offset = -0.025f;
+                pos += ray.Direction * (info.d - dot + offset);
                 pos += info.Normal * dot;
                 super::GetOwner()->SetPosition(pos);
             } // if
@@ -71,7 +70,9 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageFron
 void ratchet::component::collision::PlayerCollisionComponent::CollisionStageDownRay(Mof::LPMeshContainer mesh, const StageObject& obj) {
     auto ray = this->GetRay().value();
     Mof::COLLISIONOUTGEOMETRY info;
-    float margin = 0.1f;
+    float margin = 0.0f;
+    //margin = 0.25f;
+    //margin = -0.25f;
 
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
@@ -80,6 +81,12 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageDown
         geometry->SetMatrix(mat);
 
         if (ray.CollisionGeometry(geometry, info)) {
+            float height = _player_com.lock()->GetHeight();
+
+            auto point = super::GetOwner()->GetPosition();
+            point.y += height + margin - info.d;
+                _collision_point_stage_down_ray = point;
+
             Mof::CVector3 up(0.0f, 1.0f, 0.0f);
             float angle = up.DotAngle(info.Normal);
             float slope_threshold_angle = 30.0f;
@@ -87,8 +94,10 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageDown
                 continue;
             } // if
 
-            float height = _player_com.lock()->GetHeight();
+
+
             if (info.d <= height + margin) {
+
                 auto pos = super::GetOwner()->GetPosition();
                 pos.y += height + margin - info.d;
                 super::GetOwner()->SetPosition(pos);
@@ -122,12 +131,9 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageElev
         Mof::CMatrix44 mat = default_matrix * gimmick->GetWorldMatrix();
         geometry->SetMatrix(mat);
 
-
-
         float volume = _player_com.lock()->GetVolume();
         float height = _player_com.lock()->GetHeight();
         auto pos = super::GetOwner()->GetPosition();
-
 
         auto player_circle = Mof::CCircle(pos.x, pos.z, volume);
         auto gimmick_circle = Mof::CCircle(gimmick_pos.x, gimmick_pos.z, gimmick->GetVolume());
@@ -140,7 +146,6 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageElev
                 float direction = std::atan2(gimmick_pos.y - player_pos.y, gimmick_pos.x - player_pos.x) + math::kHalfPi;
                 auto distance = Mof::CVector2Utilities::Distance(player_pos, gimmick_pos);
                 float diff = (gimmick_circle.r + player_circle.r) - distance;
-                
                 auto add = math::Rotate(0.0f, diff, direction);
                 auto pos = super::GetOwner()->GetPosition();
                 pos.x += add.x;
@@ -163,6 +168,7 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageElev
 
                 if (!_on_elevator) {
                     gimmick->ActionStart();
+                    super::GetOwner()->Sleep();
                 } // if
                 this->ChangeState();
 
@@ -189,7 +195,11 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStageBrid
         geometry->SetMatrix(mat);
 
         if (ray.CollisionGeometry(geometry, info)) {
+
             float height = _player_com.lock()->GetHeight();
+            //_collision_point_stage_down_ray = super::GetOwner()->GetPosition();
+            //_collision_point_stage_down_ray.y += height - info.d;
+
 
             if (info.d <= height) {
                 auto pos = super::GetOwner()->GetPosition();
@@ -214,7 +224,8 @@ ratchet::component::collision::PlayerCollisionComponent::PlayerCollisionComponen
     _player_com(),
     _velocity_com(),
     _state_com(),
-    _on_elevator(false) {
+    _on_elevator(false),
+    _collision_point_stage_down_ray() {
 }
 
 ratchet::component::collision::PlayerCollisionComponent::PlayerCollisionComponent(const PlayerCollisionComponent& obj) :
@@ -222,7 +233,8 @@ ratchet::component::collision::PlayerCollisionComponent::PlayerCollisionComponen
     _player_com(),
     _velocity_com(),
     _state_com(),
-    _on_elevator(false) {
+    _on_elevator(false),
+    _collision_point_stage_down_ray() {
     _next_status.push_back(state::PlayerActionStateType::kPlayerActionJumpLandingState);
     _next_status.push_back(state::PlayerActionStateType::kPlayerActionIdleState);
 }
@@ -245,7 +257,14 @@ std::optional<Mof::CSphere> ratchet::component::collision::PlayerCollisionCompon
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::PlayerCollisionComponent::GetBox(void) {
-    return std::optional<Mof::CBoxAABB>();
+    _ASSERT_EXPR(!_player_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
+        return std::optional<Mof::CBoxAABB>();
+    } // if
+    auto pos = super::GetOwner()->GetPosition();
+    float volume = _player_com.lock()->GetVolume();
+    pos.y += _player_com.lock()->GetHeight();
+    return Mof::CBoxAABB(pos, Mof::CVector3(volume, volume, volume));
 }
 
 std::optional<Mof::CRay3D> ratchet::component::collision::PlayerCollisionComponent::GetRay(void) {
@@ -280,6 +299,10 @@ std::optional<::ratchet::component::collision::SightObject> ratchet::component::
     return std::optional<::ratchet::component::collision::SightObject>();
 }
 
+bool ratchet::component::collision::PlayerCollisionComponent::IsOnElevator(void) const {
+    return this->_on_elevator;
+}
+
 bool ratchet::component::collision::PlayerCollisionComponent::Initialize(void) {
     super::Initialize();
     _player_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerComponent>();
@@ -310,7 +333,8 @@ void ratchet::component::collision::PlayerCollisionComponent::CollisionStage(Mof
         return;
     } // if
     this->CollisionStageFrontRay(mesh, obj);
-    this->CollisionStageDownRay(mesh, obj);
+    this->CollisionStageDownRay(mesh, obj);    
+    _player_com.lock()->GetOwnerCastd()->GetShadowChildActor()->SetPosition(_collision_point_stage_down_ray);
 }
 
 void ratchet::component::collision::PlayerCollisionComponent::CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) {

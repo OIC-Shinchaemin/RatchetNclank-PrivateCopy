@@ -351,3 +351,21 @@ MigrationBackup/
 
 # exe
 *.exe
+
+# tlog
+*.tlog
+
+# TestDebug
+TestDebug/
+
+# Debug
+Debug/
+
+# Release
+Release/
+
+# ConsoleDebug
+ConsoleDebug/
+
+# ConsoleRelease
+ConsoleRelease/

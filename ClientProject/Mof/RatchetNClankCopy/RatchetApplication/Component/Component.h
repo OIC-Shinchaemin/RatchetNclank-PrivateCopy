@@ -11,10 +11,10 @@
 #include "../ResourceManager.h"
 #include "../GameDefine.h"
 #include "Base/UI/UICanvas.h"
+#include "../Game/Graphics/RenderCommandTask.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class Component : public std::enable_shared_from_this<ratchet::component::Component> {
 private:
     //! この機能の所有者
@@ -68,7 +68,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    virtual std::string GetType(void) const = 0;
+    virtual std::string GetType(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -142,6 +142,12 @@ public:
     /// <returns></returns>
     virtual bool Render(void);
     /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out);
+    /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
@@ -167,7 +173,6 @@ static bool operator<(const ratchet::component::Component& a, const ratchet::com
 }
 static bool operator<(const std::shared_ptr<ratchet::component::Component>& a, const std::shared_ptr < ratchet::component::Component>& b) noexcept {
     return a->GetPriority() < b->GetPriority();
-}
 }
 }
 #endif // !RATCHET_COMPONENT_COMPONENT_H

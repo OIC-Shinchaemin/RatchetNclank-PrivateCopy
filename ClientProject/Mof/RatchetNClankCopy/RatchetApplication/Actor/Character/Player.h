@@ -14,14 +14,18 @@
 #include "../../Game/GameSystem/ShopSystem.h"
 #include "../../Component/Player/PlayerComponent.h"
 #include "../../Game/GameSystem/GameQuest.h"
+#include "../../Game/GameSystem/Text/TextSystem.h"
+#include "../../Stage/Gimmick/Elevator.h"
+#include "../../Effect/EffectContainer.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace character {
+namespace ratchet::actor::character {
 class Player : public ratchet::actor::character::Character,
     public base::core::Observer<std::shared_ptr<ratchet::actor::weapon::Weapon>>,
-    public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> {
+    public base::core::Observer<const ratchet::game::gamesystem::QuickChangeSystem::Info&> ,
+    public ratchet::game::gamesystem::text::TextSystemOpenMessageListener,
+    public ratchet::game::gamesystem::text::TextSystemClosedMessageListener ,
+    public ElevatorArrivalMessageListener {
     using super = ratchet::actor::character::Character;
     struct ObservablePair {
         std::string name;
@@ -44,8 +48,6 @@ private:
     std::weak_ptr<component::player::PlayerComponent> _player_com;
     //! 腕の位置
     Mof::LPBONEMOTIONSTATE _upp_bone_state;
-    //! 有効
-    //bool _enable;
     //! 通知用
     ObservablePair _shop_system_subject;
     //! 通知用
@@ -56,6 +58,14 @@ private:
     std::unordered_map<std::string, ObservablePair* >_notificationable_subject_map;
     //! 通知用
     std::stack<ObservablePair*>_notificationable_subject_stack;
+    //! エフェクト
+    std::weak_ptr<ratchet::effect::EffectContainer>_effect_container;
+    //! エフェクト
+    std::shared_ptr<actor::Actor> _sense_effect_child_actor;
+    //! 通知用
+    actor::character::CharacterTalkableMessageSubject _character_talkable_message_subject;
+    //! 簡易影
+    std::shared_ptr<actor::Actor> _shadow_child_actor;
 public:
     /// <summary>
     /// コンストラクタ
@@ -76,6 +86,26 @@ public:
     /// <param name="change"></param>
     virtual void OnNotify(const ratchet::game::gamesystem::QuickChangeSystem::Info& info) override;
     /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const ratchet::game::gamesystem::text::TextSystemOpenMessage& message) override;
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const ratchet::game::gamesystem::text::TextSystemClosedMessage& message) override;
+    /// <summary>
+    /// 通知
+    /// </summary>
+    /// <param name="change"></param>
+    virtual void OnNotify(const ElevatorArrivalMessage& message) override;
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEffectContainer(const std::shared_ptr<ratchet::effect::EffectContainer>& ptr);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -92,7 +122,23 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    std::shared_ptr<actor::Actor> GetShadowChildActor(void) const {
+        return this->_shadow_child_actor;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     base::core::Observable<const ratchet::game::gamesystem::GameQuest&>* GetQuestSubject(void);
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetCharacterTalkableMessageSubject(void) {
+        return &this->_character_talkable_message_subject;
+    }
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -105,6 +151,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<ratchet::actor::weapon::Mechanical> GetCurrentMechanical(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::effect::EffectContainer> GetEffectContainer(void) const;
     /// <summary>
     /// 追加
     /// </summary>
@@ -167,7 +219,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_CHARACTER_PLAYER_H

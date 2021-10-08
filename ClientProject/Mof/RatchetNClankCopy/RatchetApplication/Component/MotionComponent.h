@@ -11,8 +11,7 @@
 #include "../MotionNames.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class MotionComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -124,6 +123,5 @@ public:
     /// <returns></returns>
     bool AddTimer(float time);
 };
-}
 }
 #endif // !RATCHET_COMPONENT_MOTION_COMPONENT_H

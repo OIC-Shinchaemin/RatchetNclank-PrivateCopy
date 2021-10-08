@@ -14,6 +14,8 @@ ratchet::game::GameManager::GameManager() :
     _shop_system(std::make_shared<ratchet::game::gamesystem::ShopSystem>()),
     _option_system(std::make_shared<ratchet::game::gamesystem::OptionSystem>()),
     _pause_system(std::make_shared<ratchet::game::gamesystem::GamePauseSystem>()),
+    _mission_system(std::make_shared<ratchet::game::gamesystem::mission::MissionSystem>()),
+    _user_action_helper(std::make_shared<ratchet::game::gamesystem::user::UserActionHelper>()),
     _resource(),
     _ui_canvas() {
     _shop_system->GetChargeInfoSubject()->AddObserver(_weapon_system);
@@ -25,7 +27,10 @@ ratchet::game::GameManager::~GameManager() {
 }
 
 void ratchet::game::GameManager::OnNotify(const std::shared_ptr<ratchet::game::gamesystem::GameSystem>& ptr) {
-    _update_system.push_back(ptr);
+    auto it = std::find(_update_system.begin(), _update_system.end(), ptr);
+    if (it == _update_system.end()) {
+        _update_system.push_back(ptr);
+    } // if
 }
 
 void ratchet::game::GameManager::SetResourceManager(const std::shared_ptr<ratchet::ResourceMgr>& ptr) {
@@ -64,6 +69,10 @@ std::shared_ptr<ratchet::game::gamesystem::GamePauseSystem> ratchet::game::GameM
     return this->_pause_system;
 }
 
+std::shared_ptr<ratchet::game::gamesystem::user::UserActionHelper> ratchet::game::GameManager::GetUserActionHelper(void) const {
+    return this->_user_action_helper;
+}
+
 void ratchet::game::GameManager::GameSystemLoad(void) {
     auto save_data = ratchet::game::gamesystem::save::SaveData();
     ratchet::game::gamesystem::save::SaveSystem().Fetch(save_data);
@@ -85,29 +94,11 @@ bool ratchet::game::GameManager::Initialize(void) {
     this->SetPtr(_shop_system);
     this->SetPtr(_option_system);
     this->SetPtr(_pause_system);
-    /*
-    _weapon_system->SetResourceManager(_resource);
-    _weapon_system->SetUICanvas(_ui_canvas);
-    _quick_change->SetResourceManager(_resource);
-    _quick_change->SetUICanvas(_ui_canvas);
-    _help_desk->SetResourceManager(_resource);
-    _help_desk->SetUICanvas(_ui_canvas);
-    _game_money->SetResourceManager(_resource);
-    _game_money->SetUICanvas(_ui_canvas);
-    _shop_system->SetResourceManager(_resource);
-    _shop_system->SetUICanvas(_ui_canvas);
-    _option_system->SetResourceManager(_resource);
-    _option_system->SetUICanvas(_ui_canvas);
-    _pause_system->SetResourceManager(_resource);
-    _pause_system->SetUICanvas(_ui_canvas);
-    */
+    this->SetPtr(_user_action_helper);
     return true;
 }
 
 bool ratchet::game::GameManager::Release(void) {
-//    _option_system->GetSubject()->RemoveObserver(shared_from_this());
-//    _pause_system->GetSubject()->RemoveObserver(shared_from_this());
-
     _option_system->Release();
     _pause_system->Release();
 
@@ -151,6 +142,7 @@ void ratchet::game::GameManager::GameSystemRelease(void) {
     _disable_systems.clear();
 
 
+    //_user_action_helper->Release();
     _shop_system->Release();
     _quick_change->Release();
     _weapon_system->Release();

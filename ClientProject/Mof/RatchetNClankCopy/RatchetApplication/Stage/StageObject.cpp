@@ -16,7 +16,8 @@ StageObject::StageObject(bool enable, bool collision, StageObjectType type, std:
     , _scale(scale)
     , _rotate(rotate)
     , _world_matrix()
-    , _geometry_spheres() {
+    , _geometry_spheres()
+    , _is_show(true) {
     RefreshWorldMatrix();
 }
 
@@ -24,6 +25,14 @@ StageObject::StageObject(bool enable, bool collision, StageObjectType type, std:
 /// デストラクタ
 /// </summary>
 StageObject::~StageObject(void) {
+}
+
+void StageObject::SetShow(bool flag) {
+    this->_is_show = flag;
+}
+
+bool StageObject::IsShow(void) const {
+    return this->_is_show;
 }
 
 /// <summary>
@@ -133,7 +142,7 @@ void StageObject::GenerateCollisionVolume(const MeshArray& meshes) {
         trans.RotateAround(trans, rotate);
 
         Mof::CSphere sphere; geometry->CalculateSphere(sphere);
-        sphere.r *= scale.x; 
+        sphere.r *= scale.x;
         sphere.Position.x += trans.x; sphere.Position.y += trans.y; sphere.Position.z += trans.z;
 
         _geometry_spheres.push_back(sphere);
@@ -162,7 +171,7 @@ void StageObject::SetPosition(const Vector3& pos) {
 }
 
 void StageObject::DebugRender(void) {
-    for (auto volume: _geometry_spheres) {
+    for (auto volume : _geometry_spheres) {
         if (this->IsCollisionEnable()) {
             //::CGraphicsUtilities::RenderBox(box, Mof::CVector4(1.0f, 0.0f, 0.0f, 0.5f));
             ::CGraphicsUtilities::RenderLineSphere(volume, Mof::CVector4(1.0f, 0.0f, 0.0f, 0.5f));

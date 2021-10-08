@@ -328,6 +328,99 @@
     <Filter Include="Ratchet\Source\UI\Shop">
       <UniqueIdentifier>{5b2c302d-a819-4d66-8dae-2b28a117ed64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\Text">
+      <UniqueIdentifier>{65af10b0-6cb3-4729-b42f-0207578fead1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Actor\Gimmick">
+      <UniqueIdentifier>{823b4c48-ace6-44dc-9158-93bc03793858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Actor\Gimmick">
+      <UniqueIdentifier>{3a88a3b1-dd27-45ff-b664-5ad77a02ce91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Effect">
+      <UniqueIdentifier>{68431acc-6b62-4e24-8220-e12029a25d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Effect">
+      <UniqueIdentifier>{c169f1a9-dfc1-4076-970d-569396bf03a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\script">
+      <UniqueIdentifier>{b7ca4f36-7bff-424d-b2fe-d7b59ae97c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Base\Accessor">
+      <UniqueIdentifier>{fb991ccd-1cfa-4d93-927b-dbc882384c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Scarecrow">
+      <UniqueIdentifier>{4fab48f0-5ae5-4c95-b2a7-89b6d58b1a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Scarecrow">
+      <UniqueIdentifier>{bd67f64e-28f5-426d-ae5a-c2d6028f55f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\Quest">
+      <UniqueIdentifier>{18139e73-d3a7-49cc-82f1-16896be9acba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\Quest">
+      <UniqueIdentifier>{f61f6f19-dc38-4401-8d20-00497f0c7710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\Mission">
+      <UniqueIdentifier>{3fd81ff8-a705-4e82-96db-9a0ad43ca26a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\Mission">
+      <UniqueIdentifier>{0f41290c-cb9d-4880-a9d4-c093572da3a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\King">
+      <UniqueIdentifier>{9b607c54-5ef5-4f91-82dc-b3d3a2aec797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\King">
+      <UniqueIdentifier>{db212138-31f9-491e-afc2-6e955d552a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\Queen">
+      <UniqueIdentifier>{0288ef50-2ee0-4e82-b0e7-c0711ba3559c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\Queen">
+      <UniqueIdentifier>{ef3eb371-e96b-4e14-b718-3f0372dc41b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Stage">
+      <UniqueIdentifier>{c5c134f5-9967-42df-9b5d-485365a07c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Stage\Gimmick">
+      <UniqueIdentifier>{0f42b3a4-7a80-4cbc-93a4-c3b5e882ba9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Stage\Parser">
+      <UniqueIdentifier>{d86210b2-fc23-439c-a348-cfab09f40f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\Text">
+      <UniqueIdentifier>{019df226-0b6b-4f8f-a60b-bcf46f18a44f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\Audio">
+      <UniqueIdentifier>{fee524df-1071-4758-9116-59ac023972f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\Audio">
+      <UniqueIdentifier>{1a41875d-5dee-4f72-8c07-bfa7dd2b978a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\Graphics">
+      <UniqueIdentifier>{22357301-893d-43b5-9809-f4dfbee485dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\Graphics">
+      <UniqueIdentifier>{667456ca-f0f2-4ce3-9587-d15da9e9b276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Scene\Loading">
+      <UniqueIdentifier>{37669806-7c44-45da-bc76-b87660ab5f37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Scene\Title">
+      <UniqueIdentifier>{0666c416-779d-4809-8c35-b93e78d4d820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Component\SenseEffect">
+      <UniqueIdentifier>{15cff8ac-711d-48a4-b8c3-8c2e8e009532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Component\SenseEffect">
+      <UniqueIdentifier>{851f7587-141d-43e8-82a7-cd5efce47d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Header\Game\GameSystem\User">
+      <UniqueIdentifier>{14653347-d284-4c4a-8e04-55d363222b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ratchet\Source\Game\GameSystem\User">
+      <UniqueIdentifier>{bb4ba47d-e8da-46e5-a196-fe6bb28d7a2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameApp.cpp">
@@ -432,9 +525,6 @@
     <ClCompile Include="Actor\Bullet\PyrocitorBullet.cpp">
       <Filter>Ratchet\Source\Actor\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithm.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
     <ClCompile Include="Factory\ActorFactory.cpp">
       <Filter>Ratchet\Source\Factory</Filter>
     </ClCompile>
@@ -525,9 +615,6 @@
     <ClCompile Include="Component\Enemy\EnemyDamageComponent.cpp">
       <Filter>Ratchet\Source\Component\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Collision\Object\CollisionComponent.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Component\Collision\Object\BlasterBulletCollisionComponent.cpp">
       <Filter>Ratchet\Source\Component\Collision\Object</Filter>
     </ClCompile>
@@ -614,12 +701,6 @@
     </ClCompile>
     <ClCompile Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.cpp">
       <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Algolithm\CollisionAlgolithmImplementation.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\Collision\Object\CollisionComponentImplementation.cpp">
-      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
     </ClCompile>
     <ClCompile Include="Component\Enemy\EnemyMeleeAttackComponent.cpp">
       <Filter>Ratchet\Source\Component\Enemy</Filter>
@@ -870,9 +951,6 @@
     <ClCompile Include="UI\HelpDeskMenu.cpp">
       <Filter>Ratchet\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameSystem\GameQuest.cpp">
-      <Filter>Ratchet\Source\Game\GameSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Event\EventManager.cpp">
       <Filter>Ratchet\Source\Event</Filter>
     </ClCompile>
@@ -1017,12 +1095,6 @@
     <ClCompile Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.cpp">
       <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
     </ClCompile>
-    <ClCompile Include="UI\GimmickAccessSystemMenu.cpp">
-      <Filter>Ratchet\Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameSystem\GimmickAccessSystem.cpp">
-      <Filter>Ratchet\Source\Game\GameSystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\include\Base\Core\State.cpp">
       <Filter>Ratchet\Base\Core</Filter>
     </ClCompile>
@@ -1077,9 +1149,6 @@
     <ClCompile Include="Component\Item\BulletItem\BulletItemDefaultComponent.cpp">
       <Filter>Ratchet\Source\Component\Item\BulletItem</Filter>
     </ClCompile>
-    <ClCompile Include="UI\UICreator.cpp">
-      <Filter>Ratchet\Source\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Game\GameSystem\Shop\ShopSystemElement.cpp">
       <Filter>Ratchet\Source\Game\GameSystem\Shop</Filter>
     </ClCompile>
@@ -1088,6 +1157,216 @@
     </ClCompile>
     <ClCompile Include="UI\Shop\ShopSystemMainMenu.cpp">
       <Filter>Ratchet\Source\UI\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\TextSystemStartEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Gimmick\Wall.cpp">
+      <Filter>Ratchet\Source\Actor\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\WallCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effect.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameSceneInitializer.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectContainer.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectPool.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectEmitter.cpp">
+      <Filter>Ratchet\Source\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\King.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\KingCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Scarecrow.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Gimmick\Fence.cpp">
+      <Filter>Ratchet\Source\Actor\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\ScarecrowCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerScarecrowCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionComponentImplementation.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionAlgolithmImplementation.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\CollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Scarecrow\ScarecrowComponent.cpp">
+      <Filter>Ratchet\Source\Component\Scarecrow</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Quest\QuestSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\GameQuest.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Mission\MissionSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Mission\MissionData.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\ThirdPersonCameraController.cpp">
+      <Filter>Ratchet\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\ScarecrowPyrocitorBulletCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BlasterBulletScarecrowCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\BombGloveBulletScarecrowCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>Ratchet\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EnemyViewEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\PlayerActionAfterGettingOffElevatorEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Character\Queen.cpp">
+      <Filter>Ratchet\Source\Actor\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\QueenCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\King\KingComponent.cpp">
+      <Filter>Ratchet\Source\Component\King</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Queen\QueenComponent.cpp">
+      <Filter>Ratchet\Source\Component\Queen</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\LightPillar.cpp">
+      <Filter>Ratchet\Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Facility\Barrack.cpp">
+      <Filter>Ratchet\Source\Actor\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\HitStopEvent.cpp">
+      <Filter>Ratchet\Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\FenceCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BarrackCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerFenceCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerBarrackCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Algolithm\PlayerBarricadeCollisionAlgolithm.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Algolithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Collision\Object\BarricadeCollisionComponent.cpp">
+      <Filter>Ratchet\Source\Component\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Menu.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\Script.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\SpriteSet.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\Text\TextSystem.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Audio\SEPlayer.cpp">
+      <Filter>Ratchet\Source\Game\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Audio\BGMPlayer.cpp">
+      <Filter>Ratchet\Source\Game\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderCommandTask.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderRectangleCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderBillboardCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderAnimationMeshCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics\RenderMeshCommand.cpp">
+      <Filter>Ratchet\Source\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TitleSceneInitializer.cpp">
+      <Filter>Ratchet\Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Effect\SenseEffect.cpp">
+      <Filter>Ratchet\Source\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\SenseEffect\SenseEffectComponent.cpp">
+      <Filter>Ratchet\Source\Component\SenseEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameSystem\User\UserActionHelper.cpp">
+      <Filter>Ratchet\Source\Game\GameSystem\User</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UserActionHelperMenu.cpp">
+      <Filter>Ratchet\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Enemy\EnemyHpBillboardComponent.cpp">
+      <Filter>Ratchet\Source\Component\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1262,9 +1541,6 @@
     <ClInclude Include="Actor\Weapon\Blaster.h">
       <Filter>Ratchet\Header\Actor\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithm.h">
-      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
     <ClInclude Include="Factory\ActorFactory.h">
       <Filter>Ratchet\Header\Factory</Filter>
     </ClInclude>
@@ -1388,9 +1664,6 @@
     <ClInclude Include="Component\Collision\Object\EnemyCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Object\CollisionComponent.h">
-      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\BlasterBulletCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
@@ -1475,12 +1748,6 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerShipCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\CollisionAlgolithmDefine.h">
-      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\CollisionComponentDefine.h">
-      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyMeleeAttackComponent.h">
       <Filter>Ratchet\Header\Component\Enemy</Filter>
     </ClInclude>
@@ -1498,36 +1765,6 @@
     </ClInclude>
     <ClInclude Include="Component\Collision\Algolithm\PlayerEnemyBulletCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\Elevator.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\WoodBox.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Gimmick\Bridge.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Parser\JsonStageParser.h">
-      <Filter>Ratchet\Source\Stage\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Parser\StageParser.h">
-      <Filter>Ratchet\Source\Stage\Parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\Stage.h">
-      <Filter>Ratchet\Source\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageDefine.h">
-      <Filter>Ratchet\Source\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageFileFormat.h">
-      <Filter>Ratchet\Source\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage\StageObject.h">
-      <Filter>Ratchet\Source\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Behaviour\Executor\Action\GoHomeNodeExecutor.h">
       <Filter>Ratchet\Header\Behaviour\Executor\Action</Filter>
@@ -1553,17 +1790,11 @@
     <ClInclude Include="Behaviour\Executor\Condition\TargetRecognitionNodeExecutor.h">
       <Filter>Ratchet\Header\Behaviour\Executor\Condition</Filter>
     </ClInclude>
-    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
-      <Filter>Ratchet\Source\Stage\Gimmick</Filter>
-    </ClInclude>
     <ClInclude Include="Component\Collision\Object\CameraCollisionComponent.h">
       <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Component\Player\PlayerStateComponent.h">
       <Filter>Ratchet\Header\Component\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Algolithm\EnemyPlayerMeleeAttackCollisionAlgolithm.h">
-      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
     <ClInclude Include="Component\InvincibleComponent.h">
       <Filter>Ratchet\Header\Component</Filter>
@@ -1705,9 +1936,6 @@
     </ClInclude>
     <ClInclude Include="Component\Enemy\EnemyComponentInclude.h">
       <Filter>Ratchet\Header\Component\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\Collision\Object\CollisionComponentInclude.h">
-      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
     </ClInclude>
     <ClInclude Include="Factory\ComponentRegister\PlayerComponentRegister.h">
       <Filter>Ratchet\Header\Factory\ComponentRegister</Filter>
@@ -1859,9 +2087,6 @@
     <ClInclude Include="UI\HelpDeskMenu.h">
       <Filter>Ratchet\Header\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameSystem\GameQuest.h">
-      <Filter>Ratchet\Header\Game\GameSystem</Filter>
-    </ClInclude>
     <ClInclude Include="Event\EventManager.h">
       <Filter>Ratchet\Header\Event</Filter>
     </ClInclude>
@@ -2012,12 +2237,6 @@
     <ClInclude Include="Component\Collision\Algolithm\PlayerNanotechItemCollisionAlgolithm.h">
       <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
     </ClInclude>
-    <ClInclude Include="UI\GimmickAccessSystemMenu.h">
-      <Filter>Ratchet\Header\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameSystem\GimmickAccessSystem.h">
-      <Filter>Ratchet\Header\Game\GameSystem</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Base\Core\Math.h">
       <Filter>Ratchet\Base\Core</Filter>
     </ClInclude>
@@ -2114,11 +2333,314 @@
     <ClInclude Include="Game\GameSystem\Shop\ShopSystemEntry.h">
       <Filter>Ratchet\Header\Game\GameSystem\Shop</Filter>
     </ClInclude>
-    <ClInclude Include="Namespace.h">
-      <Filter>Ratchet\Header</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Shop\ShopSystemMainMenu.h">
       <Filter>Ratchet\Header\UI\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Core\Tween.h">
+      <Filter>Ratchet\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugManager.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\Script.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\SpriteSet.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\Menu.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\TextSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\TextSystemStartEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameSceneInitializer.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Gimmick\Wall.h">
+      <Filter>Ratchet\Header\Actor\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerWallCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\WallCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effect.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectDefine.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectContainer.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectPool.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectEmitter.h">
+      <Filter>Ratchet\Header\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\King.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerKingCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\KingCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Scarecrow.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\ActorDefine.h">
+      <Filter>Ratchet\Header\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Gimmick\Fence.h">
+      <Filter>Ratchet\Header\Actor\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\ScarecrowCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerScarecrowCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionAlgolithmDefine.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionComponentDefine.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionComponentInclude.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Accessor\Accessor.h">
+      <Filter>Ratchet\Base\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Accessor\Getter.h">
+      <Filter>Ratchet\Base\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Base\Accessor\Setter.h">
+      <Filter>Ratchet\Base\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\CollisionAlgolithmInclude.h">
+      <Filter>Ratchet\Header\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Scarecrow\ScarecrowComponent.h">
+      <Filter>Ratchet\Header\Component\Scarecrow</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowOmniWrenchCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Quest\QuestSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Quest</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\GameQuest.h">
+      <Filter>Ratchet\Header\Game\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Mission\MissionSystem.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Mission\MissionData.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\ThirdPersonCameraController.h">
+      <Filter>Ratchet\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BlasterBulletScarecrowCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBombGloveEffectCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowPyrocitorBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\ScarecrowBlasterBulletCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\BombGloveBulletScarecrowCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EnemyViewEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\PlayerActionAfterGettingOffElevatorEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\Queen.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\QueenCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerQueenCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\KingPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\QueenPlayerCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\King\KingComponent.h">
+      <Filter>Ratchet\Header\Component\King</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Queen\QueenComponent.h">
+      <Filter>Ratchet\Header\Component\Queen</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\LightPillar.h">
+      <Filter>Ratchet\Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Stage.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageDefine.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageFileFormat.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\StageObject.h">
+      <Filter>Ratchet\Header\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\StageParser.h">
+      <Filter>Ratchet\Header\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Parser\JsonStageParser.h">
+      <Filter>Ratchet\Header\Stage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Bridge.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\Elevator.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\GimmickBase.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\MoveCloud.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage\Gimmick\WoodBox.h">
+      <Filter>Ratchet\Header\Stage\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Facility\Barrack.h">
+      <Filter>Ratchet\Header\Actor\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\HitStopEvent.h">
+      <Filter>Ratchet\Header\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BarrackCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\FenceCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerBarrackCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerFenceCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Algolithm\PlayerBarricadeCollisionAlgolithm.h">
+      <Filter>Ratchet\Header\Component\Collision\Algolithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Collision\Object\BarricadeCollisionComponent.h">
+      <Filter>Ratchet\Header\Component\Collision\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDefine.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\BGMPlayer.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\SEPlayer.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\BGMDefine.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderCommandTask.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderRectangleCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderBillboardCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderAnimationMeshCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics\RenderMeshCommand.h">
+      <Filter>Ratchet\Header\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\SEDefine.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\SoundPlayer.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Audio\AudioUtility.h">
+      <Filter>Ratchet\Header\Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TitleSceneInitializer.h">
+      <Filter>Ratchet\Header\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\Text\TextSystemDefine.h">
+      <Filter>Ratchet\Header\Game\GameSystem\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageObservation.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageObservationManager.h">
+      <Filter>Ratchet\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Loading\LoadingAnimation.h">
+      <Filter>Ratchet\Header\Scene\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Title\TitleLogo.h">
+      <Filter>Ratchet\Header\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Effect\SenseEffect.h">
+      <Filter>Ratchet\Header\Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SenseEffect\SenseEffectComponent.h">
+      <Filter>Ratchet\Header\Component\SenseEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Character\CharacterDefine.h">
+      <Filter>Ratchet\Header\Actor\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameSystem\User\UserActionHelper.h">
+      <Filter>Ratchet\Header\Game\GameSystem\User</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UserActionHelperMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\EnemyHpMenu.h">
+      <Filter>Ratchet\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Enemy\EnemyHpBillboardComponent.h">
+      <Filter>Ratchet\Header\Component\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2137,11 +2659,44 @@
     <Text Include="..\Resource\scene_resource\description_scene.txt">
       <Filter>Resource\scene_resource</Filter>
     </Text>
+    <Text Include="..\Resource\script\test.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\test2.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\tutorial_event_0_start.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\tutorial_event_1_start.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\tutorial_event_2_start.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\king_text_event.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\tutorial_event_0_end.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\tutorial_event_1_end.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\tutorial_event_2_end.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\king_free_talk_text_event.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\queen_free_talk_text_event.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
+    <Text Include="..\Resource\script\queen_text_event.txt">
+      <Filter>Resource\script</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resource\save\savedata.json">
-      <Filter>Resource\save</Filter>
-    </None>
     <None Include="..\Resource\motion_names\player.motion_names">
       <Filter>Resource\motion_names</Filter>
     </None>
@@ -2227,6 +2782,48 @@
       <Filter>Resource\builder</Filter>
     </None>
     <None Include="..\Resource\builder\nanotech.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\wall.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\behaviour\scarecrow_enemy.json">
+      <Filter>Resource\behaviour</Filter>
+    </None>
+    <None Include="..\Resource\builder\king.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\fence.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\scarecrow.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\barricade.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\queen.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\barrack.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\builder\_barrack.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\stage\placement_data.json">
+      <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\stage\_placement_data.json">
+      <Filter>Resource\stage</Filter>
+    </None>
+    <None Include="..\Resource\builder\sense_effect.json">
+      <Filter>Resource\builder</Filter>
+    </None>
+    <None Include="..\Resource\save\savedata.json">
+      <Filter>Resource\save</Filter>
+    </None>
+    <None Include="..\Resource\builder\shadow.json">
       <Filter>Resource\builder</Filter>
     </None>
   </ItemGroup>

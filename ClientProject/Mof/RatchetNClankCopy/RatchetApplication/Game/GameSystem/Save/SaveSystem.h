@@ -7,10 +7,7 @@
 #include "SaveData.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-namespace save {
+namespace ratchet::game::gamesystem::save {
 class SaveSystem {
 private:
     std::string _path;
@@ -36,8 +33,5 @@ public:
     /// <returns></returns>
     bool Save(const ratchet::game::gamesystem::save::SaveDataParam& param);
 };
-}
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_SAVE_SAVE_SYSTEM_H

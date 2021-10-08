@@ -19,8 +19,7 @@
 #include "Builder/Actor/OmniWrenchBuilder.h"
 
 
-namespace ratchet {
-namespace factory {
+namespace ratchet::factory {
 class BuilderFactory {
 private:
     //! ï€éùÇµÇƒÇ¢ÇÈBulder
@@ -123,6 +122,5 @@ public:
     /// <returns></returns>
     std::shared_ptr<ratchet::factory::builder::IBuilder> Create(const char* path) const;
 };
-}
 }
 #endif // !RATCHET_FACTORY_ACTOR_FACTORY_H

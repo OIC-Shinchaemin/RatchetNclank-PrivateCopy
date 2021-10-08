@@ -1,8 +1,22 @@
 #include "PlayerActionComponent.h"
 
 
+std::shared_ptr<ratchet::component::TransformComponent> ratchet::component::player::action::PlayerActionComponent::GetTransformComponent(void) const {
+    if (auto com = _transform_com.lock()) {
+        return com;
+    } // if
+    return nullptr;
+}
+
 std::shared_ptr<ratchet::component::VelocityComponent> ratchet::component::player::action::PlayerActionComponent::GetVelocityComponent(void) const {
     if (auto com = _velocity_com.lock()) {
+        return com;
+    } // if
+    return nullptr;
+}
+
+std::shared_ptr<ratchet::component::CameraComponent> ratchet::component::player::action::PlayerActionComponent::GetCameraComponent(void) const {
+    if (auto com = _camera_com.lock()) {
         return com;
     } // if
     return nullptr;
@@ -38,18 +52,22 @@ bool ::ratchet::component::player::action::PlayerActionComponent::ChangeMotionSt
 
 ::ratchet::component::player::action::PlayerActionComponent::PlayerActionComponent(int priority) :
     super(priority),
+    _transform_com(),
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _camera_com() {
 }
 
 ::ratchet::component::player::action::PlayerActionComponent::PlayerActionComponent(const PlayerActionComponent& obj) :
     super(obj),
+    _transform_com(),
     _velocity_com(),
     _state_com(),
     _motion_com(),
-    _motion_state_com() {
+    _motion_state_com(),
+    _camera_com() {
 }
 
 ::ratchet::component::player::action::PlayerActionComponent::~PlayerActionComponent() {
@@ -61,10 +79,12 @@ std::string ratchet::component::player::action::PlayerActionComponent::GetType(v
 
 bool ::ratchet::component::player::action::PlayerActionComponent::Initialize(void) {
     super::Initialize();
+    _transform_com = super::GetOwner()->GetComponent<ratchet::component::TransformComponent>();
     _velocity_com = super::GetOwner()->GetComponent<ratchet::component::VelocityComponent>();
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
     _motion_com = super::GetOwner()->GetComponent<ratchet::component::MotionComponent>();
     _motion_state_com = super::GetOwner()->GetComponent<ratchet::component::MotionStateComponent>();
+    _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
     return true;
 }
 

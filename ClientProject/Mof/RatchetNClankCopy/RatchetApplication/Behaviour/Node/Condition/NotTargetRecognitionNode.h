@@ -7,7 +7,7 @@
 #include "../../Executor/Condition/NotTargetRecognitionNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class NotTargetRecognitionNode : public ratchet::behaviour::ConditionalNodeBase {
     using super = ratchet::behaviour::ConditionalNodeBase;
     using Executor = ratchet::behaviour::NotTargetRecognitionNodeExecutor;
@@ -43,6 +43,5 @@ public:
         return target.expired();
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_NOT_TARGET_RECOGNITION_NODE_H

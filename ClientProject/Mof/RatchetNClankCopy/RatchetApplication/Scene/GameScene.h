@@ -14,15 +14,30 @@
 #include "../Game/PhysicsWorld.h"
 #include "../Stage/Stage.h"
 #include "../Game/GameSystem/ShopSystem.h"
-
-
 #include "../Actor/Character/Player.h"
+#include "../Actor/Character/Character.h"
+#include "../Game/GameSystem/Text/TextSystem.h"
+#include "../Event/StageViewEvent.h"
+#include "../Effect/EffectContainer.h"
+#include "../Component/SightRecognitionComponent.h"
+#include "../Event/ShipEvent.h"
+#include "../MessageObservationManager.h"
+#include "DescriptionScene.h"
+#include "Loading/LoadingAnimation.h"
 
-namespace ratchet {
-namespace scene {
-class GameScene : public ratchet::scene::Scene, public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&> {
+
+namespace ratchet::scene {
+class GameScene :
+    public ratchet::scene::Scene,
+    public base::core::Observer<const ratchet::game::gamesystem::ShopSystem::Info&>,
+    public event::StageViewEventMessageListener,
+    public ratchet::actor::character::CharacterDamageApplyMessageListener,
+    public ContactEnemyMessageListener,
+    public event::ShipEventEndMessageListener,
+    public ratchet::game::gamesystem::text::TextSystemOpenMessageListener,
+    public ratchet::game::gamesystem::text::TextSystemClosedMessageListener {
     using super = ratchet::scene::Scene;
-    using this_type = ratchet::scene::GameScene;
+    friend class GameSceneInitializer;
 private:
     //! 追加
     std::vector<std::shared_ptr<ratchet::actor::Actor>> _created_actors;
@@ -38,14 +53,33 @@ private:
     Stage _stage;
     //! 再初期化
     bool _re_initialize;
+    //! 再初期化
+    bool _player_dead;
     //! メニュー
     base::core::Observable<bool> _pause_menu_subject;
-
-
+    //! テキスト 
+    std::shared_ptr<game::gamesystem::text::TextSystem> _text_system;
     //! ゲーム
     std::weak_ptr<ratchet::game::GameManager> _game;
     //! イベント
     std::weak_ptr<ratchet::event::EventManager> _event;
+    //! エフェクト
+    std::shared_ptr<effect::EffectContainer> _effect;
+    //! カウンター
+    base::core::Timer _loading_counter;
+    //! カウンター
+    int _loading_dot_count;
+    //! 経過時間 / 所要時間
+    float _loading_progress;
+    //! 表示
+//    bool _show_how_to_play;
+    //! ローディング
+    scene::loading::LoadingDotAnimation _loading_dot_animation;
+    //! EnemyBulletEndEffect 
+    std::shared_ptr<effect::EffectEmitter> _enemy_bullet_end_effect_emitter;
+    //! 説明
+    scene::GameDescription _how_to_play;
+public:
     /// <summary>
     /// 追加
     /// </summary>
@@ -106,6 +140,36 @@ public:
     /// <param name="info"></param>
     virtual void OnNotify(const ratchet::game::gamesystem::ShopSystem::Info& info) override;
     /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(const ratchet::event::StageViewEventMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(const ratchet::event::ShipEventEndMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(const ratchet::actor::character::CharacterDamageApplyMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(const ContactEnemyMessage& message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(game::gamesystem::text::TextSystemOpenMessageListener::Message message) override;
+    /// <summary>
+    /// 通知イベント
+    /// </summary>
+    /// <param name="message"></param>
+    virtual void OnNotify(game::gamesystem::text::TextSystemClosedMessageListener::Message message) override;
+    /// <summary>
     /// セッター
     /// </summary>
     /// <param name="ptr"></param>
@@ -121,7 +185,6 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetName(void) override;
-
     /// <summary>
     /// 読み込み
     /// </summary>
@@ -147,6 +210,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
 }
 #endif // !RATCHET_SCENE_GAME_SCENE_H

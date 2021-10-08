@@ -1,0 +1,11 @@
+sprite,Sprite1,Chara_a_01.png;
+sprite,Sprite2,Chara_a_02.png;
+setpos,5000,0,Sprite1;
+setpos,5000,0,Sprite2;
+
+text,26,584,チュートリアルNo1を開始します;
+Text,26,584,Ｊキーでジャンプできます;
+Text,26,584,ジャンプしている間にＪキーを押せば、さらにジャンプできます;
+Text,26,584,最大で２回まで連続でジャンプできます;
+Text,26,584,そこにあるかかしを倒してください;
+next,test.txt;

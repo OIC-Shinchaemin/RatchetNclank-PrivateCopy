@@ -8,10 +8,7 @@
 namespace def {
 constexpr float kFPS = 60.0f;
 constexpr float kDeltaTime = 1.0f / kFPS;
-constexpr uint32_t kWindowWidth = 1024;
-constexpr uint32_t kWindowHeight = 768;
-constexpr float kWindowWidthF = static_cast<float>(def::kWindowWidth);
-constexpr float kWindowHeightF = static_cast<float>(def::kWindowHeight);
+
 namespace color_rgba {
 static const Mof::CVector4 kBlack = Mof::CVector4(0.0f, 0.0f, 0.0f, 1.0f);
 static const Mof::CVector4 kRed = Mof::CVector4(1.0f, 0.0f, 0.0f, 1.0f);

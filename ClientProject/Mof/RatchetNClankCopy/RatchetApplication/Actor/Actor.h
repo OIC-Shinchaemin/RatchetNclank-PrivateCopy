@@ -11,41 +11,28 @@
 
 #include "Base/Core/Define.h"
 #include "Base/Core/Observable.h"
+#include "ActorDefine.h"
+#include "../Game/Graphics/RenderCommandTask.h"
+#include "../GameDefine.h"
 
 
-namespace ratchet {
-namespace component {
-class Component;
-}
-namespace factory {
-namespace builder {
-class IBuilder;
-}
-}
-
-namespace actor {
-enum class ActorState {
-    Active, // 入力、更新、描画する
-    Inactive, // 入力、更新、描画しない
-    Sleep, // 入力しない、 更新する、描画する
-    Pause, // 入力しない、更新しない、描画する
-    Hide, // 入力する、更新する、描画しない
-    End // 削除
-};
+namespace ratchet::component { class Component; }
+namespace ratchet::factory::builder { class IBuilder; }
+namespace ratchet::actor {
 class Actor :
     public std::enable_shared_from_this<actor::Actor>,
     public ::base::core::Observable<const char*, const std::shared_ptr<actor::Actor>&> {
 public:
-    //using ComPtr = std::shared_ptr<ratchet::component::Component::Component>;
     using ComPtr = std::shared_ptr<component::Component>;
     using ComArray = std::vector<ComPtr>;
     using Observable = base::core::Observable<const char*, const std::shared_ptr<actor::Actor>&>;
-public:
     struct Param {
         //! 名前
         std::string name;
         //! タグ
         std::string tag;
+        //! タグ
+        ratchet::TagHolder tags;
         //! トランスフォーム
         def::Transform transform;
         Param() :
@@ -58,11 +45,13 @@ public:
     };
 private:
     //! 状態
-    actor::ActorState _state;
+    ratchet::actor::ActorState _state;
     //! 名前
     std::string _name;
     //! タグ
     std::string _tag;
+    //! タグ
+    ratchet::TagHolder _tags;
     //! トランスフォーム
     def::Transform _transform;
     //! トランスフォーム
@@ -74,8 +63,7 @@ private:
     ComArray _input_components;
     ComArray _update_components;
     ComArray _render_components;
-
-protected:
+public:
     /// <summary>
     /// 状態変更
     /// </summary>
@@ -88,6 +76,10 @@ protected:
     /// 状態変更
     /// </summary>
     virtual void Pause(void);
+    /// <summary>
+    /// 状態変更
+    /// </summary>
+    virtual void Hide(void);
 public:
     /// <summary>
     /// コンストラクタ
@@ -138,13 +130,19 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns>名前</returns>
-    std::string GetName(void) const;
+    const std::string& GetName(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns>タグ</returns>
-    std::string GetTag(void) const;
+    const std::string& GetTag(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>タグ</returns>
+    const ratchet::TagHolder& GetTagHolder(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -268,6 +266,12 @@ public:
     /// <returns></returns>
     virtual bool Render(void);
     /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out);
+    /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
@@ -279,6 +283,5 @@ public:
     /// <param name="builder"></param>
     virtual void Construct(const std::shared_ptr<factory::builder::IBuilder>& builder);
 };
-}
 }
 #endif // !RATCHET_ACTOR_ACTOR_H

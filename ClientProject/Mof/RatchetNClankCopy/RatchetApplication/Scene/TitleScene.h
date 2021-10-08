@@ -17,53 +17,16 @@
 #include "../Game/GameSystem/OptionSystem.h"
 #include "../UI/TitleInfoMenu.h"
 #include "../UI/UICreator.h"
+#include "Loading/LoadingAnimation.h"
+#include "Title/TitleLogo.h"
+#include "DescriptionScene.h"
 
 
-namespace ratchet {
-namespace scene {
-class TitleLogo {
-private:
-    //! テクスチャ
-    std::weak_ptr<Mof::CTexture> _texture;
-    //! 表示
-    bool _show;
-    //! 表示
-    base::core::Timer _show_timer;
-public:
-    TitleLogo() :
-        _texture(),
-        _show(false),
-        _show_timer() {
-        _show_timer.Initialize(3.0f, false);
-    }
-    ~TitleLogo() {
-        _show = false;
-    }
-
-    void SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
-        this->_texture = ptr;
-    }
-    bool Update(float delta_time) {
-        if (_show_timer.Tick(delta_time)) {
-            _show = true;
-        } // if
-        return true;
-    }
-    bool Render(void) {
-        if (!_show) {
-            return false;
-        } // if
-        if (auto tex = _texture.lock()) {
-            tex->Render(200.0f, 100.0f);
-        } // if
-        return true;
-    }
-};
-
-
+namespace ratchet::scene {
 class TitleScene : public ratchet::scene::Scene,
     public base::core::Observer<const ratchet::game::gamesystem::OptionSystem::Info&> {
     using super = ratchet::scene::Scene;
+    friend class TitleSceneInitializer;
 private:
     //! ステージ
     Stage _stage;
@@ -82,7 +45,30 @@ private:
     //! UI地蔵
     ratchet::ui::UICreator<ratchet::ui::TitleInfoMenu> _ui_creator;
     //! タイトル
-    TitleLogo _logo;
+    title::TitleLogo _logo;
+    //! 終了
+    bool _scene_end;
+    //! 入力タイマー
+    base::core::Timer _input_timer;
+    //! 入力フラグ
+    bool _input_flag;
+    //! ローディングアニメーション
+    scene::loading::LoadingDotAnimation _load_animation;
+    //! 表示
+    bool _show_how_to_play;
+    //! 説明
+    scene::GameDescription _how_to_play;
+private:
+    /// <summary>
+    /// フェードアウト
+    /// </summary>
+    /// <param name=""></param>
+    void FadeOutStart(void);
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name=""></param>
+    void InitializeOption(void);
 protected:
     /// <summary>
     /// 更新
@@ -158,6 +144,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void);
 };
-}
 }
 #endif // !RATCHET_SCENE_TITLE_SCENE_H

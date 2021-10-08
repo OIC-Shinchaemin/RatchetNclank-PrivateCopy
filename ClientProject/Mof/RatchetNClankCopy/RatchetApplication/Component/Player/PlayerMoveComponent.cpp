@@ -3,6 +3,7 @@
 #include "../../Actor/Character/Player.h"
 #include "PlayerComponent.h"
 #include "../CameraComponent.h"
+#include "../../TutorialManager.h"
 
 
 void ratchet::component::player::action::PlayerMoveComponent::InputMoveVelocity(float speed) {
@@ -37,24 +38,42 @@ void ratchet::component::player::action::PlayerMoveComponent::InputMoveAngularVe
     } // else if
 
     auto accele = Mof::CVector3(0.0f, angle_y * speed, 0.0f);
+    //std::cout << "accele .y = " << accele .y<< "\n";
     velocity_com->AddAngularVelocityForce(accele);
 }
 
 ratchet::component::player::action::PlayerMoveComponent::PlayerMoveComponent(int priority) :
     super(priority),
-    _move_speed(2.5f),
-    _angular_speed(3.5f),
+    _move_speed(0.0f),
+    _move_speed_max(2.5f),
+    _move_speed_increase(0.4f),
+    _angular_speed(0.0f),
+    _angular_speed_max(3.3f),
+    _angular_speed_increase(0.6f),
     _ideal_angle(0.0f),
-    _input_info() {
+    _input_info(),
+    _type_com(),
+    _camera_com(),
+    _angular_freeze(),
+    _next_state(){
 }
 
 ratchet::component::player::action::PlayerMoveComponent::PlayerMoveComponent(const PlayerMoveComponent& obj) :
     super(obj),
     _move_speed(obj._move_speed),
+    _move_speed_max(obj._move_speed_max),
+    _move_speed_increase(obj._move_speed_increase),
+
     _angular_speed(obj._angular_speed),
+    _angular_speed_max(obj._angular_speed_max),
+    _angular_speed_increase(obj._angular_speed_increase),
+
     _ideal_angle(obj._ideal_angle),
     _input_info(),
-    _camera_com() {
+    _type_com(),
+    _camera_com(),
+    _angular_freeze(),
+    _next_state() {
 }
 
 ratchet::component::player::action::PlayerMoveComponent::~PlayerMoveComponent() {
@@ -72,12 +91,20 @@ void ratchet::component::player::action::PlayerMoveComponent::SetIdealAngle(floa
     this->_ideal_angle = radian;
 }
 
+void ratchet::component::player::action::PlayerMoveComponent::SetAngularFreezeFlag(bool flag) {
+    this->_angular_freeze = flag;
+}
+
 float ratchet::component::player::action::PlayerMoveComponent::GetDefaultMoveSpeed(void) const {
     return 1.3f;
 }
 
 float ratchet::component::player::action::PlayerMoveComponent::GetMoveSpeed(void) const {
     return this->_move_speed;
+}
+
+bool ratchet::component::player::action::PlayerMoveComponent::IsAngularFreeze(void) const {
+    return this->_angular_freeze;
 }
 
 std::string ratchet::component::player::action::PlayerMoveComponent::GetType(void) const {
@@ -99,15 +126,22 @@ bool ratchet::component::player::action::PlayerMoveComponent::Initialize(void) {
 bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
     // flag
     if (::g_pInput->IsKeyPush(MOFKEY_J) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_A)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionJumpSetState);
+        _next_state = state::PlayerActionStateType::kPlayerActionJumpSetState;
     } // if
     else if (::g_pInput->IsKeyPush(MOFKEY_N) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Attack)) {
+            //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionMeleeAttackOneState);
+            _next_state = state::PlayerActionStateType::kPlayerActionMeleeAttackOneState;
+        } // if
     } // else if
-    else if (::g_pInput->IsKeyPush(MOFKEY_M) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
-        auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
-        if (owner->GetCurrentMechanical()) {
-            super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+    else if (::g_pInput->IsKeyPush(MOFKEY_V) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_B)) {
+        if (tutorial::TutorialManager::GetInstance().IsLiberation(tutorial::TutorialManager::TutorialType::Weapon)) {
+            auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
+            if (owner->GetCurrentMechanical()) {
+                //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionShotAttackState);
+                _next_state = state::PlayerActionStateType::kPlayerActionShotAttackState;
+            } // if
         } // if
     } // else if
 
@@ -118,7 +152,7 @@ bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
         in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
     } // if
     else {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
+        _next_state = state::PlayerActionStateType::kPlayerActionIdleState;
     } // else
 
     return false;
@@ -126,13 +160,23 @@ bool ratchet::component::player::action::PlayerMoveComponent::Input(void) {
 
 bool ratchet::component::player::action::PlayerMoveComponent::Update(float delta_time) {
     if (_input_info.move_flag) {
-        this->Move(_move_speed, _angular_speed, std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi);
-    } // if
-    else {
-        //super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
-    } // else
+        _move_speed += _move_speed_increase;
+        _move_speed = std::clamp(_move_speed, 0.0f, _move_speed_max);
 
-    _input_info.Reset();
+        _angular_speed += _angular_speed_increase;
+        _angular_speed = std::clamp(_angular_speed, 0.0f, _angular_speed_max);
+
+        float angular_speed = _angular_speed;
+        float ideal_angle = std::atan2(-_input_info.in.y, _input_info.in.x) - math::kHalfPi;
+
+        this->Move(_move_speed, angular_speed, ideal_angle);
+    } // if
+
+    if (!_next_state.empty()) {
+        super::ChangeActionState(_next_state);
+        _next_state.clear();
+    } // if
+     _input_info.Reset();
     return true;
 }
 
@@ -153,10 +197,16 @@ bool ratchet::component::player::action::PlayerMoveComponent::Start(void) {
     } // if
     super::Start();
     super::ChangeMotionState(state::PlayerMotionStateType::kPlayerMotionMoveState);
+    _angular_speed = 0.0f;
+    _move_speed = 0.0f;
     return true;
 }
 
 bool ratchet::component::player::action::PlayerMoveComponent::Move(float move_speed, float angular_speed, float ideal_angle) {
+    auto v = super::GetVelocityComponent()->GetVelocity();
+    v.y = 0.0f;
+
+    //this->InputMoveAngularVelocity(ideal_angle, angular_speed * (v.Length() / _velocity_force_xz_max));
     this->InputMoveAngularVelocity(ideal_angle, angular_speed);
     this->InputMoveVelocity(move_speed);
     return true;

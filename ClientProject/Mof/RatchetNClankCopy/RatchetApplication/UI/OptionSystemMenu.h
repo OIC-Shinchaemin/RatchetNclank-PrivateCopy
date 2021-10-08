@@ -13,8 +13,7 @@
 #include "../Game/GameSystem/OptionSystem.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet ::ui {
 class OptionSystemMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 private:
@@ -22,6 +21,10 @@ private:
     std::string _text;
     //! フォント
     Mof::CFont* _font;
+    //! 選択中
+    bool _selected;
+    //! 拡大率
+    float _scale;
 public:
     /// <summary>
     /// コンストラクタ
@@ -43,19 +46,22 @@ public:
     /// <param name="ptr"></param>
     void SetFont(Mof::CFont* ptr);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetSelect(const bool flag);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual Mof::CVector2 GetSize(void) const override;
     /// <summary>
-    /// 初期化
+    /// ゲッター
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="tex"></param>
-    /// <param name="color"></param>
+    /// <param name=""></param>
     /// <returns></returns>
-    //bool Initialize(Mof::CVector2 pos, const std::shared_ptr<Mof::CTexture>& tex, const Mof::CVector4& color);
+    std::shared_ptr<Mof::CTexture> GetTexture(void) const;
     /// <summary>
     /// 入力
     /// </summary>
@@ -87,6 +93,18 @@ private:
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! フォント
     Mof::CFont _font;
+    //! 余白
+    float _element_margin_y;
+    //! 拡大率
+    float _scale;
+    //! 有効化
+    bool _enable;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    std::shared_ptr<Mof::CTexture> GetTexture(const std::string& type);
 public:
     /// <summary>
     /// コンストラクタ
@@ -137,6 +155,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_OPTION_SYSTEM_MENU_H

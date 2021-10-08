@@ -10,7 +10,8 @@ ratchet::game::gamesystem::OptionSystem::OptionSystem() :
     _info_subject(),
     _item(),
     _item_index(),
-    _title_menu_subject() {
+    _title_menu_subject(),
+    _excuted(false) {
     _infomation.items = &_item;
 }
 
@@ -19,6 +20,16 @@ ratchet::game::gamesystem::OptionSystem::~OptionSystem() {
 
 void ratchet::game::gamesystem::OptionSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
+
+    if (flag) {
+        _excuted = false;
+    } // if
+
+    if (flag) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemMenuOpen, audio::SEEventCommand::Play()));
+    } // if
+
+
     _item_index = 0;
     _title_menu_subject.Notify(false);
     _infomation.enter = true;
@@ -43,9 +54,17 @@ void ratchet::game::gamesystem::OptionSystem::AddItem(const std::shared_ptr<Elem
 }
 
 bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
+    _infomation = Info();
+    _infomation.items = &_item;
+
     if (auto canvas = super::GetUICanvas()) {
         canvas->RemoveElement("HelpDeskMenu");
     } // if
+    if (auto canvas = super::GetUICanvas()) {
+        canvas->RemoveElement("OptionSystemMenu");
+    } // if
+
+
     auto menu = std::make_shared< ratchet::ui::OptionSystemMenu>("OptionSystemMenu");
     _info_subject.AddObserver(menu);
     menu->SetColor(def::color_rgba::kCyan);
@@ -54,8 +73,6 @@ bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
         auto tex = resource->Get<std::shared_ptr<Mof::CTexture>>("../Resource/texture/ui/black.png");
         menu->SetTexture(tex);
     } // if
-
-
     if (auto canvas = super::GetUICanvas()) {
         canvas->AddElement(menu);
     } // if
@@ -63,8 +80,8 @@ bool ratchet::game::gamesystem::OptionSystem::Initialize(void) {
 }
 
 bool ratchet::game::gamesystem::OptionSystem::Input(void) {
-    if (::g_pInput->IsKeyPush(MOFKEY_UP) ||
-        ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_UP)) {
+    if (::g_pInput->IsKeyPush(MOFKEY_UP) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_UP)) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemSelect, audio::SEEventCommand::Play()));
         _item_index--;
         if (_item_index < 0) {
             _item_index = 0;
@@ -72,8 +89,8 @@ bool ratchet::game::gamesystem::OptionSystem::Input(void) {
         _infomation.index = _item_index;
         _info_subject.Notify(_infomation);
     } // if
-    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN) ||
-             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_DOWN)) {
+    else if (::g_pInput->IsKeyPush(MOFKEY_DOWN) || ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_DP_DOWN)) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemSelect, audio::SEEventCommand::Play()));
         _item_index++;
         if (_item_index > _item.size() - 1) {
             _item_index = _item.size() - 1;
@@ -84,6 +101,9 @@ bool ratchet::game::gamesystem::OptionSystem::Input(void) {
     if (!_item.empty()) {
         if (::g_pInput->IsKeyPush(MOFKEY_Z) || ::g_pInput->IsKeyPush(MOFKEY_SPACE) || ::g_pInput->IsKeyPush(MOFKEY_RETURN) ||
             ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_START)) {
+            if (_item.at(_item_index)->GetText() == "ゲームスタート") {
+                super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemEner, audio::SEEventCommand::Play()));
+            } // if
             _execute_list.push_back(_item.at(_item_index));
         } // if
     } // if
@@ -91,14 +111,16 @@ bool ratchet::game::gamesystem::OptionSystem::Input(void) {
 }
 bool ratchet::game::gamesystem::OptionSystem::Update(float delta_time) {
     this->Input();
+
     if (!_execute_list.empty()) {
         for (auto ptr : _execute_list) {
             if (ptr->Execute()) {
+                _excuted = true;
             } // if
+            this->Hide();
         } // for
         _infomation.Reset();
         _info_subject.Notify(_infomation);
-
         _execute_list.clear();
         return false;
     } // if
@@ -113,6 +135,27 @@ bool ratchet::game::gamesystem::OptionSystem::Release(void) {
         canvas->RemoveElement("OptionSystemMenu");
     } // if
     return true;
+}
+
+void ratchet::game::gamesystem::OptionSystem::Hide(void) {
+    _infomation.end = true;
+    _info_subject.Notify(_infomation);
+}
+
+void ratchet::game::gamesystem::OptionSystem::Clear(void) {
+    _item.clear();
+    _info_subject.Clear();
+    _title_menu_subject.Clear();
+    if (auto canvas = super::GetUICanvas()) {
+        canvas->RemoveElement("OptionSystemMenu");
+    } // if
+
+    //_infomation = decltype(_infomation)();
+    _infomation.enter = true;
+    _infomation.exit = false;
+    _item_index = 0;
+    _excuted = false;
+    _infomation.items = &_item;
 }
 
 ratchet::game::gamesystem::OptionSystemItem::OptionSystemItem() {

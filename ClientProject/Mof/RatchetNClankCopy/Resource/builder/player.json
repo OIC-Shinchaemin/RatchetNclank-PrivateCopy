@@ -4,7 +4,7 @@
       "type": "SightRecognitionComponent",
       "paramater": {
         "priority": 0,
-        "range": 10.0
+        "range": 18.0
       }
     },
     {
@@ -24,7 +24,8 @@
     {
       "type": "InvincibleComponent",
       "paramater": {
-        "priority": 93
+        "priority": 93,
+        "time": 2.0
       }
     },
 

@@ -8,10 +8,7 @@
 #include "../../../Component/Component.h"
 
 
-namespace ratchet {
-namespace factory {
-namespace builder {
-namespace actor {
+namespace ratchet::factory::builder::actor {
 class ActorBuilder : public ratchet::factory::builder::IBuilder {
     //! 所有するパラメータ
     ratchet::actor::Actor::Param _param;
@@ -47,8 +44,5 @@ public:
     /// <param name=""></param>
     virtual void Construct(std::any shared_this) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_FACTORY_BUILDER_ACTOR_ACTOR_BUILDER_H

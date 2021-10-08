@@ -10,11 +10,10 @@
 #include "Base/Core/Timer.h"
 
 #include "../VelocityComponent.h"
+#include "../../Actor/Character/Enemy.h"
 
 
-namespace ratchet {
-namespace component {
-namespace enemy {
+namespace ratchet::component::enemy {
 class EnemyComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;
 private:
@@ -50,6 +49,10 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetType(void) const override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    std::shared_ptr<ratchet::actor::character::Enemy> GetOwnerCastd(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -92,8 +95,16 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
+    /// <summary>
+    /// エフェクト発生
+    /// </summary>
+    /// <param name=""></param>
+    void DamageEffectEmit(std::shared_ptr<ratchet::actor::Actor> actor);
+    /// <summary>
+    /// エフェクト発生
+    /// </summary>
+    /// <param name=""></param>
+    void StarEffectEmit(std::shared_ptr<ratchet::actor::Actor> actor);
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_ENEMY_ENEMY_COMPONENT_H

@@ -6,7 +6,7 @@
 ratchet::actor::bullet::BlasterBullet::BlasterBullet() :
     super() {
     super::SetTag("BlasterBullet");
-    _exist_time.Initialize(1.2f,false);
+    _exist_time.Initialize(2.0f,false);
 }
 
 ratchet::actor::bullet::BlasterBullet::~BlasterBullet() {
@@ -23,7 +23,7 @@ bool ratchet::actor::bullet::BlasterBullet::Update(float delta_time) {
 }
 
 bool ratchet::actor::bullet::BlasterBullet::Render(void) {
-    ::CGraphicsUtilities::RenderSphere(Mof::CSphere(super::GetPosition(), 0.2f), def::color_rgba::kBlack);
+    ::CGraphicsUtilities::RenderSphere(Mof::CSphere(super::GetPosition(), super::GetScale().x), def::color_rgba::kBlack);
     return true;
 }
 

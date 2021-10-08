@@ -4,9 +4,11 @@
 #include "../Camera/FollowCameraController.h"
 #include "../Camera/FirstPersonCameraController.h"
 #include "../Camera/DebugCameraController.h"
+#include "Player/PlayerComponent.h"
 #include "Player/PlayerStateComponent.h"
 #include "../Event/EventReferenceTable.h"
 #include "AnimationMeshComponent.h"
+#include "../Component/Collision/Object/PlayerCollisionComponent.h"
 
 
 void ratchet::component::CameraComponent::OnPush(void) {
@@ -21,9 +23,6 @@ void ratchet::component::CameraComponent::OnPush(void) {
         } // if
         state_com->ChangeState(state);
     } // if
-
-
-
 
     auto eye_pos = super::GetOwner()->GetPosition();
     eye_pos.y += 1.0f;
@@ -84,25 +83,32 @@ void ratchet::component::CameraComponent::OnPull(void) {
     con->SetInfo(info);
     _camera_controller.SetService(con);
 
-
     if (auto mesh = _mesh_com.lock()) {
         mesh->Activate();
     } // if
 }
 
 void ratchet::component::CameraComponent::TurnLeft(void) {
+    auto controller = this->_camera_controller.GetService();
+    _preview_angle.x = controller->GetAzimuth();
     _camera_controller.GetService()->AddAzimuth(1.0f);
 }
 
 void ratchet::component::CameraComponent::TurnRight(void) {
+    auto controller = this->_camera_controller.GetService();
+    _preview_angle.x = controller->GetAzimuth();
     _camera_controller.GetService()->AddAzimuth(-1.0f);
 }
 
 void ratchet::component::CameraComponent::LookUp(void) {
+    auto controller = this->_camera_controller.GetService();
+    _preview_angle.y = controller->GetAltitude();
     _camera_controller.GetService()->AddAltitude(1.0f);
 }
 
 void ratchet::component::CameraComponent::LookDown(void) {
+    auto controller = this->_camera_controller.GetService();
+    _preview_angle.y = controller->GetAltitude();
     _camera_controller.GetService()->AddAltitude(-1.0f);
 }
 
@@ -201,25 +207,24 @@ void ratchet::component::CameraComponent::ControlByGamepad(void) {
 
 void ratchet::component::CameraComponent::UpdateFollow(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
     if (_collisioned_stage) {
-        controller->SetAzimuth(math::ToDegree(_preview_angle.x));
-        controller->SetAltitude(math::ToDegree(_preview_angle.y));
-        _collisioned_stage = false;
+        //controller->SetAzimuth(math::ToDegree(_preview_angle.x));
+        //controller->SetAltitude(math::ToDegree(_preview_angle.y));
+        //_collisioned_stage = false;
     } // if
 
     auto pos = super::GetOwner()->GetPosition();
     auto camera_info = ratchet::camera::CameraController::CameraInfo();
 
-    auto state_com = _state_com.lock();
-    if (state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpUpState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionJumpDownState) || state_com->IsEqual(state::PlayerActionStateType::kPlayerActionDoubleJumpState)) {
+    if (_follow_camera_prev_position_update) {
         pos.y = _preview_position.y;
         camera_info.target_position = pos;
+        pos.y += _player_com.lock()->GetHeight() * 0.5f;
         controller->Update(delta_time, camera_info);
         return;
     } // if
     _preview_position = pos;
     camera_info.target_position = pos;
-    _preview_angle.x = controller->GetAzimuth();
-    _preview_angle.y = controller->GetAltitude();
+    pos.y += _player_com.lock()->GetHeight() * 0.5f;
     controller->Update(delta_time, camera_info);
 }
 
@@ -232,6 +237,9 @@ void ratchet::component::CameraComponent::UpdateFirstPerson(float delta_time, st
     controller->Update(delta_time, camera_info);
 }
 
+void ratchet::component::CameraComponent::UpdateThirdPerson(float delta_time, std::shared_ptr<ratchet::camera::CameraController> controller) {
+}
+
 ratchet::component::CameraComponent::CameraComponent(int priority) :
     super(priority),
     _target(),
@@ -242,7 +250,8 @@ ratchet::component::CameraComponent::CameraComponent(int priority) :
     _default_distance(8.0f),
     _preview_position(),
     _collisioned_stage(),
-    _preview_angle() {
+    _preview_angle(),
+    _follow_camera_prev_position_update(false) {
 }
 
 ratchet::component::CameraComponent::CameraComponent(const CameraComponent& obj) :
@@ -255,21 +264,28 @@ ratchet::component::CameraComponent::CameraComponent(const CameraComponent& obj)
     _default_distance(obj._default_distance),
     _preview_position(),
     _collisioned_stage(),
-    _preview_angle() {
+    _preview_angle(),
+    _follow_camera_prev_position_update() {
 }
 
 ratchet::component::CameraComponent::~CameraComponent() {
 }
 
 void ratchet::component::CameraComponent::OnNotify(const ratchet::camera::CameraController::CameraInfo& info) {
+    
     _camera->SetPosition(info.start_position);
     _camera->SetTarget(info.target_position);
     _camera->Update();
-    _camera_controller.GetService()->RegisterGlobalCamera();
-    _camera_controller.GetService()->SetAzimuth(
-        math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
+    _camera_controller.GetService()->SetAzimuth(math::ToDegree(super::GetOwner()->GetRotate().y + math::kHalfPi));
     _camera_controller.GetService()->SetAltitude(20.0f);
     _camera_controller.GetService()->SetDistance(_default_distance);
+    _camera_controller.GetService()->RegisterGlobalCamera();
+
+    _camera_controller.GetService()->SetUseSpring(false);
+}
+
+void ratchet::component::CameraComponent::SetFollowCameraPrevPositionUpdateFlag(bool flag) {
+    this->_follow_camera_prev_position_update = flag;
 }
 
 std::string ratchet::component::CameraComponent::GetType(void) const {
@@ -288,13 +304,14 @@ Mof::CVector3 ratchet::component::CameraComponent::GetVelocity(void) const {
     return this->_camera_controller.GetService()->GetVelocity();
 }
 
-Mof::CVector3 ratchet::component::CameraComponent::GetPreviewPosition(void) const {
-    return this->_camera_controller.GetService()->GetPreviewPosition();
+Mof::CVector3 ratchet::component::CameraComponent::GetPreviousPosition(void) const {
+    return this->_camera_controller.GetService()->GetPreviousPosition();
 }
 
 bool ratchet::component::CameraComponent::Initialize(void) {
     super::Initialize();
     super::Activate();
+    _player_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerComponent>();
     _state_com = super::GetOwner()->GetComponent<ratchet::component::player::PlayerStateComponent>();
     _mesh_com = super::GetOwner()->GetComponent<ratchet::component::AnimationMeshComponent>();
 
@@ -307,7 +324,6 @@ bool ratchet::component::CameraComponent::Initialize(void) {
     _controller_map.at(Mode::Follow)->SetCamera(_camera);
     _controller_map.at(Mode::FirstPerson)->SetCamera(_camera);
     _camera_controller.SetService(_controller_map.at(Mode::Follow));
-
     auto pos = super::GetOwner()->GetPosition();
     auto offset = Mof::CVector3(math::vec3::kNegUnitZ * _default_distance);
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
@@ -324,9 +340,14 @@ bool ratchet::component::CameraComponent::Update(float delta_time) {
     using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
-            this->UpdateFollow(delta_time, camera_controller); break;
+            this->UpdateFollow(delta_time, camera_controller);
+            break;
         case Mode::FirstPerson:
-            this->UpdateFirstPerson(delta_time, camera_controller); break;
+            this->UpdateFirstPerson(delta_time, camera_controller);
+            break;
+        case Mode::ThirdPerson:
+            this->UpdateThirdPerson(delta_time, camera_controller);
+            break;
     } // switch
     return true;
 }
@@ -337,8 +358,6 @@ bool ratchet::component::CameraComponent::Release(void) {
     _camera_controller.GetService()->Release();
     _controller_map.clear();
     _state_com.reset();
-
-    ratchet::event::EventReferenceTable::Singleton().Dispose("CameraComponent");
     return true;
 }
 
@@ -347,6 +366,10 @@ std::shared_ptr<ratchet::component::Component> ratchet::component::CameraCompone
 }
 
 void ratchet::component::CameraComponent::CollisionStage(void) {
+    auto controller = this->_camera_controller.GetService();
+    controller->SetAzimuth(math::ToDegree(_preview_angle.x));
+    controller->SetAltitude(math::ToDegree(_preview_angle.y));
+
     _collisioned_stage = true;
 }
 #ifdef _DEBUG
@@ -355,6 +378,12 @@ bool ratchet::component::CameraComponent::DebugRender(void) {
         ::CGraphicsUtilities::RenderString(
             20.0f, 200.0f, "camera state = %s", name);
     };
+
+    auto coll_com = super::GetOwner()->GetComponent<component::collision::PlayerCollisionComponent>();
+    auto point = coll_com->collision_point_stage_down_ray;
+    ::CGraphicsUtilities::RenderSphere(Mof::CSphere(point, 1.0f), def::color_rgba::kBlue);
+
+
     using Mode = ratchet::camera::CameraController::CameraMode;
     switch (_current_mode) {
         case Mode::Follow:
@@ -365,7 +394,7 @@ bool ratchet::component::CameraComponent::DebugRender(void) {
             break;
         default:
             break;
-} // switch
+    } // switch
     return true;
 }
 #endif // _DEBUG

@@ -7,8 +7,7 @@
 #include "../Executor/SequencerNodeExecutor.h"
 
 
-namespace ratchet {
-namespace behaviour {
+namespace ratchet::behaviour {
 class SequencerNode : public behaviour::CompositeNode {
     using super = ratchet::behaviour::CompositeNode;
 public:
@@ -33,6 +32,5 @@ public:
         return std::make_shared<ratchet::behaviour::SequencerNodeExecutor>(temp);
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_SEQUENCER_NODE_H

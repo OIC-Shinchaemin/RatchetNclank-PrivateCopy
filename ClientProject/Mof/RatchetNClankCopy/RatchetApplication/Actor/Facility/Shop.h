@@ -5,9 +5,7 @@
 #include "../Actor.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace facility {
+namespace ratchet::actor::facility{
 class Shop : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:
@@ -32,7 +30,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_FACILITY_SHOP_H

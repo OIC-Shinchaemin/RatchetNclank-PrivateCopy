@@ -1,11 +1,11 @@
 #include "OmniWrenchCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(int priority) :
     super(priority),
-    _offset(1.2f){
+    _offset(0.8f){
 }
 
 ratchet::component::collision::OmniWrenchCollisionComponent::OmniWrenchCollisionComponent(const OmniWrenchCollisionComponent& obj) :
@@ -28,7 +28,7 @@ std::optional<Mof::CSphere> ratchet::component::collision::OmniWrenchCollisionCo
     Mof::CVector3 offset = math::vec3::kNegUnitZ * _offset;
     offset.RotateAround(math::vec3::kZero, super::GetOwner()->GetRotate());
     pos += offset;
-    return Mof::CSphere(pos, 0.6f);
+    return Mof::CSphere(pos, 1.0f);
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::OmniWrenchCollisionComponent::GetBox(void) {

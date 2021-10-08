@@ -19,10 +19,7 @@
 #include "../../GameDefine.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
+namespace ratchet::game::gamesystem {
 class QuickChangeItem {
 private:
     //! 所有
@@ -60,8 +57,6 @@ public:
 private:
     //! 色
     This::Info _infomation;
-    //! 通知用
-    //base::core::Observable<const std::shared_ptr<This>&> _subject;
     //! 状態
     State _state;
     //! アルファ
@@ -74,12 +69,14 @@ private:
     std::unordered_map<int, ratchet::game::gamesystem::QuickChangeItem> _items;
     //! 通知用
     base::core::Observable<const std::string&> _current;
-    //! リソース
-    //std::weak_ptr<ratchet::ResourceMgr> _resource;
-    //! UI
-    //std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! 監視対象
     base::core::Observable<const This::Info&> _info_subject;
+    //! 指定の武器のインデックス
+    int _blaster_index;
+    //! 指定の武器のインデックス
+    int _empty_index;
+    //! 切り替えのワーク変数
+    int _work_index;
     /// <summary>
     /// 開く
     /// </summary>
@@ -104,22 +101,6 @@ public:
     /// </summary>
     /// <param name=""></param>
     virtual void OnNotify(bool flag) override;
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void SetResourceManager(std::weak_ptr<ratchet::ResourceMgr> ptr);
-    /// <summary>
-    /// セッター
-    /// </summary>
-    /// <param name="ptr"></param>
-    //void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    ///base::core::Observable<const std::shared_ptr<This>&>* GetSubject(void);
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -155,7 +136,5 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_QUICK_CHANGE_SYSTEM_H

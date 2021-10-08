@@ -45,16 +45,24 @@ bool ratchet::component::player::action::PlayerShotAttackComponent::Input(void) 
     } // if
     auto owner = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetOwner());
     if (auto weapon = owner->GetCurrentMechanical()) {
-        if (weapon->IsAction() && weapon->CanFire()) {
-            auto pos = weapon->GetPosition();
-            auto rotate = weapon->GetRotate();
-            weapon->Fire(def::Transform(pos, rotate));
+        if (weapon->IsAction()) {
+            if (weapon->CanFire()) {
+                auto pos = weapon->GetPosition();
+                auto rotate = weapon->GetRotate();
+                weapon->Fire(def::Transform(pos, rotate));
+            } // if
         } // if
     } // if
 
-    if (::g_pInput->IsKeyPull(MOFKEY_M) || ::g_pGamepad->IsKeyPull(Mof::XInputButton::XINPUT_B)) {
-        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
+
+    if (::g_pInput->IsKeyHold(MOFKEY_V) || ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B)) {
+        _input_info.shot_flag = true;
     } // if
+    else { 
+        _input_info.shot_flag = false;
+    } // if
+
+//    OutputDebugString("_input_info.shot_flag ");
 
     return true;
 }
@@ -67,6 +75,11 @@ bool ratchet::component::player::action::PlayerShotAttackComponent::Update(float
             //_input_info.in = math::Rotate(_input_info.in.x, _input_info.in.y, math::ToRadian(_input_info.move_angle));
         } // if
     } // if
+
+    if (!_input_info.shot_flag) {
+        super::ChangeActionState(state::PlayerActionStateType::kPlayerActionIdleState);
+    } // if
+
 
     /*
     auto owner = std::dynamic_pointer_cast<ratchet::Player>(super::GetOwner());

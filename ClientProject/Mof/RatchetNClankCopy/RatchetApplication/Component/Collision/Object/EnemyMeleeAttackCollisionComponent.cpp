@@ -1,6 +1,6 @@
 #include "EnemyMeleeAttackCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../Enemy/EnemyMeleeAttackComponent.h"
 
 

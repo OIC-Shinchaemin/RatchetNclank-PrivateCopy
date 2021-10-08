@@ -33,7 +33,7 @@ public:
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
+    /// <returns>ポインタ</returns>
     std::shared_ptr<Mof::CXGamePad>GetGamepad(void) const;
     /// <summary>
     /// 作成

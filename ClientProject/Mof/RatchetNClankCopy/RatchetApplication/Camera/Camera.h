@@ -5,8 +5,7 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace camera {
+namespace ratchet::camera {
 class Camera {
 private:
     //! ÉJÉÅÉâ
@@ -70,6 +69,5 @@ public:
     /// <param name=""></param>
     void RegisterGlobalCamera(void);
 };
-}
 }
 #endif // !RATCHET_CAMERA_CAMERA_H

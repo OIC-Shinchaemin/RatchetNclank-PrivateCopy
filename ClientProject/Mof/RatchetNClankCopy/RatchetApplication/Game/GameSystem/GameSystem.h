@@ -16,22 +16,22 @@
 #include "Base/UI/UICanvas.h"
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
+#include "../Audio/SoundPlayer.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
-class GameSystem : public std::enable_shared_from_this<ratchet::game::gamesystem::GameSystem>,
+namespace ratchet::game::gamesystem {
+class GameSystem : 
+    public std::enable_shared_from_this<ratchet::game::gamesystem::GameSystem>,
     public base::core::Observer<bool> {
-    using this_type = ratchet::game::gamesystem::GameSystem;
 private:
     //! 通知用
-    base::core::Observable<const std::shared_ptr<this_type>&> _subject;
+    base::core::Observable<const std::shared_ptr<GameSystem>&> _subject;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
+    //! SE
+    std::weak_ptr<ratchet::game::audio::SEPlayer> _se_player;
 protected:
     /// <summary>
     /// ゲッター
@@ -45,6 +45,12 @@ protected:
     /// <param name=""></param>
     /// <returns></returns>
     std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::game::audio::SEPlayer> GetSEPlayer(void) const;
 public:
     /// <summary>
     /// コンストラクタ
@@ -70,11 +76,16 @@ public:
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetSEPlayer(std::weak_ptr<ratchet::game::audio::SEPlayer> ptr);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    base::core::Observable<const std::shared_ptr<this_type>&>* GetSubject(void);
+    base::core::Observable<const std::shared_ptr<GameSystem>&>* GetSubject(void);
     /// <summary>
     /// 更新
     /// </summary>
@@ -82,7 +93,5 @@ public:
     /// <returns></returns>
     [[nodiscard]] virtual bool Update(float delta_time);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_GAME_SYSTEM_H

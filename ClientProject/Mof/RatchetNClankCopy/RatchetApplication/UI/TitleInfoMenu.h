@@ -13,10 +13,31 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class TitleInfoMenu : public base::ui::UIPanel, public base::core::Observer<bool> {
     using super = base::ui::UIPanel;
+    //! 表示テキストの種類
+    enum class TextType {
+        Press,
+        Start,
+        Button,
+        Or,
+        Enter,
+        Key,
+        ExclamationMark,
+        CountMax
+    };
+    struct TextElem {
+        TextType type;
+        std::string path;
+        Mof::CVector2 position;
+
+        TextElem(TextType t, std::string str, Mof::CVector2 pos) :
+            type(t),
+            path(str),
+            position(pos) {
+        }
+    };
 private:
     //! 表示
     bool _show;
@@ -24,12 +45,18 @@ private:
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
-    //! フォント
-    Mof::CFont _font;
     //! 表示
     base::core::Timer _show_timer;
     //! 開始
     bool _start;
+    //! 点滅タイマー
+    base::core::Timer _blinking_on_timer;
+    //! 点滅タイマー
+    base::core::Timer _blinking_off_timer;
+    //! 点滅表示中
+    bool _blinking_on;
+    //! パス
+    std::string _texture_path;
 public:
     /// <summary>
     /// コンストラクタ
@@ -74,6 +101,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_TITLE_INFO_MENU_H

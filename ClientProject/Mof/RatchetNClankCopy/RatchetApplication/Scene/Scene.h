@@ -17,18 +17,27 @@
 #include "../GameDefine.h"
 #include "Base/Core/Observer.h"
 #include "Base/UI/UICanvas.h"
+#include "../Light/LightManager.h"
+#include "../Game/Audio/BGMPlayer.h"
+#include "../Game/Audio/SEPlayer.h"
 
 
-namespace ratchet {
-namespace scene {
-class Scene : public std::enable_shared_from_this<ratchet::scene::Scene>, public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
-    using this_type = ratchet::scene::Scene;
+namespace ratchet::scene {
+class Scene : 
+    public std::enable_shared_from_this<ratchet::scene::Scene>, 
+    public base::core::Observer<const char*, const std::shared_ptr<ratchet::actor::Actor>&> {
 public:
-   enum class State {
-        Active,    
+    enum class State {
+        Active,
         Sleep,
         Pause,
         End
+    };
+    enum class TransitionState {
+        None,
+        In,
+        Out,
+        End,
     };
     struct Param {
         //! 名前
@@ -38,7 +47,9 @@ public:
     };
 protected:
     //! 状態
-    this_type::State _state;
+    scene::Scene::State _state;
+    //! 状態
+    scene::Scene::TransitionState _transition_state;
     //! カラーリソース
     Mof::CTexture _rendar_target;
     //! デフォルトのレンダーターゲット
@@ -51,6 +62,12 @@ protected:
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
+    //! ライト
+    std::weak_ptr<ratchet::light::LightManager> _light_manager;
+    //! サウンド
+    std::shared_ptr<ratchet::game::audio::BGMPlayer> _bgm_player;
+    //! サウンド
+    std::shared_ptr<ratchet::game::audio::SEPlayer> _se_player;
     //! 読み込み済み
     bool _loaded;
     //! 同期
@@ -68,6 +85,10 @@ protected:
 
     std::shared_ptr<ratchet::ResourceMgr> GetResource(void) const;
     std::shared_ptr<base::ui::UICanvas> GetUICanvas(void) const;
+    std::shared_ptr<ratchet::light::LightManager> GetLightManager(void) const;
+    std::shared_ptr<ratchet::game::audio::BGMPlayer> GetBGMPlayer(void) const;
+    std::shared_ptr<ratchet::game::audio::SEPlayer> GetSEPlayer(void) const;
+
     Mof::LPRenderTarget GetDefaultRendarTarget(void) const;
     virtual bool LoadingUpdate(float delta_time);
     virtual bool SceneUpdate(float delta_time);
@@ -95,11 +116,35 @@ public:
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="state"></param>
+    void SetState(const ratchet::scene::Scene::State state);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::string GetName(void) = 0;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    ratchet::scene::Scene::State GetState(void) const {
+        return this->_state;
+    }
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    TransitionState GetTransitionState(void) const;
     /// <summary>
     /// セッター
     /// </summary>
@@ -142,6 +187,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void);
 };
-}
 }
 #endif // !RATCHET_SCENE_SCENE_H

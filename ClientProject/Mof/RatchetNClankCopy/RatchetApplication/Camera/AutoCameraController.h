@@ -8,8 +8,7 @@
 #include "../BezierCurveAnimation.h"
 
 
-namespace ratchet {
-namespace camera {
+namespace ratchet::camera {
 class AutoCameraController : public ratchet::camera::CameraController {
     using super = ratchet::camera::CameraController;
 private:
@@ -31,6 +30,10 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
+    AutoCameraController(float time);
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
     ~AutoCameraController();
     /// <summary>
     /// ゲッター
@@ -45,6 +48,21 @@ public:
     /// <returns></returns>
     bool IsCompleted(void) const;
     /// <summary>
+    /// 登録
+    /// </summary>
+    /// <param name="point"></param>
+    void RegisterCameraPositionControllPoint(std::vector<Mof::CVector3>& points);
+    /// <summary>
+    /// 登録
+    /// </summary>
+    /// <param name="point"></param>
+    void RegisterCameraTargetControllPoint(std::vector<Mof::CVector3>& points);
+    /// <summary>
+    /// リセット
+    /// </summary>
+    /// <param name="time_set"></param>
+    void TimerReset(float time_set);
+    /// <summary>
     /// 強制的に進める
     /// </summary>
     /// <param name="time"></param>
@@ -57,6 +75,5 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time, const ratchet::camera::CameraController::CameraInfo& info) override;
 };
-}
 }
 #endif // !RATCHET_CAMERA_AUTO_CAMERA_CONTROLLER_H

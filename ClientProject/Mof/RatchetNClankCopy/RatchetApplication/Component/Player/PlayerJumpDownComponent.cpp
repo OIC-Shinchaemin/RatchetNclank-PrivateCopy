@@ -2,6 +2,8 @@
 
 #include "PlayerMoveComponent.h"
 
+#include "../Collision/Object/PlayerCollisionComponent.h"
+
 
 ratchet::component::player::action::PlayerJumpDownComponent::PlayerJumpDownComponent(int priority) :
     super(priority),
@@ -9,7 +11,9 @@ ratchet::component::player::action::PlayerJumpDownComponent::PlayerJumpDownCompo
     _jump_speed(_jump_speed_max),
     _jump_decrase(1.0f),
     _input_info(),
-    _move_com() {
+    _move_com(),
+    _falling_time(),
+    _falling_time_max(1.0f) {
 }
 
 ratchet::component::player::action::PlayerJumpDownComponent::PlayerJumpDownComponent(const PlayerJumpDownComponent& obj) :
@@ -18,7 +22,9 @@ ratchet::component::player::action::PlayerJumpDownComponent::PlayerJumpDownCompo
     _jump_speed(obj._jump_speed),
     _jump_decrase(obj._jump_decrase),
     _input_info(),
-    _move_com() {
+    _move_com(),
+    _falling_time(),
+    _falling_time_max(obj._falling_time_max) {
 }
 
 ratchet::component::player::action::PlayerJumpDownComponent::~PlayerJumpDownComponent() {
@@ -53,17 +59,15 @@ bool ratchet::component::player::action::PlayerJumpDownComponent::Input(void) {
 bool ratchet::component::player::action::PlayerJumpDownComponent::Update(float delta_time) {
     auto move_com = _move_com.lock();
 
-    //Mof::CVector2 in;
-    //float move_angle;
-
     auto& [in, move_angle, move_flag] = _input_info;
     if (move_flag) {
         float move_speed = 1.7f; float angular_speed = 3.3f;
-        //in = math::Rotate(in.x, in.y, math::ToRadian(move_angle));
         move_com->Move(move_speed, angular_speed, std::atan2(-in.y, in.x) - math::kHalfPi);
     } // if
 
-
+    if (_falling_time.Tick(delta_time)) {
+        super::GetCameraComponent()->SetFollowCameraPrevPositionUpdateFlag(false);
+    } // if
 
     if (::g_pInput->IsKeyPush(MOFKEY_Z) ||
         ::g_pGamepad->IsKeyPush(Mof::XInputButton::XINPUT_X)) {
@@ -93,5 +97,14 @@ bool ratchet::component::player::action::PlayerJumpDownComponent::Start(void) {
 
     auto velocity_com = super::GetVelocityComponent();
     velocity_com->SetGravity(2.0f);
+ 
+    super::GetCameraComponent()->SetFollowCameraPrevPositionUpdateFlag(true);
+    _falling_time.Initialize(_falling_time_max, false);
+    return true;
+}
+
+bool ratchet::component::player::action::PlayerJumpDownComponent::End(void) {
+    super::End();
+    super::GetCameraComponent()->SetFollowCameraPrevPositionUpdateFlag(false);
     return true;
 }

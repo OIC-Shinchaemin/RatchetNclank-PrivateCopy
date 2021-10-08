@@ -27,6 +27,21 @@ std::shared_ptr<base::ui::UICanvas> ratchet::scene::Scene::GetUICanvas(void) con
     return nullptr;
 }
 
+std::shared_ptr<ratchet::light::LightManager> ratchet::scene::Scene::GetLightManager(void) const {
+    if (auto ptr = _light_manager.lock()) {
+        return ptr;
+    } // if
+    return nullptr;
+}
+
+std::shared_ptr<ratchet::game::audio::BGMPlayer> ratchet::scene::Scene::GetBGMPlayer(void) const {
+    return this->_bgm_player;
+}
+
+std::shared_ptr<ratchet::game::audio::SEPlayer> ratchet::scene::Scene::GetSEPlayer(void) const {
+    return this->_se_player;
+}
+
 Mof::LPRenderTarget ratchet::scene::Scene::GetDefaultRendarTarget(void) const {
     return this->_default;
 }
@@ -37,13 +52,32 @@ bool ratchet::scene::Scene::LoadingUpdate(float delta_time) {
 
 bool ratchet::scene::Scene::SceneUpdate(float delta_time) {
     if (_effect.has_value()) {
+        auto camera = ::CGraphicsUtilities::GetCamera();
         _effect.value().Update(delta_time);
+        _effect.value().SetCamera(*camera);
+        _effect.value().Enable();
 
         if (_effect.value().IsEnd()) {
-            _effect.reset();
+            if (_transition_state == TransitionState::In) {
+                _transition_state = TransitionState::None;
+                _effect.reset();
+                return true;
+            } // if
+            else if (_transition_state == TransitionState::None) {
+                _transition_state = TransitionState::Out;
+                return true;
+            } // else if
+            else if (_transition_state == TransitionState::Out) {
+                _transition_state = TransitionState::End;
+                _effect.reset();
+                return true;
+            } // else if
+            else if (_transition_state == TransitionState::End) {
+                return true;
+            } // else if
         } // if
     } // if    
-    return true;
+    return false;
 }
 
 bool ratchet::scene::Scene::PreRender(void) {
@@ -65,11 +99,6 @@ bool ratchet::scene::Scene::PostRender(void) {
     // end
     ::g_pGraphics->SetRenderTarget(_default, ::g_pGraphics->GetDepthTarget());
     ::g_pGraphics->SetDepthEnable(false);
-    if (_effect.has_value()) {
-        auto camera = ::CGraphicsUtilities::GetCamera();
-        _effect.value().SetCamera(*camera);
-        _effect.value().Enable();
-    } // if
 
     // complete prepare
     if (_effect.has_value()) {
@@ -80,17 +109,26 @@ bool ratchet::scene::Scene::PostRender(void) {
     } // if
     else {
         ::CGraphicsUtilities::RenderTexture(0.0f, 0.0f, &_rendar_target);
+        if (_transition_state == TransitionState::End) {
+            auto width = ::g_pFramework->GetWindow()->GetWidth();
+            auto height = ::g_pFramework->GetWindow()->GetHeight();
+            ::CGraphicsUtilities::RenderFillRect(0.0f, 0.0f, width, height, def::color_rgba_u32::kBlack);
+        } // if
     } // else
     return true;
 }
 
 ratchet::scene::Scene::Scene() :
-    _state(this_type::State::Active),
+    _state(ratchet::scene::Scene::State::Active),
+    _transition_state(ratchet::scene::Scene::TransitionState::None),
     _rendar_target(),
     _default(),
     _effect(),
     _resource(),
     _ui_canvas(),
+    _light_manager(),
+    _bgm_player(std::make_shared<ratchet::game::audio::BGMPlayer>()),
+    _se_player(std::make_shared<ratchet::game::audio::SEPlayer>()),
     _loaded(false),
     _mutex(),
     _load_thread() {
@@ -111,11 +149,24 @@ void ratchet::scene::Scene::SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr) {
     this->_ui_canvas = ptr;
 }
 
+void ratchet::scene::Scene::SetLightManager(std::weak_ptr<ratchet::light::LightManager> ptr) {
+    this->_light_manager = ptr;
+}
+
+void ratchet::scene::Scene::SetState(const ratchet::scene::Scene::State state) {
+    this->_state = state;
+}
+
+ratchet::scene::Scene::TransitionState ratchet::scene::Scene::GetTransitionState(void) const {
+    return this->_transition_state;
+}
+
 void ratchet::scene::Scene::AddSceneObserver(const std::shared_ptr<base::core::Observer<const scene::SceneMessage&>>& ptr) {
     _subject.AddObserver(ptr);
 }
 
 bool ratchet::scene::Scene::Load(std::shared_ptr<ratchet::scene::Scene::Param> param) {
+    _transition_state = TransitionState::In;
     _effect = ratchet::scene::SceneEffect();
     _effect.value().Load("../Resource/shader/fadein.hlsl");
     bool seccess = _effect.value().CreateShaderBuffer("cbSceneEffectParam", sizeof(ratchet::scene::cbSceneEffectParam));
@@ -148,7 +199,6 @@ bool ratchet::scene::Scene::Update(float delta_time) {
             _load_thread.value().join();
             _load_thread.reset();
         } // if
-
         this->SceneUpdate(delta_time);
     } // if
     else {

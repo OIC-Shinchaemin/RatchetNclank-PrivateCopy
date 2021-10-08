@@ -14,13 +14,15 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace ui {
-class GameMoneyMenu : public base::ui::UIPanel, public base::core::Observer<int> {
+namespace ratchet ::ui {
+class GameMoneyMenu : public base::ui::UIPanel,
+    public ratchet::game::gamesystem::GameMoneyMessageListener {
     using super = base::ui::UIPanel;
 private:
     //! お金
     int _money;
+    //! お金
+    int _money_max;
     //! 表示
     bool _show;
     //! 時間
@@ -41,7 +43,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="money"></param>
-    virtual void OnNotify(int money) override;
+    virtual void OnNotify(const ratchet::game::gamesystem::GameMoneyMessage& message) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -71,6 +73,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_GAME_MONEY_MENU_H

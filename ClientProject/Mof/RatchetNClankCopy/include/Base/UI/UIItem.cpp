@@ -4,6 +4,7 @@
 base::ui::UIItem::UIItem(const char* name) :
     _name(name),
     _position(),
+    _scale(1.0f, 1.0f),
     _texture(),
     _color(),
     _rectangle() {
@@ -17,6 +18,10 @@ void base::ui::UIItem::SetPosition(Mof::CVector2 position) {
     this->_position = position;
 }
 
+void base::ui::UIItem::SetScale(Mof::CVector2 scale) {
+    this->_scale = scale;
+}
+
 void base::ui::UIItem::SetTexture(const std::shared_ptr<Mof::CTexture>& ptr) {
     this->_texture = ptr;
 }
@@ -27,6 +32,10 @@ void base::ui::UIItem::SetColor(const Mof::CVector4 color) {
 
 Mof::CVector2 base::ui::UIItem::GetPosition(void) const {
     return this->_position;
+}
+
+Mof::CVector2 base::ui::UIItem::GetScale(void) const {
+    return this->_scale;
 }
 
 Mof::CVector2 base::ui::UIItem::GetSize(void) const {

@@ -1,6 +1,6 @@
 #include "CameraCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 #include "../../CameraComponent.h"
 
 
@@ -22,7 +22,12 @@ std::string ratchet::component::collision::CameraCollisionComponent::GetType(voi
 }
 
 std::optional<Mof::CSphere> ratchet::component::collision::CameraCollisionComponent::GetSphere(void) {
-    return std::optional<Mof::CSphere>();
+    _ASSERT_EXPR(!_camera_com.expired(), L"–³Œø‚Èƒ|ƒCƒ“ƒ^‚ð•ÛŽ‚µ‚Ä‚¢‚Ü‚·");
+    if (super::GetOwner()->GetState() == ratchet::actor::ActorState::End) {
+        return std::optional<Mof::CSphere>();
+    } // if
+    auto pos = _camera_com.lock()->GetPosition();
+    return Mof::CSphere(pos, 0.5f);
 }
 
 std::optional<Mof::CBoxAABB> ratchet::component::collision::CameraCollisionComponent::GetBox(void) {
@@ -35,8 +40,9 @@ std::optional<Mof::CRay3D> ratchet::component::collision::CameraCollisionCompone
         return std::optional<Mof::CRay3D>();
     } // if
     auto pos = _camera_com.lock()->GetPosition();
-    auto velocity = _camera_com.lock()->GetVelocity();
-    return Mof::CRay3D(pos, velocity);
+    //auto velocity = _camera_com.lock()->GetVelocity();
+    auto target = _camera_com.lock()->GetCameraController()->GetService()->GetCamera()->GetTarget();
+    return Mof::CRay3D(pos, pos - target);
 }
 
 std::optional<Mof::LPMeshContainer> ratchet::component::collision::CameraCollisionComponent::GetMesh(void) {
@@ -50,6 +56,9 @@ std::optional<::ratchet::component::collision::SightObject> ratchet::component::
 bool ratchet::component::collision::CameraCollisionComponent::Initialize(void) {
     super::Initialize();
     _camera_com = super::GetOwner()->GetComponent<ratchet::component::CameraComponent>();
+
+    _non_collision_angle.y = 30.0f;
+    _non_collision_angle.x = 0.0f;
     return true;
 }
 
@@ -58,26 +67,44 @@ std::shared_ptr<ratchet::component::Component> ratchet::component::collision::Ca
 }
 
 void ratchet::component::collision::CameraCollisionComponent::CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) {
-    if (!this->GetRay().has_value()) {
-        return;
-    } // if
     auto camera_com = _camera_com.lock();
+    auto controller = camera_com->GetCameraController()->GetService();
     auto pos = _camera_com.lock()->GetPosition();
+    auto sphere = this->GetSphere().value();
     auto ray = this->GetRay().value();
+
     Mof::COLLISIONOUTGEOMETRY info;
-    float matgin = 0.1f;
-    float volume = 2.0f;
+    float margin = 0.0f;
+
     for (int i = 0, n = mesh->GetGeometryCount(); i < n; i++) {
         auto geometry = mesh->GetGeometry(i);
         auto default_matrix = geometry->GetMatrix();
         Mof::CMatrix44 mat = default_matrix * obj.GetWorldMatrix();
         geometry->SetMatrix(mat);
 
+        auto camera_info = camera::CameraController::CameraInfo();
+        camera_info.target_position = controller->GetCamera()->GetTarget();
+        //if (sphere.CollisionGeometry(geometry, info)) {
         if (ray.CollisionGeometry(geometry, info)) {
-            if (info.d <= volume) {
-                camera_com->CollisionStage();
+            if (info.d <= sphere.r + margin) {
+                // ­‚µ‹ß‚Ã‚­
+                float distance = info.d;
+                distance = std::clamp(distance, sphere.r, controller->GetDefaultDistance() );
+                controller->SetDistance(distance);
+                controller->Update(def::kDeltaTime, camera_info);
+                this->CollisionStage(mesh, obj);
             } // if
+            else {
+                float distance = info.d;
+                distance = std::clamp(distance, sphere.r, controller->GetDefaultDistance());
+                controller->SetDistance(distance);
+//                controller->SetDistance(controller->GetDefaultDistance());
+  //              controller->Update(def::kDeltaTime, camera_info);
+            } // else
         } // if
+        else {
+            _non_collision_distance = controller->GetDistance();
+        } // else
         geometry->SetMatrix(default_matrix);
     } // for
 }

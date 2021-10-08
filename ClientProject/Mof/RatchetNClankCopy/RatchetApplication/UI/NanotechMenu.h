@@ -13,8 +13,7 @@
 #include "../GameDefine.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class NanotechMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
@@ -30,7 +29,8 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-class NanotechMenu : public base::ui::UIPanel, public base::core::Observer<int> {
+class NanotechMenu : public base::ui::UIPanel, 
+    public base::core::Observer<int, int> {
     using super = base::ui::UIPanel;
 private:
     //! 最大値
@@ -41,6 +41,8 @@ private:
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource_manager;
+    //! 拡大率
+    float _margin_x;
 public:
     /// <summary>
     /// コンストラクタ
@@ -51,7 +53,7 @@ public:
     /// 通知イベント
     /// </summary>
     /// <param name="hp"></param>
-    virtual void OnNotify(int hp) override;
+    virtual void OnNotify(int hp, int max) override;
     /// <summary>
     /// セッター
     /// </summary>
@@ -75,6 +77,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_NANOTECH_MENU_H

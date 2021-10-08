@@ -1,6 +1,6 @@
 #include "PlayerEnemyBulletCollisionAlgolithm.h"
 
-#include "../Object/CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::PlayerEnemyBulletCollisionAlgolithm::PlayerEnemyBulletCollisionAlgolithm() :

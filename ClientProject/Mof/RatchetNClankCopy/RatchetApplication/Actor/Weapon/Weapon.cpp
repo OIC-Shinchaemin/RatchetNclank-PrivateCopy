@@ -2,7 +2,8 @@
 
 
 ratchet::actor::weapon::Weapon::Weapon() :
-    super() {
+    super(),
+    _equipmented(false) {
 }
 
 ratchet::actor::weapon::Weapon::~Weapon() {

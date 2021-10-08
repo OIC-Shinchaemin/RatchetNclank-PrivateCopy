@@ -102,6 +102,9 @@ public:
             else if (auto format = std::strstr(data_path.c_str(), ".jpg"); format) {
                 this->AddSharedElement<Mof::CTexture>(data_path.c_str());
             } // else if
+            else if (auto format = std::strstr(data_path.c_str(), ".dds"); format) {
+                this->AddSharedElement<Mof::CTexture>(data_path.c_str());
+            } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".mom"); format) {
                 this->AddSharedElement<Mof::CMeshContainer>(data_path.c_str());
             } // else if
@@ -110,6 +113,14 @@ public:
             } // else if
             else if (auto format = std::strstr(data_path.c_str(), ".ttf"); format) {
                 this->AddSharedElement<sip::CResourceFont>(data_path.c_str());
+            } // else if
+            else if (auto format = std::strstr(data_path.c_str(), ".mp3"); format) {
+                if (temp.find("bgm/") != std::string::npos) {
+                    this->AddSharedElement<Mof::CStreamingSoundBuffer>(data_path.c_str());
+                } // if
+                else if (temp.find("se/") != std::string::npos) {
+                    this->AddSharedElement<Mof::CSoundBuffer>(data_path.c_str());
+                } // else if
             } // else if
         } // for
         return true;

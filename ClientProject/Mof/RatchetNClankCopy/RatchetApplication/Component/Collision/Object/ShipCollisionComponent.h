@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_SHIP_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -10,10 +10,8 @@
 #include <Mof.h>
 
 
-namespace ratchet {
-namespace component {
-namespace ship { class ShipStateComponent; }
-namespace collision {
+namespace ratchet::component::ship { class ShipStateComponent; }
+namespace ratchet::component::collision {
 class ShipCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -91,7 +89,5 @@ public:
     /// <param name="obj"></param>
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_SHIP_COLLISION_COMPONENT_H

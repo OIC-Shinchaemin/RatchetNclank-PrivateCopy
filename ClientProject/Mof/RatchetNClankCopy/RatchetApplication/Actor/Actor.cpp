@@ -9,11 +9,17 @@
 void ratchet::actor::Actor::Activate(void) {
     this->_state = ratchet::actor::ActorState::Active;
 }
+
 void ratchet::actor::Actor::Sleep(void) {
     this->_state = ratchet::actor::ActorState::Sleep;
 }
+
 void ratchet::actor::Actor::Pause(void) {
     this->_state = ratchet::actor::ActorState::Pause;
+}
+
+void ratchet::actor::Actor::Hide(void) {
+    this->_state = ratchet::actor::ActorState::Hide;
 }
 
 ratchet::actor::Actor::Actor() :
@@ -55,12 +61,16 @@ void ratchet::actor::Actor::SetParentTransform(std::optional<Mof::CMatrix44> tra
     this->_parent_transform = transform;
 }
 
-std::string ratchet::actor::Actor::GetName(void) const {
+const std::string& ratchet::actor::Actor::GetName(void) const {
     return this->_name;
 }
 
-std::string ratchet::actor::Actor::GetTag(void) const {
+const std::string& ratchet::actor::Actor::GetTag(void) const {
     return this->_tag;
+}
+
+const ratchet::TagHolder& ratchet::actor::Actor::GetTagHolder(void) const {
+    return this->_tags;
 }
 
 Mof::CVector3 ratchet::actor::Actor::GetPosition(void) const {
@@ -88,7 +98,7 @@ ratchet::actor::ActorState ratchet::actor::Actor::GetState(void) const {
 }
 
 bool ratchet::actor::Actor::InCameraRange(void) const {
-    const int camera_range = 30.0f;
+    const int camera_range = 40.0f;
     auto pos = ::CGraphicsUtilities::GetCamera()->GetViewPosition();
     auto sphere = Mof::CSphere(pos, camera_range);
     return sphere.CollisionPoint(this->GetPosition());
@@ -141,7 +151,7 @@ void ratchet::actor::Actor::RemoveComponent(const ComPtr& component) {
 }
 
 void ratchet::actor::Actor::End(void) {
-    this->_state = ratchet::actor::ActorState::End;
+    //this->_state = ratchet::actor::ActorState::End;
     Observable::Notify("DeleteRequest", shared_from_this());
 }
 
@@ -159,6 +169,8 @@ bool ratchet::actor::Actor::Initialize(void) {
 bool ratchet::actor::Actor::Initialize(ratchet::actor::Actor::Param* param) {
     _state = ratchet::actor::ActorState::Active;
     _name = param->name;
+    _tag = param->tag;
+    _tags = param->tags;
     _transform = param->transform;
     _initial_transform = _transform;
 
@@ -198,7 +210,25 @@ bool ratchet::actor::Actor::Render(void) {
         if (com->IsActive()) {
             com->Render();
 #ifdef _DEBUG
-            com->DebugRender();
+            if (debug::DebugManager::GetInstance().IsDebugMode()) {
+                com->DebugRender();
+            } // if
+#endif // _DEBUG
+            re = true;
+        } // if
+    } // for
+    return re;
+}
+
+bool ratchet::actor::Actor::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
+    bool re = false;
+    for (auto& com : _render_components) {
+        if (com->IsActive()) {
+            com->Render(out);
+#ifdef _DEBUG
+            if (debug::DebugManager::GetInstance().IsDebugMode()) {
+                com->DebugRender();
+            } // if
 #endif // _DEBUG
             re = true;
         } // if

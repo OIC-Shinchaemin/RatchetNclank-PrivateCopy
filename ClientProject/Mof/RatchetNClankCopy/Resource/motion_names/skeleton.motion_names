@@ -17,14 +17,14 @@
     },
     {
       "name": "skeleton-skeleton|attack",
-      "speed": 1.0,
+      "speed": 0.8,
       "loop": false,
       "same": false,
       "state": "EnemyMotionMeleeAttackState"
     },
     {
       "name": "skeleton-skeleton|attack",
-      "speed": 1.0,
+      "speed": 0.6,
       "loop": false,
       "same": true,
       "state": "EnemyMotionRangedAttackState"

@@ -5,8 +5,7 @@
 #include <string>
 
 
-namespace ratchet {
-namespace state {
+namespace ratchet::state {
 struct EnemyActionStateType {
     static std::string kEnemyActionIdleState;
     static std::string kEnemyActionGoHomeState;
@@ -15,6 +14,5 @@ struct EnemyActionStateType {
     static std::string kEnemyActionRangedAttackState;
     static std::string kEnemyActionDamageState;
 };
-}
 }
 #endif // !RATCHET_STATE_ENEMY_ACTION_STATE_DEFINE_H

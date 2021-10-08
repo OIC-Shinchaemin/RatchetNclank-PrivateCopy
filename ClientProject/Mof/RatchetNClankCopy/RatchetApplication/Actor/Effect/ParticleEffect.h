@@ -9,15 +9,13 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace effect {
+namespace ratchet::actor::effect {
 class ParticleEffect : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 public:
     struct Param : public super::Param {
         //! êF
-        Mof::CVector4 color;
+        Mof::CVector4 color = Mof::CVector4(1.0f, 1.0f, 1.0f, 1.0f);
         //! éûä‘
         float life_time;
     };
@@ -75,7 +73,5 @@ public:
     /// <param name="info"></param>
     void Start(const ratchet::actor::effect::ParticleEffect::Info& info);
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_EFFECT_PARTICLE_EFFECT_H

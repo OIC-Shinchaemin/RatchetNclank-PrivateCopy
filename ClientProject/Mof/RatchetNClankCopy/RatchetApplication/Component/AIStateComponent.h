@@ -8,8 +8,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class AIStateComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -55,11 +54,23 @@ public:
     /// <returns></returns>
     virtual std::string GetType(void) const override;
     /// <summary>
+    /// “ü—Í”»’è
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool IsInput(void) const override;
+    /// <summary>
     /// ‰Šú‰»
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     virtual bool Initialize(void) override;
+    /// <summary>
+    /// “ü—Í
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Input(void) override;
     /// <summary>
     /// XV
     /// </summary>
@@ -92,6 +103,5 @@ public:
     virtual bool DebugRender(void) override;
 #endif // _DEBUG
 };
-}
 }
 #endif // !RATCHET_COMPONENT_AI_STATE_COMPONENT_H

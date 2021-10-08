@@ -7,8 +7,7 @@
 #include <memory>
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class BillboardComponent : public ratchet::component::RenderComponent {
     using super = ratchet::component::RenderComponent;
 private:
@@ -16,6 +15,10 @@ private:
     std::weak_ptr<Mof::CTexture> _texture;
     //! 表示色
     Mof::CVector4 _color;
+    //! オフセット
+    Mof::CVector3 _offset_position;
+    //! オフセット
+    Mof::CVector3 _offset_rotation;
 public:
     /// <summary>
     /// コンストラクタ
@@ -42,6 +45,21 @@ public:
     /// <param name="mesh"></param>
     void SetTexture(const std::shared_ptr<Mof::CTexture>& ptr);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetColor(const Mof::CVector4& value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetOffsetPosition(const Mof::CVector3& value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetOffsetRotation(const Mof::CVector3& value);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -66,6 +84,12 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
     /// <summary>
+    /// 描画
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out);
+    /// <summary>
     /// 解放
     /// </summary>
     /// <param name=""></param>
@@ -78,6 +102,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_BILLBOARD_COMPONENT_H

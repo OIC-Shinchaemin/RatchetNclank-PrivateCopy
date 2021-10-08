@@ -7,12 +7,21 @@
 #include <memory>
 
 #include "../../Actor/Actor.h"
+#include "../../Actor/Character/Character.h"
 #include "Base/Core/Observable.h"
 
+#include "../TransformComponent.h"
+#include "../VelocityComponent.h"
+#include "../CameraComponent.h"
 
-namespace ratchet {
-namespace component {
-namespace player {
+
+namespace ratchet::actor::character {
+class Player;
+}
+namespace ratchet::component::collision {
+class PlayerCollisionComponent;
+}
+namespace ratchet::component::player {
 class PlayerComponent : public ::ratchet::component::CharacterComponent {
     using super = ::ratchet::component::CharacterComponent;
 private:
@@ -22,10 +31,30 @@ private:
     base::core::Observable<std::optional<Mof::CVector3>> _observable;
     //! 状態
     std::weak_ptr<class PlayerStateComponent> _state_com;
+    //! 速度
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
+    //! カメラ
+    std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
+    //! カメラ
+    std::weak_ptr<ratchet::component::collision::PlayerCollisionComponent> _coll_volume_com;
     //! 地点
     std::string _next_terrain;
-    //! アクションフラグ
-    //bool _action_enable;
+    //! 接触モード 有効であれば武器ボタンがアクションボタンになる
+    //bool _contact_mode;
+    //! 話し相手
+    std::weak_ptr<ratchet::actor::character::Character> _talk_target;
+
+    void CacheComponent(void);
+    void CollisionFunctionBarrack(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionBarricade(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionFence(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionKing(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionQueen(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionScarecrow(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionShop(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionShip(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionWall(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
+    void CollisionFunctionWaterFlow(std::shared_ptr<ratchet::component::collision::PlayerCollisionComponent>& com);
 public:
     /// <summary>
     /// コンストラクタ
@@ -60,6 +89,10 @@ public:
     /// <summary>
     /// ゲッター
     /// </summary>
+    std::shared_ptr<ratchet::actor::character::Player> GetOwnerCastd(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
     std::weak_ptr<::ratchet::actor::Actor> GetTarget(void) const;
@@ -69,6 +102,18 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     std::string GetNextTerrain(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    //bool IsContactMode(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool HasTalkTarget(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -93,8 +138,19 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::shared_ptr<::ratchet::component::Component> Clone(void) override;
+#ifdef _DEBUG
+    /// <summary>
+    /// デバッグ
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool DebugRender(void) override;
+#endif // _DEBUG
+    /// <summary>
+    /// 会話
+    /// </summary>
+    /// <param name=""></param>
+    void TalkToTarget(void);
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_PLAYER_COMPONENT_H

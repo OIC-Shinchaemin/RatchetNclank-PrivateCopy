@@ -2,7 +2,7 @@
 #define RATCHET_PLAYER_ENEMY_MELEE_ATTACK_COLLISION_ALGOLITHM_H
 
 
-#include "CollisionAlgolithm.h"
+#include "../CollisionAlgolithm.h"
 
 
 namespace ratchet {

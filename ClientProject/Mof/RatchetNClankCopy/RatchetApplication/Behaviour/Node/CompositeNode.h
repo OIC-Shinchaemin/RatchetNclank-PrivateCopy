@@ -5,7 +5,7 @@
 #include "Node.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class CompositeNode : public ratchet::behaviour::Node {
     using super = ratchet::behaviour::Node;
 protected:
@@ -29,7 +29,7 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    const ratchet::behaviour::NodeList& GetChildren(void) const { 
+    const ratchet::behaviour::NodeList& GetChildren(void) const {
         return this->_children;
     }
     /// <summary>
@@ -37,18 +37,17 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    ratchet::behaviour::NodeList& GetChildren(void) { 
-        return this->_children; 
+    ratchet::behaviour::NodeList& GetChildren(void) {
+        return this->_children;
     }
     /// <summary>
     /// ’Ç‰Á
     /// </summary>
     /// <param name="node"></param>
-    void AddChild(const ratchet::behaviour::NodePtr& node) { 
-        _children.push_back(node); 
+    void AddChild(const ratchet::behaviour::NodePtr& node) {
+        _children.push_back(node);
     }
 };
 using CompositeNodePtr = std::shared_ptr<ratchet::behaviour::CompositeNode>;
-}
 }
 #endif // !RATCHET_BEHAVIOUR_COMPOSITENODE_H

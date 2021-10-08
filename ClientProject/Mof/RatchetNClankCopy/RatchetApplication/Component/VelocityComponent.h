@@ -7,8 +7,7 @@
 #include <memory>
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class VelocityComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
@@ -60,6 +59,11 @@ public:
     /// </summary>
     /// <param name="value"></param>
     void SetDrag(float value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="value"></param>
+    void SetAngularDrag(float value);
     /// <summary>
     /// セッター
     /// </summary>
@@ -146,6 +150,5 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_VELOCITY_COMPONENT_H

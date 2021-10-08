@@ -6,11 +6,10 @@
 
 #include <memory>
 
+#include "Base/Core/Timer.h"
 
-namespace ratchet {
-namespace component {
-namespace player {
-namespace action {
+
+namespace ratchet::component::player::action {
 class PlayerJumpDownComponent : public ::ratchet::component::player::action::PlayerActionComponent {
     using super = ::ratchet::component::player::action::PlayerActionComponent;
     using This = ratchet::component::player::action::PlayerJumpDownComponent;
@@ -37,6 +36,10 @@ private:
     This::InputInfo _input_info;
     //! 移動
     std::weak_ptr<class PlayerMoveComponent> _move_com;
+    //! 実行時間
+    base::core::Timer _falling_time;
+    //! 実行時間
+    float _falling_time_max;
 public:
     /// <summary>
     /// コンストラクタ
@@ -100,9 +103,12 @@ public:
     /// <param name=""></param>
     /// <returns>成功</returns>
     virtual bool Start(void) override;
+    /// <summary>
+    /// 終了
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    virtual bool End(void) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_JUMP_DOWN_COMPONENT_H

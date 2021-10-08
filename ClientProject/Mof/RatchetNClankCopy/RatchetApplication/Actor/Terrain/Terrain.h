@@ -8,9 +8,7 @@
 #include "../../ResourceManager.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace terrain {
+namespace ratchet::actor::terrain {
 class Terrain : public ratchet::actor::Actor {
     using super = ratchet::actor::Actor;
 private:
@@ -64,7 +62,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_TERRAIN_TERRAIN_H

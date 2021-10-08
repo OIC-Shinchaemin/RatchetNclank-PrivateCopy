@@ -45,6 +45,12 @@ public:
         return std::any_cast<Type>(this->At(key));
     }
     /// <summary>
+    /// ”»’è
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    bool Exist(const std::string& key);
+    /// <summary>
     /// “o˜^
     /// </summary>
     /// <param name="key"></param>

@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -12,14 +12,16 @@
 #include "../../CameraComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace collision {
+namespace ratchet::component::collision {
 class CameraCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
     //! プレイヤー
     std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
+    //! x,y　方向角 仰角
+    Mof::CVector3 _non_collision_angle;
+    Mof::CVector3 _non_collision_position;
+    float _non_collision_distance;
 public:
     /// <summary>
     /// コンストラクタ
@@ -84,6 +86,12 @@ public:
     /// <returns></returns>
     virtual std::shared_ptr<ratchet::component::Component> Clone(void) override;
     /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+//    bool IsCollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj);
+    /// <summary>
     /// 衝突
     /// </summary>
     /// <param name="ptr"></param>
@@ -95,7 +103,5 @@ public:
     /// <param name="gimmick"></param>
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_CAMERA_COLLISION_COMPONENT_H

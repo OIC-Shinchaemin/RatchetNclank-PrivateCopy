@@ -18,7 +18,7 @@ ratchet::actor::weapon::Pyrocitor::~Pyrocitor() {
 }
 
 bool ratchet::actor::weapon::Pyrocitor::IsAction(void) const {
-    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_M);
+    return ::g_pGamepad->IsKeyHold(Mof::XInputButton::XINPUT_B) || ::g_pInput->IsKeyHold(MOFKEY_V);
 }
 
 bool ratchet::actor::weapon::Pyrocitor::Fire(const def::Transform& transform) {

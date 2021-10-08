@@ -7,21 +7,22 @@
 #include <memory>
 
 #include "../../Gamepad.h"
+#include "../TransformComponent.h"
 #include "../VelocityComponent.h"
 #include "PlayerStateComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
+#include "../CameraComponent.h"
 #include "../../State/PlayerActionStateDefine.h"
 #include "../../State/PlayerMotionStateDefine.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player {
-namespace action {
+namespace ratchet::component ::player::action {
 class PlayerActionComponent : public ratchet::component::ActionComponent {
     using super = ratchet::component::ActionComponent;
 private:
+    //! トランスフォーム
+    std::weak_ptr<ratchet::component::TransformComponent> _transform_com;
     //! 速度
     std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
     //! 状態
@@ -30,13 +31,27 @@ private:
     std::weak_ptr<ratchet::component::MotionComponent> _motion_com;
     //! モーション
     std::weak_ptr<ratchet::component::MotionStateComponent> _motion_state_com;
+    //! カメラ
+    std::weak_ptr<ratchet::component::CameraComponent> _camera_com;
 protected:
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    std::shared_ptr<ratchet::component::TransformComponent> GetTransformComponent(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     std::shared_ptr<ratchet::component::VelocityComponent> GetVelocityComponent(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    std::shared_ptr<ratchet::component::CameraComponent> GetCameraComponent(void) const;
     /// <summary>
     /// 判定
     /// </summary>
@@ -93,8 +108,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
-}
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_ACTION_COMPONENT_H

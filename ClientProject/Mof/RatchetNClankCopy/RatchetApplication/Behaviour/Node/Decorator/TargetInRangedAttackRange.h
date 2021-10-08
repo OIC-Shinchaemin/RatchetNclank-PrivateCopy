@@ -7,7 +7,7 @@
 #include "../../Executor/Decorator/TargetInRangedAttackRangeNodeExecutor.h"
 
 
-namespace ratchet {  namespace behaviour {
+namespace ratchet::behaviour {
 class TargetInRangedAttackRangeNode : public ratchet::behaviour::DecoratorNodeBase {
     using super = ratchet::behaviour::DecoratorNodeBase;
     using Executor = ratchet::behaviour::TargetInRangedAttackRangeNodeExecutor;
@@ -40,12 +40,12 @@ public:
     /// <returns>false:é¿çsÇÃé∏îs</returns>
     virtual bool Execute(std::any node_args) override {
         auto args = std::any_cast<Executor::NodeArgs>(node_args);
-        
+
         auto target = args.ENEMY_com.lock()->GetTarget();
         if (target.expired()) {
             return false;
         } // if
-       
+
         auto pos = target.lock()->GetPosition();
         auto range_sphere = args.ranged_attack_com.lock()->GetCanAttackRangeSphere();
         if (range_sphere.CollisionPoint(pos)) {
@@ -54,6 +54,5 @@ public:
         return false;
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_TARGET_IN_RANGED_ATTACK_NODE_H

@@ -8,13 +8,10 @@
 
 #include "../CameraComponent.h"
 
-
-namespace ratchet {
-namespace component {
-namespace player {
-class PlayerComponent;
-namespace action {
-class PlayerMoveComponent : public ::ratchet::component::player::action::PlayerActionComponent {
+namespace ratchet::component::player { class PlayerComponent; }
+namespace ratchet::component::player::action {
+class PlayerMoveComponent : 
+    public ::ratchet::component::player::action::PlayerActionComponent {
     using super = ::ratchet::component::player::action::PlayerActionComponent;
     struct InputInfo {
         Mof::CVector2 in;
@@ -35,16 +32,31 @@ class PlayerMoveComponent : public ::ratchet::component::player::action::PlayerA
 private:
     //! 移動速度
     float _move_speed;
+    //! 最大値
+    float _move_speed_max;
+    //! 増加分
+    float _move_speed_increase;
     //! 回転速度
     float _angular_speed;
+    //! 最大値
+    float _angular_speed_max;
+    //! 増加分
+    float _angular_speed_increase;
     //! ラジアン
     float _ideal_angle;
+    
+    //! 移動速度
+    //float _velocity_force_xz_max;
     //! 入力情報
     ratchet::component::player::action::PlayerMoveComponent::InputInfo _input_info;
     //! 状態
     std::weak_ptr<ratchet::component::player::PlayerComponent> _type_com;
     //! カメラ
     std::weak_ptr<::ratchet::component::CameraComponent> _camera_com;
+    //! 回転しない
+    bool _angular_freeze;
+    //! 次の状態
+    std::string _next_state;
 public:
     /// <summary>
     /// 加速
@@ -56,7 +68,7 @@ public:
     /// </summary>
     /// <param name="angle"></param>
     /// <param name="speed"></param>
-    virtual void InputMoveAngularVelocity(float angle, float speed);
+    virtual void InputMoveAngularVelocity(float ideal_angle, float speed);
 public:
     /// <summary>
     /// コンストラクタ
@@ -88,6 +100,11 @@ public:
     /// <param name="radian"></param>
     void SetIdealAngle(float radian);
     /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetAngularFreezeFlag(bool flag);
+    /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
@@ -99,6 +116,10 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     float GetMoveSpeed(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    bool IsAngularFreeze(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -152,7 +173,7 @@ public:
     /// </summary>
     /// <param name="move_speed"></param>
     /// <param name="angular_speed"></param>
-    /// <param name="ideal_angle"></param>
+    /// <param name="ideal_angle">ラジアン</param>
     /// <returns>実行</returns>
     bool Move(float move_speed, float angular_speed, float ideal_angle);
     /// <summary>
@@ -163,6 +184,5 @@ public:
     /// <returns></returns>
     bool AquireInputData(Mof::CVector2& stick, float& move_angle);
 };
-}}}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_ACTION_PLAYER_MOVE_COMPONENT_H

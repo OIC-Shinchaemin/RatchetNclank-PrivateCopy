@@ -7,10 +7,24 @@
 ../Resource/mesh/futuristic_transport_shuttle_animated/scene.mom
 ../Resource/mesh/bolt/scene01.mom
 ../Resource/mesh/shop/scene.mom
+../Resource/mesh/king/king.mom
+../Resource/mesh/queen/queen.mom
+../Resource/mesh/barracks/barracks.mom
+../Resource/mesh/fence/fence.mom
 
 ../Resource/mesh/bomb_glove_bullet/scene.mom
 ../Resource/mesh/pyrocitor_bullet/scene.mom
 ../Resource/mesh/blaster_bullet/scene.mom
+
+../Resource/mesh/scarecrow/scene0.mom
+../Resource/mesh/scarecrow/scene1.mom
+../Resource/mesh/shadow/Shadow.mom
+
+../Resource/texture/effect/smoke.png
+../Resource/texture/effect/sense.png
+../Resource/texture/effect/star.png
+../Resource/texture/effect/flash.png
+../Resource/texture/effect/enemy_bullet_end_effect.png
 
 ../Resource/texture/icon/bomb_glove.png
 ../Resource/texture/icon/pyrocitor.png
@@ -18,6 +32,9 @@
 ../Resource/texture/icon/nanotech.png
 ../Resource/texture/nanotech/nanotech.png
 ../Resource/texture/nanotech/nanotech_empty.png
+../Resource/texture/nanotech/guage_base.png
+../Resource/texture/nanotech/guage_red.png
+
 
 ../Resource/texture/money/money.png
 ../Resource/texture/lock_on_cursor/cursor.png
@@ -27,9 +44,38 @@
 ../Resource/texture/title_logo/image.png
 
 
+
+../Resource/texture/ui/text/start.png
+../Resource/texture/ui/text/press.png
+../Resource/texture/ui/text/button.png
+../Resource/texture/ui/text/or.png
+../Resource/texture/ui/text/enter.png
+../Resource/texture/ui/text/ex_mark.png
+../Resource/texture/ui/text/key.png
+../Resource/texture/ui/text/press_button_text.png
+
+../Resource/texture/ui/text/game_start.png
+../Resource/texture/ui/text/how_to_play.png
+../Resource/texture/ui/text/exit_game.png
+../Resource/texture/ui/text/back_to_game.png
+../Resource/texture/ui/text/go_to_title.png
+
+../Resource/texture/ui/icon/question.png
+
 ../Resource/motion_names/player.motion_names
 ../Resource/motion_names/skeleton.motion_names
 ../Resource/motion_names/chaman.motion_names
 ../Resource/motion_names/ship.motion_names
 
 ../Resource/font/kkm_analogtv.ttf\KKM-アナログテレビフォント
+
+../Resource/bgm/battle.mp3
+../Resource/bgm/field.mp3
+../Resource/bgm/title.mp3
+
+../Resource/se/system_select.mp3
+../Resource/se/system_enter.mp3
+../Resource/se/system_menu_open.mp3
+../Resource/se/player_dead.mp3
+../Resource/se/enemy_dead.mp3
+../Resource/se/enemy_damage.mp3

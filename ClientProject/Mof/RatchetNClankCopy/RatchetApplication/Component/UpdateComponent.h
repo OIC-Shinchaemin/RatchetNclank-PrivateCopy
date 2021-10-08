@@ -5,8 +5,7 @@
 #include "Component.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class UpdateComponent : public ratchet::component::Component {
     using super = ratchet::component::Component;
 public:
@@ -30,7 +29,7 @@ public:
     /// <param name="param"></param>
     virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
-    /// ï`âÊîªíË
+    /// çXêVîªíË
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
@@ -54,6 +53,5 @@ public:
     /// <returns></returns>
     virtual bool Release(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_UPDATE_COMPONENT_H

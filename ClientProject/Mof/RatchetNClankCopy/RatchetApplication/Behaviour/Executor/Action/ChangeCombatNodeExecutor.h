@@ -9,8 +9,7 @@
 #include "../../../Component/AIStateComponent.h"
 
 
-namespace ratchet {
-namespace behaviour {
+namespace ratchet::behaviour {
 class ChangeCombatNodeExecutor : public ratchet::behaviour::ActionNodeExecutor {
     using super = ratchet::behaviour::ActionNodeExecutor;
 public:
@@ -57,6 +56,5 @@ public:
         return super::ActionNodeExecute(_node_args);
     }
 };
-}
 }
 #endif // !RATCHET_BEHAVIOUR_CHANGE_COMBAT_NODE_EXECUTOR_H

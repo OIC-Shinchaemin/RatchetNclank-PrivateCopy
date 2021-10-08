@@ -7,12 +7,10 @@
 #include <stack>
 
 #include "../../Scene/SceneDefine.h"
+#include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
-
+namespace ratchet::game::gamesystem {
 class OptionSystemItem : public std::enable_shared_from_this<ratchet::game::gamesystem::OptionSystemItem> {
     using this_type = ratchet::game::gamesystem::OptionSystemItem;
 private:
@@ -61,6 +59,7 @@ public:
     struct Info {
         bool enter = false;
         bool exit = false;
+        bool end = false;
         int index = 0;
         std::vector<std::shared_ptr<ElemType>>* items = nullptr;
         
@@ -85,6 +84,8 @@ private:
     base::core::Observable<const scene::SceneMessage&> _scene_message_subject;
     //! 通知用
     base::core::Observable<bool> _title_menu_subject;
+    //! 実行済み
+    bool _excuted;
 public:
     /// <summary>
     /// コンストラクタ
@@ -145,8 +146,16 @@ public:
     /// </summary>
     /// <returns></returns>
     bool Release(void);
+    /// <summary>
+    /// UIを隠す
+    /// </summary>
+    /// <param name=""></param>
+    void Hide(void);
+    /// <summary>
+    /// クリア
+    /// </summary>
+    /// <param name=""></param>
+    void Clear(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_OPTION_SYSTEM_H

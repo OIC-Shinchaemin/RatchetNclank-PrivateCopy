@@ -35,10 +35,12 @@ void ratchet::game::gamesystem::GamePauseSystem::OnNotify(bool flag) {
     super::OnNotify(flag);
     if (flag) {
         _infomation.Reset();
-
+        _infomation.index = 0;
         _infomation.items = &_items;
         _infomation.enable = true;
         _info_subject.Notify(_infomation);
+
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemMenuOpen, audio::SEEventCommand::Play()));
     } // if
 }
 
@@ -73,12 +75,11 @@ bool ratchet::game::gamesystem::GamePauseSystem::Initialize(void) {
 
 bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
     if (this->IsPushUp()) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemSelect, audio::SEEventCommand::Play()));
+        
         if (_infomation.index.has_value()) {
-            _infomation.index.value()++;
-            if (_infomation.index.value() > _items.size() - 1) {
-                _infomation.index = _items.size() - 1;
-            } // if
-            _infomation.index = _infomation.index.value();
+            _infomation.index.value()--;
+            _infomation.index = std::clamp(_infomation.index.value(), 0, static_cast<int>(_items.size()) - 1);
             _info_subject.Notify(_infomation);
         } // if
         else {
@@ -86,12 +87,11 @@ bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
         } // else
     } // if
     else if (this->IsPushDown()) {
+        super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemSelect, audio::SEEventCommand::Play()));
+
         if (_infomation.index.has_value()) {
-            _infomation.index.value()--;
-            if (_infomation.index.value() < 0) {
-                _infomation.index = 0;
-            } // if
-            _infomation.index = _infomation.index.value();
+            _infomation.index.value()++;
+            _infomation.index = std::clamp(_infomation.index.value(), 0, static_cast<int>(_items.size()) - 1);
             _info_subject.Notify(_infomation);
         } // if
         else {
@@ -101,6 +101,10 @@ bool ratchet::game::gamesystem::GamePauseSystem::Input(void) {
 
     if (!_items.empty() && _infomation.index.has_value()) {
         if (this->IsPushEnter()) {
+            auto& item = _infomation.items->at(_infomation.index.value());
+            if (item->GetText()  == "ƒ^ƒCƒgƒ‹‚É–ß‚é") {
+                super::GetSEPlayer()->Recieve(audio::SEEvent(audio::SEType::SystemEner, audio::SEEventCommand::Play()));
+            } // if
             _execute_list.push_back(_items.at(_infomation.index.value()));
         } // if
     } // if
@@ -123,7 +127,6 @@ bool ratchet::game::gamesystem::GamePauseSystem::Update(float delta_time) {
         this->_infomation.enable = false;
 
         _infomation.Reset();
-        //_infomation.exit = true;
         _info_subject.Notify(_infomation);
         return false;
     } // if

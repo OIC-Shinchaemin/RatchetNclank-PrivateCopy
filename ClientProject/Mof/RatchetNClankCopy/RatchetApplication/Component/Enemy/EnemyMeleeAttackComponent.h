@@ -11,11 +11,8 @@
 #include "../MotionStateComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace collision { class EnemyMeleeAttackCollisionComponent; }
-
-namespace enemy {
+namespace ratchet::component::collision { class EnemyMeleeAttackCollisionComponent; }
+namespace ratchet::component::enemy {
 class EnemyMeleeAttackComponent : public ratchet::component::ActionComponent {
     using super = ratchet::component::ActionComponent;
 private:
@@ -114,7 +111,5 @@ public:
     /// <returns>ê¨å˜</returns>
     virtual bool End(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_ENEMY_ENEMY_ATTACK_COMPONENT_H

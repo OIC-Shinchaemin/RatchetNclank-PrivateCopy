@@ -11,23 +11,45 @@
 #include "../../ResourceManager.h"
 #include "../../GameDefine.h"
 #include "Base/UI/UICanvas.h"
+#include "../../Event/EventManager.h"
 #include "Save/SaveData.h"
+#include "Text/TextSystem.h"
+#include "../../Scene/Scene.h"
 
 
-namespace ratchet {
-namespace game {
-namespace gamesystem {
+namespace ratchet::game::gamesystem {
+struct GameMoneyMessage {
+    int money;
+    int money_max;
+};
+using GameMoneyMessageSubject = base::core::Observable<const GameMoneyMessage&>;
+using GameMoneyMessageListener = base::core::Observer<const GameMoneyMessage&>;
 
-class GameMoney : public std::enable_shared_from_this<ratchet::game::gamesystem::GameMoney>, public base::core::Observer<int> {
+class GameMoney :
+    public std::enable_shared_from_this<ratchet::game::gamesystem::GameMoney>,
+    public base::core::Observer<int> {
 private:
     //! お金
     std::uint32_t _value;
+    //! お金
+    std::uint32_t _value_max;
     //! 通知用
-    base::core::Observable<int> _subject;
+    //base::core::Observable<int> _subject;
+    GameMoneyMessageSubject _subject;
     //! リソース
     std::weak_ptr<ratchet::ResourceMgr> _resource;
     //! UI
     std::weak_ptr<base::ui::UICanvas> _ui_canvas;
+    //! イベント
+    std::weak_ptr<ratchet::event::EventManager> _event_manager;
+    //! テキスト
+    ratchet::game::gamesystem::text::TextSystemMessageSubject _text_system_message_subject;
+    //! テキスト
+    std::weak_ptr<ratchet::game::gamesystem::text::TextSystem> _text_system;
+    //! 生成先
+    std::weak_ptr<ratchet::scene::Scene> _game_scene;
+    //! イベント発火済み 
+    bool _event_activated;
 public:
     /// <summary>
     /// コンストラクタ
@@ -52,6 +74,28 @@ public:
     /// </summary>
     /// <param name="ptr"></param>
     void SetUICanvas(std::weak_ptr<base::ui::UICanvas> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetEventManager(std::weak_ptr<ratchet::event::EventManager> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="ptr"></param>
+    void SetTextSystem(std::weak_ptr<ratchet::game::gamesystem::text::TextSystem> ptr);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    void SetGameScene(const std::shared_ptr<ratchet::scene::Scene> ptr);    
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto GetTextSystemMessageSubject(void) {
+        return &this->_text_system_message_subject;
+    }
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -82,7 +126,5 @@ public:
     /// <returns></returns>
     bool Release(void);
 };
-}
-}
 }
 #endif // !RATCHET_GAME_GAME_SYSTEM_GAME_MONEY_H

@@ -7,13 +7,14 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace component {
+namespace ratchet::component {
 class InvincibleComponent : public ratchet::component::UpdateComponent {
     using super = ratchet::component::UpdateComponent;
 private:
     //! 時間
     base::core::Timer _invincible;
+    //! 時間
+    float _time;
 public:
     /// <summary>
     /// コンストラクタ
@@ -29,6 +30,11 @@ public:
     /// デストラクタ
     /// </summary>
     virtual ~InvincibleComponent();
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="param"></param>
+    virtual void SetParam(const rapidjson::Value& param) override;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -66,6 +72,5 @@ public:
     /// <returns>成功</returns>
     virtual bool Activate(void) override;
 };
-}
 }
 #endif // !RATCHET_COMPONENT_PLAYER_INVINCIBLE_COMPONENT_H

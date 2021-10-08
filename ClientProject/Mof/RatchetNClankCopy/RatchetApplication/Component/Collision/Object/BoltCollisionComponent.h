@@ -2,18 +2,18 @@
 #define RATCHET_COMPONENT_COLLISION_BOLT_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
 
 #include <Mof.h>
 
+#include "../../VelocityComponent.h"
 
-namespace ratchet {
-namespace component {
-namespace item { class BoltActionStateComponent; }
-namespace collision {
+
+namespace ratchet::component::item { class BoltActionStateComponent; }
+namespace ratchet::component::collision {
 class BoltCollisionComponent : public ::ratchet::component::collision::CollisionComponent {
     using super = ::ratchet::component::collision::CollisionComponent;
 private:
@@ -23,6 +23,8 @@ private:
     float _volume;
     //! 状態
     std::weak_ptr<ratchet::component::item::BoltActionStateComponent> _state_com;
+    //! 状態
+    std::weak_ptr<ratchet::component::VelocityComponent> _velocity_com;
 public:
     /// <summary>
     /// コンストラクタ
@@ -98,7 +100,5 @@ public:
     /// <param name="ptr"></param>
     virtual void CollisionStage(Mof::LPMeshContainer mesh, const StageObject& obj) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_BOLT_COLLISION_COMPONENT_H

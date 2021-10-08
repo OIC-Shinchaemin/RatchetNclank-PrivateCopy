@@ -2,7 +2,7 @@
 #define RATCHET_COMPONENT_COLLISION_PLAYER_COLLISION_COMPONENT_H
 
 
-#include "CollisionComponent.h"
+#include "../CollisionComponent.h"
 
 #include <optional>
 #include <memory>
@@ -12,10 +12,8 @@
 #include "../../VelocityComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace player { class PlayerComponent; class PlayerStateComponent; }
-namespace collision {
+namespace ratchet::component::player { class PlayerComponent; class PlayerStateComponent; }
+namespace ratchet::component::collision {
 class PlayerCollisionComponent : public ratchet::component::collision::CollisionComponent {
     using super = ratchet::component::collision::CollisionComponent;
 private:
@@ -29,18 +27,17 @@ private:
     bool _on_elevator;
     //! 落下rayとStageの衝突時遷移する状態
     std::vector<std::string> _next_status;
+    //! ステージとの接触位置
+    Mof::CVector3 _collision_point_stage_down_ray;
+public:
+    //! ゲッター
+    base::accessor::Getter<decltype(_collision_point_stage_down_ray)> collision_point_stage_down_ray = _collision_point_stage_down_ray;
 private:
     /// <summary>
     /// 変更
     /// </summary>
     /// <param name=""></param>
     void ChangeState(void);
-    /// <summary>
-    /// ゲッター
-    /// </summary>
-    /// <param name=""></param>
-    /// <returns></returns>
-    virtual std::optional<Mof::CRay3D> GetFrontRay(void);
     /// <summary>
     /// 衝突
     /// </summary>
@@ -107,6 +104,12 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    virtual std::optional<Mof::CRay3D> GetFrontRay(void) override;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     virtual std::optional<Mof::CRay3D> GetNextRay(void) override;
     /// <summary>
     /// ゲッター
@@ -120,6 +123,12 @@ public:
     /// <param name=""></param>
     /// <returns></returns>
     virtual std::optional<::ratchet::component::collision::SightObject> GetSightObject(void) override;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsOnElevator(void) const;
     /// <summary>
     /// 初期化
     /// </summary>
@@ -144,7 +153,5 @@ public:
     /// <param name="gimmick"></param>
     virtual void CollisionStageGimmick(Mof::LPMeshContainer mesh, GimmickPtr& gimmick) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_COLLISION_PLAYER_COLLISION_COMPONENT_H

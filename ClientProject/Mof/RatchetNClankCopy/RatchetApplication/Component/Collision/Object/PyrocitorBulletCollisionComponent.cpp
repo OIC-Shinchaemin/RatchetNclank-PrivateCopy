@@ -1,6 +1,6 @@
 #include "PyrocitorBulletCollisionComponent.h"
 
-#include "CollisionComponentDefine.h"
+#include "../CollisionComponentDefine.h"
 
 
 ratchet::component::collision::PyrocitorBulletCollisionComponent::PyrocitorBulletCollisionComponent(int priority) :

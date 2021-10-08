@@ -5,12 +5,11 @@
 #include "Scene.h"
 
 
-namespace ratchet {
-namespace scene {
+namespace ratchet::scene {
 class ClearScene : public ratchet::scene::Scene {
     using super = ratchet::scene::Scene;
 protected:
-/// <summary>
+    /// <summary>
     /// çXêV
     /// </summary>
     /// <param name="delta_time"></param>
@@ -56,6 +55,5 @@ public:
     /// <returns></returns>
     virtual bool Load(std::shared_ptr<super::Param> param) override;
 };
-}
 }
 #endif // !RATCHET_SCENE_CLEAR_SCENE_H

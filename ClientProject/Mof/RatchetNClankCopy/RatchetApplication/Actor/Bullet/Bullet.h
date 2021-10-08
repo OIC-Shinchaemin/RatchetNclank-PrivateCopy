@@ -7,9 +7,7 @@
 #include "Base/Core/Timer.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace bullet {
+namespace ratchet ::actor ::bullet {
 class Bullet : public actor::Actor {
     using super = actor::Actor;
 public:
@@ -68,7 +66,5 @@ public:
     /// <param name="in"></param>
     void Start(const Bullet::Param& in);
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_BULLET_BULLET_H

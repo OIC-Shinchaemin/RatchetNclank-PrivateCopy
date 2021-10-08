@@ -15,8 +15,7 @@
 #include "../Game/GameSystem/QuickChangeSystem.h"
 
 
-namespace ratchet {
-namespace ui {
+namespace ratchet::ui {
 class QuickChangeMenuItem : public base::ui::UIItem {
     using super = base::ui::UIItem;
 public:
@@ -95,6 +94,5 @@ public:
     /// <returns></returns>
     virtual bool Render(void) override;
 };
-}
 }
 #endif // !RATCHET_UI_QUICK_CHANGE_MENU_H

@@ -1,16 +1,22 @@
 #include "BillboardComponent.h"
 
+#include "../Game/Graphics/RenderBillboardCommand.h"
+
 
 ratchet::component::BillboardComponent::BillboardComponent(int priority) :
     super(priority),
     _texture(),
-    _color() {
+    _color(),
+    _offset_position(),
+    _offset_rotation() {
 }
 
 ratchet::component::BillboardComponent::BillboardComponent(const ratchet::component::BillboardComponent& obj) :
     super(obj),
     _texture(obj._texture),
-    _color(obj._color) {
+    _color(obj._color),
+    _offset_position(),
+    _offset_rotation() {
 }
 
 ratchet::component::BillboardComponent::~BillboardComponent() {
@@ -43,6 +49,18 @@ void ratchet::component::BillboardComponent::SetTexture(const std::shared_ptr<Mo
     this->_texture = ptr;
 }
 
+void ratchet::component::BillboardComponent::SetColor(const Mof::CVector4& value) {
+    this->_color = value;
+}
+
+void ratchet::component::BillboardComponent::SetOffsetPosition(const Mof::CVector3& value) {
+    this->_offset_position = value;
+}
+
+void ratchet::component::BillboardComponent::SetOffsetRotation(const Mof::CVector3& value) {
+    this->_offset_rotation = value;
+}
+
 std::string ratchet::component::BillboardComponent::GetType(void) const {
     return "BillboardComponent";
 }
@@ -64,16 +82,42 @@ bool ratchet::component::BillboardComponent::Render(void) {
     // •`‰æ
     if (auto tex = this->GetTexture(); tex) {
         Mof::CMatrix44 scale, rotate, translate;
-        Mof::CQuaternion quat; quat.Rotation(owner->GetRotate());
-
+        Mof::CQuaternion quat; quat.Rotation(this->_offset_rotation + owner->GetRotate());
+        
         scale.Scaling(owner->GetScale(), scale);
         quat.ConvertMatrixTranspose(rotate);
-        translate.Translation(owner->GetPosition(), translate);
+        translate.Translation(this->_offset_position + owner->GetPosition(), translate);
 
         Mof::CMatrix44 world = scale * rotate * translate;
         auto camera = ::CGraphicsUtilities::GetCamera();
-        tex->Render(camera->GetBillBoardMatrix() * world);
-        
+        tex->Render(camera->GetBillBoardMatrix() * world, _color.ToU32Color());
+
+        //CGraphicsUtilities::RenderTexture();
+        //tex->Render(world, _rectangle.value());
+    } // if
+    return true;
+}
+
+bool ratchet::component::BillboardComponent::Render(std::shared_ptr<ratchet::game::graphics::RenderCommandTask> out) {
+    if (!super::GetOwner()->InCameraRange()) {
+        return false;
+    } // if
+
+    auto owner = super::GetOwner();
+    // •`‰æ
+    if (auto tex = this->GetTexture(); tex) {
+        Mof::CMatrix44 scale, rotate, translate;
+        Mof::CQuaternion quat; quat.Rotation(this->_offset_rotation + owner->GetRotate());
+
+        scale.Scaling(owner->GetScale(), scale);
+        quat.ConvertMatrixTranspose(rotate);
+        translate.Translation(this->_offset_position + owner->GetPosition(), translate);
+
+        Mof::CMatrix44 world = scale * rotate * translate;
+        auto camera = ::CGraphicsUtilities::GetCamera();
+        //tex->Render(camera->GetBillBoardMatrix() * world);
+        auto command = std::make_shared<ratchet::game::graphics::RenderBillboardCommand>(tex, camera->GetBillBoardMatrix() * world, _color);
+        out->Push(command, _target_layer);
         //CGraphicsUtilities::RenderTexture();
         //tex->Render(world, _rectangle.value());
     } // if

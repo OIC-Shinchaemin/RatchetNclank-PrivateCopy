@@ -4,7 +4,7 @@
 #include "../MotionComponent.h"
 #include "../../Camera/FollowCameraController.h"
 #include "../Collision/Object/ShipCollisionComponent.h"
-#include "../Collision/Object/CollisionComponentDefine.h"
+#include "../Collision/CollisionComponentDefine.h"
 #include "ShipStateComponent.h"
 
 

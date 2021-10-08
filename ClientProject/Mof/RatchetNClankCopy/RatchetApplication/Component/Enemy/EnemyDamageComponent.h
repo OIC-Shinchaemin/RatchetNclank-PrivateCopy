@@ -7,17 +7,16 @@
 #include <memory>
 
 #include "Base/Core/Timer.h"
-#include "../Collision/Object/CollisionComponent.h"
+#include "../Collision/CollisionComponent.h"
 
 #include "../VelocityComponent.h"
 #include "../MotionComponent.h"
 #include "../MotionStateComponent.h"
 #include "../HpComponent.h"
+#include "../InvincibleComponent.h"
 
 
-namespace ratchet {
-namespace component {
-namespace enemy {
+namespace ratchet::component::enemy {
 class EnemyDamageComponent : public ratchet::component::ActionComponent {
     using super = ratchet::component::ActionComponent;
 private:
@@ -36,9 +35,11 @@ private:
     //! Hp
     std::weak_ptr<ratchet::component::HpComponent> _hp_com;
     //! å^
-    std::weak_ptr<class EnemyComponent> _ENEMY_com;
+    std::weak_ptr<class EnemyComponent> _enemy_com;
     //! èÛë‘
     std::weak_ptr<class EnemyStateComponent> _state_com;
+    //! ñ≥ìG
+    std::weak_ptr<ratchet::component::InvincibleComponent> _invincible_com;
 private:
     /// <summary>
     /// è’ìÀèàóù
@@ -103,7 +104,5 @@ public:
     /// <returns>ê¨å˜</returns>
     virtual bool Start(void) override;
 };
-}
-}
 }
 #endif // !RATCHET_COMPONENT_ENEMY_ENEMY_DAMAGE_COMPONENT_H

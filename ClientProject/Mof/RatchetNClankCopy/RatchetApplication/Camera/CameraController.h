@@ -9,13 +9,13 @@
 #include "CameraManager.h"
 
 
-namespace ratchet {
-namespace camera {
+namespace ratchet::camera {
 class CameraController {
 public:
     enum class CameraMode {
         Follow,
         FirstPerson,
+        ThirdPerson,
     };
     struct Param {
         //! 方位角θ
@@ -54,9 +54,15 @@ protected:
     //! 対象
     Mof::CVector3 _target;
     //! 位置
-    Mof::CVector3 _preview_position;
+    Mof::CVector3 _previous_position;
     //! パラメータ
     ratchet::camera::CameraController::Param _param;
+    //! ばね使用
+    bool _use_spring;
+    //! ばね使用
+    bool _update_position_flag;
+    //! ぶつかっている
+    bool _collision_stage;
 public:
     /// <summary>
     /// セッター
@@ -89,7 +95,7 @@ public:
     /// <summary>
     /// セッター
     /// </summary>
-    /// <param name="azimuth"></param>
+    /// <param name="degree"></param>
     void SetAzimuth(float degree);
     /// <summary>
     /// セッター
@@ -106,6 +112,21 @@ public:
     /// </summary>
     /// <param name="value"></param>
     void SetDumping(float value);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetUseSpring(bool flag);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetUpdatePositionFlag(bool flag);
+    /// <summary>
+    /// セッター
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetCollisionStage(bool flag);
     /// <summary>
     /// セット
     /// </summary>
@@ -133,14 +154,20 @@ public:
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
+    /// <returns>角度（デグリー）</returns>
     float GetAzimuth(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
-    /// <returns></returns>
+    /// <returns>角度（デグリー）</returns>
     float GetAltitude(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    float GetDistance(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
@@ -158,13 +185,31 @@ public:
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
+    float GetDefaultDistance(void) const;
+    /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
     Mof::CVector3 GetVelocity(void) const;
     /// <summary>
     /// ゲッター
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    Mof::CVector3 GetPreviewPosition(void) const;
+    Mof::CVector3 GetPreviousPosition(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsUpdatePositionFlag(void) const;
+    /// <summary>
+    /// 判定
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    bool IsCollisionStage(void) const;
     /// <summary>
     /// 回転
     /// </summary>
@@ -201,6 +246,5 @@ public:
     /// <returns></returns>
     bool RegisterGlobalCamera(void);
 };
-}
 }
 #endif // !RATCHET_CAMERA_CAMERA_CONTROLLER_H

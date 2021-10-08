@@ -12,13 +12,18 @@
 #include "../Camera/PointCameraController.h"
 
 
-namespace ratchet {
-namespace event {
+namespace ratchet ::event {
+struct ShipEventEndMessage {
+};
+using ShipEventEndMessageSubject = base::core::Observable<const ShipEventEndMessage&>;
+using ShipEventEndMessageListener = base::core::Observer<const  ShipEventEndMessage&>;
 class ShipEvent : public ratchet::event::Event,
     public base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>,
     public base::core::Observer<const char*, const std::shared_ptr<StageObject>&> {
     using super = ratchet::event::Event;
 private:
+    //! 開始
+    bool _start;
     //! 通知用
     base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>& > _ship_event_subject;
     //! カメラ
@@ -31,6 +36,14 @@ private:
     ratchet::camera::CameraController::CameraInfo _info;
     //! プレイヤービュー
     std::weak_ptr<base::core::Observer<const ratchet::camera::CameraController::CameraInfo&>> _camera_com;
+    //! 実行時間
+    base::core::Timer _timer;
+    //! 実行時間
+    const float _time;
+    //! 通知
+    ShipEventEndMessageSubject _ship_event_end_message_subject;
+    //! 位置
+    Mof::CVector3 _ship_generate_position;
 public:
     /// <summary>
     /// コンストラクタ
@@ -59,6 +72,14 @@ public:
     /// <returns></returns>
     base::core::Observable<const char*, const std::shared_ptr<ratchet::actor::Actor>&>* GetShipEventSubject(void);
     /// <summary>
+    /// ゲッター
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    auto ShipEventEndMessageSubject(void) {
+        return &this->_ship_event_end_message_subject;
+    }
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name=""></param>
@@ -71,6 +92,5 @@ public:
     /// <returns></returns>
     virtual bool Update(float delta_time) override;
 };
-}
 }
 #endif // !RATCHET_SHIP_EVENT_H

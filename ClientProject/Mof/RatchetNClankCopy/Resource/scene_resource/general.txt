@@ -28,6 +28,14 @@
 ../Resource/texture/lock_on_cursor/cursor.png
 ../Resource/texture/scene/title.png
 
+../Resource/texture/ui/ui_text_start.png
+../Resource/texture/ui/ui_text_press.png
+../Resource/texture/ui/ui_text_button.png
+../Resource/texture/ui/ui_text_or.png
+../Resource/texture/ui/ui_text_enter.png
+../Resource/texture/ui/ui_text_exclamation_mark.png
+../Resource/texture/ui/ui_text_key.png
+
 ../Resource/motion_names/player.motion_names
 ../Resource/motion_names/skeleton.motion_names
 ../Resource/motion_names/chaman.motion_names

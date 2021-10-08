@@ -5,9 +5,7 @@
 #include "Weapon.h"
 
 
-namespace ratchet {
-namespace actor {
-namespace weapon {
+namespace ratchet::actor::weapon {
 class OmniWrench : public ratchet::actor::weapon::Weapon {
     using super = ratchet::actor::weapon::Weapon;
 public:
@@ -26,7 +24,5 @@ public:
     /// <returns></returns>
     virtual bool Initialize(ratchet::actor::Actor::Param* param) override;
 };
-}
-}
 }
 #endif // !RATCHET_ACTOR_WEAPON_OMNI_WRENCH_H
