@@ -3,5 +3,5 @@ sprite,Sprite2,Chara_a_02.png;
 setpos,40,0,Sprite1;
 setpos,540,0,Sprite2;
 
-text,26,584,いってらっしゃい;
+text,26,584,スタート地点の船に乗ったらゲームクリアです;
 next,test.txt;

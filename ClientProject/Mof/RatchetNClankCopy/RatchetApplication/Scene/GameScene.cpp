@@ -36,12 +36,6 @@ void ratchet::scene::GameScene::ReInitialize(void) {
 bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
     super::SceneUpdate(delta_time);
 
-    {
-        tutorial::TutorialManager::GetInstance().Complete();
-        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Attack);
-        tutorial::TutorialManager::GetInstance().Liberation(tutorial::TutorialManager::TutorialType::Weapon);
-    }
-
     for (auto& ptr : _created_actors) {
         this->AddElement(ptr);
     } // for
@@ -56,7 +50,6 @@ bool ratchet::scene::GameScene::SceneUpdate(float delta_time) {
         auto init = GameSceneInitializer();
         init.AddPlayer(_game.lock(), _event.lock(), std::dynamic_pointer_cast<GameScene>(shared_from_this()));
         _player_dead = false;
-//        this->ReInitialize();
     } // if
 
 
@@ -249,18 +242,21 @@ void ratchet::scene::GameScene::OnNotify(const ratchet::actor::character::Charac
 void ratchet::scene::GameScene::OnNotify(const ContactEnemyMessage& message) {
     auto bgm_player = super::GetBGMPlayer();
     using namespace game::audio;
-    {
-        auto e = ratchet::game::audio::BGMEvent();
-        e.type = decltype(e.type)::Battle;
-        e.command = decltype(e.command)::Play();
-        super::GetBGMPlayer()->Recieve(e);
-    }
-    {
-        auto e = ratchet::game::audio::BGMEvent();
-        e.type = decltype(e.type)::Field;
-        e.command = decltype(e.command)::Stop();
-        super::GetBGMPlayer()->Recieve(e);
-    }
+    if (!bgm_player->IsPlay(game::audio::BGMType::Battle)) {
+        {
+            auto e = ratchet::game::audio::BGMEvent();
+            e.type = decltype(e.type)::Battle;
+            e.command = decltype(e.command)::Play();
+            super::GetBGMPlayer()->Recieve(e);
+        }
+        {
+            auto e = ratchet::game::audio::BGMEvent();
+            e.type = decltype(e.type)::Field;
+            e.command = decltype(e.command)::Stop();
+            super::GetBGMPlayer()->Recieve(e);
+        }
+    } // if
+
 }
 
 void ratchet::scene::GameScene::OnNotify(game::gamesystem::text::TextSystemOpenMessageListener::Message message) {
@@ -357,7 +353,6 @@ bool ratchet::scene::GameScene::Initialize(void) {
         auto item1 = std::make_shared<ratchet::game::gamesystem::GamePauseSystemItem>([&]() {
             this->SetState(State::Pause);
             _how_to_play.Show();
-//            _show_how_to_play = true;
             return true;
         });
         item1->SetText("ëÄçÏê‡ñæ");

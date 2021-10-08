@@ -162,22 +162,22 @@ bool ratchet::actor::character::King::Render(void) {
 
 void ratchet::actor::character::King::Talk(void) {
     auto param = ratchet::actor::Actor::Param();
-    //auto out = _actor_container.lock();
     auto effect = _effect_container.lock();
-    //auto player = _player.lock();
     auto player = std::dynamic_pointer_cast<ratchet::actor::character::Player>(super::GetTalkedTarget());
-
 
     auto billboard = super::GetComponent<component::BillboardComponent>();
     auto dir = Mof::CVector3(super::GetPosition() - player->GetPosition());
     float angle_y = std::atan2f(-dir.z, dir.x) + math::kHalfPi;
     super::SetRotate(Mof::CVector3(0.0f, angle_y, 0.0f));
     billboard->SetOffsetRotation(-super::GetRotate());
+    billboard->Inactivate();
+
 
     if (_quest_index < _quest_count) {
         auto message = ratchet::game::gamesystem::text::TextSystemMessage();
         auto type_temp = static_cast<int>(decltype(message.type)::TutorialEventNo0) + _quest_index;
         message.type = static_cast<decltype(message.type)>(type_temp);
+
         message.on_close = [&]() {
             auto player_actor = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::actor::character::Player> >("player");
             auto camera_controller = player_actor->GetComponent<component::CameraComponent>()->GetCameraController()->GetService();
@@ -186,12 +186,8 @@ void ratchet::actor::character::King::Talk(void) {
             camera_controller->RegisterGlobalCamera();
 
             auto target = Mof::CVector3(-12.0f, -5.0f, -4.0f);
-//            auto player_camera = _player_view_camera_controller->GetService();
             auto dir = target - player_actor->GetPosition();
             camera_controller->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
-
-            auto billboard = super::GetComponent<component::BillboardComponent>();
-            billboard->Inactivate();
             return true;
         };
         super::GetTextSystemMessageSubject()->Notify(message);
@@ -223,7 +219,6 @@ void ratchet::actor::character::King::Talk(void) {
             auto dir = super::GetPosition() - player->GetPosition();
             camera_camera_controller->SetAzimuth(math::ToDegree(std::atan2(-dir.z, dir.x)));
             this->PlayerActionLiberate();
-        //    _quest_index++;
         } // if
         _event_active = true;
     } // if
@@ -235,8 +230,6 @@ void ratchet::actor::character::King::Talk(void) {
             message.on_close = [&]() {
                 tutorial::TutorialManager::GetInstance().Complete();
 
-                auto billboard = super::GetComponent<component::BillboardComponent>();
-                billboard->Inactivate();
 
                 if (event::EventReferenceTable::Singleton().Exist("GameManager")) {
                     auto game = event::EventReferenceTable::Singleton().Get<std::shared_ptr<ratchet::game::GameManager>>("GameManager");

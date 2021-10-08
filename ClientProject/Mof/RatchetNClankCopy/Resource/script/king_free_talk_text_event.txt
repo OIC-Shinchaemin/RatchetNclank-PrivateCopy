@@ -3,5 +3,5 @@ sprite,Sprite2,Chara_a_02.png;
 setpos,40,0,Sprite1;
 setpos,540,0,Sprite2;
 
-text,26,584,がんばれ;
+text,26,584,アイテムを集め終わったら戻ってきてください;
 next,test.txt;

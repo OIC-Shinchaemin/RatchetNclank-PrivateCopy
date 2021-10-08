@@ -234,7 +234,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
     auto help_desk = game->GetHelpDesk();
     // enemy
     for (auto enemy_spawn : out->_stage.GetEnemySpawnArray()) {
-        auto event_sphere = Mof::CSphere(180.0f, -30.0f, 25.0f, 40.0f);
         _ASSERT_EXPR(enemy_spawn.second->GetType() == StageObjectType::EnemySpawnPoint, L"Œ^‚ªˆê’v‚µ‚Ü‚¹‚ñ");
         auto builder = enemy_spawn.first.c_str();
         param->name = enemy_spawn.second->GetName();
@@ -243,13 +242,6 @@ bool ratchet::scene::GameSceneInitializer::Execute(std::shared_ptr<ratchet::game
         out->AddElement(enemy);
         enemy->SetEffectContainer(out->_effect);
         enemy->GetCharacterDamageApplyMessageSubject()->AddObserver(out);
-
-
-        static int i = 0;
-        if (i == 2) {
-            break;
-        } // if
-        i++;
     } // for
 
     {
