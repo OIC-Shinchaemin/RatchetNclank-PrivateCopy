@@ -140,7 +140,8 @@ ratchet::scene::GameScene::GameScene() :
     _text_system(std::make_shared<ratchet::game::gamesystem::text::TextSystem>()),
     _loading_counter(),
     _loading_dot_count(0),
-    _how_to_play() {
+    _how_to_play(),
+    _player_dead(false){
     _loading_counter.Initialize(1.0f, true);
 }
 
